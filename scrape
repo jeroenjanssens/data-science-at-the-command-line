@@ -2,7 +2,7 @@
 # scrape: Extract HTML elements using an XPath query or CSS3 selector. 
 #
 # Example usage: curl 'http://en.wikipedia.org/wiki/List_of_sovereign_states' -s \
-# | ./hotsoup -be 'table.wikitable > tr > td > b > a'
+# | scrape -be 'table.wikitable > tr > td > b > a'
 #
 # Dependencies: lxml and optionally cssselector
 #
