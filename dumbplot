@@ -1,0 +1,10 @@
+#!/bin/bash
+# dumbplot: Output scatter plot on the terminal given list of X,Y coordinates.
+#
+# Example usage: paste -d, <(seq 80) <({seq 40; seq 40 -1 1}) | dumbplot
+#
+# Dependency: gnuplot
+#
+# Author: http://jeroenjanssens.com
+
+gnuplot -e 'set term dumb; set datafile separator ",";  plot "-"'
