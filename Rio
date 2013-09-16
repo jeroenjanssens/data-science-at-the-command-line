@@ -1,7 +1,7 @@
 #!/bin/bash
 # Rio: Load CSV from stdin into R as a data frame, execute given commands, and get the output as CSV on stdout
 #
-# Example usage: seq 100 | ./rdo 'sqrt(df)' 2>/dev/null
+# Example usage: seq 100 | Rio 'sqrt(df)' 2>/dev/null
 #
 # Dependency: R
 #
