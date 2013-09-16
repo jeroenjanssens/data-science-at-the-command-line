@@ -1,0 +1,16 @@
+#!/bin/bash
+# Rio: Load CSV from stdin into R as a data frame, execute given commands, and get the output as CSV on stdout
+#
+# Example usage: seq 100 | ./rdo 'sqrt(df)' 2>/dev/null
+#
+# Dependency: R
+#
+# Author: http://jeroenjanssens.com
+
+SCRIPT=$1
+IN=$(mktemp)
+OUT=$(mktemp)
+cat /dev/stdin > $IN
+Rscript -e "df<-read.csv('${IN}',header=F);$SCRIPT;write.table(.Last.value,'${OUT}',sep=',',quote=F,row.names=F,col.names=F);" 1>&2
+cat $OUT
+rm $IN $OUT
