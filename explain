@@ -1,0 +1,16 @@
+#!/bin/bash
+# explain: Command-line wrapper for explainshell.com
+# 
+# Example usage: explain tar xzvf 
+#
+# Dependency: scrape (from: https://github.com/jeroenjanssens/data-science-toolbox)
+#
+# Author: http://jeroenjanssens.com
+
+COMMAND=$1
+ARGS="${*:2}"
+if [[ "$ARGS" ]]; then
+	ARGS="?args=$ARGS";
+fi
+URL="http://explainshell.com/explain/${COMMAND}${ARGS}"
+curl -s "${URL}" | scrape -e 'span.dropdown > a, pre' | sed -re 's/<(\/?)[^>]*>//g'
