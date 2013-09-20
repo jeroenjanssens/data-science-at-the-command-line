@@ -1,16 +1,13 @@
-#!/usr/bin/env python
-# sample: Output lines from stdin to stdout with a given probability, for a given duration, and with a given delay between lines.
-# 
-# Example usage: seq 100 | sample -r 20% -d 1000
-#
-# Dependency: Python 2.7
-# 
-# Author: http://jeroenjanssens.com
+"""
+random-sample: Output lines from stdin to stdout with a given probability,
+for a given duration, and with a given delay between lines.
 
-import os
-import sys
-import argparse
+Example usage: seq 100 | random-sample -r 20% -d 1000
 
+Dependency: Python 2.7
+ 
+Author: http://jeroenjanssens.com
+"""
 from random import random
 from time import time, sleep
 from sys import stdin, stdout

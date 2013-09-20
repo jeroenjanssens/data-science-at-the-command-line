@@ -15,7 +15,7 @@ setup(
     entry_points={
         'console_scripts': [
             'scrape = datalogy.scrape:main',
-            'sample = datalogy.sample:main',
+            'random-sample = datalogy.sample:main',
         ],
     },
 )
