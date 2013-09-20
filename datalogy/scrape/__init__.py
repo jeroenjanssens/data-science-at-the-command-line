@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # scrape: Extract HTML elements using an XPath query or CSS3 selector. 
 #
-# Example usage: curl 'http://en.wikipedia.org/wiki/List_of_sovereign_states' -s \
-# | scrape -be 'table.wikitable > tr > td > b > a'
+# Example usage::
+# 
+#     curl -s http://en.wikipedia.org/wiki/List_of_sovereign_states' | \
+#          scrape -be 'table.wikitable > tr > td > b > a'
 #
 # Dependencies: lxml and optionally cssselector
 #
@@ -11,6 +13,11 @@
 import sys
 import argparse
 from lxml import etree
+cssselect = None
+try:
+    import cssselect
+except:
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -22,10 +29,9 @@ def main():
     args = parser.parse_args()
 
     if not args.expression.startswith('//'):
-        from cssselect import GenericTranslator, SelectorError
         try:
-            expression = GenericTranslator().css_to_xpath(args.expression)
-        except SelectorError:
+            expression = cssselect.GenericTranslator().css_to_xpath(args.expression)
+        except cssselect.SelectorError:
             parser.error('Invalid CSS selector')
     else:
         expression = args.expression
