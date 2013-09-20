@@ -32,6 +32,10 @@ Run the tests with:
 
     nosetests
 
+Lint the project with:
+
+    flake8 datalogy tests
+
 ## API documentation
 
 To generate the documentation:
