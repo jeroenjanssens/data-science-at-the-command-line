@@ -3,7 +3,7 @@
 #
 # Example usage::
 # 
-#     curl -s http://en.wikipedia.org/wiki/List_of_sovereign_states' | \
+#     curl -s http://en.wikipedia.org/wiki/List_of_sovereign_states | \
 #          scrape -be 'table.wikitable > tr > td > b > a'
 #
 # Dependencies: lxml and optionally cssselector
@@ -17,7 +17,7 @@ cssselect = None
 try:
     import cssselect
 except:
-
+    pass
 
 def main():
     parser = argparse.ArgumentParser()
