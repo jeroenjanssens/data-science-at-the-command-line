@@ -1,4 +1,40 @@
-data-science-toolbox
-====================
+# datalogy
 
-A collection of command-line tools that facilitate the obtaining, scrubbing, and exploring of data.
+A collection of command-line tools that facilitate the obtaining, scrubbing
+and exploring of data.
+
+## scrape
+
+Extract HTML elements using an XPath query or CSS3 selector.
+
+### Example usage
+ 
+     curl -s http://en.wikipedia.org/wiki/List_of_sovereign_states | \
+             scrape -be 'table.wikitable > tr > td > b > a'
+
+
+## sample
+
+Output lines from stdin to stdout with a given probability, for a given 
+duration, and with a given delay between lines.
+
+### Example usage
+
+    seq 100 | sample -r 20% -d 1000
+
+## Testing
+
+Install development requirements:
+
+    pip install -r requirements.txt
+
+Run the tests with:
+
+    nosetests
+
+## API documentation
+
+To generate the documentation:
+
+    cd docs && PYTHONPATH=.. make singlehtml
+
