@@ -11,8 +11,9 @@ Dependencies: lxml and optionally cssselector
 Author: http://jeroenjanssens.com
 """
 
-import sys
 import argparse
+import sys
+
 from lxml import etree
 cssselect = None
 try:
@@ -20,39 +21,63 @@ try:
 except:
     pass
 
+def html_wrap(html):
+    html.insert(0, '<!DOCTYPE html>\n<html>\n<body>\n')
+    html.append('</body>\n</html>\n')
+    return html
+
+def scrape(html, expression, text, body, delimiter):
+    if not expression.startswith('//') and cssselect:
+        try:
+            expression = cssselect.GenericTranslator().css_to_xpath(expression)
+        except cssselect.SelectorError:
+            parser.error('Invalid CSS selector')
+
+    document = etree.fromstring(
+        html,
+        parser=etree.HTMLParser(encoding='utf-8')
+    )
+
+    output = []
+    for element in document.xpath(expression):
+        try:
+            output.append(
+               etree.tostring(element).encode('utf-8') + '\n'
+            )
+        except IOError:
+            pass
+
+    if body:
+        return html_wrap(output)
+    else:
+        return output
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('html', nargs='?', type=argparse.FileType('rb'), default=sys.stdin, help="HTML", metavar="HTML")
     parser.add_argument('-e', '--expression', default='*', help="XPath query or CSS3 selector")
     parser.add_argument('-t', '--text', action='store_true', default=False, help="Output text instead of HTML")
     parser.add_argument('-b', '--body', action='store_true', default=False, help="Enclose output with HTML and BODY tags")
     parser.add_argument('-d', '--delimiter', default=' ', help="Delimiter when output is text")
     args = parser.parse_args()
 
-    if not args.expression.startswith('//'):
+    html, expression, text, body, delimiter = (
+        '\n'.join(sys.stdin.readlines()),
+        args.expression,
+        args.text,
+        args.body,
+        args.delimiter
+    )
+
+    output = scrape(html, expression, text, body, delimiter)
+
+    for line in output:
         try:
-            expression = cssselect.GenericTranslator().css_to_xpath(args.expression)
-        except cssselect.SelectorError:
-            parser.error('Invalid CSS selector')
-    else:
-        expression = args.expression
-
-    html_parser = etree.HTMLParser(encoding='utf-8')
-    document = etree.parse(args.html, html_parser)
-
-    if args.body:
-        sys.stdout.write("<!DOCTYPE html>\n<html>\n<body>\n")
-
-    for e in document.xpath(expression):
-        try:
-            text = etree.tostring(e)
-            sys.stdout.write(text.encode('utf-8') + "\n")
+            sys.stdout.write(line)
             sys.stdout.flush()
         except IOError:
             pass
 
-    if args.body:
-        sys.stdout.write("</body>\n</html>\n")
 
 if __name__ == "__main__":
     exit(main())
