@@ -1,14 +1,15 @@
-#!/usr/bin/env python
-# scrape: Extract HTML elements using an XPath query or CSS3 selector. 
-#
-# Example usage::
-# 
-#     curl -s http://en.wikipedia.org/wiki/List_of_sovereign_states | \
-#          scrape -be 'table.wikitable > tr > td > b > a'
-#
-# Dependencies: lxml and optionally cssselector
-#
-# Author: http://jeroenjanssens.com
+"""
+scrape: Extract HTML elements using an XPath query or CSS3 selector. 
+
+Example usage:
+ 
+     curl -s http://en.wikipedia.org/wiki/List_of_sovereign_states | \
+             scrape -be 'table.wikitable > tr > td > b > a'
+
+Dependencies: lxml and optionally cssselector
+
+Author: http://jeroenjanssens.com
+"""
 
 import sys
 import argparse
