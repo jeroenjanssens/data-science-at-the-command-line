@@ -13,14 +13,14 @@ Extract HTML elements using an XPath query or CSS3 selector.
              scrape -be 'table.wikitable > tr > td > b > a'
 
 
-## sample
+## random-sample
 
 Output lines from stdin to stdout with a given probability, for a given 
 duration, and with a given delay between lines.
 
 ### Example usage
 
-    seq 100 | sample -r 20% -d 1000
+    seq 100 | random-sample -r 20% -d 1000
 
 ## Testing
 
