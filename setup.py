@@ -1,4 +1,4 @@
-import datalogy 
+import datalogy
 
 from setuptools import setup
 
