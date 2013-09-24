@@ -39,8 +39,14 @@ REQUIRES=
 DELIMITER=","
 HEADER="T"
 VERBOSE=false
-IN=$(mktemp)
-OUT=$(mktemp).png
+
+if [ -z "$TMPDIR" ]; then
+    TMPDIR=/tmp/
+fi
+IN=$(mktemp ${TMPDIR}Rio-XXXXXXXX)
+OUT=$(mktemp ${TMPDIR}Rio-XXXXXXXX).png
+
+
 while getopts "d:hgnpsve:" OPTION
 do
 	case $OPTION in
