@@ -3,7 +3,7 @@
 # 
 # Example usage: seq 100 | sample -r 20% -d 1000
 #
-# Dependency: Python 2.7
+# Dependency: Python 2.5
 # 
 # Author: http://jeroenjanssens.com
 
