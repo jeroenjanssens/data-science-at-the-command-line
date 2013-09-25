@@ -9,7 +9,7 @@
 
 import os
 import sys
-import argparse
+import optparse
 
 from random import random
 from time import time, sleep
@@ -17,17 +17,17 @@ from sys import stdin, stdout
 from datetime import datetime, timedelta
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-W', '--weeks', type=float, default=0, help="Duration of sampling in weeks")
-    parser.add_argument('-D', '--days', type=float, default=0, help="Duration of sampling in days")
-    parser.add_argument('-H', '--hours', type=float, default=0, help="Duration of sampling in hours")
-    parser.add_argument('-m', '--minutes', type=float, default=0, help="Duration of sampling in minutes")
-    parser.add_argument('-s', '--seconds', type=float, default=0, help="Duration of sampling in seconds")
-    parser.add_argument('-t', '--milliseconds', type=float, default=0, help="Duration of sampling in milliseconds")
-    parser.add_argument('-u', '--microseconds', type=float, default=0, help="Duration of sampling in microseconds")
-    parser.add_argument('-r', '--rate', default='100%', help="Rate between 0 and 1 using either 0.33, 33%, 1/3 notation.")
-    parser.add_argument('-d', '--delay', default=0, type=int, help="Time in milliseconds between each line of output")
-    args = parser.parse_args()
+    parser = optparse.OptionParser()
+    parser.add_option('-W', '--weeks', type=float, default=0, help="Duration of sampling in weeks")
+    parser.add_option('-D', '--days', type=float, default=0, help="Duration of sampling in days")
+    parser.add_option('-H', '--hours', type=float, default=0, help="Duration of sampling in hours")
+    parser.add_option('-m', '--minutes', type=float, default=0, help="Duration of sampling in minutes")
+    parser.add_option('-s', '--seconds', type=float, default=0, help="Duration of sampling in seconds")
+    parser.add_option('-t', '--milliseconds', type=float, default=0, help="Duration of sampling in milliseconds")
+    parser.add_option('-u', '--microseconds', type=float, default=0, help="Duration of sampling in microseconds")
+    parser.add_option('-r', '--rate', default='100%', help="Rate between 0 and 1 using either 0.33, 33%, 1/3 notation.")
+    parser.add_option('-d', '--delay', default=0, type=int, help="Time in milliseconds between each line of output")
+    args, cmds = parser.parse_args()
 
     try:
         delay = (float(args.delay) / 1000.0)
