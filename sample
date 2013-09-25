@@ -16,6 +16,10 @@ from time import time, sleep
 from sys import stdin, stdout
 from datetime import datetime, timedelta
 
+def total_seconds(delta):
+   'Total seconds in the duration :param: delta.'
+   return delta.seconds + (24 * 3600 * delta.days)
+
 def main():
     parser = optparse.OptionParser()
     parser.add_option('-W', '--weeks', type=float, default=0, help="Duration of sampling in weeks")
@@ -35,7 +39,9 @@ def main():
         parser.error("Invalid delay. Please specify a delay in ms.")
         
     try:
-        duration = timedelta(weeks=args.weeks, days=args.days, hours=args.hours, minutes=args.minutes, seconds=args.seconds, milliseconds=args.milliseconds, microseconds=args.microseconds).total_seconds()
+        duration = total_seconds(timedelta(weeks=args.weeks, days=args.days,
+	    hours=args.hours, minutes=args.minutes, seconds=args.seconds,
+	    milliseconds=args.milliseconds, microseconds=args.microseconds))
     except:
         parser.error("Invalid duration.")
 
