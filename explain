@@ -7,10 +7,6 @@
 #
 # Author: http://jeroenjanssens.com
 
-COMMAND=$1
-ARGS="${*:2}"
-if [[ "$ARGS" ]]; then
-	ARGS="?args=$ARGS";
-fi
-URL="http://explainshell.com/explain/${COMMAND}${ARGS}"
+COMMAND="$@"
+URL="http://explainshell.com/explain?cmd=${COMMAND}"
 curl -s "${URL}" | scrape -e 'span.dropdown > a, pre' | sed -re 's/<(\/?)[^>]*>//g'
