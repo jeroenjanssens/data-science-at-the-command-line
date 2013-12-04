@@ -1,0 +1,10 @@
+#!/bin/bash
+# pbc: parallel bc. First column of input CSV is mapped to {1}, second to {2}, and so forth.
+#
+# Example usage: paste -d, <(seq 100) <(seq 100 -1 1) | ./pbc 'sqrt({1}*{2})'
+#
+# Dependency: GNU parallel
+#
+# Author: http://jeroenjanssens.com
+
+parallel -C, -k -j100% "echo '$1' | bc -l"

@@ -1,0 +1,2 @@
+#!/bin/bash
+Rio -e 'n<-sapply(df,is.numeric);cbind(as.data.frame(prcomp(df[n],scale=T)$x),df[!n])'
