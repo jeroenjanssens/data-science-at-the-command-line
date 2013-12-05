@@ -13,8 +13,10 @@ mkdir -p $REPOS
 mkdir -p $TOOLS
 mkdir -p $DOWNLOADS
 
-log 'Adding PPA for node...'
+log 'Adding repos for node and R...'
 sudo add-apt-repository -y ppa:chris-lea/node.js
+sudo sh -c 'echo "deb http://cran.rstudio.com/bin/linux/ubuntu precise/" >> /etc/apt/sources.list'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 
 log 'Retrieving updated list of packages...'
 apt-get update
@@ -57,6 +59,12 @@ sudo apt-get install -y python-software-properties python g++ make
 sudo apt-get install -y nodejs
 curl https://npmjs.org/install.sh | sudo clean=yes sh
 sudo npm install -g xml2json-command
+
+log 'Installing R...'
+sudo apt-get install -y r-base-dev
+
+log 'Installing sqldf, ggplot2, and plyr packages'
+echo 1 | sudo $REPOS/data-science-toolbox/tools/Rio -ve 'install.packages(c("sqldf","ggplot2","plyr"),repos="http://cran.us.r-project.org")'
 
 sudo echo 'export PATH=$PATH:/usr/lib/go/bin:/home/vagrant/repos/data-science-toolbox/tools:/home/vagrant/tools' >> $HOME/.bashrc 
 sudo chown -R vagrant:vagrant $REPOS
