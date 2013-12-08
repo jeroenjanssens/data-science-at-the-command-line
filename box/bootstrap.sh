@@ -24,6 +24,10 @@ apt-get update
 log 'Installing common requirements...'
 apt-get install -y curl git python-pip make python-dev
 
+log 'Installing scientific Python stack...'
+apt-get install -y python-numpy python-scipy python-matplotlib python-pandas python-scikits.learn
+sudo pip install ipython
+
 log 'Installing GNU parallel...'
 cd $DOWNLOADS
 wget http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
