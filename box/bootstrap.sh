@@ -35,6 +35,12 @@ tar -xjf parallel-latest.tar.bz2
 cd $(find -name 'parallel-*' -type d)
 ./configure && make && sudo make install
 
+log 'Installing qstats...'
+cd $DOWNLOADS
+git clone https://github.com/tonyfischetti/qstats.git
+cd qstats
+make && make install
+
 log 'Installing jq...'
 cd $TOOLS
 wget http://stedolan.github.io/jq/download/linux64/jq
