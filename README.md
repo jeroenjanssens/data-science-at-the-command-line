@@ -1,19 +1,3 @@
-Note for Strata Attendees
-=========================
-
-On Wednesday Feb 12 at 12:10pm, we're going to talk about how to restructure the Data Science Toolbox at [Strata BoF table 3](http://strataconf.com/strata2014/public/schedule/detail/33601). 
-Come and join us when you:
-
-- Are a teacher, author, or company and you would like to enable your students, readers, or employees to get up and running in minutes.
-- Have any ideas regarding virtualiziation, provisioning, configuration, command-line menu's, or installers for Windows or Mac OS X.
-
-Hope to see you there!
-
-Jeroen Janssens
-
-[@jeroenhjanssens](https://twitter.com/jeroenhjanssens)
-
-
 Data Science Toolbox
 ====================
 
