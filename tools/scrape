@@ -30,7 +30,7 @@ def main():
     else:
         expression = args.expression
 
-    html_parser = etree.HTMLParser(encoding='utf-8')
+    html_parser = etree.HTMLParser(encoding='utf-8', recover=True)
     document = etree.parse(args.html, html_parser)
 
     if args.body:
