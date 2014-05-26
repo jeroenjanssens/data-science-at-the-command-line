@@ -31,7 +31,7 @@ EOF
 }
 
 callR() {
-	Rscript --vanilla -e "df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=F,row.names=F,col.names=${HEADER});}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=72);}else{sink('${OUT}');print(last);}"
+	Rscript --vanilla -e "df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=F,row.names=F,col.names=${HEADER});}else if(is.vector(last)){cat(last,sep='\n', file='${OUT}')}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=72);}else{sink('${OUT}');print(last);}"
 }
 
 SCRIPT=
