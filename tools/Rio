@@ -3,6 +3,7 @@
 #
 # Example usage:
 # curl -s 'https://raw.githubusercontent.com/pydata/pandas/master/pandas/tests/data/iris.csv' > iris.csv
+# < iris.csv Rio -e 'df$SepalLength^2'
 # < iris.csv Rio -e 'summary(df)'
 # < iris.csv Rio -se 'sqldf("select Name from df where df.SepalLength > 7")'
 # < iris.csv Rio -ge 'g+geom_point(aes(x=SepalLength,y=SepalWidth,colour=Name))' > iris.png
