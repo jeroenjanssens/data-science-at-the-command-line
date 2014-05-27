@@ -1,0 +1,2 @@
+#!/bin/bash
+Rio -e 'n<-sapply(df,is.numeric);fit<-cmdscale(dist(df),eig=TRUE,k=2);points<-as.data.frame(fit$points);cbind(points,df[!n])'
