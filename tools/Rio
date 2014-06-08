@@ -25,6 +25,7 @@ OPTIONS:
    -g      Import ggplot2
    -n      CSV has no header
    -p      Import plyr
+   -r      Import reshape2
    -s      Import sqldf
    -v      Verbose
 
@@ -49,8 +50,9 @@ if [ -z "$TMPDIR" ]; then
 fi
 IN=$(mktemp ${TMPDIR}Rio-XXXXXXXX)
 OUT=$(mktemp ${TMPDIR}Rio-XXXXXXXX).png
+ERR=$(mktemp ${TMPDIR}Rio-XXXXXXXX).err
 
-while getopts "d:hgnpsve:" OPTION
+while getopts "d:hgnprsve:" OPTION
 do
 	case $OPTION in
 		d)
@@ -76,6 +78,9 @@ do
 		p)
 			REQUIRES="${REQUIRES}require(plyr);"
 			;;
+		r)
+			REQUIRES="${REQUIRES}require(reshape2);"
+			;;
 		s)
 			REQUIRES="${REQUIRES}require(sqldf);"
 			;;
@@ -90,12 +95,25 @@ do
 done
 
 cat /dev/stdin > $IN
+
 if $VERBOSE
 then
 	callR
 else
-	callR >/dev/null 2>&1
+	callR > $ERR 2>&1
 fi
-cat $OUT
-rm $IN $OUT
+
+if [[ ! -f $OUT ]]; then
+	cat $ERR
+else
+	RESULT="$(cat $OUT)"
+	if [ "$RESULT" == "NULL" ]; then
+		cat $ERR
+	else
+		cat $OUT
+	fi 
+fi
+
+
+rm -f $IN $OUT
 rm -f Rplots.pdf
