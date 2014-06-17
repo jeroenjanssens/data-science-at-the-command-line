@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-Rio -ne 'as.data.frame(t(df))'
