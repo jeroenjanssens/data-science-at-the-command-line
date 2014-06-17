@@ -17,6 +17,6 @@
 # $ < iris-original.csv tapkee --method t-sne > iris-mapped.csv
 
 OUT=$(mktemp --tmpdir tapkee-XXXXXXXX).dat
-Rio-transpose | tr , ' ' | tapkee_cli -i /dev/stdin -o $OUT "$@" > /dev/null
-sed -re 's/^\s+//;s/\s+/,/g' $OUT | Rio-transpose
+Rio -nf t | tr , ' ' | tapkee_cli -i /dev/stdin -o $OUT "$@" > /dev/null
+sed -re 's/^\s+//;s/\s+/,/g' $OUT | Rio -nf t
 rm $OUT
