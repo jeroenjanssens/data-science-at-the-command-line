@@ -9,7 +9,9 @@
 #
 # Dependency: Rio
 #
-# Author: http://jeroenjanssens.com
+# Author: Jeroen Janssens (http://jeroenjanssens.com)
 
-COLOUR=${3:-1}
-Rio -ge "g+geom_point(aes(x=$1,y=$2,colour=${COLOUR}))"
+X="$1"
+Y="$2"
+COLOR="${3:-1}"
+Rio -ge "g+geom_point(aes(x=${X},y=${Y},color=${COLOR}))"
