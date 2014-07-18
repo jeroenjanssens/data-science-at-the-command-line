@@ -1,7 +1,7 @@
 Data Science at the Command Line
 ================================
 
-![Data Science at the Command Line Cover](cover.png)
+![Data Science at the Command Line Cover](book/cover.png)
 
 ## License
 
