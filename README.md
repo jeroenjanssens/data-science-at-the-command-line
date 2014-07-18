@@ -7,4 +7,4 @@ The `box` directory contains a Vagrant environment for installing these command-
 
 ## License
 
-GPLv3
+BSD 2-Clause
