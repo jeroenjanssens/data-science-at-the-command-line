@@ -10,7 +10,6 @@
 # From: http://unix.stackexchange.com/a/11859
 #
 # See also: header (https://github.com/jeroenjanssens/command-line-tools-for-data-science)
-
 IFS= read -r header
 printf '%s\n' "$header"
-"$@"
+eval $@
