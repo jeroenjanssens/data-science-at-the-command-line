@@ -1,0 +1,2 @@
+#!/bin/bash
+drip -cp $(dirname $0)/drake.jar drake.core "$@"
