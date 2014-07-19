@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+ALGO="$@"
+IN=$(mktemp --tmpdir weka-cluster-XXXXXXXX).arff
+
+finish () {
+	rm -f $IN
+}
+trap finish EXIT
+
+csv2arff > $IN
+weka filters.unsupervised.attribute.AddCluster -W "weka.${ALGO}" -i $IN -o /dev/stdout | arff2csv
