@@ -15,13 +15,11 @@
 # Author: http://jeroenjanssens.com
 
 ARG="$1"
-ARGINV=$(echo $ARG | tr "[:lower:][:upper:]" "[:upper:][:lower:]")
 shift
 COLUMNS="$1"
 shift
-COMMAND="$@"
-
+EXPR="$@"
 DIRTMP=$(mktemp -d)
 mkfifo $DIRTMP/other_columns
-tee $DIRTMP/other_columns | csvcut $ARG $COLUMNS | eval "$COMMAND" | paste -d, - <(csvcut $ARGINV $COLUMNS $DIRTMP/other_columns)
+tee $DIRTMP/other_columns | csvcut $ARG $COLUMNS | eval ${EXPR} | paste -d, - <(csvcut ${ARG~~} $COLUMNS $DIRTMP/other_columns)
 rm -rf $DIRTMP
