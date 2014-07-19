@@ -2,14 +2,14 @@
 # weka: run Weka from the command-line
 #
 # Weka can be obtained from http://www.cs.waikato.ac.nz/ml/weka/downloading.html
-# Make sure that WEKAJAR is set to the full path of weka.jar in your .bashrc or .zshrc
+# Make sure that WEKAPATH is set to the full path that contains weka.jar in your .bashrc or .zshrc
 # The snippets below enable tab completion in Bash and Zsh, respectively.
 # 
 # Author: Jeroen Janssens (http://jeroenjanssens.com)
 #
 # See csv2arff and arff2csv for two examples
 
-java -Xmx1024M -cp ${WEKAJAR} "weka.$@"
+java -Xmx1024M -cp ${WEKAPATH}/weka.jar "weka.$@"
 
 #########################################################
 # Tab completion for Bash                               #
