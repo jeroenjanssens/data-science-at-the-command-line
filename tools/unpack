@@ -3,7 +3,7 @@
  
 # Dependencies: unrar, unzip, p7zip-full
 
-# Author: brisbin33
+# Author: Patrick Brisbin
 # From: http://linuxtidbits.wordpress.com/2009/08/04/week-of-bash-scripts-extract/
 
 # Display usage if no parameters given
