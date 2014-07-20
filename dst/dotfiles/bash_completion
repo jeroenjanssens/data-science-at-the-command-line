@@ -1,0 +1,42 @@
+weka-classes () {
+	 unzip -l $WEKAPATH/weka.jar |
+	 sed -rne 's/.*(weka)\/([^g])([^$]*)\.class$/\2\3/p' |
+	 tr '/' '.'
+}
+ 
+weka-folders () {
+	 unzip -l $WEKAPATH/weka.jar |
+	 sed -rne 's/.*(weka)\/([^g])([^$]*)\/$/\2\3\./p' |
+	 tr '/' '.'
+}
+ 
+_completeweka() {
+	local curw=${COMP_WORDS[COMP_CWORD]}
+	local wordlist=$(weka-folders; weka-classes)
+	COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
+	return 0
+}
+
+complete -o nospace -F _completeweka weka weka-cluster
+
+function jump { 
+    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+function mark { 
+    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+function unmark { 
+    rm -i "$MARKPATH/$1"
+}
+function marks {
+    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+}
+
+_completemarks() {
+  local curw=${COMP_WORDS[COMP_CWORD]}
+  local wordlist=$(find $MARKPATH -type l -printf "%f\n")
+  COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
+  return 0
+}
+
+complete -F _completemarks jump unmark

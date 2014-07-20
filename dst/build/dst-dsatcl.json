@@ -1,0 +1,100 @@
+{
+  "variables": {
+    "dst_dsatcl_version": "{{env `dst_dsatcl_version`}}",
+    "aws_secret_key": "{{env `aws_secret_key`}}",
+    "aws_access_key": "{{env `aws_access_key`}}"
+  },
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "virtualbox_version_file": ".vbox_version",
+      "ssh_wait_timeout": "40m",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+      "iso_url": "isos/ubuntu-14.04-server-amd64.iso",
+      "iso_checksum": "ababb88a492e08759fddcf4f05e5ccc58ec9d47fa37550d63931d0a5fa4f7388",
+      "iso_checksum_type": "sha256",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<esc><esc><enter><wait>",
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname=data-science-toolbox ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "headless": "false",
+      "guest_os_type": "Ubuntu_64",
+      "guest_additions_mode": "disable",
+      "http_directory": "http"
+    },
+    {
+      "type": "amazon-ebs",
+      "ami_name": "dst-dsatcl-{{user `dst_dsatcl_version`}}",
+      "ssh_username": "ubuntu",
+      "instance_type": "m1.xlarge",
+      "source_ami": "ami-2f252646",
+      "region": "us-east-1",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "access_key": "{{user `aws_access_key`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/vagrant.sh",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "inline": [
+        "sleep 5",
+        "sudo apt-get update",
+        "sleep 5",
+        "sudo apt-get install -y python-pip python-dev python-apt",
+        "sleep 5",
+        "sudo pip install ansible"
+      ],
+      "type": "shell"
+    },
+    {
+      "playbook_file": "bundle/dst-dsatcl.yml",
+      "type": "ansible-local",
+      "extra_arguments": ["--extra-vars='dst_username=vagrant'"],
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "playbook_file": "bundle/dst-dsatcl.yml",
+      "type": "ansible-local",
+      "extra_arguments": ["--extra-vars='dst_username=ubuntu'"],
+      "only": ["amazon-ebs"]
+    },
+    {
+      "type": "shell",
+      "script": "scripts/virtualbox.sh",
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
+        }
+      },
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/vm_cleanup.sh"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "only": ["virtualbox-iso"]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": true,
+      "only": ["virtualbox-iso"]
+    }
+  ]
+}

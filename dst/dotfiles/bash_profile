@@ -1,0 +1,4 @@
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/vagrant/tools:/usr/lib/go/bin:/home/vagrant/.go/bin:$HOME/.data-science-at-the-command-line/tools:$HOME/.bin"
+export WEKAPATH="$HOME/.bin"
+export DRAKEPATH="$HOME/.bin"
+export MARKPATH="$HOME/.marks"

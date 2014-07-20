@@ -1,0 +1,40 @@
+---
+- hosts: 127.0.0.1
+  sudo: yes
+  connection: local
+  vars:
+    parallel_version: 20140622
+  tasks:
+
+    #- name: Install Ubuntu packages
+      #apt: pkg={{item}} state=latest
+      #with_items:
+
+    #- name: Install Python packages
+      #pip: name={{item}} state=latest
+      #with_items:
+
+    #- name: Make sure that the repos directory exists
+      #file: path=/home/{{ dst_username }}/repos state=directory owner={{ dst_username }} group={{ dst_username }}
+
+
+
+
+
+
+
+    #- name: Delete repos directory
+      #shell: rm -rf /home/{{ dst_username }}/repos
+      
+    #- name: Change owner of tools
+      #file: path=/home/{{ dst_username }}/tools state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes
+
+
+
+# repo .hidden
+
+#- WEKAPATH in .bashrc
+#- WEKA command-line completion
+#- MOTD
+#- csvfix
+#- csvquote
