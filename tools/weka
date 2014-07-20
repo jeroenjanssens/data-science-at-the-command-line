@@ -15,16 +15,16 @@ java -Xmx1024M -cp ${WEKAPATH}/weka.jar "weka.$@"
 # Tab completion for Bash                               #
 #########################################################
 # 
-# export WEKAJAR="/home/joe/bin/weka.jar"
+# export WEKAPATH="/home/joe/bin/"
 #
 # weka-classes () {
-# 	unzip -l $WEKAJAR |
+# 	unzip -l $WEKAPATH/weka.jar |
 # 	sed -rne 's/.*(weka)\/([^g])([^$]*)\.class$/\2\3/p' |
 # 	tr '/' '.'
 # }
 # 
 # weka-folders () {
-# 	unzip -l $WEKAJAR |
+# 	unzip -l $WEKAPATH/weka.jar |
 # 	sed -rne 's/.*(weka)\/([^g])([^$]*)\/$/\2\3\./p' |
 # 	tr '/' '.'
 # }
