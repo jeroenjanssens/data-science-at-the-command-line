@@ -17,11 +17,8 @@
     #- name: Make sure that the repos directory exists
       #file: path=/home/{{ dst_username }}/repos state=directory owner={{ dst_username }} group={{ dst_username }}
 
-
-
-
-
-
+    - name: Change owner
+      file: path=/home/{{ dst_username }} state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes
 
     #- name: Delete repos directory
       #shell: rm -rf /home/{{ dst_username }}/repos
@@ -31,10 +28,7 @@
 
 
 
-# repo .hidden
-
-#- WEKAPATH in .bashrc
-#- WEKA command-line completion
 #- MOTD
+
 #- csvfix
 #- csvquote

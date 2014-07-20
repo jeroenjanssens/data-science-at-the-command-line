@@ -74,9 +74,6 @@
     - name: Add repository for node.js
       apt_repository: repo='ppa:chris-lea/node.js' update-cache=yes
 
-
-
-
     - name: Install jq
       get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/home/{{ dst_username }}/.bin/jq mode=0755 owner={{ dst_username }} group={{ dst_username }}
 
@@ -122,19 +119,6 @@
 
     - name: Install SKLL
       pip: name=skll state=latest extra_args=--no-deps
-
-    #- name: Update PATH
-      #lineinfile: >
-        #dest=/etc/environment
-        #state=present
-        #backrefs=yes
-        #regexp='PATH=(["]*)((?!.*?{{ item }}).*?)(["]*)$'
-        #line='PATH=\1\2:{{ item }}\3'
-      #with_items:
-        #- '/home/{{ dst_username }}/.data-science-at-the-command-line/tools'
-        #- '/home/{{ dst_username }}/.bin'
-        #- '/usr/lib/go/bin'
-        #- '/home/{{ dst_username }}/.go/bin'
 
     - name: Get Drake
       git: repo=https://github.com/Factual/drake.git dest=/home/{{ dst_username }}/repos/drake/
@@ -182,14 +166,27 @@
     - name: Delete repos directory
       shell: rm -rf /home/{{ dst_username }}/repos
 
+    - name: Create symlink for dotfiles
+      shell: ln -sf /home/{{ dst_username }}/.data-science-at-the-command-line/dst/build/bundle/dotfiles/{{ item }} /home/{{ dst_username }}/.{{ item }}
+      with_items:
+        - bash_aliases
+        - bash_completion
+        - bashrc
+        - profile
+
+    - name: Create symlink for MOTD
+      shell: ln -sf /home/{{ dst_username }}/.data-science-at-the-command-line/dst/build/bundle/motd/{{ item }} /etc/update-motd.d/{{ item }}
+      with_items:
+        - 00-header
+        - 10-help-text
+
+    - name: Update MOTD
+      shell: run-parts /etc/update-motd.d/ | tee /var/run/motd.dynamic
+
     - name: Change owner
       file: path=/home/{{ dst_username }} state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes
-
-    #- name: Change owner of .bin
-      #file: path=/home/{{ dst_username }}/.bin state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes
 
     #- name: Download Q
       #get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/{{ dst_username }}/tools/q mode=0755 owner={{ dst_username }} group={{ dst_username }}
     #- name: Download TextQL
       #shell: sudo GOPATH=/home/{{ dst_username }}/.go go get github.com/dinedal/textql
-
