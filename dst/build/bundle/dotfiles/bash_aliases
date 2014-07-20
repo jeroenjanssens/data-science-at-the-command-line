@@ -1,1 +1,5 @@
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -1 --group-directories-first'
+
 alias j='jump'
