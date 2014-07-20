@@ -1,1 +1,6 @@
 .vagrant
+isos
+boxes
+output-virtualbox-iso
+packer_cache
+variables.json
