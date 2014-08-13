@@ -14,14 +14,23 @@
       #pip: name={{item}} state=latest
       #with_items:
 
-    #- name: Make sure that the repos directory exists
-      #file: path=/home/{{ dst_username }}/repos state=directory owner={{ dst_username }} group={{ dst_username }}
+    - name: Make sure that the repos directory exists
+      file: path=/home/{{ dst_username }}/repos state=directory owner={{ dst_username }} group={{ dst_username }}
 
+    - name: Get Tapkee
+      git: repo=https://github.com/lisitsyn/tapkee.git dest=/home/{{ dst_username }}/repos/tapkee/
+    - file: path=/home/{{ dst_username }}/repos/tapkee/build state=directory 
+    - shell: cmake .. && make
+      args:
+        chdir: /home/{{ dst_username }}/repos/tapkee/build
+    - name: Move Tapkee
+      shell: mv /home/{{ dst_username}}/repos/tapkee/bin/tapkee /home/{{ dst_username }}/.bin/
+      
     - name: Change owner
       file: path=/home/{{ dst_username }} state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes
 
-    #- name: Delete repos directory
-      #shell: rm -rf /home/{{ dst_username }}/repos
+    - name: Delete repos directory
+      shell: rm -rf /home/{{ dst_username }}/repos
       
     #- name: Change owner of tools
       #file: path=/home/{{ dst_username }}/tools state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes

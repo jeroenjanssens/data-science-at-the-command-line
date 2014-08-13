@@ -5,14 +5,18 @@
   vars:
     parallel_version: 20140622
   tasks:
-    - name: Get Data Science at the Command Line tools, data, and scripts
-      git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/{{ dst_username }}/.data-science-at-the-command-line 
 
-    - name: Create symlink for book directory
-      shell: ln -s /home/{{ dst_username }}/.data-science-at-the-command-line/book /home/{{ dst_username }}/book
+    - name: Make sure that the repos directory exists
+      file: path=/home/{{ dst_username }}/repos state=directory owner={{ dst_username }} group={{ dst_username }}
+    - name: Make sure that the .bin directory exists
+      file: path=/home/{{ dst_username }}/.bin state=directory owner={{ dst_username }} group={{ dst_username }}
 
-    - name: Install dst command-line tool
-      pip: name=dst state=latest
+    - name: Add repository for node.js
+      apt_repository: repo='ppa:chris-lea/node.js' update-cache=yes
+
+    - name: Configure Go
+      shell: echo 'golang-go golang-go/dashboard boolean true' > /tmp/preseed.conf
+    - shell: debconf-set-selections /tmp/preseed.conf
 
     - name: Install Ubuntu packages
       apt: pkg={{item}} state=latest
@@ -44,12 +48,18 @@
         - unzip
         - openjdk-6-jdk
         - leiningen
+        - cowsay
         #- mysql-common
         #- libmysqlclient-dev 
         #- python-matplotlib
         #- python-pandas
         #- python-nose
         #- python-sympy
+
+    - name: Get Data Science at the Command Line tools, data, and scripts
+      git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/{{ dst_username }}/.data-science-at-the-command-line 
+    - name: Create symlink for book directory
+      shell: ln -s /home/{{ dst_username }}/.data-science-at-the-command-line/book /home/{{ dst_username }}/book
 
     - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
     - apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' state=present
@@ -61,18 +71,6 @@
         - sqldf
         - dplyr
 
-    - name: Make sure that the repos directory exists
-      file: path=/home/{{ dst_username }}/repos state=directory owner={{ dst_username }} group={{ dst_username }}
-
-    - name: Make sure that the .bin directory exists
-      file: path=/home/{{ dst_username }}/.bin state=directory owner={{ dst_username }} group={{ dst_username }}
-
-    - name: Configure Go
-      shell: echo 'golang-go golang-go/dashboard boolean true' > /tmp/preseed.conf
-    - shell: debconf-set-selections /tmp/preseed.conf
-
-    - name: Add repository for node.js
-      apt_repository: repo='ppa:chris-lea/node.js' update-cache=yes
 
     - name: Install jq
       get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/home/{{ dst_username }}/.bin/jq mode=0755 owner={{ dst_username }} group={{ dst_username }}
@@ -149,14 +147,14 @@
       args:
         chdir: /home/{{ dst_username}}/repos
 
-    - name: Get Tapkee
-      git: repo=https://github.com/lisitsyn/tapkee.git dest=/home/{{ dst_username }}/repos/tapkee/
-    - file: path=/home/{{ dst_username }}/repos/tapkee/build state=directory 
-    - shell: cmake .. && make
-      args:
-        chdir: /home/{{ dst_username }}/repos/tapkee/build
-    - name: Move Tapkee
-      shell: mv /home/{{ dst_username}}/repos/tapkee/bin/tapkee /home/{{ dst_username }}/.bin/
+    #- name: Get Tapkee
+      #git: repo=https://github.com/lisitsyn/tapkee.git dest=/home/{{ dst_username }}/repos/tapkee/
+    #- file: path=/home/{{ dst_username }}/repos/tapkee/build state=directory 
+    #- shell: cmake .. && make
+      #args:
+        #chdir: /home/{{ dst_username }}/repos/tapkee/build
+    #- name: Move Tapkee
+      #shell: mv /home/{{ dst_username}}/repos/tapkee/bin/tapkee /home/{{ dst_username }}/.bin/
 
     - name: Clone csvquote
       git: repo=https://github.com/dbro/csvquote.git dest=/home/{{ dst_username }}/repos/csvquote/
