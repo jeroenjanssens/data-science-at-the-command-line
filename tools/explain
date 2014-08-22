@@ -7,6 +7,19 @@
 #
 # Author: http://jeroenjanssens.com
 
+
 COMMAND="$@"
 URL="http://explainshell.com/explain?cmd=${COMMAND}"
-curl -s "${URL}" | scrape -e 'span.dropdown > a, pre' | sed -re 's/<(\/?)[^>]*>//g'
+SYSTEM=$(uname)
+
+if [[ "$SYSTEM" == "Linux" ]]
+then
+  curl -s "${URL}" | scrape -e 'span.dropdown > a, pre' | sed -re 's/<(\/?)[^>]*>//g'
+elif [[ "$SYSTEM" == "Darwin" ]]
+then
+  curl -s "${URL}" | scrape -e 'span.dropdown > a, pre' | sed -Ee 's/<(\/?)[^>]*>//g'
+fi
+
+
+
+
