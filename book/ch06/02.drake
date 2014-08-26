@@ -1,0 +1,10 @@
+NUM=10
+BASE=data/
+
+top.html <- [-timecheck]
+	curl -s 'http://www.gutenberg.org/browse/scores/top' > $OUTPUT
+
+top-$[NUM] <- top.html
+	< $INPUT grep -E '^<li>' |
+	head -n $[NUM] |
+	sed -E "s/.*ebooks\/([0-9]+)\">([^<]+)<.*/\\1,\\2/" > $OUTPUT
