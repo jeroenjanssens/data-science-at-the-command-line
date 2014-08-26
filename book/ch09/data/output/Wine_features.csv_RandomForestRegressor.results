@@ -1,0 +1,148 @@
+Experiment Name: Wine
+Timestamp: 22 Jun 2014 18:17:17
+SKLL Version: 0.24.0
+Training Set: train
+Test Set: cv
+Feature Set: ["features.csv"]
+Learner: RandomForestRegressor
+Task: cross_validate
+Feature Scaling: both
+Grid Search: False
+Grid Objective Function: r2
+
+
+Fold: 1
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.3640 (predicted)
+ Max:  8.0000 (actual),  7.9660 (predicted)
+ Avg:  5.9041 (actual),  5.9031 (predicted)
+ Std:  0.8995 (actual),  0.6495 (predicted)
+Pearson: 0.777633
+Objective Function Score (Test) = 0.601621013686
+
+Fold: 2
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.4400 (predicted)
+ Max:  8.0000 (actual),  7.7980 (predicted)
+ Avg:  5.8531 (actual),  5.9128 (predicted)
+ Std:  0.9029 (actual),  0.6273 (predicted)
+Pearson: 0.752006
+Objective Function Score (Test) = 0.557859547508
+
+Fold: 3
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.2900 (predicted)
+ Max:  9.0000 (actual),  7.7460 (predicted)
+ Avg:  5.8347 (actual),  5.8546 (predicted)
+ Std:  0.9031 (actual),  0.6189 (predicted)
+Pearson: 0.703861
+Objective Function Score (Test) = 0.494589542667
+
+Fold: 4
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.3140 (predicted)
+ Max:  8.0000 (actual),  8.0000 (predicted)
+ Avg:  5.9408 (actual),  5.9241 (predicted)
+ Std:  0.8705 (actual),  0.5962 (predicted)
+Pearson: 0.733218
+Objective Function Score (Test) = 0.534911906073
+
+Fold: 5
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.2580 (predicted)
+ Max:  9.0000 (actual),  7.6180 (predicted)
+ Avg:  5.8531 (actual),  5.8909 (predicted)
+ Std:  0.8347 (actual),  0.5855 (predicted)
+Pearson: 0.734615
+Objective Function Score (Test) = 0.536501204332
+
+Fold: 6
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.2680 (predicted)
+ Max:  8.0000 (actual),  7.6320 (predicted)
+ Avg:  5.8510 (actual),  5.8728 (predicted)
+ Std:  0.9171 (actual),  0.6406 (predicted)
+Pearson: 0.759645
+Objective Function Score (Test) = 0.572764986407
+
+Fold: 7
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.2220 (predicted)
+ Max:  9.0000 (actual),  7.9980 (predicted)
+ Avg:  5.8286 (actual),  5.8780 (predicted)
+ Std:  0.8894 (actual),  0.6328 (predicted)
+Pearson: 0.771863
+Objective Function Score (Test) = 0.589033395253
+
+Fold: 8
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.3000 (predicted)
+ Max:  8.0000 (actual),  8.0000 (predicted)
+ Avg:  5.9286 (actual),  5.9157 (predicted)
+ Std:  0.8577 (actual),  0.5991 (predicted)
+Pearson: 0.718597
+Objective Function Score (Test) = 0.51574859362
+
+Fold: 9
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.3360 (predicted)
+ Max:  8.0000 (actual),  7.9820 (predicted)
+ Avg:  5.8569 (actual),  5.8863 (predicted)
+ Std:  0.8999 (actual),  0.6189 (predicted)
+Pearson: 0.748832
+Objective Function Score (Test) = 0.555946492806
+
+Fold: 10
+Model Parameters: {"oob_score": false, "n_jobs": 1, "verbose": 0, "min_density": null, "compute_importances": null, "bootstrap": true, "min_samples_leaf": 1, "n_estimators": 500, "min_samples_split": 2, "random_state": 123456789, "criterion": "mse", "max_features": "auto", "max_depth": null}
+Grid Objective Score (Train) = 0.0
+
+Accuracy = 
+Descriptive statistics:
+ Min:  3.0000 (actual),  4.2900 (predicted)
+ Max:  9.0000 (actual),  7.5900 (predicted)
+ Avg:  5.9284 (actual),  5.8868 (predicted)
+ Std:  0.8681 (actual),  0.6013 (predicted)
+Pearson: 0.718336
+Objective Function Score (Test) = 0.513048256368
+
+Fold: average
+Model Parameters: 
+Grid Objective Score (Train) = 
+Objective Function Score (Test) = 0.547202493872
+

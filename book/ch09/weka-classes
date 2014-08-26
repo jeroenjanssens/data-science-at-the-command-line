@@ -1,0 +1,2 @@
+#!/bin/bash
+unzip -l $(dirname $0)/weka.jar | sed -rne 's/.*(weka)\/([^g])([^$]*)\.class$/\2\3/p' | tr / .
