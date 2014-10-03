@@ -29,7 +29,9 @@
         - zlib1g-dev # lxml
         - python-numpy
         - python-scipy
-        - python-scikits-learn
+        - libblas-dev
+        - liblapack-dev
+        - gfortran
         - tree
         - imagemagick # display
         - feedgnuplot
@@ -49,12 +51,26 @@
         - openjdk-6-jdk
         - leiningen
         - cowsay
-        #- mysql-common
-        #- libmysqlclient-dev 
-        #- python-matplotlib
-        #- python-pandas
-        #- python-nose
-        #- python-sympy
+
+    - name: Install Python packages
+      pip: name={{item}} state=latest
+      with_items:
+        - numpy 
+        - scikit-learn
+        - cssselect
+        - lxml
+        - joblib
+        - six
+        - PrettyTable
+        - beautifulsoup4
+        - configparser
+        - futures
+        - logutils
+
+    - pip: name=awscli version=1.3.24
+    - pip: name=bigmler version=1.12.2
+    - pip: name=csvkit version=0.8.0
+    - pip: name=skll version=0.26
 
     - name: Get Data Science at the Command Line tools, data, and scripts
       git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/{{ dst_username }}/.data-science-at-the-command-line 
@@ -71,7 +87,6 @@
         - sqldf
         - dplyr
 
-
     - name: Install jq
       get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/home/{{ dst_username }}/.bin/jq mode=0755 owner={{ dst_username }} group={{ dst_username }}
 
@@ -86,22 +101,6 @@
     - name: Install xml2json
       npm: name=xml2json-command global=yes
 
-    - name: Install Python packages
-      pip: name={{item}} state=latest
-      with_items:
-        - awscli
-        - csvkit
-        - bigmler
-        - cssselect
-        - lxml
-        - joblib
-        - six
-        - PrettyTable
-        - beautifulsoup4
-        - configparser
-        - futures
-        - logutils
-
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/{{ dst_username }}/parallel-{{ parallel_version }}.tar.bz2
     - name: Install GNU Parallel
@@ -114,9 +113,6 @@
         rm -rf parallel-{{ parallel_version }}
       args:
         chdir: /home/{{ dst_username }}/
-
-    - name: Install SKLL
-      pip: name=skll state=latest extra_args=--no-deps
 
     - name: Get Drake
       git: repo=https://github.com/Factual/drake.git dest=/home/{{ dst_username }}/repos/drake/
@@ -147,14 +143,28 @@
       args:
         chdir: /home/{{ dst_username}}/repos
 
-    #- name: Get Tapkee
-      #git: repo=https://github.com/lisitsyn/tapkee.git dest=/home/{{ dst_username }}/repos/tapkee/
-    #- file: path=/home/{{ dst_username }}/repos/tapkee/build state=directory 
-    #- shell: cmake .. && make
-      #args:
-        #chdir: /home/{{ dst_username }}/repos/tapkee/build
-    #- name: Move Tapkee
-      #shell: mv /home/{{ dst_username}}/repos/tapkee/bin/tapkee /home/{{ dst_username }}/.bin/
+    - name: Get Tapkee
+      git: repo=https://github.com/lisitsyn/tapkee.git dest=/home/{{ dst_username }}/repos/tapkee/
+    - file: path=/home/{{ dst_username }}/repos/tapkee/build state=directory 
+    - shell: cmake .. && make
+      args:
+        chdir: /home/{{ dst_username }}/repos/tapkee/build
+    - name: Move Tapkee
+      shell: mv /home/{{ dst_username}}/repos/tapkee/bin/tapkee /home/{{ dst_username }}/.bin/
+
+    - name: Get curlicue
+      git: repo=https://github.com/decklin/curlicue.git dest=/home/{{ dst_username }}/repos/curlicue/
+    - name: Move curlicue
+      shell: mv /home/{{ dst_username}}/repos/curlicue/curlicue /home/{{ dst_username }}/.bin/
+    - name: Move curlicue-setup
+      shell: mv /home/{{ dst_username}}/repos/curlicue/curlicue-setup /home/{{ dst_username }}/.bin/
+
+    - name: Get CRUSH
+      get_url: url=http://crush-tools.googlecode.com/files/crush-tools-2013-04.tar.gz dest=/tmp/crush.tar.gz
+    - name: Unpack CRUSH
+      shell: chdir=/tmp/ tar -xzvf crush.tar.gz; cd crush-tools-*; ./configure; make; make install; ldconfig
+    - name: Change owner
+      file: path=/home/{{ dst_username }} state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes
 
     - name: Clone csvquote
       git: repo=https://github.com/dbro/csvquote.git dest=/home/{{ dst_username }}/repos/csvquote/
@@ -183,8 +193,3 @@
 
     - name: Change owner
       file: path=/home/{{ dst_username }} state=directory owner={{ dst_username }} group={{ dst_username }} recurse=yes
-
-    #- name: Download Q
-      #get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/{{ dst_username }}/tools/q mode=0755 owner={{ dst_username }} group={{ dst_username }}
-    #- name: Download TextQL
-      #shell: sudo GOPATH=/home/{{ dst_username }}/.go go get github.com/dinedal/textql

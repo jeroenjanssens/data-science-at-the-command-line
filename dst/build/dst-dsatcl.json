@@ -28,7 +28,11 @@
       "headless": "false",
       "guest_os_type": "Ubuntu_64",
       "guest_additions_mode": "disable",
-      "http_directory": "http"
+      "http_directory": "http",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "2048"],
+        ["modifyvm", "{{.Name}}", "--cpus", "2"]
+      ]
     },
     {
       "type": "amazon-ebs",
@@ -53,7 +57,9 @@
         "sleep 5",
         "sudo apt-get update",
         "sleep 5",
-        "sudo apt-get install -y python-pip python-dev python-apt",
+        "sudo apt-get install -y python-dev python-apt",
+        "wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py",
+        "sudo python get-pip.py",
         "sleep 5",
         "sudo pip install ansible"
       ],
