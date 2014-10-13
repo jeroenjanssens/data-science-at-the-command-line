@@ -37,7 +37,13 @@ EOF
 }
 
 finish() {
-	rm -f $IN $OUT
+	rm -f $IN $OUT ${OUT%.png} ${ERR%.err}
+
+        ## Removes error file if error file is empty.
+    if [[ ! -s $ERR ]]; then
+        rm -f $ERR
+    fi
+
 	rm -f Rplots.pdf
 }
 
@@ -61,8 +67,8 @@ if [ -z "$TMPDIR" ]; then
     TMPDIR=/tmp/
 fi
 IN=$(mktemp ${TMPDIR}Rio-XXXXXXXX)
-OUT=$(mktemp ${TMPDIR}Rio-XXXXXXXX.png)
-ERR=$(mktemp ${TMPDIR}Rio-XXXXXXXX.err)
+OUT=$(mktemp ${TMPDIR}Rio-XXXXXXXX).png
+ERR=$(mktemp ${TMPDIR}Rio-XXXXXXXX).err
 
 while getopts "d:hgnprsve:f:b" OPTION
 do
@@ -131,3 +137,4 @@ else
 		cat $OUT
 	fi 
 fi
+
