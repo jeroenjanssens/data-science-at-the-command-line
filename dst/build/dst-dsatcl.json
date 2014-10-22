@@ -38,8 +38,8 @@
       "type": "amazon-ebs",
       "ami_name": "dst-dsatcl-{{user `dst_dsatcl_version`}}",
       "ssh_username": "ubuntu",
-      "instance_type": "m1.xlarge",
-      "source_ami": "ami-2f252646",
+      "instance_type": "m3.large",
+      "source_ami": "ami-8caa1ce4",
       "region": "us-east-1",
       "secret_key": "{{user `aws_secret_key`}}",
       "access_key": "{{user `aws_access_key`}}"
