@@ -19,6 +19,7 @@ def main():
     parser.add_argument('-t', '--text', action='store_true', default=False, help="Output text instead of HTML")
     parser.add_argument('-b', '--body', action='store_true', default=False, help="Enclose output with HTML and BODY tags")
     parser.add_argument('-d', '--delimiter', default=' ', help="Delimiter when output is text")
+    parser.add_argument('-r', '--rawinput', action='store_true', default=False, help="Do not parse HTML before feeding etree (useful for escaping CData)")
     args = parser.parse_args()
 
     if not args.expression.startswith('//'):
@@ -30,8 +31,11 @@ def main():
     else:
         expression = args.expression
 
-    html_parser = etree.HTMLParser(encoding='utf-8', recover=True)
-    document = etree.parse(args.html, html_parser)
+    html_parser = etree.HTMLParser(encoding='utf-8', recover=True, strip_cdata=True)
+    if args.rawinput:
+      document = etree.fromstring(args.html.read())
+    else:
+      document = etree.parse(args.html, html_parser)
 
     if args.body:
         sys.stdout.write("<!DOCTYPE html>\n<html>\n<body>\n")
