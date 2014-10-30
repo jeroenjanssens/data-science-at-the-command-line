@@ -19,6 +19,7 @@ def main():
     parser.add_argument('-t', '--text', action='store_true', default=False, help="Output text instead of HTML")
     parser.add_argument('-b', '--body', action='store_true', default=False, help="Enclose output with HTML and BODY tags")
     parser.add_argument('-d', '--delimiter', default=' ', help="Delimiter when output is text")
+    parser.add_argument('-a', '--argument', default="", help="argument to extract from tag")  
     args = parser.parse_args()
 
     if not args.expression.startswith('//'):
@@ -38,7 +39,13 @@ def main():
 
     for e in document.xpath(expression):
         try:
-            text = etree.tostring(e)
+            if not args.argument :
+                text = etree.tostring(e)
+	    else:
+		    if e.get(args.argument) != None:
+			    text = e.get(args.argument)
+		    else:
+			    text = "No corresponding attribute in matching tag"
             sys.stdout.write(text.encode('utf-8') + "\n")
             sys.stdout.flush()
         except IOError:
