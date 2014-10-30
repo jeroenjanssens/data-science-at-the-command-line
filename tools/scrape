@@ -41,12 +41,10 @@ def main():
         try:
             if not args.argument :
                 text = etree.tostring(e)
-	    else:
-		    if e.get(args.argument) != None:
-			    text = e.get(args.argument)
-		    else:
-			    text = "No corresponding attribute in matching tag"
-            sys.stdout.write(text.encode('utf-8') + "\n")
+            else:
+                text = e.get(args.argument)
+            if text != None:
+                sys.stdout.write(text.encode('utf-8') + "\n")
             sys.stdout.flush()
         except IOError:
             pass
