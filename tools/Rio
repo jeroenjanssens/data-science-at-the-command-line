@@ -60,9 +60,9 @@ DPI=72
 if [ -z "$TMPDIR" ]; then
     TMPDIR=/tmp/
 fi
-IN=$(mktemp ${TMPDIR}Rio-XXXXXXXX)
-OUT=$(mktemp ${TMPDIR}Rio-XXXXXXXX).png
-ERR=$(mktemp ${TMPDIR}Rio-XXXXXXXX).err
+IN=$(mktemp ${TMPDIR}/Rio-XXXXXXXX)
+OUT=$(mktemp ${TMPDIR}/Rio-XXXXXXXX).png
+ERR=$(mktemp ${TMPDIR}/Rio-XXXXXXXX).err
 
 while getopts "d:hgnprsve:f:b" OPTION
 do
