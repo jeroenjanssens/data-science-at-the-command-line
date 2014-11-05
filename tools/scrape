@@ -21,6 +21,8 @@ def main():
     parser.add_argument('-d', '--delimiter', default=' ', help="Delimiter when output is text")
     args = parser.parse_args()
 
+    args.expression = args.expression.decode('utf-8')
+
     if not args.expression.startswith('//'):
         from cssselect import GenericTranslator, SelectorError
         try:
