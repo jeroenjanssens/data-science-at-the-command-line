@@ -2,4 +2,4 @@ top-5 <-
 	curl -s 'http://www.gutenberg.org/browse/scores/top' |
 	grep -E '^<li>' | 
 	head -n 5 | 
-	ed -E "s/.*ebooks\/([0-9]+)\">([^<]+)<.*/\\1,\\2/" > top-5
+	sed -E "s/.*ebooks\/([0-9]+)\">([^<]+)<.*/\\1,\\2/" > top-5
