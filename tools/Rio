@@ -37,14 +37,20 @@ EOF
 }
 
 finish() {
-	rm -f $IN $OUT
+	rm -f $IN $OUT ${OUT%.png} ${ERR%.err}
+
+        ## Removes error file if error file is empty.
+    if [[ ! -s $ERR ]]; then
+        rm -f $ERR
+    fi
+
 	rm -f Rplots.pdf
 }
 
 trap finish EXIT
 
 callR() {
-	Rscript --vanilla -e "options(scipen=999);df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.matrix(last)){last<-as.data.frame(last)};if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=T,qmethod='double',row.names=F,col.names=${HEADER});}else if(is.vector(last)){cat(last,sep='\n', file='${OUT}')}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=${DPI},units='cm',width=20,height=15);}else{sink('${OUT}');print(last);}"
+	Rscript --vanilla -e "options(scipen=999);df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.matrix(last)){last<-as.data.frame(last)};if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=T,qmethod='double',row.names=F,col.names=${HEADER});}else if(is.vector(last)){cat(last,sep='\\\n', file='${OUT}')}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=${DPI},units='cm',width=20,height=15);}else{sink('${OUT}');print(last);}"
 }
 
 SCRIPT=
@@ -131,3 +137,4 @@ else
 		cat $OUT
 	fi 
 fi
+
