@@ -22,6 +22,8 @@ def main():
     parser.add_argument('-r', '--rawinput', action='store_true', default=False, help="Do not parse HTML before feeding etree (useful for escaping CData)")
     args = parser.parse_args()
 
+    args.expression = args.expression.decode('utf-8')
+
     if not args.expression.startswith('//'):
         from cssselect import GenericTranslator, SelectorError
         try:
