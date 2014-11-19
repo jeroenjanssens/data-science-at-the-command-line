@@ -27,8 +27,7 @@ OPTIONS:
    -h      Show this message
    -g      Import ggplot2
    -n      CSV has no header
-   -p      Import plyr
-   -r      Import reshape2
+   -r      Import dplyr and tidyr
    -s      Import sqldf
    -b      Use same settings as used for book Data Science at the Command Line
    -v      Verbose
@@ -99,11 +98,8 @@ do
 		n)
 			HEADER="F"
 			;;
-		p)
-			REQUIRES="${REQUIRES}require(plyr);"
-			;;
 		r)
-			REQUIRES="${REQUIRES}require(reshape2);"
+			REQUIRES="${REQUIRES}require(dplyr);require(tidyr);"
 			;;
 		s)
 			REQUIRES="${REQUIRES}require(sqldf);"
