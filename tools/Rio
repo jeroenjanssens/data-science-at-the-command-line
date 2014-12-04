@@ -10,7 +10,7 @@
 # $ < iris.csv Rio -se 'sqldf("select Name from df where df.SepalLength > 7")'
 # $ < iris.csv Rio -ge 'g+geom_point(aes(x=SepalLength,y=SepalWidth,colour=Name))' > iris.png
 #
-# Dependency: R (with optionally the R packages ggplot2, plyr, and sqldf)
+# Dependency: R (with optionally the R packages ggplot2, dplyr, tidyr, and sqldf)
 #
 # Author: http://jeroenjanssens.com
 
