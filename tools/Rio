@@ -49,7 +49,7 @@ finish() {
 trap finish EXIT
 
 callR() {
-	Rscript --vanilla -e "options(scipen=999);df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.matrix(last)){last<-as.data.frame(last)};if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=T,qmethod='double',row.names=F,col.names=${HEADER});}else if(is.vector(last)){cat(last,sep='\\\n', file='${OUT}')}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=${DPI},units='cm',width=20,height=15);}else{sink('${OUT}');print(last);}"
+	Rscript --vanilla -e "options(scipen=999);df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.matrix(last)){last<-as.data.frame(last)};if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=T,qmethod='double',row.names=F,col.names=${HEADER});}else if(is.vector(last)){cat(last,sep='\\\n', file='${OUT}')}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=${RIO_DPI-72},units='cm',width=20,height=15);}else{sink('${OUT}');print(last);}"
 }
 
 SCRIPT=
@@ -57,7 +57,6 @@ REQUIRES=
 DELIMITER=","
 HEADER="T"
 VERBOSE=false
-DPI=72
 
 # OSX `mktemp' requires a temp file template, but Linux `mktemp' has it as optional.
 # This explicitly uses a template, which works for both.  The $TMPDIR is in case
@@ -73,7 +72,7 @@ while getopts "d:hgnprsve:f:b" OPTION
 do
 	case $OPTION in
 		b)
-			DPI=300
+			RIO_DPI=300
 			;;
 		d)
 			DELIMITER=$OPTARG
