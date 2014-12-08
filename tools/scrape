@@ -54,7 +54,10 @@ def main():
     for e in document.xpath(expression):
         try:
             if not args.argument:
-                text = etree.tostring(e)
+                if isinstance(e, str):
+		    text = e
+		else:
+		    text = etree.tostring(e)
             else:
                 text = e.get(args.argument)
             if text is not None:
