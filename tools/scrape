@@ -55,9 +55,9 @@ def main():
         try:
             if not args.argument:
                 if isinstance(e, str):
-		    text = e
-		else:
-		    text = etree.tostring(e)
+                    text = e
+                else:
+                    text = etree.tostring(e)
             else:
                 text = e.get(args.argument)
             if text is not None:
