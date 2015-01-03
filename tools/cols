@@ -15,11 +15,20 @@
 # Author: http://jeroenjanssens.com
 
 ARG="$1"
+ARG_INV="$(tr cC Cc <<< ${ARG})"
 shift
 COLUMNS="$1"
 shift
 EXPR="$@"
-DIRTMP=$(mktemp -d)
-mkfifo $DIRTMP/other_columns
-tee $DIRTMP/other_columns | csvcut $ARG $COLUMNS | eval ${EXPR} | paste -d, - <(csvcut ${ARG~~} $COLUMNS $DIRTMP/other_columns)
-rm -rf $DIRTMP
+
+finish() {
+	rm -f $OTHER_COLUMNS
+}
+trap finish EXIT
+
+if [ -z "$TMPDIR" ]; then
+    TMPDIR=/tmp
+fi
+OTHER_COLUMNS=$(mktemp ${TMPDIR}/cols-XXXXXXXX)
+
+tee $OTHER_COLUMNS | csvcut $ARG $COLUMNS | eval ${EXPR} | paste -d, - <(csvcut ${ARG_INV} $COLUMNS $OTHER_COLUMNS)
