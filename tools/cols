@@ -31,4 +31,4 @@ if [ -z "$TMPDIR" ]; then
 fi
 OTHER_COLUMNS=$(mktemp ${TMPDIR}/cols-XXXXXXXX)
 
-tee $OTHER_COLUMNS | csvcut $ARG $COLUMNS | eval ${EXPR} | paste -d, - <(csvcut ${ARG_INV} $COLUMNS $OTHER_COLUMNS)
+tee $OTHER_COLUMNS | csvcut $ARG "$COLUMNS" | eval ${EXPR} | paste -d, - <(csvcut ${ARG_INV} "$COLUMNS" $OTHER_COLUMNS)
