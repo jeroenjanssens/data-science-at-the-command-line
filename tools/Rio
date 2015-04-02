@@ -37,7 +37,7 @@ EOF
 }
 
 finish() {
-	rm -f $IN $OUT ${OUT%.png} ${ERR%.err}
+	rm -f $IN $OUT ${OUT%.png} ${OUT%.pdf} ${ERR%.err}
 
         ## Removes error file if error file is empty.
     if [[ ! -s $ERR ]]; then
@@ -58,7 +58,6 @@ REQUIRES=
 DELIMITER=","
 HEADER="T"
 VERBOSE=false
-PDF=false
 
 # OSX `mktemp' requires a temp file template, but Linux `mktemp' has it as optional.
 # This explicitly uses a template, which works for both.  The $TMPDIR is in case
@@ -109,7 +108,7 @@ do
 			VERBOSE=true
 			;;
         p)
-            PDF=true
+            OUT=${OUT%.png}.pdf
             ;;			
 		?)
 			usage
@@ -119,11 +118,6 @@ do
 done
 
 cat /dev/stdin > $IN
-
-if $PDF
-then
-    OUT=$(mktemp ${TMPDIR}/Rio-XXXXXXXX).pdf
-fi
 
 if $VERBOSE
 then
