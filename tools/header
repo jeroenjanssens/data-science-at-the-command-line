@@ -62,24 +62,24 @@ do
 		a)
 			print_header "$OPTARG\n"
 			print_body
-			exit 1
+			exit 0
 			;;
 		d)
 			get_header
 			print_body
-			exit 1
+			exit 0
 			;;
 		r)
 			get_header
 			print_header "$OPTARG\n"
 			print_body
-			exit 1
+			exit 0
 			;;
 		e)
 			get_header
 			print_header "$(echo -ne $OLDHEADER | eval $OPTARG)\n"
 			print_body
-			exit 1
+			exit 0
 			;;
 		h)
 			usage
