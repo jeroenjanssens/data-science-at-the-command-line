@@ -25,6 +25,8 @@ def main():
                         help="Enclose output with HTML and BODY tags")
     parser.add_argument('-e', '--expression', default='*',
                         help="XPath query or CSS3 selector")
+    parser.add_argument('-x', '--check-existance', action='store_true', default=False,
+                        help="Process return value signifying existance")
     parser.add_argument('-r', '--rawinput', action='store_true', default=False,
                         help="Do not parse HTML before feeding etree (useful"
                         "for escaping CData)")
@@ -51,7 +53,12 @@ def main():
     if args.body:
         sys.stdout.write("<!DOCTYPE html>\n<html>\n<body>\n")
 
-    for e in document.xpath(expression):
+    els = list(document.xpath(expression))
+
+    if args.check_existance:
+        sys.exit(1 if len(els) == 0 else 0)
+
+    for e in els:
         try:
             if not args.argument:
                 text = etree.tostring(e)
