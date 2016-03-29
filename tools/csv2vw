@@ -5,8 +5,6 @@ import csv
 from sys import stdin, stdout, stderr, exit
 import itertools
 
-# cat ~/iris.csv | ./csv2vw -tspecies -mcsetosa
-
 
 def main():
     parser = argparse.ArgumentParser(
@@ -77,8 +75,6 @@ Convert CSV to Vowpal Wabbit input format.
                         action="store_true")
     parser.add_argument("-t", "--tag",
                         help="""Name of column that contains the tags.""")
-
-    # define custom set
 
     args = parser.parse_args()
 
