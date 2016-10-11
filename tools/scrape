@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # scrape: Extract HTML elements using an XPath query or CSS3 selector.
 #
@@ -46,9 +46,6 @@ def main():
         document = etree.fromstring(inp.read())
     else:
         document = etree.parse(inp, html_parser)
-
-    # import IPython
-    # IPython.embed()
 
     for e in expression:
         els = list(document.xpath(e))
