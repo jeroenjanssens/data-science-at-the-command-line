@@ -28,12 +28,13 @@ def main():
     parser.add_argument('-r', '--rawinput', action='store_true', default=False,
                         help="Do not parse HTML before feeding etree (useful"
                         "for escaping CData)")
+    parser.add_argument('-x', '--xpath', action='store_true', default=False, help="Force expression to be parsed as XPath")
     parser.add_argument('-n', '--nonewline', action='store_true', default=False, help="Do not output trailing newline")
     args = parser.parse_args()
 
     args.expression = args.expression.decode('utf-8')
 
-    if not args.expression.startswith('//'):
+    if (not args.expression.startswith('//') and not args.xpath):
         from cssselect import GenericTranslator, SelectorError
         try:
             expression = GenericTranslator().css_to_xpath(args.expression)
