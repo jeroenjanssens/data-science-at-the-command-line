@@ -14,4 +14,4 @@
 X="$1"
 Y="$2"
 COLOR="${3:-1}"
-Rio -bge "g+geom_point(aes(x=${X},y=${Y},color=${COLOR}))"
+Rio -ge "g+geom_point(aes(x=${X},y=${Y},color=${COLOR}))"
