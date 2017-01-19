@@ -28,11 +28,13 @@ def main():
     parser.add_argument('-r', '--rawinput', action='store_true', default=False,
                         help="Do not parse HTML before feeding etree (useful"
                         "for escaping CData)")
+    parser.add_argument('-x', '--xpath', action='store_true', default=False, help="Force expression to be parsed as XPath")
+    parser.add_argument('-n', '--nonewline', action='store_true', default=False, help="Do not output trailing newline")
     args = parser.parse_args()
 
     args.expression = args.expression.decode('utf-8')
 
-    if not args.expression.startswith('//'):
+    if (not args.expression.startswith('//') and not args.xpath):
         from cssselect import GenericTranslator, SelectorError
         try:
             expression = GenericTranslator().css_to_xpath(args.expression)
@@ -48,23 +50,31 @@ def main():
     else:
         document = etree.parse(args.html, html_parser)
 
+    if args.nonewline:
+        trailing = ""
+    else:
+        trailing = "\n"
+
     if args.body:
-        sys.stdout.write("<!DOCTYPE html>\n<html>\n<body>\n")
+        sys.stdout.write("<!DOCTYPE html>\n<html>\n<body>" + trailing)
 
     for e in document.xpath(expression):
         try:
             if not args.argument:
-                text = etree.tostring(e)
+                if isinstance(e, str):
+                    text = e
+                else:
+                    text = etree.tostring(e)
             else:
                 text = e.get(args.argument)
             if text is not None:
-                sys.stdout.write(text.encode('utf-8') + "\n")
+                sys.stdout.write(text.encode('utf-8') + trailing)
             sys.stdout.flush()
         except IOError:
             pass
 
     if args.body:
-        sys.stdout.write("</body>\n</html>\n")
+        sys.stdout.write("</body>\n</html>" + trailing)
 
 if __name__ == "__main__":
     exit(main())
