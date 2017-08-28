@@ -21,6 +21,8 @@ def main():
                         default=sys.stdin, help="HTML", metavar="HTML")
     parser.add_argument('-a', '--argument', default="",
                         help="argument to extract from tag")
+    parser.add_argument('-b', '--body', action='store_true', default=False,
+                        help="Enclose output with HTML and BODY tags")
     parser.add_argument('-e', '--expression', default=[], action='append',
                         help="XPath query or CSS3 selector")
     parser.add_argument('-f', '--file', default='',
@@ -47,6 +49,9 @@ def main():
     else:
         document = etree.parse(inp, html_parser)
 
+    if args.body:
+        sys.stdout.write("<!DOCTYPE html>\n<html>\n<body>\n")
+
     for e in expression:
         els = list(document.xpath(e))
 
@@ -62,6 +67,9 @@ def main():
                 text = e.get(args.argument)
             if text is not None:
                 sys.stdout.write(text.encode('utf-8').strip() + "\t")
+
+    if args.body:
+        sys.stdout.write("</body>\n</html>")
 
     sys.stdout.write('\n')
     sys.stdout.flush()
