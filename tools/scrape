@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # scrape: Extract HTML elements using an XPath query or CSS3 selector.
 #
@@ -23,48 +23,56 @@ def main():
                         help="argument to extract from tag")
     parser.add_argument('-b', '--body', action='store_true', default=False,
                         help="Enclose output with HTML and BODY tags")
-    parser.add_argument('-e', '--expression', default='*',
+    parser.add_argument('-e', '--expression', default=[], action='append',
                         help="XPath query or CSS3 selector")
+    parser.add_argument('-f', '--file', default='',
+                        help="File to read input from")
+    parser.add_argument('-x', '--check-existance', action='store_true', default=False,
+                        help="Process return value signifying existance")
     parser.add_argument('-r', '--rawinput', action='store_true', default=False,
                         help="Do not parse HTML before feeding etree (useful"
                         "for escaping CData)")
     args = parser.parse_args()
 
-    args.expression = args.expression.decode('utf-8')
+    args.expression = [e.decode('utf-8') for e in args.expression]
 
-    if not args.expression.startswith('//'):
-        from cssselect import GenericTranslator, SelectorError
-        try:
-            expression = GenericTranslator().css_to_xpath(args.expression)
-        except SelectorError:
-            parser.error('Invalid CSS selector')
-    else:
-        expression = args.expression
+    from cssselect import GenericTranslator
+
+    expression = [e if e.startswith('//') else GenericTranslator().css_to_xpath(e) for e in args.expression]
 
     html_parser = etree.HTMLParser(encoding='utf-8', recover=True,
                                    strip_cdata=True)
+
+    inp = open(args.file) if args.file else args.html
     if args.rawinput:
-        document = etree.fromstring(args.html.read())
+        document = etree.fromstring(inp.read())
     else:
-        document = etree.parse(args.html, html_parser)
+        document = etree.parse(inp, html_parser)
 
     if args.body:
         sys.stdout.write("<!DOCTYPE html>\n<html>\n<body>\n")
 
-    for e in document.xpath(expression):
-        try:
-            if not args.argument:
+    for e in expression:
+        els = list(document.xpath(e))
+
+        if args.check_existance:
+            sys.exit(1 if len(els) == 0 else 0)
+
+        for e in els:
+            if isinstance(e, basestring):
+                text = e
+            elif not args.argument:
                 text = etree.tostring(e)
             else:
                 text = e.get(args.argument)
             if text is not None:
-                sys.stdout.write(text.encode('utf-8') + "\n")
-            sys.stdout.flush()
-        except IOError:
-            pass
+                sys.stdout.write(text.encode('utf-8').strip() + "\t")
 
     if args.body:
-        sys.stdout.write("</body>\n</html>\n")
+        sys.stdout.write("</body>\n</html>")
+
+    sys.stdout.write('\n')
+    sys.stdout.flush()
 
 if __name__ == "__main__":
     exit(main())
