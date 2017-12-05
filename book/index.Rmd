@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "Data Science at the Command Line"
+author: "Jeroen Janssens"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book

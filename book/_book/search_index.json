@@ -1,0 +1,3 @@
+[
+["index.html", "Data Science at the Command Line Chapter 1 Prerequisites", " Data Science at the Command Line Jeroen Janssens 2017-12-05 Chapter 1 Prerequisites This is a sample book written in Markdown. You can use anything that Pandoc’s Markdown supports, e.g., a math equation \\(a^2 + b^2 = c^2\\). The bookdown package can be installed from CRAN or Github: install.packages(&quot;bookdown&quot;) # or the development version # devtools::install_github(&quot;rstudio/bookdown&quot;) Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading #. To compile this example to PDF, you need to install XeLaTeX. "]
+]
