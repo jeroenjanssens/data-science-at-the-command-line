@@ -1,0 +1,4 @@
+book_filename: "book"
+language:
+  ui:
+    chapter_name: "Chapter "
