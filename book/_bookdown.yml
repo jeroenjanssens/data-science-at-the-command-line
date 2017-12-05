@@ -1,4 +1,6 @@
 book_filename: "book"
+output_dir: "../docs"
+delete_merged_file: true
 language:
   ui:
     chapter_name: "Chapter "

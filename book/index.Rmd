@@ -10,21 +10,33 @@ link-citations: yes
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
 ---
 
-# Prerequisites
+# Welcome {-}
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+This is the website for *Data Science at the Command Line*, published by O'Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.
 
-The **bookdown** package can be installed from CRAN or Github:
+To get you started---whether you’re on Windows, OS X, or Linux---author [Jeroen Janssens](https://twitter.com/jeroenhjanssens) has developed a Docker image packed with over 80 command-line tools.
 
-```{r eval=FALSE}
-install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
+Discover why the command line is an agile, scalable, and extensible technology. Even if you’re already comfortable processing data with, say, Python or R, you’ll greatly improve your data science workflow by also leveraging the power of the command line.
+
+
+```{r out.width='349px', echo=FALSE, out.extra='class="cover"'}
+knitr::include_graphics('images/cover.png', dpi = NA)
 ```
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
 
-To compile this example to PDF, you need to install XeLaTeX.
+If you find this content useful, please consider supporting the work by either:
+
+* Buying the book on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [bol.com](https://www.bol.com/nl/p/data-science-at-the-command-line/9200000031673818)
+* Writing a review on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [Goodreads](https://www.goodreads.com/book/show/22747725-data-science-at-the-command-line)
+* Starring the [Github repository](https://github.com/jeroenjanssens/data-science-at-the-command-line) or [Docker image](https://hub.docker.com/u/datascienceworkshops/)
+
+If you and your colleagues would like to learn from the author in person, please contact [Data Science Workshops B.V.](https://datascienceworkshops.com) for more information.
+
+This work is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International   License](https://creativecommons.org/licenses/by-nd/4.0/).
+
+
+
+
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
