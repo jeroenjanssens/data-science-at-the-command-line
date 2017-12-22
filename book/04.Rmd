@@ -1,25 +1,3 @@
-```{r include=FALSE, cache=FALSE}
-# library(knitractive)
-#
-# engine <- ActiveEngine$new(
-#   name = "bash",
-#   shell_command = "docker run --rm -it datascienceworkshops/data-science-at-the-command-line:latest",
-#   prompt = "^(\\[.*\\]\\$|>)$",
-#   lexer = "shell-session"
-# )
-# engine$start()
-```
-```{r include=FALSE, cache=FALSE}
-# library(knitractive)
-#
-# engine <- ActiveEngine$new(
-#   name = "bash",
-#   shell_command = "docker run --rm -it datascienceworkshops/data-science-at-the-command-line:latest",
-#   prompt = "^(\\[.*\\]\\$|>)$",
-#   lexer = "shell-session"
-# )
-# engine$start()
-```
 # Creating Reusable Command-line Tools 
 
 Throughout the book, we use a lot of commands and pipelines that basically fit on one line. Let us call those one-liners. Being able to perform complex tasks with just a one-liner is what makes the command line powerful. It’s a very different experience from writing traditional programs.
@@ -103,7 +81,9 @@ The first step is to create a new file. Open your favorite text editor and copy 
 \@ref(exm:top-words-1)
 .
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt |
 tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
 uniq -c | sort -nr | head -n 10
@@ -198,7 +178,9 @@ In our case we want to use `bash` to interpret our commands. Example
 \@ref(exm:top-words-3)
  shows what the file *top-words-3.sh* looks like with a shebang.
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt |
 tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
@@ -219,7 +201,9 @@ If we assume that the user of the command-line tool will provide the text, it wi
 \@ref(exm:top-words-4)
  for the updated script named *top-words-4.sh*.
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
 uniq -c | sort -nr | head -n 10
@@ -241,7 +225,9 @@ There is one more step that we can perform in order to make our command-line too
 \@ref(exm:top-words-5)
  shows what our file *top-words-5.sh* looks like if we parametrize `head`.
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 NUM_WORDS="$1"                                        
 tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
@@ -305,7 +291,9 @@ We will first show the two files *top-words.py* and *top-words.R* and then discu
 \@ref(exm:top-words-py)
 .
 
-```{example}
+```{example, name=""}
+```
+```{python, eval=FALSE}
 #!/usr/bin/env python
 import re
 import sys
@@ -329,7 +317,9 @@ And in R, the code would look something like Example
 \@ref(exm:top-words-5)
  (thanks to Hadley Wickham):
 
-```{example}
+```{example, name=""}
+```
+```{r, eval=FALSE}
 #!/usr/bin/env Rscript
 n <- as.integer(commandArgs(trailingOnly = TRUE))
 f <- file("stdin")
@@ -378,7 +368,9 @@ Luckily Python are R support processing streaming data. You can apply a function
 \@ref(exm:stream-r)
  are two minimal examples that demonstrate how this works in Python and R, respectively.
 
-```{example}
+```{example, name=""}
+```
+```{python, eval=FALSE}
 #!/usr/bin/env python
 from sys import stdin, stdout
 while True:
@@ -389,7 +381,7 @@ while True:
     stdout.flush()
 ```
 
-```{example, name="Test R Script"}
+```{example, name=""}
 ```
 ```{r, eval=FALSE}
 #!/usr/bin/env Rscript

@@ -38,7 +38,9 @@ $ cp ~/Desktop/logs.csv .
 
 And if you are running Windows, you can run the following commands on the command prompt:
 
-``` {.powershell}
+```{example, name=""}
+```
+```{powershell, eval=FALSE}
 > cd %UserProfile%\Desktop
 > copy logs.csv MyDataScienceToolbox\
 ```
@@ -83,7 +85,9 @@ The `unpack` tool is part of the Data Science Toolbox. Remember that you look up
 \@ref(exm:script-unpack)
  shows the source of `unpack`. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 # unpack: Extract common file formats
 

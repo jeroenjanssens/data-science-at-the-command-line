@@ -357,7 +357,9 @@ value
 
 It assumes that the header of the CSV file only spans one row. Here’s the source code for completeness:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 IFS= read -r header        
 printf '%s\n' "$header"    
@@ -401,7 +403,9 @@ Note that the header is not used and is also printed again in the output.
 
 The second command-line tool, `header` allows us, as the name implies, to manipulate the header of a CSV file. The complete source code is as follows:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 get_header () {
         for i in $(seq $NUMROWS); do
@@ -517,7 +521,9 @@ LINE
 
 The third command-line tool is called `cols`, which is similar to `header` and `body` in that it allows you to apply a certain command to only a subset of the columns. The code is as follows:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 ARG="$1"
 shift

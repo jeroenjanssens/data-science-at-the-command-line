@@ -62,7 +62,9 @@ In order to gain insight into the data set, it is useful to print the feature na
 
 Note that this basic command assumes that the file is delimited by commas. Just as reminder: if you intend to use this command often, you could define a function in your *.bashrc* file called, say, *names*:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 names () { sed -e 's/,/\n/g;q'; }
 ```
 
@@ -350,7 +352,9 @@ For example, imagine that you have a CSV file called *tips.csv*, and you would l
 
 And then run the following commands:
 
-``` {.rconsole}
+```{example, name=""}
+```
+```{rconsole, eval=FALSE}
 > tips <- read.csv('tips.csv', header = T, sep = ',', stringsAsFactors = F)
 > tips.percent <- tips$tip / tips$bill * 100
 > cat(tips.percent, sep = '\n', file = 'percent.csv')
@@ -435,7 +439,9 @@ To demonstrate the flexibility (and its archaic notation), consider Example
 \@ref(exm:script-gnuplot)
 , which is copied from the Gnuplot website (<http://gnuplot.sourceforge.net/demo/histograms.6.gnu>).
 
-``` {.text}
+```{example, name=""}
+```
+```{text, eval=FALSE}
 # set terminal pngcairo  transparent enhanced font "arial,10" fontscale 1.0 size
 # set output 'histograms.6.png'
 set border 3 front linetype -1 linewidth 1.000

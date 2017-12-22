@@ -57,7 +57,9 @@ This creates a file named *Vagrantfile*. This is a configuration file that tells
 \@ref(exm:vagrantfile-minimal)
 .
 
-``` {.ruby}
+```{example, name=""}
+```
+```{ruby, eval=FALSE}
 Vagrant.configure(2) do |config|
   config.vm.box = "data-science-toolbox/data-science-at-the-command-line"
 end
@@ -77,7 +79,9 @@ If you ever see the message `default: Warning: Connection timeout. Retrying...` 
 \@ref(exm:vagrantfile-forward)
 ):
 
-``` {.ruby}
+```{example, name=""}
+```
+```{ruby, eval=FALSE}
   config.vm.provider "virtualbox" do |vb|
     vb.gui = true
   end
@@ -90,7 +94,9 @@ Example
 \@ref(exm:vagrantfile-forward)
  shows a slightly more elaborate *Vagrantfile*. You can view more configuration option at <http://docs.vagrantup.com/v2>.
 
-``` {.ruby}
+```{example, name=""}
+```
+```{ruby, eval=FALSE}
 Vagrant.require_version ">= 1.5.0"                                         #
 Vagrant.configure(2) do |config|
   config.vm.box = "data-science-toolbox/data-science-at-the-command-line"
@@ -178,7 +184,7 @@ Terminal
 
 :   The terminal, which is the second layer, is the application where we type our commands in. If you see the following text:
 
-    ``` {.console}
+    ```{bash, eval=FALSE}
     $ seq 3
     1
     2
@@ -274,7 +280,9 @@ Interpreted Script
 \@ref(exm:script-fac)
  shows a script named *\~/book/ch02/fac.py*. This script is interpreted by Python not because of the file extension *.py*, but because the first line of the script defines the binary that should execute it.
 
-    ``` {.python}
+    ```{example, name=""}
+```
+```{python, eval=FALSE}
     #!/usr/bin/env python
 
     def factorial(x):
@@ -291,7 +299,7 @@ Interpreted Script
 
     This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:
 
-    ``` {.console}
+    ```{bash, eval=FALSE}
     $ book/ch02/fac.py 5
     120
     ```
@@ -302,7 +310,7 @@ Shell Function
 
 :   A shell function is a function that is, in our case executed by Bash. They provide similar functionality to a Bash script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called `fac`, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using `seq`, putting those numbers on one line with `*` as the delimiter using `paste` [@paste], and passing this equation into `bc` [@bc], which is evaluates it and outputs the result.
 
-    ``` {.console}
+    ```{bash, eval=FALSE}
     $ #? fac
     $ fac() { (echo 1; seq $1) | paste -s -d\* | bc; }
     $ fac 5
@@ -315,14 +323,14 @@ Alias
 
 :   Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for this. Aliases are also very useful when you continue to misspell a certain command (see <https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh> for a long list of useful aliases). The following command defines such an alias:
 
-    ``` {.console}
+    ```{bash, eval=FALSE}
     $ alias l='ls -1 --group-directories-first'
     $ alias moer=more
     ```
 
     Now, if you type the following on the command line, the shell will replace each alias it finds with its value:
 
-    ``` {.console}
+    ```{bash, eval=FALSE}
     $ cd ~
     $ l
     book

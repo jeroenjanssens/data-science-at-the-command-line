@@ -271,14 +271,18 @@ Does this mean that we’re going to give up on Weka? Of course not! Since Weka 
 
 Save the following snippet as a new file called `weka` and put it somewhere on your *PATH*:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 java -Xmx1024M -cp ${WEKAPATH}/weka.jar "weka.$@"
 ```
 
 Subsequently, add the following line to your *.bashrc* file so that `weka` can be called from anywhere:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 $ export WEKAPATH=/home/vagrant/repos/weka
 ```
 
@@ -370,7 +374,9 @@ As you can see, `weka` offers a whole range of classes and functionality.
 
 At this moment, you still need to type in the entire class name yourself. You can add so-called tab completion by adding the following snippet to your *.bashrc* file after you export *WEKAPATH*:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 _completeweka() {
   local curw=${COMP_WORDS[COMP_CWORD]}
   local wordlist=$(cat $WEKAPATH/weka.classes)
@@ -409,12 +415,16 @@ Weka uses ARFF as a file format. This is basically CSV with additional informati
 \@ref(exm:arff2csv)
 ).
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 weka core.converters.CSVLoader /dev/stdin
 ```
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 weka core.converters.CSVSaver -i /dev/stdin
 ```
@@ -423,7 +433,9 @@ weka core.converters.CSVSaver -i /dev/stdin
 
 Unfortunately, in order to cluster data using Weka, we need yet another command-line tool to help us with this. The *AddCluster* class is needed to assign data points to the learned clusters. Unfortunately, this class does not accept data from standard input, not even when we specify *-i /dev/stdin* because it expects a file with the *.arff* extension. We consider this to be bad design. The source code of `weka-cluster` is:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 ALGO="$@"
 IN=$(mktemp --tmpdir weka-cluster-XXXXXXXX).arff
@@ -510,7 +522,9 @@ $ wine-white-clean.csv nl -s, -w1 -v0 | sed '1s/0,/id,/' > train/features.csv
 
 Create a configuration file called *predict-quality.cfg*:
 
-``` {.ini}
+```{example, name=""}
+```
+```{ini, eval=FALSE}
 [General]
 experiment_name = Wine
 task = cross_validate

@@ -149,7 +149,9 @@ In this section we’ll convert the above command into a Drake workflow. A workf
 \@ref(exm:drakefile)
 .
 
-``` {.text}
+```{example, name=""}
+```
+```{text, eval=FALSE}
 top-5 <-                                                    
     curl -s 'http://www.gutenberg.org/browse/scores/top' |  
     grep -E '^<li>' |                                       
@@ -202,7 +204,9 @@ Aborted.
 
 As you can see, Drake wants to execute the step again! However, now mentions a different reason, namely, that there is no input step *\[no-input-step\]*. Its default behavior is to check whether the input has changed by looking at the timestamp of the input. However, since we didn’t specify any input, Drake doesn’t know whether or not this step should be run again. We can disable this default behavior to check timestamps as follows:
 
-``` {.text}
+```{example, name=""}
+```
+```{text, eval=FALSE}
 top-5 <- [-timecheck]
     curl -s 'http://www.gutenberg.org/browse/scores/top' |
     grep -E '^<li>' |
@@ -230,7 +234,9 @@ You may have noticed that the number 5 is specified three times. If you ever wan
 
 It may not be immediately obvious from our workflow, but our data resides in the same location as the script. It is better to have the data live in a separate location and have it separated from any code that generates this data. Not only does it keep our project cleaner, it also allows us to delete the generated data files easier, and we can easily specify that we do not like the data files to be included in any version control system such as `git` [@git]. Let’s have a look:
 
-``` {.text}
+```{example, name=""}
+```
+```{text, eval=FALSE}
 NUM:=5                                                              
 BASE=data/                                                          
 
@@ -291,7 +297,9 @@ $ drake -w 02.drake '=top.html'
 
 There is a more convenient way than using the output filename to specify which step you want to execute again. We can add so-called *tags* to both the input and output of steps. A tag starts with a "%". It is a good idea to choose a short and descriptive tag name so that you can easily specify this at the command line. Let’s add the tag *%html* to the first step and *%filter* to the second step:
 
-``` {.text}
+```{example, name=""}
+```
+```{text, eval=FALSE}
 NUM:=5
 BASE=data/
 

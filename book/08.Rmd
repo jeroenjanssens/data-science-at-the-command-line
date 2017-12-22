@@ -162,7 +162,9 @@ Assume that we have a very long running command, such as the one shown in Exampl
 \@ref(exm:slow-sh)
 .
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/bin/bash
 echo "Starting job $1"
 duration=$((1+RANDOM%5))                
@@ -431,7 +433,9 @@ The `bc` tool, which we used in the beginning of the chapter, is not parallel by
 \@ref(exm:script-pbc)
 .
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 parallel -C, -k -j100% "echo '$1' | bc -l"
 ```
@@ -510,7 +514,9 @@ ec2-54-88-89-208.compute-1.amazonaws.com
 
 As mentioned, `parallel` employs `ssh` to connect to the EC2 instances. Add the following to *\~/.ssh/config*, so that `ssh` knows how to connect to the EC2 instances:
 
-``` {.text}
+```{example, name=""}
+```
+```{text, eval=FALSE}
 Host *.amazonaws.com
     IdentityFile ~/.ssh/MyKeyFile.pem
     User ubuntu
@@ -591,7 +597,9 @@ Good, that works. If you have a larger command that you want to execute on the r
 
 Let’s create a very simple command-line tool called *sum*:
 
-```{example}
+```{example, name=""}
+```
+```{bash, eval=FALSE}
 #!/usr/bin/env bash
 paste -sd+ | bc
 ```

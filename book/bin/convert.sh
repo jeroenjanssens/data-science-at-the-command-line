@@ -19,6 +19,5 @@ sed -re 's/\[example\\\_title\]\(\#([^\)]*)\)/Example\n\\@ref\(exm:\1\)\n/g' | #
 sed -re '/^\\@ref/y/_/-/' | # replace underscores with dashes in references
 sed -re '/\\\[render:/d' |
 sed -re '/^-/{N;N;s/^\-(.*)\n\n\-(.*)$/\-\1\n\-\2/;}' | sed -re 'N;/^-/{N;N;s/^\-(.*)\n\n\-(.*)$/\-\1\n\-\2/;}' | # fix empty lines in lists (I'm sorry)
-sed -re 's/``` \{\.(.*)\}/```\{example\}\n```\n```\{\1, eval=FALSE\}/' | # create examples
-# sed -re 's/^``` \{.((python)|(r)|(bash))\}/```\{example\}/' # create examples
+sed -re 's/``` \{\.(.*)\}/```\{example, name=""\}\n```\n```\{\1, eval=FALSE\}/' | # create examples
 cat
