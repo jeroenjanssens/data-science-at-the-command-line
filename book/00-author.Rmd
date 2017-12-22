@@ -1,4 +1,0 @@
-# About the Author {-}
-
-[Jeroen Janssens](http://jeroenjanssens.com/) is the founder and CEO of [Data Science Workshops](https://datascienceworkshops.com), which provides on-the-job training and coaching in data visualisation, machine learning, and programming. Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and startups YPlan and Outbrain in New York City. He is the author of Data Science at the Command Line, published by O’Reilly Media. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He can be found on [Twitter](https://twitter.com/jeroenhjanssens/), [LinkedIn](http://www.linkedin.com/in/jeroenjanssens), and [GitHub](https://github.com/jeroenjanssens).
-

@@ -1,0 +1,80 @@
+# Conclusion 
+
+In this final chapter we conclude the book. First, we’ll recap what we have discussed in the previous nine chapters. Second, we would like to offer you three pieces of advice. Third, we provide some resources to further explore the topics we touch on. Finally, we provide a few way to get in touch with us in case you have any questions, comments, or new command-line tools to share.
+
+## Let’s Recap 
+
+This book explored the power of employing the command line to perform data science tasks. It is an interesting observation that the challenges posed by this relatively young field can be tackled by such a time-tested technology. We hope that we have been able to show you what the command line is capable of. The many command-line tools offer all sorts of possibilities that are well suited to the variety of tasks encompassing data science.
+
+There are many definitions for data science available. In Chapter 1, we introduced the OSEMN model as defined by Mason and Wiggens because it is a very practical one that translates to very specific tasks. The acronym OSEMN stands for Obtaining, Scrubbing, Exploring, Modeling, and Interpreting data. Furthermore, in Chapter 1, we explained why the command line is very suitable for doing these data science tasks.
+
+In Chapter 2, we explained how you can set up your own Data Science Toolbox and install the bundle that is associated with this book. Chapter 2 also provided an introduction to the essential tools and concepts of the command line.
+
+In the step chapters (3, 5, 7, and 9) associated with the OSEMN model we on focused on performing those practical tasks using the command line. The fifth step, interpreting data, did not end up with a separate chapter because, quite frankly, the computer, let alone the command line, is of very little use here. We provide some pointers for further reading below.
+
+In the three intermezzo chapters we looked at some broader topics of doing data science at the command line, that are not really specific for one step. In chapter 4, we explained how you can turn one-liners and existing code into reusable command-line tools. In Chapter 6, we described how you can manage your data workflow using a command-line tool called Drake. In Chapter 8, we demonstrated how ordinary command-line tools, or pipelines, can be run in parallel using GNU parallel. These topics can be applied at any point in your data workflow.
+
+It has been impossible to demonstrate all command-line tools that are available and relevant for doing data science. New command-line tools are being created on a daily basis. As you may have come to understand by now, this book has been more about the idea of using the command line and its tools, rather than giving you a complete overview.
+
+## Three Pieces of Advice 
+
+You have probably spent quite some time reading the chapters, and perhaps also following along with the code examples. In the hope that it maximizes the return on this investment and increases the probability that you’ll continue to incorporate the command line into your data science workflow, we would like to offer you three pieces of advice: (1) be patient, (2) be creative, and (3) be practical. In the next three subsections we elaborate on each piece of advice.
+
+### Be Patient 
+
+The first piece of advice that we can give is to be patient. Working with data on the command line is different from using a programming language, and therefore it requires a different mindset.
+
+Moreover, the command-line tools themselves are not without their quirks and inconsistencies. This is partly because they have been developed by many different people, over the course of multiple decades. If you every find yourself at a loss regarding their mind dazzling arguments, don’t forget to use `-h`, `man`, or your favorite search engine to learn more.
+
+Still, especially in the beginning, it can be a frustrating experience. Trust us, you will become more proficient as you practice using the command line and its tools. The command line has been around for many decades, and will be for around for many more to come. It is a worthwhile investment.
+
+### Be Creative 
+
+The second, related piece of advice is to be creative. The command line is very flexible. By combining the command-line tools you can accomplish more than you might think.
+
+We encourage you to not immediately fall back onto your programming language. And when you do have to use a programming language, think about whether the code can be generalized or reused in some way. If so, consider creating your own command-line tool with that code using the steps we discussed in Chapter 4. If you believe your command-line tool may be beneficial for others, you could even go one step further by making it open source.
+
+### Be Practical 
+
+The third piece of advice that we would like to give is to be practical. Being practical is related to being creative but deserves a separate explanation. In the previous subsection we mentioned that you should not immediately fall back to a programming language.
+
+Of course, the command line has its limits. Throughout the book, we have emphasized that the command line should be regarded as an companion approach to doing data science.
+
+We have discussed four steps for doing data science at the command line. In practice, the applicability of the command line is higher for step 1 than it is for step 4. We believe that you should use whatever approach works best for the task at hand. And it is perfectly fine to mix and match approaches at any point in your workflow. The command line is wonderful at being integrated with other approaches, programming languages, and statistical environments. There is a certain trade-off with each approach, and part of become proficient at the command line is to learn when to use which.
+
+When you’re patient, creative, and practical, then the command line will make you a more efficient and productive data scientist.
+
+## Where To Go From Here? 
+
+As this book is on the intersection of the command line and data science, many related topics have only been touched upon. Now, it’s up to you to further explore these topics. Below is a list of topics and suggested resources to consult.
+
+### APIs 
+
+
+
+### Shell Programming 
+
+
+
+
+
+
+### Python, R, and SQL 
+
+
+
+
+### Interpreting Data 
+
+
+
+## Getting in Touch 
+
+This book would not have been possible without the many people that created the command line, and the numerous command-line tools. You could say that the current ecosystem of command-line tools for data science is a community effort. We have only been able to give you a glimpse of the many command-line tools available. New ones are created everyday, and perhaps some day you will create one yourself. In that case we would love to hear from you. We’d also appreciate it if you would drop us a line whenever you have a question, comment, or suggestion. There are a couples of ways to get in touch with us:
+
+-   Email: <jeroen@jeroenjanssens.com>
+-   Twitter: @jeroenhjanssens
+-   Book website: <http://datascienceatthecommandline.com/>
+-   Book GitHub repository: <https://github.com/jeroenjanssens/data-science-at-the-command-line>
+
+

@@ -1,8 +1,13 @@
 bookdown::gitbook:
   css: style.css
+  split_bib: no
+  keep_md: no
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="./">Data Science at the Command Line</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    sharing:
+      github: yes
