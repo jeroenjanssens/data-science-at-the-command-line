@@ -352,9 +352,7 @@ For example, imagine that you have a CSV file called *tips.csv*, and you would l
 
 And then run the following commands:
 
-```{example, name=""}
-```
-```{rconsole, eval=FALSE}
+```r
 > tips <- read.csv('tips.csv', header = T, sep = ',', stringsAsFactors = F)
 > tips.percent <- tips$tip / tips$bill * 100
 > cat(tips.percent, sep = '\n', file = 'percent.csv')
@@ -435,11 +433,9 @@ In this section we’re going to discuss how to create visualizations at the com
 
 The first software package to create visualizations that we’re discussing in this chapter is Gnuplot. Gnuplot has been around since 1986. Despite being rather old, its visualization capabilities are quite extensive. As such, it’s impossible to do it justice. There are other good resources available, including *Gnuplot in Action* by @Janert2009.
 
-To demonstrate the flexibility (and its archaic notation), consider Example
-\@ref(exm:script-gnuplot)
-, which is copied from the Gnuplot website (<http://gnuplot.sourceforge.net/demo/histograms.6.gnu>).
+To demonstrate the flexibility (and its archaic notation), consider Example \@ref(exm:script-gnuplot), which is copied from the Gnuplot website (<http://gnuplot.sourceforge.net/demo/histograms.6.gnu>).
 
-```{example, name=""}
+```{example script-gnuplot, name="Creating a histogram using Gnuplot"}
 ```
 ```{text, eval=FALSE}
 # set terminal pngcairo  transparent enhanced font "arial,10" fontscale 1.0 size

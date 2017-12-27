@@ -24,6 +24,28 @@ knitr::include_graphics('images/cover.png', dpi = NA)
 ```
 
 
+* Obtain data from websites, APIs, databases, and spreadsheets
+* Perform scrub operations on text, CSV, HTML/XML, and JSON
+* Explore data, compute descriptive statistics, and create visualizations
+* Manage your data science workflow
+* Create reusable command-line tools from one-liners and existing Python or R code
+* Parallelize and distribute data-intensive pipelines
+* Model data with dimensionality reduction, clustering, regression, and classification algorithms
+
+
+> The Unix philosophy of simple tools, each doing one job well, then cleverly piped together, is embodied by the command line. Jeroen expertly discusses how to bring that philosophy into your work in data science, illustrating how the command line is not only the world of file input/output, but also the world of data manipulation, exploration, and even modeling.
+>
+> **---Chris H. Wiggins**
+>
+> Associate Professor in the Department of Applied Physics and Applied Mathematics at Columbia University and Chief Data Scientist at *The New York Times*
+
+> This book explains how to integrate common data science tasks into a coherent workflow. It's not just about tactics for breaking down problems, it's also about strategies for assembling the pieces of the solution.
+>
+> **---John D. Cook**
+>
+> Consultant in applied mathematics, statistics, and technical computing
+
+
 If you find this content useful, please consider supporting the work by either:
 
 * Buying the book on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [bol.com](https://www.bol.com/nl/p/data-science-at-the-command-line/9200000031673818)
@@ -33,8 +55,6 @@ If you find this content useful, please consider supporting the work by either:
 If you and your colleagues would like to learn from the author in person, please contact [Data Science Workshops B.V.](https://datascienceworkshops.com) for more information.
 
 This work is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International   License](https://creativecommons.org/licenses/by-nd/4.0/).
-
-
 
 
 

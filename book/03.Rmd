@@ -38,9 +38,7 @@ $ cp ~/Desktop/logs.csv .
 
 And if you are running Windows, you can run the following commands on the command prompt:
 
-```{example, name=""}
-```
-```{powershell, eval=FALSE}
+```powershell
 > cd %UserProfile%\Desktop
 > copy logs.csv MyDataScienceToolbox\
 ```
@@ -81,11 +79,9 @@ Indeed, `tar` is notorious for its many command-line arguments. In this case, th
 
 Rather than remembering the different command-line tools and their arguments, there is a handy script called `unpack` [@unpack], which will decompress many different formats. `unpack` looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.
 
-The `unpack` tool is part of the Data Science Toolbox. Remember that you look up how it can be installed in the appendix. Example
-\@ref(exm:script-unpack)
- shows the source of `unpack`. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.
+The `unpack` tool is part of the Data Science Toolbox. Remember that you look up how it can be installed in the appendix. Example \@ref(exm:script-unpack) shows the source of `unpack`. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works. 
 
-```{example, name=""}
+```{example script-unpack, name="Decompress various file formats"}
 ```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash

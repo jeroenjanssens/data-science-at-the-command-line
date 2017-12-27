@@ -77,11 +77,9 @@ Because we use Bash as our shell, the script will be written in the programming 
 
 ### Step 1: Copy and Paste 
 
-The first step is to create a new file. Open your favorite text editor and copy and paste our one-liner. We use name the file *top-words-1.sh* (The *1* stands for the first step towards our new command-line tool), and put it in the *\~/book/ch04* directory, but you may choose a different name and location. The contents of the file should look something like Example
-\@ref(exm:top-words-1)
-.
+The first step is to create a new file. Open your favorite text editor and copy and paste our one-liner. We use name the file *top-words-1.sh* (The *1* stands for the first step towards our new command-line tool), and put it in the *\~/book/ch04* directory, but you may choose a different name and location. The contents of the file should look something like Example \@ref(exm:top-words-1).
 
-```{example, name=""}
+```{example top-words-1, name="~/book/ch04/top-words-1.sh"}
 ```
 ```{bash, eval=FALSE}
 curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt |
@@ -174,11 +172,9 @@ bash: ./top-words-1.sh: Permission denied
 
 Although we can already execute the file on its own, we should add a so-called *shebang* to the file. The shebang is a special line in the script, which instructs the system which executable should be used to interpret the commands.
 
-In our case we want to use `bash` to interpret our commands. Example
-\@ref(exm:top-words-3)
- shows what the file *top-words-3.sh* looks like with a shebang.
+In our case we want to use `bash` to interpret our commands. Example \@ref(exm:top-words-3) shows what the file *top-words-3.sh* looks like with a shebang. 
 
-```{example, name=""}
+```{example top-words-3, name="~/book/ch04/top-words-3.sh"}
 ```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
@@ -197,11 +193,9 @@ We know have a valid command-line tool that we can execute from the command line
 
 What if we wanted to obtain the top 10 most-used words from another e-book, or any other text for that matter? The input data is fixed within the tools itself. It would be better to separate the data from the command-line tool.
 
-If we assume that the user of the command-line tool will provide the text, it will become generally applicable. So, the solution is to simply remove the `curl` command from the script. See Example
-\@ref(exm:top-words-4)
- for the updated script named *top-words-4.sh*.
+If we assume that the user of the command-line tool will provide the text, it will become generally applicable. So, the solution is to simply remove the `curl` command from the script. See Example \@ref(exm:top-words-4) for the updated script named *top-words-4.sh*.
 
-```{example, name=""}
+```{example top-words-4, name="~/book/ch04/top-words-4.sh"}
 ```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
@@ -211,7 +205,6 @@ uniq -c | sort -nr | head -n 10
 
 This works because if a script starts with a command that needs data from standard input, like `tr`, it will take the input that is given to the command-line tools. For example:
 
-    $ #? [echo]
     $ cat data/finn.txt | top-words-4.sh
 
 ```{block2, type="rmdtip"}
@@ -221,11 +214,9 @@ Although we have not done so in our script, the same principle holds for saving 
 
 ### Step 5: Parametrize 
 
-There is one more step that we can perform in order to make our command-line tool even more reusable: parameters. In our command-line tool there are a number of fixed command-line arguments, for example `-nr` for `sort` and `-n 10` for `head`. It is probably best to keep the former argument fixed. However, it would be very useful to allow for different values for the `head` command. This would allow the end user to set the number of most-often used words to be outputted. Example
-\@ref(exm:top-words-5)
- shows what our file *top-words-5.sh* looks like if we parametrize `head`.
+There is one more step that we can perform in order to make our command-line tool even more reusable: parameters. In our command-line tool there are a number of fixed command-line arguments, for example `-nr` for `sort` and `-n 10` for `head`. It is probably best to keep the former argument fixed. However, it would be very useful to allow for different values for the `head` command. This would allow the end user to set the number of most-often used words to be outputted. Example \@ref(exm:top-words-5) shows what our file *top-words-5.sh* looks like if we parametrize `head`.
 
-```{example, name=""}
+```{example top-words-5, name="~/book/ch04/top-words-5.sh"}
 ```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
@@ -234,8 +225,8 @@ tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
 uniq -c | sort -nr | head -n $NUM_WORDS               
 ```
 
--   The variable *NUM\_WORDS* is set to the value of *\$1*, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers.
--   Note that in order to use the value of the *\$NUM\_WORDS* variable, you need to put a dollar sign in front of it. When you set it, you do not write a dollar sign.
+* The variable *NUM\_WORDS* is set to the value of *\$1*, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers.
+* Note that in order to use the value of the *\$NUM\_WORDS* variable, you need to put a dollar sign in front of it. When you set it, you do not write a dollar sign.
 
 ```{block2, type="rmdtip"}
 
@@ -244,7 +235,6 @@ We could have also used *\$1* directly as an argument for `head` and not bother 
 
 Now if we wanted to see the top 5 most-used words of our text, we would invoke our command-line tool as follows:
 
-    $ #? [echo]
     $ cat data/finn.txt | top-words-5 5
 
 If the user does not provide an argument then `head` will return an error message, because the value of *\$1*, and therefore *\$NUM\_WORDS* will be an empty string.
@@ -287,11 +277,9 @@ When it comes to creating command-line tools using Python and R, there are two m
 
 As a starting point, let’s see how we would port the prior shell script to both Python and R. In other words, what Python and R code gives us the top most-often used words from standard input? It is not important whether implementing this task in anything else than a shell programming language is a good idea. What matters is that it gives us a good opportunity to compare Bash with Python and R.
 
-We will first show the two files *top-words.py* and *top-words.R* and then discuss the differences with the shell code. In Python, the code could would look something like Example
-\@ref(exm:top-words-py)
-.
+We will first show the two files *top-words.py* and *top-words.R* and then discuss the differences with the shell code. In Python, the code could would look something like Example \@ref(exm:top-words-py).
 
-```{example, name=""}
+```{example top-words-py, name="~/book/ch04/top-words.py"}
 ```
 ```{python, eval=FALSE}
 #!/usr/bin/env python
@@ -313,11 +301,9 @@ Example
  uses pure Python. When you want to do advanced text processing we recommend you check out the NLTK package [@Perkins2010]. If you are going to work with a lot of numerical data, then we recommend you use the Pandas package [@McKinney2012].
 ```
 
-And in R, the code would look something like Example
-\@ref(exm:top-words-5)
- (thanks to Hadley Wickham):
+And in R, the code would look something like Example \@ref(exm:top-words-5) (thanks to Hadley Wickham):
 
-```{example, name=""}
+```{example top-words-5, name="~/book/ch04/top-words-1.R"}
 ```
 ```{r, eval=FALSE}
 #!/usr/bin/env Rscript
@@ -362,13 +348,9 @@ First, what’s immediately obvious is the difference in amount of code. For thi
 
 In the previous two code snippets, both Python R read the complete standard input at once. On the command line, most command-line tools pipe data to the next command-line tool in a streaming fashion. (There are a few command-line tools which require the complete data before they write any data to standard output, like `sort` and `awk` [@awk].) This means the pipeline is blocked by such command-line tools. This does not have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.
 
-Luckily Python are R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example
-\@ref(exm:stream-py)
- and Example
-\@ref(exm:stream-r)
- are two minimal examples that demonstrate how this works in Python and R, respectively.
+Luckily Python are R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example \@ref(exm:stream-py) and Example \@ref(exm:stream-r) are two minimal examples that demonstrate how this works in Python and R, respectively.
 
-```{example, name=""}
+```{example stream-py, name="~/book/ch04/stream.py"}
 ```
 ```{python, eval=FALSE}
 #!/usr/bin/env python
@@ -381,7 +363,7 @@ while True:
     stdout.flush()
 ```
 
-```{example, name=""}
+```{example stream-r, name="~/book/ch04/stream.R"}
 ```
 ```{r, eval=FALSE}
 #!/usr/bin/env Rscript

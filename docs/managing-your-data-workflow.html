@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -431,10 +429,10 @@ Drip speeds up Java because it reserves an instance of the JVM, after it has bee
 </div>
 <div id="every-workflow-starts-with-a-single-step" class="section level2">
 <h2><span class="header-section-number">6.5</span> Every Workflow Starts with a Single Step</h2>
-<p>In this section we’ll convert the above command into a Drake workflow. A workflow is just a text file. You’d usually name this file <em>Drakefile</em> because Drake uses that file if no other file is specified at the command line. A workflow with just a single step would look like Example <a href="#exm:drakefile"><strong>??</strong></a> .</p>
+<p>In this section we’ll convert the above command into a Drake workflow. A workflow is just a text file. You’d usually name this file <em>Drakefile</em> because Drake uses that file if no other file is specified at the command line. A workflow with just a single step would look like Example <a href="managing-your-data-workflow.html#exm:drakefile">6.1</a>.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-14" class="example"><strong>Example 4.1  ()  </strong></span>
+<span id="exm:drakefile" class="example"><strong>Example 6.1  (A workflow with just a single stip)  </strong></span>
 </div>
 
 <pre class="text"><code>top-5 &lt;-                                                    
@@ -474,11 +472,6 @@ Drip speeds up Java because it reserves an instance of the JVM, after it has bee
 <span class="ex">Confirm?</span> [y/n] n
 <span class="ex">Aborted.</span></code></pre></div>
 <p>As you can see, Drake wants to execute the step again! However, now mentions a different reason, namely, that there is no input step <em><span class="math display">\[no-input-step\]</span></em>. Its default behavior is to check whether the input has changed by looking at the timestamp of the input. However, since we didn’t specify any input, Drake doesn’t know whether or not this step should be run again. We can disable this default behavior to check timestamps as follows:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-19" class="example"><strong>Example 4.3  ()  </strong></span>
-</div>
-
 <pre class="text"><code>top-5 &lt;- [-timecheck]
     curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; |
     grep -E &#39;^&lt;li&gt;&#39; |
@@ -496,11 +489,6 @@ $ <span class="ex">drake</span> -w 01.drake
 <p>Our workflow contains just a single step, which means that, just like having a simple Bash script, everything will be executed all the time. So the first thing we are going to do is to split up this single step into two steps, where the first step downloads the HTML, and the second step processes this HTML. The second step obviously depends on the first step. We can define this dependency in our workflow.</p>
 <p>You may have noticed that the number 5 is specified three times. If you ever wanted to get the top, say, top 10 e-books from Project Gutenberg, we would have to change our workflow in three places. This is inefficient and needs to be addressed. Luckily, Drake supports variables.</p>
 <p>It may not be immediately obvious from our workflow, but our data resides in the same location as the script. It is better to have the data live in a separate location and have it separated from any code that generates this data. Not only does it keep our project cleaner, it also allows us to delete the generated data files easier, and we can easily specify that we do not like the data files to be included in any version control system such as <code>git</code> <span class="citation">(Torvalds and Hamano <a href="references.html#ref-git">2014</a>)</span>. Let’s have a look:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-22" class="example"><strong>Example 6.1  ()  </strong></span>
-</div>
-
 <pre class="text"><code>NUM:=5                                                              
 BASE=data/                                                          
 
@@ -547,11 +535,6 @@ top-$[NUM] &lt;- top.html
 <p>The list of the top 100 e-books on project Gutenberg changes daily. We’ve seen that if we run the Drake workflow again then the HTML containing this list is not being downloaded again. Luckily, Drake allows us to run certain steps again, so that we can update this HTML file:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span> -w 02.drake <span class="st">&#39;=top.html&#39;</span></code></pre></div>
 <p>There is a more convenient way than using the output filename to specify which step you want to execute again. We can add so-called <em>tags</em> to both the input and output of steps. A tag starts with a “%”. It is a good idea to choose a short and descriptive tag name so that you can easily specify this at the command line. Let’s add the tag <em>%html</em> to the first step and <em>%filter</em> to the second step:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-27" class="example"><strong>Example 6.2  ()  </strong></span>
-</div>
-
 <pre class="text"><code>NUM:=5
 BASE=data/
 
@@ -570,7 +553,7 @@ top-$[NUM], %filter &lt;- top.html
 <p>One of the beauties of the command line is that allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It is therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.</p>
 <p>We have shown you that just putting every command in one bash script is suboptimal. We have proposed to use Drake as a command-line tool to manage your data workflow. By using a running example, we have shown you how to define steps and the dependencies between them. We’ve also discussed how to use variables and tags.</p>
 <p>There’s nothing more fun than just playing with your data and forget everything else. But you have to trust us when we say that it’s worthwhile to keep a record of what you have done by means of a Drake workflow. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time. It makes you more efficient over time, the same holds for Drake workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. We hope that you will get used to Drake, and that it will make your life easier.</p>
-<p>We’ve only been able to scratch the surface with Drake. Some of it’s more advanced features are:</p>
+<p>We’ve only been able to scratch the surface with Drake. Some of its more advanced features are:</p>
 <ul>
 <li>Asynchronous execution of steps.</li>
 <li>Support for inline Python and R code.</li>

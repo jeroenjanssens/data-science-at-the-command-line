@@ -145,11 +145,9 @@ If you want to be able to reproduce this, that is, once again at a later time, t
 
 ## Every Workflow Starts with a Single Step 
 
-In this section we’ll convert the above command into a Drake workflow. A workflow is just a text file. You’d usually name this file *Drakefile* because Drake uses that file if no other file is specified at the command line. A workflow with just a single step would look like Example
-\@ref(exm:drakefile)
-.
+In this section we’ll convert the above command into a Drake workflow. A workflow is just a text file. You’d usually name this file *Drakefile* because Drake uses that file if no other file is specified at the command line. A workflow with just a single step would look like Example \@ref(exm:drakefile).
 
-```{example, name=""}
+```{example drakefile, name="A workflow with just a single stip"}
 ```
 ```{text, eval=FALSE}
 top-5 <-                                                    
@@ -204,8 +202,6 @@ Aborted.
 
 As you can see, Drake wants to execute the step again! However, now mentions a different reason, namely, that there is no input step *\[no-input-step\]*. Its default behavior is to check whether the input has changed by looking at the timestamp of the input. However, since we didn’t specify any input, Drake doesn’t know whether or not this step should be run again. We can disable this default behavior to check timestamps as follows:
 
-```{example, name=""}
-```
 ```{text, eval=FALSE}
 top-5 <- [-timecheck]
     curl -s 'http://www.gutenberg.org/browse/scores/top' |
@@ -234,8 +230,6 @@ You may have noticed that the number 5 is specified three times. If you ever wan
 
 It may not be immediately obvious from our workflow, but our data resides in the same location as the script. It is better to have the data live in a separate location and have it separated from any code that generates this data. Not only does it keep our project cleaner, it also allows us to delete the generated data files easier, and we can easily specify that we do not like the data files to be included in any version control system such as `git` [@git]. Let’s have a look:
 
-```{example, name=""}
-```
 ```{text, eval=FALSE}
 NUM:=5                                                              
 BASE=data/                                                          
@@ -297,8 +291,6 @@ $ drake -w 02.drake '=top.html'
 
 There is a more convenient way than using the output filename to specify which step you want to execute again. We can add so-called *tags* to both the input and output of steps. A tag starts with a "%". It is a good idea to choose a short and descriptive tag name so that you can easily specify this at the command line. Let’s add the tag *%html* to the first step and *%filter* to the second step:
 
-```{example, name=""}
-```
 ```{text, eval=FALSE}
 NUM:=5
 BASE=data/
@@ -326,7 +318,7 @@ We have shown you that just putting every command in one bash script is suboptim
 
 There’s nothing more fun than just playing with your data and forget everything else. But you have to trust us when we say that it’s worthwhile to keep a record of what you have done by means of a Drake workflow. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time. It makes you more efficient over time, the same holds for Drake workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. We hope that you will get used to Drake, and that it will make your life easier.
 
-We’ve only been able to scratch the surface with Drake. Some of it’s more advanced features are:
+We’ve only been able to scratch the surface with Drake. Some of its more advanced features are:
 
 -   Asynchronous execution of steps.
 -   Support for inline Python and R code.

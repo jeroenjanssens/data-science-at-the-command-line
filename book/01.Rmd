@@ -83,17 +83,13 @@ In Chapter 8, we explain how your commands and tools can be sped up by running t
 
 ## What is the Command Line? 
 
-Before we discuss why you should use the command line for data science, we’ll first show you what the command line actually looks like. It may be already familiar to you, but it’s good to show it nonetheless. Figure
-\@ref(fig:mac-terminal)
- and Figure
-\@ref(fig:ubuntu-terminal)
- show a screenshot of the command line as it appears by default on Mac OS X and Ubuntu, respectively. Ubuntu is a particular distribution of GNU/Linux, which we’ll be assuming throughout the book.
+Before we discuss why you should use the command line for data science, we’ll first show you what the command line actually looks like. It may be already familiar to you, but it’s good to show it nonetheless. Figure \@ref(fig:mac-terminal) and Figure \@ref(fig:ubuntu-terminal) show a screenshot of the command line as it appears by default on Mac OS X and Ubuntu, respectively. Ubuntu is a particular distribution of GNU/Linux, which we’ll be assuming throughout the book.
 
-```{r, echo=FALSE, fig.cap="Command line on Mac OS X", fig.align="center"}
+```{r mac-terminal, echo=FALSE, fig.cap="Command line on Mac OS X", fig.align="center"}
 knitr::include_graphics("images/screenshot_terminal_mac_dst.png")
 ```
 
-```{r, echo=FALSE, fig.cap="Command line on Ubuntu", fig.align="center"}
+```{r ubuntu-terminal, echo=FALSE, fig.cap="Command line on Ubuntu", fig.align="center"}
 knitr::include_graphics("images/screenshot_terminal_ubuntu_dst.png")
 ```
 
@@ -257,9 +253,7 @@ $ < fashion.csv cols -c date cut -dT -f1 | head | csvlook
 |-------------+------------+-----------------------------------------|
 ```
 
-That’s seems to have worked! In order to gain any insight, we’d better visualize the data. Figure
-\@ref(fig:fashion-week)
- contains a line graph created with R [@R], `Rio` [@Rio], and `ggplot2` [@Wickham2009].
+That’s seems to have worked! In order to gain any insight, we’d better visualize the data. Figure \@ref(fig:fashion-week) contains a line graph created with R [@R], `Rio` [@Rio], and `ggplot2` [@Wickham2009].
 
 ```{bash, eval=FALSE}
 $ < fashion.csv Rio -ge 'g + geom_freqpoly(aes(as.Date(date), color=type), '\
@@ -267,7 +261,7 @@ $ < fashion.csv Rio -ge 'g + geom_freqpoly(aes(as.Date(date), color=type), '\
 > ' Fashion Week in New York Times")' | display
 ```
 
-```{r, echo=FALSE, fig.cap="Coverage of New York Fashion Week in the New York Times", fig.align="center"}
+```{r fashion-week, echo=FALSE, fig.cap="Coverage of New York Fashion Week in the New York Times", fig.align="center"}
 knitr::include_graphics("images/nyt-fashion-week-multi.png")
 ```
 

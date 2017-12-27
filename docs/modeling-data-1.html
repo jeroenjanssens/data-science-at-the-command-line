@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -471,7 +469,7 @@ $ <span class="fu">make</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
 <img src="images/tapkee-wine-pca.png" alt="PCA" width="252" />
 <p class="caption">
-Figure 9.1: PCA
+Figure 7.1: PCA
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> cols -C type body tapkee --method t-sne <span class="kw">|</span>
@@ -480,7 +478,7 @@ Figure 9.1: PCA
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
 <img src="images/tapkee-wine-t-sne.png" alt="t-SNE" width="252" />
 <p class="caption">
-Figure 9.2: t-SNE
+Figure 9.1: t-SNE
 </p>
 </div>
 <p>Note that there’s not a single GNU core util (i.e., classic command-line tool) in this one-liner. Now that’s the power of the command line!</p>
@@ -534,19 +532,9 @@ Figure 9.2: t-SNE
 <div id="an-improved-command-line-tool-for-weka" class="section level4">
 <h4><span class="header-section-number">9.4.2.1</span> An Improved Command-line Tool for Weka</h4>
 <p>Save the following snippet as a new file called <code>weka</code> and put it somewhere on your <em>PATH</em>:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-20" class="example"><strong>Example 9.1  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="ex">java</span> -Xmx1024M -cp <span class="va">${WEKAPATH}</span>/weka.jar <span class="st">&quot;weka.</span><span class="va">$@</span><span class="st">&quot;</span></code></pre></div>
 <p>Subsequently, add the following line to your <em>.bashrc</em> file so that <code>weka</code> can be called from anywhere:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-22" class="example"><strong>Example 6.1  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">export</span> <span class="va">WEKAPATH=</span>/home/vagrant/repos/weka</code></pre></div>
 <p>We can now call the previous example with:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">weka</span> datagenerators.classifiers.regression.MexicanHat -n 10</code></pre></div>
@@ -615,11 +603,6 @@ Figure 9.2: t-SNE
 <div id="adding-tab-completion" class="section level4">
 <h4><span class="header-section-number">9.4.2.3</span> Adding Tab Completion</h4>
 <p>At this moment, you still need to type in the entire class name yourself. You can add so-called tab completion by adding the following snippet to your <em>.bashrc</em> file after you export <em>WEKAPATH</em>:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-29" class="example"><strong>Example 4.6  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">_completeweka()</span> <span class="kw">{</span>
   <span class="bu">local</span> <span class="va">curw=${COMP_WORDS[COMP_CWORD]}</span>
   <span class="bu">local</span> <span class="va">wordlist=$(</span><span class="fu">cat</span> <span class="va">$WEKAPATH</span>/weka.classes<span class="va">)</span>
@@ -649,17 +632,17 @@ clusterers.XMeans</code></pre>
 </div>
 <div id="converting-between-csv-to-arff-data-formats" class="section level3">
 <h3><span class="header-section-number">9.4.3</span> Converting between CSV to ARFF Data Formats</h3>
-<p>Weka uses ARFF as a file format. This is basically CSV with additional information about the columns. We’ll use two convenient command-line tools to convert between CSV and ARFF, namely <code>csv2arff</code> (see Example <a href="#exm:csv2arff"><strong>??</strong></a> ) and <code>arff2csv</code> (see Example <a href="#exm:arff2csv"><strong>??</strong></a> ).</p>
+<p>Weka uses ARFF as a file format. This is basically CSV with additional information about the columns. We’ll use two convenient command-line tools to convert between CSV and ARFF, namely <code>csv2arff</code> (see Example <a href="modeling-data-1.html#exm:csv2arff">9.1</a> ) and <code>arff2csv</code> (see Example <a href="modeling-data-1.html#exm:arff2csv">9.2</a>).</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-31" class="example"><strong>Example 4.7  ()  </strong></span>
+<span id="exm:csv2arff" class="example"><strong>Example 9.1  (Convert CSV to ARFF)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="ex">weka</span> core.converters.CSVLoader /dev/stdin</code></pre></div>
 
 <div class="example">
-<span id="exm:unnamed-chunk-33" class="example"><strong>Example 9.2  ()  </strong></span>
+<span id="exm:arff2csv" class="example"><strong>Example 9.2  (Convert ARFF to CSV)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
@@ -668,11 +651,6 @@ clusterers.XMeans</code></pre>
 <div id="comparing-three-cluster-algorithms" class="section level3">
 <h3><span class="header-section-number">9.4.4</span> Comparing Three Cluster Algorithms</h3>
 <p>Unfortunately, in order to cluster data using Weka, we need yet another command-line tool to help us with this. The <em>AddCluster</em> class is needed to assign data points to the learned clusters. Unfortunately, this class does not accept data from standard input, not even when we specify <em>-i /dev/stdin</em> because it expects a file with the <em>.arff</em> extension. We consider this to be bad design. The source code of <code>weka-cluster</code> is:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-35" class="example"><strong>Example 9.3  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="va">ALGO=</span><span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span>
 <span class="va">IN=$(</span><span class="fu">mktemp</span> --tmpdir weka-cluster-XXXXXXXX<span class="va">)</span>.arff
@@ -701,22 +679,22 @@ $ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> csvc
 <p>Next, the cluster assignments are combined with the t-SNE mapping using <code>paste</code> and a scatter plot is created using <code>Rio-scatter</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> -j1 <span class="st">&quot;paste -d, wine-both-xy.csv wine-both-cluster-{}.csv | &quot;</span>\
 <span class="op">&gt;</span> <span class="st">&quot;Rio-scatter x y cluster | display&quot;</span> ::: em simplekmeans cobweb</code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
 <img src="images/ch09-wine-cluster-em.png" alt="EM" width="1181" />
 <p class="caption">
-Figure 7.8: EM
+Figure 7.7: EM
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-41"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-35"></span>
 <img src="images/ch09-wine-cluster-simplekmeans.png" alt="SimpleKMeans" width="1181" />
 <p class="caption">
-Figure 9.3: SimpleKMeans
+Figure 9.2: SimpleKMeans
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-42"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
 <img src="images/ch09-wine-cluster-cobweb.png" alt="Cobweb" width="1181" />
 <p class="caption">
-Figure 9.4: Cobweb
+Figure 9.3: Cobweb
 </p>
 </div>
 <p>Admittedly, we have through a lot of trouble taming Weka. The exercise was worth it, because some day you may run into a command-line tool that works different from what you expect. Now you know that there are always ways to work around such command-line tools.</p>
@@ -739,11 +717,6 @@ $ <span class="ex">wine-white-clean.csv</span> nl -s, -w1 -v0 <span class="kw">|
 <div id="running-the-experiment" class="section level3">
 <h3><span class="header-section-number">9.5.2</span> Running the Experiment</h3>
 <p>Create a configuration file called <em>predict-quality.cfg</em>:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-46" class="example"><strong>Example 9.4  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode ini"><code class="sourceCode ini"><span class="kw">[General]</span>
 <span class="dt">experiment_name </span><span class="ot">=</span><span class="st"> Wine</span>
 <span class="dt">task </span><span class="ot">=</span><span class="st"> cross_validate</span>

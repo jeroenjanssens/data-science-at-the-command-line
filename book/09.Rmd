@@ -271,8 +271,6 @@ Does this mean that we’re going to give up on Weka? Of course not! Since Weka 
 
 Save the following snippet as a new file called `weka` and put it somewhere on your *PATH*:
 
-```{example, name=""}
-```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
 java -Xmx1024M -cp ${WEKAPATH}/weka.jar "weka.$@"
@@ -280,8 +278,6 @@ java -Xmx1024M -cp ${WEKAPATH}/weka.jar "weka.$@"
 
 Subsequently, add the following line to your *.bashrc* file so that `weka` can be called from anywhere:
 
-```{example, name=""}
-```
 ```{bash, eval=FALSE}
 $ export WEKAPATH=/home/vagrant/repos/weka
 ```
@@ -374,8 +370,6 @@ As you can see, `weka` offers a whole range of classes and functionality.
 
 At this moment, you still need to type in the entire class name yourself. You can add so-called tab completion by adding the following snippet to your *.bashrc* file after you export *WEKAPATH*:
 
-```{example, name=""}
-```
 ```{bash, eval=FALSE}
 _completeweka() {
   local curw=${COMP_WORDS[COMP_CWORD]}
@@ -409,20 +403,16 @@ Creating a command-line tool `weka` and adding tab completion makes sure that We
 
 ### Converting between CSV to ARFF Data Formats 
 
-Weka uses ARFF as a file format. This is basically CSV with additional information about the columns. We’ll use two convenient command-line tools to convert between CSV and ARFF, namely `csv2arff` (see Example
-\@ref(exm:csv2arff)
-) and `arff2csv` (see Example
-\@ref(exm:arff2csv)
-).
+Weka uses ARFF as a file format. This is basically CSV with additional information about the columns. We’ll use two convenient command-line tools to convert between CSV and ARFF, namely `csv2arff` (see Example \@ref(exm:csv2arff) ) and `arff2csv` (see Example \@ref(exm:arff2csv)).
 
-```{example, name=""}
+```{example csv2arff, name="Convert CSV to ARFF"}
 ```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
 weka core.converters.CSVLoader /dev/stdin
 ```
 
-```{example, name=""}
+```{example arff2csv, name="Convert ARFF to CSV"}
 ```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
@@ -433,8 +423,6 @@ weka core.converters.CSVSaver -i /dev/stdin
 
 Unfortunately, in order to cluster data using Weka, we need yet another command-line tool to help us with this. The *AddCluster* class is needed to assign data points to the learned clusters. Unfortunately, this class does not accept data from standard input, not even when we specify *-i /dev/stdin* because it expects a file with the *.arff* extension. We consider this to be bad design. The source code of `weka-cluster` is:
 
-```{example, name=""}
-```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
 ALGO="$@"
@@ -522,9 +510,7 @@ $ wine-white-clean.csv nl -s, -w1 -v0 | sed '1s/0,/id,/' > train/features.csv
 
 Create a configuration file called *predict-quality.cfg*:
 
-```{example, name=""}
-```
-```{ini, eval=FALSE}
+```ini
 [General]
 experiment_name = Wine
 task = cross_validate

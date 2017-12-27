@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -390,10 +388,10 @@ Each command-line tool used in this one-liner offers a man page. So in case you 
 </ol>
 <div id="step-1-copy-and-paste" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Step 1: Copy and Paste</h3>
-<p>The first step is to create a new file. Open your favorite text editor and copy and paste our one-liner. We use name the file <em>top-words-1.sh</em> (The <em>1</em> stands for the first step towards our new command-line tool), and put it in the <em>~/book/ch04</em> directory, but you may choose a different name and location. The contents of the file should look something like Example <a href="#exm:top-words-1"><strong>??</strong></a> .</p>
+<p>The first step is to create a new file. Open your favorite text editor and copy and paste our one-liner. We use name the file <em>top-words-1.sh</em> (The <em>1</em> stands for the first step towards our new command-line tool), and put it in the <em>~/book/ch04</em> directory, but you may choose a different name and location. The contents of the file should look something like Example <a href="creating-reusable-command-line-tools.html#exm:top-words-1">4.1</a>.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-4" class="example"><strong>Example 3.1  ()  </strong></span>
+<span id="exm:top-words-1" class="example"><strong>Example 4.1  (~/book/ch04/top-words-1.sh)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">curl</span> -s http://www.gutenberg.org/cache/epub/76/pg76.txt <span class="kw">|</span>
@@ -457,10 +455,10 @@ $ <span class="ex">./top-words-2.sh</span></code></pre></div>
 <div id="step-3-define-shebang" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Step 3: Define Shebang</h3>
 <p>Although we can already execute the file on its own, we should add a so-called <em>shebang</em> to the file. The shebang is a special line in the script, which instructs the system which executable should be used to interpret the commands.</p>
-<p>In our case we want to use <code>bash</code> to interpret our commands. Example <a href="#exm:top-words-3"><strong>??</strong></a> shows what the file <em>top-words-3.sh</em> looks like with a shebang.</p>
+<p>In our case we want to use <code>bash</code> to interpret our commands. Example <a href="creating-reusable-command-line-tools.html#exm:top-words-3">4.2</a> shows what the file <em>top-words-3.sh</em> looks like with a shebang.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-14" class="example"><strong>Example 4.1  ()  </strong></span>
+<span id="exm:top-words-3" class="example"><strong>Example 4.2  (~/book/ch04/top-words-3.sh)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
@@ -474,18 +472,17 @@ $ <span class="ex">./top-words-2.sh</span></code></pre></div>
 <h3><span class="header-section-number">4.2.4</span> Step 4: Remove Fixed Input</h3>
 <p>We know have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is <code>curl</code>, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.</p>
 <p>What if we wanted to obtain the top 10 most-used words from another e-book, or any other text for that matter? The input data is fixed within the tools itself. It would be better to separate the data from the command-line tool.</p>
-<p>If we assume that the user of the command-line tool will provide the text, it will become generally applicable. So, the solution is to simply remove the <code>curl</code> command from the script. See Example <a href="#exm:top-words-4"><strong>??</strong></a> for the updated script named <em>top-words-4.sh</em>.</p>
+<p>If we assume that the user of the command-line tool will provide the text, it will become generally applicable. So, the solution is to simply remove the <code>curl</code> command from the script. See Example <a href="creating-reusable-command-line-tools.html#exm:top-words-4">4.3</a> for the updated script named <em>top-words-4.sh</em>.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-16" class="example"><strong>Example 4.2  ()  </strong></span>
+<span id="exm:top-words-4" class="example"><strong>Example 4.3  (~/book/ch04/top-words-4.sh)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="fu">tr</span> <span class="st">&#39;[:upper:]&#39;</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -oE <span class="st">&#39;\w+&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span>
 <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr <span class="kw">|</span> <span class="fu">head</span> -n 10</code></pre></div>
 <p>This works because if a script starts with a command that needs data from standard input, like <code>tr</code>, it will take the input that is given to the command-line tools. For example:</p>
-<pre><code>$ #? [echo]
-$ cat data/finn.txt | top-words-4.sh</code></pre>
+<pre><code>$ cat data/finn.txt | top-words-4.sh</code></pre>
 
 <div class="rmdtip">
 Although we have not done so in our script, the same principle holds for saving data. It is, in general, better to let the user take care of that. Of course, if you intend to use a command-line tool only for own projects, then there are no limits to how specific you can be.
@@ -494,10 +491,10 @@ Although we have not done so in our script, the same principle holds for saving 
 </div>
 <div id="step-5-parametrize" class="section level3">
 <h3><span class="header-section-number">4.2.5</span> Step 5: Parametrize</h3>
-<p>There is one more step that we can perform in order to make our command-line tool even more reusable: parameters. In our command-line tool there are a number of fixed command-line arguments, for example <code>-nr</code> for <code>sort</code> and <code>-n 10</code> for <code>head</code>. It is probably best to keep the former argument fixed. However, it would be very useful to allow for different values for the <code>head</code> command. This would allow the end user to set the number of most-often used words to be outputted. Example <a href="#exm:top-words-5"><strong>??</strong></a> shows what our file <em>top-words-5.sh</em> looks like if we parametrize <code>head</code>.</p>
+<p>There is one more step that we can perform in order to make our command-line tool even more reusable: parameters. In our command-line tool there are a number of fixed command-line arguments, for example <code>-nr</code> for <code>sort</code> and <code>-n 10</code> for <code>head</code>. It is probably best to keep the former argument fixed. However, it would be very useful to allow for different values for the <code>head</code> command. This would allow the end user to set the number of most-often used words to be outputted. Example <a href="creating-reusable-command-line-tools.html#exm:top-words-5">4.4</a> shows what our file <em>top-words-5.sh</em> looks like if we parametrize <code>head</code>.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-19" class="example"><strong>Example 4.3  ()  </strong></span>
+<span id="exm:top-words-5" class="example"><strong>Example 4.4  (~/book/ch04/top-words-5.sh)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
@@ -514,8 +511,7 @@ We could have also used <em>$1</em> directly as an argument for <code>head</code
 </div>
 
 <p>Now if we wanted to see the top 5 most-used words of our text, we would invoke our command-line tool as follows:</p>
-<pre><code>$ #? [echo]
-$ cat data/finn.txt | top-words-5 5</code></pre>
+<pre><code>$ cat data/finn.txt | top-words-5 5</code></pre>
 <p>If the user does not provide an argument then <code>head</code> will return an error message, because the value of <em>$1</em>, and therefore <em>$NUM_WORDS</em> will be an empty string.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> data/finn.txt <span class="kw">|</span> <span class="ex">top-words-5</span>
 <span class="ex">head</span>: option requires an argument -- <span class="st">&#39;n&#39;</span>
@@ -542,10 +538,10 @@ $ cat data/finn.txt | top-words-5 5</code></pre>
 <div id="porting-the-shell-script" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Porting The Shell Script</h3>
 <p>As a starting point, let’s see how we would port the prior shell script to both Python and R. In other words, what Python and R code gives us the top most-often used words from standard input? It is not important whether implementing this task in anything else than a shell programming language is a good idea. What matters is that it gives us a good opportunity to compare Bash with Python and R.</p>
-<p>We will first show the two files <em>top-words.py</em> and <em>top-words.R</em> and then discuss the differences with the shell code. In Python, the code could would look something like Example <a href="#exm:top-words-py"><strong>??</strong></a> .</p>
+<p>We will first show the two files <em>top-words.py</em> and <em>top-words.R</em> and then discuss the differences with the shell code. In Python, the code could would look something like Example <a href="creating-reusable-command-line-tools.html#exm:top-words-py">4.5</a>.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-23" class="example"><strong>Example 4.4  ()  </strong></span>
+<span id="exm:top-words-py" class="example"><strong>Example 4.5  (~/book/ch04/top-words.py)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
@@ -560,13 +556,13 @@ cnt <span class="op">=</span> Counter(words)
     <span class="bu">print</span> <span class="st">&quot;</span><span class="sc">%7d</span><span class="st"> </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (count, word)</code></pre></div>
 
 <div class="rmdnote">
-Example <a href="#exm:top-words-py"><strong>??</strong></a> uses pure Python. When you want to do advanced text processing we recommend you check out the NLTK package <span class="citation">(Perkins <a href="references.html#ref-Perkins2010">2010</a>)</span>. If you are going to work with a lot of numerical data, then we recommend you use the Pandas package <span class="citation">(McKinney <a href="references.html#ref-McKinney2012">2012</a>)</span>.
+Example <a href="creating-reusable-command-line-tools.html#exm:top-words-py">4.5</a> uses pure Python. When you want to do advanced text processing we recommend you check out the NLTK package <span class="citation">(Perkins <a href="references.html#ref-Perkins2010">2010</a>)</span>. If you are going to work with a lot of numerical data, then we recommend you use the Pandas package <span class="citation">(McKinney <a href="references.html#ref-McKinney2012">2012</a>)</span>.
 </div>
 
-<p>And in R, the code would look something like Example <a href="#exm:top-words-5"><strong>??</strong></a> (thanks to Hadley Wickham):</p>
+<p>And in R, the code would look something like Example <a href="creating-reusable-command-line-tools.html#exm:top-words-5">4.4</a> (thanks to Hadley Wickham):</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-26" class="example"><strong>Example 4.5  ()  </strong></span>
+<span id="exm:top-words-5" class="example"><strong>Example 4.4  (~/book/ch04/top-words-1.R)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#!/usr/bin/env Rscript</span>
@@ -603,10 +599,10 @@ $ <span class="op">&lt;</span> <span class="ex">data/76.txt</span> top-words.R 5
 <div id="processing-streaming-data-from-standard-input" class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Processing Streaming Data from Standard Input</h3>
 <p>In the previous two code snippets, both Python R read the complete standard input at once. On the command line, most command-line tools pipe data to the next command-line tool in a streaming fashion. (There are a few command-line tools which require the complete data before they write any data to standard output, like <code>sort</code> and <code>awk</code> <span class="citation">(Brennan <a href="references.html#ref-awk">1994</a>)</span>.) This means the pipeline is blocked by such command-line tools. This does not have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.</p>
-<p>Luckily Python are R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example <a href="#exm:stream-py"><strong>??</strong></a> and Example <a href="#exm:stream-r"><strong>??</strong></a> are two minimal examples that demonstrate how this works in Python and R, respectively.</p>
+<p>Luckily Python are R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example <a href="creating-reusable-command-line-tools.html#exm:stream-py">4.6</a> and Example <a href="creating-reusable-command-line-tools.html#exm:stream-r">4.7</a> are two minimal examples that demonstrate how this works in Python and R, respectively.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-29" class="example"><strong>Example 4.6  ()  </strong></span>
+<span id="exm:stream-py" class="example"><strong>Example 4.6  (~/book/ch04/stream.py)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
@@ -619,7 +615,7 @@ $ <span class="op">&lt;</span> <span class="ex">data/76.txt</span> top-words.R 5
     stdout.flush()</code></pre></div>
 
 <div class="example">
-<span id="exm:unnamed-chunk-31" class="example"><strong>Example 4.7  ()  </strong></span>
+<span id="exm:stream-r" class="example"><strong>Example 4.7  (~/book/ch04/stream.R)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#!/usr/bin/env Rscript</span>

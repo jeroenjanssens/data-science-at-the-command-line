@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -579,11 +577,6 @@ $ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <s
 <span class="ex">5</span>
 <span class="ex">7</span></code></pre></div>
 <p>It assumes that the header of the CSV file only spans one row. Here’s the source code for completeness:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-26" class="example"><strong>Example 4.5  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="va">IFS=</span> <span class="bu">read</span> -r <span class="va">header</span>        
 <span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&quot;</span><span class="va">$header</span><span class="st">&quot;</span>    
@@ -611,11 +604,6 @@ $ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <s
 <span class="ex">5</span></code></pre></div>
 <p>Note that the header is not used and is also printed again in the output.</p>
 <p>The second command-line tool, <code>header</code> allows us, as the name implies, to manipulate the header of a CSV file. The complete source code is as follows:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-31" class="example"><strong>Example 4.7  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="fu">get_header ()</span> <span class="kw">{</span>
         <span class="kw">for</span> <span class="ex">i</span> in <span class="va">$(</span><span class="fu">seq</span> <span class="va">$NUMROWS)</span><span class="kw">;</span> <span class="kw">do</span>
@@ -708,11 +696,6 @@ $ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <s
 <span class="ex">4</span>
 <span class="ex">5</span></code></pre></div>
 <p>The third command-line tool is called <code>cols</code>, which is similar to <code>header</code> and <code>body</code> in that it allows you to apply a certain command to only a subset of the columns. The code is as follows:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-38" class="example"><strong>Example 5.1  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="va">ARG=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span>
 <span class="bu">shift</span>

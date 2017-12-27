@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -407,14 +405,14 @@ Although the five steps are listed in a linear and incremental fashion, in pract
 </div>
 <div id="what-is-the-command-line" class="section level2">
 <h2><span class="header-section-number">1.4</span> What is the Command Line?</h2>
-<p>Before we discuss why you should use the command line for data science, we’ll first show you what the command line actually looks like. It may be already familiar to you, but it’s good to show it nonetheless. Figure <a href="#fig:mac-terminal"><strong>??</strong></a> and Figure <a href="#fig:ubuntu-terminal"><strong>??</strong></a> show a screenshot of the command line as it appears by default on Mac OS X and Ubuntu, respectively. Ubuntu is a particular distribution of GNU/Linux, which we’ll be assuming throughout the book.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<p>Before we discuss why you should use the command line for data science, we’ll first show you what the command line actually looks like. It may be already familiar to you, but it’s good to show it nonetheless. Figure <a href="introduction.html#fig:mac-terminal">1.1</a> and Figure <a href="introduction.html#fig:ubuntu-terminal">1.2</a> show a screenshot of the command line as it appears by default on Mac OS X and Ubuntu, respectively. Ubuntu is a particular distribution of GNU/Linux, which we’ll be assuming throughout the book.</p>
+<div class="figure" style="text-align: center"><span id="fig:mac-terminal"></span>
 <img src="images/screenshot_terminal_mac_dst.png" alt="Command line on Mac OS X" width="342" />
 <p class="caption">
 Figure 1.1: Command line on Mac OS X
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure" style="text-align: center"><span id="fig:ubuntu-terminal"></span>
 <img src="images/screenshot_terminal_ubuntu_dst.png" alt="Command line on Ubuntu" width="362" />
 <p class="caption">
 Figure 1.2: Command line on Ubuntu
@@ -538,11 +536,11 @@ $ <span class="bu">echo</span> <span class="st">&#39;The command line is awesome
 <span class="kw">|</span>  <span class="ex">2009-09-14</span> <span class="kw">|</span> <span class="ex">multimedia</span> <span class="kw">|</span> <span class="ex">A</span> Designer Reinvents Himself            <span class="kw">|</span>
 <span class="kw">|</span>  <span class="ex">2009-09-12</span> <span class="kw">|</span> <span class="ex">multimedia</span> <span class="kw">|</span> <span class="ex">On</span> the Street <span class="kw">|</span> <span class="ex">Catwalk</span>                 <span class="kw">|</span>
 <span class="kw">|</span><span class="ex">-------------+------------+-----------------------------------------</span><span class="kw">|</span></code></pre></div>
-<p>That’s seems to have worked! In order to gain any insight, we’d better visualize the data. Figure <a href="#fig:fashion-week"><strong>??</strong></a> contains a line graph created with R <span class="citation">(R Foundation for Statistical Computing <a href="references.html#ref-R">2014</a>)</span>, <code>Rio</code> <span class="citation">(Janssens <a href="references.html#ref-Rio">2014</a><a href="references.html#ref-Rio">e</a>)</span>, and <code>ggplot2</code> <span class="citation">(Wickham <a href="references.html#ref-Wickham2009">2009</a>)</span>.</p>
+<p>That’s seems to have worked! In order to gain any insight, we’d better visualize the data. Figure <a href="introduction.html#fig:fashion-week">1.3</a> contains a line graph created with R <span class="citation">(R Foundation for Statistical Computing <a href="references.html#ref-R">2014</a>)</span>, <code>Rio</code> <span class="citation">(Janssens <a href="references.html#ref-Rio">2014</a><a href="references.html#ref-Rio">e</a>)</span>, and <code>ggplot2</code> <span class="citation">(Wickham <a href="references.html#ref-Wickham2009">2009</a>)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">fashion.csv</span> Rio -ge <span class="st">&#39;g + geom_freqpoly(aes(as.Date(date), color=type), &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;binwidth=7) + scale_x_date() + labs(x=&quot;date&quot;, title=&quot;Coverage of New York&#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39; Fashion Week in New York Times&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<div class="figure" style="text-align: center"><span id="fig:fashion-week"></span>
 <img src="images/nyt-fashion-week-multi.png" alt="Coverage of New York Fashion Week in the New York Times" width="1181" />
 <p class="caption">
 Figure 1.3: Coverage of New York Fashion Week in the New York Times

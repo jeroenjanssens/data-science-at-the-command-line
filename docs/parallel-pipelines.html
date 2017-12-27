@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -452,10 +450,10 @@ If the list to process becomes too complex, you can always store the result into
 </div>
 <div id="parallel-processing" class="section level2">
 <h2><span class="header-section-number">8.3</span> Parallel Processing</h2>
-<p>Assume that we have a very long running command, such as the one shown in Example <a href="#exm:slow-sh"><strong>??</strong></a> .</p>
+<p>Assume that we have a very long running command, such as the one shown in Example <a href="parallel-pipelines.html#exm:slow-sh">8.1</a>.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-11" class="example"><strong>Example 2.3  ()  </strong></span>
+<span id="exm:slow-sh" class="example"><strong>Example 8.1  (~/book/ch08/slow.sh)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
@@ -652,10 +650,10 @@ $ <span class="fu">find</span> data/ch08/outdir
 </div>
 <div id="creating-parallel-tools" class="section level3">
 <h3><span class="header-section-number">8.3.5</span> Creating Parallel Tools</h3>
-<p>The <code>bc</code> tool, which we used in the beginning of the chapter, is not parallel by itself. However, we can parallelize it using <code>parallel</code>. The Data Science toolbox contains a tool called <code>pbc</code> <span class="citation">(Janssens <a href="references.html#ref-pbc">2014</a><a href="references.html#ref-pbc">d</a>)</span>. Its code is shown in Example <a href="#exm:script-pbc"><strong>??</strong></a> .</p>
+<p>The <code>bc</code> tool, which we used in the beginning of the chapter, is not parallel by itself. However, we can parallelize it using <code>parallel</code>. The Data Science toolbox contains a tool called <code>pbc</code> <span class="citation">(Janssens <a href="references.html#ref-pbc">2014</a><a href="references.html#ref-pbc">d</a>)</span>. Its code is shown in Example <a href="parallel-pipelines.html#exm:script-pbc">8.2</a>.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-36" class="example"><strong>Example 8.1  ()  </strong></span>
+<span id="exm:script-pbc" class="example"><strong>Example 8.2  (Parallel bc)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
@@ -713,11 +711,6 @@ $ <span class="fu">cat</span> hostnames
 <span class="ex">ec2-54-88-89-208.compute-1.amazonaws.com</span></code></pre></div>
 <p>(If we would leave out <code>-r</code>, which stands for <em>raw</em>, the hostnames would have been surrounded by double quotes.) We save the output to <em>hostnames</em>, so that we can pass this to <code>parallel</code> later.</p>
 <p>As mentioned, <code>parallel</code> employs <code>ssh</code> to connect to the EC2 instances. Add the following to <em>~/.ssh/config</em>, so that <code>ssh</code> knows how to connect to the EC2 instances:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-42" class="example"><strong>Example 8.2  ()  </strong></span>
-</div>
-
 <pre class="text"><code>Host *.amazonaws.com
     IdentityFile ~/.ssh/MyKeyFile.pem
     User ubuntu</code></pre>
@@ -770,11 +763,6 @@ ute-1.amazonaws.com (). Using 1.
 <span class="ex">500500</span></code></pre></div>
 <p>Good, that works. If you have a larger command that you want to execute on the remote machines, you can also put it in a separate script and upload it script with <code>parallel</code>.</p>
 <p>Let’s create a very simple command-line tool called <em>sum</em>:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-50" class="example"><strong>Example 8.3  ()  </strong></span>
-</div>
-
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
 <span class="ex">paste</span> -sd+ <span class="kw">|</span> <span class="fu">bc</span></code></pre></div>
 <p>Don’t forget to make it executable as discussed in Chapter 4. The following command first uploads the file <em>sum</em>:</p>

@@ -1,3 +1,25 @@
+.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+}
+.rmdcaution {
+  background-image: url("../images/caution.png");
+}
+.rmdimportant {
+  background-image: url("../images/important.png");
+}
+.rmdnote {
+  background-image: url("../images/note.png");
+}
+.rmdtip {
+  background-image: url("../images/tip.png");
+}
+.rmdwarning {
+  background-image: url("../images/warning.png");
+}
+
+
 p.caption {
   color: #777;
   margin-top: 10px;
@@ -15,7 +37,7 @@ pre code {
 
 #welcome .cover {
   display: block;
-  margin: auto;
+  margin: 2em auto;
   border: 0.4px solid black;
 }
 
@@ -27,6 +49,28 @@ pre code {
   padding-top: 15px !important;
   font-weight: 500;
 }
+
+
+blockquote {
+  width: 80%;
+  margin: 2em auto !important;
+}
+
+blockquote p {
+  color: #ce253e;
+  text-align: right;
+}
+
+blockquote > p:last-child {
+  font-size: 14px !important;
+  margin-top: -1em !important;
+}
+
+blockquote > p:first-child {
+  text-align: inherit;
+  font-style: italic;
+}
+
 
 .highlight pre .hll { background-color: #ffffcc }
 .highlight pre  { background: #eeeedd; }

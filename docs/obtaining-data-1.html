@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -355,11 +353,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>If you have a file on your local computer, and you want to apply some command-line tools to it, all you have to do is copy or move the file to that directory. Let’s assume that you have a file called <em>logs.csv</em> on your Desktop. If you are running Linux or Mac OS X, execute the following command on your operating system (and not inside the Data Science Toolbox):</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cp</span> ~/Desktop/logs.csv .</code></pre></div>
 <p>And if you are running Windows, you can run the following commands on the command prompt:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-4" class="example"><strong>Example 3.1  ()  </strong></span>
-</div>
-
 <pre class="powershell"><code>&gt; cd %UserProfile%\Desktop
 &gt; copy logs.csv MyDataScienceToolbox\</code></pre>
 <p>You may also drag-and-drop the file into the directory using Windows Explorer.</p>
@@ -384,10 +377,10 @@ $ <span class="fu">cat</span> data/logs.csv</code></pre></div>
 $ <span class="fu">tar</span> -xzvf data/logs.tar.gz</code></pre></div>
 <p>Indeed, <code>tar</code> is notorious for its many command-line arguments. In this case, the four command-line arguments <code>x</code>, <code>z</code>, <code>v</code>, and <code>f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm, be <em>verbose</em> and use file <em>logs.tar.gz</em>. Although in time, you will get used to typing these four characters, there is a more convenient way.</p>
 <p>Rather than remembering the different command-line tools and their arguments, there is a handy script called <code>unpack</code> <span class="citation">(Brisbin <a href="references.html#ref-unpack">2013</a>)</span>, which will decompress many different formats. <code>unpack</code> looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.</p>
-<p>The <code>unpack</code> tool is part of the Data Science Toolbox. Remember that you look up how it can be installed in the appendix. Example <a href="#exm:script-unpack"><strong>??</strong></a> shows the source of <code>unpack</code>. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.</p>
+<p>The <code>unpack</code> tool is part of the Data Science Toolbox. Remember that you look up how it can be installed in the appendix. Example <a href="obtaining-data-1.html#exm:script-unpack">3.1</a> shows the source of <code>unpack</code>. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-9" class="example"><strong>Example 2.2  ()  </strong></span>
+<span id="exm:script-unpack" class="example"><strong>Example 3.1  (Decompress various file formats)  </strong></span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>

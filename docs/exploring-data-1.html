@@ -25,7 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
-<meta name="date" content="2017-12-22">
+<meta name="date" content="2017-12-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -142,9 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="getting-started.html"><a href="getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="getting-started.html"><a href="getting-started.html#installing-the-data-science-toolbox"><i class="fa fa-check"></i><b>2.2.1</b> Installing the Data Science Toolbox</a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="getting-started.html"><a href="getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
 <li class="chapter" data-level="2.3" data-path="getting-started.html"><a href="getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="getting-started.html"><a href="getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="getting-started.html"><a href="getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -655,15 +653,10 @@ $ &lt; file.csv csvlook | less -S</code></pre>
 <pre><code>$ #? [echo]
 $ R</code></pre>
 <p>And then run the following commands:</p>
-
-<div class="example">
-<span id="exm:unnamed-chunk-12" class="example"><strong>Example 7.2  ()  </strong></span>
-</div>
-
-<pre class="rconsole"><code>&gt; tips &lt;- read.csv(&#39;tips.csv&#39;, header = T, sep = &#39;,&#39;, stringsAsFactors = F)
-&gt; tips.percent &lt;- tips$tip / tips$bill * 100
-&gt; cat(tips.percent, sep = &#39;\n&#39;, file = &#39;percent.csv&#39;)
-&gt; q(&quot;no&quot;)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>tips &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;tips.csv&#39;</span>, <span class="dt">header =</span> T, <span class="dt">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="dt">stringsAsFactors =</span> F)
+<span class="op">&gt;</span><span class="st"> </span>tips.percent &lt;-<span class="st"> </span>tips<span class="op">$</span>tip <span class="op">/</span><span class="st"> </span>tips<span class="op">$</span>bill <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">cat</span>(tips.percent, <span class="dt">sep =</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, <span class="dt">file =</span> <span class="st">&#39;percent.csv&#39;</span>)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">q</span>(<span class="st">&quot;no&quot;</span>)</code></pre></div>
 <p>Afterwards, you can continue with the saved file <em>percent.csv</em> on the command line. Note that there is only one command that is associated with what we want to accomplish specifically. The other commands are necessary boilerplate. Typing in this boilerplate in order to accomplish something simple is cumbersome and breaks your workflow. Sometimes, you only want to do one or two things at a time to your data. Wouldn’t it be great if we could harness the power of R and be able to use it from the command line?</p>
 <p>This is where <code>Rio</code> comes in. The name Rio stands for <em>R input/output</em>, because it enables you to use R as a filter on the command line. You simply pipe CSV data into <code>Rio</code> and you specify the R commands that you want to run on it. Let’s perform the same task as before, but now using <code>Rio</code>:</p>
 <pre><code>$ &lt; data/tips.csv Rio -e &#39;df$tip / df$bill * 100&#39; | head -n 10</code></pre>
@@ -712,10 +705,10 @@ $ &lt; data/iris.csv Rio -e &#39;kurtosis(df$petal_width)&#39;</code></pre>
 <div id="introducing-gnuplot-and-feedgnuplot" class="section level3">
 <h3><span class="header-section-number">7.4.1</span> Introducing Gnuplot and Feedgnuplot</h3>
 <p>The first software package to create visualizations that we’re discussing in this chapter is Gnuplot. Gnuplot has been around since 1986. Despite being rather old, its visualization capabilities are quite extensive. As such, it’s impossible to do it justice. There are other good resources available, including <em>Gnuplot in Action</em> by <span class="citation">Janert (<a href="references.html#ref-Janert2009">2009</a>)</span>.</p>
-<p>To demonstrate the flexibility (and its archaic notation), consider Example <a href="#exm:script-gnuplot"><strong>??</strong></a> , which is copied from the Gnuplot website (<a href="http://gnuplot.sourceforge.net/demo/histograms.6.gnu" class="uri">http://gnuplot.sourceforge.net/demo/histograms.6.gnu</a>).</p>
+<p>To demonstrate the flexibility (and its archaic notation), consider Example <a href="exploring-data-1.html#exm:script-gnuplot">7.2</a>, which is copied from the Gnuplot website (<a href="http://gnuplot.sourceforge.net/demo/histograms.6.gnu" class="uri">http://gnuplot.sourceforge.net/demo/histograms.6.gnu</a>).</p>
 
 <div class="example">
-<span id="exm:unnamed-chunk-17" class="example"><strong>Example 7.3  ()  </strong></span>
+<span id="exm:script-gnuplot" class="example"><strong>Example 7.2  (Creating a histogram using Gnuplot)  </strong></span>
 </div>
 
 <pre class="text"><code># set terminal pngcairo  transparent enhanced font &quot;arial,10&quot; fontscale 1.0 size
@@ -745,7 +738,7 @@ set yrange [ 0.00000 : * ] noreverse nowriteback
 i = 23
 plot &#39;immigration.dat&#39; using 6 ti col, &#39;&#39; using 12 ti col,      &#39;&#39; using 13 ti c</code></pre>
 <p>Please note that this is trimmed to 80 characters wide. The above script generates the following image:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
 <img src="images/histograms.6.png" alt="Immigration Plot by Gnuplot" width="250" />
 <p class="caption">
 Figure 7.1: Immigration Plot by Gnuplot
@@ -826,7 +819,7 @@ Figure 7.1: Immigration Plot by Gnuplot
 <span class="op">&gt;</span> <span class="st">&#39; fill=Period), stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;Set1&quot;) &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;+ labs(x=&quot;Country of origin&quot;, y=&quot;Immigration by decade&quot;, title=&#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;&quot;Immigration from Northern Europe\n(columstacked histogram)&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
 <img src="images/rio-immigration.png" alt="Immigration plot by Rio and ggplot2" width="1181" />
 <p class="caption">
 Figure 7.2: Immigration plot by Rio and ggplot2
@@ -840,7 +833,7 @@ Figure 7.2: Immigration plot by Rio and ggplot2
 <h3><span class="header-section-number">7.4.3</span> Histograms</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_histogram(aes(bill))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
 <img src="images/rio-histogram.png" alt="Histogram" width="1181" />
 <p class="caption">
 Figure 7.3: Histogram
@@ -879,7 +872,7 @@ Figure 7.3: Histogram
 <h3><span class="header-section-number">7.4.4</span> Bar Plots</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_bar(aes(factor(size)))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
 <img src="images/rio-barplot.png" alt="Bar Plot" width="1181" />
 <p class="caption">
 Figure 7.4: Bar Plot
@@ -919,7 +912,7 @@ Figure 7.4: Bar Plot
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_density(aes(tip / bill * 100, fill=sex), &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;alpha=0.3) + xlab(&quot;percent&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
 <img src="images/rio-densityplot.png" alt="Density Plot" width="1181" />
 <p class="caption">
 Figure 7.5: Density Plot
@@ -931,7 +924,7 @@ Figure 7.5: Density Plot
 <h3><span class="header-section-number">7.4.6</span> Box Plots</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_boxplot(aes(time, bill))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-35"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-32"></span>
 <img src="images/rio-boxplot.png" alt="Box Plot" width="1181" />
 <p class="caption">
 Figure 7.6: Box Plot
@@ -943,7 +936,7 @@ Figure 7.6: Box Plot
 <h3><span class="header-section-number">7.4.7</span> Scatter Plots</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_point(aes(bill, tip, color=time))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-37"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
 <img src="images/rio-scatterplot.png" alt="Scatter Plot" width="1181" />
 <p class="caption">
 Figure 7.7: Scatter Plot
@@ -983,7 +976,7 @@ Figure 7.7: Scatter Plot
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/immigration-long.csv</span> Rio -ge <span class="st">&#39;g+geom_line(aes(x=Period, &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;y=Count, group=Country, color=Country)) + theme(axis.text.x = &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;element_text(angle = -45, hjust = 0))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-37"></span>
 <img src="images/rio-linegraph.png" alt="Line Graph" width="1181" />
 <p class="caption">
 Figure 7.8: Line Graph
