@@ -437,7 +437,7 @@ To demonstrate the flexibility (and its archaic notation), consider Example \@re
 
 ```{example script-gnuplot, name="Creating a histogram using Gnuplot"}
 ```
-```{text, eval=FALSE}
+```
 # set terminal pngcairo  transparent enhanced font "arial,10" fontscale 1.0 size
 # set output 'histograms.6.png'
 set border 3 front linetype -1 linewidth 1.000

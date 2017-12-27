@@ -127,7 +127,7 @@ We employ the term command-line tool a lot, but so far, we have not yet explaine
 -   A shell function.
 -   An alias.
 
-It’s good to know the difference between the types. The command-line tools that come pre-installed with the Data Science Toolbox mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our *own Data Science Toolbox*[^1] and become more efficient and more productive data scientists.
+It’s good to know the difference between the types. The command-line tools that come pre-installed with the Data Science Toolbox mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our *own Data Science Toolbox*[^2] and become more efficient and more productive data scientists.
 
 Binary Executable
 
@@ -425,4 +425,4 @@ Specifying the `--help` option also works for the GNU command-line tools such as
 
 
 
-[^1]: Here, we do not refer to the literal Data Science Toolbox we just installed, but to having your own set of tools, in a figurative sense.
+[^2]: Here, we do not refer to the literal Data Science Toolbox we just installed, but to having your own set of tools, in a figurative sense.

@@ -510,7 +510,7 @@ ec2-54-88-89-208.compute-1.amazonaws.com
 
 As mentioned, `parallel` employs `ssh` to connect to the EC2 instances. Add the following to *\~/.ssh/config*, so that `ssh` knows how to connect to the EC2 instances:
 
-```{text, eval=FALSE}
+```
 Host *.amazonaws.com
     IdentityFile ~/.ssh/MyKeyFile.pem
     User ubuntu

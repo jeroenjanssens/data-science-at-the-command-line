@@ -417,12 +417,12 @@ $ <span class="ex">csvstack</span> -g red,white -n type wine-<span class="dt">{r
 <p>Excellent! Just out of curiosity, let’s see what the how the distribution of quality looks like for both red and white wines.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-clean.csv</span> Rio -ge <span class="st">&#39;g+geom_density(aes(quality, &#39;</span>\
 <span class="st">&#39;fill=type), adjust=3, alpha=0.5)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<p><img src="images/ch09-wine-quality-density.png" width="1181" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch09-wine-quality-density.png" width="2362" style="display: block; margin: auto;" /></p>
 <p>From the density plot we can see the quality of white wine is distributed more towards higher values. Does this mean that white wines are overall better than red wines, or that the white wine experts more easily give higher scores than red wine experts? That’s something that the data doesn’t tell us. Or is there perhaps a correlation between alcohol and quality? Let’s use Rio and ggplot again to find out:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-clean.csv</span> Rio -ge <span class="st">&#39;ggplot(df, aes(x=alcohol, y=quality, &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;color=type)) + geom_point(position=&quot;jitter&quot;, alpha=0.2) + &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;geom_smooth(method=&quot;lm&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<p><img src="images/ch09-wine-alcohol-vs-quality.png" width="1181" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch09-wine-alcohol-vs-quality.png" width="2362" style="display: block; margin: auto;" /></p>
 <p>Eureka! Ahem, let’s carry on with some modeling, shall we?</p>
 </div>
 <div id="dimensionality-reduction-with-tapkee" class="section level2">
@@ -467,18 +467,18 @@ $ <span class="fu">make</span></code></pre></div>
 <span class="op">&gt;</span> <span class="ex">header</span> -r x,y,type <span class="kw">|</span> <span class="ex">Rio-scatter</span> x y type <span class="kw">|</span>
 <span class="op">&gt;</span> <span class="fu">tee</span> tapkee-wine-pca.png <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
-<img src="images/tapkee-wine-pca.png" alt="PCA" width="252" />
+<img src="images/tapkee-wine-pca.png" alt="PCA" width="504" />
 <p class="caption">
-Figure 7.1: PCA
+Figure 9.1: PCA
 </p>
 </div>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> cols -C type body tapkee --method t-sne <span class="kw">|</span>
 <span class="op">&gt;</span> <span class="ex">header</span> -r x,y,type <span class="kw">|</span> <span class="ex">Rio-scatter</span> x y type <span class="kw">|</span>
 <span class="op">&gt;</span> <span class="fu">tee</span> tapkee-wine-t-sne.png <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
-<img src="images/tapkee-wine-t-sne.png" alt="t-SNE" width="252" />
+<img src="images/tapkee-wine-t-sne.png" alt="t-SNE" width="504" />
 <p class="caption">
-Figure 9.1: t-SNE
+Figure 9.2: t-SNE
 </p>
 </div>
 <p>Note that there’s not a single GNU core util (i.e., classic command-line tool) in this one-liner. Now that’s the power of the command line!</p>
@@ -680,21 +680,21 @@ $ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> csvc
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> -j1 <span class="st">&quot;paste -d, wine-both-xy.csv wine-both-cluster-{}.csv | &quot;</span>\
 <span class="op">&gt;</span> <span class="st">&quot;Rio-scatter x y cluster | display&quot;</span> ::: em simplekmeans cobweb</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
-<img src="images/ch09-wine-cluster-em.png" alt="EM" width="1181" />
+<img src="images/ch09-wine-cluster-em.png" alt="EM" width="2362" />
 <p class="caption">
-Figure 7.7: EM
+Figure 9.3: EM
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-35"></span>
-<img src="images/ch09-wine-cluster-simplekmeans.png" alt="SimpleKMeans" width="1181" />
+<img src="images/ch09-wine-cluster-simplekmeans.png" alt="SimpleKMeans" width="2362" />
 <p class="caption">
-Figure 9.2: SimpleKMeans
+Figure 9.4: SimpleKMeans
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
-<img src="images/ch09-wine-cluster-cobweb.png" alt="Cobweb" width="1181" />
+<img src="images/ch09-wine-cluster-cobweb.png" alt="Cobweb" width="2362" />
 <p class="caption">
-Figure 9.3: Cobweb
+Figure 7.8: Cobweb
 </p>
 </div>
 <p>Admittedly, we have through a lot of trouble taming Weka. The exercise was worth it, because some day you may run into a command-line tool that works different from what you expect. Now you know that there are always ways to work around such command-line tools.</p>
@@ -779,7 +779,7 @@ $ <span class="ex">csvstack</span> *Regres* -n learner --filenames <span class="
 <span class="op">&gt;</span> <span class="st">&#39;theme(aspect.ratio=1) + xlim(3,9) + ylim(3,9) + guides(colour=FALSE) + &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;geom_smooth(aes(quality, prediction), method=&quot;lm&quot;, color=&quot;black&quot;) + &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;ylab(&quot;prediction&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<p><img src="images/ch09-wine-quality-predictions.png" width="1181" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch09-wine-quality-predictions.png" width="2362" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="classification-with-bigml" class="section level2">

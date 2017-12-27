@@ -1,7 +1,7 @@
 bookdown::gitbook:
   css: style.css
   split_bib: no
-  keep_md: no
+  keep_md: yes
   includes:
     in_header: [google_analytics.html]
   config:

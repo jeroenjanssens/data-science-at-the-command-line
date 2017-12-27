@@ -711,7 +711,7 @@ $ <span class="fu">cat</span> hostnames
 <span class="ex">ec2-54-88-89-208.compute-1.amazonaws.com</span></code></pre></div>
 <p>(If we would leave out <code>-r</code>, which stands for <em>raw</em>, the hostnames would have been surrounded by double quotes.) We save the output to <em>hostnames</em>, so that we can pass this to <code>parallel</code> later.</p>
 <p>As mentioned, <code>parallel</code> employs <code>ssh</code> to connect to the EC2 instances. Add the following to <em>~/.ssh/config</em>, so that <code>ssh</code> knows how to connect to the EC2 instances:</p>
-<pre class="text"><code>Host *.amazonaws.com
+<pre><code>Host *.amazonaws.com
     IdentityFile ~/.ssh/MyKeyFile.pem
     User ubuntu</code></pre>
 <p>Depending on your which distribution your running, your username may be different than <em>ubuntu</em>.</p>

@@ -711,7 +711,7 @@ $ &lt; data/iris.csv Rio -e &#39;kurtosis(df$petal_width)&#39;</code></pre>
 <span id="exm:script-gnuplot" class="example"><strong>Example 7.2  (Creating a histogram using Gnuplot)  </strong></span>
 </div>
 
-<pre class="text"><code># set terminal pngcairo  transparent enhanced font &quot;arial,10&quot; fontscale 1.0 size
+<pre><code># set terminal pngcairo  transparent enhanced font &quot;arial,10&quot; fontscale 1.0 size
 # set output &#39;histograms.6.png&#39;
 set border 3 front linetype -1 linewidth 1.000
 set boxwidth 0.75 absolute
@@ -738,8 +738,8 @@ set yrange [ 0.00000 : * ] noreverse nowriteback
 i = 23
 plot &#39;immigration.dat&#39; using 6 ti col, &#39;&#39; using 12 ti col,      &#39;&#39; using 13 ti c</code></pre>
 <p>Please note that this is trimmed to 80 characters wide. The above script generates the following image:</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
-<img src="images/histograms.6.png" alt="Immigration Plot by Gnuplot" width="250" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="images/histograms.6.png" alt="Immigration Plot by Gnuplot" width="500" />
 <p class="caption">
 Figure 7.1: Immigration Plot by Gnuplot
 </p>
@@ -819,8 +819,8 @@ Figure 7.1: Immigration Plot by Gnuplot
 <span class="op">&gt;</span> <span class="st">&#39; fill=Period), stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;Set1&quot;) &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;+ labs(x=&quot;Country of origin&quot;, y=&quot;Immigration by decade&quot;, title=&#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;&quot;Immigration from Northern Europe\n(columstacked histogram)&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
-<img src="images/rio-immigration.png" alt="Immigration plot by Rio and ggplot2" width="1181" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
+<img src="images/rio-immigration.png" alt="Immigration plot by Rio and ggplot2" width="2362" />
 <p class="caption">
 Figure 7.2: Immigration plot by Rio and ggplot2
 </p>
@@ -833,8 +833,8 @@ Figure 7.2: Immigration plot by Rio and ggplot2
 <h3><span class="header-section-number">7.4.3</span> Histograms</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_histogram(aes(bill))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
-<img src="images/rio-histogram.png" alt="Histogram" width="1181" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<img src="images/rio-histogram.png" alt="Histogram" width="2362" />
 <p class="caption">
 Figure 7.3: Histogram
 </p>
@@ -872,8 +872,8 @@ Figure 7.3: Histogram
 <h3><span class="header-section-number">7.4.4</span> Bar Plots</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_bar(aes(factor(size)))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
-<img src="images/rio-barplot.png" alt="Bar Plot" width="1181" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<img src="images/rio-barplot.png" alt="Bar Plot" width="2362" />
 <p class="caption">
 Figure 7.4: Bar Plot
 </p>
@@ -912,8 +912,8 @@ Figure 7.4: Bar Plot
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_density(aes(tip / bill * 100, fill=sex), &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;alpha=0.3) + xlab(&quot;percent&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
-<img src="images/rio-densityplot.png" alt="Density Plot" width="1181" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<img src="images/rio-densityplot.png" alt="Density Plot" width="2362" />
 <p class="caption">
 Figure 7.5: Density Plot
 </p>
@@ -924,8 +924,8 @@ Figure 7.5: Density Plot
 <h3><span class="header-section-number">7.4.6</span> Box Plots</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_boxplot(aes(time, bill))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-32"></span>
-<img src="images/rio-boxplot.png" alt="Box Plot" width="1181" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-31"></span>
+<img src="images/rio-boxplot.png" alt="Box Plot" width="2362" />
 <p class="caption">
 Figure 7.6: Box Plot
 </p>
@@ -936,8 +936,8 @@ Figure 7.6: Box Plot
 <h3><span class="header-section-number">7.4.7</span> Scatter Plots</h3>
 <p>Using <code>Rio</code>:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_point(aes(bill, tip, color=time))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
-<img src="images/rio-scatterplot.png" alt="Scatter Plot" width="1181" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
+<img src="images/rio-scatterplot.png" alt="Scatter Plot" width="2362" />
 <p class="caption">
 Figure 7.7: Scatter Plot
 </p>
@@ -976,8 +976,8 @@ Figure 7.7: Scatter Plot
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/immigration-long.csv</span> Rio -ge <span class="st">&#39;g+geom_line(aes(x=Period, &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;y=Count, group=Country, color=Country)) + theme(axis.text.x = &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;element_text(angle = -45, hjust = 0))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-37"></span>
-<img src="images/rio-linegraph.png" alt="Line Graph" width="1181" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<img src="images/rio-linegraph.png" alt="Line Graph" width="2362" />
 <p class="caption">
 Figure 7.8: Line Graph
 </p>

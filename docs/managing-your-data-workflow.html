@@ -435,7 +435,7 @@ Drip speeds up Java because it reserves an instance of the JVM, after it has bee
 <span id="exm:drakefile" class="example"><strong>Example 6.1  (A workflow with just a single stip)  </strong></span>
 </div>
 
-<pre class="text"><code>top-5 &lt;-                                                    
+<pre><code>top-5 &lt;-                                                    
     curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; |  
     grep -E &#39;^&lt;li&gt;&#39; |                                       
     head -n 5 |                                             
@@ -472,7 +472,7 @@ Drip speeds up Java because it reserves an instance of the JVM, after it has bee
 <span class="ex">Confirm?</span> [y/n] n
 <span class="ex">Aborted.</span></code></pre></div>
 <p>As you can see, Drake wants to execute the step again! However, now mentions a different reason, namely, that there is no input step <em><span class="math display">\[no-input-step\]</span></em>. Its default behavior is to check whether the input has changed by looking at the timestamp of the input. However, since we didn’t specify any input, Drake doesn’t know whether or not this step should be run again. We can disable this default behavior to check timestamps as follows:</p>
-<pre class="text"><code>top-5 &lt;- [-timecheck]
+<pre><code>top-5 &lt;- [-timecheck]
     curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; |
     grep -E &#39;^&lt;li&gt;&#39; |
     head -n 5 |
@@ -489,7 +489,7 @@ $ <span class="ex">drake</span> -w 01.drake
 <p>Our workflow contains just a single step, which means that, just like having a simple Bash script, everything will be executed all the time. So the first thing we are going to do is to split up this single step into two steps, where the first step downloads the HTML, and the second step processes this HTML. The second step obviously depends on the first step. We can define this dependency in our workflow.</p>
 <p>You may have noticed that the number 5 is specified three times. If you ever wanted to get the top, say, top 10 e-books from Project Gutenberg, we would have to change our workflow in three places. This is inefficient and needs to be addressed. Luckily, Drake supports variables.</p>
 <p>It may not be immediately obvious from our workflow, but our data resides in the same location as the script. It is better to have the data live in a separate location and have it separated from any code that generates this data. Not only does it keep our project cleaner, it also allows us to delete the generated data files easier, and we can easily specify that we do not like the data files to be included in any version control system such as <code>git</code> <span class="citation">(Torvalds and Hamano <a href="references.html#ref-git">2014</a>)</span>. Let’s have a look:</p>
-<pre class="text"><code>NUM:=5                                                              
+<pre><code>NUM:=5                                                              
 BASE=data/                                                          
 
 top.html &lt;- [-timecheck]
@@ -535,7 +535,7 @@ top-$[NUM] &lt;- top.html
 <p>The list of the top 100 e-books on project Gutenberg changes daily. We’ve seen that if we run the Drake workflow again then the HTML containing this list is not being downloaded again. Luckily, Drake allows us to run certain steps again, so that we can update this HTML file:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span> -w 02.drake <span class="st">&#39;=top.html&#39;</span></code></pre></div>
 <p>There is a more convenient way than using the output filename to specify which step you want to execute again. We can add so-called <em>tags</em> to both the input and output of steps. A tag starts with a “%”. It is a good idea to choose a short and descriptive tag name so that you can easily specify this at the command line. Let’s add the tag <em>%html</em> to the first step and <em>%filter</em> to the second step:</p>
-<pre class="text"><code>NUM:=5
+<pre><code>NUM:=5
 BASE=data/
 
 top.html, %html &lt;- [-timecheck]
