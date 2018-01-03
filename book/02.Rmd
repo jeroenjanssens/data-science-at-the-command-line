@@ -1,4 +1,4 @@
-# Getting Started 
+# Getting Started {#wrong-id}
 
 In this chapter we are going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
 

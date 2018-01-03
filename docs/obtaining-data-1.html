@@ -349,7 +349,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ls</span> -1 /vagrant
 <span class="ex">build</span>
 <span class="ex">Vagrantfile</span></code></pre></div>
-<p>If you have a file on your local computer, and you want to apply some command-line tools to it, all you have to do is copy or move the file to that directory. Let’s assume that you have a file called <em>logs.csv</em> on your Desktop. If you are running Linux or Mac OS X, execute the following command on your operating system (and not inside the Data Science Toolbox):</p>
+<p>If you have a file on your local computer, and you want to apply some command-line tools to it, all you have to do is copy or move the file to that directory. Let’s assume that you have a file called <em>logs.csv</em> on your Desktop. If you are running Linux or macOS, execute the following command on your operating system (and not inside the Data Science Toolbox):</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cp</span> ~/Desktop/logs.csv .</code></pre></div>
 <p>And if you are running Windows, you can run the following commands on the command prompt:</p>
 <pre class="powershell"><code>&gt; cd %UserProfile%\Desktop
@@ -362,7 +362,7 @@ $ <span class="fu">cat</span> data/logs.csv</code></pre></div>
 </div>
 <div id="remote-version-of-data-science-toolbox" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Remote Version of Data Science Toolbox</h3>
-<p>If you are running Linux or Mac OS X, you can use <code>scp</code> <span class="citation">(Rinne and Ylonen <a href="references.html#ref-scp">2014</a>)</span>, which stands for <em>secure copy</em>, to copy files onto the EC2 instance. You will need the same key pair file that you used to login to the EC2 instance.</p>
+<p>If you are running Linux or macOS, you can use <code>scp</code> <span class="citation">(Rinne and Ylonen <a href="references.html#ref-scp">2014</a>)</span>, which stands for <em>secure copy</em>, to copy files onto the EC2 instance. You will need the same key pair file that you used to login to the EC2 instance.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">scp</span> -i  mykey.pem ~/Desktop/logs.csv \
 <span class="op">&gt;</span> ubuntu@ec2-184-73-72-150.compute-1.amazonaws.com:data</code></pre></div>
 <p>Replace the host name in the example <em>ec2-184-73-72-150.compute-1.amazonaws.com</em> with the value you see on the EC2 overview page in the AWS console.</p>
