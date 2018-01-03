@@ -29,12 +29,12 @@ The command-line tools will be introduced on a need-to-use basis. You will notic
 
 In this chapter, you’ll learn how to:
 
--   Convert data from one format to another.
--   Apply SQL queries to CSV.
--   Filter lines.
--   Extract and replace values.
+- Convert data from one format to another.
+- Apply SQL queries to CSV.
+- Filter lines.
+- Extract and replace values.
 
--   Split, merge, and extract columns.
+- Split, merge, and extract columns.
 
 ## Common Scrub Operations for Plain Text 
 
@@ -366,9 +366,9 @@ $@
 
 It works like this:
 
--   Take one line from standard in and store it as a variable named *\$header*.
--   Print out the header.
--   Execute all the command-line arguments passed to `body` on the remaining data in standard in.
+- Take one line from standard in and store it as a variable named *\$header*.
+- Print out the header.
+- Execute all the command-line arguments passed to `body` on the remaining data in standard in.
 
 Here’s another example. Imagine that we count the lines of the following CSV file:
 

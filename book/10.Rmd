@@ -80,9 +80,9 @@ As this book is on the intersection of the command line and data science, many r
 
 This book would not have been possible without the many people that created the command line, and the numerous command-line tools. You could say that the current ecosystem of command-line tools for data science is a community effort. We have only been able to give you a glimpse of the many command-line tools available. New ones are created everyday, and perhaps some day you will create one yourself. In that case we would love to hear from you. We’d also appreciate it if you would drop us a line whenever you have a question, comment, or suggestion. There are a couples of ways to get in touch with us:
 
--   Email: <jeroen@datascienceworkshops.com>
--   Twitter: [\@jeroenhjanssens](https://twitter.com/jeroenhjanssens/)
--   Book website: <http://datascienceatthecommandline.com/>
--   Book GitHub repository: <https://github.com/jeroenjanssens/data-science-at-the-command-line>
+- Email: <jeroen@datascienceworkshops.com>
+- Twitter: [\@jeroenhjanssens](https://twitter.com/jeroenhjanssens/)
+- Book website: <http://datascienceatthecommandline.com/>
+- Book GitHub repository: <https://github.com/jeroenjanssens/data-science-at-the-command-line>
 
 

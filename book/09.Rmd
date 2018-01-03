@@ -6,10 +6,10 @@ However, visualizations, on the one hand, are characterized by shapes, positions
 
 In this chapter we’ll consider four common types of algorithms to model data:
 
--   Dimensionality reduction.
--   Clustering.
--   Regression.
--   Classification.
+- Dimensionality reduction.
+- Clustering.
+- Regression.
+- Classification.
 
 These four algorithms come from the field of machine learning. As such, we’re going to change our vocabulary a bit. Let’s assume that we have a CSV file, also known as a *data set*. Each row, except for the header, is considered to be a *data point*. For simplicity we assume that each column that contains numerical values is an input *feature*. If a data point also contains a non-numerical field, such as the *species* column in the Iris data set, then that is known as the data point’s *label*.
 
@@ -24,10 +24,10 @@ This is by no means an introduction to machine learning. That implies that we mu
 
 In this chapter, you’ll learn how to:
 
--   Reduce the dimensionality of your data set.
--   Identify groups of data points with three clustering algorithms.
--   Predict the quality of white wine using regression.
--   Classify wine as red or white via a prediction API.
+- Reduce the dimensionality of your data set.
+- Identify groups of data points with three clustering algorithms.
+- Predict the quality of white wine using regression.
+- Classify wine as red or white via a prediction API.
 
 ## More Wine Please! 
 
@@ -70,10 +70,10 @@ $ wc -l wine-{red,white}.csv
 
 At first sight this data appears to be very clean already. Still, let’s scrub this data a little bit so that it conforms more with what most command-line tools are expecting. Specifically, we’ll:
 
--   Convert the header to lowercase.
--   Convert the semi-colons to commas.
--   Convert spaces to underscores.
--   Remove unnecessary quotes.
+- Convert the header to lowercase.
+- Convert the semi-colons to commas.
+- Convert spaces to underscores.
+- Remove unnecessary quotes.
 
 These things can all be taken care of by ‘tr\`. Let’s use a for loop this time---for old times’ sake---to process both data sets:
 
@@ -151,11 +151,11 @@ In this section we’ll look at two techniques: PCA, which stands for Principal 
 
 Tapkee is a C++ template library for dimensionality reduction [@Lisitsyn2013]. The library contains implementations of many dimensionality reduction algorithms, including:
 
--   Locally Linear Embedding
--   Isomap
--   Multidimensional scaling
--   PCA
--   t-SNE
+- Locally Linear Embedding
+- Isomap
+- Multidimensional scaling
+- PCA
+- t-SNE
 
 Tapkee’s website: <http://tapkee.lisitsyn.me/>, contains more information about these algorithms. Although Tapkee is mainly a library that can be included in other applications, it also offers a command-line tool. We’ll use this to perform dimensionality reduction on our wine data set.
 
@@ -261,9 +261,9 @@ _-R_-10..10_-N_0.0_-V_1.0
 
 Don’t worry about the output of this command, we’ll discuss that later. At this moment, we’re concerned with the usage of Weka. There are a couple of things to note here:
 
--   You need run `java`, which is counter-intuitive.
--   The jar file contains over 2000 classes, and only about 300 of those can be used from the command line directly. How do you know which ones?
--   You need to specify entire namespace of the class: `weka.datagenerators.classifiers.regression.MexicanHat`. How are you supposed to remember that?
+- You need run `java`, which is counter-intuitive.
+- The jar file contains over 2000 classes, and only about 300 of those can be used from the command line directly. How do you know which ones?
+- You need to specify entire namespace of the class: `weka.datagenerators.classifiers.regression.MexicanHat`. How are you supposed to remember that?
 
 Does this mean that we’re going to give up on Weka? Of course not! Since Weka does contain a lot of useful functionality, we’re going to tackle these issues in the next three subsections.
 
@@ -354,15 +354,15 @@ $ grep -L 'Exception' * | tee $WEKAPATH/weka.classes
 
 This still comes down to 332 classes! Here are a few classes that might be of interest):
 
--   `attributeSelection.PrincipalComponents`
--   `classifiers.bayes.NaiveBayes`
--   `classifiers.evaluation.ConfusionMatrix`
--   `classifiers.functions.SimpleLinearRegression`
--   `classifiers.meta.AdaBoostM1`
--   `classifiers.trees.RandomForest`
+- `attributeSelection.PrincipalComponents`
+- `classifiers.bayes.NaiveBayes`
+- `classifiers.evaluation.ConfusionMatrix`
+- `classifiers.functions.SimpleLinearRegression`
+- `classifiers.meta.AdaBoostM1`
+- `classifiers.trees.RandomForest`
 
--   `clusterers.EM`
--   `filters.unsupervised.attribute.Normalize`
+- `clusterers.EM`
+- `filters.unsupervised.attribute.Normalize`
 
 As you can see, `weka` offers a whole range of classes and functionality.
 
@@ -447,9 +447,9 @@ $ < wine-both-scaled.csv csvcut -C quality,type |
 > csvcut -c cluster > data/wine-both-cluster-em.csv        
 ```
 
--   Use the scaled features, and don’t use the features quality and type for the cluster.
--   Apply the algorithm using `weka-cluster`.
--   Only save the cluster assignment.
+- Use the scaled features, and don’t use the features quality and type for the cluster.
+- Apply the algorithm using `weka-cluster`.
+- Only save the cluster assignment.
 
 We’ll run the same command again for *SimpleKMeans* and *Cobweb* algorithms. Now we have three files with cluster assignments. Let’s create a t-SNE mapping in order to visualize the cluster assignments:
 
@@ -619,9 +619,9 @@ $ csvstack -n type -g red,white wine-red-clean.csv \
 
 This long command breaks down as follows:
 
--   `csvstack` is used to combine multiple data sets. It creates a new column *type*, which has the value *red* for all rows coming from the first file *wine-red-clean.csv* and *white* for all rows coming from the second file.
--   The second file is passed to `csvstack` using file redirection. This allows us to create a temporary file using `shuf`, which creates a random permutation of the *wine-white-clean.csv* and `head` which only selects the header and the first 1559 rows.
--   Finally, we reorder the columns of this data set using `csvcut` because by default, `bigmler` assumes that the last column is the label.
+- `csvstack` is used to combine multiple data sets. It creates a new column *type*, which has the value *red* for all rows coming from the first file *wine-red-clean.csv* and *white* for all rows coming from the second file.
+- The second file is passed to `csvstack` using file redirection. This allows us to create a temporary file using `shuf`, which creates a random permutation of the *wine-white-clean.csv* and `head` which only selects the header and the first 1559 rows.
+- Finally, we reorder the columns of this data set using `csvcut` because by default, `bigmler` assumes that the last column is the label.
 
 Let’s verify that *wine-balanced.csv* is actually balanced by counting the number of instances per class using `parallel` and `grep`:
 
@@ -642,9 +642,9 @@ $ parallel --xapply "cat wine-header.csv x0{1} > wine-{2}.csv" \
 
 This is another long command that deserves to be broken down:
 
--   Get the header using `header` and save it to a temporary file named *wine-header.csv*
--   Mix up the red and white wines using `tail` and `shuf` and split it into two files named *x00* and *x01* using a round robin distribution.
--   Use `cat` to combine the header saved in *wine-header.csv* and the rows stored in *x00* to save it as *wine-train.csv*; similarly for *x01* and *wine-test.csv*. The `--xapply` command-line argument tells `parallel` to loop over the two input sources in tandem.
+- Get the header using `header` and save it to a temporary file named *wine-header.csv*
+- Mix up the red and white wines using `tail` and `shuf` and split it into two files named *x00* and *x01* using a round robin distribution.
+- Use `cat` to combine the header saved in *wine-header.csv* and the rows stored in *x00* to save it as *wine-train.csv*; similarly for *x01* and *wine-test.csv*. The `--xapply` command-line argument tells `parallel` to loop over the two input sources in tandem.
 
 Let’s check again number of instances per class in both *wine-train.csv* and *wine-test.csv*:
 
@@ -721,8 +721,8 @@ $ paste -d, <(csvcut -c type data/wine-test.csv) \
 766
 ```
 
--   First, we combine the *type* columns of both *data/wine-test.csv* and *output/predictions.csv*.
--   Then, we use `awk` to keep count of when the two columns differ in value.
+- First, we combine the *type* columns of both *data/wine-test.csv* and *output/predictions.csv*.
+- Then, we use `awk` to keep count of when the two columns differ in value.
 
 As you can see, BigML’s API misclassified 766 wines out of 1599. This isn’t a good result, but please note that we just blindly applied an algorithm to a data set, which we normally wouldn’t do.
 
@@ -730,9 +730,9 @@ As you can see, BigML’s API misclassified 766 wines out of 1599. This isn’t 
 
 BigML’s prediction API has proven to be easy to use. As with many of the command-line tools discussed in this book, we’ve barely scratched the surface with BigML. For completeness, we should mention that:
 
--   BigML’s command-line tool also allows for local computations, which is useful for debugging.
--   Results can also be inspected using BigML’s web interface.
--   BigML can also perform regression tasks.
+- BigML’s command-line tool also allows for local computations, which is useful for debugging.
+- Results can also be inspected using BigML’s web interface.
+- BigML can also perform regression tasks.
 
 Please see <https://bigml.com/developers> for a complete overview of BigML’s features.
 

@@ -2,10 +2,10 @@
 
 In the previous chapters, we have been dealing with commands and pipelines that take care of an entire task at once. In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times. For, example, you may need to:
 
--   Scrape hundreds of web pages.
--   Make dozens of API calls and transform their output.
--   Train a classifier for a range of parameter values.
--   Generate scatter plots for every pair of features in your dataset.
+- Scrape hundreds of web pages.
+- Make dozens of API calls and transform their output.
+- Train a classifier for a range of parameter values.
+- Generate scatter plots for every pair of features in your dataset.
 
 In any of the above examples, there is a certain form of repetition involved. With your favorite scripting or programming language, you take care of this with a for loop or a while loop. On the command line, the first thing you might be inclined to do is to press `<Up>` (which brings back the previous command), modify it if necessary, and press `<Enter>` (which runs the command again). This is fine for two or three times, but imagine doing this for, say, dozens of files. Such an approach quickly becomes cumbersome and time-inefficient. The good news is that we can write such loops on the command line as well. This chapter is all about repetition.
 
@@ -15,10 +15,10 @@ Sometimes, repeating a fast command on after the other (in serial) is sufficient
 
 This intermezzo chapter discusses several approaches to speed up tasks that require commands and pipelines to be run many times. The main goal of this chapter is to demonstrate to you the flexibility and power of a tool called GNU Parallel. Because this tool can be combined with any other tool discussed in this book, it will positively change the way you use the command line for data science. In this chapter, you’ll learn about:
 
--   Running commands in serial to a range of numbers, lines, and files.
--   Breaking a large task into several smaller tasks.
--   Running pipelines in parallel using GNU Parallel.
--   Distributing pipelines on multiple machines.
+- Running commands in serial to a range of numbers, lines, and files.
+- Breaking a large task into several smaller tasks.
+- Running pipelines in parallel using GNU Parallel.
+- Distributing pipelines on multiple machines.
 
 ## Serial Processing 
 
@@ -56,9 +56,9 @@ $ for i in {0..100..2}
 
 There are a number of things going on here:
 
--   Bash has a feature called brace expansion, which transforms *{0..100..2}* into a list separated by spaces: *0 2 4 … 98 100*.
--   The variable *i* is assigned the value *1* in the first iteration, *2* in the second iteration, and so forth. The value of this variable can be employed in commands by prefixing it with a dollar sign *\$*. The shell will replace *\$i* with its value before `echo` is being executed. Note that there can be more than one command between `do` and `done`.
--   We pipe the output of the for loop to `tail` so that we see the last ten values, only.
+- Bash has a feature called brace expansion, which transforms *{0..100..2}* into a list separated by spaces: *0 2 4 … 98 100*.
+- The variable *i* is assigned the value *1* in the first iteration, *2* in the second iteration, and so forth. The value of this variable can be employed in commands by prefixing it with a dollar sign *\$*. The shell will replace *\$i* with its value before `echo` is being executed. Note that there can be more than one command between `do` and `done`.
+- We pipe the output of the for loop to `tail` so that we see the last ten values, only.
 
 Although the syntax may appear a bit odd compared to your favorite programming language, it is worth remembering this because it is always available in the bash shell. We will shortly introduce a better and more flexible way of repeating commands.
 
@@ -93,9 +93,9 @@ Sending invitation to wyatt.nelson80@example.com.
 Sending invitation to peter.coleman75@example.com.
 ```
 
--   In this case we need to use a while loop because Bash does not know beforehand how many lines the input consists of.
--   Although the curly braces around the *line* variable are not necessary in this case (since variable names cannot contain periods), it’s still good practice.
--   This redirection can also be placed before `while`.
+- In this case we need to use a while loop because Bash does not know beforehand how many lines the input consists of.
+- Although the curly braces around the *line* variable are not necessary in this case (since variable names cannot contain periods), it’s still good practice.
+- This redirection can also be placed before `while`.
 
 You can also provide input to the while loop interactively by specifying the special file standard input */dev/stdin*. Press `<Ctrl-D>` when you are done.
 
@@ -129,9 +129,9 @@ Just as with brace expansion with numbers, the *\*.csv* is first expanded into a
 
 A more elaborate alternative to finding files is `find` [@find], which:
 
--   Allows for elaborate searching on properties such as size, access time, and permissions.
--   Handles dashes.
--   Handles special characters such as spaces and newlines.
+- Allows for elaborate searching on properties such as size, access time, and permissions.
+- Handles dashes.
+- Handles special characters such as spaces and newlines.
 
 ```{bash, eval=FALSE}
 $ find data -name '*.csv' -exec echo "Processing {}" \;
@@ -170,7 +170,7 @@ sleep $duration
 echo "Job $1 took ${duration} seconds"
 ```
 
--   *\$RANDOM* is an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that number by 5 and adding 1 ensures that the number is between 1 and 5.
+- *\$RANDOM* is an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that number by 5 and adding 1 ensures that the number is between 1 and 5.
 
 This process does not take up all the resources we have available. And it so happens that we need to run this command a lot of times. For example, we need to download a whole sequence of files.
 
@@ -199,7 +199,7 @@ Job 1 took 4 seconds
 Processed 1
 ```
 
--   Parentheses create a subshell. The ampersand ensures that it will be executed in the background.
+- Parentheses create a subshell. The ampersand ensures that it will be executed in the background.
 
 The problem with subshells is that they are executed all at once. There is no mechanism to control the maximum number of processes. You are not advised to use this.
 
@@ -462,8 +462,8 @@ First, we’re going to obtain a list of running AWS EC2 instances. Don’t worr
 
 Once we know which remote machines to take over, we’re going to consider three flavors of distributed processing:
 
--   Simply running ordinary commands on remote machines.
--   Distributing local data directly among remote machines.
+- Simply running ordinary commands on remote machines.
+- Distributing local data directly among remote machines.
 
     -   Sending files to remote machines, process them, and retrieve the results.
 
@@ -546,10 +546,10 @@ Running the same command on every remote machine once only requires one core per
 
 In this case, we have `parallel` installed on one of the two remote machines. We’re getting a warning message indicating that `parallel` is not found on one of them. As a result, `parallel` cannot determine the number of cores and will default to using one core. When you receive this warning message, you can do one of the following four things:
 
--   Don’t worry, and be happy with using one core per machine.
--   Specify the number of jobs per machine via `-j`.
--   Specify the number of cores to use per machine by putting, for example, *2/* if you want two cores, in front of each hostname in the *hostnames* file.
--   Install GNU Parallel using a package manager. For example, on Ubuntu:
+- Don’t worry, and be happy with using one core per machine.
+- Specify the number of jobs per machine via `-j`.
+- Specify the number of cores to use per machine by putting, for example, *2/* if you want two cores, in front of each hostname in the *hostnames* file.
+- Install GNU Parallel using a package manager. For example, on Ubuntu:
 
 ```{bash, eval=FALSE}
 $ parallel --nonall --slf hostnames "sudo apt-get install -y parallel"
@@ -657,14 +657,14 @@ $ zcat *.json.gz |
 
 Because this is quite a long pipeline, and because we’re using it again in a moment with `parallel`, it’s worth to go over it:
 
--   Expand all compressed files using `zcat`.
--   For each call, extract the name of the borough using `jq`.
--   Convert borough names to lowercase and replace spaces with underscores (because `awk` splits on whitespace by default).
--   Count the occurrences of each borough using `sort` and `uniq`.
+- Expand all compressed files using `zcat`.
+- For each call, extract the name of the borough using `jq`.
+- Convert borough names to lowercase and replace spaces with underscores (because `awk` splits on whitespace by default).
+- Count the occurrences of each borough using `sort` and `uniq`.
 
--   Reverse the count and borough and make it comma delimited using `awk`.
--   Add a header using `header`.
--   Sort by count and print table using `csvsort` [@csvsort].
+- Reverse the count and borough and make it comma delimited using `awk`.
+- Add a header using `header`.
+- Sort by count and print table using `csvsort` [@csvsort].
 
 Imagine, for a moment, that our own machine is so slow that we simply cannot perform this pipeline locally. We can use GNU Parallel to distribute the local files among the remote machines, let them do the processing, and retrieve the results:
 
@@ -689,12 +689,12 @@ zcat 9.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
 
 This long command breaks down as follows:
 
--   Print the list of files and pipe it into `parallel`.
--   Transmit the `jq` binary to each remote machine. Lucklily, jq has no dependencies. This file will be removed from the remote machine at the end because we specified `--trc` (which implies the `--cleanup` command-line argument).
--   The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transfered to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine.
--   Specify a list of hostnames. Remember, if you want to try this out locally, you can specify `--sshlogin :` instead of `--self hostnames`.
+- Print the list of files and pipe it into `parallel`.
+- Transmit the `jq` binary to each remote machine. Lucklily, jq has no dependencies. This file will be removed from the remote machine at the end because we specified `--trc` (which implies the `--cleanup` command-line argument).
+- The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transfered to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine.
+- Specify a list of hostnames. Remember, if you want to try this out locally, you can specify `--sshlogin :` instead of `--self hostnames`.
 
--   Note the escaping in the `awk` expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. In quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as we did with `sum`.
+- Note the escaping in the `awk` expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. In quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as we did with `sum`.
 
 If we, at some point during this command, run `ls` on one of the remote machines, we could see that `parallel` indeed transfers (and cleans up) the binary `jq`, the JSON files, and CSV files:
 
@@ -757,10 +757,10 @@ $ cat *.csv | header -a borough,count |
 
 As data scientists, we work with data, and sometimes a lot of data. This means that sometimes we need to run a command multiple times or distribute data-intensive commands over multiple cores. In this chapter we have shown you how easy it is to parallelize commands. GNU Parallel is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them over multiple cores and remote machines. It offers a lot of functionality and in this chapter we’ve only been able to scratch the surface. Some features of GNU Parallel are that we haven’t covered:
 
--   Different ways of specifying input.
--   Keep a log of all the jobs.
--   Only start new jobs when the machine is under a certain load.
--   Timeout, resume, and retry jobs.
+- Different ways of specifying input.
+- Keep a log of all the jobs.
+- Only start new jobs when the machine is under a certain load.
+- Timeout, resume, and retry jobs.
 
 Once you have a basic understanding of GNU Parallel and its most important options, we recommend that you take a look at its tutorial listed in the Further Reading section.
 

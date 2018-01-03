@@ -16,8 +16,8 @@ In order to turn a one-liner into a shell script, we need to use some shell scri
 
 In this chapter, you’ll learn how to:
 
--   Convert one-liners into shell scripts.
--   Make existing Python, R, and Java code part of the command line.
+- Convert one-liners into shell scripts.
+- Make existing Python, R, and Java code part of the command line.
 
 ## Converting One-liners into Shell Scripts 
 
@@ -45,14 +45,14 @@ $ curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt |
 
 In short, as you may have guessed from the output, this one-liner returns the top ten words of the e-book version of *Adventures of Huckleberry Finn*. It accomplishes this by:
 
--   Downloading an ebook using `curl`.
--   Converting the entire text to lowercase using `tr` [@tr].
--   Extracting all the words using `grep` [@grep] and put each word on separate line.
--   Sort these words in alphabetical order using `sort` [@sort].
+- Downloading an ebook using `curl`.
+- Converting the entire text to lowercase using `tr` [@tr].
+- Extracting all the words using `grep` [@grep] and put each word on separate line.
+- Sort these words in alphabetical order using `sort` [@sort].
 
--   Remove all the duplicates and count how often each word appears in the list using `uniq` [@uniq].
--   Sort this list of unique words by their count in descending order using `sort`.
--   Keep only the top 10 lines (i.e., words) using `head`.
+- Remove all the duplicates and count how often each word appears in the list using `uniq` [@uniq].
+- Sort this list of unique words by their count in descending order using `sort`.
+- Keep only the top 10 lines (i.e., words) using `head`.
 
 ```{block2, type="rmdtip"}
 

@@ -10,8 +10,8 @@ By the end of this chapter, you’ll have everything you need in order to contin
 
 In this chapter, you’ll learn:
 
--   How to set up the Data Science Toolbox.
--   Essential concepts and tools necessary to perform data science at the command line.
+- How to set up the Data Science Toolbox.
+- Essential concepts and tools necessary to perform data science at the command line.
 
 ## Setting Up Your Data Science Toolbox 
 
@@ -121,11 +121,11 @@ Here we pass three command-line arguments to `head` [@head]. The first one is an
 
 We employ the term command-line tool a lot, but so far, we have not yet explained what we actually mean by it. We use it as an umbrella term for *anything* that can be executed from the command line. Under the hood, each command-line tool is one of the following five types:
 
--   A binary executable.
--   A shell builtin.
--   An interpreted script.
--   A shell function.
--   An alias.
+- A binary executable.
+- A shell builtin.
+- An interpreted script.
+- A shell function.
+- An alias.
 
 It’s good to know the difference between the types. The command-line tools that come pre-installed with the Data Science Toolbox mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our *own Data Science Toolbox*[^2] and become more efficient and more productive data scientists.
 

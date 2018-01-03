@@ -10,11 +10,11 @@ Data can be obtained in several ways, for example by downloading it from a serve
 
 In this chapter, you’ll learn how to:
 
--   Obtain data from servers.
--   Query databases.
--   Connect to Web APIs.
--   Decompress files.
--   Convert Microsoft Excel spreadsheets into usable data.
+- Obtain data from servers.
+- Query databases.
+- Connect to Web APIs.
+- Decompress files.
+- Convert Microsoft Excel spreadsheets into usable data.
 
 ## Copying Local Files to the Data Science Toolbox 
 

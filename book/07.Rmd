@@ -14,9 +14,9 @@ The third perspective is to create visualizations of the data. From this perspec
 
 In this chapter, you’ll learn how to:
 
--   Inspect the data and its properties.
--   Compute descriptive statistics.
--   Create data visualizations inside and outside the command line.
+- Inspect the data and its properties.
+- Compute descriptive statistics.
+- Create data visualizations inside and outside the command line.
 
 ## Inspecting Data and its Properties 
 
@@ -24,10 +24,10 @@ In this section we’ll demonstrate how to inspect your data set and its propert
 
 For simplicity sake, we’ll also assume that your data has a header. In the first subsection we are going to determine whether that is the case. Once we know we have a header, we can continue answering the following questions:
 
--   How many data points and features does the data set have?
--   What does the raw data look like?
--   What kind of features does the data set have?
--   Can some of these features be treated as categorical or as factors?
+- How many data points and features does the data set have?
+- What does the raw data look like?
+- What kind of features does the data set have?
+- Can some of these features be treated as categorical or as factors?
 
 ### Header Or Not, Here I Come 
 
@@ -201,10 +201,10 @@ If the number of unique values is low compared to the number of rows, then that 
 
 The command-line tool `csvstat` gives a lot of information. For each feature (column), it shows:
 
--   The data type in Python terminology (see Table 7-1 for a comparison between Python and SQL data types).
--   Whether it has any missing values (nulls).
--   The number of unique values.
--   Various descriptive statistics (maximum, minimum, sum, mean, standard deviation, and median) for those features for which it is appropriate.
+- The data type in Python terminology (see Table 7-1 for a comparison between Python and SQL data types).
+- Whether it has any missing values (nulls).
+- The number of unique values.
+- Various descriptive statistics (maximum, minimum, sum, mean, standard deviation, and median) for those features for which it is appropriate.
 
 We invoke `csvstat` as follows:
 
@@ -247,17 +247,17 @@ Row count: 3
 
 This gives a very verbose output. For a more concise output specify one of the statistics arguments:
 
--   `--max` (maximum)
--   `--min` (minimum)
--   `--sum` (sum)
--   `--mean` (mean)
--   `--median` (median)
--   `--stdev` (standard deviation)
+- `--max` (maximum)
+- `--min` (minimum)
+- `--sum` (sum)
+- `--mean` (mean)
+- `--median` (median)
+- `--stdev` (standard deviation)
 
--   `--nulls` (whether column contains nulls)
--   `--unique` (unique values)
--   `--freq` (frequent values)
--   `--len` (max value length)
+- `--nulls` (whether column contains nulls)
+- `--unique` (unique values)
+- `--freq` (frequent values)
+- `--len` (max value length)
 
 For example:
 
@@ -371,12 +371,12 @@ This is where `Rio` comes in. The name Rio stands for *R input/output*, because 
 
 These small one-liners are possible because `Rio` takes care of all the boilerplate. Being able to use the command line for this and capture the power of R into a one-liner is fantastic, especially if you want to keep on working on the command line. `Rio` assumes that the input data is in CSV format with a header. (By specifying the `-n` command-line argument `Rio` does not consider the first row to be the header and creates default column names.) Behind the scenes, `Rio` writes the piped data to a temporary CSV file and creates a script that:
 
--   Import required libraries.
--   Loads the CSV file as a data frame.
--   Generates a `ggplot2` object if needed (more on this in the next section).
--   Runs the specified commands.
+- Import required libraries.
+- Loads the CSV file as a data frame.
+- Generates a `ggplot2` object if needed (more on this in the next section).
+- Runs the specified commands.
 
--   Prints the result of the last command to standard output.
+- Prints the result of the last command to standard output.
 
 So now, if you wanted to do one or two things to your data set with R, you can specify it as a one-liner, and keep on working on the command line. All the knowledge that you already have about R can now be used from the command line. With `Rio`, you can even create sophisticated visualizations, as you will see later in this chapter.
 
