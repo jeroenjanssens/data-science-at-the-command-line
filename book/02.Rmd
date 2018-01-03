@@ -54,7 +54,7 @@ Terminal
     3
     ```
 
-    then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In Chapter 1, we showed you two screenshots of how the default terminal looks like in Mac OS X and Ubuntu with various commands and their output.
+    then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In Chapter 1, we showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
 
 Shell
 

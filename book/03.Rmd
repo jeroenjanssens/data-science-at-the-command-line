@@ -30,7 +30,7 @@ build
 Vagrantfile
 ```
 
-If you have a file on your local computer, and you want to apply some command-line tools to it, all you have to do is copy or move the file to that directory. Let’s assume that you have a file called *logs.csv* on your Desktop. If you are running Linux or Mac OS X, execute the following command on your operating system (and not inside the Data Science Toolbox):
+If you have a file on your local computer, and you want to apply some command-line tools to it, all you have to do is copy or move the file to that directory. Let’s assume that you have a file called *logs.csv* on your Desktop. If you are running Linux or macOS, execute the following command on your operating system (and not inside the Data Science Toolbox):
 
 ```{bash, eval=FALSE}
 $ cp ~/Desktop/logs.csv .
@@ -55,7 +55,7 @@ $ cat data/logs.csv
 
 ### Remote Version of Data Science Toolbox 
 
-If you are running Linux or Mac OS X, you can use `scp` [@scp], which stands for *secure copy*, to copy files onto the EC2 instance. You will need the same key pair file that you used to login to the EC2 instance.
+If you are running Linux or macOS, you can use `scp` [@scp], which stands for *secure copy*, to copy files onto the EC2 instance. You will need the same key pair file that you used to login to the EC2 instance.
 
 ```{bash, eval=FALSE}
 $ scp -i  mykey.pem ~/Desktop/logs.csv \
