@@ -740,7 +740,10 @@ Although we’ve only been able to experiment with one prediction API, we do bel
 
 ## Further Reading 
 
-
+* Cortez, P., A. Cerdeira, F. Almeida, T. Matos, and J. Reis. 2009. “Modeling Wine Preferences by Data Mining from Physicochemical Properties.” <em>Decision Support Systems</em> 47 (4). Elsevier:547–53.
+* Hall, Mark, Eibe Frank, Geoffrey Holmes, Bernhard Pfahringer, Peter Reutemann, and Ian H. Witten. 2009. “The WEKA Data Mining Software: An Update.” <em>SIGKDD Explorations</em> 11 (1). ACM.
+* Pearson, K. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2 (11):559–72.
+* Maaten, Laurens van der, and Geoffrey Everest Hinton. 2008. “Visualizing Data Using T-SNE.” <em>Journal of Machine Learning Research</em> 9:2579–2605.
 
 
 

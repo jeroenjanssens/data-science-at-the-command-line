@@ -1210,7 +1210,10 @@ $ csvsql --query 'SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id '\
 
 ## Further Reading 
 
-
+* Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.
+* Goyvaerts, Jan, and Steven Levithan. 2012. <em>Regular Expressions Cookbook</em>. 2nd Ed. O’Reilly Media.
+* Dougherty, Dale, and Arnold Robbins. 1997. <em>Sed &amp; Awk</em>. 2nd Ed. O’Reilly Media.
+ 
 
 
 

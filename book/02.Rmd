@@ -420,6 +420,9 @@ Specifying the `--help` option also works for the GNU command-line tools such as
 
 ## Further Reading 
 
+* Heddings, Lowell. 2006. “Keyboard Shortcuts for Bash.” <a href="http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc" class="uri">http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc</a>.
+* Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.
+
 
 
 

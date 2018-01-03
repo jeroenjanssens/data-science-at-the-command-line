@@ -6,6 +6,8 @@ site: bookdown::bookdown_site
 documentclass: book
 bibliography: [library.bib, tools.bib]
 biblio-style: apalike
+nocite: | 
+  @Schutt2013, @Peek2002, @Heddings2006, @Molinaro2005, @HTTP, @docopt, @Rossant2013, @manpages, @Raymond2003, @Goyvaerts2012, @Dougherty1997, @Tange2011a, @Cortez2009, @commandlinefu, @Cooper2014, @Russell2013, @Warden2011
 link-citations: yes
 description: "This is the website for Data Science at the Command Line, published by O'Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data."
 ---

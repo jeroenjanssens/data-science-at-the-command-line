@@ -1,4 +1,4 @@
-.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
+.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning, .rmdcomment {
   padding: 1em 1em 1em 5em;
   margin-bottom: 2em;
   background: #f5f5f5 1em center/3em no-repeat;
@@ -8,7 +8,7 @@
   background-image: url("images/exclamation-triangle.svg");
 }
 .rmdimportant {
-  background-image: url("images/exclamation-triangle.svg");
+  background-image: url("images/comment.svg");
 }
 .rmdnote {
   background-image: url("images/info-circle.svg");
@@ -19,7 +19,9 @@
 .rmdwarning {
   background-image: url("images/comment.svg");
 }
-
+.rmdcomment {
+  background-image: url("images/comment.svg");
+}
 
 p.caption {
   color: #777;

@@ -766,6 +766,10 @@ Once you have a basic understanding of GNU Parallel and its most important optio
 
 ## Further Reading 
 
+* Tange, O. 2011. “GNU Parallel - the Command-Line Power Tool.”<em>;Login: The USENIX Magazine</em> 36 (1). Frederiksberg, Denmark:42–47. <a href="http://www.gnu.org/s/parallel" class="uri">http://www.gnu.org/s/parallel</a>.
+* Tange, Ole. 2014. “GNU Parallel.” <a href="http://www.gnu.org/software/parallel" class="uri">http://www.gnu.org/software/parallel</a>.
+* Services, Amazon Web. 2014. “AWS Command Line Interface.” <a href="http://aws.amazon.com/cli" class="uri">http://aws.amazon.com/cli</a>.
+
 
 
 

@@ -50,22 +50,30 @@ As this book is on the intersection of the command line and data science, many r
 
 ### APIs 
 
+* Russell, Matthew. 2013. <em>Mining the Social Web</em>. 2nd Ed. O’Reilly Media.
+* Warden, Pete. 2011. <em>Data Source Handbook</em>. O’Reilly Media.
 
 
 ### Shell Programming 
 
-
-
-
+* Winterbottom, David. 2014. “Commandlinefu.com.” <a href="http://www.commandlinefu.com" class="uri">http://www.commandlinefu.com</a>.
+* Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.
+* Goyvaerts, Jan, and Steven Levithan. 2012. <em>Regular Expressions Cookbook</em>. 2nd Ed. O’Reilly Media.
+* Cooper, Mendel. 2014. “Advanced Bash-Scripting Guide.” <a href="http://www.tldp.org/LDP/abs/html" class="uri">http://www.tldp.org/LDP/abs/html</a>.
+* Robbins, Arnold, and Nelson H. F. Beebe. 2005. <em>Classic Shell Scripting</em>. O’Reilly Media.
 
 
 ### Python, R, and SQL 
 
-
+* Wickham, Hadley. 2009. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.
+* McKinney, Wes. 2012. <em>Python for Data Analysis</em>. O’Reilly Media.
+* Rossant, Cyrille. 2013. <em>Learning Ipython for Interactive Computing and Data Visualization</em>. Packt Publishing.
 
 
 ### Interpreting Data 
 
+* Shron, Max. 2014. <em>Thinking with Data</em>. O’Reilly Media.
+* Patil, DJ. 2012. <em>Data Jujitsu</em>. O’Reilly Media.
 
 
 ## Getting in Touch 

@@ -388,6 +388,7 @@ For more popular APIs, there are specialized command-line tools available. These
 
 ## Further Reading 
 
-
+* Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.
+* Wikipedia. 2014. “List of Http Status Codes.” <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="uri">http://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a>.
 
 

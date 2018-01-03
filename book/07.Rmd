@@ -793,7 +793,7 @@ Both `Rio` with `ggplot2` and `feedgnuplot` with Gnuplot have their advantages. 
 
 ## Further Reading 
 
-
-
-
-
+* Wickham, Hadley. 2009. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.
+* Janert, Philipp K. 2009. <em>Gnuplot in Action</em>. Manning Publications.
+* Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Pearson.
+ 
