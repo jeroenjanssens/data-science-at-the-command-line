@@ -4,7 +4,7 @@ function chapref() {
 
 function allchaprefs() {
     cat $1 |
-    sed -re 's/\[(Chapter [0-9]{1,2})\]\(.*\)/\1/g' |
+    sed -re 's/\[(Chapter [0-9]{1,2})\]\([a-z\-]+\)/\1/g' |
     chapref "1" "chapter-introduction" |
     chapref "2" "chapter-getting-started" |
     chapref "3" "chapter-obtaining-data" |
