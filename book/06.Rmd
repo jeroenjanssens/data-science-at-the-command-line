@@ -1,4 +1,4 @@
-# Managing Your Data Workflow 
+# Managing Your Data Workflow {#chapter-6-managing-your-data-workflow}
 
 We hope that by now, you have come to appreciate that the command line is a very convenient environment for exploratory data analysis. You may have noticed that, as a consequence of working with the command line, we:
 
@@ -141,7 +141,7 @@ $ cat data/top-5
 1952
 ```
 
-If you want to be able to reproduce this, that is, once again at a later time, the easiest thing you can do is put this command in a script as we’ve seen in Chapter 4. If you execute this script again, the HTML will be downloaded again as well. There are three common reasons why you might want to be able to control whether certain steps are run. First, because this step may take a very long time. Second, because you want to continue with the same data. Third, the data may come from an API which has certain rate limits. It would be a good idea to let one step save the data to a file and then let subsequent steps operate on that file so that you don’t have to make any redundant computations or API calls. Now, the first reason is not really a problem in our example because the HTML can be downloaded fast enough. However, in some cases the data may come from other sources and may comprise of gigabytes of data.
+If you want to be able to reproduce this, that is, once again at a later time, the easiest thing you can do is put this command in a script as we’ve seen in [Chapter 4](#chapter-4-creating-reusable-command-line-tools). If you execute this script again, the HTML will be downloaded again as well. There are three common reasons why you might want to be able to control whether certain steps are run. First, because this step may take a very long time. Second, because you want to continue with the same data. Third, the data may come from an API which has certain rate limits. It would be a good idea to let one step save the data to a file and then let subsequent steps operate on that file so that you don’t have to make any redundant computations or API calls. Now, the first reason is not really a problem in our example because the HTML can be downloaded fast enough. However, in some cases the data may come from other sources and may comprise of gigabytes of data.
 
 ## Every Workflow Starts with a Single Step 
 

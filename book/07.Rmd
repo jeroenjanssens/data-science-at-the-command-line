@@ -1,4 +1,4 @@
-# Exploring Data 
+# Exploring Data {#chapter-7-exploring-data}
 
 Now that we have obtained and scrubbed our data, we can continue with the third step of the OSEMN model, which is to explore it. After all that hard work, (unless you already had clean data lying around!), it is time for some fun.
 
@@ -20,7 +20,7 @@ In this chapter, you’ll learn how to:
 
 ## Inspecting Data and its Properties 
 
-In this section we’ll demonstrate how to inspect your data set and its properties. Because the upcoming visualization and modeling techniques expect the data to be in tabular format, we’ll assume that the data is in CSV format. You can use the techniques described in Chapter 5 to convert your data to CSV if necessary.
+In this section we’ll demonstrate how to inspect your data set and its properties. Because the upcoming visualization and modeling techniques expect the data to be in tabular format, we’ll assume that the data is in CSV format. You can use the techniques described in [Chapter 5](#chapter-5-scrubbing-data) to convert your data to CSV if necessary.
 
 For simplicity sake, we’ll also assume that your data has a header. In the first subsection we are going to determine whether that is the case. Once we know we have a header, we can continue answering the following questions:
 
@@ -36,7 +36,7 @@ You can check whether your file has a header by printing the first few lines:
     $ #? [echo]
     $ head file.csv | csvlook
 
-It is then up to you to decide whether the first line is indeed a header or already the first data point. When the data set contains no header or when its header contains newlines, you’re best off going back to Chapter 5 and correct that.
+It is then up to you to decide whether the first line is indeed a header or already the first data point. When the data set contains no header or when its header contains newlines, you’re best off going back to [Chapter 5](#chapter-5-scrubbing-data) and correct that.
 
 ### Inspect All The Data 
 
@@ -111,7 +111,7 @@ $ < data/datatypes.csv csvlook
 |-----+--------+-------+----------+------------------+------------+----------|
 ```
 
-We’ve already used `csvsql` in Chapter 5 to execute SQL queries directly on CSV data. When no command-line arguments are passed, it generates the necessary SQL statement that would be needed if we were to insert this data into an actual database. We can use the output also for ourselves to inspect what the inferred column types are:
+We’ve already used `csvsql` in [Chapter 5](#chapter-5-scrubbing-data) to execute SQL queries directly on CSV data. When no command-line arguments are passed, it generates the necessary SQL statement that would be needed if we were to insert this data into an actual database. We can use the output also for ourselves to inspect what the inferred column types are:
 
 ```{bash, eval=FALSE}
 csvsql data/datatypes.csv

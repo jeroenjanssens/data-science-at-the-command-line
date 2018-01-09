@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Science at the Command Line</title>
+  <meta name="description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Science at the Command Line" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Science at the Command Line" />
+  
+  <meta name="twitter:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+<meta name="author" content="Jeroen Janssens">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="chapter-7-exploring-data.html">
+<link rel="next" href="chapter-9-modeling-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#further-reading-1"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#overview-2"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-a-database"><i class="fa fa-check"></i><b>3.5</b> Querying a Database</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#further-reading-2"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#overview-3"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#further-reading-3"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#overview-4"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#further-reading-4"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#overview-5"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#further-reading-5"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#overview-6"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#further-reading-6"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a><ul>
+<li class="chapter" data-level="8.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#overview-7"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#discussion-1"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#further-reading-7"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#overview-8"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#further-reading-8"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a><ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#interpreting-data-1"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-8-parallel-pipelines" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Parallel Pipelines</h1>
+<p>In the previous chapters, we have been dealing with commands and pipelines that take care of an entire task at once. In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times. For, example, you may need to:</p>
+<ul>
+<li>Scrape hundreds of web pages.</li>
+<li>Make dozens of API calls and transform their output.</li>
+<li>Train a classifier for a range of parameter values.</li>
+<li>Generate scatter plots for every pair of features in your dataset.</li>
+</ul>
+<p>In any of the above examples, there is a certain form of repetition involved. With your favorite scripting or programming language, you take care of this with a for loop or a while loop. On the command line, the first thing you might be inclined to do is to press <code>&lt;Up&gt;</code> (which brings back the previous command), modify it if necessary, and press <code>&lt;Enter&gt;</code> (which runs the command again). This is fine for two or three times, but imagine doing this for, say, dozens of files. Such an approach quickly becomes cumbersome and time-inefficient. The good news is that we can write such loops on the command line as well. This chapter is all about repetition.</p>
+<p>Sometimes, repeating a fast command on after the other (in serial) is sufficient. When you have multiple cores (and perhaps even multiple machines) it would be nice if you could make use of those, especially when you’re faced with a data-intensive task. When using multiple cores or machines, the total running time of may be reduced significantly. In this chapter we will introduce a very powerful tool called GNU Parallel that can take care of exactly this. GNU Parallel allows us to apply a command or pipeline with a range of arguments such as numbers, lines, and files. Plus, it allows us to run our commands in parallel.</p>
+<div id="overview-7" class="section level2">
+<h2><span class="header-section-number">8.1</span> Overview</h2>
+<p>This intermezzo chapter discusses several approaches to speed up tasks that require commands and pipelines to be run many times. The main goal of this chapter is to demonstrate to you the flexibility and power of a tool called GNU Parallel. Because this tool can be combined with any other tool discussed in this book, it will positively change the way you use the command line for data science. In this chapter, you’ll learn about:</p>
+<ul>
+<li>Running commands in serial to a range of numbers, lines, and files.</li>
+<li>Breaking a large task into several smaller tasks.</li>
+<li>Running pipelines in parallel using GNU Parallel.</li>
+<li>Distributing pipelines on multiple machines.</li>
+</ul>
+</div>
+<div id="serial-processing" class="section level2">
+<h2><span class="header-section-number">8.2</span> Serial Processing</h2>
+<p>Before we dive into parallelization, we will look at looping in a serial fashion. It’s worthwhile to know how to do this because this functionality is always available, the syntax closely resembles looping in other programming languages, and it will really make you appreciate the tool GNU Parallel.</p>
+<p>From the examples provided in the introduction of this chapter, we can distill three types of items to loop over: (1) numbers, (2) lines, and (3) files. These three types of items will be discussed in the next three subsections, respectively.</p>
+<div id="looping-over-numbers" class="section level3">
+<h3><span class="header-section-number">8.2.1</span> Looping Over Numbers</h3>
+<p>Imagine that we need to compute the square of every even integer between 0 and 100. There’s a tool called <code>bc</code>, which is basically a calculator on the command line where you can pipe an equation to. The command to compute the square of 4 looks as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&quot;4^2&quot;</span> <span class="kw">|</span> <span class="fu">bc</span>
+<span class="ex">16</span></code></pre></div>
+<p>For a one-off calculation, this is perfect. However, as mentioned in the introduction, we would be creazy to press <code>&lt;Up&gt;</code>, change the number, and press <code>&lt;Enter&gt;</code> 51 times! In this case it is better to let Bash do the hard work for us by using a for loop:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="ex">i</span> in <span class="dt">{0..100..2}</span>  
+<span class="op">&gt;</span> <span class="kw">do</span>
+<span class="op">&gt;</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$i</span><span class="st">^2&quot;</span> <span class="kw">|</span> <span class="fu">bc</span>      
+<span class="op">&gt;</span> <span class="kw">done</span> <span class="kw">|</span> <span class="fu">tail</span>           
+<span class="ex">6724</span>
+<span class="ex">7056</span>
+<span class="ex">7396</span>
+<span class="ex">7744</span>
+<span class="ex">8100</span>
+<span class="ex">8464</span>
+<span class="ex">8836</span>
+<span class="ex">9216</span>
+<span class="ex">9604</span>
+<span class="ex">10000</span></code></pre></div>
+<p>There are a number of things going on here:</p>
+<ul>
+<li>Bash has a feature called brace expansion, which transforms <em>{0..100..2}</em> into a list separated by spaces: <em>0 2 4 … 98 100</em>.</li>
+<li>The variable <em>i</em> is assigned the value <em>1</em> in the first iteration, <em>2</em> in the second iteration, and so forth. The value of this variable can be employed in commands by prefixing it with a dollar sign <em>$</em>. The shell will replace <em>$i</em> with its value before <code>echo</code> is being executed. Note that there can be more than one command between <code>do</code> and <code>done</code>.</li>
+<li>We pipe the output of the for loop to <code>tail</code> so that we see the last ten values, only.</li>
+</ul>
+<p>Although the syntax may appear a bit odd compared to your favorite programming language, it is worth remembering this because it is always available in the bash shell. We will shortly introduce a better and more flexible way of repeating commands.</p>
+</div>
+<div id="looping-over-lines" class="section level3">
+<h3><span class="header-section-number">8.2.2</span> Looping Over Lines</h3>
+<p>The second type of items we can loop over are lines. These lines can come from either a file or from standard input. This is a very generic approach because the lines can contain anything, including: numbers, dates, and email adresses.</p>
+<p>Imagine that we want to send an email to our customers. Let’s generate some fake users using the <a href="http://randomuser.me/" class="uri">http://randomuser.me/</a> API:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">curl</span> -s <span class="st">&quot;http://api.randomuser.me/?results=5&quot;</span> <span class="op">&gt;</span> data/users.json
+$ <span class="op">&lt;</span> <span class="ex">data/users.json</span> jq -r <span class="st">&#39;.results[].user.email&#39;</span> <span class="op">&gt;</span> data/emails.txt
+$ <span class="fu">cat</span> data/emails.txt
+<span class="ex">kaylee.anderson64@example.com</span>
+<span class="ex">arthur.baker92@example.com</span>
+<span class="ex">chloe.graham66@example.com</span>
+<span class="ex">wyatt.nelson80@example.com</span>
+<span class="ex">peter.coleman75@example.com</span></code></pre></div>
+<p>We can loop over the lines from <em>emails.txt</em> with a while-loop:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">while</span> <span class="bu">read</span> <span class="va">line</span>                                       
+<span class="op">&gt;</span> <span class="kw">do</span>
+<span class="op">&gt;</span> <span class="bu">echo</span> <span class="st">&quot;Sending invitation to </span><span class="va">${line}</span><span class="st">.&quot;</span>                 
+<span class="op">&gt;</span> <span class="kw">done</span> <span class="op">&lt;</span> <span class="ex">data/emails.txt</span>                                
+<span class="ex">Sending</span> invitation to kaylee.anderson64@example.com.
+<span class="ex">Sending</span> invitation to arthur.baker92@example.com.
+<span class="ex">Sending</span> invitation to chloe.graham66@example.com.
+<span class="ex">Sending</span> invitation to wyatt.nelson80@example.com.
+<span class="ex">Sending</span> invitation to peter.coleman75@example.com.</code></pre></div>
+<ul>
+<li>In this case we need to use a while loop because Bash does not know beforehand how many lines the input consists of.</li>
+<li>Although the curly braces around the <em>line</em> variable are not necessary in this case (since variable names cannot contain periods), it’s still good practice.</li>
+<li>This redirection can also be placed before <code>while</code>.</li>
+</ul>
+<p>You can also provide input to the while loop interactively by specifying the special file standard input <em>/dev/stdin</em>. Press <code>&lt;Ctrl-D&gt;</code> when you are done.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">while</span> <span class="bu">read</span> <span class="va">i</span>; <span class="kw">do</span> <span class="bu">echo</span> <span class="st">&quot;You typed: </span><span class="va">$i</span><span class="st">.&quot;</span><span class="kw">;</span> <span class="kw">done</span> <span class="op">&lt;</span> <span class="ex">/dev/stdin</span>
+<span class="ex">one</span>
+<span class="ex">You</span> typed: one.
+<span class="ex">two</span>
+<span class="ex">You</span> typed: two.
+<span class="ex">three</span>
+<span class="ex">You</span> typed: three.</code></pre></div>
+<p>This method, however, has the disadvantage that, once you press <code>&lt;Enter&gt;</code>, the command(s) between <code>do</code> and <code>done</code> are run immediately for that line of input.</p>
+</div>
+<div id="looping-over-files" class="section level3">
+<h3><span class="header-section-number">8.2.3</span> Looping Over Files</h3>
+<p>In this section we discuss the third type of item that we often need to loop over: files.</p>
+<p>To handle special characters, use globbing (i.e., pathname expansion) instead of <code>ls</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">for</span> <span class="ex">filename</span> in *.csv
+<span class="op">&gt;</span> <span class="kw">do</span>
+<span class="op">&gt;</span> <span class="bu">echo</span> <span class="st">&quot;Processing </span><span class="va">${filename}</span><span class="st">.&quot;</span>
+<span class="op">&gt;</span> <span class="kw">done</span>
+<span class="ex">Processing</span> countries.csv.</code></pre></div>
+<p>Just as with brace expansion with numbers, the <em>*.csv</em> is first expanded into a list before it is being processed by the for loop.</p>
+<p>A more elaborate alternative to finding files is <code>find</code> <span class="citation">(Youngman <a href="references.html#ref-find">2008</a>)</span>, which:</p>
+<ul>
+<li>Allows for elaborate searching on properties such as size, access time, and permissions.</li>
+<li>Handles dashes.</li>
+<li>Handles special characters such as spaces and newlines.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">find</span> data -name <span class="st">&#39;*.csv&#39;</span> -exec echo <span class="st">&quot;Processing {}&quot;</span> <span class="dt">\;</span>
+<span class="ex">Processing</span> data/countries.csv
+<span class="ex">Processing</span> data/movies.csv
+<span class="ex">Processing</span> data/top250.csv</code></pre></div>
+<p>Here’s the same but then using <code>parallel</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">find</span> data -name <span class="st">&#39;*.csv&#39;</span> -print0 <span class="kw">|</span> <span class="ex">parallel</span> -0 echo <span class="st">&quot;Processing {}&quot;</span>
+<span class="ex">Processing</span> data/countries.csv
+<span class="ex">Processing</span> data/movies.csv
+<span class="ex">Processing</span> data/top250.csv</code></pre></div>
+<p>The <code>-print0</code> option allows file names that contain newlines or other types of white space to be correctly interpreted by programs that process the find output. If you are absolutely certain that the filenames contain no special characters such as spaces and newlines, then you can omit <code>-print0</code> and <code>-0</code> options.</p>
+
+<div class="rmdtip">
+If the list to process becomes too complex, you can always store the result into a temporary file and then use the method to loop over lines from a file.
+</div>
+
+</div>
+</div>
+<div id="parallel-processing" class="section level2">
+<h2><span class="header-section-number">8.3</span> Parallel Processing</h2>
+<p>Assume that we have a very long running command, such as the one shown in Example <a href="chapter-8-parallel-pipelines.html#exm:slow-sh">8.1</a>.</p>
+
+<div class="example">
+<span id="exm:slow-sh" class="example"><strong>Example 8.1  (~/book/ch08/slow.sh)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+<span class="bu">echo</span> <span class="st">&quot;Starting job </span><span class="va">$1</span><span class="st">&quot;</span>
+<span class="va">duration=$((</span>1+RANDOM%5<span class="va">))</span>                
+<span class="fu">sleep</span> <span class="va">$duration</span>
+<span class="bu">echo</span> <span class="st">&quot;Job </span><span class="va">$1</span><span class="st"> took </span><span class="va">${duration}</span><span class="st"> seconds&quot;</span></code></pre></div>
+<ul>
+<li><em>$RANDOM</em> is an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that number by 5 and adding 1 ensures that the number is between 1 and 5.</li>
+</ul>
+<p>This process does not take up all the resources we have available. And it so happens that we need to run this command a lot of times. For example, we need to download a whole sequence of files.</p>
+<p>A naive way to parallelize is to run the commands in the background:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~/book/ch08
+$ <span class="kw">for</span> <span class="ex">i</span> in <span class="dt">{1..4}</span><span class="kw">;</span> <span class="kw">do</span>
+<span class="op">&gt;</span> <span class="kw">(</span><span class="ex">slow.sh</span> <span class="va">$i</span><span class="kw">;</span> <span class="bu">echo</span> Processed <span class="va">$i</span><span class="kw">)</span> <span class="kw">&amp;</span>  
+<span class="op">&gt;</span> <span class="kw">done</span>
+[<span class="ex">1</span>] 3334
+[<span class="ex">2</span>] 3335
+[<span class="ex">3</span>] 3336
+[<span class="ex">4</span>] 3338
+$ <span class="ex">Starting</span> job 2
+<span class="ex">Starting</span> job 1
+<span class="ex">Starting</span> job 3
+<span class="ex">Starting</span> job 4
+<span class="ex">Job</span> 4 took 1 seconds
+<span class="ex">Processed</span> 4
+<span class="ex">Job</span> 3 took 4 seconds
+<span class="ex">Job</span> 2 took 4 seconds
+<span class="ex">Processed</span> 3
+<span class="ex">Processed</span> 2
+<span class="ex">Job</span> 1 took 4 seconds
+<span class="ex">Processed</span> 1</code></pre></div>
+<ul>
+<li>Parentheses create a subshell. The ampersand ensures that it will be executed in the background.</li>
+</ul>
+<p>The problem with subshells is that they are executed all at once. There is no mechanism to control the maximum number of processes. You are not advised to use this.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">while</span> <span class="bu">read</span> <span class="va">i</span>; <span class="kw">do</span>
+<span class="op">&gt;</span> <span class="kw">(</span><span class="ex">slow.sh</span> <span class="st">&quot;</span><span class="va">$i</span><span class="st">&quot;</span><span class="kw">;</span> <span class="kw">)</span> <span class="kw">&amp;</span>
+<span class="op">&gt;</span> <span class="kw">done</span> <span class="op">&lt;</span> <span class="ex">data/movies.txt</span>
+[<span class="ex">1</span>] 3404
+[<span class="ex">2</span>] 3405
+[<span class="ex">3</span>] 3406
+<span class="ex">Starting</span> job Star Wars
+<span class="ex">Starting</span> job Matrix
+<span class="ex">Starting</span> job Home Alone
+[<span class="ex">4</span>] 3407
+[<span class="ex">5</span>] 3410
+$ <span class="ex">Starting</span> job Back to the Future
+<span class="ex">Starting</span> job Indiana Jones
+<span class="ex">Job</span> Home Alone took 2 seconds
+<span class="ex">Job</span> Matrix took 2 seconds
+<span class="ex">Job</span> Star Wars took 2 seconds
+<span class="ex">Job</span> Back to the Future took 3 seconds
+<span class="ex">Job</span> Indiana Jones took 4 seconds</code></pre></div>
+
+<div class="rmdnote">
+Not everything can be parallelized: API calls may be limited to a certain number, or some commands can only have one instance.
+</div>
+
+
+<div class="rmdimportant">
+Quoting is important. If we did not quote <em>$i</em>, then only the first word of each movie would have been passed to the script <em>slow.sh</em>.
+</div>
+
+<p>There are two problems with this naive approach. First, there’s no way to control how many processes you are running concurrently. Second, logging: which output belongs to which input.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/movies</span> parallel -j3 slow.sh <span class="st">&quot;{}&quot;</span>
+<span class="ex">Starting</span> job Star Wars
+<span class="ex">Job</span> Star Wars took 3 seconds
+<span class="ex">Starting</span> job Home Alone
+<span class="ex">Job</span> Home Alone took 3 seconds
+<span class="ex">Starting</span> job Matrix
+<span class="ex">Job</span> Matrix took 4 seconds
+<span class="ex">Starting</span> job Indiana Jones
+<span class="ex">Job</span> Indiana Jones took 1 seconds
+<span class="ex">Starting</span> job Back to the Future
+<span class="ex">Job</span> Back to the Future took 5 seconds</code></pre></div>
+<div id="introducing-gnu-parallel" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Introducing GNU Parallel</h3>
+<p>GNU Parallel is a command-line tool written by Ole Tange. This tool allows us to parallelize commands and pipelines. The beauty of this tool is that existing tools can be used as they are; they do not need to be modified.</p>
+
+<div class="rmdcaution">
+You may have noticed that we keep writing GNU Parallel. That’s because there are two tools with the name “parallel”. If you make use of the Data Science Toolbox then you already have the correct one installed. Otherwise, please double check that you have installed the correct tool installed by running <code>parallel --version</code>.
+</div>
+
+<p>Before we go into the details of GNU Parallel, here’s a little teaser to show you how easy it is to parallelize the for loop stated above:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> <span class="st">&quot;echo {}^2 | bc&quot;</span>
+<span class="ex">1</span>
+<span class="ex">4</span>
+<span class="ex">9</span>
+<span class="ex">16</span>
+<span class="ex">25</span></code></pre></div>
+<p>This is <code>parallel</code> in its simplest form: without any arguments. As you can see it basically acts as a for loop. (We’ll explain later what is going on exactly.) With no less than 110 command-line arguments (!), GNU Parallel offers a lot of additional functionality. Don’t worry, by the end of this chapter, you’ll have a solid understanding of the most important ones.</p>
+<p>Install GNU Parallel by running the following commands:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">wget</span> http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
+$ <span class="fu">tar</span> -xvjf parallel-latest.tar.bz2 <span class="op">&gt;</span> extracted-files
+$ <span class="bu">cd</span> <span class="va">$(</span><span class="fu">head</span> -n 1 extracted-files<span class="va">)</span>
+$ <span class="ex">./configure</span> <span class="kw">&amp;&amp;</span> <span class="fu">make</span> <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> make install</code></pre></div>
+<p>You can verify that you have correctly installed GNU Parallel:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> --version <span class="kw">|</span> <span class="fu">head</span> -n 1
+<span class="ex">GNU</span> parallel 20140622</code></pre></div>
+<p>You can safely delete the created files and directories.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ..
+$ <span class="fu">rm</span> -r <span class="va">$(</span><span class="fu">head</span> -n 1 extracted-files<span class="va">)</span>
+$ <span class="fu">rm</span> parallel-latest.tar.bz2 extracted-files</code></pre></div>
+
+<div class="rmdtip">
+If you use <code>parallel</code> as often as us then you may want to create an alias (for example <code>p</code>) by adding <em>alias p=parallel</em> to your <em>.bashrc</em>. (In this chapter we’ll just use <code>parallel</code> for clarity.)
+</div>
+
+</div>
+<div id="specifying-input" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Specifying Input</h3>
+<p>The most important argument to GNU Parallel, is the command that you would like to run for every input. The question is: where should the input item be inserted in the command line? If you do not specify anything, then the input item will be appended to the command. While this is usually what you want, we advise you to be explicit about where the input item should be inserted in the command using one or more placeholders.</p>
+
+<div class="rmdnote">
+There are many ways to provide input to GNU Parallel. We prefer piping the input (as we do throughout this chapter) because that is generally applicable and allows us to construct a pipeline from left to right. Please consult the man page of parallel to read about other ways to provide input.
+</div>
+
+<p>In most cases, you probably want to use the entire input item as it is. For this, you only need one placeholder. You specify the placeholder, in other words, where to put the input item, with two curly braces:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> echo <span class="dt">{}</span></code></pre></div>
+<p>When the input item is a file, there are a couple of special placeholders you can use to modify the file name. For example, with <em>{./}</em>, only the base name of the file name will be used.</p>
+<p>If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders. For example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">input.csv</span> <span class="kw">|</span> <span class="ex">parallel</span> -C, <span class="st">&quot;mv {1} {2}&quot;</span></code></pre></div>
+<p>Here, you can apply the same placeholder modifiers. It is also possible to reuse the same input item. If the input to parallel is a CSV file with a header, then you can use the column names as placeholders:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">input.csv</span> <span class="kw">|</span> <span class="ex">parallel</span> -C, --header : <span class="st">&quot;invite {name} {email}&quot;</span></code></pre></div>
+<p>Sometimes you just want to run the same command without any changing inputs. This is also possible in parallel. We just have to specify the <code>-N0</code> parameter and give as input as many lines as you want to execute:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> -N0 <span class="st">&quot;echo The command line rules&quot;</span>
+<span class="ex">The</span> command line rules
+<span class="ex">The</span> command line rules
+<span class="ex">The</span> command line rules
+<span class="ex">The</span> command line rules</code></pre></div>
+
+<div class="rmdtip">
+If you ever wonder whether your GNU Parallel command is set up correctly, you can add the <code>--dryrun</code> option. Instead of actually executing the command, GNU Parallel will print out all the commands exactly as if they would have been executed.
+</div>
+
+</div>
+<div id="controlling-the-number-of-concurrent-jobs" class="section level3">
+<h3><span class="header-section-number">8.3.3</span> Controlling the Number of Concurrent Jobs</h3>
+<p>By default, parallel runs one job per CPU core. You can control the number of jobs that will be run in parallel with the <code>-j</code> command-line argument, which is short for <em>jobs</em>. Simply specifying a number means that many jobs will be run in parallel. If you put a plus sign in front of the number then parallel will run <em>N</em> jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run <em>N-M</em> jobs. Where <em>N</em> is the number of CPU cores. You can also specify a percentage to the <code>-j</code> parameter. So, the default is 100% of the number of CPU cores. The optimal number of jobs to run in parallel depends on the actual commands you are running.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> -j0 <span class="st">&quot;echo Hi {}&quot;</span>
+<span class="ex">Hi</span> 1
+<span class="ex">Hi</span> 2
+<span class="ex">Hi</span> 3
+<span class="ex">Hi</span> 4
+<span class="ex">Hi</span> 5</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> -j200% <span class="st">&quot;echo Hi {}&quot;</span>
+<span class="ex">Hi</span> 1
+<span class="ex">Hi</span> 2
+<span class="ex">Hi</span> 3
+<span class="ex">Hi</span> 4
+<span class="ex">Hi</span> 5</code></pre></div>
+<p>If you specify <code>-j1</code>, then the commands will be run in serial. Even though this doesn’t do the name of the tool of justice, it still has its uses. For example, when you need to access an API which only allows one connection at a time. If you specify <code>-j0</code>, then parallel will run as many jobs in parallel as possible. This can be compared to our loop with subshells. This is not advised.</p>
+</div>
+<div id="logging-and-output" class="section level3">
+<h3><span class="header-section-number">8.3.4</span> Logging and Output</h3>
+<p>To save the output of each command, you might be tempted to the following:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> <span class="st">&quot;echo </span><span class="dt">\&quot;</span><span class="st">Hi {}</span><span class="dt">\&quot;</span><span class="st"> &gt; data/ch08/hi-{}.txt&quot;</span></code></pre></div>
+<p>This will save the output into individual files. Or, if you want to save everything into one big file you could do the following:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> <span class="st">&quot;echo Hi {}&quot;</span> <span class="op">&gt;&gt;</span> data/ch08/one-big-file.txt</code></pre></div>
+<p>However, GNU Parallel offers the <code>--results</code> option, which stores the output of each job into a separate file, where the filename is based on the input values:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> --results data/ch08/outdir <span class="st">&quot;echo Hi {}&quot;</span>
+<span class="ex">Hi</span> 1
+<span class="ex">Hi</span> 2
+<span class="ex">Hi</span> 3
+<span class="ex">Hi</span> 4
+<span class="ex">Hi</span> 5
+$ <span class="fu">find</span> data/ch08/outdir
+<span class="ex">data/ch08/outdir</span>
+<span class="ex">data/ch08/outdir/1</span>
+<span class="ex">data/ch08/outdir/1/1</span>
+<span class="ex">data/ch08/outdir/1/1/stderr</span>
+<span class="ex">data/ch08/outdir/1/1/stdout</span>
+<span class="ex">data/ch08/outdir/1/3</span>
+<span class="ex">data/ch08/outdir/1/3/stderr</span>
+<span class="ex">data/ch08/outdir/1/3/stdout</span>
+<span class="ex">data/ch08/outdir/1/5</span>
+<span class="ex">data/ch08/outdir/1/5/stderr</span>
+<span class="ex">data/ch08/outdir/1/5/stdout</span>
+<span class="ex">data/ch08/outdir/1/2</span>
+<span class="ex">data/ch08/outdir/1/2/stderr</span>
+<span class="ex">data/ch08/outdir/1/2/stdout</span>
+<span class="ex">data/ch08/outdir/1/4</span>
+<span class="ex">data/ch08/outdir/1/4/stderr</span>
+<span class="ex">data/ch08/outdir/1/4/stdout</span></code></pre></div>
+<p>When you’re running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input. The output of jobs is therefore also mixed up. To keep the same order, simply specify the <code>--keep-order</code> option or <code>-k</code> option.</p>
+<p>Sometimes it’s useful to record which input generated which output. GNU Parallel allows you to <em>tag</em> the output with the <code>--tag</code> option:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">parallel</span> --tag <span class="st">&quot;echo Hi {}&quot;</span>
+<span class="ex">1</span>       Hi 1
+<span class="ex">2</span>       Hi 2
+<span class="ex">3</span>       Hi 3
+<span class="ex">4</span>       Hi 4
+<span class="ex">5</span>       Hi 5</code></pre></div>
+</div>
+<div id="creating-parallel-tools" class="section level3">
+<h3><span class="header-section-number">8.3.5</span> Creating Parallel Tools</h3>
+<p>The <code>bc</code> tool, which we used in the beginning of the chapter, is not parallel by itself. However, we can parallelize it using <code>parallel</code>. The Data Science toolbox contains a tool called <code>pbc</code> <span class="citation">(Janssens <a href="references.html#ref-pbc">2014</a><a href="references.html#ref-pbc">d</a>)</span>. Its code is shown in Example <a href="chapter-8-parallel-pipelines.html#exm:script-pbc">8.2</a>.</p>
+
+<div class="example">
+<span id="exm:script-pbc" class="example"><strong>Example 8.2  (Parallel bc)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="ex">parallel</span> -C, -k -j100% <span class="st">&quot;echo &#39;</span><span class="va">$1</span><span class="st">&#39; | bc -l&quot;</span></code></pre></div>
+<p>This tool allows us to simplify the code used in the beginning of the chapter too:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 100 <span class="kw">|</span> <span class="ex">pbc</span> <span class="st">&#39;{1}^2&#39;</span> <span class="kw">|</span> <span class="fu">tail</span>
+<span class="ex">8281</span>
+<span class="ex">8464</span>
+<span class="ex">8649</span>
+<span class="ex">8836</span>
+<span class="ex">9025</span>
+<span class="ex">9216</span>
+<span class="ex">9409</span>
+<span class="ex">9604</span>
+<span class="ex">9801</span>
+<span class="ex">10000</span></code></pre></div>
+</div>
+</div>
+<div id="distributed-processing" class="section level2">
+<h2><span class="header-section-number">8.4</span> Distributed Processing</h2>
+<p>Sometimes you need more power than your local machine, even with all its cores, can offer. Luckily, GNU Parallel can also leverage the power of remote machines, which really allows us to speed up our pipeline.</p>
+<p>What’s great is that GNU Parallel does not have to be installed on the remote machine. All that’s required is that you can connect to the remote machine via SSH, which is also what GNU Parallel uses to distribute our pipeline. (Having GNU Parallel installed is helpful because it can then determine how many cores to employ on each remote machine; more on this later.)</p>
+<p>First, we’re going to obtain a list of running AWS EC2 instances. Don’t worry if you don’t have any remote machines, you can replace any occurrence of <code>--slf hostnames</code>, which tells GNU Parallel which remote machines to use, with <code>--sshlogin :</code>. This way, you can still follow along with the examples in this section.</p>
+<p>Once we know which remote machines to take over, we’re going to consider three flavors of distributed processing:</p>
+<ul>
+<li>Simply running ordinary commands on remote machines.</li>
+<li><p>Distributing local data directly among remote machines.</p>
+<ul>
+<li>Sending files to remote machines, process them, and retrieve the results.</li>
+</ul></li>
+</ul>
+<div id="get-list-of-running-aws-ec2-instances" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Get List of Running AWS EC2 Instances</h3>
+<p>In this section we’re creating a file named <em>hostnames</em> that will contain one hostname of a remote machine per line. We’re using Amazon Web Services as an example. If you’re using a different cloud computing service, or have your own servers, please make sure that you create a <em>hostnames</em> file yourself.</p>
+<p>We can obtain a list of running AWS EC2 instances from the commanding using <code>aws</code>, the command-line interface to the AWS API <span class="citation">(Services <a href="references.html#ref-aws">2014</a>)</span>. If you’re not using the Data Science Toolbox, install <code>awscli</code> using <code>pip</code> <span class="citation">(PyPA <a href="references.html#ref-pip">2014</a>)</span> as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">pip</span> install awscli</code></pre></div>
+<p>With <code>aws</code>, you can virtually do everything you can do with the online AWS Management Console. We use this command to obtain a list of running EC2 instances from AWS, but it can do a lot more.</p>
+<p>We assume that you know how to launch instances, either through the online Management Console or through the <code>aws</code> command-line tool.</p>
+<p>The command <code>aws ec2 describe-instances</code> returns a lot of information about all your EC2 instances in JSON format (see <a href="http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html" class="uri">http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html</a>). We extract the relevant fields using <code>jq</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">aws</span> ec2 describe-instances <span class="kw">|</span> <span class="ex">jq</span> <span class="st">&#39;.Reservations[].Instances[] | &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;{public_dns: .PublicDnsName, state: .State.Name}&#39;</span>
+<span class="kw">{</span>
+  <span class="st">&quot;state&quot;</span>: <span class="st">&quot;running&quot;</span>,
+  <span class="st">&quot;public_dns&quot;</span>: <span class="st">&quot;ec2-54-88-122-140.compute-1.amazonaws.com&quot;</span>
+<span class="kw">}</span>
+<span class="kw">{</span>
+  <span class="st">&quot;state&quot;</span>: <span class="st">&quot;stopped&quot;</span>,
+  <span class="st">&quot;public_dns&quot;</span>: <span class="ex">null</span>
+<span class="kw">}</span></code></pre></div>
+<p>The possible states of an EC2 instance are: <em>pending</em>, <em>running</em>, <em>shutting-down</em>, <em>terminated</em>, <em>stopping</em>, and <em>stopped</em>. Since we can only distribute our pipeline to running instances, we filter out the non-running instances:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">aws</span> ec2 describe-instances <span class="kw">|</span> <span class="ex">jq</span> -r <span class="st">&#39;.Reservations[].Instances[] | &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;select(.State.Name==&quot;running&quot;) | .PublicDnsName&#39;</span> <span class="op">&gt;</span> hostnames
+$ <span class="fu">cat</span> hostnames
+<span class="ex">ec2-54-88-122-140.compute-1.amazonaws.com</span>
+<span class="ex">ec2-54-88-89-208.compute-1.amazonaws.com</span></code></pre></div>
+<p>(If we would leave out <code>-r</code>, which stands for <em>raw</em>, the hostnames would have been surrounded by double quotes.) We save the output to <em>hostnames</em>, so that we can pass this to <code>parallel</code> later.</p>
+<p>As mentioned, <code>parallel</code> employs <code>ssh</code> to connect to the EC2 instances. Add the following to <em>~/.ssh/config</em>, so that <code>ssh</code> knows how to connect to the EC2 instances:</p>
+<pre><code>Host *.amazonaws.com
+    IdentityFile ~/.ssh/MyKeyFile.pem
+    User ubuntu</code></pre>
+<p>Depending on your which distribution your running, your username may be different than <em>ubuntu</em>.</p>
+</div>
+<div id="running-commands-on-remote-machines" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> Running Commands on Remote Machines</h3>
+<p>The first flavor of distributed processing is to simply run ordinary commands on remote machines. Let’s first double check that parallel is working by running the command-line tools <code>hostname</code> List of hosts:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> --nonall --slf hostnames hostname
+<span class="ex">ip-172-31-23-204</span>
+<span class="ex">ip-172-31-23-205</span></code></pre></div>
+<p>Here, <code>--slf</code> is short for <code>--sshloginfile</code> and <code>--nonall</code> instructs <code>parallel</code> to execute the same command on every remote machine in the <em>hostnames</em> file without using any parameters. Remember, if you don’t have any remote machines to utilize, you can replace <code>--slf hostnames</code> with <code>--sshlogin :</code> so that the command is run on your local machine:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> --nonall --sshlogin : hostname
+<span class="ex">data-science-toolbox</span></code></pre></div>
+<p>Running the same command on every remote machine once only requires one core per machine. If we wanted to distribute the list of arguments passed in to <code>parallel</code> then it could potentially use more than one core. If the number of cores are not specified explicitly, <code>parallel</code> will try to determine this:</p>
+<pre><code>$ seq 2 | parallel --slf hostnames echo 2&gt;&amp;1 | fold
+bash: parallel: command not found
+parallel: Warning: Could not figure out number of cpus on ec2-54-88-122-140.comp
+ute-1.amazonaws.com (). Using 1.
+1
+2</code></pre>
+<p>In this case, we have <code>parallel</code> installed on one of the two remote machines. We’re getting a warning message indicating that <code>parallel</code> is not found on one of them. As a result, <code>parallel</code> cannot determine the number of cores and will default to using one core. When you receive this warning message, you can do one of the following four things:</p>
+<ul>
+<li>Don’t worry, and be happy with using one core per machine.</li>
+<li>Specify the number of jobs per machine via <code>-j</code>.</li>
+<li>Specify the number of cores to use per machine by putting, for example, <em>2/</em> if you want two cores, in front of each hostname in the <em>hostnames</em> file.</li>
+<li>Install GNU Parallel using a package manager. For example, on Ubuntu:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> --nonall --slf hostnames <span class="st">&quot;sudo apt-get install -y parallel&quot;</span></code></pre></div>
+</div>
+<div id="distributing-local-data-among-remote-machines" class="section level3">
+<h3><span class="header-section-number">8.4.3</span> Distributing Local Data among Remote Machines</h3>
+<p>The second flavor of distributed processing is to distribute local data directly among remote machines. Imagine you have one very large data set that you want to process it using multiple remote machines. For simplicity, we’re going to sum all integers from 1 to 1000. First, let’s double check that our input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using <code>wc</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 1000 <span class="kw">|</span> <span class="ex">parallel</span> -N100 --pipe --slf hosts  <span class="st">&quot;(hostname; wc -l) | paste -sd:&quot;</span>
+<span class="ex">ip-172-31-23-204</span>:100
+<span class="ex">ip-172-31-23-205</span>:100
+<span class="ex">ip-172-31-23-205</span>:100
+<span class="ex">ip-172-31-23-204</span>:100
+<span class="ex">ip-172-31-23-205</span>:100
+<span class="ex">ip-172-31-23-204</span>:100
+<span class="ex">ip-172-31-23-205</span>:100
+<span class="ex">ip-172-31-23-204</span>:100
+<span class="ex">ip-172-31-23-205</span>:100
+<span class="ex">ip-172-31-23-204</span>:100</code></pre></div>
+<p>We can verify that our 1000 numbers get distributed evenly in subsets of 100 (as specified by <code>-N100</code>). Now, we’re ready to sum all those numbers:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">seq</span> 1000 <span class="kw">|</span> <span class="ex">parallel</span> -N100 --pipe --slf hosts <span class="st">&quot;paste -sd+ | bc&quot;</span> <span class="kw">|</span> <span class="ex">paste</span> -sd+ <span class="kw">|</span> <span class="fu">bc</span>
+<span class="ex">500500</span></code></pre></div>
+<p>Here, we immediately also sum the ten sums we get back from the remote machines. Let’s double check the answer is correct:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 1000 <span class="kw">|</span> <span class="ex">paste</span> -sd+ <span class="kw">|</span> <span class="fu">bc</span>
+<span class="ex">500500</span></code></pre></div>
+<p>Good, that works. If you have a larger command that you want to execute on the remote machines, you can also put it in a separate script and upload it script with <code>parallel</code>.</p>
+<p>Let’s create a very simple command-line tool called <em>sum</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="ex">paste</span> -sd+ <span class="kw">|</span> <span class="fu">bc</span></code></pre></div>
+<p>Don’t forget to make it executable as discussed in <a href="chapter-4-creating-reusable-command-line-tools.html#chapter-4-creating-reusable-command-line-tools">Chapter 4</a>. The following command first uploads the file <em>sum</em>:</p>
+<pre><code>$ seq 1000 | parallel -N100 --basefile sum --pipe --slf hosts &#39;./sum&#39; | ./sum
+500500</code></pre>
+<p>Of course, summing 1000 numbers is only a toy example. It would have been much faster to do this locally. However, we hope it’s clear from this that GNU Parallel can be incredibly powerful.</p>
+</div>
+<div id="processing-files-on-remote-machines" class="section level3">
+<h3><span class="header-section-number">8.4.4</span> Processing Files on Remote Machines</h3>
+<p>The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results. Imagine that we want to count for each borough of New York City, how often they receive service calls on 311. We don’t have that data on our local machine yet, so let’s first obtain it from <a href="https://data.cityofnewyork.us/" class="uri">https://data.cityofnewyork.us/</a> using their great API:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 0 100 900 <span class="kw">|</span> <span class="ex">parallel</span>  <span class="st">&quot;curl -sL &#39;http://data.cityofnewyork.us/resource&#39;&quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;&#39;/erm2-nwe9.json?</span><span class="dt">\$</span><span class="st">limit=100&amp;</span><span class="dt">\$</span><span class="st">offset={}&#39; | jq -c &#39;.[]&#39; | gzip &gt; {#}.json.gz&quot;</span></code></pre></div>
+<p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one line. We now have 10 files containing compressed JSON data. Let’s see what one line of JSON looks like:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">zcat</span> 1.json.gz <span class="kw">|</span> <span class="fu">head</span> -n 1 <span class="kw">|</span> <span class="ex">fold</span>
+{<span class="st">&quot;school_region&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;park_facility_name&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;x_coordinate_</span>
+<span class="st">state_plane&quot;</span>:<span class="st">&quot;945974&quot;</span>,<span class="st">&quot;agency_name&quot;</span>:<span class="st">&quot;Department of Health and Mental Hygiene&quot;</span>,<span class="st">&quot;u</span>
+<span class="st">nique_key&quot;</span>:<span class="st">&quot;147&quot;</span>,<span class="st">&quot;facility_type&quot;</span>:<span class="st">&quot;N/A&quot;</span>,<span class="st">&quot;status&quot;</span>:<span class="st">&quot;Assigned&quot;</span>,<span class="st">&quot;school_address&quot;</span>:<span class="st">&quot;Uns</span>
+<span class="st">pecified&quot;</span>,<span class="st">&quot;created_date&quot;</span>:<span class="st">&quot;2006-08-29T21:25:23&quot;</span>,<span class="st">&quot;community_board&quot;</span>:<span class="st">&quot;01 STATEN ISLA</span>
+<span class="st">ND&quot;</span>,<span class="st">&quot;incident_zip&quot;</span>:<span class="st">&quot;10302&quot;</span>,<span class="st">&quot;school_name&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;location&quot;</span>:{<span class="st">&quot;latitude&quot;</span>:<span class="st">&quot;4</span>
+<span class="st">0.62745427115626&quot;</span>,<span class="st">&quot;longitude&quot;</span>:<span class="st">&quot;-74.13789056665027&quot;</span>,<span class="st">&quot;needs_recoding&quot;</span>:<span class="ex">false</span>},<span class="st">&quot;comp</span>
+<span class="st">laint_type&quot;</span>:<span class="st">&quot;Food Establishment&quot;</span>,<span class="st">&quot;city&quot;</span>:<span class="st">&quot;STATEN ISLAND&quot;</span>,<span class="st">&quot;park_borough&quot;</span>:<span class="st">&quot;STATEN I</span>
+<span class="st">SLAND&quot;</span>,<span class="st">&quot;school_state&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;longitude&quot;</span>:<span class="st">&quot;-74.13789056665027&quot;</span>,<span class="st">&quot;intersecti</span>
+<span class="st">on_street_1&quot;</span>:<span class="st">&quot;DECKER AVENUE&quot;</span>,<span class="st">&quot;y_coordinate_state_plane&quot;</span>:<span class="st">&quot;167905&quot;</span>,<span class="st">&quot;due_date&quot;</span>:<span class="st">&quot;200</span>
+<span class="st">6-10-05T21:25:23&quot;</span>,<span class="st">&quot;latitude&quot;</span>:<span class="st">&quot;40.62745427115626&quot;</span>,<span class="st">&quot;school_code&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;sc</span>
+<span class="st">hool_city&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;address_type&quot;</span>:<span class="st">&quot;INTERSECTION&quot;</span>,<span class="st">&quot;intersection_street_2&quot;</span>:<span class="st">&quot;</span>
+<span class="st">BARRETT AVENUE&quot;</span>,<span class="st">&quot;school_number&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;resolution_action_updated_date&quot;</span>:<span class="st">&quot;</span>
+<span class="st">2006-10-06T00:00:17&quot;</span>,<span class="st">&quot;descriptor&quot;</span>:<span class="st">&quot;Handwashing&quot;</span>,<span class="st">&quot;school_zip&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>,<span class="st">&quot;loca</span>
+<span class="st">tion_type&quot;</span>:<span class="st">&quot;Restaurant/Bar/Deli/Bakery&quot;</span>,<span class="st">&quot;agency&quot;</span>:<span class="st">&quot;DOHMH&quot;</span>,<span class="st">&quot;borough&quot;</span>:<span class="st">&quot;STATEN ISLAN</span>
+<span class="st">D&quot;</span>,<span class="st">&quot;school_phone_number&quot;</span>:<span class="st">&quot;Unspecified&quot;</span>}</code></pre></div>
+<p>If we were to get the total number of service calls per borough on our local machine, we would run the following command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">zcat</span> *.json.gz <span class="kw">|</span>               
+<span class="op">&gt;</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span>           
+<span class="op">&gt;</span> <span class="fu">tr</span> <span class="st">&#39;[A-Z] &#39;</span> <span class="st">&#39;[a-z]_&#39;</span> <span class="kw">|</span>         
+<span class="op">&gt;</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span>               
+<span class="op">&gt;</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span> <span class="kw">|</span>        
+<span class="op">&gt;</span> <span class="ex">header</span> -a borough,count <span class="kw">|</span>      
+<span class="op">&gt;</span> <span class="ex">csvsort</span> -rc count <span class="kw">|</span> <span class="ex">csvlook</span>    
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">borough</span>       <span class="kw">|</span> <span class="ex">count</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">unspecified</span>   <span class="kw">|</span> <span class="ex">467</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">manhattan</span>     <span class="kw">|</span> <span class="ex">274</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">brooklyn</span>      <span class="kw">|</span> <span class="ex">103</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">queens</span>        <span class="kw">|</span> <span class="ex">77</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bronx</span>         <span class="kw">|</span> <span class="ex">44</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">staten_island</span> <span class="kw">|</span> <span class="ex">35</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span></code></pre></div>
+<p>Because this is quite a long pipeline, and because we’re using it again in a moment with <code>parallel</code>, it’s worth to go over it:</p>
+<ul>
+<li>Expand all compressed files using <code>zcat</code>.</li>
+<li>For each call, extract the name of the borough using <code>jq</code>.</li>
+<li>Convert borough names to lowercase and replace spaces with underscores (because <code>awk</code> splits on whitespace by default).</li>
+<li><p>Count the occurrences of each borough using <code>sort</code> and <code>uniq</code>.</p></li>
+<li>Reverse the count and borough and make it comma delimited using <code>awk</code>.</li>
+<li>Add a header using <code>header</code>.</li>
+<li><p>Sort by count and print table using <code>csvsort</code> <span class="citation">(Groskopf <a href="references.html#ref-csvsort">2014</a><a href="references.html#ref-csvsort">j</a>)</span>.</p></li>
+</ul>
+<p>Imagine, for a moment, that our own machine is so slow that we simply cannot perform this pipeline locally. We can use GNU Parallel to distribute the local files among the remote machines, let them do the processing, and retrieve the results:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ls</span> *.json.gz <span class="kw">|</span>                                                            
+<span class="op">&gt;</span> <span class="ex">parallel</span> -v --basefile jq <span class="dt">\ </span>                                              
+<span class="op">&gt;</span> <span class="ex">--trc</span> <span class="dt">{.}</span>.csv <span class="dt">\ </span>                                                          
+<span class="op">&gt;</span> <span class="ex">--slf</span> hostnames <span class="dt">\ </span>                                                        
+<span class="op">&gt;</span> <span class="st">&quot;zcat {} | ./jq -r &#39;.borough&#39; | tr &#39;[A-Z] &#39; &#39;[a-z]_&#39; | sort | uniq -c |&quot;</span><span class="kw">\</span>
+<span class="op">&gt;</span> <span class="st">&quot; awk &#39;{print </span><span class="dt">\$</span><span class="st">2</span><span class="dt">\&quot;</span><span class="st">,</span><span class="dt">\&quot;\$</span><span class="st">1}&#39; &gt; {.}.csv&quot;</span>                                    
+<span class="fu">zcat</span> 10.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 2.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 1.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 3.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 4.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 5.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 6.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 7.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 8.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span>
+<span class="fu">zcat</span> 9.json.gz <span class="kw">|</span> <span class="ex">./jq</span> -r <span class="st">&#39;.borough&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span></code></pre></div>
+<p>This long command breaks down as follows:</p>
+<ul>
+<li>Print the list of files and pipe it into <code>parallel</code>.</li>
+<li>Transmit the <code>jq</code> binary to each remote machine. Lucklily, jq has no dependencies. This file will be removed from the remote machine at the end because we specified <code>--trc</code> (which implies the <code>--cleanup</code> command-line argument).</li>
+<li>The command-line argument <code>--trc {.}.csv</code> is short for <code>--transfer --return {.}.csv --cleanup</code>. (The replacement string <em>{.}</em> gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transfered to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine.</li>
+<li><p>Specify a list of hostnames. Remember, if you want to try this out locally, you can specify <code>--sshlogin :</code> instead of <code>--self hostnames</code>.</p></li>
+<li><p>Note the escaping in the <code>awk</code> expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. In quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as we did with <code>sum</code>.</p></li>
+</ul>
+<p>If we, at some point during this command, run <code>ls</code> on one of the remote machines, we could see that <code>parallel</code> indeed transfers (and cleans up) the binary <code>jq</code>, the JSON files, and CSV files:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ssh</span> <span class="va">$(</span><span class="fu">head</span> -n 1 hostnames<span class="va">)</span> ls
+<span class="ex">1.json.csv</span>
+<span class="ex">1.json.gz</span>
+<span class="ex">jq</span></code></pre></div>
+<p>Each CSV file looks like this:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> 1.json.csv
+<span class="ex">bronx</span>,3
+<span class="ex">brooklyn</span>,5
+<span class="ex">manhattan</span>,24
+<span class="ex">queens</span>,3
+<span class="ex">staten_island</span>,2
+<span class="ex">unspecified</span>,63</code></pre></div>
+<p>We can sum the counts in each CSV file using Rio and the <code>aggregate</code> function in R:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> *.csv <span class="kw">|</span> <span class="ex">header</span> -a borough,count <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">Rio</span> -e <span class="st">&#39;aggregate(count ~ borough, df, sum)&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">csvsort</span> -rc count <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">borough</span>       <span class="kw">|</span> <span class="ex">count</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">unspecified</span>   <span class="kw">|</span> <span class="ex">467</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">manhattan</span>     <span class="kw">|</span> <span class="ex">274</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">brooklyn</span>      <span class="kw">|</span> <span class="ex">103</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">queens</span>        <span class="kw">|</span> <span class="ex">77</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bronx</span>         <span class="kw">|</span> <span class="ex">44</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">staten_island</span> <span class="kw">|</span> <span class="ex">35</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span></code></pre></div>
+<p>Or, if you prefer to use SQL to aggregate results, you can use <code>csvsql</code> as discussed in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> *.csv <span class="kw">|</span> <span class="ex">header</span> -a borough,count <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">csvsql</span> --query <span class="st">&#39;SELECT borough, SUM(count) AS count FROM stdin &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;GROUP BY borough ORDER BY count DESC&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">borough</span>       <span class="kw">|</span> <span class="ex">count</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">unspecified</span>   <span class="kw">|</span> <span class="ex">467</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">manhattan</span>     <span class="kw">|</span> <span class="ex">274</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">brooklyn</span>      <span class="kw">|</span> <span class="ex">103</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">queens</span>        <span class="kw">|</span> <span class="ex">77</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bronx</span>         <span class="kw">|</span> <span class="ex">44</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">staten_island</span> <span class="kw">|</span> <span class="ex">35</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------+--------</span><span class="kw">|</span></code></pre></div>
+</div>
+</div>
+<div id="discussion-1" class="section level2">
+<h2><span class="header-section-number">8.5</span> Discussion</h2>
+<p>As data scientists, we work with data, and sometimes a lot of data. This means that sometimes we need to run a command multiple times or distribute data-intensive commands over multiple cores. In this chapter we have shown you how easy it is to parallelize commands. GNU Parallel is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them over multiple cores and remote machines. It offers a lot of functionality and in this chapter we’ve only been able to scratch the surface. Some features of GNU Parallel are that we haven’t covered:</p>
+<ul>
+<li>Different ways of specifying input.</li>
+<li>Keep a log of all the jobs.</li>
+<li>Only start new jobs when the machine is under a certain load.</li>
+<li>Timeout, resume, and retry jobs.</li>
+</ul>
+<p>Once you have a basic understanding of GNU Parallel and its most important options, we recommend that you take a look at its tutorial listed in the Further Reading section.</p>
+</div>
+<div id="further-reading-7" class="section level2">
+<h2><span class="header-section-number">8.6</span> Further Reading</h2>
+<ul>
+<li>Tange, O. 2011. “GNU Parallel - the Command-Line Power Tool.”<em>;Login: The USENIX Magazine</em> 36 (1). Frederiksberg, Denmark:42–47. <a href="http://www.gnu.org/s/parallel" class="uri">http://www.gnu.org/s/parallel</a>.</li>
+<li>Tange, Ole. 2014. “GNU Parallel.” <a href="http://www.gnu.org/software/parallel" class="uri">http://www.gnu.org/software/parallel</a>.</li>
+<li>Services, Amazon Web. 2014. “AWS Command Line Interface.” <a href="http://aws.amazon.com/cli" class="uri">http://aws.amazon.com/cli</a>.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-7-exploring-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-9-modeling-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

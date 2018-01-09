@@ -1,4 +1,4 @@
-# Scrubbing Data 
+# Scrubbing Data {#chapter-5-scrubbing-data}
 
 Two chapters ago, in Step 1 of the OSEMN model for data science, we looked at how to obtain data from a variety of sources. It’s not uncommon for this data to have missing values, inconsistencies, errors, weird characters, or uninteresting columns. Sometimes we only need a specific portion of the data. And sometimes we need the data to be in a different format. In those cases, we have to scrub, or clean, the data before we can move on to Step 3: Exploring Data.
 

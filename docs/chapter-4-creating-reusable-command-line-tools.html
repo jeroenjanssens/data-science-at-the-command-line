@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="chapter-1-introduction.html">
+<link rel="prev" href="chapter-3-obtaining-data.html">
+<link rel="next" href="chapter-5-scrubbing-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -324,42 +324,320 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>Data science is an exited field to work in. It’s also still very young. Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science. However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.</p>
-<p>Around five years ago, during my PhD program, I gradually switched from using Microsoft Windows to Linux. Because it was a bit scary at first, I started with having both operating systems installed next to each other (known as dual-boot). The urge to switch back and forth between Microsoft Windows faded and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch. All you’re given is the command line, and it’s up to you what you want to make of it. Out of necessity I quickly became very comfortable using the command line. Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its easy-of-use and large community. However, the command line is still where I’m spending most of time.</p>
-<p>It actually hasn’t been too long ago that I realized that the command line is not just for installing software, system configuration, and searching files. I started learning about command-line tools such as <code>cut</code>, <code>sort</code>, and <code>sed</code>. These are examples of command-line tools that take data as input, do something to it, and print the result. Ubuntu comes with quite a few of them. Once I understood the potential of combining these small tools, I was hooked.</p>
-<p>After my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible. Thanks to a couple of new, open-source command-line tools including <code>xml2json</code>, <code>jq</code>, and <code>json2csv</code> I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data. In September 2013, I decided to write a blog post titled <em>Seven Command-line Tools for Data Science</em>, which is available at <a href="http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html" class="uri">http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html</a>. To my surprise, the blog post got quite some attention and I received a lot of suggestions of other command-line tools. I started wondering whether this blog post could be turned into a book. I’m pleased that, some ten months later, with the help of many talented people (see the acknowledgments below), the answer is a yes.</p>
-<p>I am sharing this personal story not so much because I think you should know how this book came about, but because I want to you know that I had to learn about the command line as well. Because the command line is so different from using a graphical user interface, it can seem scary at first. But if I can learn it, then you can as well. No matter what your current operating system is and no matter how you currently work with data, after reading this book you will be able to do data science at the command line. If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.</p>
-<div id="what-to-expect-from-this-book" class="section level2 unnumbered">
-<h2>What to Expect from This Book</h2>
-<p>In this book, we’re going to obtain, scrub, explore, and model data; a lot of it. This book is not so much about how become <em>better</em> at those data science tasks. There are already great resources available that discuss, for example, when to apply which statistical test or how data can be best visualized. Instead, this practical book aims to make you more <em>efficient</em> and <em>productive</em> by teaching you how to perform those data science tasks at the command line.</p>
-<p>While this book discusses over 80 command-line tools, it’s not the tools themselves that matter most. Some command-line tools have been around for a very long time, while others will be replace by better ones. There are even command-line tools that are being created as you’re reading this. In the past nine months, I have discovered many amazing command-line tools. Unfortunately, some of them were discovered too late to be included in the book. In short, command-line tools come and go. But that’s OK.</p>
-<p>What matters most is the underlying idea of working with tools, pipes, and data. Most of the command-line tools do one thing and do it well. This is part the UNIX philosophy, which makes several appearances throughout the book. Once you become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.</p>
+<div id="chapter-4-creating-reusable-command-line-tools" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Creating Reusable Command-line Tools</h1>
+<p>Throughout the book, we use a lot of commands and pipelines that basically fit on one line. Let us call those one-liners. Being able to perform complex tasks with just a one-liner is what makes the command line powerful. It’s a very different experience from writing traditional programs.</p>
+<p>Some tasks you perform only once, and some you perform more often. Some tasks are very specific and others can be generalized. If you foresee or notice that you need to repeat a certain one-liner on a regular basis, it is worthwhile to turn this into a command-line tool of its own. So, both one-liners and command-line tools have their uses. Recognizing the opportunity requires practice and skill. The advantage of a command-line tool is that you do not have to remember the entire one-liner and that it improves readability if you include it into some other pipeline.</p>
+<p>The benefit of a working with a programming language, however, is that you have the code in a file. This means that you can easily reuse that code. If the code has parameters it can even be applied to problems that follow a similar pattern.</p>
+<p>Command-line tools have the best of both worlds: they can be used from the command line, accept parameters, and only have to be created once. In this chapter we’re going to get familiar creating reusable command-line tools in two ways. First, we explain to turn those one-liners into reusable command-line tools. By adding parameters to our commands, we can add the same flexibility that a programming language offers. Subsequently, we demonstrate how to create reusable command-line tools from code you have written in a programming language. By following the UNIX philosophy, your code can be combined with other command-line tools, which may be written in an entirely different language. We will focus on three programming languages: Python, R, and Java.</p>
+<p>We believe that creating reusable command-line tools makes you a more efficient and productive data scientist in the long run. You gradually build up your own data science toolbox from which you can draw existing tools and apply it to problems you have encountered previously. It requires practice in order to be able to recognize the opportunity to turn a one-liner or existing code into a command-line tool.</p>
+<p>In order to turn a one-liner into a shell script, we need to use some shell scripting. We shall only demonstrate the usefulness a small subset of concepts from shell scripting. This subset includes variables, conditionals, and loops. A complete course in shell scripting deserves a book on its own, and is therefore beyond the scope of this one. If you want to dive deeper into shell scripting, we recommend <em>Classic Shell Scripting</em> by <span class="citation">Robbins and Beebe (<a href="references.html#ref-Robbins2005">2005</a>)</span>.</p>
+<div id="overview-3" class="section level2">
+<h2><span class="header-section-number">4.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Convert one-liners into shell scripts.</li>
+<li>Make existing Python, R, and Java code part of the command line.</li>
+</ul>
 </div>
-<div id="how-to-read-this-book" class="section level2 unnumbered">
-<h2>How to Read This Book</h2>
-<p>In general, you’re advised to read this book in a linear fashion. Once a concept or command-line tool has been introduced, chances are that we employ it in a later chapter. For example, in Chapter 9, we make heavy use of <code>parallel</code>, which is introduced extensively in Chapter 8.</p>
-<p>Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning. As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length. Throughout the book, there are suggestions for additional reading. It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.</p>
+<div id="converting-one-liners-into-shell-scripts" class="section level2">
+<h2><span class="header-section-number">4.2</span> Converting One-liners into Shell Scripts</h2>
+<p>In this section we are going to explain how to turn a one-liner into a reusable command-line tool. Imagine that we have the following one-liner:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">curl</span> -s http://www.gutenberg.org/cache/epub/76/pg76.txt <span class="kw">|</span> 
+<span class="op">&gt;</span> <span class="fu">tr</span> <span class="st">&#39;[:upper:]&#39;</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="kw">|</span> 
+<span class="op">&gt;</span> <span class="fu">grep</span> -oE <span class="st">&#39;\w+&#39;</span> <span class="kw">|</span>             
+<span class="op">&gt;</span> <span class="fu">sort</span> <span class="kw">|</span>                       
+<span class="op">&gt;</span> <span class="fu">uniq</span> -c <span class="kw">|</span>                    
+<span class="op">&gt;</span> <span class="fu">sort</span> -nr <span class="kw">|</span>                   
+<span class="op">&gt;</span> <span class="fu">head</span> -n 10                   
+   <span class="ex">6441</span> and
+   <span class="ex">5082</span> the
+   <span class="ex">3666</span> i
+   <span class="ex">3258</span> a
+   <span class="ex">3022</span> to
+   <span class="ex">2567</span> it
+   <span class="ex">2086</span> t
+   <span class="ex">2044</span> was
+   <span class="ex">1847</span> he
+   <span class="ex">1778</span> of</code></pre></div>
+<p>In short, as you may have guessed from the output, this one-liner returns the top ten words of the e-book version of <em>Adventures of Huckleberry Finn</em>. It accomplishes this by:</p>
+<ul>
+<li>Downloading an ebook using <code>curl</code>.</li>
+<li>Converting the entire text to lowercase using <code>tr</code> <span class="citation">(Meyering <a href="references.html#ref-tr">2012</a><a href="references.html#ref-tr">c</a>)</span>.</li>
+<li>Extracting all the words using <code>grep</code> <span class="citation">(Meyering <a href="references.html#ref-grep">2012</a><a href="references.html#ref-grep">a</a>)</span> and put each word on separate line.</li>
+<li><p>Sort these words in alphabetical order using <code>sort</code> <span class="citation">(Haertel and Eggert <a href="references.html#ref-sort">2012</a>)</span>.</p></li>
+<li>Remove all the duplicates and count how often each word appears in the list using <code>uniq</code> <span class="citation">(Stallman and MacKenzie <a href="references.html#ref-uniq">2012</a><a href="references.html#ref-uniq">b</a>)</span>.</li>
+<li>Sort this list of unique words by their count in descending order using <code>sort</code>.</li>
+<li><p>Keep only the top 10 lines (i.e., words) using <code>head</code>.</p></li>
+</ul>
+
+<div class="rmdtip">
+Each command-line tool used in this one-liner offers a man page. So in case you would like to know more about, say, <code>grep</code>, you can run <code>man grep</code> from the command line. The command-line tools <code>tr</code>, <code>grep</code>, <code>uniq</code>, and <code>sort</code> will be discussed in more detail in the next chapter.
 </div>
-<div id="who-this-book-is-for" class="section level2 unnumbered">
-<h2>Who This Book Is For</h2>
-<p>This book makes just one assumption about you: that you work with data. It doesn’t matter whether which programming language or statistical computing environment you’re currently using. The book starts explains all the necessary concepts from the beginning.</p>
-<p>It also doesn’t matter whether your operating system is Microsoft Windows, MacOS, or some form of Linux. The book comes with a Docker image, which is an easy-to-install virtual environment. It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written. You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.</p>
-<p>The book contains some code in Bash, Python, and R so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.</p>
+
+<p>There is nothing wrong with running this one-liner just once. However, imagine if we wanted to have the top 10 words of every e-book on Project Gutenberg. Or imagine that we wanted the top 10 words of a news website on a hourly basis. In those cases, it would be best to have this one-liner as a separate building block that can be part of something bigger. Because we want to add some flexibility to this one-liner in terms of parameters, we will turn it into a shell script.</p>
+<p>Because we use Bash as our shell, the script will be written in the programming language Bash. This allows us to take the one-liner as the starting point, and gradually improve on it. To turn this one-liner into a reusable command-line tool, we’ll walk you through the following six steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>Copy and paste the one-liner into a file.</p></li>
+<li><p>Add execute permissions.</p></li>
+<li><p>Define a so-called shebang.</p></li>
+<li><p>Remove the fixed input part.</p></li>
+<li><p>Add a parameter.</p></li>
+<li><p>Optionally extend your PATH.</p></li>
+</ol>
+<div id="step-1-copy-and-paste" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Step 1: Copy and Paste</h3>
+<p>The first step is to create a new file. Open your favorite text editor and copy and paste our one-liner. We use name the file <em>top-words-1.sh</em> (The <em>1</em> stands for the first step towards our new command-line tool), and put it in the <em>~/book/ch04</em> directory, but you may choose a different name and location. The contents of the file should look something like Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:top-words-1">4.1</a>.</p>
+
+<div class="example">
+<span id="exm:top-words-1" class="example"><strong>Example 4.1  (~/book/ch04/top-words-1.sh)  </strong></span>
 </div>
-<div id="acknowledgments" class="section level2 unnumbered">
-<h2>Acknowledgments</h2>
-<p>First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post <a href="http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html">Seven Command-Line Tools for Data Science</a>, which I wrote in September 2013, could be expanded into a book.</p>
-<p>Special thanks to my technical reviewers Mike Dewar, Brian Eoff, and Shane Reustle for reading various drafts, meticulously testing all the commands, and providing invaluable feedback. Your efforts have improved the book greatly. The remaining errors are entirely my own responsibility.</p>
-<p>I had the privilege of working together with three amazing editors, namely: Ann Spencer, Julie Steele, and Marie Beaugureau. Thank you for your guidance and for being such great liaisons with the many talented people at O’Reilly. Those people include: Laura Baldwin, Huguette Barriere, Sophia DeMartini, Yasmina Greco, Rachel James, Ben Lorica, Mike Loukides, and Christopher Pappas. There are many others whom I haven’t met because they are operating behind the scenes. Together they ensured that working with O’Reilly has truly been a pleasure.</p>
-<p>This book discusses over 80 command-line tools. Needless to say, without these tools, this book wouldn’t have existed in the first place. I’m therefore extremely grateful to all the authors who created and contributed to these tools. The complete list of authors is unfortunately too long to include here; they are mentioned in the Appendix. Thanks especially to Aaron Crow, Jehiah Czebotar, Christoph Groskopf, Dima Kogan, Sergey Lisitsyn, Francisco J. Martin, and Ole Tange for providing help with their amazing command-line tools.</p>
-<p>Eric Postma and Jaap van den Herik, who supervised me during my PhD program, deserve a special thank you. Over the course of five years they have taught me many lessons. Although writing a technical book is quite different from writing a PhD thesis, many of those lessons proved to be very helpful in the past nine months as well.</p>
-<p>Finally, I’d like to thank my colleagues at YPlan, my friends, my family, and especially my wife Esther for supporting me and for pulling me away from the command line at just the right times.</p>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">curl</span> -s http://www.gutenberg.org/cache/epub/76/pg76.txt <span class="kw">|</span>
+<span class="fu">tr</span> <span class="st">&#39;[:upper:]&#39;</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -oE <span class="st">&#39;\w+&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span>
+<span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr <span class="kw">|</span> <span class="fu">head</span> -n 10</code></pre></div>
+<p>We are using the file extension <em>.sh</em> to make clear that we are creating a shell script. However, command-line tools do not need to have an extension. In fact, command-line tools rarely have extensions.</p>
+
+<div class="rmdtip">
+Here is a nice little command-line trick. On the command-line, <code>!!</code> will be substituted with the previous command. So, if you realize you needed superuser privileges for the previous command, you can run <code>sudo !!</code> <span class="citation">(Miller <a href="references.html#ref-sudo">2013</a>)</span>. And if you want to save the previous command into a file without have to copy and paste it, you can run <code>echo &quot;!!&quot; &gt; scriptname</code>. Be sure to check the contents of the file <em>scriptname</em> for correctness before executing it because it may not always work when your command has quotes.
 </div>
-<div id="about-the-author" class="section level2 unnumbered">
-<h2>About the Author</h2>
-<p><a href="http://jeroenjanssens.com/">Jeroen Janssens</a> is the founder and CEO of <a href="https://datascienceworkshops.com">Data Science Workshops</a>, which provides on-the-job training and coaching in data visualisation, machine learning, and programming. Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and startups YPlan and Outbrain in New York City. He is the author of Data Science at the Command Line, published by O’Reilly Media. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He can be found on <a href="https://twitter.com/jeroenhjanssens/">Twitter</a>, <a href="http://www.linkedin.com/in/jeroenjanssens">LinkedIn</a>, and <a href="https://github.com/jeroenjanssens">GitHub</a>.</p>
+
+<p>We can now use <code>bash</code> <span class="citation">(Fox and Ramey <a href="references.html#ref-bash">2010</a>)</span> to interpret and execute the commands in the file:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">bash</span> book/ch04/top-words-1.sh
+   <span class="ex">6441</span> and
+   <span class="ex">5082</span> the
+   <span class="ex">3666</span> i
+   <span class="ex">3258</span> a
+   <span class="ex">3022</span> to
+   <span class="ex">2567</span> it
+   <span class="ex">2086</span> t
+   <span class="ex">2044</span> was
+   <span class="ex">1847</span> he
+   <span class="ex">1778</span> of</code></pre></div>
+<p>This already saves us from typing the one-liner. Because the file cannot be executed on its own, we cannot really speak of a true command-line tool, yet. Let us change that in the next step.</p>
+</div>
+<div id="step-2-add-permission-to-execute" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Step 2: Add Permission to Execute</h3>
+<p>The reason we cannot execute our file directly is that we do not have the correct access permissions. In particular, you, as a user, need to have the permission to execute the file. In this section we change the access permissions of our file.</p>
+
+<div class="rmdnote">
+In order to compare differences between steps, we copy the file to <em>top-words-2.sh</em> using <code>cp top-words-{1,2}.sh</code>. You can keep working with the same file if you want to.
+</div>
+
+<p>To change the access permissions of a file, we need to use a command-line tool called <code>chmod</code> <span class="citation">(MacKenzie and Meyering <a href="references.html#ref-chmod">2012</a><a href="references.html#ref-chmod">a</a>)</span>, which stands for <em>change mode</em>. It changes the file mode bits of a specific file. The following command gives the user, you, the permission to execute <em>top-words-2.sh</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~/book/ch04/
+$ <span class="fu">chmod</span> u+x top-words-2.sh</code></pre></div>
+<p>The command-line argument <code>u+x</code> consists of three characters: (1) <code>u</code> indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) <code>+</code> indicates that we want to add a permission; and (3) <code>x</code>, which indicates the permissions to execute. Let us now have a look at the access permissions of both files:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ls</span> -l top-words-<span class="dt">{1,2}</span>.sh
+<span class="ex">-rw-rw-r--</span> 1 vagrant vagrant 145 Jul 20 23:33 top-words-1.sh
+<span class="ex">-rwxrw-r--</span> 1 vagrant vagrant 143 Jul 20 23:34 top-words-2.sh</code></pre></div>
+<p>The first column shows the access permissions for each file. For <em>top-words-2.sh</em>, this is <code>-rwxrw-r--</code>. The first character <code>-</code> indicates the file type. A <code>-</code> means regular file and a <code>d</code> means directory. The next three characters <code>rwx</code> indicate the access permissions for the user who owns the file. The <code>r</code> and <code>w</code> mean read and write respectively. (As you can see, <em>top-words-1.sh</em> has a <code>-</code> instead of an <code>x</code>, which means that we cannot execute that file.) The next three characters <code>rw-</code> indicate the access permissions for all members of the group that owns the file. Finally, the last three characters in the column <code>r--</code> indicate access permissions for all other users.</p>
+<p>Now you can execute the file as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">book/ch04/top-words-2.sh</span>
+   <span class="ex">6441</span> and
+   <span class="ex">5082</span> the
+   <span class="ex">3666</span> i
+   <span class="ex">3258</span> a
+   <span class="ex">3022</span> to
+   <span class="ex">2567</span> it
+   <span class="ex">2086</span> t
+   <span class="ex">2044</span> was
+   <span class="ex">1847</span> he
+   <span class="ex">1778</span> of</code></pre></div>
+<p>Note that if you’re ever in the same directory as the executable, you need to execute it as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~/book/ch04
+$ <span class="ex">./top-words-2.sh</span></code></pre></div>
+<p>If you try to execute a file for which you do not have the correct access permissions, as with <em>top-words-1.sh</em>, you will see the following error message:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">./top-words-1.sh</span>
+<span class="ex">bash</span>: ./top-words-1.sh: Permission denied</code></pre></div>
+</div>
+<div id="step-3-define-shebang" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Step 3: Define Shebang</h3>
+<p>Although we can already execute the file on its own, we should add a so-called <em>shebang</em> to the file. The shebang is a special line in the script, which instructs the system which executable should be used to interpret the commands.</p>
+<p>In our case we want to use <code>bash</code> to interpret our commands. Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:top-words-3">4.2</a> shows what the file <em>top-words-3.sh</em> looks like with a shebang.</p>
+
+<div class="example">
+<span id="exm:top-words-3" class="example"><strong>Example 4.2  (~/book/ch04/top-words-3.sh)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="ex">curl</span> -s http://www.gutenberg.org/cache/epub/76/pg76.txt <span class="kw">|</span>
+<span class="fu">tr</span> <span class="st">&#39;[:upper:]&#39;</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -oE <span class="st">&#39;\w+&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span>
+<span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr <span class="kw">|</span> <span class="fu">head</span> -n 10</code></pre></div>
+<p>The name shebang comes from the first two characters: a hash (she) and an exclamation mark (bang). It is not a good idea to leave it out, as we have done in the previous step, because then the behavior of the script is undefined. The Bash shell, which is the one that we are using, uses the executable <em>/bin/sh</em> by default. Other shells may have different defaults.</p>
+<p>Sometimes you will come across scripts that have a shebang in the form of <em>!/usr/bin/bash</em> or <em>!/usr/bin/python</em> (in the case of Python, as we will see in the next section). While this generally works, if the <code>bash</code> or <code>python</code> <span class="citation">(Python Software Foundation <a href="references.html#ref-python">2014</a>)</span> executables are installed in a different location than <em>/usr/bin</em>, then the script does not work anymore. It is better to use the form that we present here, namely <em>!/usr/bin/env bash</em> and <em>!/usr/bin/env python</em>, because the <code>env</code> <span class="citation">(Mlynarik and MacKenzie <a href="references.html#ref-env">2012</a>)</span> executable is aware where <code>bash</code> and <code>python</code> are installed. In short, using <code>env</code> makes your scripts more portable.</p>
+</div>
+<div id="step-4-remove-fixed-input" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Step 4: Remove Fixed Input</h3>
+<p>We know have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is <code>curl</code>, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.</p>
+<p>What if we wanted to obtain the top 10 most-used words from another e-book, or any other text for that matter? The input data is fixed within the tools itself. It would be better to separate the data from the command-line tool.</p>
+<p>If we assume that the user of the command-line tool will provide the text, it will become generally applicable. So, the solution is to simply remove the <code>curl</code> command from the script. See Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:top-words-4">4.3</a> for the updated script named <em>top-words-4.sh</em>.</p>
+
+<div class="example">
+<span id="exm:top-words-4" class="example"><strong>Example 4.3  (~/book/ch04/top-words-4.sh)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="fu">tr</span> <span class="st">&#39;[:upper:]&#39;</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -oE <span class="st">&#39;\w+&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span>
+<span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr <span class="kw">|</span> <span class="fu">head</span> -n 10</code></pre></div>
+<p>This works because if a script starts with a command that needs data from standard input, like <code>tr</code>, it will take the input that is given to the command-line tools. For example:</p>
+<pre><code>$ cat data/finn.txt | top-words-4.sh</code></pre>
+
+<div class="rmdtip">
+Although we have not done so in our script, the same principle holds for saving data. It is, in general, better to let the user take care of that. Of course, if you intend to use a command-line tool only for own projects, then there are no limits to how specific you can be.
+</div>
+
+</div>
+<div id="step-5-parametrize" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> Step 5: Parametrize</h3>
+<p>There is one more step that we can perform in order to make our command-line tool even more reusable: parameters. In our command-line tool there are a number of fixed command-line arguments, for example <code>-nr</code> for <code>sort</code> and <code>-n 10</code> for <code>head</code>. It is probably best to keep the former argument fixed. However, it would be very useful to allow for different values for the <code>head</code> command. This would allow the end user to set the number of most-often used words to be outputted. Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:top-words-5">4.4</a> shows what our file <em>top-words-5.sh</em> looks like if we parametrize <code>head</code>.</p>
+
+<div class="example">
+<span id="exm:top-words-5" class="example"><strong>Example 4.4  (~/book/ch04/top-words-5.sh)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="va">NUM_WORDS=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span>                                        
+<span class="fu">tr</span> <span class="st">&#39;[:upper:]&#39;</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -oE <span class="st">&#39;\w+&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span>
+<span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr <span class="kw">|</span> <span class="fu">head</span> -n <span class="va">$NUM_WORDS</span>               </code></pre></div>
+<ul>
+<li>The variable <em>NUM_WORDS</em> is set to the value of <em>$1</em>, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers.</li>
+<li>Note that in order to use the value of the <em>$NUM_WORDS</em> variable, you need to put a dollar sign in front of it. When you set it, you do not write a dollar sign.</li>
+</ul>
+
+<div class="rmdtip">
+We could have also used <em>$1</em> directly as an argument for <code>head</code> and not bother creating an extra variable such <em>NUM_WORDS</em>. However, with larger scripts and a few more command-line arguments such as <em>$2</em> and <em>$3</em>, the code becomes more readable when you use named variables.
+</div>
+
+<p>Now if we wanted to see the top 5 most-used words of our text, we would invoke our command-line tool as follows:</p>
+<pre><code>$ cat data/finn.txt | top-words-5 5</code></pre>
+<p>If the user does not provide an argument then <code>head</code> will return an error message, because the value of <em>$1</em>, and therefore <em>$NUM_WORDS</em> will be an empty string.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> data/finn.txt <span class="kw">|</span> <span class="ex">top-words-5</span>
+<span class="ex">head</span>: option requires an argument -- <span class="st">&#39;n&#39;</span>
+<span class="ex">Try</span> <span class="st">&#39;head --help&#39;</span> for more information.</code></pre></div>
+</div>
+<div id="step-6-extend-your-path" class="section level3">
+<h3><span class="header-section-number">4.2.6</span> Step 6: Extend Your PATH</h3>
+<p>After the previous five steps we are finally finished building a reusable command-line tool. There is, however, one more step that can be very useful. In this optional step we are going to ensure that you can execute your command-line tools from everywhere.</p>
+<p>Currently, when you want to execute your command-line tool, you either have to navigate to the directory it is in or include the full path name as shown in step 2. This is fine if the command-line tool is specifically built for, say, a certain project. However, if your command-line tool could be applied in multiple situations, then it is useful to be able to execute form everywhere, just like the command-line tools that come with Ubuntu.</p>
+<p>To accomplish this, Bash needs to know where to look for your command-line tools. It does this by traversing a list of directories which are stored in an environment variable called <em>PATH</em>. In a fresh Data Science Toolbox, the <em>PATH</em> looks like this:</p>
+<pre><code>$ echo $PATH | fold</code></pre>
+<p>The directories are delimited by colons. Here is the list of directories:</p>
+<pre><code>$ echo $PATH | tr &#39;:&#39; &#39;\n&#39;</code></pre>
+<p>To change the <em>PATH</em> permanently, you’ll need to edit the <em>.bashrc</em> or <em>.profile</em> file located in your home directory. If you put all your custom command-line tools into one directory, say, <em>~/tools</em>, then you only change the <em>PATH</em> once. As you can see, the Data Science Toolbox already has <em>/home/vagrant/.bin</em> in its <em>PATH</em>. Now, you no longer need to add the <em>./</em>, but you can just use the filename. Moreover, you do no longer need to remember where the command-line tool is located.</p>
+</div>
+</div>
+<div id="creating-command-line-tools-with-python-and-r" class="section level2">
+<h2><span class="header-section-number">4.3</span> Creating Command-line Tools with Python and R</h2>
+<p>The command-line tool that we created in the previous section was written in Bash. (Sure, not every feature of the Bash language was employed, but the interpreter still was <code>bash</code>.) As you may know by now, the command line is language agnostic, so we do not necessarily have to use Bash for creating command-line tools.</p>
+<p>In this section we are going demonstrate that command-line tools can be created in other programming languages as well. We will focus on Python and R because these are currently the two most popular programming languages within the data science community. We cannot offer a complete introduction to either language, so we assume that you have some familiarity with Python and or R. Programming languages such as Java, Go, and Julia, follow a similar pattern when it comes to creating command-line tools.</p>
+<p>There are three main reasons for creating command-line tools in a programming language instead of Bash. First, you may have existing code that you wish be able to use from the command line. Second, the command-line tool would end up encompassing more than a hundred lines of code. Third, the command-line tool needs to be very fast.</p>
+<p>The six steps that we discussed in the previous section roughly apply to creating command-line tools in other programming languages as well. The first step, however, would not be copy pasting from the command line, but rather copy pasting the relevant code into a new file. Command-line tools in Python and R need to specify <code>python</code> <span class="citation">(Python Software Foundation <a href="references.html#ref-python">2014</a>)</span> and <code>Rscript</code> <span class="citation">(R Foundation for Statistical Computing <a href="references.html#ref-R">2014</a>)</span>, respectively, as the interpreter after the shebang.</p>
+<p>When it comes to creating command-line tools using Python and R, there are two more aspects that deserve special attention, which will be discuss below. First, processing standard input, which comes natural to shell scripts, has to be taken care of explicitly in Python and R. Second, as command-line tools written in Python and R tend to be more complex, we may also want to offer the user the ability to specify more complex command-line arguments.</p>
+<div id="porting-the-shell-script" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Porting The Shell Script</h3>
+<p>As a starting point, let’s see how we would port the prior shell script to both Python and R. In other words, what Python and R code gives us the top most-often used words from standard input? It is not important whether implementing this task in anything else than a shell programming language is a good idea. What matters is that it gives us a good opportunity to compare Bash with Python and R.</p>
+<p>We will first show the two files <em>top-words.py</em> and <em>top-words.R</em> and then discuss the differences with the shell code. In Python, the code could would look something like Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:top-words-py">4.5</a>.</p>
+
+<div class="example">
+<span id="exm:top-words-py" class="example"><strong>Example 4.5  (~/book/ch04/top-words.py)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
+<span class="im">import</span> re
+<span class="im">import</span> sys
+<span class="im">from</span> collections <span class="im">import</span> Counter
+num_words <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">1</span>])
+text <span class="op">=</span> sys.stdin.read().lower()
+words <span class="op">=</span> re.split(<span class="st">&#39;\W+&#39;</span>, text)
+cnt <span class="op">=</span> Counter(words)
+<span class="cf">for</span> word, count <span class="kw">in</span> cnt.most_common(num_words):
+    <span class="bu">print</span> <span class="st">&quot;</span><span class="sc">%7d</span><span class="st"> </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> (count, word)</code></pre></div>
+
+<div class="rmdnote">
+Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:top-words-py">4.5</a> uses pure Python. When you want to do advanced text processing we recommend you check out the NLTK package <span class="citation">(Perkins <a href="references.html#ref-Perkins2010">2010</a>)</span>. If you are going to work with a lot of numerical data, then we recommend you use the Pandas package <span class="citation">(McKinney <a href="references.html#ref-McKinney2012">2012</a>)</span>.
+</div>
+
+<p>And in R, the code would look something like Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:top-words-5">4.4</a> (thanks to Hadley Wickham):</p>
+
+<div class="example">
+<span id="exm:top-words-5" class="example"><strong>Example 4.4  (~/book/ch04/top-words-1.R)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#!/usr/bin/env Rscript</span>
+n &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">commandArgs</span>(<span class="dt">trailingOnly =</span> <span class="ot">TRUE</span>))
+f &lt;-<span class="st"> </span><span class="kw">file</span>(<span class="st">&quot;stdin&quot;</span>)
+lines &lt;-<span class="st"> </span><span class="kw">readLines</span>(f)
+words &lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(lines, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">W+&quot;</span>)))
+counts &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">table</span>(words), <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+counts_n &lt;-<span class="st"> </span>counts[<span class="dv">1</span><span class="op">:</span>n]
+<span class="kw">cat</span>(<span class="kw">sprintf</span>(<span class="st">&quot;%7d %s</span><span class="ch">\n</span><span class="st">&quot;</span>, counts_n, <span class="kw">names</span>(counts_n)), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+<span class="kw">close</span>(f)</code></pre></div>
+<p>Let’s check that all three implementations (i.e., Bash, Python, and R) return the same top 5 words with the same counts:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/76.txt</span> top-words.sh 5
+   <span class="ex">6441</span> and
+   <span class="ex">5082</span> the
+   <span class="ex">3666</span> i
+   <span class="ex">3258</span> a
+   <span class="ex">3022</span> to
+$ <span class="op">&lt;</span> <span class="ex">data/76.txt</span> top-words.py 5
+   <span class="ex">6441</span> and
+   <span class="ex">5082</span> the
+   <span class="ex">3666</span> i
+   <span class="ex">3258</span> a
+   <span class="ex">3022</span> to
+$ <span class="op">&lt;</span> <span class="ex">data/76.txt</span> top-words.R 5
+   <span class="ex">6441</span> and
+   <span class="ex">5082</span> the
+   <span class="ex">3666</span> i
+   <span class="ex">3258</span> a
+   <span class="ex">3022</span> to</code></pre></div>
+<p>Wonderful! Sure, the output itself is not very exciting. What is exciting is the observation that we can accomplish the same task with multiple approaches. Let’s have a look at the differences between the approaches.</p>
+<p>First, what’s immediately obvious is the difference in amount of code. For this specific task, both Python and R require much more code than Bash. This illustrates that, for some tasks, it is better to use the command line. For other tasks, you may better off using a programming language. As you gain more experience on the command-line, you will start to recognize when to use which approach. When everything is a command-line tool, you can even split up the task into subtasks, and combine a Bash command-line tool with a, say, Python command-line tool. Whichever approach works best for the task at hand.</p>
+</div>
+<div id="processing-streaming-data-from-standard-input" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Processing Streaming Data from Standard Input</h3>
+<p>In the previous two code snippets, both Python R read the complete standard input at once. On the command line, most command-line tools pipe data to the next command-line tool in a streaming fashion. (There are a few command-line tools which require the complete data before they write any data to standard output, like <code>sort</code> and <code>awk</code> <span class="citation">(Brennan <a href="references.html#ref-awk">1994</a>)</span>.) This means the pipeline is blocked by such command-line tools. This does not have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.</p>
+<p>Luckily Python are R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:stream-py">4.6</a> and Example <a href="chapter-4-creating-reusable-command-line-tools.html#exm:stream-r">4.7</a> are two minimal examples that demonstrate how this works in Python and R, respectively.</p>
+
+<div class="example">
+<span id="exm:stream-py" class="example"><strong>Example 4.6  (~/book/ch04/stream.py)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/env python</span>
+<span class="im">from</span> sys <span class="im">import</span> stdin, stdout
+<span class="cf">while</span> <span class="va">True</span>:
+    line <span class="op">=</span> stdin.readline()
+    <span class="cf">if</span> <span class="kw">not</span> line:
+        <span class="cf">break</span>
+    stdout.write(<span class="st">&quot;</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">int</span>(line)<span class="op">**</span><span class="dv">2</span>)
+    stdout.flush()</code></pre></div>
+
+<div class="example">
+<span id="exm:stream-r" class="example"><strong>Example 4.7  (~/book/ch04/stream.R)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#!/usr/bin/env Rscript</span>
+f &lt;-<span class="st"> </span><span class="kw">file</span>(<span class="st">&quot;stdin&quot;</span>)
+<span class="kw">open</span>(f)
+<span class="cf">while</span>(<span class="kw">length</span>(line &lt;-<span class="st"> </span><span class="kw">readLines</span>(f, <span class="dt">n =</span> <span class="dv">1</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {
+        <span class="kw">write</span>(<span class="kw">as.integer</span>(line)<span class="op">^</span><span class="dv">2</span>, <span class="kw">stdout</span>())
+}
+<span class="kw">close</span>(f)</code></pre></div>
+</div>
+</div>
+<div id="further-reading-3" class="section level2">
+<h2><span class="header-section-number">4.4</span> Further Reading</h2>
+<ul>
+<li>Docopt. 2014. “Command-Line Interface Description Language.” <a href="http://docopt.org" class="uri">http://docopt.org</a>.</li>
+<li>Robbins, Arnold, and Nelson H. F. Beebe. 2005. <em>Classic Shell Scripting</em>. O’Reilly Media.</li>
+<li>Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.</li>
+<li>Perkins, Jacob. 2010. <em>Python Text Processing with Nltk 2.0 Cookbook</em>. Packt Publishing.</li>
+<li>McKinney, Wes. 2012. <em>Python for Data Analysis</em>. O’Reilly Media.</li>
+<li>Rossant, Cyrille. 2013. <em>Learning Ipython for Interactive Computing and Data Visualization</em>. Packt Publishing.</li>
+<li>Wirzenius, Lars. 2013. “Writing Manual Pages.” <a href="http://liw.fi/manpages/" class="uri">http://liw.fi/manpages/</a>.</li>
+<li>Raymond, Eric Steven. 2014. “Basics of the Unix Philosophy.” <a href="http://www.faqs.org/docs/artu/ch01s06.html" class="uri">http://www.faqs.org/docs/artu/ch01s06.html</a>.</li>
+</ul>
 
 </div>
 </div>
@@ -368,8 +646,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-1-introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-3-obtaining-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-5-scrubbing-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

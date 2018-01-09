@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Science at the Command Line</title>
+  <meta name="description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Science at the Command Line" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Science at the Command Line" />
+  
+  <meta name="twitter:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+<meta name="author" content="Jeroen Janssens">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="chapter-6-managing-your-data-workflow.html">
+<link rel="next" href="chapter-8-parallel-pipelines.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#further-reading-1"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#overview-2"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-a-database"><i class="fa fa-check"></i><b>3.5</b> Querying a Database</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#further-reading-2"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#overview-3"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#further-reading-3"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#overview-4"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#further-reading-4"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#overview-5"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#further-reading-5"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#overview-6"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#further-reading-6"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a><ul>
+<li class="chapter" data-level="8.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#overview-7"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#discussion-1"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#further-reading-7"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#overview-8"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#further-reading-8"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a><ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#interpreting-data-1"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-7-exploring-data" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Exploring Data</h1>
+<p>Now that we have obtained and scrubbed our data, we can continue with the third step of the OSEMN model, which is to explore it. After all that hard work, (unless you already had clean data lying around!), it is time for some fun.</p>
+<p>Exploring is the step where you familiarize yourself with the data. Being familiar with the data is essential when you want to extract any value from it. For example, knowing what kind of features the data has, means you know which ones are worth further exploring and which ones you can use to answer any questions that you have.</p>
+<p>Exploring your data can be done from three perspectives. The first perspective is to inspect the data and its properties. Here, we want to know, for example, what the raw data looks like, how many data points the data set has, and what kind of features the data set has.</p>
+<p>The second perspective from which we can explore out data is to compute descriptive statistics. This perspective is useful for learning more about the individual features. One advantage of this perspective is that the output is often brief and textual and can therefore be printed on the command line.</p>
+<p>The third perspective is to create visualizations of the data. From this perspective we can gain insight into how multiple features interact. We’ll discuss a way of creating visualizations that can be printed on the command line. However, visualizations are best suited to be displayed on a graphical user interfaces. An advantage of visualizations over descriptive statistics is that they are more flexible and that they can convey much more information.</p>
+<div id="overview-6" class="section level2">
+<h2><span class="header-section-number">7.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Inspect the data and its properties.</li>
+<li>Compute descriptive statistics.</li>
+<li>Create data visualizations inside and outside the command line.</li>
+</ul>
+</div>
+<div id="inspecting-data-and-its-properties" class="section level2">
+<h2><span class="header-section-number">7.2</span> Inspecting Data and its Properties</h2>
+<p>In this section we’ll demonstrate how to inspect your data set and its properties. Because the upcoming visualization and modeling techniques expect the data to be in tabular format, we’ll assume that the data is in CSV format. You can use the techniques described in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a> to convert your data to CSV if necessary.</p>
+<p>For simplicity sake, we’ll also assume that your data has a header. In the first subsection we are going to determine whether that is the case. Once we know we have a header, we can continue answering the following questions:</p>
+<ul>
+<li>How many data points and features does the data set have?</li>
+<li>What does the raw data look like?</li>
+<li>What kind of features does the data set have?</li>
+<li>Can some of these features be treated as categorical or as factors?</li>
+</ul>
+<div id="header-or-not-here-i-come" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Header Or Not, Here I Come</h3>
+<p>You can check whether your file has a header by printing the first few lines:</p>
+<pre><code>$ #? [echo]
+$ head file.csv | csvlook</code></pre>
+<p>It is then up to you to decide whether the first line is indeed a header or already the first data point. When the data set contains no header or when its header contains newlines, you’re best off going back to <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a> and correct that.</p>
+</div>
+<div id="inspect-all-the-data" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> Inspect All The Data</h3>
+<p>If you want to inspect the raw data, then it’s best not to use the <code>cat</code> command-line tool, since <code>cat</code> prints all the data to the screen in one go. In order to inspect the raw data at your own pace, we recommend to use <code>less</code> <span class="citation">(Nudelman <a href="references.html#ref-less">2013</a>)</span> with the <code>-S</code> command-line argument:</p>
+<pre><code>$ #? [echo]
+$ less -S file.csv</code></pre>
+<p>The <code>-S</code> command-line argument ensures that long lines are not being wrapped when they don’t fit in the terminal. Instead, <code>less</code> allows you to scroll horizontally to see the rest of the lines. The advantage of <code>less</code> is that it does not load the entire file into memory, which is good for viewing large files. Once you’re in <code>less</code>, you can scroll down a full screen by pressing <code>&lt;Space&gt;</code>. Scrolling horizontally is done by pressing <code>&lt;Left&gt;</code> and <code>&lt;Right&gt;</code>. Press <code>g</code> and <code>G</code> to go to start and the end of the file, respectively. Quiting <code>less</code> is done by pressing <code>q</code>. Read the man page for more key bindings.</p>
+<p>If you want the data set to be nicely formatted, you can add in <code>csvlook</code>:</p>
+<pre><code>$ #? [echo]
+$ &lt; file.csv csvlook | less -S</code></pre>
+<p>Unfortunately, <code>csvlook</code> needs to read the entire file into memory in order to determine the width of the columns. So, when you want to inspect a very large file, then either you may want to get a subset (using <code>sample</code>, for example) or you may need to be patient.</p>
+</div>
+<div id="feature-names-and-data-types" class="section level3">
+<h3><span class="header-section-number">7.2.3</span> Feature Names and Data Types</h3>
+<p>In order to gain insight into the data set, it is useful to print the feature names and study them. After all, the feature names may indicate the meaning of the feature. You can use the following <code>sed</code> expression for this:</p>
+<pre><code>$ &lt; data/iris.csv sed -e &#39;s/,/\n/g;q&#39;</code></pre>
+<p>Note that this basic command assumes that the file is delimited by commas. Just as reminder: if you intend to use this command often, you could define a function in your <em>.bashrc</em> file called, say, <em>names</em>:</p>
+
+<div class="example">
+<span id="exm:unnamed-chunk-2" class="example"><strong>Example 7.1  ()  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">names ()</span> <span class="kw">{</span> <span class="fu">sed</span> -e <span class="st">&#39;s/,/\n/g;q&#39;</span><span class="kw">;</span> <span class="kw">}</span></code></pre></div>
+<p>Which you can then you use like this:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/investments.csv</span> names
+<span class="ex">company_permalink</span>
+<span class="ex">company_name</span>
+<span class="ex">company_category_list</span>
+<span class="ex">company_market</span>
+<span class="ex">company_country_code</span>
+<span class="ex">company_state_code</span>
+<span class="ex">company_region</span>
+<span class="ex">company_city</span>
+<span class="ex">investor_permalink</span>
+<span class="ex">investor_name</span>
+<span class="ex">investor_category_list</span>
+<span class="ex">investor_market</span>
+<span class="ex">investor_country_code</span>
+<span class="ex">investor_state_code</span>
+<span class="ex">investor_region</span>
+<span class="ex">investor_city</span>
+<span class="ex">funding_round_permalink</span>
+<span class="ex">funding_round_type</span>
+<span class="ex">funding_round_code</span>
+<span class="ex">funded_at</span>
+<span class="ex">funded_month</span>
+<span class="ex">funded_quarter</span>
+<span class="ex">funded_year</span>
+<span class="ex">raised_amount_usd</span></code></pre></div>
+<p>We can go a step further than just printing the column names. Besides the names of the columns, it would be very useful to know what type of values each column contains. Examples of data types are a string of characters, a numerical value, or a date. Assume that we have the following toy data set:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/datatypes.csv</span> csvlook
+<span class="kw">|</span><span class="ex">-----+--------+-------+----------+------------------+------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">a</span>  <span class="kw">|</span> <span class="ex">b</span>      <span class="kw">|</span> <span class="ex">c</span>     <span class="kw">|</span> <span class="ex">d</span>        <span class="kw">|</span> <span class="ex">e</span>                <span class="kw">|</span> <span class="ex">f</span>          <span class="kw">|</span> <span class="ex">g</span>        <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+--------+-------+----------+------------------+------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">2</span>  <span class="kw">|</span> <span class="ex">0.0</span>    <span class="kw">|</span> <span class="ex">FALSE</span> <span class="kw">|</span> <span class="st">&quot;Yes!&quot;</span>   <span class="kw">|</span> <span class="ex">2011-11-11</span> 11:00 <span class="kw">|</span> <span class="ex">2012-09-08</span> <span class="kw">|</span> <span class="ex">12</span>:34    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">42</span> <span class="kw">|</span> <span class="ex">3.1415</span> <span class="kw">|</span> <span class="ex">TRUE</span>  <span class="kw">|</span> <span class="ex">Oh</span>, good <span class="kw">|</span> <span class="ex">2014-09-15</span>       <span class="kw">|</span> <span class="ex">12/6/70</span>    <span class="kw">|</span> <span class="ex">0</span>:07 PM  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">66</span> <span class="kw">|</span>        <span class="kw">|</span> <span class="ex">False</span> <span class="kw">|</span> <span class="ex">2198</span>     <span class="kw">|</span>                  <span class="kw">|</span>            <span class="kw">|</span>          <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+--------+-------+----------+------------------+------------+----------</span><span class="kw">|</span></code></pre></div>
+<p>We’ve already used <code>csvsql</code> in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a> to execute SQL queries directly on CSV data. When no command-line arguments are passed, it generates the necessary SQL statement that would be needed if we were to insert this data into an actual database. We can use the output also for ourselves to inspect what the inferred column types are:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">csvsql</span> data/datatypes.csv
+<span class="ex">CREATE</span> TABLE datatypes (
+        <span class="ex">a</span> INTEGER NOT NULL,
+        <span class="ex">b</span> FLOAT,
+        <span class="ex">c</span> BOOLEAN NOT NULL,
+        <span class="ex">d</span> VARCHAR(8) <span class="ex">NOT</span> NULL,
+        <span class="ex">e</span> DATETIME,
+        <span class="ex">f</span> DATE,
+        <span class="ex">g</span> TIME,
+        <span class="ex">CHECK</span> (c IN (0, 1))
+);</code></pre></div>
+<p>provides on overview of what the various SQL data types mean. If a column has the <em>NOT NULL</em> string printed after the data type, then that column contains no missing values.</p>
+<table>
+<caption>Python versus SQL data types</caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Python</th>
+<th>SQL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p>Character string</p></td>
+<td><p>unicode</p></td>
+<td><p>VARCHAR</p></td>
+</tr>
+<tr class="even">
+<td><p>Boolean</p></td>
+<td><p>bool</p></td>
+<td><p>BOOLEAN</p></td>
+</tr>
+<tr class="odd">
+<td><p>Integer</p></td>
+<td><p>int</p></td>
+<td><p>INTEGER</p></td>
+</tr>
+<tr class="even">
+<td><p>Real number</p></td>
+<td><p>float</p></td>
+<td><p>FLOAT</p></td>
+</tr>
+<tr class="odd">
+<td><p>Date</p></td>
+<td><p>datetime.date</p></td>
+<td><p>DATE</p></td>
+</tr>
+<tr class="even">
+<td><p>Time</p></td>
+<td><p>datetime.time</p></td>
+<td><p>TIME</p></td>
+</tr>
+<tr class="odd">
+<td><p>Date and time</p></td>
+<td><p>datetime.datetime</p></td>
+<td><p>DATETIME</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="unique-identifiers-continuous-variables-and-factors" class="section level3">
+<h3><span class="header-section-number">7.2.4</span> Unique Identifiers, Continuous Variables, and Factors</h3>
+<p>Knowing the data type of each feature is not enough. It is also essential to know what each feature represents. Having knowledge about the domain is very useful here, however we may also get some ideas from the data itself.</p>
+<p>Both a string and an integer could be a unique identifier or could represent a category. In the latter case, this could be used to assign a color to your visualization. If an integer denotes, say, the ZIP Code, then it doesn’t make sense to compute the average.</p>
+<p>To determine whether a feature should be treated as a unique identifier or categorical variable (or factor in R terms), you could count the number of unique values for a specific column:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> data/iris.csv <span class="kw">|</span> <span class="ex">csvcut</span> -c species <span class="kw">|</span> <span class="ex">body</span> <span class="st">&quot;sort | uniq | wc -l&quot;</span>
+<span class="ex">species</span>
+<span class="ex">3</span></code></pre></div>
+<p>Or we can use <code>csvstat</code> <span class="citation">(Groskopf <a href="references.html#ref-csvstat">2014</a><a href="references.html#ref-csvstat">a</a>)</span>, which is part of <code>csvkit</code>, to get the number of unique values for each column:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstat</span> data/investments2.csv --unique
+  <span class="ex">1.</span> company_permalink: 27342
+  <span class="ex">2.</span> company_name: 27324
+  <span class="ex">3.</span> company_category_list: 8759
+  <span class="ex">4.</span> company_market: 443
+  <span class="ex">5.</span> company_country_code: 150
+  <span class="ex">6.</span> company_state_code: 147
+  <span class="ex">7.</span> company_region: 1079
+  <span class="ex">8.</span> company_city: 3305
+  <span class="ex">9.</span> investor_permalink: 11176
+ <span class="ex">10.</span> investor_name: 11135
+ <span class="ex">11.</span> investor_category_list: 468
+ <span class="ex">12.</span> investor_market: 134
+ <span class="ex">13.</span> investor_country_code: 111
+ <span class="ex">14.</span> investor_state_code: 80
+ <span class="ex">15.</span> investor_region: 549
+ <span class="ex">16.</span> investor_city: 1198
+ <span class="ex">17.</span> funding_round_permalink: 41790
+ <span class="ex">18.</span> funding_round_type: 13
+ <span class="ex">19.</span> funding_round_code: 15
+ <span class="ex">20.</span> funded_at: 3595
+ <span class="ex">21.</span> funded_month: 295
+ <span class="ex">22.</span> funded_quarter: 121
+ <span class="ex">23.</span> funded_year: 34
+ <span class="ex">24.</span> raised_amount_usd: 6143</code></pre></div>
+<p>If the number of unique values is low compared to the number of rows, then that feature may indeed be treated as a categorical one (such as <em>funding_round_type</em>). If the number is equal to the number of rows, it may be a unique identifier (such as <em>company_permalink</em>).</p>
+</div>
+</div>
+<div id="computing-descriptive-statistics" class="section level2">
+<h2><span class="header-section-number">7.3</span> Computing Descriptive Statistics</h2>
+<div id="csvstat" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> csvstat</h3>
+<p>The command-line tool <code>csvstat</code> gives a lot of information. For each feature (column), it shows:</p>
+<ul>
+<li>The data type in Python terminology (see Table 7-1 for a comparison between Python and SQL data types).</li>
+<li>Whether it has any missing values (nulls).</li>
+<li>The number of unique values.</li>
+<li>Various descriptive statistics (maximum, minimum, sum, mean, standard deviation, and median) for those features for which it is appropriate.</li>
+</ul>
+<p>We invoke <code>csvstat</code> as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstat</span> data/datatypes.csv
+  <span class="ex">1.</span> a
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: False
+        <span class="ex">Values</span>: 2, 66, 42
+  <span class="ex">2.</span> b
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;float&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Values</span>: 0.0, 3.1415
+  <span class="ex">3.</span> c
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;bool&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: False
+        <span class="ex">Unique</span> values: 2
+        <span class="ex">5</span> most frequent values:
+                <span class="ex">False</span>:  2
+                <span class="ex">True</span>:   1
+  <span class="ex">4.</span> d
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;unicode&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: False
+        <span class="ex">Values</span>: 2198, <span class="st">&quot;Yes!&quot;</span>, Oh, good
+  <span class="ex">5.</span> e
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;datetime.datetime&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Values</span>: 2011-11-11 11:00:00, 2014-09-15 00:00:00
+  <span class="ex">6.</span> f
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;datetime.date&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Values</span>: 2012-09-08, 1970-12-06
+  <span class="ex">7.</span> g
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;datetime.time&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Values</span>: 12:34:00, 12:07:00
+
+<span class="ex">Row</span> count: 3</code></pre></div>
+<p>This gives a very verbose output. For a more concise output specify one of the statistics arguments:</p>
+<ul>
+<li><code>--max</code> (maximum)</li>
+<li><code>--min</code> (minimum)</li>
+<li><code>--sum</code> (sum)</li>
+<li><code>--mean</code> (mean)</li>
+<li><code>--median</code> (median)</li>
+<li><p><code>--stdev</code> (standard deviation)</p></li>
+<li><code>--nulls</code> (whether column contains nulls)</li>
+<li><code>--unique</code> (unique values)</li>
+<li><code>--freq</code> (frequent values)</li>
+<li><p><code>--len</code> (max value length)</p></li>
+</ul>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstat</span> data/datatypes.csv --null
+  <span class="ex">1.</span> a: False
+  <span class="ex">2.</span> b: True
+  <span class="ex">3.</span> c: False
+  <span class="ex">4.</span> d: False
+  <span class="ex">5.</span> e: True
+  <span class="ex">6.</span> f: True
+  <span class="ex">7.</span> g: True</code></pre></div>
+<p>You can select a subset of features with the <code>-c</code> command-line argument. This accepts both integers and column names:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstat</span> data/investments2.csv -c 2,13,19,24
+  <span class="ex">2.</span> company_name
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;unicode&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Unique</span> values: 27324
+        <span class="ex">5</span> most frequent values:
+                <span class="ex">Aviir</span>:  13
+                <span class="ex">Galectin</span> Therapeutics:  12
+                <span class="ex">Rostima</span>:        12
+                <span class="ex">Facebook</span>:       11
+                <span class="ex">Lending</span> Club:   11
+        <span class="ex">Max</span> length: 66
+ <span class="ex">13.</span> investor_country_code
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;unicode&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Unique</span> values: 111
+        <span class="ex">5</span> most frequent values:
+                <span class="ex">USA</span>:    20806
+                <span class="ex">GBR</span>:    2357
+                <span class="ex">DEU</span>:    946
+                <span class="ex">CAN</span>:    893
+                <span class="ex">FRA</span>:    737
+        <span class="ex">Max</span> length: 15
+ <span class="ex">19.</span> funding_round_code
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;unicode&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Unique</span> values: 15
+        <span class="ex">5</span> most frequent values:
+                <span class="ex">a</span>:      7529
+                <span class="ex">b</span>:      4776
+                <span class="ex">c</span>:      2452
+                <span class="ex">d</span>:      1042
+                <span class="ex">e</span>:      384
+        <span class="ex">Max</span> length: 10
+ <span class="ex">24.</span> raised_amount_usd
+        <span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span>
+        <span class="ex">Nulls</span>: True
+        <span class="ex">Min</span>: 0
+        <span class="ex">Max</span>: 3200000000
+        <span class="ex">Sum</span>: 359891203117
+        <span class="ex">Mean</span>: 10370010.1748
+        <span class="ex">Median</span>: 3250000
+        <span class="ex">Standard</span> Deviation: 38513119.1802
+        <span class="ex">Unique</span> values: 6143
+        <span class="ex">5</span> most frequent values:
+                <span class="ex">10000000</span>:       1159
+                <span class="ex">1000000</span>:        1074
+                <span class="ex">5000000</span>:        1066
+                <span class="ex">2000000</span>:        875
+                <span class="ex">3000000</span>:        820
+
+<span class="ex">Row</span> count: 41799</code></pre></div>
+<p>Please note that <code>csvstat</code>, just like <code>csvsql</code>, employs heuristics to determine the data type, and therefore may not always get it right. We encourage you to always do a manual inspection as discussed in the previous subsection. Moreover, the type may be a character string or integer that doesn’t say anything about how it should be used.</p>
+<p>As a nice extra, <code>csvstat</code> outputs, at the very end, the number of data points (rows). Newlines and commas inside values are handles correctly. To only see the relevant line, we can use <code>tail</code>:</p>
+<pre><code>$ csvstat data/iris.csv | tail -n 1</code></pre>
+<p>If you only want to see the actual number number of data points, you can use, for example, the following <code>sed</code> expression to extract the number:</p>
+<pre><code>$ csvstat data/iris.csv | sed -rne &#39;${s/^([^:]+): ([0-9]+)$/\2/;p}&#39;</code></pre>
+</div>
+<div id="using-r-from-the-command-line-using-rio" class="section level3">
+<h3><span class="header-section-number">7.3.2</span> Using R from the Command Line using Rio</h3>
+<p>In this section we would like to introduce you to a command-line tool called <code>Rio</code>, which is essentially a small, nifty wrapper around the statistical programming environment R. Before we explain what Rio does and why it exists, lets talk a bit about R itself.</p>
+<p>R is a very powerful statistical software package to analyze data and create visualizations. It’s an interpreted programming language, has an extensive collection of packages, and offers its own REPL (Read-Eval-Print-Loop), which allows you, similar to the command line, to play with your data. Unfortunately, R is quite separated from the command line. Once you start it, you’re in a separate environment. R doesn’t really play well with the command line because you cannot pipe any data into it and it also doesn’t support any one-liners that you can specify.</p>
+<p>For example, imagine that you have a CSV file called <em>tips.csv</em>, and you would like compute the tip percentage, and save the result. To accomplish this in R you would first startup R:</p>
+<pre><code>$ #? [echo]
+$ R</code></pre>
+<p>And then run the following commands:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span>tips &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;tips.csv&#39;</span>, <span class="dt">header =</span> T, <span class="dt">sep =</span> <span class="st">&#39;,&#39;</span>, <span class="dt">stringsAsFactors =</span> F)
+<span class="op">&gt;</span><span class="st"> </span>tips.percent &lt;-<span class="st"> </span>tips<span class="op">$</span>tip <span class="op">/</span><span class="st"> </span>tips<span class="op">$</span>bill <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">cat</span>(tips.percent, <span class="dt">sep =</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, <span class="dt">file =</span> <span class="st">&#39;percent.csv&#39;</span>)
+<span class="op">&gt;</span><span class="st"> </span><span class="kw">q</span>(<span class="st">&quot;no&quot;</span>)</code></pre></div>
+<p>Afterwards, you can continue with the saved file <em>percent.csv</em> on the command line. Note that there is only one command that is associated with what we want to accomplish specifically. The other commands are necessary boilerplate. Typing in this boilerplate in order to accomplish something simple is cumbersome and breaks your workflow. Sometimes, you only want to do one or two things at a time to your data. Wouldn’t it be great if we could harness the power of R and be able to use it from the command line?</p>
+<p>This is where <code>Rio</code> comes in. The name Rio stands for <em>R input/output</em>, because it enables you to use R as a filter on the command line. You simply pipe CSV data into <code>Rio</code> and you specify the R commands that you want to run on it. Let’s perform the same task as before, but now using <code>Rio</code>:</p>
+<pre><code>$ &lt; data/tips.csv Rio -e &#39;df$tip / df$bill * 100&#39; | head -n 10</code></pre>
+<p><code>Rio</code> can execute multiple R command that are separated by semicolons. So, if you wanted to add a column called <em>percent</em> to the input data, you could do the following:</p>
+<pre><code>$ &lt; data/tips.csv Rio -e &#39;df$percent &lt;- df$tip / df$bill * 100; df&#39; | head</code></pre>
+<p>These small one-liners are possible because <code>Rio</code> takes care of all the boilerplate. Being able to use the command line for this and capture the power of R into a one-liner is fantastic, especially if you want to keep on working on the command line. <code>Rio</code> assumes that the input data is in CSV format with a header. (By specifying the <code>-n</code> command-line argument <code>Rio</code> does not consider the first row to be the header and creates default column names.) Behind the scenes, <code>Rio</code> writes the piped data to a temporary CSV file and creates a script that:</p>
+<ul>
+<li>Import required libraries.</li>
+<li>Loads the CSV file as a data frame.</li>
+<li>Generates a <code>ggplot2</code> object if needed (more on this in the next section).</li>
+<li><p>Runs the specified commands.</p></li>
+<li><p>Prints the result of the last command to standard output.</p></li>
+</ul>
+<p>So now, if you wanted to do one or two things to your data set with R, you can specify it as a one-liner, and keep on working on the command line. All the knowledge that you already have about R can now be used from the command line. With <code>Rio</code>, you can even create sophisticated visualizations, as you will see later in this chapter.</p>
+<p>Rio doesn’t have to be used as a filter, meaning the output doesn’t have to be a in CSV format per se. You can compute</p>
+<pre><code>$ &lt; data/iris.csv Rio -e &#39;mean(df$sepal_length)&#39;
+$ &lt; data/iris.csv Rio -e &#39;sd(df$sepal_length)&#39;
+$ &lt; data/iris.csv Rio -e &#39;sum(df$sepal_length)&#39;</code></pre>
+<p>If we wanted to compute the five summary statistics, we would do:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">iris.csv</span> Rio -e <span class="st">&#39;summary(df$sepal_length)&#39;</span>
+   <span class="ex">Min.</span> 1st Qu.  Median    Mean 3rd Qu.    Max.
+  <span class="ex">4.300</span>   5.100   5.800   5.843   6.400   7.900</code></pre></div>
+<p>You can also compute the skewness (symmetry of the distribution) and kurtosis (peakedness of the distribution), but then you need to have the <code>moments</code> package installed:</p>
+<pre><code>$ #? [echo]
+$ &lt; data/iris.csv Rio -e &#39;skewness(df$sepal_length)&#39;
+$ &lt; data/iris.csv Rio -e &#39;kurtosis(df$petal_width)&#39;</code></pre>
+<p>Correlation between two features:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">tips.csv</span> Rio -e <span class="st">&#39;cor(df$bill, df$tip)&#39;</span>
+<span class="ex">0.6757341</span></code></pre></div>
+<p>Or a correlation matrix:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> csvcut -c bill,tip <span class="kw">|</span> <span class="ex">Rio</span> -f cor <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">--------------------+--------------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bill</span>              <span class="kw">|</span> <span class="ex">tip</span>                <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------------------+--------------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1</span>                 <span class="kw">|</span> <span class="ex">0.675734109211365</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">0.675734109211365</span> <span class="kw">|</span> <span class="ex">1</span>                  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------------------+--------------------</span><span class="kw">|</span></code></pre></div>
+<p>Note that with the command-line argument <code>-f</code>, we can specify the function to apply to the data frame <code>df</code>. In this case, it is the same as <code>-e cor(df)</code>.</p>
+<p>You can even create a stem plot <span class="citation">(Tukey <a href="references.html#ref-Tukey1977">1977</a>)</span> using <code>Rio</code>:</p>
+<pre><code>$ &lt; data/iris.csv Rio -e &#39;stem(df$sepal_length)&#39;</code></pre>
+</div>
+</div>
+<div id="creating-visualizations" class="section level2">
+<h2><span class="header-section-number">7.4</span> Creating Visualizations</h2>
+<p>In this section we’re going to discuss how to create visualizations at the command line. We’ll be looking at two different software packages: gnuplot and ggplot. First, we’ll introduce both packages. Then, we’ll demonstrate how to create several different types of visualizations using both of them.</p>
+<div id="introducing-gnuplot-and-feedgnuplot" class="section level3">
+<h3><span class="header-section-number">7.4.1</span> Introducing Gnuplot and Feedgnuplot</h3>
+<p>The first software package to create visualizations that we’re discussing in this chapter is Gnuplot. Gnuplot has been around since 1986. Despite being rather old, its visualization capabilities are quite extensive. As such, it’s impossible to do it justice. There are other good resources available, including <em>Gnuplot in Action</em> by <span class="citation">Janert (<a href="references.html#ref-Janert2009">2009</a>)</span>.</p>
+<p>To demonstrate the flexibility (and its archaic notation), consider Example <a href="chapter-7-exploring-data.html#exm:script-gnuplot">7.2</a>, which is copied from the Gnuplot website (<a href="http://gnuplot.sourceforge.net/demo/histograms.6.gnu" class="uri">http://gnuplot.sourceforge.net/demo/histograms.6.gnu</a>).</p>
+
+<div class="example">
+<span id="exm:script-gnuplot" class="example"><strong>Example 7.2  (Creating a histogram using Gnuplot)  </strong></span>
+</div>
+
+<pre><code># set terminal pngcairo  transparent enhanced font &quot;arial,10&quot; fontscale 1.0 size
+# set output &#39;histograms.6.png&#39;
+set border 3 front linetype -1 linewidth 1.000
+set boxwidth 0.75 absolute
+set style fill   solid 1.00 border lt -1
+set grid nopolar
+set grid noxtics nomxtics ytics nomytics noztics nomztics \
+ nox2tics nomx2tics noy2tics nomy2tics nocbtics nomcbtics
+set grid layerdefault   linetype 0 linewidth 1.000,  linetype 0 linewidth 1.000
+set key outside right top vertical Left reverse noenhanced autotitles columnhead
+set style histogram columnstacked title  offset character 0, 0, 0
+set datafile missing &#39;-&#39;
+set style data histograms
+set xtics border in scale 1,0.5 nomirror norotate  offset character 0, 0, 0 auto
+set xtics  norangelimit
+set xtics   ()
+set ytics border in scale 0,0 mirror norotate  offset character 0, 0, 0 autojust
+set ztics border in scale 0,0 nomirror norotate  offset character 0, 0, 0 autoju
+set cbtics border in scale 0,0 mirror norotate  offset character 0, 0, 0 autojus
+set rtics axis in scale 0,0 nomirror norotate  offset character 0, 0, 0 autojust
+set title &quot;Immigration from Northern Europe\n(columstacked histogram)&quot;
+set xlabel &quot;Country of Origin&quot;
+set ylabel &quot;Immigration by decade&quot;
+set yrange [ 0.00000 : * ] noreverse nowriteback
+i = 23
+plot &#39;immigration.dat&#39; using 6 ti col, &#39;&#39; using 12 ti col,      &#39;&#39; using 13 ti c</code></pre>
+<p>Please note that this is trimmed to 80 characters wide. The above script generates the following image:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="images/histograms.6.png" alt="Immigration Plot by Gnuplot" width="500" />
+<p class="caption">
+Figure 7.1: Immigration Plot by Gnuplot
+</p>
+</div>
+<p>Gnuplot is different from most command-line tools we’ve been using for two reasons. First, it uses a script instead of command-line arguments. Second, the output is always written to a file and not printed to standard output.</p>
+<p>One great advantage of Gnuplot being around for so long, and the main reason we’ve included it in this book, is that it’s able to produce visualizations <strong>for</strong> the command line. That is, it’s able to print its output to the terminal without the need for a graphical user interface (GUI). Even then, you would need to set up a script.</p>
+<p>Luckily, there is a command-line tool called <code>feedgnuplot</code> <span class="citation">(Kogan <a href="references.html#ref-feedgnuplot">2014</a>)</span>, which can help us with setting up a script for Gnuplot. <code>feedgnuplot</code> is entirely configurable through command-line arguments. Plus, it reads from standard input. After we have introduced <code>ggplot2</code>, we’re going to create a few visualizations using <code>feedgnuplot</code>.</p>
+<p>One great feature of <code>feedgnuplot</code> that we would like to mention here, is that it allows you to plot streaming data. The following is a snapshot of a continuously updated plot based on random input data:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="kw">do</span> <span class="bu">echo</span> <span class="va">$RANDOM</span><span class="kw">;</span> <span class="kw">done</span> <span class="kw">|</span> <span class="ex">sample</span> -d 10 <span class="kw">|</span> <span class="ex">feedgnuplot</span> --stream \
+<span class="op">&gt;</span> --terminal <span class="st">&#39;dumb 80,25&#39;</span> --lines --xlen 10
+
+  <span class="ex">30000</span> ++-----+------------+-------------+-------------+------------+-----++
+        <span class="kw">|</span>      <span class="ex">+</span>            *             +             +            +      <span class="kw">|</span>
+        <span class="kw">|</span>      <span class="bu">:</span>            **            :             *******      :      *
+  <span class="ex">25000</span> ++.................*.*..........................*.....*............+*
+        <span class="kw">|</span>      <span class="bu">:</span>           *: *           :            *:      *     :     *<span class="kw">|</span>
+        <span class="kw">|</span>      <span class="bu">:</span>           *: *           :            *:      *     :     *<span class="kw">|</span>
+        <span class="kw">|</span>      <span class="bu">:</span>          * :  *          :           * :       *    :    * <span class="kw">|</span>
+  <span class="ex">20000</span> ++................*....*......................*.........*.........*++
+        <span class="kw">|</span>      <span class="bu">:</span>          * :   *         :          *  :       *    :    * <span class="kw">|</span>
+        <span class="kw">|</span>      <span class="bu">:</span>         *  :   *         :          *  :        *   :   *  <span class="kw">|</span>
+  <span class="ex">15000</span> ++....**.........*.......*..................*............*.......*.++
+        <span class="kw">|</span> <span class="ex">****</span> :*        *  :    *        :         *   :         *  :   *  <span class="kw">|</span>
+        <span class="ex">**</span>     :*        *  :     *      ****      *    :         *  :  *   <span class="kw">|</span>
+  <span class="ex">10000</span> ++.......*......*.........*....**....*.....*..............*.....*..++
+        <span class="kw">|</span>      <span class="bu">:</span>  *     *   :      * **   :   *   *     :          * : *    <span class="kw">|</span>
+        <span class="kw">|</span>      <span class="bu">:</span>   *    *   :      **     :    ** *     :          * : *    <span class="kw">|</span>
+        <span class="kw">|</span>      <span class="bu">:</span>   *   *    :             :      *      :          * : *    <span class="kw">|</span>
+   <span class="ex">5000</span> ++..........*..*.........................*..................*.*....++
+        <span class="kw">|</span>      <span class="bu">:</span>     * *    :             :             :           *:*     <span class="kw">|</span>
+        <span class="kw">|</span>      <span class="ex">+</span>     **     +             +             +            *      <span class="kw">|</span>
+      <span class="ex">0</span> ++-----+------*-----+-------------+-------------+------------*-----++
+              <span class="ex">2350</span>         2352          2354          2356         2358</code></pre></div>
+</div>
+<div id="introducing-ggplot2" class="section level3">
+<h3><span class="header-section-number">7.4.2</span> Introducing ggplot2</h3>
+<p>A more modern software package for creating visualizations is ggplot, which is an implementation of the grammar of graphics in R <span class="citation">(Wickham <a href="references.html#ref-Wickham2009">2009</a>)</span>.</p>
+<p>Thanks to the grammar of graphics and using sensible defaults, <code>ggplot2</code> commands tend to be very short and expressive. When used through <code>Rio</code>, this is a very convenient way of creating visualizations from the command line.</p>
+<p>To demonstrate it’s expressiveness, we’ll recreate the histogram plot generated above by gnuplot, with the help of <code>Rio</code>. Because <code>Rio</code> expects the data set to be comma-delimited, and because <code>ggplot2</code> expects the data in <em>long</em> format, we first need to scrub and transform the data a little bit:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/immigration.dat</span> sed -re <span class="st">&#39;/^#/d;s/\t/,/g;s/,-,/,0,/g;s/Region/&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;Period/&#39;</span> <span class="kw">|</span> <span class="fu">tee</span> data/immigration.csv <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="fu">cut</span> -c1-80
+<span class="ex">Period</span>,Austria,Hungary,Belgium,Czechoslovakia,Denmark,France,Germany,Greece,Irel
+<span class="ex">1891-1900</span>,234081,181288,18167,0,50231,30770,505152,15979,388416,651893,26758,950
+<span class="ex">1901-1910</span>,668209,808511,41635,0,65285,73379,341498,167519,339065,2045877,48262,1
+<span class="ex">1911-1920</span>,453649,442693,33746,3426,41983,61897,143945,184201,146181,1109524,4371
+<span class="ex">1921-1930</span>,32868,30680,15846,102194,32430,49610,412202,51084,211234,455315,26948,
+<span class="ex">1931-1940</span>,3563,7861,4817,14393,2559,12623,144058,9119,10973,68028,7150,4740,3960
+<span class="ex">1941-1950</span>,24860,3469,12189,8347,5393,38809,226578,8973,19789,57661,14860,10100,1
+<span class="ex">1951-1960</span>,67106,36637,18575,918,10984,51121,477765,47608,43362,185491,52277,2293
+<span class="ex">1961-1970</span>,20621,5401,9192,3273,9201,45237,190796,85969,32966,214111,30606,15484,</code></pre></div>
+<p>The <code>sed</code> expression consists of four parts, delimited by semicolons:</p>
+<ol style="list-style-type: decimal">
+<li><p>Remove lines that start with <em>#</em>.</p></li>
+<li><p>Convert tabs to commas.</p></li>
+<li><p>Change dashes (missing values) into zero’s.</p></li>
+<li><p>Change the feature name <em>Region</em> into <em>Period</em>.</p></li>
+</ol>
+<p>We then select only the columns that matter using <code>csvcut</code> and subsequently convert the data from a wide format to a long one using the <code>Rio</code> and the <code>melt</code> function which part of the R package <code>reshape2</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/immigration.csv</span> csvcut -c Period,Denmark,Netherlands,Norway,\
+<span class="op">&gt;</span> Sweden <span class="kw">|</span> <span class="ex">Rio</span> -re <span class="st">&#39;melt(df, id=&quot;Period&quot;, variable.name=&quot;Country&quot;, &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;value.name=&quot;Count&quot;)&#39;</span> <span class="kw">|</span> <span class="fu">tee</span> data/immigration-long.csv <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">------------+-------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Period</span>    <span class="kw">|</span> <span class="ex">Country</span>     <span class="kw">|</span> <span class="ex">Count</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------------+-------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1891-1900</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">50231</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1901-1910</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">65285</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1911-1920</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">41983</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1921-1930</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">32430</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1931-1940</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">2559</span>   <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1941-1950</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">5393</span>   <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1951-1960</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">10984</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1961-1970</span> <span class="kw">|</span> <span class="ex">Denmark</span>     <span class="kw">|</span> <span class="ex">9201</span>   <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1891-1900</span> <span class="kw">|</span> <span class="ex">Netherlands</span> <span class="kw">|</span> <span class="ex">26758</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------------+-------------+--------</span><span class="kw">|</span></code></pre></div>
+<p>Now, we can use <code>Rio</code> again, but then with an expression that builds up a <code>ggplot2</code> visualization:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/immigration-long.csv</span> Rio -ge <span class="st">&#39;g + geom_bar(aes(Country, Count,&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39; fill=Period), stat=&quot;identity&quot;) + scale_fill_brewer(palette=&quot;Set1&quot;) &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;+ labs(x=&quot;Country of origin&quot;, y=&quot;Immigration by decade&quot;, title=&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;&quot;Immigration from Northern Europe\n(columstacked histogram)&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
+<img src="images/rio-immigration.png" alt="Immigration plot by Rio and ggplot2" width="2362" />
+<p class="caption">
+Figure 7.2: Immigration plot by Rio and ggplot2
+</p>
+</div>
+<p>The <code>-g</code> command-line argument indicates that Rio should load the <code>ggplot2</code> package. The output is an image in PNG format. You can either view the PNG image via <code>display</code>, which is part of ImageMagick <span class="citation">(LLC <a href="references.html#ref-display">2009</a>)</span> or you can redirect the output to a PNG file. If you’re on a remote terminal then you probably won’t be able to see any graphics. A workaround for this is to start a webserver from a particular directory:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">python</span> -m SimpleHTTPServer 8000</code></pre></div>
+<p>Make sure that you have access to the port (8000 in this case). If you save the PNG image to the directory from which the webserver was launched, then you can access the image from your browser at <a href="http://localhost:8000/file.png" class="uri">http://localhost:8000/file.png</a>.</p>
+</div>
+<div id="histograms" class="section level3">
+<h3><span class="header-section-number">7.4.3</span> Histograms</h3>
+<p>Using <code>Rio</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_histogram(aes(bill))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<img src="images/rio-histogram.png" alt="Histogram" width="2362" />
+<p class="caption">
+Figure 7.3: Histogram
+</p>
+</div>
+<p>Using <code>feedgnuplot</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&lt;</span> <span class="ex">data/tips.csv</span> csvcut -c bill <span class="kw">|</span> <span class="ex">feedgnuplot</span> --terminal <span class="st">&#39;dumb 80,25&#39;</span> \
+--histogram 0 --with boxes --ymin 0 --binwidth 1.5 --unset grid --exit
+
+
+
+  <span class="ex">25</span> ++----+------+-----+--***-+-----+------+-----+------+-----+------+----++
+     <span class="ex">+</span>     +      +     +*** * +     +      +     +      +     +      +     +
+     <span class="kw">|</span>                   <span class="ex">*</span> * *                                              <span class="kw">|</span>
+     <span class="kw">|</span>               <span class="ex">***</span> * * *                                              <span class="kw">|</span>
+  <span class="ex">20</span> ++              * * * * *                                             ++
+     <span class="kw">|</span>            <span class="ex">****</span> * * * *                                              <span class="kw">|</span>
+     <span class="kw">|</span>            <span class="ex">*</span> ** *** * * ***                                          <span class="kw">|</span>
+     <span class="kw">|</span>            <span class="ex">*</span> ** * * * * * *                                          <span class="kw">|</span>
+  <span class="ex">15</span> ++           * ** * * * * * *                                         ++
+     <span class="kw">|</span>            <span class="ex">*</span> ** * * * * * *                                          <span class="kw">|</span>
+     <span class="kw">|</span>            <span class="ex">*</span> ** * * * * * *                                          <span class="kw">|</span>
+     <span class="kw">|</span>            <span class="ex">*</span> ** * * * * * * ***                                      <span class="kw">|</span>
+  <span class="ex">10</span> ++           * ** * * * *** *** *                                     ++
+     <span class="kw">|</span>            <span class="ex">*</span> ** * * * * * * * *                                      <span class="kw">|</span>
+     <span class="kw">|</span>          <span class="ex">***</span> ** * * * * * * * ***** ***                              <span class="kw">|</span>
+     <span class="kw">|</span>          <span class="ex">*</span> * ** * * * * * * * * * *** *                              <span class="kw">|</span>
+   <span class="ex">5</span> ++       *** * ** * * * * * * * * * * * *   ***                       ++
+     <span class="kw">|</span>        <span class="ex">*</span> * * ** * * * * * * * * * * * * *** *                        <span class="kw">|</span>
+     <span class="kw">|</span>        <span class="ex">*</span> * * ** * * * * * * * * * * * *** * ********   *** ***       <span class="kw">|</span>
+     <span class="ex">+</span>  ***+*** * * ** *+* * * * * * * * * *+* * *+** * *+* ***+* * * ***   +
+   <span class="ex">0</span> ++-***+***********************************************-*****-***-***--++
+     <span class="ex">0</span>     5      10    15     20    25     30    35     40    45     50    55</code></pre></div>
+</div>
+<div id="bar-plots" class="section level3">
+<h3><span class="header-section-number">7.4.4</span> Bar Plots</h3>
+<p>Using <code>Rio</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_bar(aes(factor(size)))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<img src="images/rio-barplot.png" alt="Bar Plot" width="2362" />
+<p class="caption">
+Figure 7.4: Bar Plot
+</p>
+</div>
+<p>Using <code>feedgnuplot</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> <span class="kw">|</span> <span class="ex">csvcut</span> -c size <span class="kw">|</span> <span class="ex">header</span> -d <span class="kw">|</span> <span class="ex">feedgnuplot</span> --terminal \
+<span class="op">&gt;</span> <span class="st">&#39;dumb 80,25&#39;</span> --histogram 0  --with boxes --unset grid --exit
+
+
+
+  <span class="ex">160</span> ++--------+----***********----+---------+---------+---------+--------++
+      <span class="ex">+</span>         +    *    +    *    +         +         +         +         +
+  <span class="ex">140</span> ++             *         *                                           ++
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+  <span class="ex">120</span> ++             *         *                                           ++
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+  <span class="ex">100</span> ++             *         *                                           ++
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+   <span class="ex">80</span> ++             *         *                                           ++
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+   <span class="ex">60</span> ++             *         *                                           ++
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+      <span class="kw">|</span>              <span class="ex">*</span>         *                                            <span class="kw">|</span>
+   <span class="ex">40</span> ++             *         *********************                       ++
+      <span class="kw">|</span>              <span class="ex">*</span>         *         *         *                        <span class="kw">|</span>
+   <span class="ex">20</span> ++             *         *         *         *                       ++
+      <span class="kw">|</span>              <span class="ex">*</span>         *         *         *                        <span class="kw">|</span>
+      <span class="ex">+</span>    ***********    +    *    +    *    +    *********************    +
+    <span class="ex">0</span> ++---*************************************************************---++
+      <span class="ex">0</span>         1         2         3         4         5         6         7</code></pre></div>
+</div>
+<div id="density-plots" class="section level3">
+<h3><span class="header-section-number">7.4.5</span> Density Plots</h3>
+<p>Using <code>Rio</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_density(aes(tip / bill * 100, fill=sex), &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;alpha=0.3) + xlab(&quot;percent&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<img src="images/rio-densityplot.png" alt="Density Plot" width="2362" />
+<p class="caption">
+Figure 7.5: Density Plot
+</p>
+</div>
+<p>Since <code>feedgnuplot</code> cannot generate density plots, it’s best to just generate a histogram.</p>
+</div>
+<div id="box-plots" class="section level3">
+<h3><span class="header-section-number">7.4.6</span> Box Plots</h3>
+<p>Using <code>Rio</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_boxplot(aes(time, bill))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-31"></span>
+<img src="images/rio-boxplot.png" alt="Box Plot" width="2362" />
+<p class="caption">
+Figure 7.6: Box Plot
+</p>
+</div>
+<p>Drawing a box plot is unfortunately not possible with <code>feedgnuplot</code>.</p>
+</div>
+<div id="scatter-plots" class="section level3">
+<h3><span class="header-section-number">7.4.7</span> Scatter Plots</h3>
+<p>Using <code>Rio</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> Rio -ge <span class="st">&#39;g+geom_point(aes(bill, tip, color=time))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-33"></span>
+<img src="images/rio-scatterplot.png" alt="Scatter Plot" width="2362" />
+<p class="caption">
+Figure 7.7: Scatter Plot
+</p>
+</div>
+<p>Using <code>feedgnuplot</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="op">&lt;</span> <span class="ex">data/tips.csv</span> csvcut -c bill,tip <span class="kw">|</span> <span class="fu">tr</span> , <span class="st">&#39; &#39;</span> <span class="kw">|</span> <span class="ex">header</span> -d <span class="kw">|</span> <span class="ex">feedgnuplot</span> \
+--terminal <span class="st">&#39;dumb 80,25&#39;</span> --points --domain --unset grid --exit --style <span class="st">&#39;pt&#39;</span> <span class="st">&#39;14&#39;</span>
+
+
+
+  <span class="ex">10</span> ++----+------+-----+------+-----+------+-----+------+-----+------+A---++
+     <span class="ex">+</span>     +      +     +      +     +      +     +      +     +      +     +
+   <span class="ex">9</span> ++                                                            A       ++
+     <span class="kw">|</span>                                                                      <span class="kw">|</span>
+   <span class="ex">8</span> ++                                                                    ++
+     <span class="kw">|</span>                                                  <span class="ex">A</span>                   <span class="kw">|</span>
+     <span class="kw">|</span>                                                                      <span class="kw">|</span>
+   <span class="ex">7</span> ++                                          A                 A       ++
+     <span class="kw">|</span>                             <span class="ex">A</span>     A                                  <span class="kw">|</span>
+   <span class="ex">6</span> ++                              A    A    A                           ++
+     <span class="kw">|</span>                             <span class="ex">A</span>        A                               <span class="kw">|</span>
+   <span class="ex">5</span> ++       A                 A A   A A   AA A  AA      A  A     A       ++
+     <span class="kw">|</span>                                <span class="ex">A</span>       A    A     A                  <span class="kw">|</span>
+   <span class="ex">4</span> ++          A     A  AAAA AAA A  A A  A          A                    ++
+     <span class="kw">|</span>                <span class="ex">A</span>   AAAAA AAA AA            A             A           <span class="kw">|</span>
+     <span class="kw">|</span>              <span class="ex">A</span>  AAAAAAA AA A A  AA   A AA                            <span class="kw">|</span>
+   <span class="ex">3</span> ++           A   AAAAAAAAAAA A A    AA           AA A                 ++
+     <span class="kw">|</span>              <span class="ex">AAAAAAA</span> AA  A A A     A                   A             <span class="kw">|</span>
+   <span class="ex">2</span> ++        AA AAAAAAAAA A  A  A AA  A A A                              ++
+     <span class="ex">+</span>     +   AAAAAAAA +A   AA+     + A    +     +      +     +      +     +
+   <span class="ex">1</span> ++--A-+A-A---+--AA-+--A---+-----+------+--A--+------+-----+------+----++
+     <span class="ex">0</span>     5      10    15     20    25     30    35     40    45     50    55</code></pre></div>
+</div>
+<div id="line-graphs" class="section level3">
+<h3><span class="header-section-number">7.4.8</span> Line Graphs</h3>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/immigration-long.csv</span> Rio -ge <span class="st">&#39;g+geom_line(aes(x=Period, &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;y=Count, group=Country, color=Country)) + theme(axis.text.x = &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;element_text(angle = -45, hjust = 0))&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<img src="images/rio-linegraph.png" alt="Line Graph" width="2362" />
+<p class="caption">
+Figure 7.8: Line Graph
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/immigration.csv</span> <span class="kw">|</span> <span class="ex">csvcut</span> -c Period,Denmark,Netherlands,Norway,Sweden <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">header</span> -d <span class="kw">|</span> <span class="fu">tr</span> , <span class="st">&#39; &#39;</span> <span class="kw">|</span> <span class="ex">feedgnuplot</span> --terminal <span class="st">&#39;dumb 80,25&#39;</span> --lines \
+<span class="op">&gt;</span> --autolegend --domain --legend 0 <span class="st">&quot;Denmark&quot;</span> --legend 1 <span class="st">&quot;Netherlands&quot;</span> \
+<span class="op">&gt;</span> --legend 2 <span class="st">&quot;Norway&quot;</span> --legend 3 <span class="st">&quot;Sweden&quot;</span> --xlabel <span class="st">&quot;Period&quot;</span> --unset grid --exit
+
+
+
+  <span class="ex">250000</span> ++-----%%%-------+-------+--------+-------+-------+--------+------++
+         <span class="ex">+</span>  %%%% + %      +       +        +       +       + Denmark+****** +
+         <span class="kw">|</span><span class="ex">%%</span>        %                                    Netherlands <span class="co">###### |</span>
+         <span class="kw">|</span>          <span class="ex">%</span>                                         Norway <span class="va">$$$$$$</span> <span class="kw">|</span>
+  <span class="ex">200000</span> ++          %                                        Sweden %%%%%%++
+         <span class="kw">|</span>        $   <span class="ex">%</span>                                                     <span class="kw">|</span>
+         <span class="kw">|</span>       $ $   <span class="ex">%</span>                                                    <span class="kw">|</span>
+         <span class="kw">|</span>      $   $  <span class="ex">%</span>                                                    <span class="kw">|</span>
+  <span class="ex">150000</span> ++   <span class="va">$$</span>     $  %                                                  ++
+         <span class="kw">|</span>   $        $  <span class="ex">%</span>                                                  <span class="kw">|</span>
+         <span class="kw">|</span>  $          $  <span class="ex">%</span>                                                 <span class="kw">|</span>
+  <span class="ex">100000</span> ++$            $ %                                                ++
+         <span class="kw">|</span>$              $ <span class="ex">%%%%%%%%%%</span>                                       <span class="kw">|</span>
+         <span class="kw">|</span>                $          <span class="ex">%</span>                                      <span class="kw">|</span>
+         <span class="kw">|</span>    <span class="ex">***********</span>  <span class="va">$$$$$$$$$$</span>$%                                     <span class="kw">|</span>
+   <span class="ex">50000</span> +****  #########**           $%%                  #######         ++
+         <span class="kw">|</span>  ####           <span class="ex">********</span>    <span class="va">$$</span>%              ###       ##        <span class="kw">|</span>
+         <span class="kw">|</span>##                       <span class="ex">******</span>##           ##<span class="va">$$$$$$$$$$$$</span>#       <span class="kw">|</span>
+         <span class="ex">+</span>       +        +       +      **###########<span class="va">$$</span>*************       +
+       <span class="ex">0</span> ++------+--------+-------+--------*************---+--------+------++
+        <span class="ex">1890</span>    1900     1910    1920     1930    1940    1950     1960    1970
+                                       <span class="ex">Period</span></code></pre></div>
+</div>
+<div id="summary" class="section level3">
+<h3><span class="header-section-number">7.4.9</span> Summary</h3>
+<p>Both <code>Rio</code> with <code>ggplot2</code> and <code>feedgnuplot</code> with Gnuplot have their advantages. The plots generated by <code>Rio</code> are obviously of much higher quality. It offers a consistent syntax that lends itself well for the command line. The only down-side would be that the output is not viewable from the command line. This is where <code>feedgnuplot</code> may come in handy. Each plot has roughly the same command-line arguments. As such, it would be straightforward to create a small Bash script that would make generating plots from and for the command line even easier. After all, with the command line having such a low resolution, we don’t need a lot of flexibility.</p>
+</div>
+</div>
+<div id="further-reading-6" class="section level2">
+<h2><span class="header-section-number">7.5</span> Further Reading</h2>
+<ul>
+<li>Wickham, Hadley. 2009. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.</li>
+<li>Janert, Philipp K. 2009. <em>Gnuplot in Action</em>. Manning Publications.</li>
+<li>Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Pearson.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-6-managing-your-data-workflow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-8-parallel-pipelines.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

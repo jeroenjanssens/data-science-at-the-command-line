@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="chapter-1-introduction.html">
+<link rel="prev" href="chapter-1-introduction.html">
+<link rel="next" href="chapter-3-obtaining-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -324,52 +324,314 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>Data science is an exited field to work in. It’s also still very young. Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science. However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.</p>
-<p>Around five years ago, during my PhD program, I gradually switched from using Microsoft Windows to Linux. Because it was a bit scary at first, I started with having both operating systems installed next to each other (known as dual-boot). The urge to switch back and forth between Microsoft Windows faded and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch. All you’re given is the command line, and it’s up to you what you want to make of it. Out of necessity I quickly became very comfortable using the command line. Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its easy-of-use and large community. However, the command line is still where I’m spending most of time.</p>
-<p>It actually hasn’t been too long ago that I realized that the command line is not just for installing software, system configuration, and searching files. I started learning about command-line tools such as <code>cut</code>, <code>sort</code>, and <code>sed</code>. These are examples of command-line tools that take data as input, do something to it, and print the result. Ubuntu comes with quite a few of them. Once I understood the potential of combining these small tools, I was hooked.</p>
-<p>After my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible. Thanks to a couple of new, open-source command-line tools including <code>xml2json</code>, <code>jq</code>, and <code>json2csv</code> I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data. In September 2013, I decided to write a blog post titled <em>Seven Command-line Tools for Data Science</em>, which is available at <a href="http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html" class="uri">http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html</a>. To my surprise, the blog post got quite some attention and I received a lot of suggestions of other command-line tools. I started wondering whether this blog post could be turned into a book. I’m pleased that, some ten months later, with the help of many talented people (see the acknowledgments below), the answer is a yes.</p>
-<p>I am sharing this personal story not so much because I think you should know how this book came about, but because I want to you know that I had to learn about the command line as well. Because the command line is so different from using a graphical user interface, it can seem scary at first. But if I can learn it, then you can as well. No matter what your current operating system is and no matter how you currently work with data, after reading this book you will be able to do data science at the command line. If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.</p>
-<div id="what-to-expect-from-this-book" class="section level2 unnumbered">
-<h2>What to Expect from This Book</h2>
-<p>In this book, we’re going to obtain, scrub, explore, and model data; a lot of it. This book is not so much about how become <em>better</em> at those data science tasks. There are already great resources available that discuss, for example, when to apply which statistical test or how data can be best visualized. Instead, this practical book aims to make you more <em>efficient</em> and <em>productive</em> by teaching you how to perform those data science tasks at the command line.</p>
-<p>While this book discusses over 80 command-line tools, it’s not the tools themselves that matter most. Some command-line tools have been around for a very long time, while others will be replace by better ones. There are even command-line tools that are being created as you’re reading this. In the past nine months, I have discovered many amazing command-line tools. Unfortunately, some of them were discovered too late to be included in the book. In short, command-line tools come and go. But that’s OK.</p>
-<p>What matters most is the underlying idea of working with tools, pipes, and data. Most of the command-line tools do one thing and do it well. This is part the UNIX philosophy, which makes several appearances throughout the book. Once you become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.</p>
+<div id="chapter-2-getting-started" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Getting Started</h1>
+<p>In this chapter we are going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.</p>
+<p>First, we describe how to install the Data Science Toolbox, which is a virtual environment based on GNU/Linux that contains all the necessary command-line tools. Subsequently, we explain the essential command-line concepts through examples.</p>
+<p>By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.</p>
+<div id="overview-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Overview</h2>
+<p>In this chapter, you’ll learn:</p>
+<ul>
+<li>How to set up the Data Science Toolbox.</li>
+<li>Essential concepts and tools necessary to perform data science at the command line.</li>
+</ul>
 </div>
-<div id="how-to-read-this-book" class="section level2 unnumbered">
-<h2>How to Read This Book</h2>
-<p>In general, you’re advised to read this book in a linear fashion. Once a concept or command-line tool has been introduced, chances are that we employ it in a later chapter. For example, in Chapter 9, we make heavy use of <code>parallel</code>, which is introduced extensively in Chapter 8.</p>
-<p>Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning. As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length. Throughout the book, there are suggestions for additional reading. It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.</p>
+<div id="setting-up-your-data-science-toolbox" class="section level2">
+<h2><span class="header-section-number">2.2</span> Setting Up Your Data Science Toolbox</h2>
+<p>In this book we use many different command-line tools. The distribution of GNU/Linux that we assume, Ubuntu, comes with a whole bunch of command-line tools pre-installed. Moreover, Ubuntu offers many packages that contain other, relevant command-line tools. Installing these packages yourself is not too difficult. However, we also use command-line tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, we encourage you to install the Data Science Toolbox.</p>
+
+<div class="rmdnote">
+If you prefer to run the command-line tools natively rather than inside a virtual machine, then you can install the command-line tools individually. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only, so please check the book’s website at <a href="http://datasciencatthecommandline.com" class="uri">http://datasciencatthecommandline.com</a> for up-to-date information on how to install the command-line tools natively on other operating systems. The scripts and data sets used in the book can be obtained by cloning this book’s GitHub repository at <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line" class="uri">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.
 </div>
-<div id="who-this-book-is-for" class="section level2 unnumbered">
-<h2>Who This Book Is For</h2>
-<p>This book makes just one assumption about you: that you work with data. It doesn’t matter whether which programming language or statistical computing environment you’re currently using. The book starts explains all the necessary concepts from the beginning.</p>
-<p>It also doesn’t matter whether your operating system is Microsoft Windows, MacOS, or some form of Linux. The book comes with a Docker image, which is an easy-to-install virtual environment. It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written. You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.</p>
-<p>The book contains some code in Bash, Python, and R so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.</p>
+
+<p>The Data Science Toolbox is a virtual environment that allows you to get started doing data science in minutes. The default version comes with commonly used software for data science, including the Python scientific stack and R together with its most popular packages. Additional software and data bundles are easily installed. These bundles can be specific to a certain book, course, or organization. You can read more about the Data Science Toolbox in general at <a href="http://datasciencetoolbox.org" class="uri">http://datasciencetoolbox.org</a>.</p>
 </div>
-<div id="acknowledgments" class="section level2 unnumbered">
-<h2>Acknowledgments</h2>
-<p>First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post <a href="http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html">Seven Command-Line Tools for Data Science</a>, which I wrote in September 2013, could be expanded into a book.</p>
-<p>Special thanks to my technical reviewers Mike Dewar, Brian Eoff, and Shane Reustle for reading various drafts, meticulously testing all the commands, and providing invaluable feedback. Your efforts have improved the book greatly. The remaining errors are entirely my own responsibility.</p>
-<p>I had the privilege of working together with three amazing editors, namely: Ann Spencer, Julie Steele, and Marie Beaugureau. Thank you for your guidance and for being such great liaisons with the many talented people at O’Reilly. Those people include: Laura Baldwin, Huguette Barriere, Sophia DeMartini, Yasmina Greco, Rachel James, Ben Lorica, Mike Loukides, and Christopher Pappas. There are many others whom I haven’t met because they are operating behind the scenes. Together they ensured that working with O’Reilly has truly been a pleasure.</p>
-<p>This book discusses over 80 command-line tools. Needless to say, without these tools, this book wouldn’t have existed in the first place. I’m therefore extremely grateful to all the authors who created and contributed to these tools. The complete list of authors is unfortunately too long to include here; they are mentioned in the Appendix. Thanks especially to Aaron Crow, Jehiah Czebotar, Christoph Groskopf, Dima Kogan, Sergey Lisitsyn, Francisco J. Martin, and Ole Tange for providing help with their amazing command-line tools.</p>
-<p>Eric Postma and Jaap van den Herik, who supervised me during my PhD program, deserve a special thank you. Over the course of five years they have taught me many lessons. Although writing a technical book is quite different from writing a PhD thesis, many of those lessons proved to be very helpful in the past nine months as well.</p>
-<p>Finally, I’d like to thank my colleagues at YPlan, my friends, my family, and especially my wife Esther for supporting me and for pulling me away from the command line at just the right times.</p>
+<div id="essential-gnulinux-concepts" class="section level2">
+<h2><span class="header-section-number">2.3</span> Essential GNU/Linux Concepts</h2>
+<p>In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, we briefly showed you what the command line is. Now that you have your own Data Science Toolbox, we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.</p>
+
+<div class="rmdnote">
+This section is not a complete course in GNU/Linux. We will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the Data Science Toolbox is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
 </div>
-<div id="about-the-author" class="section level2 unnumbered">
-<h2>About the Author</h2>
-<p><a href="http://jeroenjanssens.com/">Jeroen Janssens</a> is the founder and CEO of <a href="https://datascienceworkshops.com">Data Science Workshops</a>, which provides on-the-job training and coaching in data visualisation, machine learning, and programming. Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and startups YPlan and Outbrain in New York City. He is the author of Data Science at the Command Line, published by O’Reilly Media. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He can be found on <a href="https://twitter.com/jeroenhjanssens/">Twitter</a>, <a href="http://www.linkedin.com/in/jeroenjanssens">LinkedIn</a>, and <a href="https://github.com/jeroenjanssens">GitHub</a>.</p>
+
+<div id="the-environment" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> The Environment</h3>
+<p>So you’ve just logged into a brand new environment. Before we do anything, it is worthwhile to get a high-level understanding of this environment. The environment is roughly defined by four layers, which we briefly discuss from the top down.</p>
+<dl>
+<dt>Command-line tools</dt>
+<dd><p>First and foremost, there are the command-line tools that you work with. We use them by typing their corresponding commands. There are different types of command-line tools, which we will discuss in the next section. Examples of tools are: <code>ls</code> <span class="citation">(Stallman and MacKenzie <a href="references.html#ref-ls">2012</a><a href="references.html#ref-ls">a</a>)</span>, <code>cat</code> <span class="citation">(Granlund and Stallman <a href="references.html#ref-cat">2012</a><a href="references.html#ref-cat">a</a>)</span>, and <code>jq</code> <span class="citation">(Dolan <a href="references.html#ref-jq">2014</a>)</span>.</p>
+</dd>
+<dt>Terminal</dt>
+<dd><p>The terminal, which is the second layer, is the application where we type our commands in. If you see the following text:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 3
+<span class="ex">1</span>
+<span class="ex">2</span>
+<span class="ex">3</span></code></pre></div>
+<p>then you would type <code>seq 3</code> into your terminal and press <code>&lt;Enter&gt;</code>. (The command-line tool <code>seq</code> <span class="citation">(Drepper <a href="references.html#ref-seq">2012</a>)</span> generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below <code>seq 3</code> is the output of the command. In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, we showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.</p>
+</dd>
+<dt>Shell</dt>
+<dd><p>The third layer is the shell. Once we have typed in our command and pressed <code>&lt;Enter&gt;</code>, the terminal sends that command to the shell. The shell is a program that interprets the command. The Data Science Toolbox uses Bash as the shell, but there are many others available. Once you have become a bit more proficient at the command line, you may want to look into a shell called the Z shell. It offers many additional features that may increase your productivity at the command line.</p>
+</dd>
+<dt>Operating system</dt>
+<dd><p>The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The Data Science Toolbox is based on a particular Linux distribution called Ubuntu.</p>
+</dd>
+</dl>
+</div>
+<div id="executing-a-command-line-tool" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Executing a Command-line Tool</h3>
+<p>Now that you have a basic understanding of the environment, it is high time that you try out some commands. Type the following in your terminal (without the dollar sign) and press <code>&lt;Enter&gt;</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">pwd</span>
+<span class="ex">/home/vagrant</span></code></pre></div>
+<p>Sometimes we are using commands and pipelines that are too long to fit on the page. In that case you’ll see something like the following:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;Hello&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39; world&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">wc</span></code></pre></div>
+<p>The greater-than sign is the continuation prompt, which indicates that this line is a continuation of the previous one. A long command can be broken up with either a backslash or a pipe symbol. Be sure to first match any quotation marks. The following command is exactly the same:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;Hello world&#39;</span> <span class="kw">|</span> <span class="fu">wc</span></code></pre></div>
+<p>This is as simple as it gets. You just executed a command that contained a single command-line tool. The command-line tool <code>pwd</code> <span class="citation">(Meyering <a href="references.html#ref-pwd">2012</a><a href="references.html#ref-pwd">b</a>)</span> prints the name of the directory where you currently are. By default, when you login, this is your home directory. You can view the contents of this directory with <code>ls</code> <span class="citation">(Stallman and MacKenzie <a href="references.html#ref-ls">2012</a><a href="references.html#ref-ls">a</a>)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">ls</span>
+<span class="ex">book</span></code></pre></div>
+<p>The command-line tool <code>cd</code>, which is a Bash builtin, allows you to navigate to a different directory:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> book/ch02/
+$ <span class="bu">cd</span> data
+$ <span class="bu">pwd</span>
+<span class="ex">/home/vagrant/book/ch02/data</span>
+$ <span class="bu">cd</span> ..
+$ <span class="bu">pwd</span>
+<span class="ex">/home/vagrant/book/ch02/</span></code></pre></div>
+<p>The part after <code>cd</code> specifies to which directory you want to navigate to. Values that come after the command are called command-line arguments or options. The two dots refer to the parent directory. Let’s try a different command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">head</span> -n 3 data/movies.txt
+<span class="ex">Matrix</span>
+<span class="ex">Star</span> Wars
+<span class="ex">Home</span> Alone</code></pre></div>
+<p>Here we pass three command-line arguments to <code>head</code> <span class="citation">(MacKenzie and Meyering <a href="references.html#ref-head">2012</a><a href="references.html#ref-head">b</a>)</span>. The first one is an option. The second one is a value that belongs to the option. The third one is a filename. This particular command outputs the first three lines of file <em>book/ch02/data/movies.txt</em>.</p>
+</div>
+<div id="five-types-of-command-line-tools" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Five Types of Command-line Tools</h3>
+<p>We employ the term command-line tool a lot, but so far, we have not yet explained what we actually mean by it. We use it as an umbrella term for <em>anything</em> that can be executed from the command line. Under the hood, each command-line tool is one of the following five types:</p>
+<ul>
+<li>A binary executable.</li>
+<li>A shell builtin.</li>
+<li>An interpreted script.</li>
+<li>A shell function.</li>
+<li>An alias.</li>
+</ul>
+<p>It’s good to know the difference between the types. The command-line tools that come pre-installed with the Data Science Toolbox mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our <em>own Data Science Toolbox</em><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> and become more efficient and more productive data scientists.</p>
+<dl>
+<dt>Binary Executable</dt>
+<dd><p>Binary executables are programs in the classical sense. A binary executable is created by compiling source code to machine code. This means that when you open the file in a text editor you cannot read it.</p>
+</dd>
+<dt>Shell Builtin</dt>
+<dd><p>Shell builtins are command-line tools provided by the shell, which is Bash in our case. Examples include <code>cd</code> and <code>help</code>. These cannot be changed. Shell builtins may differ between shells. Like binary executables, they cannot be easily inspected or changed.</p>
+</dd>
+<dt>Interpreted Script</dt>
+<dd><p>An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. Example <a href="chapter-2-getting-started.html#exm:script-fac">2.1</a> shows a script named <em>~/book/ch02/fac.py</em>. This script is interpreted by Python not because of the file extension <em>.py</em>, but because the first line of the script defines the binary that should execute it.</p>
+
+<div class="example">
+<span id="exm:script-fac" class="example"><strong>Example 2.1  (Python script that computes the factorial of an integer)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">##!/usr/bin/env python</span>
+
+<span class="kw">def</span> factorial(x):
+    result <span class="op">=</span> <span class="dv">1</span>
+    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">xrange</span>(<span class="dv">2</span>, x <span class="op">+</span> <span class="dv">1</span>):
+        result <span class="op">*=</span> i
+    <span class="cf">return</span> result
+
+<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:
+    <span class="im">import</span> sys
+    x <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">1</span>])
+    <span class="bu">print</span> factorial(x)</code></pre></div>
+<p>This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">book/ch02/fac.py</span> 5
+<span class="ex">120</span></code></pre></div>
+<p>In <a href="chapter-4-creating-reusable-command-line-tools.html#chapter-4-creating-reusable-command-line-tools">Chapter 4</a>, we’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.</p>
+</dd>
+<dt>Shell Function</dt>
+<dd><p>A shell function is a function that is, in our case executed by Bash. They provide similar functionality to a Bash script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called <code>fac</code>, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using <code>seq</code>, putting those numbers on one line with <code>*</code> as the delimiter using <code>paste</code> <span class="citation">(Ihnat and MacKenzie <a href="references.html#ref-paste">2012</a>)</span>, and passing this equation into <code>bc</code> <span class="citation">(Nelson <a href="references.html#ref-bc">2006</a>)</span>, which is evaluates it and outputs the result.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">fac()</span> <span class="kw">{</span> <span class="kw">(</span><span class="bu">echo</span> 1<span class="kw">;</span> <span class="fu">seq</span> <span class="va">$1</span><span class="kw">)</span> <span class="kw">|</span> <span class="ex">paste</span> -s -d<span class="dt">\*</span> <span class="kw">|</span> <span class="fu">bc</span><span class="kw">;</span> <span class="kw">}</span>
+$ <span class="ex">fac</span> 5
+<span class="ex">120</span></code></pre></div>
+<p>The file <em>.bashrc</em>, which is a configuration file for Bash, is a good place to define your shell functions, so that they are always available.</p>
+</dd>
+<dt>Alias</dt>
+<dd><p>Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for this. Aliases are also very useful when you continue to misspell a certain command (see <a href="https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh" class="uri">https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh</a> for a long list of useful aliases). The following command defines such an alias:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">alias</span> l=<span class="st">&#39;ls -1 --group-directories-first&#39;</span>
+$ <span class="bu">alias</span> moer=more</code></pre></div>
+<p>Now, if you type the following on the command line, the shell will replace each alias it finds with its value:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~
+$ <span class="ex">l</span>
+<span class="ex">book</span></code></pre></div>
+<p>Aliases are simpler than shell functions as they don’t allow parameters. The function <code>fac</code> could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in <em>.bashrc</em> or <em>.bash_aliases</em> configuration files, which are located in your home directory. To see all aliases currently defined, you simply run <code>alias</code> without arguments. Try it, what do you see?</p>
+</dd>
+</dl>
+<p>In this book we will focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases. This is because these can easily be changed. The purpose of a command-line tool is to make your life on the command line easier, and to make you a more productive and more efficient data scientist. You can find out the type of a command-line tool with <code>type</code> (which is itself a shell builtin):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">type</span> -a pwd
+<span class="bu">pwd</span> is a shell builtin
+<span class="bu">pwd</span> is /bin/pwd
+$ <span class="bu">type</span> -a cd
+<span class="bu">cd</span> is a shell builtin
+$ <span class="bu">type</span> -a fac
+<span class="ex">fac</span> is a function
+<span class="fu">fac ()</span>
+<span class="kw">{</span>
+    <span class="kw">(</span> <span class="bu">echo</span> 1<span class="kw">;</span>
+    <span class="fu">seq</span> <span class="va">$1</span> <span class="kw">)</span> <span class="kw">|</span> <span class="ex">paste</span> -s -d<span class="dt">\*</span> <span class="kw">|</span> <span class="fu">bc</span>
+<span class="kw">}</span>
+$ <span class="bu">type</span> -a l
+<span class="ex">l</span> is aliased to <span class="kw">`</span><span class="fu">ls</span> -1 --group-directories-first<span class="st">&#39;</span></code></pre></div>
+<p><code>type</code> returns two command-line tools for <code>pwd</code>. In that case, the first reported command-line tool is used when you type <code>pwd</code>. In the next section we will look at how to combine command-line tools.</p>
+</div>
+<div id="combining-command-line-tools" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Combining Command-line Tools</h3>
+<p>Because most command-line tools adhere to the UNIX philosophy, they are designed to do only thing, and do it really well. For example, the command-line tool <code>grep</code> <span class="citation">(Meyering <a href="references.html#ref-grep">2012</a><a href="references.html#ref-grep">a</a>)</span> can filter lines, <code>wc</code> <span class="citation">(Rubin and MacKenzie <a href="references.html#ref-wc">2012</a>)</span> can count lines, and <code>sort</code> <span class="citation">(Haertel and Eggert <a href="references.html#ref-sort">2012</a>)</span> can sort lines. The power of the command line comes from its ability to combine these small, yet powerful command-line tools. The most important way of combining command-line tools is through a so-called pipe. The output from the first tool is passed to the second tool. There are virtually no limits to this.</p>
+<p>Consider, for example, the command-line tool <code>seq</code>, which generates a sequence of numbers. Let us generate a sequence of five numbers.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5
+<span class="ex">1</span>
+<span class="ex">2</span>
+<span class="ex">3</span>
+<span class="ex">4</span>
+<span class="ex">5</span></code></pre></div>
+<p>The output of a command-line tool is by default passed on to the terminal, which displays it on our screen. We can <em>pipe</em> the ouput of <code>seq</code> to a second tool, called <code>grep</code>, which can be used to filter lines. Imagine that we only want to see numbers that contain a “3”. We can combine <code>seq</code> and <code>grep</code> as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 30 <span class="kw">|</span> <span class="fu">grep</span> 3
+<span class="ex">3</span>
+<span class="ex">13</span>
+<span class="ex">23</span>
+<span class="ex">30</span></code></pre></div>
+<p>And if we wanted to know <em>how many</em> numbers between 1 and 100 that contain a three, we can use <code>wc</code>, that is very good at counting things:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 100 <span class="kw">|</span> <span class="fu">grep</span> 3 <span class="kw">|</span> <span class="fu">wc</span> -l
+<span class="ex">19</span></code></pre></div>
+<p>The option <code>-l</code> specifies that <code>wc</code> should only output the number of lines that are pass into it. By default it also returns the number of characters and words.</p>
+<p>You may start to see that combining command-line tools is a very powerful concept. In the rest of the book you will be introduced to many more tools and the functionality they offer when combining them.</p>
+</div>
+<div id="redirecting-input-and-output" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Redirecting Input and Output</h3>
+<p>We mentioned that, by default, the output of the last command-line tool in the pipeline is outputted to the terminal. You can also save this output to a file. This is called output redirection, and works as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 10 <span class="op">&gt;</span> data/ten-numbers</code></pre></div>
+<p>Here, we save the output of the <code>seq</code> tool to a file named <em>ten-numbers</em> in the directory <em>~/book/ch02/data</em>. If this file does not exist yet, it is created. If this file already did exist, its contents would have been overwritten. You can also append the output to a file with <code>&gt;&gt;</code>, meaning the output is put after the original contents:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> -n <span class="st">&quot;Hello&quot;</span> <span class="op">&gt;</span> hello-world
+$ <span class="bu">echo</span> <span class="st">&quot; World&quot;</span> <span class="op">&gt;&gt;</span> hello-world</code></pre></div>
+<p>The tool echo just outputs the value you specify. The <code>-n</code> option specifies that <code>echo</code> should not output a trailing newline.</p>
+<p>Saving the output to a file is useful if you need to store intermediate results, for example for continuing with your analysis at a later stage. To use the contents of the file <em>hello-world</em> again, we can use <code>cat</code> <span class="citation">(Granlund and Stallman <a href="references.html#ref-cat">2012</a><a href="references.html#ref-cat">a</a>)</span>, which reads a file prints it.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> hello-world <span class="kw">|</span> <span class="fu">wc</span> -w
+<span class="ex">2</span></code></pre></div>
+<p>(Note that the <code>-w</code> option indicates <code>wc</code> to only count words.) The same result can be achieved with the following notation:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">hello-world</span> wc -w
+<span class="ex">2</span></code></pre></div>
+<p>This way, you are directly passing the file to the standard input of <code>wc</code> without running an additional process. If the command-line tool also allows files to be specified as command-line arguments, which many do, you can also do the following for <code>wc</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">wc</span> -w hello-world
+<span class="ex">2</span> hello-world</code></pre></div>
+</div>
+<div id="working-with-files" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> Working With Files</h3>
+<p>As data scientists, we work with a lot of data. This data is often stored in files. It is important to know how to work with files (and the directories they live in) on the command line. Every action that you can do using a graphical user interface, you can do with command-line tools (and much more). In this section we introduce the most important ones to create, move, copy, rename, and delete files and directories.</p>
+<p>You have already seen how we can create new files by redirecting the output with either <code>&gt;</code> or <code>&gt;&gt;</code>. In case you need to move a file to a different directory you can use <code>mv</code> <span class="citation">(Parker, MacKenzie, and Meyering <a href="references.html#ref-mv">2012</a>)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">mv</span> hello.txt ~/book/ch02/data/</code></pre></div>
+<p>You can also rename files with <code>mv</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> data
+$ <span class="fu">mv</span> hello.txt bye.txt</code></pre></div>
+<p>You can also rename or move entire directories. In case you no longer need a file, you delete (or remove) it with <code>rm</code> <span class="citation">(Rubin, MacKenzie, Stallman, et al. <a href="references.html#ref-rm">2012</a>)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">rm</span> bye.txt</code></pre></div>
+<p>In case you want to remove an entire directory with all its contents, specify the <code>-r</code> option, which stands for recursive:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">rm</span> -r book/ch02/data/old</code></pre></div>
+<p>In case you want to copy a file, use <code>cp</code> <span class="citation">(Granlund, MacKenzie, and Meyering <a href="references.html#ref-cp">2012</a>)</span>. This is useful for creating backups:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cp</span> server.log server.log.bak</code></pre></div>
+<p>You can create directories using <code>mkdir</code> <span class="citation">(MacKenzie <a href="references.html#ref-mkdir">2012</a>)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> data
+$ <span class="fu">mkdir</span> logs</code></pre></div>
+<p>Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the filesystem to provide immediate feedback.</p>
+<p>All of the above command-line tools accept the <code>-v</code> option, which stands for verbose, so that they output what’s going on. All but <code>mkdir</code> accept the <code>-i</code> option, which stands for interactive, and causes the tools to ask you for confirmation.</p>
+</div>
+<div id="help" class="section level3">
+<h3><span class="header-section-number">2.3.7</span> Help!</h3>
+<p>As you are finding your way around the command-line, it may happen that you need help. Even the most-seasoned Linux users need help at some point. It is impossible to remember all the different command-line tools and their possible arguments. Fortunately, the command line offers severals ways to get help.</p>
+<p>The most important command to get help is perhaps <code>man</code> <span class="citation">(Eaton and Watson <a href="references.html#ref-man">2014</a>)</span>, which is short for <em>manual</em>. It contains information for most command-line tools. Imagine that we forgot the different options to the tool <code>cat</code>. You can access its man page using:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">man</span> cat <span class="kw">|</span> <span class="fu">head</span> -n 20
+<span class="ex">CAT</span>(1)                           <span class="ex">User</span> Commands                          CAT(1)
+
+
+
+<span class="ex">NAME</span>
+       <span class="fu">cat</span> - concatenate files and print on the standard output
+
+<span class="ex">SYNOPSIS</span>
+       <span class="fu">cat</span> [OPTION]... [FILE]...
+
+<span class="ex">DESCRIPTION</span>
+       <span class="ex">Concatenate</span> FILE(s), <span class="ex">or</span> standard input, to standard output.
+
+       <span class="ex">-A</span>, --show-all
+              <span class="ex">equivalent</span> to -vET
+
+       <span class="ex">-b</span>, --number-nonblank
+              <span class="ex">number</span> nonempty output lines, overrides -n
+
+       <span class="ex">-e</span>     equivalent to -vE</code></pre></div>
+
+<div class="rmdtip">
+Sometimes you’ll see us use <code>head</code>, <code>fold</code>, or <code>cut</code> at the end of a command. This is only to ensure that the output of the command fits on the page; you don’t have to type these. For example, <code>head -n 5</code> only prints the first five lines, <code>fold</code> wraps long lines to 80 characters, and <code>cut -c1-80</code> trims lines that are long than 80 characters.
+</div>
+
+<p>Not every command-line tool has a man page. For shell builtins, such as <code>cd</code>, you need to use the <code>help</code> command-line tool:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">help</span> cd <span class="kw">|</span> <span class="fu">head</span> -n 20
+<span class="ex">cd</span>: cd [-L<span class="kw">|</span>[<span class="ex">-P</span> [-e]] [-@]] [dir]
+    <span class="ex">Change</span> the shell working directory.
+
+    <span class="ex">Change</span> the current directory to DIR.  The default DIR is the value of the
+    <span class="ex">HOME</span> shell variable.
+
+    <span class="ex">The</span> variable CDPATH defines the search path for the directory containing
+    <span class="ex">DIR.</span>  Alternative directory names in CDPATH are separated by a colon (:)<span class="ex">.</span>
+    <span class="ex">A</span> null directory name is the same as the current directory.  If DIR begins
+    <span class="ex">with</span> a slash (/), <span class="kw">then</span> <span class="ex">CDPATH</span> is not used.
+
+    <span class="ex">If</span> the directory is not found, and the shell option <span class="kw">`</span><span class="ex">cdable_vars</span><span class="st">&#39; is set,</span>
+<span class="st">    the word is assumed to be  a variable name.  If that variable has a value,</span>
+<span class="st">    its value is used for DIR.</span>
+
+<span class="st">    Options:</span>
+<span class="st">        -L      force symbolic links to be followed: resolve symbolic links in</span>
+<span class="st">        DIR after processing instances of `..&#39;</span>
+        <span class="ex">-P</span>      use the physical directory structure without following symbolic
+        <span class="ex">links</span>: resolve symbolic links in DIR before processing instances</code></pre></div>
+<p>This help also covers other topics of Bash, in case you are interested (try <code>help</code> without command-line arguments for a list of topics). Remember that you can use <code>type</code> to figure out the kind of a specific command-line tool.</p>
+<p>Newer tools that can be used from the command-line, often lack a man page as well. In that case, your best bet is to invoke the tool with the <code>--help</code> option (and sometimes the <code>-h</code> option). For example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">jq</span> --help
+
+<span class="ex">jq</span> - commandline JSON processor [version 1.4]
+<span class="ex">Usage</span>: jq [options] <span class="op">&lt;</span>jq filter<span class="op">&gt;</span> [file...]
+
+<span class="ex">For</span> a description of the command line options and
+<span class="ex">how</span> to write jq filters (and why you might want to)
+<span class="ex">see</span> the jq manpage, or the online documentation at
+<span class="ex">http</span>://stedolan.github.com/jq</code></pre></div>
+<p>Specifying the <code>--help</code> option also works for the GNU command-line tools such as <code>cat</code>. However, the corresponding man page often provides more information. If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet. In the appendix, there’s a list of all command-line tools used in this book. Besides how each command-line tool can be installed, it also shows how you can get help.</p>
+</div>
+</div>
+<div id="further-reading-1" class="section level2">
+<h2><span class="header-section-number">2.4</span> Further Reading</h2>
+<ul>
+<li>Heddings, Lowell. 2006. “Keyboard Shortcuts for Bash.” <a href="http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc" class="uri">http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc</a>.</li>
+<li>Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.</li>
+</ul>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>Here, we do not refer to the literal Data Science Toolbox we just installed, but to having your own set of tools, in a figurative sense.<a href="chapter-2-getting-started.html#fnref2">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-1-introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-1-introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-3-obtaining-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

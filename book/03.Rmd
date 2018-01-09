@@ -1,4 +1,4 @@
-# Obtaining Data 
+# Obtaining Data {#chapter-3-obtaining-data}
 
 This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. We assume that the data that is needed to solve the data science problem at hand, already exists on some location in some form. Our goal is to get this data onto your computer (or into your Data Science Toolbox) in a form that we can work with.
 
@@ -22,7 +22,7 @@ A common situation is that you already have the files on your own computer. This
 
 ### Local Version of Data Science Toolbox 
 
-We mentioned in Chapter 2 that the Vagrant version of the Data Science Toolbox is an isolated virtual environment. Luckily there is one exception to that: files can be transfered in and out the Data Science Toolbox. The local directory from which you ran `vagrant up` (which is the one that contains the file *Vagrantfile*), is mapped to a directory in the Data Science Toolbox. This directory is called */vagrant*. Please note that this is not your home directory. Let us check the contents of this directory:
+We mentioned in [Chapter 2](#chapter-2-getting-started) that the Vagrant version of the Data Science Toolbox is an isolated virtual environment. Luckily there is one exception to that: files can be transfered in and out the Data Science Toolbox. The local directory from which you ran `vagrant up` (which is the one that contains the file *Vagrantfile*), is mapped to a directory in the Data Science Toolbox. This directory is called */vagrant*. Please note that this is not your home directory. Let us check the contents of this directory:
 
 ```{bash, eval=FALSE}
 $ ls -1 /vagrant
@@ -368,7 +368,7 @@ $ curl -s http://api.randomuser.me | jq '.'
 }
 ```
 
-The data is piped to a command-line tool `jq` in order to display it in a nice way. `jq` has many more possibilities that we will explore in Chapter 5.
+The data is piped to a command-line tool `jq` in order to display it in a nice way. `jq` has many more possibilities that we will explore in [Chapter 5](#chapter-5-scrubbing-data).
 
 Some web APIs return data in a streaming manner. This means that once you connect to it, the data will continue to pour in forever. A well-known example is the Twitter "firehose", which constantly streams all the tweets being sent around the world. Luckily, most command-line tools that we use also operate in a streaming matter, so that we also use this kind of data.
 
@@ -384,7 +384,7 @@ $ curlicue -f credentials \
 > 'https://api.twitter.com/1/statuses/home_timeline.xml'
 ```
 
-For more popular APIs, there are specialized command-line tools available. These are wrappers that provide a convenient way to connect to the API. In Chapter 9, for example, we’ll be using the command-line tool `bigmler` that only connects to BigML’s prediction API.
+For more popular APIs, there are specialized command-line tools available. These are wrappers that provide a convenient way to connect to the API. In [Chapter 9](#chapter-9-modeling-data), for example, we’ll be using the command-line tool `bigmler` that only connects to BigML’s prediction API.
 
 ## Further Reading 
 

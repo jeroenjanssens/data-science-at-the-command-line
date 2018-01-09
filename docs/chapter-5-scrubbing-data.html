@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Science at the Command Line</title>
+  <meta name="description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Science at the Command Line" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Science at the Command Line" />
+  
+  <meta name="twitter:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+<meta name="author" content="Jeroen Janssens">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="chapter-4-creating-reusable-command-line-tools.html">
+<link rel="next" href="chapter-6-managing-your-data-workflow.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#further-reading-1"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#overview-2"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-a-database"><i class="fa fa-check"></i><b>3.5</b> Querying a Database</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#further-reading-2"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#overview-3"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#further-reading-3"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#overview-4"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#further-reading-4"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#overview-5"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#further-reading-5"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#overview-6"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#further-reading-6"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a><ul>
+<li class="chapter" data-level="8.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#overview-7"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#discussion-1"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#further-reading-7"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#overview-8"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#further-reading-8"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a><ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#interpreting-data-1"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-5-scrubbing-data" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Scrubbing Data</h1>
+<p>Two chapters ago, in Step 1 of the OSEMN model for data science, we looked at how to obtain data from a variety of sources. It’s not uncommon for this data to have missing values, inconsistencies, errors, weird characters, or uninteresting columns. Sometimes we only need a specific portion of the data. And sometimes we need the data to be in a different format. In those cases, we have to scrub, or clean, the data before we can move on to Step 3: Exploring Data.</p>
+<p>The data we obtained in Chapter 3 can come in a variety of formats. The most common ones are plain text, CSV, JSON, and HTML/XML. Since most command-line tools operate on one format only, it is worthwhile to be able to convert data from one format to another.</p>
+<p>CSV, which is the main format we’re working with in this chapter, is actually not the easiest format to work with. Many CSV data sets are broken or incompatible with each other because there is no standard syntax, unlike XML and JSON.</p>
+<p>Once our data is in the format we want it to be, we can apply common scrubbing operations. These include filtering, replacing, and merging data. The command line is especially well-suited for these kind of operations, as there exist many powerful command-line tools that are optimized for handling large amounts of data. Tools that we’ll discuss in this chapter include classic ones such as: <code>cut</code> <span class="citation">(Ihnat, MacKenzie, and Meyering <a href="references.html#ref-cut">2012</a>)</span> and <code>sed</code> <span class="citation">(Fenlason et al. <a href="references.html#ref-sed">2012</a>)</span>, and newer ones such as <code>jq</code> <span class="citation">(Dolan <a href="references.html#ref-jq">2014</a>)</span> and <code>csvgrep</code> <span class="citation">(Groskopf <a href="references.html#ref-csvgrep">2014</a><a href="references.html#ref-csvgrep">e</a>)</span>.</p>
+<p>The scrubbing tasks that we discuss in this chapter not only apply to the input data. Sometimes, we also need to reformat the output of some command-line tools. For example, to transform the output of <code>uniq -c</code> to a CSV data set, we could use <code>awk</code> <span class="citation">(Brennan <a href="references.html#ref-awk">1994</a>)</span> and <code>header</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;foo\nbar\nfoo&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr
+      <span class="ex">2</span> foo
+      <span class="ex">1</span> bar
+$ <span class="bu">echo</span> <span class="st">&#39;foo\nbar\nfoo&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span> <span class="kw">|</span> <span class="ex">header</span> -a
+<span class="ex">value</span>,count
+<span class="ex">foo</span>,2
+<span class="ex">bar</span>,1</code></pre></div>
+<p>If your data requires additional functionality than that is offered by (a combination of) these command-line tools, you can use <code>csvsql</code>. This is a new command-line tool that allow you to perform SQL queries directly on CSV files. And remember, if after reading this chapter you still need more flexibility, you’re free to use R, Python, or whatever programming language you prefer.</p>
+<p>The command-line tools will be introduced on a need-to-use basis. You will notice that sometimes we can use the same command-line tool to perform multiple operations, or vice versa, multiple command-line tools to perform the same operation. This chapter is more structured like a cookbook, where the focus is on the problems or recipes, rather than on the command-line tools.</p>
+<div id="overview-4" class="section level2">
+<h2><span class="header-section-number">5.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Convert data from one format to another.</li>
+<li>Apply SQL queries to CSV.</li>
+<li>Filter lines.</li>
+<li><p>Extract and replace values.</p></li>
+<li><p>Split, merge, and extract columns.</p></li>
+</ul>
+</div>
+<div id="common-scrub-operations-for-plain-text" class="section level2">
+<h2><span class="header-section-number">5.2</span> Common Scrub Operations for Plain Text</h2>
+<p>In this section we describe common scrubbing operations for plain text. Formally, plain text refers to a sequence of human-readable characters and optionally, some specific types of control characters (for example a tab or a newline) (see: <a href="http://www.linfo.org/plain_text.html" class="uri">http://www.linfo.org/plain_text.html</a>). Examples include: e-books, emails, log files, and source code.</p>
+<p>For the purpose of this book, we assume that the plain text contains some data, and that it has no clear tabular structure (like the CSV format) or nested structure (like the JSON and HTML formats). We discuss those formats later in this chapter. Although these operations can also be applied to CSV, JSON and XML/HTML formats, keep in mind that the tools treat the data as plain text.</p>
+<div id="filtering-lines" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Filtering Lines</h3>
+<p>The first scrubbing operation is filtering lines. This means that from the input data, each line will be evaluated whether it may be passed on as output.</p>
+<div id="based-on-location" class="section level4">
+<h4><span class="header-section-number">5.2.1.1</span> Based on Location</h4>
+<p>The most straightforward way to filter lines is based on their location. This may be useful when you want to inspect, say, the top 10 lines of a file, or when you extract a specific row from the output of another command-line tool. To illustrate how to filter based on location, let’s create a dummy file that contains 10 lines:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> -f <span class="st">&quot;Line %g&quot;</span> 10 <span class="kw">|</span> <span class="fu">tee</span> data/lines
+<span class="ex">Line</span> 1
+<span class="ex">Line</span> 2
+<span class="ex">Line</span> 3
+<span class="ex">Line</span> 4
+<span class="ex">Line</span> 5
+<span class="ex">Line</span> 6
+<span class="ex">Line</span> 7
+<span class="ex">Line</span> 8
+<span class="ex">Line</span> 9
+<span class="ex">Line</span> 10</code></pre></div>
+<p>We can print the first 3 lines using either <code>head</code>, <code>sed</code>, or <code>awk</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">lines</span> head -n 3
+$ <span class="op">&lt;</span> <span class="ex">lines</span> sed -n <span class="st">&#39;1,3p&#39;</span>
+$ <span class="op">&lt;</span> <span class="ex">lines</span> awk <span class="st">&#39;NR&lt;=3&#39;</span>
+<span class="ex">Line</span> 1
+<span class="ex">Line</span> 2
+<span class="ex">Line</span> 3</code></pre></div>
+<p>Similarly, we can print the last 3 lines using <code>tail</code> <span class="citation">(Rubin, MacKenzie, Taylor, et al. <a href="references.html#ref-tail">2012</a>)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">lines</span> tail -n 3
+<span class="ex">Line</span> 8
+<span class="ex">Line</span> 9
+<span class="ex">Line</span> 10</code></pre></div>
+<p>You can also you use <code>sed</code> and <code>awk</code> for this, but <code>tail</code> is much faster.</p>
+<p>Removing the first 3 lines goes as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">lines</span> tail -n +4
+$ <span class="op">&lt;</span> <span class="ex">lines</span> sed <span class="st">&#39;1,3d&#39;</span>
+$ <span class="op">&lt;</span> <span class="ex">lines</span> sed -n <span class="st">&#39;1,3!p&#39;</span>
+<span class="ex">Line</span> 4
+<span class="ex">Line</span> 5
+<span class="ex">Line</span> 6
+<span class="ex">Line</span> 7
+<span class="ex">Line</span> 8
+<span class="ex">Line</span> 9
+<span class="ex">Line</span> 10</code></pre></div>
+<p>Please notice that with tail you have to add one.</p>
+<p>Removing the last 3 lines can be done with <code>head</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">lines</span> head -n -3
+<span class="ex">Line</span> 1
+<span class="ex">Line</span> 2
+<span class="ex">Line</span> 3
+<span class="ex">Line</span> 4
+<span class="ex">Line</span> 5
+<span class="ex">Line</span> 6
+<span class="ex">Line</span> 7</code></pre></div>
+<p>You can print (or extract) specific lines (4, 5, and 6 in this case) using a either <code>sed</code>, <code>awk</code>, or a combination of <code>head</code> and <code>tail</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">lines</span> sed -n <span class="st">&#39;4,6p&#39;</span>
+$ <span class="op">&lt;</span> <span class="ex">lines</span> awk <span class="st">&#39;(NR&gt;=4)&amp;&amp;(NR&lt;=6)&#39;</span>
+$ <span class="op">&lt;</span> <span class="ex">lines</span> head -n 6 <span class="kw">|</span> <span class="fu">tail</span> -n 3
+<span class="ex">Line</span> 4
+<span class="ex">Line</span> 5
+<span class="ex">Line</span> 6</code></pre></div>
+<p>Print odd lines with <code>sed</code> by specifying a start and a step, or with <code>awk</code> by using the modulo operator:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">lines</span> sed -n <span class="st">&#39;1~2p&#39;</span>
+$ <span class="op">&lt;</span> <span class="ex">lines</span> awk <span class="st">&#39;NR%2&#39;</span>
+<span class="ex">Line</span> 1
+<span class="ex">Line</span> 3
+<span class="ex">Line</span> 5
+<span class="ex">Line</span> 7
+<span class="ex">Line</span> 9</code></pre></div>
+<p>Printing even lines works in a similar manner:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">lines</span> sed -n <span class="st">&#39;0~2p&#39;</span>
+$ <span class="op">&lt;</span> <span class="ex">lines</span> awk <span class="st">&#39;(NR+1)%2&#39;</span>
+<span class="ex">Line</span> 2
+<span class="ex">Line</span> 4
+<span class="ex">Line</span> 6
+<span class="ex">Line</span> 8
+<span class="ex">Line</span> 10</code></pre></div>
+</div>
+<div id="based-on-pattern" class="section level4">
+<h4><span class="header-section-number">5.2.1.2</span> Based on Pattern</h4>
+<p>Sometimes you want to extract or remove lines based on their contents. Using <code>grep</code>, the canonical command-line tool for filtering lines, we can print every line that matches a certain pattern or regular expression. For example, to extract all the chapter headings from <em>Alice’s Adventures in Wonderland</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">grep</span> -i chapter alice.txt
+<span class="ex">CHAPTER</span> I. Down the Rabbit-Hole
+<span class="ex">CHAPTER</span> II. The Pool of Tears
+<span class="ex">CHAPTER</span> III. A Caucus-Race and a Long Tale
+<span class="ex">CHAPTER</span> IV. The Rabbit Sends in a Little Bill
+<span class="ex">CHAPTER</span> V. Advice from a Caterpillar
+<span class="ex">CHAPTER</span> VI. Pig and Pepper
+<span class="ex">CHAPTER</span> VII. A Mad Tea-Party
+<span class="ex">CHAPTER</span> VIII. The Queen<span class="st">&#39;s Croquet-Ground</span>
+<span class="st">CHAPTER IX. The Mock Turtle&#39;</span>s Story
+<span class="ex">CHAPTER</span> X. The Lobster Quadrille
+<span class="ex">CHAPTER</span> XI. Who Stole the Tarts?
+<span class="ex">CHAPTER</span> XII. Alice<span class="st">&#39;s Evidence</span></code></pre></div>
+<p>Here, <code>-i</code> means case-insensitive. We can also specify a regular expression. For example, if we only wanted to print out the headings which start with <em>The</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">grep</span> -E <span class="st">&#39;^CHAPTER (.*)\. The&#39;</span> alice.txt
+<span class="ex">CHAPTER</span> II. The Pool of Tears
+<span class="ex">CHAPTER</span> IV. The Rabbit Sends in a Little Bill
+<span class="ex">CHAPTER</span> VIII. The Queen<span class="st">&#39;s Croquet-Ground</span>
+<span class="st">CHAPTER IX. The Mock Turtle&#39;</span>s Story
+<span class="ex">CHAPTER</span> X. The Lobster Quadrille</code></pre></div>
+<p>Please note that you have to specify the <code>-E</code> command-line argument in order to enable regular expressions. Otherwise, <code>grep</code> interprets the pattern as a literal string.</p>
+</div>
+<div id="based-on-randomness" class="section level4">
+<h4><span class="header-section-number">5.2.1.3</span> Based on Randomness</h4>
+<p>When you’re in the process of formulating your data pipeline and you have a lot of data, then debugging your pipeline can be cumbersome. In that case, sampling from the data might be useful. The main purpose of the command-line tool <code>sample</code> <span class="citation">(Janssens <a href="references.html#ref-sample">2014</a><a href="references.html#ref-sample">f</a>)</span> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 1000 <span class="kw">|</span> <span class="ex">sample</span> -r 1% <span class="kw">|</span> <span class="ex">jq</span> -c <span class="st">&#39;{line: .}&#39;</span>
+<span class="dt">{&quot;line&quot;:53}</span>
+<span class="dt">{&quot;line&quot;:119}</span>
+<span class="dt">{&quot;line&quot;:141}</span>
+<span class="dt">{&quot;line&quot;:228}</span>
+<span class="dt">{&quot;line&quot;:464}</span>
+<span class="dt">{&quot;line&quot;:476}</span>
+<span class="dt">{&quot;line&quot;:523}</span>
+<span class="dt">{&quot;line&quot;:657}</span>
+<span class="dt">{&quot;line&quot;:675}</span>
+<span class="dt">{&quot;line&quot;:865}</span>
+<span class="dt">{&quot;line&quot;:948}</span></code></pre></div>
+<p>Here, every input line has a one percent chance of being forwarded to <code>jq</code>. This percentage could also have been specified as a fraction (<em>1/100</em>) or as a probability (<em>0.01</em>).</p>
+<p><code>sample</code> has two other purposes, which can be useful when you’re in debugging. First, it’s possible to add some delay to the output. This comes in handy when the input is a constant stream (for example, the Twitter firehose), and the data comes in too fast to see what’s going on. Secondly, you can put a timer on <code>sample</code>. This way, you don’t have to kill the ongoing process manually. To add a 1 second delay between each output line to the previous command and to only run for 5 seconds:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 10000 <span class="kw">|</span> <span class="ex">sample</span> -r 1% -d 1000 -s 5 <span class="kw">|</span> <span class="ex">jq</span> -c <span class="st">&#39;{line: .}&#39;</span></code></pre></div>
+<p>In order to prevent unnecessary computation, try to put <code>sample</code> as early as possible in your pipeline (this argument holds any command-line tool that reduces data, like <code>head</code> and <code>tail</code>). Once you’re done debugging you can simply take it out of the pipeline.</p>
+</div>
+</div>
+<div id="extracting-values" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Extracting Values</h3>
+<p>To extract the actual chapter headings from our example earlier, we can take a simple approach by piping the output of <code>grep</code> to <code>cut</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">grep</span> -i chapter alice.txt <span class="kw">|</span> <span class="fu">cut</span> -d<span class="st">&#39; &#39;</span> -f3-
+<span class="ex">Down</span> the Rabbit-Hole
+<span class="ex">The</span> Pool of Tears
+<span class="ex">A</span> Caucus-Race and a Long Tale
+<span class="ex">The</span> Rabbit Sends in a Little Bill
+<span class="ex">Advice</span> from a Caterpillar
+<span class="ex">Pig</span> and Pepper
+<span class="ex">A</span> Mad Tea-Party
+<span class="ex">The</span> Queen<span class="st">&#39;s Croquet-Ground</span>
+<span class="st">The Mock Turtle&#39;</span>s Story
+<span class="ex">The</span> Lobster Quadrille
+<span class="ex">Who</span> Stole the Tarts?
+<span class="ex">Alice</span><span class="st">&#39;s Evidence</span></code></pre></div>
+<p>Here, each line that’s passed to <code>cut</code> is being split on spaces into fields, and then the third field to the last field is being printed. The total number of fields may be different per input line. With <code>sed</code> we can accomplish the same task in a much more complex manner:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">sed</span> -rn <span class="st">&#39;s/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p&#39;</span> alice.txt <span class="op">&gt;</span> /dev/null</code></pre></div>
+<p>(Since the output is the same it’s omitted by redirecting it to <em>/dev/null</em>.) This approach uses a regular expression and a back reference. Here, <code>sed</code> also takes over the work done by <code>grep</code>. This complex approach is only advisable when a simpler one would not work. For example, if <em>chapter</em> was ever part of the text itself and not just used to indicate the start of a new chapter. Of course there are many levels of complexity which would have worked around this, but this was to illustrate an extremely strict approach. In practice, the challenge is to find a good balance between complexity and flexibility.</p>
+<p>It’s worth noting that <code>cut</code> can also split on characters positions. This is useful for when you want to extract (or remove) the same set of characters per input line:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">grep</span> -i chapter alice.txt <span class="kw">|</span> <span class="fu">cut</span> -c 9-
+<span class="ex">I.</span> Down the Rabbit-Hole
+<span class="ex">II.</span> The Pool of Tears
+<span class="ex">III.</span> A Caucus-Race and a Long Tale
+<span class="ex">IV.</span> The Rabbit Sends in a Little Bill
+<span class="ex">V.</span> Advice from a Caterpillar
+<span class="ex">VI.</span> Pig and Pepper
+<span class="ex">VII.</span> A Mad Tea-Party
+<span class="ex">VIII.</span> The Queen<span class="st">&#39;s Croquet-Ground</span>
+<span class="st">IX. The Mock Turtle&#39;</span>s Story
+<span class="ex">X.</span> The Lobster Quadrille
+<span class="ex">XI.</span> Who Stole the Tarts?
+<span class="ex">XII.</span> Alice<span class="st">&#39;s Evidence</span></code></pre></div>
+<p><code>grep</code> has a great feature that outputs every match onto a separate line:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">alice.txt</span> grep -oE <span class="st">&#39;\w{2,}&#39;</span> <span class="kw">|</span> <span class="fu">head</span>
+<span class="ex">Project</span>
+<span class="ex">Gutenberg</span>
+<span class="ex">Alice</span>
+<span class="ex">Adventures</span>
+<span class="kw">in</span>
+<span class="ex">Wonderland</span>
+<span class="ex">by</span>
+<span class="ex">Lewis</span>
+<span class="ex">Carroll</span>
+<span class="ex">This</span></code></pre></div>
+<p>But what if we wanted to create a data set of all the words that start with an <em>a</em> and end with an <em>e</em>. Well, of course there’s a pipeline for that too:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">alice.txt</span> tr <span class="st">&#39;[:upper:]&#39;</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -oE <span class="st">&#39;\w{2,}&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">grep</span> -E <span class="st">&#39;^a.*e$&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">sort</span> -nr <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">awk</span> <span class="st">&#39;{print $2&quot;,&quot;$1}&#39;</span> <span class="kw">|</span> <span class="ex">header</span> -a word,count <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">-------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">word</span>       <span class="kw">|</span> <span class="ex">count</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-------------+--------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">alice</span>      <span class="kw">|</span> <span class="ex">403</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">are</span>        <span class="kw">|</span> <span class="ex">73</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">archive</span>    <span class="kw">|</span> <span class="ex">13</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">agree</span>      <span class="kw">|</span> <span class="ex">11</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">anyone</span>     <span class="kw">|</span> <span class="ex">5</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">alone</span>      <span class="kw">|</span> <span class="ex">5</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">age</span>        <span class="kw">|</span> <span class="ex">4</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">applicable</span> <span class="kw">|</span> <span class="ex">3</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">anywhere</span>   <span class="kw">|</span> <span class="ex">3</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">alive</span>      <span class="kw">|</span> <span class="ex">3</span>      <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-------------+--------</span><span class="kw">|</span></code></pre></div>
+</div>
+<div id="replacing-and-deleting-values" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Replacing and Deleting Values</h3>
+<p>You can use the command-line tool <code>tr</code>, which stands for translate, to replace individual characters. For example, spaces can be replaced by underscores as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39; &#39;</span> <span class="st">&#39;_&#39;</span>
+<span class="ex">hello_world</span>!</code></pre></div>
+<p>If more than one character needs to be replaced, then you can combine that:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39; !&#39;</span> <span class="st">&#39;_?&#39;</span>
+<span class="ex">hello_world?</span></code></pre></div>
+<p><code>tr</code> can also be used to delete individual characters by specifying the argument <code>-d</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <span class="kw">|</span> <span class="fu">tr</span> -d -c <span class="st">&#39;[a-z]&#39;</span>
+<span class="ex">helloworld</span></code></pre></div>
+<p>Here, we’ve actually used two more features. First we’ve specified a set of characters (all lowercase letters). Second we’ve indicated that the complement <code>-c</code> should be used. In other words, this command only retains lowercase letters. We can even use <code>tr</code> to convert our text to uppercase:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39;[a-z]&#39;</span> <span class="st">&#39;[A-Z]&#39;</span>
+<span class="ex">HELLO</span> WORLD!
+$ <span class="bu">echo</span> <span class="st">&#39;hello world!&#39;</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39;[:lower:]&#39;</span> <span class="st">&#39;[:upper:]&#39;</span>
+<span class="ex">HELLO</span> WORLD!</code></pre></div>
+<p>The latter command is preferable because that also handles non-ASCII characters. If you need to operate on more than individual characters, then you may find <code>sed</code> useful. We’ve already seen an example of <code>sed</code> with extracting the chapter headings from Alice in Wonderland. Extracting, deleting, and replacing is actually all the same operation in <code>sed</code>. You just specify different regular expressions. For example, to change a word, remove repeated spaces, and remove leading spaces:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39; hello     world!&#39;</span> <span class="kw">|</span> <span class="fu">sed</span> -re <span class="st">&#39;s/hello/bye/;s/\s+/ /g;s/\s+//&#39;</span>
+<span class="ex">bye</span> world!</code></pre></div>
+<p>The argument <code>-g</code> stands for global, meaning that the same command can be applied more than once on the same line. We do not need that with the second command, which removes leading spaces. Note that regular expressions of the first and the last command could have been combined into one regular expression.</p>
+</div>
+</div>
+<div id="working-with-csv" class="section level2">
+<h2><span class="header-section-number">5.3</span> Working with CSV</h2>
+<div id="bodies-and-headers-and-columns-oh-my" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Bodies and Headers and Columns, Oh My!</h3>
+<p>The command-line tools that we’ve used to scrub plain text, such as <code>tr</code> and <code>grep</code>, cannot always be applied to CSV. The reason is that these command-line tools have no notion of headers, bodies, and columns. What if we wanted to filter lines using <code>grep</code> but always include the header in the output? Or what if we only wanted to uppercase the values of a specific column using <code>tr</code> and leave the other columns untouched? There are multi-step workarounds for this, but they are very cumbersome. We have something better. In order to leverage ordinary command-line tools for CSV, we’d like to introduce you to three command-line tools, aptly named: <code>body</code> <span class="citation">(Janssens <a href="references.html#ref-body">2014</a><a href="references.html#ref-body">a</a>)</span>, <code>header</code> <span class="citation">(Janssens <a href="references.html#ref-header">2014</a><a href="references.html#ref-header">c</a>)</span>, and <code>cols</code> <span class="citation">(Janssens <a href="references.html#ref-cols">2014</a><a href="references.html#ref-cols">b</a>)</span>.</p>
+<p>Let’s start with the first command-line tool, <code>body</code>. With <code>body</code> you can apply any command-line tool to the body of a CSV file, that is, everything excluding the header. For example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> -e <span class="st">&quot;value\n7\n2\n5\n3&quot;</span> <span class="kw">|</span> <span class="ex">body</span> sort -n
+<span class="ex">value</span>
+<span class="ex">2</span>
+<span class="ex">3</span>
+<span class="ex">5</span>
+<span class="ex">7</span></code></pre></div>
+<p>It assumes that the header of the CSV file only spans one row. Here’s the source code for completeness:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="va">IFS=</span> <span class="bu">read</span> -r <span class="va">header</span>        
+<span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&quot;</span><span class="va">$header</span><span class="st">&quot;</span>    
+<span class="va">$@</span>                         </code></pre></div>
+<p>It works like this:</p>
+<ul>
+<li>Take one line from standard in and store it as a variable named <em>$header</em>.</li>
+<li>Print out the header.</li>
+<li>Execute all the command-line arguments passed to <code>body</code> on the remaining data in standard in.</li>
+</ul>
+<p>Here’s another example. Imagine that we count the lines of the following CSV file:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a count
+<span class="ex">count</span>
+<span class="ex">1</span>
+<span class="ex">2</span>
+<span class="ex">3</span>
+<span class="ex">4</span>
+<span class="ex">5</span></code></pre></div>
+<p>With <code>wc -l</code>, we can count the number of all lines:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a count <span class="kw">|</span> <span class="fu">wc</span> -l
+<span class="ex">6</span></code></pre></div>
+<p>If we only want to consider the lines in the body (so everything except the header), we simply add <code>body</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a count <span class="kw">|</span> <span class="ex">body</span> wc -l
+<span class="ex">count</span>
+<span class="ex">5</span></code></pre></div>
+<p>Note that the header is not used and is also printed again in the output.</p>
+<p>The second command-line tool, <code>header</code> allows us, as the name implies, to manipulate the header of a CSV file. The complete source code is as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="fu">get_header ()</span> <span class="kw">{</span>
+        <span class="kw">for</span> <span class="ex">i</span> in <span class="va">$(</span><span class="fu">seq</span> <span class="va">$NUMROWS)</span><span class="kw">;</span> <span class="kw">do</span>
+                <span class="va">IFS=</span> <span class="bu">read</span> -r <span class="va">LINE</span>
+                <span class="va">OLDHEADER=</span><span class="st">&quot;</span><span class="va">${OLDHEADER}${LINE}</span><span class="st">\n&quot;</span>
+        <span class="kw">done</span>
+<span class="kw">}</span>
+
+<span class="fu">print_header ()</span> <span class="kw">{</span>
+        <span class="bu">echo</span> -ne <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span>
+<span class="kw">}</span>
+
+<span class="fu">print_body ()</span> <span class="kw">{</span>
+        <span class="fu">cat</span>
+<span class="kw">}</span>
+
+<span class="va">OLDHEADER=</span>
+<span class="va">NUMROWS=</span>1
+
+<span class="kw">while</span> <span class="bu">getopts</span> <span class="st">&quot;dn:ha:r:e:&quot;</span> OPTION
+<span class="kw">do</span>
+        <span class="kw">case</span> <span class="va">$OPTION</span><span class="kw"> in</span>
+                n<span class="kw">)</span>
+                        <span class="va">NUMROWS=$OPTARG</span>
+                        <span class="kw">;;</span>
+                a<span class="kw">)</span>
+                        <span class="ex">print_header</span> <span class="st">&quot;</span><span class="va">$OPTARG</span><span class="st">\n&quot;</span>
+                        <span class="ex">print_body</span>
+                        <span class="bu">exit</span> 1
+                        <span class="kw">;;</span>
+                d<span class="kw">)</span>
+                        <span class="ex">get_header</span>
+                        <span class="ex">print_body</span>
+                        <span class="bu">exit</span> 1
+                        <span class="kw">;;</span>
+                r<span class="kw">)</span>
+                        <span class="ex">get_header</span>
+                        <span class="ex">print_header</span> <span class="st">&quot;</span><span class="va">$OPTARG</span><span class="st">\n&quot;</span>
+                        <span class="ex">print_body</span>
+                        <span class="bu">exit</span> 1
+                        <span class="kw">;;</span>
+                e<span class="kw">)</span>
+                        <span class="ex">get_header</span>
+                        <span class="ex">print_header</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">echo</span> -ne <span class="va">$OLDHEADER</span> <span class="kw">|</span> <span class="bu">eval</span> <span class="va">$OPTARG)</span><span class="st">\n&quot;</span>
+                        <span class="ex">print_body</span>
+                        <span class="bu">exit</span> 1
+                        <span class="kw">;;</span>
+                h<span class="kw">)</span>
+                        <span class="ex">usage</span>
+                        <span class="bu">exit</span> 1
+                        <span class="kw">;;</span>
+        <span class="kw">esac</span>
+<span class="kw">done</span>
+
+<span class="ex">get_header</span>
+<span class="ex">print_header</span> <span class="va">$OLDHEADER</span></code></pre></div>
+<p>If no argument are provided, the header of the CSV file is printed:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">tips.csv</span> <span class="kw">|</span> <span class="ex">header</span>
+<span class="ex">bill</span>,tip,sex,smoker,day,time,size</code></pre></div>
+<p>This is the same as <code>head -n 1</code>. If the header spans more than one row, which is not recommended, you can specify <code>-n 2</code>. We can also add a header to a CSV file:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a count
+<span class="ex">count</span>
+<span class="ex">1</span>
+<span class="ex">2</span>
+<span class="ex">3</span>
+<span class="ex">4</span>
+<span class="ex">5</span></code></pre></div>
+<p>This is equivalent to <code>echo &quot;count&quot; | cat - &lt;(seq 5)</code>. Deleting a header is done with the <code>-d</code> command-line argument:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">iris.csv</span> <span class="kw">|</span> <span class="ex">header</span> -d <span class="kw">|</span> <span class="fu">head</span>
+<span class="ex">5.1</span>,3.5,1.4,0.2,Iris-setosa
+<span class="ex">4.9</span>,3.0,1.4,0.2,Iris-setosa
+<span class="ex">4.7</span>,3.2,1.3,0.2,Iris-setosa
+<span class="ex">4.6</span>,3.1,1.5,0.2,Iris-setosa
+<span class="ex">5.0</span>,3.6,1.4,0.2,Iris-setosa
+<span class="ex">5.4</span>,3.9,1.7,0.4,Iris-setosa
+<span class="ex">4.6</span>,3.4,1.4,0.3,Iris-setosa
+<span class="ex">5.0</span>,3.4,1.5,0.2,Iris-setosa
+<span class="ex">4.4</span>,2.9,1.4,0.2,Iris-setosa
+<span class="ex">4.9</span>,3.1,1.5,0.1,Iris-setosa</code></pre></div>
+<p>This is similar to <code>tail -n +2</code>, but it’s a bit easier to remember. Replacing a header, which is basically first deleting a header and then adding one if you look at the above source code, is accomplished with specifying <code>-r</code>. Here, we combine it with <code>body</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a line <span class="kw">|</span> <span class="ex">body</span> wc -l <span class="kw">|</span> <span class="ex">header</span> -r count
+<span class="ex">count</span>
+<span class="ex">5</span></code></pre></div>
+<p>And last but not least, we can apply a command to just the header, similar to what the <code>body</code> command-line tool does to the body:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a line <span class="kw">|</span> <span class="ex">header</span> -e <span class="st">&quot;tr &#39;[a-z]&#39; &#39;[A-Z]&#39;&quot;</span>
+<span class="ex">LINE</span>
+<span class="ex">1</span>
+<span class="ex">2</span>
+<span class="ex">3</span>
+<span class="ex">4</span>
+<span class="ex">5</span></code></pre></div>
+<p>The third command-line tool is called <code>cols</code>, which is similar to <code>header</code> and <code>body</code> in that it allows you to apply a certain command to only a subset of the columns. The code is as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="va">ARG=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span>
+<span class="bu">shift</span>
+<span class="va">COLUMNS=</span><span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span>
+<span class="bu">shift</span>
+<span class="va">EXPR=</span><span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span>
+<span class="va">DIRTMP=$(</span><span class="fu">mktemp</span> -d<span class="va">)</span>
+<span class="fu">mkfifo</span> <span class="va">$DIRTMP</span>/other_columns
+<span class="fu">tee</span> <span class="va">$DIRTMP</span>/other_columns <span class="kw">|</span> <span class="ex">csvcut</span> <span class="va">$ARG</span> <span class="va">$COLUMNS</span> <span class="kw">|</span> <span class="va">${EXPR}</span> <span class="kw">|</span>
+<span class="ex">paste</span> -d, - <span class="op">&lt;(</span><span class="ex">csvcut</span> <span class="va">${ARG</span><span class="er">~~</span><span class="va">}</span> <span class="va">$COLUMNS</span> <span class="va">$DIRTMP</span>/other_columns<span class="op">)</span>
+<span class="fu">rm</span> -rf <span class="va">$DIRTMP</span></code></pre></div>
+<p>For example, if we wanted to uppercase the values in the day column in the tips data set (without affecting the other columns and the header), we would use <code>cols</code> in combination with <code>body</code>, as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">tips.csv</span> cols -c day body <span class="st">&quot;tr &#39;[a-z]&#39; &#39;[A-Z]&#39;&quot;</span> <span class="kw">|</span> <span class="fu">head</span> -n 5 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">------+-------+------+--------+--------+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">day</span> <span class="kw">|</span> <span class="ex">bill</span>  <span class="kw">|</span> <span class="ex">tip</span>  <span class="kw">|</span> <span class="ex">sex</span>    <span class="kw">|</span> <span class="ex">smoker</span> <span class="kw">|</span> <span class="bu">time</span>   <span class="kw">|</span> <span class="fu">size</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------+-------+------+--------+--------+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">SUN</span> <span class="kw">|</span> <span class="ex">16.99</span> <span class="kw">|</span> <span class="ex">1.01</span> <span class="kw">|</span> <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">2</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">SUN</span> <span class="kw">|</span> <span class="ex">10.34</span> <span class="kw">|</span> <span class="ex">1.66</span> <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">SUN</span> <span class="kw">|</span> <span class="ex">21.01</span> <span class="kw">|</span> <span class="ex">3.5</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">SUN</span> <span class="kw">|</span> <span class="ex">23.68</span> <span class="kw">|</span> <span class="ex">3.31</span> <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">2</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------+-------+------+--------+--------+--------+-------</span><span class="kw">|</span></code></pre></div>
+<p>Please note that passing multiple command-line tools and arguments as command to <code>header -e</code>, <code>body</code>, and <code>cols</code> can lead to tricky quoting citations. If you ever run in such problems, it is best to create a separate command-line tool for this and pass that as command.</p>
+<p>In conclusion, while it is generally preferable to use command-line tools which are specifically made for CSV data, <code>body</code>, <code>header</code>, and <code>cols</code> also allow you to apply the classic command-line tools to CSV files if needed.</p>
+</div>
+<div id="performing-sql-queries-on-csv" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Performing SQL Queries on CSV</h3>
+<p>In case the command-line tools mentioned in this chapter do not provide enough flexibility, then there is another approach to scrub your data from the command line. The command-line tool <code>csvsql</code> <span class="citation">(Groskopf <a href="references.html#ref-csvsql">2014</a><a href="references.html#ref-csvsql">f</a>)</span> allows you to execute SQL queries directly on CSV files. As you may know, SQL is a very powerful language to define operations for scrubbing data; it is a very different way than using individual command-line tools.</p>
+
+<div class="rmdnote">
+If your data originally comes from a relational database, then, if possible, try to execute SQL queries on that database and subsequently extract the data as CSV. As discussed in Chapter 3, you can use the command-line tool <code>sql2csv</code> for this. When you first export data from the database to a CSV file, and then apply SQL, it is not only slower, but there is also a possibility that the column types are not correctly inferred from the CSV data.
+</div>
+
+<p>In the scrubbing tasks below, we’ll include several solutions that involve <code>csvsql</code>. The basic command is this:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a value <span class="kw">|</span> <span class="ex">csvsql</span> --query <span class="st">&quot;SELECT SUM(value) AS sum FROM stdin&quot;</span>
+<span class="fu">sum</span>
+<span class="ex">15</span></code></pre></div>
+<p>If you pass standard input to <code>csvsql</code>, then the table is named <em>stdin</em>. The types of the column are automatically inferred from the data. As you will see later, in the combining CSV files section, you can also specify multiple CSV files. Please keep in mind that <code>csvsql</code> employs SQLite dialect. While SQL is generally more verbose than the other solutions, it is also much more flexible. If you already know how to tackle a scrubbing problem with SQL, then there’s no shame in using it from the command line!</p>
+</div>
+</div>
+<div id="working-with-xmlhtml-and-json" class="section level2">
+<h2><span class="header-section-number">5.4</span> Working with XML/HTML and JSON</h2>
+<p>As we have seen in Chapter 3, our obtained data can come in a variety of formats. The most common ones are plain text, CSV, JSON, and HTML/XML. In this section we are going to demonstrate a couple of command-line tools that can convert our data from one format to another. There are two reasons to convert data.</p>
+<p>First, oftentimes, the data needs to be in tabular form, just like a database table or a spreadsheet, because many visualization and machine learning algorithms depend on it. CSV is inherently in tabular form, but JSON and HTML/XML data can have a deeply nested structure.</p>
+<p>Second, many command-line tools, especially the classic ones such as <code>cut</code> and <code>grep</code>, operate on plain text. This is because text is regarded as a universal interface between command-line tools. Moreover, the other formats are simply younger. Each of these formats can be treated as plain text, allowing us to apply such command-line tools to the other formats as well.</p>
+<p>Sometimes we can get away with applying the classic tools to structured data. For example, by treating the JSON data below as plain text, we can change the attribute <em>gender</em> to <em>sex</em> using <code>sed</code>:</p>
+<pre><code>$ sed -e &#39;s/&quot;gender&quot;:/&quot;sex&quot;:/g&#39; data/users.json | fold | head -n 3</code></pre>
+<p>Like many other command-line tools, <code>sed</code> does not make use of the structure of the data. Better is to either use a command-line tool that makes use of the structure of the data (such as <code>jq</code> which we discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.</p>
+<p>We’re going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case. The command-line tools that we’ll be using here are: <code>curl</code>, <code>scrape</code> <span class="citation">(Janssens <a href="references.html#ref-scrape">2014</a><a href="references.html#ref-scrape">g</a>)</span>, <code>xml2json</code> <span class="citation">(Parmentier <a href="references.html#ref-xml2json">2014</a>)</span>, <code>jq</code> <span class="citation">(Dolan <a href="references.html#ref-jq">2014</a>)</span>, and <code>json2csv</code> <span class="citation">(Czebotar <a href="references.html#ref-json2csv">2014</a>)</span>.</p>
+<p>Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets. For example, the page <a href="http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio" class="uri">http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio</a> contains a list of countries and territories together with their border length, their area, and the ration between the two.</p>
+<p>Let’s imagine that we’re interested in analyzing this data. In this section, we’ll walk you through all the necessary steps and their corresponding commands. We won’t go into every little detail, so it could be that you won’t understand everything right away. Don’t worry, we’re confident that you’ll get the gist of it. Remember that the purpose of this section is to demonstrate the command line. All tools and concepts used in this section (and more) will be explained in the subsequent chapters.</p>
+<p>The data set that we’re interested in, is embedded in HTML. Our goal is to end up with a representation of this data set that we can work with. The very first step is to download the HTML using <code>curl</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">curl</span> -sL <span class="st">&#39;http://en.wikipedia.org/wiki/List_of_countries_and_territories_&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;by_border/area_ratio&#39;</span> <span class="op">&gt;</span> data/wiki.html</code></pre></div>
+<p>The option <code>-s</code> causes <code>curl</code> to be silent and not output any other information but the actual HTML. The HTML is saved to a file named <code>data/wiki.html</code>. Let’s see how the first 10 lines look like:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">head</span> -n 10 data/wiki.html <span class="kw">|</span> <span class="fu">cut</span> -c1-79
+<span class="op">&lt;</span>!<span class="ex">DOCTYPE</span> html<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">html</span> lang=<span class="st">&quot;en&quot;</span> dir=<span class="st">&quot;ltr&quot;</span> class=<span class="st">&quot;client-nojs&quot;</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="fu">head</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">meta</span> charset=<span class="st">&quot;UTF-8&quot;</span> /<span class="op">&gt;&lt;</span>title<span class="op">&gt;</span>List of countries and territories by border/area
+<span class="op">&lt;</span><span class="ex">meta</span> http-equiv=<span class="st">&quot;X-UA-Compatible&quot;</span> content=<span class="st">&quot;IE=EDGE&quot;</span> /<span class="op">&gt;&lt;</span>meta name=<span class="st">&quot;generator&quot;</span> c
+<span class="op">&lt;</span><span class="fu">link</span> rel=<span class="st">&quot;alternate&quot;</span> type=<span class="st">&quot;application/x-wiki&quot;</span> title=<span class="st">&quot;Edit this page&quot;</span> href=<span class="st">&quot;/w</span>
+<span class="st">&lt;link rel=&quot;</span>edit<span class="st">&quot; title=&quot;</span>Edit this page<span class="st">&quot; href=&quot;</span>/w/index.php?title=List_of_countr
+<span class="op">&lt;</span><span class="fu">link</span> rel=<span class="st">&quot;apple-touch-icon&quot;</span> href=<span class="st">&quot;//bits.wikimedia.org/apple-touch/wikipedia.p</span>
+<span class="st">&lt;link rel=&quot;</span>shortcut icon<span class="st">&quot; href=&quot;</span>//bits.wikimedia.org/favicon/wikipedia.ico<span class="st">&quot; /&gt;</span>
+<span class="st">&lt;link rel=&quot;</span>search<span class="st">&quot; type=&quot;</span>application/opensearchdescription+xml<span class="st">&quot; href=&quot;</span>/w/opense</code></pre></div>
+<p>That seems to be in order. (Note that we’re only showing the first 79 characters of each line so that output fits on the page.)</p>
+<p>Using the developer tools of our browser, we were able to determine that the root HTML element that we’re interested in is a <em>&lt;table&gt;</em> with the class <em>wikitable</em>. This allows us to look at the part that we’re interest in using <code>grep</code> (the <code>-A</code> command-line argument specifies the number of lines we want to see after the matching line):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/wiki.html</span> grep wikitable -A 21
+<span class="op">&lt;</span><span class="ex">table</span> class=<span class="st">&quot;wikitable sortable&quot;</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="fu">tr</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">th</span><span class="op">&gt;</span>Rank<span class="op">&lt;</span>/th<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">th</span><span class="op">&gt;</span>Country or territory<span class="op">&lt;</span>/th<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">th</span><span class="op">&gt;</span>Total length of land borders (km)<span class="op">&lt;</span>/<span class="ex">th</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">th</span><span class="op">&gt;</span>Total surface area (kmÂ²)<span class="op">&lt;</span>/<span class="ex">th</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">th</span><span class="op">&gt;</span>Border/area ratio (km/kmÂ²)<span class="op">&lt;</span>/<span class="ex">th</span><span class="op">&gt;</span>
+<span class="op">&lt;</span>/<span class="ex">tr</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="fu">tr</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;1&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>Vatican City<span class="op">&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>3.<span class="op">2&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>0.<span class="op">44&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>7.<span class="op">2727273&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span>/<span class="ex">tr</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="fu">tr</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;2&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>Monaco<span class="op">&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>4.<span class="op">4&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;2&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>2.<span class="op">2000000&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span>/<span class="ex">tr</span><span class="op">&gt;</span></code></pre></div>
+<p>We now actually see the countries and their values that we first saw in the screenshot. The next step is to extract the necessary elements from the HTML file. For this we use the <code>scrape</code> tool:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/wiki.html</span> scrape -b -e <span class="st">&#39;table.wikitable &gt; tr:not(:first-child)&#39;</span> \
+<span class="op">&gt;</span> <span class="op">&gt;</span> data/table.html
+$ <span class="fu">head</span> -n 21 data/table.html
+<span class="op">&lt;</span>!<span class="ex">DOCTYPE</span> html<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">html</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">body</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="fu">tr</span><span class="op">&gt;&lt;</span>td<span class="op">&gt;1&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>Vatican City<span class="op">&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>3.<span class="op">2&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>0.<span class="op">44&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>7.<span class="op">2727273&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span>/<span class="ex">tr</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="fu">tr</span><span class="op">&gt;&lt;</span>td<span class="op">&gt;2&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>Monaco<span class="op">&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>4.<span class="op">4&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;2&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>2.<span class="op">2000000&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span>/<span class="ex">tr</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="fu">tr</span><span class="op">&gt;&lt;</span>td<span class="op">&gt;3&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>San Marino<span class="op">&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;39&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;61&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ex">td</span><span class="op">&gt;</span>0.<span class="op">6393443&lt;</span>/td<span class="op">&gt;</span>
+<span class="op">&lt;</span>/<span class="ex">tr</span><span class="op">&gt;</span></code></pre></div>
+<p>The value passed to argument <code>-e</code>, which stands for <em>expression</em> (also with many other command-line tools), is a so-called CSS-selector. The syntax is usually used to style web pages, but we can also use it to select certain elements from our HTML. In this case, we wish to select all <em>&lt;tr&gt;</em> elements or <em>rows</em> (except the first) that are part of a table which belongs to the <em>wikitable</em> class. This is precisely the table that we’re interested in. The reason that we don’t want the first row (specified by <em>:not(first-child)</em>) is that we don’t want the header of the table. This results in a data set where each row represents a country or territory. As you can see, we now have a <em>&lt;tr&gt;</em> elements that we’re looking for, encapsulated in <em>&lt;html&gt;` and ’&lt;body&gt;</em> elements (because we specified the <code>-b</code> argument). This ensures that our next tool, <code>xml2json</code>, can work with it.</p>
+<p>As its name implies, <code>xml2json</code> converts XML (and HTML) to JSON.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/table.html</span> xml2json <span class="op">&gt;</span> data/table.json
+$ <span class="op">&lt;</span> <span class="ex">data/table.json</span> jq <span class="st">&#39;.&#39;</span> <span class="kw">|</span> <span class="fu">head</span> -n 25
+<span class="kw">{</span>
+  <span class="st">&quot;html&quot;</span>: <span class="kw">{</span>
+    <span class="st">&quot;body&quot;</span>: <span class="kw">{</span>
+      <span class="st">&quot;tr&quot;</span>:<span class="bu"> [</span>
+        {
+          <span class="st">&quot;td&quot;</span>: [
+            {
+              <span class="st">&quot;</span><span class="va">$t</span><span class="st">&quot;</span>: <span class="st">&quot;1&quot;</span>
+            },
+            {
+              <span class="st">&quot;</span><span class="va">$t</span><span class="st">&quot;</span>: <span class="st">&quot;Vatican City&quot;</span>
+            },
+            {
+              <span class="st">&quot;</span><span class="va">$t</span><span class="st">&quot;</span>: <span class="st">&quot;3.2&quot;</span>
+            },
+            {
+              <span class="st">&quot;</span><span class="va">$t</span><span class="st">&quot;</span>: <span class="st">&quot;0.44&quot;</span>
+            },
+            {
+              <span class="st">&quot;</span><span class="va">$t</span><span class="st">&quot;</span>: <span class="st">&quot;7.2727273&quot;</span>
+            }
+          ]
+        },
+        {
+          <span class="st">&quot;td&quot;</span>: [</code></pre></div>
+<p>The reason we convert the HTML to JSON is because there is a very powerful tool called <code>jq</code> that operates on JSON data. The following command extracts certain parts of the JSON data and reshapes it into a form that we can work with:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/table.json</span> jq -c <span class="st">&#39;.html.body.tr[] | {country: .td[1][],border:&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;.td[2][], surface: .td[3][]}&#39;</span> <span class="op">&gt;</span> data/countries.json
+$ <span class="fu">head</span> -n 10 data/countries.json
+{<span class="st">&quot;surface&quot;</span>:<span class="st">&quot;0.44&quot;</span>,<span class="st">&quot;border&quot;</span>:<span class="st">&quot;3.2&quot;</span>,<span class="st">&quot;country&quot;</span>:<span class="st">&quot;Vatican City&quot;</span>}
+<span class="dt">{&quot;surface&quot;:&quot;2&quot;,&quot;border&quot;:&quot;4.4&quot;,&quot;country&quot;:&quot;Monaco&quot;}</span>
+{<span class="st">&quot;surface&quot;</span>:<span class="st">&quot;61&quot;</span>,<span class="st">&quot;border&quot;</span>:<span class="st">&quot;39&quot;</span>,<span class="st">&quot;country&quot;</span>:<span class="st">&quot;San Marino&quot;</span>}
+<span class="dt">{&quot;surface&quot;:&quot;160&quot;,&quot;border&quot;:&quot;76&quot;,&quot;country&quot;:&quot;Liechtenstein&quot;}</span>
+{<span class="st">&quot;surface&quot;</span>:<span class="st">&quot;34&quot;</span>,<span class="st">&quot;border&quot;</span>:<span class="st">&quot;10.2&quot;</span>,<span class="st">&quot;country&quot;</span>:<span class="st">&quot;Sint Maarten (Netherlands)&quot;</span>}
+<span class="dt">{&quot;surface&quot;:&quot;468&quot;,&quot;border&quot;:&quot;120.3&quot;,&quot;country&quot;:&quot;Andorra&quot;}</span>
+{<span class="st">&quot;surface&quot;</span>:<span class="st">&quot;6&quot;</span>,<span class="st">&quot;border&quot;</span>:<span class="st">&quot;1.2&quot;</span>,<span class="st">&quot;country&quot;</span>:<span class="st">&quot;Gibraltar (United Kingdom)&quot;</span>}
+{<span class="st">&quot;surface&quot;</span>:<span class="st">&quot;54&quot;</span>,<span class="st">&quot;border&quot;</span>:<span class="st">&quot;10.2&quot;</span>,<span class="st">&quot;country&quot;</span>:<span class="st">&quot;Saint Martin (France)&quot;</span>}
+<span class="dt">{&quot;surface&quot;:&quot;2586&quot;,&quot;border&quot;:&quot;359&quot;,&quot;country&quot;:&quot;Luxembourg&quot;}</span>
+{<span class="st">&quot;surface&quot;</span>:<span class="st">&quot;6220&quot;</span>,<span class="st">&quot;border&quot;</span>:<span class="st">&quot;466&quot;</span>,<span class="st">&quot;country&quot;</span>:<span class="st">&quot;Palestinian territories&quot;</span>}</code></pre></div>
+<p>Now we’re getting somewhere. JSON is a very popular data format, with many advantages, but for our purposes, we’re better off with having the data in CSV format. The tool <code>json2csv</code> is able to convert the data from JSON to CSV:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/countries.json</span> json2csv -p -k border,surface <span class="op">&gt;</span> data/countries.csv
+$ <span class="fu">head</span> -n 11 data/countries.csv <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">border</span> <span class="kw">|</span> <span class="ex">surface</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">3.2</span>    <span class="kw">|</span> <span class="ex">0.44</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.4</span>    <span class="kw">|</span> <span class="ex">2</span>        <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">39</span>     <span class="kw">|</span> <span class="ex">61</span>       <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">76</span>     <span class="kw">|</span> <span class="ex">160</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">10.2</span>   <span class="kw">|</span> <span class="ex">34</span>       <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">120.3</span>  <span class="kw">|</span> <span class="ex">468</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1.2</span>    <span class="kw">|</span> <span class="ex">6</span>        <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">10.2</span>   <span class="kw">|</span> <span class="ex">54</span>       <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">359</span>    <span class="kw">|</span> <span class="ex">2586</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">466</span>    <span class="kw">|</span> <span class="ex">6220</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------+----------</span><span class="kw">|</span></code></pre></div>
+<p>The data is now in a form that we can work with. Those were quite a few steps to get from a Wikipedia page to a CSV data set. However, when you combine all of the above commands into one, you will see that it’s actually really concise and expressive:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">curl</span> -sL <span class="st">&#39;http://en.wikipedia.org/wiki/List_of_countries&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;_and_territories_by_border/area_ratio&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">scrape</span> -be <span class="st">&#39;table.wikitable &gt; tr:not(:first-child)&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">xml2json</span> <span class="kw">|</span> <span class="ex">jq</span> -c <span class="st">&#39;.html.body.tr[] | {country: .td[1][],&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;border: .td[2][], surface: .td[3][], ratio: .td[4][]}&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">json2csv</span> -p -k=border,surface <span class="kw">|</span> <span class="fu">head</span> -n 11 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">border</span> <span class="kw">|</span> <span class="ex">surface</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">3.2</span>    <span class="kw">|</span> <span class="ex">0.44</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.4</span>    <span class="kw">|</span> <span class="ex">2</span>        <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">39</span>     <span class="kw">|</span> <span class="ex">61</span>       <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">76</span>     <span class="kw">|</span> <span class="ex">160</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">10.2</span>   <span class="kw">|</span> <span class="ex">34</span>       <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">120.3</span>  <span class="kw">|</span> <span class="ex">468</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1.2</span>    <span class="kw">|</span> <span class="ex">6</span>        <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">10.2</span>   <span class="kw">|</span> <span class="ex">54</span>       <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">359</span>    <span class="kw">|</span> <span class="ex">2586</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">466</span>    <span class="kw">|</span> <span class="ex">6220</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------+----------</span><span class="kw">|</span></code></pre></div>
+<p>That concludes the demonstration of conversion XML/HTML to JSON to CSV. While <code>jq</code> can perform much more operations, and while there exist specialized tools to work with XML data, in our experience, converting the data to CSV format as quickly as possible tends to work well. This way, you can spend more time becoming proficient at generic command-line tools, rather than very specific tools.</p>
+</div>
+<div id="common-scrub-operations-for-csv" class="section level2">
+<h2><span class="header-section-number">5.5</span> Common Scrub Operations for CSV</h2>
+<div id="extracting-and-reordering-columns" class="section level3">
+<h3><span class="header-section-number">5.5.1</span> Extracting and Reordering Columns</h3>
+<p>Columns can be extracted and reordered using the command-line tool: <code>csvcut</code> <span class="citation">(Groskopf <a href="references.html#ref-csvcut">2014</a><a href="references.html#ref-csvcut">g</a>)</span>. For example, to keep only the columns in the Iris data set that contain numerical values <em>and</em> reorder the middle two columns:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">iris.csv</span> csvcut -c sepal_length,petal_length,sepal_width,petal_width <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">head</span> -n 5 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------------+--------------+-------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">petal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">petal_width</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+--------------+-------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.1</span>          <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">3.5</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.9</span>          <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">3.0</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.7</span>          <span class="kw">|</span> <span class="ex">1.3</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+--------------+-------------+--------------</span><span class="kw">|</span></code></pre></div>
+<p>Alternatively, we can also specify the columns we want to leave out with <code>-C</code>, which stands for <em>complement</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">iris.csv</span> csvcut -C species <span class="kw">|</span> <span class="fu">head</span> -n 5 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">petal_length</span> <span class="kw">|</span> <span class="ex">petal_width</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.1</span>          <span class="kw">|</span> <span class="ex">3.5</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.9</span>          <span class="kw">|</span> <span class="ex">3.0</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.7</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">1.3</span>          <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+--------------</span><span class="kw">|</span></code></pre></div>
+<p>Here, the included columns are kept in the same order. Instead of the column names, you can also specify the indices of the columns, which start at 1. This allows you to, for example, select only the odd columns (should you ever need it!):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">csvcut</span> -c <span class="va">$(</span><span class="fu">seq</span> 1 2 9 <span class="kw">|</span> <span class="ex">paste</span> -sd,<span class="va">)</span>
+<span class="ex">a</span>,c,e,g,i
+<span class="ex">1</span>,3,5,7,9</code></pre></div>
+<p>If you’re certain that there are no comma’s in any of the values, then you can also use <code>cut</code> to extract columns. Be aware that <code>cut</code> does not reorder columns, as is demonstrated with the following command:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">echo</span> <span class="st">&#39;a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9&#39;</span> <span class="kw">|</span> <span class="fu">cut</span> -d, -f 5,1,3
+<span class="ex">a</span>,c,e
+<span class="ex">1</span>,3,5</code></pre></div>
+<p>As you can see, it does not matter in which order we specify the columns with <code>-f</code>, with <code>cut</code> they will always appear in the original order. For completeness, let’s also take a look at the SQL approach for extracting and reordering the numerical columns of the Iris data set:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">iris.csv</span> csvsql --query <span class="st">&quot;SELECT sepal_length, petal_length, &quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;sepal_width, petal_width FROM stdin&quot;</span> <span class="kw">|</span> <span class="fu">head</span> -n 5 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------------+--------------+-------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">petal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">petal_width</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+--------------+-------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.1</span>          <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">3.5</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.9</span>          <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">3.0</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.7</span>          <span class="kw">|</span> <span class="ex">1.3</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+--------------+-------------+--------------</span><span class="kw">|</span></code></pre></div>
+</div>
+<div id="filtering-lines-1" class="section level3">
+<h3><span class="header-section-number">5.5.2</span> Filtering Lines</h3>
+<p>The difference between filtering lines in a CSV file as opposed to a plain text file is that you may want to base this filtering on values in a certain column, only. Filtering on location is essentially the same, but you have to take into account that the first line of a CSV file is usually the header. Remember that you can always use the <code>body</code> command-line tool if you want to keep the header:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="fu">sed</span> -n <span class="st">&#39;3,5p&#39;</span>
+<span class="ex">3</span>
+<span class="ex">4</span>
+<span class="ex">5</span>
+$ <span class="fu">seq</span> 5 <span class="kw">|</span> <span class="ex">header</span> -a count <span class="kw">|</span> <span class="ex">body</span> sed -n <span class="st">&#39;3,5p&#39;</span>
+<span class="ex">count</span>
+<span class="ex">3</span>
+<span class="ex">4</span>
+<span class="ex">5</span></code></pre></div>
+<p>When it comes down to filtering on a certain pattern within a certain column, we can use either <code>csvgrep</code>, <code>awk</code>, or, of course, <code>csvsql</code>. For example, to exclude all the bills of which the party size was 4 or less:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvgrep</span> -c size -i -r <span class="st">&quot;[1-4]&quot;</span> tips.csv <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+------+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bill</span>  <span class="kw">|</span> <span class="ex">tip</span>  <span class="kw">|</span> <span class="ex">sex</span>    <span class="kw">|</span> <span class="ex">smoker</span> <span class="kw">|</span> <span class="ex">day</span>  <span class="kw">|</span> <span class="bu">time</span>   <span class="kw">|</span> <span class="fu">size</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+------+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">29.8</span>  <span class="kw">|</span> <span class="ex">4.2</span>  <span class="kw">|</span> <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Thur</span> <span class="kw">|</span> <span class="ex">Lunch</span>  <span class="kw">|</span> <span class="ex">6</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">34.3</span>  <span class="kw">|</span> <span class="ex">6.7</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Thur</span> <span class="kw">|</span> <span class="ex">Lunch</span>  <span class="kw">|</span> <span class="ex">6</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">41.19</span> <span class="kw">|</span> <span class="ex">5.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Thur</span> <span class="kw">|</span> <span class="ex">Lunch</span>  <span class="kw">|</span> <span class="ex">5</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">27.05</span> <span class="kw">|</span> <span class="ex">5.0</span>  <span class="kw">|</span> <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Thur</span> <span class="kw">|</span> <span class="ex">Lunch</span>  <span class="kw">|</span> <span class="ex">6</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">29.85</span> <span class="kw">|</span> <span class="ex">5.14</span> <span class="kw">|</span> <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Sun</span>  <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">5</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">48.17</span> <span class="kw">|</span> <span class="ex">5.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Sun</span>  <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">6</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">20.69</span> <span class="kw">|</span> <span class="ex">5.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">Sun</span>  <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">5</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">30.46</span> <span class="kw">|</span> <span class="ex">2.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">Yes</span>    <span class="kw">|</span> <span class="ex">Sun</span>  <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">5</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">28.15</span> <span class="kw">|</span> <span class="ex">3.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">Yes</span>    <span class="kw">|</span> <span class="ex">Sat</span>  <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">5</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+------+--------+-------</span><span class="kw">|</span></code></pre></div>
+<p>Both <code>awk</code> and <code>csvsql</code> can also do numerical comparisons. For example, to get all the bills above 40 USD on a Saturday or a Sunday:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">tips.csv</span> awk -F, <span class="st">&#39;($1 &gt; 40.0) &amp;&amp; ($5 ~ /S/)&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+-----+-----+--------+----</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">48.27</span> <span class="kw">|</span> <span class="ex">6.73</span> <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>  <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">4</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+-----+-----+--------+----</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">44.3</span>  <span class="kw">|</span> <span class="ex">2.5</span>  <span class="kw">|</span> <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">Yes</span> <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">48.17</span> <span class="kw">|</span> <span class="ex">5.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>  <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">6</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">50.81</span> <span class="kw">|</span> <span class="ex">10.0</span> <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">Yes</span> <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">45.35</span> <span class="kw">|</span> <span class="ex">3.5</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">Yes</span> <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">40.55</span> <span class="kw">|</span> <span class="ex">3.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">Yes</span> <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">2</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">48.33</span> <span class="kw">|</span> <span class="ex">9.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>  <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">4</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+-----+-----+--------+----</span><span class="kw">|</span></code></pre></div>
+<p>The <code>csvsql</code> solution is more verbose but is also more robust as it uses the names of the columns instead of their indexes:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">tips.csv</span> csvsql --query <span class="st">&quot;SELECT * FROM stdin &quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;WHERE bill &gt; 40 AND day LIKE &#39;%S%&#39;&quot;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+-----+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bill</span>  <span class="kw">|</span> <span class="ex">tip</span>  <span class="kw">|</span> <span class="ex">sex</span>    <span class="kw">|</span> <span class="ex">smoker</span> <span class="kw">|</span> <span class="ex">day</span> <span class="kw">|</span> <span class="bu">time</span>   <span class="kw">|</span> <span class="fu">size</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+-----+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">48.27</span> <span class="kw">|</span> <span class="ex">6.73</span> <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">0</span>      <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">4</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">44.3</span>  <span class="kw">|</span> <span class="ex">2.5</span>  <span class="kw">|</span> <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">1</span>      <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">48.17</span> <span class="kw">|</span> <span class="ex">5.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">0</span>      <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">6</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">50.81</span> <span class="kw">|</span> <span class="ex">10.0</span> <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">1</span>      <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">45.35</span> <span class="kw">|</span> <span class="ex">3.5</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">1</span>      <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">3</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">40.55</span> <span class="kw">|</span> <span class="ex">3.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">1</span>      <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">2</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">48.33</span> <span class="kw">|</span> <span class="ex">9.0</span>  <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">0</span>      <span class="kw">|</span> <span class="ex">Sat</span> <span class="kw">|</span> <span class="ex">Dinner</span> <span class="kw">|</span> <span class="ex">4</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+-----+--------+-------</span><span class="kw">|</span></code></pre></div>
+<p>It should be noted that the flexibility of the <em>WHERE</em> clause in an SQL query cannot be easily matched with other command-line tools, as SQL can operate on dates and sets, and form complex combinations of clauses.</p>
+</div>
+<div id="merging-columns" class="section level3">
+<h3><span class="header-section-number">5.5.3</span> Merging Columns</h3>
+<p>Merging columns is useful for when the values of interest are spread over multiple columns. This may happen with dates (where year, month, and day could be separate columns) or names (where the first name and last name are separate columns). Let’s consider the second situation.</p>
+<p>The input CSV is a list of contemporary composers. Imagine our task is to combine the first name and the last name into a full name. We’ll present four different approaches for this task: <code>sed</code>, <code>awk</code>, <code>cols</code> + <code>tr</code>, and <code>csvsql</code>. Let’s have a look at the input CSV:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names.csv</span> csvlook
+<span class="kw">|</span><span class="ex">-----+-----------+------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="fu">id</span> <span class="kw">|</span> <span class="ex">last_name</span> <span class="kw">|</span> <span class="ex">first_name</span> <span class="kw">|</span> <span class="ex">born</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+-----------+------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1</span>  <span class="kw">|</span> <span class="ex">Williams</span>  <span class="kw">|</span> <span class="ex">John</span>       <span class="kw">|</span> <span class="ex">1932</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">2</span>  <span class="kw">|</span> <span class="ex">Elfman</span>    <span class="kw">|</span> <span class="ex">Danny</span>      <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">3</span>  <span class="kw">|</span> <span class="ex">Horner</span>    <span class="kw">|</span> <span class="ex">James</span>      <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4</span>  <span class="kw">|</span> <span class="ex">Shore</span>     <span class="kw">|</span> <span class="ex">Howard</span>     <span class="kw">|</span> <span class="ex">1946</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5</span>  <span class="kw">|</span> <span class="ex">Zimmer</span>    <span class="kw">|</span> <span class="ex">Hans</span>       <span class="kw">|</span> <span class="ex">1957</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+-----------+------------+-------</span><span class="kw">|</span></code></pre></div>
+<p>The first approach, <code>sed</code>, uses two statements. The first is to replace the header and the second is a regular expression with back references applied to the second row onwards:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names.csv</span> sed -re <span class="st">&#39;1s/.*/id,full_name,born/g;&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="fu">id</span> <span class="kw">|</span> <span class="ex">full_name</span>     <span class="kw">|</span> <span class="ex">born</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1</span>  <span class="kw">|</span> <span class="ex">John</span> Williams <span class="kw">|</span> <span class="ex">1932</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">2</span>  <span class="kw">|</span> <span class="ex">Danny</span> Elfman  <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">3</span>  <span class="kw">|</span> <span class="ex">James</span> Horner  <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4</span>  <span class="kw">|</span> <span class="ex">Howard</span> Shore  <span class="kw">|</span> <span class="ex">1946</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5</span>  <span class="kw">|</span> <span class="ex">Hans</span> Zimmer   <span class="kw">|</span> <span class="ex">1957</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span></code></pre></div>
+<p>The <code>awk</code> approach looks as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names.csv</span> awk -F, <span class="st">&#39;BEGIN{OFS=&quot;,&quot;; print &quot;id,full_name,born&quot;}&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;{if(NR &gt; 1) {print $1,$3&quot; &quot;$2,$4}}&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="fu">id</span> <span class="kw">|</span> <span class="ex">full_name</span>     <span class="kw">|</span> <span class="ex">born</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1</span>  <span class="kw">|</span> <span class="ex">John</span> Williams <span class="kw">|</span> <span class="ex">1932</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">2</span>  <span class="kw">|</span> <span class="ex">Danny</span> Elfman  <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">3</span>  <span class="kw">|</span> <span class="ex">James</span> Horner  <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4</span>  <span class="kw">|</span> <span class="ex">Howard</span> Shore  <span class="kw">|</span> <span class="ex">1946</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5</span>  <span class="kw">|</span> <span class="ex">Hans</span> Zimmer   <span class="kw">|</span> <span class="ex">1957</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span></code></pre></div>
+<p>The <code>cols</code> approach in combination with <code>tr</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names.csv</span> <span class="kw">|</span> <span class="ex">cols</span> -c first_name,last_name tr <span class="dt">\&quot;</span>,<span class="dt">\&quot;</span> <span class="dt">\&quot;</span> <span class="dt">\&quot;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">header</span> -r full_name,id,born <span class="kw">|</span> <span class="ex">csvcut</span> -c id,full_name,born <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="fu">id</span> <span class="kw">|</span> <span class="ex">full_name</span>     <span class="kw">|</span> <span class="ex">born</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1</span>  <span class="kw">|</span> <span class="ex">John</span> Williams <span class="kw">|</span> <span class="ex">1932</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">2</span>  <span class="kw">|</span> <span class="ex">Danny</span> Elfman  <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">3</span>  <span class="kw">|</span> <span class="ex">James</span> Horner  <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4</span>  <span class="kw">|</span> <span class="ex">Howard</span> Shore  <span class="kw">|</span> <span class="ex">1946</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5</span>  <span class="kw">|</span> <span class="ex">Hans</span> Zimmer   <span class="kw">|</span> <span class="ex">1957</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+---------------+-------</span><span class="kw">|</span></code></pre></div>
+<p>Please note that <code>csvsql</code> employ SQLite as the database to execute the query and that <code>||</code> stands for concatenation:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names.csv</span> csvsql --query <span class="st">&quot;SELECT id, first_name || &#39; &#39; || last_name &quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;AS full_name, born FROM stdin&quot;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">-----+-----------------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="fu">id</span> <span class="kw">|</span> <span class="ex">full_name</span>             <span class="kw">|</span> <span class="ex">born</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+-----------------------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">1</span>  <span class="kw">|</span> <span class="ex">John</span> Williams         <span class="kw">|</span> <span class="ex">1932</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">2</span>  <span class="kw">|</span> <span class="ex">Danny</span> Elfman          <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">3</span>  <span class="kw">|</span> <span class="ex">James</span> Horner          <span class="kw">|</span> <span class="ex">1953</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4</span>  <span class="kw">|</span> <span class="ex">Howard</span> Shore          <span class="kw">|</span> <span class="ex">1946</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5</span>  <span class="kw">|</span> <span class="ex">Hans</span> Zimmer           <span class="kw">|</span> <span class="ex">1957</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">-----+-----------------------+-------</span><span class="kw">|</span></code></pre></div>
+<p>What if <em>last_name</em> would contain a comma? Let’s have a look at the raw input CSV for clarity sake:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> names-comma.csv
+<span class="fu">id</span>,last_name,first_name,born
+<span class="ex">1</span>,Williams,John,1932
+<span class="ex">2</span>,Elfman,Danny,1953
+<span class="ex">3</span>,Horner,James,1953
+<span class="ex">4</span>,Shore,Howard,1946
+<span class="ex">5</span>,Zimmer,Hans,1957
+<span class="ex">6</span>,<span class="st">&quot;Beethoven, van&quot;</span>,Ludwig,1770</code></pre></div>
+<p>Well, it appears that the first three approaches fail; all in different ways. Only <code>csvsql</code> is able to combine first_name and full_name:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names-comma.csv</span> sed -re <span class="st">&#39;1s/.*/id,full_name,born/g;&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g&#39;</span> <span class="kw">|</span> <span class="fu">tail</span> -n 1
+<span class="ex">6</span>,<span class="st">&quot;Beethoven,Ludwig  van&quot;</span>,1770</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names-comma.csv</span> awk -F, <span class="st">&#39;BEGIN{OFS=&quot;,&quot;; print &quot;id,full_name,born&quot;}&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;{if(NR &gt; 1) {print $1,$3&quot; &quot;$2,$4}}&#39;</span> <span class="kw">|</span> <span class="fu">tail</span> -n 1
+<span class="ex">6</span>, van<span class="st">&quot; &quot;</span>Beethoven,Ludwig</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names-comma.csv</span> <span class="kw">|</span> <span class="ex">cols</span> -c first_name,last_name tr <span class="dt">\&quot;</span>,<span class="dt">\&quot;</span> <span class="dt">\&quot;</span> <span class="dt">\&quot;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">header</span> -r full_name,id,born <span class="kw">|</span> <span class="ex">csvcut</span> -c id,full_name,born <span class="kw">|</span> <span class="fu">tail</span> -n 1
+<span class="ex">6</span>,<span class="st">&quot;Ludwig &quot;&quot;Beethoven  van&quot;&quot;&quot;</span>,1770</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names-comma.csv</span> csvsql --query <span class="st">&quot;SELECT id, first_name || &#39; &#39; || last_name&quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot; AS full_name, born FROM stdin&quot;</span> <span class="kw">|</span> <span class="fu">tail</span> -n 1
+<span class="ex">6</span>,<span class="st">&quot;Ludwig Beethoven, van&quot;</span>,1770</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">names-comma.csv</span> Rio -e <span class="st">&#39;df$full_name &lt;- paste(df$first_name, df$last_name);&#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;df[c(&quot;id&quot;,&quot;full_name&quot;,&quot;born&quot;)]&#39;</span> <span class="kw">|</span> <span class="fu">tail</span> -n 1
+<span class="ex">6</span>,<span class="st">&quot;Ludwig Beethoven, van&quot;</span>,1770</code></pre></div>
+<p>Wait a minute! What’s that last command? Is that R? Well, as a matter of fact, it is. It’s R code evaluated through a command-line tool called <code>Rio</code> <span class="citation">(Janssens <a href="references.html#ref-Rio">2014</a><a href="references.html#ref-Rio">e</a>)</span>. All that we can say at this moment, is that also this approach succeeds at merging the two columns. We’ll discuss this nifty command-line tool later.</p>
+</div>
+<div id="combining-multiple-csv-files" class="section level3">
+<h3><span class="header-section-number">5.5.4</span> Combining Multiple CSV Files</h3>
+<div id="concatenate-vertically" class="section level4">
+<h4><span class="header-section-number">5.5.4.1</span> Concatenate Vertically</h4>
+<p>Vertical concatenation may be necessary in cases where you have, for example, a data set which is generated on a daily basis, or where each data set represents a different, say, market or product. Let’s simulate the latter by splitting up our beloved Iris data set into three CSV files, so that we have something to combine again. We’ll use <code>fieldsplit</code> <span class="citation">(Hinds et al. <a href="references.html#ref-fieldsplit">2010</a>)</span>, which is part of the <code>CRUSH</code> suite of command-line tools:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">iris.csv</span> fieldsplit -d, -k -F species -p . -s .csv</code></pre></div>
+<p>Here, the command-line arguments specify: the delimiter (<code>-d</code>), that we want to keep the header in each file (<code>-k</code>), the column whose values dictate the possible output files (<code>-F</code>), the relative output path (<code>-p</code>), and the filename suffix (<code>-s</code>), respectively. Because the <em>species</em> column in the Iris data set contains three different values, we end up with three CSV files, each with 50 data points and a header:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">wc</span> -l Iris-*.csv
+  <span class="ex">51</span> Iris-setosa.csv
+  <span class="ex">51</span> Iris-versicolor.csv
+  <span class="ex">51</span> Iris-virginica.csv
+ <span class="ex">153</span> total</code></pre></div>
+<p>You could just concatenate the files back using <code>cat</code> and removing the headers of all but the first file using <code>header -d</code> as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> Iris-setosa.csv <span class="op">&lt;(&lt;</span> <span class="ex">Iris-versicolor.csv</span> header -d<span class="op">)</span> \
+<span class="op">&gt;</span> <span class="op">&lt;(&lt;</span> <span class="ex">Iris-virginica.csv</span> header -d<span class="op">)</span> <span class="kw">|</span> <span class="fu">sed</span> -n <span class="st">&#39;1p;49,54p&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+-------------+------------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">petal_length</span> <span class="kw">|</span> <span class="ex">petal_width</span> <span class="kw">|</span> <span class="ex">species</span>          <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+-------------+------------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.3</span>          <span class="kw">|</span> <span class="ex">3.7</span>         <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span> <span class="ex">0.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.0</span>          <span class="kw">|</span> <span class="ex">3.3</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">7.0</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">4.7</span>          <span class="kw">|</span> <span class="ex">1.4</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.4</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">4.5</span>          <span class="kw">|</span> <span class="ex">1.5</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.9</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">4.9</span>          <span class="kw">|</span> <span class="ex">1.5</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+-------------+------------------</span><span class="kw">|</span></code></pre></div>
+<p>Note that we’re merely using <code>sed</code> to only print the header and the first three body rows that belonged to the second file in order to illustrate success. While this method works, it’s easier (and less prone to errors) to use <code>csvstack</code> <span class="citation">(Groskopf <a href="references.html#ref-csvstack">2014</a><a href="references.html#ref-csvstack">h</a>)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstack</span> Iris-*.csv <span class="kw">|</span> <span class="fu">sed</span> -n <span class="st">&#39;1p;49,54p&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+-------------+------------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">petal_length</span> <span class="kw">|</span> <span class="ex">petal_width</span> <span class="kw">|</span> <span class="ex">species</span>          <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+-------------+------------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.3</span>          <span class="kw">|</span> <span class="ex">3.7</span>         <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span> <span class="ex">0.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.0</span>          <span class="kw">|</span> <span class="ex">3.3</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>      <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">7.0</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">4.7</span>          <span class="kw">|</span> <span class="ex">1.4</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.4</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">4.5</span>          <span class="kw">|</span> <span class="ex">1.5</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.9</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">4.9</span>          <span class="kw">|</span> <span class="ex">1.5</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+--------------+-------------+------------------</span><span class="kw">|</span></code></pre></div>
+<p>If the species column did not exist, you can create a new column based on the filename using <code>csvstack</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstack</span> Iris-*.csv -n species --filenames</code></pre></div>
+<p>Alternatively, you could specify the group names using <code>-g</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstack</span> Iris-*.csv -n class -g a,b,c <span class="kw">|</span> <span class="ex">csvcut</span> -C species <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">sed</span> -n <span class="st">&#39;1p;49,54p&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">--------+--------------+-------------+--------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">class</span> <span class="kw">|</span> <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">petal_length</span> <span class="kw">|</span> <span class="ex">petal_width</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+--------------+-------------+--------------+--------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">a</span>     <span class="kw">|</span> <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">a</span>     <span class="kw">|</span> <span class="ex">5.3</span>          <span class="kw">|</span> <span class="ex">3.7</span>         <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">a</span>     <span class="kw">|</span> <span class="ex">5.0</span>          <span class="kw">|</span> <span class="ex">3.3</span>         <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span> <span class="ex">0.2</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">b</span>     <span class="kw">|</span> <span class="ex">7.0</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">4.7</span>          <span class="kw">|</span> <span class="ex">1.4</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">b</span>     <span class="kw">|</span> <span class="ex">6.4</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">4.5</span>          <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">b</span>     <span class="kw">|</span> <span class="ex">6.9</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">4.9</span>          <span class="kw">|</span> <span class="ex">1.5</span>          <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+--------------+-------------+--------------+--------------</span><span class="kw">|</span></code></pre></div>
+<p>The new column <em>class</em> is added at the front. If you’d like to change the order you can use <code>csvcut</code> as discussed earlier in this section.</p>
+</div>
+<div id="concatenate-horizontally" class="section level4">
+<h4><span class="header-section-number">5.5.4.2</span> Concatenate Horizontally</h4>
+<p>Let’s say you have three CSV files that want to put side by side. We use <code>tee</code> <span class="citation">(Parker, Stallman, and MacKenzie <a href="references.html#ref-tee">2012</a>)</span> to save the result of <code>csvcut</code> in the middle of the pipeline:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> csvcut -c bill,tip <span class="kw">|</span> <span class="fu">tee</span> data/bills.csv <span class="kw">|</span> <span class="fu">head</span> -n 3 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bill</span>  <span class="kw">|</span> <span class="ex">tip</span>   <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">16.99</span> <span class="kw">|</span> <span class="ex">1.01</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">10.34</span> <span class="kw">|</span> <span class="ex">1.66</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+-------</span><span class="kw">|</span>
+$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> csvcut -c day,time <span class="kw">|</span> <span class="fu">tee</span> data/datetime.csv <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">head</span> -n 3 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">------+---------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">day</span> <span class="kw">|</span> <span class="bu">time</span>    <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------+---------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------+---------</span><span class="kw">|</span>
+$ <span class="op">&lt;</span> <span class="ex">data/tips.csv</span> csvcut -c sex,smoker,size <span class="kw">|</span> <span class="fu">tee</span> data/customers.csv <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">head</span> -n 3 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sex</span>    <span class="kw">|</span> <span class="ex">smoker</span> <span class="kw">|</span> <span class="fu">size</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------+--------+-------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">2</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">3</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------+--------+-------</span><span class="kw">|</span></code></pre></div>
+<p>Assuming that the rows line up, you can simply <code>paste</code> <span class="citation">(Ihnat and MacKenzie <a href="references.html#ref-paste">2012</a>)</span> the files together:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">paste</span> -d, data/<span class="dt">{bills,customers,datetime}</span>.csv <span class="kw">|</span> <span class="fu">head</span> -n 3 <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+------+-----+---------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">bill</span>  <span class="kw">|</span> <span class="ex">tip</span>  <span class="kw">|</span> <span class="ex">sex</span>    <span class="kw">|</span> <span class="ex">smoker</span> <span class="kw">|</span> <span class="fu">size</span> <span class="kw">|</span> <span class="ex">day</span> <span class="kw">|</span> <span class="bu">time</span>    <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+------+-----+---------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">16.99</span> <span class="kw">|</span> <span class="ex">1.01</span> <span class="kw">|</span> <span class="ex">Female</span> <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">2</span>    <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span>  <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">10.34</span> <span class="kw">|</span> <span class="ex">1.66</span> <span class="kw">|</span> <span class="ex">Male</span>   <span class="kw">|</span> <span class="ex">No</span>     <span class="kw">|</span> <span class="ex">3</span>    <span class="kw">|</span> <span class="ex">Sun</span> <span class="kw">|</span> <span class="ex">Dinner</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">--------+------+--------+--------+------+-----+---------</span><span class="kw">|</span></code></pre></div>
+<p>Here, the command-line argument <code>-d</code> instructs <code>paste</code> to use a comma as the delimiter.</p>
+</div>
+<div id="joining" class="section level4">
+<h4><span class="header-section-number">5.5.4.3</span> Joining</h4>
+<p>Sometimes data cannot simply by combined by vertical or horizontal concatenation. In some cases, especially in relational databases, the data is spread over multiple tables (or files) in order to minimize redundancy. Imagine we wanted to extend the Iris data set with more information about the three types of Iris flowers, namely the USDA identifier. It so happens that we have separate CSV file with these identifiers:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvlook</span> irismeta.csv
+<span class="kw">|</span><span class="ex">------------------+----------------------------------------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">species</span>         <span class="kw">|</span> <span class="ex">wikipedia_url</span>                                <span class="kw">|</span> <span class="ex">usda_id</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------------------+----------------------------------------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Iris-versicolor</span> <span class="kw">|</span> <span class="ex">http</span>://en.wikipedia.org/wiki/Iris_versicolor <span class="kw">|</span> <span class="ex">IRVE2</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Iris-virginica</span>  <span class="kw">|</span> <span class="ex">http</span>://en.wikipedia.org/wiki/Iris_virginica  <span class="kw">|</span> <span class="ex">IRVI</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">Iris-setosa</span>     <span class="kw">|</span>                                              <span class="kw">|</span> <span class="ex">IRSE</span>     <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">------------------+----------------------------------------------+----------</span><span class="kw">|</span></code></pre></div>
+<p>What this data set and the Iris data set have in common is the species column. We can use <code>csvjoin</code> <span class="citation">(Groskopf <a href="references.html#ref-csvjoin">2014</a><a href="references.html#ref-csvjoin">i</a>)</span> to join the two data sets:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvjoin</span> -c species iris.csv irismeta.csv <span class="kw">|</span> <span class="ex">csvcut</span> -c sepal_length,\
+<span class="op">&gt;</span> sepal_width,species,usda_id <span class="kw">|</span> <span class="fu">sed</span> -n <span class="st">&#39;1p;49,54p&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+-----------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">species</span>         <span class="kw">|</span> <span class="ex">usda_id</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+-----------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>     <span class="kw">|</span> <span class="ex">IRSE</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.3</span>          <span class="kw">|</span> <span class="ex">3.7</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>     <span class="kw">|</span> <span class="ex">IRSE</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.0</span>          <span class="kw">|</span> <span class="ex">3.3</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>     <span class="kw">|</span> <span class="ex">IRSE</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">7.0</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span> <span class="kw">|</span> <span class="ex">IRVE2</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.4</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span> <span class="kw">|</span> <span class="ex">IRVE2</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.9</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span> <span class="kw">|</span> <span class="ex">IRVE2</span>    <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+-----------------+----------</span><span class="kw">|</span></code></pre></div>
+<p>Of course we can also use the SQL approach using <code>csvsql</code>, which is, as per usual, a bit longer (but potentially much more flexible):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvsql</span> --query <span class="st">&#39;SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;FROM iris i JOIN irismeta m ON (i.species = m.species)&#39;</span> \
+<span class="op">&gt;</span> iris.csv irismeta.csv <span class="kw">|</span> <span class="fu">sed</span> -n <span class="st">&#39;1p;49,54p&#39;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+-----------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">sepal_length</span> <span class="kw">|</span> <span class="ex">sepal_width</span> <span class="kw">|</span> <span class="ex">species</span>         <span class="kw">|</span> <span class="ex">usda_id</span>  <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+-----------------+----------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">4.6</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>     <span class="kw">|</span> <span class="ex">IRSE</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.3</span>          <span class="kw">|</span> <span class="ex">3.7</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>     <span class="kw">|</span> <span class="ex">IRSE</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">5.0</span>          <span class="kw">|</span> <span class="ex">3.3</span>         <span class="kw">|</span> <span class="ex">Iris-setosa</span>     <span class="kw">|</span> <span class="ex">IRSE</span>     <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">7.0</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span> <span class="kw">|</span> <span class="ex">IRVE2</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.4</span>          <span class="kw">|</span> <span class="ex">3.2</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span> <span class="kw">|</span> <span class="ex">IRVE2</span>    <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">6.9</span>          <span class="kw">|</span> <span class="ex">3.1</span>         <span class="kw">|</span> <span class="ex">Iris-versicolor</span> <span class="kw">|</span> <span class="ex">IRVE2</span>    <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">---------------+-------------+-----------------+----------</span><span class="kw">|</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="further-reading-4" class="section level2">
+<h2><span class="header-section-number">5.6</span> Further Reading</h2>
+<ul>
+<li>Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.</li>
+<li>Goyvaerts, Jan, and Steven Levithan. 2012. <em>Regular Expressions Cookbook</em>. 2nd Ed. O’Reilly Media.</li>
+<li>Dougherty, Dale, and Arnold Robbins. 1997. <em>Sed &amp; Awk</em>. 2nd Ed. O’Reilly Media.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-4-creating-reusable-command-line-tools.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-6-managing-your-data-workflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

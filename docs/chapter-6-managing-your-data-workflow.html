@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="chapter-1-introduction.html">
+<link rel="prev" href="chapter-5-scrubbing-data.html">
+<link rel="next" href="chapter-7-exploring-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -324,42 +324,246 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>Data science is an exited field to work in. It’s also still very young. Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science. However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.</p>
-<p>Around five years ago, during my PhD program, I gradually switched from using Microsoft Windows to Linux. Because it was a bit scary at first, I started with having both operating systems installed next to each other (known as dual-boot). The urge to switch back and forth between Microsoft Windows faded and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch. All you’re given is the command line, and it’s up to you what you want to make of it. Out of necessity I quickly became very comfortable using the command line. Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its easy-of-use and large community. However, the command line is still where I’m spending most of time.</p>
-<p>It actually hasn’t been too long ago that I realized that the command line is not just for installing software, system configuration, and searching files. I started learning about command-line tools such as <code>cut</code>, <code>sort</code>, and <code>sed</code>. These are examples of command-line tools that take data as input, do something to it, and print the result. Ubuntu comes with quite a few of them. Once I understood the potential of combining these small tools, I was hooked.</p>
-<p>After my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible. Thanks to a couple of new, open-source command-line tools including <code>xml2json</code>, <code>jq</code>, and <code>json2csv</code> I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data. In September 2013, I decided to write a blog post titled <em>Seven Command-line Tools for Data Science</em>, which is available at <a href="http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html" class="uri">http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html</a>. To my surprise, the blog post got quite some attention and I received a lot of suggestions of other command-line tools. I started wondering whether this blog post could be turned into a book. I’m pleased that, some ten months later, with the help of many talented people (see the acknowledgments below), the answer is a yes.</p>
-<p>I am sharing this personal story not so much because I think you should know how this book came about, but because I want to you know that I had to learn about the command line as well. Because the command line is so different from using a graphical user interface, it can seem scary at first. But if I can learn it, then you can as well. No matter what your current operating system is and no matter how you currently work with data, after reading this book you will be able to do data science at the command line. If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.</p>
-<div id="what-to-expect-from-this-book" class="section level2 unnumbered">
-<h2>What to Expect from This Book</h2>
-<p>In this book, we’re going to obtain, scrub, explore, and model data; a lot of it. This book is not so much about how become <em>better</em> at those data science tasks. There are already great resources available that discuss, for example, when to apply which statistical test or how data can be best visualized. Instead, this practical book aims to make you more <em>efficient</em> and <em>productive</em> by teaching you how to perform those data science tasks at the command line.</p>
-<p>While this book discusses over 80 command-line tools, it’s not the tools themselves that matter most. Some command-line tools have been around for a very long time, while others will be replace by better ones. There are even command-line tools that are being created as you’re reading this. In the past nine months, I have discovered many amazing command-line tools. Unfortunately, some of them were discovered too late to be included in the book. In short, command-line tools come and go. But that’s OK.</p>
-<p>What matters most is the underlying idea of working with tools, pipes, and data. Most of the command-line tools do one thing and do it well. This is part the UNIX philosophy, which makes several appearances throughout the book. Once you become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.</p>
+<div id="chapter-6-managing-your-data-workflow" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Managing Your Data Workflow</h1>
+<p>We hope that by now, you have come to appreciate that the command line is a very convenient environment for exploratory data analysis. You may have noticed that, as a consequence of working with the command line, we:</p>
+<ul>
+<li>Invoke many different commands.</li>
+<li>Create custom command-line tools.</li>
+<li>Obtain and generate many (intermediate) files.</li>
+</ul>
+<p>As this process is of an exploratory nature, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done. It is very important that our steps can be reproduced, whether that is by ourselves or by others. When we, for example, continue with a project from a few weeks earlier, chances are that we have forgotten which commands we have ran, on which files, in which order, and with which parameters. Imagine the difficulty passing on your analysis to a collaborator.</p>
+<p>You may recover some lost commands by digging into your Bash history, but this is, of course, not a good approach. A better approach would be to save your commands to a shell script <em>run.sh</em>. This allows you and your collaborators to at least reproduce the analysis. A shell script is, however, a sub-optimal approach because:</p>
+<ul>
+<li>It is difficult to read and to maintain.</li>
+<li>Dependencies between steps are unclear.</li>
+<li>Every step gets executed every time, which is inefficient and sometimes undesirable.</li>
+</ul>
+<p>This is where Drake comes in handy <span class="citation">(Factual <a href="references.html#ref-drake">2014</a>)</span>. Drake is command-line tool created by Factual that allows you to:</p>
+<ul>
+<li>Formalize your data workflow steps in terms of input and output dependencies.</li>
+<li>Run specific steps of your workflow from the command line.</li>
+<li>Use inline code.</li>
+<li>Store and retrieve data from external sources.</li>
+</ul>
+<div id="overview-5" class="section level2">
+<h2><span class="header-section-number">6.1</span> Overview</h2>
+<p>Managing your data workflow with Drake is the main topic of this chapter. As such, you’ll learn about:</p>
+<ul>
+<li>Defining your workflow with a so-called Drakefile.</li>
+<li>Thinking about your workflow in terms of input and output dependencies.</li>
+<li>Build specific targets.</li>
+</ul>
 </div>
-<div id="how-to-read-this-book" class="section level2 unnumbered">
-<h2>How to Read This Book</h2>
-<p>In general, you’re advised to read this book in a linear fashion. Once a concept or command-line tool has been introduced, chances are that we employ it in a later chapter. For example, in Chapter 9, we make heavy use of <code>parallel</code>, which is introduced extensively in Chapter 8.</p>
-<p>Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning. As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length. Throughout the book, there are suggestions for additional reading. It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.</p>
+<div id="introducing-drake" class="section level2">
+<h2><span class="header-section-number">6.2</span> Introducing Drake</h2>
+<p>Drake organizes command execution around data and its dependencies. Your data processing steps are formalized in a separate text file (a workflow). Each step usually has one or more inputs and outputs. Drake automatically resolves their dependencies and determines which commands need to be run and in which order.</p>
+<p>This means that when you have, say, an SQL query that takes ten minutes, it only has to be executed when the result is missing or when the query has changed afterwards. Also, if want to (re-)run a specific step, Drake only considers to (re-)run the steps on which it depends. This can save you a lot of time.</p>
+<p>The benefit of having a formalized workflow allows you to pick up easily your project after a few weeks and to collaborate with others. We strongly advise you to do this, even when you think this will be a one-off project, because you’ll never know when to run certain steps again, or when you want to reuse certain steps in another project.</p>
 </div>
-<div id="who-this-book-is-for" class="section level2 unnumbered">
-<h2>Who This Book Is For</h2>
-<p>This book makes just one assumption about you: that you work with data. It doesn’t matter whether which programming language or statistical computing environment you’re currently using. The book starts explains all the necessary concepts from the beginning.</p>
-<p>It also doesn’t matter whether your operating system is Microsoft Windows, MacOS, or some form of Linux. The book comes with a Docker image, which is an easy-to-install virtual environment. It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written. You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.</p>
-<p>The book contains some code in Bash, Python, and R so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.</p>
+<div id="installing-drake" class="section level2">
+<h2><span class="header-section-number">6.3</span> Installing Drake</h2>
+<p>Drake has quite a few dependencies, which makes its installation process rather involved. For the following instructions we assume that you are on Ubuntu.</p>
+
+<div class="rmdtip">
+If you’re using the Data Science Toolbox, then you already have Drake installed, and you may safely skip this section.
 </div>
-<div id="acknowledgments" class="section level2 unnumbered">
-<h2>Acknowledgments</h2>
-<p>First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post <a href="http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html">Seven Command-Line Tools for Data Science</a>, which I wrote in September 2013, could be expanded into a book.</p>
-<p>Special thanks to my technical reviewers Mike Dewar, Brian Eoff, and Shane Reustle for reading various drafts, meticulously testing all the commands, and providing invaluable feedback. Your efforts have improved the book greatly. The remaining errors are entirely my own responsibility.</p>
-<p>I had the privilege of working together with three amazing editors, namely: Ann Spencer, Julie Steele, and Marie Beaugureau. Thank you for your guidance and for being such great liaisons with the many talented people at O’Reilly. Those people include: Laura Baldwin, Huguette Barriere, Sophia DeMartini, Yasmina Greco, Rachel James, Ben Lorica, Mike Loukides, and Christopher Pappas. There are many others whom I haven’t met because they are operating behind the scenes. Together they ensured that working with O’Reilly has truly been a pleasure.</p>
-<p>This book discusses over 80 command-line tools. Needless to say, without these tools, this book wouldn’t have existed in the first place. I’m therefore extremely grateful to all the authors who created and contributed to these tools. The complete list of authors is unfortunately too long to include here; they are mentioned in the Appendix. Thanks especially to Aaron Crow, Jehiah Czebotar, Christoph Groskopf, Dima Kogan, Sergey Lisitsyn, Francisco J. Martin, and Ole Tange for providing help with their amazing command-line tools.</p>
-<p>Eric Postma and Jaap van den Herik, who supervised me during my PhD program, deserve a special thank you. Over the course of five years they have taught me many lessons. Although writing a technical book is quite different from writing a PhD thesis, many of those lessons proved to be very helpful in the past nine months as well.</p>
-<p>Finally, I’d like to thank my colleagues at YPlan, my friends, my family, and especially my wife Esther for supporting me and for pulling me away from the command line at just the right times.</p>
+
+<p>Drake is written in the programming language Clojure which means that it runs on the Java Virtual Machine (JVM). There are pre-built jars available but because Drake is in active development, we will build it from source. For this, you will need to install Leiningen.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get install openjdk-6-jdk
+$ <span class="fu">sudo</span> apt-get install leiningen</code></pre></div>
+<p>Then, clone the Drake repository from Factual:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">git</span> clone https://github.com/Factual/drake.git</code></pre></div>
+<p>And build the uberjar using Leiningen:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> drake
+$ <span class="ex">lein</span> uberjar</code></pre></div>
+<p>This creates <em>drake.jar</em>. Copy this file to a directory which is on your <em>$PATH</em>, for example, <em>~/.bin</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">mv</span> drake.jar ~/bin/</code></pre></div>
+<p>At this point you should already be able to run Drake:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~/bin/
+$ <span class="ex">java</span> -jar drake.jar</code></pre></div>
+<p>This is not really convenient for two reasons: (1) the Java Virtual Machine (JVM) takes a long time to start and (2) you can only run it from that directory. We advise you to install Drip, which is a launcher for the JVM that provides much faster startup times than the <code>java</code> command. First, clone the Drip repository from Flatland:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">git</span> clone https://github.com/flatland/drip.git
+$ <span class="bu">cd</span> drip
+$ <span class="fu">make</span> prefix=~/bin install</code></pre></div>
+<p>Then, create a Bash script that allows you to run Drake from everywhere:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~/bin
+$ <span class="fu">cat</span> <span class="op">&lt;&lt; &#39;EOF&#39;</span> <span class="op">&gt;</span> <span class="ex">drake</span>
+&gt; #!/bin/bash
+&gt; drip -cp $(dirname $0)/drake.jar drake.core &quot;$@&quot;
+&gt; EOF
+$ chmod +x drake</code></pre></div>
+<p>To verify that you have correctly installed both Drake and Drip, you can run the following command, preferably from a different directory:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span> --version
+<span class="ex">Drake</span> Version 0.1.6</code></pre></div>
+
+<div class="rmdnote">
+Drip speeds up Java because it reserves an instance of the JVM, after it has been run once. Because of this, you will only notice the speed up from the second time onwards.
 </div>
-<div id="about-the-author" class="section level2 unnumbered">
-<h2>About the Author</h2>
-<p><a href="http://jeroenjanssens.com/">Jeroen Janssens</a> is the founder and CEO of <a href="https://datascienceworkshops.com">Data Science Workshops</a>, which provides on-the-job training and coaching in data visualisation, machine learning, and programming. Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and startups YPlan and Outbrain in New York City. He is the author of Data Science at the Command Line, published by O’Reilly Media. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He can be found on <a href="https://twitter.com/jeroenhjanssens/">Twitter</a>, <a href="http://www.linkedin.com/in/jeroenjanssens">LinkedIn</a>, and <a href="https://github.com/jeroenjanssens">GitHub</a>.</p>
+
+</div>
+<div id="obtain-top-e-books-from-project-gutenberg" class="section level2">
+<h2><span class="header-section-number">6.4</span> Obtain Top E-books from Project Gutenberg</h2>
+<p>For the remainder of this chapter, we’ll use the following task as a running example. Our goal is to turn the command that we use to solve this task into a Drake workflow. We start out simple, and work our way towards an advanced workflow in order to explain to you the various concepts and syntax of Drake.</p>
+<p>Project Gutenberg is an ambitious project that, since 1971, has archived and digitized over 42,000 books and offers these as free e-books. On its website you can find the top hundred most downloaded books. Let’s assume that we are interested in the top five downloads of Project Gutenberg. Because this list is available in HTML it is straightforward to obtain the top five downloads:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">curl</span> -s <span class="st">&#39;http://www.gutenberg.org/browse/scores/top&#39;</span> <span class="kw">|</span>  
+<span class="op">&gt;</span> <span class="fu">grep</span> -E <span class="st">&#39;^&lt;li&gt;&#39;</span> <span class="kw">|</span>                                       
+<span class="op">&gt;</span> <span class="fu">head</span> -n 5 <span class="kw">|</span>                                             
+<span class="op">&gt;</span> <span class="fu">sed</span> -E <span class="st">&quot;s/.*ebooks\/([0-9]+).*/</span><span class="dt">\\</span><span class="st">1/&quot;</span> <span class="op">&gt;</span> data/top-5       </code></pre></div>
+<p>This command:</p>
+<ul>
+<li>Downloads the HTML.</li>
+<li>Extracts the list items.</li>
+<li>Keeps only the top five items.</li>
+<li>Saves e-book IDs to <em>data/top-5</em>.</li>
+</ul>
+<p>The output of the command is:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> data/top-5
+<span class="ex">1342</span>
+<span class="ex">76</span>
+<span class="ex">11</span>
+<span class="ex">1661</span>
+<span class="ex">1952</span></code></pre></div>
+<p>If you want to be able to reproduce this, that is, once again at a later time, the easiest thing you can do is put this command in a script as we’ve seen in <a href="chapter-4-creating-reusable-command-line-tools.html#chapter-4-creating-reusable-command-line-tools">Chapter 4</a>. If you execute this script again, the HTML will be downloaded again as well. There are three common reasons why you might want to be able to control whether certain steps are run. First, because this step may take a very long time. Second, because you want to continue with the same data. Third, the data may come from an API which has certain rate limits. It would be a good idea to let one step save the data to a file and then let subsequent steps operate on that file so that you don’t have to make any redundant computations or API calls. Now, the first reason is not really a problem in our example because the HTML can be downloaded fast enough. However, in some cases the data may come from other sources and may comprise of gigabytes of data.</p>
+</div>
+<div id="every-workflow-starts-with-a-single-step" class="section level2">
+<h2><span class="header-section-number">6.5</span> Every Workflow Starts with a Single Step</h2>
+<p>In this section we’ll convert the above command into a Drake workflow. A workflow is just a text file. You’d usually name this file <em>Drakefile</em> because Drake uses that file if no other file is specified at the command line. A workflow with just a single step would look like Example <a href="chapter-6-managing-your-data-workflow.html#exm:drakefile">6.1</a>.</p>
+
+<div class="example">
+<span id="exm:drakefile" class="example"><strong>Example 6.1  (A workflow with just a single stip)  </strong></span>
+</div>
+
+<pre><code>top-5 &lt;-                                                    
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; |  
+    grep -E &#39;^&lt;li&gt;&#39; |                                       
+    head -n 5 |                                             
+    sed -E &quot;s/.*ebooks\/([0-9]+).*/\\1/&quot; &gt; top-5            </code></pre>
+<p>Let’s go through this file. The first line, which contains the arrow pointing to the left, is our step definition. The left side of this arrow, which says <em>top-5</em>, is the name or output of this step. Any inputs to this step would appear on the right side of this arrow, but since this step has no input, it’s empty. Defining inputs and outputs is what allows Drake to recognize the dependencies between steps, and to figure out whether and when which steps need to be executed in order to fulfill a certain output. This output is also known as a target. As you can see, the body of this step is literally our command from before but then indented.</p>
+<ul>
+<li>The arrow (<em>←</em>) denotes the name of the step and its dependencies. More on this later.</li>
+<li>The body is indented.</li>
+<li>Select only list items.</li>
+<li>Get the first five items.</li>
+<li>Extract the id, and save to file <em>top-5</em>. Note that <em>top-5</em> was already specified in the step definition and that <em>5</em> has now been used three times. We are going to address that later.</li>
+</ul>
+<p>This workflow is as simple as it gets. It doesn’t offer any advantages over having our command in a Bash script. But don’t worry, we promise you that it will get more exciting. For now, let’s run Drake and see what it does with our first workflow:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span>
+<span class="ex">The</span> following steps will be run, in order:
+  <span class="ex">1</span>: top-5 <span class="op">&lt;</span>-  [missing output]
+<span class="ex">Confirm?</span> [y/n] y
+<span class="ex">Running</span> 1 steps with concurrence of 1...
+
+<span class="ex">---</span> 0. Running (missing output)<span class="bu">:</span> top-5 <span class="op">&lt;</span>-
+<span class="ex">---</span> 0: top-5 <span class="op">&lt;</span>-  -<span class="op">&gt;</span> done in 0.35s
+<span class="ex">Done</span> (1 steps run)<span class="ex">.</span></code></pre></div>
+<p>If we do not specify any specific workflow file, then Drake will use <em>./Drakefile</em>. Drake first determines which steps need to be run. In our case, the one and only step will be run because it’s missing the output. This means that there’s no file named <em>data/top-5</em>. Drake asks for confirmation before it will execute these steps. We press <code>y</code>, and very soon thereafter we see that Drake is done. Drake did not complain about any errors in our steps. Let’s verify that we have the top five books by looking at the output file <em>data/top-5</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">cat</span> data/top-5
+<span class="ex">1342</span>
+<span class="ex">76</span>
+<span class="ex">11</span>
+<span class="ex">1661</span>
+<span class="ex">1952</span></code></pre></div>
+<p>Now we do have the output file. Let’s run Drake again:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span>
+<span class="ex">The</span> following steps will be run, in order:
+  <span class="ex">1</span>: top-5 <span class="op">&lt;</span>-  [no-input step]
+<span class="ex">Confirm?</span> [y/n] n
+<span class="ex">Aborted.</span></code></pre></div>
+<p>As you can see, Drake wants to execute the step again! However, now mentions a different reason, namely, that there is no input step <em><span class="math display">\[no-input-step\]</span></em>. Its default behavior is to check whether the input has changed by looking at the timestamp of the input. However, since we didn’t specify any input, Drake doesn’t know whether or not this step should be run again. We can disable this default behavior to check timestamps as follows:</p>
+<pre><code>top-5 &lt;- [-timecheck]
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; |
+    grep -E &#39;^&lt;li&gt;&#39; |
+    head -n 5 |
+    sed -E &quot;s/.*ebooks\/([0-9]+)\&quot;&gt;([^&lt;]+)&lt;.*/\\1,\\2/&quot; &gt; top-5</code></pre>
+<p>The square brackets around <em><span class="math display">\[-timecheck\]</span></em> indicate that this is an option to the step. The minus (<em>-</em>) means that we wish to disable checking timestamps. Now, this step is only run when the output is missing.</p>
+<p>We’re going to use different filenames so that we keep old versions. We can specify a different workflow name (other than <em>Drakefile</em>) with the <code>-w</code> option. Let’s run Drake once more:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">mv</span> Drakefile 01.drake
+$ <span class="ex">drake</span> -w 01.drake
+<span class="ex">Nothing</span> to do.</code></pre></div>
+<p>Our very first workflow is already saving us time because Drake detects that the step was not need to be executed again. However, we can do much better than this. This workflow has three shortcomings that we’re going to address in the next section.</p>
+</div>
+<div id="well-that-depends" class="section level2">
+<h2><span class="header-section-number">6.6</span> Well, That Depends</h2>
+<p>Our workflow contains just a single step, which means that, just like having a simple Bash script, everything will be executed all the time. So the first thing we are going to do is to split up this single step into two steps, where the first step downloads the HTML, and the second step processes this HTML. The second step obviously depends on the first step. We can define this dependency in our workflow.</p>
+<p>You may have noticed that the number 5 is specified three times. If you ever wanted to get the top, say, top 10 e-books from Project Gutenberg, we would have to change our workflow in three places. This is inefficient and needs to be addressed. Luckily, Drake supports variables.</p>
+<p>It may not be immediately obvious from our workflow, but our data resides in the same location as the script. It is better to have the data live in a separate location and have it separated from any code that generates this data. Not only does it keep our project cleaner, it also allows us to delete the generated data files easier, and we can easily specify that we do not like the data files to be included in any version control system such as <code>git</code> <span class="citation">(Torvalds and Hamano <a href="references.html#ref-git">2014</a>)</span>. Let’s have a look:</p>
+<pre><code>NUM:=5                                                              
+BASE=data/                                                          
+
+top.html &lt;- [-timecheck]
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; &gt; $OUTPUT  
+
+top-$[NUM] &lt;- top.html                                              
+    &lt; $INPUT grep -E &#39;^&lt;li&gt;&#39; |
+    head -n $[NUM] |
+    sed -E &quot;s/.*ebooks\/([0-9]+)\&quot;&gt;([^&lt;]+)&lt;.*/\\1,\\2/&quot; &gt; $OUTPUT</code></pre>
+<ul>
+<li>You can specify variables in Drake, preferably at the beginning of the file, by specifying the variable name, then an equal sign, and then the value. The name of the variable doesn’t have to be in all capitals, but it does make them stand out more. As you can see, we have used for the variable <em>NUM</em> the <em>:=</em> instead of <em>=</em>. This means that if the variable <em>NUM</em> is already set, it will not be overridden. This allows us to specify the value of <em>NUM</em> from the command line before we run Drake.</li>
+<li>The <em>BASE</em> variable is a special variable. Drake will treat every file specified in the workflow as if it were in this base directory.</li>
+<li>We now have two steps. The first step has the same input as before, but now the output is a different file, namely, <em>top.html</em>. This output is defined again as the input of step two. This is how Drake knows that the second step depends on the first step.</li>
+<li>We have used two more special variables: <em>INPUT</em> and <em>OUTPUT</em>. Values of these two special variables are set to what we have defined as the input and output of that step, respectively. This way, we don’t have to specify the input and output of a certain step twice. Furthermore, it allows us to easily reuse certain steps in any future workflows.</li>
+</ul>
+<p>Let’s execute this new workflow using Drake:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span> -w 02.drake
+<span class="ex">The</span> following steps will be run, in order:
+  <span class="ex">1</span>: ../../data/top.html <span class="op">&lt;</span>-  [missing output]
+  <span class="ex">2</span>: ../../data/top-5 <span class="op">&lt;</span>- ../../data/top.html [projected timestamped]
+<span class="ex">Confirm?</span> [y/n] y
+<span class="ex">Running</span> 2 steps with concurrence of 1...
+
+<span class="ex">---</span> 0. Running (missing output)<span class="bu">:</span> ../../data/top.html <span class="op">&lt;</span>-
+<span class="ex">---</span> 0: ../../data/top.html <span class="op">&lt;</span>-  -<span class="op">&gt;</span> done in 0.89s
+<span class="ex">---</span> 1. Running (missing output)<span class="bu">:</span> ../../data/top-5 <span class="op">&lt;</span>- ../../data/top.html
+<span class="ex">---</span> 1: ../../data/top-5 <span class="op">&lt;</span>- ../../data/top.html -<span class="op">&gt;</span> done in 0.02s
+<span class="ex">Done</span> (2 steps run)<span class="ex">.</span></code></pre></div>
+<p>Now, let’s assume that we want instead of the top 5 e-books, the top 10 e-books. We can set the <em>NUM</em> variable from the command line and run Drake again:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="va">NUM=</span>10 <span class="ex">drake</span> -w 02.drake
+<span class="ex">The</span> following steps will be run, in order:
+  <span class="ex">1</span>: ../../data/top-10 <span class="op">&lt;</span>- ../../data/top.html [missing output]
+<span class="ex">Confirm?</span> [y/n] y
+<span class="ex">Running</span> 1 steps with concurrence of 1...
+
+<span class="ex">---</span> 1. Running (missing output)<span class="bu">:</span> ../../data/top-10 <span class="op">&lt;</span>- ../../data/top.html
+<span class="ex">---</span> 1: ../../data/top-10 <span class="op">&lt;</span>- ../../data/top.html -<span class="op">&gt;</span> done in 0.02s
+<span class="ex">Done</span> (1 steps run)<span class="ex">.</span></code></pre></div>
+<p>As you can see, Drake now only needs to execute the second step, because the output of the first step has already been satisfied. Again, downloading an HTML file is not such a big deal, but can you imagine the implications if you were dealing with 10 GB worth of data?</p>
+</div>
+<div id="rebuilding-certain-targets" class="section level2">
+<h2><span class="header-section-number">6.7</span> Rebuilding Certain Targets</h2>
+<p>The list of the top 100 e-books on project Gutenberg changes daily. We’ve seen that if we run the Drake workflow again then the HTML containing this list is not being downloaded again. Luckily, Drake allows us to run certain steps again, so that we can update this HTML file:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span> -w 02.drake <span class="st">&#39;=top.html&#39;</span></code></pre></div>
+<p>There is a more convenient way than using the output filename to specify which step you want to execute again. We can add so-called <em>tags</em> to both the input and output of steps. A tag starts with a “%”. It is a good idea to choose a short and descriptive tag name so that you can easily specify this at the command line. Let’s add the tag <em>%html</em> to the first step and <em>%filter</em> to the second step:</p>
+<pre><code>NUM:=5
+BASE=data/
+
+top.html, %html &lt;- [-timecheck]
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; &gt; $OUTPUT
+
+top-$[NUM], %filter &lt;- top.html
+    &lt; $INPUT grep -E &#39;^&lt;li&gt;&#39; |
+    head -n $[NUM] |
+    sed -E &quot;s/.*ebooks\/([0-9]+)\&quot;&gt;([^&lt;]+)&lt;.*/\\1,\\2/&quot; &gt; $OUTPUT</code></pre>
+<p>We can now rebuild the first step by specifying the <em>%html</em> tag:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">drake</span> -w 03.drake <span class="st">&#39;=%html&#39;</span></code></pre></div>
+</div>
+<div id="discussion" class="section level2">
+<h2><span class="header-section-number">6.8</span> Discussion</h2>
+<p>One of the beauties of the command line is that allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It is therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.</p>
+<p>We have shown you that just putting every command in one bash script is suboptimal. We have proposed to use Drake as a command-line tool to manage your data workflow. By using a running example, we have shown you how to define steps and the dependencies between them. We’ve also discussed how to use variables and tags.</p>
+<p>There’s nothing more fun than just playing with your data and forget everything else. But you have to trust us when we say that it’s worthwhile to keep a record of what you have done by means of a Drake workflow. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time. It makes you more efficient over time, the same holds for Drake workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. We hope that you will get used to Drake, and that it will make your life easier.</p>
+<p>We’ve only been able to scratch the surface with Drake. Some of its more advanced features are:</p>
+<ul>
+<li>Asynchronous execution of steps.</li>
+<li>Support for inline Python and R code.</li>
+<li>Upload and download data from HDFS S3.</li>
+</ul>
+</div>
+<div id="further-reading-5" class="section level2">
+<h2><span class="header-section-number">6.9</span> Further Reading</h2>
+<ul>
+<li>Factual. 2014. “Drake.” <a href="https://github.com/Factual/drake" class="uri">https://github.com/Factual/drake</a>.</li>
+</ul>
 
 </div>
 </div>
@@ -368,8 +572,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-1-introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-5-scrubbing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-7-exploring-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

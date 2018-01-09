@@ -1,4 +1,4 @@
-# Creating Reusable Command-line Tools 
+# Creating Reusable Command-line Tools {#chapter-4-creating-reusable-command-line-tools}
 
 Throughout the book, we use a lot of commands and pipelines that basically fit on one line. Let us call those one-liners. Being able to perform complex tasks with just a one-liner is what makes the command line powerful. It’s a very different experience from writing traditional programs.
 
@@ -281,7 +281,7 @@ We will first show the two files *top-words.py* and *top-words.R* and then discu
 
 ```{example top-words-py, name="~/book/ch04/top-words.py"}
 ```
-```{python, eval=FALSE}
+```{python, eval=FALSE, python.reticulate = FALSE}
 #!/usr/bin/env python
 import re
 import sys
@@ -352,7 +352,7 @@ Luckily Python are R support processing streaming data. You can apply a function
 
 ```{example stream-py, name="~/book/ch04/stream.py"}
 ```
-```{python, eval=FALSE}
+```{python, eval=FALSE, python.reticulate = FALSE}
 #!/usr/bin/env python
 from sys import stdin, stdout
 while True:

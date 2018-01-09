@@ -1,4 +1,4 @@
-# Getting Started {#wrong-id}
+# Getting Started {#chapter-2-getting-started}
 
 In this chapter we are going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
 
@@ -28,7 +28,7 @@ The Data Science Toolbox is a virtual environment that allows you to get started
 
 ## Essential GNU/Linux Concepts 
 
-In Chapter 1, we briefly showed you what the command line is. Now that you have your own Data Science Toolbox, we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.
+In [Chapter 1](#chapter-1-introduction), we briefly showed you what the command line is. Now that you have your own Data Science Toolbox, we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.
 
 ```{block2, type="rmdnote"}
 
@@ -54,7 +54,7 @@ Terminal
     3
     ```
 
-    then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In Chapter 1, we showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
+    then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In [Chapter 1](#chapter-1-introduction), we showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
 
 Shell
 
@@ -143,8 +143,8 @@ Interpreted Script
 
     ```{example script-fac, name="Python script that computes the factorial of an integer"}
     ```
-    ```{python, eval=FALSE}
-    #!/usr/bin/env python
+    ```{python, eval=FALSE, python.reticulate = FALSE}
+    ##!/usr/bin/env python
 
     def factorial(x):
         result = 1
@@ -165,7 +165,7 @@ Interpreted Script
     120
     ```
 
-    In Chapter 4, we’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.
+    In [Chapter 4](#chapter-4-creating-reusable-command-line-tools), we’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.
 
 Shell Function
 

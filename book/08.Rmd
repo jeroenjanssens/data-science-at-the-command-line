@@ -1,4 +1,4 @@
-# Parallel Pipelines 
+# Parallel Pipelines {#chapter-8-parallel-pipelines}
 
 In the previous chapters, we have been dealing with commands and pipelines that take care of an entire task at once. In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times. For, example, you may need to:
 
@@ -596,7 +596,7 @@ Let’s create a very simple command-line tool called *sum*:
 paste -sd+ | bc
 ```
 
-Don’t forget to make it executable as discussed in Chapter 4. The following command first uploads the file *sum*:
+Don’t forget to make it executable as discussed in [Chapter 4](#chapter-4-creating-reusable-command-line-tools). The following command first uploads the file *sum*:
 
     $ seq 1000 | parallel -N100 --basefile sum --pipe --slf hosts './sum' | ./sum
     500500
@@ -735,7 +735,7 @@ $ cat *.csv | header -a borough,count |
 |----------------+--------|
 ```
 
-Or, if you prefer to use SQL to aggregate results, you can use `csvsql` as discussed in Chapter 5:
+Or, if you prefer to use SQL to aggregate results, you can use `csvsql` as discussed in [Chapter 5](#chapter-5-scrubbing-data):
 
 ```{bash, eval=FALSE}
 $ cat *.csv | header -a borough,count |

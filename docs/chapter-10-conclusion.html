@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="chapter-1-introduction.html">
+<link rel="prev" href="chapter-9-modeling-data.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -324,42 +324,84 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>Data science is an exited field to work in. It’s also still very young. Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science. However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.</p>
-<p>Around five years ago, during my PhD program, I gradually switched from using Microsoft Windows to Linux. Because it was a bit scary at first, I started with having both operating systems installed next to each other (known as dual-boot). The urge to switch back and forth between Microsoft Windows faded and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch. All you’re given is the command line, and it’s up to you what you want to make of it. Out of necessity I quickly became very comfortable using the command line. Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its easy-of-use and large community. However, the command line is still where I’m spending most of time.</p>
-<p>It actually hasn’t been too long ago that I realized that the command line is not just for installing software, system configuration, and searching files. I started learning about command-line tools such as <code>cut</code>, <code>sort</code>, and <code>sed</code>. These are examples of command-line tools that take data as input, do something to it, and print the result. Ubuntu comes with quite a few of them. Once I understood the potential of combining these small tools, I was hooked.</p>
-<p>After my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible. Thanks to a couple of new, open-source command-line tools including <code>xml2json</code>, <code>jq</code>, and <code>json2csv</code> I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data. In September 2013, I decided to write a blog post titled <em>Seven Command-line Tools for Data Science</em>, which is available at <a href="http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html" class="uri">http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html</a>. To my surprise, the blog post got quite some attention and I received a lot of suggestions of other command-line tools. I started wondering whether this blog post could be turned into a book. I’m pleased that, some ten months later, with the help of many talented people (see the acknowledgments below), the answer is a yes.</p>
-<p>I am sharing this personal story not so much because I think you should know how this book came about, but because I want to you know that I had to learn about the command line as well. Because the command line is so different from using a graphical user interface, it can seem scary at first. But if I can learn it, then you can as well. No matter what your current operating system is and no matter how you currently work with data, after reading this book you will be able to do data science at the command line. If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.</p>
-<div id="what-to-expect-from-this-book" class="section level2 unnumbered">
-<h2>What to Expect from This Book</h2>
-<p>In this book, we’re going to obtain, scrub, explore, and model data; a lot of it. This book is not so much about how become <em>better</em> at those data science tasks. There are already great resources available that discuss, for example, when to apply which statistical test or how data can be best visualized. Instead, this practical book aims to make you more <em>efficient</em> and <em>productive</em> by teaching you how to perform those data science tasks at the command line.</p>
-<p>While this book discusses over 80 command-line tools, it’s not the tools themselves that matter most. Some command-line tools have been around for a very long time, while others will be replace by better ones. There are even command-line tools that are being created as you’re reading this. In the past nine months, I have discovered many amazing command-line tools. Unfortunately, some of them were discovered too late to be included in the book. In short, command-line tools come and go. But that’s OK.</p>
-<p>What matters most is the underlying idea of working with tools, pipes, and data. Most of the command-line tools do one thing and do it well. This is part the UNIX philosophy, which makes several appearances throughout the book. Once you become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.</p>
+<div id="chapter-10-conclusion" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Conclusion</h1>
+<p>In this final chapter, the book comes to a close. We’ll first recap what we have discussed in the previous nine chapters, and will then offer you three pieces of advice and provide some resources to further explore the related topics we touched upon. Finally, in case you have any questions, comments, or new command-line tools to share, we provide a few ways to get in touch.</p>
+<div id="lets-recap" class="section level2">
+<h2><span class="header-section-number">10.1</span> Let’s Recap</h2>
+<p>This book explored the power of employing the command line to perform data science tasks. It is an interesting observation that the challenges posed by this relatively young field can be tackled by such a time-tested technology. It is our hope that you now see what the command line is capable of. The many command-line tools offer all sorts of possibilities that are well suited to the variety of tasks encompassing data science.</p>
+<p>There are many definitions for data science available. In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, we introduced the OSEMN model as defined by Mason and Wiggens, because it is a very practical one that translates to very specific tasks. The acronym OSEMN stands for obtaining, scrubbing, exploring, modeling, and interpreting data. <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a> also explained why the command line is very suitable for doing these data science tasks.</p>
+<p>In <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>, we explained how you can set up your own Data Science Toolbox and install the bundle that is associated with this book. <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a> also provided an introduction to the essential tools and concepts of the command line.</p>
+<p>The OSEMN model chapters—Chapters 3 (obtaining), 5 (scrubbing), 7 (exploring), and 9 (modeling)—focused on performing those practical tasks using the command line. We haven’t devoted a chapter to the fifth step, interpreting data, because, quite frankly, the computer, let alone the command line, is of very little use here. We have, however, provided some pointers for further reading on this topic.</p>
+<p>In the three intermezzo chapters, we looked at some broader topics of doing data science at the command line, topics which are not really specific to one particular step. In <a href="chapter-4-creating-reusable-command-line-tools.html#chapter-4-creating-reusable-command-line-tools">Chapter 4</a>, we explained how you can turn one-liners and existing code into reusable command-line tools. In <a href="chapter-6-managing-your-data-workflow.html#chapter-6-managing-your-data-workflow">Chapter 6</a>, we described how you can manage your data workflow using a command-line tool called Drake. In <a href="chapter-8-parallel-pipelines.html#chapter-8-parallel-pipelines">Chapter 8</a>, we demonstrated how ordinary command-line tools and pipelines can be run in parallel using GNU Parallel. These topics can be applied at any point in your data workflow.</p>
+<p>It is impossible to demonstrate all command-line tools that are available and relevant for doing data science. New command-line tools are created on a daily basis. As you may have come to understand by now, this book is more about the idea of using the command line, rather than giving you an exhaustive list of tools.</p>
 </div>
-<div id="how-to-read-this-book" class="section level2 unnumbered">
-<h2>How to Read This Book</h2>
-<p>In general, you’re advised to read this book in a linear fashion. Once a concept or command-line tool has been introduced, chances are that we employ it in a later chapter. For example, in Chapter 9, we make heavy use of <code>parallel</code>, which is introduced extensively in Chapter 8.</p>
-<p>Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning. As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length. Throughout the book, there are suggestions for additional reading. It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.</p>
+<div id="three-pieces-of-advice" class="section level2">
+<h2><span class="header-section-number">10.2</span> Three Pieces of Advice</h2>
+<p>You probably spent quite some time reading these chapters and perhaps also following along with the code examples. In the hope that it maximizes the return on this investment and increases the probability that you’ll continue to incorporate the command line into your data science workflow, we would like to offer you three pieces of advice: (1) be patient, (2) be creative, and (3) be practical. In the next three subsections we elaborate on each piece of advice.</p>
+<div id="be-patient" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Be Patient</h3>
+<p>The first piece of advice that we can give is to be patient. Working with data on the command line is different from using a programming language, and therefore it requires a different mindset.</p>
+<p>Moreover, the command-line tools themselves are not without their quirks and inconsistencies. This is partly because they have been developed by many different people, over the course of multiple decades. If you ever find yourself at a loss regarding their mind-dazzling options, don’t forget to use –help, man, or your favorite search engine to learn more.</p>
+<p>Still, especially in the beginning, it can be a frustrating experience. Trust us, you will become more proficient as you practice using the command line and its tools. The command line has been around for many decades, and will be around for many more to come. It is a worthwhile investment.</p>
 </div>
-<div id="who-this-book-is-for" class="section level2 unnumbered">
-<h2>Who This Book Is For</h2>
-<p>This book makes just one assumption about you: that you work with data. It doesn’t matter whether which programming language or statistical computing environment you’re currently using. The book starts explains all the necessary concepts from the beginning.</p>
-<p>It also doesn’t matter whether your operating system is Microsoft Windows, MacOS, or some form of Linux. The book comes with a Docker image, which is an easy-to-install virtual environment. It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written. You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.</p>
-<p>The book contains some code in Bash, Python, and R so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.</p>
+<div id="be-creative" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> Be Creative</h3>
+<p>The second, related piece of advice is to be creative. The command line is very flexible. By combining the command-line tools, you can accomplish more than you might think.</p>
+<p>We encourage you to not immediately fall back onto your programming language. And when you do have to use a programming language, think about whether the code can be generalized or reused in some way. If so, consider creating your own command-line tool with that code using the steps we discussed in <a href="chapter-4-creating-reusable-command-line-tools.html#chapter-4-creating-reusable-command-line-tools">Chapter 4</a>. If you believe your command-line tool may be beneficial for others, you could even go one step further by making it open source.</p>
 </div>
-<div id="acknowledgments" class="section level2 unnumbered">
-<h2>Acknowledgments</h2>
-<p>First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post <a href="http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html">Seven Command-Line Tools for Data Science</a>, which I wrote in September 2013, could be expanded into a book.</p>
-<p>Special thanks to my technical reviewers Mike Dewar, Brian Eoff, and Shane Reustle for reading various drafts, meticulously testing all the commands, and providing invaluable feedback. Your efforts have improved the book greatly. The remaining errors are entirely my own responsibility.</p>
-<p>I had the privilege of working together with three amazing editors, namely: Ann Spencer, Julie Steele, and Marie Beaugureau. Thank you for your guidance and for being such great liaisons with the many talented people at O’Reilly. Those people include: Laura Baldwin, Huguette Barriere, Sophia DeMartini, Yasmina Greco, Rachel James, Ben Lorica, Mike Loukides, and Christopher Pappas. There are many others whom I haven’t met because they are operating behind the scenes. Together they ensured that working with O’Reilly has truly been a pleasure.</p>
-<p>This book discusses over 80 command-line tools. Needless to say, without these tools, this book wouldn’t have existed in the first place. I’m therefore extremely grateful to all the authors who created and contributed to these tools. The complete list of authors is unfortunately too long to include here; they are mentioned in the Appendix. Thanks especially to Aaron Crow, Jehiah Czebotar, Christoph Groskopf, Dima Kogan, Sergey Lisitsyn, Francisco J. Martin, and Ole Tange for providing help with their amazing command-line tools.</p>
-<p>Eric Postma and Jaap van den Herik, who supervised me during my PhD program, deserve a special thank you. Over the course of five years they have taught me many lessons. Although writing a technical book is quite different from writing a PhD thesis, many of those lessons proved to be very helpful in the past nine months as well.</p>
-<p>Finally, I’d like to thank my colleagues at YPlan, my friends, my family, and especially my wife Esther for supporting me and for pulling me away from the command line at just the right times.</p>
+<div id="be-practical" class="section level3">
+<h3><span class="header-section-number">10.2.3</span> Be Practical</h3>
+<p>The third piece of advice is to be practical. Being practical is related to being creative, but deserves a separate explanation. In the previous subsection, we mentioned that you should not immediately fall back to a programming language. Of course, the command line has its limits. Throughout the book, we have emphasized that the command line should be regarded as a companion approach to doing data science.</p>
+<p>We’ve discussed four steps for doing data science at the command line. In practice, the applicability of the command line is higher for step 1 than it is for step 4. You should use whatever approach works best for the task at hand. And it’s perfectly fine to mix and match approaches at any point in your workflow. The command line is wonderful at being integrated with other approaches, programming languages, and statistical environments. There’s a certain trade-off with each approach, and part of becoming proficient at the command line is to learn when to use which.</p>
+<p>In conclusion, when you’re patient, creative, and practical, the command line will make you a more efficient and productive data scientist.</p>
 </div>
-<div id="about-the-author" class="section level2 unnumbered">
-<h2>About the Author</h2>
-<p><a href="http://jeroenjanssens.com/">Jeroen Janssens</a> is the founder and CEO of <a href="https://datascienceworkshops.com">Data Science Workshops</a>, which provides on-the-job training and coaching in data visualisation, machine learning, and programming. Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and startups YPlan and Outbrain in New York City. He is the author of Data Science at the Command Line, published by O’Reilly Media. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He can be found on <a href="https://twitter.com/jeroenhjanssens/">Twitter</a>, <a href="http://www.linkedin.com/in/jeroenjanssens">LinkedIn</a>, and <a href="https://github.com/jeroenjanssens">GitHub</a>.</p>
+</div>
+<div id="where-to-go-from-here" class="section level2">
+<h2><span class="header-section-number">10.3</span> Where To Go From Here?</h2>
+<p>As this book is on the intersection of the command line and data science, many related topics have only been touched upon. Now, it’s up to you to further explore these topics. The following subsections provide a list of topics and suggested resources to consult.</p>
+<div id="apis" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> APIs</h3>
+<ul>
+<li>Russell, Matthew. 2013. <em>Mining the Social Web</em>. 2nd Ed. O’Reilly Media.</li>
+<li>Warden, Pete. 2011. <em>Data Source Handbook</em>. O’Reilly Media.</li>
+</ul>
+</div>
+<div id="shell-programming" class="section level3">
+<h3><span class="header-section-number">10.3.2</span> Shell Programming</h3>
+<ul>
+<li>Winterbottom, David. 2014. “Commandlinefu.com.” <a href="http://www.commandlinefu.com" class="uri">http://www.commandlinefu.com</a>.</li>
+<li>Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.</li>
+<li>Goyvaerts, Jan, and Steven Levithan. 2012. <em>Regular Expressions Cookbook</em>. 2nd Ed. O’Reilly Media.</li>
+<li>Cooper, Mendel. 2014. “Advanced Bash-Scripting Guide.” <a href="http://www.tldp.org/LDP/abs/html" class="uri">http://www.tldp.org/LDP/abs/html</a>.</li>
+<li>Robbins, Arnold, and Nelson H. F. Beebe. 2005. <em>Classic Shell Scripting</em>. O’Reilly Media.</li>
+</ul>
+</div>
+<div id="python-r-and-sql" class="section level3">
+<h3><span class="header-section-number">10.3.3</span> Python, R, and SQL</h3>
+<ul>
+<li>Wickham, Hadley. 2009. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.</li>
+<li>McKinney, Wes. 2012. <em>Python for Data Analysis</em>. O’Reilly Media.</li>
+<li>Rossant, Cyrille. 2013. <em>Learning Ipython for Interactive Computing and Data Visualization</em>. Packt Publishing.</li>
+</ul>
+</div>
+<div id="interpreting-data-1" class="section level3">
+<h3><span class="header-section-number">10.3.4</span> Interpreting Data</h3>
+<ul>
+<li>Shron, Max. 2014. <em>Thinking with Data</em>. O’Reilly Media.</li>
+<li>Patil, DJ. 2012. <em>Data Jujitsu</em>. O’Reilly Media.</li>
+</ul>
+</div>
+</div>
+<div id="getting-in-touch" class="section level2">
+<h2><span class="header-section-number">10.4</span> Getting in Touch</h2>
+<p>This book would not have been possible without the many people who created the command line and the numerous command-line tools. It’s safe to say that the current ecosystem of command-line tools for data science is a community effort. We have only been able to give you a glimpse of the many command-line tools available. New ones are created everyday, and perhaps some day you will create one yourself. In that case, we would love to hear from you. We’d also appreciate it if you would drop us a line whenever you have a question, comment, or suggestion. There are a couple of ways to get in touch:</p>
+<ul>
+<li>Email: <a href="mailto:jeroen@datascienceworkshops.com">jeroen@datascienceworkshops.com</a></li>
+<li>Twitter: <a href="https://twitter.com/jeroenhjanssens/">@jeroenhjanssens</a></li>
+<li>Book website: <a href="http://datascienceatthecommandline.com/" class="uri">http://datascienceatthecommandline.com/</a></li>
+<li>Book GitHub repository: <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line" class="uri">https://github.com/jeroenjanssens/data-science-at-the-command-line</a></li>
+</ul>
 
 </div>
 </div>
@@ -368,8 +410,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-1-introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-9-modeling-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Science at the Command Line</title>
+  <meta name="description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Science at the Command Line" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Science at the Command Line" />
+  
+  <meta name="twitter:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+<meta name="author" content="Jeroen Janssens">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="chapter-8-parallel-pipelines.html">
+<link rel="next" href="chapter-10-conclusion.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#further-reading-1"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#overview-2"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-a-database"><i class="fa fa-check"></i><b>3.5</b> Querying a Database</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#further-reading-2"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#overview-3"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#further-reading-3"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#overview-4"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#further-reading-4"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#overview-5"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#further-reading-5"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#overview-6"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#further-reading-6"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a><ul>
+<li class="chapter" data-level="8.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#overview-7"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#discussion-1"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#further-reading-7"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#overview-8"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#further-reading-8"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a><ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#interpreting-data-1"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-9-modeling-data" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Modeling Data</h1>
+<p>In this chapter we’re going to perform the fourth and last step of the OSEMN model that we can do on a computer: modeling data. Generally speaking, to model data is to create an abstract or higher-level description of your data. Just like with creating visualizations, it’s like taking a step back from the individual data points.</p>
+<p>However, visualizations, on the one hand, are characterized by shapes, positions, and colors such that we can interpret them by looking at them. Models, on the other hand, are internally characterized by a bunch of numbers, which means that computers can use them, for example, to make predictions about a new data points. (We can still visualize models so that we can try to understand them and see how they are performing.)</p>
+<p>In this chapter we’ll consider four common types of algorithms to model data:</p>
+<ul>
+<li>Dimensionality reduction.</li>
+<li>Clustering.</li>
+<li>Regression.</li>
+<li>Classification.</li>
+</ul>
+<p>These four algorithms come from the field of machine learning. As such, we’re going to change our vocabulary a bit. Let’s assume that we have a CSV file, also known as a <em>data set</em>. Each row, except for the header, is considered to be a <em>data point</em>. For simplicity we assume that each column that contains numerical values is an input <em>feature</em>. If a data point also contains a non-numerical field, such as the <em>species</em> column in the Iris data set, then that is known as the data point’s <em>label</em>.</p>
+<p>The first two types of algorithms (dimensionality reduction and clustering) are most often unsupervised, which means that they create a model based on the features of the data set only. The last two types of algorithms (regression and classification) are by definition supervised algorithms, which means that they also incorporate the labels into the model.</p>
+
+<div class="rmdcaution">
+This is by no means an introduction to machine learning. That implies that we must skim over many details. We strongly advise that you become familiar with an algorithm before applying it blindly to your data.
+</div>
+
+<div id="overview-8" class="section level2">
+<h2><span class="header-section-number">9.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Reduce the dimensionality of your data set.</li>
+<li>Identify groups of data points with three clustering algorithms.</li>
+<li>Predict the quality of white wine using regression.</li>
+<li>Classify wine as red or white via a prediction API.</li>
+</ul>
+</div>
+<div id="more-wine-please" class="section level2">
+<h2><span class="header-section-number">9.2</span> More Wine Please!</h2>
+<p>In this chapter, we’ll be using a data set of wine tastings. Specifically, red and white Portuguese “Vinho Verde” wine. Each data point represents a wine, and consists of 11 physicochemical properties: (1) fixed acidity, (2) volatile acidity, (3) citric acid, (4) residual sugar, (5) chlorides, (6) free sulfur dioxide, (7) total sulfur dioxide, (8) density, (9) pH, (10) sulphates, and (11) alcohol. There is also a quality score. This score lies between 0 (very bad) and 10 (excellent) and is the median of at least three evaluation by wine experts. More information about this data set is available at <a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality" class="uri">http://archive.ics.uci.edu/ml/datasets/Wine+Quality</a>.</p>
+<p>There are two data sets: one for white wine and one for red wine. The very first step is to obtain the two data sets using <code>curl</code> (and of course <code>parallel</code> because we haven’t got all day):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~/book/ch09
+$ <span class="ex">parallel</span> <span class="st">&quot;curl -sL http://archive.ics.uci.edu/ml/machine-learning-databases&quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;/wine-quality/winequality-{}.csv &gt; data/wine-{}.csv&quot;</span> ::: red white</code></pre></div>
+<p>The triple colon is yet another way we can pass data to <code>parallel</code>. Let’s inspect both data sets using <code>head</code> and count the number of rows using <code>wc -l</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">head</span> -n 5 wine-<span class="dt">{red,white}</span>.csv <span class="kw">|</span> <span class="ex">fold</span>
+==<span class="op">&gt;</span> <span class="ex">wine-red.csv</span> <span class="op">&lt;</span>==
+<span class="st">&quot;fixed acidity&quot;</span>;<span class="st">&quot;volatile acidity&quot;</span>;<span class="st">&quot;citric acid&quot;</span>;<span class="st">&quot;residual sugar&quot;</span>;<span class="st">&quot;chlorides&quot;</span>;<span class="st">&quot;f</span>
+<span class="st">ree sulfur dioxide&quot;</span>;<span class="st">&quot;total sulfur dioxide&quot;</span>;<span class="st">&quot;density&quot;</span>;<span class="st">&quot;pH&quot;</span>;<span class="st">&quot;sulphates&quot;</span>;<span class="st">&quot;alcohol&quot;</span>;
+<span class="st">&quot;quality&quot;</span>
+<span class="ex">7.4</span><span class="kw">;</span><span class="ex">0.7</span><span class="kw">;</span><span class="ex">0</span><span class="kw">;</span><span class="ex">1.9</span><span class="kw">;</span><span class="ex">0.076</span><span class="kw">;</span><span class="ex">11</span><span class="kw">;</span><span class="ex">34</span><span class="kw">;</span><span class="ex">0.9978</span><span class="kw">;</span><span class="ex">3.51</span><span class="kw">;</span><span class="ex">0.56</span><span class="kw">;</span><span class="ex">9.4</span><span class="kw">;</span><span class="ex">5</span>
+<span class="ex">7.8</span><span class="kw">;</span><span class="ex">0.88</span><span class="kw">;</span><span class="ex">0</span><span class="kw">;</span><span class="ex">2.6</span><span class="kw">;</span><span class="ex">0.098</span><span class="kw">;</span><span class="ex">25</span><span class="kw">;</span><span class="ex">67</span><span class="kw">;</span><span class="ex">0.9968</span><span class="kw">;</span><span class="ex">3.2</span><span class="kw">;</span><span class="ex">0.68</span><span class="kw">;</span><span class="ex">9.8</span><span class="kw">;</span><span class="ex">5</span>
+<span class="ex">7.8</span><span class="kw">;</span><span class="ex">0.76</span><span class="kw">;</span><span class="ex">0.04</span><span class="kw">;</span><span class="ex">2.3</span><span class="kw">;</span><span class="ex">0.092</span><span class="kw">;</span><span class="ex">15</span><span class="kw">;</span><span class="ex">54</span><span class="kw">;</span><span class="ex">0.997</span><span class="kw">;</span><span class="ex">3.26</span><span class="kw">;</span><span class="ex">0.65</span><span class="kw">;</span><span class="ex">9.8</span><span class="kw">;</span><span class="ex">5</span>
+<span class="ex">11.2</span><span class="kw">;</span><span class="ex">0.28</span><span class="kw">;</span><span class="ex">0.56</span><span class="kw">;</span><span class="ex">1.9</span><span class="kw">;</span><span class="ex">0.075</span><span class="kw">;</span><span class="ex">17</span><span class="kw">;</span><span class="ex">60</span><span class="kw">;</span><span class="ex">0.998</span><span class="kw">;</span><span class="ex">3.16</span><span class="kw">;</span><span class="ex">0.58</span><span class="kw">;</span><span class="ex">9.8</span><span class="kw">;</span><span class="ex">6</span>
+
+==<span class="op">&gt;</span> <span class="ex">wine-white.csv</span> <span class="op">&lt;</span>==
+<span class="st">&quot;fixed acidity&quot;</span>;<span class="st">&quot;volatile acidity&quot;</span>;<span class="st">&quot;citric acid&quot;</span>;<span class="st">&quot;residual sugar&quot;</span>;<span class="st">&quot;chlorides&quot;</span>;<span class="st">&quot;f</span>
+<span class="st">ree sulfur dioxide&quot;</span>;<span class="st">&quot;total sulfur dioxide&quot;</span>;<span class="st">&quot;density&quot;</span>;<span class="st">&quot;pH&quot;</span>;<span class="st">&quot;sulphates&quot;</span>;<span class="st">&quot;alcohol&quot;</span>;
+<span class="st">&quot;quality&quot;</span>
+<span class="ex">7</span><span class="kw">;</span><span class="ex">0.27</span><span class="kw">;</span><span class="ex">0.36</span><span class="kw">;</span><span class="ex">20.7</span><span class="kw">;</span><span class="ex">0.045</span><span class="kw">;</span><span class="ex">45</span><span class="kw">;</span><span class="ex">170</span><span class="kw">;</span><span class="ex">1.001</span><span class="kw">;</span><span class="ex">3</span><span class="kw">;</span><span class="ex">0.45</span><span class="kw">;</span><span class="ex">8.8</span><span class="kw">;</span><span class="ex">6</span>
+<span class="ex">6.3</span><span class="kw">;</span><span class="ex">0.3</span><span class="kw">;</span><span class="ex">0.34</span><span class="kw">;</span><span class="ex">1.6</span><span class="kw">;</span><span class="ex">0.049</span><span class="kw">;</span><span class="ex">14</span><span class="kw">;</span><span class="ex">132</span><span class="kw">;</span><span class="ex">0.994</span><span class="kw">;</span><span class="ex">3.3</span><span class="kw">;</span><span class="ex">0.49</span><span class="kw">;</span><span class="ex">9.5</span><span class="kw">;</span><span class="ex">6</span>
+<span class="ex">8.1</span><span class="kw">;</span><span class="ex">0.28</span><span class="kw">;</span><span class="ex">0.4</span><span class="kw">;</span><span class="ex">6.9</span><span class="kw">;</span><span class="ex">0.05</span><span class="kw">;</span><span class="ex">30</span><span class="kw">;</span><span class="ex">97</span><span class="kw">;</span><span class="ex">0.9951</span><span class="kw">;</span><span class="ex">3.26</span><span class="kw">;</span><span class="ex">0.44</span><span class="kw">;</span><span class="ex">10.1</span><span class="kw">;</span><span class="ex">6</span>
+<span class="ex">7.2</span><span class="kw">;</span><span class="ex">0.23</span><span class="kw">;</span><span class="ex">0.32</span><span class="kw">;</span><span class="ex">8.5</span><span class="kw">;</span><span class="ex">0.058</span><span class="kw">;</span><span class="ex">47</span><span class="kw">;</span><span class="ex">186</span><span class="kw">;</span><span class="ex">0.9956</span><span class="kw">;</span><span class="ex">3.19</span><span class="kw">;</span><span class="ex">0.4</span><span class="kw">;</span><span class="ex">9.9</span><span class="kw">;</span><span class="ex">6</span>
+$ <span class="fu">wc</span> -l wine-<span class="dt">{red,white}</span>.csv
+  <span class="ex">1600</span> wine-red.csv
+  <span class="ex">4899</span> wine-white.csv
+  <span class="ex">6499</span> total</code></pre></div>
+<p>At first sight this data appears to be very clean already. Still, let’s scrub this data a little bit so that it conforms more with what most command-line tools are expecting. Specifically, we’ll:</p>
+<ul>
+<li>Convert the header to lowercase.</li>
+<li>Convert the semi-colons to commas.</li>
+<li>Convert spaces to underscores.</li>
+<li>Remove unnecessary quotes.</li>
+</ul>
+<p>These things can all be taken care of by ‘tr`. Let’s use a for loop this time—for old times’ sake—to process both data sets:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">for</span> <span class="ex">T</span> in red white<span class="kw">;</span> <span class="kw">do</span>
+<span class="op">&lt;</span> <span class="ex">wine-</span><span class="va">$T</span>.csv tr <span class="st">&#39;[A-Z]; &#39;</span> <span class="st">&#39;[a-z],_&#39;</span> <span class="kw">|</span> <span class="fu">tr</span> -d <span class="dt">\&quot;</span> <span class="op">&gt;</span> wine-<span class="va">${T}</span>-clean.csv
+<span class="kw">done</span></code></pre></div>
+<p>Let’s also create a data set by combining the two data sets. We’ll use <code>csvstack</code> to add a column named “type” which will be “red” for rows of the first file, and “white” for rows of the second file:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="va">HEADER=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">head</span> -n 1 wine-red-clean.csv<span class="va">)</span><span class="st">,type&quot;</span>
+$ <span class="ex">csvstack</span> -g red,white -n type wine-<span class="dt">{red,white}</span>-clean.csv <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">csvcut</span> -c <span class="va">$HEADER</span> <span class="op">&gt;</span> wine-both-clean.csv</code></pre></div>
+<p>The new column <em>type</em> is added to the beginning of the table. Because some of the command-line tools that we’ll use in this chapter assume that the class label is the last column, we’ll rearrange the columns by using <code>csvcut</code>. Instead of typing all 13 columns, we temporary store the desired header into a variable <em>$HEADER</em> before we call <code>csvstack</code>.</p>
+<p>It’s good to check whether there are any missing values in this data set:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstat</span> wine-both-clean.csv --nulls
+  <span class="ex">1.</span> fixed_acidity: False
+  <span class="ex">2.</span> volatile_acidity: False
+  <span class="ex">3.</span> citric_acid: False
+  <span class="ex">4.</span> residual_sugar: False
+  <span class="ex">5.</span> chlorides: False
+  <span class="ex">6.</span> free_sulfur_dioxide: False
+  <span class="ex">7.</span> total_sulfur_dioxide: False
+  <span class="ex">8.</span> density: False
+  <span class="ex">9.</span> ph: False
+ <span class="ex">10.</span> sulphates: False
+ <span class="ex">11.</span> alcohol: False
+ <span class="ex">12.</span> quality: False
+ <span class="ex">13.</span> type: False</code></pre></div>
+<p>Excellent! Just out of curiosity, let’s see what the how the distribution of quality looks like for both red and white wines.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-clean.csv</span> Rio -ge <span class="st">&#39;g+geom_density(aes(quality, &#39;</span>\
+<span class="st">&#39;fill=type), adjust=3, alpha=0.5)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<p><img src="images/ch09-wine-quality-density.png" width="2362" style="display: block; margin: auto;" /></p>
+<p>From the density plot we can see the quality of white wine is distributed more towards higher values. Does this mean that white wines are overall better than red wines, or that the white wine experts more easily give higher scores than red wine experts? That’s something that the data doesn’t tell us. Or is there perhaps a correlation between alcohol and quality? Let’s use Rio and ggplot again to find out:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-clean.csv</span> Rio -ge <span class="st">&#39;ggplot(df, aes(x=alcohol, y=quality, &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;color=type)) + geom_point(position=&quot;jitter&quot;, alpha=0.2) + &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;geom_smooth(method=&quot;lm&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<p><img src="images/ch09-wine-alcohol-vs-quality.png" width="2362" style="display: block; margin: auto;" /></p>
+<p>Eureka! Ahem, let’s carry on with some modeling, shall we?</p>
+</div>
+<div id="dimensionality-reduction-with-tapkee" class="section level2">
+<h2><span class="header-section-number">9.3</span> Dimensionality Reduction with Tapkee</h2>
+<p>The goal of dimensionality reduction is to map high-dimensional data points onto a lower dimensional mapping. The challenge is to keep similar data points close together on the lower-dimensional mapping. As we’ve seen in the previous section, our wine data set contained 13 features. We’ll stick with two dimensions because that’s straight forward to visualize.</p>
+<p>Dimensionality reduction is often regarded as being part of exploring step. It’s useful for when there are too many features for plotting. You could do a scatter-plot matrix, but that only shows you two features at a time. It’s also useful as a pre-processing step for other machine learning algorithms.</p>
+<p>Most dimensionality reduction algorithms are unsupervised. This means that they don’t employ the labels of the data points in order to construct the lower-dimensional mapping.</p>
+<p>In this section we’ll look at two techniques: PCA, which stands for Principal Components Analysis <span class="citation">(Pearson <a href="references.html#ref-Pearson1901">1901</a>)</span> and t-SNE, which stands for t-distributed Stochastic Neighbor Embedding <span class="citation">(Maaten and Hinton <a href="references.html#ref-van2008visualizing">2008</a>)</span>.</p>
+<div id="introducing-tapkee" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Introducing Tapkee</h3>
+<p>Tapkee is a C++ template library for dimensionality reduction <span class="citation">(Lisitsyn, Widmer, and Garcia <a href="references.html#ref-Lisitsyn2013">2013</a>)</span>. The library contains implementations of many dimensionality reduction algorithms, including:</p>
+<ul>
+<li>Locally Linear Embedding</li>
+<li>Isomap</li>
+<li>Multidimensional scaling</li>
+<li>PCA</li>
+<li>t-SNE</li>
+</ul>
+<p>Tapkee’s website: <a href="http://tapkee.lisitsyn.me/" class="uri">http://tapkee.lisitsyn.me/</a>, contains more information about these algorithms. Although Tapkee is mainly a library that can be included in other applications, it also offers a command-line tool. We’ll use this to perform dimensionality reduction on our wine data set.</p>
+</div>
+<div id="installing-tapkee" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> Installing Tapkee</h3>
+<p>If you aren’t running the Data Science Toolbox, you’ll need to download and compile Tapkee yourself. First make sure that you have <code>CMake</code> installed. On Ubuntu, you simply run:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">sudo</span> apt-get install cmake</code></pre></div>
+<p>Please consult Tapkee’s website for instructions for other operating systems. Then execute the following commands to download the source and compile it:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">curl</span> -sL https://github.com/lisitsyn/tapkee/archive/master.tar.gz <span class="op">&gt;</span> \
+<span class="op">&gt;</span> tapkee-master.tar.gz
+$ <span class="fu">tar</span> -xzf tapkee-master.tar.gz
+$ <span class="bu">cd</span> tapkee-master
+$ <span class="fu">mkdir</span> build <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> build
+$ <span class="fu">cmake</span> ..
+$ <span class="fu">make</span></code></pre></div>
+<p>This creates a binary executable named <code>tapkee</code>.</p>
+</div>
+<div id="linear-and-non-linear-mappings" class="section level3">
+<h3><span class="header-section-number">9.3.3</span> Linear and Non-linear Mappings</h3>
+<p>First, we’ll scale the features using standardization such that each feature is equally important. This generally leads to better results when applying machine learning algorithms.</p>
+<p>To scale we use a combination of <code>cols</code> and <code>Rio</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both.csv</span> cols -C type Rio -f scale <span class="op">&gt;</span> wine-both-scaled.csv</code></pre></div>
+<p>Now we apply both dimensionality reduction techniques and visualize the mapping using <code>Rio-scatter</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> cols -C type body tapkee --method pca <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">header</span> -r x,y,type <span class="kw">|</span> <span class="ex">Rio-scatter</span> x y type <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">tee</span> tapkee-wine-pca.png <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="images/tapkee-wine-pca.png" alt="PCA" width="504" />
+<p class="caption">
+Figure 9.1: PCA
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> cols -C type body tapkee --method t-sne <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">header</span> -r x,y,type <span class="kw">|</span> <span class="ex">Rio-scatter</span> x y type <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">tee</span> tapkee-wine-t-sne.png <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
+<img src="images/tapkee-wine-t-sne.png" alt="t-SNE" width="504" />
+<p class="caption">
+Figure 9.2: t-SNE
+</p>
+</div>
+<p>Note that there’s not a single GNU core util (i.e., classic command-line tool) in this one-liner. Now that’s the power of the command line!</p>
+</div>
+</div>
+<div id="clustering-with-weka" class="section level2">
+<h2><span class="header-section-number">9.4</span> Clustering with Weka</h2>
+<p>In this section we’ll be clustering our wine data set into groups. Like, dimensionality reduction, clustering is usually unsupervised. It can be used go gain an understanding of how your data is structured. Once the data has been clustered, you can visualize the result by coloring the data points according to their cluster assignment. For most algorithms you specify upfront how many groups you want the data to be clustered in; some algorithms are able to determine a suitable number of groups.</p>
+<p>For this task we’ll use Weka, which is being maintained by the Machine Learning Group at the University of Waikato <span class="citation">(Hall et al. <a href="references.html#ref-Hall2009">2009</a>)</span>. If you already know Weka, then you probably know it as a software with a graphical user interface. However, as you’ll see, Weka can also be used from the command line (albeit with some modifications). Besides clustering, Weka can also do classification and regression, but we’re going to be using other tools for those machine learning tasks.</p>
+<div id="introducing-weka" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> Introducing Weka</h3>
+<p>You may ask, surely there are better command-line tools for clustering? And you are right. One reason we include Weka in this chapter is to show you how you can work around these imperfections by building additional command-line tools. As you spend more time on the command line and try out other command-line tools, chances are that you come across one that seems very promising at first, but does not work as you expected. A common imperfection is the command-line tool does not handle standard in or standard out correctly. In the next section we’ll point out these imperfections and demonstrate how we work around them.</p>
+</div>
+<div id="taming-weka-on-the-command-line" class="section level3">
+<h3><span class="header-section-number">9.4.2</span> Taming Weka on the Command Line</h3>
+<p>Weka can be invoked from the command line, but it’s definitely not straightforward or user friendly. Weka is programmed in Java, which means that you have to run <code>java</code>, specify the location of the <em>weka.jar</em> file, and specify the individual class you want to call. For example, Weka has a class called <em>MexicanHat</em>, which generates a toy data set. To generate 10 data points using this class, you would run:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">java</span> -cp ~/bin/weka.jar weka.datagenerators.classifiers.regression.MexicanHat\
+<span class="op">&gt;</span>  -n 10 <span class="kw">|</span> <span class="ex">fold</span>
+<span class="ex">%</span>
+<span class="ex">%</span> Commandline
+<span class="ex">%</span>
+<span class="ex">%</span> weka.datagenerators.classifiers.regression.MexicanHat -r weka.datagenerators.c
+<span class="ex">lassifiers.regression.MexicanHat-S_1_-n_10_-A_1.0_-R_-10..10_-N_0.0_-V_1.0</span> -S 1
+<span class="ex">-n</span> 10 -A 1.0 -R -10..10 -N 0.0 -V 1.0
+<span class="ex">%</span>
+<span class="ex">@relation</span> weka.datagenerators.classifiers.regression.MexicanHat-S_1_-n_10_-A_1.0
+<span class="ex">_-R_-10..10_-N_0.0_-V_1.0</span>
+
+<span class="ex">@attribute</span> x numeric
+<span class="ex">@attribute</span> y numeric
+
+<span class="ex">@data</span>
+
+<span class="ex">4.617564</span>,-0.215591
+<span class="ex">-1.798384</span>,0.541716
+<span class="ex">-5.845703</span>,-0.072474
+<span class="ex">-3.345659</span>,-0.060572
+<span class="ex">9.355118</span>,0.00744
+<span class="ex">-9.877656</span>,-0.044298
+<span class="ex">9.274096</span>,0.016186
+<span class="ex">8.797308</span>,0.066736
+<span class="ex">8.943898</span>,0.051718
+<span class="ex">8.741643</span>,0.072209</code></pre></div>
+<p>Don’t worry about the output of this command, we’ll discuss that later. At this moment, we’re concerned with the usage of Weka. There are a couple of things to note here:</p>
+<ul>
+<li>You need run <code>java</code>, which is counter-intuitive.</li>
+<li>The jar file contains over 2000 classes, and only about 300 of those can be used from the command line directly. How do you know which ones?</li>
+<li>You need to specify entire namespace of the class: <code>weka.datagenerators.classifiers.regression.MexicanHat</code>. How are you supposed to remember that?</li>
+</ul>
+<p>Does this mean that we’re going to give up on Weka? Of course not! Since Weka does contain a lot of useful functionality, we’re going to tackle these issues in the next three subsections.</p>
+<div id="an-improved-command-line-tool-for-weka" class="section level4">
+<h4><span class="header-section-number">9.4.2.1</span> An Improved Command-line Tool for Weka</h4>
+<p>Save the following snippet as a new file called <code>weka</code> and put it somewhere on your <em>PATH</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="ex">java</span> -Xmx1024M -cp <span class="va">${WEKAPATH}</span>/weka.jar <span class="st">&quot;weka.</span><span class="va">$@</span><span class="st">&quot;</span></code></pre></div>
+<p>Subsequently, add the following line to your <em>.bashrc</em> file so that <code>weka</code> can be called from anywhere:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">export</span> <span class="va">WEKAPATH=</span>/home/vagrant/repos/weka</code></pre></div>
+<p>We can now call the previous example with:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">weka</span> datagenerators.classifiers.regression.MexicanHat -n 10</code></pre></div>
+</div>
+<div id="usable-weka-classes" class="section level4">
+<h4><span class="header-section-number">9.4.2.2</span> Usable Weka Classes</h4>
+<p>As mentioned, the file <em>weka.jar</em> contains over 2000 classes. Many of them cannot be used from the command line directly. We consider a class usable from the command line when it provides us with a help message if we invoke it with <code>-h</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">weka</span> datagenerators.classifiers.regression.MexicanHat -h
+
+<span class="ex">Data</span> Generator options:
+
+<span class="ex">-h</span>
+        <span class="ex">Prints</span> this help.
+<span class="ex">-o</span> <span class="op">&lt;</span>file<span class="op">&gt;</span>
+        <span class="ex">The</span> name of the output file, otherwise the generated data is
+        <span class="ex">printed</span> to stdout.
+<span class="ex">-r</span> <span class="op">&lt;</span>name<span class="op">&gt;</span>
+        <span class="ex">The</span> name of the relation.
+<span class="ex">-d</span>
+        <span class="ex">Whether</span> to print debug informations.
+<span class="ex">-S</span>
+        <span class="ex">The</span> seed for random function (default 1)
+<span class="ex">-n</span> <span class="op">&lt;</span>num<span class="op">&gt;</span>
+        <span class="ex">The</span> number of examples to generate (default 100)
+<span class="ex">-A</span> <span class="op">&lt;</span>num<span class="op">&gt;</span>
+        <span class="ex">The</span> amplitude multiplier (default 1.0)<span class="ex">.</span>
+<span class="ex">-R</span> <span class="op">&lt;</span>num<span class="op">&gt;</span>..<span class="op">&lt;</span>num<span class="op">&gt;</span>
+        <span class="ex">The</span> range x is randomly drawn from (default -10.0..10.0)<span class="ex">.</span>
+<span class="ex">-N</span> <span class="op">&lt;</span>num<span class="op">&gt;</span>
+        <span class="ex">The</span> noise rate (default 0.0)<span class="ex">.</span>
+<span class="ex">-V</span> <span class="op">&lt;</span>num<span class="op">&gt;</span>
+        <span class="ex">The</span> noise variance (default 1.0)<span class="ex">.</span></code></pre></div>
+<p>Now that’s usable. This, for example, is not a usable class:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">weka</span> filters.SimpleFilter -h
+<span class="ex">java.lang.ClassNotFoundException</span>: -h
+        <span class="ex">at</span> java.net.URLClassLoader<span class="va">$1</span>.run(URLClassLoader.java:202)
+        <span class="ex">at</span> java.security.AccessController.doPrivileged(Native Method)
+        <span class="ex">at</span> java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+        <span class="ex">at</span> java.lang.ClassLoader.loadClass(ClassLoader.java:306)
+        <span class="ex">at</span> sun.misc.Launcher<span class="va">$AppClassLoader</span>.loadClass(Launcher.java:301)
+        <span class="ex">at</span> java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+        <span class="ex">at</span> java.lang.Class.forName0(Native Method)
+        <span class="ex">at</span> java.lang.Class.forName(Class.java:171)
+        <span class="ex">at</span> weka.filters.Filter.main(Filter.java:1344)
+<span class="ex">-h</span></code></pre></div>
+<p>The following pipeline runs <code>weka</code> with every class in <em>weka.jar</em> and <code>-h</code> and saves the standard output and standard error to a file with the same name as the class:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">unzip</span> -l <span class="va">$WEKAPATH</span>/weka.jar <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">sed</span> -rne <span class="st">&#39;s/.*(weka)\/([^g])([^$]*)\.class$/\2\3/p&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">tr</span> <span class="st">&#39;/&#39;</span> <span class="st">&#39;.&#39;</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">parallel</span> --timeout 1 -j4 -v <span class="st">&quot;weka {} -h &gt; {} 2&gt;&amp;1&quot;</span></code></pre></div>
+<p>We now have 749 files. With the following command we save the filename of every files which does not contain the string <em>Exception</em> to <em>weka.classes</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">grep</span> -L <span class="st">&#39;Exception&#39;</span> * <span class="kw">|</span> <span class="fu">tee</span> <span class="va">$WEKAPATH</span>/weka.classes</code></pre></div>
+<p>This still comes down to 332 classes! Here are a few classes that might be of interest):</p>
+<ul>
+<li><code>attributeSelection.PrincipalComponents</code></li>
+<li><code>classifiers.bayes.NaiveBayes</code></li>
+<li><code>classifiers.evaluation.ConfusionMatrix</code></li>
+<li><code>classifiers.functions.SimpleLinearRegression</code></li>
+<li><code>classifiers.meta.AdaBoostM1</code></li>
+<li><p><code>classifiers.trees.RandomForest</code></p></li>
+<li><code>clusterers.EM</code></li>
+<li><p><code>filters.unsupervised.attribute.Normalize</code></p></li>
+</ul>
+<p>As you can see, <code>weka</code> offers a whole range of classes and functionality.</p>
+</div>
+<div id="adding-tab-completion" class="section level4">
+<h4><span class="header-section-number">9.4.2.3</span> Adding Tab Completion</h4>
+<p>At this moment, you still need to type in the entire class name yourself. You can add so-called tab completion by adding the following snippet to your <em>.bashrc</em> file after you export <em>WEKAPATH</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">_completeweka()</span> <span class="kw">{</span>
+  <span class="bu">local</span> <span class="va">curw=${COMP_WORDS[COMP_CWORD]}</span>
+  <span class="bu">local</span> <span class="va">wordlist=$(</span><span class="fu">cat</span> <span class="va">$WEKAPATH</span>/weka.classes<span class="va">)</span>
+  <span class="va">COMPREPLY=($(</span><span class="bu">compgen</span> -W <span class="st">&#39;${wordlist[@]}&#39;</span> -- <span class="st">&quot;</span><span class="va">$curw</span><span class="st">&quot;</span><span class="va">))</span>
+  <span class="bu">return</span> 0
+<span class="kw">}</span>
+<span class="bu">complete</span> -o nospace -F _completeweka weka</code></pre></div>
+<p>This function makes use of the <em>weka.classes</em> file we generated earlier. If you now type: <code>weka clu&lt;Tab&gt;&lt;Tab&gt;&lt;Tab&gt;</code> on the command line, you are presented with a list of all classes that have to do with clustering:</p>
+<pre><code>$ weka clusterers.
+clusterers.CheckClusterer
+clusterers.CLOPE
+clusterers.ClusterEvaluation
+clusterers.Cobweb
+clusterers.DBSCAN
+clusterers.EM
+clusterers.FarthestFirst
+clusterers.FilteredClusterer
+clusterers.forOPTICSAndDBScan.OPTICS_GUI.OPTICS_Visualizer
+clusterers.HierarchicalClusterer
+clusterers.MakeDensityBasedClusterer
+clusterers.OPTICS
+clusterers.sIB
+clusterers.SimpleKMeans
+clusterers.XMeans</code></pre>
+<p>Creating a command-line tool <code>weka</code> and adding tab completion makes sure that Weka is a little bit more friendly to use on the command line.</p>
+</div>
+</div>
+<div id="converting-between-csv-to-arff-data-formats" class="section level3">
+<h3><span class="header-section-number">9.4.3</span> Converting between CSV to ARFF Data Formats</h3>
+<p>Weka uses ARFF as a file format. This is basically CSV with additional information about the columns. We’ll use two convenient command-line tools to convert between CSV and ARFF, namely <code>csv2arff</code> (see Example <a href="chapter-9-modeling-data.html#exm:csv2arff">9.1</a> ) and <code>arff2csv</code> (see Example <a href="chapter-9-modeling-data.html#exm:arff2csv">9.2</a>).</p>
+
+<div class="example">
+<span id="exm:csv2arff" class="example"><strong>Example 9.1  (Convert CSV to ARFF)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="ex">weka</span> core.converters.CSVLoader /dev/stdin</code></pre></div>
+
+<div class="example">
+<span id="exm:arff2csv" class="example"><strong>Example 9.2  (Convert ARFF to CSV)  </strong></span>
+</div>
+
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="ex">weka</span> core.converters.CSVSaver -i /dev/stdin</code></pre></div>
+</div>
+<div id="comparing-three-cluster-algorithms" class="section level3">
+<h3><span class="header-section-number">9.4.4</span> Comparing Three Cluster Algorithms</h3>
+<p>Unfortunately, in order to cluster data using Weka, we need yet another command-line tool to help us with this. The <em>AddCluster</em> class is needed to assign data points to the learned clusters. Unfortunately, this class does not accept data from standard input, not even when we specify <em>-i /dev/stdin</em> because it expects a file with the <em>.arff</em> extension. We consider this to be bad design. The source code of <code>weka-cluster</code> is:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/usr/bin/env bash</span>
+<span class="va">ALGO=</span><span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span>
+<span class="va">IN=$(</span><span class="fu">mktemp</span> --tmpdir weka-cluster-XXXXXXXX<span class="va">)</span>.arff
+
+<span class="fu">finish ()</span> <span class="kw">{</span>
+        <span class="fu">rm</span> -f <span class="va">$IN</span>
+<span class="kw">}</span>
+<span class="bu">trap</span> finish EXIT
+
+<span class="ex">csv2arff</span> <span class="op">&gt;</span> <span class="va">$IN</span>
+<span class="ex">weka</span> filters.unsupervised.attribute.AddCluster -W <span class="st">&quot;weka.</span><span class="va">${ALGO}</span><span class="st">&quot;</span> -i <span class="va">$IN</span> \
+-o /dev/stdout <span class="kw">|</span> <span class="ex">arff2csv</span></code></pre></div>
+<p>Now we can apply the EM clustering algorithm and save the assignment as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> data
+$ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> csvcut -C quality,type <span class="kw">|</span>          
+<span class="op">&gt;</span> <span class="ex">weka-cluster</span> clusterers.EM -N 5 <span class="kw">|</span>                        
+<span class="op">&gt;</span> <span class="ex">csvcut</span> -c cluster <span class="op">&gt;</span> data/wine-both-cluster-em.csv        </code></pre></div>
+<ul>
+<li>Use the scaled features, and don’t use the features quality and type for the cluster.</li>
+<li>Apply the algorithm using <code>weka-cluster</code>.</li>
+<li>Only save the cluster assignment.</li>
+</ul>
+<p>We’ll run the same command again for <em>SimpleKMeans</em> and <em>Cobweb</em> algorithms. Now we have three files with cluster assignments. Let’s create a t-SNE mapping in order to visualize the cluster assignments:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-both-scaled.csv</span> csvcut -C quality,type <span class="kw">|</span> <span class="ex">body</span> tapkee --method t-sne <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="ex">header</span> -r x,y <span class="op">&gt;</span> wine-both-xy.csv</code></pre></div>
+<p>Next, the cluster assignments are combined with the t-SNE mapping using <code>paste</code> and a scatter plot is created using <code>Rio-scatter</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> -j1 <span class="st">&quot;paste -d, wine-both-xy.csv wine-both-cluster-{}.csv | &quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;Rio-scatter x y cluster | display&quot;</span> ::: em simplekmeans cobweb</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
+<img src="images/ch09-wine-cluster-em.png" alt="EM" width="2362" />
+<p class="caption">
+Figure 9.3: EM
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-35"></span>
+<img src="images/ch09-wine-cluster-simplekmeans.png" alt="SimpleKMeans" width="2362" />
+<p class="caption">
+Figure 9.4: SimpleKMeans
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-36"></span>
+<img src="images/ch09-wine-cluster-cobweb.png" alt="Cobweb" width="2362" />
+<p class="caption">
+Figure 7.8: Cobweb
+</p>
+</div>
+<p>Admittedly, we have through a lot of trouble taming Weka. The exercise was worth it, because some day you may run into a command-line tool that works different from what you expect. Now you know that there are always ways to work around such command-line tools.</p>
+</div>
+</div>
+<div id="regression-with-scikit-learn-laboratory" class="section level2">
+<h2><span class="header-section-number">9.5</span> Regression with SciKit-Learn Laboratory</h2>
+<p>In this section, we’ll be predicting the quality of the white wine, based on their physicochemical properties. Because the quality is a number between 0 and 10, we can consider predicting the quality as a regression task. Generally speaking, using training data points, we train three regression models using three different algorithms.</p>
+<p>We’ll be using the SciKit-Learn Laboratory (or SKLL) package for this. If you’re not using the Data Science Toolbox, you can install SKLL using <code>pip</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">pip</span> install skll</code></pre></div>
+<p>If you’re running Python 2.7, you also need to install the following packages:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">pip</span> install configparser futures logutils</code></pre></div>
+<div id="preparing-the-data" class="section level3">
+<h3><span class="header-section-number">9.5.1</span> Preparing the Data</h3>
+<p>SKLL expects that the train and test data have the same filenames, located in separate directories. However, in this example, we’re going to use cross-validation, meaning that we only need to specify a training data set. Cross-validation is a technique that splits up the whole data set into a certain number of subsets. These subsets are called folds. (Usually, five or ten folds are used.)</p>
+<p>We need to add an identifier to each row so that we can easily identify the data points later (the predictions are not in the same order as the original data set):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="fu">mkdir</span> train
+$ <span class="ex">wine-white-clean.csv</span> nl -s, -w1 -v0 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;1s/0,/id,/&#39;</span> <span class="op">&gt;</span> train/features.csv</code></pre></div>
+</div>
+<div id="running-the-experiment" class="section level3">
+<h3><span class="header-section-number">9.5.2</span> Running the Experiment</h3>
+<p>Create a configuration file called <em>predict-quality.cfg</em>:</p>
+<div class="sourceCode"><pre class="sourceCode ini"><code class="sourceCode ini"><span class="kw">[General]</span>
+<span class="dt">experiment_name </span><span class="ot">=</span><span class="st"> Wine</span>
+<span class="dt">task </span><span class="ot">=</span><span class="st"> cross_validate</span>
+
+<span class="kw">[Input]</span>
+<span class="dt">train_location </span><span class="ot">=</span><span class="st"> train</span>
+<span class="dt">featuresets </span><span class="ot">=</span><span class="st"> [[&quot;features.csv&quot;]]</span>
+<span class="dt">learners </span><span class="ot">=</span><span class="st"> [&quot;LinearRegression&quot;,&quot;GradientBoostingRegressor&quot;,&quot;RandomForestRegressor&quot;]</span>
+<span class="dt">label_col </span><span class="ot">=</span><span class="st"> quality</span>
+
+<span class="kw">[Tuning]</span>
+<span class="dt">grid_search </span><span class="ot">=</span><span class="st"> </span><span class="kw">false</span>
+<span class="dt">feature_scaling </span><span class="ot">=</span><span class="st"> both</span>
+<span class="dt">objective </span><span class="ot">=</span><span class="st"> r2</span>
+
+<span class="kw">[Output]</span>
+<span class="dt">log </span><span class="ot">=</span><span class="st"> output</span>
+<span class="dt">results </span><span class="ot">=</span><span class="st"> output</span>
+<span class="dt">predictions </span><span class="ot">=</span><span class="st"> output</span></code></pre></div>
+<p>We run the experiment using the <em>run_experiment</em> command-line tool <span class="math display">\[cite:run\_experiment\]</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">run_experiment</span> -l evaluate.cfg</code></pre></div>
+<p>The <code>-l</code> command-line argument indicates that we’re running in local mode. SKLL also offers the possibility to run experiments on clusters. The time it takes to run the experiment depends on the complexity of the chosen algorithms.</p>
+</div>
+<div id="parsing-the-results" class="section level3">
+<h3><span class="header-section-number">9.5.3</span> Parsing the Results</h3>
+<p>Once all algorithms are done, the results can now be found in the directory <em>output</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> output
+$ <span class="fu">ls</span> -1
+<span class="ex">Wine_features.csv_GradientBoostingRegressor.log</span>
+<span class="ex">Wine_features.csv_GradientBoostingRegressor.predictions</span>
+<span class="ex">Wine_features.csv_GradientBoostingRegressor.results</span>
+<span class="ex">Wine_features.csv_GradientBoostingRegressor.results.json</span>
+<span class="ex">Wine_features.csv_LinearRegression.log</span>
+<span class="ex">Wine_features.csv_LinearRegression.predictions</span>
+<span class="ex">Wine_features.csv_LinearRegression.results</span>
+<span class="ex">Wine_features.csv_LinearRegression.results.json</span>
+<span class="ex">Wine_features.csv_RandomForestRegressor.log</span>
+<span class="ex">Wine_features.csv_RandomForestRegressor.predictions</span>
+<span class="ex">Wine_features.csv_RandomForestRegressor.results</span>
+<span class="ex">Wine_features.csv_RandomForestRegressor.results.json</span>
+<span class="ex">Wine_summary.tsv</span></code></pre></div>
+<p>SKLL generates four files for each learner: one log, two with results, and one with predictions. Moreover, SKLL generates a summary file, which contains a lot of information about each individual fold (too much to show here). We can extract the relevant metrics using the following SQL query:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">Wine_summary.tsv</span> csvsql --query <span class="st">&quot;SELECT learner_name, pearson FROM stdin &quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;WHERE fold = &#39;average&#39; ORDER BY pearson DESC&quot;</span> <span class="kw">|</span> <span class="ex">csvlook</span>
+<span class="kw">|</span><span class="ex">----------------------------+----------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">learner_name</span>              <span class="kw">|</span> <span class="ex">pearson</span>        <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------------------+----------------</span><span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">RandomForestRegressor</span>     <span class="kw">|</span> <span class="ex">0.741860521533</span> <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">GradientBoostingRegressor</span> <span class="kw">|</span> <span class="ex">0.661957860603</span> <span class="kw">|</span>
+<span class="kw">|</span>  <span class="ex">LinearRegression</span>          <span class="kw">|</span> <span class="ex">0.524144785555</span> <span class="kw">|</span>
+<span class="kw">|</span><span class="ex">----------------------------+----------------</span><span class="kw">|</span></code></pre></div>
+<p>The relevant column here is <em>pearson</em>, which indicates the Pearson’s ranking correlation. This is value between -1 and 1 that indicates the correlation between the true ranking (of quality scores) and the predicted ranking. Let’s paste all the predictions back to the data set:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> <span class="st">&quot;csvjoin -c id train/features.csv &lt;(&lt; output/Wine_features.csv_{}&quot;</span>\
+<span class="op">&gt;</span> <span class="st">&quot;.predictions | tr &#39;\t&#39; &#39;,&#39;) | csvcut -c id,quality,prediction &gt; {}&quot;</span> ::: \
+<span class="op">&gt;</span> RandomForestRegressor GradientBoostingRegressor LinearRegression
+$ <span class="ex">csvstack</span> *Regres* -n learner --filenames <span class="op">&gt;</span> predictions.csv</code></pre></div>
+<p>And create a plot using <code>Rio</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">predictions.csv</span> Rio -ge <span class="st">&#39;g+geom_point(aes(quality, round(prediction), &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;color=learner), position=&quot;jitter&quot;, alpha=0.1) + facet_wrap(~ learner) + &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;theme(aspect.ratio=1) + xlim(3,9) + ylim(3,9) + guides(colour=FALSE) + &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;geom_smooth(aes(quality, prediction), method=&quot;lm&quot;, color=&quot;black&quot;) + &#39;</span>\
+<span class="op">&gt;</span> <span class="st">&#39;ylab(&quot;prediction&quot;)&#39;</span> <span class="kw">|</span> <span class="ex">display</span></code></pre></div>
+<p><img src="images/ch09-wine-quality-predictions.png" width="2362" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="classification-with-bigml" class="section level2">
+<h2><span class="header-section-number">9.6</span> Classification with BigML</h2>
+<p>In this fourth and last modeling section we’re going to classify wines as either red or wine. For this we’ll be using a solution called BigML, which provides a prediction API. This means that the actual modeling and predicting takes place in the cloud, which is useful if you need a bit more power than your own computer can offer.</p>
+<p>Although prediction APIs are relatively young, they are upcoming, which is why we’ve included one in this chapter. Other providers of prediction APIs are Google (see <a href="https://developers.google.com/prediction" class="uri">https://developers.google.com/prediction</a>) and PredictionIO (see <a href="http://prediction.io" class="uri">http://prediction.io</a>). One advantage of BigML is that they offer a convenient command-line tool called <code>bigmler</code> <span class="citation">(BigML <a href="references.html#ref-bigmler">2014</a>)</span> that interfaces with their API. We can use this command-line like any other presented in this book, but behind the scenes, our data set is being sent to BigML’s servers, which perform the classification and send back the results.</p>
+<div id="creating-balanced-train-and-test-data-sets" class="section level3">
+<h3><span class="header-section-number">9.6.1</span> Creating Balanced Train and Test Data Sets</h3>
+<p>First, we create a balanced data set to ensure that both class are represented equally. For this, we use <code>csvstack</code> <span class="citation">(Groskopf <a href="references.html#ref-csvstack">2014</a><a href="references.html#ref-csvstack">h</a>)</span>, <code>shuf</code> <span class="citation">(Eggert <a href="references.html#ref-shuf">2012</a>)</span>, <code>head</code>, and <code>csvcut</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvstack</span> -n type -g red,white wine-red-clean.csv <span class="dt">\ </span>                  
+<span class="op">&gt;</span> <span class="op">&lt;(&lt;</span> <span class="ex">wine-white-clean.csv</span> body shuf <span class="kw">|</span> <span class="fu">head</span> -n 1600<span class="op">)</span> <span class="kw">|</span>                 
+<span class="op">&gt;</span> <span class="ex">csvcut</span> -c fixed_acidity,volatile_acidity,citric_acid,<span class="dt">\ </span>              
+<span class="op">&gt;</span> <span class="ex">residual_sugar</span>,chlorides,free_sulfur_dioxide,total_sulfur_dioxide,\
+<span class="op">&gt;</span> density,ph,sulphates,alcohol,type <span class="op">&gt;</span> wine-balanced.csv</code></pre></div>
+<p>This long command breaks down as follows:</p>
+<ul>
+<li><code>csvstack</code> is used to combine multiple data sets. It creates a new column <em>type</em>, which has the value <em>red</em> for all rows coming from the first file <em>wine-red-clean.csv</em> and <em>white</em> for all rows coming from the second file.</li>
+<li>The second file is passed to <code>csvstack</code> using file redirection. This allows us to create a temporary file using <code>shuf</code>, which creates a random permutation of the <em>wine-white-clean.csv</em> and <code>head</code> which only selects the header and the first 1559 rows.</li>
+<li>Finally, we reorder the columns of this data set using <code>csvcut</code> because by default, <code>bigmler</code> assumes that the last column is the label.</li>
+</ul>
+<p>Let’s verify that <em>wine-balanced.csv</em> is actually balanced by counting the number of instances per class using <code>parallel</code> and <code>grep</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> --tag grep -c <span class="dt">{}</span> wine-balanced.csv ::: red white
+<span class="fu">red</span>      1599
+<span class="ex">white</span>    1599</code></pre></div>
+<p>As you can see, the data set <em>wine-balanced.csv</em> contains both 1599 red and 1599 white wines. Next we split into train and test data sets using <code>split</code> <span class="citation">(Granlund and Stallman <a href="references.html#ref-split">2012</a><a href="references.html#ref-split">b</a>)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="op">&lt;</span> <span class="ex">wine-balanced.csv</span> header <span class="op">&gt;</span> wine-header.csv                   
+$ <span class="fu">tail</span> -n +2 wine-balanced.csv <span class="kw">|</span> <span class="ex">shuf</span> <span class="kw">|</span> <span class="fu">split</span> -d -n r/2          
+$ <span class="ex">parallel</span> --xapply <span class="st">&quot;cat wine-header.csv x0{1} &gt; wine-{2}.csv&quot;</span> <span class="dt">\ </span>
+<span class="op">&gt;</span> ::: <span class="ex">0</span> 1 ::: train test</code></pre></div>
+<p>This is another long command that deserves to be broken down:</p>
+<ul>
+<li>Get the header using <code>header</code> and save it to a temporary file named <em>wine-header.csv</em></li>
+<li>Mix up the red and white wines using <code>tail</code> and <code>shuf</code> and split it into two files named <em>x00</em> and <em>x01</em> using a round robin distribution.</li>
+<li>Use <code>cat</code> to combine the header saved in <em>wine-header.csv</em> and the rows stored in <em>x00</em> to save it as <em>wine-train.csv</em>; similarly for <em>x01</em> and <em>wine-test.csv</em>. The <code>--xapply</code> command-line argument tells <code>parallel</code> to loop over the two input sources in tandem.</li>
+</ul>
+<p>Let’s check again number of instances per class in both <em>wine-train.csv</em> and <em>wine-test.csv</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">parallel</span> --tag grep -c <span class="dt">{2}</span> wine-<span class="dt">{1}</span>.csv ::: train test ::: red white
+<span class="ex">train</span> red       821
+<span class="ex">train</span> white     778
+<span class="bu">test</span> white      821
+<span class="bu">test</span> red        778</code></pre></div>
+<p>That looks like are data sets are well balanced. We’re now ready to call the prediction API using <code>bigmler</code>.</p>
+</div>
+<div id="calling-the-api" class="section level3">
+<h3><span class="header-section-number">9.6.2</span> Calling the API</h3>
+
+<div class="rmdnote">
+You can obtain a BigML username and API key at <a href="https://bigml.com/developers" class="uri">https://bigml.com/developers</a>. Be sure to set the variables <em>BIGML_USERNAME</em> and <em>BIGML_API_KEY</em> in <em>.bashrc</em> with the appropriate values.
+</div>
+
+<p>The API call is quite straightforward, and the meaning of each command-line argument is obvious from it’s name.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">bigmler</span> --train data/wine-train.csv \
+<span class="op">&gt;</span> --test data/wine-test-blind.csv \
+<span class="op">&gt;</span> --prediction-info full \
+<span class="op">&gt;</span> --prediction-header \
+<span class="op">&gt;</span> --output-dir output \
+<span class="op">&gt;</span> --tag wine \
+<span class="op">&gt;</span> --remote</code></pre></div>
+<p>The file <em>wine-test-blind.csv</em> is just <em>wine-test</em> with the <em>type</em> column (so the label) removed. After this call is finished, the results can be found in the <em>output</em> directory:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">tree</span> output
+<span class="ex">output</span>
+├── <span class="ex">batch_prediction</span>
+├── <span class="ex">bigmler_sessions</span>
+├── <span class="ex">dataset</span>
+├── <span class="ex">dataset_test</span>
+├── <span class="ex">models</span>
+├── <span class="ex">predictions.csv</span>
+├── <span class="bu">source</span>
+└── <span class="ex">source_test</span>
+
+<span class="ex">0</span> directories, 8 files</code></pre></div>
+</div>
+<div id="inspecting-the-results" class="section level3">
+<h3><span class="header-section-number">9.6.3</span> Inspecting the Results</h3>
+<p>The file which is of most interest is <em>output/predictions.csv</em>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">csvcut</span> output/predictions.csv -c type <span class="kw">|</span> <span class="fu">head</span>
+<span class="bu">type</span>
+<span class="ex">white</span>
+<span class="ex">white</span>
+<span class="fu">red</span>
+<span class="fu">red</span>
+<span class="ex">white</span>
+<span class="fu">red</span>
+<span class="fu">red</span>
+<span class="ex">white</span>
+<span class="fu">red</span></code></pre></div>
+<p>We can compare these predicted labels with the labels in our test data set. Let’s count the number of misclassifications:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">paste</span> -d, <span class="op">&lt;(</span><span class="ex">csvcut</span> -c type data/wine-test.csv<span class="op">)</span> <span class="dt">\ </span>       
+<span class="op">&gt;</span> <span class="op">&lt;(</span><span class="ex">csvcut</span> -c type output/predictions.csv<span class="op">)</span> <span class="kw">|</span>
+<span class="op">&gt;</span> <span class="fu">awk</span> -F, <span class="st">&#39;{ if ($1 != $2) {sum+=1 } } END { print sum }&#39;</span> 
+<span class="ex">766</span></code></pre></div>
+<ul>
+<li>First, we combine the <em>type</em> columns of both <em>data/wine-test.csv</em> and <em>output/predictions.csv</em>.</li>
+<li>Then, we use <code>awk</code> to keep count of when the two columns differ in value.</li>
+</ul>
+<p>As you can see, BigML’s API misclassified 766 wines out of 1599. This isn’t a good result, but please note that we just blindly applied an algorithm to a data set, which we normally wouldn’t do.</p>
+</div>
+<div id="conclusion" class="section level3">
+<h3><span class="header-section-number">9.6.4</span> Conclusion</h3>
+<p>BigML’s prediction API has proven to be easy to use. As with many of the command-line tools discussed in this book, we’ve barely scratched the surface with BigML. For completeness, we should mention that:</p>
+<ul>
+<li>BigML’s command-line tool also allows for local computations, which is useful for debugging.</li>
+<li>Results can also be inspected using BigML’s web interface.</li>
+<li>BigML can also perform regression tasks.</li>
+</ul>
+<p>Please see <a href="https://bigml.com/developers" class="uri">https://bigml.com/developers</a> for a complete overview of BigML’s features.</p>
+<p>Although we’ve only been able to experiment with one prediction API, we do believe that prediction APIs in general are worthwhile to consider for doing data science.</p>
+</div>
+</div>
+<div id="further-reading-8" class="section level2">
+<h2><span class="header-section-number">9.7</span> Further Reading</h2>
+<ul>
+<li>Cortez, P., A. Cerdeira, F. Almeida, T. Matos, and J. Reis. 2009. “Modeling Wine Preferences by Data Mining from Physicochemical Properties.” <em>Decision Support Systems</em> 47 (4). Elsevier:547–53.</li>
+<li>Hall, Mark, Eibe Frank, Geoffrey Holmes, Bernhard Pfahringer, Peter Reutemann, and Ian H. Witten. 2009. “The WEKA Data Mining Software: An Update.” <em>SIGKDD Explorations</em> 11 (1). ACM.</li>
+<li>Pearson, K. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2 (11):559–72.</li>
+<li>Maaten, Laurens van der, and Geoffrey Everest Hinton. 2008. “Visualizing Data Using T-SNE.” <em>Journal of Machine Learning Research</em> 9:2579–2605.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-8-parallel-pipelines.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-10-conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-# Introduction 
+# Introduction {#chapter-1-introduction}
 
 This book is about doing data science at the command line. Our aim is to make you a more efficient and productive data scientist by teaching you how to leverage the power of the command line. 
 
@@ -33,7 +33,7 @@ Without any data, there is little data science you can do. So the first step is 
 - Extract data from another file (e.g., an HTML file or spreadsheet)
 - Generate data yourself (e.g., reading sensors or taking surveys)
 
-In [Chapter 3](#obtaining-data-1), we discuss several methods for obtaining data using the command line. The obtained data will most likely be in either text, CSV, JSON of HTML/XML format. The next step is to scrub this data.
+In [Chapter 3](#chapter-3-obtaining-data), we discuss several methods for obtaining data using the command line. The obtained data will most likely be in either text, CSV, JSON of HTML/XML format. The next step is to scrub this data.
 
 ### Scrubbing Data 
 
@@ -46,21 +46,21 @@ It is not uncommon that the obtained data has missing values, inconsistencies, e
 - Handling missing values
 - Converting data from one format to another
 
-While we data scientists love to create exciting data visualizations and insightful models (steps 3 and 4), usually much effort goes into obtaining and scrubbing the required data first (steps 1 and 2). In *Data Jujitsu*, @Patil2012 states that "80% of the work in any data project is in cleaning the data". In [Chapter 5](#scrubbing-data-1), we demonstrate how the command line can help accomplish such data scrubbing operations.
+While we data scientists love to create exciting data visualizations and insightful models (steps 3 and 4), usually much effort goes into obtaining and scrubbing the required data first (steps 1 and 2). In *Data Jujitsu*, @Patil2012 states that "80% of the work in any data project is in cleaning the data". In [Chapter 5](#chapter-5-scrubbing-data), we demonstrate how the command line can help accomplish such data scrubbing operations.
 
 ### Exploring Data 
 
-Once you have scrubbed your data, you are ready to explore it. This is where it gets interesting because here you will get really into your data. In [Chapter 7](#exploring-data-1) we show you how the command line can be used to:
+Once you have scrubbed your data, you are ready to explore it. This is where it gets interesting because here you will get really into your data. In [Chapter 7](#chapter-7-exploring-data) we show you how the command line can be used to:
 
 - Look at your data
 - Derive statistics from your data
 - Create interesting visualizations
 
-Command-line tools introduced in [Chapter 7](#exploring-data-1) include: `csvstat` [@csvstat], `feedgnuplot` [@feedgnuplot], and `Rio` [@Rio].
+Command-line tools introduced in [Chapter 7](#chapter-7-exploring-data) include: `csvstat` [@csvstat], `feedgnuplot` [@feedgnuplot], and `Rio` [@Rio].
 
 ### Modeling Data 
 
-If you want to explain the data or predict what will happen, you probably want to create a statistical model of your data. Techniques to create a model include clustering, classification, regression, and dimensionality reduction. The command line is not suitable for implementing a new model from scratch. It is, however, very useful to be able to build a model from the command line. In [Chapter 9](#modeling-data-1) we will introduce several command-line tools that either build a model locally or employ an API to perform the computation in the cloud.
+If you want to explain the data or predict what will happen, you probably want to create a statistical model of your data. Techniques to create a model include clustering, classification, regression, and dimensionality reduction. The command line is not suitable for implementing a new model from scratch. It is, however, very useful to be able to build a model from the command line. In [Chapter 9](#chapter-9-modeling-data) we will introduce several command-line tools that either build a model locally or employ an API to perform the computation in the cloud.
 
 ### Interpreting Data 
 
@@ -76,11 +76,11 @@ To be honest, the computer is of little use here, and the command line does not 
 
 In between the chapters that cover the OSEMN steps, there are three intermezzo chapters. Each intermezzo chapter discusses a more general topic concerning data science, and how the command line is employed for that. These topics are applicable to any step in the data science process.
 
-In [Chapter 4](#creating-reusable-command-line-tools), we discuss how to create reusable tools for the command line. These personal tools can come from both long commands that you have typed on the command line, or from existing code that you have written in, say, Python or R. Being able to create your own tools allows you to become more efficient and productive.
+In [Chapter 4](#chapter-4-creating-reusable-command-line-tools), we discuss how to create reusable tools for the command line. These personal tools can come from both long commands that you have typed on the command line, or from existing code that you have written in, say, Python or R. Being able to create your own tools allows you to become more efficient and productive.
 
-Because the command line is an interactive environment for doing data science, it can become challenging to keep track of your workflow. In [Chapter 6](#managing-your-data-workflow), we demonstrate a command-line tool called Drake [@drake], which allows you to define your data science workflow in terms of tasks and the dependencies between them. This tool increases the reproducibility of your workflow, not only for you but also for your colleagues and peers.
+Because the command line is an interactive environment for doing data science, it can become challenging to keep track of your workflow. In [Chapter 6](#chapter-6-managing-your-data-workflow), we demonstrate a command-line tool called Drake [@drake], which allows you to define your data science workflow in terms of tasks and the dependencies between them. This tool increases the reproducibility of your workflow, not only for you but also for your colleagues and peers.
 
-In [Chapter 8](#parallel-pipelines), we explain how your commands and tools can be sped up by running them in parallel. Using a command-line tool called GNU Parallel [@parallel], we can apply command-line tools to very large data sets and run them on multiple cores and remote machines.
+In [Chapter 8](#chapter-8-parallel-pipelines), we explain how your commands and tools can be sped up by running them in parallel. Using a command-line tool called GNU Parallel [@parallel], we can apply command-line tools to very large data sets and run them on multiple cores and remote machines.
 
 ## What is the Command Line? 
 
@@ -97,7 +97,7 @@ knitr::include_graphics("images/screenshot_terminal_ubuntu_dst.png")
 The window shown in the two screenshots is called the terminal. This is the program that enables you to interact with the shell. It is the shell that executes the commands we type in. (On both Ubuntu and macOS, the default shell is Bash.)
 
 ```{block2, type="rmdnote"}
-We’re not showing the Microsoft Windows command line (also known as the Command Prompt or PowerShell), because it's fundamentally different and incompatible with the commands presented in this book. The good news is that you can install the Data Science Toolbox on Microsoft Windows, so that you’re able to follow along. How to install the Data Science Toolbox is explained in [Chapter 2](#getting-started).
+We’re not showing the Microsoft Windows command line (also known as the Command Prompt or PowerShell), because it's fundamentally different and incompatible with the commands presented in this book. The good news is that you can install the Data Science Toolbox on Microsoft Windows, so that you’re able to follow along. How to install the Data Science Toolbox is explained in [Chapter 2](#chapter-2-getting-started).
 ```
 
 Typing commands is a very different way of interacting with your computer than through a graphical user interface. If you are mostly used to processing data in, say, Microsoft Excel, then this approach may seem intimidating at first. Don’t be afraid. Trust us when we say that you’ll get used to working at the command line very quickly.
@@ -142,7 +142,7 @@ Second, the command line is very close to the filesystem. Because data is the ma
 
 Whatever technology your data science workflow currently includes (whether it's R, IPython, or Hadoop), you should know that we’re not suggesting you abandon that workflow. Instead, the command line is presented here as an augmenting technology that amplifies the technologies you’re currently employing.
 
-The command line integrates well with other technologies. On the one hand, you can often employ the command line from your own environment. Python and R, for instance, allow you to run command-line tools and capture their output. On the other hand, you can turn your code (e.g., a Python or R function that you have already written) into a command-line tool. We will cover this extensively in [Chapter 4](#creating-reusable-command-line-tools). Moreover, the command line can easily cooperate with various databases and file types such as Microsoft Excel.
+The command line integrates well with other technologies. On the one hand, you can often employ the command line from your own environment. Python and R, for instance, allow you to run command-line tools and capture their output. On the other hand, you can turn your code (e.g., a Python or R function that you have already written) into a command-line tool. We will cover this extensively in [Chapter 4](#chapter-4-creating-reusable-command-line-tools). Moreover, the command line can easily cooperate with various databases and file types such as Microsoft Excel.
 
 In the end, every technology has its advantages and disadvantages (including the command line), so it’s good to know several and use whichever is most appropriate for the task at hand. Sometimes that means using R, sometimes the command line, and sometimes even pen and paper. By the end of this book you’ll have a solid understanding of when you could use the command line, and when you’re better off continuing with your favorite programming language or statistical computing environment.
 
@@ -150,7 +150,7 @@ In the end, every technology has its advantages and disadvantages (including the
 
 Working on the command line is very different from using a graphical user interface (GUI). On the command line you do things by typing, whereas with a GUI, you do things by pointing and clicking with a mouse.
 
-Everything that you type manually on the command line, can also be automated through scripts and tools. This makes it very easy to re-run your commands in case you made a mistake, when the data set changed, or because your colleague wants to perform the same analysis. Moreover, your commands can be run at specific intervals, on a remote server, and in parallel on many chunks of data (more on that in [Chapter 8](#parallel-pipelines)).
+Everything that you type manually on the command line, can also be automated through scripts and tools. This makes it very easy to re-run your commands in case you made a mistake, when the data set changed, or because your colleague wants to perform the same analysis. Moreover, your commands can be run at specific intervals, on a remote server, and in parallel on many chunks of data (more on that in Chapter 8).
 
 Because the command line is automatable, it becomes scalable and repeatable. It is not straightforward to automate pointing and clicking, which makes a GUI a less suitable environment for doing scalable and repeatable data science.
 
@@ -264,7 +264,7 @@ knitr::include_graphics("images/nyt-fashion-week-multi.png")
 
 By looking at the line graph we can infer that New York Fashion Week happens two times per year. And now we know when: once in February and once in September. Let’s hope that it’s going to be the same this year so that we can prepare ourselves! In any case, we hope that with this example, we’ve shown that *The New York Times* API is an interesting source of data. More importantly, we hope that we’ve convinced you that the command line can be a very powerful approach for doing data science.
 
-In this section we’ve peeked at some important concepts and some exciting command-line tools. Don’t worry if some things don’t make sense yet. Most of the concepts will be discussed in [Chapter 2](#getting-started), and in the subsequent chapters we’ll go into more detail for all the command-line tools used in this section.
+In this section we’ve peeked at some important concepts and some exciting command-line tools. Don’t worry if some things don’t make sense yet. Most of the concepts will be discussed in [Chapter 2](#chapter-2-getting-started), and in the subsequent chapters we’ll go into more detail for all the command-line tools used in this section.
 
 ## Further Reading 
 
