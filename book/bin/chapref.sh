@@ -1,5 +1,5 @@
 function chapref() {
-    sed -re 's/([\^ ])(Chapter '$1')([;:., ])/\1\[\2\]\(#'$2'\)\3/g'
+    sed -re 's/([\^ \-])(Chapter '$1')([;:., ])/\1\[\2\]\(#'$2'\)\3/g'
 }
 
 function allchaprefs() {
