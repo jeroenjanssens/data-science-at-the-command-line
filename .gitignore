@@ -1,6 +1,3 @@
-.vagrant
-isos
-boxes
-output-virtualbox-iso
-packer_cache
-variables.json
+.Rproj.user
+docs/*.md
+book/asciidoc

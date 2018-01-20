@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Data Science at the Command Line</title>
+  <meta name="description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Data Science at the Command Line" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Data Science at the Command Line" />
+  
+  <meta name="twitter:description" content="This is the website for Data Science at the Command Line, published by O’Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  
+
+<meta name="author" content="Jeroen Janssens">
+
+
+<meta name="date" content="2018-01-20">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="chapter-1-introduction.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#docker-image"><i class="fa fa-check"></i><b>2.2</b> Installing the Docker Image</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#further-reading-1"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#overview-2"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-relational-databases"><i class="fa fa-check"></i><b>3.5</b> Querying Relational Databases</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#further-reading-2"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#overview-3"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#further-reading-3"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#overview-4"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#further-reading-4"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#overview-5"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#further-reading-5"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a><ul>
+<li class="chapter" data-level="7.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#overview-6"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#further-reading-6"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a><ul>
+<li class="chapter" data-level="8.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#overview-7"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#discussion-1"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#further-reading-7"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a><ul>
+<li class="chapter" data-level="9.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#overview-8"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#further-reading-8"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a><ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#interpreting-data-1"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<p>Data science is an exited field to work in. It’s also still very young. Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science. However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.</p>
+<p>Around five years ago, during my PhD program, I gradually switched from using Microsoft Windows to Linux. Because it was a bit scary at first, I started with having both operating systems installed next to each other (known as dual-boot). The urge to switch back and forth between Microsoft Windows faded and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch. All you’re given is the command line, and it’s up to you what you want to make of it. Out of necessity I quickly became very comfortable using the command line. Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its easy-of-use and large community. However, the command line is still where I’m spending most of time.</p>
+<p>It actually hasn’t been too long ago that I realized that the command line is not just for installing software, system configuration, and searching files. I started learning about command-line tools such as <code>cut</code>, <code>sort</code>, and <code>sed</code>. These are examples of command-line tools that take data as input, do something to it, and print the result. Ubuntu comes with quite a few of them. Once I understood the potential of combining these small tools, I was hooked.</p>
+<p>After my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible. Thanks to a couple of new, open-source command-line tools including <code>xml2json</code>, <code>jq</code>, and <code>json2csv</code> I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data. In September 2013, I decided to write a blog post titled <em>Seven Command-line Tools for Data Science</em>, which is available at <a href="http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html" class="uri">http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html</a>. To my surprise, the blog post got quite some attention and I received a lot of suggestions of other command-line tools. I started wondering whether this blog post could be turned into a book. I’m pleased that, some ten months later, with the help of many talented people (see the acknowledgments below), the answer is a yes.</p>
+<p>I am sharing this personal story not so much because I think you should know how this book came about, but because I want to you know that I had to learn about the command line as well. Because the command line is so different from using a graphical user interface, it can seem scary at first. But if I can learn it, then you can as well. No matter what your current operating system is and no matter how you currently work with data, after reading this book you will be able to do data science at the command line. If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.</p>
+<div id="what-to-expect-from-this-book" class="section level2 unnumbered">
+<h2>What to Expect from This Book</h2>
+<p>In this book, we’re going to obtain, scrub, explore, and model data; a lot of it. This book is not so much about how become <em>better</em> at those data science tasks. There are already great resources available that discuss, for example, when to apply which statistical test or how data can be best visualized. Instead, this practical book aims to make you more <em>efficient</em> and <em>productive</em> by teaching you how to perform those data science tasks at the command line.</p>
+<p>While this book discusses over 80 command-line tools, it’s not the tools themselves that matter most. Some command-line tools have been around for a very long time, while others will be replace by better ones. There are even command-line tools that are being created as you’re reading this. In the past nine months, I have discovered many amazing command-line tools. Unfortunately, some of them were discovered too late to be included in the book. In short, command-line tools come and go. But that’s OK.</p>
+<p>What matters most is the underlying idea of working with tools, pipes, and data. Most of the command-line tools do one thing and do it well. This is part the UNIX philosophy, which makes several appearances throughout the book. Once you become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.</p>
+</div>
+<div id="how-to-read-this-book" class="section level2 unnumbered">
+<h2>How to Read This Book</h2>
+<p>In general, you’re advised to read this book in a linear fashion. Once a concept or command-line tool has been introduced, chances are that we employ it in a later chapter. For example, in Chapter 9, we make heavy use of <code>parallel</code>, which is introduced extensively in Chapter 8.</p>
+<p>Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning. As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length. Throughout the book, there are suggestions for additional reading. It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.</p>
+</div>
+<div id="who-this-book-is-for" class="section level2 unnumbered">
+<h2>Who This Book Is For</h2>
+<p>This book makes just one assumption about you: that you work with data. It doesn’t matter whether which programming language or statistical computing environment you’re currently using. The book starts explains all the necessary concepts from the beginning.</p>
+<p>It also doesn’t matter whether your operating system is Microsoft Windows, MacOS, or some form of Linux. The book comes with a Docker image, which is an easy-to-install virtual environment. It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written. You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.</p>
+<p>The book contains some code in Bash, Python, and R so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.</p>
+</div>
+<div id="acknowledgments" class="section level2 unnumbered">
+<h2>Acknowledgments</h2>
+<p>First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post <a href="http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html">Seven Command-Line Tools for Data Science</a>, which I wrote in September 2013, could be expanded into a book.</p>
+<p>Special thanks to my technical reviewers Mike Dewar, Brian Eoff, and Shane Reustle for reading various drafts, meticulously testing all the commands, and providing invaluable feedback. Your efforts have improved the book greatly. The remaining errors are entirely my own responsibility.</p>
+<p>I had the privilege of working together with three amazing editors, namely: Ann Spencer, Julie Steele, and Marie Beaugureau. Thank you for your guidance and for being such great liaisons with the many talented people at O’Reilly. Those people include: Laura Baldwin, Huguette Barriere, Sophia DeMartini, Yasmina Greco, Rachel James, Ben Lorica, Mike Loukides, and Christopher Pappas. There are many others whom I haven’t met because they are operating behind the scenes. Together they ensured that working with O’Reilly has truly been a pleasure.</p>
+<p>This book discusses over 80 command-line tools. Needless to say, without these tools, this book wouldn’t have existed in the first place. I’m therefore extremely grateful to all the authors who created and contributed to these tools. The complete list of authors is unfortunately too long to include here; they are mentioned in the Appendix. Thanks especially to Aaron Crow, Jehiah Czebotar, Christoph Groskopf, Dima Kogan, Sergey Lisitsyn, Francisco J. Martin, and Ole Tange for providing help with their amazing command-line tools.</p>
+<p>Eric Postma and Jaap van den Herik, who supervised me during my PhD program, deserve a special thank you. Over the course of five years they have taught me many lessons. Although writing a technical book is quite different from writing a PhD thesis, many of those lessons proved to be very helpful in the past nine months as well.</p>
+<p>Finally, I’d like to thank my colleagues at YPlan, my friends, my family, and especially my wife Esther for supporting me and for pulling me away from the command line at just the right times.</p>
+</div>
+<div id="about-the-author" class="section level2 unnumbered">
+<h2>About the Author</h2>
+<p><a href="http://jeroenjanssens.com/">Jeroen Janssens</a> is the founder and CEO of <a href="https://datascienceworkshops.com">Data Science Workshops</a>, which provides on-the-job training and coaching in data visualisation, machine learning, and programming. Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and startups YPlan and Outbrain in New York City. He is the author of Data Science at the Command Line, published by O’Reilly Media. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He can be found on <a href="https://twitter.com/jeroenhjanssens/">Twitter</a>, <a href="http://www.linkedin.com/in/jeroenjanssens">LinkedIn</a>, and <a href="https://github.com/jeroenjanssens">GitHub</a>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-1-introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

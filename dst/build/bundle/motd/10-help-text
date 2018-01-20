@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo
-echo " * Data Science at the Command Line: http://datascienceatthecommandline.com"
-echo " * Data Science Toolbox:             http://datasciencetoolbox.org"
-echo " * Ubuntu documentation:             http://help.ubuntu.com"
