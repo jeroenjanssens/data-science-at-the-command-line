@@ -2,7 +2,7 @@
 
 In this chapter we are going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
 
-First, we describe how to install the Data Science Toolbox, which is a virtual environment based on GNU/Linux that contains all the necessary command-line tools. Subsequently, we explain the essential command-line concepts through examples.
+First, we describe how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools. Subsequently, we explain the essential command-line concepts through examples.
 
 By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.
 
@@ -10,29 +10,65 @@ By the end of this chapter, you’ll have everything you need in order to contin
 
 In this chapter, you’ll learn:
 
-- How to set up the Data Science Toolbox.
+- How to install the Docker image.
 - Essential concepts and tools necessary to perform data science at the command line.
 
-## Setting Up Your Data Science Toolbox 
-
-In this book we use many different command-line tools. The distribution of GNU/Linux that we assume, Ubuntu, comes with a whole bunch of command-line tools pre-installed. Moreover, Ubuntu offers many packages that contain other, relevant command-line tools. Installing these packages yourself is not too difficult. However, we also use command-line tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, we encourage you to install the Data Science Toolbox.
+## Installing the Docker Image {#docker-image}
 
 ```{block2, type="rmdnote"}
-
-If you prefer to run the command-line tools natively rather than inside a virtual machine, then you can install the command-line tools individually. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only, so please check the book’s website at <http://datasciencatthecommandline.com> for up-to-date information on how to install the command-line tools natively on other operating systems. The scripts and data sets used in the book can be obtained by cloning this book’s GitHub repository at <https://github.com/jeroenjanssens/data-science-at-the-command-line>.
+This section used to be called *Setting up the Data Science Toolbox* and described how to install a Vagrant box containing all the command-line tools. This Vagrant box was created in 2014, and because technology around virtualisation and containerisation has moved on, it became high time for an update. So now, instead of a Vagrant box, we use a Docker image.
 ```
 
-The Data Science Toolbox is a virtual environment that allows you to get started doing data science in minutes. The default version comes with commonly used software for data science, including the Python scientific stack and R together with its most popular packages. Additional software and data bundles are easily installed. These bundles can be specific to a certain book, course, or organization. You can read more about the Data Science Toolbox in general at <http://datasciencetoolbox.org>.
 
+In this book we use many different command-line tools. Linux often comes with a whole bunch of command-line tools pre-installed. Moreover, Linux offers many packages that contain other, relevant tools. Installing these packages yourself is not too difficult. However, we also use tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, we encourage you to install a Docker image that was created specifically for this book.
+
+```{block2, type="rmdtip"}
+If you still prefer to run the command-line tools natively rather than inside a Docker image, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s [GitHub repository](https://github.com/jeroenjanssens/data-science-at-the-command-line).
+```
+
+To install the Docker image, you first need to download and install Docker itself from [the Docker website](https://www.docker.com/products/docker). 
+Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don't type the dollar sign):
+
+```{bash, eval=FALSE}
+$ docker pull datascienceworkshops/data-science-at-the-command-line
+```
+
+You can run the Docker image as follows:
+
+```{bash eval=FALSE}
+$ docker run --rm -itv`pwd`:/data datascienceworkshops/data-science-at-the-command-line
+```
+
+```{block2, type="rmdtip"}
+It's a good idea to remember from which directory you run the Docker container. In the above command, the option `-v` instructs `docker` to map the current directory to the */data* directory inside the container, so this is the place to get data in and out of the Docker container.
+```
+
+You're now inside an isolated Linux environment---known as a *Docker container*---with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:
+
+```{bash eval=FALSE}
+$ cowsay "Let's go!"
+ ___________
+< Let's go! >
+ -----------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+
+```{block2, type="rmdnote"}
+If you would like to know more about the Docker image you can [visit it on Docker Hub](https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line/).
+```
 
 
 ## Essential GNU/Linux Concepts 
 
-In [Chapter 1](#chapter-1-introduction), we briefly showed you what the command line is. Now that you have your own Data Science Toolbox, we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.
+In [Chapter 1](#chapter-1-introduction), we briefly showed you what the command line is. Now that you are running the [Docker image](#docker-image), we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.
 
 ```{block2, type="rmdnote"}
 
-This section is not a complete course in GNU/Linux. We will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the Data Science Toolbox is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
+This section is not a complete course in GNU/Linux. We will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the [Docker image](#docker-image) is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
 ```
 
 ### The Environment 
@@ -58,11 +94,11 @@ Terminal
 
 Shell
 
-:   The third layer is the shell. Once we have typed in our command and pressed `<Enter>`, the terminal sends that command to the shell. The shell is a program that interprets the command. The Data Science Toolbox uses Bash as the shell, but there are many others available. Once you have become a bit more proficient at the command line, you may want to look into a shell called the Z shell. It offers many additional features that may increase your productivity at the command line.
+:   The third layer is the shell. Once we have typed in our command and pressed `<Enter>`, the terminal sends that command to the shell. The shell is a program that interprets the command. The [Docker image](#docker-image) uses Bash as the shell, but there are many others available. Once you have become a bit more proficient at the command line, you may want to look into a shell called the Z shell. It offers many additional features that may increase your productivity at the command line.
 
 Operating system
 
-:   The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The Data Science Toolbox is based on a particular Linux distribution called Ubuntu.
+:   The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The [Docker image](#docker-image) is based on a particular Linux distribution called Alpine Linux.
 
 ### Executing a Command-line Tool 
 
@@ -127,7 +163,7 @@ We employ the term command-line tool a lot, but so far, we have not yet explaine
 - A shell function.
 - An alias.
 
-It’s good to know the difference between the types. The command-line tools that come pre-installed with the Data Science Toolbox mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our *own Data Science Toolbox*[^2] and become more efficient and more productive data scientists.
+It’s good to know the difference between the types. The command-line tools that come pre-installed with the [Docker image](#docker-image) mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our data science toolbox and become more efficient and more productive data scientists.
 
 Binary Executable
 
@@ -143,7 +179,7 @@ Interpreted Script
 
     ```{example script-fac, name="Python script that computes the factorial of an integer"}
     ```
-    ```{python, eval=FALSE, python.reticulate = FALSE}
+    ```{python, eval=FALSE}
     ##!/usr/bin/env python
 
     def factorial(x):
@@ -426,6 +462,3 @@ Specifying the `--help` option also works for the GNU command-line tools such as
 
 
 
-
-
-[^2]: Here, we do not refer to the literal Data Science Toolbox we just installed, but to having your own set of tools, in a figurative sense.

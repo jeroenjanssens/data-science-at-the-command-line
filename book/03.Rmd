@@ -1,24 +1,24 @@
 # Obtaining Data {#chapter-3-obtaining-data}
 
-This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. We assume that the data that is needed to solve the data science problem at hand, already exists on some location in some form. Our goal is to get this data onto your computer (or into your Data Science Toolbox) in a form that we can work with.
+This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. We assume that the data that is needed to solve the data science problem at hand already exists at some location in some form. Our goal is to get this data onto your computer (or into your Data Science Toolbox) in a form that we can work with.
 
-According to the UNIX philosophy, text is a universal interface. Almost every command-line tool takes text as input or produces text as output or both. This is the main reason why command-line tools can work so well together. However, as we will see, even just text can come in multiple forms.
+According to the Unix philosophy, text is a universal interface. Almost every command-line tool takes text as input, produces text as output, or both. This is the main reason why command-line tools can work so well together. However, as we'll see, even just text can come in multiple forms.
 
-Data can be obtained in several ways, for example by downloading it from a server, by querying a database, or by connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel. In this chapter we discuss several tools that help tackle this from the command line, including: `curl` [@curl], `in2csv` [@in2csv], `sql2csv` [@sql2csv], and `tar` [@tar].
+Data can be obtained in several ways---for example by downloading it from a server, by querying a database, or by connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel. In this chapter, we discuss several tools that help tackle this from the command line, including: `curl` [@curl], `in2csv` [@in2csv], `sql2csv` [@sql2csv], and `tar` [@tar].
 
 ## Overview 
 
 In this chapter, you’ll learn how to:
 
-- Obtain data from servers.
-- Query databases.
-- Connect to Web APIs.
-- Decompress files.
-- Convert Microsoft Excel spreadsheets into usable data.
+- Obtain data from the Internet
+- Query databases
+- Connect to Web APIs
+- Decompress files
+- Convert Microsoft Excel spreadsheets into usable data
 
-## Copying Local Files to the Data Science Toolbox 
+## Copying Local Files to the Data Science Toolbox
 
-A common situation is that you already have the files on your own computer. This section explains how you can get those files onto the local or remote version of the Data Science Toolbox.
+A common situation is that you already have the necessary files on your own computer. This section explains how you can get those files onto the local or remote version of the Data Science Toolbox.
 
 ### Local Version of Data Science Toolbox 
 
@@ -66,7 +66,7 @@ Replace the host name in the example *ec2-184-73-72-150.compute-1.amazonaws.com*
 
 ## Decompressing Files 
 
-If the original data set is very large or it is a collection of many files, the file may be a (compressed) archive. Data sets which contain many repeated values (such as the words in a text) are especially well suited for compression.
+If the original data set is very large or it's a collection of many files, the file may be a (compressed) archive. Data sets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.
 
 Common file extensions of compressed archives are: *.tar.gz*, *.zip*, and *.rar*. To decompress these, you would use the command-line tools `tar` [@tar], `unzip` [@unzip], and `unrar` [@unrar], respectively. There exists a few more, though less common, file extensions for which you would need yet other tools. For example, in order to extract a file named *logs.tar.gz*, you would use:
 
@@ -75,11 +75,11 @@ $ cd ~/book/ch03
 $ tar -xzvf data/logs.tar.gz
 ```
 
-Indeed, `tar` is notorious for its many command-line arguments. In this case, the four command-line arguments `x`, `z`, `v`, and `f` specify that `tar` should *extract* files from an archive, use *gzip* as the decompression algorithm, be *verbose* and use file *logs.tar.gz*. Although in time, you will get used to typing these four characters, there is a more convenient way.
+Indeed, `tar` is notorious for its many command-line arguments. In this case, the four command-line arguments `x`, `z`, `v`, and `f` specify that `tar` should *extract* files from an archive, use *gzip* as the decompression algorithm, be *verbose* and use file *logs.tar.gz*. In time, you'll get used to typing these four characters, but there's a more convenient way.
 
-Rather than remembering the different command-line tools and their arguments, there is a handy script called `unpack` [@unpack], which will decompress many different formats. `unpack` looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.
+Rather than remembering the different command-line tools and their options, there's a handy script called `unpack` [@unpack], which will decompress many different formats. `unpack` looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.
 
-The `unpack` tool is part of the Data Science Toolbox. Remember that you look up how it can be installed in the appendix. Example \@ref(exm:script-unpack) shows the source of `unpack`. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works. 
+The `unpack` tool is part of the Data Science Toolbox. Remember that you can look up how it can be installed in the appendix. Example \@ref(exm:script-unpack) shows the source of `unpack`. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.
 
 ```{example script-unpack, name="Decompress various file formats"}
 ```
@@ -89,53 +89,53 @@ The `unpack` tool is part of the Data Science Toolbox. Remember that you look up
 
 # Display usage if no parameters given
 if [[ -z "$@" ]]; then
-        echo " ${0##*/} <archive> - extract common file formats)"
-        exit
+    echo " ${0##*/} <archive> - extract common file formats)"
+    exit
 fi
 
 # Required program(s)
 req_progs=(7z unrar unzip)
 for p in ${req_progs[@]}; do
-        hash "$p" 2>&- || \
-        { echo >&2 " Required program \"$p\" not installed."; exit 1; }
+    hash "$p" 2>&- || \
+    { echo >&2 " Required program \"$p\" not installed."; exit 1; }
 done
 
 # Test if file exists
 if [ ! -f "$@" ]; then
-        echo "File "$@" doesn't exist"
-        exit
+    echo "File "$@" doesn't exist"
+    exit
 fi
 
 # Extract file by using extension as reference
 case "$@" in
-        *.7z ) 7z x "$@" ;;
-        *.tar.bz2 ) tar xvjf "$@" ;;
-        *.bz2 ) bunzip2 "$@" ;;
-        *.deb ) ar vx "$@" ;;
-        *.tar.gz ) tar xvf "$@" ;;
-        *.gz ) gunzip "$@" ;;
-        *.tar ) tar xvf "$@" ;;
-        *.tbz2 ) tar xvjf "$@" ;;
-        *.tar.xz ) tar xvf "$@" ;;
-        *.tgz ) tar xvzf "$@" ;;
-        *.rar ) unrar x "$@" ;;
-        *.zip ) unzip "$@" ;;
-        *.Z ) uncompress "$@" ;;
-        * ) echo " Unsupported file format" ;;
+    *.7z ) 7z x "$@" ;;
+    *.tar.bz2 ) tar xvjf "$@" ;;
+    *.bz2 ) bunzip2 "$@" ;;
+    *.deb ) ar vx "$@" ;;
+    *.tar.gz ) tar xvf "$@" ;;
+    *.gz ) gunzip "$@" ;;
+    *.tar ) tar xvf "$@" ;;
+    *.tbz2 ) tar xvjf "$@" ;;
+    *.tar.xz ) tar xvf "$@" ;;
+    *.tgz ) tar xvzf "$@" ;;
+    *.rar ) unrar x "$@" ;;
+    *.zip ) unzip "$@" ;;
+    *.Z ) uncompress "$@" ;;
+    * ) echo " Unsupported file format" ;;
 esac
 ```
 
-Now, in order to decompress the same file as above, you would simply use:
+Now, in order to decompress this same file, you would simply use:
 
 ```{bash, eval=FALSE}
 $ unpack logs.tar.gz
 ```
 
-## Converting Microsoft Excel Spreadsheets 
+## Converting Microsoft Excel Spreadsheets
 
-Microsoft Excel offers for many an intuitive way to work with small data sets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (*.xls*) or as a collection of compressed XML files (*.xlsx*). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable data sets just because they are stored this way.
+For many people, Microsoft Excel offers an intuitive way to work with small data sets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (*.xls*) or as a collection of compressed XML files (*.xlsx*). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable data sets just because they are stored this way.
 
-Luckily there is a command-line tool called `in2csv` [@in2csv], which is able to convert Microsoft Excel spreadsheets to CSV. CSV stands for comma separated values or character separated values. Working with CSV can be tricky because it lacks a formal specification. RFC 4180 (<http://www.ietf.org/rfc/rfc4180.txt>) defines the CSV format according to the following three points:
+Luckily, there is a command-line tool called `in2csv` [@in2csv], which is able to convert Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. [RFC 4180](http://www.ietf.org/rfc/rfc4180.txt) defines the CSV format according to the following three points:
 
 1.  Each record is located on a separate line, delimited by a line break (CRLF). For example:
 
@@ -147,20 +147,20 @@ Luckily there is a command-line tool called `in2csv` [@in2csv], which is able to
         aaa,bbb,ccc CRLF
         zzz,yyy,xxx
 
-3.  There maybe an optional header line appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file (the presence or absence of the header line should be indicated via the optional "header" parameter of this MIME type). For example:
+3.  There maybe an optional header line appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file (the presence or absence of the header line should be indicated via the optional header parameter of this MIME type). For example:
 
         field_name,field_name,field_name CRLF
         aaa,bbb,ccc CRLF
         zzz,yyy,xxx CRLF
 
-Let’s demonstrate `in2csv` using a spreadsheet that contains the top 250 movies from the Internet Movie Database (IMDb) (obtained from <http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2>), and that the file is called *imdb-250.xlsx*. To extract its data, we invoke `in2csv` as follows:
+Let’s demonstrate `in2csv` using a spreadsheet that contains the top 250 movies from the Internet Movie Database (IMDb). The file is named *imdb-250.xlsx* and can be obtained from <http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2>. To extract its data, we invoke `in2csv` as follows:
 
 ```{bash, eval=FALSE}
 $ cd book/ch03
 $ in2csv data/imdb-250.xlsx > data/imdb-250.csv
 ```
 
-The format of the file is automatically determined by the extension, *.xlsx* in this case. If we were to pipe the data into `in2csv`, we would have to specify the format explicitly.
+The format of the file is automatically determined by the extension, *.xlsx* in this case. If we were to pipe the data into `in2csv`, we would have to specify the format explicitly. Let's look at the data:
 
 ```{bash, eval=FALSE}
 $ in2csv imdb-250.xlsx | head | cut -c1-80
@@ -176,10 +176,10 @@ Fanny and Alexander (1982),FannyandAlexander(1982),1982,210,41,8,y,n/a,n/a,
 Beauty and the Beast (1991),BeautyandtheBeast(1991),1991,249,2,8,y,n/a,n/a,
 ```
 
-As you can see, CSV by default is not too readable. You can pipe the data to a tool called `csvlook` [@csvlook], which will nicely format the data into a table. Here, we’ll display a subset of columns using `csvcut` such that the table fits on the page:
+As you can see, CSV by default is not too readable. You can pipe the data to a tool called `csvlook` [@csvlook], which will nicely format the data into a table. Here, we’ll display a subset of the columns using `csvcut` such that the table fits on the page:
 
 ```{bash, eval=FALSE}
-$ in2csv imdb-250.xlsx | head | csvcut -c Title,Year,Rating | csvlook
+$ in2csv data/imdb-250.xlsx | head | csvcut -c Title,Year,Rating | csvlook
 |------------------------------------------+------+---------|
 |  Title                                   | Year | Rating  |
 |------------------------------------------+------+---------|
@@ -197,20 +197,19 @@ $ in2csv imdb-250.xlsx | head | csvcut -c Title,Year,Rating | csvlook
 
 A spreadsheet can contain multiple worksheets. By default, `in2csv` extracts the first worksheet. To extract a different worksheet, you need to pass the name of worksheet to the `--sheet` option.
 
-The tools `in2csv`, `csvcut`, and `csvlook` are actually part of Csvkit, which is collection of handy command-line tools to work with CSV data. Csvkit will be used quite often in this book because it has so many valuable tools. If you’re running the Data Science Toolbox, you already have Csvkit installed. Otherwise, see the appendix for instructions on how to install it.
+The tools `in2csv`, `csvcut`, and `csvlook` are actually part of Csvkit, which is collection of command-line tools to work with CSV data. Csvkit will be used quite often in this book because it has so many valuable tools. If you’re running the Data Science Toolbox, you already have Csvkit installed. Otherwise, see the appendix for instructions on how to install it.
 
 ```{block2, type="rmdnote"}
-
-An alternative approach to `in2csv` is to open the spreadsheet in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually export it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and is not automatable. Furthermore, when you are working on the command line of a remote server, chances are that you do not have such an application available.
+An alternative approach to `in2csv` is to open the spreadsheet in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually export it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and is not automatable. Furthermore, when you are working on the command line of a remote server, chances are that you don't have such an application available.
 ```
 
-## Querying a Database 
+## Querying Relational Databases
 
-When you work for a company, chances are that they have their data stored in a relational database. Examples of relational databases are MySQL, PostgreSQL, and SQLite. These databases all have a slightly different way of interfacing with them. Some provide a command-line tool or a command-line interface, while others do not. Moreover, they are not very consistent when it comes to their usage and output.
+Most companies store their data in a relational database. Examples of relational databases are MySQL, PostgreSQL, and SQLite. These databases all have a slightly different way of interfacing with them. Some provide a command-line tool or a command-line interface, while others do not. Moreover, they are not very consistent when it comes to their usage and output.
 
-Fortunately, there is a command-line tool called `sql2csv`, which is part of the `csvkit` suite, like many other tools discussed in this book. Because it leverages the Python SQLAlchemy package, we only have to use one tool to execute queries on many different databases through a common interface, including: MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of `sql2csv` is, as its name suggests, in CSV format.
+Fortunately, there is a command-line tool called `sql2csv`, which is part of the Csvkit suite. Because it leverages the Python SQLAlchemy package, we only have to use one tool to execute queries on many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of `sql2csv` is, as its name suggests, in CSV format.
 
-We can obtain data from relational databases by executing a `SELECT` query on them. (`sql2csv` also support `INSERT`, `UPDATE`, and `DELETE` queries, but that is not the purpose of this chapter.) To select certain data from an SQLite database named *iris.db*, `sql2csv` can be invoked as follows:
+We can obtain data from relational databases by executing a `SELECT` query on them. (`sql2csv` also support `INSERT`, `UPDATE`, and `DELETE` queries, but that's not the purpose of this chapter.) To select a specific set of data from an SQLite database named *iris.db*, `sql2csv` can be invoked as follows:
 
 ```{bash, eval=FALSE}
 $ sql2csv --db 'sqlite:///data/iris.db' --query 'SELECT * FROM iris '\
@@ -224,13 +223,13 @@ sepal_length,sepal_width,petal_length,petal_width,species
 7.7,3.0,6.1,2.3,Iris-virginica
 ```
 
-Here, we are selecting all rows where *sepal\_length* is larger than 7.5. The `--db` option specifies the database URL, of which the typical form is: *dialect+driver://username:password@host:port/database*.
+Here, we are selecting all rows where `sepal\_length` is larger than 7.5. The `--db` option specifies the database URL, of which the typical form is: `dialect+driver://username:password@host:port/database`.
 
-## Downloading from the Internet 
+## Downloading from the Internet
 
-The Internet is, without a doubt, the largest resource for data. This data is available in various forms, using various protocols. The command-line tool cURL [@curl] can be considered the Swiss army knife when it comes to downloading data from the Internet.
+The Internet provides without a doubt the largest resource for data. This data is available in various forms, using various protocols. The command-line tool cURL [@curl] can be considered the command line's Swiss Army knife when it comes to downloading data from the Internet.
 
-When you access a URL, which stands for *Uniform Resource Locator*, through your browser, the data that is being downloaded can be interpreted. For example, an HTML file is rendered as a website, an MP3 file may be automatically played, and a PDF file may be automatically downloaded or opened by a viewer. However, when cURL is used to access a URL, the data is downloaded as is printed to standard output. Other command-line tools may then be used to process this data further.
+When you access a URL, which stands for *uniform resource locator*, through your browser, the data that is being downloaded can be interpreted. For example, an HTML file is rendered as a website, an MP3 file may be automatically played, and a PDF file may be automatically downloaded or opened by a viewer. However, when cURL is used to access a URL, the data is downloaded as is printed to standard output. Other command-line tools may then be used to process this data further.
 
 The easiest invocation of cURL is to simply specify a URL as a command-line argument. For example, to download the book *Adventures of Huckleberry Finn* by Mark Twain from Project Gutenberg, we can run the following command:
 

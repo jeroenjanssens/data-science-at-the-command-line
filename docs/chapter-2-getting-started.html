@@ -25,6 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
+<meta name="date" content="2018-01-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,7 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#docker-image"><i class="fa fa-check"></i><b>2.2</b> Installing the Docker Image</a></li>
 <li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -161,7 +162,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
 <li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
-<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-a-database"><i class="fa fa-check"></i><b>3.5</b> Querying a Database</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-relational-databases"><i class="fa fa-check"></i><b>3.5</b> Querying Relational Databases</a></li>
 <li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
 <li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
 <li class="chapter" data-level="3.8" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#further-reading-2"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
@@ -327,32 +328,60 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="chapter-2-getting-started" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Getting Started</h1>
 <p>In this chapter we are going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.</p>
-<p>First, we describe how to install the Data Science Toolbox, which is a virtual environment based on GNU/Linux that contains all the necessary command-line tools. Subsequently, we explain the essential command-line concepts through examples.</p>
+<p>First, we describe how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools. Subsequently, we explain the essential command-line concepts through examples.</p>
 <p>By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.</p>
 <div id="overview-1" class="section level2">
 <h2><span class="header-section-number">2.1</span> Overview</h2>
 <p>In this chapter, you’ll learn:</p>
 <ul>
-<li>How to set up the Data Science Toolbox.</li>
+<li>How to install the Docker image.</li>
 <li>Essential concepts and tools necessary to perform data science at the command line.</li>
 </ul>
 </div>
-<div id="setting-up-your-data-science-toolbox" class="section level2">
-<h2><span class="header-section-number">2.2</span> Setting Up Your Data Science Toolbox</h2>
-<p>In this book we use many different command-line tools. The distribution of GNU/Linux that we assume, Ubuntu, comes with a whole bunch of command-line tools pre-installed. Moreover, Ubuntu offers many packages that contain other, relevant command-line tools. Installing these packages yourself is not too difficult. However, we also use command-line tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, we encourage you to install the Data Science Toolbox.</p>
+<div id="docker-image" class="section level2">
+<h2><span class="header-section-number">2.2</span> Installing the Docker Image</h2>
 
 <div class="rmdnote">
-If you prefer to run the command-line tools natively rather than inside a virtual machine, then you can install the command-line tools individually. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only, so please check the book’s website at <a href="http://datasciencatthecommandline.com" class="uri">http://datasciencatthecommandline.com</a> for up-to-date information on how to install the command-line tools natively on other operating systems. The scripts and data sets used in the book can be obtained by cloning this book’s GitHub repository at <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line" class="uri">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.
+This section used to be called <em>Setting up the Data Science Toolbox</em> and described how to install a Vagrant box containing all the command-line tools. This Vagrant box was created in 2014, and because technology around virtualisation and containerisation has moved on, it became high time for an update. So now, instead of a Vagrant box, we use a Docker image.
 </div>
 
-<p>The Data Science Toolbox is a virtual environment that allows you to get started doing data science in minutes. The default version comes with commonly used software for data science, including the Python scientific stack and R together with its most popular packages. Additional software and data bundles are easily installed. These bundles can be specific to a certain book, course, or organization. You can read more about the Data Science Toolbox in general at <a href="http://datasciencetoolbox.org" class="uri">http://datasciencetoolbox.org</a>.</p>
+<p>In this book we use many different command-line tools. Linux often comes with a whole bunch of command-line tools pre-installed. Moreover, Linux offers many packages that contain other, relevant tools. Installing these packages yourself is not too difficult. However, we also use tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, we encourage you to install a Docker image that was created specifically for this book.</p>
+
+<div class="rmdtip">
+If you still prefer to run the command-line tools natively rather than inside a Docker image, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">GitHub repository</a>.
+</div>
+
+<p>To install the Docker image, you first need to download and install Docker itself from <a href="https://www.docker.com/products/docker">the Docker website</a>. Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don’t type the dollar sign):</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">docker</span> pull datascienceworkshops/data-science-at-the-command-line</code></pre></div>
+<p>You can run the Docker image as follows:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">docker</span> run --rm -itv<span class="kw">`</span><span class="bu">pwd</span><span class="kw">`</span>:/data datascienceworkshops/data-science-at-the-command-line</code></pre></div>
+
+<div class="rmdtip">
+It’s a good idea to remember from which directory you run the Docker container. In the above command, the option <code>-v</code> instructs <code>docker</code> to map the current directory to the <em>/data</em> directory inside the container, so this is the place to get data in and out of the Docker container.
+</div>
+
+<p>You’re now inside an isolated Linux environment—known as a <em>Docker container</em>—with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">cowsay</span> <span class="st">&quot;Let&#39;s go!&quot;</span>
+ <span class="ex">___________</span>
+<span class="op">&lt;</span> <span class="ex">Let</span><span class="st">&#39;s go! &gt;</span>
+<span class="st"> -----------</span>
+<span class="st">        \   ^__^</span>
+<span class="st">         \  (oo)\_______</span>
+<span class="st">            (__)\       )\/\</span>
+<span class="st">                ||----w |</span>
+<span class="st">                ||     ||</span></code></pre></div>
+
+<div class="rmdnote">
+If you would like to know more about the Docker image you can <a href="https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line/">visit it on Docker Hub</a>.
+</div>
+
 </div>
 <div id="essential-gnulinux-concepts" class="section level2">
 <h2><span class="header-section-number">2.3</span> Essential GNU/Linux Concepts</h2>
-<p>In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, we briefly showed you what the command line is. Now that you have your own Data Science Toolbox, we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.</p>
+<p>In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, we briefly showed you what the command line is. Now that you are running the <a href="chapter-2-getting-started.html#docker-image">Docker image</a>, we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.</p>
 
 <div class="rmdnote">
-This section is not a complete course in GNU/Linux. We will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the Data Science Toolbox is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
+This section is not a complete course in GNU/Linux. We will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the <a href="chapter-2-getting-started.html#docker-image">Docker image</a> is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
 </div>
 
 <div id="the-environment" class="section level3">
@@ -371,10 +400,10 @@ This section is not a complete course in GNU/Linux. We will only explain the con
 <p>then you would type <code>seq 3</code> into your terminal and press <code>&lt;Enter&gt;</code>. (The command-line tool <code>seq</code> <span class="citation">(Drepper <a href="references.html#ref-seq">2012</a>)</span> generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below <code>seq 3</code> is the output of the command. In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, we showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.</p>
 </dd>
 <dt>Shell</dt>
-<dd><p>The third layer is the shell. Once we have typed in our command and pressed <code>&lt;Enter&gt;</code>, the terminal sends that command to the shell. The shell is a program that interprets the command. The Data Science Toolbox uses Bash as the shell, but there are many others available. Once you have become a bit more proficient at the command line, you may want to look into a shell called the Z shell. It offers many additional features that may increase your productivity at the command line.</p>
+<dd><p>The third layer is the shell. Once we have typed in our command and pressed <code>&lt;Enter&gt;</code>, the terminal sends that command to the shell. The shell is a program that interprets the command. The <a href="chapter-2-getting-started.html#docker-image">Docker image</a> uses Bash as the shell, but there are many others available. Once you have become a bit more proficient at the command line, you may want to look into a shell called the Z shell. It offers many additional features that may increase your productivity at the command line.</p>
 </dd>
 <dt>Operating system</dt>
-<dd><p>The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The Data Science Toolbox is based on a particular Linux distribution called Ubuntu.</p>
+<dd><p>The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The <a href="chapter-2-getting-started.html#docker-image">Docker image</a> is based on a particular Linux distribution called Alpine Linux.</p>
 </dd>
 </dl>
 </div>
@@ -417,7 +446,7 @@ $ <span class="bu">pwd</span>
 <li>A shell function.</li>
 <li>An alias.</li>
 </ul>
-<p>It’s good to know the difference between the types. The command-line tools that come pre-installed with the Data Science Toolbox mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our <em>own Data Science Toolbox</em><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> and become more efficient and more productive data scientists.</p>
+<p>It’s good to know the difference between the types. The command-line tools that come pre-installed with the <a href="chapter-2-getting-started.html#docker-image">Docker image</a> mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our data science toolbox and become more efficient and more productive data scientists.</p>
 <dl>
 <dt>Binary Executable</dt>
 <dd><p>Binary executables are programs in the classical sense. A binary executable is created by compiling source code to machine code. This means that when you open the file in a text editor you cannot read it.</p>
@@ -433,13 +462,11 @@ $ <span class="bu">pwd</span>
 </div>
 
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">##!/usr/bin/env python</span>
-
 <span class="kw">def</span> factorial(x):
     result <span class="op">=</span> <span class="dv">1</span>
     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">xrange</span>(<span class="dv">2</span>, x <span class="op">+</span> <span class="dv">1</span>):
         result <span class="op">*=</span> i
     <span class="cf">return</span> result
-
 <span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:
     <span class="im">import</span> sys
     x <span class="op">=</span> <span class="bu">int</span>(sys.argv[<span class="dv">1</span>])
@@ -618,12 +645,6 @@ Sometimes you’ll see us use <code>head</code>, <code>fold</code>, or <code>cut
 </ul>
 
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="2">
-<li id="fn2"><p>Here, we do not refer to the literal Data Science Toolbox we just installed, but to having your own set of tools, in a figurative sense.<a href="chapter-2-getting-started.html#fnref2">↩</a></p></li>
-</ol>
 </div>
             </section>
 

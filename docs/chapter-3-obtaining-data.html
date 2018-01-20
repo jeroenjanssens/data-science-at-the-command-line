@@ -25,6 +25,7 @@
 <meta name="author" content="Jeroen Janssens">
 
 
+<meta name="date" content="2018-01-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,7 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a><ul>
 <li class="chapter" data-level="2.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#overview-1"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
-<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#setting-up-your-data-science-toolbox"><i class="fa fa-check"></i><b>2.2</b> Setting Up Your Data Science Toolbox</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#docker-image"><i class="fa fa-check"></i><b>2.2</b> Installing the Docker Image</a></li>
 <li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
 <li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
@@ -161,7 +162,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
 <li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
-<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-a-database"><i class="fa fa-check"></i><b>3.5</b> Querying a Database</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-relational-databases"><i class="fa fa-check"></i><b>3.5</b> Querying Relational Databases</a></li>
 <li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
 <li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
 <li class="chapter" data-level="3.8" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#further-reading-2"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
@@ -326,23 +327,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="chapter-3-obtaining-data" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Obtaining Data</h1>
-<p>This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. We assume that the data that is needed to solve the data science problem at hand, already exists on some location in some form. Our goal is to get this data onto your computer (or into your Data Science Toolbox) in a form that we can work with.</p>
-<p>According to the UNIX philosophy, text is a universal interface. Almost every command-line tool takes text as input or produces text as output or both. This is the main reason why command-line tools can work so well together. However, as we will see, even just text can come in multiple forms.</p>
-<p>Data can be obtained in several ways, for example by downloading it from a server, by querying a database, or by connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel. In this chapter we discuss several tools that help tackle this from the command line, including: <code>curl</code> <span class="citation">(Stenberg <a href="references.html#ref-curl">2012</a>)</span>, <code>in2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-in2csv">2014</a><a href="references.html#ref-in2csv">b</a>)</span>, <code>sql2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-sql2csv">2014</a><a href="references.html#ref-sql2csv">c</a>)</span>, and <code>tar</code> <span class="citation">(Bailey, Eggert, and Poznyakoff <a href="references.html#ref-tar">2014</a>)</span>.</p>
+<p>This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. We assume that the data that is needed to solve the data science problem at hand already exists at some location in some form. Our goal is to get this data onto your computer (or into your Data Science Toolbox) in a form that we can work with.</p>
+<p>According to the Unix philosophy, text is a universal interface. Almost every command-line tool takes text as input, produces text as output, or both. This is the main reason why command-line tools can work so well together. However, as we’ll see, even just text can come in multiple forms.</p>
+<p>Data can be obtained in several ways—for example by downloading it from a server, by querying a database, or by connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel. In this chapter, we discuss several tools that help tackle this from the command line, including: <code>curl</code> <span class="citation">(Stenberg <a href="references.html#ref-curl">2012</a>)</span>, <code>in2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-in2csv">2014</a><a href="references.html#ref-in2csv">b</a>)</span>, <code>sql2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-sql2csv">2014</a><a href="references.html#ref-sql2csv">c</a>)</span>, and <code>tar</code> <span class="citation">(Bailey, Eggert, and Poznyakoff <a href="references.html#ref-tar">2014</a>)</span>.</p>
 <div id="overview-2" class="section level2">
 <h2><span class="header-section-number">3.1</span> Overview</h2>
 <p>In this chapter, you’ll learn how to:</p>
 <ul>
-<li>Obtain data from servers.</li>
-<li>Query databases.</li>
-<li>Connect to Web APIs.</li>
-<li>Decompress files.</li>
-<li>Convert Microsoft Excel spreadsheets into usable data.</li>
+<li>Obtain data from the Internet</li>
+<li>Query databases</li>
+<li>Connect to Web APIs</li>
+<li>Decompress files</li>
+<li>Convert Microsoft Excel spreadsheets into usable data</li>
 </ul>
 </div>
 <div id="copying-local-files-to-the-data-science-toolbox" class="section level2">
 <h2><span class="header-section-number">3.2</span> Copying Local Files to the Data Science Toolbox</h2>
-<p>A common situation is that you already have the files on your own computer. This section explains how you can get those files onto the local or remote version of the Data Science Toolbox.</p>
+<p>A common situation is that you already have the necessary files on your own computer. This section explains how you can get those files onto the local or remote version of the Data Science Toolbox.</p>
 <div id="local-version-of-data-science-toolbox" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Local Version of Data Science Toolbox</h3>
 <p>We mentioned in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a> that the Vagrant version of the Data Science Toolbox is an isolated virtual environment. Luckily there is one exception to that: files can be transfered in and out the Data Science Toolbox. The local directory from which you ran <code>vagrant up</code> (which is the one that contains the file <em>Vagrantfile</em>), is mapped to a directory in the Data Science Toolbox. This directory is called <em>/vagrant</em>. Please note that this is not your home directory. Let us check the contents of this directory:</p>
@@ -370,13 +371,13 @@ $ <span class="fu">cat</span> data/logs.csv</code></pre></div>
 </div>
 <div id="decompressing-files" class="section level2">
 <h2><span class="header-section-number">3.3</span> Decompressing Files</h2>
-<p>If the original data set is very large or it is a collection of many files, the file may be a (compressed) archive. Data sets which contain many repeated values (such as the words in a text) are especially well suited for compression.</p>
+<p>If the original data set is very large or it’s a collection of many files, the file may be a (compressed) archive. Data sets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.</p>
 <p>Common file extensions of compressed archives are: <em>.tar.gz</em>, <em>.zip</em>, and <em>.rar</em>. To decompress these, you would use the command-line tools <code>tar</code> <span class="citation">(Bailey, Eggert, and Poznyakoff <a href="references.html#ref-tar">2014</a>)</span>, <code>unzip</code> <span class="citation">(Smith <a href="references.html#ref-unzip">2009</a>)</span>, and <code>unrar</code> <span class="citation">(Asselstine, Scheurer, and Winkelmann <a href="references.html#ref-unrar">2014</a>)</span>, respectively. There exists a few more, though less common, file extensions for which you would need yet other tools. For example, in order to extract a file named <em>logs.tar.gz</em>, you would use:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> ~/book/ch03
 $ <span class="fu">tar</span> -xzvf data/logs.tar.gz</code></pre></div>
-<p>Indeed, <code>tar</code> is notorious for its many command-line arguments. In this case, the four command-line arguments <code>x</code>, <code>z</code>, <code>v</code>, and <code>f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm, be <em>verbose</em> and use file <em>logs.tar.gz</em>. Although in time, you will get used to typing these four characters, there is a more convenient way.</p>
-<p>Rather than remembering the different command-line tools and their arguments, there is a handy script called <code>unpack</code> <span class="citation">(Brisbin <a href="references.html#ref-unpack">2013</a>)</span>, which will decompress many different formats. <code>unpack</code> looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.</p>
-<p>The <code>unpack</code> tool is part of the Data Science Toolbox. Remember that you look up how it can be installed in the appendix. Example <a href="chapter-3-obtaining-data.html#exm:script-unpack">3.1</a> shows the source of <code>unpack</code>. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.</p>
+<p>Indeed, <code>tar</code> is notorious for its many command-line arguments. In this case, the four command-line arguments <code>x</code>, <code>z</code>, <code>v</code>, and <code>f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm, be <em>verbose</em> and use file <em>logs.tar.gz</em>. In time, you’ll get used to typing these four characters, but there’s a more convenient way.</p>
+<p>Rather than remembering the different command-line tools and their options, there’s a handy script called <code>unpack</code> <span class="citation">(Brisbin <a href="references.html#ref-unpack">2013</a>)</span>, which will decompress many different formats. <code>unpack</code> looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.</p>
+<p>The <code>unpack</code> tool is part of the Data Science Toolbox. Remember that you can look up how it can be installed in the appendix. Example <a href="chapter-3-obtaining-data.html#exm:script-unpack">3.1</a> shows the source of <code>unpack</code>. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.</p>
 
 <div class="example">
 <span id="exm:script-unpack" class="example"><strong>Example 3.1  (Decompress various file formats)  </strong></span>
@@ -387,47 +388,47 @@ $ <span class="fu">tar</span> -xzvf data/logs.tar.gz</code></pre></div>
 
 <span class="co"># Display usage if no parameters given</span>
 <span class="kw">if [[</span> <span class="ot">-z</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="kw"> ]]</span>; <span class="kw">then</span>
-        <span class="bu">echo</span> <span class="st">&quot; </span><span class="va">${0##</span>*/<span class="va">}</span><span class="st"> &lt;archive&gt; - extract common file formats)&quot;</span>
-        <span class="bu">exit</span>
+    <span class="bu">echo</span> <span class="st">&quot; </span><span class="va">${0##</span>*/<span class="va">}</span><span class="st"> &lt;archive&gt; - extract common file formats)&quot;</span>
+    <span class="bu">exit</span>
 <span class="kw">fi</span>
 
 <span class="co"># Required program(s)</span>
 <span class="va">req_progs=(</span>7z unrar unzip<span class="va">)</span>
 <span class="kw">for</span> <span class="ex">p</span> in <span class="va">${req_progs[@]}</span><span class="kw">;</span> <span class="kw">do</span>
-        <span class="bu">hash</span> <span class="st">&quot;</span><span class="va">$p</span><span class="st">&quot;</span> <span class="op">2&gt;</span><span class="kw">&amp;</span><span class="ex">-</span> <span class="kw">||</span> <span class="kw">\</span>
-        <span class="kw">{</span> <span class="bu">echo</span> <span class="op">&gt;&amp;2</span> <span class="st">&quot; Required program </span><span class="dt">\&quot;</span><span class="va">$p</span><span class="dt">\&quot;</span><span class="st"> not installed.&quot;</span><span class="kw">;</span> <span class="bu">exit</span> 1<span class="kw">;</span> <span class="kw">}</span>
+    <span class="bu">hash</span> <span class="st">&quot;</span><span class="va">$p</span><span class="st">&quot;</span> <span class="op">2&gt;</span><span class="kw">&amp;</span><span class="ex">-</span> <span class="kw">||</span> <span class="kw">\</span>
+    <span class="kw">{</span> <span class="bu">echo</span> <span class="op">&gt;&amp;2</span> <span class="st">&quot; Required program </span><span class="dt">\&quot;</span><span class="va">$p</span><span class="dt">\&quot;</span><span class="st"> not installed.&quot;</span><span class="kw">;</span> <span class="bu">exit</span> 1<span class="kw">;</span> <span class="kw">}</span>
 <span class="kw">done</span>
 
 <span class="co"># Test if file exists</span>
 <span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span>
-        <span class="bu">echo</span> <span class="st">&quot;File &quot;</span><span class="va">$@</span><span class="st">&quot; doesn&#39;t exist&quot;</span>
-        <span class="bu">exit</span>
+    <span class="bu">echo</span> <span class="st">&quot;File &quot;</span><span class="va">$@</span><span class="st">&quot; doesn&#39;t exist&quot;</span>
+    <span class="bu">exit</span>
 <span class="kw">fi</span>
 
 <span class="co"># Extract file by using extension as reference</span>
 <span class="kw">case</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="kw"> in</span>
-        *.7z <span class="kw">)</span> <span class="ex">7z</span> x <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.tar.bz2</span> ) <span class="fu">tar</span> xvjf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.bz2</span> ) <span class="fu">bunzip2</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.deb</span> ) <span class="fu">ar</span> vx <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.tar.gz</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.gz</span> ) <span class="fu">gunzip</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.tar</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.tbz2</span> ) <span class="fu">tar</span> xvjf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.tar.xz</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.tgz</span> ) <span class="fu">tar</span> xvzf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.rar</span> ) <span class="ex">unrar</span> x <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.zip</span> ) <span class="fu">unzip</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*.Z</span> ) <span class="ex">uncompress</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
-        <span class="ex">*</span> ) <span class="bu">echo</span> <span class="st">&quot; Unsupported file format&quot;</span> <span class="kw">;;</span>
+    *.7z <span class="kw">)</span> <span class="ex">7z</span> x <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.tar.bz2</span> ) <span class="fu">tar</span> xvjf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.bz2</span> ) <span class="fu">bunzip2</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.deb</span> ) <span class="fu">ar</span> vx <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.tar.gz</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.gz</span> ) <span class="fu">gunzip</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.tar</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.tbz2</span> ) <span class="fu">tar</span> xvjf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.tar.xz</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.tgz</span> ) <span class="fu">tar</span> xvzf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.rar</span> ) <span class="ex">unrar</span> x <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.zip</span> ) <span class="fu">unzip</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*.Z</span> ) <span class="ex">uncompress</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span>
+    <span class="ex">*</span> ) <span class="bu">echo</span> <span class="st">&quot; Unsupported file format&quot;</span> <span class="kw">;;</span>
 <span class="kw">esac</span></code></pre></div>
-<p>Now, in order to decompress the same file as above, you would simply use:</p>
+<p>Now, in order to decompress this same file, you would simply use:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">unpack</span> logs.tar.gz</code></pre></div>
 </div>
 <div id="converting-microsoft-excel-spreadsheets" class="section level2">
 <h2><span class="header-section-number">3.4</span> Converting Microsoft Excel Spreadsheets</h2>
-<p>Microsoft Excel offers for many an intuitive way to work with small data sets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (<em>.xls</em>) or as a collection of compressed XML files (<em>.xlsx</em>). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable data sets just because they are stored this way.</p>
-<p>Luckily there is a command-line tool called <code>in2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-in2csv">2014</a><a href="references.html#ref-in2csv">b</a>)</span>, which is able to convert Microsoft Excel spreadsheets to CSV. CSV stands for comma separated values or character separated values. Working with CSV can be tricky because it lacks a formal specification. RFC 4180 (<a href="http://www.ietf.org/rfc/rfc4180.txt" class="uri">http://www.ietf.org/rfc/rfc4180.txt</a>) defines the CSV format according to the following three points:</p>
+<p>For many people, Microsoft Excel offers an intuitive way to work with small data sets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (<em>.xls</em>) or as a collection of compressed XML files (<em>.xlsx</em>). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable data sets just because they are stored this way.</p>
+<p>Luckily, there is a command-line tool called <code>in2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-in2csv">2014</a><a href="references.html#ref-in2csv">b</a>)</span>, which is able to convert Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. <a href="http://www.ietf.org/rfc/rfc4180.txt">RFC 4180</a> defines the CSV format according to the following three points:</p>
 <ol style="list-style-type: decimal">
 <li><p>Each record is located on a separate line, delimited by a line break (CRLF). For example:</p>
 <pre><code>aaa,bbb,ccc CRLF
@@ -435,15 +436,15 @@ zzz,yyy,xxx CRLF</code></pre></li>
 <li><p>The last record in the file may or may not have an ending line break. For example:</p>
 <pre><code>aaa,bbb,ccc CRLF
 zzz,yyy,xxx</code></pre></li>
-<li><p>There maybe an optional header line appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file (the presence or absence of the header line should be indicated via the optional “header” parameter of this MIME type). For example:</p>
+<li><p>There maybe an optional header line appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file (the presence or absence of the header line should be indicated via the optional header parameter of this MIME type). For example:</p>
 <pre><code>field_name,field_name,field_name CRLF
 aaa,bbb,ccc CRLF
 zzz,yyy,xxx CRLF</code></pre></li>
 </ol>
-<p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the top 250 movies from the Internet Movie Database (IMDb) (obtained from <a href="http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2" class="uri">http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2</a>), and that the file is called <em>imdb-250.xlsx</em>. To extract its data, we invoke <code>in2csv</code> as follows:</p>
+<p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the top 250 movies from the Internet Movie Database (IMDb). The file is named <em>imdb-250.xlsx</em> and can be obtained from <a href="http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2" class="uri">http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2</a>. To extract its data, we invoke <code>in2csv</code> as follows:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="bu">cd</span> book/ch03
 $ <span class="ex">in2csv</span> data/imdb-250.xlsx <span class="op">&gt;</span> data/imdb-250.csv</code></pre></div>
-<p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case. If we were to pipe the data into <code>in2csv</code>, we would have to specify the format explicitly.</p>
+<p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case. If we were to pipe the data into <code>in2csv</code>, we would have to specify the format explicitly. Let’s look at the data:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">in2csv</span> imdb-250.xlsx <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="fu">cut</span> -c1-80
 <span class="ex">Title</span>,title trim,Year,Rank,Rank (desc),<span class="ex">Rating</span>,New in 2011 from 2010?,2010 rank,R
 <span class="ex">Sherlock</span> Jr. (1924),<span class="ex">SherlockJr.</span>(1924),<span class="ex">1924</span>,221,30,8,y,n/a,n/a,
@@ -455,8 +456,8 @@ $ <span class="ex">in2csv</span> data/imdb-250.xlsx <span class="op">&gt;</span>
 <span class="ex">Stalker</span> (1979),<span class="ex">Stalker</span>(1979),<span class="ex">1979</span>,243,8,8,y,n/a,n/a,
 <span class="ex">Fanny</span> and Alexander (1982),<span class="ex">FannyandAlexander</span>(1982),<span class="ex">1982</span>,210,41,8,y,n/a,n/a,
 <span class="ex">Beauty</span> and the Beast (1991),<span class="ex">BeautyandtheBeast</span>(1991),<span class="ex">1991</span>,249,2,8,y,n/a,n/a,</code></pre></div>
-<p>As you can see, CSV by default is not too readable. You can pipe the data to a tool called <code>csvlook</code> <span class="citation">(Groskopf <a href="references.html#ref-csvlook">2014</a><a href="references.html#ref-csvlook">d</a>)</span>, which will nicely format the data into a table. Here, we’ll display a subset of columns using <code>csvcut</code> such that the table fits on the page:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">in2csv</span> imdb-250.xlsx <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="ex">csvcut</span> -c Title,Year,Rating <span class="kw">|</span> <span class="ex">csvlook</span>
+<p>As you can see, CSV by default is not too readable. You can pipe the data to a tool called <code>csvlook</code> <span class="citation">(Groskopf <a href="references.html#ref-csvlook">2014</a><a href="references.html#ref-csvlook">d</a>)</span>, which will nicely format the data into a table. Here, we’ll display a subset of the columns using <code>csvcut</code> such that the table fits on the page:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">in2csv</span> data/imdb-250.xlsx <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="ex">csvcut</span> -c Title,Year,Rating <span class="kw">|</span> <span class="ex">csvlook</span>
 <span class="kw">|</span><span class="ex">------------------------------------------+------+---------</span><span class="kw">|</span>
 <span class="kw">|</span>  <span class="ex">Title</span>                                   <span class="kw">|</span> <span class="ex">Year</span> <span class="kw">|</span> <span class="ex">Rating</span>  <span class="kw">|</span>
 <span class="kw">|</span><span class="ex">------------------------------------------+------+---------</span><span class="kw">|</span>
@@ -471,18 +472,18 @@ $ <span class="ex">in2csv</span> data/imdb-250.xlsx <span class="op">&gt;</span>
 <span class="kw">|</span>  <span class="ex">Beauty</span> and the Beast (1991)             <span class="kw">|</span> <span class="ex">1991</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span>
 <span class="kw">|</span><span class="ex">------------------------------------------+------+---------</span><span class="kw">|</span></code></pre></div>
 <p>A spreadsheet can contain multiple worksheets. By default, <code>in2csv</code> extracts the first worksheet. To extract a different worksheet, you need to pass the name of worksheet to the <code>--sheet</code> option.</p>
-<p>The tools <code>in2csv</code>, <code>csvcut</code>, and <code>csvlook</code> are actually part of Csvkit, which is collection of handy command-line tools to work with CSV data. Csvkit will be used quite often in this book because it has so many valuable tools. If you’re running the Data Science Toolbox, you already have Csvkit installed. Otherwise, see the appendix for instructions on how to install it.</p>
+<p>The tools <code>in2csv</code>, <code>csvcut</code>, and <code>csvlook</code> are actually part of Csvkit, which is collection of command-line tools to work with CSV data. Csvkit will be used quite often in this book because it has so many valuable tools. If you’re running the Data Science Toolbox, you already have Csvkit installed. Otherwise, see the appendix for instructions on how to install it.</p>
 
 <div class="rmdnote">
-An alternative approach to <code>in2csv</code> is to open the spreadsheet in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually export it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and is not automatable. Furthermore, when you are working on the command line of a remote server, chances are that you do not have such an application available.
+An alternative approach to <code>in2csv</code> is to open the spreadsheet in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually export it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and is not automatable. Furthermore, when you are working on the command line of a remote server, chances are that you don’t have such an application available.
 </div>
 
 </div>
-<div id="querying-a-database" class="section level2">
-<h2><span class="header-section-number">3.5</span> Querying a Database</h2>
-<p>When you work for a company, chances are that they have their data stored in a relational database. Examples of relational databases are MySQL, PostgreSQL, and SQLite. These databases all have a slightly different way of interfacing with them. Some provide a command-line tool or a command-line interface, while others do not. Moreover, they are not very consistent when it comes to their usage and output.</p>
-<p>Fortunately, there is a command-line tool called <code>sql2csv</code>, which is part of the <code>csvkit</code> suite, like many other tools discussed in this book. Because it leverages the Python SQLAlchemy package, we only have to use one tool to execute queries on many different databases through a common interface, including: MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of <code>sql2csv</code> is, as its name suggests, in CSV format.</p>
-<p>We can obtain data from relational databases by executing a <code>SELECT</code> query on them. (<code>sql2csv</code> also support <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> queries, but that is not the purpose of this chapter.) To select certain data from an SQLite database named <em>iris.db</em>, <code>sql2csv</code> can be invoked as follows:</p>
+<div id="querying-relational-databases" class="section level2">
+<h2><span class="header-section-number">3.5</span> Querying Relational Databases</h2>
+<p>Most companies store their data in a relational database. Examples of relational databases are MySQL, PostgreSQL, and SQLite. These databases all have a slightly different way of interfacing with them. Some provide a command-line tool or a command-line interface, while others do not. Moreover, they are not very consistent when it comes to their usage and output.</p>
+<p>Fortunately, there is a command-line tool called <code>sql2csv</code>, which is part of the Csvkit suite. Because it leverages the Python SQLAlchemy package, we only have to use one tool to execute queries on many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of <code>sql2csv</code> is, as its name suggests, in CSV format.</p>
+<p>We can obtain data from relational databases by executing a <code>SELECT</code> query on them. (<code>sql2csv</code> also support <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> queries, but that’s not the purpose of this chapter.) To select a specific set of data from an SQLite database named <em>iris.db</em>, <code>sql2csv</code> can be invoked as follows:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">sql2csv</span> --db <span class="st">&#39;sqlite:///data/iris.db&#39;</span> --query <span class="st">&#39;SELECT * FROM iris &#39;</span>\
 <span class="op">&gt;</span> <span class="st">&#39;WHERE sepal_length &gt; 7.5&#39;</span>
 <span class="ex">sepal_length</span>,sepal_width,petal_length,petal_width,species
@@ -492,12 +493,12 @@ An alternative approach to <code>in2csv</code> is to open the spreadsheet in Mic
 <span class="ex">7.7</span>,2.8,6.7,2.0,Iris-virginica
 <span class="ex">7.9</span>,3.8,6.4,2.0,Iris-virginica
 <span class="ex">7.7</span>,3.0,6.1,2.3,Iris-virginica</code></pre></div>
-<p>Here, we are selecting all rows where <em>sepal_length</em> is larger than 7.5. The <code>--db</code> option specifies the database URL, of which the typical form is: <em>dialect+driver://username:<a href="mailto:password@host">password@host</a>:port/database</em>.</p>
+<p>Here, we are selecting all rows where <code>sepal\_length</code> is larger than 7.5. The <code>--db</code> option specifies the database URL, of which the typical form is: <code>dialect+driver://username:password@host:port/database</code>.</p>
 </div>
 <div id="downloading-from-the-internet" class="section level2">
 <h2><span class="header-section-number">3.6</span> Downloading from the Internet</h2>
-<p>The Internet is, without a doubt, the largest resource for data. This data is available in various forms, using various protocols. The command-line tool cURL <span class="citation">(Stenberg <a href="references.html#ref-curl">2012</a>)</span> can be considered the Swiss army knife when it comes to downloading data from the Internet.</p>
-<p>When you access a URL, which stands for <em>Uniform Resource Locator</em>, through your browser, the data that is being downloaded can be interpreted. For example, an HTML file is rendered as a website, an MP3 file may be automatically played, and a PDF file may be automatically downloaded or opened by a viewer. However, when cURL is used to access a URL, the data is downloaded as is printed to standard output. Other command-line tools may then be used to process this data further.</p>
+<p>The Internet provides without a doubt the largest resource for data. This data is available in various forms, using various protocols. The command-line tool cURL <span class="citation">(Stenberg <a href="references.html#ref-curl">2012</a>)</span> can be considered the command line’s Swiss Army knife when it comes to downloading data from the Internet.</p>
+<p>When you access a URL, which stands for <em>uniform resource locator</em>, through your browser, the data that is being downloaded can be interpreted. For example, an HTML file is rendered as a website, an MP3 file may be automatically played, and a PDF file may be automatically downloaded or opened by a viewer. However, when cURL is used to access a URL, the data is downloaded as is printed to standard output. Other command-line tools may then be used to process this data further.</p>
 <p>The easiest invocation of cURL is to simply specify a URL as a command-line argument. For example, to download the book <em>Adventures of Huckleberry Finn</em> by Mark Twain from Project Gutenberg, we can run the following command:</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="ex">curl</span> -s http://www.gutenberg.org/cache/epub/76/pg76.txt <span class="kw">|</span> <span class="fu">head</span> -n 10
 
