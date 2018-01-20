@@ -12,5 +12,8 @@ bookdown::gitbook:
         <li><a href="./">Data Science at the Command Line</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit:
+      link: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/%s
+      text: "Edit"
     sharing:
       github: yes
