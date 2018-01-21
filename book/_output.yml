@@ -15,5 +15,3 @@ bookdown::gitbook:
     edit:
       link: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/%s
       text: "Edit"
-    sharing:
-      github: yes
