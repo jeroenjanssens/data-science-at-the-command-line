@@ -59,14 +59,15 @@ If you find this content useful, please consider supporting the work by either:
 * Writing a review on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [Goodreads](https://www.goodreads.com/book/show/22747725-data-science-at-the-command-line)
 * Starring the [Github repository](https://github.com/jeroenjanssens/data-science-at-the-command-line) or [Docker image](https://hub.docker.com/u/datascienceworkshops/)
 
+This work is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nd/4.0/).
+
+<a href="https://datascienceworkshops.com">
 ```{r, out.width = "350px", echo=FALSE, fig.align='center'}
 knitr::include_graphics("images/data-science-workshops.svg")
 ```
+</a>
 
 Did you know that the author gives in-company training about this topic and other topics such as R and Python? If you and your colleagues would like to learn from Jeroen in person, please contact [Data Science Workshops B.V.](https://datascienceworkshops.com) for more information.
-
-This work is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nd/4.0/).
-
 
 
 ```{r include=FALSE}
