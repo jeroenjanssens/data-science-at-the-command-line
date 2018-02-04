@@ -1,5 +1,7 @@
 language: r
 pandoc_version: 2.1.1
+before_install:
+  - cd book
 sudo: false
 cache:
   packages: true
@@ -14,4 +16,4 @@ addons:
     - libudunits2-dev
 
 script:
-- cd book && Rscript -e 'bookdown::render_book("index.Rmd")'
+- Rscript -e 'bookdown::render_book("index.Rmd")'
