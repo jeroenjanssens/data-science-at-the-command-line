@@ -1,0 +1,16 @@
+language: r
+sudo: false
+cache:
+  packages: true
+  directories:
+  - _bookdown_files
+  - $HOME/.npm
+addons:
+  apt:
+    packages:
+    - libgsl0-dev
+    - libxml2-dev
+    - libudunits2-dev
+
+script:
+- cd book && Rscript -e 'bookdown::render_book("index.Rmd")'
