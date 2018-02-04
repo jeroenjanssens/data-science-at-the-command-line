@@ -4,4 +4,5 @@ Version: 1.0.0.9000
 Authors@R: person("Jeroen", "Janssens", email = "jeroen@datascienceworkshops.com", role = c("aut", "cre"))
 Depends: R (>= 3.3.0)
 Imports:
-  bookdown
+    bookdown,
+    reticulate
