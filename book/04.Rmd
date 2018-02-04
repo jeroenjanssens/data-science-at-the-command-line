@@ -348,7 +348,7 @@ First, what’s immediately obvious is the difference in amount of code. For thi
 
 In the previous two code snippets, both Python R read the complete standard input at once. On the command line, most command-line tools pipe data to the next command-line tool in a streaming fashion. (There are a few command-line tools which require the complete data before they write any data to standard output, like `sort` and `awk` [@awk].) This means the pipeline is blocked by such command-line tools. This does not have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.
 
-Luckily Python are R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example \@ref(exm:stream-py) and Example \@ref(exm:stream-r) are two minimal examples that demonstrate how this works in Python and R, respectively.
+Luckily Python and R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example \@ref(exm:stream-py) and Example \@ref(exm:stream-r) are two minimal examples that demonstrate how this works in Python and R, respectively.
 
 ```{example stream-py, name="~/book/ch04/stream.py"}
 ```
