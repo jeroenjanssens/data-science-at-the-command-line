@@ -4,7 +4,7 @@ bookdown::gitbook:
   keep_md: yes
   citation_package: natbib
   includes:
-    in_header: [google_analytics.html]
+    in_header: [favicon.html, google_analytics.html]
   config:
     toc:
       collapse: section
