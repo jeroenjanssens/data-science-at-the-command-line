@@ -56,7 +56,7 @@ knitr::include_graphics('images/cover.png', dpi = NA)
 If you find this content useful, please consider supporting the work by either:
 
 * Buying the book on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [bol.com](https://www.bol.com/nl/p/data-science-at-the-command-line/9200000031673818)
-* Writing a review on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [Goodreads](https://www.goodreads.com/book/show/22747725-data-science-at-the-command-line)
+* Writing a review on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [Goodreads](https://www.goodreads.com/book/show/22967424-data-science-at-the-command-line)
 * Starring the [Github repository](https://github.com/jeroenjanssens/data-science-at-the-command-line) or [Docker image](https://hub.docker.com/u/datascienceworkshops/)
 
 This work is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nd/4.0/).
