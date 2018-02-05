@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-open ../docs/index.html
+open ../_book_output/index.html

@@ -1,6 +1,6 @@
 book_filename: "book"
 repo: https://github.com/jeroenjanssens/data-science-at-the-command-line
-output_dir: "../docs"
+output_dir: "../_book_output"
 link-citations: true
 language:
   ui:
