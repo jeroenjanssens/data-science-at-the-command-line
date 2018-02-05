@@ -1,7 +1,7 @@
 # Preface {-}
 
 
-Data science is an exited field to work in. It’s also still very young. Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science. However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.
+Data science is an excited field to work in. It’s also still very young. Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science. However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.
 
 Around five years ago, during my PhD program, I gradually switched from using Microsoft Windows to Linux. Because it was a bit scary at first, I started with having both operating systems installed next to each other (known as dual-boot). The urge to switch back and forth between Microsoft Windows faded and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch. All you’re given is the command line, and it’s up to you what you want to make of it. Out of necessity I quickly became very comfortable using the command line. Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its easy-of-use and large community. However, the command line is still where I’m spending most of time.
 
