@@ -6,7 +6,7 @@ sudo: false
 cache:
   packages: true
   directories:
-  - _bookdown_files
+  - book/_bookdown_files
   - $HOME/.npm
 addons:
   apt:
@@ -17,3 +17,8 @@ addons:
 
 script:
 - Rscript -e 'bookdown::render_book("index.Rmd")'
+
+deploy:
+  provider: script
+  script: cd .. && netlify deploy -t $NETLIFY_PAT
+  skip_cleanup: true
