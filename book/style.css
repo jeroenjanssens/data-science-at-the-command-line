@@ -1,3 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400i,700,700i|Merriweather:400,400i,700,700i|Roboto+Mono:400,400i,500,500i');
+
+h1, h2, h3, h4, h5, h6, .book-summary {
+  font-family: 'Merriweather Sans', sans-serif;
+  letter-spacing: -0.02em !important;
+}
+
+h1.title {
+  font-size: 2.5em !important;
+}
+
+.book.font-family-0 {
+  font-family: 'Merriweather', serif !important;
+}
+
+.book.font-family-1 {
+  font-family: 'Merriweather Sans', sans-serif !important;
+}
+
+#header .title {
+  margin-bottom: 0em;
+}
+
+#header h4.author {
+  margin: 0;
+  font-size: 1.7em;
+}
+
+#header h4.date {
+  margin: 0;
+  color: #666;
+}
+
+#header h4.author em, #header h4.date em {
+  font-style: normal;
+}
+
 .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning, .rmdcomment {
   padding: 1em 1em 1em 5em;
   margin-bottom: 2em;
@@ -27,6 +64,12 @@ p.caption {
   color: #777;
   margin-top: 10px;
 }
+
+pre, code {
+  font-family: 'Roboto Mono', monospace !important;
+  line-height: 1.2;
+}
+
 p code {
   white-space: inherit;
 }

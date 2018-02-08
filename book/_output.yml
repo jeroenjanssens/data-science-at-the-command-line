@@ -6,6 +6,13 @@ bookdown::gitbook:
   includes:
     in_header: [favicon.html, google_analytics.html]
   config:
+    fontsettings:
+      theme: white
+      family: serif
+      size: 2
+    sharing:
+      facebook: no
+      twitter: no
     toc:
       collapse: section
       before: |
