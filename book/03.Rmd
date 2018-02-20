@@ -248,7 +248,7 @@ eBook or online at www.gutenberg.net
 By default, cURL outputs a progress meter that shows how the download rate and the expected time of completion. If you are piping the output directly to another command-line tool, such as `head`, be sure to specify the `-s` command-line argument, which stands for *silent*, so that the progress meter is disabled. Compare, for example, the output with the following command:
 
 ```{bash, eval=FALSE}
-$ curl http://www.gutenberg.org/cache/epub/76/pg76.txt | head -n 10
+$ curl http://www.gutenberg.org/files/76/76-0.txt | head -n 10
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 
@@ -266,13 +266,13 @@ eBook or online at www.gutenberg.net
 Note that the output of the second command, where we do not disable the progress meter, contains the unwanted text and even an error message. If you save the data to a file, then you do not need to necessarily specify the `-s` option:
 
 ```{bash, eval=FALSE}
-$ curl http://www.gutenberg.org/cache/epub/76/pg76.txt > data/finn.txt
+$ curl http://www.gutenberg.org/files/76/76-0.txt > data/finn.txt
 ```
 
 You can also save the data by explicitly specifying the output file with the `-o` option:
 
 ```{bash, eval=FALSE}
-$ curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt -o data/finn.txt
+$ curl -s http://www.gutenberg.org/files/76/76-0.txt -o data/finn.txt
 ```
 
 When downloading data from the Internet, the URL will most likely use the protocols HTTP or HTTPS. To download from an FTP server, which stands for File Transfer Protocol, you use cURL in exactly the same way. When the URL is password protected, you can specify a username and a password as follows:
