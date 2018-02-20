@@ -325,7 +325,7 @@ To conclude this section, cURL is a straight-forward command-line tool for downl
 
 ## Calling a Web API 
 
-In the previous section we explained how to download individual files from the Internet. Another way data can come from the Internet is through a web API, which stands for *Application Protocol Interface*. The number of APIs that are being offered by organizations is growing at increasing rate, which means a lot of interesting data for us data scientists.
+In the previous section we explained how to download individual files from the Internet. Another way data can come from the Internet is through a web API, which stands for *Application Programming Interface*. The number of APIs that are being offered by organizations is growing at increasing rate, which means a lot of interesting data for us data scientists.
 
 Web APIs are not meant to be presented in nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as `jq`. For example, the API from <http://randomuser.me> returns data in the following JSON structure.
 
