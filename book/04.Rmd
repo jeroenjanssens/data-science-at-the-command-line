@@ -24,7 +24,7 @@ In this chapter, you’ll learn how to:
 In this section we are going to explain how to turn a one-liner into a reusable command-line tool. Imagine that we have the following one-liner:
 
 ```{bash, eval=FALSE}
-$ curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt | 
+$ curl -s http://www.gutenberg.org/files/76/76-0.txt |
 > tr '[:upper:]' '[:lower:]' | 
 > grep -oE '\w+' |             
 > sort |                       
@@ -82,7 +82,7 @@ The first step is to create a new file. Open your favorite text editor and copy 
 ```{example top-words-1, name="~/book/ch04/top-words-1.sh"}
 ```
 ```{bash, eval=FALSE}
-curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt |
+curl -s http://www.gutenberg.org/files/76/76-0.txt |
 tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
 uniq -c | sort -nr | head -n 10
 ```
@@ -178,7 +178,7 @@ In our case we want to use `bash` to interpret our commands. Example \@ref(exm:t
 ```
 ```{bash, eval=FALSE}
 #!/usr/bin/env bash
-curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt |
+curl -s http://www.gutenberg.org/files/76/76-0.txt |
 tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
 uniq -c | sort -nr | head -n 10
 ```
