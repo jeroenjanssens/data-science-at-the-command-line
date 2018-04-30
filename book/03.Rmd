@@ -234,7 +234,7 @@ When you access a URL, which stands for *uniform resource locator*, through your
 The easiest invocation of cURL is to simply specify a URL as a command-line argument. For example, to download the book *Adventures of Huckleberry Finn* by Mark Twain from Project Gutenberg, we can run the following command:
 
 ```{bash, eval=FALSE}
-$ curl -s http://www.gutenberg.org/cache/epub/76/pg76.txt | head -n 10
+$ curl -s http://www.gutenberg.org/files/76/76-0.txt | head -n 10
 
 The Project Gutenberg EBook of Adventures of Huckleberry Finn, Complete
 by Mark Twain (Samuel Clemens)
