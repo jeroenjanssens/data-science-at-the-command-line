@@ -17,10 +17,6 @@ github-repo: "jeroenjanssens/data-science-at-the-command-line"
 
 # Welcome {-}
 
-```{block2, type='rmdcaution'}
-Please note that this website is currently slightly out-dated with respect to the published book. I'm slowly working my way through the entire book to correct any inconsistencies. At the same time I'm updating terms (e.g., macOS instead of Mac OS X) and sections (e.g., [Installing the Docker image](#docker-image) instead of *Setting up the Data Science Toolbox*) where appropriate. ---Jeroen Janssens, January 20, 2018.
-```
-
 This is the website for *Data Science at the Command Line*, published by O'Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.
 
 To get you started---whether you’re on Windows, macOS, or Linux---author [Jeroen Janssens](https://twitter.com/jeroenhjanssens) has developed a [Docker image](https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line) packed with over 80 command-line tools.
