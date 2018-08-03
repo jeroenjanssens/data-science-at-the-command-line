@@ -66,11 +66,11 @@ Although the syntax may appear a bit odd compared to your favorite programming l
 
 The second type of items we can loop over are lines. These lines can come from either a file or from standard input. This is a very generic approach because the lines can contain anything, including: numbers, dates, and email adresses.
 
-Imagine that we want to send an email to our customers. Let’s generate some fake users using the <http://randomuser.me/> API:
+Imagine that we want to send an email to our customers. Let’s generate some fake users using the <https://randomuser.me/> API:
 
 ```{bash, eval=FALSE}
-$ curl -s "http://api.randomuser.me/?results=5" > data/users.json
-$ < data/users.json jq -r '.results[].user.email' > data/emails.txt
+$ curl -s "https://randomuser.me/api/1.2/?results=5" > data/users.json
+$ < data/users.json jq -r '.results[].email' > data/emails.txt
 $ cat data/emails.txt
 kaylee.anderson64@example.com
 arthur.baker92@example.com
