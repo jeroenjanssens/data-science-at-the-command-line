@@ -6,7 +6,7 @@ First, we describe how to install the Docker image, which is a virtual environme
 
 By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.
 
-## Overview 
+## Overview
 
 In this chapter, you’ll learn:
 
@@ -26,7 +26,7 @@ In this book we use many different command-line tools. Linux often comes with a 
 If you still prefer to run the command-line tools natively rather than inside a Docker image, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s [GitHub repository](https://github.com/jeroenjanssens/data-science-at-the-command-line).
 ```
 
-To install the Docker image, you first need to download and install Docker itself from [the Docker website](https://www.docker.com/products/docker). 
+To install the Docker image, you first need to download and install Docker itself from [the Docker website](https://www.docker.com/products/docker).
 Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don't type the dollar sign):
 
 ```{bash, eval=FALSE}
@@ -36,11 +36,7 @@ $ docker pull datascienceworkshops/data-science-at-the-command-line
 You can run the Docker image as follows:
 
 ```{bash eval=FALSE}
-$ docker run --rm -itv`pwd`:/data datascienceworkshops/data-science-at-the-command-line
-```
-
-```{block2, type="rmdtip"}
-It's a good idea to remember from which directory you run the Docker container. In the above command, the option `-v` instructs `docker` to map the current directory to the */data* directory inside the container, so this is the place to get data in and out of the Docker container.
+$ docker run --rm -it datascienceworkshops/data-science-at-the-command-line
 ```
 
 You're now inside an isolated Linux environment---known as a *Docker container*---with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:
@@ -57,12 +53,33 @@ $ cowsay "Let's go!"
                 ||     ||
 ```
 
+Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. We recommend that you create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
+
+```{bash eval=FALSE}
+$ docker run --rm -it -v`pwd`:/data datascienceworkshops/data-science-at-the-command-line
+```
+
+Or the following when you're on Windows and using the command line:
+
+```{bash eval=FALSE}
+$ docker run --rm -it -v %cd%:/data datascienceworkshops/data-science-at-the-command-line
+```
+
+Or the following when you're using Windows PowerShell:
+
+```{bash eval=FALSE}
+$ docker run --rm -it -v ${PWD}:/data datascienceworkshops/data-science-at-the-command-line
+```
+
+In the above commands, the option `-v` instructs `docker` to map the current directory to the */data* directory inside the container, so this is the place to get data in and out of the Docker container.
+
+
 ```{block2, type="rmdnote"}
 If you would like to know more about the Docker image you can [visit it on Docker Hub](https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line/).
 ```
 
 
-## Essential GNU/Linux Concepts 
+## Essential GNU/Linux Concepts
 
 In [Chapter 1](#chapter-1-introduction), we briefly showed you what the command line is. Now that you are running the [Docker image](#docker-image), we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.
 
@@ -71,7 +88,7 @@ In [Chapter 1](#chapter-1-introduction), we briefly showed you what the command 
 This section is not a complete course in GNU/Linux. We will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the [Docker image](#docker-image) is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
 ```
 
-### The Environment 
+### The Environment
 
 So you’ve just logged into a brand new environment. Before we do anything, it is worthwhile to get a high-level understanding of this environment. The environment is roughly defined by four layers, which we briefly discuss from the top down.
 
@@ -100,7 +117,7 @@ Operating system
 
 :   The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The [Docker image](#docker-image) is based on a particular Linux distribution called Alpine Linux.
 
-### Executing a Command-line Tool 
+### Executing a Command-line Tool
 
 Now that you have a basic understanding of the environment, it is high time that you try out some commands. Type the following in your terminal (without the dollar sign) and press `<Enter>`:
 
@@ -153,7 +170,7 @@ Home Alone
 
 Here we pass three command-line arguments to `head` [@head]. The first one is an option. The second one is a value that belongs to the option. The third one is a filename. This particular command outputs the first three lines of file *book/ch02/data/movies.txt*.
 
-### Five Types of Command-line Tools 
+### Five Types of Command-line Tools
 
 We employ the term command-line tool a lot, but so far, we have not yet explained what we actually mean by it. We use it as an umbrella term for *anything* that can be executed from the command line. Under the hood, each command-line tool is one of the following five types:
 
@@ -255,7 +272,7 @@ l is aliased to `ls -1 --group-directories-first'
 
 `type` returns two command-line tools for `pwd`. In that case, the first reported command-line tool is used when you type `pwd`. In the next section we will look at how to combine command-line tools.
 
-### Combining Command-line Tools 
+### Combining Command-line Tools
 
 Because most command-line tools adhere to the UNIX philosophy, they are designed to do only thing, and do it really well. For example, the command-line tool `grep` [@grep] can filter lines, `wc` [@wc] can count lines, and `sort` [@sort] can sort lines. The power of the command line comes from its ability to combine these small, yet powerful command-line tools. The most important way of combining command-line tools is through a so-called pipe. The output from the first tool is passed to the second tool. There are virtually no limits to this.
 
@@ -291,7 +308,7 @@ The option `-l` specifies that `wc` should only output the number of lines that 
 
 You may start to see that combining command-line tools is a very powerful concept. In the rest of the book you will be introduced to many more tools and the functionality they offer when combining them.
 
-### Redirecting Input and Output 
+### Redirecting Input and Output
 
 We mentioned that, by default, the output of the last command-line tool in the pipeline is outputted to the terminal. You can also save this output to a file. This is called output redirection, and works as follows:
 
@@ -329,7 +346,7 @@ $ wc -w hello-world
 2 hello-world
 ```
 
-### Working With Files 
+### Working With Files
 
 As data scientists, we work with a lot of data. This data is often stored in files. It is important to know how to work with files (and the directories they live in) on the command line. Every action that you can do using a graphical user interface, you can do with command-line tools (and much more). In this section we introduce the most important ones to create, move, copy, rename, and delete files and directories.
 
@@ -375,7 +392,7 @@ Using the command-line tools to manage your files can be scary at first, because
 
 All of the above command-line tools accept the `-v` option, which stands for verbose, so that they output what’s going on. All but `mkdir` accept the `-i` option, which stands for interactive, and causes the tools to ask you for confirmation.
 
-### Help! 
+### Help!
 
 As you are finding your way around the command-line, it may happen that you need help. Even the most-seasoned Linux users need help at some point. It is impossible to remember all the different command-line tools and their possible arguments. Fortunately, the command line offers severals ways to get help.
 
@@ -454,11 +471,7 @@ http://stedolan.github.com/jq
 
 Specifying the `--help` option also works for the GNU command-line tools such as `cat`. However, the corresponding man page often provides more information. If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet. In the appendix, there’s a list of all command-line tools used in this book. Besides how each command-line tool can be installed, it also shows how you can get help.
 
-## Further Reading 
+## Further Reading
 
 * Heddings, Lowell. 2006. “Keyboard Shortcuts for Bash.” <a href="http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc" class="uri">http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc</a>.
 * Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.
-
-
-
-
