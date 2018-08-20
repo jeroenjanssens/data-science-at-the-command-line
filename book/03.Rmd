@@ -327,43 +327,71 @@ To conclude this section, cURL is a straight-forward command-line tool for downl
 
 In the previous section we explained how to download individual files from the Internet. Another way data can come from the Internet is through a web API, which stands for *Application Programming Interface*. The number of APIs that are being offered by organizations is growing at increasing rate, which means a lot of interesting data for us data scientists.
 
-Web APIs are not meant to be presented in nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as `jq`. For example, the API from <http://randomuser.me> returns data in the following JSON structure.
+Web APIs are not meant to be presented in nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as `jq`. For example, the API from <https://randomuser.me> returns data in the following JSON structure.
 
 ```{bash, eval=FALSE}
-$ curl -s http://api.randomuser.me | jq '.'
+$ curl -s https://randomuser.me/api/1.2/ | jq .
 {
   "results": [
     {
-      "version": "0.3.2",
-      "seed": "1c5b868416387bf",
-      "user": {
-        "picture": "http://api.randomuser.me/0.3.2/portraits/women/2.jpg",
-        "SSN": "972-79-4140",
-        "cell": "(519)-135-8132",
-        "phone": "(842)-322-2703",
-        "dob": "64945368",
-        "registered": "1136430654",
-        "sha1": "a3fed7d4f481fbd6845c0c5a19e4f1113cc977ed",
-        "gender": "female",
-        "name": {
-          "last": "green",
-          "first": "scarlett",
-          "title": "miss"
+      "gender": "male",
+      "name": {
+        "title": "mr",
+        "first": "jeffrey",
+        "last": "lawson"
+      },
+      "location": {
+        "street": "838 miller ave",
+        "city": "washington",
+        "state": "maryland",
+        "postcode": 81831,
+        "coordinates": {
+          "latitude": "81.9488",
+          "longitude": "-67.8247"
         },
-        "location": {
-          "zip": "43413",
-          "state": "nevada",
-          "city": "redding",
-          "street": "8608 crescent canyon st"
-        },
-        "email": "scarlett.green32@example.com",
-        "username": "reddog82",
-        "password": "ddddd",
-        "salt": "AEKvMi$+",
-        "md5": "f898fc73430cff8327b91ef6d538be5b"
-      }
+        "timezone": {
+          "offset": "+4:00",
+          "description": "Abu Dhabi, Muscat, Baku, Tbilisi"
+        }
+      },
+      "email": "jeffrey.lawson@example.com",
+      "login": {
+        "uuid": "78918f6c-2658-4915-bebf-bfaa61a1624c",
+        "username": "silverzebra774",
+        "password": "treble",
+        "salt": "iAtIKhvB",
+        "md5": "4c02abeca4d6ca4dbfc0ddb33dcef29f",
+        "sha1": "36e109513abf73df460cead89b78c749abe908fa",
+        "sha256": "0155d9e6cabedfc3ad0f21d18b3ca3e738a8f17811dd57dc3b4dd386cd021963"
+      },
+      "dob": {
+        "date": "1996-07-04T02:49:46Z",
+        "age": 22
+      },
+      "registered": {
+        "date": "2013-01-13T13:37:21Z",
+        "age": 5
+      },
+      "phone": "(406)-041-2792",
+      "cell": "(831)-085-8264",
+      "id": {
+        "name": "SSN",
+        "value": "629-40-9671"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/62.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/62.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/62.jpg"
+      },
+      "nat": "US"
     }
-  ]
+  ],
+  "info": {
+    "seed": "4bd9f66fd83a6ec7",
+    "results": 1,
+    "page": 1,
+    "version": "1.2"
+  }
 }
 ```
 
