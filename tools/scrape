@@ -13,6 +13,7 @@
 import sys
 import argparse
 from lxml import etree
+from sys import exit
 
 
 def main():
