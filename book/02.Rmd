@@ -196,7 +196,7 @@ Interpreted Script
 
     ```{example script-fac, name="Python script that computes the factorial of an integer"}
     ```
-    ```{python, eval=FALSE}
+    ```{python2, eval=FALSE}
     ##!/usr/bin/env python
 
     def factorial(x):
