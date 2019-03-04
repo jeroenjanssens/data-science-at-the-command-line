@@ -534,7 +534,7 @@ rm -rf $DIRTMP
 For example, if we wanted to uppercase the values in the day column in the tips data set (without affecting the other columns and the header), we would use `cols` in combination with `body`, as follows:
 
 ```{bash, eval=FALSE}
-$ < tips.csv cols -c day body "tr '[a-z]' '[A-Z]'" | head -n 5 | csvlook
+$ < tips.csv cols -c day body "tr '[a-z]' '[A-Z]'" | head -n 5 | csvlook -I
 |------+-------+------+--------+--------+--------+-------|
 |  day | bill  | tip  | sex    | smoker | time   | size  |
 |------+-------+------+--------+--------+--------+-------|
@@ -873,7 +873,7 @@ $ csvgrep -c size -i -r "[1-4]" tips.csv | csvlook
 Both `awk` and `csvsql` can also do numerical comparisons. For example, to get all the bills above 40 USD on a Saturday or a Sunday:
 
 ```{bash, eval=FALSE}
-$ < tips.csv awk -F, '($1 > 40.0) && ($5 ~ /S/)' | csvlook
+$ < tips.csv awk -F, '($1 > 40.0) && ($5 ~ /S/)' | csvlook -I
 |--------+------+--------+-----+-----+--------+----|
 |  48.27 | 6.73 | Male   | No  | Sat | Dinner | 4  |
 |--------+------+--------+-----+-----+--------+----|
@@ -890,7 +890,7 @@ The `csvsql` solution is more verbose but is also more robust as it uses the nam
 
 ```{bash, eval=FALSE}
 $ < tips.csv csvsql --query "SELECT * FROM stdin "\
-> "WHERE bill > 40 AND day LIKE '%S%'" | csvlook
+> "WHERE bill > 40 AND day LIKE '%S%'" | csvlook -I
 |--------+------+--------+--------+-----+--------+-------|
 |  bill  | tip  | sex    | smoker | day | time   | size  |
 |--------+------+--------+--------+-----+--------+-------|
@@ -913,7 +913,7 @@ Merging columns is useful for when the values of interest are spread over multip
 The input CSV is a list of contemporary composers. Imagine our task is to combine the first name and the last name into a full name. We’ll present four different approaches for this task: `sed`, `awk`, `cols` + `tr`, and `csvsql`. Let’s have a look at the input CSV:
 
 ```{bash, eval=FALSE}
-$ < names.csv csvlook
+$ < names.csv csvlook -I
 |-----+-----------+------------+-------|
 |  id | last_name | first_name | born  |
 |-----+-----------+------------+-------|
@@ -929,7 +929,7 @@ The first approach, `sed`, uses two statements. The first is to replace the head
 
 ```{bash, eval=FALSE}
 $ < names.csv sed -re '1s/.*/id,full_name,born/g;'\
-> '2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | csvlook
+> '2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | csvlook -I
 |-----+---------------+-------|
 |  id | full_name     | born  |
 |-----+---------------+-------|
@@ -945,7 +945,7 @@ The `awk` approach looks as follows:
 
 ```{bash, eval=FALSE}
 $ < names.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"}'\
-> '{if(NR > 1) {print $1,$3" "$2,$4}}' | csvlook
+> '{if(NR > 1) {print $1,$3" "$2,$4}}' | csvlook -I
 |-----+---------------+-------|
 |  id | full_name     | born  |
 |-----+---------------+-------|
@@ -961,7 +961,7 @@ The `cols` approach in combination with `tr`:
 
 ```{bash, eval=FALSE}
 $ < names.csv | cols -c first_name,last_name tr \",\" \" \" |
-> header -r full_name,id,born | csvcut -c id,full_name,born | csvlook
+> header -r full_name,id,born | csvcut -c id,full_name,born | csvlook -I
 |-----+---------------+-------|
 |  id | full_name     | born  |
 |-----+---------------+-------|
@@ -977,7 +977,7 @@ Please note that `csvsql` employ SQLite as the database to execute the query and
 
 ```{bash, eval=FALSE}
 $ < names.csv csvsql --query "SELECT id, first_name || ' ' || last_name "\
-> "AS full_name, born FROM stdin" | csvlook
+> "AS full_name, born FROM stdin" | csvlook -I
 |-----+-----------------------+-------|
 |  id | full_name             | born  |
 |-----+-----------------------+-------|
@@ -1127,7 +1127,7 @@ $ < data/tips.csv csvcut -c bill,tip | tee data/bills.csv | head -n 3 | csvlook
 |  10.34 | 1.66  |
 |--------+-------|
 $ < data/tips.csv csvcut -c day,time | tee data/datetime.csv |
-> head -n 3 | csvlook
+> head -n 3 | csvlook -I
 |------+---------|
 |  day | time    |
 |------+---------|
@@ -1147,7 +1147,7 @@ $ < data/tips.csv csvcut -c sex,smoker,size | tee data/customers.csv |
 Assuming that the rows line up, you can simply `paste` [@paste] the files together:
 
 ```{bash, eval=FALSE}
-$ paste -d, data/{bills,customers,datetime}.csv | head -n 3 | csvlook
+$ paste -d, data/{bills,customers,datetime}.csv | head -n 3 | csvlook -I
 |--------+------+--------+--------+------+-----+---------|
 |  bill  | tip  | sex    | smoker | size | day | time    |
 |--------+------+--------+--------+------+-----+---------|
