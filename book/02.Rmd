@@ -388,7 +388,7 @@ $ cd data
 $ mkdir logs
 ```
 
-Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the filesystem to provide immediate feedback.
+Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the file system to provide immediate feedback.
 
 All of the above command-line tools accept the `-v` option, which stands for verbose, so that they output what’s going on. All but `mkdir` accept the `-i` option, which stands for interactive, and causes the tools to ask you for confirmation.
 

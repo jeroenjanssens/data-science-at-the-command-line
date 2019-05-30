@@ -136,7 +136,7 @@ The first advantage of the command line is that it allows you to be agile. Data 
 
 First, the command line provides a so-called read-eval-print-loop (REPL). This means that you type in command, press **<Enter>**, and the command is evaluated immediately. A REPL is often much more convenient for doing data science than the edit-compile-run-debug cycle associated with scripts, large programs, and, say, Hadoop jobs. Your commands are executed immediately, may be stopped at will, and can be changed quickly. This short iteration cycle really allows you to play with your data.
 
-Second, the command line is very close to the filesystem. Because data is the main ingredient for doing data science, it is important to be able to easily work with the files that contain your data set. The command line offers many convenient tools for this.
+Second, the command line is very close to the file system. Because data is the main ingredient for doing data science, it is important to be able to easily work with the files that contain your data set. The command line offers many convenient tools for this.
 
 ### The Command Line is Augmenting 
 
