@@ -23,5 +23,5 @@ script:
 
 deploy:
   provider: script
-  script: cd .. && netlify deploy -t $NETLIFY_PAT
+  script: cd .. && netlify deploy --prod
   skip_cleanup: true
