@@ -23,5 +23,5 @@ script:
 
 deploy:
   provider: script
-  script: cd .. && netlify deploy --prod
+  script: cd .. && pwd && ls && netlify deploy --prod --dir _book_output
   skip_cleanup: true
