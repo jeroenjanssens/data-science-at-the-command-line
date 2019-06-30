@@ -225,7 +225,7 @@ Shell Function
 :   A shell function is a function that is, in our case executed by Bash. They provide similar functionality to a Bash script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called `fac`, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using `seq`, putting those numbers on one line with `*` as the delimiter using `paste` [@paste], and passing this equation into `bc` [@bc], which is evaluates it and outputs the result.
 
     ```{bash, eval=FALSE}
-    $ fac() { (echo 1; seq $1) | paste -s -d\* | bc; }
+    $ fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
     $ fac 5
     120
     ```
@@ -264,7 +264,7 @@ fac is a function
 fac ()
 {
     ( echo 1;
-    seq $1 ) | paste -s -d\* | bc
+    seq $1 ) | paste -s -d\* - | bc
 }
 $ type -a l
 l is aliased to `ls -1 --group-directories-first'
