@@ -64,18 +64,24 @@ $ scp -i  mykey.pem ~/Desktop/logs.csv \
 
 Replace the host name in the example *ec2-184-73-72-150.compute-1.amazonaws.com* with the value you see on the EC2 overview page in the AWS console.
 
-## Decompressing Files 
+## Compressing and Decompressing Files 
 
 If the original data set is very large or it's a collection of many files, the file may be a (compressed) archive. Data sets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.
 
-Common file extensions of compressed archives are: *.tar.gz*, *.zip*, and *.rar*. To decompress these, you would use the command-line tools `tar` [@tar], `unzip` [@unzip], and `unrar` [@unrar], respectively. There exists a few more, though less common, file extensions for which you would need yet other tools. For example, in order to extract a file named *logs.tar.gz*, you would use:
+Common file extensions of compressed archives are: *.tar.gz*, *.zip*, and *.rar*. To compress and decompress these files, you would use the command-line tools `tar` [@tar], `unzip` [@unzip], and `unrar` [@unrar], respectively. There exists a few more, though less common, file extensions for which you would need yet other tools. For example, in order to extract a compressed file named *logs.tar.gz*, you would use:
 
 ```{bash, eval=FALSE}
 $ cd ~/book/ch03
 $ tar -xzvf data/logs.tar.gz
 ```
 
-Indeed, `tar` is notorious for its many command-line arguments. In this case, the four command-line arguments `x`, `z`, `v`, and `f` specify that `tar` should *extract* files from an archive, use *gzip* as the decompression algorithm, be *verbose* and use file *logs.tar.gz*. In time, you'll get used to typing these four characters, but there's a more convenient way.
+Similarly, to compress a directory called *logs* into a compressed file named *archive.tar.gz*, you would use:  
+
+```{bash, eval=FALSE}
+$ tar -czvf archive.tar.gz logs
+```
+
+Indeed, `tar` is notorious for its many command-line arguments. In the case of extraction, the four command-line arguments `x`, `z`, `v`, and `f` specify that `tar` should *extract* files from an archive, use *gzip* as the decompression algorithm, be *verbose* and use file *logs.tar.gz*. In the compression example, the command-line argument `-c` specifies that you intend to *create* a file. In time, you'll get used to typing these four characters, but there's a more convenient way.
 
 Rather than remembering the different command-line tools and their options, there's a handy script called `unpack` [@unpack], which will decompress many different formats. `unpack` looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.
 
