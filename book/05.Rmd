@@ -15,7 +15,7 @@ $ printf 'foo\nbar\nfoo' | sort | uniq -c | sort -nr
       2 foo
       1 bar
 $ printf 'foo\nbar\nfoo' | sort | uniq -c | sort -nr |
-> awk '{print $2","$1}' | header -a
+> awk '{print $2","$1}' | header -a 'value, count'
 value,count
 foo,2
 bar,1
