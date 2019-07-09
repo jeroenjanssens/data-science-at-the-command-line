@@ -11,10 +11,10 @@ Once our data is in the format we want it to be, we can apply common scrubbing o
 The scrubbing tasks that we discuss in this chapter not only apply to the input data. Sometimes, we also need to reformat the output of some command-line tools. For example, to transform the output of `uniq -c` to a CSV data set, we could use `awk` [@awk] and `header`:
 
 ```{bash, eval=FALSE}
-$ echo 'foo\nbar\nfoo' | sort | uniq -c | sort -nr
+$ printf 'foo\nbar\nfoo' | sort | uniq -c | sort -nr
       2 foo
       1 bar
-$ echo 'foo\nbar\nfoo' | sort | uniq -c | sort -nr |
+$ printf 'foo\nbar\nfoo' | sort | uniq -c | sort -nr |
 > awk '{print $2","$1}' | header -a
 value,count
 foo,2
