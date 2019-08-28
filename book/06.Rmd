@@ -220,7 +220,7 @@ $ drake -w 01.drake
 Nothing to do.
 ```
 
-Our very first workflow is already saving us time because Drake detects that the step was not need to be executed again. However, we can do much better than this. This workflow has three shortcomings that we’re going to address in the next section.
+Our very first workflow is already saving us time because Drake detects that the step was not required to be executed again. However, we can do much better than this. This workflow has three shortcomings that we’re going to address in the next section.
 
 ## Well, That Depends 
 
