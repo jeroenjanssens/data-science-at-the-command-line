@@ -192,7 +192,7 @@ Computer:jobs running/jobs completed/%of started jobs/Average seconds to complet
 local:1/9/100%/0.4s
 ```
 
-Basically, we’re performing the same query for years 2009-2014. The API only allows up to 100 pages (starting at 0) per query, so we’re generating 100 numbers using brace expansion. These numbers are used by the *page* parameter in the query. We’re searching for articles that contain the search term `New+York+Fashion+Week`. Because the API has certain limits, we ensure that there’s only one request at a time, with a one-second delay between them. Make sure that you replace `&lt;your-api-key&gt;` with your own API key for the article search endpoint.
+Basically, we’re performing the same query for years 2009-2014. The API only allows up to 100 pages (starting at 0) per query, so we’re generating 100 numbers using brace expansion. These numbers are used by the *page* parameter in the query. We’re searching for articles that contain the search term `New+York+Fashion+Week`. Because the API has certain limits, we ensure that there’s only one request at a time, with a one-second delay between them. Make sure that you replace `<your-api-key>` with your own API key for the article search endpoint.
 
 Each request returns 10 articles, so that’s 1,000 articles in total. These are sorted by page views, so this should give us a good estimate of the coverage. The results are in JSON format, which we store in the *results* directory. The command-line tool `tree` [@tree] gives an overview of how the subdirectories are structured:
 
