@@ -110,7 +110,7 @@ $ bash book/ch04/top-words-1.sh
    1778 of
 ```
 
-This already saves us from typing the one-liner. Because the file cannot be executed on its own, we cannot really speak of a true command-line tool, yet. Let us change that in the next step.
+This already saves us from typing the one-liner. Because the file cannot be executed on its own, it is not yet a true command-line tool. Let us change that in the next step.
 
 ### Step 2: Add Permission to Execute 
 
@@ -303,7 +303,7 @@ Example
 
 And in R, the code would look something like Example \@ref(exm:top-words-5) (thanks to Hadley Wickham):
 
-```{example top-words-5, name="~/book/ch04/top-words-1.R"}
+```{example top-words-5, name="~/book/ch04/top-words.R"}
 ```
 ```{r, eval=FALSE}
 #!/usr/bin/env Rscript
@@ -346,7 +346,7 @@ First, what’s immediately obvious is the difference in amount of code. For thi
 
 ### Processing Streaming Data from Standard Input 
 
-In the previous two code snippets, both Python R read the complete standard input at once. On the command line, most command-line tools pipe data to the next command-line tool in a streaming fashion. (There are a few command-line tools which require the complete data before they write any data to standard output, like `sort` and `awk` [@awk].) This means the pipeline is blocked by such command-line tools. This does not have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.
+In the previous two code snippets, both Python and R read the complete standard input at once. On the command line, most command-line tools pipe data to the next command-line tool in a streaming fashion. (There are a few command-line tools which require the complete data before they write any data to standard output, like `sort` and `awk` [@awk].) This means the pipeline is blocked by such command-line tools. This does not have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.
 
 Luckily Python and R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example \@ref(exm:stream-py) and Example \@ref(exm:stream-r) are two minimal examples that demonstrate how this works in Python and R, respectively.
 
