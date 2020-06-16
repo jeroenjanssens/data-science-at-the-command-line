@@ -1,5 +1,5 @@
 #!/bin/bash
-# Rio: Load CSV from stdin into R as a data.frame, execute given commands, and get the output as CSV or PNG on stdout
+# Rio: Load CSV from stdin into R as a data.frame, execute given commands, and get the output as CSV, PNG or PDF on stdout
 #
 # Example usage:
 # $ < seq 100 | Rio -nf sum (same as Rio -ne 'sum(df)')
@@ -30,13 +30,16 @@ OPTIONS:
    -r      Import dplyr and tidyr
    -s      Import sqldf
    -b      Use same settings as used for book Data Science at the Command Line
+   -p      Export graphic as PDF   
+   -w      set width of graph in cm
+   -i      set heIght of graph in cm
    -v      Verbose
 
 EOF
 }
 
 finish() {
-	rm -f $IN $OUT ${OUT%.png} ${ERR%.err}
+	rm -f $IN $OUT ${OUT%.png} ${OUT%.pdf} ${ERR%.err}
 
         ## Removes error file if error file is empty.
     if [[ ! -s $ERR ]]; then
@@ -49,7 +52,7 @@ finish() {
 trap finish EXIT
 
 callR() {
-	Rscript --vanilla -e "options(scipen=999);df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.matrix(last)){last<-as.data.frame(last)};if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=T,qmethod='double',row.names=F,col.names=${HEADER});}else if(is.vector(last)){cat(last,sep='\\\n', file='${OUT}')}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=${RIO_DPI-72},units='cm',width=20,height=15);}else{sink('${OUT}');print(last);}"
+	Rscript --vanilla -e "options(scipen=999);df<-read.csv('${IN}',header=${HEADER},sep='${DELIMITER}',stringsAsFactors=F);${REQUIRES}${SCRIPT}last<-.Last.value;if(is.matrix(last)){last<-as.data.frame(last)};if(is.data.frame(last)){write.table(last,'${OUT}',sep=',',quote=T,qmethod='double',row.names=F,col.names=${HEADER});}else if(is.vector(last)){cat(last,sep='\\\n', file='${OUT}')}else if(exists('is.ggplot')&&is.ggplot(last)){ggsave('${OUT}',last,dpi=${RIO_DPI-72},units='cm',width=${WIDTH},height=${HEIGHT});}else{sink('${OUT}');print(last);}"
 }
 
 SCRIPT=
@@ -57,6 +60,8 @@ REQUIRES=
 DELIMITER=","
 HEADER="T"
 VERBOSE=false
+WIDTH=20
+HEIGHT=15
 
 # OSX `mktemp' requires a temp file template, but Linux `mktemp' has it as optional.
 # This explicitly uses a template, which works for both.  The $TMPDIR is in case
@@ -68,7 +73,7 @@ IN=$(mktemp ${TMPDIR}/Rio-XXXXXXXX)
 OUT=$(mktemp ${TMPDIR}/Rio-XXXXXXXX).png
 ERR=$(mktemp ${TMPDIR}/Rio-XXXXXXXX).err
 
-while getopts "d:hgnprsve:f:b" OPTION
+while getopts "d:hgnprspve:f:bw:i:" OPTION
 do
 	case $OPTION in
 		b)
@@ -105,6 +110,15 @@ do
 			;;
 		v)
 			VERBOSE=true
+			;;
+		p)
+			OUT=${OUT%.png}.pdf
+			;;
+		w)
+			WIDTH=$OPTARG
+			;;
+		i)
+			HEIGHT=$OPTARG
 			;;
 		?)
 			usage
