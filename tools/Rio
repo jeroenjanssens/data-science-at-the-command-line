@@ -1,5 +1,5 @@
 #!/bin/bash
-# Rio: Load CSV from stdin into R as a data.frame, execute given commands, and get the output as CSV or PNG on stdout
+# Rio: Load CSV from stdin into R as a data.frame, execute given commands, and get the output as CSV, PNG or PDF on stdout
 #
 # Example usage:
 # $ < seq 100 | Rio -nf sum (same as Rio -ne 'sum(df)')
@@ -30,13 +30,14 @@ OPTIONS:
    -r      Import dplyr and tidyr
    -s      Import sqldf
    -b      Use same settings as used for book Data Science at the Command Line
+   -p      Export graphic as PDF   
    -v      Verbose
 
 EOF
 }
 
 finish() {
-	rm -f $IN $OUT ${OUT%.png} ${ERR%.err}
+	rm -f $IN $OUT ${OUT%.png} ${OUT%.pdf} ${ERR%.err}
 
         ## Removes error file if error file is empty.
     if [[ ! -s $ERR ]]; then
@@ -68,7 +69,7 @@ IN=$(mktemp ${TMPDIR}/Rio-XXXXXXXX)
 OUT=$(mktemp ${TMPDIR}/Rio-XXXXXXXX).png
 ERR=$(mktemp ${TMPDIR}/Rio-XXXXXXXX).err
 
-while getopts "d:hgnprsve:f:b" OPTION
+while getopts "d:hgnprspve:f:b" OPTION
 do
 	case $OPTION in
 		b)
@@ -106,6 +107,9 @@ do
 		v)
 			VERBOSE=true
 			;;
+        p)
+            OUT=${OUT%.png}.pdf
+            ;;			
 		?)
 			usage
 			exit
