@@ -1,5 +1,4 @@
 .Rproj.user
 docs/*.md
-book/asciidoc
 _book_output
 .netlify
