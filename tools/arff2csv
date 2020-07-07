@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-weka core.converters.CSVSaver -i /dev/stdin

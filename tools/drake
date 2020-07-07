@@ -1,2 +1,0 @@
-#!/bin/bash
-drip -cp ${DRAKEPATH}/drake.jar drake.core "$@"
