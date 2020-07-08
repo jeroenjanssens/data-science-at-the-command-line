@@ -1,0 +1,1219 @@
+# Scrubbing Data {#chapter-5-scrubbing-data}
+
+Two chapters ago, in Step 1 of the OSEMN model for data science, we looked at how to obtain data from a variety of sources. It’s not uncommon for this data to have missing values, inconsistencies, errors, weird characters, or uninteresting columns. Sometimes we only need a specific portion of the data. And sometimes we need the data to be in a different format. In those cases, we have to scrub, or clean, the data before we can move on to Step 3: Exploring Data.
+
+The data we obtained in Chapter 3 can come in a variety of formats. The most common ones are plain text, CSV, JSON, and HTML/XML. Since most command-line tools operate on one format only, it is worthwhile to be able to convert data from one format to another.
+
+CSV, which is the main format we’re working with in this chapter, is actually not the easiest format to work with. Many CSV data sets are broken or incompatible with each other because there is no standard syntax, unlike XML and JSON.
+
+Once our data is in the format we want it to be, we can apply common scrubbing operations. These include filtering, replacing, and merging data. The command line is especially well-suited for these kind of operations, as there exist many powerful command-line tools that are optimized for handling large amounts of data. Tools that we’ll discuss in this chapter include classic ones such as: `cut` [@cut] and `sed` [@sed], and newer ones such as `jq` [@jq] and `csvgrep` [@csvgrep].
+
+The scrubbing tasks that we discuss in this chapter not only apply to the input data. Sometimes, we also need to reformat the output of some command-line tools. For example, to transform the output of `uniq -c` to a CSV data set, we could use `awk` [@awk] and `header`:
+
+```{bash, eval=FALSE}
+$ printf 'foo\nbar\nfoo' | sort | uniq -c | sort -nr
+      2 foo
+      1 bar
+$ printf 'foo\nbar\nfoo' | sort | uniq -c | sort -nr |
+> awk '{print $2","$1}' | header -a 'value, count'
+value,count
+foo,2
+bar,1
+```
+
+If your data requires additional functionality than that is offered by (a combination of) these command-line tools, you can use `csvsql`. This is a new command-line tool that allow you to perform SQL queries directly on CSV files. And remember, if after reading this chapter you still need more flexibility, you’re free to use R, Python, or whatever programming language you prefer.
+
+The command-line tools will be introduced on a need-to-use basis. You will notice that sometimes we can use the same command-line tool to perform multiple operations, or vice versa, multiple command-line tools to perform the same operation. This chapter is more structured like a cookbook, where the focus is on the problems or recipes, rather than on the command-line tools.
+
+## Overview 
+
+In this chapter, you’ll learn how to:
+
+- Convert data from one format to another.
+- Apply SQL queries to CSV.
+- Filter lines.
+- Extract and replace values.
+
+- Split, merge, and extract columns.
+
+## Common Scrub Operations for Plain Text 
+
+In this section we describe common scrubbing operations for plain text. Formally, plain text refers to a sequence of human-readable characters and optionally, some specific types of control characters (for example a tab or a newline) (see: <http://www.linfo.org/plain_text.html>). Examples include: e-books, emails, log files, and source code.
+
+For the purpose of this book, we assume that the plain text contains some data, and that it has no clear tabular structure (like the CSV format) or nested structure (like the JSON and HTML formats). We discuss those formats later in this chapter. Although these operations can also be applied to CSV, JSON and XML/HTML formats, keep in mind that the tools treat the data as plain text.
+
+### Filtering Lines 
+
+The first scrubbing operation is filtering lines. This means that from the input data, each line will be evaluated whether it may be passed on as output.
+
+#### Based on Location 
+
+The most straightforward way to filter lines is based on their location. This may be useful when you want to inspect, say, the top 10 lines of a file, or when you extract a specific row from the output of another command-line tool. To illustrate how to filter based on location, let’s create a dummy file that contains 10 lines:
+
+```{bash, eval=FALSE}
+$ seq -f "Line %g" 10 | tee data/lines
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+Line 10
+```
+
+We can print the first 3 lines using either `head`, `sed`, or `awk`:
+
+```{bash, eval=FALSE}
+$ < lines head -n 3
+$ < lines sed -n '1,3p'
+$ < lines awk 'NR<=3'
+Line 1
+Line 2
+Line 3
+```
+
+Similarly, we can print the last 3 lines using `tail` [@tail]:
+
+```{bash, eval=FALSE}
+$ < lines tail -n 3
+Line 8
+Line 9
+Line 10
+```
+
+You can also you use `sed` and `awk` for this, but `tail` is much faster.
+
+Removing the first 3 lines goes as follows:
+
+```{bash, eval=FALSE}
+$ < lines tail -n +4
+$ < lines sed '1,3d'
+$ < lines sed -n '1,3!p'
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+Line 10
+```
+
+Please notice that with tail you have to add one.
+
+Removing the last 3 lines can be done with `head`:
+
+```{bash, eval=FALSE}
+$ < lines head -n -3
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+```
+
+You can print (or extract) specific lines (4, 5, and 6 in this case) using a either `sed`, `awk`, or a combination of `head` and `tail`:
+
+```{bash, eval=FALSE}
+$ < lines sed -n '4,6p'
+$ < lines awk '(NR>=4)&&(NR<=6)'
+$ < lines head -n 6 | tail -n 3
+Line 4
+Line 5
+Line 6
+```
+
+Print odd lines with `sed` by specifying a start and a step, or with `awk` by using the modulo operator:
+
+```{bash, eval=FALSE}
+$ < lines sed -n '1~2p'
+$ < lines awk 'NR%2'
+Line 1
+Line 3
+Line 5
+Line 7
+Line 9
+```
+
+Printing even lines works in a similar manner:
+
+```{bash, eval=FALSE}
+$ < lines sed -n '0~2p'
+$ < lines awk '(NR+1)%2'
+Line 2
+Line 4
+Line 6
+Line 8
+Line 10
+```
+
+#### Based on Pattern 
+
+Sometimes you want to extract or remove lines based on their contents. Using `grep`, the canonical command-line tool for filtering lines, we can print every line that matches a certain pattern or regular expression. For example, to extract all the chapter headings from *Alice’s Adventures in Wonderland*:
+
+```{bash, eval=FALSE}
+$ grep -i chapter alice.txt
+CHAPTER I. Down the Rabbit-Hole
+CHAPTER II. The Pool of Tears
+CHAPTER III. A Caucus-Race and a Long Tale
+CHAPTER IV. The Rabbit Sends in a Little Bill
+CHAPTER V. Advice from a Caterpillar
+CHAPTER VI. Pig and Pepper
+CHAPTER VII. A Mad Tea-Party
+CHAPTER VIII. The Queen's Croquet-Ground
+CHAPTER IX. The Mock Turtle's Story
+CHAPTER X. The Lobster Quadrille
+CHAPTER XI. Who Stole the Tarts?
+CHAPTER XII. Alice's Evidence
+```
+
+Here, `-i` means case-insensitive. We can also specify a regular expression. For example, if we only wanted to print out the headings which start with *The*:
+
+```{bash, eval=FALSE}
+$ grep -E '^CHAPTER (.*)\. The' alice.txt
+CHAPTER II. The Pool of Tears
+CHAPTER IV. The Rabbit Sends in a Little Bill
+CHAPTER VIII. The Queen's Croquet-Ground
+CHAPTER IX. The Mock Turtle's Story
+CHAPTER X. The Lobster Quadrille
+```
+
+Please note that you have to specify the `-E` command-line argument in order to enable regular expressions. Otherwise, `grep` interprets the pattern as a literal string.
+
+#### Based on Randomness 
+
+When you’re in the process of formulating your data pipeline and you have a lot of data, then debugging your pipeline can be cumbersome. In that case, sampling from the data might be useful. The main purpose of the command-line tool `sample` [@sample] is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.
+
+```{bash, eval=FALSE}
+$ seq 1000 | sample -r 1% | jq -c '{line: .}'
+{"line":53}
+{"line":119}
+{"line":141}
+{"line":228}
+{"line":464}
+{"line":476}
+{"line":523}
+{"line":657}
+{"line":675}
+{"line":865}
+{"line":948}
+```
+
+Here, every input line has a one percent chance of being forwarded to `jq`. This percentage could also have been specified as a fraction (*1/100*) or as a probability (*0.01*).
+
+`sample` has two other purposes, which can be useful when you’re in debugging. First, it’s possible to add some delay to the output. This comes in handy when the input is a constant stream (for example, the Twitter firehose), and the data comes in too fast to see what’s going on. Secondly, you can put a timer on `sample`. This way, you don’t have to kill the ongoing process manually. To add a 1 second delay between each output line to the previous command and to only run for 5 seconds:
+
+```{bash, eval=FALSE}
+$ seq 10000 | sample -r 1% -d 1000 -s 5 | jq -c '{line: .}'
+```
+
+In order to prevent unnecessary computation, try to put `sample` as early as possible in your pipeline (this argument holds any command-line tool that reduces data, like `head` and `tail`). Once you’re done debugging you can simply take it out of the pipeline.
+
+### Extracting Values 
+
+To extract the actual chapter headings from our example earlier, we can take a simple approach by piping the output of `grep` to `cut`:
+
+```{bash, eval=FALSE}
+$ grep -i chapter alice.txt | cut -d' ' -f3-
+Down the Rabbit-Hole
+The Pool of Tears
+A Caucus-Race and a Long Tale
+The Rabbit Sends in a Little Bill
+Advice from a Caterpillar
+Pig and Pepper
+A Mad Tea-Party
+The Queen's Croquet-Ground
+The Mock Turtle's Story
+The Lobster Quadrille
+Who Stole the Tarts?
+Alice's Evidence
+```
+
+Here, each line that’s passed to `cut` is being split on spaces into fields, and then the third field to the last field is being printed. The total number of fields may be different per input line. With `sed` we can accomplish the same task in a much more complex manner:
+
+```{bash, eval=FALSE}
+$ sed -rn 's/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p' alice.txt > /dev/null
+```
+
+(Since the output is the same it’s omitted by redirecting it to */dev/null*.) This approach uses a regular expression and a back reference. Here, `sed` also takes over the work done by `grep`. This complex approach is only advisable when a simpler one would not work. For example, if *chapter* was ever part of the text itself and not just used to indicate the start of a new chapter. Of course there are many levels of complexity which would have worked around this, but this was to illustrate an extremely strict approach. In practice, the challenge is to find a good balance between complexity and flexibility.
+
+It’s worth noting that `cut` can also split on characters positions. This is useful for when you want to extract (or remove) the same set of characters per input line:
+
+```{bash, eval=FALSE}
+$ grep -i chapter alice.txt | cut -c 9-
+I. Down the Rabbit-Hole
+II. The Pool of Tears
+III. A Caucus-Race and a Long Tale
+IV. The Rabbit Sends in a Little Bill
+V. Advice from a Caterpillar
+VI. Pig and Pepper
+VII. A Mad Tea-Party
+VIII. The Queen's Croquet-Ground
+IX. The Mock Turtle's Story
+X. The Lobster Quadrille
+XI. Who Stole the Tarts?
+XII. Alice's Evidence
+```
+
+`grep` has a great feature that outputs every match onto a separate line:
+
+```{bash, eval=FALSE}
+$ < alice.txt grep -oE '\w{2,}' | head
+Project
+Gutenberg
+Alice
+Adventures
+in
+Wonderland
+by
+Lewis
+Carroll
+This
+```
+
+But what if we wanted to create a data set of all the words that start with an *a* and end with an *e*. Well, of course there’s a pipeline for that too:
+
+```{bash, eval=FALSE}
+$ < alice.txt tr '[:upper:]' '[:lower:]' | grep -oE '\w{2,}' |
+> grep -E '^a.*e$' | sort | uniq -c | sort -nr |
+> awk '{print $2","$1}' | header -a word,count | head | csvlook
+|-------------+--------|
+|  word       | count  |
+|-------------+--------|
+|  alice      | 403    |
+|  are        | 73     |
+|  archive    | 13     |
+|  agree      | 11     |
+|  anyone     | 5      |
+|  alone      | 5      |
+|  age        | 4      |
+|  applicable | 3      |
+|  anywhere   | 3      |
+|  alive      | 3      |
+|-------------+--------|
+```
+
+### Replacing and Deleting Values 
+
+You can use the command-line tool `tr`, which stands for translate, to replace individual characters. For example, spaces can be replaced by underscores as follows:
+
+```{bash, eval=FALSE}
+$ echo 'hello world!' | tr ' ' '_'
+hello_world!
+```
+
+If more than one character needs to be replaced, then you can combine that:
+
+```{bash, eval=FALSE}
+$ echo 'hello world!' | tr ' !' '_?'
+hello_world?
+```
+
+`tr` can also be used to delete individual characters by specifying the argument `-d`:
+
+```{bash, eval=FALSE}
+$ echo 'hello world!' | tr -d -c '[a-z]'
+helloworld
+```
+
+Here, we’ve actually used two more features. First we’ve specified a set of characters (all lowercase letters). Second we’ve indicated that the complement `-c` should be used. In other words, this command only retains lowercase letters. We can even use `tr` to convert our text to uppercase:
+
+```{bash, eval=FALSE}
+$ echo 'hello world!' | tr '[a-z]' '[A-Z]'
+HELLO WORLD!
+$ echo 'hello world!' | tr '[:lower:]' '[:upper:]'
+HELLO WORLD!
+```
+
+The latter command is preferable because that also handles non-ASCII characters. If you need to operate on more than individual characters, then you may find `sed` useful. We’ve already seen an example of `sed` with extracting the chapter headings from Alice in Wonderland. Extracting, deleting, and replacing is actually all the same operation in `sed`. You just specify different regular expressions. For example, to change a word, remove repeated spaces, and remove leading spaces:
+
+```{bash, eval=FALSE}
+$ echo ' hello     world!' | sed -re 's/hello/bye/;s/\s+/ /g;s/\s+//'
+bye world!
+```
+
+The argument `-g` stands for global, meaning that the same command can be applied more than once on the same line. We do not need that with the second command, which removes leading spaces. Note that regular expressions of the first and the last command could have been combined into one regular expression.
+
+## Working with CSV 
+
+### Bodies and Headers and Columns, Oh My! 
+
+The command-line tools that we’ve used to scrub plain text, such as `tr` and `grep`, cannot always be applied to CSV. The reason is that these command-line tools have no notion of headers, bodies, and columns. What if we wanted to filter lines using `grep` but always include the header in the output? Or what if we only wanted to uppercase the values of a specific column using `tr` and leave the other columns untouched? There are multi-step workarounds for this, but they are very cumbersome. We have something better. In order to leverage ordinary command-line tools for CSV, we’d like to introduce you to three command-line tools, aptly named: `body` [@body], `header` [@header], and `cols` [@cols].
+
+Let’s start with the first command-line tool, `body`. With `body` you can apply any command-line tool to the body of a CSV file, that is, everything excluding the header. For example:
+
+```{bash, eval=FALSE}
+$ echo -e "value\n7\n2\n5\n3" | body sort -n
+value
+2
+3
+5
+7
+```
+
+It assumes that the header of the CSV file only spans one row. Here’s the source code for completeness:
+
+```{bash, eval=FALSE}
+#!/usr/bin/env bash
+IFS= read -r header        
+printf '%s\n' "$header"    
+$@                         
+```
+
+It works like this:
+
+- Take one line from standard in and store it as a variable named *\$header*.
+- Print out the header.
+- Execute all the command-line arguments passed to `body` on the remaining data in standard in.
+
+Here’s another example. Imagine that we count the lines of the following CSV file:
+
+```{bash, eval=FALSE}
+$ seq 5 | header -a count
+count
+1
+2
+3
+4
+5
+```
+
+With `wc -l`, we can count the number of all lines:
+
+```{bash, eval=FALSE}
+$ seq 5 | header -a count | wc -l
+6
+```
+
+If we only want to consider the lines in the body (so everything except the header), we simply add `body`:
+
+```{bash, eval=FALSE}
+$ seq 5 | header -a count | body wc -l
+count
+5
+```
+
+Note that the header is not used and is also printed again in the output.
+
+The second command-line tool, `header` allows us, as the name implies, to manipulate the header of a CSV file. The complete source code is as follows:
+
+```{bash, eval=FALSE}
+#!/usr/bin/env bash
+get_header () {
+        for i in $(seq $NUMROWS); do
+                IFS= read -r LINE
+                OLDHEADER="${OLDHEADER}${LINE}\n"
+        done
+}
+
+print_header () {
+        echo -ne "$1"
+}
+
+print_body () {
+        cat
+}
+
+OLDHEADER=
+NUMROWS=1
+
+while getopts "dn:ha:r:e:" OPTION
+do
+        case $OPTION in
+                n)
+                        NUMROWS=$OPTARG
+                        ;;
+                a)
+                        print_header "$OPTARG\n"
+                        print_body
+                        exit 1
+                        ;;
+                d)
+                        get_header
+                        print_body
+                        exit 1
+                        ;;
+                r)
+                        get_header
+                        print_header "$OPTARG\n"
+                        print_body
+                        exit 1
+                        ;;
+                e)
+                        get_header
+                        print_header "$(echo -ne $OLDHEADER | eval $OPTARG)\n"
+                        print_body
+                        exit 1
+                        ;;
+                h)
+                        usage
+                        exit 1
+                        ;;
+        esac
+done
+
+get_header
+print_header $OLDHEADER
+```
+
+If no argument are provided, the header of the CSV file is printed:
+
+```{bash, eval=FALSE}
+$ < tips.csv | header
+bill,tip,sex,smoker,day,time,size
+```
+
+This is the same as `head -n 1`. If the header spans more than one row, which is not recommended, you can specify `-n 2`. We can also add a header to a CSV file:
+
+```{bash, eval=FALSE}
+$ seq 5 | header -a count
+count
+1
+2
+3
+4
+5
+```
+
+This is equivalent to `echo "count" | cat - <(seq 5)`. Deleting a header is done with the `-d` command-line argument:
+
+```{bash, eval=FALSE}
+$ < iris.csv | header -d | head
+5.1,3.5,1.4,0.2,Iris-setosa
+4.9,3.0,1.4,0.2,Iris-setosa
+4.7,3.2,1.3,0.2,Iris-setosa
+4.6,3.1,1.5,0.2,Iris-setosa
+5.0,3.6,1.4,0.2,Iris-setosa
+5.4,3.9,1.7,0.4,Iris-setosa
+4.6,3.4,1.4,0.3,Iris-setosa
+5.0,3.4,1.5,0.2,Iris-setosa
+4.4,2.9,1.4,0.2,Iris-setosa
+4.9,3.1,1.5,0.1,Iris-setosa
+```
+
+This is similar to `tail -n +2`, but it’s a bit easier to remember. Replacing a header, which is basically first deleting a header and then adding one if you look at the above source code, is accomplished with specifying `-r`. Here, we combine it with `body`:
+
+```{bash, eval=FALSE}
+$ seq 5 | header -a line | body wc -l | header -r count
+count
+5
+```
+
+And last but not least, we can apply a command to just the header, similar to what the `body` command-line tool does to the body:
+
+```{bash, eval=FALSE}
+$ seq 5 | header -a line | header -e "tr '[a-z]' '[A-Z]'"
+LINE
+1
+2
+3
+4
+5
+```
+
+The third command-line tool is called `cols`, which is similar to `header` and `body` in that it allows you to apply a certain command to only a subset of the columns. The code is as follows:
+
+```{bash, eval=FALSE}
+#!/usr/bin/env bash
+ARG="$1"
+shift
+COLUMNS="$1"
+shift
+EXPR="$@"
+DIRTMP=$(mktemp -d)
+mkfifo $DIRTMP/other_columns
+tee $DIRTMP/other_columns | csvcut $ARG $COLUMNS | ${EXPR} |
+paste -d, - <(csvcut ${ARG~~} $COLUMNS $DIRTMP/other_columns)
+rm -rf $DIRTMP
+```
+
+For example, if we wanted to uppercase the values in the day column in the tips data set (without affecting the other columns and the header), we would use `cols` in combination with `body`, as follows:
+
+```{bash, eval=FALSE}
+$ < tips.csv cols -c day body "tr '[a-z]' '[A-Z]'" | head -n 5 | csvlook -I
+|------+-------+------+--------+--------+--------+-------|
+|  day | bill  | tip  | sex    | smoker | time   | size  |
+|------+-------+------+--------+--------+--------+-------|
+|  SUN | 16.99 | 1.01 | Female | No     | Dinner | 2     |
+|  SUN | 10.34 | 1.66 | Male   | No     | Dinner | 3     |
+|  SUN | 21.01 | 3.5  | Male   | No     | Dinner | 3     |
+|  SUN | 23.68 | 3.31 | Male   | No     | Dinner | 2     |
+|------+-------+------+--------+--------+--------+-------|
+```
+
+Please note that passing multiple command-line tools and arguments as command to `header -e`, `body`, and `cols` can lead to tricky quoting citations. If you ever run in such problems, it is best to create a separate command-line tool for this and pass that as command.
+
+In conclusion, while it is generally preferable to use command-line tools which are specifically made for CSV data, `body`, `header`, and `cols` also allow you to apply the classic command-line tools to CSV files if needed.
+
+### Performing SQL Queries on CSV 
+
+In case the command-line tools mentioned in this chapter do not provide enough flexibility, then there is another approach to scrub your data from the command line. The command-line tool `csvsql` [@csvsql] allows you to execute SQL queries directly on CSV files. As you may know, SQL is a very powerful language to define operations for scrubbing data; it is a very different way than using individual command-line tools.
+
+```{block2, type="rmdnote"}
+
+If your data originally comes from a relational database, then, if possible, try to execute SQL queries on that database and subsequently extract the data as CSV. As discussed in Chapter 3, you can use the command-line tool `sql2csv` for this. When you first export data from the database to a CSV file, and then apply SQL, it is not only slower, but there is also a possibility that the column types are not correctly inferred from the CSV data.
+```
+
+In the scrubbing tasks below, we’ll include several solutions that involve `csvsql`. The basic command is this:
+
+```{bash, eval=FALSE}
+$ seq 5 | header -a value | csvsql --query "SELECT SUM(value) AS sum FROM stdin"
+sum
+15
+```
+
+If you pass standard input to `csvsql`, then the table is named *stdin*. The types of the column are automatically inferred from the data. As you will see later, in the combining CSV files section, you can also specify multiple CSV files. Please keep in mind that `csvsql` employs SQLite dialect. While SQL is generally more verbose than the other solutions, it is also much more flexible. If you already know how to tackle a scrubbing problem with SQL, then there’s no shame in using it from the command line!
+
+## Working with XML/HTML and JSON 
+
+As we have seen in Chapter 3, our obtained data can come in a variety of formats. The most common ones are plain text, CSV, JSON, and HTML/XML. In this section we are going to demonstrate a couple of command-line tools that can convert our data from one format to another. There are two reasons to convert data.
+
+First, oftentimes, the data needs to be in tabular form, just like a database table or a spreadsheet, because many visualization and machine learning algorithms depend on it. CSV is inherently in tabular form, but JSON and HTML/XML data can have a deeply nested structure.
+
+Second, many command-line tools, especially the classic ones such as `cut` and `grep`, operate on plain text. This is because text is regarded as a universal interface between command-line tools. Moreover, the other formats are simply younger. Each of these formats can be treated as plain text, allowing us to apply such command-line tools to the other formats as well.
+
+Sometimes we can get away with applying the classic tools to structured data. For example, by treating the JSON data below as plain text, we can change the attribute *gender* to *sex* using `sed`:
+
+    $ sed -e 's/"gender":/"sex":/g' data/users.json | fold | head -n 3
+
+Like many other command-line tools, `sed` does not make use of the structure of the data. Better is to either use a command-line tool that makes use of the structure of the data (such as `jq` which we discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.
+
+We’re going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case. The command-line tools that we’ll be using here are: `curl`, `scrape` [@scrape], `xml2json` [@xml2json], `jq` [@jq], and `json2csv` [@json2csv].
+
+Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets. For example, the page <http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio> contains a list of countries and territories together with their border length, their area, and the ration between the two.
+
+Let’s imagine that we’re interested in analyzing this data. In this section, we’ll walk you through all the necessary steps and their corresponding commands. We won’t go into every little detail, so it could be that you won’t understand everything right away. Don’t worry, we’re confident that you’ll get the gist of it. Remember that the purpose of this section is to demonstrate the command line. All tools and concepts used in this section (and more) will be explained in the subsequent chapters.
+
+The data set that we’re interested in, is embedded in HTML. Our goal is to end up with a representation of this data set that we can work with. The very first step is to download the HTML using `curl`:
+
+```{bash, eval=FALSE}
+$ curl -sL 'http://en.wikipedia.org/wiki/List_of_countries_and_territories_'\
+> 'by_border/area_ratio' > data/wiki.html
+```
+
+The option `-s` causes `curl` to be silent and not output any other information but the actual HTML. The HTML is saved to a file named `data/wiki.html`. Let’s see how the first 10 lines look like:
+
+```{bash, eval=FALSE}
+$ head -n 10 data/wiki.html | cut -c1-79
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<meta charset="UTF-8" /><title>List of countries and territories by border/area
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" /><meta name="generator" c
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="/w
+<link rel="edit" title="Edit this page" href="/w/index.php?title=List_of_countr
+<link rel="apple-touch-icon" href="//bits.wikimedia.org/apple-touch/wikipedia.p
+<link rel="shortcut icon" href="//bits.wikimedia.org/favicon/wikipedia.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opense
+```
+
+That seems to be in order. (Note that we’re only showing the first 79 characters of each line so that output fits on the page.)
+
+Using the developer tools of our browser, we were able to determine that the root HTML element that we’re interested in is a *&lt;table&gt;* with the class *wikitable*. This allows us to look at the part that we’re interest in using `grep` (the `-A` command-line argument specifies the number of lines we want to see after the matching line):
+
+```{bash, eval=FALSE}
+$ < data/wiki.html grep wikitable -A 21
+<table class="wikitable sortable">
+<tr>
+<th>Rank</th>
+<th>Country or territory</th>
+<th>Total length of land borders (km)</th>
+<th>Total surface area (kmÂ²)</th>
+<th>Border/area ratio (km/kmÂ²)</th>
+</tr>
+<tr>
+<td>1</td>
+<td>Vatican City</td>
+<td>3.2</td>
+<td>0.44</td>
+<td>7.2727273</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Monaco</td>
+<td>4.4</td>
+<td>2</td>
+<td>2.2000000</td>
+</tr>
+```
+
+We now actually see the countries and their values that we first saw in the screenshot. The next step is to extract the necessary elements from the HTML file. For this we use the `scrape` tool:
+
+```{bash, eval=FALSE}
+$ < data/wiki.html scrape -b -e 'table.wikitable > tr:not(:first-child)' \
+> > data/table.html
+$ head -n 21 data/table.html
+<!DOCTYPE html>
+<html>
+<body>
+<tr><td>1</td>
+<td>Vatican City</td>
+<td>3.2</td>
+<td>0.44</td>
+<td>7.2727273</td>
+</tr>
+<tr><td>2</td>
+<td>Monaco</td>
+<td>4.4</td>
+<td>2</td>
+<td>2.2000000</td>
+</tr>
+<tr><td>3</td>
+<td>San Marino</td>
+<td>39</td>
+<td>61</td>
+<td>0.6393443</td>
+</tr>
+```
+
+The value passed to argument `-e`, which stands for *expression* (also with many other command-line tools), is a so-called CSS-selector. The syntax is usually used to style web pages, but we can also use it to select certain elements from our HTML. In this case, we wish to select all *&lt;tr&gt;* elements or *rows* (except the first) that are part of a table which belongs to the *wikitable* class. This is precisely the table that we’re interested in. The reason that we don’t want the first row (specified by *:not(first-child)*) is that we don’t want the header of the table. This results in a data set where each row represents a country or territory. As you can see, we now have a *&lt;tr&gt;* elements that we’re looking for, encapsulated in *&lt;html&gt;\` and '&lt;body&gt;* elements (because we specified the `-b` argument). This ensures that our next tool, `xml2json`, can work with it.
+
+As its name implies, `xml2json` converts XML (and HTML) to JSON.
+
+```{bash, eval=FALSE}
+$ < data/table.html xml2json > data/table.json
+$ < data/table.json jq '.' | head -n 25
+{
+  "html": {
+    "body": {
+      "tr": [
+        {
+          "td": [
+            {
+              "$t": "1"
+            },
+            {
+              "$t": "Vatican City"
+            },
+            {
+              "$t": "3.2"
+            },
+            {
+              "$t": "0.44"
+            },
+            {
+              "$t": "7.2727273"
+            }
+          ]
+        },
+        {
+          "td": [
+```
+
+The reason we convert the HTML to JSON is because there is a very powerful tool called `jq` that operates on JSON data. The following command extracts certain parts of the JSON data and reshapes it into a form that we can work with:
+
+```{bash, eval=FALSE}
+$ < data/table.json jq -c '.html.body.tr[] | {country: .td[1][],border:'\
+> '.td[2][], surface: .td[3][]}' > data/countries.json
+$ head -n 10 data/countries.json
+{"surface":"0.44","border":"3.2","country":"Vatican City"}
+{"surface":"2","border":"4.4","country":"Monaco"}
+{"surface":"61","border":"39","country":"San Marino"}
+{"surface":"160","border":"76","country":"Liechtenstein"}
+{"surface":"34","border":"10.2","country":"Sint Maarten (Netherlands)"}
+{"surface":"468","border":"120.3","country":"Andorra"}
+{"surface":"6","border":"1.2","country":"Gibraltar (United Kingdom)"}
+{"surface":"54","border":"10.2","country":"Saint Martin (France)"}
+{"surface":"2586","border":"359","country":"Luxembourg"}
+{"surface":"6220","border":"466","country":"Palestinian territories"}
+```
+
+Now we’re getting somewhere. JSON is a very popular data format, with many advantages, but for our purposes, we’re better off with having the data in CSV format. The tool `json2csv` is able to convert the data from JSON to CSV:
+
+```{bash, eval=FALSE}
+$ < data/countries.json json2csv -p -k border,surface > data/countries.csv
+$ head -n 11 data/countries.csv | csvlook
+|---------+----------|
+|  border | surface  |
+|---------+----------|
+|  3.2    | 0.44     |
+|  4.4    | 2        |
+|  39     | 61       |
+|  76     | 160      |
+|  10.2   | 34       |
+|  120.3  | 468      |
+|  1.2    | 6        |
+|  10.2   | 54       |
+|  359    | 2586     |
+|  466    | 6220     |
+|---------+----------|
+```
+
+The data is now in a form that we can work with. Those were quite a few steps to get from a Wikipedia page to a CSV data set. However, when you combine all of the above commands into one, you will see that it’s actually really concise and expressive:
+
+```{bash, eval=FALSE}
+$ curl -sL 'http://en.wikipedia.org/wiki/List_of_countries'\
+> '_and_territories_by_border/area_ratio' |
+> scrape -be 'table.wikitable > tr:not(:first-child)' |
+> xml2json | jq -c '.html.body.tr[] | {country: .td[1][],'\
+> 'border: .td[2][], surface: .td[3][], ratio: .td[4][]}' |
+> json2csv -p -k=border,surface | head -n 11 | csvlook
+|---------+----------|
+|  border | surface  |
+|---------+----------|
+|  3.2    | 0.44     |
+|  4.4    | 2        |
+|  39     | 61       |
+|  76     | 160      |
+|  10.2   | 34       |
+|  120.3  | 468      |
+|  1.2    | 6        |
+|  10.2   | 54       |
+|  359    | 2586     |
+|  466    | 6220     |
+|---------+----------|
+```
+
+That concludes the demonstration of conversion XML/HTML to JSON to CSV. While `jq` can perform much more operations, and while there exist specialized tools to work with XML data, in our experience, converting the data to CSV format as quickly as possible tends to work well. This way, you can spend more time becoming proficient at generic command-line tools, rather than very specific tools.
+
+## Common Scrub Operations for CSV 
+
+### Extracting and Reordering Columns 
+
+Columns can be extracted and reordered using the command-line tool: `csvcut` [@csvcut]. For example, to keep only the columns in the Iris data set that contain numerical values *and* reorder the middle two columns:
+
+```{bash, eval=FALSE}
+$ < iris.csv csvcut -c sepal_length,petal_length,sepal_width,petal_width |
+> head -n 5 | csvlook
+|---------------+--------------+-------------+--------------|
+|  sepal_length | petal_length | sepal_width | petal_width  |
+|---------------+--------------+-------------+--------------|
+|  5.1          | 1.4          | 3.5         | 0.2          |
+|  4.9          | 1.4          | 3.0         | 0.2          |
+|  4.7          | 1.3          | 3.2         | 0.2          |
+|  4.6          | 1.5          | 3.1         | 0.2          |
+|---------------+--------------+-------------+--------------|
+```
+
+Alternatively, we can also specify the columns we want to leave out with `-C`, which stands for *complement*:
+
+```{bash, eval=FALSE}
+$ < iris.csv csvcut -C species | head -n 5 | csvlook
+|---------------+-------------+--------------+--------------|
+|  sepal_length | sepal_width | petal_length | petal_width  |
+|---------------+-------------+--------------+--------------|
+|  5.1          | 3.5         | 1.4          | 0.2          |
+|  4.9          | 3.0         | 1.4          | 0.2          |
+|  4.7          | 3.2         | 1.3          | 0.2          |
+|  4.6          | 3.1         | 1.5          | 0.2          |
+|---------------+-------------+--------------+--------------|
+```
+
+Here, the included columns are kept in the same order. Instead of the column names, you can also specify the indices of the columns, which start at 1. This allows you to, for example, select only the odd columns (should you ever need it!):
+
+```{bash, eval=FALSE}
+$ echo 'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9' |
+> csvcut -c $(seq 1 2 9 | paste -sd,)
+a,c,e,g,i
+1,3,5,7,9
+```
+
+If you’re certain that there are no comma’s in any of the values, then you can also use `cut` to extract columns. Be aware that `cut` does not reorder columns, as is demonstrated with the following command:
+
+```{bash, eval=FALSE}
+$ echo 'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9' | cut -d, -f 5,1,3
+a,c,e
+1,3,5
+```
+
+As you can see, it does not matter in which order we specify the columns with `-f`, with `cut` they will always appear in the original order. For completeness, let’s also take a look at the SQL approach for extracting and reordering the numerical columns of the Iris data set:
+
+```{bash, eval=FALSE}
+$ < iris.csv csvsql --query "SELECT sepal_length, petal_length, "\
+> "sepal_width, petal_width FROM stdin" | head -n 5 | csvlook
+|---------------+--------------+-------------+--------------|
+|  sepal_length | petal_length | sepal_width | petal_width  |
+|---------------+--------------+-------------+--------------|
+|  5.1          | 1.4          | 3.5         | 0.2          |
+|  4.9          | 1.4          | 3.0         | 0.2          |
+|  4.7          | 1.3          | 3.2         | 0.2          |
+|  4.6          | 1.5          | 3.1         | 0.2          |
+|---------------+--------------+-------------+--------------|
+```
+
+### Filtering Lines 
+
+The difference between filtering lines in a CSV file as opposed to a plain text file is that you may want to base this filtering on values in a certain column, only. Filtering on location is essentially the same, but you have to take into account that the first line of a CSV file is usually the header. Remember that you can always use the `body` command-line tool if you want to keep the header:
+
+```{bash, eval=FALSE}
+$ seq 5 | sed -n '3,5p'
+3
+4
+5
+$ seq 5 | header -a count | body sed -n '3,5p'
+count
+3
+4
+5
+```
+
+When it comes down to filtering on a certain pattern within a certain column, we can use either `csvgrep`, `awk`, or, of course, `csvsql`. For example, to exclude all the bills of which the party size was 4 or less:
+
+```{bash, eval=FALSE}
+$ csvgrep -c size -i -r "[1-4]" tips.csv | csvlook
+|--------+------+--------+--------+------+--------+-------|
+|  bill  | tip  | sex    | smoker | day  | time   | size  |
+|--------+------+--------+--------+------+--------+-------|
+|  29.8  | 4.2  | Female | No     | Thur | Lunch  | 6     |
+|  34.3  | 6.7  | Male   | No     | Thur | Lunch  | 6     |
+|  41.19 | 5.0  | Male   | No     | Thur | Lunch  | 5     |
+|  27.05 | 5.0  | Female | No     | Thur | Lunch  | 6     |
+|  29.85 | 5.14 | Female | No     | Sun  | Dinner | 5     |
+|  48.17 | 5.0  | Male   | No     | Sun  | Dinner | 6     |
+|  20.69 | 5.0  | Male   | No     | Sun  | Dinner | 5     |
+|  30.46 | 2.0  | Male   | Yes    | Sun  | Dinner | 5     |
+|  28.15 | 3.0  | Male   | Yes    | Sat  | Dinner | 5     |
+|--------+------+--------+--------+------+--------+-------|
+```
+
+Both `awk` and `csvsql` can also do numerical comparisons. For example, to get all the bills above 40 USD on a Saturday or a Sunday:
+
+```{bash, eval=FALSE}
+$ < tips.csv awk -F, '($1 > 40.0) && ($5 ~ /S/)' | csvlook -I
+|--------+------+--------+-----+-----+--------+----|
+|  48.27 | 6.73 | Male   | No  | Sat | Dinner | 4  |
+|--------+------+--------+-----+-----+--------+----|
+|  44.3  | 2.5  | Female | Yes | Sat | Dinner | 3  |
+|  48.17 | 5.0  | Male   | No  | Sun | Dinner | 6  |
+|  50.81 | 10.0 | Male   | Yes | Sat | Dinner | 3  |
+|  45.35 | 3.5  | Male   | Yes | Sun | Dinner | 3  |
+|  40.55 | 3.0  | Male   | Yes | Sun | Dinner | 2  |
+|  48.33 | 9.0  | Male   | No  | Sat | Dinner | 4  |
+|--------+------+--------+-----+-----+--------+----|
+```
+
+The `csvsql` solution is more verbose but is also more robust as it uses the names of the columns instead of their indexes:
+
+```{bash, eval=FALSE}
+$ < tips.csv csvsql --query "SELECT * FROM stdin "\
+> "WHERE bill > 40 AND day LIKE '%S%'" | csvlook -I
+|--------+------+--------+--------+-----+--------+-------|
+|  bill  | tip  | sex    | smoker | day | time   | size  |
+|--------+------+--------+--------+-----+--------+-------|
+|  48.27 | 6.73 | Male   | 0      | Sat | Dinner | 4     |
+|  44.3  | 2.5  | Female | 1      | Sat | Dinner | 3     |
+|  48.17 | 5.0  | Male   | 0      | Sun | Dinner | 6     |
+|  50.81 | 10.0 | Male   | 1      | Sat | Dinner | 3     |
+|  45.35 | 3.5  | Male   | 1      | Sun | Dinner | 3     |
+|  40.55 | 3.0  | Male   | 1      | Sun | Dinner | 2     |
+|  48.33 | 9.0  | Male   | 0      | Sat | Dinner | 4     |
+|--------+------+--------+--------+-----+--------+-------|
+```
+
+It should be noted that the flexibility of the *WHERE* clause in an SQL query cannot be easily matched with other command-line tools, as SQL can operate on dates and sets, and form complex combinations of clauses.
+
+### Merging Columns 
+
+Merging columns is useful for when the values of interest are spread over multiple columns. This may happen with dates (where year, month, and day could be separate columns) or names (where the first name and last name are separate columns). Let’s consider the second situation.
+
+The input CSV is a list of contemporary composers. Imagine our task is to combine the first name and the last name into a full name. We’ll present four different approaches for this task: `sed`, `awk`, `cols` + `tr`, and `csvsql`. Let’s have a look at the input CSV:
+
+```{bash, eval=FALSE}
+$ < names.csv csvlook -I
+|-----+-----------+------------+-------|
+|  id | last_name | first_name | born  |
+|-----+-----------+------------+-------|
+|  1  | Williams  | John       | 1932  |
+|  2  | Elfman    | Danny      | 1953  |
+|  3  | Horner    | James      | 1953  |
+|  4  | Shore     | Howard     | 1946  |
+|  5  | Zimmer    | Hans       | 1957  |
+|-----+-----------+------------+-------|
+```
+
+The first approach, `sed`, uses two statements. The first is to replace the header and the second is a regular expression with back references applied to the second row onwards:
+
+```{bash, eval=FALSE}
+$ < names.csv sed -re '1s/.*/id,full_name,born/g;'\
+> '2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | csvlook -I
+|-----+---------------+-------|
+|  id | full_name     | born  |
+|-----+---------------+-------|
+|  1  | John Williams | 1932  |
+|  2  | Danny Elfman  | 1953  |
+|  3  | James Horner  | 1953  |
+|  4  | Howard Shore  | 1946  |
+|  5  | Hans Zimmer   | 1957  |
+|-----+---------------+-------|
+```
+
+The `awk` approach looks as follows:
+
+```{bash, eval=FALSE}
+$ < names.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"}'\
+> '{if(NR > 1) {print $1,$3" "$2,$4}}' | csvlook -I
+|-----+---------------+-------|
+|  id | full_name     | born  |
+|-----+---------------+-------|
+|  1  | John Williams | 1932  |
+|  2  | Danny Elfman  | 1953  |
+|  3  | James Horner  | 1953  |
+|  4  | Howard Shore  | 1946  |
+|  5  | Hans Zimmer   | 1957  |
+|-----+---------------+-------|
+```
+
+The `cols` approach in combination with `tr`:
+
+```{bash, eval=FALSE}
+$ < names.csv | cols -c first_name,last_name tr \",\" \" \" |
+> header -r full_name,id,born | csvcut -c id,full_name,born | csvlook -I
+|-----+---------------+-------|
+|  id | full_name     | born  |
+|-----+---------------+-------|
+|  1  | John Williams | 1932  |
+|  2  | Danny Elfman  | 1953  |
+|  3  | James Horner  | 1953  |
+|  4  | Howard Shore  | 1946  |
+|  5  | Hans Zimmer   | 1957  |
+|-----+---------------+-------|
+```
+
+Please note that `csvsql` employ SQLite as the database to execute the query and that `||` stands for concatenation:
+
+```{bash, eval=FALSE}
+$ < names.csv csvsql --query "SELECT id, first_name || ' ' || last_name "\
+> "AS full_name, born FROM stdin" | csvlook -I
+|-----+-----------------------+-------|
+|  id | full_name             | born  |
+|-----+-----------------------+-------|
+|  1  | John Williams         | 1932  |
+|  2  | Danny Elfman          | 1953  |
+|  3  | James Horner          | 1953  |
+|  4  | Howard Shore          | 1946  |
+|  5  | Hans Zimmer           | 1957  |
+|-----+-----------------------+-------|
+```
+
+What if *last\_name* would contain a comma? Let’s have a look at the raw input CSV for clarity sake:
+
+```{bash, eval=FALSE}
+$ cat names-comma.csv
+id,last_name,first_name,born
+1,Williams,John,1932
+2,Elfman,Danny,1953
+3,Horner,James,1953
+4,Shore,Howard,1946
+5,Zimmer,Hans,1957
+6,"Beethoven, van",Ludwig,1770
+```
+
+Well, it appears that the first three approaches fail; all in different ways. Only `csvsql` is able to combine first\_name and full\_name:
+
+```{bash, eval=FALSE}
+$ < names-comma.csv sed -re '1s/.*/id,full_name,born/g;'\
+> '2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | tail -n 1
+6,"Beethoven,Ludwig  van",1770
+```
+
+```{bash, eval=FALSE}
+$ < names-comma.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"}'\
+> '{if(NR > 1) {print $1,$3" "$2,$4}}' | tail -n 1
+6, van" "Beethoven,Ludwig
+```
+
+```{bash, eval=FALSE}
+$ < names-comma.csv | cols -c first_name,last_name tr \",\" \" \" |
+> header -r full_name,id,born | csvcut -c id,full_name,born | tail -n 1
+6,"Ludwig ""Beethoven  van""",1770
+```
+
+```{bash, eval=FALSE}
+$ < names-comma.csv csvsql --query "SELECT id, first_name || ' ' || last_name"\
+> " AS full_name, born FROM stdin" | tail -n 1
+6,"Ludwig Beethoven, van",1770
+```
+
+```{bash, eval=FALSE}
+$ < names-comma.csv Rio -e 'df$full_name <- paste(df$first_name, df$last_name);'\
+> 'df[c("id","full_name","born")]' | tail -n 1
+6,"Ludwig Beethoven, van",1770
+```
+
+Wait a minute! What’s that last command? Is that R? Well, as a matter of fact, it is. It’s R code evaluated through a command-line tool called `Rio` [@Rio]. All that we can say at this moment, is that also this approach succeeds at merging the two columns. We’ll discuss this nifty command-line tool later.
+
+### Combining Multiple CSV Files 
+
+#### Concatenate Vertically 
+
+Vertical concatenation may be necessary in cases where you have, for example, a data set which is generated on a daily basis, or where each data set represents a different, say, market or product. Let’s simulate the latter by splitting up our beloved Iris data set into three CSV files, so that we have something to combine again. We’ll use `fieldsplit` [@fieldsplit], which is part of the `CRUSH` suite of command-line tools:
+
+```{bash, eval=FALSE}
+$ < iris.csv fieldsplit -d, -k -F species -p . -s .csv
+```
+
+Here, the command-line arguments specify: the delimiter (`-d`), that we want to keep the header in each file (`-k`), the column whose values dictate the possible output files (`-F`), the relative output path (`-p`), and the filename suffix (`-s`), respectively. Because the *species* column in the Iris data set contains three different values, we end up with three CSV files, each with 50 data points and a header:
+
+```{bash, eval=FALSE}
+$ wc -l Iris-*.csv
+  51 Iris-setosa.csv
+  51 Iris-versicolor.csv
+  51 Iris-virginica.csv
+ 153 total
+```
+
+You could just concatenate the files back using `cat` and removing the headers of all but the first file using `header -d` as follows:
+
+```{bash, eval=FALSE}
+$ cat Iris-setosa.csv <(< Iris-versicolor.csv header -d) \
+> <(< Iris-virginica.csv header -d) | sed -n '1p;49,54p' | csvlook
+|---------------+-------------+--------------+-------------+------------------|
+|  sepal_length | sepal_width | petal_length | petal_width | species          |
+|---------------+-------------+--------------+-------------+------------------|
+|  4.6          | 3.2         | 1.4          | 0.2         | Iris-setosa      |
+|  5.3          | 3.7         | 1.5          | 0.2         | Iris-setosa      |
+|  5.0          | 3.3         | 1.4          | 0.2         | Iris-setosa      |
+|  7.0          | 3.2         | 4.7          | 1.4         | Iris-versicolor  |
+|  6.4          | 3.2         | 4.5          | 1.5         | Iris-versicolor  |
+|  6.9          | 3.1         | 4.9          | 1.5         | Iris-versicolor  |
+|---------------+-------------+--------------+-------------+------------------|
+```
+
+Note that we’re merely using `sed` to only print the header and the first three body rows that belonged to the second file in order to illustrate success. While this method works, it’s easier (and less prone to errors) to use `csvstack` [@csvstack]:
+
+```{bash, eval=FALSE}
+$ csvstack Iris-*.csv | sed -n '1p;49,54p' | csvlook
+|---------------+-------------+--------------+-------------+------------------|
+|  sepal_length | sepal_width | petal_length | petal_width | species          |
+|---------------+-------------+--------------+-------------+------------------|
+|  4.6          | 3.2         | 1.4          | 0.2         | Iris-setosa      |
+|  5.3          | 3.7         | 1.5          | 0.2         | Iris-setosa      |
+|  5.0          | 3.3         | 1.4          | 0.2         | Iris-setosa      |
+|  7.0          | 3.2         | 4.7          | 1.4         | Iris-versicolor  |
+|  6.4          | 3.2         | 4.5          | 1.5         | Iris-versicolor  |
+|  6.9          | 3.1         | 4.9          | 1.5         | Iris-versicolor  |
+|---------------+-------------+--------------+-------------+------------------|
+```
+
+If the species column did not exist, you can create a new column based on the filename using `csvstack`:
+
+```{bash, eval=FALSE}
+$ csvstack Iris-*.csv -n species --filenames
+```
+
+Alternatively, you could specify the group names using `-g`:
+
+```{bash, eval=FALSE}
+$ csvstack Iris-*.csv -n class -g a,b,c | csvcut -C species |
+> sed -n '1p;49,54p' | csvlook
+|--------+--------------+-------------+--------------+--------------|
+|  class | sepal_length | sepal_width | petal_length | petal_width  |
+|--------+--------------+-------------+--------------+--------------|
+|  a     | 4.6          | 3.2         | 1.4          | 0.2          |
+|  a     | 5.3          | 3.7         | 1.5          | 0.2          |
+|  a     | 5.0          | 3.3         | 1.4          | 0.2          |
+|  b     | 7.0          | 3.2         | 4.7          | 1.4          |
+|  b     | 6.4          | 3.2         | 4.5          | 1.5          |
+|  b     | 6.9          | 3.1         | 4.9          | 1.5          |
+|--------+--------------+-------------+--------------+--------------|
+```
+
+The new column *class* is added at the front. If you’d like to change the order you can use `csvcut` as discussed earlier in this section.
+
+#### Concatenate Horizontally 
+
+Let’s say you have three CSV files that want to put side by side. We use `tee` [@tee] to save the result of `csvcut` in the middle of the pipeline:
+
+```{bash, eval=FALSE}
+$ < data/tips.csv csvcut -c bill,tip | tee data/bills.csv | head -n 3 | csvlook
+|--------+-------|
+|  bill  | tip   |
+|--------+-------|
+|  16.99 | 1.01  |
+|  10.34 | 1.66  |
+|--------+-------|
+$ < data/tips.csv csvcut -c day,time | tee data/datetime.csv |
+> head -n 3 | csvlook -I
+|------+---------|
+|  day | time    |
+|------+---------|
+|  Sun | Dinner  |
+|  Sun | Dinner  |
+|------+---------|
+$ < data/tips.csv csvcut -c sex,smoker,size | tee data/customers.csv |
+> head -n 3 | csvlook
+|---------+--------+-------|
+|  sex    | smoker | size  |
+|---------+--------+-------|
+|  Female | No     | 2     |
+|  Male   | No     | 3     |
+|---------+--------+-------|
+```
+
+Assuming that the rows line up, you can simply `paste` [@paste] the files together:
+
+```{bash, eval=FALSE}
+$ paste -d, data/{bills,customers,datetime}.csv | head -n 3 | csvlook -I
+|--------+------+--------+--------+------+-----+---------|
+|  bill  | tip  | sex    | smoker | size | day | time    |
+|--------+------+--------+--------+------+-----+---------|
+|  16.99 | 1.01 | Female | No     | 2    | Sun | Dinner  |
+|  10.34 | 1.66 | Male   | No     | 3    | Sun | Dinner  |
+|--------+------+--------+--------+------+-----+---------|
+```
+
+Here, the command-line argument `-d` instructs `paste` to use a comma as the delimiter.
+
+#### Joining 
+
+Sometimes data cannot simply by combined by vertical or horizontal concatenation. In some cases, especially in relational databases, the data is spread over multiple tables (or files) in order to minimize redundancy. Imagine we wanted to extend the Iris data set with more information about the three types of Iris flowers, namely the USDA identifier. It so happens that we have separate CSV file with these identifiers:
+
+```{bash, eval=FALSE}
+$ csvlook irismeta.csv
+|------------------+----------------------------------------------+----------|
+|  species         | wikipedia_url                                | usda_id  |
+|------------------+----------------------------------------------+----------|
+|  Iris-versicolor | http://en.wikipedia.org/wiki/Iris_versicolor | IRVE2    |
+|  Iris-virginica  | http://en.wikipedia.org/wiki/Iris_virginica  | IRVI     |
+|  Iris-setosa     |                                              | IRSE     |
+|------------------+----------------------------------------------+----------|
+```
+
+What this data set and the Iris data set have in common is the species column. We can use `csvjoin` [@csvjoin] to join the two data sets:
+
+```{bash, eval=FALSE}
+$ csvjoin -c species iris.csv irismeta.csv | csvcut -c sepal_length,\
+> sepal_width,species,usda_id | sed -n '1p;49,54p' | csvlook
+|---------------+-------------+-----------------+----------|
+|  sepal_length | sepal_width | species         | usda_id  |
+|---------------+-------------+-----------------+----------|
+|  4.6          | 3.2         | Iris-setosa     | IRSE     |
+|  5.3          | 3.7         | Iris-setosa     | IRSE     |
+|  5.0          | 3.3         | Iris-setosa     | IRSE     |
+|  7.0          | 3.2         | Iris-versicolor | IRVE2    |
+|  6.4          | 3.2         | Iris-versicolor | IRVE2    |
+|  6.9          | 3.1         | Iris-versicolor | IRVE2    |
+|---------------+-------------+-----------------+----------|
+```
+
+Of course we can also use the SQL approach using `csvsql`, which is, as per usual, a bit longer (but potentially much more flexible):
+
+```{bash, eval=FALSE}
+$ csvsql --query 'SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id '\
+> 'FROM iris i JOIN irismeta m ON (i.species = m.species)' \
+> iris.csv irismeta.csv | sed -n '1p;49,54p' | csvlook
+|---------------+-------------+-----------------+----------|
+|  sepal_length | sepal_width | species         | usda_id  |
+|---------------+-------------+-----------------+----------|
+|  4.6          | 3.2         | Iris-setosa     | IRSE     |
+|  5.3          | 3.7         | Iris-setosa     | IRSE     |
+|  5.0          | 3.3         | Iris-setosa     | IRSE     |
+|  7.0          | 3.2         | Iris-versicolor | IRVE2    |
+|  6.4          | 3.2         | Iris-versicolor | IRVE2    |
+|  6.9          | 3.1         | Iris-versicolor | IRVE2    |
+|---------------+-------------+-----------------+----------|
+```
+
+## Further Reading 
+
+* Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.
+* Goyvaerts, Jan, and Steven Levithan. 2012. <em>Regular Expressions Cookbook</em>. 2nd Ed. O’Reilly Media.
+* Dougherty, Dale, and Arnold Robbins. 1997. <em>Sed &amp; Awk</em>. 2nd Ed. O’Reilly Media.
+ 
+
+
+

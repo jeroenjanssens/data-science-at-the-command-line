@@ -1,0 +1,387 @@
+# Creating Reusable Command-line Tools {#chapter-4-creating-reusable-command-line-tools}
+
+Throughout the book, we use a lot of commands and pipelines that basically fit on one line. Let us call those one-liners. Being able to perform complex tasks with just a one-liner is what makes the command line powerful. It’s a very different experience from writing traditional programs.
+
+Some tasks you perform only once, and some you perform more often. Some tasks are very specific and others can be generalized. If you foresee or notice that you need to repeat a certain one-liner on a regular basis, it is worthwhile to turn this into a command-line tool of its own. So, both one-liners and command-line tools have their uses. Recognizing the opportunity requires practice and skill. The advantage of a command-line tool is that you do not have to remember the entire one-liner and that it improves readability if you include it into some other pipeline.
+
+The benefit of a working with a programming language, however, is that you have the code in a file. This means that you can easily reuse that code. If the code has parameters it can even be applied to problems that follow a similar pattern.
+
+Command-line tools have the best of both worlds: they can be used from the command line, accept parameters, and only have to be created once. In this chapter we’re going to get familiar creating reusable command-line tools in two ways. First, we explain to turn those one-liners into reusable command-line tools. By adding parameters to our commands, we can add the same flexibility that a programming language offers. Subsequently, we demonstrate how to create reusable command-line tools from code you have written in a programming language. By following the UNIX philosophy, your code can be combined with other command-line tools, which may be written in an entirely different language. We will focus on three programming languages: Python, R, and Java.
+
+We believe that creating reusable command-line tools makes you a more efficient and productive data scientist in the long run. You gradually build up your own data science toolbox from which you can draw existing tools and apply it to problems you have encountered previously. It requires practice in order to be able to recognize the opportunity to turn a one-liner or existing code into a command-line tool.
+
+In order to turn a one-liner into a shell script, we need to use some shell scripting. We shall only demonstrate the usefulness a small subset of concepts from shell scripting. This subset includes variables, conditionals, and loops. A complete course in shell scripting deserves a book on its own, and is therefore beyond the scope of this one. If you want to dive deeper into shell scripting, we recommend *Classic Shell Scripting* by @Robbins2005.
+
+## Overview 
+
+In this chapter, you’ll learn how to:
+
+- Convert one-liners into shell scripts.
+- Make existing Python, R, and Java code part of the command line.
+
+## Converting One-liners into Shell Scripts 
+
+In this section we are going to explain how to turn a one-liner into a reusable command-line tool. Imagine that we have the following one-liner:
+
+```{bash, eval=FALSE}
+$ curl -s http://www.gutenberg.org/files/76/76-0.txt |
+> tr '[:upper:]' '[:lower:]' | 
+> grep -oE '\w+' |             
+> sort |                       
+> uniq -c |                    
+> sort -nr |                   
+> head -n 10                   
+   6441 and
+   5082 the
+   3666 i
+   3258 a
+   3022 to
+   2567 it
+   2086 t
+   2044 was
+   1847 he
+   1778 of
+```
+
+In short, as you may have guessed from the output, this one-liner returns the top ten words of the e-book version of *Adventures of Huckleberry Finn*. It accomplishes this by:
+
+- Downloading an ebook using `curl`.
+- Converting the entire text to lowercase using `tr` [@tr].
+- Extracting all the words using `grep` [@grep] and put each word on separate line.
+- Sort these words in alphabetical order using `sort` [@sort].
+
+- Remove all the duplicates and count how often each word appears in the list using `uniq` [@uniq].
+- Sort this list of unique words by their count in descending order using `sort`.
+- Keep only the top 10 lines (i.e., words) using `head`.
+
+```{block2, type="rmdtip"}
+
+Each command-line tool used in this one-liner offers a man page. So in case you would like to know more about, say, `grep`, you can run `man grep` from the command line. The command-line tools `tr`, `grep`, `uniq`, and `sort` will be discussed in more detail in the next chapter.
+```
+
+There is nothing wrong with running this one-liner just once. However, imagine if we wanted to have the top 10 words of every e-book on Project Gutenberg. Or imagine that we wanted the top 10 words of a news website on a hourly basis. In those cases, it would be best to have this one-liner as a separate building block that can be part of something bigger. Because we want to add some flexibility to this one-liner in terms of parameters, we will turn it into a shell script.
+
+Because we use Bash as our shell, the script will be written in the programming language Bash. This allows us to take the one-liner as the starting point, and gradually improve on it. To turn this one-liner into a reusable command-line tool, we’ll walk you through the following six steps:
+
+1.  Copy and paste the one-liner into a file.
+
+2.  Add execute permissions.
+
+3.  Define a so-called shebang.
+
+4.  Remove the fixed input part.
+
+5.  Add a parameter.
+
+6.  Optionally extend your PATH.
+
+### Step 1: Copy and Paste 
+
+The first step is to create a new file. Open your favorite text editor and copy and paste our one-liner. We use name the file *top-words-1.sh* (The *1* stands for the first step towards our new command-line tool), and put it in the *\~/book/ch04* directory, but you may choose a different name and location. The contents of the file should look something like Example \@ref(exm:top-words-1).
+
+```{example top-words-1, name="~/book/ch04/top-words-1.sh"}
+```
+```{bash, eval=FALSE}
+curl -s http://www.gutenberg.org/files/76/76-0.txt |
+tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
+uniq -c | sort -nr | head -n 10
+```
+
+We are using the file extension *.sh* to make clear that we are creating a shell script. However, command-line tools do not need to have an extension. In fact, command-line tools rarely have extensions.
+
+```{block2, type="rmdtip"}
+
+Here is a nice little command-line trick. On the command-line, `!!` will be substituted with the previous command. So, if you realize you needed superuser privileges for the previous command, you can run `sudo !!` [@sudo]. And if you want to save the previous command into a file without have to copy and paste it, you can run `echo "!!" > scriptname`. Be sure to check the contents of the file *scriptname* for correctness before executing it because it may not always work when your command has quotes.
+```
+
+We can now use `bash` [@bash] to interpret and execute the commands in the file:
+
+```{bash, eval=FALSE}
+$ bash book/ch04/top-words-1.sh
+   6441 and
+   5082 the
+   3666 i
+   3258 a
+   3022 to
+   2567 it
+   2086 t
+   2044 was
+   1847 he
+   1778 of
+```
+
+This already saves us from typing the one-liner. Because the file cannot be executed on its own, it is not yet a true command-line tool. Let us change that in the next step.
+
+### Step 2: Add Permission to Execute 
+
+The reason we cannot execute our file directly is that we do not have the correct access permissions. In particular, you, as a user, need to have the permission to execute the file. In this section we change the access permissions of our file.
+
+```{block2, type="rmdnote"}
+
+In order to compare differences between steps, we copy the file to *top-words-2.sh* using `cp top-words-{1,2}.sh`. You can keep working with the same file if you want to.
+```
+
+To change the access permissions of a file, we need to use a command-line tool called `chmod` [@chmod], which stands for *change mode*. It changes the file mode bits of a specific file. The following command gives the user, you, the permission to execute *top-words-2.sh*:
+
+```{bash, eval=FALSE}
+$ cd ~/book/ch04/
+$ chmod u+x top-words-2.sh
+```
+
+The command-line argument `u+x` consists of three characters: (1) `u` indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) `+` indicates that we want to add a permission; and (3) `x`, which indicates the permissions to execute. Let us now have a look at the access permissions of both files:
+
+```{bash, eval=FALSE}
+$ ls -l top-words-{1,2}.sh
+-rw-rw-r-- 1 vagrant vagrant 145 Jul 20 23:33 top-words-1.sh
+-rwxrw-r-- 1 vagrant vagrant 143 Jul 20 23:34 top-words-2.sh
+```
+
+The first column shows the access permissions for each file. For *top-words-2.sh*, this is `-rwxrw-r--`. The first character `-` indicates the file type. A `-` means regular file and a `d` means directory. The next three characters `rwx` indicate the access permissions for the user who owns the file. The `r` and `w` mean read and write respectively. (As you can see, *top-words-1.sh* has a `-` instead of an `x`, which means that we cannot execute that file.) The next three characters `rw-` indicate the access permissions for all members of the group that owns the file. Finally, the last three characters in the column `r--` indicate access permissions for all other users.
+
+Now you can execute the file as follows:
+
+```{bash, eval=FALSE}
+$ book/ch04/top-words-2.sh
+   6441 and
+   5082 the
+   3666 i
+   3258 a
+   3022 to
+   2567 it
+   2086 t
+   2044 was
+   1847 he
+   1778 of
+```
+
+Note that if you’re ever in the same directory as the executable, you need to execute it as follows:
+
+```{bash, eval=FALSE}
+$ cd ~/book/ch04
+$ ./top-words-2.sh
+```
+
+If you try to execute a file for which you do not have the correct access permissions, as with *top-words-1.sh*, you will see the following error message:
+
+```{bash, eval=FALSE}
+$ ./top-words-1.sh
+bash: ./top-words-1.sh: Permission denied
+```
+
+### Step 3: Define Shebang 
+
+Although we can already execute the file on its own, we should add a so-called *shebang* to the file. The shebang is a special line in the script, which instructs the system which executable should be used to interpret the commands.
+
+In our case we want to use `bash` to interpret our commands. Example \@ref(exm:top-words-3) shows what the file *top-words-3.sh* looks like with a shebang. 
+
+```{example top-words-3, name="~/book/ch04/top-words-3.sh"}
+```
+```{bash, eval=FALSE}
+#!/usr/bin/env bash
+curl -s http://www.gutenberg.org/files/76/76-0.txt |
+tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
+uniq -c | sort -nr | head -n 10
+```
+
+The name shebang comes from the first two characters: a hash (she) and an exclamation mark (bang). It is not a good idea to leave it out, as we have done in the previous step, because then the behavior of the script is undefined. The Bash shell, which is the one that we are using, uses the executable */bin/sh* by default. Other shells may have different defaults.
+
+Sometimes you will come across scripts that have a shebang in the form of *!/usr/bin/bash* or *!/usr/bin/python* (in the case of Python, as we will see in the next section). While this generally works, if the `bash` or `python` [@python] executables are installed in a different location than */usr/bin*, then the script does not work anymore. It is better to use the form that we present here, namely *!/usr/bin/env bash* and *!/usr/bin/env python*, because the `env` [@env] executable is aware where `bash` and `python` are installed. In short, using `env` makes your scripts more portable.
+
+### Step 4: Remove Fixed Input 
+
+We know have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is `curl`, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.
+
+What if we wanted to obtain the top 10 most-used words from another e-book, or any other text for that matter? The input data is fixed within the tools itself. It would be better to separate the data from the command-line tool.
+
+If we assume that the user of the command-line tool will provide the text, it will become generally applicable. So, the solution is to simply remove the `curl` command from the script. See Example \@ref(exm:top-words-4) for the updated script named *top-words-4.sh*.
+
+```{example top-words-4, name="~/book/ch04/top-words-4.sh"}
+```
+```{bash, eval=FALSE}
+#!/usr/bin/env bash
+tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
+uniq -c | sort -nr | head -n 10
+```
+
+This works because if a script starts with a command that needs data from standard input, like `tr`, it will take the input that is given to the command-line tools. For example:
+
+    $ cat data/finn.txt | top-words-4.sh
+
+```{block2, type="rmdtip"}
+
+Although we have not done so in our script, the same principle holds for saving data. It is, in general, better to let the user take care of that. Of course, if you intend to use a command-line tool only for own projects, then there are no limits to how specific you can be.
+```
+
+### Step 5: Parametrize 
+
+There is one more step that we can perform in order to make our command-line tool even more reusable: parameters. In our command-line tool there are a number of fixed command-line arguments, for example `-nr` for `sort` and `-n 10` for `head`. It is probably best to keep the former argument fixed. However, it would be very useful to allow for different values for the `head` command. This would allow the end user to set the number of most-often used words to be outputted. Example \@ref(exm:top-words-5) shows what our file *top-words-5.sh* looks like if we parametrize `head`.
+
+```{example top-words-5, name="~/book/ch04/top-words-5.sh"}
+```
+```{bash, eval=FALSE}
+#!/usr/bin/env bash
+NUM_WORDS="$1"                                        
+tr '[:upper:]' '[:lower:]' | grep -oE '\w+' | sort |
+uniq -c | sort -nr | head -n $NUM_WORDS               
+```
+
+* The variable *NUM\_WORDS* is set to the value of *\$1*, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers.
+* Note that in order to use the value of the *\$NUM\_WORDS* variable, you need to put a dollar sign in front of it. When you set it, you do not write a dollar sign.
+
+```{block2, type="rmdtip"}
+
+We could have also used *\$1* directly as an argument for `head` and not bother creating an extra variable such *NUM\_WORDS*. However, with larger scripts and a few more command-line arguments such as *\$2* and *\$3*, the code becomes more readable when you use named variables.
+```
+
+Now if we wanted to see the top 5 most-used words of our text, we would invoke our command-line tool as follows:
+
+    $ cat data/finn.txt | top-words-5 5
+
+If the user does not provide an argument then `head` will return an error message, because the value of *\$1*, and therefore *\$NUM\_WORDS* will be an empty string.
+
+```{bash, eval=FALSE}
+$ cat data/finn.txt | top-words-5
+head: option requires an argument -- 'n'
+Try 'head --help' for more information.
+```
+
+### Step 6: Extend Your PATH 
+
+After the previous five steps we are finally finished building a reusable command-line tool. There is, however, one more step that can be very useful. In this optional step we are going to ensure that you can execute your command-line tools from everywhere.
+
+Currently, when you want to execute your command-line tool, you either have to navigate to the directory it is in or include the full path name as shown in step 2. This is fine if the command-line tool is specifically built for, say, a certain project. However, if your command-line tool could be applied in multiple situations, then it is useful to be able to execute form everywhere, just like the command-line tools that come with Ubuntu.
+
+To accomplish this, Bash needs to know where to look for your command-line tools. It does this by traversing a list of directories which are stored in an environment variable called *PATH*. In a fresh Data Science Toolbox, the *PATH* looks like this:
+
+    $ echo $PATH | fold
+
+The directories are delimited by colons. Here is the list of directories:
+
+    $ echo $PATH | tr ':' '\n'
+
+To change the *PATH* permanently, you’ll need to edit the *.bashrc* or *.profile* file located in your home directory. If you put all your custom command-line tools into one directory, say, *\~/tools*, then you only change the *PATH* once. As you can see, the Data Science Toolbox already has */home/vagrant/.bin* in its *PATH*. Now, you no longer need to add the *./*, but you can just use the filename. Moreover, you do no longer need to remember where the command-line tool is located.
+
+## Creating Command-line Tools with Python and R 
+
+The command-line tool that we created in the previous section was written in Bash. (Sure, not every feature of the Bash language was employed, but the interpreter still was `bash`.) As you may know by now, the command line is language agnostic, so we do not necessarily have to use Bash for creating command-line tools.
+
+In this section we are going demonstrate that command-line tools can be created in other programming languages as well. We will focus on Python and R because these are currently the two most popular programming languages within the data science community. We cannot offer a complete introduction to either language, so we assume that you have some familiarity with Python and or R. Programming languages such as Java, Go, and Julia, follow a similar pattern when it comes to creating command-line tools.
+
+There are three main reasons for creating command-line tools in a programming language instead of Bash. First, you may have existing code that you wish be able to use from the command line. Second, the command-line tool would end up encompassing more than a hundred lines of code. Third, the command-line tool needs to be very fast.
+
+The six steps that we discussed in the previous section roughly apply to creating command-line tools in other programming languages as well. The first step, however, would not be copy pasting from the command line, but rather copy pasting the relevant code into a new file. Command-line tools in Python and R need to specify `python` [@python] and `Rscript` [@R], respectively, as the interpreter after the shebang.
+
+When it comes to creating command-line tools using Python and R, there are two more aspects that deserve special attention, which will be discuss below. First, processing standard input, which comes natural to shell scripts, has to be taken care of explicitly in Python and R. Second, as command-line tools written in Python and R tend to be more complex, we may also want to offer the user the ability to specify more complex command-line arguments.
+
+### Porting The Shell Script 
+
+As a starting point, let’s see how we would port the prior shell script to both Python and R. In other words, what Python and R code gives us the top most-often used words from standard input? It is not important whether implementing this task in anything else than a shell programming language is a good idea. What matters is that it gives us a good opportunity to compare Bash with Python and R.
+
+We will first show the two files *top-words.py* and *top-words.R* and then discuss the differences with the shell code. In Python, the code could would look something like Example \@ref(exm:top-words-py).
+
+```{example top-words-py, name="~/book/ch04/top-words.py"}
+```
+```{python, eval=FALSE, python.reticulate = FALSE}
+#!/usr/bin/env python
+import re
+import sys
+from collections import Counter
+num_words = int(sys.argv[1])
+text = sys.stdin.read().lower()
+words = re.split('\W+', text)
+cnt = Counter(words)
+for word, count in cnt.most_common(num_words):
+    print "%7d %s" % (count, word)
+```
+
+```{block2, type="rmdnote"}
+
+Example
+\@ref(exm:top-words-py)
+ uses pure Python. When you want to do advanced text processing we recommend you check out the NLTK package [@Perkins2010]. If you are going to work with a lot of numerical data, then we recommend you use the Pandas package [@McKinney2012].
+```
+
+And in R, the code would look something like Example \@ref(exm:top-words-5) (thanks to Hadley Wickham):
+
+```{example top-words-5, name="~/book/ch04/top-words.R"}
+```
+```{r, eval=FALSE}
+#!/usr/bin/env Rscript
+n <- as.integer(commandArgs(trailingOnly = TRUE))
+f <- file("stdin")
+lines <- readLines(f)
+words <- tolower(unlist(strsplit(lines, "\\W+")))
+counts <- sort(table(words), decreasing = TRUE)
+counts_n <- counts[1:n]
+cat(sprintf("%7d %s\n", counts_n, names(counts_n)), sep = "")
+close(f)
+```
+
+Let’s check that all three implementations (i.e., Bash, Python, and R) return the same top 5 words with the same counts:
+
+```{bash, eval=FALSE}
+$ < data/76.txt top-words.sh 5
+   6441 and
+   5082 the
+   3666 i
+   3258 a
+   3022 to
+$ < data/76.txt top-words.py 5
+   6441 and
+   5082 the
+   3666 i
+   3258 a
+   3022 to
+$ < data/76.txt top-words.R 5
+   6441 and
+   5082 the
+   3666 i
+   3258 a
+   3022 to
+```
+
+Wonderful! Sure, the output itself is not very exciting. What is exciting is the observation that we can accomplish the same task with multiple approaches. Let’s have a look at the differences between the approaches.
+
+First, what’s immediately obvious is the difference in amount of code. For this specific task, both Python and R require much more code than Bash. This illustrates that, for some tasks, it is better to use the command line. For other tasks, you may better off using a programming language. As you gain more experience on the command-line, you will start to recognize when to use which approach. When everything is a command-line tool, you can even split up the task into subtasks, and combine a Bash command-line tool with a, say, Python command-line tool. Whichever approach works best for the task at hand.
+
+### Processing Streaming Data from Standard Input 
+
+In the previous two code snippets, both Python and R read the complete standard input at once. On the command line, most command-line tools pipe data to the next command-line tool in a streaming fashion. (There are a few command-line tools which require the complete data before they write any data to standard output, like `sort` and `awk` [@awk].) This means the pipeline is blocked by such command-line tools. This does not have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.
+
+Luckily Python and R support processing streaming data. You can apply a function on a line-per-line basis, for example. Example \@ref(exm:stream-py) and Example \@ref(exm:stream-r) are two minimal examples that demonstrate how this works in Python and R, respectively.
+
+```{example stream-py, name="~/book/ch04/stream.py"}
+```
+```{python, eval=FALSE, python.reticulate = FALSE}
+#!/usr/bin/env python
+from sys import stdin, stdout
+while True:
+    line = stdin.readline()
+    if not line:
+        break
+    stdout.write("%d\n" % int(line)**2)
+    stdout.flush()
+```
+
+```{example stream-r, name="~/book/ch04/stream.R"}
+```
+```{r, eval=FALSE}
+#!/usr/bin/env Rscript
+f <- file("stdin")
+open(f)
+while(length(line <- readLines(f, n = 1)) > 0) {
+        write(as.integer(line)^2, stdout())
+}
+close(f)
+```
+
+## Further Reading 
+
+* Docopt. 2014. “Command-Line Interface Description Language.” <a href="http://docopt.org" class="uri">http://docopt.org</a>.
+* Robbins, Arnold, and Nelson H. F. Beebe. 2005. <em>Classic Shell Scripting</em>. O’Reilly Media.
+* Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.
+* Perkins, Jacob. 2010. <em>Python Text Processing with Nltk 2.0 Cookbook</em>. Packt Publishing.
+* McKinney, Wes. 2012. <em>Python for Data Analysis</em>. O’Reilly Media.
+* Rossant, Cyrille. 2013. <em>Learning Ipython for Interactive Computing and Data Visualization</em>. Packt Publishing.
+* Wirzenius, Lars. 2013. “Writing Manual Pages.” <a href="http://liw.fi/manpages/" class="uri">http://liw.fi/manpages/</a>.
+* Raymond, Eric Steven. 2014. “Basics of the Unix Philosophy.” <a href="http://www.faqs.org/docs/artu/ch01s06.html" class="uri">http://www.faqs.org/docs/artu/ch01s06.html</a>.

@@ -1,0 +1,24 @@
+bookdown::gitbook:
+  css: style.css
+  split_bib: no
+  keep_md: yes
+  citation_package: natbib
+  includes:
+    in_header: [favicon.html, google_analytics.html]
+  config:
+    fontsettings:
+      theme: white
+      family: serif
+      size: 2
+    sharing:
+      facebook: no
+      twitter: no
+    toc:
+      collapse: section
+      before: |
+        <li><a href="./">Data Science at the Command Line</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit:
+      link: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/%s
+      text: "Edit"

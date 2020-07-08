@@ -1,0 +1,331 @@
+# Managing Your Data Workflow {#chapter-6-managing-your-data-workflow}
+
+We hope that by now, you have come to appreciate that the command line is a very convenient environment for exploratory data analysis. You may have noticed that, as a consequence of working with the command line, we:
+
+- Invoke many different commands.
+- Create custom command-line tools.
+- Obtain and generate many (intermediate) files.
+
+As this process is of an exploratory nature, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done. It is very important that our steps can be reproduced, whether that is by ourselves or by others. When we, for example, continue with a project from a few weeks earlier, chances are that we have forgotten which commands we have ran, on which files, in which order, and with which parameters. Imagine the difficulty passing on your analysis to a collaborator.
+
+You may recover some lost commands by digging into your Bash history, but this is, of course, not a good approach. A better approach would be to save your commands to a shell script *run.sh*. This allows you and your collaborators to at least reproduce the analysis. A shell script is, however, a sub-optimal approach because:
+
+- It is difficult to read and to maintain.
+- Dependencies between steps are unclear.
+- Every step gets executed every time, which is inefficient and sometimes undesirable.
+
+This is where Drake comes in handy [@drake]. Drake is command-line tool created by Factual that allows you to:
+
+- Formalize your data workflow steps in terms of input and output dependencies.
+- Run specific steps of your workflow from the command line.
+- Use inline code.
+- Store and retrieve data from external sources.
+
+## Overview 
+
+Managing your data workflow with Drake is the main topic of this chapter. As such, you’ll learn about:
+
+- Defining your workflow with a so-called Drakefile.
+- Thinking about your workflow in terms of input and output dependencies.
+- Build specific targets.
+
+## Introducing Drake 
+
+Drake organizes command execution around data and its dependencies. Your data processing steps are formalized in a separate text file (a workflow). Each step usually has one or more inputs and outputs. Drake automatically resolves their dependencies and determines which commands need to be run and in which order.
+
+This means that when you have, say, an SQL query that takes ten minutes, it only has to be executed when the result is missing or when the query has changed afterwards. Also, if want to (re-)run a specific step, Drake only considers to (re-)run the steps on which it depends. This can save you a lot of time.
+
+The benefit of having a formalized workflow allows you to pick up easily your project after a few weeks and to collaborate with others. We strongly advise you to do this, even when you think this will be a one-off project, because you’ll never know when to run certain steps again, or when you want to reuse certain steps in another project.
+
+## Installing Drake 
+
+Drake has quite a few dependencies, which makes its installation process rather involved. For the following instructions we assume that you are on Ubuntu.
+
+```{block2, type="rmdtip"}
+
+If you’re using the Data Science Toolbox, then you already have Drake installed, and you may safely skip this section.
+```
+
+Drake is written in the programming language Clojure which means that it runs on the Java Virtual Machine (JVM). There are pre-built jars available but because Drake is in active development, we will build it from source. For this, you will need to install Leiningen.
+
+```{bash, eval=FALSE}
+$ sudo apt-get install openjdk-6-jdk
+$ sudo apt-get install leiningen
+```
+
+Then, clone the Drake repository from Factual:
+
+```{bash, eval=FALSE}
+$ git clone https://github.com/Factual/drake.git
+```
+
+And build the uberjar using Leiningen:
+
+```{bash, eval=FALSE}
+$ cd drake
+$ lein uberjar
+```
+
+This creates *drake.jar*. Copy this file to a directory which is on your *\$PATH*, for example, *\~/bin*:
+
+```{bash, eval=FALSE}
+$ mv drake.jar ~/bin/
+```
+
+At this point you should already be able to run Drake:
+
+```{bash, eval=FALSE}
+$ cd ~/bin/
+$ java -jar drake.jar
+```
+
+This is not really convenient for two reasons: (1) the Java Virtual Machine (JVM) takes a long time to start and (2) you can only run it from that directory. We advise you to install Drip, which is a launcher for the JVM that provides much faster startup times than the `java` command. First, clone the Drip repository from Flatland:
+
+```{bash, eval=FALSE}
+$ git clone https://github.com/flatland/drip.git
+$ cd drip
+$ make prefix=~/bin install
+```
+
+Then, create a Bash script that allows you to run Drake from everywhere:
+
+```{bash, eval=FALSE}
+$ cd ~/bin
+$ cat << 'EOF' > drake
+> #!/bin/bash
+> drip -cp $(dirname $0)/drake.jar drake.core "$@"
+> EOF
+$ chmod +x drake
+```
+
+To verify that you have correctly installed both Drake and Drip, you can run the following command, preferably from a different directory:
+
+```{bash, eval=FALSE}
+$ drake --version
+Drake Version 0.1.6
+```
+
+```{block2, type="rmdnote"}
+
+Drip speeds up Java because it reserves an instance of the JVM, after it has been run once. Because of this, you will only notice the speed up from the second time onwards.
+```
+
+## Obtain Top E-books from Project Gutenberg 
+
+For the remainder of this chapter, we’ll use the following task as a running example. Our goal is to turn the command that we use to solve this task into a Drake workflow. We start out simple, and work our way towards an advanced workflow in order to explain to you the various concepts and syntax of Drake.
+
+Project Gutenberg is an ambitious project that, since 1971, has archived and digitized over 42,000 books and offers these as free e-books. On its website you can find the top hundred most downloaded books. Let’s assume that we are interested in the top five downloads of Project Gutenberg. Because this list is available in HTML it is straightforward to obtain the top five downloads:
+
+```{bash, eval=FALSE}
+$ curl -s 'http://www.gutenberg.org/browse/scores/top' |  
+> grep -E '^<li>' |                                       
+> head -n 5 |                                             
+> sed -E "s/.*ebooks\/([0-9]+).*/\\1/" > data/top-5       
+```
+
+This command:
+
+- Downloads the HTML.
+- Extracts the list items.
+- Keeps only the top five items.
+- Saves e-book IDs to *data/top-5*.
+
+The output of the command is:
+
+```{bash, eval=FALSE}
+$ cat data/top-5
+1342
+76
+11
+1661
+1952
+```
+
+If you want to be able to reproduce this, that is, once again at a later time, the easiest thing you can do is put this command in a script as we’ve seen in [Chapter 4](#chapter-4-creating-reusable-command-line-tools). If you execute this script again, the HTML will be downloaded again as well. There are three common reasons why you might want to be able to control whether certain steps are run. First, because this step may take a very long time. Second, because you want to continue with the same data. Third, the data may come from an API which has certain rate limits. It would be a good idea to let one step save the data to a file and then let subsequent steps operate on that file so that you don’t have to make any redundant computations or API calls. Now, the first reason is not really a problem in our example because the HTML can be downloaded fast enough. However, in some cases the data may come from other sources and may comprise of gigabytes of data.
+
+## Every Workflow Starts with a Single Step 
+
+In this section we’ll convert the above command into a Drake workflow. A workflow is just a text file. You’d usually name this file *Drakefile* because Drake uses that file if no other file is specified at the command line. A workflow with just a single step would look like Example \@ref(exm:drakefile).
+
+```{example drakefile, name="A workflow with just a single stip"}
+```
+```
+top-5 <-                                                    
+    curl -s 'http://www.gutenberg.org/browse/scores/top' |  
+    grep -E '^<li>' |                                       
+    head -n 5 |                                             
+    sed -E "s/.*ebooks\/([0-9]+).*/\\1/" > top-5            
+```
+
+Let’s go through this file. The first line, which contains the arrow pointing to the left, is our step definition. The left side of this arrow, which says *top-5*, is the name or output of this step. Any inputs to this step would appear on the right side of this arrow, but since this step has no input, it’s empty. Defining inputs and outputs is what allows Drake to recognize the dependencies between steps, and to figure out whether and when which steps need to be executed in order to fulfill a certain output. This output is also known as a target. As you can see, the body of this step is literally our command from before but then indented.
+
+- The arrow (*←*) denotes the name of the step and its dependencies. More on this later.
+- The body is indented.
+- Select only list items.
+- Get the first five items.
+- Extract the id, and save to file *top-5*. Note that *top-5* was already specified in the step definition and that *5* has now been used three times. We are going to address that later.
+
+This workflow is as simple as it gets. It doesn’t offer any advantages over having our command in a Bash script. But don’t worry, we promise you that it will get more exciting. For now, let’s run Drake and see what it does with our first workflow:
+
+```{bash, eval=FALSE}
+$ drake
+The following steps will be run, in order:
+  1: top-5 <-  [missing output]
+Confirm? [y/n] y
+Running 1 steps with concurrence of 1...
+
+--- 0. Running (missing output): top-5 <-
+--- 0: top-5 <-  -> done in 0.35s
+Done (1 steps run).
+```
+
+If we do not specify any specific workflow file, then Drake will use *./Drakefile*. Drake first determines which steps need to be run. In our case, the one and only step will be run because it’s missing the output. This means that there’s no file named *data/top-5*. Drake asks for confirmation before it will execute these steps. We press `y`, and very soon thereafter we see that Drake is done. Drake did not complain about any errors in our steps. Let’s verify that we have the top five books by looking at the output file *data/top-5*:
+
+```{bash, eval=FALSE}
+$ cat data/top-5
+1342
+76
+11
+1661
+1952
+```
+
+Now we do have the output file. Let’s run Drake again:
+
+```{bash, eval=FALSE}
+$ drake
+The following steps will be run, in order:
+  1: top-5 <-  [no-input step]
+Confirm? [y/n] n
+Aborted.
+```
+
+As you can see, Drake wants to execute the step again! However, now mentions a different reason, namely, that there is no input step *\[no-input-step\]*. Its default behavior is to check whether the input has changed by looking at the timestamp of the input. However, since we didn’t specify any input, Drake doesn’t know whether or not this step should be run again. We can disable this default behavior to check timestamps as follows:
+
+```
+top-5 <- [-timecheck]
+    curl -s 'http://www.gutenberg.org/browse/scores/top' |
+    grep -E '^<li>' |
+    head -n 5 |
+    sed -E "s/.*ebooks\/([0-9]+)\">([^<]+)<.*/\\1,\\2/" > top-5
+```
+
+The square brackets around *\[-timecheck\]* indicate that this is an option to the step. The minus (*-*) means that we wish to disable checking timestamps. Now, this step is only run when the output is missing.
+
+We’re going to use different filenames so that we keep old versions. We can specify a different workflow name (other than *Drakefile*) with the `-w` option. Let’s run Drake once more:
+
+```{bash, eval=FALSE}
+$ mv Drakefile 01.drake
+$ drake -w 01.drake
+Nothing to do.
+```
+
+Our very first workflow is already saving us time because Drake detects that the step was not required to be executed again. However, we can do much better than this. This workflow has three shortcomings that we’re going to address in the next section.
+
+## Well, That Depends 
+
+Our workflow contains just a single step, which means that, just like having a simple Bash script, everything will be executed all the time. So the first thing we are going to do is to split up this single step into two steps, where the first step downloads the HTML, and the second step processes this HTML. The second step obviously depends on the first step. We can define this dependency in our workflow.
+
+You may have noticed that the number 5 is specified three times. If you ever wanted to get the top, say, top 10 e-books from Project Gutenberg, we would have to change our workflow in three places. This is inefficient and needs to be addressed. Luckily, Drake supports variables.
+
+It may not be immediately obvious from our workflow, but our data resides in the same location as the script. It is better to have the data live in a separate location and have it separated from any code that generates this data. Not only does it keep our project cleaner, it also allows us to delete the generated data files easier, and we can easily specify that we do not like the data files to be included in any version control system such as `git` [@git]. Let’s have a look:
+
+```
+NUM:=5                                                              
+BASE=data/                                                          
+
+top.html <- [-timecheck]
+    curl -s 'http://www.gutenberg.org/browse/scores/top' > $OUTPUT  
+
+top-$[NUM] <- top.html                                              
+    < $INPUT grep -E '^<li>' |
+    head -n $[NUM] |
+    sed -E "s/.*ebooks\/([0-9]+)\">([^<]+)<.*/\\1,\\2/" > $OUTPUT
+```
+
+- You can specify variables in Drake, preferably at the beginning of the file, by specifying the variable name, then an equal sign, and then the value. The name of the variable doesn’t have to be in all capitals, but it does make them stand out more. As you can see, we have used for the variable *NUM* the *:=* instead of *=*. This means that if the variable *NUM* is already set, it will not be overridden. This allows us to specify the value of *NUM* from the command line before we run Drake.
+- The *BASE* variable is a special variable. Drake will treat every file specified in the workflow as if it were in this base directory.
+- We now have two steps. The first step has the same input as before, but now the output is a different file, namely, *top.html*. This output is defined again as the input of step two. This is how Drake knows that the second step depends on the first step.
+- We have used two more special variables: *INPUT* and *OUTPUT*. Values of these two special variables are set to what we have defined as the input and output of that step, respectively. This way, we don’t have to specify the input and output of a certain step twice. Furthermore, it allows us to easily reuse certain steps in any future workflows.
+
+Let’s execute this new workflow using Drake:
+
+```{bash, eval=FALSE}
+$ drake -w 02.drake
+The following steps will be run, in order:
+  1: ../../data/top.html <-  [missing output]
+  2: ../../data/top-5 <- ../../data/top.html [projected timestamped]
+Confirm? [y/n] y
+Running 2 steps with concurrence of 1...
+
+--- 0. Running (missing output): ../../data/top.html <-
+--- 0: ../../data/top.html <-  -> done in 0.89s
+--- 1. Running (missing output): ../../data/top-5 <- ../../data/top.html
+--- 1: ../../data/top-5 <- ../../data/top.html -> done in 0.02s
+Done (2 steps run).
+```
+
+Now, let’s assume that we want instead of the top 5 e-books, the top 10 e-books. We can set the *NUM* variable from the command line and run Drake again:
+
+```{bash, eval=FALSE}
+$ NUM=10 drake -w 02.drake
+The following steps will be run, in order:
+  1: ../../data/top-10 <- ../../data/top.html [missing output]
+Confirm? [y/n] y
+Running 1 steps with concurrence of 1...
+
+--- 1. Running (missing output): ../../data/top-10 <- ../../data/top.html
+--- 1: ../../data/top-10 <- ../../data/top.html -> done in 0.02s
+Done (1 steps run).
+```
+
+As you can see, Drake now only needs to execute the second step, because the output of the first step has already been satisfied. Again, downloading an HTML file is not such a big deal, but can you imagine the implications if you were dealing with 10 GB worth of data?
+
+## Rebuilding Certain Targets 
+
+The list of the top 100 e-books on project Gutenberg changes daily. We’ve seen that if we run the Drake workflow again then the HTML containing this list is not being downloaded again. Luckily, Drake allows us to run certain steps again, so that we can update this HTML file:
+
+```{bash, eval=FALSE}
+$ drake -w 02.drake '=top.html'
+```
+
+There is a more convenient way than using the output filename to specify which step you want to execute again. We can add so-called *tags* to both the input and output of steps. A tag starts with a "%". It is a good idea to choose a short and descriptive tag name so that you can easily specify this at the command line. Let’s add the tag *%html* to the first step and *%filter* to the second step:
+
+```
+NUM:=5
+BASE=data/
+
+top.html, %html <- [-timecheck]
+    curl -s 'http://www.gutenberg.org/browse/scores/top' > $OUTPUT
+
+top-$[NUM], %filter <- top.html
+    < $INPUT grep -E '^<li>' |
+    head -n $[NUM] |
+    sed -E "s/.*ebooks\/([0-9]+)\">([^<]+)<.*/\\1,\\2/" > $OUTPUT
+```
+
+We can now rebuild the first step by specifying the *%html* tag:
+
+```{bash, eval=FALSE}
+$ drake -w 03.drake '=%html'
+```
+
+## Discussion 
+
+One of the beauties of the command line is that allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It is therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.
+
+We have shown you that just putting every command in one bash script is suboptimal. We have proposed to use Drake as a command-line tool to manage your data workflow. By using a running example, we have shown you how to define steps and the dependencies between them. We’ve also discussed how to use variables and tags.
+
+There’s nothing more fun than just playing with your data and forget everything else. But you have to trust us when we say that it’s worthwhile to keep a record of what you have done by means of a Drake workflow. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time. It makes you more efficient over time, the same holds for Drake workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. We hope that you will get used to Drake, and that it will make your life easier.
+
+We’ve only been able to scratch the surface with Drake. Some of its more advanced features are:
+
+- Asynchronous execution of steps.
+- Support for inline Python and R code.
+- Upload and download data from HDFS S3.
+
+## Further Reading 
+
+* Factual. 2014. “Drake.” <a href="https://github.com/Factual/drake" class="uri">https://github.com/Factual/drake</a>.
+
+
