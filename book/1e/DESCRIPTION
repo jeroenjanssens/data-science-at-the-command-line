@@ -1,5 +1,5 @@
 Package: data-science-at-the-command-line
-Title: Data Science at the Command Line
+Title: Data Science at the Command Line, 1e
 Version: 1.0.0.9000
 Authors@R: person("Jeroen", "Janssens", email = "jeroen@datascienceworkshops.com", role = c("aut", "cre"))
 Depends: R (>= 3.3.0)

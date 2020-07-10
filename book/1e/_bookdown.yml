@@ -1,11 +1,10 @@
 book_filename: "book"
 repo: https://github.com/jeroenjanssens/data-science-at-the-command-line
-output_dir: "../../www/static/1e/"
+output_dir: "../../www/static/1e"
 link-citations: true
 language:
   ui:
     chapter_name: "Chapter "
     edit: "Edit"
-
 new_session: yes
 before_chapter_script: "_common.R"

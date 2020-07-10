@@ -16,7 +16,7 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Data Science at the Command Line</a></li>
+        <li><a href="./">Data Science at the Command Line, 1e</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit:

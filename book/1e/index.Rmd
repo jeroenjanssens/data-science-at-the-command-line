@@ -1,5 +1,5 @@
 --- 
-title: "Data Science at the Command Line"
+title: "Data Science at the Command Line, 1e"
 author: "Jeroen Janssens"
 date: "`r gsub(' 0', ' ', format(Sys.Date(), '%B %d, %Y'))`"
 site: bookdown::bookdown_site
@@ -13,8 +13,6 @@ description: "This hands-on guide demonstrates how the flexibility of the comman
 cover-image: "images/cover.png"
 github-repo: "jeroenjanssens/data-science-at-the-command-line"
 ---
-
-
 
 # Welcome {-}
 
