@@ -1,7 +1,10 @@
 .DS_Store
 .Rproj.user
-docs/*.md
-_book_output
 .netlify
 .Rhistory
-node_modules
+
+docs/*.md
+_book_output
+
+www/node_modules
+www/public

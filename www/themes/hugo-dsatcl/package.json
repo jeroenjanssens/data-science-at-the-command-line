@@ -1,0 +1,26 @@
+{
+    "name": "hugo-theme-tailwindcss-starter",
+    "version": "0.1.1",
+    "description": "Starter files for a Hugo theme with Tailwindcss",
+    "main": "index.js",
+    "repository": "https://github.com/dirkolbrich/hugo-theme-tailwindcss-starter",
+    "author": "dirkolbrich <github@dirkolbrich.de>",
+    "license": "MIT",
+    "scripts": {
+        "start": "hugo --gc"
+    },
+    "devDependencies": {
+        "@fullhuman/postcss-purgecss": "^2.1.0",
+        "autoprefixer": "^9.7.4",
+        "postcss": "^7.0.27",
+        "postcss-cli": "^7.1.0",
+        "postcss-import": "^12.0.1",
+        "tailwindcss": "^1.2.0"
+    },
+    "browserslist": [
+        "last 1 version",
+        "> 1%",
+        "maintained node versions",
+        "not dead"
+    ]
+}

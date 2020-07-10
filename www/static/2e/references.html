@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>References | Data Science at the Command Line, 2e</title>
+  <meta name="description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="References | Data Science at the Command Line, 2e" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="github-repo" content="jeroenjanssens/data-science-at-the-command-line" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="References | Data Science at the Command Line, 2e" />
+  
+  <meta name="twitter:description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Jeroen Janssens" />
+
+
+<meta name="date" content="2020-07-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-10-conclusion.html"/>
+
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line, 2e</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#docker-image"><i class="fa fa-check"></i><b>2.2</b> Installing the Docker Image</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-relational-databases"><i class="fa fa-check"></i><b>3.5</b> Querying Relational Databases</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="/1e">Read first edition instead.</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line, 2e</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="references" class="section level1 unnumbered" number="">
+<h1>References</h1>
+
+<div id="refs" class="references hanging-indent">
+<div id="ref-unrar">
+<p>Asselstine, Ben, Christian Scheurer, and Johannes Winkelmann. 2014. “Unrar.” <a href="http://home.gna.org/unrar">http://home.gna.org/unrar</a>.</p>
+</div>
+<div id="ref-tar">
+<p>Bailey, Jeff, Paul Eggert, and Sergey Poznyakoff. 2014. “Tar.” <a href="http://www.gnu.org/software/tar">http://www.gnu.org/software/tar</a>.</p>
+</div>
+<div id="ref-tree">
+<p>Baker, Steve. 2014. “Tree.” <a href="https://launchpad.net/ubuntu/+source/tree">https://launchpad.net/ubuntu/+source/tree</a>.</p>
+</div>
+<div id="ref-bigmler">
+<p>BigML. 2014. “BigMLer.” <a href="http://bigmler.readthedocs.org">http://bigmler.readthedocs.org</a>.</p>
+</div>
+<div id="ref-awk">
+<p>Brennan, Mike. 1994. “Mawk.” <a href="http://invisible-island.net/mawk">http://invisible-island.net/mawk</a>.</p>
+</div>
+<div id="ref-unpack">
+<p>Brisbin, Patrick. 2013. “Unpack.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-Cooper2014">
+<p>Cooper, Mendel. 2014. “Advanced Bash-Scripting Guide.” <a href="http://www.tldp.org/LDP/abs/html">http://www.tldp.org/LDP/abs/html</a>.</p>
+</div>
+<div id="ref-Cortez2009">
+<p>Cortez, P., A. Cerdeira, F. Almeida, T. Matos, and J. Reis. 2009. “Modeling Wine Preferences by Data Mining from Physicochemical Properties.” <em>Decision Support Systems</em> 47 (4): 547–53.</p>
+</div>
+<div id="ref-json2csv">
+<p>Czebotar, Jehiah. 2014. “Json2Csv.” <a href="https://github.com/jehiah/json2csv">https://github.com/jehiah/json2csv</a>.</p>
+</div>
+<div id="ref-docopt">
+<p>Docopt. 2014. “Command-Line Interface Description Language.” <a href="http://docopt.org">http://docopt.org</a>.</p>
+</div>
+<div id="ref-jq">
+<p>Dolan, Stephen. 2014. “Jq.” <a href="http://stedolan.github.com/jq">http://stedolan.github.com/jq</a>.</p>
+</div>
+<div id="ref-Dougherty1997">
+<p>Dougherty, Dale, and Arnold Robbins. 1997. <em>Sed &amp; Awk</em>. 2nd Ed. O’Reilly Media.</p>
+</div>
+<div id="ref-seq">
+<p>Drepper, Ulrich. 2012. “Seq.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-man">
+<p>Eaton, John W., and Colin Watson. 2014. “Man.”</p>
+</div>
+<div id="ref-shuf">
+<p>Eggert, Paul. 2012. “Shuf.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-drake">
+<p>Factual. 2014. “Drake.” <a href="https://github.com/Factual/drake">https://github.com/Factual/drake</a>.</p>
+</div>
+<div id="ref-sed">
+<p>Fenlason, Jay, Tom Lord, Ken Pizzini, and Paolo Bonzini. 2012. “Sed.” <a href="http://www.gnu.org/software/sed">http://www.gnu.org/software/sed</a>.</p>
+</div>
+<div id="ref-curlicue">
+<p>Foster, Decklin. 2014. “Curlicue.” <a href="https://github.com/decklin/curlicue">https://github.com/decklin/curlicue</a>.</p>
+</div>
+<div id="ref-bash">
+<p>Fox, Brian, and Chet Ramey. 2010. “Bash.” <a href="http://www.gnu.org/software/bash">http://www.gnu.org/software/bash</a>.</p>
+</div>
+<div id="ref-Goyvaerts2012">
+<p>Goyvaerts, Jan, and Steven Levithan. 2012. <em>Regular Expressions Cookbook</em>. 2nd Ed. O’Reilly Media.</p>
+</div>
+<div id="ref-cp">
+<p>Granlund, Torbjorn, David MacKenzie, and Jim Meyering. 2012. “Cp.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-cat">
+<p>Granlund, Torbjorn, and Richard M. Stallman. 2012a. “Cat.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-split">
+<p>———. 2012b. “Split.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-csvstat">
+<p>Groskopf, Christopher. 2014a. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-in2csv">
+<p>———. 2014b. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-sql2csv">
+<p>———. 2014c. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-csvlook">
+<p>———. 2014d. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-csvgrep">
+<p>———. 2014e. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-csvsql">
+<p>———. 2014f. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-csvcut">
+<p>———. 2014g. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-csvstack">
+<p>———. 2014h. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-csvjoin">
+<p>———. 2014i. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-csvsort">
+<p>———. 2014j. “Csvkit.” <a href="http://csvkit.readthedocs.org">http://csvkit.readthedocs.org</a>.</p>
+</div>
+<div id="ref-sort">
+<p>Haertel, Mike, and Paul Eggert. 2012. “Sort.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-Hall2009">
+<p>Hall, Mark, Eibe Frank, Geoffrey Holmes, Bernhard Pfahringer, Peter Reutemann, and Ian H. Witten. 2009. “The WEKA Data Mining Software: An Update.” <em>SIGKDD Explorations</em> 11 (1).</p>
+</div>
+<div id="ref-Heddings2006">
+<p>Heddings, Lowell. 2006. “Keyboard Shortcuts for Bash.” <a href="http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc">http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc</a>.</p>
+</div>
+<div id="ref-fieldsplit">
+<p>Hinds, Jeremy, Jason Gessner, Jim Renwick, Norman Gocke, Rodofo Granata, and Tobias Wolff. 2010. “Fieldsplit.” <a href="http://code.google.com/p/crush-tools">http://code.google.com/p/crush-tools</a>.</p>
+</div>
+<div id="ref-paste">
+<p>Ihnat, David M., and David MacKenzie. 2012. “Paste.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-cut">
+<p>Ihnat, David M., David MacKenzie, and Jim Meyering. 2012. “Cut.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-Janert2009">
+<p>Janert, Philipp K. 2009. <em>Gnuplot in Action</em>. Manning Publications.</p>
+</div>
+<div id="ref-body">
+<p>Janssens, Jeroen H. M. 2014a. “Body.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-cols">
+<p>———. 2014b. “Cols.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-header">
+<p>———. 2014c. “Header.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-pbc">
+<p>———. 2014d. “Pbc.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-Rio">
+<p>———. 2014e. “Rio.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-sample">
+<p>———. 2014f. “Sample.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-scrape">
+<p>———. 2014g. “Scrape.” <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>.</p>
+</div>
+<div id="ref-feedgnuplot">
+<p>Kogan, Dima. 2014. “Feedgnuplot.” <a href="http://search.cpan.org/perldoc?feedgnuplot">http://search.cpan.org/perldoc?feedgnuplot</a>.</p>
+</div>
+<div id="ref-Lisitsyn2013">
+<p>Lisitsyn, Sergey, Christian Widmer, and Fernando J. Iglesias Garcia. 2013. “Tapkee: An Efficient Dimension Reduction Library.” <em>Journal of Machine Learning Research</em> 14: 2355–9.</p>
+</div>
+<div id="ref-display">
+<p>LLC, ImageMagick Studio. 2009. “Display.” <a href="http://www.imagemagick.org">http://www.imagemagick.org</a>.</p>
+</div>
+<div id="ref-van2008visualizing">
+<p>Maaten, Laurens van der, and Geoffrey Everest Hinton. 2008. “Visualizing Data Using T-SNE.” <em>Journal of Machine Learning Research</em> 9: 2579–2605.</p>
+</div>
+<div id="ref-mkdir">
+<p>MacKenzie, David. 2012. “Mkdir.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-chmod">
+<p>MacKenzie, David, and Jim Meyering. 2012a. “Chmod.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-head">
+<p>———. 2012b. “Head.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-Mason2010">
+<p>Mason, Hilary, and Chris H. Wiggins. 2010. “A Taxonomy of Data Science.” <a href="http://www.dataists.com/2010/09/a-taxonomy-of-data-science">http://www.dataists.com/2010/09/a-taxonomy-of-data-science</a>.</p>
+</div>
+<div id="ref-McKinney2012">
+<p>McKinney, Wes. 2012. <em>Python for Data Analysis</em>. O’Reilly Media.</p>
+</div>
+<div id="ref-grep">
+<p>Meyering, Jim. 2012a. “Grep.” <a href="http://www.gnu.org/software/grep">http://www.gnu.org/software/grep</a>.</p>
+</div>
+<div id="ref-pwd">
+<p>———. 2012b. “Pwd.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-tr">
+<p>———. 2012c. “Tr.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-sudo">
+<p>Miller, Todd C. 2013. “Sudo.” <a href="http://www.sudo.ws/sudo">http://www.sudo.ws/sudo</a>.</p>
+</div>
+<div id="ref-env">
+<p>Mlynarik, Richard, and David MacKenzie. 2012. “Env.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-Molinaro2005">
+<p>Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.</p>
+</div>
+<div id="ref-bc">
+<p>Nelson, Philip A. 2006. “Bc.” <a href="http://www.gnu.org/software/bc">http://www.gnu.org/software/bc</a>.</p>
+</div>
+<div id="ref-less">
+<p>Nudelman, Mark. 2013. “Less.” <a href="http://www.greenwoodsoftware.com/less">http://www.greenwoodsoftware.com/less</a>.</p>
+</div>
+<div id="ref-mv">
+<p>Parker, Mike, David MacKenzie, and Jim Meyering. 2012. “Mv.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-tee">
+<p>Parker, Mike, Richard M. Stallman, and David MacKenzie. 2012. “Tee.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-xml2json">
+<p>Parmentier, Francois. 2014. “Xml2Json.” <a href="https://github.com/parmentf/xml2json">https://github.com/parmentf/xml2json</a>.</p>
+</div>
+<div id="ref-Patil2012">
+<p>Patil, DJ. 2012. <em>Data Jujitsu</em>. O’Reilly Media.</p>
+</div>
+<div id="ref-Pearson1901">
+<p>Pearson, K. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2 (11): 559–72.</p>
+</div>
+<div id="ref-Peek2002">
+<p>Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.</p>
+</div>
+<div id="ref-Perkins2010">
+<p>Perkins, Jacob. 2010. <em>Python Text Processing with Nltk 2.0 Cookbook</em>. Packt Publishing.</p>
+</div>
+<div id="ref-pip">
+<p>PyPA. 2014. “Pip.” <a href="https://pip.pypa.io">https://pip.pypa.io</a>.</p>
+</div>
+<div id="ref-python">
+<p>Python Software Foundation. 2014. “Python.” <a href="http://www.python.org">http://www.python.org</a>.</p>
+</div>
+<div id="ref-Raymond2003">
+<p>Raymond, Eric Steven. 2014. “Basics of the Unix Philosophy.” <a href="http://www.faqs.org/docs/artu/ch01s06.html">http://www.faqs.org/docs/artu/ch01s06.html</a>.</p>
+</div>
+<div id="ref-R">
+<p>R Foundation for Statistical Computing. 2014. “R.” <a href="http://www.r-project.org">http://www.r-project.org</a>.</p>
+</div>
+<div id="ref-scp">
+<p>Rinne, Timo, and Tatu Ylonen. 2014. “Scp.” <a href="http://www.openssh.com">http://www.openssh.com</a>.</p>
+</div>
+<div id="ref-Robbins2005">
+<p>Robbins, Arnold, and Nelson H. F. Beebe. 2005. <em>Classic Shell Scripting</em>. O’Reilly Media.</p>
+</div>
+<div id="ref-Rossant2013">
+<p>Rossant, Cyrille. 2013. <em>Learning Ipython for Interactive Computing and Data Visualization</em>. Packt Publishing.</p>
+</div>
+<div id="ref-wc">
+<p>Rubin, Paul, and David MacKenzie. 2012. “Wc.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-rm">
+<p>Rubin, Paul, David MacKenzie, Richard M. Stallman, and Jim Meyering. 2012. “Rm.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-tail">
+<p>Rubin, Paul, David MacKenzie, Ian Lance Taylor, and Jim Meyering. 2012. “Tail.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-Russell2013">
+<p>Russell, Matthew. 2013. <em>Mining the Social Web</em>. 2nd Ed. O’Reilly Media.</p>
+</div>
+<div id="ref-Schutt2013">
+<p>Schutt, Rachel, and Cathy O’Neil. 2013. <em>Doing Data Science</em>. O’Reilly Media.</p>
+</div>
+<div id="ref-aws">
+<p>Services, Amazon Web. 2014. “AWS Command Line Interface.” <a href="http://aws.amazon.com/cli">http://aws.amazon.com/cli</a>.</p>
+</div>
+<div id="ref-Shron2014">
+<p>Shron, Max. 2014. <em>Thinking with Data</em>. O’Reilly Media.</p>
+</div>
+<div id="ref-unzip">
+<p>Smith, Samuel H. 2009. “Unzip.” <a href="http://www.info-zip.org/pub/infozip">http://www.info-zip.org/pub/infozip</a>.</p>
+</div>
+<div id="ref-ls">
+<p>Stallman, Richard M., and David MacKenzie. 2012a. “Ls.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-uniq">
+<p>———. 2012b. “Uniq.” <a href="http://www.gnu.org/software/coreutils">http://www.gnu.org/software/coreutils</a>.</p>
+</div>
+<div id="ref-curl">
+<p>Stenberg, Daniel. 2012. “CURL.” <a href="http://curl.haxx.se">http://curl.haxx.se</a>.</p>
+</div>
+<div id="ref-Tange2011a">
+<p>Tange, O. 2011. “GNU Parallel - the Command-Line Power Tool.”<em>;Login: The USENIX Magazine</em> 36 (1): 42–47. <a href="http://www.gnu.org/s/parallel">http://www.gnu.org/s/parallel</a>.</p>
+</div>
+<div id="ref-parallel">
+<p>Tange, Ole. 2014. “GNU Parallel.” <a href="http://www.gnu.org/software/parallel">http://www.gnu.org/software/parallel</a>.</p>
+</div>
+<div id="ref-git">
+<p>Torvalds, Linus, and Junio C. Hamano. 2014. “Git.” <a href="http://git-scm.com">http://git-scm.com</a>.</p>
+</div>
+<div id="ref-Tukey1977">
+<p>Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Pearson.</p>
+</div>
+<div id="ref-Warden2011">
+<p>Warden, Pete. 2011. <em>Data Source Handbook</em>. O’Reilly Media.</p>
+</div>
+<div id="ref-Wickham2009">
+<p>Wickham, Hadley. 2009. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.</p>
+</div>
+<div id="ref-HTTP">
+<p>Wikipedia. 2014. “List of Http Status Codes.” <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">http://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a>.</p>
+</div>
+<div id="ref-commandlinefu">
+<p>Winterbottom, David. 2014. “Commandlinefu.com.” <a href="http://www.commandlinefu.com">http://www.commandlinefu.com</a>.</p>
+</div>
+<div id="ref-manpages">
+<p>Wirzenius, Lars. 2013. “Writing Manual Pages.” <a href="http://liw.fi/manpages/">http://liw.fi/manpages/</a>.</p>
+</div>
+<div id="ref-find">
+<p>Youngman, James. 2008. “Find.” <a href="http://www.gnu.org/software/findutils">http://www.gnu.org/software/findutils</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-10-conclusion.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/12-references.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

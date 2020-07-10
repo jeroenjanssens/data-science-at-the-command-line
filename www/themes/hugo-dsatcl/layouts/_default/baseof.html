@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+  <head>
+{{ partial "head.html" . }}  </head>
+  <body class="screen:min-h-screen screen:flex screen:flex-col screen:text-gray-700 text-sm sm:text-base print:text-lg">
+{{ partial "header.html" . }}    <main class="screen:flex-1 mx-8 sm:mx-12 md:mx-16 lg:mx-20 xl:mx-24">
+      {{ block "main" . }}{{- end }}
+    </main>
+{{ partial "footer.html" . }}  </body>
+</html>

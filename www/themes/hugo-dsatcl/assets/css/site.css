@@ -1,0 +1,74 @@
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  line-height: 0.9;
+  @apply inline-block;
+  width: 16ex;
+}
+
+h2 {
+  @apply mb-4;
+}
+
+h2::after {
+  content: '.';
+  @apply text-red-600;
+}
+
+main ul li {
+  padding-left: 1.5rem;
+}
+
+main ul li::before {
+  content: "\25CF";
+  color: theme('colors.red.600');
+  width: 1.25rem;
+  display: inline-block;
+  margin-left: -1.25rem;
+}
+
+main li {
+  @apply mb-2;
+}
+
+main a {
+  @apply text-red-600 underline;
+}
+
+main a:hover {
+  @apply no-underline;
+}
+
+main a:visited {
+  @apply text-purple-600;
+}
+
+footer a {
+  @apply underline;
+}
+
+footer a:hover {
+  @apply no-underline;
+}
+
+main p {
+  @apply leading-relaxed pb-4;
+}
+
+@media print {
+  main a[href]:after {
+    content:" (" attr(href) ")";
+  }
+
+  main a:visited {
+    @apply text-blue-600 border-blue-600;
+  }
+
+  main p {
+    @apply text-left;
+  }
+}

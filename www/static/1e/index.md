@@ -1,0 +1,67 @@
+--- 
+title: "Data Science at the Command Line, 1e"
+author: "Jeroen Janssens"
+date: "July 9, 2020"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [library.bib, tools.bib]
+biblio-style: apalike
+nocite: | 
+  @Schutt2013, @Peek2002, @Heddings2006, @Molinaro2005, @HTTP, @docopt, @Rossant2013, @manpages, @Raymond2003, @Goyvaerts2012, @Dougherty1997, @Tange2011a, @Cortez2009, @commandlinefu, @Cooper2014, @Russell2013, @Warden2011
+link-citations: yes
+description: "This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data."
+cover-image: "images/cover.png"
+github-repo: "jeroenjanssens/data-science-at-the-command-line"
+---
+
+# Welcome {-}
+
+This is the website for *Data Science at the Command Line*, published by O'Reilly October 2014 First Edition. This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data.
+
+To get you started---whether you’re on Windows, macOS, or Linux---author [Jeroen Janssens](https://twitter.com/jeroenhjanssens) has developed a [Docker image](https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line) packed with over 80 command-line tools.
+
+Discover why the command line is an agile, scalable, and extensible technology. Even if you’re already comfortable processing data with, say, Python or R, you’ll greatly improve your data science workflow by also leveraging the power of the command line.
+
+
+<img src="images/cover.png" width="349px" class="cover" />
+
+
+* Obtain data from websites, APIs, databases, and spreadsheets
+* Perform scrub operations on text, CSV, HTML/XML, and JSON
+* Explore data, compute descriptive statistics, and create visualizations
+* Manage your data science workflow
+* Create reusable command-line tools from one-liners and existing Python or R code
+* Parallelize and distribute data-intensive pipelines
+* Model data with dimensionality reduction, clustering, regression, and classification algorithms
+
+
+> The Unix philosophy of simple tools, each doing one job well, then cleverly piped together, is embodied by the command line. Jeroen expertly discusses how to bring that philosophy into your work in data science, illustrating how the command line is not only the world of file input/output, but also the world of data manipulation, exploration, and even modeling.
+>
+> **---Chris H. Wiggins**
+>
+> Associate Professor in the Department of Applied Physics and Applied Mathematics at Columbia University and Chief Data Scientist at *The New York Times*
+
+> This book explains how to integrate common data science tasks into a coherent workflow. It's not just about tactics for breaking down problems, it's also about strategies for assembling the pieces of the solution.
+>
+> **---John D. Cook**
+>
+> Consultant in applied mathematics, statistics, and technical computing
+
+
+If you find this content useful, please consider supporting the work by either:
+
+* Sponsoring the author on [GitHub Sponsors](https://github.com/sponsors/jeroenjanssens/).
+* Buying the book on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [bol.com](https://www.bol.com/nl/p/data-science-at-the-command-line/9200000031673818).
+* Writing a review on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Time-Tested/dp/1491947853) or [Goodreads](https://www.goodreads.com/book/show/22967424-data-science-at-the-command-line).
+* Starring the [Github repository](https://github.com/jeroenjanssens/data-science-at-the-command-line) or [Docker image](https://hub.docker.com/u/datascienceworkshops/).
+
+This work is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nd/4.0/).
+
+<a href="https://datascienceworkshops.com">
+<img src="images/data-science-workshops.svg" width="350px" style="display: block; margin: auto;" />
+</a>
+
+Did you know that the author provides training about this topic and other topics such as R and Python? If you and your colleagues would like to learn from Jeroen in person, please contact [Data Science Workshops B.V.](https://www.datascienceworkshops.com) for more information.
+
+
+

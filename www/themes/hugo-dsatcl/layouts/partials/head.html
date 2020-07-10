@@ -1,0 +1,54 @@
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ block "title" . }}
+    {{- .Site.Title -}}
+    {{ end }}</title>
+    <meta name="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
+    <meta itemprop="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
+    <meta name="author" content="{{ $.Site.Params.author }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    {{ if .Site.IsServer -}}
+    {{ with resources.Get "css/styles.css" | postCSS (dict "config" "./assets/css/dev/postcss.config.js") }}<style>{{ .Content | safeCSS }}</style>{{ end }}
+    {{- else -}}
+    {{ with resources.Get "css/styles.css" | postCSS (dict "config" "./assets/css/postcss.config.js") | minify }}<style>{{ .Content | safeCSS }}</style>{{ end }}
+    {{- end }}
+    <meta property="og:title" content="{{- .Site.Title -}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{- .Site.BaseURL -}}" />
+    <meta property="og:description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
+    <meta property="og:site_name" content="{{- .Site.Title -}}" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://www.datascienceatthecommandline.com/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@jeroenhjanssens" />
+    <meta name="twitter:creator" content="@jeroenhjanssens" />
+    <meta name="twitter:image" content="https://www.datascienceatthecommandline.com/twitter.jpg" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://www.datascienceatthecommandline.com/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://www.datascienceatthecommandline.com/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://www.datascienceatthecommandline.com/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.datascienceatthecommandline.com/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://www.datascienceatthecommandline.com/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://www.datascienceatthecommandline.com/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://www.datascienceatthecommandline.com/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://www.datascienceatthecommandline.com/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="https://www.datascienceatthecommandline.com/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="https://www.datascienceatthecommandline.com/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="https://www.datascienceatthecommandline.com/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="https://www.datascienceatthecommandline.com/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="https://www.datascienceatthecommandline.com/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="Data Science at the Command Line"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="https://www.datascienceatthecommandline.com/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="https://www.datascienceatthecommandline.com/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="https://www.datascienceatthecommandline.com/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="https://www.datascienceatthecommandline.com/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="https://www.datascienceatthecommandline.com/mstile-310x310.png" />
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script>

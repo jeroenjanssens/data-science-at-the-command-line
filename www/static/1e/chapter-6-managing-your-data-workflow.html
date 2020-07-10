@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Managing Your Data Workflow | Data Science at the Command Line, 1e</title>
+  <meta name="description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Managing Your Data Workflow | Data Science at the Command Line, 1e" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="github-repo" content="jeroenjanssens/data-science-at-the-command-line" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Managing Your Data Workflow | Data Science at the Command Line, 1e" />
+  
+  <meta name="twitter:description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Jeroen Janssens" />
+
+
+<meta name="date" content="2020-07-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-5-scrubbing-data.html"/>
+<link rel="next" href="chapter-7-exploring-data.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line, 1e</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#docker-image"><i class="fa fa-check"></i><b>2.2</b> Installing the Docker Image</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-relational-databases"><i class="fa fa-check"></i><b>3.5</b> Querying Relational Databases</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line, 1e</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-6-managing-your-data-workflow" class="section level1" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Managing Your Data Workflow</h1>
+<p>We hope that by now, you have come to appreciate that the command line is a very convenient environment for exploratory data analysis. You may have noticed that, as a consequence of working with the command line, we:</p>
+<ul>
+<li>Invoke many different commands.</li>
+<li>Create custom command-line tools.</li>
+<li>Obtain and generate many (intermediate) files.</li>
+</ul>
+<p>As this process is of an exploratory nature, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done. It is very important that our steps can be reproduced, whether that is by ourselves or by others. When we, for example, continue with a project from a few weeks earlier, chances are that we have forgotten which commands we have ran, on which files, in which order, and with which parameters. Imagine the difficulty passing on your analysis to a collaborator.</p>
+<p>You may recover some lost commands by digging into your Bash history, but this is, of course, not a good approach. A better approach would be to save your commands to a shell script <em>run.sh</em>. This allows you and your collaborators to at least reproduce the analysis. A shell script is, however, a sub-optimal approach because:</p>
+<ul>
+<li>It is difficult to read and to maintain.</li>
+<li>Dependencies between steps are unclear.</li>
+<li>Every step gets executed every time, which is inefficient and sometimes undesirable.</li>
+</ul>
+<p>This is where Drake comes in handy <span class="citation">(Factual <a href="references.html#ref-drake" role="doc-biblioref">2014</a>)</span>. Drake is command-line tool created by Factual that allows you to:</p>
+<ul>
+<li>Formalize your data workflow steps in terms of input and output dependencies.</li>
+<li>Run specific steps of your workflow from the command line.</li>
+<li>Use inline code.</li>
+<li>Store and retrieve data from external sources.</li>
+</ul>
+<div id="overview" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Overview</h2>
+<p>Managing your data workflow with Drake is the main topic of this chapter. As such, you’ll learn about:</p>
+<ul>
+<li>Defining your workflow with a so-called Drakefile.</li>
+<li>Thinking about your workflow in terms of input and output dependencies.</li>
+<li>Build specific targets.</li>
+</ul>
+</div>
+<div id="introducing-drake" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Introducing Drake</h2>
+<p>Drake organizes command execution around data and its dependencies. Your data processing steps are formalized in a separate text file (a workflow). Each step usually has one or more inputs and outputs. Drake automatically resolves their dependencies and determines which commands need to be run and in which order.</p>
+<p>This means that when you have, say, an SQL query that takes ten minutes, it only has to be executed when the result is missing or when the query has changed afterwards. Also, if want to (re-)run a specific step, Drake only considers to (re-)run the steps on which it depends. This can save you a lot of time.</p>
+<p>The benefit of having a formalized workflow allows you to pick up easily your project after a few weeks and to collaborate with others. We strongly advise you to do this, even when you think this will be a one-off project, because you’ll never know when to run certain steps again, or when you want to reuse certain steps in another project.</p>
+</div>
+<div id="installing-drake" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Installing Drake</h2>
+<p>Drake has quite a few dependencies, which makes its installation process rather involved. For the following instructions we assume that you are on Ubuntu.</p>
+
+<div class="rmdtip">
+If you’re using the Data Science Toolbox, then you already have Drake installed, and you may safely skip this section.
+</div>
+<p>Drake is written in the programming language Clojure which means that it runs on the Java Virtual Machine (JVM). There are pre-built jars available but because Drake is in active development, we will build it from source. For this, you will need to install Leiningen.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb167-1"><a href="chapter-6-managing-your-data-workflow.html#cb167-1"></a>$ <span class="fu">sudo</span> apt-get install openjdk-6-jdk</span>
+<span id="cb167-2"><a href="chapter-6-managing-your-data-workflow.html#cb167-2"></a>$ <span class="fu">sudo</span> apt-get install leiningen</span></code></pre></div>
+<p>Then, clone the Drake repository from Factual:</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb168-1"><a href="chapter-6-managing-your-data-workflow.html#cb168-1"></a>$ <span class="fu">git</span> clone https://github.com/Factual/drake.git</span></code></pre></div>
+<p>And build the uberjar using Leiningen:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb169-1"><a href="chapter-6-managing-your-data-workflow.html#cb169-1"></a>$ <span class="bu">cd</span> drake</span>
+<span id="cb169-2"><a href="chapter-6-managing-your-data-workflow.html#cb169-2"></a>$ <span class="ex">lein</span> uberjar</span></code></pre></div>
+<p>This creates <em>drake.jar</em>. Copy this file to a directory which is on your <em>$PATH</em>, for example, <em>~/bin</em>:</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb170-1"><a href="chapter-6-managing-your-data-workflow.html#cb170-1"></a>$ <span class="fu">mv</span> drake.jar ~/bin/</span></code></pre></div>
+<p>At this point you should already be able to run Drake:</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb171-1"><a href="chapter-6-managing-your-data-workflow.html#cb171-1"></a>$ <span class="bu">cd</span> ~/bin/</span>
+<span id="cb171-2"><a href="chapter-6-managing-your-data-workflow.html#cb171-2"></a>$ <span class="ex">java</span> -jar drake.jar</span></code></pre></div>
+<p>This is not really convenient for two reasons: (1) the Java Virtual Machine (JVM) takes a long time to start and (2) you can only run it from that directory. We advise you to install Drip, which is a launcher for the JVM that provides much faster startup times than the <code>java</code> command. First, clone the Drip repository from Flatland:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb172-1"><a href="chapter-6-managing-your-data-workflow.html#cb172-1"></a>$ <span class="fu">git</span> clone https://github.com/flatland/drip.git</span>
+<span id="cb172-2"><a href="chapter-6-managing-your-data-workflow.html#cb172-2"></a>$ <span class="bu">cd</span> drip</span>
+<span id="cb172-3"><a href="chapter-6-managing-your-data-workflow.html#cb172-3"></a>$ <span class="fu">make</span> prefix=~/bin install</span></code></pre></div>
+<p>Then, create a Bash script that allows you to run Drake from everywhere:</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb173-1"><a href="chapter-6-managing-your-data-workflow.html#cb173-1"></a>$ <span class="bu">cd</span> ~/bin</span>
+<span id="cb173-2"><a href="chapter-6-managing-your-data-workflow.html#cb173-2"></a>$ <span class="fu">cat</span> <span class="op">&lt;&lt; &#39;EOF&#39;</span> <span class="op">&gt;</span> <span class="ex">drake</span></span>
+<span id="cb173-3"><a href="chapter-6-managing-your-data-workflow.html#cb173-3"></a>&gt; #!/bin/bash</span>
+<span id="cb173-4"><a href="chapter-6-managing-your-data-workflow.html#cb173-4"></a>&gt; drip -cp $(dirname $0)/drake.jar drake.core &quot;$@&quot;</span>
+<span id="cb173-5"><a href="chapter-6-managing-your-data-workflow.html#cb173-5"></a>&gt; EOF</span>
+<span id="cb173-6"><a href="chapter-6-managing-your-data-workflow.html#cb173-6"></a>$ chmod +x drake</span></code></pre></div>
+<p>To verify that you have correctly installed both Drake and Drip, you can run the following command, preferably from a different directory:</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb174-1"><a href="chapter-6-managing-your-data-workflow.html#cb174-1"></a>$ <span class="ex">drake</span> --version</span>
+<span id="cb174-2"><a href="chapter-6-managing-your-data-workflow.html#cb174-2"></a><span class="ex">Drake</span> Version 0.1.6</span></code></pre></div>
+
+<div class="rmdnote">
+Drip speeds up Java because it reserves an instance of the JVM, after it has been run once. Because of this, you will only notice the speed up from the second time onwards.
+</div>
+</div>
+<div id="obtain-top-e-books-from-project-gutenberg" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Obtain Top E-books from Project Gutenberg</h2>
+<p>For the remainder of this chapter, we’ll use the following task as a running example. Our goal is to turn the command that we use to solve this task into a Drake workflow. We start out simple, and work our way towards an advanced workflow in order to explain to you the various concepts and syntax of Drake.</p>
+<p>Project Gutenberg is an ambitious project that, since 1971, has archived and digitized over 42,000 books and offers these as free e-books. On its website you can find the top hundred most downloaded books. Let’s assume that we are interested in the top five downloads of Project Gutenberg. Because this list is available in HTML it is straightforward to obtain the top five downloads:</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb175-1"><a href="chapter-6-managing-your-data-workflow.html#cb175-1"></a>$ <span class="ex">curl</span> -s <span class="st">&#39;http://www.gutenberg.org/browse/scores/top&#39;</span> <span class="kw">|</span>  </span>
+<span id="cb175-2"><a href="chapter-6-managing-your-data-workflow.html#cb175-2"></a><span class="op">&gt;</span> <span class="fu">grep</span> -E <span class="st">&#39;^&lt;li&gt;&#39;</span> <span class="kw">|</span>                                       </span>
+<span id="cb175-3"><a href="chapter-6-managing-your-data-workflow.html#cb175-3"></a><span class="op">&gt;</span> <span class="fu">head</span> -n 5 <span class="kw">|</span>                                             </span>
+<span id="cb175-4"><a href="chapter-6-managing-your-data-workflow.html#cb175-4"></a><span class="op">&gt;</span> <span class="fu">sed</span> -E <span class="st">&quot;s/.*ebooks\/([0-9]+).*/</span><span class="dt">\\</span><span class="st">1/&quot;</span> <span class="op">&gt;</span> data/top-5       </span></code></pre></div>
+<p>This command:</p>
+<ul>
+<li>Downloads the HTML.</li>
+<li>Extracts the list items.</li>
+<li>Keeps only the top five items.</li>
+<li>Saves e-book IDs to <em>data/top-5</em>.</li>
+</ul>
+<p>The output of the command is:</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb176-1"><a href="chapter-6-managing-your-data-workflow.html#cb176-1"></a>$ <span class="fu">cat</span> data/top-5</span>
+<span id="cb176-2"><a href="chapter-6-managing-your-data-workflow.html#cb176-2"></a><span class="ex">1342</span></span>
+<span id="cb176-3"><a href="chapter-6-managing-your-data-workflow.html#cb176-3"></a><span class="ex">76</span></span>
+<span id="cb176-4"><a href="chapter-6-managing-your-data-workflow.html#cb176-4"></a><span class="ex">11</span></span>
+<span id="cb176-5"><a href="chapter-6-managing-your-data-workflow.html#cb176-5"></a><span class="ex">1661</span></span>
+<span id="cb176-6"><a href="chapter-6-managing-your-data-workflow.html#cb176-6"></a><span class="ex">1952</span></span></code></pre></div>
+<p>If you want to be able to reproduce this, that is, once again at a later time, the easiest thing you can do is put this command in a script as we’ve seen in <a href="chapter-4-creating-reusable-command-line-tools.html#chapter-4-creating-reusable-command-line-tools">Chapter 4</a>. If you execute this script again, the HTML will be downloaded again as well. There are three common reasons why you might want to be able to control whether certain steps are run. First, because this step may take a very long time. Second, because you want to continue with the same data. Third, the data may come from an API which has certain rate limits. It would be a good idea to let one step save the data to a file and then let subsequent steps operate on that file so that you don’t have to make any redundant computations or API calls. Now, the first reason is not really a problem in our example because the HTML can be downloaded fast enough. However, in some cases the data may come from other sources and may comprise of gigabytes of data.</p>
+</div>
+<div id="every-workflow-starts-with-a-single-step" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Every Workflow Starts with a Single Step</h2>
+<p>In this section we’ll convert the above command into a Drake workflow. A workflow is just a text file. You’d usually name this file <em>Drakefile</em> because Drake uses that file if no other file is specified at the command line. A workflow with just a single step would look like Example <a href="chapter-6-managing-your-data-workflow.html#exm:drakefile">6.1</a>.</p>
+
+<div class="example">
+<span id="exm:drakefile" class="example"><strong>Example 6.1  (A workflow with just a single stip)  </strong></span>
+</div>
+<pre><code>top-5 &lt;-                                                    
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; |  
+    grep -E &#39;^&lt;li&gt;&#39; |                                       
+    head -n 5 |                                             
+    sed -E &quot;s/.*ebooks\/([0-9]+).*/\\1/&quot; &gt; top-5            </code></pre>
+<p>Let’s go through this file. The first line, which contains the arrow pointing to the left, is our step definition. The left side of this arrow, which says <em>top-5</em>, is the name or output of this step. Any inputs to this step would appear on the right side of this arrow, but since this step has no input, it’s empty. Defining inputs and outputs is what allows Drake to recognize the dependencies between steps, and to figure out whether and when which steps need to be executed in order to fulfill a certain output. This output is also known as a target. As you can see, the body of this step is literally our command from before but then indented.</p>
+<ul>
+<li>The arrow (<em>←</em>) denotes the name of the step and its dependencies. More on this later.</li>
+<li>The body is indented.</li>
+<li>Select only list items.</li>
+<li>Get the first five items.</li>
+<li>Extract the id, and save to file <em>top-5</em>. Note that <em>top-5</em> was already specified in the step definition and that <em>5</em> has now been used three times. We are going to address that later.</li>
+</ul>
+<p>This workflow is as simple as it gets. It doesn’t offer any advantages over having our command in a Bash script. But don’t worry, we promise you that it will get more exciting. For now, let’s run Drake and see what it does with our first workflow:</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb178-1"><a href="chapter-6-managing-your-data-workflow.html#cb178-1"></a>$ <span class="ex">drake</span></span>
+<span id="cb178-2"><a href="chapter-6-managing-your-data-workflow.html#cb178-2"></a><span class="ex">The</span> following steps will be run, in order:</span>
+<span id="cb178-3"><a href="chapter-6-managing-your-data-workflow.html#cb178-3"></a>  <span class="ex">1</span>: top-5 <span class="op">&lt;</span>-  [missing output]</span>
+<span id="cb178-4"><a href="chapter-6-managing-your-data-workflow.html#cb178-4"></a><span class="ex">Confirm?</span> [y/n] y</span>
+<span id="cb178-5"><a href="chapter-6-managing-your-data-workflow.html#cb178-5"></a><span class="ex">Running</span> 1 steps with concurrence of 1...</span>
+<span id="cb178-6"><a href="chapter-6-managing-your-data-workflow.html#cb178-6"></a></span>
+<span id="cb178-7"><a href="chapter-6-managing-your-data-workflow.html#cb178-7"></a><span class="ex">---</span> 0. Running (missing output)<span class="bu">:</span> top-5 <span class="op">&lt;</span>-</span>
+<span id="cb178-8"><a href="chapter-6-managing-your-data-workflow.html#cb178-8"></a><span class="ex">---</span> 0: top-5 <span class="op">&lt;</span>-  -<span class="op">&gt;</span> done in 0.35s</span>
+<span id="cb178-9"><a href="chapter-6-managing-your-data-workflow.html#cb178-9"></a><span class="ex">Done</span> (1 steps run)<span class="ex">.</span></span></code></pre></div>
+<p>If we do not specify any specific workflow file, then Drake will use <em>./Drakefile</em>. Drake first determines which steps need to be run. In our case, the one and only step will be run because it’s missing the output. This means that there’s no file named <em>data/top-5</em>. Drake asks for confirmation before it will execute these steps. We press <code>y</code>, and very soon thereafter we see that Drake is done. Drake did not complain about any errors in our steps. Let’s verify that we have the top five books by looking at the output file <em>data/top-5</em>:</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb179-1"><a href="chapter-6-managing-your-data-workflow.html#cb179-1"></a>$ <span class="fu">cat</span> data/top-5</span>
+<span id="cb179-2"><a href="chapter-6-managing-your-data-workflow.html#cb179-2"></a><span class="ex">1342</span></span>
+<span id="cb179-3"><a href="chapter-6-managing-your-data-workflow.html#cb179-3"></a><span class="ex">76</span></span>
+<span id="cb179-4"><a href="chapter-6-managing-your-data-workflow.html#cb179-4"></a><span class="ex">11</span></span>
+<span id="cb179-5"><a href="chapter-6-managing-your-data-workflow.html#cb179-5"></a><span class="ex">1661</span></span>
+<span id="cb179-6"><a href="chapter-6-managing-your-data-workflow.html#cb179-6"></a><span class="ex">1952</span></span></code></pre></div>
+<p>Now we do have the output file. Let’s run Drake again:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb180-1"><a href="chapter-6-managing-your-data-workflow.html#cb180-1"></a>$ <span class="ex">drake</span></span>
+<span id="cb180-2"><a href="chapter-6-managing-your-data-workflow.html#cb180-2"></a><span class="ex">The</span> following steps will be run, in order:</span>
+<span id="cb180-3"><a href="chapter-6-managing-your-data-workflow.html#cb180-3"></a>  <span class="ex">1</span>: top-5 <span class="op">&lt;</span>-  [no-input step]</span>
+<span id="cb180-4"><a href="chapter-6-managing-your-data-workflow.html#cb180-4"></a><span class="ex">Confirm?</span> [y/n] n</span>
+<span id="cb180-5"><a href="chapter-6-managing-your-data-workflow.html#cb180-5"></a><span class="ex">Aborted.</span></span></code></pre></div>
+<p>As you can see, Drake wants to execute the step again! However, now mentions a different reason, namely, that there is no input step <em><span class="math display">\[no-input-step\]</span></em>. Its default behavior is to check whether the input has changed by looking at the timestamp of the input. However, since we didn’t specify any input, Drake doesn’t know whether or not this step should be run again. We can disable this default behavior to check timestamps as follows:</p>
+<pre><code>top-5 &lt;- [-timecheck]
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; |
+    grep -E &#39;^&lt;li&gt;&#39; |
+    head -n 5 |
+    sed -E &quot;s/.*ebooks\/([0-9]+)\&quot;&gt;([^&lt;]+)&lt;.*/\\1,\\2/&quot; &gt; top-5</code></pre>
+<p>The square brackets around <em><span class="math display">\[-timecheck\]</span></em> indicate that this is an option to the step. The minus (<em>-</em>) means that we wish to disable checking timestamps. Now, this step is only run when the output is missing.</p>
+<p>We’re going to use different filenames so that we keep old versions. We can specify a different workflow name (other than <em>Drakefile</em>) with the <code>-w</code> option. Let’s run Drake once more:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb182-1"><a href="chapter-6-managing-your-data-workflow.html#cb182-1"></a>$ <span class="fu">mv</span> Drakefile 01.drake</span>
+<span id="cb182-2"><a href="chapter-6-managing-your-data-workflow.html#cb182-2"></a>$ <span class="ex">drake</span> -w 01.drake</span>
+<span id="cb182-3"><a href="chapter-6-managing-your-data-workflow.html#cb182-3"></a><span class="ex">Nothing</span> to do.</span></code></pre></div>
+<p>Our very first workflow is already saving us time because Drake detects that the step was not required to be executed again. However, we can do much better than this. This workflow has three shortcomings that we’re going to address in the next section.</p>
+</div>
+<div id="well-that-depends" class="section level2" number="6.6">
+<h2><span class="header-section-number">6.6</span> Well, That Depends</h2>
+<p>Our workflow contains just a single step, which means that, just like having a simple Bash script, everything will be executed all the time. So the first thing we are going to do is to split up this single step into two steps, where the first step downloads the HTML, and the second step processes this HTML. The second step obviously depends on the first step. We can define this dependency in our workflow.</p>
+<p>You may have noticed that the number 5 is specified three times. If you ever wanted to get the top, say, top 10 e-books from Project Gutenberg, we would have to change our workflow in three places. This is inefficient and needs to be addressed. Luckily, Drake supports variables.</p>
+<p>It may not be immediately obvious from our workflow, but our data resides in the same location as the script. It is better to have the data live in a separate location and have it separated from any code that generates this data. Not only does it keep our project cleaner, it also allows us to delete the generated data files easier, and we can easily specify that we do not like the data files to be included in any version control system such as <code>git</code> <span class="citation">(Torvalds and Hamano <a href="references.html#ref-git" role="doc-biblioref">2014</a>)</span>. Let’s have a look:</p>
+<pre><code>NUM:=5                                                              
+BASE=data/                                                          
+
+top.html &lt;- [-timecheck]
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; &gt; $OUTPUT  
+
+top-$[NUM] &lt;- top.html                                              
+    &lt; $INPUT grep -E &#39;^&lt;li&gt;&#39; |
+    head -n $[NUM] |
+    sed -E &quot;s/.*ebooks\/([0-9]+)\&quot;&gt;([^&lt;]+)&lt;.*/\\1,\\2/&quot; &gt; $OUTPUT</code></pre>
+<ul>
+<li>You can specify variables in Drake, preferably at the beginning of the file, by specifying the variable name, then an equal sign, and then the value. The name of the variable doesn’t have to be in all capitals, but it does make them stand out more. As you can see, we have used for the variable <em>NUM</em> the <em>:=</em> instead of <em>=</em>. This means that if the variable <em>NUM</em> is already set, it will not be overridden. This allows us to specify the value of <em>NUM</em> from the command line before we run Drake.</li>
+<li>The <em>BASE</em> variable is a special variable. Drake will treat every file specified in the workflow as if it were in this base directory.</li>
+<li>We now have two steps. The first step has the same input as before, but now the output is a different file, namely, <em>top.html</em>. This output is defined again as the input of step two. This is how Drake knows that the second step depends on the first step.</li>
+<li>We have used two more special variables: <em>INPUT</em> and <em>OUTPUT</em>. Values of these two special variables are set to what we have defined as the input and output of that step, respectively. This way, we don’t have to specify the input and output of a certain step twice. Furthermore, it allows us to easily reuse certain steps in any future workflows.</li>
+</ul>
+<p>Let’s execute this new workflow using Drake:</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb184-1"><a href="chapter-6-managing-your-data-workflow.html#cb184-1"></a>$ <span class="ex">drake</span> -w 02.drake</span>
+<span id="cb184-2"><a href="chapter-6-managing-your-data-workflow.html#cb184-2"></a><span class="ex">The</span> following steps will be run, in order:</span>
+<span id="cb184-3"><a href="chapter-6-managing-your-data-workflow.html#cb184-3"></a>  <span class="ex">1</span>: ../../data/top.html <span class="op">&lt;</span>-  [missing output]</span>
+<span id="cb184-4"><a href="chapter-6-managing-your-data-workflow.html#cb184-4"></a>  <span class="ex">2</span>: ../../data/top-5 <span class="op">&lt;</span>- ../../data/top.html [projected timestamped]</span>
+<span id="cb184-5"><a href="chapter-6-managing-your-data-workflow.html#cb184-5"></a><span class="ex">Confirm?</span> [y/n] y</span>
+<span id="cb184-6"><a href="chapter-6-managing-your-data-workflow.html#cb184-6"></a><span class="ex">Running</span> 2 steps with concurrence of 1...</span>
+<span id="cb184-7"><a href="chapter-6-managing-your-data-workflow.html#cb184-7"></a></span>
+<span id="cb184-8"><a href="chapter-6-managing-your-data-workflow.html#cb184-8"></a><span class="ex">---</span> 0. Running (missing output)<span class="bu">:</span> ../../data/top.html <span class="op">&lt;</span>-</span>
+<span id="cb184-9"><a href="chapter-6-managing-your-data-workflow.html#cb184-9"></a><span class="ex">---</span> 0: ../../data/top.html <span class="op">&lt;</span>-  -<span class="op">&gt;</span> done in 0.89s</span>
+<span id="cb184-10"><a href="chapter-6-managing-your-data-workflow.html#cb184-10"></a><span class="ex">---</span> 1. Running (missing output)<span class="bu">:</span> ../../data/top-5 <span class="op">&lt;</span>- ../../data/top.html</span>
+<span id="cb184-11"><a href="chapter-6-managing-your-data-workflow.html#cb184-11"></a><span class="ex">---</span> 1: ../../data/top-5 <span class="op">&lt;</span>- ../../data/top.html -<span class="op">&gt;</span> done in 0.02s</span>
+<span id="cb184-12"><a href="chapter-6-managing-your-data-workflow.html#cb184-12"></a><span class="ex">Done</span> (2 steps run)<span class="ex">.</span></span></code></pre></div>
+<p>Now, let’s assume that we want instead of the top 5 e-books, the top 10 e-books. We can set the <em>NUM</em> variable from the command line and run Drake again:</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb185-1"><a href="chapter-6-managing-your-data-workflow.html#cb185-1"></a>$ <span class="va">NUM=</span>10 <span class="ex">drake</span> -w 02.drake</span>
+<span id="cb185-2"><a href="chapter-6-managing-your-data-workflow.html#cb185-2"></a><span class="ex">The</span> following steps will be run, in order:</span>
+<span id="cb185-3"><a href="chapter-6-managing-your-data-workflow.html#cb185-3"></a>  <span class="ex">1</span>: ../../data/top-10 <span class="op">&lt;</span>- ../../data/top.html [missing output]</span>
+<span id="cb185-4"><a href="chapter-6-managing-your-data-workflow.html#cb185-4"></a><span class="ex">Confirm?</span> [y/n] y</span>
+<span id="cb185-5"><a href="chapter-6-managing-your-data-workflow.html#cb185-5"></a><span class="ex">Running</span> 1 steps with concurrence of 1...</span>
+<span id="cb185-6"><a href="chapter-6-managing-your-data-workflow.html#cb185-6"></a></span>
+<span id="cb185-7"><a href="chapter-6-managing-your-data-workflow.html#cb185-7"></a><span class="ex">---</span> 1. Running (missing output)<span class="bu">:</span> ../../data/top-10 <span class="op">&lt;</span>- ../../data/top.html</span>
+<span id="cb185-8"><a href="chapter-6-managing-your-data-workflow.html#cb185-8"></a><span class="ex">---</span> 1: ../../data/top-10 <span class="op">&lt;</span>- ../../data/top.html -<span class="op">&gt;</span> done in 0.02s</span>
+<span id="cb185-9"><a href="chapter-6-managing-your-data-workflow.html#cb185-9"></a><span class="ex">Done</span> (1 steps run)<span class="ex">.</span></span></code></pre></div>
+<p>As you can see, Drake now only needs to execute the second step, because the output of the first step has already been satisfied. Again, downloading an HTML file is not such a big deal, but can you imagine the implications if you were dealing with 10 GB worth of data?</p>
+</div>
+<div id="rebuilding-certain-targets" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Rebuilding Certain Targets</h2>
+<p>The list of the top 100 e-books on project Gutenberg changes daily. We’ve seen that if we run the Drake workflow again then the HTML containing this list is not being downloaded again. Luckily, Drake allows us to run certain steps again, so that we can update this HTML file:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb186-1"><a href="chapter-6-managing-your-data-workflow.html#cb186-1"></a>$ <span class="ex">drake</span> -w 02.drake <span class="st">&#39;=top.html&#39;</span></span></code></pre></div>
+<p>There is a more convenient way than using the output filename to specify which step you want to execute again. We can add so-called <em>tags</em> to both the input and output of steps. A tag starts with a “%”. It is a good idea to choose a short and descriptive tag name so that you can easily specify this at the command line. Let’s add the tag <em>%html</em> to the first step and <em>%filter</em> to the second step:</p>
+<pre><code>NUM:=5
+BASE=data/
+
+top.html, %html &lt;- [-timecheck]
+    curl -s &#39;http://www.gutenberg.org/browse/scores/top&#39; &gt; $OUTPUT
+
+top-$[NUM], %filter &lt;- top.html
+    &lt; $INPUT grep -E &#39;^&lt;li&gt;&#39; |
+    head -n $[NUM] |
+    sed -E &quot;s/.*ebooks\/([0-9]+)\&quot;&gt;([^&lt;]+)&lt;.*/\\1,\\2/&quot; &gt; $OUTPUT</code></pre>
+<p>We can now rebuild the first step by specifying the <em>%html</em> tag:</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb188-1"><a href="chapter-6-managing-your-data-workflow.html#cb188-1"></a>$ <span class="ex">drake</span> -w 03.drake <span class="st">&#39;=%html&#39;</span></span></code></pre></div>
+</div>
+<div id="discussion" class="section level2" number="6.8">
+<h2><span class="header-section-number">6.8</span> Discussion</h2>
+<p>One of the beauties of the command line is that allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It is therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.</p>
+<p>We have shown you that just putting every command in one bash script is suboptimal. We have proposed to use Drake as a command-line tool to manage your data workflow. By using a running example, we have shown you how to define steps and the dependencies between them. We’ve also discussed how to use variables and tags.</p>
+<p>There’s nothing more fun than just playing with your data and forget everything else. But you have to trust us when we say that it’s worthwhile to keep a record of what you have done by means of a Drake workflow. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time. It makes you more efficient over time, the same holds for Drake workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. We hope that you will get used to Drake, and that it will make your life easier.</p>
+<p>We’ve only been able to scratch the surface with Drake. Some of its more advanced features are:</p>
+<ul>
+<li>Asynchronous execution of steps.</li>
+<li>Support for inline Python and R code.</li>
+<li>Upload and download data from HDFS S3.</li>
+</ul>
+</div>
+<div id="further-reading" class="section level2" number="6.9">
+<h2><span class="header-section-number">6.9</span> Further Reading</h2>
+<ul>
+<li>Factual. 2014. “Drake.” <a href="https://github.com/Factual/drake" class="uri">https://github.com/Factual/drake</a>.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-5-scrubbing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-7-exploring-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/06.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

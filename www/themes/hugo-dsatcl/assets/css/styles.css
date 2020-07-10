@@ -1,0 +1,8 @@
+/* Tailwind base - put variables under: tailwind.config.js */
+@import "node_modules/tailwindcss/base";
+/* Tailwind component classes registered by plugins*/
+@import "node_modules/tailwindcss/components";
+/* Site Specific */
+@import "assets/css/site";
+/* Tailwind's utility classes - generated based on config file */
+@import "node_modules/tailwindcss/utilities";

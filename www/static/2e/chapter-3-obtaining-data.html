@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Obtaining Data | Data Science at the Command Line, 2e</title>
+  <meta name="description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Obtaining Data | Data Science at the Command Line, 2e" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/cover.png" />
+  <meta property="og:description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="github-repo" content="jeroenjanssens/data-science-at-the-command-line" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Obtaining Data | Data Science at the Command Line, 2e" />
+  
+  <meta name="twitter:description" content="This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data." />
+  <meta name="twitter:image" content="images/cover.png" />
+
+<meta name="author" content="Jeroen Janssens" />
+
+
+<meta name="date" content="2020-07-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="chapter-2-getting-started.html"/>
+<link rel="next" href="chapter-4-creating-reusable-command-line-tools.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-43246574-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science at the Command Line, 2e</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#what-to-expect-from-this-book"><i class="fa fa-check"></i>What to Expect from This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#how-to-read-this-book"><i class="fa fa-check"></i>How to Read This Book</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#who-this-book-is-for"><i class="fa fa-check"></i>Who This Book Is For</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#dedication"><i class="fa fa-check"></i>Dedication</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#data-science-is-osemn"><i class="fa fa-check"></i><b>1.2</b> Data Science is OSEMN</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#obtaining-data"><i class="fa fa-check"></i><b>1.2.1</b> Obtaining Data</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#scrubbing-data"><i class="fa fa-check"></i><b>1.2.2</b> Scrubbing Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#exploring-data"><i class="fa fa-check"></i><b>1.2.3</b> Exploring Data</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#modeling-data"><i class="fa fa-check"></i><b>1.2.4</b> Modeling Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>1.2.5</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#intermezzo-chapters"><i class="fa fa-check"></i><b>1.3</b> Intermezzo Chapters</a></li>
+<li class="chapter" data-level="1.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#what-is-the-command-line"><i class="fa fa-check"></i><b>1.4</b> What is the Command Line?</a></li>
+<li class="chapter" data-level="1.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#why-data-science-at-the-command-line"><i class="fa fa-check"></i><b>1.5</b> Why Data Science at the Command Line?</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-agile"><i class="fa fa-check"></i><b>1.5.1</b> The Command Line is Agile</a></li>
+<li class="chapter" data-level="1.5.2" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-augmenting"><i class="fa fa-check"></i><b>1.5.2</b> The Command Line is Augmenting</a></li>
+<li class="chapter" data-level="1.5.3" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-scalable"><i class="fa fa-check"></i><b>1.5.3</b> The Command Line is Scalable</a></li>
+<li class="chapter" data-level="1.5.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-extensible"><i class="fa fa-check"></i><b>1.5.4</b> The Command Line is Extensible</a></li>
+<li class="chapter" data-level="1.5.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#the-command-line-is-ubiquitous"><i class="fa fa-check"></i><b>1.5.5</b> The Command Line is Ubiquitous</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#a-real-world-use-case"><i class="fa fa-check"></i><b>1.6</b> A Real-world Use Case</a></li>
+<li class="chapter" data-level="1.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>1.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting Started</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#docker-image"><i class="fa fa-check"></i><b>2.2</b> Installing the Docker Image</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#essential-gnulinux-concepts"><i class="fa fa-check"></i><b>2.3</b> Essential GNU/Linux Concepts</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#the-environment"><i class="fa fa-check"></i><b>2.3.1</b> The Environment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#executing-a-command-line-tool"><i class="fa fa-check"></i><b>2.3.2</b> Executing a Command-line Tool</a></li>
+<li class="chapter" data-level="2.3.3" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#five-types-of-command-line-tools"><i class="fa fa-check"></i><b>2.3.3</b> Five Types of Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.4" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#combining-command-line-tools"><i class="fa fa-check"></i><b>2.3.4</b> Combining Command-line Tools</a></li>
+<li class="chapter" data-level="2.3.5" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#redirecting-input-and-output"><i class="fa fa-check"></i><b>2.3.5</b> Redirecting Input and Output</a></li>
+<li class="chapter" data-level="2.3.6" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#working-with-files"><i class="fa fa-check"></i><b>2.3.6</b> Working With Files</a></li>
+<li class="chapter" data-level="2.3.7" data-path="chapter-2-getting-started.html"><a href="chapter-2-getting-started.html#help"><i class="fa fa-check"></i><b>2.3.7</b> Help!</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>2.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html"><i class="fa fa-check"></i><b>3</b> Obtaining Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#copying-local-files-to-the-data-science-toolbox"><i class="fa fa-check"></i><b>3.2</b> Copying Local Files to the Data Science Toolbox</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#local-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.1</b> Local Version of Data Science Toolbox</a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#remote-version-of-data-science-toolbox"><i class="fa fa-check"></i><b>3.2.2</b> Remote Version of Data Science Toolbox</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#decompressing-files"><i class="fa fa-check"></i><b>3.3</b> Decompressing Files</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#converting-microsoft-excel-spreadsheets"><i class="fa fa-check"></i><b>3.4</b> Converting Microsoft Excel Spreadsheets</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#querying-relational-databases"><i class="fa fa-check"></i><b>3.5</b> Querying Relational Databases</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#downloading-from-the-internet"><i class="fa fa-check"></i><b>3.6</b> Downloading from the Internet</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-3-obtaining-data.html"><a href="chapter-3-obtaining-data.html#calling-a-web-api"><i class="fa fa-check"></i><b>3.7</b> Calling a Web API</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>3.8</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html"><i class="fa fa-check"></i><b>4</b> Creating Reusable Command-line Tools</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#converting-one-liners-into-shell-scripts"><i class="fa fa-check"></i><b>4.2</b> Converting One-liners into Shell Scripts</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-1-copy-and-paste"><i class="fa fa-check"></i><b>4.2.1</b> Step 1: Copy and Paste</a></li>
+<li class="chapter" data-level="4.2.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-2-add-permission-to-execute"><i class="fa fa-check"></i><b>4.2.2</b> Step 2: Add Permission to Execute</a></li>
+<li class="chapter" data-level="4.2.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-3-define-shebang"><i class="fa fa-check"></i><b>4.2.3</b> Step 3: Define Shebang</a></li>
+<li class="chapter" data-level="4.2.4" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-4-remove-fixed-input"><i class="fa fa-check"></i><b>4.2.4</b> Step 4: Remove Fixed Input</a></li>
+<li class="chapter" data-level="4.2.5" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-5-parametrize"><i class="fa fa-check"></i><b>4.2.5</b> Step 5: Parametrize</a></li>
+<li class="chapter" data-level="4.2.6" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#step-6-extend-your-path"><i class="fa fa-check"></i><b>4.2.6</b> Step 6: Extend Your PATH</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#creating-command-line-tools-with-python-and-r"><i class="fa fa-check"></i><b>4.3</b> Creating Command-line Tools with Python and R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#porting-the-shell-script"><i class="fa fa-check"></i><b>4.3.1</b> Porting The Shell Script</a></li>
+<li class="chapter" data-level="4.3.2" data-path="chapter-4-creating-reusable-command-line-tools.html"><a href="chapter-4-creating-reusable-command-line-tools.html#processing-streaming-data-from-standard-input"><i class="fa fa-check"></i><b>4.3.2</b> Processing Streaming Data from Standard Input</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>4.4</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html"><i class="fa fa-check"></i><b>5</b> Scrubbing Data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-plain-text"><i class="fa fa-check"></i><b>5.2</b> Common Scrub Operations for Plain Text</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines"><i class="fa fa-check"></i><b>5.2.1</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.2.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-values"><i class="fa fa-check"></i><b>5.2.2</b> Extracting Values</a></li>
+<li class="chapter" data-level="5.2.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#replacing-and-deleting-values"><i class="fa fa-check"></i><b>5.2.3</b> Replacing and Deleting Values</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-csv"><i class="fa fa-check"></i><b>5.3</b> Working with CSV</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#bodies-and-headers-and-columns-oh-my"><i class="fa fa-check"></i><b>5.3.1</b> Bodies and Headers and Columns, Oh My!</a></li>
+<li class="chapter" data-level="5.3.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#performing-sql-queries-on-csv"><i class="fa fa-check"></i><b>5.3.2</b> Performing SQL Queries on CSV</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#working-with-xmlhtml-and-json"><i class="fa fa-check"></i><b>5.4</b> Working with XML/HTML and JSON</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#common-scrub-operations-for-csv"><i class="fa fa-check"></i><b>5.5</b> Common Scrub Operations for CSV</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#extracting-and-reordering-columns"><i class="fa fa-check"></i><b>5.5.1</b> Extracting and Reordering Columns</a></li>
+<li class="chapter" data-level="5.5.2" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#filtering-lines-1"><i class="fa fa-check"></i><b>5.5.2</b> Filtering Lines</a></li>
+<li class="chapter" data-level="5.5.3" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#merging-columns"><i class="fa fa-check"></i><b>5.5.3</b> Merging Columns</a></li>
+<li class="chapter" data-level="5.5.4" data-path="chapter-5-scrubbing-data.html"><a href="chapter-5-scrubbing-data.html#combining-multiple-csv-files"><i class="fa fa-check"></i><b>5.5.4</b> Combining Multiple CSV Files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>5.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html"><i class="fa fa-check"></i><b>6</b> Managing Your Data Workflow</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#introducing-drake"><i class="fa fa-check"></i><b>6.2</b> Introducing Drake</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#installing-drake"><i class="fa fa-check"></i><b>6.3</b> Installing Drake</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#obtain-top-e-books-from-project-gutenberg"><i class="fa fa-check"></i><b>6.4</b> Obtain Top E-books from Project Gutenberg</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#every-workflow-starts-with-a-single-step"><i class="fa fa-check"></i><b>6.5</b> Every Workflow Starts with a Single Step</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#well-that-depends"><i class="fa fa-check"></i><b>6.6</b> Well, That Depends</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#rebuilding-certain-targets"><i class="fa fa-check"></i><b>6.7</b> Rebuilding Certain Targets</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>6.8</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>6.9</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html"><i class="fa fa-check"></i><b>7</b> Exploring Data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspecting-data-and-its-properties"><i class="fa fa-check"></i><b>7.2</b> Inspecting Data and its Properties</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#header-or-not-here-i-come"><i class="fa fa-check"></i><b>7.2.1</b> Header Or Not, Here I Come</a></li>
+<li class="chapter" data-level="7.2.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#inspect-all-the-data"><i class="fa fa-check"></i><b>7.2.2</b> Inspect All The Data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#feature-names-and-data-types"><i class="fa fa-check"></i><b>7.2.3</b> Feature Names and Data Types</a></li>
+<li class="chapter" data-level="7.2.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#unique-identifiers-continuous-variables-and-factors"><i class="fa fa-check"></i><b>7.2.4</b> Unique Identifiers, Continuous Variables, and Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#computing-descriptive-statistics"><i class="fa fa-check"></i><b>7.3</b> Computing Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#csvstat"><i class="fa fa-check"></i><b>7.3.1</b> csvstat</a></li>
+<li class="chapter" data-level="7.3.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#using-r-from-the-command-line-using-rio"><i class="fa fa-check"></i><b>7.3.2</b> Using R from the Command Line using Rio</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#creating-visualizations"><i class="fa fa-check"></i><b>7.4</b> Creating Visualizations</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-gnuplot-and-feedgnuplot"><i class="fa fa-check"></i><b>7.4.1</b> Introducing Gnuplot and Feedgnuplot</a></li>
+<li class="chapter" data-level="7.4.2" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#introducing-ggplot2"><i class="fa fa-check"></i><b>7.4.2</b> Introducing ggplot2</a></li>
+<li class="chapter" data-level="7.4.3" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#histograms"><i class="fa fa-check"></i><b>7.4.3</b> Histograms</a></li>
+<li class="chapter" data-level="7.4.4" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#bar-plots"><i class="fa fa-check"></i><b>7.4.4</b> Bar Plots</a></li>
+<li class="chapter" data-level="7.4.5" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#density-plots"><i class="fa fa-check"></i><b>7.4.5</b> Density Plots</a></li>
+<li class="chapter" data-level="7.4.6" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#box-plots"><i class="fa fa-check"></i><b>7.4.6</b> Box Plots</a></li>
+<li class="chapter" data-level="7.4.7" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#scatter-plots"><i class="fa fa-check"></i><b>7.4.7</b> Scatter Plots</a></li>
+<li class="chapter" data-level="7.4.8" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#line-graphs"><i class="fa fa-check"></i><b>7.4.8</b> Line Graphs</a></li>
+<li class="chapter" data-level="7.4.9" data-path="chapter-7-exploring-data.html"><a href="chapter-7-exploring-data.html#summary"><i class="fa fa-check"></i><b>7.4.9</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>7.5</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html"><i class="fa fa-check"></i><b>8</b> Parallel Pipelines</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#serial-processing"><i class="fa fa-check"></i><b>8.2</b> Serial Processing</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-numbers"><i class="fa fa-check"></i><b>8.2.1</b> Looping Over Numbers</a></li>
+<li class="chapter" data-level="8.2.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-lines"><i class="fa fa-check"></i><b>8.2.2</b> Looping Over Lines</a></li>
+<li class="chapter" data-level="8.2.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#looping-over-files"><i class="fa fa-check"></i><b>8.2.3</b> Looping Over Files</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#parallel-processing"><i class="fa fa-check"></i><b>8.3</b> Parallel Processing</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#introducing-gnu-parallel"><i class="fa fa-check"></i><b>8.3.1</b> Introducing GNU Parallel</a></li>
+<li class="chapter" data-level="8.3.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#specifying-input"><i class="fa fa-check"></i><b>8.3.2</b> Specifying Input</a></li>
+<li class="chapter" data-level="8.3.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#controlling-the-number-of-concurrent-jobs"><i class="fa fa-check"></i><b>8.3.3</b> Controlling the Number of Concurrent Jobs</a></li>
+<li class="chapter" data-level="8.3.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#logging-and-output"><i class="fa fa-check"></i><b>8.3.4</b> Logging and Output</a></li>
+<li class="chapter" data-level="8.3.5" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#creating-parallel-tools"><i class="fa fa-check"></i><b>8.3.5</b> Creating Parallel Tools</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributed-processing"><i class="fa fa-check"></i><b>8.4</b> Distributed Processing</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#get-list-of-running-aws-ec2-instances"><i class="fa fa-check"></i><b>8.4.1</b> Get List of Running AWS EC2 Instances</a></li>
+<li class="chapter" data-level="8.4.2" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#running-commands-on-remote-machines"><i class="fa fa-check"></i><b>8.4.2</b> Running Commands on Remote Machines</a></li>
+<li class="chapter" data-level="8.4.3" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#distributing-local-data-among-remote-machines"><i class="fa fa-check"></i><b>8.4.3</b> Distributing Local Data among Remote Machines</a></li>
+<li class="chapter" data-level="8.4.4" data-path="chapter-8-parallel-pipelines.html"><a href="chapter-8-parallel-pipelines.html#processing-files-on-remote-machines"><i class="fa fa-check"></i><b>8.4.4</b> Processing Files on Remote Machines</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="chapter-6-managing-your-data-workflow.html"><a href="chapter-6-managing-your-data-workflow.html#discussion"><i class="fa fa-check"></i><b>8.5</b> Discussion</a></li>
+<li class="chapter" data-level="8.6" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>8.6</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html"><i class="fa fa-check"></i><b>9</b> Modeling Data</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#overview"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#more-wine-please"><i class="fa fa-check"></i><b>9.2</b> More Wine Please!</a></li>
+<li class="chapter" data-level="9.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#dimensionality-reduction-with-tapkee"><i class="fa fa-check"></i><b>9.3</b> Dimensionality Reduction with Tapkee</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-tapkee"><i class="fa fa-check"></i><b>9.3.1</b> Introducing Tapkee</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#installing-tapkee"><i class="fa fa-check"></i><b>9.3.2</b> Installing Tapkee</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#linear-and-non-linear-mappings"><i class="fa fa-check"></i><b>9.3.3</b> Linear and Non-linear Mappings</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#clustering-with-weka"><i class="fa fa-check"></i><b>9.4</b> Clustering with Weka</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#introducing-weka"><i class="fa fa-check"></i><b>9.4.1</b> Introducing Weka</a></li>
+<li class="chapter" data-level="9.4.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#taming-weka-on-the-command-line"><i class="fa fa-check"></i><b>9.4.2</b> Taming Weka on the Command Line</a></li>
+<li class="chapter" data-level="9.4.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#converting-between-csv-to-arff-data-formats"><i class="fa fa-check"></i><b>9.4.3</b> Converting between CSV to ARFF Data Formats</a></li>
+<li class="chapter" data-level="9.4.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#comparing-three-cluster-algorithms"><i class="fa fa-check"></i><b>9.4.4</b> Comparing Three Cluster Algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#regression-with-scikit-learn-laboratory"><i class="fa fa-check"></i><b>9.5</b> Regression with SciKit-Learn Laboratory</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#preparing-the-data"><i class="fa fa-check"></i><b>9.5.1</b> Preparing the Data</a></li>
+<li class="chapter" data-level="9.5.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#running-the-experiment"><i class="fa fa-check"></i><b>9.5.2</b> Running the Experiment</a></li>
+<li class="chapter" data-level="9.5.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#parsing-the-results"><i class="fa fa-check"></i><b>9.5.3</b> Parsing the Results</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#classification-with-bigml"><i class="fa fa-check"></i><b>9.6</b> Classification with BigML</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#creating-balanced-train-and-test-data-sets"><i class="fa fa-check"></i><b>9.6.1</b> Creating Balanced Train and Test Data Sets</a></li>
+<li class="chapter" data-level="9.6.2" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#calling-the-api"><i class="fa fa-check"></i><b>9.6.2</b> Calling the API</a></li>
+<li class="chapter" data-level="9.6.3" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#inspecting-the-results"><i class="fa fa-check"></i><b>9.6.3</b> Inspecting the Results</a></li>
+<li class="chapter" data-level="9.6.4" data-path="chapter-9-modeling-data.html"><a href="chapter-9-modeling-data.html#conclusion"><i class="fa fa-check"></i><b>9.6.4</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#further-reading"><i class="fa fa-check"></i><b>9.7</b> Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html"><i class="fa fa-check"></i><b>10</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#lets-recap"><i class="fa fa-check"></i><b>10.1</b> Let’s Recap</a></li>
+<li class="chapter" data-level="10.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#three-pieces-of-advice"><i class="fa fa-check"></i><b>10.2</b> Three Pieces of Advice</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-patient"><i class="fa fa-check"></i><b>10.2.1</b> Be Patient</a></li>
+<li class="chapter" data-level="10.2.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-creative"><i class="fa fa-check"></i><b>10.2.2</b> Be Creative</a></li>
+<li class="chapter" data-level="10.2.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#be-practical"><i class="fa fa-check"></i><b>10.2.3</b> Be Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#where-to-go-from-here"><i class="fa fa-check"></i><b>10.3</b> Where To Go From Here?</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#apis"><i class="fa fa-check"></i><b>10.3.1</b> APIs</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#shell-programming"><i class="fa fa-check"></i><b>10.3.2</b> Shell Programming</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#python-r-and-sql"><i class="fa fa-check"></i><b>10.3.3</b> Python, R, and SQL</a></li>
+<li class="chapter" data-level="10.3.4" data-path="chapter-1-introduction.html"><a href="chapter-1-introduction.html#interpreting-data"><i class="fa fa-check"></i><b>10.3.4</b> Interpreting Data</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="chapter-10-conclusion.html"><a href="chapter-10-conclusion.html#getting-in-touch"><i class="fa fa-check"></i><b>10.4</b> Getting in Touch</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="/1e">Read first edition instead.</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science at the Command Line, 2e</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-3-obtaining-data" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Obtaining Data</h1>
+<p>This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. We assume that the data that is needed to solve the data science problem at hand already exists at some location in some form. Our goal is to get this data onto your computer (or into your Data Science Toolbox) in a form that we can work with.</p>
+<p>According to the Unix philosophy, text is a universal interface. Almost every command-line tool takes text as input, produces text as output, or both. This is the main reason why command-line tools can work so well together. However, as we’ll see, even just text can come in multiple forms.</p>
+<p>Data can be obtained in several ways—for example by downloading it from a server, by querying a database, or by connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel. In this chapter, we discuss several tools that help tackle this from the command line, including: <code>curl</code> <span class="citation">(Stenberg <a href="references.html#ref-curl" role="doc-biblioref">2012</a>)</span>, <code>in2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-in2csv" role="doc-biblioref">2014</a><a href="references.html#ref-in2csv" role="doc-biblioref">b</a>)</span>, <code>sql2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-sql2csv" role="doc-biblioref">2014</a><a href="references.html#ref-sql2csv" role="doc-biblioref">c</a>)</span>, and <code>tar</code> <span class="citation">(Bailey, Eggert, and Poznyakoff <a href="references.html#ref-tar" role="doc-biblioref">2014</a>)</span>.</p>
+<div id="overview" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Obtain data from the Internet</li>
+<li>Query databases</li>
+<li>Connect to Web APIs</li>
+<li>Decompress files</li>
+<li>Convert Microsoft Excel spreadsheets into usable data</li>
+</ul>
+</div>
+<div id="copying-local-files-to-the-data-science-toolbox" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Copying Local Files to the Data Science Toolbox</h2>
+<p>A common situation is that you already have the necessary files on your own computer. This section explains how you can get those files onto the local or remote version of the Data Science Toolbox.</p>
+<div id="local-version-of-data-science-toolbox" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Local Version of Data Science Toolbox</h3>
+<p>We mentioned in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a> that the Vagrant version of the Data Science Toolbox is an isolated virtual environment. Luckily there is one exception to that: files can be transfered in and out the Data Science Toolbox. The local directory from which you ran <code>vagrant up</code> (which is the one that contains the file <em>Vagrantfile</em>), is mapped to a directory in the Data Science Toolbox. This directory is called <em>/vagrant</em>. Please note that this is not your home directory. Let us check the contents of this directory:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="chapter-3-obtaining-data.html#cb44-1"></a>$ <span class="fu">ls</span> -1 /vagrant</span>
+<span id="cb44-2"><a href="chapter-3-obtaining-data.html#cb44-2"></a><span class="ex">build</span></span>
+<span id="cb44-3"><a href="chapter-3-obtaining-data.html#cb44-3"></a><span class="ex">Vagrantfile</span></span></code></pre></div>
+<p>If you have a file on your local computer, and you want to apply some command-line tools to it, all you have to do is copy or move the file to that directory. Let’s assume that you have a file called <em>logs.csv</em> on your Desktop. If you are running Linux or macOS, execute the following command on your operating system (and not inside the Data Science Toolbox):</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="chapter-3-obtaining-data.html#cb45-1"></a>$ <span class="fu">cp</span> ~/Desktop/logs.csv .</span></code></pre></div>
+<p>And if you are running Windows, you can run the following commands on the command prompt:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb46-1"><a href="chapter-3-obtaining-data.html#cb46-1"></a>&gt; <span class="fu">cd</span> %UserProfile%\Desktop</span>
+<span id="cb46-2"><a href="chapter-3-obtaining-data.html#cb46-2"></a>&gt; <span class="fu">copy</span> logs.<span class="fu">csv</span> MyDataScienceToolbox\</span></code></pre></div>
+<p>You may also drag-and-drop the file into the directory using Windows Explorer.</p>
+<p>The file is now located in the directory <em>/vagrant</em>. It is a good idea to keep your data in a separate directory, like we have <em>~/book/ch03/data</em>. So, after you have copied the file, you can move it by running:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="chapter-3-obtaining-data.html#cb47-1"></a>$ <span class="fu">mv</span> /vagrant/logs.csv ~/book/ch03/data</span>
+<span id="cb47-2"><a href="chapter-3-obtaining-data.html#cb47-2"></a>$ <span class="bu">cd</span> ~/book/ch03</span>
+<span id="cb47-3"><a href="chapter-3-obtaining-data.html#cb47-3"></a>$ <span class="fu">cat</span> data/logs.csv</span></code></pre></div>
+</div>
+<div id="remote-version-of-data-science-toolbox" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Remote Version of Data Science Toolbox</h3>
+<p>If you are running Linux or macOS, you can use <code>scp</code> <span class="citation">(Rinne and Ylonen <a href="references.html#ref-scp" role="doc-biblioref">2014</a>)</span>, which stands for <em>secure copy</em>, to copy files onto the EC2 instance. You will need the same key pair file that you used to login to the EC2 instance.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="chapter-3-obtaining-data.html#cb48-1"></a>$ <span class="fu">scp</span> -i  mykey.pem ~/Desktop/logs.csv \</span>
+<span id="cb48-2"><a href="chapter-3-obtaining-data.html#cb48-2"></a><span class="op">&gt;</span> ubuntu@ec2-184-73-72-150.compute-1.amazonaws.com:data</span></code></pre></div>
+<p>Replace the host name in the example <em>ec2-184-73-72-150.compute-1.amazonaws.com</em> with the value you see on the EC2 overview page in the AWS console.</p>
+</div>
+</div>
+<div id="decompressing-files" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Decompressing Files</h2>
+<p>If the original data set is very large or it’s a collection of many files, the file may be a (compressed) archive. Data sets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.</p>
+<p>Common file extensions of compressed archives are: <em>.tar.gz</em>, <em>.zip</em>, and <em>.rar</em>. To decompress these, you would use the command-line tools <code>tar</code> <span class="citation">(Bailey, Eggert, and Poznyakoff <a href="references.html#ref-tar" role="doc-biblioref">2014</a>)</span>, <code>unzip</code> <span class="citation">(Smith <a href="references.html#ref-unzip" role="doc-biblioref">2009</a>)</span>, and <code>unrar</code> <span class="citation">(Asselstine, Scheurer, and Winkelmann <a href="references.html#ref-unrar" role="doc-biblioref">2014</a>)</span>, respectively. There exists a few more, though less common, file extensions for which you would need yet other tools. For example, in order to extract a file named <em>logs.tar.gz</em>, you would use:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="chapter-3-obtaining-data.html#cb49-1"></a>$ <span class="bu">cd</span> ~/book/ch03</span>
+<span id="cb49-2"><a href="chapter-3-obtaining-data.html#cb49-2"></a>$ <span class="fu">tar</span> -xzvf data/logs.tar.gz</span></code></pre></div>
+<p>Indeed, <code>tar</code> is notorious for its many command-line arguments. In this case, the four command-line arguments <code>x</code>, <code>z</code>, <code>v</code>, and <code>f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm, be <em>verbose</em> and use file <em>logs.tar.gz</em>. In time, you’ll get used to typing these four characters, but there’s a more convenient way.</p>
+<p>Rather than remembering the different command-line tools and their options, there’s a handy script called <code>unpack</code> <span class="citation">(Brisbin <a href="references.html#ref-unpack" role="doc-biblioref">2013</a>)</span>, which will decompress many different formats. <code>unpack</code> looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.</p>
+<p>The <code>unpack</code> tool is part of the Data Science Toolbox. Remember that you can look up how it can be installed in the appendix. Example <a href="chapter-3-obtaining-data.html#exm:script-unpack">3.1</a> shows the source of <code>unpack</code>. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.</p>
+
+<div class="example">
+<span id="exm:script-unpack" class="example"><strong>Example 3.1  (Decompress various file formats)  </strong></span>
+</div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="chapter-3-obtaining-data.html#cb50-1"></a><span class="co">#!/usr/bin/env bash</span></span>
+<span id="cb50-2"><a href="chapter-3-obtaining-data.html#cb50-2"></a><span class="co"># unpack: Extract common file formats</span></span>
+<span id="cb50-3"><a href="chapter-3-obtaining-data.html#cb50-3"></a></span>
+<span id="cb50-4"><a href="chapter-3-obtaining-data.html#cb50-4"></a><span class="co"># Display usage if no parameters given</span></span>
+<span id="cb50-5"><a href="chapter-3-obtaining-data.html#cb50-5"></a><span class="kw">if [[</span> <span class="ot">-z</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="kw"> ]]</span>; <span class="kw">then</span></span>
+<span id="cb50-6"><a href="chapter-3-obtaining-data.html#cb50-6"></a>    <span class="bu">echo</span> <span class="st">&quot; </span><span class="va">${0##</span>*/<span class="va">}</span><span class="st"> &lt;archive&gt; - extract common file formats)&quot;</span></span>
+<span id="cb50-7"><a href="chapter-3-obtaining-data.html#cb50-7"></a>    <span class="bu">exit</span></span>
+<span id="cb50-8"><a href="chapter-3-obtaining-data.html#cb50-8"></a><span class="kw">fi</span></span>
+<span id="cb50-9"><a href="chapter-3-obtaining-data.html#cb50-9"></a></span>
+<span id="cb50-10"><a href="chapter-3-obtaining-data.html#cb50-10"></a><span class="co"># Required program(s)</span></span>
+<span id="cb50-11"><a href="chapter-3-obtaining-data.html#cb50-11"></a><span class="va">req_progs=(</span>7z unrar unzip<span class="va">)</span></span>
+<span id="cb50-12"><a href="chapter-3-obtaining-data.html#cb50-12"></a><span class="kw">for</span> <span class="ex">p</span> in <span class="va">${req_progs[@]}</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb50-13"><a href="chapter-3-obtaining-data.html#cb50-13"></a>    <span class="bu">hash</span> <span class="st">&quot;</span><span class="va">$p</span><span class="st">&quot;</span> <span class="op">2&gt;</span><span class="kw">&amp;</span><span class="ex">-</span> <span class="kw">||</span> <span class="kw">\</span></span>
+<span id="cb50-14"><a href="chapter-3-obtaining-data.html#cb50-14"></a>    <span class="kw">{</span> <span class="bu">echo</span> <span class="op">&gt;&amp;2</span> <span class="st">&quot; Required program </span><span class="dt">\&quot;</span><span class="va">$p</span><span class="dt">\&quot;</span><span class="st"> not installed.&quot;</span><span class="kw">;</span> <span class="bu">exit</span> 1<span class="kw">;</span> <span class="kw">}</span></span>
+<span id="cb50-15"><a href="chapter-3-obtaining-data.html#cb50-15"></a><span class="kw">done</span></span>
+<span id="cb50-16"><a href="chapter-3-obtaining-data.html#cb50-16"></a></span>
+<span id="cb50-17"><a href="chapter-3-obtaining-data.html#cb50-17"></a><span class="co"># Test if file exists</span></span>
+<span id="cb50-18"><a href="chapter-3-obtaining-data.html#cb50-18"></a><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb50-19"><a href="chapter-3-obtaining-data.html#cb50-19"></a>    <span class="bu">echo</span> <span class="st">&quot;File &quot;</span><span class="va">$@</span><span class="st">&quot; doesn&#39;t exist&quot;</span></span>
+<span id="cb50-20"><a href="chapter-3-obtaining-data.html#cb50-20"></a>    <span class="bu">exit</span></span>
+<span id="cb50-21"><a href="chapter-3-obtaining-data.html#cb50-21"></a><span class="kw">fi</span></span>
+<span id="cb50-22"><a href="chapter-3-obtaining-data.html#cb50-22"></a></span>
+<span id="cb50-23"><a href="chapter-3-obtaining-data.html#cb50-23"></a><span class="co"># Extract file by using extension as reference</span></span>
+<span id="cb50-24"><a href="chapter-3-obtaining-data.html#cb50-24"></a><span class="kw">case</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="kw"> in</span></span>
+<span id="cb50-25"><a href="chapter-3-obtaining-data.html#cb50-25"></a>    *.7z <span class="kw">)</span> <span class="ex">7z</span> x <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-26"><a href="chapter-3-obtaining-data.html#cb50-26"></a>    <span class="ex">*.tar.bz2</span> ) <span class="fu">tar</span> xvjf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-27"><a href="chapter-3-obtaining-data.html#cb50-27"></a>    <span class="ex">*.bz2</span> ) <span class="fu">bunzip2</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-28"><a href="chapter-3-obtaining-data.html#cb50-28"></a>    <span class="ex">*.deb</span> ) <span class="fu">ar</span> vx <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-29"><a href="chapter-3-obtaining-data.html#cb50-29"></a>    <span class="ex">*.tar.gz</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-30"><a href="chapter-3-obtaining-data.html#cb50-30"></a>    <span class="ex">*.gz</span> ) <span class="fu">gunzip</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-31"><a href="chapter-3-obtaining-data.html#cb50-31"></a>    <span class="ex">*.tar</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-32"><a href="chapter-3-obtaining-data.html#cb50-32"></a>    <span class="ex">*.tbz2</span> ) <span class="fu">tar</span> xvjf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-33"><a href="chapter-3-obtaining-data.html#cb50-33"></a>    <span class="ex">*.tar.xz</span> ) <span class="fu">tar</span> xvf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-34"><a href="chapter-3-obtaining-data.html#cb50-34"></a>    <span class="ex">*.tgz</span> ) <span class="fu">tar</span> xvzf <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-35"><a href="chapter-3-obtaining-data.html#cb50-35"></a>    <span class="ex">*.rar</span> ) <span class="ex">unrar</span> x <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-36"><a href="chapter-3-obtaining-data.html#cb50-36"></a>    <span class="ex">*.zip</span> ) <span class="fu">unzip</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-37"><a href="chapter-3-obtaining-data.html#cb50-37"></a>    <span class="ex">*.Z</span> ) <span class="ex">uncompress</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-38"><a href="chapter-3-obtaining-data.html#cb50-38"></a>    <span class="ex">*</span> ) <span class="bu">echo</span> <span class="st">&quot; Unsupported file format&quot;</span> <span class="kw">;;</span></span>
+<span id="cb50-39"><a href="chapter-3-obtaining-data.html#cb50-39"></a><span class="kw">esac</span></span></code></pre></div>
+<p>Now, in order to decompress this same file, you would simply use:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="chapter-3-obtaining-data.html#cb51-1"></a>$ <span class="ex">unpack</span> logs.tar.gz</span></code></pre></div>
+</div>
+<div id="converting-microsoft-excel-spreadsheets" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Converting Microsoft Excel Spreadsheets</h2>
+<p>For many people, Microsoft Excel offers an intuitive way to work with small data sets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (<em>.xls</em>) or as a collection of compressed XML files (<em>.xlsx</em>). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable data sets just because they are stored this way.</p>
+<p>Luckily, there is a command-line tool called <code>in2csv</code> <span class="citation">(Groskopf <a href="references.html#ref-in2csv" role="doc-biblioref">2014</a><a href="references.html#ref-in2csv" role="doc-biblioref">b</a>)</span>, which is able to convert Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. <a href="http://www.ietf.org/rfc/rfc4180.txt">RFC 4180</a> defines the CSV format according to the following three points:</p>
+<ol style="list-style-type: decimal">
+<li><p>Each record is located on a separate line, delimited by a line break (CRLF). For example:</p>
+<pre><code>aaa,bbb,ccc CRLF
+zzz,yyy,xxx CRLF</code></pre></li>
+<li><p>The last record in the file may or may not have an ending line break. For example:</p>
+<pre><code>aaa,bbb,ccc CRLF
+zzz,yyy,xxx</code></pre></li>
+<li><p>There maybe an optional header line appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file (the presence or absence of the header line should be indicated via the optional header parameter of this MIME type). For example:</p>
+<pre><code>field_name,field_name,field_name CRLF
+aaa,bbb,ccc CRLF
+zzz,yyy,xxx CRLF</code></pre></li>
+</ol>
+<p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the top 250 movies from the Internet Movie Database (IMDb). The file is named <em>imdb-250.xlsx</em> and can be obtained from <a href="http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2" class="uri">http://www.overthinkingit.com/2011/10/11/imdb-top-250-movies-4th-edition/2</a>. To extract its data, we invoke <code>in2csv</code> as follows:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="chapter-3-obtaining-data.html#cb55-1"></a>$ <span class="bu">cd</span> book/ch03</span>
+<span id="cb55-2"><a href="chapter-3-obtaining-data.html#cb55-2"></a>$ <span class="ex">in2csv</span> data/imdb-250.xlsx <span class="op">&gt;</span> data/imdb-250.csv</span></code></pre></div>
+<p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case. If we were to pipe the data into <code>in2csv</code>, we would have to specify the format explicitly. Let’s look at the data:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="chapter-3-obtaining-data.html#cb56-1"></a>$ <span class="ex">in2csv</span> imdb-250.xlsx <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="fu">cut</span> -c1-80</span>
+<span id="cb56-2"><a href="chapter-3-obtaining-data.html#cb56-2"></a><span class="ex">Title</span>,title trim,Year,Rank,Rank (desc),<span class="ex">Rating</span>,New in 2011 from 2010?,2010 rank,R</span>
+<span id="cb56-3"><a href="chapter-3-obtaining-data.html#cb56-3"></a><span class="ex">Sherlock</span> Jr. (1924),<span class="ex">SherlockJr.</span>(1924),<span class="ex">1924</span>,221,30,8,y,n/a,n/a,</span>
+<span id="cb56-4"><a href="chapter-3-obtaining-data.html#cb56-4"></a><span class="ex">The</span> Passion of Joan of Arc (1928),<span class="ex">ThePassionofJoanofArc</span>(1928),<span class="ex">1928</span>,212,39,8,y,n/</span>
+<span id="cb56-5"><a href="chapter-3-obtaining-data.html#cb56-5"></a><span class="ex">His</span> Girl Friday (1940),<span class="ex">HisGirlFriday</span>(1940),<span class="ex">1940</span>,250,1,8,y,n/a,n/a,</span>
+<span id="cb56-6"><a href="chapter-3-obtaining-data.html#cb56-6"></a><span class="ex">Tokyo</span> Story (1953),<span class="ex">TokyoStory</span>(1953),<span class="ex">1953</span>,248,3,8,y,n/a,n/a,</span>
+<span id="cb56-7"><a href="chapter-3-obtaining-data.html#cb56-7"></a><span class="ex">The</span> Man Who Shot Liberty Valance (1962),<span class="ex">TheManWhoShotLibertyValance</span>(1962),<span class="ex">1962</span>,2</span>
+<span id="cb56-8"><a href="chapter-3-obtaining-data.html#cb56-8"></a><span class="ex">Persona</span> (1966),<span class="ex">Persona</span>(1966),<span class="ex">1966</span>,200,51,8,y,n/a,n/a,</span>
+<span id="cb56-9"><a href="chapter-3-obtaining-data.html#cb56-9"></a><span class="ex">Stalker</span> (1979),<span class="ex">Stalker</span>(1979),<span class="ex">1979</span>,243,8,8,y,n/a,n/a,</span>
+<span id="cb56-10"><a href="chapter-3-obtaining-data.html#cb56-10"></a><span class="ex">Fanny</span> and Alexander (1982),<span class="ex">FannyandAlexander</span>(1982),<span class="ex">1982</span>,210,41,8,y,n/a,n/a,</span>
+<span id="cb56-11"><a href="chapter-3-obtaining-data.html#cb56-11"></a><span class="ex">Beauty</span> and the Beast (1991),<span class="ex">BeautyandtheBeast</span>(1991),<span class="ex">1991</span>,249,2,8,y,n/a,n/a,</span></code></pre></div>
+<p>As you can see, CSV by default is not too readable. You can pipe the data to a tool called <code>csvlook</code> <span class="citation">(Groskopf <a href="references.html#ref-csvlook" role="doc-biblioref">2014</a><a href="references.html#ref-csvlook" role="doc-biblioref">d</a>)</span>, which will nicely format the data into a table. Here, we’ll display a subset of the columns using <code>csvcut</code> such that the table fits on the page:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="chapter-3-obtaining-data.html#cb57-1"></a>$ <span class="ex">in2csv</span> data/imdb-250.xlsx <span class="kw">|</span> <span class="fu">head</span> <span class="kw">|</span> <span class="ex">csvcut</span> -c Title,Year,Rating <span class="kw">|</span> <span class="ex">csvlook</span></span>
+<span id="cb57-2"><a href="chapter-3-obtaining-data.html#cb57-2"></a><span class="kw">|</span><span class="ex">------------------------------------------+------+---------</span><span class="kw">|</span></span>
+<span id="cb57-3"><a href="chapter-3-obtaining-data.html#cb57-3"></a><span class="kw">|</span>  <span class="ex">Title</span>                                   <span class="kw">|</span> <span class="ex">Year</span> <span class="kw">|</span> <span class="ex">Rating</span>  <span class="kw">|</span></span>
+<span id="cb57-4"><a href="chapter-3-obtaining-data.html#cb57-4"></a><span class="kw">|</span><span class="ex">------------------------------------------+------+---------</span><span class="kw">|</span></span>
+<span id="cb57-5"><a href="chapter-3-obtaining-data.html#cb57-5"></a><span class="kw">|</span>  <span class="ex">Sherlock</span> Jr. (1924)                     <span class="kw">|</span> <span class="ex">1924</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-6"><a href="chapter-3-obtaining-data.html#cb57-6"></a><span class="kw">|</span>  <span class="ex">The</span> Passion of Joan of Arc (1928)       <span class="kw">|</span> <span class="ex">1928</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-7"><a href="chapter-3-obtaining-data.html#cb57-7"></a><span class="kw">|</span>  <span class="ex">His</span> Girl Friday (1940)                  <span class="kw">|</span> <span class="ex">1940</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-8"><a href="chapter-3-obtaining-data.html#cb57-8"></a><span class="kw">|</span>  <span class="ex">Tokyo</span> Story (1953)                      <span class="kw">|</span> <span class="ex">1953</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-9"><a href="chapter-3-obtaining-data.html#cb57-9"></a><span class="kw">|</span>  <span class="ex">The</span> Man Who Shot Liberty Valance (1962) <span class="kw">|</span> <span class="ex">1962</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-10"><a href="chapter-3-obtaining-data.html#cb57-10"></a><span class="kw">|</span>  <span class="ex">Persona</span> (1966)                          <span class="kw">|</span> <span class="ex">1966</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-11"><a href="chapter-3-obtaining-data.html#cb57-11"></a><span class="kw">|</span>  <span class="ex">Stalker</span> (1979)                          <span class="kw">|</span> <span class="ex">1979</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-12"><a href="chapter-3-obtaining-data.html#cb57-12"></a><span class="kw">|</span>  <span class="ex">Fanny</span> and Alexander (1982)              <span class="kw">|</span> <span class="ex">1982</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-13"><a href="chapter-3-obtaining-data.html#cb57-13"></a><span class="kw">|</span>  <span class="ex">Beauty</span> and the Beast (1991)             <span class="kw">|</span> <span class="ex">1991</span> <span class="kw">|</span> <span class="ex">8</span>       <span class="kw">|</span></span>
+<span id="cb57-14"><a href="chapter-3-obtaining-data.html#cb57-14"></a><span class="kw">|</span><span class="ex">------------------------------------------+------+---------</span><span class="kw">|</span></span></code></pre></div>
+<p>A spreadsheet can contain multiple worksheets. By default, <code>in2csv</code> extracts the first worksheet. To extract a different worksheet, you need to pass the name of worksheet to the <code>--sheet</code> option.</p>
+<p>The tools <code>in2csv</code>, <code>csvcut</code>, and <code>csvlook</code> are actually part of Csvkit, which is collection of command-line tools to work with CSV data. Csvkit will be used quite often in this book because it has so many valuable tools. If you’re running the Data Science Toolbox, you already have Csvkit installed. Otherwise, see the appendix for instructions on how to install it.</p>
+
+<div class="rmdnote">
+An alternative approach to <code>in2csv</code> is to open the spreadsheet in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually export it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and is not automatable. Furthermore, when you are working on the command line of a remote server, chances are that you don’t have such an application available.
+</div>
+</div>
+<div id="querying-relational-databases" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Querying Relational Databases</h2>
+<p>Most companies store their data in a relational database. Examples of relational databases are MySQL, PostgreSQL, and SQLite. These databases all have a slightly different way of interfacing with them. Some provide a command-line tool or a command-line interface, while others do not. Moreover, they are not very consistent when it comes to their usage and output.</p>
+<p>Fortunately, there is a command-line tool called <code>sql2csv</code>, which is part of the Csvkit suite. Because it leverages the Python SQLAlchemy package, we only have to use one tool to execute queries on many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of <code>sql2csv</code> is, as its name suggests, in CSV format.</p>
+<p>We can obtain data from relational databases by executing a <code>SELECT</code> query on them. (<code>sql2csv</code> also support <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code> queries, but that’s not the purpose of this chapter.) To select a specific set of data from an SQLite database named <em>iris.db</em>, <code>sql2csv</code> can be invoked as follows:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb58-1"><a href="chapter-3-obtaining-data.html#cb58-1"></a>$ <span class="ex">sql2csv</span> --db <span class="st">&#39;sqlite:///data/iris.db&#39;</span> --query <span class="st">&#39;SELECT * FROM iris &#39;</span>\</span>
+<span id="cb58-2"><a href="chapter-3-obtaining-data.html#cb58-2"></a><span class="op">&gt;</span> <span class="st">&#39;WHERE sepal_length &gt; 7.5&#39;</span></span>
+<span id="cb58-3"><a href="chapter-3-obtaining-data.html#cb58-3"></a><span class="ex">sepal_length</span>,sepal_width,petal_length,petal_width,species</span>
+<span id="cb58-4"><a href="chapter-3-obtaining-data.html#cb58-4"></a><span class="ex">7.6</span>,3.0,6.6,2.1,Iris-virginica</span>
+<span id="cb58-5"><a href="chapter-3-obtaining-data.html#cb58-5"></a><span class="ex">7.7</span>,3.8,6.7,2.2,Iris-virginica</span>
+<span id="cb58-6"><a href="chapter-3-obtaining-data.html#cb58-6"></a><span class="ex">7.7</span>,2.6,6.9,2.3,Iris-virginica</span>
+<span id="cb58-7"><a href="chapter-3-obtaining-data.html#cb58-7"></a><span class="ex">7.7</span>,2.8,6.7,2.0,Iris-virginica</span>
+<span id="cb58-8"><a href="chapter-3-obtaining-data.html#cb58-8"></a><span class="ex">7.9</span>,3.8,6.4,2.0,Iris-virginica</span>
+<span id="cb58-9"><a href="chapter-3-obtaining-data.html#cb58-9"></a><span class="ex">7.7</span>,3.0,6.1,2.3,Iris-virginica</span></code></pre></div>
+<p>Here, we are selecting all rows where <code>sepal\_length</code> is larger than 7.5. The <code>--db</code> option specifies the database URL, of which the typical form is: <code>dialect+driver://username:password@host:port/database</code>.</p>
+</div>
+<div id="downloading-from-the-internet" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Downloading from the Internet</h2>
+<p>The Internet provides without a doubt the largest resource for data. This data is available in various forms, using various protocols. The command-line tool cURL <span class="citation">(Stenberg <a href="references.html#ref-curl" role="doc-biblioref">2012</a>)</span> can be considered the command line’s Swiss Army knife when it comes to downloading data from the Internet.</p>
+<p>When you access a URL, which stands for <em>uniform resource locator</em>, through your browser, the data that is being downloaded can be interpreted. For example, an HTML file is rendered as a website, an MP3 file may be automatically played, and a PDF file may be automatically downloaded or opened by a viewer. However, when cURL is used to access a URL, the data is downloaded as is printed to standard output. Other command-line tools may then be used to process this data further.</p>
+<p>The easiest invocation of cURL is to simply specify a URL as a command-line argument. For example, to download the book <em>Adventures of Huckleberry Finn</em> by Mark Twain from Project Gutenberg, we can run the following command:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb59-1"><a href="chapter-3-obtaining-data.html#cb59-1"></a>$ <span class="ex">curl</span> -s http://www.gutenberg.org/files/76/76-0.txt <span class="kw">|</span> <span class="fu">head</span> -n 10</span>
+<span id="cb59-2"><a href="chapter-3-obtaining-data.html#cb59-2"></a></span>
+<span id="cb59-3"><a href="chapter-3-obtaining-data.html#cb59-3"></a><span class="ex">The</span> Project Gutenberg EBook of Adventures of Huckleberry Finn, Complete</span>
+<span id="cb59-4"><a href="chapter-3-obtaining-data.html#cb59-4"></a><span class="ex">by</span> Mark Twain (Samuel Clemens)</span>
+<span id="cb59-5"><a href="chapter-3-obtaining-data.html#cb59-5"></a></span>
+<span id="cb59-6"><a href="chapter-3-obtaining-data.html#cb59-6"></a><span class="ex">This</span> eBook is for the use of anyone anywhere at no cost and with almost</span>
+<span id="cb59-7"><a href="chapter-3-obtaining-data.html#cb59-7"></a><span class="ex">no</span> restrictions whatsoever. You may copy it, give it away or re-use</span>
+<span id="cb59-8"><a href="chapter-3-obtaining-data.html#cb59-8"></a><span class="ex">it</span> under the terms of the Project Gutenberg License included with this</span>
+<span id="cb59-9"><a href="chapter-3-obtaining-data.html#cb59-9"></a><span class="ex">eBook</span> or online at www.gutenberg.net</span></code></pre></div>
+<p>By default, cURL outputs a progress meter that shows how the download rate and the expected time of completion. If you are piping the output directly to another command-line tool, such as <code>head</code>, be sure to specify the <code>-s</code> command-line argument, which stands for <em>silent</em>, so that the progress meter is disabled. Compare, for example, the output with the following command:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb60-1"><a href="chapter-3-obtaining-data.html#cb60-1"></a>$ <span class="ex">curl</span> http://www.gutenberg.org/files/76/76-0.txt <span class="kw">|</span> <span class="fu">head</span> -n 10</span>
+<span id="cb60-2"><a href="chapter-3-obtaining-data.html#cb60-2"></a>  <span class="ex">%</span> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span>
+<span id="cb60-3"><a href="chapter-3-obtaining-data.html#cb60-3"></a>                                 <span class="ex">Dload</span>  Upload   Total   Spent    Left  Speed</span>
+<span id="cb60-4"><a href="chapter-3-obtaining-data.html#cb60-4"></a></span>
+<span id="cb60-5"><a href="chapter-3-obtaining-data.html#cb60-5"></a>  <span class="ex">0</span>     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--</span>
+<span id="cb60-6"><a href="chapter-3-obtaining-data.html#cb60-6"></a></span>
+<span id="cb60-7"><a href="chapter-3-obtaining-data.html#cb60-7"></a><span class="ex">The</span> Project Gutenberg EBook of Adventures of Huckleberry Finn, Complete</span>
+<span id="cb60-8"><a href="chapter-3-obtaining-data.html#cb60-8"></a><span class="ex">by</span> Mark Twain (Samuel Clemens)</span>
+<span id="cb60-9"><a href="chapter-3-obtaining-data.html#cb60-9"></a></span>
+<span id="cb60-10"><a href="chapter-3-obtaining-data.html#cb60-10"></a><span class="ex">This</span> eBook is for the use of anyone anywhere at no cost and with almost</span>
+<span id="cb60-11"><a href="chapter-3-obtaining-data.html#cb60-11"></a><span class="ex">no</span> restrictions whatsoever. You may copy it, give it away or re-use</span>
+<span id="cb60-12"><a href="chapter-3-obtaining-data.html#cb60-12"></a><span class="ex">it</span> under the terms of the Project Gutenberg License included with this</span>
+<span id="cb60-13"><a href="chapter-3-obtaining-data.html#cb60-13"></a><span class="ex">eBook</span> or online at www.gutenberg.net</span></code></pre></div>
+<p>Note that the output of the second command, where we do not disable the progress meter, contains the unwanted text and even an error message. If you save the data to a file, then you do not need to necessarily specify the <code>-s</code> option:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb61-1"><a href="chapter-3-obtaining-data.html#cb61-1"></a>$ <span class="ex">curl</span> http://www.gutenberg.org/files/76/76-0.txt <span class="op">&gt;</span> data/finn.txt</span></code></pre></div>
+<p>You can also save the data by explicitly specifying the output file with the <code>-o</code> option:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb62-1"><a href="chapter-3-obtaining-data.html#cb62-1"></a>$ <span class="ex">curl</span> -s http://www.gutenberg.org/files/76/76-0.txt -o data/finn.txt</span></code></pre></div>
+<p>When downloading data from the Internet, the URL will most likely use the protocols HTTP or HTTPS. To download from an FTP server, which stands for File Transfer Protocol, you use cURL in exactly the same way. When the URL is password protected, you can specify a username and a password as follows:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb63-1"><a href="chapter-3-obtaining-data.html#cb63-1"></a>$ <span class="ex">curl</span> -u username:password ftp://host/file</span></code></pre></div>
+<p>If the specified URL is a directory, <code>curl</code> will list the contents of that directory.</p>
+<p>When you access a shortened URL, such as the ones that start with <em><a href="http://bit.ly/" class="uri">http://bit.ly/</a></em> or <em><a href="http://t.co/" class="uri">http://t.co/</a></em>, your browser automatically redirects you to the correct location. With <code>curl</code>, however, you need to specify the <code>-L</code> or <code>--location</code> option in order to be redirected:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb64-1"><a href="chapter-3-obtaining-data.html#cb64-1"></a>$ <span class="ex">curl</span> -L j.mp/locatbbar</span></code></pre></div>
+<p>If you do not specify the <code>-L</code> or <code>--location</code> option, you may get something like:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb65-1"><a href="chapter-3-obtaining-data.html#cb65-1"></a>$ <span class="ex">curl</span> j.mp/locatbbar</span>
+<span id="cb65-2"><a href="chapter-3-obtaining-data.html#cb65-2"></a><span class="op">&lt;</span><span class="ex">html</span><span class="op">&gt;</span></span>
+<span id="cb65-3"><a href="chapter-3-obtaining-data.html#cb65-3"></a><span class="op">&lt;</span><span class="fu">head</span><span class="op">&gt;</span></span>
+<span id="cb65-4"><a href="chapter-3-obtaining-data.html#cb65-4"></a><span class="op">&lt;</span><span class="ex">title</span><span class="op">&gt;</span>bit.ly<span class="op">&lt;</span>/title<span class="op">&gt;</span></span>
+<span id="cb65-5"><a href="chapter-3-obtaining-data.html#cb65-5"></a><span class="op">&lt;</span>/<span class="ex">head</span><span class="op">&gt;</span></span>
+<span id="cb65-6"><a href="chapter-3-obtaining-data.html#cb65-6"></a><span class="op">&lt;</span><span class="ex">body</span><span class="op">&gt;</span></span>
+<span id="cb65-7"><a href="chapter-3-obtaining-data.html#cb65-7"></a><span class="op">&lt;</span><span class="ex">a</span> href=<span class="st">&quot;http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_bo</span></span>
+<span id="cb65-8"><a href="chapter-3-obtaining-data.html#cb65-8"></a><span class="st">rder/area_ratio&quot;</span><span class="op">&gt;</span>moved here<span class="op">&lt;</span>/a<span class="op">&gt;</span></span>
+<span id="cb65-9"><a href="chapter-3-obtaining-data.html#cb65-9"></a><span class="op">&lt;</span>/<span class="ex">body</span><span class="op">&gt;</span></span></code></pre></div>
+<p>By specifying the <code>-I</code> or <code>--head</code> option, <code>curl</code> fetches only the HTTP header of the response:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb66-1"><a href="chapter-3-obtaining-data.html#cb66-1"></a>$ <span class="ex">curl</span> -I j.mp/locatbbar</span>
+<span id="cb66-2"><a href="chapter-3-obtaining-data.html#cb66-2"></a><span class="ex">HTTP/1.1</span> 301 Moved Permanently</span>
+<span id="cb66-3"><a href="chapter-3-obtaining-data.html#cb66-3"></a><span class="ex">Server</span>: nginx</span>
+<span id="cb66-4"><a href="chapter-3-obtaining-data.html#cb66-4"></a><span class="ex">Date</span>: Wed, 21 May 2014 18:50:28 GMT</span>
+<span id="cb66-5"><a href="chapter-3-obtaining-data.html#cb66-5"></a><span class="ex">Content-Type</span>: text/html<span class="kw">;</span> <span class="va">charset=</span>utf-8</span>
+<span id="cb66-6"><a href="chapter-3-obtaining-data.html#cb66-6"></a><span class="ex">Connection</span>: keep-alive</span>
+<span id="cb66-7"><a href="chapter-3-obtaining-data.html#cb66-7"></a><span class="ex">Cache-Control</span>: private<span class="kw">;</span> <span class="ex">max-age</span>=90</span>
+<span id="cb66-8"><a href="chapter-3-obtaining-data.html#cb66-8"></a><span class="ex">Content-Length</span>: 175</span>
+<span id="cb66-9"><a href="chapter-3-obtaining-data.html#cb66-9"></a><span class="ex">Location</span>: http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_bo</span>
+<span id="cb66-10"><a href="chapter-3-obtaining-data.html#cb66-10"></a><span class="ex">Mime-Version</span>: 1.0</span>
+<span id="cb66-11"><a href="chapter-3-obtaining-data.html#cb66-11"></a><span class="ex">Set-Cookie</span>: _bit=537cf574-002ba-07d79-2e1cf10a<span class="kw">;</span><span class="va">domain=</span>.j.mp;<span class="va">expires=</span>Mon <span class="ex">Nov</span> 17</span></code></pre></div>
+<p>The first line indicates the HTTP status code, which is 301 (moved permanently) in this case. You can also see the location this URL redirects to: <a href="http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio" class="uri">http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio</a>. Inspecting the header and getting the status code is a useful debugging tool in case <code>curl</code> does not give you the expected result. Other common HTTP status codes include 404 (not found) and 403 (forbidden). This page lists all HTTP status codes: <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="uri">http://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a>.</p>
+<p>To conclude this section, cURL is a straight-forward command-line tool for downloading data from the Internet. Its three most common command-line arguments are <code>-s</code> to suppress the progress meter, <code>-u</code> to specify a username and password, and <code>-L</code> to automatically follow redirects. See its man page for more information.</p>
+</div>
+<div id="calling-a-web-api" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Calling a Web API</h2>
+<p>In the previous section we explained how to download individual files from the Internet. Another way data can come from the Internet is through a web API, which stands for <em>Application Programming Interface</em>. The number of APIs that are being offered by organizations is growing at increasing rate, which means a lot of interesting data for us data scientists.</p>
+<p>Web APIs are not meant to be presented in nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as <code>jq</code>. For example, the API from <a href="https://randomuser.me" class="uri">https://randomuser.me</a> returns data in the following JSON structure.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb67-1"><a href="chapter-3-obtaining-data.html#cb67-1"></a>$ <span class="ex">curl</span> -s https://randomuser.me/api/1.2/ <span class="kw">|</span> <span class="ex">jq</span> .</span>
+<span id="cb67-2"><a href="chapter-3-obtaining-data.html#cb67-2"></a><span class="kw">{</span></span>
+<span id="cb67-3"><a href="chapter-3-obtaining-data.html#cb67-3"></a>  <span class="st">&quot;results&quot;</span>:<span class="bu"> [</span></span>
+<span id="cb67-4"><a href="chapter-3-obtaining-data.html#cb67-4"></a>    {</span>
+<span id="cb67-5"><a href="chapter-3-obtaining-data.html#cb67-5"></a>      <span class="st">&quot;gender&quot;</span>: <span class="st">&quot;male&quot;</span>,</span>
+<span id="cb67-6"><a href="chapter-3-obtaining-data.html#cb67-6"></a>      <span class="st">&quot;name&quot;</span>: {</span>
+<span id="cb67-7"><a href="chapter-3-obtaining-data.html#cb67-7"></a>        <span class="st">&quot;title&quot;</span>: <span class="st">&quot;mr&quot;</span>,</span>
+<span id="cb67-8"><a href="chapter-3-obtaining-data.html#cb67-8"></a>        <span class="st">&quot;first&quot;</span>: <span class="st">&quot;jeffrey&quot;</span>,</span>
+<span id="cb67-9"><a href="chapter-3-obtaining-data.html#cb67-9"></a>        <span class="st">&quot;last&quot;</span>: <span class="st">&quot;lawson&quot;</span></span>
+<span id="cb67-10"><a href="chapter-3-obtaining-data.html#cb67-10"></a>      },</span>
+<span id="cb67-11"><a href="chapter-3-obtaining-data.html#cb67-11"></a>      <span class="st">&quot;location&quot;</span>: {</span>
+<span id="cb67-12"><a href="chapter-3-obtaining-data.html#cb67-12"></a>        <span class="st">&quot;street&quot;</span>: <span class="st">&quot;838 miller ave&quot;</span>,</span>
+<span id="cb67-13"><a href="chapter-3-obtaining-data.html#cb67-13"></a>        <span class="st">&quot;city&quot;</span>: <span class="st">&quot;washington&quot;</span>,</span>
+<span id="cb67-14"><a href="chapter-3-obtaining-data.html#cb67-14"></a>        <span class="st">&quot;state&quot;</span>: <span class="st">&quot;maryland&quot;</span>,</span>
+<span id="cb67-15"><a href="chapter-3-obtaining-data.html#cb67-15"></a>        <span class="st">&quot;postcode&quot;</span>: 81831,</span>
+<span id="cb67-16"><a href="chapter-3-obtaining-data.html#cb67-16"></a>        <span class="st">&quot;coordinates&quot;</span>: {</span>
+<span id="cb67-17"><a href="chapter-3-obtaining-data.html#cb67-17"></a>          <span class="st">&quot;latitude&quot;</span>: <span class="st">&quot;81.9488&quot;</span>,</span>
+<span id="cb67-18"><a href="chapter-3-obtaining-data.html#cb67-18"></a>          <span class="st">&quot;longitude&quot;</span>: <span class="st">&quot;-67.8247&quot;</span></span>
+<span id="cb67-19"><a href="chapter-3-obtaining-data.html#cb67-19"></a>        },</span>
+<span id="cb67-20"><a href="chapter-3-obtaining-data.html#cb67-20"></a>        <span class="st">&quot;timezone&quot;</span>: {</span>
+<span id="cb67-21"><a href="chapter-3-obtaining-data.html#cb67-21"></a>          <span class="st">&quot;offset&quot;</span>: <span class="st">&quot;+4:00&quot;</span>,</span>
+<span id="cb67-22"><a href="chapter-3-obtaining-data.html#cb67-22"></a>          <span class="st">&quot;description&quot;</span>: <span class="st">&quot;Abu Dhabi, Muscat, Baku, Tbilisi&quot;</span></span>
+<span id="cb67-23"><a href="chapter-3-obtaining-data.html#cb67-23"></a>        }</span>
+<span id="cb67-24"><a href="chapter-3-obtaining-data.html#cb67-24"></a>      },</span>
+<span id="cb67-25"><a href="chapter-3-obtaining-data.html#cb67-25"></a>      <span class="st">&quot;email&quot;</span>: <span class="st">&quot;jeffrey.lawson@example.com&quot;</span>,</span>
+<span id="cb67-26"><a href="chapter-3-obtaining-data.html#cb67-26"></a>      <span class="st">&quot;login&quot;</span>: {</span>
+<span id="cb67-27"><a href="chapter-3-obtaining-data.html#cb67-27"></a>        <span class="st">&quot;uuid&quot;</span>: <span class="st">&quot;78918f6c-2658-4915-bebf-bfaa61a1624c&quot;</span>,</span>
+<span id="cb67-28"><a href="chapter-3-obtaining-data.html#cb67-28"></a>        <span class="st">&quot;username&quot;</span>: <span class="st">&quot;silverzebra774&quot;</span>,</span>
+<span id="cb67-29"><a href="chapter-3-obtaining-data.html#cb67-29"></a>        <span class="st">&quot;password&quot;</span>: <span class="st">&quot;treble&quot;</span>,</span>
+<span id="cb67-30"><a href="chapter-3-obtaining-data.html#cb67-30"></a>        <span class="st">&quot;salt&quot;</span>: <span class="st">&quot;iAtIKhvB&quot;</span>,</span>
+<span id="cb67-31"><a href="chapter-3-obtaining-data.html#cb67-31"></a>        <span class="st">&quot;md5&quot;</span>: <span class="st">&quot;4c02abeca4d6ca4dbfc0ddb33dcef29f&quot;</span>,</span>
+<span id="cb67-32"><a href="chapter-3-obtaining-data.html#cb67-32"></a>        <span class="st">&quot;sha1&quot;</span>: <span class="st">&quot;36e109513abf73df460cead89b78c749abe908fa&quot;</span>,</span>
+<span id="cb67-33"><a href="chapter-3-obtaining-data.html#cb67-33"></a>        <span class="st">&quot;sha256&quot;</span>: <span class="st">&quot;0155d9e6cabedfc3ad0f21d18b3ca3e738a8f17811dd57dc3b4dd386cd021963&quot;</span></span>
+<span id="cb67-34"><a href="chapter-3-obtaining-data.html#cb67-34"></a>      },</span>
+<span id="cb67-35"><a href="chapter-3-obtaining-data.html#cb67-35"></a>      <span class="st">&quot;dob&quot;</span>: {</span>
+<span id="cb67-36"><a href="chapter-3-obtaining-data.html#cb67-36"></a>        <span class="st">&quot;date&quot;</span>: <span class="st">&quot;1996-07-04T02:49:46Z&quot;</span>,</span>
+<span id="cb67-37"><a href="chapter-3-obtaining-data.html#cb67-37"></a>        <span class="st">&quot;age&quot;</span>: 22</span>
+<span id="cb67-38"><a href="chapter-3-obtaining-data.html#cb67-38"></a>      },</span>
+<span id="cb67-39"><a href="chapter-3-obtaining-data.html#cb67-39"></a>      <span class="st">&quot;registered&quot;</span>: {</span>
+<span id="cb67-40"><a href="chapter-3-obtaining-data.html#cb67-40"></a>        <span class="st">&quot;date&quot;</span>: <span class="st">&quot;2013-01-13T13:37:21Z&quot;</span>,</span>
+<span id="cb67-41"><a href="chapter-3-obtaining-data.html#cb67-41"></a>        <span class="st">&quot;age&quot;</span>: 5</span>
+<span id="cb67-42"><a href="chapter-3-obtaining-data.html#cb67-42"></a>      },</span>
+<span id="cb67-43"><a href="chapter-3-obtaining-data.html#cb67-43"></a>      <span class="st">&quot;phone&quot;</span>: <span class="st">&quot;(406)-041-2792&quot;</span>,</span>
+<span id="cb67-44"><a href="chapter-3-obtaining-data.html#cb67-44"></a>      <span class="st">&quot;cell&quot;</span>: <span class="st">&quot;(831)-085-8264&quot;</span>,</span>
+<span id="cb67-45"><a href="chapter-3-obtaining-data.html#cb67-45"></a>      <span class="st">&quot;id&quot;</span>: {</span>
+<span id="cb67-46"><a href="chapter-3-obtaining-data.html#cb67-46"></a>        <span class="st">&quot;name&quot;</span>: <span class="st">&quot;SSN&quot;</span>,</span>
+<span id="cb67-47"><a href="chapter-3-obtaining-data.html#cb67-47"></a>        <span class="st">&quot;value&quot;</span>: <span class="st">&quot;629-40-9671&quot;</span></span>
+<span id="cb67-48"><a href="chapter-3-obtaining-data.html#cb67-48"></a>      },</span>
+<span id="cb67-49"><a href="chapter-3-obtaining-data.html#cb67-49"></a>      <span class="st">&quot;picture&quot;</span>: {</span>
+<span id="cb67-50"><a href="chapter-3-obtaining-data.html#cb67-50"></a>        <span class="st">&quot;large&quot;</span>: <span class="st">&quot;https://randomuser.me/api/portraits/men/62.jpg&quot;</span>,</span>
+<span id="cb67-51"><a href="chapter-3-obtaining-data.html#cb67-51"></a>        <span class="st">&quot;medium&quot;</span>: <span class="st">&quot;https://randomuser.me/api/portraits/med/men/62.jpg&quot;</span>,</span>
+<span id="cb67-52"><a href="chapter-3-obtaining-data.html#cb67-52"></a>        <span class="st">&quot;thumbnail&quot;</span>: <span class="st">&quot;https://randomuser.me/api/portraits/thumb/men/62.jpg&quot;</span></span>
+<span id="cb67-53"><a href="chapter-3-obtaining-data.html#cb67-53"></a>      },</span>
+<span id="cb67-54"><a href="chapter-3-obtaining-data.html#cb67-54"></a>      <span class="st">&quot;nat&quot;</span>: <span class="st">&quot;US&quot;</span></span>
+<span id="cb67-55"><a href="chapter-3-obtaining-data.html#cb67-55"></a>    }</span>
+<span id="cb67-56"><a href="chapter-3-obtaining-data.html#cb67-56"></a>  ],</span>
+<span id="cb67-57"><a href="chapter-3-obtaining-data.html#cb67-57"></a>  <span class="st">&quot;info&quot;</span>: {</span>
+<span id="cb67-58"><a href="chapter-3-obtaining-data.html#cb67-58"></a>    <span class="st">&quot;seed&quot;</span>: <span class="st">&quot;4bd9f66fd83a6ec7&quot;</span>,</span>
+<span id="cb67-59"><a href="chapter-3-obtaining-data.html#cb67-59"></a>    <span class="st">&quot;results&quot;</span>: 1,</span>
+<span id="cb67-60"><a href="chapter-3-obtaining-data.html#cb67-60"></a>    <span class="st">&quot;page&quot;</span>: 1,</span>
+<span id="cb67-61"><a href="chapter-3-obtaining-data.html#cb67-61"></a>    <span class="st">&quot;version&quot;</span>: <span class="st">&quot;1.2&quot;</span></span>
+<span id="cb67-62"><a href="chapter-3-obtaining-data.html#cb67-62"></a>  }</span>
+<span id="cb67-63"><a href="chapter-3-obtaining-data.html#cb67-63"></a>}</span></code></pre></div>
+<p>The data is piped to a command-line tool <code>jq</code> in order to display it in a nice way. <code>jq</code> has many more possibilities that we will explore in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a>.</p>
+<p>Some web APIs return data in a streaming manner. This means that once you connect to it, the data will continue to pour in forever. A well-known example is the Twitter “firehose”, which constantly streams all the tweets being sent around the world. Luckily, most command-line tools that we use also operate in a streaming matter, so that we also use this kind of data.</p>
+<p>Some APIs require you to log in using the OAuth protocol. There is a handy command-line tool called <code>curlicue</code> <span class="citation">(Foster <a href="references.html#ref-curlicue" role="doc-biblioref">2014</a>)</span> that assists in performing the so-called “OAuth dance”. Once this has been set up, it <code>curlicue</code> will call <code>curl</code> with the correct headers. First, you set things up once for a particular API with <code>curlicue-setup</code>, and then you can call that API using <code>curlicue</code>. For example, to use <code>curlicue</code> with the Twitter API you would run:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb68-1"><a href="chapter-3-obtaining-data.html#cb68-1"></a>$ <span class="ex">curlicue-setup</span> \</span>
+<span id="cb68-2"><a href="chapter-3-obtaining-data.html#cb68-2"></a><span class="op">&gt;</span> <span class="st">&#39;https://api.twitter.com/oauth/request_token&#39;</span> \</span>
+<span id="cb68-3"><a href="chapter-3-obtaining-data.html#cb68-3"></a><span class="op">&gt;</span> <span class="st">&#39;https://api.twitter.com/oauth/authorize?oauth_token=$oauth_token&#39;</span> \</span>
+<span id="cb68-4"><a href="chapter-3-obtaining-data.html#cb68-4"></a><span class="op">&gt;</span> <span class="st">&#39;https://api.twitter.com/oauth/access_token&#39;</span> \</span>
+<span id="cb68-5"><a href="chapter-3-obtaining-data.html#cb68-5"></a><span class="op">&gt;</span> credentials</span>
+<span id="cb68-6"><a href="chapter-3-obtaining-data.html#cb68-6"></a>$ <span class="ex">curlicue</span> -f credentials \</span>
+<span id="cb68-7"><a href="chapter-3-obtaining-data.html#cb68-7"></a><span class="op">&gt;</span> <span class="st">&#39;https://api.twitter.com/1/statuses/home_timeline.xml&#39;</span></span></code></pre></div>
+<p>For more popular APIs, there are specialized command-line tools available. These are wrappers that provide a convenient way to connect to the API. In <a href="chapter-9-modeling-data.html#chapter-9-modeling-data">Chapter 9</a>, for example, we’ll be using the command-line tool <code>bigmler</code> that only connects to BigML’s prediction API.</p>
+</div>
+<div id="further-reading" class="section level2" number="3.8">
+<h2><span class="header-section-number">3.8</span> Further Reading</h2>
+<ul>
+<li>Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.</li>
+<li>Wikipedia. 2014. “List of Http Status Codes.” <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="uri">http://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a>.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-2-getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-4-creating-reusable-command-line-tools.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "serif",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/03.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

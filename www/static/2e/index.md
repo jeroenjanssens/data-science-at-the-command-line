@@ -1,0 +1,18 @@
+---
+title: "Data Science at the Command Line, 2e"
+author: "Jeroen Janssens"
+date: "July 9, 2020"
+site: bookdown::bookdown_site
+documentclass: book
+biblio-style: apalike
+nocite: |
+  @Schutt2013, @Peek2002, @Heddings2006, @Molinaro2005, @HTTP, @docopt, @Rossant2013, @manpages, @Raymond2003, @Goyvaerts2012, @Dougherty1997, @Tange2011a, @Cortez2009, @commandlinefu, @Cooper2014, @Russell2013, @Warden2011
+link-citations: yes
+description: "This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data."
+cover-image: "images/cover.png"
+github-repo: "jeroenjanssens/data-science-at-the-command-line"
+---
+
+# Welcome {-}
+
+The second edition of Data Science at the Command Line is currently under construction. It is scheduled to be published by O’Reilly Media in October 2021. You’re welcome to take a look around.

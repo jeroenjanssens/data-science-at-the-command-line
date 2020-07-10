@@ -1,0 +1,9 @@
+baseURL = "https://www.datascienceatthecommandline.com/"
+languageCode = "en-us"
+title = "Data Science at the Command Line"
+theme = "hugo-dsatcl"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[params]
+  author = "Jeroen Janssens"
+  description = "This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data."
