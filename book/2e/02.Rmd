@@ -1,8 +1,8 @@
 # Getting Started {#chapter-2-getting-started}
 
-In this chapter we are going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
+In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
 
-First, we describe how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools. Subsequently, we explain the essential command-line concepts through examples.
+First, I describe how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools. Subsequently, I explain the essential command-line concepts through examples.
 
 By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.
 
@@ -15,7 +15,7 @@ In this chapter, you’ll learn:
 
 ## Installing the Docker Image {#docker-image}
 
-In this book we use many different command-line tools. Linux often comes with a whole bunch of command-line tools pre-installed. Moreover, Linux offers many packages that contain other, relevant tools. Installing these packages yourself is not too difficult. However, we also use tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, we encourage you to install a Docker image that was created specifically for this book.
+In this book we use many different command-line tools. Linux often comes with a whole bunch of command-line tools pre-installed. Moreover, Linux offers many packages that contain other, relevant tools. Installing these packages yourself is not too difficult. However, we also use tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you to install the Docker image that was created specifically for this book.
 
 ```{block2, type="rmdtip"}
 If you still prefer to run the command-line tools natively rather than inside a Docker image, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s [GitHub repository](https://github.com/jeroenjanssens/data-science-at-the-command-line).
@@ -48,7 +48,7 @@ $ cowsay "Let's go!"
                 ||     ||
 ```
 
-Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. We recommend that you create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
+Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
 
 ```{bash eval=FALSE}
 $ docker run --rm -it -v`pwd`:/data datascienceworkshops/data-science-at-the-command-line
@@ -76,20 +76,20 @@ If you would like to know more about the Docker image you can [visit it on Docke
 
 ## Essential GNU/Linux Concepts
 
-In [Chapter 1](#chapter-1-introduction), we briefly showed you what the command line is. Now that you are running the [Docker image](#docker-image), we can really get started. In this section, we discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, we’ll start at the beginning, and very gradually go to more advanced topics.
+In [Chapter 1](#chapter-1-introduction), I briefly showed you what the command line is. Now that you are running the [Docker image](#docker-image), we can really get started. In this section, I discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, I’ll start at the beginning, and very gradually go to more advanced topics.
 
 ```{block2, type="rmdnote"}
 
-This section is not a complete course in GNU/Linux. We will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the [Docker image](#docker-image) is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
+This section is not a complete course in GNU/Linux. I will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the [Docker image](#docker-image) is that a lot is already set up. If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
 ```
 
 ### The Environment
 
-So you’ve just logged into a brand new environment. Before we do anything, it is worthwhile to get a high-level understanding of this environment. The environment is roughly defined by four layers, which we briefly discuss from the top down.
+So you’ve just logged into a brand new environment. Before we do anything, it is worthwhile to get a high-level understanding of this environment. The environment is roughly defined by four layers, which I briefly discuss from the top down.
 
 Command-line tools
 
-:   First and foremost, there are the command-line tools that you work with. We use them by typing their corresponding commands. There are different types of command-line tools, which we will discuss in the next section. Examples of tools are: `ls` [@ls], `cat` [@cat], and `jq` [@jq].
+:   First and foremost, there are the command-line tools that you work with. We use them by typing their corresponding commands. There are different types of command-line tools, which I will discuss in the next section. Examples of tools are: `ls` [@ls], `cat` [@cat], and `jq` [@jq].
 
 Terminal
 
@@ -102,7 +102,7 @@ Terminal
     3
     ```
 
-    then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In [Chapter 1](#chapter-1-introduction), we showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
+    then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In [Chapter 1](#chapter-1-introduction), I showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
 
 Shell
 
@@ -121,7 +121,7 @@ $ pwd
 /home/vagrant
 ```
 
-Sometimes we are using commands and pipelines that are too long to fit on the page. In that case you’ll see something like the following:
+Sometimes I'm using commands and pipelines that are too long to fit on the page. In that case you’ll see something like the following:
 
 ```{bash, eval=FALSE}
 $ echo 'Hello'\
@@ -167,7 +167,7 @@ Here we pass three command-line arguments to `head` [@head]. The first one is an
 
 ### Five Types of Command-line Tools
 
-We employ the term command-line tool a lot, but so far, we have not yet explained what we actually mean by it. We use it as an umbrella term for *anything* that can be executed from the command line. Under the hood, each command-line tool is one of the following five types:
+I use the term command-line tool a lot, but so far, I haven't yet explained what I actually mean by it. I use it as an umbrella term for *anything* that can be executed from the command line. Under the hood, each command-line tool is one of the following five types:
 
 - A binary executable.
 - A shell builtin.
@@ -213,7 +213,7 @@ Interpreted Script
     120
     ```
 
-    In [Chapter 4](#chapter-4-creating-reusable-command-line-tools), we’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.
+    In [Chapter 4](#chapter-4-creating-reusable-command-line-tools), I’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.
 
 Shell Function
 
@@ -246,7 +246,7 @@ Alias
 
     Aliases are simpler than shell functions as they don’t allow parameters. The function `fac` could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in *.bashrc* or *.bash\_aliases* configuration files, which are located in your home directory. To see all aliases currently defined, you simply run `alias` without arguments. Try it, what do you see?
 
-In this book we will focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases. This is because these can easily be changed. The purpose of a command-line tool is to make your life on the command line easier, and to make you a more productive and more efficient data scientist. You can find out the type of a command-line tool with `type` (which is itself a shell builtin):
+In this book I'll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases. This is because these can easily be changed. The purpose of a command-line tool is to make your life on the command line easier, and to make you a more productive and more efficient data scientist. You can find out the type of a command-line tool with `type` (which is itself a shell builtin):
 
 ```{bash, eval=FALSE}
 $ type -a pwd
@@ -265,7 +265,7 @@ $ type -a l
 l is aliased to `ls -1 --group-directories-first'
 ```
 
-`type` returns two command-line tools for `pwd`. In that case, the first reported command-line tool is used when you type `pwd`. In the next section we will look at how to combine command-line tools.
+`type` returns two command-line tools for `pwd`. In that case, the first reported command-line tool is used when you type `pwd`. In the next section we'll look at how to combine command-line tools.
 
 ### Combining Command-line Tools
 
@@ -305,7 +305,7 @@ You may start to see that combining command-line tools is a very powerful concep
 
 ### Redirecting Input and Output
 
-We mentioned that, by default, the output of the last command-line tool in the pipeline is outputted to the terminal. You can also save this output to a file. This is called output redirection, and works as follows:
+I mentioned that, by default, the output of the last command-line tool in the pipeline is outputted to the terminal. You can also save this output to a file. This is called output redirection, and works as follows:
 
 ```{bash, eval=FALSE}
 $ seq 10 > data/ten-numbers
@@ -343,7 +343,7 @@ $ wc -w hello-world
 
 ### Working With Files
 
-As data scientists, we work with a lot of data. This data is often stored in files. It is important to know how to work with files (and the directories they live in) on the command line. Every action that you can do using a graphical user interface, you can do with command-line tools (and much more). In this section we introduce the most important ones to create, move, copy, rename, and delete files and directories.
+As data scientists, we work with a lot of data. This data is often stored in files. It is important to know how to work with files (and the directories they live in) on the command line. Every action that you can do using a graphical user interface, you can do with command-line tools (and much more). In this section I introduce the most important ones to create, move, copy, rename, and delete files and directories.
 
 You have already seen how we can create new files by redirecting the output with either `>` or `>>`. In case you need to move a file to a different directory you can use `mv` [@mv]:
 
