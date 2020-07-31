@@ -15,23 +15,23 @@ In this chapter, you’ll learn:
 
 ## Installing the Docker Image {#docker-image}
 
-In this book we use many different command-line tools. Linux often comes with a whole bunch of command-line tools pre-installed. Moreover, Linux offers many packages that contain other, relevant tools. Installing these packages yourself is not too difficult. However, we also use tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you to install the Docker image that was created specifically for this book.
+In this book we use many different command-line tools. Linux often comes with a whole bunch of command-line tools pre-installed. Moreover, Linux offers many packages that contain other, relevant tools. Installing these packages yourself is often not too difficult. However, we also use tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you to install the Docker image that was created specifically for this book.
 
 ```{block2, type="rmdtip"}
-If you still prefer to run the command-line tools natively rather than inside a Docker image, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s [GitHub repository](https://github.com/jeroenjanssens/data-science-at-the-command-line).
+If you still prefer to run the command-line tools natively rather than inside a Docker image, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s [GitHub repository](https://github.com/datasciencetoolbox/datasciencetoolbox).
 ```
 
 To install the Docker image, you first need to download and install Docker itself from [the Docker website](https://www.docker.com/products/docker).
 Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don't type the dollar sign):
 
 ```{bash, eval=FALSE}
-$ docker pull datascienceworkshops/data-science-at-the-command-line
+$ docker pull datasciencetoolbox/dsatcl2e
 ```
 
 You can run the Docker image as follows:
 
 ```{bash eval=FALSE}
-$ docker run --rm -it datascienceworkshops/data-science-at-the-command-line
+$ docker run --rm -it datasciencetoolbox/dsatcl2e
 ```
 
 You're now inside an isolated Linux environment---known as a *Docker container*---with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:
@@ -48,22 +48,22 @@ $ cowsay "Let's go!"
                 ||     ||
 ```
 
-Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
+Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
 
 ```{bash eval=FALSE}
-$ docker run --rm -it -v`pwd`:/data datascienceworkshops/data-science-at-the-command-line
+$ docker run --rm -it -v`pwd`:/data datasciencetoolbox/dsatcl2e
 ```
 
 Or the following when you're on Windows and using the command line:
 
 ```{bash eval=FALSE}
-$ docker run --rm -it -v %cd%:/data datascienceworkshops/data-science-at-the-command-line
+$ docker run --rm -it -v %cd%:/data datasciencetoolbox/dsatcl2e
 ```
 
 Or the following when you're using Windows PowerShell:
 
 ```{bash eval=FALSE}
-$ docker run --rm -it -v ${PWD}:/data datascienceworkshops/data-science-at-the-command-line
+$ docker run --rm -it -v ${PWD}:/data datasciencetoolbox/dsatcl2e
 ```
 
 In the above commands, the option `-v` instructs `docker` to map the current directory to the */data* directory inside the container, so this is the place to get data in and out of the Docker container.
@@ -192,7 +192,7 @@ Interpreted Script
     ```{example script-fac, name="Python script that computes the factorial of an integer"}
     ```
     ```{python, eval=FALSE}
-    ##!/usr/bin/env python
+    #!/usr/bin/env python
 
     def factorial(x):
         result = 1
@@ -267,7 +267,7 @@ l is aliased to `ls -1 --group-directories-first'
 
 `type` returns two command-line tools for `pwd`. In that case, the first reported command-line tool is used when you type `pwd`. In the next section we'll look at how to combine command-line tools.
 
-### Combining Command-line Tools
+### Combining Command-line Tools {#combining-command-line-tools}
 
 Because most command-line tools adhere to the UNIX philosophy, they are designed to do only thing, and do it really well. For example, the command-line tool `grep` [@grep] can filter lines, `wc` [@wc] can count lines, and `sort` [@sort] can sort lines. The power of the command line comes from its ability to combine these small, yet powerful command-line tools. The most important way of combining command-line tools is through a so-called pipe. The output from the first tool is passed to the second tool. There are virtually no limits to this.
 
