@@ -1,0 +1,266 @@
+#!/usr/bin/env python
+
+# - load tools.yaml
+# - get versions using box
+# - create appendix and write as file
+# - create bigtable and write as file
+
+
+import logging
+import subprocess
+from yaml import load, dump
+
+log_format = '%(asctime)-15s [%(levelname).3s] %(message)s'
+logging.basicConfig(format=log_format, level=logging.WARNING)
+log = logging.getLogger('process-tools')
+
+def get_version(tool):
+    error = 0
+    version = None
+    command = None
+    if 'version_cmd' in tool:
+        command = tool['version_cmd']
+    elif 'manager' in tool:
+        package = tool.get('package') or tool['command']
+        if tool['manager'] == 'pip':
+            command = "pip show {package} | grep Version | cut -d' ' -f2".format(package=package)
+        elif tool['manager'] == 'apt':
+            command = "dpkg-query -p {package} | grep Version | tr - ' ' | cut -d' ' -f2".format(package=package)
+    if command:
+        ssh_command = "ssh -p 2200 -i /home/jeroen/.vagrant.d/insecure_private_key vagrant@localhost \"source ~/.profile;{command}\"".format(command=command)
+        p = subprocess.Popen(ssh_command, stdout=subprocess.PIPE,stderr=subprocess.PIPE,shell=True)
+        output, errors = p.communicate()
+        if len(errors) > 0:
+            log.error("%s", errors)
+            error = 1
+        version = output.strip()
+        if len(version) < 1:
+            error = 1
+            log.warn("%s has version %s" % (tool['command'], version))
+    return version, error
+
+def run_example(tool):
+    example_output = None
+    if 'example' in tool:
+        if 'output' in tool:
+            return tool['output']
+        command = tool['example']
+        if command:
+            command = command.replace('\\','\\\\')
+            command = command.replace('"','\\"')
+            command = command.replace('$','\$')
+            command = command.replace('[','\[')
+            command = command.replace(']','\]')
+            ssh_command = "ssh -p 2200 -i /home/jeroen/.vagrant.d/insecure_private_key vagrant@localhost \"source ~/.profile;{command}\"".format(command=command)
+            log.debug("Executing: %s", ssh_command)
+            p = subprocess.Popen(ssh_command, stdout=subprocess.PIPE,stderr=subprocess.PIPE,shell=True)
+            output, errors = p.communicate()
+            if len(errors) > 0:
+                log.error("%s", errors)
+                error = 1
+            example_output = output.strip() + errors.strip()
+    return example_output
+
+def get_type(tool):
+    if 'type' in tool:
+        return tool['type']
+    command = "type -t %s" % tool['command']
+    ssh_command = "ssh -p 2200 -i /home/jeroen/.vagrant.d/insecure_private_key vagrant@localhost \"source ~/.profile;{command}\"".format(command=command)
+    log.debug("Getting type: %s", ssh_command)
+    p = subprocess.Popen(ssh_command, stdout=subprocess.PIPE,stderr=subprocess.PIPE,shell=True)
+    output, errors = p.communicate()
+    if len(errors) > 0:
+        log.error("%s", errors)
+        error = 1
+    if len(output.strip()) < 1:
+        log.warn("%s has type %s" % (tool['command'], output))
+    return output.strip()
+
+def get_install(tool):
+    if 'install_cmd' in tool:
+        return tool['install_cmd']
+    elif 'manager' in tool:
+        package = tool.get('package') or tool['command']
+        if tool['manager'] == 'pip':
+            command = "sudo pip install {package}"
+        elif tool['manager'] == 'apt':
+            command = "sudo apt-get install {package}"
+        elif tool['manager'] == 'git':
+            command = "git clone {package}"
+        else:
+            return None
+        command = command.format(package=package)
+    else:
+        return None
+    return command
+
+
+def format_tool_reference(t):
+    if t['command'] == 'Rio-scatter':
+        return None
+    if 'website' not in t:
+        t['website'] = ''
+    if 'year' not in t:
+        return None
+    if 'author' not in t:
+        return None
+
+
+    t['author_and'] = t['author'].replace(', ', ' and ').replace('and and', 'and')
+
+    return """@webpage{{{command},
+    title = {{{name}}},
+    url = {{{website}}},
+    author = {{{author_and}}},
+    year = {{{year}}}
+}}
+
+""".format(**t)
+
+def format_tool_appendix(t):
+
+    t['help'] = t.get('help', None)
+    if t['help'] == '--help': t['format_help'] = '%s --help' % t['command']
+    elif t['help'] == '-h': t['format_help'] = '%s -h' % t['command']
+    elif t['help'] == 'man': t['format_help'] = 'man %s' % t['command']
+    elif t['help'] == 'help': t['format_help'] = 'help %s' % t['command']
+    else: t['format_help'] = t['help']
+
+    s =  "\n\n==== %s\n\n%s" % (t['command'], t['description'])
+
+
+    s += " %s" % t['name']
+    if t.get('version', None):
+        s+= " (version %s)" % t['version']
+    if t.get('type', None) == "builtin":
+        s+= " is a Bash builtin"
+    elif t.get('type', None) == "keyword":
+        s+= " is a Bash keyword"
+    if 'author' in t and len(t['author']) > 2:
+        s+= " by %s (%d)" % (t['author'].replace('{','').replace('}',''), t['year'])
+    s += "."
+    if 'website' in t:
+        w = t['website']
+        if w.endswith('/'):
+            log.warn("Removing trailing slash of: %s", w)
+            w == w[:-2]
+        s+= " %s." % w
+    s += "\n\n[source,console]\n----\n"
+    if t.get('type', None) not in ["keyword","builtin"] and t.get('install_cmd', None):
+        s += "$ %s\n" % t['install_cmd']
+    if t['format_help']:
+        s += "$ %s\n" % t['format_help']
+    if t.get('example', None):
+        s += "$ %s\n" % t['example']
+        if t.get('output', None):
+            s += "%s\n" % t['output']
+    s+= "----\n"
+    return s
+
+
+def sanitize_tool(tool):
+    error = 0
+
+    for attr in [
+        'author',
+        'description',
+    ]:
+        if attr not in tool or tool[attr] is None:
+            log.error("Tool %s missing '%s'", tool['command'], attr)
+            error += 1
+
+    for attr in [
+        'help',
+        'author',
+        'manager',
+    ]:
+        if attr not in tool or tool[attr] is None:
+            log.warning("Tool %s missing '%s'", tool['command'], attr)
+
+    tool['name'] = tool.get('name') or tool['command'].title()
+
+    return tool, error
+
+
+def process_tools(tools_list):
+
+    appendix = """:source-highlighter: pygments
+:icons:
+:data-uri:
+
+[appendix]
+== List of Command-line Tools
+
+This is an overview of all the command-line tools discussed in this book. This includes binary executables, interpreted scripts, and Bash builtins and keywords. For each command-line tool, we state, when available and appropriate, the following information:
+
+* The actual command to type at the command-line.
+* A description.
+* The name of the package it belongs to.
+* The version used in the book.
+* The year that version was released.
+* The primary author(s).
+* A website to find more information.
+* How to install it.
+* How to obtain help.
+* An example usage.
+
+All command-line tools listed here are included in the Data Science Toolbox for Data Science at the Command Line. See Chapter 2 for instructions on how to set it up. The install commands assume that you're running Ubuntu 14.04. Please note that citing open source software is not trivial, and that some information may be missing or incorrect.
+
+"""
+
+    references = ""
+
+    tools = {t['command']: t for t in tools_list}
+    total_errors = 0
+    log.info("Found %d command-line tools", len(tools))
+
+    for command, tool in sorted(tools.items(), key=lambda (k, v): k.lower()):
+        log.debug("processing: %s", command)
+
+        # copy attributes from other tools
+        if 'copy' in tool:
+            for other_tool, attrs in tool['copy'].items():
+                for attr in attrs:
+                    log.debug("Copying '%s' from '%s'", attr, other_tool)
+                    tool[attr] = tools[other_tool][attr]
+
+        # check attributes
+        tool, error = sanitize_tool(tool)
+        if error > 0:
+            total_errors += 1
+            continue
+
+        # get version
+        tool['version'], error = get_version(tool)
+        if error > 0:
+            total_errors += 1
+            continue
+
+        # get install command
+        tool['install_cmd'] = get_install(tool)
+
+        # run example
+        tool['output'] = run_example(tool)
+
+        # get type
+        tool['type'] = get_type(tool)
+
+        #print tool['command'], tool['version'], tool['install']
+        appendix += format_tool_appendix(tool)
+        ref = format_tool_reference(tool)
+        if ref:
+            references += ref
+
+    if total_errors > 0:
+        log.error("Still %d command-line tools have errors", total_errors)
+
+    with open('output/chapters/tools2.asciidoc', 'w') as f:
+        f.write(appendix)
+
+    with open('tools2.bib', 'w') as f:
+        f.write(references)
+
+if __name__ == '__main__':
+
+    with open('tools.yml', 'r') as f:
+       process_tools(load(f.read()))

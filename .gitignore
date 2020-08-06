@@ -11,3 +11,5 @@ www/public/
 www/resources/
 www/static/1e/
 www/static/2e/
+
+*.rds

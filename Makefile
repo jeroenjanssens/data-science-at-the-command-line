@@ -15,7 +15,7 @@ www/static/1e/index.html: book/1e/*
 
 
 www/static/2e/index.html: book/2e/*
-	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("index.Rmd", encoding = "UTF-8", clean = TRUE)'
+	cd book/2e && rm -f book.md && Rscript --vanilla -e 'bookdown::render_book("index.Rmd", encoding = "UTF-8", clean = TRUE)'
 
 
 ch%:

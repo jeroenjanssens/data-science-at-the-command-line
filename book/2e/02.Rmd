@@ -1,3 +1,14 @@
+```{r setup, include=FALSE}
+library(knitractive)
+library(rexpect)
+
+engine <- start(name = "bash",
+                command = cmd_docker(image = "datasciencetoolbox/dsatcl2e"),
+                prompt = prompts$bash,
+                session_width = 100,
+                session_height = 16)
+```
+
 # Getting Started {#chapter-2-getting-started}
 
 In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
@@ -36,16 +47,8 @@ $ docker run --rm -it datasciencetoolbox/dsatcl2e
 
 You're now inside an isolated Linux environment---known as a *Docker container*---with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:
 
-```{bash eval=FALSE}
-$ cowsay "Let's go!"
- ___________
-< Let's go! >
- -----------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+```{bash}
+cowsay "Let's go!"
 ```
 
 Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
@@ -95,11 +98,8 @@ Terminal
 
 :   The terminal, which is the second layer, is the application where we type our commands in. If you see the following text:
 
-    ```{bash, eval=FALSE}
-    $ seq 3
-    1
-    2
-    3
+    ```{bash}
+    seq 3
     ```
 
     then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In [Chapter 1](#chapter-1-introduction), I showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
@@ -116,30 +116,28 @@ Operating system
 
 Now that you have a basic understanding of the environment, it is high time that you try out some commands. Type the following in your terminal (without the dollar sign) and press `<Enter>`:
 
-```{bash, eval=FALSE}
-$ pwd
-/home/vagrant
+```{bash}
+pwd
 ```
 
 Sometimes I'm using commands and pipelines that are too long to fit on the page. In that case you’ll see something like the following:
 
-```{bash, eval=FALSE}
-$ echo 'Hello'\
-> ' world' |
-> wc
+```{bash}
+echo 'Hello'\
+' world' |
+wc
 ```
 
 The greater-than sign is the continuation prompt, which indicates that this line is a continuation of the previous one. A long command can be broken up with either a backslash or a pipe symbol. Be sure to first match any quotation marks. The following command is exactly the same:
 
-```{bash, eval=FALSE}
-$ echo 'Hello world' | wc
+```{bash}
+echo 'Hello world' | wc
 ```
 
 This is as simple as it gets. You just executed a command that contained a single command-line tool. The command-line tool `pwd` [@pwd] prints the name of the directory where you currently are. By default, when you login, this is your home directory. You can view the contents of this directory with `ls` [@ls]:
 
-```{bash, eval=FALSE}
-$ ls
-book
+```{bash}
+ls
 ```
 
 The command-line tool `cd`, which is a Bash builtin, allows you to navigate to a different directory:
@@ -470,3 +468,7 @@ Specifying the `--help` option also works for the GNU command-line tools such as
 
 * Heddings, Lowell. 2006. “Keyboard Shortcuts for Bash.” <a href="http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc" class="uri">http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc</a>.
 * Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.
+
+```{r teardown, include = FALSE}
+send_lines(engine$session, "exit")
+```

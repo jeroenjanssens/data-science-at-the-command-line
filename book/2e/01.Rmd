@@ -1,3 +1,18 @@
+```{r setup, include=FALSE}
+library(knitractive)
+library(rexpect)
+
+engine <- start(name = "console",
+                command = cmd_docker(image = "datasciencetoolbox/dsatcl2e"),
+                prompt = prompts$bash,
+                session_width = 90,
+                session_height = 16)
+```
+
+```{console, include = FALSE}
+PS1='$ '
+```
+
 # Introduction {#chapter-1-introduction}
 
 This book is about doing data science at the command line. Our aim is to make you a more efficient and productive data scientist by teaching you how to leverage the power of the command line.
@@ -107,22 +122,11 @@ Typing commands is a very different way of interacting with your computer than t
 
 In this book, the commands that we type and the output that they generate, are displayed as text. For example, the contents of the terminal (after the welcome message) in the two screenshots would look like this:
 
-```{bash, eval=FALSE}
-$ whoami
-vagrant
-$ hostname
-data-science-toolbox
-$ date
-Tue Jul 22 02:52:09 UTC 2014
-$ echo 'The command line is awesome!' | cowsay
- ______________________________
-< The command line is awesome! >
- ------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+```{console}
+whoami
+hostname
+date
+echo 'The command line is awesome!' | cowsay -f tux
 ```
 
 You’ll also notice that each command is preceded with a dollar sign (**$**). This is called the prompt. The prompt in the two screenshots showed more information, namely the username (`vagrant`), the hostname (`data-science-toolbox`) and the current working directory (`\~`). It’s a convention to show only a dollar sign in examples, because the prompt (1) can change during a session (when you go to a different directory), (2) can be customized by the user (e.g., it can also show the time or the current `git` [@git] branch you’re working on), and (3) is irrelevant for the commands themselves.
@@ -183,9 +187,21 @@ Besides mentioning that the command line is available in a lot of places, it is 
 
 ## A Real-world Use Case
 
+
 In the previous sections, I’ve given you a definition of data science and explained to you why the command line can be a great environment for doing data science. Now it’s time to demonstrate the power and flexibility of the command line through a real-world use case. I'll go pretty fast, so don't worry if some things don't make sense yet.
 
-TODO: Create a real-world use case using the penguin dataset.
+```{console}
+curl -sL 'https://www.openml.org/data/get_csv/21854866/penguins.arff' > penguin.csv
+wc -l penguin.csv
+head -n 10 penguin.csv
+sed -i -re '1s/_(mm|g)//g' penguin.csv
+```
+
+```{console}
+cat penguin.csv |
+xsv sample 15 |
+csvlook
+```
 
 In this section we’ve peeked at some important concepts and some exciting command-line tools. Don’t worry if some things don’t make sense yet. Most of the concepts will be discussed in [Chapter 2](#chapter-2-getting-started), and in the subsequent chapters I’ll go into more detail for all the command-line tools used in this section.
 
@@ -198,3 +214,7 @@ In this section we’ve peeked at some important concepts and some exciting comm
 
 
 [^1]: The development of the UNIX operating system [started back in 1969](http://www.unix.org/what_is_unix/history_timeline.html). It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3.4](#combining-command-line-tools), was added in 1973.
+
+```{r teardown, include = FALSE}
+send_lines(engine$session, "exit")
+```

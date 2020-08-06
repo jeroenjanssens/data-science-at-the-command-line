@@ -5,6 +5,9 @@ bookdown::gitbook:
   citation_package: natbib
   includes:
     in_header: [favicon.html, google_analytics.html]
+  pandoc_args:
+    - --filter
+    - bin/pygments-filter.py
   config:
     fontsettings:
       theme: white

@@ -1,0 +1,656 @@
+---
+- command: parallel
+  author: Ole Tange
+  year: 2014
+  description: "Build and execute shell command lines from standard input in parallel."
+  example: "seq 3 | parallel echo Processing file {}.csv"
+  help: man
+  website: http://www.gnu.org/software/parallel
+  install_cmd: "# See website for installation instructions"
+  name: GNU Parallel
+  version_cmd: "parallel --version | head -n 1 | cut -d' ' -f3"
+  arguments:
+    - shrt: "-j _N_"
+      long: "--jobs _N_"
+      desc: "Number of jobslots. Run up to _N_ jobs in parallel. 0 means as many as possible. Default is 100%, which will run one job per CPU core."
+    - long: "--results _prefix_"
+      desc: "Save the output into files. The files will be stored in a directory tree rooted at _prefix_."
+
+- command: csvlook
+  year: 2014
+  name: Csvkit
+  author: Christopher Groskopf
+  description: "Renders a CSV file to the command line in a readable, fixed-width format."
+  example: 'echo -e "a,b\n1,2\n3,4" | csvlook'
+  help: "--help"
+  manager: pip
+  package: csvkit
+  website: http://csvkit.readthedocs.org
+  arguments:
+    - shrt: "-H"
+    - long: "--no-header-row"
+    - desc: "Specifies that the input CSV file has no header row."
+
+- command: awk
+  author: Mike Brennan
+  year: 1994
+  description: Pattern scanning and text processing language.
+  example: "seq 5 | awk '{sum+=$1} END {print sum}'"
+  help: man
+  manager: apt
+  name: Mawk
+  package: mawk
+  website: http://invisible-island.net/mawk
+
+- command: aws
+  author: Amazon Web Services
+  year: 2014
+  description: Manage AWS Services such as EC2 and S3 from the command line.
+  example: "aws ec2 describe-regions | head -n 5"
+  help: aws help
+  manager: pip
+  name: AWS Command Line Interface
+  note: Make sure to set up your credentials.
+  output: |
+    {
+        "Regions": [
+            {
+                "Endpoint": "ec2.eu-west-1.amazonaws.com", 
+                "RegionName": "eu-west-1"
+  package: awscli
+  website: http://aws.amazon.com/cli
+
+- command: bash
+  year: 2010
+  author: Brian Fox and Chet Ramey
+  description: GNU Bourne-Again SHell.
+  help: man
+  manager: apt
+  name: Bash
+  website: http://www.gnu.org/software/bash
+
+- command: bc
+  year: 2006
+  author: Philip A. Nelson
+  description: Evaluate equation from standard input.
+  example: "echo 'e(1)' | bc -l"
+  help: man
+  manager: apt
+  website: http://www.gnu.org/software/bc
+
+- command: bigmler
+  author: BigML
+  year: 2014
+  description: Access BigML's prediction API.
+  help: "--help"
+  manager: pip
+  name: BigMLer
+  website: http://bigmler.readthedocs.org
+
+- command: body
+  year: 2014
+  author: Jeroen H.M. Janssens
+  description: "Apply expression to all but the first line. Useful if you want to apply classic command-line tools to CSV files with a header."
+  manager: git
+  package: https://github.com/jeroenjanssens/data-science-at-the-command-line.git
+  website: https://github.com/jeroenjanssens/data-science-at-the-command-line
+  example: 'echo -e "value\n7\n2\n5\n3" | body sort -n'
+
+- command: cat
+  year: 2012
+  author: Torbjorn Granlund and Richard M. Stallman
+  description: Concatenate files and standard input, and print on standard output.
+  help: man
+  manager: apt
+  package: coreutils
+  website: http://www.gnu.org/software/coreutils
+  example: "cat results-01 results-02 results-03 > results-all"
+  output: 
+
+- command: cd
+  author: ""
+  description: Change the shell working directory.
+  help: help
+  example: "cd ~; pwd; cd ..; pwd"
+
+- command: pwd
+  copy: {cat: [year, manager, package, website, help]}
+  author: Jim Meyering
+  description: Print name of current working directory.
+  example: "pwd"
+
+- command: chmod
+  copy: {cat: [year, manager, package, website, help]}
+  author: David MacKenzie and Jim Meyering
+  description: Change file mode bits. We use it to make our command-line tools executable.
+  example: "chmod u+x experiment.sh"
+  output:
+
+- command: cols
+  copy: {body: [year, author,website,package,manager]}
+  description: Apply a command to a subset of the columns and merge the result back with the remaining columns.
+  example: "< iris.csv cols -C species body tapkee --method pca | header -r x,y,species"
+  output: 
+
+- command: csvcut
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Extract columns from CSV data. Like `cut` command-line tool, but for tabular data."
+  example: ""
+
+- command: in2csv
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Convert common, but less awesome, tabular data formats to CSV."
+  example: ""
+  arguments: ""
+
+- command: csvgrep
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Filter tabular data to only those rows where certain columns contain a given value or match a regular expression."
+  example: ""
+
+- command: csvjoin
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Merge two or more CSV tables together using a method analogous to SQL JOIN operation."
+  example: ""
+
+- command: csvsort
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Sort CSV files. Like the `sort` command-line tool, but for tabular data."
+  example: ""
+
+- command: csvsql
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Execute SQL queries directly on CSV data or insert CSV into a database."
+  example: ""
+  arguments:
+    - long: "--query"
+      desc: ""
+
+- command: sql2csv
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Executes arbitrary commands against an SQL database and outputs the results as a CSV."
+
+- command: csvstack
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Stack up the rows from multiple CSV files, optionally adding a grouping value to each row."
+  example: ""
+  arguments:
+    - long: "--group"
+    - long: "--name"
+
+- command: csvstat
+  copy: {csvlook: [year, name, author, package, manager, website, help]}
+  description: "Print descriptive statistics for all columns in a CSV file." 
+  example: ""
+  arguments: ""
+
+- command: curl
+  year: 2012
+  author: Daniel Stenberg
+  description: Download data from a URL.
+  help: man
+  manager: apt
+  name: cURL
+  website: http://curl.haxx.se
+
+- command: cut
+  copy: {cat: [year, manager, package, website, help]}
+  author: David M. Ihnat, David MacKenzie, and Jim Meyering
+  description: Remove sections from each line of files.
+
+- command: display
+  author: ImageMagick Studio LLC
+  description: Display an image or image sequence on any X server. Can read image data from standard input.
+  help: man
+  year: 2009
+  manager: apt
+  package: imagemagick
+  website: http://www.imagemagick.org
+
+- command: drake
+  year: 2014
+  author: Factual
+  description: Manage a data workflow.
+  help: "--help"
+  version_cmd: "drake --version | sed -re '1s/.*([0-9\\.]{5}).*/\\1/' | cat | head -n 1"
+  install_cmd: "# Please see Chapter 6 for installation instructions."
+  name: Drake
+  website: https://github.com/Factual/drake
+  #arguments:
+
+- command: echo
+  author: "Brian Fox and Chet Ramey"
+  type: file
+  copy: {cat: [year, manager, package, website, help]}
+  description: Display a line of text.
+  arguments: 
+    - shrt: "-e"
+      desc: Enable interpretation of backslash escapes
+    - shrt: "-n"
+      desc: Do not output the trailing newline
+
+- command: cowsay
+  author: Tony Monroe
+  year: 1999
+  description: Generate an ASCII picture of a cow with a message. Useful for when building up a particular pipeline is starting to frustrate you a bit too much.
+  help: man
+  manager: apt
+  website: http://www.nog.net/~tony/warez
+  example: "echo 'The command line is awesome!' | cowsay"
+
+- command: feedgnuplot
+  author: Dima Kogan
+  year: 2014
+  description: Generate a script for `gnuplot` while passing data to standard input.
+  help: man
+  manager: apt
+  website: http://search.cpan.org/perldoc?feedgnuplot
+
+- command: find
+  year: 2008
+  author: James Youngman
+  description: Search for files in a directory hierarchy.
+  help: man
+  package: findutils
+  manager: apt
+  website: http://www.gnu.org/software/findutils
+
+
+- command: git
+  year: 2014
+  author: Linus Torvalds and Junio C. Hamano
+  description: Manage repositories for git, which is a distributed version control system.
+  help: man
+  manager: apt
+  website: http://git-scm.com
+
+- command: grep
+  year: 2012
+  author: Jim Meyering
+  description: Print lines matching a pattern.
+  help: man
+  manager: apt
+  website: http://www.gnu.org/software/grep
+
+
+- command: head
+  copy: {cat: [year, manager, package, website, help]}
+  author: David MacKenzie and Jim Meyering
+  description: Output the first part of files.
+  example: "seq 5 | head -n 3"
+
+- command: header
+  copy: {body: [year,author,website,package,manager]}
+  description: Add, replace, and delete header lines.
+  help: "-h"
+  arguments: 
+    - shrt: "-n"
+      desc: "Number of lines to consider as header"
+    - shrt: "-a"
+      desc: "Add header"
+    - shrt: "-r"
+      desc: "Replace header"
+    - shrt: "-e"
+      desc: "Apply expression to header"
+    - shrt: "-d"
+      desc: "Delete header"
+
+- command: jq
+  year: 2014
+  author: Stephen Dolan
+  description: Process JSON.
+  help: "# See website for documentation"
+  version_cmd: "jq --version 2>&1 | cut -d' ' -f3"
+  install_cmd: "# See website for installation instructions"
+  website: http://stedolan.github.com/jq
+  arguments: 
+
+- command: ls
+  copy: {cat: [year,manager, package, website, help]}
+  author:  Richard M. Stallman and David MacKenzie
+  description: List directory contents.
+
+- command: mkdir
+  copy: {cat: [year,manager, package, website, help]}
+  author: David MacKenzie
+  description: Make directories.
+
+- command: mv
+  copy: {cat: [year,manager, package, website, help]}
+  description: Move or rename files and directories.
+  author: Mike Parker, David MacKenzie, and Jim Meyering
+
+- command: cp
+  copy: {cat: [year,manager, package, website, help]}
+  description: Copy files and directories.
+  author: Torbjorn Granlund, David MacKenzie, and Jim Meyering
+
+- command: env
+  description: Run a program in a modified environment. It's often used to specify which interpreter should run our script.
+  copy: {cat: [year, manager, package, website, help]}
+  author: Richard Mlynarik and David MacKenzie
+  example: "#!/usr/bin/env python"
+  output:
+
+- command: paste
+  copy: {cat: [year, manager, package, website, help]}
+  author: David M. Ihnat and David MacKenzie
+  description: Merge lines of files.
+  #arguments: s d
+
+- command: pip
+  author: PyPA
+  year: 2014
+  description: Install and manage Python packages.
+  help: man
+  manager: apt
+  package: python-pip
+  website: https://pip.pypa.io
+
+- command: python
+  year: 2014
+  author: "{Python Software Foundation}"
+  description: Execute Python, which is an interpreted, interactive, and object-oriented programming language.
+  help: man
+  manager: apt
+  website: http://www.python.org
+
+- command: Rio
+  copy: {body: [year,author,website,package,manager]}
+  help: "-h"
+  description: Load CSV from standard input into R as a data.frame, execute given commands, and get the output as CSV or PNG.
+  example: "seq 10 | Rio -nf sum"
+  #arguments: gnedf
+
+- command: rm
+  copy: {cat: [year, manager, package, website, help]}
+  author: Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering
+  description: Remove files or directories.
+
+- command: run_experiment
+  year: 2014
+  author: "{Educational Testing Service}"
+  description: Run machine learning experiments with scikit-learn.
+  help: "--help"
+  manager: pip
+  name: SciKit-Learn Laboratory
+  package: skll 
+  website: https://skll.readthedocs.org
+
+- command: sample
+  copy: {body: [year,author,website,package,manager]}
+  help: "--help"
+  description: "Print lines from standard output with a given probability, for a given duration, and with a given delay between lines."
+  #example: ""
+  #arguments:
+
+- command: scrape
+  copy: {body: [year,author,website,package,manager]}
+  description: Extract HTML elements using an XPath query or CSS3 selector. 
+  example: "curl -sL 'http://datasciencetoolbox.org' | scrape -e 'head > title'"
+  output: "<title>Data Science Toolbox</title>"
+  #arguments:
+
+- command: sed 
+  year: 2012
+  author: Jay Fenlason, Tom Lord, Ken Pizzini, and Paolo Bonzini
+  description: Filter and transform text.
+  help: man
+  manager: apt
+  website: http://www.gnu.org/software/sed
+
+- command: seq
+  copy: {cat: [year, manager, package, website, help]}
+  author: Ulrich Drepper
+  description: Print a sequence of numbers.
+  example: "seq 5"
+
+- command: shuf
+  copy: {cat: [year, manager, package, website, help]}
+  author: Paul Eggert
+  description: Generate random permutations.
+
+- command: sort
+  copy: {cat: [year, manager, package, website, help]}
+  author: Mike Haertel and Paul Eggert
+  description:  Sort lines of text files.
+
+- command: split
+  copy: {cat: [year,manager, package, website, help]}
+  author: Torbjorn Granlund and Richard M. Stallman
+  description:  Split a file into pieces.
+
+- command: ssh
+  year: 2014
+  author: Tatu Ylonen, Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo de Raadt, Dug Song, and Markus Friedl
+  description: Login to remote machines.
+  help: man
+  name: OpenSSH client
+  manager: apt
+  version_cmd: "sudo -V | head -n 1 | sed -re 's/.*([0-9\\.]{5}).*/\\1/'"
+  website: http://www.openssh.com
+
+- command: sudo
+  year: 2013
+  author: Todd C. Miller
+  description: Execute a command as another user.
+  help: man
+  manager: apt
+  website: http://www.sudo.ws/sudo
+
+- command: tail
+  copy: {cat: [year,manager, package, website, help]}
+  author: Paul Rubin, David MacKenzie, Ian Lance Taylor, and Jim Meyering
+  description: Output the last part of files.
+  example: "seq 5 | tail -n 3"
+
+- command: tar
+  year: 2014
+  author: Jeff Bailey, Paul Eggert, and Sergey Poznyakoff
+  description: Create, list, and extract tar archives.
+  help: man
+  manager: apt
+  website: http://www.gnu.org/software/tar
+  #arguments: "xzvf c"
+
+- command: tee
+  copy: {cat: [year, manager, package, website, help]}
+  author: Mike Parker, Richard M. Stallman, and David MacKenzie
+  description: Read from standard input and write to standard output and files.
+
+- command: tr
+  copy: {cat: [year,manager, package, website, help]}
+  author: Jim Meyering
+  description: Translate or delete characters.
+
+- command: tree
+  website: https://launchpad.net/ubuntu/+source/tree
+  year: 2014
+  author: Steve Baker
+  description: List contents of directories in a tree-like format.
+  help: man
+  manager: apt
+
+- command: uniq
+  copy: {cat: [year,manager, package, website, help]}
+  author: Richard M. Stallman and David MacKenzie
+  description: Report or omit repeated lines.
+
+- command: unzip
+  year: 2009
+  author: Samuel H. Smith
+  description: List, test and extract compressed files in a ZIP archive.
+  help: man
+  manager: apt
+  website: http://www.info-zip.org/pub/infozip
+
+- command: wc
+  copy: {cat: [year, manager, package, website, help]}
+  author: Paul Rubin and David MacKenzie
+  description:  Print newline, word, and byte counts for each file.
+  example: "echo 'hello world' | wc -c"
+
+- command: weka
+  description: "Weka is a collection of machine learning algorithms for data mining tasks by Mark Hall, Eibe Frank, Geoffrey Holmes, Bernhard Pfahringer, Peter Reutemann, and Ian H. Witten. This command-line tool allows you to run Weka from the command line."
+  copy: {body: [year,author,website,package,manager]}
+  name: Weka command-line tool
+
+- command: dseq
+  description: Generate sequence of dates relative to today.
+  copy: {body: [year,author,website,package,manager]}
+  example: "dseq -2 0 # day before yesterday till today"
+  output: |
+    2014-07-15
+    2014-07-16
+    2014-07-17
+
+- command: R
+  author: "{R Foundation for Statistical Computing}"
+  description: Analyze data and create visualizations with the `R` programming language. To install the latest version of `R` on Ubuntu, follow the instructions on http://cran.r-project.org/bin/linux/ubuntu/README. 
+  help: man
+  year: 2014
+  version_cmd: "R --version | head -n 1 | cut -d' ' -f3"
+  manager: apt
+  package: r-base-dev
+  website: http://www.r-project.org
+
+- command: json2csv
+  year: 2014
+  author: Jehiah Czebotar
+  description: Convert JSON to CSV.
+  version_cmd: "json2csv --version | cut -dv -f3"
+  install_cmd: "go get github.com/jehiah/json2csv"
+  help: "--help"
+  website: https://github.com/jehiah/json2csv
+
+- command: man
+  year: 2014
+  author: John W. Eaton and Colin Watson
+  description: Read reference manuals of command-line tools.
+  help: man
+  version_cmd: "man --version | cut -c5-"
+  manager: apt
+  example: "man grep"
+  output: ""
+
+- command: type
+  description: Display the type of a command-line tool.
+  author: ""
+  help: help
+  example: "type cd"
+
+
+- command: export
+  author: ""
+  description: "Set export attribute for shell variables. Useful for making shell variables available to other command-line tools."
+  help: help
+  example: "export WEKAPATH=$HOME/bin"
+  output: 
+
+- command: which
+  author: Unknown
+  year: 2009
+  description: Locate a command-line tool. Does not work for Bash builtins.
+  help: man
+  example: "which man"
+
+- command: unpack
+  author: Patrick Brisbin
+  year: 2013
+  description: Extract common file formats.
+  copy: {body: [website,package,manager]}
+  example: "unpack file.tgz"
+  output: 
+
+- command: pbc
+  description: "Run `bc` with `parallel`. First column of input CSV is mapped to `{1}`, second to `{2}`, and so forth."
+  copy: {body: [year,author,website,package,manager]}
+  example: "seq 5 | pbc '{1}^2'"
+
+- command: alias
+  author: ""
+  description: Define or display aliases.
+  help: help
+  example: "alias ll='ls -alF'"
+  output:
+
+- command: for
+  author: ""
+  description: "Execute commands for each member in a list. In Chapter 8, we discuss the advantages of using `parallel` instead of `for`."
+  help: help
+  example: "for i in {A..C} \"It's easy as\" {1..3}; do echo $i; done"
+
+- command: Rio-scatter
+  description: Create a scatter plot from CSV using `Rio`.
+  copy: {body: [year,author,website,package,manager]}
+  example: "< iris.csv Rio-scatter sepal_length sepal_width species > iris.png"
+  output: 
+
+- command: tapkee
+  description: Reduce dimensionality of a data set using various algorithms.
+  author: Sergey Lisitsyn and Fernando Iglesias
+  year: 2014
+  website: http://tapkee.lisitsyn.me
+  example: "< iris.csv cols -C species body tapkee --method pca | header -r x,y,species"
+  output: 
+  help: "--help"
+  install_cmd: "# See website for installation instructions"
+
+- command: less
+  description: Paginate large files.
+  author: Mark Nudelman
+  year: 2013
+  manager: apt
+  help: man
+  website: http://www.greenwoodsoftware.com/less
+  example: csvlook iris.csv | less
+  output:
+
+- command: xml2json
+  description: "Convert XML to JSON"
+  install_cmd: "npm install xml2json-command"
+  version_cmd: "echo 0.0.2"
+  author: "Francois Parmentier"
+  year: 2014
+  website: https://github.com/parmentf/xml2json
+  example: "xml2json < input.xml > output.json"
+  output: 
+
+- command: unrar
+  description: "Extract files from rar archives."
+  author: Ben Asselstine, Christian Scheurer, and Johannes Winkelmann
+  year: 2014
+  help: man
+  package: unrar-free
+  manager: apt
+  website: http://home.gna.org/unrar
+    
+- command: scp
+  author: Timo Rinne and Tatu Ylonen
+  year: 2014
+  description: "Copy remote files securely."
+  help: man
+  package: openssh-client
+  manager: apt
+  website: http://www.openssh.com
+
+- command: fieldsplit
+  description: "Splits a file into multiple files according to a particular field value."
+  version_cmd: "echo 2010-01"
+  install_cmd: "# See website for installation instructions"
+  author: Jeremy Hinds, Jason Gessner, Jim Renwick, Norman Gocke, Rodofo Granata, and Tobias Wolff
+  year: 2010
+  website: http://code.google.com/p/crush-tools
+  help: "--help"
+
+- command: curlicue
+  description: "Perform OAuth dance for `curl`."
+  author: Decklin Foster
+  year: 2014
+  manager: git
+  package: https://github.com/decklin/curlicue.git
+  website: https://github.com/decklin/curlicue
+
+# csvfix
+# csvquote
+# fieldsplit "CRUSH"
