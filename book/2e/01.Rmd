@@ -5,13 +5,14 @@ library(rexpect)
 engine <- start(name = "console",
                 command = cmd_docker(image = "datasciencetoolbox/dsatcl2e"),
                 prompt = prompts$bash,
-                session_width = 90,
+                session_width = 80,
                 session_height = 16)
 ```
 
 ```{console, include = FALSE}
 PS1='$ '
 ```
+
 
 # Introduction {#chapter-1-introduction}
 
@@ -102,7 +103,7 @@ In [Chapter 10](#chapter-10-polyglot-data-science), I discuss how to employ the 
 
 ## What is the Command Line?
 
-Before I discuss *why* you should use the command line for data science, let's take a peek at *what* the command line actually looks like (it may be already familiar to you). Figure \@ref(fig:mac-terminal) and Figure \@ref(fig:ubuntu-terminal) show a screenshot of the command line as it appears by default on macOS and Ubuntu, respectively. Ubuntu is a particular distribution of GNU/Linux, which I’ll be assuming throughout the book.
+Before I discuss *why* you should use the command line for data science, let's take a peek at *what* the command line actually looks like (it may be already familiar to you). \@ref(fig:mac-terminal) and \@ref(fig:ubuntu-terminal) show a screenshot of the command line as it appears by default on macOS and Ubuntu, respectively. Ubuntu is a particular distribution of GNU/Linux, which I’ll be assuming throughout the book.
 
 ```{r mac-terminal, echo=FALSE, fig.cap="Command line on macOS", fig.align="center"}
 knitr::include_graphics("images/screenshot_terminal_mac_dst.png")
@@ -124,12 +125,11 @@ In this book, the commands that we type and the output that they generate, are d
 
 ```{console}
 whoami
-hostname
 date
 echo 'The command line is awesome!' | cowsay -f tux
 ```
 
-You’ll also notice that each command is preceded with a dollar sign (**$**). This is called the prompt. The prompt in the two screenshots showed more information, namely the username (`vagrant`), the hostname (`data-science-toolbox`) and the current working directory (`\~`). It’s a convention to show only a dollar sign in examples, because the prompt (1) can change during a session (when you go to a different directory), (2) can be customized by the user (e.g., it can also show the time or the current `git` [@git] branch you’re working on), and (3) is irrelevant for the commands themselves.
+You’ll also notice that each command is preceded with a dollar sign (**$**). This is called the prompt. The prompt in the two screenshots showed more information, namely the username, the date, and a penguin. It’s a convention to show only a dollar sign in examples, because the prompt (1) can change during a session (when you go to a different directory), (2) can be customized by the user (e.g., it can also show the time or the current `git` [@git] branch you’re working on), and (3) is irrelevant for the commands themselves.
 
 In the next chapter I’ll explain much more about essential command-line concepts. Now it’s time to first explain *why* you should learn to use the command line for doing data science.
 
@@ -141,7 +141,7 @@ The command line has many great advantages that can really make you a more effic
 
 The first advantage of the command line is that it allows you to be agile. Data science has a very interactive and exploratory nature, and the environment that you work in needs to allow for that. The command line achieves this by two means.
 
-First, the command line provides a so-called read-eval-print-loop (REPL). This means that you type in command, press **<Enter>**, and the command is evaluated immediately. A REPL is often much more convenient for doing data science than the edit-compile-run-debug cycle associated with scripts, large programs, and, say, Hadoop jobs. Your commands are executed immediately, may be stopped at will, and can be changed quickly. This short iteration cycle really allows you to play with your data.
+First, the command line provides a so-called read-eval-print-loop (REPL). This means that you type in command, press **Enter**, and the command is evaluated immediately. A REPL is often much more convenient for doing data science than the edit-compile-run-debug cycle associated with scripts, large programs, and, say, Hadoop jobs. Your commands are executed immediately, may be stopped at will, and can be changed quickly. This short iteration cycle really allows you to play with your data.
 
 Second, the command line is very close to the file system. Because data is the main ingredient for doing data science, it is important to be able to easily work with the files that contain your data set. The command line offers many convenient tools for this.
 
@@ -200,6 +200,7 @@ sed -i -re '1s/_(mm|g)//g' penguin.csv
 ```{console}
 cat penguin.csv |
 xsv sample 15 |
+xsv select species,culmen_length,culmen_depth,flipper_length,body_mass |
 csvlook
 ```
 
@@ -213,7 +214,7 @@ In this section we’ve peeked at some important concepts and some exciting comm
 * Shron, Max. 2014. <em>Thinking with Data</em>. O’Reilly Media.
 
 
-[^1]: The development of the UNIX operating system [started back in 1969](http://www.unix.org/what_is_unix/history_timeline.html). It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3.4](#combining-command-line-tools), was added in 1973.
+[^1]: The development of the UNIX operating system started back in 1969. It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3](#essential-concepts), was added in 1973.
 
 ```{r teardown, include = FALSE}
 send_lines(engine$session, "exit")

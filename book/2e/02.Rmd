@@ -2,11 +2,15 @@
 library(knitractive)
 library(rexpect)
 
-engine <- start(name = "bash",
+engine <- start(name = "console",
                 command = cmd_docker(image = "datasciencetoolbox/dsatcl2e"),
                 prompt = prompts$bash,
-                session_width = 100,
+                session_width = 80,
                 session_height = 16)
+```
+
+```{console, include = FALSE}
+PS1='$ '
 ```
 
 # Getting Started {#chapter-2-getting-started}
@@ -35,37 +39,37 @@ If you still prefer to run the command-line tools natively rather than inside a 
 To install the Docker image, you first need to download and install Docker itself from [the Docker website](https://www.docker.com/products/docker).
 Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don't type the dollar sign):
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ docker pull datasciencetoolbox/dsatcl2e
 ```
 
 You can run the Docker image as follows:
 
-```{bash eval=FALSE}
+```{console eval=FALSE}
 $ docker run --rm -it datasciencetoolbox/dsatcl2e
 ```
 
 You're now inside an isolated Linux environment---known as a *Docker container*---with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:
 
-```{bash}
+```{console}
 cowsay "Let's go!"
 ```
 
 Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
 
-```{bash eval=FALSE}
+```{console eval=FALSE}
 $ docker run --rm -it -v`pwd`:/data datasciencetoolbox/dsatcl2e
 ```
 
 Or the following when you're on Windows and using the command line:
 
-```{bash eval=FALSE}
+```{console eval=FALSE}
 $ docker run --rm -it -v %cd%:/data datasciencetoolbox/dsatcl2e
 ```
 
 Or the following when you're using Windows PowerShell:
 
-```{bash eval=FALSE}
+```{console eval=FALSE}
 $ docker run --rm -it -v ${PWD}:/data datasciencetoolbox/dsatcl2e
 ```
 
@@ -77,7 +81,7 @@ If you would like to know more about the Docker image you can [visit it on Docke
 ```
 
 
-## Essential GNU/Linux Concepts
+## Essential GNU/Linux Concepts {#essential-concepts}
 
 In [Chapter 1](#chapter-1-introduction), I briefly showed you what the command line is. Now that you are running the [Docker image](#docker-image), we can really get started. In this section, I discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, I’ll start at the beginning, and very gradually go to more advanced topics.
 
@@ -98,15 +102,15 @@ Terminal
 
 :   The terminal, which is the second layer, is the application where we type our commands in. If you see the following text:
 
-    ```{bash}
+    ```{console}
     seq 3
     ```
 
-    then you would type `seq 3` into your terminal and press `<Enter>`. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In [Chapter 1](#chapter-1-introduction), I showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
+    then you would type `seq 3` into your terminal and press **Enter**. (The command-line tool `seq` [@seq] generates a sequence of numbers.) You do not type the dollar sign. It is just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below `seq 3` is the output of the command. In [Chapter 1](#chapter-1-introduction), I showed you two screenshots of how the default terminal looks like in macOS and Ubuntu with various commands and their output.
 
 Shell
 
-:   The third layer is the shell. Once we have typed in our command and pressed `<Enter>`, the terminal sends that command to the shell. The shell is a program that interprets the command. The [Docker image](#docker-image) uses Bash as the shell, but there are many others available. Once you have become a bit more proficient at the command line, you may want to look into a shell called the Z shell. It offers many additional features that may increase your productivity at the command line.
+:   The third layer is the shell. Once we have typed in our command and pressed **Enter**, the terminal sends that command to the shell. The shell is a program that interprets the command. The [Docker image](#docker-image) uses Bash as the shell, but there are many others available. Once you have become a bit more proficient at the command line, you may want to look into a shell called the Z shell. It offers many additional features that may increase your productivity at the command line.
 
 Operating system
 
@@ -114,15 +118,15 @@ Operating system
 
 ### Executing a Command-line Tool
 
-Now that you have a basic understanding of the environment, it is high time that you try out some commands. Type the following in your terminal (without the dollar sign) and press `<Enter>`:
+Now that you have a basic understanding of the environment, it is high time that you try out some commands. Type the following in your terminal (without the dollar sign) and press **Enter**:
 
-```{bash}
+```{console}
 pwd
 ```
 
 Sometimes I'm using commands and pipelines that are too long to fit on the page. In that case you’ll see something like the following:
 
-```{bash}
+```{console}
 echo 'Hello'\
 ' world' |
 wc
@@ -130,19 +134,19 @@ wc
 
 The greater-than sign is the continuation prompt, which indicates that this line is a continuation of the previous one. A long command can be broken up with either a backslash or a pipe symbol. Be sure to first match any quotation marks. The following command is exactly the same:
 
-```{bash}
+```{console}
 echo 'Hello world' | wc
 ```
 
 This is as simple as it gets. You just executed a command that contained a single command-line tool. The command-line tool `pwd` [@pwd] prints the name of the directory where you currently are. By default, when you login, this is your home directory. You can view the contents of this directory with `ls` [@ls]:
 
-```{bash}
+```{console}
 ls
 ```
 
 The command-line tool `cd`, which is a Bash builtin, allows you to navigate to a different directory:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ cd book/ch02/
 $ cd data
 $ pwd
@@ -154,7 +158,7 @@ $ pwd
 
 The part after `cd` specifies to which directory you want to navigate to. Values that come after the command are called command-line arguments or options. The two dots refer to the parent directory. Let’s try a different command:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ head -n 3 data/movies.txt
 Matrix
 Star Wars
@@ -185,7 +189,7 @@ Shell Builtin
 
 Interpreted Script
 
-:   An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. Example \@ref(exm:script-fac) shows a script named *\~/book/ch02/fac.py*. This script is interpreted by Python not because of the file extension *.py*, but because the first line of the script defines the binary that should execute it.
+:   An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. \@ref(exm:script-fac) shows a script named *\~/book/ch02/fac.py*. This script is interpreted by Python not because of the file extension *.py*, but because the first line of the script defines the binary that should execute it.
 
     ```{example script-fac, name="Python script that computes the factorial of an integer"}
     ```
@@ -206,7 +210,7 @@ Interpreted Script
 
     This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:
 
-    ```{bash, eval=FALSE}
+    ```{console, eval=FALSE}
     $ book/ch02/fac.py 5
     120
     ```
@@ -217,7 +221,7 @@ Shell Function
 
 :   A shell function is a function that is, in our case executed by Bash. They provide similar functionality to a Bash script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called `fac`, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using `seq`, putting those numbers on one line with `*` as the delimiter using `paste` [@paste], and passing this equation into `bc` [@bc], which is evaluates it and outputs the result.
 
-    ```{bash, eval=FALSE}
+    ```{console, eval=FALSE}
     $ fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
     $ fac 5
     120
@@ -229,14 +233,14 @@ Alias
 
 :   Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for this. Aliases are also very useful when you continue to misspell a certain command (see <https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh> for a long list of useful aliases). The following command defines such an alias:
 
-    ```{bash, eval=FALSE}
+    ```{console, eval=FALSE}
     $ alias l='ls -1 --group-directories-first'
     $ alias moer=more
     ```
 
     Now, if you type the following on the command line, the shell will replace each alias it finds with its value:
 
-    ```{bash, eval=FALSE}
+    ```{console, eval=FALSE}
     $ cd ~
     $ l
     book
@@ -246,7 +250,7 @@ Alias
 
 In this book I'll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases. This is because these can easily be changed. The purpose of a command-line tool is to make your life on the command line easier, and to make you a more productive and more efficient data scientist. You can find out the type of a command-line tool with `type` (which is itself a shell builtin):
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ type -a pwd
 pwd is a shell builtin
 pwd is /bin/pwd
@@ -271,7 +275,7 @@ Because most command-line tools adhere to the UNIX philosophy, they are designed
 
 Consider, for example, the command-line tool `seq`, which generates a sequence of numbers. Let us generate a sequence of five numbers.
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ seq 5
 1
 2
@@ -282,7 +286,7 @@ $ seq 5
 
 The output of a command-line tool is by default passed on to the terminal, which displays it on our screen. We can *pipe* the ouput of `seq` to a second tool, called `grep`, which can be used to filter lines. Imagine that we only want to see numbers that contain a "3". We can combine `seq` and `grep` as follows:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ seq 30 | grep 3
 3
 13
@@ -292,7 +296,7 @@ $ seq 30 | grep 3
 
 And if we wanted to know *how many* numbers between 1 and 100 that contain a three, we can use `wc`, that is very good at counting things:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ seq 100 | grep 3 | wc -l
 19
 ```
@@ -305,13 +309,13 @@ You may start to see that combining command-line tools is a very powerful concep
 
 I mentioned that, by default, the output of the last command-line tool in the pipeline is outputted to the terminal. You can also save this output to a file. This is called output redirection, and works as follows:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ seq 10 > data/ten-numbers
 ```
 
 Here, we save the output of the `seq` tool to a file named *ten-numbers* in the directory *\~/book/ch02/data*. If this file does not exist yet, it is created. If this file already did exist, its contents would have been overwritten. You can also append the output to a file with `>>`, meaning the output is put after the original contents:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ echo -n "Hello" > hello-world
 $ echo " World" >> hello-world
 ```
@@ -320,21 +324,21 @@ The tool echo just outputs the value you specify. The `-n` option specifies that
 
 Saving the output to a file is useful if you need to store intermediate results, for example for continuing with your analysis at a later stage. To use the contents of the file *hello-world* again, we can use `cat` [@cat], which reads a file prints it.
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ cat hello-world | wc -w
 2
 ```
 
 (Note that the `-w` option indicates `wc` to only count words.) The same result can be achieved with the following notation:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ < hello-world wc -w
 2
 ```
 
 This way, you are directly passing the file to the standard input of `wc` without running an additional process. If the command-line tool also allows files to be specified as command-line arguments, which many do, you can also do the following for `wc`:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ wc -w hello-world
 2 hello-world
 ```
@@ -345,38 +349,38 @@ As data scientists, we work with a lot of data. This data is often stored in fil
 
 You have already seen how we can create new files by redirecting the output with either `>` or `>>`. In case you need to move a file to a different directory you can use `mv` [@mv]:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ mv hello.txt ~/book/ch02/data/
 ```
 
 You can also rename files with `mv`:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ cd data
 $ mv hello.txt bye.txt
 ```
 
 You can also rename or move entire directories. In case you no longer need a file, you delete (or remove) it with `rm` [@rm]:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ rm bye.txt
 ```
 
 In case you want to remove an entire directory with all its contents, specify the `-r` option, which stands for recursive:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ rm -r book/ch02/data/old
 ```
 
 In case you want to copy a file, use `cp` [@cp]. This is useful for creating backups:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ cp server.log server.log.bak
 ```
 
 You can create directories using `mkdir` [@mkdir]:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ cd data
 $ mkdir logs
 ```
@@ -391,7 +395,7 @@ As you are finding your way around the command-line, it may happen that you need
 
 The most important command to get help is perhaps `man` [@man], which is short for *manual*. It contains information for most command-line tools. Imagine that we forgot the different options to the tool `cat`. You can access its man page using:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ man cat | head -n 20
 CAT(1)                           User Commands                          CAT(1)
 
@@ -422,7 +426,7 @@ Sometimes you’ll see us use `head`, `fold`, or `cut` at the end of a command. 
 
 Not every command-line tool has a man page. For shell builtins, such as `cd`, you need to use the `help` command-line tool:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 $ help cd | head -n 20
 cd: cd [-L|[-P [-e]] [-@]] [dir]
     Change the shell working directory.
@@ -450,7 +454,7 @@ This help also covers other topics of Bash, in case you are interested (try `hel
 
 Newer tools that can be used from the command-line, often lack a man page as well. In that case, your best bet is to invoke the tool with the `--help` option (and sometimes the `-h` option). For example:
 
-```{bash, eval=FALSE}
+```{console, eval=FALSE}
 jq --help
 
 jq - commandline JSON processor [version 1.4]

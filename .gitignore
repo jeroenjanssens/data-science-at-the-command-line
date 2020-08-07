@@ -13,3 +13,5 @@ www/static/1e/
 www/static/2e/
 
 *.rds
+/book/2e/*.md
+/book/2e/*.asciidoc
