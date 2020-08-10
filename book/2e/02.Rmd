@@ -189,10 +189,8 @@ Shell Builtin
 
 Interpreted Script
 
-:   An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. \@ref(exm:script-fac) shows a script named *\~/book/ch02/fac.py*. This script is interpreted by Python not because of the file extension *.py*, but because the first line of the script defines the binary that should execute it.
+:   An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. The script below is interpreted by Python not because of the file extension *.py*, but because the first line of the script defines the binary that should execute it.
 
-    ```{example script-fac, name="Python script that computes the factorial of an integer"}
-    ```
     ```{python, eval=FALSE}
     #!/usr/bin/env python
 
@@ -421,7 +419,7 @@ DESCRIPTION
 
 ```{block2, type="rmdtip"}
 
-Sometimes you’ll see us use `head`, `fold`, or `cut` at the end of a command. This is only to ensure that the output of the command fits on the page; you don’t have to type these. For example, `head -n 5` only prints the first five lines, `fold` wraps long lines to 80 characters, and `cut -c1-80` trims lines that are long than 80 characters.
+Sometimes you’ll see me use `head`, `fold`, or `cut` at the end of a command. This is only to ensure that the output of the command fits on the page; you don’t have to type these. For example, `head -n 5` only prints the first five lines, `fold` wraps long lines to 80 characters, and `cut -c1-80` trims lines that are long than 80 characters.
 ```
 
 Not every command-line tool has a man page. For shell builtins, such as `cd`, you need to use the `help` command-line tool:

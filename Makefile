@@ -15,8 +15,8 @@ redirects: www/static/_redirects
 www/static/1e/index.html: book/1e/*
 	cd book/1e && Rscript --vanilla -e 'bookdown::render_book("index.Rmd", encoding = "UTF-8")'
 
-ch%:
-	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE)'
+#ch%:
+#	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE)'
 
 www/static/_redirects:
 	curl -sL datascienceatthecommandline.com/1e | \
@@ -36,8 +36,8 @@ publish-draft:
 publish-production:
 	(cd www && hugo) && netlify deploy --prod --dir www/public
 
-pandoc:
-	cd book/2e && /usr/local/bin/pandoc +RTS -K512m -RTS ./01.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash --email-obfuscation none --wrap preserve --filter bin/pygments-filter.py --standalone --section-divs --table-of-contents --toc-depth 3 --number-sections --file-scope --filter /usr/local/bin/pandoc-citeproc
+book/2e/atlas/ch%.asciidoc: book/2e/%.utf8.md
+	< $< book/2e/bin/atlas.sh > $@
 
-atlas:
-	book/2e/bin/atlas.sh
+atlas-copy:
+	cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
