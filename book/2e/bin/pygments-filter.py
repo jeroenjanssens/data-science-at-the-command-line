@@ -51,7 +51,8 @@ def pygments(key, value, format, _):
             elif div_type == "figure":
                 fig_id = code[2]["c"][0]["c"].split(")")[0][2:]
                 html = code[0]["c"][0]["c"][1]
-                _, src, _, alt, _ = html.split("\"")
+                stderr.write(f"{html}\n")
+                _, src, _, alt, *_ = html.split("\"")
                 return Plain([Str(f"[[{fig_id}]]\n.{alt}\nimage::{src}[{alt}]")])
 
     elif format == "html4":
