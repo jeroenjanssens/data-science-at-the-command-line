@@ -94,7 +94,7 @@ Besides the chapters that cover the OSEMN steps, there are four intermezzo chapt
 
 In [Chapter 4](#chapter-4-creating-reusable-command-line-tools), I discuss how to create reusable tools for the command line. These personal tools can come from both long commands that you have typed on the command line, or from existing code that you have written in, say, Python or R. Being able to create your own tools allows you to become more efficient and productive.
 
-Because the command line is an interactive environment for doing data science, it can become challenging to keep track of your workflow. In [Chapter 6](#chapter-6-managing-your-data-workflow), I demonstrate a command-line tool called Drake [@drake], which allows you to define your data science workflow in terms of tasks and the dependencies between them. This tool increases the reproducibility of your workflow, not only for you but also for your colleagues and peers.
+Because the command line is an interactive environment for doing data science, it can become challenging to keep track of your workflow. In [Chapter 6](#chapter-6-managing-your-data-workflow), I demonstrate a command-line tool called Make, which allows you to define your data science workflow in terms of tasks and the dependencies between them. This tool increases the reproducibility of your workflow, not only for you but also for your colleagues and peers.
 
 In [Chapter 8](#chapter-8-parallel-processing), I explain how your commands and tools can be sped up by running them in parallel. Using a command-line tool called GNU Parallel [@parallel], we can apply command-line tools to very large data sets and run them on multiple cores and remote machines.
 

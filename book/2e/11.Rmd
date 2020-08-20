@@ -1,10 +1,10 @@
 # Conclusion {#chapter-11-conclusion}
 
-In this final chapter, the book comes to a close. I'll first recap what I've discussed in the previous nine chapters, and will then offer you three pieces of advice and provide some resources to further explore the related topics we touched upon. Finally, in case you have any questions, comments, or new command-line tools to share, I provide a few ways to get in touch.
+In this final chapter, the book comes to a close. I'll first recap what I've discussed in the previous nine chapters, and will then offer you three pieces of advice and provide some resources to further explore the related topics we touched upon. Finally, in case you have any questions, comments, or new command-line tools to share, I provide a few ways to get in touch with me.
 
 ## Let's Recap 
 
-This book explored the power of employing the command line to perform data science tasks. It is an interesting observation that the challenges posed by this relatively young field can be tackled by such a time-tested technology. It is our hope that you now see what the command line is capable of. The many command-line tools offer all sorts of possibilities that are well suited to the variety of tasks encompassing data science.
+This book explored the power of using the command line to perform data science tasks. It is an interesting observation that the challenges posed by this relatively young field can be tackled by such a time-tested technology. It is our hope that you now see what the command line is capable of. The many command-line tools offer all sorts of possibilities that are well suited to the variety of tasks encompassing data science.
 
 There are many definitions for data science available. In [Chapter 1](#chapter-1-introduction), I introduced the OSEMN model as defined by Mason and Wiggens, because it is a very practical one that translates to very specific tasks. The acronym OSEMN stands for obtaining, scrubbing, exploring, modeling, and interpreting data. [Chapter 1](#chapter-1-introduction) also explained why the command line is very suitable for doing these data science tasks.
 
