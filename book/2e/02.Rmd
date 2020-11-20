@@ -196,14 +196,14 @@ Interpreted Script
 
     def factorial(x):
         result = 1
-        for i in xrange(2, x + 1):
+        for i in range(2, x + 1):
             result *= i
         return result
 
     if __name__ == "__main__":
         import sys
         x = int(sys.argv[1])
-        print factorial(x)
+        print(factorial(x))
     ```
 
     This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:
