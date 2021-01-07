@@ -9,4 +9,5 @@ gsed -E ':1
   n
   s/^\s*//
   b1
-}'
+}' |
+gsed -E 's/<<chapter\-([0-9]+)\-([^>]*)>>/Chapter \1/g'

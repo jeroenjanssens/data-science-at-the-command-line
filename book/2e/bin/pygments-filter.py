@@ -66,9 +66,12 @@ def pygments(key, value, format, _):
         # Highlight code using pygments
         elif key == "CodeBlock":
             [[ident, classes, keyvals], code] = value
-            language = classes[0]
-            # stderr.write(f"\n\nformat: {format}\n\n```" + language + "\n" + code + "\n```\n\n\n")
-            result = highlight(code, get_lexer_by_name(language), HtmlFormatter())
+            if classes:
+                language = classes[0]
+                # stderr.write(f"\n\nformat: {format}\n\n```" + language + "\n" + code + "\n```\n\n\n")
+                result = highlight(code, get_lexer_by_name(language), HtmlFormatter())
+            else:
+                result = code
             return RawBlock("html", result)
 
 if __name__ == "__main__":

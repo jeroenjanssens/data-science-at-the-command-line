@@ -1,18 +1,3 @@
-```{r setup, include=FALSE}
-library(knitractive)
-library(rexpect)
-
-engine <- start(name = "console",
-                command = cmd_docker(image = "datasciencetoolbox/dsatcl2e"),
-                prompt = prompts$bash,
-                session_width = 80,
-                session_height = 16)
-```
-
-```{console, include = FALSE}
-PS1='$ '
-```
-
 # Getting Started {#chapter-2-getting-started}
 
 In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
@@ -470,7 +455,3 @@ Specifying the `--help` option also works for the GNU command-line tools such as
 
 * Heddings, Lowell. 2006. “Keyboard Shortcuts for Bash.” <a href="http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc" class="uri">http://www.howtogeek.com/howto/ubuntu/keyboard-shortcuts-for-bash-command-shell-for-ubuntu-debian-suse-redhat-linux-etc</a>.
 * Peek, Jerry, Shelley Powers, Tim O’Reilly, and Mike Loukides. 2002. <em>Unix Power Tools</em>. 3rd Ed. O’Reilly Media.
-
-```{r teardown, include = FALSE}
-send_lines(engine$session, "exit")
-```

@@ -6,6 +6,8 @@ language:
   ui:
     chapter_name: "Chapter "
     edit: "Edit"
-
+view: https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/%s
+edit: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/%s
 new_session: yes
-before_chapter_script: "_common.R"
+before_chapter_script: "_console_start.R"
+after_chapter_script: "_console_exit.R"
