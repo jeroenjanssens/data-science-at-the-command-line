@@ -1,3 +1,9 @@
+```{console setup_history, include=FALSE}
+ export CHAPTER="02"
+ rm -f /history/bash_history_${CHAPTER}
+ export HISTFILE=/history/bash_history_${CHAPTER}
+```
+
 # Getting Started {#chapter-2-getting-started}
 
 In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
@@ -24,38 +30,50 @@ If you still prefer to run the command-line tools natively rather than inside a 
 To install the Docker image, you first need to download and install Docker itself from [the Docker website](https://www.docker.com/products/docker).
 Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don't type the dollar sign):
 
-```{console, eval=FALSE}
-$ docker pull datasciencetoolbox/dsatcl2e
+```{console docker_pull}
+docker pull datasciencetoolbox/dsatcl2e#! enter=FALSE
+```
+
+```{console docker_pull_cancel, include=FALSE}
+C-C #! literal=FALSE
 ```
 
 You can run the Docker image as follows:
 
-```{console eval=FALSE}
-$ docker run --rm -it datasciencetoolbox/dsatcl2e
+```{console, docker_run}
+docker run --rm -it datasciencetoolbox/dsatcl2e#! enter=FALSE
+```
+
+```{console, docker_run_cancel, include=FALSE}
+C-C #! literal=FALSE
 ```
 
 You're now inside an isolated Linux environment---known as a *Docker container*---with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:
 
-```{console}
-cowsay "Let's go!"
+```{console cowsay_lets_moove}
+cowsay "Let's moove\!"
 ```
 
 Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
 
-```{console eval=FALSE}
-$ docker run --rm -it -v`pwd`:/data datasciencetoolbox/dsatcl2e
+```{console docker_run_v}
+$ docker run --rm -it -v`pwd`:/data datasciencetoolbox/dsatcl2e#! enter=FALSE
+```
+
+```{console, docker_run_v_cancel, include=FALSE}
+C-C #! literal=FALSE
 ```
 
 Or the following when you're on Windows and using the command line:
 
 ```{console eval=FALSE}
-$ docker run --rm -it -v %cd%:/data datasciencetoolbox/dsatcl2e
+> docker run --rm -it -v %cd%:/data datasciencetoolbox/dsatcl2e
 ```
 
 Or the following when you're using Windows PowerShell:
 
 ```{console eval=FALSE}
-$ docker run --rm -it -v ${PWD}:/data datasciencetoolbox/dsatcl2e
+> docker run --rm -it -v ${PWD}:/data datasciencetoolbox/dsatcl2e
 ```
 
 In the above commands, the option `-v` instructs `docker` to map the current directory to the */data* directory inside the container, so this is the place to get data in and out of the Docker container.

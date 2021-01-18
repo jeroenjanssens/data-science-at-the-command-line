@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400i,700,700i|Merriweather:400,400i,700,700i|Cousine:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400i,700,700i|Merriweather:400,400i,700,700i|Source+Code+Pro:400,400i,600,600i');
 
 h1, h2, h3, h4, h5, h6, .book-summary {
   font-family: 'Merriweather Sans', sans-serif;
@@ -66,8 +66,8 @@ p.caption {
 }
 
 pre, code {
-  font-family: 'Cousine', monospace !important;
-  line-height: 1.1;
+  font-family: 'Source Code Pro', monospace !important;
+  line-height: 1.15;
   font-size: 0.94em;
 }
 
@@ -120,9 +120,11 @@ blockquote > p:first-child {
 
 pre {
   white-space: pre !important;
+  background-color: #002b36 !important;
+  color: #839496 !important;
 }
 
-.highlight, pre { background-color: #fdf6e3 !important; color: #586e75}
+/* .highlight, pre { background-color: #fdf6e3 !important; color: #586e75} */
 .highlight .c { color: #859900 } /* Comment */
 .highlight .err { color: #dc322f } /* Error */
 .highlight .g { color: #586e75 } /* Generic */
@@ -193,7 +195,7 @@ pre {
 .highlight .il { color: #2aa198 } /* Literal.Number.Integer.Long */
 
 
-.highlight .gp, .highlight .go {
+.highlight .gp, {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

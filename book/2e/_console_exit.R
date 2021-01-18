@@ -1,1 +1,1 @@
-send_lines(engine$session, "exit")
+send_lines(engine$session, " exit")

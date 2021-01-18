@@ -7,4 +7,4 @@ text = sys.stdin.read().lower()
 words = re.split('\W+', text)
 cnt = Counter(words)
 for word, count in cnt.most_common(num_words):
-    print "%7d %s" % (count, word)
+    print(f"{count:>7} {word}")

@@ -1,3 +1,10 @@
+```{console setup_history, include=FALSE}
+ export CHAPTER="01"
+ rm -f /history/bash_history_${CHAPTER}
+ export HISTFILE=/history/bash_history_${CHAPTER}
+```
+
+
 # Introduction {#chapter-1-introduction}
 
 This book is about doing data science at the command line. Our aim is to make you a more efficient and productive data scientist by teaching you how to leverage the power of the command line.
@@ -175,9 +182,8 @@ Besides mentioning that the command line is available in a lot of places, it is 
 In the previous sections, I’ve given you a definition of data science and explained to you why the command line can be a great environment for doing data science. Now it’s time to demonstrate the power and flexibility of the command line through a real-world use case. I'll go pretty fast, so don't worry if some things don't make sense yet.
 
 ```{console}
-curl -sL 'https://www.openml.org/data/get_csv/21854866/penguins.arff' > penguin.csv
-wc -l penguin.csv
-head -n 10 penguin.csv
+curl -sL 'https://www.openml.org/data/get_csv/21854866/penguins.arff' |
+tee penguin.csv | trim
 sed -i -re '1s/_(mm|g)//g' penguin.csv
 ```
 

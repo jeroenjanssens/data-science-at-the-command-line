@@ -45,18 +45,28 @@ ch03: book/2e/03.utf8.md
 ch04: book/2e/04.utf8.md
 ch05: book/2e/05.utf8.md
 ch06: book/2e/06.utf8.md
+ch11: book/2e/11.utf8.md
 
 ch%: book/2e/%.utf8.md
 
 book/2e/atlas/ch%.asciidoc: book/2e/%.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
-asciidoc: book/2e/atlas/ch*.asciidoc
+asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch06.asciidoc
 
 sync-atlas: asciidoc
-	@cp book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
-	@cp book/2e/images/* ../../atlas/data-science-at-the-command-line-2e/images
+	@cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
+	@cp -v book/2e/images/* ../../atlas/data-science-at-the-command-line-2e/images
 	@echo "Syncing Asciidoc files to Atlas"
 
 docker-run:
-	docker run -it --rm -v $$(pwd)/book/2e/data:/data.bak -p 8000:8000 datasciencetoolbox/dsatcl2e:latest
+	docker run -it --rm -v $$(pwd)/book/2e/data:/data -p 8000:8000 datasciencetoolbox/dsatcl2e:latest
+
+update-cache:
+	cd book/2e/data/cache && \
+  curl -sL 'https://github.com/r-dbi/RSQLite/raw/master/inst/db/datasets.sqlite' -O && \
+  ls -lAshF
+
+attach:
+	tmux set-option window-size manual &&\
+	tmux attach -rt knitractive_console

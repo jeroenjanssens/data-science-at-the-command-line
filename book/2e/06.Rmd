@@ -1,5 +1,10 @@
-# Project Management with Make {#chapter-6-managing-your-data-workflow}
+```{console setup_history, include=FALSE}
+ export CHAPTER="06"
+ rm -f /history/bash_history_${CHAPTER}
+ export HISTFILE=/history/bash_history_${CHAPTER}
+```
 
+# Project Management with Make {#chapter-6-managing-your-data-workflow}
 
 I hope that by now, you have come to appreciate that the command line is a very convenient environment for working with data. You may have noticed that, as a consequence of working with the command line, we:
 

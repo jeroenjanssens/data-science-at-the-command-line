@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from pprint import pformat
-from re import split
+from re import split, compile
 from sys import stderr
 
 from pandocfilters import toJSONFilter, Plain, Str, RawBlock
@@ -10,6 +10,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
+from ansi2html import Ansi2HTMLConverter
 
 REF_TYPE = {"fig": "Figure",
             "exm": "Example"}
@@ -18,6 +19,10 @@ ADM_TYPE = {"comment": "NOTE",
             "note": "NOTE",
             "tip": "TIP"}
 
+conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)
+
+# ansi_escape = compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
+# ansi_escape.sub('', line)
 
 def pygments(key, value, format, _):
 
@@ -68,8 +73,10 @@ def pygments(key, value, format, _):
             [[ident, classes, keyvals], code] = value
             if classes:
                 language = classes[0]
-                # stderr.write(f"\n\nformat: {format}\n\n```" + language + "\n" + code + "\n```\n\n\n")
-                result = highlight(code, get_lexer_by_name(language), HtmlFormatter())
+                # if language == "text":
+                result = "<pre>" + conv.convert(code, full=False) + "</pre>"
+                # else:
+                # result = highlight(code, get_lexer_by_name(language), HtmlFormatter())
             else:
                 result = code
             return RawBlock("html", result)
