@@ -24,11 +24,16 @@ setup <- c(" setopt HIST_IGNORE_SPACE",
            "     trim |",
            "     sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──┤/;s/|/│/g;2s/-/─/g'",
            " }",
-           " alias bat='bat --paging never --theme \"Solarized (dark)\"'",
+           " alias bat='bat --tabs 8 --paging never --theme \"Solarized (dark)\"'",
+           " alias docker='echo'",
+           " alias display='echo'",
            " sudo cp -r /data.bak /data",
            " sudo sudo chown -R dst:dst /data",
+           " setopt interactivecomments",
            " eval $(dircolors -b)"
            )
 
 send_lines(engine$session, setup, wait = TRUE)
 engine$scroll(length(engine$session) - 1)
+
+knitr::opts_chunk$set(escape = TRUE)

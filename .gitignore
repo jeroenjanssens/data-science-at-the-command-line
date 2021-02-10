@@ -16,5 +16,5 @@ www/static/2e/
 /book/2e/*.md
 /book/2e/atlas/*.asciidoc
 
-/book/2e/data/cache/
-/book/2e/data/secret/
+/book/2e/data/.cache/
+/book/2e/data/.secret/

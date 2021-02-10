@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400i,700,700i|Merriweather:400,400i,700,700i|Source+Code+Pro:400,400i,600,600i');
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400i,700,700i|Merriweather:400,400i,700,700i|Source+Code+Pro:400,400i,600,600i|Noto+Sans+JP:900');
 
 h1, h2, h3, h4, h5, h6, .book-summary {
   font-family: 'Merriweather Sans', sans-serif;
@@ -71,13 +71,33 @@ pre, code {
   font-size: 0.94em;
 }
 
+.callout {
+  font-family: 'Noto Sans JP' !important;
+  font-weight: 900;
+  margin-top: -0.5em !important;
+  margin-bottom: -0.2em !important;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+pre .callout {
+  color: #93a1a1 !important;
+  font-size: 1.0em !important;
+}
+
+p .callout {
+  margin-right: 1em !important;
+}
+
 p code {
   white-space: inherit;
 }
+
 pre {
   word-break: normal;
   word-wrap: normal;
 }
+
 pre code {
   white-space: inherit;
 }
@@ -195,7 +215,7 @@ pre {
 .highlight .il { color: #2aa198 } /* Literal.Number.Integer.Long */
 
 
-.highlight .gp, {
+.highlight .gp, pre .callout {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

@@ -1,9 +1,12 @@
-.PHONY: 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc
+.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc
 .SUFFIXES:
 
 .ONESHELL:
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -e
+
+clean:
+	rm book/2e/book.md
 
 live:
 	cd www && hugo server --disableFastRender
@@ -52,7 +55,7 @@ ch%: book/2e/%.utf8.md
 book/2e/atlas/ch%.asciidoc: book/2e/%.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
-asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch06.asciidoc
+asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch11.asciidoc
 
 sync-atlas: asciidoc
 	@cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
@@ -69,4 +72,4 @@ update-cache:
 
 attach:
 	tmux set-option window-size manual &&\
-	tmux attach -rt knitractive_console
+	tmux attach -t knitractive_console

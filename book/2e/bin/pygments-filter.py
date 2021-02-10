@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 from pprint import pformat
-from re import split, compile
+import re
 from sys import stderr
 
-from pandocfilters import toJSONFilter, Plain, Str, RawBlock
+from pandocfilters import toJSONFilter, Plain, Str, RawBlock, RawInline
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
@@ -21,24 +21,18 @@ ADM_TYPE = {"comment": "NOTE",
 
 conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)
 
-# ansi_escape = compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
-# ansi_escape.sub('', line)
+callout_code_re = re.compile(r'#? ?&lt;([0-9]{1,2})&gt;')
+callout_text_re = re.compile(r'<([0-9]{1,2})>')
+
 
 def pygments(key, value, format, _):
-
-    # if key not in ["Space", "Str", "RawInline", "Para", "Quoted", "Plain"]:
-        # stderr.write(f"- {key}: {value[:100]}\n")
-
-    # if (key == "Str") and "fig:" in value:
-    #     stderr.write(f"{key}\t{value}\t{format}\n")
-
 
     if format == "asciidoc":
 
         # Fix references to figures
         if (key == "Str") and value.startswith("@ref"):
             # stderr.write(f"{key}\t{value}\n")
-            _, ref_type, ref_id, _ = split("\(|:|\)", value)
+            _, ref_type, ref_id, _ = re.split("\(|:|\)", value)
             return Str(f"<<{ref_type}:{ref_id}>>")
 
         elif key == "Div":
@@ -62,21 +56,26 @@ def pygments(key, value, format, _):
 
     elif format == "html4":
 
+        # Turn text callout number into unicode char
+        if (key == "Str") and (match := callout_text_re.fullmatch(value)):
+            num = int(match.group(1))
+            br = "<br>" if num > 1 else ""
+            return RawInline("html", f"{br}<span class=\"callout\">&#{num + 10121};</span>")
 
         # Insert "Figure" or "Example" in front of internal references
         if (key == "Str") and value.startswith("@ref"):
-            _, ref_type, ref_id, _ = split("\(|:|\)", value)
+            _, ref_type, ref_id, _ = re.split("\(|:|\)", value)
             return Str(f"{REF_TYPE[ref_type]} {value}")
 
-        # Highlight code using pygments
         elif key == "CodeBlock":
             [[ident, classes, keyvals], code] = value
             if classes:
                 language = classes[0]
-                # if language == "text":
+                # stderr.write(f"{key}\t{value}\t{format}\n")
                 result = "<pre>" + conv.convert(code, full=False) + "</pre>"
-                # else:
-                # result = highlight(code, get_lexer_by_name(language), HtmlFormatter())
+
+                # Turn code callout number into unicode char
+                result = callout_code_re.sub(lambda x: f"<span class=\"callout\">&#{int(x.group(1))+10121};</span>", result)
             else:
                 result = code
             return RawBlock("html", result)

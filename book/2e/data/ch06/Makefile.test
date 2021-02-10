@@ -1,0 +1,5 @@
+VAR="WOW"
+
+test:
+	@echo "yo ${VAR}"
+

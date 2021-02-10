@@ -1,17 +1,20 @@
+---
+suppress-bibliography: true
+---
+
 ```{console setup_history, include=FALSE}
  export CHAPTER="03"
  rm -f /history/history_${CHAPTER}
  export HISTFILE=history/history_${CHAPTER}
 ```
 
-
 # Obtaining Data {#chapter-3-obtaining-data}
 
-This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. I assume that the data that is needed to solve the data science problem at hand already exists at some location in some form. Our goal is to get this data onto your computer (or into your Data Science Toolbox) in a form that we can work with.
+This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. I assume that the data you need to solve your data science problem already exists. Your first task is to get this data onto your computer (and possibly also inside the Docker container) in a form that you can work with.
 
 According to the Unix philosophy, text is a universal interface. Almost every command-line tool takes text as input, produces text as output, or both. This is the main reason why command-line tools can work so well together. However, as we'll see, even just text can come in multiple forms.
 
-Data can be obtained in several ways---for example by downloading it from a server, by querying a database, or by connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel. In this chapter, I discuss several tools that help tackle this from the command line, including: `curl` [@curl], `in2csv` [@in2csv], `sql2csv` [@sql2csv], and `tar` [@tar].
+Data can be obtained in several ways---for example by downloading it from a server, by querying a database, or by connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel. In this chapter, I discuss several tools that help tackle this from the command line, including: `curl`[@curl], `in2csv`[@in2csv], `sql2csv`[@sql2csv], and `tar`[@tar].
 
 ## Overview
 
@@ -38,7 +41,7 @@ This section explains how you can get those files into the Data Science Toolbox.
 
 I mentioned in [Chapter 2](#chapter-2-getting-started) that the Data Science Toolbox is an isolated virtual environment. Luckily there is one exception to that: files can be transfered in and out the Data Science Toolbox. The local directory from which you ran `docker run`, is mapped to a directory in the Data Science Toolbox. This directory is called */data*. Note that this is not the home directory, which is */home/dst*.
 
-If you have one or more files on your local computer, and you want to apply some command-line tools to it, all you have to do is copy or move the file to that mapped directory. Let’s assume that you have a file called *logs.csv* in your Downloads directory.
+If you have one or more files on your local computer, and you want to apply some command-line tools to them, all you have to do is copy or move the files to that mapped directory. Let’s assume that you have a file called *logs.csv* in your Downloads directory.
 
 If you're running Windows, open the command prompt or PowerShell and run the following two commands:
 
@@ -47,7 +50,7 @@ If you're running Windows, open the command prompt or PowerShell and run the fol
 > copy logs.csv MyDataScienceToolbox\
 ```
 
-If you are running Linux or macOS, open execute the following command on your operating system (and not inside the Data Science Toolbox):
+If you are running Linux or macOS, open a terminal and execute the following command on your operating system (and not inside the Docker container):
 
 ```{console cp}
 cp ~/Downloads/logs.csv ~/my-data-science-toolbox #! enter=FALSE
@@ -62,29 +65,29 @@ You can also drag-and-drop the file into the right directory using a graphical f
 ## Downloading from the Internet
 
 The Internet provides, without a doubt, the largest resource for interesting data.
-This data comes in various forms and can be downloaded using various protocols.
 The command-line tool `curl` [@curl] can be considered the command line's Swiss Army knife when it comes to downloading data from the Internet.
 
 ### Introducing `curl`
 
-When you access a URL, which stands for *uniform resource locator*, through your browser, the data that's being downloaded can immediately be interpreted by the browser. For example, an HTML file may be nicely rendered, a video file is perhaps automatically played, and a PDF file may be immediately shown. However, when you use `curl` to access a URL, the data is downloaded and by default printed to standard output. Nothing special is being done by `curl`, but other command-line tools can be used to process this data further.
+When you browse to a URL, which stands for *uniform resource locator*, your browser often interprets the data it downloads. For example, the browser renders HTML files, plays video files automatically, and shows PDF files. However, when you use `curl` to access a URL, it simply downloads the data and, by default, prints it to standard output. `curl` doesn't do any interpretation, but luckily other command-line tools can be used to process the data further.
 
-The easiest invocation of `curl` is to specify a URL as a command-line argument. Let's, for example, download a certain article from Wikipedia:
+The easiest invocation of `curl` is to specify a URL as a command-line argument. Let's, try downloading an article from Wikipedia:
 
 ```{console curl_simple}
 curl https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands | trim
 ```
 
-Remember, `trim` is used only to make the output fit nicely in the book. As you can see, `curl` downloads the raw HTML returned by Wikipedia's server; no interpretation is being done and all the contents is immediately printed on standard output. Because of the URL, you'd think that this article would list all the windmills in the Netherlands. However, there are apparently so many windmills left, that each province has their own page. Fascinating.
+(Remember, `trim` is used only to make the output fit nicely in the book.) As you can see, `curl` downloads the raw HTML returned by Wikipedia's server; no interpretation is being done and all the contents is immediately printed on standard output. Because of the URL, you'd think that this article would list all the windmills in the Netherlands. However, there are apparently so many windmills left that each province has its own page. Fascinating.
 
-By default, `curl` outputs a progress meter that shows how the download rate and the expected time of completion. Because this is written to standard error, and not standard output, it doesn't interfere when you add another tool to the pipeline. While this information can be useful when downloading very large files, I usually find it distracting, so I specify the `-s` option to *silence* this output.
+By default, `curl` outputs a progress meter that shows the download rate and the expected time of completion. This output isn't written to standard output, but a separate channel, known as *standard error*, so this doesn't interfere when you add another tool to the pipeline. While this information can be useful when downloading very large files, I usually find it distracting, so I specify the `-s` option to *silence* this output.
 
 ```{console curl_silent}
 curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland |
-pup -n 'table.wikitable tr'
+pup -n 'table.wikitable tr' # <1>
 ```
+<1> I'll discuss `pup`, a handy tool for scraping websites, in more detail in Chapter 5.
 
-And what do you know, there are apparently 234 windmills in the province of Friesland alone! I'll discuss `pup`, a handy tool for scraping websites, in more detail in Chapter 5.
+And what do you know, there are apparently 234 windmills in the province of Friesland alone!
 
 ### Saving
 
@@ -104,7 +107,7 @@ curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland \
 
 ### Other Protocols
 
-In total, `curl` supports more than twenty protocols (see https://ec.haxx.se/protocols/protocols-curl). To download from an FTP server, which stands for File Transfer Protocol, you use `curl` the same way:
+In total, `curl` supports more than 20 protocols (see https://ec.haxx.se/protocols/protocols-curl). To download from an FTP server, which stands for File Transfer Protocol, you use `curl` the same way. Here I download the file *welcome.msg* from *ftp.gnu.org*:
 
 ```{console curl_ftp}
 curl -s ftp://ftp.gnu.org/welcome.msg | trim
@@ -113,13 +116,13 @@ curl -s ftp://ftp.gnu.org/welcome.msg | trim
 If the specified URL is a directory, `curl` will list the contents of that directory.
 When the URL is password protected, you can specify a username and a password as follows with the `-u` option.
 
-Or how about the DICT protocol:
+Or how about the DICT protocol, which allows you to access various dictionaries and lookup definitions. Here's the definition of "windmill" according to the Collaborative International Dictionary of English:
 
 ```{console curl_dict}
 curl -s dict://dict.org/d:windmill | trim
 ```
 
-When downloading data from the Internet, however, the protocol most likely be HTTP, so the URL will start with either *http://* or *https://*.
+When downloading data from the Internet, however, the protocol will most likely be HTTP, so the URL will start with either *http://* or *https://*.
 
 
 ### Following Redirects
@@ -154,15 +157,16 @@ man curl | trim 20
 
 ## Decompressing Files
 
-If the original data set is very large or it's a collection of many files, the file may be (compressed) archive. Data sets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.
+If the original dataset is very large or it's a collection of many files, the file may be a compressed archive. Datasets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.
 
-Common file extensions of compressed archives are: *.tar.gz*, *.zip*, and *.rar*. To decompress these, you would use the command-line tools `tar` [@tar], `unzip` [@unzip], and `unrar` [@unrar], respectively. There exists a few more, though less common, file extensions for which you would need yet other tools.
+Common file extensions of compressed archives are: *.tar.gz*, *.zip*, and *.rar*. To decompress these, you would use the command-line tools `tar` [@tar], `unzip` [@unzip], and `unrar` [@unrar], respectively. (There are a few more, though less common, file extensions for which you would need yet other tools.)
 
 Let's take *tar.gz* (pronounced as "gzipped tarball") as an example. In order to extract an archive named *logs.tar.gz*, you would use the following incantation:
 
 ```{console tar_x}
-tar -xzf logs.tar.gz #! enter=FALSE
+tar -xzf logs.tar.gz # <1> #! enter=FALSE
 ```
+<1> It's common to combine these three short options, like I did here, but you can also specify them separately as `-x -z -f`. In fact, many command-tools allow you to combine options that consist of a single character.
 
 Indeed, `tar` is notorious for its many command-line arguments. In this case, the three options `-x`, `-z`, and `-f` specify that `tar` should *extract* files from an archive, use *gzip* as the decompression algorithm and use file *logs.tar.gz*.
 
@@ -176,7 +180,7 @@ However, since we're not yet familiar with this archive, it's a good idea to fir
 tar -tzf logs.tar.gz | trim
 ```
 
-Is seems that this archive contains a lot of files, and they are not inside a directory. In this case it's a good idea to first create a new directory using `mkdir` and extract those files there using the `-C` option:
+Is seems that this archive contains a lot of files, and they are not inside a directory. In order to keep the current directory clean, it's a good idea to first create a new directory using `mkdir` and extract those files there using the `-C` option.
 
 ```{console tar_mkdir}
 mkdir logs
@@ -190,11 +194,11 @@ ls logs | wc -l
 cat logs/* | trim
 ```
 
-Excellent. Now, I understand that you'd like to scrub and explore these log files, but that's for later.
+Excellent. Now, I understand that you'd like to scrub and explore these log files, but that's for later in Chapter 5 and 7.
 
 In time, you'll get used to these options, but I'd like to show you an alternative option, which might be convenient. Rather than remembering the different command-line tools and their options, there's a handy script called `unpack` [@unpack], which will decompress many different formats. `unpack` looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.
 
-`unpack` is part of the Data Science Toolbox. Below is the source of `unpack`. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.
+`unpack` is part of the Data Science Toolbox. Below is the source code of `unpack`. Although Bash scripting is not the focus of this book, it’s still useful to take a moment to figure out how it works.
 
 ```{console bat_unpack}
 bat $(which unpack)
@@ -212,15 +216,18 @@ C-C #! literal=FALSE
 
 ## Converting Microsoft Excel Spreadsheets to CSV
 
-For many people, Microsoft Excel offers an intuitive way to work with small data sets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (*.xls*) or as a collection of compressed XML files (*.xlsx*). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable data sets just because they are stored this way.
+For many people, Microsoft Excel offers an intuitive way to work with small datasets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (*.xls*) or as a collection of compressed XML files (*.xlsx*). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable datasets just because they are stored this way.
 
-Luckily, there is a command-line tool called `in2csv` [@in2csv], which is able to convert Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. [RFC 4180](http://www.ietf.org/rfc/rfc4180.txt) defines the CSV format according to the following three points:
+Especially when you're just starting out at the command line, you might be tempted to convert your spreadsheet to CSV by opening it in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually exporting it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and cannot be automated. Furthermore, when you're working on a server, chances are that you don't have such an application available. Trust me, you'll get the hang of it.
 
-1.  Each record is located on a separate line, delimited by a line break (`␊`). For example:
+Luckily, there is a command-line tool called `in2csv` [@in2csv], that converts Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. [@shafranovich2005common] defines the CSV format according to the following three points:
+
+1.  Each record is located on a separate line, delimited by a line break (`␊`). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:
 
 ```{console csv_1}
-bat -A tmnt-basic.csv
+bat -A tmnt-basic.csv # <1>
 ```
+<1> The `-A` option makes `bat` show all non-printable characters like spaces, tabs, and newlines.
 
 2.  The last record in the file may or may not have an ending line break. For example:
 
@@ -234,13 +241,14 @@ bat -A tmnt-missing-newline.csv
 bat -A tmnt-with-header.csv
 ```
 
-As you can see, CSV by default is not too readable. You can pipe the data to a tool called `csvlook` [@csvlook], which will nicely format the data into a table. If the CSV data has no header then you need to add the `-H` option, otherwise the first line will be interpreted as the header.
+As you can see, CSV by default is not too readable. You can pipe the data to a tool called `csvlook` [@csvlook], which will nicely format it into a table. If the CSV data has no header, like *tmnt-missing-newline.csv* then you need to add the `-H` option, otherwise the first line will be interpreted as the header.
 
 ```{console csvlook}
 csvlook tmnt-with-header.csv
 csvlook tmnt-basic.csv
-csvlook -H tmnt-missing-newline.csv
+csvlook -H tmnt-missing-newline.csv # <1>
 ```
+<1> The `-H` option specifies that the CSV file has no header.
 
 Let’s demonstrate `in2csv` using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program called Top 2000. To extract its data, you invoke `in2csv` as follows:
 
@@ -255,7 +263,7 @@ Who is Danny Vera? The most popular song is supposed to be *Bohemian Rhapsody*, 
 csvgrep top2000.csv -c ARTIEST -r '^Queen$' | csvlook -I
 ```
 
-By the way, the tools `in2csv`, `csvgrep`, and `csvlook` are part of CSVkit, which is collection of command-line tools to work with CSV data. CSVkit will be used quite often in this book because it has so many valuable tools. If you’re running the Data Science Toolbox, you already have CSVkit installed. Otherwise, see the appendix for instructions on how to install it.
+By the way, the tools `in2csv`, `csvgrep`, and `csvlook` are part of CSVkit, which is a collection of command-line tools to work with CSV data. CSVkit will be used quite often in this book because it has so many valuable tools. If you’re running the Data Science Toolbox, you already have CSVkit installed. Otherwise, see the appendix for instructions on how to install it.
 
 The format of the file is automatically determined by the extension, *.xlsx* in this case. If you were to pipe the data into `in2csv`, you would have to specify the format explicitly.
 
@@ -265,19 +273,18 @@ A spreadsheet can contain multiple worksheets. `in2csv` extracts, by default, th
 in2csv --names top2000.xlsx
 ```
 
-Especially when you're just starting out at the command line, you might be tempted to convert your spreadsheet to CSV by opening it in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually exporting it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and cannot be automated. Furthermore, when you're working on a server, chances are that you don't have such an application available. Trust me, you'll get the hang of it.
 
 ## Querying Relational Databases
 
-Many companies have their data stored in a relational database. Just as with spreadsheets, it would be great if we could obtain that data from the command line.
+Many companies store their data in a relational database. Just as with spreadsheets, it would be great if we could obtain that data from the command line.
 
 Examples of relational databases are MySQL, PostgreSQL, and SQLite. These databases all have a slightly different way of interfacing with them. Some provide a command-line tool or a command-line interface, while others do not. Moreover, they are not very consistent when it comes to their usage and output.
 
-Fortunately, there is a command-line tool called `sql2csv`, which is part of the CSVkit suite. Because it leverages the Python SQLAlchemy package, we can use one tool to execute queries on many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of `sql2csv` is, as its name suggests, in CSV format.
+Fortunately, there is a command-line tool called `sql2csv`, which is part of the CSVkit suite. It works with many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of `sql2csv` is, as its name suggests, in CSV format.
 
 We can obtain data from relational databases by executing a `SELECT` query on them. (`sql2csv` also support `INSERT`, `UPDATE`, and `DELETE` queries, but that's not the purpose of this chapter.)
 
-`sql2csv` needs two arguments: `--db`, which specifies the database URL, of which the typical form is: `dialect+driver://username:password@host:port/database` and `--query`, which contains the `SELECT` query. For example, given an SQLite database that contains the standard data sets from R (see https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite), I can select all the rows from the table `mtcars` and sort them by the `mpg` column as follows:
+`sql2csv` needs two arguments: `--db`, which specifies the database URL, of which the typical form is: `dialect+driver://username:password@host:port/database` and `--query`, which contains the `SELECT` query. For example, given an SQLite database that contains the standard datasets from R[^1] , I can select all the rows from the table `mtcars` and sort them by the `mpg` column as follows:
 
 ```{console sql2csv}
 sql2csv --db 'sqlite:///r-datasets.db' \
@@ -291,38 +298,38 @@ This SQLite database is simply a local file, so in this I don't need to specify 
 
 In the previous section I explained how to download files from the Internet. Another way data can come from the Internet is through a web API, which stands for *Application Programming Interface*. The number of APIs that are being offered is growing at increasing rate, which means a lot of interesting data for us data scientists.
 
-Web APIs are not meant to be presented in nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as `jq`. For example, the API of Ice and Fire, which contains a lot of information about the world Game of Thrones takes place in, returns data in the following JSON structure.
+Web APIs are not meant to be presented in nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as `jq`. For example, the API of Ice and Fire, which contains a lot of information about George R.R. Martin's fictional world, in which the Game of Thrones book and TV shows take place, returns data in the following JSON structure:
 
 ```{console curl_api}
 curl -s "https://anapioficeandfire.com/api/characters/583" | jq '.'
 ```
 
-The data is piped to a command-line tool `jq` in order to display it in a nice way. `jq` has many more possibilities that I will explore in [Chapter 5](#chapter-5-scrubbing-data).
+The data is piped to a command-line tool `jq` just to display it in a nice way. `jq` has many more scrubbing and exploring possibilities that I will explore in [Chapter 5](#chapter-5-scrubbing-data) and [Chapter 7](#chapter-7-exploring-data).
 
 
 ### Authentication
 
-Some web APIs require you to authenticate before you can consume their output. There are several ways in which authentication can happen. Some web APIs use API keys while others use the OAuth protocol. News API is a great example. It allows you to search and retrieve news articles. Let's see what happens when you try to access this API without an API key:
+Some web APIs require you to authenticate (that is, prove your identity) before you can consume their output. There are several ways to do this. Some web APIs use API keys while others use the OAuth protocol. News API, an independent source of headlines and news articles, is a great example. Let's see what happens when you try to access this API without an API key:
 
 ```{console curl_nokey}
 curl -s "http://newsapi.org/v2/everything?q=linux" | jq .
 ```
 
-Well, that was to be expected. The part after the question mark, by the way, is where we pass any query parameters. That's also the place where you need to specify an API key. Below I insert my own API key by reading the file */data/secret/newsapi.org_apikey* using command substitution because I'd like to keep that a secret. You can get your own API key at https://newsapi.org.
+Well, that was to be expected. The part after the question mark, by the way, is where we pass any query parameters. That's also the place where you need to specify an API key. I'd like to keep my own API key a secret, so I insert it below by reading the file */data/.secret/newsapi.org_apikey* using command substitution.
 
 ```{console curl_auth}
-curl -s "http://newsapi.org/v2/everything?q=linux&apiKey=$(< /data/secret/newsapi.org_apikey)" |
+curl -s "http://newsapi.org/v2/everything?q=linux&apiKey=$(< /data/.secret/newsapi.org_apikey)" |
 jq '.' | trim 30
 ```
-
+You can get your own API key at https://newsapi.org.
 
 ### Streaming APIs
 
-Some web APIs return data in a streaming manner. This means that once you connect to it, the data will continue to pour in forever, until the connection is closed. A well-known example is the Twitter "firehose", which constantly streams all the tweets being sent around the world. Luckily, most command-line tools that we use also operate in a streaming matter, so that we also use this kind of data.
+Some web APIs return data in a streaming manner. This means that once you connect to it, the data will continue to pour in, until the connection is closed. A well-known example is the Twitter "firehose", which constantly streams all the tweets being sent around the world. Luckily, most command-line tools also operate in a streaming matter.
 
 
 ```{console wikimedia_cp, include=FALSE}
-cp /data/cache/wikimedia-stream-sample .
+cp /data/.cache/wikimedia-stream-sample .
 ```
 
 Let's take a 10 second sample of one of Wikimedia's streaming APIs, for example:
@@ -332,12 +339,12 @@ curl -s "https://stream.wikimedia.org/v2/stream/recentchange" |
 sample -s 10 > wikimedia-stream-sample #! enter=FALSE
 ```
 
-This particular API returns all changes that have been made to Wikipedia and other properties of Wikimedia.
-The command-line tool `sample` is used to close the connection after 10 seconds. The connection can also be closed manually by pressing ***Ctrl-C*** to send an interrupt. The output is saved to a file *wikimedia-stream-sample*. Let's take a peek using `trim`:
-
 ```{console wikimedia_cancel, include=FALSE}
 C-C #! literal=FALSE
 ```
+
+This particular API returns all changes that have been made to Wikipedia and other properties of Wikimedia. The command-line tool `sample` is used to close the connection after 10 seconds. The connection can also be closed manually by pressing **`Ctrl-C`** to send an interrupt. The output is saved to a file *wikimedia-stream-sample*. Let's take a peek using `trim`:
+
 
 ```{console wikimedia_trim}
 < wikimedia-stream-sample trim
@@ -350,9 +357,4 @@ With a little bit of `sed` and `jq` I can scrub this data to get a glimpse of th
 jq 'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'
 ```
 
-
-
-## Further Reading
-
-* Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.
-* Wikipedia. 2014. “List of Http Status Codes.” <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="uri">http://en.wikipedia.org/wiki/List_of_HTTP_status_codes</a>.
+[^1]: See https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite.

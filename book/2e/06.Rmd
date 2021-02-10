@@ -1,3 +1,7 @@
+---
+suppress-bibliography: true
+---
+
 ```{console setup_history, include=FALSE}
  export CHAPTER="06"
  rm -f /history/bash_history_${CHAPTER}
@@ -6,24 +10,24 @@
 
 # Project Management with Make {#chapter-6-managing-your-data-workflow}
 
-I hope that by now, you have come to appreciate that the command line is a very convenient environment for working with data. You may have noticed that, as a consequence of working with the command line, we:
+I hope that by now you have come to appreciate that the command line is a very convenient environment for working with data. You may have noticed that, as a consequence of working with the command line, we:
 
 - Invoke many different commands.
 - Work from various directories.
 - Develop our own command-line tools.
 - Obtain and generate many (intermediate) files.
 
-As this process is of an exploratory nature, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done. It's important that our steps can be reproduced, whether that is by ourselves or by others. When we, for example, continue with a project from a few weeks earlier, chances are that we have forgotten which commands we have ran, from which directory, on which files, with which parameters, and in which order. Imagine the challenges of sharing your project with a collaborator.
+Since this is an exploratory process, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done. It's important that our steps can be reproduced, by us or by others. When you continue with a project from a few weeks ago, chances are that you have forgotten which commands you ran, from which directory, on which files, with which parameters, and in which order. Imagine the challenges of sharing your project with a collaborator.
 
-You may recover some commands by digging through the output of the `history` command, but this is, of course, not a reliable approach.
-A somewhat better approach would be to save your commands to a shell script *run.sh*.
+You can recover some commands by digging through the output of the `history` command, but this is, of course, not a reliable approach.
+A somewhat better approach would be to save your commands to a shell script.
 At least this allows you and your collaborators to reproduce the project. A shell script is, however, also a sub-optimal approach because:
 
 - It is difficult to read and to maintain.
 - Dependencies between steps are unclear.
 - Every step gets executed every time, which is inefficient and sometimes undesirable.
 
-This is where Make really shines [@make], which is a command-line tool that allows you to:
+This is where `make` really shines [@make]. `make` which is a command-line tool that allows you to:
 
 - Formalize your data workflow steps in terms of input and output dependencies.
 - Run specific steps of your workflow.
@@ -31,152 +35,137 @@ This is where Make really shines [@make], which is a command-line tool that allo
 - Store and retrieve data from external sources.
 
 ```{block2, type="rmdnote"}
-In the first edition, this chapter used Drake [@drake] instead of Make.
-Drake was supposed to be a successor to Make with additional features to work with data.
-Unfortunately, Drake was abandoned by its creators a couple of years ago with a couple of unresolved bugs.
-That's why I've decided to use Make instead.
+In the first edition, this chapter used `drake` [@drake] instead of `make`.
+Drake was supposed to be a successor to `make` with additional features to work with data.
+Unfortunately, Drake was abandoned by its creators in 2016 with too many unresolved bugs.
+That's why I've decided to use `make` instead.
 ```
 
 ## Overview
 
-Managing your data workflow with Make is the main topic of this chapter. As such, you’ll learn about:
+Managing your data workflow with `make` is the main topic of this chapter. As such, you’ll learn about:
 
-- Defining your workflow with a so-called *Makefile*.
+- Defining your workflow with a *Makefile*.
 - Thinking about your workflow in terms of input and output dependencies.
-- Build specific targets.
+- Running tasks and building targets.
 
+```{console ls}
+cd /data/ch06
+l
+```
 
 ## Introducing Make
 
-Make organizes command execution around data and its dependencies. Your data processing steps are formalized in a separate text file (a workflow). Each step usually has zero, one, or more inputs and outputs. Make automatically resolves their dependencies and determines which commands need to be run and in which order.
+`make` organizes command execution around data and its dependencies. Your data processing steps are formalized in a separate text file (a workflow). Each step may have inputs and outputs. `make` automatically resolves their dependencies and determines which commands need to be run and in which order.
 
-This means that when you have, say, an SQL query that takes ten minutes, it only has to be executed when the result is missing or when the query has changed afterwards. Also, if want to (re-)run a specific step, Make only considers to (re-)run the steps on which it depends. This can save you a lot of time.
+This means that when you have, say, an SQL query that takes ten minutes, it only has to be executed when the result is missing or when the query has changed afterwards. Also, if you want to (re-)run a specific step, `make` only re-runs the steps on which that step depends. This can save you a lot of time.
 
-The benefit of having a formalized workflow allows you to easily pick up your project after a few weeks and to collaborate with others. We strongly advise you to do this, even when you think this will be a one-off project, because you’ll never know when to run certain steps again, or when you want to reuse certain steps in another project.
+Having a formalized workflow allows you to easily pick up your project after a few weeks and to collaborate with others. I strongly advise you to do this, even when you think this will be a one-off project, because you never know when you need to run certain steps again, or reuse them in another project.
 
 
-## A Glorified Task Runner
+## Running Tasks
 
-By default, Make searches for a file called *makefile* or *Makefile* in the current directory. I recommend calling your file the latter so that it appears at the top of a directory listing.
+By default, `make` searches for a configuration file called *Makefile* in the current directory. It can also be named *makefile* (lower case), but I recommend calling your file *Makefile* because it's more common and that way it appears at the top of a directory listing. Normally you would only have one configuration file per project. Because this chapter discusses many different ones, I haven given each of them a different filename with the `.make` extension. Let's start with the following *Makefile*:
 
-Let's start with a small *Makefile* in a new directory:
-
-```{console}
-cd ~
-mkdir ch06 && cd ch06
-pwd
-
-cat << 'EOF' > Makefile
-numbers:
-^v ^i #! literal = FALSE
-seq 7
-EOF
+```{console cp_numbers}
+bat -A numbers.make
 ```
 
-```{block2, type="rmdnote"}
-Note that the lines that starting with `cat` and `EOF` are syntax used to create *Makefile* and do not end up being part of the file itself. This way of creating files is known as a Heredoc.
+This *Makefile* contains one *target* called `numbers`. A *target* is like a task. It's usually the name of a file you'd like to create but it can also be more generic than that. The line below, `seq 7`, is known as a *rule*. Think of a rule as a recipe; one or more commands that specify how the target should be built.
+
+The space in front of the rule is a single tab character. `make` is picky when it comes to white space. Beware that some editors insert spaces when you press the __TAB__ key, known as a soft tab, which will cause `make` to produce an error. The following code illustrates this by expanding the tab to eight spaces:
+
+```{console expand}
+< numbers.make expand > spaces.make
+bat -A spaces.make
+make -f spaces.make
+rm spaces.make
 ```
 
-This Makefile contains one *target* called `numbers`. The line below, `seq 7`, is known as a *rule*.
+I needed the add the `-f` option because the configuration file wasn't actually called *Makefile*. From now on, I'll rename the appropriate file to *Makefile* because that matches real-world use more closely. So, if I just run `make`:
 
-The white space in front of the rule is a tab character. Make is picky when it comes to white space. Some editors insert spaces when you press the __TAB__ key, known as a soft tab, which will cause Make to produce an error. We can verify that our Makefile is correct with `cat -t`, which displays tab characters as `^I`:
-
-```{console}
-cat -t Makefile
+```{console make_numbers}
+cp numbers.make Makefile
+make
 ```
 
-If we invoke `make` with the name of the target:
+Then we see that `make` first prints the rule itself, and then the output generated by the rule.
+This process is known as *building* a target.
+If you don't specify the name of a target, then `make` will build the first target specified in the *Makefile*.
+In practice though, you'll most often be specifying the target you'd want to build:
 
-```{console}
+```{console make_numbers_again}
 make numbers
 ```
 
-then we see that Make first prints the rule itself, and then the output generated by the rule.
-This is known as *building* a target. Make was originally created to ease the compilation of source code, which explains some of this jargon.
-
 ```{block2, type="rmdnote"}
-If you don't specify the name of a target, then `make` will build the first target specified in the Makefile.
+`make` was originally created to ease the compilation of source code, which explains some of the terminology like *target*, *rule*, and *building*.
 ```
 
 In this case, we're not actually building anything, as in, we're not creating any new files.
-You could say that we're using Make as a glorified task runner.
-That already provides value, because we can use a Makefile to keep project-specific shortcuts.
+`make` will happily *build* are target `numbers` again, because it's not finding a file called *numbers*. In the next section I'll go into this.
 
-For me, when I use Docker for a project, I often put a target called `docker` in a Makefile. For example, the following rule, which is from an actual Makefile I use, launches Jupyter Lab in a Docker container. (Yes, it's perfectly fine to put long-running commands in a Makefile.)
+Sometimes it's useful to have a target that builds regardless of whether a file with the same name exists.
+Think of tasks that you need to perform as part of a project. It's good practice to declare those targets as phony by using a special target called `.PHONY` at the top of your *Makefile*, followed by the names of the phony targets.
 
-
-```{console, include = FALSE}
-mkdir some-real-project
-cat << 'EOF' > some-real-project/Makefile
-docker:
-^v ^i #! literal = FALSE
-docker run --rm -it -p 9999:9999 -v "$$(pwd)/notebooks":/opt/notebooks continuumio/anaconda3 /bin/bash -c "/opt/conda/bin/jupyter lab --notebook-dir=/opt/notebooks --ip="0.0.0.0" --port=9999 --no-browser --allow-root"
-EOF
+```{console bat_tasks}
+bat tasks.make
 ```
+
+The above is taken from a *Makefile* I use while working on this book.
+You could say that I'm using `make` as a glorified task runner.
+Although this wasn't `make`s purpose, it still provides a lot of value because I don't need to remember or look up what incantation I used.
+Instead, I type `make publish` and the latest version of the book is published.
+And yes, it's perfectly fine to put long-running commands in a *Makefile*.
+
+But `make` can do much more for us!
+
+
+## Building, For Real
+
+Let's modify our *Makefile* such the output of the rule is written to a file `numbers`.
 
 ```{console}
-cat some-real-project/Makefile | grep docker
+cp numbers-write.make Makefile
+bat Makefile
+make numbers
+bat numbers
 ```
 
-This way, I don't need to remember what incantation I used for this project nor do I don't need to search my history.
-But Make can do much more for us!
-
-
-
-## Building Targets
-
-Let's modify our Makefile such the output of the rule is written to a file `numbers`.
-
-```{console}
-cat << 'EOF' > Makefile
-numbers:
-^v ^i #! literal = FALSE
-seq 7 > numbers
-EOF
-```
-
-Now it makes more sense to speak of *building* a target:
+Now we can say that `make` is actually building something.
+What's more, if we run it again, we see that `make` reports that target `numbers` is up-to-date.
 
 ```{console}
 make numbers
 ```
 
-What's more, if we run `make` again:
+There's no need to rebuild the target `numbers` because the file *numbers* already exists. That's great because `make` is saving us time by not doing unnecessary work.
 
-```{console}
-make numbers
+In `make`, it's all about files. But keep in mind that `make` only cares about the *name* of the target. It does not check whether a file of the same name actually gets created by the rule. If we were to write to a file called *nummers*, which is Dutch for "numbers", and the target was still called `numbers`, then `make` would always build this target. Vice versa, if the file *numbers* was created by some other process, whether automated or manual, then `make` would still consider that target up-to-date.
+
+We can avoid some repetition by using the automatic variable `$@`, which gets expanded to the name of the target:
+
+```{console make_numbers_write_var}
+cp numbers-write-var.make Makefile
+bat Makefile
 ```
 
-We see that Make reports that target `numbers` is up-to-date. In other words, there's no need to rebuild the target `numbers` because the file `numbers` already exists. That's great because Make is saving us time by not doing unnecessary work.
+Let's verify that this works by removing the file *numbers* and calling `make` again:
 
-In Make, it's all about files. But keep in mind that Make only cares about the name of the target. It does not check whether a file of the same name actually gets created by the rule. If we were to write to a file called `nummers`, which is Dutch for "numbers", and the target would still be called `numbers`, then Make would always build this target. Vice versa, if the file `numbers` would be created by some other process, whether it's automated or manual, then Make would still consider that target up-to-date.
-
-We can improve a rule by using the automatic variable `$@`, which gets expanded to the name of the target:
-
-```{console}
-cat << 'EOF' > Makefile
-numbers:
-^v ^i #! literal = FALSE
-seq 7 > $@
-EOF
-```
-
-Let's verify this by removing the file `numbers` and calling Make again:
-
-```{console}
+```{console bat_numbers}
 rm numbers
 make numbers
-cat numbers
+bat numbers
 ```
 
-Another reason for Make to rebuild a target are its dependencies, so let's discuss that next.
+Another reason for `make` to rebuild a target is its dependencies, so let's discuss that next.
 
 
 ## Adding Dependencies between Targets
 
-So far, we've looked at targets which exist in isolation.
-In a typical data science workflow, steps may depend on other steps.
-In order to properly talk about dependencies in a Makefile, let's consider two tasks that work with a data set about Star Wars characters. Here's an excerpt of that data set:
+So far, we've looked at targets that exist in isolation.
+In a typical data science workflow, many steps depend on other steps.
+In order to properly talk about dependencies in a *Makefile*, let's consider two tasks that work with a data set about Star Wars characters. Here's an excerpt of that data set:
 
 ```{console}
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
@@ -195,12 +184,12 @@ sort -t, -k2 -nr |
 head
 ```
 
-The second tasks creates a box plot showing the distribution of heights per species:
+The second task creates a box plot showing the distribution of heights per species:
 
 ```{console}
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
 Rio -ge 'g + geom_boxplot(aes(x = height, y = species))' > heights.png
-display heights.png #! enter = FALSE
+display heights.png#! enter = FALSE
 ```
 
 ```{console, include = FALSE}
@@ -212,63 +201,32 @@ mv heights.png /images/docker-starwars-heights.png
 knitr::include_graphics("images/docker-starwars-heights.png")
 ```
 
-We can put these two tasks into a Makefile. Instead of doing this incrementally, I'd first like to show what a complete Makefile looks like and then explain all the syntax step by step.
+We can put these two tasks into a *Makefile*. Instead of doing this incrementally, I'd first like to show what a complete *Makefile* looks like and then explain all the syntax step by step.
 
 ```{console}
-cat << 'EOF' > Makefile
-SHELL := bash
-.ONESHELL:
-.SHELLFLAGS := -eu -o pipefail -c
-
-URL = "https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv"
-
-.PHONY: all top10
-
-all: top10 heights.png
-
-data:
-^v ^i #! literal = FALSE
-mkdir $@
-
-data/starwars.csv: data
-^v ^i #! literal = FALSE
-curl -sL $(URL) > $@
-
-top10: data/starwars.csv
-^v ^i #! literal = FALSE
-grep Human $< |
-^v ^i #! literal = FALSE
-cut -d, -f 1,2 |
-^v ^i #! literal = FALSE
-sort -t, -k2 -nr |
-^v ^i #! literal = FALSE
-head
-
-heights.png: data/starwars.csv
-^v ^i #! literal = FALSE
-< $< Rio -ge 'g + geom_boxplot(aes(x = height, y = species))' > $@
-EOF
+cp starwars.make Makefile
+bat Makefile
 ```
 
-Let's go through this Makefile step by step The first three lines are there to change some default settings related to Make itself:
+Let's go through this *Makefile* step by step The first three lines are there to change some default settings related to `make` itself:
 
-1. All rules are executed in a shell, which by default, is `sh`. With the `SHELL` variable we can change this to another shell, like `bash`. This way we can use everything that Bash has to offer such as for loops. Moreover, it resembles the shell that we are working in, which makes for a more consistent experience.
+1. All rules are executed in a shell, which by default, is `sh`. With the `SHELL` variable we can change this to another shell, like `bash`. This way we can use everything that Bash has to offer such as for loops.
 2. By default, every line in a rule is sent separately to the shell. With the special target `.ONESHELL` we can override this so the rule for target `top10` works.
 3. The `.SHELLFLAGS` line makes Bash more strict, which is considered a best practice.[^1] For example, because of this, the pipeline in the rule for target `top10` now stops as soon as there is an error.
 
-We define a custom variable called `URL`. Even though this is only used once, I find it helpful to put information like this near the beginning of the file.
+We define a custom variable called `URL`. Even though this is only used once, I find it helpful to put information like this near the beginning of the file, so that you can easily make changes to these kinds of settings.
 
 With the special target `.PHONY` we can indicate which targets are not represented by files. In our case that holds for targets `all` and `top10`. These targets will now be executed regardless of whether the directory contains files with the same name.
 
 There are five targets: `all`, `data`, `data/starwars.csv`, `top10`, and `heights.png`. Let's discuss each of them in turn:
 
-1. The target `all` has two dependencies but no rule. This is like a shortcut to execute one or more targets in the order in which they are specified. In this case: `top10` and `heights.png`. The target `all` appears as the first target in the Makefile, which means that if we simply run `make`, this target will be built.
-2. The target `data` create the directory `data`. Earlier I said that Make is all about files. Well, it's also about directories. This target will only be executed when the directory `data` doesn't yet exist.
+1. The target `all` has two dependencies but no rule. This is like a shortcut to execute one or more targets in the order in which they are specified. In this case: `top10` and `heights.png`. The target `all` appears as the first target in the *Makefile*, which means that if we simply run `make`, this target will be built.
+2. The target `data` create the directory `data`. Earlier I said that `make` is all about files. Well, it's also about directories. This target will only be executed when the directory `data` doesn't yet exist.
 3. The target `data/starwars.csv` depends on the target `data`. If there's no `data` directory, it will first be created. Once all dependencies are satisfied, the rule will be executed, which involves downloading a file and saving it to a file with the same name as the target.
 4. The target `top10` is marked as phony, so it will always be built if specified. It depends on the `data/starwars.csv` target. It makes use of a special variable, `$<` which expands to the name of the first prerequisite, namely `data/starwars.csv`.
 5. The target `heights.png`, like target `top10` depends `data/starwars.csv` and makes use of both automatic variables we've seen in this chapter. See https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html if you'd like to learn about other automatic variables.
 
-Last but not least, let's verify that this Makefile works:
+Last but not least, let's verify that this *Makefile* works:
 
 ```{console}
 make
@@ -279,10 +237,10 @@ No surprises here. Because we didn't specify any target, the `all` target will b
 
 ## Discussion
 
-One of the beauties of the command line is that allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It is therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.
+One of the beauties of the command line is that it allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It is therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.
 
-I have shown you that just putting every command in one bash script is suboptimal. I have proposed to use Make as a command-line tool to manage your data workflow. By using a running example, I have shown you how to define steps and the dependencies between them. I’ve also discussed how to use variables and tags.
+I have shown you that just putting every command in one bash script is suboptimal. I have proposed to use `make` as a command-line tool to manage your data workflow. By using a running example, I have shown you how to define steps and the dependencies between them. I’ve also discussed how to use variables and tags.
 
-There’s nothing more fun than just playing with your data and forget everything else. But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a *Makefile*. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time. It makes you more efficient over time, the same holds for Make workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. I hope that you will get used to Make, and that it will make your life easier.
+There’s nothing more fun than just playing with your data and forgetting everything else. But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a *Makefile*. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time, the same holds for `make` workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. I hope that you will get used to Make, and that it will make your life easier.
 
 [^1]: See http://redsymbol.net/articles/unofficial-bash-strict-mode/ for more information.

@@ -8,12 +8,22 @@
 
 In this final chapter, the book comes to a close. I'll first recap what I've discussed in the previous nine chapters, and will then offer you three pieces of advice and provide some resources to further explore the related topics we touched upon. Finally, in case you have any questions, comments, or new command-line tools to share, I provide a few ways to get in touch with me.
 
-```{console, highlight=FALSE}
+```{console, callouts=list(1, 5, "trim", "Leo", -1)}
 cd /data/ch03
 l
 cat top2000.csv | trim
 csvlook tmnt-with-header.csv
 ```
+<1> Change directory
+<2> Peek at file
+<3> Peek at file
+<4> Peek at file
+<5> Peek at file
+<6> Peek at file
+<7> Peek at file
+<8> Peek at file
+<9> List
+<10> Trim it!
 
 ## Let's Recap
 

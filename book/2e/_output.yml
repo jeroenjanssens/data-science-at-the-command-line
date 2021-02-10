@@ -2,12 +2,13 @@ bookdown::gitbook:
   css: style.css
   split_bib: no
   keep_md: yes
-  citation_package: natbib
   includes:
     in_header: [favicon.html, google_analytics.html]
   pandoc_args:
     - --filter
     - bin/pygments-filter.py
+    - --csl
+    - chicago-fullnote-bibliography.csl
   config:
     fontsettings:
       theme: white

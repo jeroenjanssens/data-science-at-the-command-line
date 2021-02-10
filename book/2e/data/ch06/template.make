@@ -1,0 +1,2 @@
+target:
+	echo "This rules"

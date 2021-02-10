@@ -1,0 +1,2 @@
+numbers:
+	seq 7 > $@
