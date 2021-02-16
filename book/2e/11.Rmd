@@ -25,6 +25,10 @@ csvlook tmnt-with-header.csv
 <9> List
 <10> Trim it!
 
+
+
+
+
 ## Let's Recap
 
 This book explored the power of using the command line to perform data science tasks. It is an interesting observation that the challenges posed by this relatively young field can be tackled by such a time-tested technology. It is our hope that you now see what the command line is capable of. The many command-line tools offer all sorts of possibilities that are well suited to the variety of tasks encompassing data science.

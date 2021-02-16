@@ -357,4 +357,27 @@ With a little bit of `sed` and `jq` I can scrub this data to get a glimpse of th
 jq 'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'
 ```
 
+Speaking of streaming, did you know that you could stream *Star Wars: Episode IV – A New Hope* for free using `telnet`?
+
+```{console telnet_setup, include=FALSE}
+cd /data/.cache/
+alias telnet=echo
+```
+
+```{console telnet_cmd}
+telnet towel.blinkenlights.nl#! enter=FALSE
+```
+
+And after some time, we see that Han Solo did shoot first!
+
+```{console telnet_cancel, include=FALSE}
+C-C#! literal=FALSE
+```
+
+```{console, remove=1}
+cat towel.blinkenlights.nl
+```
+
+Sure, it's probably not a good source of data, but there's nothing wrong with enjoying an old classic while training your machine learning models.
+
 [^1]: See https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite.
