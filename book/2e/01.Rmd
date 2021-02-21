@@ -101,7 +101,7 @@ knitr::include_graphics("images/screenshot_terminal_mac_dst.png")
 knitr::include_graphics("images/screenshot_terminal_ubuntu_dst.png")
 ```
 
-The window shown in the two screenshots is called the *terminal*. This is the program that enables you to interact with the shell. It is the shell that executes the commands I type in. (On both Ubuntu and macOS, the default shell is Bash.)
+The window shown in the two screenshots is called the *terminal*. This is the program that enables you to interact with the shell. It is the shell that executes the commands I type in. (The default shell for Ubuntu is Bash. Until recently, the same was true for macOS. However, in 2019, Apple established zsh as the default shell. Regardless, users can easily configure their computer to use their interpreter of choice.[^2])
 
 ```{block2, type="rmdnote"}
 I’m not showing the Microsoft Windows command line (also known as the Command Prompt or PowerShell), because it's fundamentally different and incompatible with the commands presented in this book. The good news is that you can install a Docker image on Microsoft Windows so that you’re able to follow along. How to install the Docker image is explained in [Chapter 2](#chapter-2-getting-started).
@@ -167,7 +167,7 @@ These command-line tools can work together, which makes the command line very fl
 
 ### The Command Line is Ubiquitous
 
-Because the command line comes with any Unix-like operating system, including Ubuntu Linux and macOS, it can be found in many places. Plus, 100% of the top 500 supercomputers are running Linux.[^2] So, if you ever get your hands on one of those supercomputers (or if you ever find yourself in Jurassic Park with the doors locks not working), you better know your way around the command line!
+Because the command line comes with any Unix-like operating system, including Ubuntu Linux and macOS, it can be found in many places. Plus, 100% of the top 500 supercomputers are running Linux.[^3] So, if you ever get your hands on one of those supercomputers (or if you ever find yourself in Jurassic Park with the doors locks not working), you better know your way around the command line!
 
 But GNU/Linux not only runs on supercomputers. It also runs on servers, laptops, and embedded systems. These days, many companies offer cloud computing, where you can easily launch new machines on the fly. If you ever log in to such a machine (or a server in general), there’s a good chance that you’ll arrive at the command line.
 
@@ -196,4 +196,6 @@ In this section we’ve peeked at some important concepts and some exciting comm
 
 [^1]: The development of the UNIX operating system started back in 1969. It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3](#essential-concepts), was added in 1973.
 
-[^2]: See http://top500.org/blog/lists/2013/11/press-release.
+[^2]: See https://support.apple.com/en-us/HT208050.
+
+[^3]: See http://top500.org/blog/lists/2013/11/press-release.
