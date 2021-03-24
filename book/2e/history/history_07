@@ -1,0 +1,44 @@
+cd /data/ch07
+l
+head -n 5 venture.csv
+head -n 3 venture.csv | nl
+< venture.csv trim 5
+less -S venture.csv
+< venture.csv head -n 1 | tr , '\n'
+csvcut -n venture.csv
+bat -A datatypes.csv
+csvlook datatypes.csv
+csvsql datatypes.csv
+csvsql venture.csv
+wc -l tips.csv
+< tips.csv csvcut -c day | header -d | sort | uniq | wc -l
+csvstat tips.csv --unique
+csvstat venture.csv --unique
+< venture.csv csvcut -C $(           #<1>\
+  csvstat venture.csv --unique |     #<2>\
+  grep ': 1$' |                      #<3>\
+  cut -d. -f 1 |                     #<4>\
+  tr -d ' ' |                        #<5>\
+  paste -sd,                         #<6>\
+) | trim                             #<7>
+csvstat venture.csv
+csvstat venture.csv --freq
+csvstat venture.csv -c 3,GEO
+csvstat venture.csv | tail -n 1
+xsv count venture.csv
+rush plot -x time tips.csv
+rush plot -x time tips.csv > plot-bar.png
+display plot-bar.png
+rush plot -x obs_value --fill unit venture.csv
+rush plot -x obs_value --fill unit venture.csv > obs-histogram.png
+display obs-histogram.png
+cat venture.csv |\
+rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) +\
+geom_histogram() +\
+facet_wrap(~ unit, scales = "free")' -
+cat venture.csv |\
+rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) +\
+geom_histogram() +\
+facet_wrap(~ unit, scales = "free")' - > obs-facets.png
+display obs-facets.png
+rush plot -x bill --geom density --title "Density plot" tips.csv

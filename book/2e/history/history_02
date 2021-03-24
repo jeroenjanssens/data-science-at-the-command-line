@@ -1,0 +1,47 @@
+cowsay "Let's moove\!"
+seq 3
+pwd
+echo 'Hello'\\
+' world' |\
+wc
+echo 'Hello world' | wc
+ls
+cd /data/ch02
+pwd
+cd ..
+pwd
+cd ch02
+head -n 3 movies.txt
+alias bat='bat --tabs 8 --paging never --terminal-width 76 --theme "Solarized (dark)"'
+bat fac.py
+./fac.py 5
+fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
+fac 5
+alias l='ls --color -lhF --group-directories-first'
+alias moer=more
+cd /data
+l
+cd ch02
+type -a pwd
+type -a cd
+type -a fac
+type -a l
+alias bat='bat --tabs 8 --paging never --theme \"Solarized (dark)\"'
+seq 5
+seq 30 | grep 3
+seq 100 | grep 3 | wc -l
+seq 10 > ten-numbers
+cat ten-numbers
+echo -n "Hello" > greeting
+echo " World" >> greeting
+cat greeting
+cat greeting | wc -w
+< greeting wc -w
+wc -w greeting ten-numbers
+mkdir -v backup
+cp -v * backup
+rm -i *
+man tar | trim 20
+man cd
+man zshbuiltins | trim
+jq --help | trim

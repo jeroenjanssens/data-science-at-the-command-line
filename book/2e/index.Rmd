@@ -17,4 +17,4 @@ github-repo: "jeroenjanssens/data-science-at-the-command-line"
 
 # Welcome {-}
 
-The second edition of Data Science at the Command Line is currently under construction. It is scheduled to be published by O’Reilly Media in October 2021. You’re welcome to take a look around.
+The second edition of Data Science at the Command Line is currently being written. It is scheduled to be published by O’Reilly Media in October 2021. You’re welcome to take a look around.

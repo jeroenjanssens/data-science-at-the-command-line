@@ -4,8 +4,8 @@ suppress-bibliography: true
 
 ```{console setup_history, include=FALSE}
  export CHAPTER="03"
- rm -f /history/history_${CHAPTER}
- export HISTFILE=history/history_${CHAPTER}
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
 ```
 
 # Obtaining Data {#chapter-3-obtaining-data}
@@ -329,7 +329,7 @@ Some web APIs return data in a streaming manner. This means that once you connec
 
 
 ```{console wikimedia_cp, include=FALSE}
-cp /data/.cache/wikimedia-stream-sample .
+ cp /data/.cache/wikimedia-stream-sample .
 ```
 
 Let's take a 10 second sample of one of Wikimedia's streaming APIs, for example:
@@ -360,8 +360,9 @@ jq 'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'
 Speaking of streaming, did you know that you could stream *Star Wars: Episode IV – A New Hope* for free using `telnet`?
 
 ```{console telnet_setup, include=FALSE}
-cd /data/.cache/
-alias telnet=echo
+ cd /data/.cache/
+ alias telnet=echo
+ print -S "telnet towel.blinkenlights.nl"
 ```
 
 ```{console telnet_cmd}
@@ -375,7 +376,7 @@ C-C#! literal=FALSE
 ```
 
 ```{console, remove=1}
-cat towel.blinkenlights.nl
+ cat towel.blinkenlights.nl
 ```
 
 Sure, it's probably not a good source of data, but there's nothing wrong with enjoying an old classic while training your machine learning models.

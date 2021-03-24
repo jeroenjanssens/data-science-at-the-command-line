@@ -4,18 +4,19 @@ library(rlang)
 
 engine <- start(name = "console",
           command = cmd_docker(image = "datasciencetoolbox/dsatcl2e",
-                                volume = list2(!!here::here("images") := "/images",
-                                               !!here::here("history") := "/history",
-                                               !!here::here("data") := "/data.bak")),
+                               volume = list2(!!here::here("images") := "/images",
+                                              !!here::here("history") := "/history",
+                                              !!here::here("data") := "/data.bak")),
           prompt = prompts$bash,
           session_width = 80,
           session_height = 16)
 
-# "cd /usr/bin/dsutils && sudo git pull > /dev/null",
-## " PS1='\\[$(tput bold)\\]$ \\[$(tput sgr0)\\]'",
-## " PS2='\\[$(tput bold)\\]> \\[$(tput sgr0)\\]'",
 setup <- c(" setopt HIST_IGNORE_SPACE",
+           " history -p",
+           " setopt INC_APPEND_HISTORY",
            " export TERM=screen-256color",
+           " export SAVEHIST=1000000",
+           " export HISTSIZE=1000000",
            " export RIO_DPI=200",
            " export MANROFFOPT='-c'",
            " export MANPAGER=\"sh -c 'col -bx | /usr/bin/bat -plman --color=always'\"",
@@ -26,7 +27,8 @@ setup <- c(" setopt HIST_IGNORE_SPACE",
            " }",
            " alias bat='bat --tabs 8 --paging never --theme \"Solarized (dark)\"'",
            " alias docker='echo'",
-           " alias display='echo'",
+           " alias less='less -R'",
+           " function display { mv $1 /images/ }",
            " sudo cp -r /data.bak /data",
            " sudo sudo chown -R dst:dst /data",
            " setopt interactivecomments",
@@ -35,5 +37,4 @@ setup <- c(" setopt HIST_IGNORE_SPACE",
 
 send_lines(engine$session, setup, wait = TRUE)
 engine$scroll(length(engine$session) - 1)
-
 knitr::opts_chunk$set(escape = TRUE)

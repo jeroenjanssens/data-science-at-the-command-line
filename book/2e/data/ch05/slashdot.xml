@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://my.netscape.com/rdf/simple/0.9/" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0">
+
+<channel>
+<title>Slashdot: Linux</title>
+<link>https://linux.slashdot.org/</link>
+<description>News for nerds, stuff that matters</description>
+</channel>
+<image>
+<title>Slashdot: Linux</title>
+<url>https://a.fsdn.com/sd/topics/topicslashdot.gif</url>
+<link>https://linux.slashdot.org/</link>
+</image>
+<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/xml" href="http://rss.slashdot.org/Slashdot/slashdotLinux" /><feedburner:info uri="slashdot/slashdotlinux" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><item>
+<title>Three Flaws in the Linux Kernel Since 2006 Could Grant Root Privileges</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/Hr1R4BPQ14g/three-flaws-in-the-linux-kernel-since-2006-could-grant-root-privileges</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/Hr1R4BPQ14g" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/03/13/0118217/three-flaws-in-the-linux-kernel-since-2006-could-grant-root-privileges?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>7-Zip Developer Releases the First Official Linux Version</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/ZC5mONfnq8U/7-zip-developer-releases-the-first-official-linux-version</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/ZC5mONfnq8U" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://hardware.slashdot.org/story/21/03/12/2144238/7-zip-developer-releases-the-first-official-linux-version?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Linux Foundation Debuts Sigstore Project for Software Signing</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/DOX_WpTCI0Q/linux-foundation-debuts-sigstore-project-for-software-signing</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/DOX_WpTCI0Q" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/03/10/1446201/linux-foundation-debuts-sigstore-project-for-software-signing?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>A Retired Microsoft OS Engineer's Comparison of Linux with Windows</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/KHgjenz4kVM/a-retired-microsoft-os-engineers-comparison-of-linux-with-windows</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/KHgjenz4kVM" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://tech.slashdot.org/story/21/03/07/2030221/a-retired-microsoft-os-engineers-comparison-of-linux-with-windows?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>What's the Best Linux Distro for Enhanced Privacy and Security?</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/db8TywfQ15s/whats-the-best-linux-distro-for-enhanced-privacy-and-security</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/db8TywfQ15s" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/03/06/0445226/whats-the-best-linux-distro-for-enhanced-privacy-and-security?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Torvalds Warns the World: Don't Use the Linux 5.12-rc1 Kernel</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/BNihlxQz89w/torvalds-warns-the-world-dont-use-the-linux-512-rc1-kernel</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/BNihlxQz89w" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/03/06/2213211/torvalds-warns-the-world-dont-use-the-linux-512-rc1-kernel?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Linus Torvalds Went Six Days Without Electricity, Swears Smaller 5.12 Kernel Is Co-Incidental</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/T0aJMqXvWbo/linus-torvalds-went-six-days-without-electricity-swears-smaller-512-kernel-is-co-incidental</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/T0aJMqXvWbo" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/03/01/2237246/linus-torvalds-went-six-days-without-electricity-swears-smaller-512-kernel-is-co-incidental?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Linux Mint Developers Will Force Updates on Users Like Microsoft Does with Windows 10</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/zPEuLZebWBo/linux-mint-developers-will-force-updates-on-users-like-microsoft-does-with-windows-10</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/zPEuLZebWBo" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/03/01/2032216/linux-mint-developers-will-force-updates-on-users-like-microsoft-does-with-windows-10?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Introducing Crowdsec: a Modernized, Collaborative Massively Multiplayer Firewall</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/FduKVwD0N8Q/introducing-crowdsec-a-modernized-collaborative-massively-multiplayer-firewall</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/FduKVwD0N8Q" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/02/27/2215223/introducing-crowdsec-a-modernized-collaborative-massively-multiplayer-firewall?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Kali Linux 2021.1 Released: Tweaked DEs and Terminals, New Tools, Silicon Macs</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/niOliPyli6g/kali-linux-20211-released-tweaked-des-and-terminals-new-tools-silicon-macs</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/niOliPyli6g" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/02/27/043218/kali-linux-20211-released-tweaked-des-and-terminals-new-tools-silicon-macs?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Red Hat Introduces Free RHEL for Open-Source Organizations</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/resYvMwkBoI/red-hat-introduces-free-rhel-for-open-source-organizations</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/resYvMwkBoI" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/02/27/0235247/red-hat-introduces-free-rhel-for-open-source-organizations?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Google Sponsors 2 Full-Time Devs To Improve Linux Security</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/OwC8hG_aUE0/google-sponsors-2-full-time-devs-to-improve-linux-security</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/OwC8hG_aUE0" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/02/24/210208/google-sponsors-2-full-time-devs-to-improve-linux-security?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Linux Is Now on Mars, Thanks to NASA's Perseverance Rover</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/KR3Q_j06npE/linux-is-now-on-mars-thanks-to-nasas-perseverance-rover</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/KR3Q_j06npE" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://science.slashdot.org/story/21/02/20/1830240/linux-is-now-on-mars-thanks-to-nasas-perseverance-rover?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>Did Linux Kill Commercial Unix?</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/9ZgTp53P-js/did-linux-kill-commercial-unix</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/9ZgTp53P-js" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/02/13/0115253/did-linux-kill-commercial-unix?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<item>
+<title>AMD Is Currently Hiring More Linux Engineers</title>
+<link>http://rss.slashdot.org/~r/Slashdot/slashdotLinux/~3/h3keKVTmW8Y/amd-is-currently-hiring-more-linux-engineers</link>
+<description>&lt;img src="http://feeds.feedburner.com/~r/Slashdot/slashdotLinux/~4/h3keKVTmW8Y" height="1" width="1" alt=""/&gt;</description><feedburner:origLink>https://linux.slashdot.org/story/21/02/11/2111248/amd-is-currently-hiring-more-linux-engineers?utm_source=rss0.9mainlinkanon&amp;utm_medium=feed</feedburner:origLink></item>
+<textinput>
+<title>Search Slashdot</title>
+<description>Search Slashdot stories</description>
+<name>query</name>
+<link>https://linux.slashdot.org/search.pl</link>
+</textinput>
+</rdf:RDF>

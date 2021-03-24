@@ -1,5 +1,705 @@
-# Parallel Processing {#chapter-8-parallel-processing}
+---
+suppress-bibliography: true
+---
+
+```{console setup_history, include=FALSE}
+ export CHAPTER="08"
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
+```
+
+# Parallel Pipelines {#chapter-8-parallel-pipelines}
+
+In the previous chapters, we've been dealing with commands and pipelines that take care of an entire task at once.
+In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times.
+For, example, you may need to:
+
+- Scrape hundreds of web pages
+- Make dozens of API calls and transform their output
+- Train a classifier for a range of parameter values
+- Generate scatter plots for every pair of features in your dataset
+
+In any of the above examples, there's a certain form of repetition involved.
+With your favorite scripting or programming language, you take care of this with a for loop or a while loop.
+On the command line, the first thing you might be inclined to do is to press **`Up`** to bring back the previous command, modify it if necessary, and press **`Enter`** to run the command again.
+This is fine for two or three times, but imagine doing this dozens of times.
+Such an approach quickly becomes cumbersome, inefficient, and prone to errors.
+The good news is that you can write such loops on the command line as well.
+That's what this chapter is all about.
+
+Sometimes, repeating a fast command on after the other (in a *serial* manner) is sufficient.
+When you have multiple cores (and perhaps even multiple machines) it would be nice if you could make use of those, especially when you’re faced with a data-intensive task.
+When using multiple cores or machines, the total running time of may be reduced significantly.
+In this chapter I will introduce a very powerful tool called `parallel`[@parallel] that can take care of exactly this. It enables you to apply a command or pipeline for a range of arguments such as numbers, lines, and files.
+Plus, as the name implies, it allows you to run your commands in *parallel*.
+
+
+## Overview
+
+This intermezzo chapter discusses several approaches to speed up tasks that require commands and pipelines to be run many times.
+My main goal is to demonstrate to you the flexibility and power of `parallel`.
+Because this tool can be combined with any other tool discussed in this book, it will positively change the way you use the command line for data science.
+In this chapter, you’ll learn about:
+
+- Running commands in serial to a range of numbers, lines, and files
+- Breaking a large task into several smaller tasks
+- Running pipelines in parallel
+- Distributing pipelines to multiple machines
+
+
+This chapter starts with the following files:
+
+```{console cd}
+cd /data/ch08
+l
+```
+
+
+## Serial Processing
+
+Before I dive into parallelization, I'll briefly discuss looping in a serial fashion.
+It’s worthwhile to know how to do this because this functionality is always available, the syntax closely resembles looping in other programming languages, and it will really make you appreciate `parallel`.
+
+From the examples provided in the introduction of this chapter, we can distill three types of items to loop over: numbers, lines, and files.
+These three types of items will be discussed in the next three subsections, respectively.
+
+
+### Looping Over Numbers
+
+Imagine that you need to compute the square of every even integer between 0 and 100. There’s a tool called `bc`[@bc], which is basically a calculator on the command line where you can pipe an equation to.
+The command to compute the square of 4 looks as follows:
+
+```{console bc}
+echo "4^2" | bc
+```
+
+For a one-off calculation, this will do.
+However, as mentioned in the introduction, you would need to be crazy to press **`Up`**, change the number, and press **`Enter`** 50 times!
+In this case it's better to let the shell do the hard work for you by using a for loop:
+
+```{console for_loop}
+for i in {0..100..2}  #<1> <2>
+do
+echo "$i^2" | bc      #<3>
+done | trim
+```
+<1> The Z Shell has a feature called brace expansion, which transforms *{0..100..2}* into a list separated by spaces: *0 2 4 … 98 100*.
+<2> The variable *i* is assigned the value *1* in the first iteration, *2* in the second iteration, and so forth.
+<3> The value of this variable can be used by prefixing it with a dollar sign *\$*. The shell will replace *\$i* with its value before `echo` is being executed. Note that there can be more than one command between `do` and `done`.
+
+Although the syntax may appear a bit odd compared to your favorite programming language, it's worth remembering this because it's always available in the shell.
+I'll introduce a better and more flexible way of repeating commands in a moment.
+
+
+### Looping Over Lines
+
+The second type of items you can loop over are lines.
+These lines can come from either a file or from standard input.
+This is a very generic approach because the lines can contain anything, including: numbers, dates, and email addresses.
+
+Imagine that you'd want to send an email to all your contacts.
+Let’s first generate some fake users using the <https://randomuser.me/> API:
+
+```{console emails}
+curl -s "https://randomuser.me/api/1.2/?results=5" > users.json
+< users.json jq -r '.results[].email' > emails
+bat emails
+```
+
+You can loop over the lines from *emails* with a while loop:
+
+```{console while_loop}
+while read line                         #<1>
+do
+echo "Sending invitation to ${line}."   #<2>
+done < emails                           #<3>
+```
+<1> In this case you need to use a while loop because the Z shell does not know beforehand how many lines the input consists of.
+<2> Although the curly braces around the *line* variable are not necessary in this case (since variable names cannot contain periods), it’s still good practice.
+<3> This redirection can also be placed before `while`.
+
+You can also provide input to a while loop interactively by specifying the special file standard input */dev/stdin*. Press **`Ctrl-D`** when you are done.
+
+```{console while_interactive}
+while read line; do echo "You typed: ${line}."; done < /dev/stdin#! expect_prompt=FALSE
+one#! expect_prompt=FALSE
+two#! expect_prompt=FALSE
+three#! expect_prompt=FALSE
+C-D#! literal=FALSE, expect_prompt=TRUE
+```
+
+This method, however, has the disadvantage that, once you press **`Enter`**, the commands between `do` and `done` are run immediately for that line of input. There's no turning back.
+
+
+### Looping Over Files
+
+In this section I discuss the third type of item that we often need to loop over: files.
+
+To handle special characters, use *globbing* (i.e., pathname expansion) instead of `ls`[@ls]:
+
+```{console}
+for chapter in /data/*
+do
+echo "Processing Chapter ${chapter}."
+done
+```
+
+Just as with brace expansion, the expression `/data/\**` is first expanded into a list by the Z shell before it's being processed by the for loop.
+
+A more elaborate alternative to listing files is `find`[@find], which:
+
+- Can traverse down directories
+- Allows for elaborate searching on properties such as size, access time, and permissions
+- Handles special characters such as spaces and newlines
+
+```{console}
+find /data -type d -name 'ch*' -exec echo "Processing chapter {}" \\;
+```
+
+
+## Parallel Processing
+
+Let's say that you have a very long running command, such as the one shown here:
+
+```{console bat_slow, callouts=list("RANDOM", "sleep")}
+bat slow.sh
+```
+<1> The magic variable *RANDOM* calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that *duration* is between 1 and 5.
+<2> `sleep` pauses execution for a given number of seconds.
+
+This process probably doesn't take up all the available resources.
+And it so happens that you need to run this command a lot of times.
+For example, you need to download a whole sequence of files.
+
+A naive way to parallelize is to run the commands in the background.
+Let's run the script *slow.sh* three times:
+
+```{console subshell, keep_last_prompt=TRUE, callouts=list(2, 4)}
+for i in {A..C}; do
+./slow.sh $i &
+done#! hold=7
+```
+<1> The ampersand sends the command to the background, allowing the for loop to continue immediately with the next iteration.
+<2> This line shows the job number given by the Z shell and the process ID, which can be used for more fine-grained job control. This topic, while powerful, is beyond the scope of this book.
+
+The problem with this approach is that all the commands are executed at once.
+There's no mechanism to control the maximum number of jobs.
+I don't recommend this approach.
+
+```{block2, type="rmdnote"}
+Keep in mind that not everything can be parallelized. API calls may be limited to a certain number, or some commands can only have one instance.
+```
+
+There are two problems with this naive approach.
+First, there’s no way to control how many processes you are running concurrently.
+Second, logging: which output belongs to which input. This is where `parallel` shines.
+
+
+### Introducing GNU Parallel
+
+`parallel` is a command-line tool written by Ole Tange. This tool allows you to parallelize commands and pipelines. The beauty of this tool is that existing tools can be used as they are; they do not need to be modified.
+
+```{block2, type="rmdcaution"}
+Be aware that there are two tools with the name `parallel`.
+If you make use of the Docker image then you already have the correct one installed.
+Otherwise, please double check that you have installed the correct tool installed by running `parallel --version`.
+It should say "GNU parallel".
+```
+
+Before I go into the details of `parallel`, here’s a little teaser to show you how easy it is to parallelize the for loop stated above:
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel "echo {}^2 | bc"
+1
+4
+9
+16
+25
+```
+
+This is `parallel` in its simplest form: without any arguments. As you can see it basically acts as a for loop. (We’ll explain later what is going on exactly.) With no less than 110 command-line arguments (!), `parallel` offers a lot of additional functionality. Don’t worry, by the end of this chapter, you’ll have a solid understanding of the most important ones.
+
+Install `parallel` by running the following commands:
+
+```{bash, eval=FALSE}
+$ wget http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
+$ tar -xvjf parallel-latest.tar.bz2 > extracted-files
+$ cd $(head -n 1 extracted-files)
+$ ./configure && make && sudo make install
+```
+
+You can verify that you have correctly installed `parallel`:
+
+```{console version}
+parallel --version | head -n 1
+```
+
+You can safely delete the created files and directories.
+
+```{bash, eval=FALSE}
+$ cd ..
+$ rm -r $(head -n 1 extracted-files)
+$ rm parallel-latest.tar.bz2 extracted-files
+```
+
+### Specifying Input
+
+The most important argument to `parallel`, is the command that you would like to run for every input. The question is: where should the input item be inserted in the command line? If you do not specify anything, then the input item will be appended to the command. While this is usually what you want, I advise you to be explicit about where the input item should be inserted in the command using one or more placeholders.
+
+```{block2, type="rmdnote"}
+
+There are many ways to provide input to `parallel`. I prefer piping the input (as I do throughout this chapter) because that is generally applicable and allows us to construct a pipeline from left to right. Please consult the man page of parallel to read about other ways to provide input.
+```
+
+In most cases, you probably want to use the entire input item as it is. For this, you only need one placeholder. You specify the placeholder, in other words, where to put the input item, with two curly braces:
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel echo {}
+```
+
+When the input item is a file, there are a couple of special placeholders you can use to modify the file name. For example, with *{./}*, only the base name of the file name will be used.
+
+If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders. For example:
+
+```{bash, eval=FALSE}
+$ < input.csv | parallel -C, "mv {1} {2}"
+```
+
+Here, you can apply the same placeholder modifiers. It is also possible to reuse the same input item. If the input to parallel is a CSV file with a header, then you can use the column names as placeholders:
+
+```{bash, eval=FALSE}
+$ < input.csv | parallel -C, --header : "invite {name} {email}"
+```
+
+Sometimes you just want to run the same command without any changing inputs. This is also possible in parallel. You just have to specify the `-N0` parameter and give as input as many lines as you want to execute:
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel -N0 "echo The command line rules"
+The command line rules
+The command line rules
+The command line rules
+The command line rules
+```
+
+```{block2, type="rmdtip"}
+
+If you ever wonder whether your `parallel` command is set up correctly, you can add the `--dryrun` option. Instead of actually executing the command, `parallel` will print out all the commands exactly as if they would have been executed.
+```
+
+### Controlling the Number of Concurrent Jobs
+
+By default, parallel runs one job per CPU core. You can control the number of jobs that will be run in parallel with the `-j` command-line argument, which is short for *jobs*. Simply specifying a number means that many jobs will be run in parallel. If you put a plus sign in front of the number then parallel will run *N* jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run *N-M* jobs. Where *N* is the number of CPU cores. You can also specify a percentage to the `-j` parameter. So, the default is 100% of the number of CPU cores. The optimal number of jobs to run in parallel depends on the actual commands you are running.
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel -j0 "echo Hi {}"
+Hi 1
+Hi 2
+Hi 3
+Hi 4
+Hi 5
+```
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel -j200% "echo Hi {}"
+Hi 1
+Hi 2
+Hi 3
+Hi 4
+Hi 5
+```
+
+If you specify `-j1`, then the commands will be run in serial. Even though this doesn’t do the name of the tool of justice, it still has its uses. For example, when you need to access an API which only allows one connection at a time. If you specify `-j0`, then parallel will run as many jobs in parallel as possible. This can be compared to your loop with the ampersand. This is not advised.
+
+### Logging and Output
+
+To save the output of each command, you might be tempted to the following:
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel "echo \"Hi {}\" > data/ch08/hi-{}.txt"
+```
+
+This will save the output into individual files. Or, if you want to save everything into one big file you could do the following:
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel "echo Hi {}" >> data/ch08/one-big-file.txt
+```
+
+However, `parallel` offers the `--results` option, which stores the output of each job into a separate file, where the filename is based on the input values:
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel --results data/ch08/outdir "echo Hi {}"
+Hi 1
+Hi 2
+Hi 3
+Hi 4
+Hi 5
+$ find data/ch08/outdir
+data/ch08/outdir
+data/ch08/outdir/1
+data/ch08/outdir/1/1
+data/ch08/outdir/1/1/stderr
+data/ch08/outdir/1/1/stdout
+data/ch08/outdir/1/3
+data/ch08/outdir/1/3/stderr
+data/ch08/outdir/1/3/stdout
+data/ch08/outdir/1/5
+data/ch08/outdir/1/5/stderr
+data/ch08/outdir/1/5/stdout
+data/ch08/outdir/1/2
+data/ch08/outdir/1/2/stderr
+data/ch08/outdir/1/2/stdout
+data/ch08/outdir/1/4
+data/ch08/outdir/1/4/stderr
+data/ch08/outdir/1/4/stdout
+```
+
+When you’re running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input. The output of jobs is therefore also mixed up. To keep the same order, simply specify the `--keep-order` option or `-k` option.
+
+Sometimes it’s useful to record which input generated which output. `parallel` allows you to *tag* the output with the `--tag` option:
+
+```{bash, eval=FALSE}
+$ seq 5 | parallel --tag "echo Hi {}"
+1       Hi 1
+2       Hi 2
+3       Hi 3
+4       Hi 4
+5       Hi 5
+```
+
+### Creating Parallel Tools
+
+The `bc` tool, which I used in the beginning of the chapter, is not parallel by itself. However, you can parallelize it using `parallel`. The Docker image contains a tool called `pbc` [@pbc]. Its code is shown here:
+
+```{console bat_pbc}
+bat $(which pbc)
+```
+
+This tool allows us to simplify the code used in the beginning of the chapter too. And it can process comma-separated values simultaneously:
+
+```{console run_pbc}
+seq 100 | pbc '{1}^2' | trim
+paste -d, <(seq 4) <(seq 4) <(seq 4) | pbc 'sqrt({1}+{2})^{3}'
+```
 
 
 
+## Distributed Processing
 
+Sometimes you need more power than your local machine, even with all its cores, can offer.
+Luckily, `parallel` can also leverage the power of remote machines, which really allows you to speed up your pipeline.
+
+What’s great is that `parallel` does not have to be installed on the remote machine. All that’s required is that you can connect to the remote machine via SSH, which is also what `parallel` uses to distribute your pipeline. (Having `parallel` installed is helpful because it can then determine how many cores to employ on each remote machine; more on this later.)
+
+First, we’re going to obtain a list of running AWS EC2 instances. Don’t worry if you don’t have any remote machines, you can replace any occurrence of `--slf hostnames`, which tells `parallel` which remote machines to use, with `--sshlogin :`. This way, you can still follow along with the examples in this section.
+
+Once you know which remote machines to take over, we’re going to consider three flavors of distributed processing:
+
+- Simply running ordinary commands on remote machines
+- Distributing local data directly among remote machines
+- Sending files to remote machines, process them, and retrieve the results
+
+### Get List of Running AWS EC2 Instances
+
+In this section we’re creating a file named *hostnames* that will contain one hostname of a remote machine per line. We’re using Amazon Web Services as an example. If you’re using a different cloud computing service, or have your own servers, please make sure that you create a *hostnames* file yourself.
+
+You can obtain a list of running AWS EC2 instances from the commanding using `aws`, the command-line interface to the AWS API [@aws]. If you’re not using the Data Science Toolbox, install `awscli` using `pip` [@pip] as follows:
+
+```{bash, eval=FALSE}
+$ pip install awscli
+```
+
+With `aws`, you can virtually do everything you can do with the online AWS Management Console. Here, you use this command to obtain a list of running EC2 instances from AWS, but it can do a lot more.
+
+I assume that you know how to launch instances, either through the online Management Console or through the `aws` command-line tool.
+
+The command `aws ec2 describe-instances` returns a lot of information about all your EC2 instances in JSON format (see <http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html>). You extract the relevant fields using `jq`:
+
+```{bash, eval=FALSE}
+$ aws ec2 describe-instances | jq '.Reservations[].Instances[] | '\
+> '{public_dns: .PublicDnsName, state: .State.Name}'
+{
+  "state": "running",
+  "public_dns": "ec2-54-88-122-140.compute-1.amazonaws.com"
+}
+{
+  "state": "stopped",
+  "public_dns": null
+}
+```
+
+The possible states of an EC2 instance are: *pending*, *running*, *shutting-down*, *terminated*, *stopping*, and *stopped*. Since you can only distribute your pipeline to running instances, you filter out the non-running instances:
+
+```{bash, eval=FALSE}
+$ aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | '\
+> 'select(.State.Name=="running") | .PublicDnsName' > hostnames
+$ cat hostnames
+ec2-54-88-122-140.compute-1.amazonaws.com
+ec2-54-88-89-208.compute-1.amazonaws.com
+```
+
+(If you would leave out `-r`, which stands for *raw*, the hostnames would have been surrounded by double quotes.) You save the output to *hostnames*, so that you can pass this to `parallel` later.
+
+As mentioned, `parallel` employs `ssh` to connect to the EC2 instances. Add the following to *\~/.ssh/config*, so that `ssh` knows how to connect to the EC2 instances:
+
+```
+Host *.amazonaws.com
+    IdentityFile ~/.ssh/MyKeyFile.pem
+    User ubuntu
+```
+
+Depending on your which distribution your running, your username may be different than *ubuntu*.
+
+### Running Commands on Remote Machines
+
+The first flavor of distributed processing is to simply run ordinary commands on remote machines. Let’s first double check that parallel is working by running the command-line tools `hostname` List of hosts:
+
+```{bash, eval=FALSE}
+$ parallel --nonall --slf hostnames hostname
+ip-172-31-23-204
+ip-172-31-23-205
+```
+
+Here, `--slf` is short for `--sshloginfile` and `--nonall` instructs `parallel` to execute the same command on every remote machine in the *hostnames* file without using any parameters. Remember, if you don’t have any remote machines to utilize, you can replace `--slf hostnames` with `--sshlogin :` so that the command is run on your local machine:
+
+```{bash, eval=FALSE}
+$ parallel --nonall --sshlogin : hostname
+data-science-toolbox
+```
+
+Running the same command on every remote machine once only requires one core per machine. If you wanted to distribute the list of arguments passed in to `parallel` then it could potentially use more than one core. If the number of cores are not specified explicitly, `parallel` will try to determine this:
+
+    $ seq 2 | parallel --slf hostnames echo 2>&1 | fold
+    bash: parallel: command not found
+    parallel: Warning: Could not figure out number of cpus on ec2-54-88-122-140.comp
+    ute-1.amazonaws.com (). Using 1.
+    1
+    2
+
+In this case, you have `parallel` installed on one of the two remote machines. We’re getting a warning message indicating that `parallel` is not found on one of them. As a result, `parallel` cannot determine the number of cores and will default to using one core. When you receive this warning message, you can do one of the following four things:
+
+- Don’t worry, and be happy with using one core per machine
+- Specify the number of jobs per machine via `-j`
+- Specify the number of cores to use per machine by putting, for example, *2/* if you want two cores, in front of each hostname in the *hostnames* file
+- Install `parallel` using a package manager. For example, on Ubuntu:
+
+```{bash, eval=FALSE}
+$ parallel --nonall --slf hostnames "sudo apt-get install -y parallel"
+```
+
+### Distributing Local Data among Remote Machines
+
+The second flavor of distributed processing is to distribute local data directly among remote machines. Imagine you have one very large dataset that you want to process it using multiple remote machines. For simplicity, we’re going to sum all integers from 1 to 1000. First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using `wc`:
+
+```{bash, eval=FALSE}
+$ seq 1000 | parallel -N100 --pipe --slf hosts  "(hostname; wc -l) | paste -sd:"
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100
+```
+
+You can verify that your 1000 numbers get distributed evenly in subsets of 100 (as specified by `-N100`). Now, you’re ready to sum all those numbers:
+
+```{bash, eval=FALSE}
+seq 1000 | parallel -N100 --pipe --slf hosts "paste -sd+ | bc" | paste -sd+ | bc
+500500
+```
+
+Here, you immediately also sum the ten sums you get back from the remote machines. Let’s double check the answer is correct:
+
+```{bash, eval=FALSE}
+$ seq 1000 | paste -sd+ | bc
+500500
+```
+
+Good, that works. If you have a larger command that you want to execute on the remote machines, you can also put it in a separate script and upload it script with `parallel`.
+
+Let’s create a very simple command-line tool called *sum*:
+
+```{bash, eval=FALSE}
+#!/usr/bin/env bash
+paste -sd+ | bc
+```
+
+Don’t forget to make it executable as discussed in [Chapter 4](#chapter-4-creating-reusable-command-line-tools). The following command first uploads the file *sum*:
+
+    $ seq 1000 | parallel -N100 --basefile sum --pipe --slf hosts './sum' | ./sum
+    500500
+
+Of course, summing 1000 numbers is only a toy example. It would have been much faster to do this locally. However, I hope it’s clear from this that `parallel` can be incredibly powerful.
+
+### Processing Files on Remote Machines
+
+The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results. Imagine that you want to count for each borough of New York City, how often they receive service calls on 311. You don’t have that data on your local machine yet, so let’s first obtain it from <https://data.cityofnewyork.us/> using their great API:
+
+```{bash, eval=FALSE}
+$ seq 0 100 900 | parallel  "curl -sL 'http://data.cityofnewyork.us/resource'"\
+> "'/erm2-nwe9.json?\$limit=100&\$offset={}' | jq -c '.[]' | gzip > {#}.json.gz"
+```
+
+Note that `jq -c '.[]'` is used to flatten the array of JSON objects so that there’s one line. You now have 10 files containing compressed JSON data. Let’s see what one line of JSON looks like:
+
+```{bash, eval=FALSE}
+$ zcat 1.json.gz | head -n 1 | fold
+{"school_region":"Unspecified","park_facility_name":"Unspecified","x_coordinate_
+state_plane":"945974","agency_name":"Department of Health and Mental Hygiene","u
+nique_key":"147","facility_type":"N/A","status":"Assigned","school_address":"Uns
+pecified","created_date":"2006-08-29T21:25:23","community_board":"01 STATEN ISLA
+ND","incident_zip":"10302","school_name":"Unspecified","location":{"latitude":"4
+0.62745427115626","longitude":"-74.13789056665027","needs_recoding":false},"comp
+laint_type":"Food Establishment","city":"STATEN ISLAND","park_borough":"STATEN I
+SLAND","school_state":"Unspecified","longitude":"-74.13789056665027","intersecti
+on_street_1":"DECKER AVENUE","y_coordinate_state_plane":"167905","due_date":"200
+6-10-05T21:25:23","latitude":"40.62745427115626","school_code":"Unspecified","sc
+hool_city":"Unspecified","address_type":"INTERSECTION","intersection_street_2":"
+BARRETT AVENUE","school_number":"Unspecified","resolution_action_updated_date":"
+2006-10-06T00:00:17","descriptor":"Handwashing","school_zip":"Unspecified","loca
+tion_type":"Restaurant/Bar/Deli/Bakery","agency":"DOHMH","borough":"STATEN ISLAN
+D","school_phone_number":"Unspecified"}
+```
+
+If you were to get the total number of service calls per borough on your local machine, you would run the following command:
+
+```{bash, eval=FALSE}
+$ zcat *.json.gz |
+> ./jq -r '.borough' |
+> tr '[A-Z] ' '[a-z]_' |
+> sort | uniq -c |
+> awk '{print $2","$1}' |
+> header -a borough,count |
+> csvsort -rc count | csvlook
+|----------------|--------|
+|  borough       | count  |
+|----------------|--------|
+|  unspecified   | 467    |
+|  manhattan     | 274    |
+|  brooklyn      | 103    |
+|  queens        | 77     |
+|  bronx         | 44     |
+|  staten_island | 35     |
+|----------------|--------|
+```
+
+Because this is quite a long pipeline, and because we’re using it again in a moment with `parallel`, it’s worth to go over it:
+
+- Expand all compressed files using `zcat`
+- For each call, extract the name of the borough using `jq`
+- Convert borough names to lowercase and replace spaces with underscores (because `awk` splits on whitespace by default)
+- Count the occurrences of each borough using `sort` and `uniq`
+
+- Reverse the count and borough and make it comma delimited using `awk`
+- Add a header using `header`
+- Sort by count and print table using `csvsort` [@csvsort]
+
+Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally.
+You can use `parallel` to distribute the local files among the remote machines, let them do the processing, and retrieve the results:
+
+```{bash, eval=FALSE}
+$ ls *.json.gz |
+> parallel -v --basefile jq \
+> --trc {.}.csv \
+> --slf hostnames \
+> "zcat {} | ./jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c |"\
+> " awk '{print \$2\",\"\$1}' > {.}.csv"
+zcat 10.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 2.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 1.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 3.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 4.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 5.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 6.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 7.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 8.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+zcat 9.json.gz | ./jq -r '.borough' | sort | uniq -c | awk '{print $2","$1}'
+```
+
+This long command breaks down as follows:
+
+- Print the list of files and pipe it into `parallel`
+- Transmit the `jq` binary to each remote machine. Lucklily, jq has no dependencies. This file will be removed from the remote machine at the end because you specified `--trc` (which implies the `--cleanup` command-line argument)
+- The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transfered to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
+- Specify a list of hostnames. Remember, if you want to try this out locally, you can specify `--sshlogin :` instead of `--self hostnames`
+- Note the escaping in the `awk` expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. In quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with `sum`
+
+If we, at some point during this command, run `ls` on one of the remote machines, you could see that `parallel` indeed transfers (and cleans up) the binary `jq`, the JSON files, and CSV files:
+
+```{bash, eval=FALSE}
+$ ssh $(head -n 1 hostnames) ls
+1.json.csv
+1.json.gz
+jq
+```
+
+Each CSV file looks like this:
+
+```{bash, eval=FALSE}
+$ cat 1.json.csv
+bronx,3
+brooklyn,5
+manhattan,24
+queens,3
+staten_island,2
+unspecified,63
+```
+
+You can sum the counts in each CSV file using Rio and the `aggregate` function in R:
+
+```{bash, eval=FALSE}
+$ cat *.csv | header -a borough,count |
+> Rio -e 'aggregate(count ~ borough, df, sum)' |
+> csvsort -rc count | csvlook
+|----------------|--------|
+|  borough       | count  |
+|----------------|--------|
+|  unspecified   | 467    |
+|  manhattan     | 274    |
+|  brooklyn      | 103    |
+|  queens        | 77     |
+|  bronx         | 44     |
+|  staten_island | 35     |
+|----------------|--------|
+```
+
+Or, if you prefer to use SQL to aggregate results, you can use `csvsql` as discussed in [Chapter 5](#chapter-5-scrubbing-data):
+
+```{bash, eval=FALSE}
+$ cat *.csv | header -a borough,count |
+> csvsql --query 'SELECT borough, SUM(count) AS count FROM stdin '\
+> 'GROUP BY borough ORDER BY count DESC' | csvlook
+|----------------|--------|
+|  borough       | count  |
+|----------------|--------|
+|  unspecified   | 467    |
+|  manhattan     | 274    |
+|  brooklyn      | 103    |
+|  queens        | 77     |
+|  bronx         | 44     |
+|  staten_island | 35     |
+|----------------|--------|
+```
+
+## Discussion
+
+As data scientists, we work with data, and sometimes a lot of data.
+This means that sometimes you need to run a command multiple times or distribute data-intensive commands over multiple cores.
+In this chapter I have shown you how easy it is to parallelize commands.
+`parallel` is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them over multiple cores and remote machines. It offers a lot of functionality and in this chapter I’ve only been able to scratch the surface. Some features of `parallel` are that I haven’t covered:
+
+- Different ways of specifying input
+- Keep a log of all the jobs
+- Only start new jobs when the machine is under a certain load
+- Timeout, resume, and retry jobs
+
+Once you have a basic understanding of `parallel` and its most important options, I recommend that you take a look at its tutorial listed in the Further Reading section.
+
+## Further Reading
+
+* Tange, O. 2011. “GNU Parallel - the Command-Line Power Tool.”<em>;Login: The USENIX Magazine</em> 36 (1). Frederiksberg, Denmark:42–47. <a href="http://www.gnu.org/s/parallel" class="uri">http://www.gnu.org/s/parallel</a>.
+* Tange, Ole. 2014. “GNU Parallel.” <a href="http://www.gnu.org/software/parallel" class="uri">http://www.gnu.org/software/parallel</a>.
+* Services, Amazon Web. 2014. “AWS Command Line Interface.” <a href="http://aws.amazon.com/cli" class="uri">http://aws.amazon.com/cli</a>.

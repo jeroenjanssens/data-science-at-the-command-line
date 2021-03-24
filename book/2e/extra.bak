@@ -1,0 +1,85 @@
+
+## Working with XML/HTML and JSON
+
+As we have seen in Chapter 3, our obtained data can come in a variety of formats. The most common ones are plain text, CSV, JSON, and HTML/XML. In this section we are going to demonstrate a couple of command-line tools that can convert our data from one format to another. There are two reasons to convert data.
+
+First, oftentimes, the data needs to be in tabular form, just like a database table or a spreadsheet, because many visualization and machine learning algorithms depend on it. CSV is inherently in tabular form, but JSON and HTML/XML data can have a deeply nested structure.
+
+Second, many command-line tools, especially the classic ones such as `cut` and `grep`, operate on plain text. This is because text is regarded as a universal interface between command-line tools. Moreover, the other formats are simply younger. Each of these formats can be treated as plain text, allowing us to apply such command-line tools to the other formats as well.
+
+Sometimes we can get away with applying the classic tools to structured data. For example, by treating the JSON data below as plain text, we can change the attribute *gender* to *sex* using `sed`:
+
+    $ sed -e 's/"gender":/"sex":/g' data/users.json | fold | head -n 3
+
+Like many other command-line tools, `sed` does not make use of the structure of the data. Better is to either use a command-line tool that makes use of the structure of the data (such as `jq` which we discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.
+
+We’re going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case. The command-line tools that we’ll be using here are: `curl`, `scrape` [@scrape], `xml2json` [@xml2json], `jq`, and `json2csv` [@json2csv].
+
+Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets. For example, the page <http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio> contains a list of countries and territories together with their border length, their area, and the ration between the two.
+
+Let’s imagine that we’re interested in analyzing this data. In this section, we’ll walk you through all the necessary steps and their corresponding commands. We won’t go into every little detail, so it could be that you won’t understand everything right away. Don’t worry, we’re confident that you’ll get the gist of it. Remember that the purpose of this section is to demonstrate the command line. All tools and concepts used in this section (and more) will be explained in the subsequent chapters.
+
+The data set that we’re interested in, is embedded in HTML. Our goal is to end up with a representation of this data set that we can work with. The very first step is to download the HTML using `curl`:
+
+```{console}
+curl -L 'http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio' > wiki.html
+```
+
+The HTML is saved to a file named *wiki.html*. Let’s see how the first 10 lines look like:
+
+```{console}
+head -n 10 wiki.html | trim
+```
+
+That seems to be in order. (Note that we’re only showing the first 79 characters of each line so that output fits on the page.)
+
+Using the developer tools of our browser, we were able to determine that the root HTML element that we’re interested in is a *&lt;table&gt;* with the class *wikitable*. This allows us to look at the part that we’re interest in using `grep` (the `-A` command-line argument specifies the number of lines we want to see after the matching line):
+
+```{console}
+< wiki.html grep wikitable -A 21
+```
+
+We now actually see the countries and their values that we first saw in the screenshot. The next step is to extract the necessary elements from the HTML file. For this we use the `scrape` tool:
+
+```{console}
+< wiki.html scrape -b -e 'table.wikitable > tr:not(:first-child)' \
+> table.html
+head -n 21 table.html
+```
+
+The value passed to argument `-e`, which stands for *expression* (also with many other command-line tools), is a so-called CSS-selector. The syntax is usually used to style web pages, but we can also use it to select certain elements from our HTML. In this case, we wish to select all *&lt;tr&gt;* elements or *rows* (except the first) that are part of a table which belongs to the *wikitable* class. This is precisely the table that we’re interested in. The reason that we don’t want the first row (specified by *:not(first-child)*) is that we don’t want the header of the table. This results in a data set where each row represents a country or territory. As you can see, we now have a *&lt;tr&gt;* elements that we’re looking for, encapsulated in *&lt;html&gt;\` and '&lt;body&gt;* elements (because we specified the `-b` argument). This ensures that our next tool, `xml2json`, can work with it.
+
+As its name implies, `xml2json` converts XML (and HTML) to JSON.
+
+```{console}
+< table.html xml2json > table.json
+< table.json jq '.' | trim 25
+```
+
+The reason we convert the HTML to JSON is because there is a very powerful tool called `jq` that operates on JSON data. The following command extracts certain parts of the JSON data and reshapes it into a form that we can work with:
+
+```{console}
+< table.json jq -c '.html.body.tr[] | {country: .td[1][],border:'\
+'.td[2][], surface: .td[3][]}' > countries.json
+head -n 10 countries.json
+```
+
+Now we’re getting somewhere. JSON is a very popular data format, with many advantages, but for our purposes, we’re better off with having the data in CSV format. The tool `json2csv` is able to convert the data from JSON to CSV:
+
+```{console}
+< countries.json json2csv -p -k border,surface > countries.csv
+head -n 11 countries.csv | csvlook
+```
+
+The data is now in a form that we can work with. Those were quite a few steps to get from a Wikipedia page to a CSV data set. However, when you combine all of the above commands into one, you will see that it’s actually really concise and expressive:
+
+```{console}
+curl -sL 'http://en.wikipedia.org/wiki/List_of_countries'\
+'_and_territories_by_border/area_ratio' |
+scrape -be 'table.wikitable > tr:not(:first-child)' |
+xml2json | jq -c '.html.body.tr[] | {country: .td[1][],'\
+'border: .td[2][], surface: .td[3][], ratio: .td[4][]}' |
+json2csv -p -k=border,surface | head -n 11 | csvlook
+```
+
+That concludes the demonstration of conversion XML/HTML to JSON to CSV. While `jq` can perform much more operations, and while there exist specialized tools to work with XML data, in our experience, converting the data to CSV format as quickly as possible tends to work well. This way, you can spend more time becoming proficient at generic command-line tools, rather than very specific tools.

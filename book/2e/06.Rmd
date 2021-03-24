@@ -4,8 +4,8 @@ suppress-bibliography: true
 
 ```{console setup_history, include=FALSE}
  export CHAPTER="06"
- rm -f /history/bash_history_${CHAPTER}
- export HISTFILE=/history/bash_history_${CHAPTER}
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
 ```
 
 # Project Management with Make {#chapter-6-managing-your-data-workflow}
@@ -189,16 +189,11 @@ The second task creates a box plot showing the distribution of heights per speci
 ```{console}
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
 Rio -ge 'g + geom_boxplot(aes(x = height, y = species))' > heights.png
-display heights.png#! enter = FALSE
+display heights.png
 ```
 
-```{console, include = FALSE}
-C-c #! literal = FALSE
-mv heights.png /images/docker-starwars-heights.png
-```
-
-```{r starwars-heights, echo=FALSE, fig.cap="Distribution of heights per species in Star Wars", fig.align="center"}
-knitr::include_graphics("images/docker-starwars-heights.png")
+```{r starwars_image, echo=FALSE, fig.cap="Distribution of heights per species in Star Wars", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/heights.png")
 ```
 
 We can put these two tasks into a *Makefile*. Instead of doing this incrementally, I'd first like to show what a complete *Makefile* looks like and then explain all the syntax step by step.

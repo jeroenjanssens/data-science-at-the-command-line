@@ -1,0 +1,541 @@
+FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIME_FORMAT_DESC,TIME_PERIOD_DESC,OBS_STATUS_DESC,EXPEND_DESC,UNIT_DESC,GEO_DESC
+A,P1Y,2015,INV_VEN,PC_GDP,CZ,,0.002,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2007,INV_VEN,PC_GDP,DE,,0.034,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2008,INV_VEN,PC_GDP,DE,,0.039,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2009,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2010,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2011,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2012,INV_VEN,PC_GDP,DE,,0.021,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2013,INV_VEN,PC_GDP,DE,,0.023,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2014,INV_VEN,PC_GDP,DE,,0.021,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2015,INV_VEN,PC_GDP,DE,,0.025,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Germany
+A,P1Y,2007,INV_VEN,PC_GDP,DK,,0.092,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2008,INV_VEN,PC_GDP,DK,,0.074,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2009,INV_VEN,PC_GDP,DK,,0.051,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2011,INV_VEN,PC_GDP,DK,,0.067,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2012,INV_VEN,PC_GDP,DK,,0.07,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2013,INV_VEN,PC_GDP,DK,,0.078,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2014,INV_VEN,PC_GDP,DK,,0.075,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2015,INV_VEN,PC_GDP,DK,,0.109,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Denmark
+A,P1Y,2007,INV_VEN,PC_GDP,EL,,0,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2008,INV_VEN,PC_GDP,EL,,0.002,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2009,INV_VEN,PC_GDP,EL,,0.006,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2010,INV_VEN,PC_GDP,EL,,0.002,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2011,INV_VEN,PC_GDP,EL,,0.004,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2012,INV_VEN,PC_GDP,EL,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2013,INV_VEN,PC_GDP,EL,,0.001,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2014,INV_VEN,PC_GDP,EL,,0,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2015,INV_VEN,PC_GDP,EL,,0,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Greece
+A,P1Y,2007,INV_VEN,PC_GDP,ES,,0.034,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2008,INV_VEN,PC_GDP,ES,,0.044,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2009,INV_VEN,PC_GDP,ES,,0.013,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2010,INV_VEN,PC_GDP,ES,,0.01,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2011,INV_VEN,PC_GDP,ES,,0.012,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2012,INV_VEN,PC_GDP,ES,,0.009,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2013,INV_VEN,PC_GDP,ES,,0.008,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2014,INV_VEN,PC_GDP,ES,,0.008,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2015,INV_VEN,PC_GDP,ES,,0.01,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Spain
+A,P1Y,2007,INV_VEN,PC_GDP,FI,,0.07,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2008,INV_VEN,PC_GDP,FI,,0.059,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2009,INV_VEN,PC_GDP,FI,,0.048,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2010,INV_VEN,PC_GDP,FI,,0.053,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2011,INV_VEN,PC_GDP,FI,,0.039,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2012,INV_VEN,PC_GDP,FI,,0.04,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2013,INV_VEN,PC_GDP,FI,,0.049,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2014,INV_VEN,PC_GDP,FI,,0.049,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2015,INV_VEN,PC_GDP,FI,,0.047,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Finland
+A,P1Y,2007,INV_VEN,PC_GDP,FR,,0.049,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2008,INV_VEN,PC_GDP,FR,,0.057,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2009,INV_VEN,PC_GDP,FR,,0.048,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2010,INV_VEN,PC_GDP,FR,,0.042,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2011,INV_VEN,PC_GDP,FR,,0.035,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2012,INV_VEN,PC_GDP,FR,,0.032,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2013,INV_VEN,PC_GDP,FR,,0.037,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2014,INV_VEN,PC_GDP,FR,,0.035,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2015,INV_VEN,PC_GDP,FR,,0.034,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,France
+A,P1Y,2007,INV_VEN,PC_GDP,HU,,0.006,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2008,INV_VEN,PC_GDP,HU,,0.01,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2009,INV_VEN,PC_GDP,HU,,0.001,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2010,INV_VEN,PC_GDP,HU,,0.018,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2011,INV_VEN,PC_GDP,HU,,0.03,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2012,INV_VEN,PC_GDP,HU,,0.068,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2013,INV_VEN,PC_GDP,HU,,0.017,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2014,INV_VEN,PC_GDP,HU,,0.029,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2015,INV_VEN,PC_GDP,HU,,0.022,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Hungary
+A,P1Y,2007,INV_VEN,PC_GDP,IE,,0.034,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2008,INV_VEN,PC_GDP,IE,,0.025,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2009,INV_VEN,PC_GDP,IE,,0.027,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2010,INV_VEN,PC_GDP,IE,,0.017,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2011,INV_VEN,PC_GDP,IE,,0.024,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2012,INV_VEN,PC_GDP,IE,,0.043,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2013,INV_VEN,PC_GDP,IE,,0.048,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2014,INV_VEN,PC_GDP,IE,,0.034,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2015,INV_VEN,PC_GDP,IE,,0.041,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Ireland
+A,P1Y,2007,INV_VEN,PC_GDP,IT,,0.007,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2008,INV_VEN,PC_GDP,IT,,0.004,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2009,INV_VEN,PC_GDP,IT,,0.004,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2010,INV_VEN,PC_GDP,IT,,0.004,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2011,INV_VEN,PC_GDP,IT,,0.003,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2012,INV_VEN,PC_GDP,IT,,0.004,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2013,INV_VEN,PC_GDP,IT,,0.003,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2014,INV_VEN,PC_GDP,IT,,0.002,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2015,INV_VEN,PC_GDP,IT,,0.002,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Italy
+A,P1Y,2007,INV_VEN,PC_GDP,LU,,0.105,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2008,INV_VEN,PC_GDP,LU,,0.189,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2009,INV_VEN,PC_GDP,LU,,0.134,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2010,INV_VEN,PC_GDP,LU,,0.111,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2011,INV_VEN,PC_GDP,LU,,0.26,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2012,INV_VEN,PC_GDP,LU,,0.117,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2013,INV_VEN,PC_GDP,LU,,0.09,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2014,INV_VEN,PC_GDP,LU,,0.073,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2015,INV_VEN,PC_GDP,LU,,0.079,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Luxembourg
+A,P1Y,2007,INV_VEN,PC_GDP,NL,,0.05,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2008,INV_VEN,PC_GDP,NL,,0.038,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2009,INV_VEN,PC_GDP,NL,,0.028,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2010,INV_VEN,PC_GDP,NL,,0.026,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2011,INV_VEN,PC_GDP,NL,,0.029,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2012,INV_VEN,PC_GDP,NL,,0.026,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2013,INV_VEN,PC_GDP,NL,,0.024,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2014,INV_VEN,PC_GDP,NL,,0.029,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2015,INV_VEN,PC_GDP,NL,,0.032,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Netherlands
+A,P1Y,2009,INV_VEN,NR_COMP,NL,,209,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2010,INV_VEN,NR_COMP,NL,,190,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2011,INV_VEN,NR_COMP,NL,,191,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2012,INV_VEN,NR_COMP,NL,,190,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2013,INV_VEN,NR_COMP,NL,,213,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2014,INV_VEN,NR_COMP,NL,,249,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2015,INV_VEN,NR_COMP,NL,,231,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2007,INV_VEN,NR_COMP,PL,,23,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2008,INV_VEN,NR_COMP,PL,,43,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2009,INV_VEN,NR_COMP,PL,,7,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2010,INV_VEN,NR_COMP,PL,,12,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2011,INV_VEN,NR_COMP,PL,,26,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2012,INV_VEN,NR_COMP,PL,,29,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2013,INV_VEN,NR_COMP,PL,,62,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2014,INV_VEN,NR_COMP,PL,,47,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2015,INV_VEN,NR_COMP,PL,,64,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Poland
+A,P1Y,2007,INV_VEN,NR_COMP,PT,,58,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2008,INV_VEN,NR_COMP,PT,,122,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2009,INV_VEN,NR_COMP,PT,,66,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2010,INV_VEN,NR_COMP,PT,,44,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2011,INV_VEN,NR_COMP,PT,,33,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2012,INV_VEN,NR_COMP,PT,,58,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2013,INV_VEN,NR_COMP,PT,,83,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2014,INV_VEN,NR_COMP,PT,,98,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2015,INV_VEN,NR_COMP,PT,,112,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Portugal
+A,P1Y,2007,INV_VEN,NR_COMP,RO,,1,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2008,INV_VEN,NR_COMP,RO,,2,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2009,INV_VEN,NR_COMP,RO,,1,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2010,INV_VEN,NR_COMP,RO,,0,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2011,INV_VEN,NR_COMP,RO,,0,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2012,INV_VEN,NR_COMP,RO,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2013,INV_VEN,NR_COMP,RO,,1,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2014,INV_VEN,NR_COMP,RO,,4,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2015,INV_VEN,NR_COMP,RO,,2,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Romania
+A,P1Y,2007,INV_VEN,NR_COMP,SE,,437,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2008,INV_VEN,NR_COMP,SE,,293,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2009,INV_VEN,NR_COMP,SE,,295,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2010,INV_VEN,NR_COMP,SE,,334,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2011,INV_VEN,NR_COMP,SE,,325,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2012,INV_VEN,NR_COMP,SE,,384,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2013,INV_VEN,NR_COMP,SE,,355,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2014,INV_VEN,NR_COMP,SE,,397,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2015,INV_VEN,NR_COMP,SE,,344,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Sweden
+A,P1Y,2007,INV_VEN,NR_COMP,UK,,599,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2008,INV_VEN,NR_COMP,UK,,727,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2009,INV_VEN,NR_COMP,UK,,491,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2010,INV_VEN,NR_COMP,UK,,426,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2011,INV_VEN,NR_COMP,UK,,393,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2012,INV_VEN,NR_COMP,UK,,399,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2013,INV_VEN,NR_COMP,UK,,382,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2014,INV_VEN,NR_COMP,UK,,388,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2015,INV_VEN,NR_COMP,UK,,254,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,United Kingdom
+A,P1Y,2007,INV_VEN,PC_GDP,AT,,0.013,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2008,INV_VEN,PC_GDP,AT,,0.011,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2009,INV_VEN,PC_GDP,AT,,0.012,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2010,INV_VEN,PC_GDP,AT,,0.01,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2011,INV_VEN,PC_GDP,AT,,0.008,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2012,INV_VEN,PC_GDP,AT,,0.008,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2013,INV_VEN,PC_GDP,AT,,0.008,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2014,INV_VEN,PC_GDP,AT,,0.008,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2015,INV_VEN,PC_GDP,AT,,0.008,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Austria
+A,P1Y,2007,INV_VEN,PC_GDP,BE,,0.055,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2008,INV_VEN,PC_GDP,BE,,0.052,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2009,INV_VEN,PC_GDP,BE,,0.053,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2010,INV_VEN,PC_GDP,BE,,0.025,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2011,INV_VEN,PC_GDP,BE,,0.03,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2012,INV_VEN,PC_GDP,BE,,0.033,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2013,INV_VEN,PC_GDP,BE,,0.026,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2014,INV_VEN,PC_GDP,BE,,0.032,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2015,INV_VEN,PC_GDP,BE,,0.015,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Belgium
+A,P1Y,2007,INV_VEN,PC_GDP,BG,,0,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2008,INV_VEN,PC_GDP,BG,,0.031,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2009,INV_VEN,PC_GDP,BG,,0.017,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2010,INV_VEN,PC_GDP,BG,,0.009,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2011,INV_VEN,PC_GDP,BG,,0,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2012,INV_VEN,PC_GDP,BG,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2013,INV_VEN,PC_GDP,BG,,0.004,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2014,INV_VEN,PC_GDP,BG,,0.003,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2015,INV_VEN,PC_GDP,BG,,0.002,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Bulgaria
+A,P1Y,2007,INV_VEN,PC_GDP,CZ,,0.001,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2008,INV_VEN,PC_GDP,CZ,,0.003,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2009,INV_VEN,PC_GDP,CZ,,0.001,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2010,INV_VEN,PC_GDP,CZ,,0.007,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2011,INV_VEN,PC_GDP,CZ,,0.005,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2012,INV_VEN,PC_GDP,CZ,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2013,INV_VEN,PC_GDP,CZ,,0,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2014,INV_VEN,PC_GDP,CZ,,0.004,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Czechia
+A,P1Y,2012,INV_VEN,MIO_EUR,NL,,168,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2013,INV_VEN,MIO_EUR,NL,,158,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2014,INV_VEN,MIO_EUR,NL,,192,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2015,INV_VEN,MIO_EUR,NL,,220,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2007,INV_VEN,MIO_EUR,PL,,20,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2008,INV_VEN,MIO_EUR,PL,,58,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2009,INV_VEN,MIO_EUR,PL,,2,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2010,INV_VEN,MIO_EUR,PL,,8,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2011,INV_VEN,MIO_EUR,PL,,25,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2012,INV_VEN,MIO_EUR,PL,,8,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2013,INV_VEN,MIO_EUR,PL,,22,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2014,INV_VEN,MIO_EUR,PL,,25,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2015,INV_VEN,MIO_EUR,PL,,29,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Poland
+A,P1Y,2007,INV_VEN,MIO_EUR,PT,,137,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2008,INV_VEN,MIO_EUR,PT,,92,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2009,INV_VEN,MIO_EUR,PT,,42,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2010,INV_VEN,MIO_EUR,PT,,65,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2011,INV_VEN,MIO_EUR,PT,,13,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2012,INV_VEN,MIO_EUR,PT,,17,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2013,INV_VEN,MIO_EUR,PT,,29,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2014,INV_VEN,MIO_EUR,PT,,45,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2015,INV_VEN,MIO_EUR,PT,,70,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Portugal
+A,P1Y,2007,INV_VEN,MIO_EUR,RO,,1,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2008,INV_VEN,MIO_EUR,RO,,7,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2009,INV_VEN,MIO_EUR,RO,,1,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2010,INV_VEN,MIO_EUR,RO,,0,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2011,INV_VEN,MIO_EUR,RO,,0,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2012,INV_VEN,MIO_EUR,RO,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2013,INV_VEN,MIO_EUR,RO,,4,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2014,INV_VEN,MIO_EUR,RO,,2,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2015,INV_VEN,MIO_EUR,RO,,1,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Romania
+A,P1Y,2007,INV_VEN,MIO_EUR,SE,,422,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2008,INV_VEN,MIO_EUR,SE,,348,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2009,INV_VEN,MIO_EUR,SE,,218,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2010,INV_VEN,MIO_EUR,SE,,246,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2011,INV_VEN,MIO_EUR,SE,,235,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2012,INV_VEN,MIO_EUR,SE,,217,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2013,INV_VEN,MIO_EUR,SE,,224,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2014,INV_VEN,MIO_EUR,SE,,198,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2015,INV_VEN,MIO_EUR,SE,,150,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Sweden
+A,P1Y,2007,INV_VEN,MIO_EUR,UK,,1641,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2008,INV_VEN,MIO_EUR,UK,,1770,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2009,INV_VEN,MIO_EUR,UK,,875,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2010,INV_VEN,MIO_EUR,UK,,802,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2011,INV_VEN,MIO_EUR,UK,,840,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2012,INV_VEN,MIO_EUR,UK,,678,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2013,INV_VEN,MIO_EUR,UK,,533,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2014,INV_VEN,MIO_EUR,UK,,775,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2015,INV_VEN,MIO_EUR,UK,,833,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,United Kingdom
+A,P1Y,2007,INV_VEN,NR_COMP,AT,,52,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2008,INV_VEN,NR_COMP,AT,,55,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2009,INV_VEN,NR_COMP,AT,,58,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2010,INV_VEN,NR_COMP,AT,,57,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2011,INV_VEN,NR_COMP,AT,,68,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2012,INV_VEN,NR_COMP,AT,,87,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2013,INV_VEN,NR_COMP,AT,,87,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2014,INV_VEN,NR_COMP,AT,,88,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2015,INV_VEN,NR_COMP,AT,,92,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Austria
+A,P1Y,2007,INV_VEN,NR_COMP,BE,,126,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2008,INV_VEN,NR_COMP,BE,,143,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2009,INV_VEN,NR_COMP,BE,,151,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2010,INV_VEN,NR_COMP,BE,,77,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2011,INV_VEN,NR_COMP,BE,,91,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2012,INV_VEN,NR_COMP,BE,,110,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2013,INV_VEN,NR_COMP,BE,,96,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2014,INV_VEN,NR_COMP,BE,,122,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2015,INV_VEN,NR_COMP,BE,,51,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Belgium
+A,P1Y,2007,INV_VEN,NR_COMP,BG,,0,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2008,INV_VEN,NR_COMP,BG,,8,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2009,INV_VEN,NR_COMP,BG,,3,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2010,INV_VEN,NR_COMP,BG,,4,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2011,INV_VEN,NR_COMP,BG,,2,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2012,INV_VEN,NR_COMP,BG,,2,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2013,INV_VEN,NR_COMP,BG,,2,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2014,INV_VEN,NR_COMP,BG,,3,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2015,INV_VEN,NR_COMP,BG,,1,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Bulgaria
+A,P1Y,2007,INV_VEN,NR_COMP,CZ,,4,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2008,INV_VEN,NR_COMP,CZ,,2,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2009,INV_VEN,NR_COMP,CZ,,2,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2010,INV_VEN,NR_COMP,CZ,,1,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2011,INV_VEN,NR_COMP,CZ,,6,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2012,INV_VEN,NR_COMP,CZ,,1,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2013,INV_VEN,NR_COMP,CZ,,3,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2014,INV_VEN,NR_COMP,CZ,,8,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2015,INV_VEN,NR_COMP,CZ,,11,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Czechia
+A,P1Y,2007,INV_VEN,NR_COMP,DE,,961,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2008,INV_VEN,NR_COMP,DE,,1137,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2009,INV_VEN,NR_COMP,DE,,1011,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2010,INV_VEN,NR_COMP,DE,,1042,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2011,INV_VEN,NR_COMP,DE,,975,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2012,INV_VEN,NR_COMP,DE,,845,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2013,INV_VEN,NR_COMP,DE,,826,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2014,INV_VEN,NR_COMP,DE,,874,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2015,INV_VEN,NR_COMP,DE,,866,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Germany
+A,P1Y,2007,INV_VEN,NR_COMP,DK,,114,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2008,INV_VEN,NR_COMP,DK,,109,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2009,INV_VEN,NR_COMP,DK,,93,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2010,INV_VEN,NR_COMP,DK,,110,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2011,INV_VEN,NR_COMP,DK,,111,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2012,INV_VEN,NR_COMP,DK,,106,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2013,INV_VEN,NR_COMP,DK,,97,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2014,INV_VEN,NR_COMP,DK,,100,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2015,INV_VEN,NR_COMP,DK,,105,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Denmark
+A,P1Y,2007,INV_VEN,NR_COMP,EL,,2,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2008,INV_VEN,NR_COMP,EL,,3,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2009,INV_VEN,NR_COMP,EL,,5,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2010,INV_VEN,NR_COMP,EL,,2,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2011,INV_VEN,NR_COMP,EL,,4,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2012,INV_VEN,NR_COMP,EL,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2013,INV_VEN,NR_COMP,EL,,1,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2014,INV_VEN,NR_COMP,EL,,1,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2015,INV_VEN,NR_COMP,EL,,0,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Greece
+A,P1Y,2007,INV_VEN,NR_COMP,ES,,132,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2008,INV_VEN,NR_COMP,ES,,169,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2009,INV_VEN,NR_COMP,ES,,120,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2010,INV_VEN,NR_COMP,ES,,86,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2011,INV_VEN,NR_COMP,ES,,123,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2012,INV_VEN,NR_COMP,ES,,97,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2013,INV_VEN,NR_COMP,ES,,96,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2014,INV_VEN,NR_COMP,ES,,86,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2015,INV_VEN,NR_COMP,ES,,89,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Spain
+A,P1Y,2007,INV_VEN,MIO_EUR,AT,,38,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2008,INV_VEN,MIO_EUR,AT,,32,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2009,INV_VEN,MIO_EUR,AT,,36,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2010,INV_VEN,MIO_EUR,AT,,29,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2011,INV_VEN,MIO_EUR,AT,,25,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2012,INV_VEN,MIO_EUR,AT,,25,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2013,INV_VEN,MIO_EUR,AT,,26,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2014,INV_VEN,MIO_EUR,AT,,25,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2015,INV_VEN,MIO_EUR,AT,,27,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Austria
+A,P1Y,2007,INV_VEN,MIO_EUR,BE,,189,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2008,INV_VEN,MIO_EUR,BE,,186,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2009,INV_VEN,MIO_EUR,BE,,184,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2010,INV_VEN,MIO_EUR,BE,,92,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2011,INV_VEN,MIO_EUR,BE,,114,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2012,INV_VEN,MIO_EUR,BE,,128,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2013,INV_VEN,MIO_EUR,BE,,104,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2014,INV_VEN,MIO_EUR,BE,,127,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2015,INV_VEN,MIO_EUR,BE,,63,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Belgium
+A,P1Y,2007,INV_VEN,MIO_EUR,BG,,0,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2007,INV_VEN,NR_COMP,FI,,197,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2008,INV_VEN,NR_COMP,FI,,198,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2009,INV_VEN,NR_COMP,FI,,172,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2010,INV_VEN,NR_COMP,FI,,156,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2011,INV_VEN,NR_COMP,FI,,130,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2012,INV_VEN,NR_COMP,FI,,138,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2013,INV_VEN,NR_COMP,FI,,164,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2014,INV_VEN,NR_COMP,FI,,205,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2015,INV_VEN,NR_COMP,FI,,175,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Finland
+A,P1Y,2007,INV_VEN,NR_COMP,FR,,372,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2008,INV_VEN,NR_COMP,FR,,505,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2009,INV_VEN,NR_COMP,FR,,522,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2010,INV_VEN,NR_COMP,FR,,488,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2011,INV_VEN,NR_COMP,FR,,464,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2012,INV_VEN,NR_COMP,FR,,397,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2013,INV_VEN,NR_COMP,FR,,469,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2014,INV_VEN,NR_COMP,FR,,464,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2015,INV_VEN,NR_COMP,FR,,379,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,France
+A,P1Y,2007,INV_VEN,NR_COMP,HU,,12,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2008,INV_VEN,NR_COMP,HU,,10,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2009,INV_VEN,NR_COMP,HU,,2,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2010,INV_VEN,NR_COMP,HU,,11,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2011,INV_VEN,NR_COMP,HU,,30,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2012,INV_VEN,NR_COMP,HU,,42,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2013,INV_VEN,NR_COMP,HU,,35,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2014,INV_VEN,NR_COMP,HU,,65,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2015,INV_VEN,NR_COMP,HU,,56,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Hungary
+A,P1Y,2007,INV_VEN,NR_COMP,IE,,62,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2008,INV_VEN,NR_COMP,IE,,72,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2009,INV_VEN,NR_COMP,IE,,62,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2010,INV_VEN,NR_COMP,IE,,55,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2011,INV_VEN,NR_COMP,IE,,75,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2012,INV_VEN,NR_COMP,IE,,82,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2013,INV_VEN,NR_COMP,IE,,102,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2014,INV_VEN,NR_COMP,IE,,72,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2015,INV_VEN,NR_COMP,IE,,61,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Ireland
+A,P1Y,2007,INV_VEN,NR_COMP,IT,,25,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2008,INV_VEN,NR_COMP,IT,,27,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2009,INV_VEN,NR_COMP,IT,,32,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2010,INV_VEN,NR_COMP,IT,,54,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2011,INV_VEN,NR_COMP,IT,,47,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2012,INV_VEN,NR_COMP,IT,,77,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2013,INV_VEN,NR_COMP,IT,,61,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2014,INV_VEN,NR_COMP,IT,,58,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2015,INV_VEN,NR_COMP,IT,,41,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Italy
+A,P1Y,2007,INV_VEN,NR_COMP,LU,,22,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2008,INV_VEN,NR_COMP,LU,,31,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2009,INV_VEN,NR_COMP,LU,,28,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2010,INV_VEN,NR_COMP,LU,,26,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2011,INV_VEN,NR_COMP,LU,,33,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2012,INV_VEN,NR_COMP,LU,,38,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2013,INV_VEN,NR_COMP,LU,,32,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2014,INV_VEN,NR_COMP,LU,,29,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2015,INV_VEN,NR_COMP,LU,,34,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Luxembourg
+A,P1Y,2007,INV_VEN,NR_COMP,NL,,251,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2008,INV_VEN,NR_COMP,NL,,171,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Number of companies,Netherlands
+A,P1Y,2008,INV_VEN,MIO_EUR,BG,,11,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2009,INV_VEN,MIO_EUR,BG,,6,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2010,INV_VEN,MIO_EUR,BG,,3,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2011,INV_VEN,MIO_EUR,BG,,0,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2012,INV_VEN,MIO_EUR,BG,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2013,INV_VEN,MIO_EUR,BG,,2,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2014,INV_VEN,MIO_EUR,BG,,1,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2015,INV_VEN,MIO_EUR,BG,,1,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Bulgaria
+A,P1Y,2007,INV_VEN,MIO_EUR,CZ,,2,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2008,INV_VEN,MIO_EUR,CZ,,4,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2009,INV_VEN,MIO_EUR,CZ,,1,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2010,INV_VEN,MIO_EUR,CZ,,12,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2011,INV_VEN,MIO_EUR,CZ,,8,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2012,INV_VEN,MIO_EUR,CZ,,1,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2013,INV_VEN,MIO_EUR,CZ,,1,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2014,INV_VEN,MIO_EUR,CZ,,6,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2015,INV_VEN,MIO_EUR,CZ,,4,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Czechia
+A,P1Y,2007,INV_VEN,MIO_EUR,DE,,864,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2008,INV_VEN,MIO_EUR,DE,,1005,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2009,INV_VEN,MIO_EUR,DE,,704,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2010,INV_VEN,MIO_EUR,DE,,751,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2011,INV_VEN,MIO_EUR,DE,,770,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2012,INV_VEN,MIO_EUR,DE,,591,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2013,INV_VEN,MIO_EUR,DE,,659,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2014,INV_VEN,MIO_EUR,DE,,613,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2015,INV_VEN,MIO_EUR,DE,,757,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Germany
+A,P1Y,2007,INV_VEN,MIO_EUR,DK,,214,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2008,INV_VEN,MIO_EUR,DK,,178,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2009,INV_VEN,MIO_EUR,DK,,118,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2010,INV_VEN,MIO_EUR,DK,,142,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2011,INV_VEN,MIO_EUR,DK,,165,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2012,INV_VEN,MIO_EUR,DK,,177,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2013,INV_VEN,MIO_EUR,DK,,198,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2014,INV_VEN,MIO_EUR,DK,,196,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2015,INV_VEN,MIO_EUR,DK,,290,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Denmark
+A,P1Y,2007,INV_VEN,MIO_EUR,EL,,1,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2008,INV_VEN,MIO_EUR,EL,,5,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2009,INV_VEN,MIO_EUR,EL,,13,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2010,INV_VEN,MIO_EUR,EL,,5,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2011,INV_VEN,MIO_EUR,EL,,9,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2012,INV_VEN,MIO_EUR,EL,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2013,INV_VEN,MIO_EUR,EL,,1,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2014,INV_VEN,MIO_EUR,EL,,0,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2015,INV_VEN,MIO_EUR,EL,,0,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Greece
+A,P1Y,2007,INV_VEN,MIO_EUR,ES,,365,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2008,INV_VEN,MIO_EUR,ES,,496,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2009,INV_VEN,MIO_EUR,ES,,136,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2010,INV_VEN,MIO_EUR,ES,,105,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2011,INV_VEN,MIO_EUR,ES,,125,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2012,INV_VEN,MIO_EUR,ES,,90,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2013,INV_VEN,MIO_EUR,ES,,85,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2014,INV_VEN,MIO_EUR,ES,,83,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2015,INV_VEN,MIO_EUR,ES,,105,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Spain
+A,P1Y,2007,INV_VEN,MIO_EUR,FI,,131,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2008,INV_VEN,MIO_EUR,FI,,115,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2009,INV_VEN,MIO_EUR,FI,,87,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2010,INV_VEN,MIO_EUR,FI,,99,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2011,INV_VEN,MIO_EUR,FI,,77,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2012,INV_VEN,MIO_EUR,FI,,80,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2013,INV_VEN,MIO_EUR,FI,,100,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2014,INV_VEN,MIO_EUR,FI,,100,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2015,INV_VEN,MIO_EUR,FI,,98,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Finland
+A,P1Y,2007,INV_VEN,MIO_EUR,FR,,957,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2008,INV_VEN,MIO_EUR,FR,,1138,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2009,INV_VEN,MIO_EUR,FR,,929,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2010,INV_VEN,MIO_EUR,FR,,847,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2011,INV_VEN,MIO_EUR,FR,,725,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2012,INV_VEN,MIO_EUR,FR,,675,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2013,INV_VEN,MIO_EUR,FR,,784,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2014,INV_VEN,MIO_EUR,FR,,751,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2015,INV_VEN,MIO_EUR,FR,,744,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,France
+A,P1Y,2007,INV_VEN,MIO_EUR,HU,,6,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2008,INV_VEN,MIO_EUR,HU,,11,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2009,INV_VEN,MIO_EUR,HU,,1,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2010,INV_VEN,MIO_EUR,HU,,18,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2011,INV_VEN,MIO_EUR,HU,,30,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2012,INV_VEN,MIO_EUR,HU,,67,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2013,INV_VEN,MIO_EUR,HU,,17,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2014,INV_VEN,MIO_EUR,HU,,30,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2015,INV_VEN,MIO_EUR,HU,,24,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Hungary
+A,P1Y,2007,INV_VEN,MIO_EUR,IE,,66,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2008,INV_VEN,MIO_EUR,IE,,46,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2009,INV_VEN,MIO_EUR,IE,,45,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2010,INV_VEN,MIO_EUR,IE,,28,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2011,INV_VEN,MIO_EUR,IE,,41,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2012,INV_VEN,MIO_EUR,IE,,75,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2013,INV_VEN,MIO_EUR,IE,,87,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2014,INV_VEN,MIO_EUR,IE,,64,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2015,INV_VEN,MIO_EUR,IE,,89,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Ireland
+A,P1Y,2007,INV_VEN,MIO_EUR,IT,,117,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2008,INV_VEN,MIO_EUR,IT,,61,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2009,INV_VEN,MIO_EUR,IT,,65,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2010,INV_VEN,MIO_EUR,IT,,63,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2011,INV_VEN,MIO_EUR,IT,,50,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2012,INV_VEN,MIO_EUR,IT,,67,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2013,INV_VEN,MIO_EUR,IT,,43,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2014,INV_VEN,MIO_EUR,IT,,32,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2015,INV_VEN,MIO_EUR,IT,,33,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Italy
+A,P1Y,2007,INV_VEN,MIO_EUR,LU,,39,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2008,INV_VEN,MIO_EUR,LU,,71,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2009,INV_VEN,MIO_EUR,LU,,49,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2010,INV_VEN,MIO_EUR,LU,,44,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2011,INV_VEN,MIO_EUR,LU,,110,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2012,INV_VEN,MIO_EUR,LU,,51,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2013,INV_VEN,MIO_EUR,LU,,42,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2014,INV_VEN,MIO_EUR,LU,,35,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2015,INV_VEN,MIO_EUR,LU,,41,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Luxembourg
+A,P1Y,2007,INV_VEN,MIO_EUR,NL,,307,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2008,INV_VEN,MIO_EUR,NL,,242,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2009,INV_VEN,MIO_EUR,NL,,175,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2010,INV_VEN,MIO_EUR,NL,,166,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2011,INV_VEN,MIO_EUR,NL,,186,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Million euro,Netherlands
+A,P1Y,2007,INV_VEN,PC_GDP,PL,,0.006,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2008,INV_VEN,PC_GDP,PL,,0.016,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2009,INV_VEN,PC_GDP,PL,,0.001,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2010,INV_VEN,PC_GDP,PL,,0.002,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2011,INV_VEN,PC_GDP,PL,,0.007,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2012,INV_VEN,PC_GDP,PL,,0.002,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2013,INV_VEN,PC_GDP,PL,,0.006,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2014,INV_VEN,PC_GDP,PL,,0.006,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2015,INV_VEN,PC_GDP,PL,,0.007,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Poland
+A,P1Y,2007,INV_VEN,PC_GDP,PT,,0.078,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2008,INV_VEN,PC_GDP,PT,,0.052,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2009,INV_VEN,PC_GDP,PT,,0.024,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2010,INV_VEN,PC_GDP,PT,,0.036,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2011,INV_VEN,PC_GDP,PT,,0.007,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2012,INV_VEN,PC_GDP,PT,,0.01,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2013,INV_VEN,PC_GDP,PT,,0.017,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2014,INV_VEN,PC_GDP,PT,,0.026,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2015,INV_VEN,PC_GDP,PT,,0.039,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Portugal
+A,P1Y,2007,INV_VEN,PC_GDP,RO,,0.001,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2008,INV_VEN,PC_GDP,RO,,0.005,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2009,INV_VEN,PC_GDP,RO,,0,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2010,INV_VEN,PC_GDP,RO,,0,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2011,INV_VEN,PC_GDP,RO,,0,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2012,INV_VEN,PC_GDP,RO,,0,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2013,INV_VEN,PC_GDP,RO,,0.002,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2014,INV_VEN,PC_GDP,RO,,0.002,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2015,INV_VEN,PC_GDP,RO,,0.001,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Romania
+A,P1Y,2007,INV_VEN,PC_GDP,SE,,0.118,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2008,INV_VEN,PC_GDP,SE,,0.099,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2009,INV_VEN,PC_GDP,SE,,0.071,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2010,INV_VEN,PC_GDP,SE,,0.067,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2011,INV_VEN,PC_GDP,SE,,0.058,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2012,INV_VEN,PC_GDP,SE,,0.051,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2013,INV_VEN,PC_GDP,SE,,0.051,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2014,INV_VEN,PC_GDP,SE,,0.046,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2015,INV_VEN,PC_GDP,SE,,0.034,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,Sweden
+A,P1Y,2007,INV_VEN,PC_GDP,UK,,0.076,Annual,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2008,INV_VEN,PC_GDP,UK,,0.093,Annual,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2009,INV_VEN,PC_GDP,UK,,0.052,Annual,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2010,INV_VEN,PC_GDP,UK,,0.044,Annual,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2011,INV_VEN,PC_GDP,UK,,0.045,Annual,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2012,INV_VEN,PC_GDP,UK,,0.033,Annual,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2013,INV_VEN,PC_GDP,UK,,0.026,Annual,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2014,INV_VEN,PC_GDP,UK,,0.034,Annual,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom
+A,P1Y,2015,INV_VEN,PC_GDP,UK,,0.032,Annual,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and later stage) ",Percentage of GDP,United Kingdom

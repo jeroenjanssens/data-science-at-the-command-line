@@ -1,8 +1,9 @@
-@webpage{awk,
-    title = {Mawk},
-    url = {http://invisible-island.net/mawk},
-    author = {Mike Brennan},
-    year = {1994}
+@software{awk,
+    title = {{mawk -- Pattern scanning and text processing language}},
+    url = {https://invisible-island.net/mawk},
+    author = {Mike D. Brennan and Thomas E. Dickey},
+    year = {2019},
+    version = {1.3.4}
 }
 
 @webpage{aws,
@@ -17,6 +18,14 @@
     url = {http://www.gnu.org/software/bash},
     author = {Brian Fox and Chet Ramey},
     year = {2010}
+}
+
+@software{bat,
+    title = {{bat} -- A {cat} clone with syntax highlighting and Git integration},
+    url = {https://github.com/sharkdp/bat},
+    author = {David Peter},
+    version = {0.18.0},
+    year = {2021}
 }
 
 @webpage{bc,
@@ -36,14 +45,15 @@
 @webpage{body,
     title = {Body},
     url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
-@webpage{cat,
-    title = {Cat},
-    url = {http://www.gnu.org/software/coreutils},
+@software{cat,
+    title = {{cat} -- Concatenate files and print on the standard output},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Torbjorn Granlund and Richard M. Stallman},
+    version = {8.30},
     year = {2012}
 }
 
@@ -57,7 +67,7 @@
 @webpage{cols,
     title = {Cols},
     url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
@@ -113,7 +123,7 @@
 @webpage{csvsql,
     title = {Csvkit},
     url = {http://csvkit.readthedocs.org},
-    author = {Christopher Groskopf},
+    author = {Christopher Groskopf and Jeroen Janssens},
     year = {2014}
 }
 
@@ -169,7 +179,7 @@
 @webpage{dseq,
     title = {Dseq},
     url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
@@ -216,64 +226,77 @@
 }
 
 @webpage{grep,
-    title = {Grep},
-    url = {http://www.gnu.org/software/grep},
+    title = {{grep} -- Print lines that match patterns},
+    url = {https://www.gnu.org/software/grep/},
     author = {Jim Meyering},
-    year = {2012}
+    version = {3.4},
+    year = {2019}
 }
 
-@webpage{head,
-    title = {Head},
-    url = {http://www.gnu.org/software/coreutils},
+@software{head,
+    title = {{head} -- Output the first part of files},
+    version = {8.30},
+    url = {https://www.gnu.org/software/coreutils},
     author = {David MacKenzie and Jim Meyering},
-    year = {2012}
+    year = {2019}
 }
 
 @webpage{header,
-    title = {Header},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    title = {{header}},
+    url = {https://github.com/jeroenjanssens/dsutils},
+    author = {Jeroen Janssens},
     year = {2014}
+}
+
+@webpage{csvkit,
+    title = {{csvkit}},
+    url = {https://csvkit.readthedocs.org},
+    author = {Christopher Groskopf and contributors},
+    year = {2016}
 }
 
 @webpage{in2csv,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
-    author = {Christopher Groskopf},
-    year = {2014}
+    title = {{csvkit}},
+    url = {https://csvkit.readthedocs.org},
+    author = {Christopher Groskopf and contributors},
+    year = {2016}
 }
 
-@webpage{jq,
-    title = {Jq},
+@software{jq,
+    title = {{jq -- Command-line {JSON} processor}},
     url = {http://stedolan.github.com/jq},
     author = {Stephen Dolan},
-    year = {2014}
+    date = {2018-11-02},
+    version = {1.6}
 }
 
-@webpage{json2csv,
-    title = {Json2Csv},
+@software{json2csv,
+    title = {{json2csv} -- Convert {JSON} to {CSV}},
     url = {https://github.com/jehiah/json2csv},
     author = {Jehiah Czebotar},
-    year = {2014}
+    version = {1.2.1},
+    year = {2019}
 }
 
-@webpage{less,
-    title = {Less},
-    url = {http://www.greenwoodsoftware.com/less},
+@software{less,
+    title = {{less} -- opposite of {more}},
+    url = {https://www.greenwoodsoftware.com/less},
     author = {Mark Nudelman},
-    year = {2013}
+    version = {551},
+    year = {2019}
 }
 
-@webpage{ls,
-    title = {Ls},
+@software{ls,
+    title = {{ls} -- List directory contents},
     url = {http://www.gnu.org/software/coreutils},
     author = {Richard M. Stallman and David MacKenzie},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
 @article{make,
     author = {Stuart I. Feldman},
-    title = {Make --- {A} Program for Maintaining Computer Programs},
+    title = {{make} -- {A} Program for Maintaining Computer Programs},
     journal = {Software: Practice and Experience},
     year = {1979},
     volume = {9},
@@ -282,11 +305,11 @@
     publisher = {Wiley Online Library}
 }
 
-@webpage{man,
-    title = {Man},
-    url = {},
+@software{man,
+    title = {{man} -- An interface to the system reference manuals},
     author = {John W. Eaton and Colin Watson},
-    year = {2014}
+    version = {2.9.1},
+    year = {2014},
 }
 
 @webpage{mkdir,
@@ -320,7 +343,7 @@
 @webpage{pbc,
     title = {Pbc},
     url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
@@ -338,12 +361,14 @@
     year = {2012}
 }
 
-@webpage{python,
-    title = {Python},
-    url = {http://www.python.org},
-    author = {{Python Software Foundation}},
-    year = {2014}
+@book{python,
+  title={Python tutorial},
+  author={Van Rossum, Guido and Drake Jr, Fred L},
+  volume={620},
+  year={1995},
+  publisher={Centrum voor Wiskunde en Informatica Amsterdam}
 }
+
 
 @webpage{R,
     title = {R},
@@ -354,8 +379,8 @@
 
 @webpage{Rio,
     title = {Rio},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    url = {https://github.com/jeroenjanssens/dsutils},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
@@ -376,7 +401,7 @@
 @webpage{sample,
     title = {Sample},
     url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
@@ -390,7 +415,7 @@
 @webpage{scrape,
     title = {Scrape},
     url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
@@ -450,24 +475,30 @@
     year = {2013}
 }
 
-@webpage{tail,
-    title = {Tail},
-    url = {http://www.gnu.org/software/coreutils},
+@software{tail,
+    title = {{tail} -- Output the last part of files},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Paul Rubin and David MacKenzie and Ian Lance Taylor and Jim Meyering},
-    year = {2012}
+    year = {2019},
+    version = {8.30}
 }
 
-@webpage{tapkee,
-    title = {Tapkee},
-    url = {http://tapkee.lisitsyn.me},
-    author = {Sergey Lisitsyn and Fernando Iglesias},
-    year = {2014}
+
+@article{tapkee,
+    title = {Tapkee: An efficient dimension reduction library},
+    author = {Sergey Lisitsyn and Christian Widmer and Fernando J. Iglesias Garcia},
+    journal = {Journal of Machine Learning Research},
+    volume = {14},
+    pages = {2355--2359},
+    year = {2013},
+    url = {http://tapkee.lisitsyn.me}
 }
 
-@webpage{tar,
-    title = {Tar},
-    url = {http://www.gnu.org/software/tar},
-    author = {Jeff Bailey and Paul Eggert and Sergey Poznyakoff},
+@software{tar,
+    title = {{tar} -- An archiving utility},
+    url = {https://www.gnu.org/software/tar},
+    author = {John Gilmore and Jay Fenlason},
+    version = {1.30},
     year = {2014}
 }
 
@@ -485,18 +516,20 @@
     year = {2012}
 }
 
-@webpage{tree,
-    title = {Tree},
+@software{tree,
+    title = {{tree} -- List contents of directories in a tree-like format},
     url = {https://launchpad.net/ubuntu/+source/tree},
     author = {Steve Baker},
+    version = {1.8.0},
     year = {2014}
 }
 
-@webpage{uniq,
-    title = {Uniq},
+@software{uniq,
+    title = {{uniq} -- Report or omit repeated lines},
     url = {http://www.gnu.org/software/coreutils},
     author = {Richard M. Stallman and David MacKenzie},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
 @webpage{unpack,
@@ -520,17 +553,18 @@
     year = {2009}
 }
 
-@webpage{wc,
-    title = {Wc},
+@software{wc,
+    title = {{wc} -- Print newline, word, and byte counts for each file},
     url = {http://www.gnu.org/software/coreutils},
     author = {Paul Rubin and David MacKenzie},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
 @webpage{weka,
     title = {Weka command-line tool},
     url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen H.M. Janssens},
+    author = {Jeroen Janssens},
     year = {2014}
 }
 
@@ -541,9 +575,26 @@
     year = {2009}
 }
 
-@webpage{xml2json,
-    title = {Xml2Json},
+@software{xml2json,
+    title = {{xml2json} -- Convert an {XML} input to a {JSON} output, using {xml-mapping}},
     url = {https://github.com/parmentf/xml2json},
-    author = {Francois Parmentier},
+    author = {François Parmentier},
+    version = {0.0.3},
+    year = {2016}
+}
+
+@software{xsv,
+    title = {{xsv} -- A fast {CSV} command line toolkit written in Rust},
+    url = {https://github.com/BurntSushi/xsv},
+    author = {Andrew Gallant},
+    version = {0.13.0},
+    year = {2018}
+}
+
+@software{xmlstarlet,
+    title = {{xmlstarlet} -- Command line {XML}/{XSLT} toolkit},
+    url = {https://sourceforge.net/projects/xmlstar/},
+    author = {Dagobert Michelsen and Noam Postavsky and Mikhail Grushinskiy},
+    version = {1.6.1},
     year = {2014}
 }

@@ -4,8 +4,8 @@ suppress-bibliography: true
 
 ```{console setup_history, include=FALSE}
  export CHAPTER="02"
- rm -f /history/bash_history_${CHAPTER}
- export HISTFILE=/history/bash_history_${CHAPTER}
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
 ```
 
 # Getting Started {#chapter-2-getting-started}

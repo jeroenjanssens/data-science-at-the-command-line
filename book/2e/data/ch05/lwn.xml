@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns="http://purl.org/rss/1.0/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+>
+
+  <channel rdf:about="https://lwn.net/headlines/rss">
+    <title>LWN.net</title>
+    <link>https://lwn.net</link>
+    <description>
+ LWN.net is a comprehensive source of news and opinions from
+        and about the Linux community.  This is the main LWN.net feed,
+        listing all articles which are posted to the site front page.
+
+    </description>
+
+    <syn:updatePeriod>hourly</syn:updatePeriod>
+    <syn:updateFrequency>2</syn:updateFrequency>
+    <items>
+      <rdf:Seq>
+	<rdf:li resource="https://lwn.net/Articles/849325/rss" />
+	<rdf:li resource="https://lwn.net/Articles/847973/rss" />
+	<rdf:li resource="https://lwn.net/Articles/849208/rss" />
+	<rdf:li resource="https://lwn.net/Articles/849108/rss" />
+	<rdf:li resource="https://lwn.net/Articles/849100/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848291/rss" />
+	<rdf:li resource="https://lwn.net/Articles/849088/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848235/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848935/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848789/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848973/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848930/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848893/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848890/rss" />
+	<rdf:li resource="https://lwn.net/Articles/848836/rss" />
+      
+      </rdf:Seq>
+    </items>
+
+  </channel>
+    <item rdf:about="https://lwn.net/Articles/849325/rss">
+      <title>Kernel prepatch 5.12-rc3</title>
+      <link>https://lwn.net/Articles/849325/rss</link>
+      <dc:date>2021-03-14T23:18:26+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      The &lt;a href=&quot;https://lwn.net/Articles/849324/&quot;&gt;third 5.12 kernel prepatch&lt;/a&gt; is out for
+testing.  &quot;&lt;span&gt;So rc3 is pretty big this time around, but that's entirely
+artificial, and due to how I released rc2 early. So I'm not going to read
+anything more into this, 5.12 still seems to actually be on the smaller
+side overall.&lt;/span&gt;&quot;
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/847973/rss">
+      <title>[$] Lockless patterns: an introduction to compare-and-swap</title>
+      <link>https://lwn.net/Articles/847973/rss</link>
+      <dc:date>2021-03-12T14:47:48+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      In the first part of this series, I showed you the theory behind
+concurrent memory models and how that theory can be applied to
+simple loads and stores.  However, loads and stores alone are not
+a practical tool for the building of higher-level synchronization primitives
+such as spinlocks, mutexes, and condition variables.
+Even though it is possible to synchronize two threads using the
+full memory-barrier pattern that was introduced last week (&lt;a
+href=&quot;https://en.wikipedia.org/wiki/Dekker%27s_algorithm&quot;&gt;Dekker's
+algorithm&lt;/a&gt;), modern processors provide a way that is
+easier, more generic, and faster&amp;mdash;yes, all three of them—the
+&lt;em&gt;compare-and-swap&lt;/em&gt; operation.
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/849208/rss">
+      <title>Security updates for Friday</title>
+      <link>https://lwn.net/Articles/849208/rss</link>
+      <dc:date>2021-03-12T14:37:41+00:00</dc:date>
+      <dc:creator>jake</dc:creator>
+      <description>
+      Security updates have been issued by &lt;b&gt;Debian&lt;/b&gt; (mupdf and pygments), &lt;b&gt;Fedora&lt;/b&gt; (arm-none-eabi-newlib, nodejs, python3.10, and suricata), &lt;b&gt;Mageia&lt;/b&gt; (ansible, ceph, firejail, glib2.0, gnuplot, libcaca, mumble, openssh, postgresql, python-cryptography, python-httplib2, python-yaml, roundcubemail, and ruby-mechanize), &lt;b&gt;Scientific Linux&lt;/b&gt; (wpa_supplicant), &lt;b&gt;Slackware&lt;/b&gt; (git), &lt;b&gt;SUSE&lt;/b&gt; (crmsh, libsolv, libzypp, yast2-installation, zypper, openssl-1_0_0, python, and stunnel), and &lt;b&gt;Ubuntu&lt;/b&gt; (pillow).
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/849108/rss">
+      <title>Asahi Linux progress report</title>
+      <link>https://lwn.net/Articles/849108/rss</link>
+      <dc:date>2021-03-11T15:54:58+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      The Asahi Linux project, which is working to build a distribution for
+M1-based Apple systems, has published &lt;a
+href=&quot;https://asahilinux.org/2021/03/progress-report-january-february-2021/&quot;&gt;a
+progress report&lt;/a&gt; for January and February.  &quot;&lt;span&gt;Apple Silicon Macs
+boot in a completely different way from PCs. The way they work is more akin
+to embedded platforms (like Android phones, or, of course, iOS devices),
+but with quite a few bespoke mechanisms thrown in. However, Apple has taken
+a few steps to make this boot process feel closer to that of an Intel Mac,
+so there has been a lot of confusion around how things actually work. For
+example, did you know that Apple Silicon Macs cannot boot from external
+storage at all, in the traditional sense? Or that the bootloader on Apple
+Silicon Macs cannot show a graphical user interface at all, and that the
+“Boot Picker” is in fact a full-screen macOS app, not part of the
+bootloader?&lt;/span&gt;&quot;
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/849100/rss">
+      <title>More stable kernels</title>
+      <link>https://lwn.net/Articles/849100/rss</link>
+      <dc:date>2021-03-11T15:49:13+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      The
+&lt;a href=&quot;https://lwn.net/Articles/849101/&quot;&gt;5.11.6&lt;/a&gt;,
+&lt;a href=&quot;https://lwn.net/Articles/849102/&quot;&gt;5.10.23&lt;/a&gt;,
+&lt;a href=&quot;https://lwn.net/Articles/849103/&quot;&gt;5.4.105&lt;/a&gt;,
+&lt;a href=&quot;https://lwn.net/Articles/849104/&quot;&gt;4.19.180&lt;/a&gt;,
+&lt;a href=&quot;https://lwn.net/Articles/849105/&quot;&gt;4.14.225&lt;/a&gt;,
+&lt;a href=&quot;https://lwn.net/Articles/849106/&quot;&gt;4.9.261&lt;/a&gt;, and
+&lt;a href=&quot;https://lwn.net/Articles/849107/&quot;&gt;4.4.261&lt;/a&gt; stable kernels have all been
+released, one day earlier than might have been expected.  Each contains yet
+another set of important fixes.
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848291/rss">
+      <title>[$] Creating an SSH honeypot</title>
+      <link>https://lwn.net/Articles/848291/rss</link>
+      <dc:date>2021-03-11T15:03:39+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      Many developers use SSH to access their systems, so it is not surprising
+that SSH servers are widely attacked. During the &lt;a
+href=&quot;https://fosdem.org/2021/&quot;&gt;FOSDEM 2021&lt;/a&gt; conference,
+Sanja Bonic and Janos Pasztor reported 
+on their experiment using containers as a way to easily create
+SSH honeypots — fake servers that allow administrators to observe the actions of
+attackers without risking a production system. The
+conversational-style talk walked the audience through the process of
+setting up an SSH server to play the role of the honeypot, showed what
+SSH attacks look like, and gave a number of suggestions on how to
+improve the security of SSH servers.
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/849088/rss">
+      <title>Security updates for Thursday</title>
+      <link>https://lwn.net/Articles/849088/rss</link>
+      <dc:date>2021-03-11T14:48:39+00:00</dc:date>
+      <dc:creator>jake</dc:creator>
+      <description>
+      Security updates have been issued by &lt;b&gt;Debian&lt;/b&gt; (zeromq3), &lt;b&gt;Oracle&lt;/b&gt; (dotnet, dotnet3.1, python3, and wpa_supplicant), and &lt;b&gt;Red Hat&lt;/b&gt; (wpa_supplicant).
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848235/rss">
+      <title>[$] LWN.net Weekly Edition for March 11, 2021</title>
+      <link>https://lwn.net/Articles/848235/rss</link>
+      <dc:date>2021-03-11T01:33:30+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      The LWN.net Weekly Edition for March 11, 2021 is available.
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848935/rss">
+      <title>[$] A vulnerability in Git</title>
+      <link>https://lwn.net/Articles/848935/rss</link>
+      <dc:date>2021-03-10T23:04:01+00:00</dc:date>
+      <dc:creator>jake</dc:creator>
+      <description>
+      A  potentially nasty vulnerability in the &lt;a href=&quot;https://git-scm.com/&quot;&gt;Git&lt;/a&gt;
+distributed revision-control system was &lt;a
+href=&quot;https://lwn.net/Articles/848893/&quot;&gt;disclosed&lt;/a&gt; on March&amp;nbsp;9.  There are enough
+qualifiers in the description of the vulnerability that it may appear to be
+fairly narrowly focused—and it is.  That may make it less worrisome, but
+it is not entirely clear.  As with most vulnerabilities, it all depends on how
+the software is being used and the environment in which it is running.
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848789/rss">
+      <title>[$] Python exception groups</title>
+      <link>https://lwn.net/Articles/848789/rss</link>
+      <dc:date>2021-03-10T18:47:07+00:00</dc:date>
+      <dc:creator>jake</dc:creator>
+      <description>
+      &lt;a href=&quot;https://docs.python.org/3/tutorial/errors.html&quot;&gt;Exceptions&lt;/a&gt; in
+Python are a mechanism used to report errors (of an 
+exceptional variety); programs can be and are written to expect and handle
+certain types of exceptions using &lt;tt&gt;try&lt;/tt&gt; and &lt;tt&gt;except&lt;/tt&gt;.  But
+exceptions were originally meant to report a single error event and, these
+days, things are a tad more complicated than that.  A recent Python
+Enhancement Proposal (PEP) targets adding exception groups, as well as new
+syntax to catch and handle the groups.
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848973/rss">
+      <title>Security updates for Wednesday</title>
+      <link>https://lwn.net/Articles/848973/rss</link>
+      <dc:date>2021-03-10T16:09:41+00:00</dc:date>
+      <dc:creator>ris</dc:creator>
+      <description>
+      Security updates have been issued by &lt;b&gt;Debian&lt;/b&gt; (kernel and privoxy), &lt;b&gt;Fedora&lt;/b&gt; (libtpms, privoxy, and x11vnc), &lt;b&gt;openSUSE&lt;/b&gt; (chromium), &lt;b&gt;Red Hat&lt;/b&gt; (.NET 5.0, .NET Core, .NET Core 2.1, .NET Core 3.1, dotnet, and dotnet3.1), &lt;b&gt;SUSE&lt;/b&gt; (git, kernel, openssl-1_1, and wpa_supplicant), and &lt;b&gt;Ubuntu&lt;/b&gt; (git and openssh).
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848930/rss">
+      <title>The Linux Foundation's &quot;sigstore&quot; project</title>
+      <link>https://lwn.net/Articles/848930/rss</link>
+      <dc:date>2021-03-10T14:39:20+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      The Linux Foundation has &lt;a
+href=&quot;https://linuxfoundation.org/en/press-release/linux-foundation-announces-free-sigstore-signing-service-to-confirm-origin-and-authenticity-of-software/&quot;&gt;announced&lt;/a&gt;
+a project called &lt;a
+href=&quot;https://sigstore.dev/what_is_sigstore/&quot;&gt;sigstore&lt;/a&gt;; its purpose is
+to protect against supply-chain attacks by signing (and verifying) release
+artifacts.  &quot;&lt;span&gt;Very few open source projects cryptographically sign
+software release artifacts. This is largely due to the challenges software
+maintainers face on key management, key compromise / revocation and the
+distribution of public keys and artifact digests. In turn, users are left
+to seek out which keys to trust and learn steps needed to validate
+signing. Further problems exist in how digests and public keys are
+distributed, often stored on websites susceptible to hacks or a README file
+situated on a public git repository. sigstore seeks to solve these issues
+by utilization of short lived ephemeral keys with a trust root leveraged
+from an open and auditable public transparency logs.&lt;/span&gt;&quot;
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848893/rss">
+      <title>A Git security release</title>
+      <link>https://lwn.net/Articles/848893/rss</link>
+      <dc:date>2021-03-09T23:28:01+00:00</dc:date>
+      <dc:creator>corbet</dc:creator>
+      <description>
+      Several new versions of the Git source-code management system have been
+released; they fix a vulnerability that could allow a hostile remote
+repository to execute code locally during a clone operation.  
+Only users with case-insensitive filesystems are affected, reducing
+the set of possible targets considerably, but an update still seems like a
+good idea.
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848890/rss">
+      <title>Linaro to release monthly GNU Toolchain integration builds</title>
+      <link>https://lwn.net/Articles/848890/rss</link>
+      <dc:date>2021-03-09T23:03:03+00:00</dc:date>
+      <dc:creator>ris</dc:creator>
+      <description>
+      Linaro Ltd has announced the first GNU Toolchain integration build. &quot;&lt;span&gt;Every six months, Arm releases the official GNU Toolchain release for Arm architectures for the purpose of production. Linaro will bridge the gap between the official releases by delivering monthly integration builds which offer users a snapshot of the upstream build. Although not supported, having access to these builds will allow developers to test features from a pre-built binary as soon as it lands upstream. The builds will also enable companies to check their BSP (Board Support Package) release will work with newer toolchains without having to wait for an official release.&lt;/span&gt;&quot;
+
+      
+      </description>
+    </item>
+    <item rdf:about="https://lwn.net/Articles/848836/rss">
+      <title>Three stable kernels</title>
+      <link>https://lwn.net/Articles/848836/rss</link>
+      <dc:date>2021-03-09T16:17:59+00:00</dc:date>
+      <dc:creator>ris</dc:creator>
+      <description>
+      Greg Kroah-Hartman has released stable kernels &lt;a
+href=&quot;https://lwn.net/Articles/848837/&quot;&gt;5.11.5&lt;/a&gt;, &lt;a
+href=&quot;https://lwn.net/Articles/848838/&quot;&gt;5.10.22&lt;/a&gt;, and &lt;a
+href=&quot;https://lwn.net/Articles/848839/&quot;&gt;5.4.104&lt;/a&gt;.  They all contain important fixes and
+users should upgrade.
+      
+      </description>
+    </item>
+</rdf:RDF>

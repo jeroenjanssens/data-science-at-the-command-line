@@ -1,0 +1,68 @@
+cd /data/ch04
+l
+curl -sL "https://www.gutenberg.org/files/11/11-0.txt" | trim
+curl -sL "https://www.gutenberg.org/files/11/11-0.txt" | # <1>\
+tr '[:upper:]' '[:lower:]' | # <2>\
+grep -oE "[a-z\']{2,}" | # <3>\
+sort | # <4>\
+uniq -c | # <5>\
+sort -nr | # <6>\
+head -n 10 # <7>
+curl -sL "https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/stopwords-en.txt" |\
+sort | tee stopwords | trim 20
+curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |\
+tr '[:upper:]' '[:lower:]' |\
+grep -oE "[a-z\']{2,}" |\
+sort |\
+grep -Fvwf stopwords |\
+uniq -c |\
+sort -nr |\
+head -n 10
+fc 
+curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |\
+tr '[:upper:]' '[:lower:]' |\
+grep -oE "[a-z\']{2,}" |\
+sort |\
+grep -Fvwf stopwords |\
+uniq -c |\
+sort -nr |\
+head -n 10
+pwd
+l
+bat top-words-1.sh
+bash top-words-1.sh
+cp -v top-words-{1,2}.sh
+chmod u+x top-words-2.sh
+l top-words-{1,2}.sh
+./top-words-2.sh
+./top-words-1.sh
+cp -v top-words-{2,3}.sh
+nano top-words-3.sh 
+bat top-words-3.sh
+cp -v top-words-{3,4}.sh
+sed -i '2d' top-words-4.sh
+bat top-words-4.sh
+curl -sL 'https://www.gutenberg.org/files/11/11-0.txt' | ./top-words-4.sh
+curl -sL 'https://www.gutenberg.org/files/12/12-0.txt' | ./top-words-4.sh
+man bash | ./top-words-4.sh
+bat top-words-5.sh
+curl -sL "https://www.gutenberg.org/files/11/11-0.txt" > alice.txt
+< alice.txt ./top-words-5.sh 20
+< alice.txt ./top-words-5.sh
+echo $PATH
+echo $PATH | tr ':' '\n'
+cp -v top-words{-5.sh,}
+export PATH="${PATH}:/data/ch04"
+echo $PATH
+curl "https://www.gutenberg.org/files/11/11-0.txt" |\
+top-words 10
+cd /data/ch04
+bat top-words.py
+bat top-words.R
+time < alice.txt top-words 5
+time < alice.txt top-words.py 5
+time < alice.txt top-words.R 5
+bat fizzbuzz.py
+bat fizzbuzz.R
+seq 20 | fizzbuzz.py
+seq 20 | fizzbuzz.R

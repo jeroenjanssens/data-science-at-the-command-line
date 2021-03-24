@@ -1,0 +1,42 @@
+cd /data/ch03
+l
+curl https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands | trim
+curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland |\
+pup -n 'table.wikitable tr' # <1>
+curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland -O
+l
+curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland \\
+> friesland.html
+curl -s ftp://ftp.gnu.org/welcome.msg | trim
+curl -s dict://dict.org/d:windmill | trim
+curl -s https://bit.ly/2XBxvwK
+curl -s https://youtu.be/dQw4w9WgXcQ
+curl -sI https://youtu.be/dQw4w9WgXcQ | trim
+man curl | trim 20
+tar -tzf logs.tar.gz | trim
+mkdir logs
+tar -xzf logs.tar.gz -C logs
+ls logs | wc -l
+cat logs/* | trim
+bat $(which unpack)
+bat -A tmnt-basic.csv # <1>
+bat -A tmnt-missing-newline.csv
+bat -A tmnt-with-header.csv
+csvlook tmnt-with-header.csv
+csvlook tmnt-basic.csv
+csvlook -H tmnt-missing-newline.csv # <1>
+curl https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx > top2000.xlsx
+in2csv top2000.xlsx | tee top2000.csv | trim
+csvgrep top2000.csv -c ARTIEST -r '^Queen$' | csvlook -I
+in2csv --names top2000.xlsx
+sql2csv --db 'sqlite:///r-datasets.db' \\
+--query 'SELECT row_names AS car, mpg FROM mtcars ORDER BY mpg' | csvlook
+curl -s "https://anapioficeandfire.com/api/characters/583" | jq '.'
+curl -s "http://newsapi.org/v2/everything?q=linux" | jq .
+curl -s "http://newsapi.org/v2/everything?q=linux&apiKey=$(< /data/.secret/newsapi.org_apikey)" |\
+jq '.' | trim 30
+curl -s "https://stream.wikimedia.org/v2/stream/recentchange" |
+< wikimedia-stream-sample trim
+< wikimedia-stream-sample sed -n 's/^data: //p' |\
+jq 'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'
+telnet towel.blinkenlights.nl

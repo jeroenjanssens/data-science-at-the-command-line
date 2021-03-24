@@ -1,0 +1,28 @@
+cd /data/ch08
+l
+echo "4^2" | bc
+for i in {0..100..2}  #<1> <2>\
+do\
+echo "$i^2" | bc      #<3>\
+done | trim
+curl -s "https://randomuser.me/api/1.2/?results=5" > users.json
+< users.json jq -r '.results[].email' > emails
+bat emails
+while read line                         #<1>\
+do\
+echo "Sending invitation to ${line}."   #<2>\
+done < emails                           #<3>
+while read line; do echo "You typed: ${line}."; done < /dev/stdin
+for chapter in /data/*\
+do\
+echo "Processing Chapter ${chapter}."\
+done
+find /data -type d -name 'ch*' -exec echo "Processing chapter {}" \;
+bat slow.sh
+for i in {A..C}; do\
+./slow.sh $i &\
+done
+parallel --version | head -n 1
+bat $(which pbc)
+seq 100 | pbc '{1}^2' | trim
+paste -d, <(seq 4) <(seq 4) <(seq 4) | pbc 'sqrt({1}+{2})^{3}'

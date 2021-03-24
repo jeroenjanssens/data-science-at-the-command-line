@@ -1,1 +1,335 @@
+---
+suppress-bibliography: true
+---
+
+```{console setup_history, include=FALSE}
+ export CHAPTER="07"
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
+```
+
 # Exploring Data {#chapter-7-exploring-data}
+
+Now that you have obtained and scrubbed your data, you can continue with the third step of the OSEMN model, which is to explore it. After all that hard work, (unless you already had clean data lying around!), it's time for some fun.
+
+Exploring is the step where you familiarize yourself with the data. Being familiar with the data is essential when you want to extract any value from it. For example, knowing what kind of features the data has, means you know which ones are worth further exploration and which ones you can use to answer any questions that you have.
+
+Exploring your data can be done from three perspectives. The first perspective is to inspect the data and its properties. Here, you want to find out things like what the raw data looks like, how many data points the dataset has, and which features the dataset has.
+
+The second perspective from which you can explore the data is to compute descriptive statistics. This perspective is useful for learning more about the individual features. One advantage of this perspective is that the output is often brief and textual and can therefore be printed on the command line.
+
+The third perspective is to create visualizations of the data. From this perspective you can gain insight into how multiple features interact. I’ll discuss a way of creating visualizations that can be printed on the command line. However, visualizations are best suited to be displayed on a graphical user interface. An advantage of data visualizations over descriptive statistics is that they are more flexible and that they can convey much more information.
+
+## Overview
+
+In this chapter, you’ll learn how to:
+
+- Inspect the data and its properties
+- Compute descriptive statistics
+- Create data visualizations inside and outside the command line
+
+
+This chapter starts with the following files:
+
+```{console cd}
+cd /data/ch07
+l
+```
+
+## Inspecting Data and its Properties
+
+In this section I’ll demonstrate how to inspect your dataset and its properties. Because the upcoming visualization and modeling techniques expect the data to be in a rectangular shape, I’ll assume that the data is in CSV format. You can use the techniques described in [Chapter 5](#chapter-5-scrubbing-data) to convert your data to CSV if necessary.
+
+For simplicity sake, I’ll also assume that your data has a header. In the first subsection I'll show a way to determine whether that's the case. Once you know you have a header, you can continue answering the following questions:
+
+- How many data points and features does the dataset have?
+- What does the raw data look like?
+- What kind of features does the dataset have?
+- Can some of these features be treated as categorical?
+
+
+### Header Or Not, Here I Come
+
+You can check whether your file has a header by printing the first few lines using `head`:
+
+```{console head_venture}
+head -n 5 venture.csv
+```
+
+If the lines are too long such that they wrap around, then it's a good idea to add line numbers using `nl`:
+
+```{console head_nl_venture}
+head -n 3 venture.csv | nl
+```
+
+Alternatively, you can use `trim`:
+
+```{console trim_venture}
+< venture.csv trim 5
+```
+
+In this case, I would say it's clear that the first line is a header because it contains only uppercase names and the subsequent lines contain numbers.
+This is indeed quite a manual process and it's up to you to decide whether the first line is a header or already the first data point.
+When the dataset contains no header, you’re best off using the `header` tool discussed in [Chapter 5](#chapter-5-scrubbing-data) to correct that.
+
+
+### Inspect All The Data
+
+If you want to inspect the raw data, then it’s probably not a good idea to use `cat`, because then all the data will be printed in one go.
+In order to inspect the raw data at your own pace, I recommend to use `less` [@less]. You can prevent long lines (as with *venture.csv*) from wrapping by specifying the `-S` option:
+
+```{console less}
+less -S venture.csv#! enter=FALSE
+```
+
+```{console less_enter, fullscreen=TRUE}
+Enter Right Left#! literal=FALSE, hold=0.1, wait=0.1
+```
+
+```{console less_exit, include=FALSE}
+q#! enter=FALSE, expect_prompt=TRUE
+```
+
+The greater-than signs on the right indicate that you can scroll horizontally.
+You can scroll up and down by pressing **`Up`** and **`Down`**.
+Press **`Space`** to scroll down an entire screen.
+Scrolling horizontally is done by pressing **`Left`** and **`Right`**.
+Press **`g`** and **`G`** to go to start and the end of the file, respectively.
+Quitting `less` is done by pressing **`q`**.
+The manual page lists all the available key bindings.
+
+One advantage of `less` is that it does not load the entire file into memory, which is good for viewing large files.
+
+### Feature Names and Data Types
+
+In order to gain insight into the dataset, it is useful to print the feature names and study them. After all, the feature names may indicate the meaning of the feature. You can use the following `head` and `tr` combo for this:
+
+```{console head_tr}
+< venture.csv head -n 1 | tr , '\n'
+```
+
+Note that this basic command assumes that the file is delimited by commas. A more robust approach is to use `csvcut`:
+
+```{console csvcut_names}
+csvcut -n venture.csv
+```
+
+You can go a step further than just printing the column names. Besides the names of the columns, it would be very useful to know what type of values each column contains. Examples of data types are a string of characters, a numerical value, or a date. Assume that you have the following toy dataset:
+
+```{console bat_datatypes}
+bat -A datatypes.csv
+```
+
+`csvlook` interprets the data as follows:
+
+```{console csvlook_datatypes}
+csvlook datatypes.csv
+```
+
+I have already used `csvsql` in [Chapter 5](#chapter-5-scrubbing-data) to execute SQL queries directly on CSV data.
+When no command-line arguments are passed, it generates the necessary SQL statement that would be needed if you were to insert this data into an actual database.
+You can use the output also for to inspect what the inferred column types are.
+If a column has the *NOT NULL* string printed after the data type, then that column contains no missing values.
+
+```{console csvsql_datatypes}
+csvsql datatypes.csv
+```
+
+This output especially useful when you use other tools within the `csvkit` suite, such as  `csvgrep`, `csvsort` and `csvsql`.
+For *venture.csv*, the columns are inferred as follows:
+
+```{console csvsql_venture}
+csvsql venture.csv
+```
+
+
+### Unique Identifiers, Continuous Variables, and Factors
+
+Knowing the data type of each feature is not enough.
+It's also essential to know what each feature represents.
+Having knowledge about the domain is very useful here, but we may also get some context by looking at the data itself.
+
+Both a string and an integer could be a unique identifier or could represent a category.
+In the latter case, this could be used to assign a color to your visualization.
+But if an integer denotes, say, a postal code, then it doesn’t make sense to compute the average.
+
+To determine whether a feature should be treated as a unique identifier or categorical variable, you could count the number of unique values for a specific column:
+
+```{console}
+wc -l tips.csv
+< tips.csv csvcut -c day | header -d | sort | uniq | wc -l
+```
+
+You can use `csvstat` [@csvstat], which is part of `csvkit`, to get the number of unique values for each column:
+
+```{console}
+csvstat tips.csv --unique
+csvstat venture.csv --unique
+```
+
+If there's only one unique value (such as *OBS_STATUS*, then that column might be discarded because it doesn't provide any value.
+If you wanted to automatically discard all such columns, then you could use the following pipeline:
+
+```{console discard_columns}
+< venture.csv csvcut -C $(           #<1>
+  csvstat venture.csv --unique |     #<2>
+  grep ': 1$' |                      #<3>
+  cut -d. -f 1 |                     #<4>
+  tr -d ' ' |                        #<5>
+  paste -sd,                         #<6>
+) | trim                             #<7>
+```
+<1> The `-C` option deselects columns given their locations (or names), which is provided with command substitution
+<2> Obtain the number of unique values for each column in *venture.csv*
+<3> Only keep the columns that contain one unique value
+<4> Extract the column location
+<5> Trim any white space
+<6> Put all column locations on one comma-separated line
+<7> Only show the first 10 lines
+
+Having said that, I'm going to keep those columns for now.
+
+Generally speaking, if the number of unique values is low compared to the total number of rows, then that feature might be treated as a categorical one (such as *GEO* in the case of *venture.csv*).
+If the number is equal to the number of rows, it might be a unique identifier but it might also be a numerical value.
+There's only one way to find out: we need to go deeper.
+
+
+## Computing Descriptive Statistics
+
+The command-line tool `csvstat` gives a lot of information. For each feature (column), it shows:
+
+- The data type
+- Whether it has any missing values (nulls)
+- The number of unique values
+- Various descriptive statistics (maximum, minimum, sum, mean, standard deviation, and median) for those features for which it is appropriate
+
+You invoke `csvstat` as follows:
+
+```{console}
+csvstat venture.csv
+```
+
+This produces a lot of output, so you might want to pipe this through `less`.
+If you're only interested in a specific statistic, you can also use one of the following options:
+
+- `--max` (maximum)
+- `--min` (minimum)
+- `--sum` (sum)
+- `--mean` (mean)
+- `--median` (median)
+- `--stdev` (standard deviation)
+- `--nulls` (whether column contains nulls)
+- `--unique` (unique values)
+- `--freq` (frequent values)
+- `--len` (maximum value length)
+
+For example:
+
+```{console csvstat_null}
+csvstat venture.csv --freq
+```
+
+You can select a subset of features with the `-c` option. This accepts both integers and column names:
+
+```{console csvstat_c}
+csvstat venture.csv -c 3,GEO
+```
+
+Keep in mind that `csvstat`, just like `csvsql`, employs heuristics to determine the data type, and therefore may not always get it right. I encourage you to always do a manual inspection as discussed in the previous subsection. Moreover, even though the type may be a string or integer, that doesn’t say anything about how it should be used.
+
+As a nice extra, `csvstat` outputs, at the very end, the number of data points (rows). Newlines and commas inside values are handled correctly. To only see that last line, you can use `tail`. Alternatively, you can use `xsv`, which only returns the actual number of rows.
+
+```{console csvstat_count}
+csvstat venture.csv | tail -n 1
+xsv count venture.csv
+```
+
+Note that these two options are different from using `wc -l`, which simply counts the number of newlines.
+
+
+
+
+
+
+
+
+## R One-Liners on the Shell
+
+`rush`
+
+
+
+
+Plotting at the command line is challenging.
+How can you represent an image using only ASCII characters (or Unicode characters and ANSI escape sequences)
+
+It's helpful to distinguish between *creating* the visualization at the command line and *viewing* the visualization at the command line.
+Of course you're going to use the command line to *create* the visualization.
+Whether you're going to use the command line to *view* the visualization depends.
+
+
+### Bar chart
+
+
+
+```{console plot_bar_ansi, trailing_spaces=TRUE, remove=-1}
+rush plot -x time tips.csv
+```
+
+```{console plot_bar_png}
+!! > plot-bar.png
+display plot-bar.png
+```
+```{r plot_bar_image, echo=FALSE, fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-bar.png")
+```
+
+
+### Histogram
+
+column type automatically detected, determines geom.
+If `--fill` is specified, ggplot2 creates a stacked histogram
+
+```{console plot_hist_ansi, trailing_spaces=TRUE, remove=-1}
+rush plot -x obs_value --fill unit venture.csv
+```
+
+```{console plot_hist_png}
+!! > obs-histogram.png
+display obs-histogram.png
+```
+```{r plot_hist_image, echo=FALSE, fig.align="center", out.width="90%"}
+knitr::include_graphics("images/obs-histogram.png")
+```
+
+Something strange is going on with *OBS_VALUE*. It takes on vastly different values depending on the *UNIT*.
+
+We need more power:
+
+```{console}
+cat venture.csv |
+rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) +
+geom_histogram() +
+facet_wrap(~ unit, scales = "free")' -
+```
+
+That last dash means that `rush` should read from standard input.
+
+```{console}
+!! > obs-facets.png
+display obs-facets.png
+```
+```{r, echo=FALSE, fig.align="center", out.width="90%"}
+knitr::include_graphics("images/obs-facets.png")
+```
+
+
+
+
+### Density plot
+
+
+
+```{console plot_density_ansi, trailing_spaces=TRUE, remove=-1}
+rush plot -x bill --geom density --title "Density plot" tips.csv
+```

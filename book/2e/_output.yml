@@ -22,7 +22,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Data Science at the Command Line, 2e</a></li>
       after: |
-        <li><a href="/1e">Read first edition instead.</a></li>
+        <li><a href="/1e">The second edition is currently being written. You can read the first edition here.</a></li>
     edit:
       link: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/%s
       text: "Edit"

@@ -6,7 +6,7 @@ SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -e
 
 clean:
-	rm book/2e/book.md
+	rm -f book/2e/book.md
 
 live:
 	cd www && hugo server --disableFastRender
@@ -48,6 +48,10 @@ ch03: book/2e/03.utf8.md
 ch04: book/2e/04.utf8.md
 ch05: book/2e/05.utf8.md
 ch06: book/2e/06.utf8.md
+ch07: book/2e/07.utf8.md
+ch08: book/2e/08.utf8.md
+ch09: book/2e/09.utf8.md
+ch10: book/2e/10.utf8.md
 ch11: book/2e/11.utf8.md
 
 ch%: book/2e/%.utf8.md
