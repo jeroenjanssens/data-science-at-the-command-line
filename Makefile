@@ -1,4 +1,4 @@
-.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc
+.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc hugo
 .SUFFIXES:
 
 .ONESHELL:
@@ -31,16 +31,19 @@ www/static/_redirects:
 	uniq | \
 	sed -E "s|(.*)|/\1 /1e/\1|" > $@
 
+hugo:
+	(cd www && hugo) && \
+	(cd book/2e/data && zip data */*) && \
+	mv book/2e/data/data.zip www/static/2e/
 
-publish-draft:
-	(cd www && hugo) && netlify deploy --dir www/public
+publish-draft: hugo
+	netlify deploy --dir www/public
 
-publish-production:
-	(cd www && hugo) && netlify deploy --prod --dir www/public
+publish-production: hugo
+	netlify deploy --prod --dir www/public
 
 book/2e/%.utf8.md: book/2e/%.Rmd
 	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE, clean = FALSE)'
-
 
 ch01: book/2e/01.utf8.md
 ch02: book/2e/02.utf8.md
@@ -59,7 +62,7 @@ ch%: book/2e/%.utf8.md
 book/2e/atlas/ch%.asciidoc: book/2e/%.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
-asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch11.asciidoc
+asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch11.asciidoc
 
 sync-atlas: asciidoc
 	@cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
@@ -77,3 +80,28 @@ update-cache:
 attach:
 	tmux set-option window-size manual &&\
 	tmux attach -t knitractive_console
+
+ref-bib-names:
+	cat book/2e/tools.bib | grep -E '^@' | tr '{' , | cut -d , -f 2
+
+ref-bib-titles:
+	cat book/2e/tools.bib | grep -E '^@' | tr '{' , | cut -d , -f 2
+
+ref-text-all:
+	grep -noE '\[@([^]]+)\]' book/2e/*.Rmd | column -s ':' -t
+
+ref-text-num-per-chapter:
+	@ggrep -oE '\[@([^]]+)\]' book/2e/*.Rmd | sort | uniq -c
+
+ref-text-duplicate-per-chapter:
+	@make ref-text-num-per-chapter | grep -v '1 '
+
+ref-tools-per-chapter:
+	@ggrep -oE ' `[A-Za-z]+`' book/2e/*.Rmd | sort | uniq | tr -d '` ' | tr ':' '\t' | sort -k 2
+
+
+
+
+
+
+ref-check: ref-text-duplicate-per-chapter

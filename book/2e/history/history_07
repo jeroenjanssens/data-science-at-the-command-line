@@ -21,11 +21,23 @@ csvstat venture.csv --unique
   tr -d ' ' |                        #<5>\
   paste -sd,                         #<6>\
 ) | trim                             #<7>
-csvstat venture.csv
-csvstat venture.csv --freq
+csvstat venture.csv | trim 32
+csvstat venture.csv --freq | trim
 csvstat venture.csv -c 3,GEO
 csvstat venture.csv | tail -n 1
 xsv count venture.csv
+R --quiet
+< percent.csv trim 5
+rm percent.csv
+rush run -t 'mutate(df, percent = tip / bill * 100)' tips.csv > percent.csv
+< percent.csv trim 5
+rush run -h
+rush run -nt 'mutate(df, percent = tip / bill * 100)' tips.csv
+< percent.csv rush run 'mean(df$percent)' -
+< percent.csv rush run 'max(df$size)' -
+< percent.csv rush run 'unique(df$time)' -
+< percent.csv rush run 'cor(df$bill, df$tip)' -
+< percent.csv rush run 'df$tip' - | trim
 rush plot -x time tips.csv
 rush plot -x time tips.csv > plot-bar.png
 display plot-bar.png
@@ -42,3 +54,5 @@ geom_histogram() +\
 facet_wrap(~ unit, scales = "free")' - > obs-facets.png
 display obs-facets.png
 rush plot -x bill --geom density --title "Density plot" tips.csv
+rush plot -x bill --geom density --title "Density plot" tips.csv > bill-density.png
+display bill-density.png

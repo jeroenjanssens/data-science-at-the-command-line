@@ -17,6 +17,7 @@ REF_TYPE = {"fig": "Figure",
 
 ADM_TYPE = {"comment": "NOTE",
             "note": "NOTE",
+            "caution": "WARNING",
             "tip": "TIP"}
 
 conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)

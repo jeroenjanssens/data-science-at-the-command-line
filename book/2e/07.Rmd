@@ -28,7 +28,6 @@ In this chapter, you’ll learn how to:
 - Compute descriptive statistics
 - Create data visualizations inside and outside the command line
 
-
 This chapter starts with the following files:
 
 ```{console cd}
@@ -196,6 +195,8 @@ There's only one way to find out: we need to go deeper.
 
 ## Computing Descriptive Statistics
 
+### Column Statistics
+
 The command-line tool `csvstat` gives a lot of information. For each feature (column), it shows:
 
 - The data type
@@ -206,10 +207,10 @@ The command-line tool `csvstat` gives a lot of information. For each feature (co
 You invoke `csvstat` as follows:
 
 ```{console}
-csvstat venture.csv
+csvstat venture.csv | trim 32
 ```
 
-This produces a lot of output, so you might want to pipe this through `less`.
+I'm only showing the first 32 lines, because this produces a lot of output. You might want to pipe this through `less`.
 If you're only interested in a specific statistic, you can also use one of the following options:
 
 - `--max` (maximum)
@@ -226,10 +227,10 @@ If you're only interested in a specific statistic, you can also use one of the f
 For example:
 
 ```{console csvstat_null}
-csvstat venture.csv --freq
+csvstat venture.csv --freq | trim
 ```
 
-You can select a subset of features with the `-c` option. This accepts both integers and column names:
+You can select a subset of features with the `-c` option, which accepts both integers and column names:
 
 ```{console csvstat_c}
 csvstat venture.csv -c 3,GEO
@@ -247,89 +248,195 @@ xsv count venture.csv
 Note that these two options are different from using `wc -l`, which simply counts the number of newlines.
 
 
+### R One-Liners on the Shell
+
+In this section I'd like to introduce you to a command-line tool called `rush` [@rush],
+which enables you to leverage the statistical programming environment `R` [@R] directly from the command line.
+Before I explain what `rush` does and why it exists, lets talk a bit about `R` itself.
+
+`R` is a very powerful statistical software package to do data science.
+It’s an interpreted programming language, has an extensive collection of packages, and offers its own REPL, which allows you, similar to the command line, to play with your data.
+Unfortunately, once you start R, you’re in an interactive session that is separated from the command line.
+
+Imagine that you have a CSV file called *tips.csv*, and you would like compute the tip percentage, and save the result.
+To accomplish this in `R` you would first run, `R`:
+
+```{console start_r, keep_last_prompt=TRUE, callouts=list(1)}
+R --quiet
+```
+<1> I use the `--quiet` option here to suppress the rather long startup message
+
+And then run the following code:
+
+```{console r_code, keep_last_prompt=TRUE}
+library(tidyverse)                            #<1>
+df <- read_csv("tips.csv")                    #<2>
+df <- mutate(df, percent = tip / bill * 100)  #<3>
+write_csv(df, "percent.csv")                  #<4>
+q("no")                                       #<5>
+```
+<1> Load any required packages
+<2> Read in the CSV file and assign it to a variable
+<3> Compute a new column *percent*
+<4> Save the result to disk
+<5> Exit `R`
+
+Afterwards, you can continue with the saved file *percent.csv* on the command line.
+
+```{console}
+< percent.csv trim 5
+```
+
+Note that there is only one line of code that's associated with what you want to accomplish specifically.
+The other lines are necessary boilerplate.
+Typing in this boilerplate in order to accomplish something simple is cumbersome and breaks your workflow.
+Sometimes, you only want to do one or two things at a time to your data.
+Wouldn't it be great if you could harness the power of `R` and be able to use it from the command line?
+
+This is where `rush` comes in.
+Let’s perform the same task as before, but now using `rush`:
+
+```{console rush_tips}
+rm percent.csv
+rush run -t 'mutate(df, percent = tip / bill * 100)' tips.csv > percent.csv
+< percent.csv trim 5
+```
+
+These small one-liners are possible because `rush` takes care of all the boilerplate.
+In this case I'm using the `run` subcommand. There's also the `plot` subcommand, which I'll use in the next section to produce data visualizations quickly.
+If you're passing in any input data, then  by default, `rush` assumes that it's in CSV format with a header and a comma as the delimiter.
+Moreover, the column names are sanitized so that they are easier to work with.
+You can override these defaults using the `--no-header` (or `-H`), `--delimiter` (or `-d`), and `--no-clean-names` (or `-C`) options, respectively.
+The help gives a good overview of the available options for the `run` subcommand:
+
+```{console rush_run_help}
+rush run -h
+```
+
+Under the hood, `rush` generates an `R` script and subsequently executes it.
+You can view this generated script by specifying the `--dry-run` (or `-n`) option:
+
+```{console rush_dryrun}
+rush run -nt 'mutate(df, percent = tip / bill * 100)' tips.csv
+```
+
+This generated script:
+
+- Writes out the shebang needed for running an `R` script from the command line
+- Imports the *tidyverse* and *glue* packages
+- Loads `tips.csv` as a data frame, cleans the column names, and assigns it to a variable *df*
+- Runs the specified expression
+- Prints the result to standard output
+
+You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.
+
+The output of `rush` doesn’t have to be a in CSV format per se. Here, I compute the mean tip percent, the maximum party size, the unique values of the time column, the correlation between the bill and the tip. Finally, I extract an entire column (but only show the first 10 values).
+
+```{console rush_run_more}
+< percent.csv rush run 'mean(df$percent)' -
+< percent.csv rush run 'max(df$size)' -
+< percent.csv rush run 'unique(df$time)' -
+< percent.csv rush run 'cor(df$bill, df$tip)' -
+< percent.csv rush run 'df$tip' - | trim
+```
+
+That last dash means that `rush` should read from standard input.
+
+So now, if you wanted to do one or two things to your data set with `R`, you can specify it as a one-liner, and keep on working on the command line.
+All the knowledge that you already have about `R` can now be used from the command line. With `rush`, you can even create sophisticated visualizations, as I'll show you in the next section.
 
 
-
-
-
-
-## R One-Liners on the Shell
-
-`rush`
-
-
-
-
-Plotting at the command line is challenging.
-How can you represent an image using only ASCII characters (or Unicode characters and ANSI escape sequences)
+## Creating Visualizations
 
 It's helpful to distinguish between *creating* the visualization at the command line and *viewing* the visualization at the command line.
 Of course you're going to use the command line to *create* the visualization.
-Whether you're going to use the command line to *view* the visualization depends.
+But sometimes you're in a position you cannot *view* any pixels and you're stuck with the capabilities of your terminal.
+Using the same syntax, `rush` is able to create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and maybe ANSI escape sequences if you have a modern terminal).
 
+Let's demonstrate this by creating a few common data visualizations.
 
 ### Bar chart
-
-
 
 ```{console plot_bar_ansi, trailing_spaces=TRUE, remove=-1}
 rush plot -x time tips.csv
 ```
 
+You can create a graphical version (by default in PNG format) by redirecting the output to a file.
+I use the `!!` syntax to repeat the previous command.
+
 ```{console plot_bar_png}
 !! > plot-bar.png
 display plot-bar.png
 ```
-```{r plot_bar_image, echo=FALSE, fig.align="center", out.width="90%"}
+```{r plot_bar_image, echo=FALSE, fig.cap="Bar plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-bar.png")
 ```
 
-
 ### Histogram
 
-column type automatically detected, determines geom.
-If `--fill` is specified, ggplot2 creates a stacked histogram
+The column type that is specified with the `-x` option is automatically detected, and determines the geometry.
+In this it's a histogram because *OBS_VALUE* is continuous.
+If the `--fill` option is specified, it creates a stacked histogram.
 
 ```{console plot_hist_ansi, trailing_spaces=TRUE, remove=-1}
 rush plot -x obs_value --fill unit venture.csv
 ```
 
+The graphical version looks like this:
+
 ```{console plot_hist_png}
 !! > obs-histogram.png
 display obs-histogram.png
 ```
-```{r plot_hist_image, echo=FALSE, fig.align="center", out.width="90%"}
+```{r plot_hist_image, echo=FALSE, fig.cap="Histogram", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/obs-histogram.png")
 ```
-
 Something strange is going on with *OBS_VALUE*. It takes on vastly different values depending on the *UNIT*.
+Let's invoke `ggplot2` directly to investigate:
 
-We need more power:
-
-```{console}
+```{console plot_facets_ansi, trailing_spaces=TRUE, remove=-1}
 cat venture.csv |
 rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) +
 geom_histogram() +
 facet_wrap(~ unit, scales = "free")' -
 ```
 
-That last dash means that `rush` should read from standard input.
+The graphical version looks much more clear:
+
 
 ```{console}
 !! > obs-facets.png
 display obs-facets.png
 ```
-```{r, echo=FALSE, fig.align="center", out.width="90%"}
+```{r, echo=FALSE, fig.cap="Histogram with facets", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/obs-facets.png")
 ```
 
-
-
-
 ### Density plot
-
 
 
 ```{console plot_density_ansi, trailing_spaces=TRUE, remove=-1}
 rush plot -x bill --geom density --title "Density plot" tips.csv
 ```
+
+```{console}
+!! > bill-density.png
+display bill-density.png
+```
+```{r, echo=FALSE, fig.cap="Density plot", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/bill-density.png")
+```
+
+### Summary
+
+Both textual and graphical data visualizations have their pros and cons.
+The latter are obviously of much higher quality.
+The only down-side would be that the output is not viewable from the command line.
+This is where textual visualizations may come in handy.
+At least `rush` has, thanks to `R` and `ggplot2` a consistent syntax for both types.
+
+## Further Reading
+
+* Wickham, Hadley. 2009. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.
+* Janert, Philipp K. 2009. <em>Gnuplot in Action</em>. Manning Publications.
+* Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Pearson.

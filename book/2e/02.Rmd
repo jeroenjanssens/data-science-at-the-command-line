@@ -17,6 +17,14 @@ First, I describe how to install the Docker image, which is a virtual environmen
 By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.
 
 
+## Getting the Datasets
+
+One directory for each chapter
+data.zip
+jj
+unzip
+
+
 ## Installing the Docker Image {#docker-image}
 
 In this book we use many different command-line tools. Linux often comes with a whole bunch of command-line tools pre-installed and offers many packages that contain other, relevant tools. Installing these packages yourself is often not too difficult. However, we'll also use tools that are not available as packages and require a more manual, and more involved, installation. In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
@@ -166,7 +174,7 @@ Here we pass three command-line arguments to `head` [@head]. The first one is an
 ### Five Types of Command-line Tools
 
 ```{console, include=FALSE}
-alias bat='bat --tabs 8 --paging never --terminal-width 76 --theme "Solarized (dark)"'
+alias bat='bat --tabs 8 --paging never --terminal-width 70 --theme "Solarized (dark)"'
 ```
 
 
@@ -251,7 +259,7 @@ alias bat='bat --tabs 8 --paging never --theme \"Solarized (dark)\"'
 
 ### Combining Command-line Tools {#combining-command-line-tools}
 
-Because most command-line tools adhere to the UNIX philosophy [@raymond2003art], they are designed to do only thing, and do it really well. For example, the command-line tool `grep` [@grep] can filter lines, `wc` [@wc] can count lines, and `sort` [@sort] can sort lines. The power of the command line comes from its ability to combine these small, yet powerful command-line tools. The most important way of combining command-line tools is through a so-called pipe. The output from the first tool is passed to the second tool. There are virtually no limits to this.
+Because most command-line tools adhere to the Unix philosophy [@raymond2003art], they are designed to do only thing, and do it really well. For example, the command-line tool `grep` [@grep] can filter lines, `wc` [@wc] can count lines, and `sort` [@sort] can sort lines. The power of the command line comes from its ability to combine these small, yet powerful command-line tools. The most important way of combining command-line tools is through a so-called pipe. The output from the first tool is passed to the second tool. There are virtually no limits to this.
 
 Consider, for example, the command-line tool `seq`, which generates a sequence of numbers. Let us generate a sequence of five numbers.
 
@@ -259,7 +267,7 @@ Consider, for example, the command-line tool `seq`, which generates a sequence o
 seq 5
 ```
 
-The output of a command-line tool is by default passed on to the terminal, which displays it on our screen. We can *pipe* the ouput of `seq` to a second tool, called `grep`, which can be used to filter lines. Imagine that we only want to see numbers contain a "3". We can combine `seq` and `grep` as follows:
+The output of a command-line tool is by default passed on to the terminal, which displays it on our screen. We can *pipe* the ouput of `seq` to `grep` to filter lines on a pattern. Imagine that we only want to see numbers contain a "3". We can combine `seq` and `grep` as follows:
 
 ```{console seq_grep}
 seq 30 | grep 3

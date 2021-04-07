@@ -8,6 +8,9 @@ suppress-bibliography: true
  rm -f $HISTFILE
 ```
 
+<!-- TODO: Remove dashes from filenames top-words.sh etc. -->
+
+
 # Creating Command-line Tools {#chapter-4-creating-reusable-command-line-tools}
 
 Throughout the book, I'll introduce you to a lot of commands and pipelines that basically fit on one line. Let's call those one-liners. Being able to perform complex tasks with just a one-liner is what makes the command line powerful. It’s a very different experience from writing and using traditional programs.
@@ -31,7 +34,7 @@ In this chapter, you’ll learn how to:
 - Convert one-liners into parameterized shell scripts
 - Turn existing Python and R code into reusable command-line tools
 
-This chapter stars with with the following files:
+This chapter starts with with the following files:
 
 ```{console list_files}
 cd /data/ch04
@@ -118,7 +121,7 @@ The first step is to create a new file. You can open your favorite text editor a
 fc #! enter=FALSE
 ```
 
-Running `fc` invokes the default text editor, which is stored in the environment variable `EDITOR`. In the Docker container, this is set to `nano`, a straightforward text editor. As you can see, this file contains our one-liner:
+Running `fc` invokes the default text editor, which is stored in the environment variable *EDITOR*. In the Docker container, this is set to `nano`, a straightforward text editor. As you can see, this file contains our one-liner:
 
 ```{console fc_enter, fullscreen=TRUE}
 Enter #! literal=FALSE, hold=0.2, wait=0.2
@@ -196,7 +199,7 @@ Let's now have a look at the access permissions of both files:
 l top-words-{1,2}.sh
 ```
 
-The first column shows the access permissions for each file. For *top-words-2.sh*, this is `-rwxrw-r--`. The first character `-` (hyphen) indicates the file type. A `-` means regular file and a `d` means directory. The next three characters, `rwx`, indicate the access permissions for the user who owns the file. The `r` and `w` mean *read* and *write*, respectively. (As you can see, *top-words-1.sh* has a `-` instead of an `x`, which means that we cannot *execute* that file.) The next three characters `rw-` indicate the access permissions for all members of the group that owns the file. Finally, the last three characters in the column, `r--`, indicate access permissions for all other users.
+The first column shows the access permissions for each file. For *top-words-2.sh*, this is *-rwxrw-r--*. The first character *-* (hyphen) indicates the file type. A *-* means regular file and a *d* means directory. The next three characters, *rwx*, indicate the access permissions for the user who owns the file. The *r* and *w* mean *read* and *write*, respectively. (As you can see, *top-words-1.sh* has a *-* instead of an *x*, which means that we cannot *execute* that file.) The next three characters *rw-* indicate the access permissions for all members of the group that owns the file. Finally, the last three characters in the column, *r--*, indicate access permissions for all other users.
 
 Now you can execute the file as follows:
 
@@ -346,7 +349,7 @@ In this section I'm going demonstrate that command-line tools can be created in 
 
 There are three main reasons for creating command-line tools in another programming language than Bash. First, you may already have some code that you'd like to be able to use from the command line. Second, the command-line tool would end up encompassing more than a hundred lines of Bash code. Third, the command-line tool needs to be more robust.
 
-The six steps that I discussed in the previous section roughly apply to creating command-line tools in other programming languages as well. The first step, however, would not be copy pasting from the command line, but rather copy pasting the relevant code into a new file. Command-line tools in Python and R need to specify `python` [@python] and `Rscript` [@R], respectively, as the interpreter after the shebang.
+The six steps that I discussed in the previous section roughly apply to creating command-line tools in other programming languages as well. The first step, however, would not be copy pasting from the command line, but rather copy pasting the relevant code into a new file. Command-line tools in Python and R need to specify `python` and `Rscript` [@R], respectively, as the interpreter after the shebang.
 
 When it comes to creating command-line tools using Python and R, there are two more aspects that deserve special attention. First, processing standard input, which comes natural to shell scripts, has to be taken care of explicitly in Python and R. Second, as command-line tools written in Python and R tend to be more complex, we may also want to offer the user the ability to specify more elaborate command-line arguments.
 

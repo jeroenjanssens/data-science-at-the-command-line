@@ -1,23 +1,48 @@
+@software{csvquote,
+    title = {{csvquote} -- Enable common unix utlities to work correctly with {CSV} data},
+    author = {Dan Brown},
+    url = {https://github.com/dbro/csvquote},
+    year = {2018}
+}
+
+@software{fx,
+    title = {{fx} -- Interactive {JSON} viewer},
+    author = {Anton Medvedev},
+    url = {https://github.com/antonmedv/fx},
+    version = {20.0.2},
+    year = {2020}
+}
+
+@software{gron,
+    title = {{gron} -- Make JSON greppable},
+    author = {Tom Hudson},
+    url = {https://github.com/TomNomNom/gron},
+    year = {2021},
+    version = {0.6.1}
+}
+
 @software{awk,
-    title = {{mawk -- Pattern scanning and text processing language}},
+    title = {{mawk} -- Pattern scanning and text processing language},
     url = {https://invisible-island.net/mawk},
     author = {Mike D. Brennan and Thomas E. Dickey},
     year = {2019},
     version = {1.3.4}
 }
 
-@webpage{aws,
-    title = {AWS Command Line Interface},
-    url = {http://aws.amazon.com/cli},
+@software{aws,
+    title = {{aws} -- Unified tool to manage {AWS} services},
+    url = {https://aws.amazon.com/cli},
     author = {Amazon Web Services},
-    year = {2014}
+    version = {2.1.32},
+    year = {2021}
 }
 
-@webpage{bash,
-    title = {Bash},
-    url = {http://www.gnu.org/software/bash},
+@software{bash,
+    title = {{bash} -- {GNU Bourne-Again SHell}},
+    url = {https://www.gnu.org/software/bash},
     author = {Brian Fox and Chet Ramey},
-    year = {2010}
+    version = {5.0.17},
+    year = {2019}
 }
 
 @software{bat,
@@ -28,25 +53,19 @@
     year = {2021}
 }
 
-@webpage{bc,
-    title = {Bc},
-    url = {http://www.gnu.org/software/bc},
+@software{bc,
+    title = {{bc} -- An arbitrary precision calculator language},
+    url = {https://www.gnu.org/software/bc},
     author = {Philip A. Nelson},
-    year = {2006}
+    version = {1.07.1},
+    year = {2017}
 }
 
-@webpage{bigmler,
-    title = {BigMLer},
-    url = {http://bigmler.readthedocs.org},
-    author = {BigML},
-    year = {2014}
-}
-
-@webpage{body,
-    title = {Body},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
+@software{body,
+    title = {{body} -- Apply command to all but the first line},
+    url = {https://github.com/jeroenjanssens/dsutils},
     author = {Jeroen Janssens},
-    year = {2014}
+    year = {2021}
 }
 
 @software{cat,
@@ -54,180 +73,178 @@
     url = {https://www.gnu.org/software/coreutils},
     author = {Torbjorn Granlund and Richard M. Stallman},
     version = {8.30},
-    year = {2012}
+    year = {2018}
 }
 
-@webpage{chmod,
-    title = {Chmod},
-    url = {http://www.gnu.org/software/coreutils},
+@software{chmod,
+    title = {{chmod} -- Change file mode bits},
+    url = {https://www.gnu.org/software/coreutils},
     author = {David MacKenzie and Jim Meyering},
-    year = {2012}
+    version = {8.30},
+    year = {2018}
 }
 
-@webpage{cols,
-    title = {Cols},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
+@software{cols,
+    title = {{cols} -- Apply command to subset of columns},
+    url = {https://github.com/jeroenjanssens/dsutils},
     author = {Jeroen Janssens},
-    year = {2014}
+    year = {2021}
 }
 
-@webpage{cowsay,
-    title = {Cowsay},
-    url = {http://www.nog.net/~tony/warez},
+@software{cowsay,
+    title = {{cowsay} -- Configurable speaking cow},
+    url = {https://github.com/tnalpgge/rank-amateur-cowsay},
     author = {Tony Monroe},
+    version = {3.0.3},
     year = {1999}
 }
 
-@webpage{cp,
-    title = {Cp},
-    url = {http://www.gnu.org/software/coreutils},
+@software{cp,
+    title = {{cp} -- Copy files and directories},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Torbjorn Granlund and David MacKenzie and Jim Meyering},
-    year = {2012}
+    version = {8.30},
+    year = {2018}
 }
 
-@webpage{csvcut,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{csvcut,
+    title = {{csvcut} -- Filter and truncate {CSV} files},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{csvgrep,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{csvgrep,
+    title = {{csvgrep} -- Search {CSV} files},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{csvjoin,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{csvjoin,
+    title = {{csvjoin} -- Execute a {SQL}-like join to merge {CSV} files on a specified column or columns},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{csvlook,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{csvlook,
+    title = {{csvlook} -- Render a {CSV} file in the console as a Markdown-compatible, fixed-width table},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{csvsort,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{csvsort,
+    title = {{csvsort} -- Sort {CSV} files},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{csvsql,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
-    author = {Christopher Groskopf and Jeroen Janssens},
-    year = {2014}
-}
-
-@webpage{csvstack,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{csvsql,
+    title = {{csvsql} -- Execute {SQL} statements on {CSV} files},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{csvstat,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{csvstack,
+    title = {{csvstack} -- Stack up the rows from multiple {CSV} files},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{curl,
-    title = {cURL},
-    url = {http://curl.haxx.se},
+@software{csvstat,
+    title = {{csvstat} -- Print descriptive statistics for each column in a {CSV} file},
+    url = {https://csvkit.rtfd.org},
+    author = {Christopher Groskopf},
+    version = {1.0.5},
+    year = {2020}
+}
+
+@software{curl,
+    title = {{curl} -- Transfer a {URL}},
+    url = {https://curl.haxx.se},
     author = {Daniel Stenberg},
-    year = {2012}
+    version = {7.68.0},
+    year = {2016}
 }
 
-@webpage{curlicue,
-    title = {Curlicue},
-    url = {https://github.com/decklin/curlicue},
-    author = {Decklin Foster},
-    year = {2014}
-}
-
-@webpage{cut,
-    title = {Cut},
-    url = {http://www.gnu.org/software/coreutils},
+@software{cut,
+    title = {{cut} -- Remove sections from each line of files},
+    url = {https://www.gnu.org/software/coreutils},
     author = {David M. Ihnat and David MacKenzie and Jim Meyering},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{display,
-    title = {Display},
-    url = {http://www.imagemagick.org},
+@software{display,
+    title = {{display} -- Displays an image or image sequence on any {X} server},
+    url = {https://imagemagick.org},
     author = {ImageMagick Studio LLC},
-    year = {2009}
+    version = {6.9.10-23},
+    year = {2019}
 }
 
-@webpage{drake,
-    title = {Drake},
+@software{drake,
+    title = {{drake} -- Data workflow tool, like a "Make for data"},
     url = {https://github.com/Factual/drake},
     author = {Factual},
-    year = {2014}
+    version = {1.0.3},
+    year = {2016}
 }
 
-@webpage{dseq,
-    title = {Dseq},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
+@software{dseq,
+    title = {{dseq} -- Generate sequence of dates},
+    url = {https://github.com/jeroenjanssens/dsutils},
     author = {Jeroen Janssens},
-    year = {2014}
+    year = {2021}
 }
 
-@webpage{echo,
-    title = {Echo},
-    url = {http://www.gnu.org/software/coreutils},
+@software{echo,
+    title = {{echo} -- Display a line of text},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Brian Fox and Chet Ramey},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{env,
-    title = {Env},
-    url = {http://www.gnu.org/software/coreutils},
-    author = {Richard Mlynarik and David MacKenzie},
-    year = {2012}
+@software{env,
+    title = {{env} -- Run a program in a modified environment},
+    url = {https://www.gnu.org/software/coreutils},
+    author = {Richard Mlynarik and David MacKenzie and Assaf Gordon},
+    version = {8.30},
+    year = {2018}
 }
 
-@webpage{feedgnuplot,
-    title = {Feedgnuplot},
-    url = {http://search.cpan.org/perldoc?feedgnuplot},
-    author = {Dima Kogan},
-    year = {2014}
+@software{find,
+    title = {{find} -- Search for files in a directory hierarchy},
+    url = {https://www.gnu.org/software/findutils},
+    author = {Eric B. Decker and James Youngman  and Kevin Dalley},
+    version = {4.7.0},
+    year = {2019}
 }
 
-@webpage{fieldsplit,
-    title = {Fieldsplit},
-    url = {http://code.google.com/p/crush-tools},
-    author = {Jeremy Hinds and Jason Gessner and Jim Renwick and Norman Gocke and Rodofo Granata and Tobias Wolff},
-    year = {2010}
-}
-
-@webpage{find,
-    title = {Find},
-    url = {http://www.gnu.org/software/findutils},
-    author = {James Youngman},
-    year = {2008}
-}
-
-@webpage{git,
-    title = {Git},
-    url = {http://git-scm.com},
+@software{git,
+    title = {{git} -- The stupid content tracker},
+    url = {https://git-scm.com},
     author = {Linus Torvalds and Junio C. Hamano},
-    year = {2014}
+    version = {2.25.1},
+    year = {2021}
 }
 
-@webpage{grep,
+@software{grep,
     title = {{grep} -- Print lines that match patterns},
-    url = {https://www.gnu.org/software/grep/},
+    url = {https://www.gnu.org/software/grep},
     author = {Jim Meyering},
     version = {3.4},
     year = {2019}
@@ -241,32 +258,34 @@
     year = {2019}
 }
 
-@webpage{header,
-    title = {{header}},
+@software{header,
+    title = {{header} -- Add, replace, and delete header lines},
     url = {https://github.com/jeroenjanssens/dsutils},
     author = {Jeroen Janssens},
-    year = {2014}
+    year = {2021}
 }
 
-@webpage{csvkit,
-    title = {{csvkit}},
-    url = {https://csvkit.readthedocs.org},
-    author = {Christopher Groskopf and contributors},
-    year = {2016}
+@software{csvkit,
+    title = {{csvkit} -- A suite of command-line tools for converting to and working with {CSV}},
+    url = {https://csvkit.rtfd.org},
+    author = {Christopher Groskopf},
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{in2csv,
-    title = {{csvkit}},
-    url = {https://csvkit.readthedocs.org},
-    author = {Christopher Groskopf and contributors},
-    year = {2016}
+@software{in2csv,
+    title = {{in2csv} -- Convert common, but less awesome, tabular data formats to {CSV}},
+    url = {https://csvkit.rtfd.org},
+    author = {Christopher Groskopf},
+    version = {1.0.5},
+    year = {2020}
 }
 
 @software{jq,
-    title = {{jq -- Command-line {JSON} processor}},
-    url = {http://stedolan.github.com/jq},
+    title = {{jq} -- Command-line {JSON} processor},
+    url = {https://stedolan.github.com/jq},
     author = {Stephen Dolan},
-    date = {2018-11-02},
+    year = {2021},
     version = {1.6}
 }
 
@@ -288,7 +307,7 @@
 
 @software{ls,
     title = {{ls} -- List directory contents},
-    url = {http://www.gnu.org/software/coreutils},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Richard M. Stallman and David MacKenzie},
     version = {8.30},
     year = {2019}
@@ -308,171 +327,182 @@
 @software{man,
     title = {{man} -- An interface to the system reference manuals},
     author = {John W. Eaton and Colin Watson},
+    url = {https://nongnu.org/man-db},
     version = {2.9.1},
-    year = {2014},
+    year = {2020},
 }
 
-@webpage{mkdir,
-    title = {Mkdir},
-    url = {http://www.gnu.org/software/coreutils},
+@software{mkdir,
+    title = {{mkdir} -- Make directories},
+    url = {https://www.gnu.org/software/coreutils},
     author = {David MacKenzie},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{mv,
-    title = {Mv},
-    url = {http://www.gnu.org/software/coreutils},
+@software{mv,
+    title = {{mv} -- Move (rename) files},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Mike Parker and David MacKenzie and Jim Meyering},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{parallel,
-    title = {GNU Parallel},
-    url = {http://www.gnu.org/software/parallel},
+@software{parallel,
+    title = {{parallel} -- Build and execute shell command lines from standard input in parallel},
+    url = {https://www.gnu.org/software/parallel},
     author = {Ole Tange},
-    year = {2014}
+    version = {20161222},
+    year = {2016}
 }
 
-@webpage{paste,
-    title = {Paste},
-    url = {http://www.gnu.org/software/coreutils},
+@software{paste,
+    title = {{paste} -- Merge lines of files},
+    url = {https://www.gnu.org/software/coreutils},
     author = {David M. Ihnat and David MacKenzie},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{pbc,
-    title = {Pbc},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen Janssens},
-    year = {2014}
-}
-
-@webpage{pip,
-    title = {Pip},
-    url = {https://pip.pypa.io},
-    author = {PyPA},
-    year = {2014}
-}
-
-@webpage{pwd,
-    title = {Pwd},
-    url = {http://www.gnu.org/software/coreutils},
-    author = {Jim Meyering},
-    year = {2012}
-}
-
-@book{python,
-  title={Python tutorial},
-  author={Van Rossum, Guido and Drake Jr, Fred L},
-  volume={620},
-  year={1995},
-  publisher={Centrum voor Wiskunde en Informatica Amsterdam}
-}
-
-
-@webpage{R,
-    title = {R},
-    url = {http://www.r-project.org},
-    author = {{R Foundation for Statistical Computing}},
-    year = {2014}
-}
-
-@webpage{Rio,
-    title = {Rio},
+@software{pbc,
+    title = {{pbc} -- Parallel {bc}},
     url = {https://github.com/jeroenjanssens/dsutils},
     author = {Jeroen Janssens},
-    year = {2014}
+    year = {2021}
 }
 
-@webpage{rm,
-    title = {Rm},
-    url = {http://www.gnu.org/software/coreutils},
+@software{pip,
+    title = {{pip} -- A tool for installing and managing Python packages},
+    url = {https://pip.pypa.io},
+    author = {PyPA},
+    version = {20.0.2},
+    year = {2020}
+}
+
+@software{pwd,
+    title = {{pwd} -- Print name of working directory},
+    url = {https://www.gnu.org/software/coreutils},
+    author = {Jim Meyering},
+    version = {8.30},
+    year = {2019}
+}
+
+@software{python,
+    title = {{python} -- An interpreted, interactive, object-oriented programming language},
+    url = {https://www.python.org},
+    author = {{The Python Software Foundation}},
+    year = {2021},
+    version = {3.8.5}
+}
+
+@software{R,
+    title = {{R} -- A Language and Environment for Statistical Computing},
+    author = {{The R Foundation for Statistical Computing}},
+    year = {2021},
+    version = {4.0.4},
+    url = {https://www.r-project.org},
+}
+
+@software{rm,
+    title = {{rm} -- Remove files or directories},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Paul Rubin and David MacKenzie and Richard M. Stallman and Jim Meyering},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{run_experiment,
-    title = {SciKit-Learn Laboratory},
-    url = {https://skll.readthedocs.org},
-    author = {{Educational Testing Service}},
-    year = {2014}
-}
-
-@webpage{sample,
-    title = {Sample},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
+@software{rush,
+    title = {{rush} -- {R} One-Liners from the Shell},
+    url = {https://github.com/jeroenjanssens/rush},
     author = {Jeroen Janssens},
-    year = {2014}
+    year = {2021}
 }
 
-@webpage{scp,
-    title = {Scp},
-    url = {http://www.openssh.com},
+@software{sample,
+    title = {{sample} -- Filter lines from standard input according to some probability, with a given delay, and for a certain duration},
+    url = {https://github.com/jeroenjanssens/sample-stream},
+    author = {Jeroen Janssens},
+    version = {0.2.4},
+    year = {2021}
+}
+
+@software{scp,
+    title = {{scp} -- {OpenSSH} secure file copy},
+    url = {https://www.openssh.com},
     author = {Timo Rinne and Tatu Ylonen},
-    year = {2014}
+    version = {1:8.2p1-4ubuntu0.2},
+    year = {2019}
 }
 
-@webpage{scrape,
-    title = {Scrape},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
+@software{scrape,
+    title = {{scrape} -- Extract {HTML} elements using an {XPath} query or {CSS3} selector},
+    url = {https://github.com/jeroenjanssens/dsutils},
     author = {Jeroen Janssens},
-    year = {2014}
+    year = {2021}
 }
 
-@webpage{sed,
-    title = {Sed},
-    url = {http://www.gnu.org/software/sed},
+@software{sed,
+    title = {{sed} -- Stream editor for filtering and transforming text},
+    url = {https://www.gnu.org/software/sed},
     author = {Jay Fenlason and Tom Lord and Ken Pizzini and Paolo Bonzini},
-    year = {2012}
+    version = {4.7},
+    year = {2018}
 }
 
-@webpage{seq,
-    title = {Seq},
-    url = {http://www.gnu.org/software/coreutils},
+@software{seq,
+    title = {{seq} -- Print a sequence of numbers},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Ulrich Drepper},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{shuf,
-    title = {Shuf},
-    url = {http://www.gnu.org/software/coreutils},
+@software{shuf,
+    title = {{shuf} -- Generate random permutations},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Paul Eggert},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{sort,
-    title = {Sort},
-    url = {http://www.gnu.org/software/coreutils},
+@software{sort,
+    title = {{sort} -- Sort lines of text files},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Mike Haertel and Paul Eggert},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{split,
-    title = {Split},
-    url = {http://www.gnu.org/software/coreutils},
+@software{split,
+    title = {{split} -- Split a file into pieces},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Torbjorn Granlund and Richard M. Stallman},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{sql2csv,
-    title = {Csvkit},
-    url = {http://csvkit.readthedocs.org},
+@software{sql2csv,
+    title = {{sql2csv} -- Execute an {SQL} query on a database and output the result to a {CSV} file},
+    url = {https://csvkit.rtfd.org},
     author = {Christopher Groskopf},
-    year = {2014}
+    version = {1.0.5},
+    year = {2020}
 }
 
-@webpage{ssh,
-    title = {OpenSSH client},
-    url = {http://www.openssh.com},
+@software{ssh,
+    title = {{ssh} -- {OpenSSH} remote login client},
+    url = {https://www.openssh.com},
     author = {Tatu Ylonen and Aaron Campbell and Bob Beck and Markus Friedl and Niels Provos and Theo de Raadt and Dug Song and Markus Friedl},
-    year = {2014}
+    version = {1:8.2p1-4ubuntu0.2},
+    year = {2020}
 }
 
-@webpage{sudo,
-    title = {Sudo},
-    url = {http://www.sudo.ws/sudo},
+@software{sudo,
+    title = {{sudo} -- Execute a command as another user},
+    url = {https://www.sudo.ws},
     author = {Todd C. Miller},
-    year = {2013}
+    version = {1.8.31},
+    year = {2019}
 }
 
 @software{tail,
@@ -483,9 +513,8 @@
     version = {8.30}
 }
 
-
 @article{tapkee,
-    title = {Tapkee: An efficient dimension reduction library},
+    title = {{tapkee} -- An efficient dimension reduction library},
     author = {Sergey Lisitsyn and Christian Widmer and Fernando J. Iglesias Garcia},
     journal = {Journal of Machine Learning Research},
     volume = {14},
@@ -502,18 +531,20 @@
     year = {2014}
 }
 
-@webpage{tee,
-    title = {Tee},
-    url = {http://www.gnu.org/software/coreutils},
+@software{tee,
+    title = {{tee} -- Read from standard input and write to standard output and files},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Mike Parker and Richard M. Stallman and David MacKenzie},
-    year = {2012}
+    version = {8.30},
+    year = {2019}
 }
 
-@webpage{tr,
-    title = {Tr},
-    url = {http://www.gnu.org/software/coreutils},
+@software{tr,
+    title = {{tr} -- Translate or delete characters},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Jim Meyering},
-    year = {2012}
+    version = {8.30},
+    year = {2018}
 }
 
 @software{tree,
@@ -521,58 +552,61 @@
     url = {https://launchpad.net/ubuntu/+source/tree},
     author = {Steve Baker},
     version = {1.8.0},
-    year = {2014}
+    year = {2018}
+}
+
+@software{trim,
+    title = {{trim} -- Trim output to a given height and width},
+    url = {https://github.com/jeroenjanssens/dsutils},
+    author = {Jeroen Janssens},
+    year = {2021}
 }
 
 @software{uniq,
     title = {{uniq} -- Report or omit repeated lines},
-    url = {http://www.gnu.org/software/coreutils},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Richard M. Stallman and David MacKenzie},
     version = {8.30},
     year = {2019}
 }
 
-@webpage{unpack,
-    title = {Unpack},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
+@software{unpack,
+    title = {{unpack} -- Extract common file formats},
+    url = {https://github.com/jeroenjanssens/dsutils},
     author = {Patrick Brisbin},
     year = {2013}
 }
 
-@webpage{unrar,
-    title = {Unrar},
+@software{unrar,
+    title = {{unrar} -- Extract files from rar archives},
     url = {http://home.gna.org/unrar},
     author = {Ben Asselstine and Christian Scheurer and Johannes Winkelmann},
+    version = {0.0.1},
     year = {2014}
 }
 
-@webpage{unzip,
-    title = {Unzip},
+@software{unzip,
+    title = {{unzip} -- List, test and extract compressed files in a {ZIP} archive},
     url = {http://www.info-zip.org/pub/infozip},
-    author = {Samuel H. Smith},
+    author = {Samuel H. Smith and Ed Gordon and Christian Spieler and Onno van der Linden and Mike White and Kai Uwe Rommel and Steven M. Schweda and Paul Kienitz and Chris Herborth and Jonathan Hudson and Sergio Monesi and Harald Denker and John Bush and Hunter Goatley and Steve Salisbury and Steve Miller and Dave Smith},
+    version = {6.0},
     year = {2009}
 }
 
 @software{wc,
     title = {{wc} -- Print newline, word, and byte counts for each file},
-    url = {http://www.gnu.org/software/coreutils},
+    url = {https://www.gnu.org/software/coreutils},
     author = {Paul Rubin and David MacKenzie},
     version = {8.30},
     year = {2019}
 }
 
-@webpage{weka,
-    title = {Weka command-line tool},
-    url = {https://github.com/jeroenjanssens/data-science-at-the-command-line},
-    author = {Jeroen Janssens},
-    year = {2014}
-}
 
-@webpage{which,
-    title = {Which},
+@software{which,
+    title = {{which} -- Locate a command},
     url = {},
     author = {Unknown},
-    year = {2009}
+    year = {2016}
 }
 
 @software{xml2json,
@@ -593,8 +627,16 @@
 
 @software{xmlstarlet,
     title = {{xmlstarlet} -- Command line {XML}/{XSLT} toolkit},
-    url = {https://sourceforge.net/projects/xmlstar/},
+    url = {https://sourceforge.net/projects/xmlstar},
     author = {Dagobert Michelsen and Noam Postavsky and Mikhail Grushinskiy},
     version = {1.6.1},
-    year = {2014}
+    year = {2019}
+}
+
+@software{zsh,
+    title = {{zsh} -- The {Z} shell},
+    url = {https://www.zsh.org},
+    author = {Paul Falstad and Peter Stephenson},
+    version = {5.8},
+    year = {2020}
 }

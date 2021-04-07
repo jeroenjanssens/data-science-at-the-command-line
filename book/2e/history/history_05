@@ -1,13 +1,15 @@
 cd /data/ch05
 l
-seq 100 | /data/ch04/fizzbuzz.py | tee fb.seq | trim
+seq 100 |\
+/data/ch04/fizzbuzz.py |\
+tee fb.seq | trim
 grep -E "fizz|buzz" fb.seq | # <1>\
 sort | uniq -c | sort -nr > fb.cnt # <2>
 bat -A fb.cnt
 < fb.cnt awk 'BEGIN { print "value,count" } { print $2","$1 }' > fb.csv
 bat fb.csv
 csvlook fb.csv
-< fb.csv Rio -vge 'ggplot(df, aes(value, count)) + geom_col()' > fb.png
+rush plot -x value -y count --geom col fb.csv > fb.png
 display fb.png
 seq -f "Line %g" 10 | tee lines
 < lines head -n 3
@@ -31,36 +33,48 @@ seq -f "Line %g" 10 | tee lines
 < alice.txt grep -Ev '^\s$' | wc -l
 RANDOM=1337
 seq -f "Line %g" 1000 | sample -r 1%
-grep -i chapter alice.txt | cut -d' ' -f3-
-sed -rn 's/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p' alice.txt > /dev/null
+grep -i chapter alice.txt | cut -d ' ' -f 3-
+sed -rn 's/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p' alice.txt | trim 3
 grep -i chapter alice.txt | cut -c 9-
-< alice.txt grep -oE '\w{2,}' | head
-< alice.txt tr '[:upper:]' '[:lower:]' | grep -oE '\w{2,}' |\
-grep -E '^a.*e$' | sort | uniq -c | sort -nr |\
-awk '{print $2","$1}' | header -a word,count | head | csvlook
+< alice.txt grep -oE '\w{2,}' | trim
+< alice.txt tr '[:upper:]' '[:lower:]' |\
+grep -oE '\w{2,}' |\
+grep -E '^a.*e$' |\
+sort | uniq | sort -nr | trim
 echo 'hello world!' | tr ' ' '_'
 echo 'hello world!' | tr ' !' '_?'
+echo 'hello world!' | tr -d ' !'
 echo 'hello world!' | tr -d -c '[a-z]'
 echo 'hello world!' | tr '[a-z]' '[A-Z]'
 echo 'hello world!' | tr '[:lower:]' '[:upper:]'
-echo ' hello     world!' | sed -re 's/hello/bye/;s/\s+/ /g;s/\s+//'
+echo 'hello world!' | tr '[a-z]' '[A-Z]'
+echo 'hallo wêreld!' | tr '[a-z]' '[A-Z]'
+echo 'hallo wêreld!' | tr '[:lower:]' '[:upper:]'
+echo 'hallo wêreld!' | sed 's/[[:lower:]]*/\U&/g'
+echo 'helló vilÃ�g' | tr '[:lower:]' '[:upper:]'
+echo 'helló vilÃ�g' | sed 's/[[:lower:]]*/\U&/g'
+echo ' hello     world!' |\
+sed -re 's/hello/bye/' |\
+sed -re 's/\s+/ /g' |\
+sed -re 's/\s+//'
+echo ' hello     world!' |\
+sed -re 's/hello/bye/;s/\s+/ /g;s/\s+//'
 echo -e "value\n7\n2\n5\n3" | body sort -n
 bat $(which body)
 seq 5 | header -a count
 seq 5 | header -a count | wc -l
 seq 5 | header -a count | body wc -l
 bat $(which header)
-< tips.csv | header
+< tips.csv header
 seq 5 | header -a count
-< iris.csv | header -d | head
+< iris.csv header -d | trim
 seq 5 | header -a line | body wc -l | header -r count
 seq 5 | header -a line | header -e "tr '[a-z]' '[A-Z]'"
 bat $(which cols)
 < tips.csv cols -c day body "tr '[a-z]' '[A-Z]'" | head -n 5 | csvlook
 seq 5 | header -a value | csvsql --query "SELECT SUM(value) AS sum FROM stdin"
-< iris.csv csvcut -c sepal_length,petal_length,sepal_width,petal_width |\
-head -n 5 | csvlook
-< iris.csv csvcut -C species | head -n 5 | csvlook
+< iris.csv csvcut -c sepal_length,petal_length,sepal_width,petal_width | csvlook
+< iris.csv csvcut -C species | csvlook
 echo 'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9' |\
 csvcut -c $(seq 1 2 9 | paste -sd,)
 echo 'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9' | cut -d, -f 5,1,3
@@ -68,10 +82,9 @@ echo 'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9' | cut -d, -f 5,1,3
 "sepal_width, petal_width FROM stdin" | head -n 5 | csvlook
 seq 5 | sed -n '3,5p'
 seq 5 | header -a count | body sed -n '3,5p'
-csvgrep -c size -i -r "[1-4]" tips.csv | csvlook
-< tips.csv awk -F, '($1 > 40.0) && ($5 ~ /S/)' | csvlook -I
-< tips.csv csvsql --query "SELECT * FROM stdin "\\
-"WHERE bill > 40 AND day LIKE '%S%'" | csvlook -I
+csvgrep -c size -i -r "[1-4]" tips.csv
+< tips.csv awk -F, 'NR==1 || ($1 > 40.0) && ($5 ~ /^S/)'
+csvsql --query "SELECT * FROM tips WHERE bill > 40 AND day LIKE 'S%'" tips.csv
 < names.csv csvlook -I
 < names.csv sed -re '1s/.*/id,full_name,born/g;'\\
 '2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | csvlook -I
@@ -88,17 +101,8 @@ cat names-comma.csv
 '{if(NR > 1) {print $1,$3" "$2,$4}}' | tail -n 1
 < names-comma.csv | cols -c first_name,last_name tr \",\" \" \" |\
 header -r full_name,id,born | csvcut -c id,full_name,born | tail -n 1
-< names-comma.csv csvsql --query "SELECT id, first_name || ' ' || last_name"\\
-" AS full_name, born FROM stdin" | tail -n 1
-< names-comma.csv Rio -e 'df$full_name <- paste(df$first_name, df$last_name);'\\
-'df[c("id","full_name","born")]' | tail -n 1
-wc -l Iris-*.csv
-cat Iris-setosa.csv <(< Iris-versicolor.csv header -d) \\
-<(< Iris-virginica.csv header -d) | sed -n '1p;49,54p' | csvlook
-csvstack Iris-*.csv | sed -n '1p;49,54p' | csvlook
-csvstack Iris-*.csv -n species --filenames
-csvstack Iris-*.csv -n class -g a,b,c | csvcut -C species |\
-sed -n '1p;49,54p' | csvlook
+< names-comma.csv csvsql --query "SELECT id, first_name || ' ' || last_name AS full_name, born FROM stdin" | tail -n 1
+< names-comma.csv rush run -t 'unite(df, full_name, first_name, last_name, sep = " ")' - | tail -n 1
 < tips.csv csvcut -c bill,tip | tee bills.csv | head -n 3 | csvlook
 < tips.csv csvcut -c day,time | tee datetime.csv |\
 head -n 3 | csvlook -I
@@ -106,8 +110,14 @@ head -n 3 | csvlook -I
 head -n 3 | csvlook
 paste -d, {bills,customers,datetime}.csv | head -n 3 | csvlook -I
 csvlook irismeta.csv
-csvjoin -c species iris.csv irismeta.csv | csvcut -c sepal_length,\\
-sepal_width,species,usda_id | sed -n '1p;49,54p' | csvlook
-csvsql --query 'SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id '\\
-'FROM iris i JOIN irismeta m ON (i.species = m.species)' \\
-iris.csv irismeta.csv | sed -n '1p;49,54p' | csvlook
+csvjoin -c species iris.csv irismeta.csv | csvcut -c sepal_length,sepal_width,species,usda_id | sed -n '1p;49,54p' | csvlook
+csvsql --query 'SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id FROM iris i JOIN irismeta m ON (i.species = m.species)' iris.csv irismeta.csv | sed -n '1p;49,54p' | csvlook
+sed -e 's/"gender":/"sex":/g' users.json | jq | trim
+curl -sL 'http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio' > wiki.html
+< wiki.html trim
+grep wikitable -A 21 wiki.html
+< wiki.html pup 'table.wikitable tbody' | tee table.html | trim
+< table.html xml2json > table.json
+jq . table.json | trim 20
+< table.json jq -r '.tbody.tr[1:][] | [.td[]["$t"]] | @csv' | header -a rank,country,border,surface,ratio > countries.csv
+csvlook --max-column-width 28 countries.csv | trim

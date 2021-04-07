@@ -402,12 +402,7 @@ Once you know which remote machines to take over, we’re going to consider thre
 
 In this section we’re creating a file named *hostnames* that will contain one hostname of a remote machine per line. We’re using Amazon Web Services as an example. If you’re using a different cloud computing service, or have your own servers, please make sure that you create a *hostnames* file yourself.
 
-You can obtain a list of running AWS EC2 instances from the commanding using `aws`, the command-line interface to the AWS API [@aws]. If you’re not using the Data Science Toolbox, install `awscli` using `pip` [@pip] as follows:
-
-```{bash, eval=FALSE}
-$ pip install awscli
-```
-
+You can obtain a list of running AWS EC2 instances from the commanding using `aws`, the command-line interface to the AWS API [@aws].
 With `aws`, you can virtually do everything you can do with the online AWS Management Console. Here, you use this command to obtain a list of running EC2 instances from AWS, but it can do a lot more.
 
 I assume that you know how to launch instances, either through the online Management Console or through the `aws` command-line tool.
@@ -648,7 +643,8 @@ staten_island,2
 unspecified,63
 ```
 
-You can sum the counts in each CSV file using Rio and the `aggregate` function in R:
+# TODO: Use rich and tidyverse in this example
+You can sum the counts in each CSV file using Rio and the *aggregate* function in R:
 
 ```{bash, eval=FALSE}
 $ cat *.csv | header -a borough,count |

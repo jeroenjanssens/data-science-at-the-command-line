@@ -60,7 +60,7 @@ Once you have scrubbed your data, you are ready to explore it. This is where it 
 - Derive statistics from your data
 - Create interesting visualizations
 
-Command-line tools introduced in [Chapter 7](#chapter-7-exploring-data) include: `csvstat` [@csvstat], `feedgnuplot` [@feedgnuplot], and `Rio` [@Rio].
+Command-line tools introduced in [Chapter 7](#chapter-7-exploring-data) include: `csvstat` [@csvstat] and `rush` [@rush].
 
 ### Modeling Data
 
