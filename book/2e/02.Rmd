@@ -21,7 +21,6 @@ By the end of this chapter, you’ll have everything you need in order to contin
 
 One directory for each chapter
 data.zip
-jj
 unzip
 
 
@@ -63,7 +62,7 @@ cowsay "Let's moove\!"
 Run `exit` to exit the container. If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
 
 ```{console docker_run_v}
-$ docker run --rm -it -v`pwd`:/data datasciencetoolbox/dsatcl2e#! enter=FALSE
+docker run --rm -it -v`pwd`:/data datasciencetoolbox/dsatcl2e#! enter=FALSE
 ```
 
 ```{console, docker_run_v_cancel, include=FALSE}
@@ -177,7 +176,6 @@ Here we pass three command-line arguments to `head` [@head]. The first one is an
 alias bat='bat --tabs 8 --paging never --terminal-width 70 --theme "Solarized (dark)"'
 ```
 
-
 I use the term *command-line tool* a lot, but so far, I haven't yet explained what I actually mean by it. I use it as an umbrella term for *anything* that can be executed from the command line. Under the hood, each command-line tool is one of the following five types:
 
 - A binary executable
@@ -257,6 +255,7 @@ alias bat='bat --tabs 8 --paging never --theme \"Solarized (dark)\"'
 
 `type` returns three command-line tools for `pwd`. In that case, the first reported command-line tool is used when you type `pwd`. In the next section we'll look at how to combine command-line tools.
 
+
 ### Combining Command-line Tools {#combining-command-line-tools}
 
 Because most command-line tools adhere to the Unix philosophy [@raymond2003art], they are designed to do only thing, and do it really well. For example, the command-line tool `grep` [@grep] can filter lines, `wc` [@wc] can count lines, and `sort` [@sort] can sort lines. The power of the command line comes from its ability to combine these small, yet powerful command-line tools. The most important way of combining command-line tools is through a so-called pipe. The output from the first tool is passed to the second tool. There are virtually no limits to this.
@@ -321,6 +320,7 @@ wc -w greeting ten-numbers
 
 Note that in this case, `wc` also outputs the name of the files.
 
+
 ### Working With Files
 
 As data scientists, we work with a lot of data. This data is often stored in files. It is important to know how to work with files (and the directories they live in) on the command line. Every action that you can do using a GUI, you can do with command-line tools (and much more). In this section I introduce the most important ones to create, move, copy, rename, and delete files and directories.
@@ -363,7 +363,6 @@ $ cd data
 $ mkdir logs
 ```
 
-
 ```{block2, type="rmdtip"}
 Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the file system to provide immediate feedback. There are a few visual file managers that can help with this, such as GNU Midnight Commander, Ranger, and Vifm. These are not installed in the Docker image, but you can install one yourself by running `sudo apt install` followed by either `mc`, `ranger`, or `vifm`.
 ```
@@ -382,9 +381,10 @@ rm -i *#! expect_prompt=FALSE
 n#! enter=FALSE, expect_prompt=TRUE
 ```
 
+
 ### Help!
 
-As you are finding your way around the command-line, it may happen that you need help. Even the most seasoned Linux users need help at some point. It is impossible to remember all the different command-line tools and their possible arguments. Fortunately, the command line offers severals ways to get help.
+As you're finding your way around the command-line, it may happen that you need help. Even the most seasoned Linux users need help at some point. It is impossible to remember all the different command-line tools and their possible arguments. Fortunately, the command line offers severals ways to get help.
 
 The most important command to get help is perhaps `man` [@man], which is short for *manual*. It contains information for most command-line tools. In case I forgot the options to the tool `tar`, which happens all the time, I just access its manual page using:
 

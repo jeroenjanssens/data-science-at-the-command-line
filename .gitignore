@@ -18,3 +18,5 @@ www/static/2e/
 
 /book/2e/data/.cache/
 /book/2e/data/.secret/
+
+package-lock.json

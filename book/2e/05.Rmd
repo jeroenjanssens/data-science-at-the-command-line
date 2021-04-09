@@ -74,7 +74,7 @@ seq 100 |
 /data/ch04/fizzbuzz.py |
 tee fb.seq | trim
 ```
-<1> The custom tool `fizzbuzz.py` comes from Chapter 4
+<1> The custom tool `fizzbuzz.py` comes from Chapter 4.
 
 Then you use `grep` to keep the lines that match the pattern *fizz* or *buzz* and count how often each word appears using `sort` and `uniq`:
 
@@ -83,8 +83,8 @@ grep -E "fizz|buzz" fb.seq | # <1>
 sort | uniq -c | sort -nr > fb.cnt # <2>
 bat -A fb.cnt
 ```
-<1> This regular expression also matches *fizzbuzz*
-<2> Using `sort` and `uniq` this way is a common way to count lines and sort them in descending order
+<1> This regular expression also matches *fizzbuzz*.
+<2> Using `sort` and `uniq` this way is a common way to count lines and sort them in descending order.
 
 Note that `sort` is used twice: first because `uniq` assumes its input data to be sorted and second to sort the counts numerically.
 In a way, this is an intermediate transformation, albeit a subtle one.
@@ -145,6 +145,7 @@ Later in this chapter I'll introduce some tools that are specifically designed f
 
 The first scrubbing operation is filtering lines.
 This means that from the input data, each line will be evaluated whether it will be kept or discarded.
+
 
 #### Based on Location
 
@@ -220,6 +221,7 @@ Please know that this is my own preference.
 Many command-line tools also accept the filename as an argument.
 ```
 
+
 #### Based on a Pattern
 
 Sometimes you want to keep or discard lines based on their contents.
@@ -229,7 +231,7 @@ For example, to extract all the chapter headings from *Alice’s Adventures in W
 ```{console alice_grep, callouts=1}
 < alice.txt grep -i chapter
 ```
-<1>The `-i` options specifies that the matching should be case-insensitive.
+<1> The `-i` options specifies that the matching should be case-insensitive.
 
 You can also specify a regular expression.
 For example, if you only wanted to print the headings that start with *The*:
