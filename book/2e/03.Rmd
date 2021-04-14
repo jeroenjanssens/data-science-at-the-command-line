@@ -53,11 +53,11 @@ If you're running Windows, open the command prompt or PowerShell and run the fol
 If you are running Linux or macOS, open a terminal and execute the following command on your operating system (and not inside the Docker container):
 
 ```{console cp}
-cp ~/Downloads/logs.csv ~/my-data-science-toolbox #! enter=FALSE
+cp ~/Downloads/logs.csv ~/my-data-science-toolbox#! enter=FALSE
 ```
 
 ```{console cp_cancel, include=FALSE}
-C-C #! literal=FALSE
+C-C#! literal=FALSE
 ```
 
 You can also drag-and-drop the file into the right directory using a graphical file manager such as Windows Explorer or macOS Finder.

@@ -49,7 +49,7 @@ cd /data/ch05
 l
 ```
 
-The instructions to get these files are in Chapter 2.
+The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
 
 Before I dive into the actual transformations, I'd like to demonstrate their ubiquity when working at the command line.
 
