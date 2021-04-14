@@ -11,8 +11,9 @@ suppress-bibliography: true
 # Parallel Pipelines {#chapter-8-parallel-pipelines}
 
 <!-- #TODO: MUST: Check whether I use the terms machine and instance correctly. -->
-<!-- #TODO: MUST: Show progress bar -->
-<!-- #TODO: MUST check spelling: "Z shell" -->
+<!-- #TODO: MUST Check spelling: "Z shell" -->
+<!-- #TODO: SHOULD: Dicuss progress bar -->
+<!-- #TODO: COULD: Discuss resume mechanism, using a tool that sometimes fails -->
 
 In the previous chapters, we've been dealing with commands and pipelines that take care of an entire task at once.
 In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times.
@@ -87,7 +88,7 @@ do
 echo "$i^2" | bc      #<3>
 done | trim
 ```
-<1> The Z Shell has a feature called brace expansion, which transforms *{0..100..2}* into a list separated by spaces: *0 2 4 … 98 100*.
+<1> The Z shell has a feature called brace expansion, which transforms *{0..100..2}* into a list separated by spaces: *0 2 4 … 98 100*.
 <2> The variable *i* is assigned the value *1* in the first iteration, *2* in the second iteration, and so forth.
 <3> The value of this variable can be used by prefixing it with a dollar sign *\$*. The shell will replace *\$i* with its value before `echo` is being executed. Note that there can be more than one command between `do` and `done`.
 
@@ -105,7 +106,7 @@ Imagine that you'd want to send an email to all your contacts.
 Let’s first generate some fake users using the <https://randomuser.me/> API:
 
 ```{console emails}
-curl -s "https://randomuser.me/api/1.2/?results=5" > users.json
+curl -s "https://randomuser.me/api/1.2/?results=5&seed=dsatcl2e" > users.json
 < users.json jq -r '.results[].email' > emails
 bat emails
 ```
@@ -141,7 +142,7 @@ In this section I discuss the third type of item that we often need to loop over
 
 To handle special characters, use *globbing* (i.e., pathname expansion) instead of `ls`[@ls]:
 
-```{console}
+```{console for}
 for chapter in /data/*
 do
 echo "Processing Chapter ${chapter}."
@@ -156,14 +157,16 @@ A more elaborate alternative to listing files is `find`[@find], which:
 - Allows for elaborate searching on properties such as size, access time, and permissions
 - Handles special characters such as spaces and newlines
 
-```{console}
-find /data -type d -name 'ch*' -exec echo "Processing chapter {}" \\;
+For example, the following `find` invocation lists all files located under the directory */data* that have *csv* as extension and are smaller than 2 kilobyte:
+
+```{console find_csv}
+find /data -type f -name '*.csv' -size -2k
 ```
 
 
 ## Parallel Processing
 
-Let's say that you have a very long running command, such as the one shown here:
+Let's say that you have a very long running tool, such as the one shown here:
 
 ```{console bat_slow, callouts=list("RANDOM", "sleep")}
 bat slow.sh
@@ -176,7 +179,7 @@ And it so happens that you need to run this command a lot of times.
 For example, you need to download a whole sequence of files.
 
 A naive way to parallelize is to run the commands in the background.
-Let's run the script *slow.sh* three times:
+Let's run `slow.sh` three times:
 
 ```{console subshell, keep_last_prompt=TRUE, callouts=list(2, 4)}
 for i in {A..C}; do
@@ -198,7 +201,6 @@ If you start too many jobs at once, your system may run out of memory.
 Second, it's difficult to tell which output belongs to which input.
 Let's look at a better approach.
 
-<!-- TODO: SHOULD discuss resume mechanism -->
 
 
 ### Introducing GNU Parallel
@@ -218,9 +220,10 @@ Before I go into the details of `parallel`, here’s a little teaser to show you
 
 ```{console teaser_2}
 seq 0 2 100 | parallel "echo {}^2 | bc" | trim
-find /usr/share/man/man1/ |
-parallel --tag 'man {} | grep -oE -- "(-[-_:alnum:])|(--[-_[:alnum:]]+)" | sort | uniq | wc -l' 2>/dev/null | sort -nrk2 | head -n 20
 ```
+
+<!-- find /usr/share/man/man1/ | -->
+<!-- parallel --tag 'man {} | grep -oE -- "(-[-_:alnum:])|(--[-_[:alnum:]]+)" | sort | uniq | wc -l' 2>/dev/null | sort -nrk2 | head -n 20 -->
 
 This is `parallel` in its simplest form: the items to loop over are passed via standard input and there aren't any any arguments other than the command that `parallel` needs to run.
 As you can see it basically acts as a for loop.
@@ -230,7 +233,7 @@ Here's another teaser, which replaces the for loop from the previous section.
 parallel --jobs 2 ./slow.sh ::: {A..C}
 ```
 
-Here, using the `--jobs` option, I specify that `parallel` can run at most two jobs concurrently. The arguments to `slow.sh` are specified as an argument instead of via standard input. 
+Here, using the `--jobs` option, I specify that `parallel` can run at most two jobs concurrently. The arguments to `slow.sh` are specified as an argument instead of via standard input.
 
 With a whopping 159 different options, `parallel` offers a lot of functionality.
 Perhaps too much.
@@ -244,10 +247,10 @@ The most important argument to `parallel`, is the command or pipeline that you'd
 The question is: where should the input item be inserted in the command line?
 If you don't specify anything, then the input item will be appended to the end of the pipeline.
 
-```{console}
+```{console, remove="keep"}
 seq 3 | parallel cowsay#! enter=FALSE
 C-C#! literal=FALSE
-parallel --jobs 1 --keep cowsay ::: 1 2 3
+parallel --jobs 1 --keep-order cowsay ::: 1 2 3
 ```
 
 The above is the same as running:
@@ -257,8 +260,8 @@ cowsay 1 > /dev/null #<1>
 cowsay 2 > /dev/null
 cowsay 3 > /dev/null
 ```
-<1> Because the output is the same as before, I redirect it to */dev/null* to supress it.
- 
+<1> Because the output is the same as before, I redirect it to */dev/null* to suppress it.
+
 Although this often works, I advise you to be explicit about where the input item should be inserted in the command by using placeholders.
 In this case, because you want to use the entire input line (a number) at once, you only need one placeholder.
 You specify the placeholder, in other words, where to put the input item, with a pair of curly braces (`{}`):
@@ -284,8 +287,9 @@ find /data/ch03 -type f | parallel echo '{#}\) File \"{}\" has basename \"{/}\"'
 
 If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:
 
-```{console}
-< input.csv | parallel --colsep , "mv {2} {1}" > /dev/null#! enter=FALSE
+```{console remove="touch"}
+touch input.csv
+< input.csv parallel --colsep , "mv {2} {1}" > /dev/null#! enter=FALSE
 C-C#! literal=FALSE
 ```
 
@@ -294,7 +298,7 @@ It is also possible to reuse the same input item.
 If the input to `parallel` is a CSV file with a header, then you can use the column names as placeholders:
 
 ```{console}
-< input.csv | parallel -C, --header : "invite {name} {email}"#! enter=FALSE
+< input.csv parallel -C, --header : "invite {name} {email}"#! enter=FALSE
 C-C#! literal=FALSE
 ```
 
@@ -332,14 +336,14 @@ If you specify `-j1`, then the commands will be run in serial. Even though this 
 To save the output of each command, you might be tempted to the following:
 
 ```{console}
-seq 5 | parallel "echo \"Hi {}\" > data/ch08/hi-{}.txt"
+seq 5 | parallel "echo \"Hi {}\" > hi-{}.txt"
 ```
 
 This will save the output into individual files.
 Or, if you want to save everything into one big file you could do the following:
 
 ```{console}
-seq 5 | parallel "echo Hi {}" >> data/ch08/one-big-file.txt
+seq 5 | parallel "echo Hi {}" >> one-big-file.txt
 ```
 
 However, `parallel` offers the `--results` option, which stores the output of each job into a separate file, where the filename is based on the input values:
@@ -349,19 +353,20 @@ seq 5 | parallel --results outdir "echo Hello from job {}"
 tree outdir
 ```
 
+<!-- #TODO: Explain the files seq, stderr, and stdout -->
+
 When you're running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input.
 The output of jobs is therefore also mixed up.
 To keep the same order, simply specify the `--keep-order` option or `-k` option.
 
 Sometimes it’s useful to record which input generated which output.
-`parallel` allows you to *tag* the output with the `--tag` option:
+`parallel` allows you to *tag* the output with the `--tag` option, which prepends each line with the input item.
 
-```{console}
-seq 5 | parallel --tag "echo Hi {}"
+```{console tag}
+seq 5 | parallel --tag "echo 'sqrt({})' | bc -l"
+parallel --tag --keep-order "echo '{1}*{2}' | bc -l" ::: 3 4 ::: 5 6 7
 ```
 
-
-<!-- #TODO: Do I mention --bar somewhere? -->
 
 ### Creating Parallel Tools
 
@@ -471,7 +476,7 @@ Depending on your which distribution your running, your user name may be differe
 The first flavor of distributed processing is to simply run ordinary commands on remote machines.
 Let’s first double check that `parallel` is working by running the tool `hostname`[@hostname] on each EC2 instance:
 
-```{console}
+```{console, remove="echo"}
 parallel --nonall --sshloginfile hostnames hostname#! enter=FALSE
 C-C#! literal=FALSE
 echo 'ip-172-31-23-204'
@@ -490,13 +495,15 @@ echo 'data-science-toolbox'
 
 Running the same command on every remote machine once only requires one core per machine. If you wanted to distribute the list of arguments passed in to `parallel` then it could potentially use more than one core. If the number of cores are not specified explicitly, `parallel` will try to determine this.
 
-```{console, remove="^\$  echo"}
-seq 2 | parallel --slf hostnames echo 2>&1
- echo 'bash: parallel: command not found'
- echo -n 'parallel: Warning: Could not figure out number of cpus on' &&
- echo ' ec2-54-88-122-140.compute-1.amazonaws.com (). Using 1.'
- echo '1'
- echo '2'
+```{console, remove="fake"}
+alias fake=echo
+seq 2 | parallel --slf hostnames echo 2>&1#! enter=FALSE
+C-C#! literal=FALSE
+fake 'bash: parallel: command not found'
+fake -n 'parallel: Warning: Could not figure out number of cpus on' &&
+fake ' ec2-54-88-122-140.compute-1.amazonaws.com (). Using 1.'
+fake '1'
+fake '2'
 ```
 
 In this case, I have `parallel` installed on one of the two remote machines.
@@ -523,7 +530,7 @@ For simplicity, let's sum all integers from 1 to 1000.
 First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using `wc`:
 
 ```{console, remove="echo"}
-seq 1000 | parallel -N100 --pipe --slf hosts  "(hostname; wc -l) | paste -sd:"#! enter=FALSE
+seq 1000 | parallel -N100 --pipe --slf hostnames "(hostname; wc -l) | paste -sd:"#! enter=FALSE
 C-C#! literal=FALSE
 echo 'ip-172-31-23-204:100'
 echo 'ip-172-31-23-205:100'
@@ -541,7 +548,7 @@ Excellent. You can see that your 1000 numbers get distributed evenly in subsets 
 Now, you’re ready to sum all those numbers:
 
 ```{console, remove="echo"}
-seq 1000 | parallel -N100 --pipe --slf hosts "paste -sd+ | bc" | paste -sd+ | bc#! enter=FALSE
+seq 1000 | parallel -N100 --pipe --slf hostnames "paste -sd+ | bc" | paste -sd+ | bc#! enter=FALSE
 C-C#! literal=FALSE
 echo '500500'
 ```
@@ -551,15 +558,15 @@ Let’s check that the answer is correct by doing the same calculation without `
 
 ```{console}
 seq 1000 | paste -sd+ | bc
-500500
 ```
 
 Good, that works.
 If you have a larger pipeline that you want to execute on the remote machines, you can also put it in a separate script and upload it script with `parallel`.
 I'll demonstrate this by creating a very simple command-line tool called `add`:
 
-```{console create_add}
-echo '#!/usr/bin/env bash\npaste -sd+ | bc' > add
+```{console create_add, marker="#~"}
+echo '#!/usr/bin/env bash' > add
+echo 'paste -sd+ | bc' >> add
 bat add
 chmod u+x add
 seq 1000 | ./add
@@ -567,14 +574,18 @@ seq 1000 | ./add
 
 Using the `--basefile` option, `parallel` first uploads the file *add* to all remote machines before running the jobs:
 
+<!-- #TODO: Explain --pipe -->
+
 ```{console use_add, remove="echo"}
-seq 1000 | parallel -N100 --basefile add --pipe --slf hostnames './add' | ./add #! enter=FALSE
+seq 1000 |
+parallel -N100 --basefile add --pipe --slf hostnames './add' |
+./add #! enter=FALSE
 C-C#! literal=FALSE
 echo '500500'
 ```
 
-Of course, summing 1000 numbers is only a toy example.
-It would've been much faster to do this locally.
+Summing 1000 numbers is of course only a toy example.
+Plus, it would've been much faster to do this locally.
 Still, I hope it’s clear from this that `parallel` can be incredibly powerful.
 
 
@@ -652,7 +663,7 @@ parallel -v --basefile jq \
 This long command breaks down as follows:
 
 - Print the list of files and pipe it into `parallel`
-- Transmit the `jq` binary to each remote machine. Luckily, `jq` has no dependencies. This file will be removed from the remote machines afterwards because I specified the `--trc` option (which implies the `--cleanup` option). Note that the pipeline uses `./jq` instead of just `jq`. That's because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path. 
+- Transmit the `jq` binary to each remote machine. Luckily, `jq` has no dependencies. This file will be removed from the remote machines afterwards because I specified the `--trc` option (which implies the `--cleanup` option). Note that the pipeline uses `./jq` instead of just `jq`. That's because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.
 - The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
 - Specify a list of hostnames. Remember, if you want to try this out locally, you can specify `--sshlogin :` instead of `--slf hostnames`
 - Note the escaping in the `awk` expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. If quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with `add`
@@ -669,7 +680,7 @@ echo 'jq'
 
 Each CSV file looks something like this:
 
-```{console}
+```{console, remove="echo"}
 cat nyc-1.json.csv #! enter=FALSE
 C-C#! literal=FALSE
 echo 'bronx,3'
