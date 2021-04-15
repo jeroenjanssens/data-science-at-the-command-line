@@ -10,13 +10,19 @@ suppress-bibliography: true
 
 # Exploring Data {#chapter-7-exploring-data}
 
-Now that you have obtained and scrubbed your data, you can continue with the third step of the OSEMN model, which is to explore it. After all that hard work, (unless you already had clean data lying around!), it's time for some fun.
+After all that hard work (unless you already had clean data lying around), it's time for some fun.
+Now that you have obtained and scrubbed your data, you can continue with the third step of the OSEMN model, which is to explore it.
 
-Exploring is the step where you familiarize yourself with the data. Being familiar with the data is essential when you want to extract any value from it. For example, knowing what kind of features the data has, means you know which ones are worth further exploration and which ones you can use to answer any questions that you have.
+Exploring is the step where you familiarize yourself with the data.
+Being familiar with the data is essential when you want to extract any value from it.
+For example, knowing what kind of features the data has, means you know which ones are worth further exploration and which ones you can use to answer any questions that you have.
 
-Exploring your data can be done from three perspectives. The first perspective is to inspect the data and its properties. Here, you want to find out things like what the raw data looks like, how many data points the dataset has, and which features the dataset has.
+Exploring your data can be done from three perspectives.
+The first perspective is to inspect the data and its properties.
+Here, you want to find out things like what the raw data looks like, how many data points the dataset has, and which features the dataset has.
 
-The second perspective from which you can explore the data is to compute descriptive statistics. This perspective is useful for learning more about the individual features. One advantage of this perspective is that the output is often brief and textual and can therefore be printed on the command line.
+The second is to compute descriptive statistics. This perspective is useful for learning more about the individual features.
+The output is often brief and textual and can therefore be printed on the command line.
 
 The third perspective is to create visualizations of the data. From this perspective you can gain insight into how multiple features interact. I’ll discuss a way of creating visualizations that can be printed on the command line. However, visualizations are best suited to be displayed on a graphical user interface. An advantage of data visualizations over descriptive statistics is that they are more flexible and that they can convey much more information.
 
@@ -35,11 +41,16 @@ cd /data/ch07
 l
 ```
 
+The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
+
+
 ## Inspecting Data and its Properties
 
 In this section I’ll demonstrate how to inspect your dataset and its properties. Because the upcoming visualization and modeling techniques expect the data to be in a rectangular shape, I’ll assume that the data is in CSV format. You can use the techniques described in [Chapter 5](#chapter-5-scrubbing-data) to convert your data to CSV if necessary.
 
-For simplicity sake, I’ll also assume that your data has a header. In the first subsection I'll show a way to determine whether that's the case. Once you know you have a header, you can continue answering the following questions:
+For simplicity sake, I’ll also assume that your data has a header.
+In the first subsection I'll show a way to determine whether that's the case.
+Once you know you have a header, you can continue answering the following questions:
 
 - How many data points and features does the dataset have?
 - What does the raw data look like?
@@ -55,7 +66,7 @@ You can check whether your file has a header by printing the first few lines usi
 head -n 5 venture.csv
 ```
 
-If the lines are too long such that they wrap around, then it's a good idea to add line numbers using `nl`:
+If the lines wrap around, add line numbers using `nl`:
 
 ```{console head_nl_venture}
 head -n 3 venture.csv | nl
@@ -67,15 +78,16 @@ Alternatively, you can use `trim`:
 < venture.csv trim 5
 ```
 
-In this case, I would say it's clear that the first line is a header because it contains only uppercase names and the subsequent lines contain numbers.
+In this case, it's clear that the first line is a header because it contains only uppercase names and the subsequent lines contain numbers.
 This is indeed quite a manual process and it's up to you to decide whether the first line is a header or already the first data point.
-When the dataset contains no header, you’re best off using the `header` tool discussed in [Chapter 5](#chapter-5-scrubbing-data) to correct that.
+When the dataset contains no header, you’re best off using the `header` tool (discussed in [Chapter 5](#chapter-5-scrubbing-data)) to correct that.
 
 
 ### Inspect All The Data
 
-If you want to inspect the raw data, then it’s probably not a good idea to use `cat`, because then all the data will be printed in one go.
-In order to inspect the raw data at your own pace, I recommend to use `less` [@less]. You can prevent long lines (as with *venture.csv*) from wrapping by specifying the `-S` option:
+If you want to inspect the raw data at your own pace, then it’s probably not a good idea to use `cat`, because then all the data will be printed in one go.
+I recommend `less` [@less].
+You can prevent long lines (as with *venture.csv*) from wrapping by specifying the `-S` option:
 
 ```{console less}
 less -S venture.csv#! enter=FALSE
@@ -97,29 +109,33 @@ Press **`g`** and **`G`** to go to start and the end of the file, respectively.
 Quitting `less` is done by pressing **`q`**.
 The manual page lists all the available key bindings.
 
-One advantage of `less` is that it does not load the entire file into memory, which is good for viewing large files.
+One advantage of `less` is that it does not load the entire file into memory, which means it's fast even for viewing large files.
 
 ### Feature Names and Data Types
 
-In order to gain insight into the dataset, it is useful to print the feature names and study them. After all, the feature names may indicate the meaning of the feature. You can use the following `head` and `tr` combo for this:
+The feature names may indicate the meaning of the feature.
+You can use the following `head` and `tr` combo for this:
 
 ```{console head_tr}
 < venture.csv head -n 1 | tr , '\n'
 ```
 
-Note that this basic command assumes that the file is delimited by commas. A more robust approach is to use `csvcut`:
+This basic command assumes that the file is delimited by commas.
+A more robust approach is to use `csvcut`:
 
 ```{console csvcut_names}
 csvcut -n venture.csv
 ```
 
-You can go a step further than just printing the column names. Besides the names of the columns, it would be very useful to know what type of values each column contains. Examples of data types are a string of characters, a numerical value, or a date. Assume that you have the following toy dataset:
+You can go a step further than just printing the column names.
+Besides the names of the columns, it would be very useful to know what type of values each column contains, such as a string of characters, a numerical value, or a date.
+Assume that you have the following toy dataset:
 
 ```{console bat_datatypes}
 bat -A datatypes.csv
 ```
 
-`csvlook` interprets the data as follows:
+Which `csvlook` interprets as follows:
 
 ```{console csvlook_datatypes}
 csvlook datatypes.csv
@@ -134,7 +150,7 @@ If a column has the *NOT NULL* string printed after the data type, then that col
 csvsql datatypes.csv
 ```
 
-This output especially useful when you use other tools within the `csvkit` suite, such as  `csvgrep`, `csvsort` and `csvsql`.
+This output is especially useful when you use other tools within the `csvkit` suite, such as  `csvgrep`, `csvsort` and `csvsql`.
 For *venture.csv*, the columns are inferred as follows:
 
 ```{console csvsql_venture}
@@ -166,7 +182,7 @@ csvstat tips.csv --unique
 csvstat venture.csv --unique
 ```
 
-If there's only one unique value (such as *OBS_STATUS*, then that column might be discarded because it doesn't provide any value.
+If there's only one unique value (such as with *OBS_STATUS*), then there's a chance that you can discard that column because it doesn't provide any value.
 If you wanted to automatically discard all such columns, then you could use the following pipeline:
 
 ```{console discard_columns}
@@ -202,9 +218,9 @@ The command-line tool `csvstat` gives a lot of information. For each feature (co
 - The data type
 - Whether it has any missing values (nulls)
 - The number of unique values
-- Various descriptive statistics (maximum, minimum, sum, mean, standard deviation, and median) for those features for which it is appropriate
+- Various descriptive statistics (minimum, maximum, sum, mean, standard deviation, and median) for those features for which it is appropriate
 
-You invoke `csvstat` as follows:
+Invoke `csvstat` as follows:
 
 ```{console}
 csvstat venture.csv | trim 32
@@ -236,9 +252,16 @@ You can select a subset of features with the `-c` option, which accepts both int
 csvstat venture.csv -c 3,GEO
 ```
 
-Keep in mind that `csvstat`, just like `csvsql`, employs heuristics to determine the data type, and therefore may not always get it right. I encourage you to always do a manual inspection as discussed in the previous subsection. Moreover, even though the type may be a string or integer, that doesn’t say anything about how it should be used.
+```{block2, type="rmdtip"}
+Keep in mind that `csvstat`, just like `csvsql`, employs heuristics to determine the data type, and therefore may not always get it right.
+I encourage you to always do a manual inspection as discussed in the previous subsection.
+Moreover, even though the type may be a string or integer, that doesn’t say anything about how it should be used.
+```
 
-As a nice extra, `csvstat` outputs, at the very end, the number of data points (rows). Newlines and commas inside values are handled correctly. To only see that last line, you can use `tail`. Alternatively, you can use `xsv`, which only returns the actual number of rows.
+As a nice extra, `csvstat` outputs, at the very end, the number of data points (rows).
+Newlines and commas inside values are handled correctly.
+To only see that last line, you can use `tail`.
+Alternatively, you can use `xsv`, which only returns the actual number of rows.
 
 ```{console csvstat_count}
 csvstat venture.csv | tail -n 1
@@ -287,11 +310,11 @@ Afterwards, you can continue with the saved file *percent.csv* on the command li
 < percent.csv trim 5
 ```
 
-Note that there is only one line of code that's associated with what you want to accomplish specifically.
+Note that only the third line is associated with what you want to accomplish specifically.
 The other lines are necessary boilerplate.
 Typing in this boilerplate in order to accomplish something simple is cumbersome and breaks your workflow.
 Sometimes, you only want to do one or two things at a time to your data.
-Wouldn't it be great if you could harness the power of `R` and be able to use it from the command line?
+Wouldn't it be great if you could harness the power of `R` and to use it from the command line?
 
 This is where `rush` comes in.
 Let’s perform the same task as before, but now using `rush`:
@@ -322,11 +345,11 @@ rush run -nt 'mutate(df, percent = tip / bill * 100)' tips.csv
 
 This generated script:
 
-- Writes out the shebang needed for running an `R` script from the command line
-- Imports the *tidyverse* and *glue* packages
-- Loads `tips.csv` as a data frame, cleans the column names, and assigns it to a variable *df*
-- Runs the specified expression
-- Prints the result to standard output
+- Writes out the shebang (`#!`; see [Chapter 4](#chapter-4-creating-reusable-command-line-tools)) needed for running an `R` script from the command line.
+- Imports the *tidyverse* and *glue* packages.
+- Loads `tips.csv` as a data frame, cleans the column names, and assigns it to a variable *df*.
+- Runs the specified expression.
+- Prints the result to standard output.
 
 You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.
 
@@ -342,16 +365,16 @@ The output of `rush` doesn’t have to be a in CSV format per se. Here, I comput
 
 That last dash means that `rush` should read from standard input.
 
-So now, if you wanted to do one or two things to your data set with `R`, you can specify it as a one-liner, and keep on working on the command line.
+So now, if you want to do one or two things to your data set with `R`, you can specify it as a one-liner, and keep on working on the command line.
 All the knowledge that you already have about `R` can now be used from the command line. With `rush`, you can even create sophisticated visualizations, as I'll show you in the next section.
 
 
 ## Creating Visualizations
 
-It's helpful to distinguish between *creating* the visualization at the command line and *viewing* the visualization at the command line.
+It's helpful to distinguish between *creating* a visualization at the command line and *viewing* a visualization at the command line.
 Of course you're going to use the command line to *create* the visualization.
-But sometimes you're in a position you cannot *view* any pixels and you're stuck with the capabilities of your terminal.
-Using the same syntax, `rush` is able to create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and maybe ANSI escape sequences if you have a modern terminal).
+But sometimes you cannot *view* any pixels and you're stuck with the capabilities of your terminal.
+Using the same syntax, `rush` can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and maybe ANSI escape sequences if you have a modern terminal).
 
 Let's demonstrate this by creating a few common data visualizations.
 
@@ -433,7 +456,7 @@ Both textual and graphical data visualizations have their pros and cons.
 The latter are obviously of much higher quality.
 The only down-side would be that the output is not viewable from the command line.
 This is where textual visualizations may come in handy.
-At least `rush` has, thanks to `R` and `ggplot2` a consistent syntax for both types.
+At least `rush` has, thanks to `R` and `ggplot2`, a consistent syntax for both types.
 
 ## Further Reading
 
