@@ -42,7 +42,7 @@ In this chapter, you’ll learn how to:
 - Split, merge, and extract columns
 - Combine multiple files
 
-I'll start with the following files:
+This chapter starts with the following files:
 
 ```{console list_files}
 cd /data/ch05
