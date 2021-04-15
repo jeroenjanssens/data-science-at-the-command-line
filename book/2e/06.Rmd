@@ -207,7 +207,7 @@ Let's go through this *Makefile* step by step The first three lines are there to
 
 1. All rules are executed in a shell, which by default, is `sh`. With the *SHELL* variable we can change this to another shell, like `bash`. This way we can use everything that Bash has to offer such as for loops.
 2. By default, every line in a rule is sent separately to the shell. With the special target *.ONESHELL* we can override this so the rule for target *top10* works.
-3. The *.SHELLFLAGS* line makes Bash more strict, which is considered a best practice.[^1] For example, because of this, the pipeline in the rule for target *top10* now stops as soon as there is an error.
+3. The *.SHELLFLAGS* line makes Bash more strict, which is considered a best practice.[^4] For example, because of this, the pipeline in the rule for target *top10* now stops as soon as there is an error.
 
 We define a custom variable called *URL*. Even though this is only used once, I find it helpful to put information like this near the beginning of the file, so that you can easily make changes to these kinds of settings.
 
@@ -238,4 +238,4 @@ I have shown you that just putting every command in one bash script is suboptima
 
 There’s nothing more fun than just playing with your data and forgetting everything else. But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a *Makefile*. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time, the same holds for `make` workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. I hope that you will get used to `make`, and that it will make your life easier.
 
-[^1]: See http://redsymbol.net/articles/unofficial-bash-strict-mode/ for more information.
+[^4]: See http://redsymbol.net/articles/unofficial-bash-strict-mode/ for more information.

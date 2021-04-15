@@ -284,7 +284,7 @@ Fortunately, there is a command-line tool called `sql2csv`, which is part of the
 
 We can obtain data from relational databases by executing a *SELECT* query on them. (`sql2csv` also support *INSERT*, *UPDATE*, and *DELETE* queries, but that's not the purpose of this chapter.)
 
-`sql2csv` needs two arguments: `--db`, which specifies the database URL, of which the typical form is: `dialect+driver://username:password@host:port/database` and `--query`, which contains the *SELECT* query. For example, given an SQLite database that contains the standard datasets from R[^1] , I can select all the rows from the table *mtcars* and sort them by the *mpg* column as follows:
+`sql2csv` needs two arguments: `--db`, which specifies the database URL, of which the typical form is: `dialect+driver://username:password@host:port/database` and `--query`, which contains the *SELECT* query. For example, given an SQLite database that contains the standard datasets from R[^3] , I can select all the rows from the table *mtcars* and sort them by the *mpg* column as follows:
 
 ```{console sql2csv}
 sql2csv --db 'sqlite:///r-datasets.db' \
@@ -381,4 +381,4 @@ C-C#! literal=FALSE
 
 Sure, it's probably not a good source of data, but there's nothing wrong with enjoying an old classic while training your machine learning models.
 
-[^1]: See https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite.
+[^3]: See https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite.
