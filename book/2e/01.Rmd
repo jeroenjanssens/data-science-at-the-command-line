@@ -111,7 +111,7 @@ Typing commands is a very different way of interacting with your computer than t
 
 In this book, the commands that I type and the output that they generate are displayed as text. For example, the contents of the terminal in the two screenshots would look like this:
 
-```{console, keep_prompt=TRUE}
+```{console, keep_last_prompt=TRUE}
 whoami
 date
 echo 'The command line is awesome!' | cowsay -f tux
