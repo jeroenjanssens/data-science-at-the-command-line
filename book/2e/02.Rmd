@@ -223,7 +223,7 @@ Shell Function
 
 Alias
 
-:   Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for it to save time. Aliases are also very useful when you continue to misspell a certain command (see <https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh> for a long list of useful aliases). The following command defines such an alias:
+:   Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for it to save time. Aliases are also very useful when you continue to misspell a certain command (Chris Wiggins maintains a [useful list of aliases](https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh)). The following command defines such an alias:
 
     ```{console define_alias}
     alias l='ls --color -lhF --group-directories-first'

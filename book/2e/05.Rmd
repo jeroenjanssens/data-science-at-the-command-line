@@ -11,21 +11,21 @@ suppress-bibliography: true
 # Scrubbing Data {#chapter-5-scrubbing-data}
 
 Two chapters ago, in the first step of the OSEMN model for data science, we looked at *obtaining* data from a variety of sources.
-This chapter is all about the second step of the OSEMN model: *scrubbing* data.
+This chapter is all about the second step: *scrubbing* data.
 You see, it's quite rare that you can immediately continue with *exploring* or even *modeling* the data.
 There's a plethora of reasons why your data first needs some cleaning, or scrubbing.
 
 For starters, the data might not be in the desired format.
-For example, you may have obtained some JSON data from an API while you need it to be in CSV format to create a visualization.
+For example, you may have obtained some JSON data from an API, but you need it to be in CSV format to create a visualization.
 Other common formats include plain text, HTML, and XML.
 Most command-line tools only work with one or two formats, so it's important that you're able to convert data from one format to another.
 
-Once the data is in the desired format, there could still be issues like missing values, inconsistencies, weird characters, or simply unnecessary parts.
-Those can be fixed by applying transformations such as applying filters, replacing values, and combining multiple files.
+Once the data is in the desired format, there could still be issues like missing values, inconsistencies, weird characters, or unnecessary parts.
+You can fix these by applying filters, replacing values, and combining multiple files.
 The command line is especially well-suited for these kind of transformations, because there are many specialized tools available, most of which can handle large amounts of data.
-Tools that I’ll discuss in this chapter include classic ones such as: `grep` [@grep] and `awk` [@awk], and newer ones such as `jq` [@jq] and `xmlstarlet` [@xmlstarlet].
+In this chapter I’ll discuss classic tools such as `grep` [@grep] and `awk` [@awk], and newer ones such as `jq` [@jq] and `xmlstarlet` [@xmlstarlet].
 
-You'll notice that sometimes you can use the same command-line tool to perform several operations, and vice versa, multiple tools to perform the same operation.
+Sometimes you can use the same command-line tool to perform several operations or multiple tools to perform the same operation.
 This chapter is more structured like a cookbook, where the focus is on the problems or recipes, rather than diving deeply into the command-line tools themselves.
 
 
@@ -896,7 +896,8 @@ Better is to either use a tool that makes use of the structure of the data (such
 I'm going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case.
 The command-line tools that I’ll be using here are: `curl`, `scrape` [@scrape], `xml2json` [@xml2json], `jq` [@jq], and `json2csv` [@json2csv].
 
-Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets. For example, the page <http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio> contains a list of countries and territories together with their border length, their area, and the ration between the two.
+Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets.
+For example, [this page](http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio) contains a list of countries and territories together with their border length, their area, and the ration between the two.
 
 Let’s imagine that you’re interested in analyzing this data. In this section, I’ll walk you through all the necessary steps and their corresponding commands. I won’t go into every little detail, so it could be that you won’t understand everything right away. Don’t worry, I’re confident that you’ll get the gist of it. Remember that the purpose of this section is to demonstrate the command line. All tools and concepts used in this section (and more) will be explained in the subsequent chapters.
 

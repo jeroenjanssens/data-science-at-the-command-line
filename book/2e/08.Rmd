@@ -103,7 +103,7 @@ These lines can come from either a file or from standard input.
 This is a very generic approach because the lines can contain anything, including: numbers, dates, and email addresses.
 
 Imagine that you'd want to send an email to all your contacts.
-Let’s first generate some fake users using the <https://randomuser.me/> API:
+Let’s first generate some fake users using the free [Random User Generator API](https://randomuser.me):
 
 ```{console emails}
 curl -s "https://randomuser.me/api/1.2/?results=5&seed=dsatcl2e" > users.json
@@ -427,7 +427,7 @@ With `aws`, you can virtually do everything you can do with the online AWS Manag
 
 <!-- #TODO: Change the URL below into a footnote -->
 
-The command `aws ec2 describe-instances` returns a lot of information about all your EC2 instances in JSON format (see <https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instances.html>).
+The command `aws ec2 describe-instances` returns a lot of information about all your EC2 instances in JSON format (see [the online documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instances.html) for more information).
 You can extract the relevant fields using `jq`:
 
 <!-- TODO: Run these EC2 commands once for real in the docker image and use a bunch of echo statements -->
@@ -593,7 +593,7 @@ Still, I hope it’s clear from this that `parallel` can be incredibly powerful.
 
 The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results.
 Imagine that you want to count for each borough of New York City, how often they receive service calls on 311.
-You don’t have that data on your local machine yet, so let’s first obtain it from <https://data.cityofnewyork.us/> using their free API:
+You don’t have that data on your local machine yet, so let’s first obtain it from the free [NYC Open Data API](https://data.cityofnewyork.us/):
 
 ```{console nyc}
 seq 0 100 900 | parallel  "curl -sL 'http://data.cityofnewyork.us/resource/erm2-nwe9.json?\$limit=100&\$offset={}' | jq -c '.[]' | gzip > nyc-{#}.json.gz"
@@ -720,9 +720,3 @@ In this chapter I have shown you how easy it is to parallelize commands.
 - Timeout, resume, and retry jobs
 
 Once you have a basic understanding of `parallel` and its most important options, I recommend that you take a look at its tutorial listed in the Further Reading section.
-
-## Further Reading
-
-* Tange, O. 2011. “GNU Parallel - the Command-Line Power Tool.”<em>;Login: The USENIX Magazine</em> 36 (1). Frederiksberg, Denmark:42–47. <a href="http://www.gnu.org/s/parallel" class="uri">http://www.gnu.org/s/parallel</a>.
-* Tange, Ole. 2014. “GNU Parallel.” <a href="http://www.gnu.org/software/parallel" class="uri">http://www.gnu.org/software/parallel</a>.
-* Services, Amazon Web. 2014. “AWS Command Line Interface.” <a href="http://aws.amazon.com/cli" class="uri">http://aws.amazon.com/cli</a>.

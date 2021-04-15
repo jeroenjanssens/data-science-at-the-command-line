@@ -196,4 +196,4 @@ In this section we’ve peeked at some important concepts and some exciting comm
 
 [^1]: The development of the UNIX operating system started back in 1969. It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3](#essential-concepts), was added in 1973.
 
-[^2]: See http://top500.org/blog/lists/2013/11/press-release.
+[^2]: See [this press release](http://top500.org/blog/lists/2013/11/press-release).

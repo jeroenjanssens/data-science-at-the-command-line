@@ -107,7 +107,8 @@ curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland \
 
 ### Other Protocols
 
-In total, `curl` supports more than 20 protocols (see https://ec.haxx.se/protocols/protocols-curl). To download from an FTP server, which stands for File Transfer Protocol, you use `curl` the same way. Here I download the file *welcome.msg* from *ftp.gnu.org*:
+In total, `curl` supports [more than 20 protocols](https://ec.haxx.se/protocols/protocols-curl).
+To download from an FTP server, which stands for File Transfer Protocol, you use `curl` the same way. Here I download the file *welcome.msg* from *ftp.gnu.org*:
 
 ```{console curl_ftp}
 curl -s ftp://ftp.gnu.org/welcome.msg | trim
@@ -146,7 +147,7 @@ By specifying the `-I` or `--head` option, `curl` fetches only the HTTP header o
 curl -sI https://youtu.be/dQw4w9WgXcQ | trim
 ```
 
-The first line shows the protocol followed by the HTTP status code, which is 303 in this case. You can also see the location this URL redirects to. Inspecting the header and getting the status code is a useful debugging tool in case `curl` does not give you the expected result. Other common HTTP status codes include 404 (not found) and 403 (forbidden). This page lists all HTTP status codes: <http://en.wikipedia.org/wiki/List_of_HTTP_status_codes>.
+The first line shows the protocol followed by the HTTP status code, which is 303 in this case. You can also see the location this URL redirects to. Inspecting the header and getting the status code is a useful debugging tool in case `curl` does not give you the expected result. Other common HTTP status codes include 404 (not found) and 403 (forbidden). Wikipedia has a page that lists [all HTTP status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 In summary, `curl` is a useful command-line tool for downloading data from the Internet. Its three most common options are `-s` to silence the progress meter, `-u` to specify a username and password, and `-L` to automatically follow redirects. See its man page for more information (and to make your head spin):
 
@@ -321,7 +322,7 @@ Well, that was to be expected. The part after the question mark, by the way, is 
 curl -s "http://newsapi.org/v2/everything?q=linux&apiKey=$(< /data/.secret/newsapi.org_apikey)" |
 jq '.' | trim 30
 ```
-You can get your own API key at https://newsapi.org.
+You can get your own API key at [News API's website](https://newsapi.org).
 
 ### Streaming APIs
 
@@ -381,4 +382,4 @@ C-C#! literal=FALSE
 
 Sure, it's probably not a good source of data, but there's nothing wrong with enjoying an old classic while training your machine learning models.
 
-[^3]: See https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite.
+[^3]: Available on [GitHub](https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite).
