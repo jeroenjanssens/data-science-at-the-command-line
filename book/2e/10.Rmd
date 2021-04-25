@@ -15,7 +15,7 @@ suppress-bibliography: true
 In a digital product or service, it's good idea to rely on as a little as possible, including programming languages.
 When you're building, analising, there's no harm in using other languages.
 
-When you're 
+When you're
 
 
 The command line is everywhere.
@@ -56,7 +56,7 @@ The subprocess module allows you to spawn new processes, connect to their input/
 <!-- TODO: MUST: Create python script that uses the subprocess module. -->
 
 
-### Python scripts with 
+### Python scripts with
 
 ## Leveraging the Command Line in R
 
@@ -69,7 +69,7 @@ The subprocess module allows you to spawn new processes, connect to their input/
 - pipe
 - fread
 - processx
-- 
+-
 
 
 ## Leveraging the Command Line Elsewhere
@@ -91,21 +91,29 @@ when formatting emailadresses
 pipe transformation
 
 https://spark.apache.org/docs/latest/rdd-programming-guide.html
-pipe(command, [envVars]) 
- 	Pipe each partition of the RDD through a shell command, e.g. a Perl or bash script. RDD elements are written to the process's stdin and lines output to its stdout are returned as an RDD of strings. 
+pipe(command, [envVars])
+ 	Pipe each partition of the RDD through a shell command, e.g. a Perl or bash script. RDD elements are written to the process's stdin and lines output to its stdout are returned as an RDD of strings.
 
 - result needs to be converted to integer explicitly
 - piping multiple commands is difficult (it's not a shell)
 - one item per line
 
-```{console, remove=list("alias", "cache")}
-alias spark-shell echo
+```{console, remove=list("alias", "cache"), callouts=c("textFile", "flatMap", "grep", "wc", "res3", "toInt", "res5")}
+alias spark-shell=echo
 spark-shell --master local[6]#!enter=FALSE
 C-C#!literal=FALSE
 cat /data/.cache/spark
 ```
+<1> Read *alice.txt* such that each line is an element.
+<2> Split each element on spaces. In other words, each line is split into words.
+<3> Pipe each partition through `grep` to keep only the elements that match the string *alice*.
+<4> Pipe each partition through `wc` to count the number of elements.
+<5> There's one count for each partition.
+<6> Sum all counts to get a final count.
+<7> The above steps combined into a single command.
 
-Also available in PySpark and 
+
+Also available in PySpark and
 
 https://stackoverflow.com/questions/54239583/question-about-rdd-pipe-operator-on-apache-spark
 It seems, after all, that the external script should be present on all executor nodes. One way to do this is to pass your script via spark-submit (e.g. --files script.sh) and then you should be able to refer that (e.g. "./script.sh") in rdd.pipe.
@@ -124,6 +132,3 @@ Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-comm
 - Visual Studio Code https://code.visualstudio.com/docs/editor/integrated-terminal
 - Emacs
 - VIM (using ! command)
-
-
-

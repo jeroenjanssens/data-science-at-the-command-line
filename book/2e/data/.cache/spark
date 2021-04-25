@@ -1,5 +1,5 @@
 Spark context Web UI available at http://3d1bec8f2543:4040
-Spark context available as 'sc' (master = local[*], app id = local-16193763).
+Spark context available as 'sc' (master = local[6], app id = local-16193763).
 Spark session available as 'spark'.
 Welcome to
       ____              __
