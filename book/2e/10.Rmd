@@ -100,8 +100,8 @@ pipe(command, [envVars])
 
 ```{console, remove=list("alias", "cache")}
 alias spark-shell echo
-spark-shell --master local[6]#!enter=False
-C-C#!literal=False
+spark-shell --master local[6]#!enter=FALSE
+C-C#!literal=FALSE
 cat /data/.cache/spark
 ```
 
