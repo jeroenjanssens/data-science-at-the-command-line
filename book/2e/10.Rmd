@@ -15,62 +15,172 @@ suppress-bibliography: true
 In a digital product or service, it's good idea to rely on as a little as possible, including programming languages.
 When you're building, analising, there's no harm in using other languages.
 
-When you're
+What's a polyglot? Why be polyglot?
+So, when you're using the command line, you are, in fact, already a polyglot data scientist.
+But this was perhaps without you knowing it.
 
+I believe you should take a pragmatic approach
 
 The command line is everywhere.
 It's a super glue.
 Useful for when you're in another environment.
 
+I'm also not saying that you should abandon your workflow and use the command line all the time.
 Let's be honest, you're not going to spend all your time at the command line.
 Neither do I.
 Depending on the project or task, I'm often in a Jupyter notebook, RStudio, ...
 
+
 Use the tool that gets the job done
 Language wars are boring and unproductive.
 
+Integrate into the rest of your workflow or toolset.
+Goal is to be productive.
+
+The command line doesn't care in which programming language a tools is made. 
+It could be just about any language you can think of.
+Python, R, Julia, JavaScript, Java, Scala, Perl, C, C++, 
+
+
+
+
+
 ## Overview
 
-In this chapter I cover:
+In this chapter, you’ll learn how to:
+
+* Transform RDDs with shell commands in Spark
+* Run arbitrary tools
+* Filter data in R and Python
+* Run a terminal in JupyterLab and RStudio IDE
+
+
+
+
+```{console}
+cd /data/ch10
+l
+```
+
+
+## Four Modes 
+
+run (don't involved data)
+read (receive data from command line)
+write (send data to command line)
+filter (send data to and receive data from command)
+
+
+Shell capabilities or not?
+
+
+
+
+
+# all four options are executed in a shell. 
+
+# no stdin and no stdout: system
+
+# stdin but no stdout: writeLines(pipe)
+
+# stdout but no stdin: readLines(pipe)
+readLines(pipe(""))
+
+# both stdin and stdout: fifo, readLines, writeLines
+first-in first-out special file, named pipe
+When processes are
+exchanging data via the FIFO, the kernel passes all data
+internally without writing it to the filesystem.
 
 
 
 
 ## Leveraging the Command Line in Python
 
-In scripts.
 
-### Jupyter Console and Notebook
+
+### Jupyter
+
 
 Jupyter Console with IPython kernel
 
+JupyterLab
+
+
+```{r jupyterlab, echo=FALSE, fig.cap="JupyterLab with a code panel, a notebook panel, and a terminal panel", fig.align="center"}
+knitr::include_graphics("images/screenshot_jupyterlab.png")
+```
 
 
 
-<!-- #TODO: MUST: Make screenshot of Jupyter Lab, showing both a terminal and ! and %%bash -->
-
-### Python scripts with subprocess
+### Python Scripts
 
 The subprocess module allows you to spawn new processes, connect to their input/output/error pipes, and obtain their return codes. This module intends to replace several older modules and functions: os.system
 
-<!-- TODO: MUST: Create python script that uses the subprocess module. -->
+- not run in a shell by default, but is possible to change with `shell` argument to `run` function.
+
+```{console}
+bat count.py
+```
+
+```{console}
+./count.py alice.txt alice
+```
 
 
-### Python scripts with
+
 
 ## Leveraging the Command Line in R
 
 ### RStudio IDE
 
-<!-- #TODO: MUST: Make screenshot of RStudio, showing terminal tab -->
+The RStudio IDE is arguably the most popular environment for working with R.
+
+
+```{r rstudio-console, echo=FALSE, fig.cap="RStudio IDE with console tab open", fig.align="center"}
+knitr::include_graphics("images/screenshot_rstudio_console.png")
+```
+
+```{r rstudio-terminal, echo=FALSE, fig.cap="RStudio IDE with terminal tab open", fig.align="center"}
+knitr::include_graphics("images/screenshot_rstudio_terminal.png")
+```
+
+
+
 
 ### R Scripts
 
-- pipe
-- fread
-- processx
--
+```{console}
+R --quiet
+lines <- readLines("alice.txt")
+head(lines)
+words <- unlist(strsplit(lines, " "))
+head(words)
+alice <- system2("grep", c("-i", "alice"), input = words, stdout = TRUE)
+head(alice)
+length(alice)
+```
 
+
+```{console}
+in_con <- pipe("grep b > out")
+out_con <- fifo("out")
+writeLines(c("foo", "bar"), in_con)
+readLines(out_con)
+```
+
+
+```{console}
+writeLines(c("baz", "qux"), in_con)
+readLines(out_con)
+close(out_con);
+close(in_con)
+q("no")
+```
+
+Mention pipe and fread
+
+check out the processx package https://processx.r-lib.org/. experimental at the time of writing. but seems very promising to working with connections in a more robust manner.
 
 ## Leveraging the Command Line Elsewhere
 
@@ -88,7 +198,15 @@ when formatting emailadresses
 
 <!-- TODO: SHOULD include reference to spark and https://scala-lang.org/ -->
 
+Spark is a ... 
+Through a series of transformations, followed by an action, you build up a pipeline for data processing and machine learning. 
+It's the system you want to turn to if you want to have you terabytes or petabytes of data.
+
 pipe transformation
+
+I think it's interesting to see the author say that the pipe transformation is one of the more interesting ones.
+
+
 
 https://spark.apache.org/docs/latest/rdd-programming-guide.html
 pipe(command, [envVars])
@@ -132,3 +250,12 @@ Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-comm
 - Visual Studio Code https://code.visualstudio.com/docs/editor/integrated-terminal
 - Emacs
 - VIM (using ! command)
+
+
+## Other Combinations
+
+- reticulate
+- Rpy2
+- sparkr
+- sparklyr
+
