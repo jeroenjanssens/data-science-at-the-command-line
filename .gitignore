@@ -19,3 +19,6 @@ www/static/2e/
 /book/2e/data/.secret/
 
 package-lock.json
+
+.ipynb_checkpoints/
+__pycache__/
