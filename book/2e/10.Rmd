@@ -91,15 +91,15 @@ The project includes JupyterLab, Jupyter Notebook, and Jupyter Console.
 I'll start with Jupyter Console, as it is the most basic one to work with Python in an interactive way.
 Here's a Jupyter Console session illustrating a couple of ways to leverage the command line.
 
-```{console remove=list(1, "1R"), callouts=c("date", "open", "total_lines[", "import", "curl", "rm -v", "upper")}
+```{console remove=list(1, "1R"), callouts=c("date", "open", "int", "import", "curl", "rm -v", "upper")}
 cat /data/.cache/jupyter-console#!expect_prompt=FALSE
 C-C#!literal=FALSE
 ```
 <1> You can run arbitrary shell commands and pipelines such as `date` or `pip` to install a Python package.
-<2> Compare this line of Pyton code to count the number of lines in *alice.txt* with the invocation of `wc` below it. 
+<2> Compare this line of Pyton code to count the number of lines in *alice.txt* with the invocation of `wc` below it.
 <3> Note that standard output is returned as a list of strings, so in order to use the value of *total_lines*, get the first item and cast it to an integer.
 <4> Compare this cell and the next to download a file with the invocation of `curl` below it.
-<5> You can use Python variables as part of the shell command by using curly braces. 
+<5> You can use Python variables as part of the shell command by using curly braces.
 <6> If you want to use literal curly braces, type them twice.
 <7> Using a Python variable as standard input can be done, but gets quite tricky as you can see.
 
@@ -110,10 +110,10 @@ It's very popular among data scientists for this reason.
 Jupyter Notebook is a separate project and environment, but I'd like to use JupyterLab to work with notebooks, because it offers a more complete IDE.
 
 Figure X is a screenshot of JupyterLab, showing the file explorer (left), a code editor (middle), a notebook (right), and a terminal (bottom). The latter three all show ways to leverage the command line.
-The code is something I get back to in the next section. 
+The code is something I get back to in the next section.
 This particular notebook is quite similar to the console session I just discussed.
-The terminal offers a complete shell for you to run command line tools. 
-Be aware that there's no interactivity possible between this terminal, the code, and the notebook. 
+The terminal offers a complete shell for you to run command line tools.
+Be aware that there's no interactivity possible between this terminal, the code, and the notebook.
 So this terminal is not really different from having a separate terminal application open, but it's still helpful when you're working inside a Docker container or on a remote server.
 <!-- TODO: Explain above sentence about remote -->
 
@@ -133,18 +133,31 @@ You're better off creating a Bash script in a separate file, and then executing 
 
 ### Python Scripts
 
-The subprocess module allows you to spawn new processes, connect to their input/output/error pipes, and obtain their return codes. This module intends to replace several older modules and functions: os.system
+The `subprocess` module allows you to run command-line tools from Python and connect to their standard input and output.
+This module is recommended over the older `os.system()` function.
+It's not run in a shell by default, but it's possible to change that with the `shell` argument to `run()` function.
 
-- not run in a shell by default, but is possible to change with `shell` argument to `run` function.
+<!-- TODO Link to run function -->
+<!-- #TODO: Add link to recommendation below -->
 
-```{console}
+```{console, callouts=c("run", "open", "split", "grep", "stdout")}
 bat count.py
 ```
+<1> The recommended way to leverage the command line is to use the `run()` function of the `subprocess` module.
+<2> Open the file *filename*
+<3> Split the entire text into words
+<4> Run the command-line tool `grep`, where *words* is passed as standard input.
+<5> The standard output is available as one long string. Here, I split it on each newline character to count the number of occurrences of *pattern*.
+
+This command-line tools is used as follows:
 
 ```{console}
 ./count.py alice.txt alice
 ```
 
+Notice that the first argument of the `run` call on line 15 is a list of strings, where the first item is the name of the command-line tool, and the remaining items are arguments.
+This is different from passing a single string.
+This is also means that you don't have any other shell syntax available that would allow for things such as redirection and piping.
 
 
 ## Leveraging the Command Line in R
