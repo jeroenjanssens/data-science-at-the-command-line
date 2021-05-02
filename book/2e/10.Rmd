@@ -11,107 +11,123 @@ suppress-bibliography: true
 
 # Polyglot Data Science {#chapter-10-polyglot-data-science}
 
-<!-- ##### Motivation -->
-In a digital product or service, it's good idea to rely on as a little as possible, including programming languages.
-When you're building, analising, there's no harm in using other languages.
+<!-- What's a polyglot? -->
+A polyglot is someone who speaks multiple languages.
+A polyglot data scientist, as I see it, is someone who uses multiple programming languages, tools, and techniques to obtain, scrub, explore, and model data.
 
-What's a polyglot? Why be polyglot?
-So, when you're using the command line, you are, in fact, already a polyglot data scientist.
-But this was perhaps without you knowing it.
+<!-- Already a polyglot -->
+The command line stimulates a polyglot approach.
+The command line doesn't care in which programming language a tool is written, as long as they adhere to the Unix philosophy.
+We saw that very clearly in [Chapter 4](#chapter-4-creating-reusable-command-line-tools), where we created command-line tools in Bash, Python, and R.
+Moreover, we executed SQL queries directly on CSV files and executed R expressions from the command line.
+In short, we have already been doing polyglot data science without fully realizing it!
+   
+<!-- In this chapter -->
+In this chapter I'm going take this further by flipping it around. 
+I'm going to show you how to leverage the command line from various programming languages and environments.
+Because let's be honest, we're not going to spend our entire data science careers at the command line.
+As for me, when I'm analysing some data I often use the RStudio IDE and when I'm implementing something, I often use Python.
+I use whatever helps me to get the job done.
 
-I believe you should take a pragmatic approach
+<!-- Why be polyglot? -->
+I find it comforting to know that the command-line is often within arm's reach, without having to switch to a different application.
+It allows me to quickly run a command without switching to a separate application and break my workflow.
+Examples are downloading files with `curl`, inspecting a piece of data with `head`, creating a backup with `git`, and compiling a website with `make`.
+Generally speaking, tasks that normally require a lot of code or simply cannot be done at all without the commandl line.
 
-The command line is everywhere.
-It's a super glue.
-Useful for when you're in another environment.
-
-I'm also not saying that you should abandon your workflow and use the command line all the time.
-Let's be honest, you're not going to spend all your time at the command line.
-Neither do I.
-Depending on the project or task, I'm often in a Jupyter notebook, RStudio, ...
-
-
-Use the tool that gets the job done
-Language wars are boring and unproductive.
-
-Integrate into the rest of your workflow or toolset.
-Goal is to be productive.
-
-The command line doesn't care in which programming language a tools is made. 
-It could be just about any language you can think of.
-Python, R, Julia, JavaScript, Java, Scala, Perl, C, C++, 
-
-
-
+<!-- A word of caution -->
+<!-- Language wars are boring and unproductive. -->
+<!-- Integrate into the rest of your workflow or toolset. -->
+<!-- Goal is to be productive. -->
+<!-- In a digital product or service, it's good idea to rely on as a little as possible, including programming languages. -->
+<!-- I believe you should take a pragmatic approach. -->
+<!-- The command line is everywhere. -->
+<!-- It's a super glue. -->
+<!-- Useful for when you're in another environment. -->
 
 
 ## Overview
 
 In this chapter, you’ll learn how to:
 
-* Transform RDDs with shell commands in Spark
-* Run arbitrary tools
-* Filter data in R and Python
-* Run a terminal in JupyterLab and RStudio IDE
-
-
-
+* Run a terminal within JupyterLab and RStudio IDE
+* Interact with arbitrary command-line tools in Python and R
+* Transform RDDs using shell commands in Apache Spark
 
 ```{console}
 cd /data/ch10
 l
 ```
 
-
-## Four Modes 
-
-run (don't involved data)
-read (receive data from command line)
-write (send data to command line)
-filter (send data to and receive data from command)
+The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
 
 
-Shell capabilities or not?
+<!-- TODO: SHOULD: Write about four modes -->
+<!-- ## Four Modes of Leveraging the Command Line in a Language -->
 
+<!-- * run (don't involved data) -->
+<!-- * read (receive data from command line) -->
+<!-- * write (send data to command line) -->
+<!-- * filter (send data to and receive data from command) -->
 
-
-
-
-# all four options are executed in a shell. 
-
-# no stdin and no stdout: system
-
-# stdin but no stdout: writeLines(pipe)
-
-# stdout but no stdin: readLines(pipe)
-readLines(pipe(""))
-
-# both stdin and stdout: fifo, readLines, writeLines
-first-in first-out special file, named pipe
-When processes are
-exchanging data via the FIFO, the kernel passes all data
-internally without writing it to the filesystem.
+<!-- Shell capabilities or not? -->
 
 
 
 
 ## Leveraging the Command Line in Python
 
+Python is one of the most popular programming languages 
 
+<!-- TODO: SHOULD: Add links to all projects, including Jupyter. -->
 
 ### Jupyter
 
+Project Jupyter is an open-source project, born out of the IPython Project in 2014 as it evolved to support interactive data science and scientific computing across all programming languages.
+Jupyter supports over 40 programming languages, including Python, R, Julia, and Scala.
+In this section I'll focus on Python.
 
-Jupyter Console with IPython kernel
+The project includes JupyterLab, Jupyter Notebook, and Jupyter Console.
+I'll start with Jupyter Console, as it is the most basic one to work with Python in an interactive way.
 
-JupyterLab
+<!-- TODO MUST: Annotate console session -->
+
+```{console remove=list(1, "1R7")}
+cat /data/.cache/jupyter-console
+C-C#!literal=FALSE
+```
+
+Note:
+  returns as list of strings, so to use the value total_lines, get first value and cast to an integer
 
 
-```{r jupyterlab, echo=FALSE, fig.cap="JupyterLab with a code panel, a notebook panel, and a terminal panel", fig.align="center"}
+Jupyter Notebook is, in essence, a browser-based version of Jupyter Console.
+It supports the same ways to leverage the command line, including the exclamation mark and bash magic.
+The biggest difference is that a notebook cannot only contain code, but also marked-up text, equations, and data visualizations.
+It's very popular among data scientists for this reason.
+Jupyter Notebook is a separate project and environment, but I'd like to use JupyterLab to work with notebooks, because it offers a more complete IDE.
+
+Figure X is a screenshot of JupyterLab, showing the file explorer (left), a code editor (middle), a notebook (right), and a terminal (bottom). The latter three all show ways to leverage the command line.
+
+```{r jupyterlab, echo=FALSE, fig.cap="JupyterLab with the file explorer, a code editor, a notebook, and a terminal", fig.align="center"}
 knitr::include_graphics("images/screenshot_jupyterlab.png")
 ```
 
+* code
+* notebook
+* terminal
 
+
+```{block2, type="rmdwarning"}
+This notebook in the screenshot also contains a cell using so-called `%%bash` magic, which allows you to write multi-line Bash scripts.
+Because it's much more difficult to use Python variables, I don't recommend this approach.
+You're better off creating a Bash script in a separate file, and then executing it by using the exclamation mark (`!`).
+```
+
+
+
+
+<!-- TODO: Write out voice recordings -->
 
 ### Python Scripts
 
@@ -182,6 +198,19 @@ Mention pipe and fread
 
 check out the processx package https://processx.r-lib.org/. experimental at the time of writing. but seems very promising to working with connections in a more robust manner.
 
+
+<!-- # all four options are executed in a shell.  -->
+<!-- # no stdin and no stdout: system -->
+<!-- # stdin but no stdout: writeLines(pipe) -->
+<!-- # stdout but no stdin: readLines(pipe) -->
+<!-- readLines(pipe("")) -->
+<!-- # both stdin and stdout: fifo, readLines, writeLines -->
+<!-- first-in first-out special file, named pipe -->
+<!-- When processes are -->
+<!-- exchanging data via the FIFO, the kernel passes all data -->
+<!-- internally without writing it to the filesystem. -->
+
+
 ## Leveraging the Command Line Elsewhere
 
 ### Clipboard
@@ -245,11 +274,13 @@ Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-comm
 
 
 
-### Other IDEs
+### Other IDEs / Notable mensions
 
 - Visual Studio Code https://code.visualstudio.com/docs/editor/integrated-terminal
 - Emacs
 - VIM (using ! command)
+- OS: Guake, 
+- OS: iTerm2:    https://www.sharmaprakash.com.np/guake-like-dropdown-terminal-in-mac/
 
 
 ## Other Combinations
