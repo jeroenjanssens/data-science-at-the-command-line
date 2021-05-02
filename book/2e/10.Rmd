@@ -89,17 +89,19 @@ In this section I'll focus on Python.
 
 The project includes JupyterLab, Jupyter Notebook, and Jupyter Console.
 I'll start with Jupyter Console, as it is the most basic one to work with Python in an interactive way.
+Here's a Jupyter Console session illustrating a couple of ways to leverage the command line.
 
-<!-- TODO MUST: Annotate console session -->
-
-```{console remove=list(1, "1R"), callouts=c("date", "open", "import", "curl", "rm -v", "upper")}
+```{console remove=list(1, "1R"), callouts=c("date", "open", "total_lines[", "import", "curl", "rm -v", "upper")}
 cat /data/.cache/jupyter-console#!expect_prompt=FALSE
 C-C#!literal=FALSE
 ```
-
-Note:
-  returns as list of strings, so to use the value total_lines, get first value and cast to an integer
-
+<1> You can run arbitrary shell commands and pipelines such as `date` or `pip` to install a Python package.
+<2> Compare this line of Pyton code to count the number of lines in *alice.txt* with the invocation of `wc` below it. 
+<3> Note that standard output is returned as a list of strings, so in order to use the value of *total_lines*, get the first item and cast it to an integer.
+<4> Compare this cell and the next to download a file with the invocation of `curl` below it.
+<5> You can use Python variables as part of the shell command by using curly braces. 
+<6> If you want to use literal curly braces, type them twice.
+<7> Using a Python variable as standard input can be done, but gets quite tricky as you can see.
 
 Jupyter Notebook is, in essence, a browser-based version of Jupyter Console.
 It supports the same ways to leverage the command line, including the exclamation mark and bash magic.
@@ -108,14 +110,16 @@ It's very popular among data scientists for this reason.
 Jupyter Notebook is a separate project and environment, but I'd like to use JupyterLab to work with notebooks, because it offers a more complete IDE.
 
 Figure X is a screenshot of JupyterLab, showing the file explorer (left), a code editor (middle), a notebook (right), and a terminal (bottom). The latter three all show ways to leverage the command line.
+The code is something I get back to in the next section. 
+This particular notebook is quite similar to the console session I just discussed.
+The terminal offers a complete shell for you to run command line tools. 
+Be aware that there's no interactivity possible between this terminal, the code, and the notebook. 
+So this terminal is not really different from having a separate terminal application open, but it's still helpful when you're working inside a Docker container or on a remote server.
+<!-- TODO: Explain above sentence about remote -->
 
 ```{r jupyterlab, echo=FALSE, fig.cap="JupyterLab with the file explorer, a code editor, a notebook, and a terminal", fig.align="center"}
 knitr::include_graphics("images/screenshot_jupyterlab.png")
 ```
-
-* code
-* notebook
-* terminal
 
 
 ```{block2, type="rmdwarning"}
@@ -123,8 +127,6 @@ This notebook in the screenshot also contains a cell using so-called `%%bash` ma
 Because it's much more difficult to use Python variables, I don't recommend this approach.
 You're better off creating a Bash script in a separate file, and then executing it by using the exclamation mark (`!`).
 ```
-
-
 
 
 <!-- TODO: Write out voice recordings -->
@@ -142,7 +144,6 @@ bat count.py
 ```{console}
 ./count.py alice.txt alice
 ```
-
 
 
 
