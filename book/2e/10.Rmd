@@ -21,9 +21,9 @@ The command line doesn't care in which programming language a tool is written, a
 We saw that very clearly in [Chapter 4](#chapter-4-creating-reusable-command-line-tools), where we created command-line tools in Bash, Python, and R.
 Moreover, we executed SQL queries directly on CSV files and executed R expressions from the command line.
 In short, we have already been doing polyglot data science without fully realizing it!
-   
+
 <!-- In this chapter -->
-In this chapter I'm going take this further by flipping it around. 
+In this chapter I'm going take this further by flipping it around.
 I'm going to show you how to leverage the command line from various programming languages and environments.
 Because let's be honest, we're not going to spend our entire data science careers at the command line.
 As for me, when I'm analysing some data I often use the RStudio IDE and when I'm implementing something, I often use Python.
@@ -77,7 +77,7 @@ The instructions to get these files are in [Chapter 2](#chapter-2-getting-starte
 
 ## Leveraging the Command Line in Python
 
-Python is one of the most popular programming languages 
+Python is one of the most popular programming languages
 
 <!-- TODO: SHOULD: Add links to all projects, including Jupyter. -->
 
@@ -92,8 +92,8 @@ I'll start with Jupyter Console, as it is the most basic one to work with Python
 
 <!-- TODO MUST: Annotate console session -->
 
-```{console remove=list(1, "1R7")}
-cat /data/.cache/jupyter-console
+```{console remove=list(1, "1R"), callouts=c("date", "open", "import", "curl", "rm -v", "upper")}
+cat /data/.cache/jupyter-console#!expect_prompt=FALSE
 C-C#!literal=FALSE
 ```
 
@@ -227,8 +227,8 @@ when formatting emailadresses
 
 <!-- TODO: SHOULD include reference to spark and https://scala-lang.org/ -->
 
-Spark is a ... 
-Through a series of transformations, followed by an action, you build up a pipeline for data processing and machine learning. 
+Spark is a ...
+Through a series of transformations, followed by an action, you build up a pipeline for data processing and machine learning.
 It's the system you want to turn to if you want to have you terabytes or petabytes of data.
 
 pipe transformation
@@ -279,7 +279,7 @@ Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-comm
 - Visual Studio Code https://code.visualstudio.com/docs/editor/integrated-terminal
 - Emacs
 - VIM (using ! command)
-- OS: Guake, 
+- OS: Guake,
 - OS: iTerm2:    https://www.sharmaprakash.com.np/guake-like-dropdown-terminal-in-mac/
 
 
@@ -289,4 +289,3 @@ Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-comm
 - Rpy2
 - sparkr
 - sparklyr
-
