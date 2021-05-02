@@ -75,13 +75,7 @@ The instructions to get these files are in [Chapter 2](#chapter-2-getting-starte
 
 
 
-## Leveraging the Command Line in Python
-
-Python is one of the most popular programming languages
-
-<!-- TODO: SHOULD: Add links to all projects, including Jupyter. -->
-
-### Jupyter
+## Jupyter
 
 Project Jupyter is an open-source project, born out of the IPython Project in 2014 as it evolved to support interactive data science and scientific computing across all programming languages.
 Jupyter supports over 40 programming languages, including Python, R, Julia, and Scala.
@@ -131,7 +125,7 @@ You're better off creating a Bash script in a separate file, and then executing 
 
 <!-- TODO: Write out voice recordings -->
 
-### Python Scripts
+## Python Scripts
 
 The `subprocess` module allows you to run command-line tools from Python and connect to their standard input and output.
 This module is recommended over the older `os.system()` function.
@@ -160,9 +154,8 @@ This is different from passing a single string.
 This is also means that you don't have any other shell syntax available that would allow for things such as redirection and piping.
 
 
-## Leveraging the Command Line in R
 
-### RStudio IDE
+## RStudio IDE
 
 The RStudio IDE is arguably the most popular environment for working with R.
 
@@ -178,7 +171,7 @@ knitr::include_graphics("images/screenshot_rstudio_terminal.png")
 
 
 
-### R Scripts
+## R Scripts
 
 ```{console}
 R --quiet
@@ -225,39 +218,31 @@ check out the processx package https://processx.r-lib.org/. experimental at the 
 <!-- internally without writing it to the filesystem. -->
 
 
-## Leveraging the Command Line Elsewhere
+<!-- ## Leveraging the Command Line Elsewhere -->
 
-### Clipboard
+<!-- ### Clipboard -->
 
-yank
-pbcopy pbpaste
+<!-- yank -->
+<!-- pbcopy pbpaste -->
 
-when formatting emailadresses
+<!-- when formatting emailadresses -->
 
 
-### Apache Spark
-
-<!-- #TODO: Explain Spark in one or two sentences. Actions and Transformation -->
+## Apache Spark
 
 <!-- TODO: SHOULD include reference to spark and https://scala-lang.org/ -->
+<!-- https://spark.apache.org/docs/latest/rdd-programming-guide.html -->
+<!-- pipe(command, [envVars]) -->
 
-Spark is a ...
-Through a series of transformations, followed by an action, you build up a pipeline for data processing and machine learning.
-It's the system you want to turn to if you want to have you terabytes or petabytes of data.
+Apache Spark is a cluster-computing framework.
+It's the 800-pound gorilla you turn to when its impossible to fit your data in memory.
+Spark itself is written in Scala, but using PySpark and SparkR you can also interact with it using Python and R, respectively.
 
-pipe transformation
+Data processing and machine learning pipelines are defined through a series of transformations and one final action.
+One such transformation is the `pipe()` transformation, which allows you to run the entire dataset through a shell command such as a Bash or Perl script.
+The items in the dataset are written to standard input and the standard output is returned as an RDD of strings.
 
-I think it's interesting to see the author say that the pipe transformation is one of the more interesting ones.
-
-
-
-https://spark.apache.org/docs/latest/rdd-programming-guide.html
-pipe(command, [envVars])
- 	Pipe each partition of the RDD through a shell command, e.g. a Perl or bash script. RDD elements are written to the process's stdin and lines output to its stdout are returned as an RDD of strings.
-
-- result needs to be converted to integer explicitly
-- piping multiple commands is difficult (it's not a shell)
-- one item per line
+In the session below, I start a Spark shell and count the number of occurrences of *alice* in the book *Alice’s Adventures in Wonderland*.
 
 ```{console, remove=list("alias", "cache"), callouts=c("textFile", "flatMap", "grep", "wc", "res3", "toInt", "res5")}
 alias spark-shell=echo
@@ -270,36 +255,39 @@ cat /data/.cache/spark
 <3> Pipe each partition through `grep` to keep only the elements that match the string *alice*.
 <4> Pipe each partition through `wc` to count the number of elements.
 <5> There's one count for each partition.
-<6> Sum all counts to get a final count.
+<6> Sum all counts to get a final count. Note that elements first need to be converted from strings to integers.
 <7> The above steps combined into a single command.
 
+```{block2, type="rmdwarning"}
+The `pipe()` transformation is also available in PySpark and SparkR.
+```
 
-Also available in PySpark and
+<!-- https://stackoverflow.com/questions/54239583/question-about-rdd-pipe-operator-on-apache-spark -->
 
-https://stackoverflow.com/questions/54239583/question-about-rdd-pipe-operator-on-apache-spark
-It seems, after all, that the external script should be present on all executor nodes. One way to do this is to pass your script via spark-submit (e.g. --files script.sh) and then you should be able to refer that (e.g. "./script.sh") in rdd.pipe.
+If you want to use a custom command-line tool in your pipeline, then you need to make sure that it's present on all nodes in the cluster (known as the executors).
+One way to do this is to specify the filename(s) with the `--files` option when you're submitting Spark applications using `spark-submit`.
 
-
-### Julia
-
-<!-- #TODO: Figure out whether I think this section is necessary -->
-
-Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-commands.html
-
+Bill Chambers and Matei Zaharia (the original author of Spark) mention in their book *Spark: The Definitive Guide* that "[t]he `pipe` method is probably one of Spark's more interesting methods."
+I too find it interesting that the developers of Spark added the ability to leverage a 50-year old technology.
 
 
-### Other IDEs / Notable mensions
+<!-- ### Notable mentions -->
 
-- Visual Studio Code https://code.visualstudio.com/docs/editor/integrated-terminal
-- Emacs
-- VIM (using ! command)
-- OS: Guake,
-- OS: iTerm2:    https://www.sharmaprakash.com.np/guake-like-dropdown-terminal-in-mac/
+<!-- - Julia: Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-commands.html -->
+<!-- - Visual Studio Code https://code.visualstudio.com/docs/editor/integrated-terminal -->
+<!-- - Emacs -->
+<!-- - VIM (using ! command) -->
+<!-- - OS: Guake, -->
+<!-- - OS: iTerm2:    https://www.sharmaprakash.com.np/guake-like-dropdown-terminal-in-mac/ -->
+
+<!-- ## Other Combinations -->
+
+<!-- - reticulate -->
+<!-- - Rpy2 -->
+<!-- - sparkr -->
+<!-- - sparklyr -->
 
 
-## Other Combinations
-
-- reticulate
-- Rpy2
-- sparkr
-- sparklyr
+<!-- TODO: MUST: Write Summary or Conclusion -->
+<!-- # Summary -->
+<!-- TODO: MUST: Talk about other combinations between languages. This is already possible with this approah, but there are tighter integrations. -->
