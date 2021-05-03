@@ -125,7 +125,7 @@ You're better off creating a Bash script in a separate file, and then executing 
 
 <!-- TODO: Write out voice recordings -->
 
-## Python Scripts
+## Python
 
 The `subprocess` module allows you to run command-line tools from Python and connect to their standard input and output.
 This module is recommended over the older `os.system()` function.
@@ -155,25 +155,15 @@ This is also means that you don't have any other shell syntax available that wou
 
 
 
-## RStudio IDE
-
-The RStudio IDE is arguably the most popular environment for working with R.
 
 
-```{r rstudio-console, echo=FALSE, fig.cap="RStudio IDE with console tab open", fig.align="center"}
-knitr::include_graphics("images/screenshot_rstudio_console.png")
-```
+## R
 
-```{r rstudio-terminal, echo=FALSE, fig.cap="RStudio IDE with terminal tab open", fig.align="center"}
-knitr::include_graphics("images/screenshot_rstudio_terminal.png")
-```
+In R, there are several ways to leverage the command line.
 
+In the example below, I start an R session and count the number of occurrences of the string *alice* in the book *Alice’s Adventures in Wonderland* using the `system2()` function.
 
-
-
-## R Scripts
-
-```{console}
+```{console, callouts=c("readLines", "strsplit", "system2")}
 R --quiet
 lines <- readLines("alice.txt")
 head(lines)
@@ -183,27 +173,34 @@ alice <- system2("grep", c("-i", "alice"), input = words, stdout = TRUE)
 head(alice)
 length(alice)
 ```
+<1> Read in the file *alice.txt*
+<2> Split the text into words
+<3> Invoke the command-line tool `grep` to only keep the lines that match the string *alice*. The character vector *words* is passed as standard input.
+<4> Count the number of elements in the character vector *alice*
 
+A disadvantage of `system2()` is that it first writes the character vector to a file before passing it as standard input to the command-line tool.
+This can be problematic when dealing with a lot of data and a lot of invocations.
 
-```{console}
+It's better to use a named pipe, because then no data will be written to disk, which is much more efficient.
+This can be done with `pipe()` and `fifo()` functions. 
+Thanks to Jim Hester for suggesting this.
+The code below demonstrates this:
+
+```{console callouts=c("fifo", "grep", "writeLines", "readLines", "close")}
+out_con <- fifo("out", "w+")
 in_con <- pipe("grep b > out")
-out_con <- fifo("out")
 writeLines(c("foo", "bar"), in_con)
 readLines(out_con)
+close(out_con); close(in_con); unlink("out")
 ```
+<1> The function `fifo()` creates a special first-in-first-out file called *out*. This is just a reference to a pipe connection (like stdin and stdout are). No data is actually written to disk.
+<2> The tool `grep` will only keep lines that contain a *b* and write them the named pipe *out* .
+<3> Write two values to standard input of the shell command.
+<4> Read the standard output produces by `grep` as a character vector.
+<5> Clean up the connections and delete the special file
 
 
-```{console}
-writeLines(c("baz", "qux"), in_con)
-readLines(out_con)
-close(out_con);
-close(in_con)
-q("no")
-```
-
-Mention pipe and fread
-
-check out the processx package https://processx.r-lib.org/. experimental at the time of writing. but seems very promising to working with connections in a more robust manner.
+<!-- check out the processx package https://processx.r-lib.org/. experimental at the time of writing. but seems very promising to working with connections in a more robust manner. -->
 
 
 <!-- # all four options are executed in a shell.  -->
@@ -228,6 +225,52 @@ check out the processx package https://processx.r-lib.org/. experimental at the 
 <!-- when formatting emailadresses -->
 
 
+Because this requires quite a bit of boilerplate code (creating connections, writing, reading, cleaning up), I have written a helper function `sh()`. 
+Using the pipe operator (`%>%`) from the `magrittr` package I chain together multiple shell commands.
+
+```{console}
+library(magrittr)
+
+sh <- function(.data, command) {
+  temp_file <- tempfile()
+  out_con <- fifo(temp_file, "w+")
+  in_con <- pipe(paste0(command, " > ", temp_file))
+  writeLines(as.character(.data), in_con)
+  result <- readLines(out_con)
+  close(out_con)
+  close(in_con)
+  unlink(temp_file)
+  result
+}
+
+lines <- readLines("alice.txt")
+words <- unlist(strsplit(lines, " "))
+
+sh(words, "grep -i alice") %>%
+  sh("wc -l") %>%
+  sh("cowsay") %>%
+  cli::cat_boxx()
+q("no")
+```
+
+
+## RStudio
+
+The RStudio IDE is arguably the most popular environment for working with R.
+When you open RStudio, you will first see the console tab:
+
+```{r rstudio-console, echo=FALSE, fig.cap="RStudio IDE with console tab open", fig.align="center"}
+knitr::include_graphics("images/screenshot_rstudio_console.png")
+```
+
+The terminal tab is right next to the console tab.
+If offers a complete shell:
+
+```{r rstudio-terminal, echo=FALSE, fig.cap="RStudio IDE with terminal tab open", fig.align="center"}
+knitr::include_graphics("images/screenshot_rstudio_terminal.png")
+```
+
+
 ## Apache Spark
 
 <!-- TODO: SHOULD include reference to spark and https://scala-lang.org/ -->
@@ -236,13 +279,13 @@ check out the processx package https://processx.r-lib.org/. experimental at the 
 
 Apache Spark is a cluster-computing framework.
 It's the 800-pound gorilla you turn to when its impossible to fit your data in memory.
-Spark itself is written in Scala, but using PySpark and SparkR you can also interact with it using Python and R, respectively.
+Spark itself is written in Scala, but you can also interact with it from Python using [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) and from R using [SparkR](https://spark.apache.org/docs/latest/sparkr.html) or [sparklyr](https://spark.rstudio.com/).
 
 Data processing and machine learning pipelines are defined through a series of transformations and one final action.
 One such transformation is the `pipe()` transformation, which allows you to run the entire dataset through a shell command such as a Bash or Perl script.
 The items in the dataset are written to standard input and the standard output is returned as an RDD of strings.
 
-In the session below, I start a Spark shell and count the number of occurrences of *alice* in the book *Alice’s Adventures in Wonderland*.
+In the session below, I start a Spark shell and again count the number of occurrences of *alice* in the book *Alice’s Adventures in Wonderland*.
 
 ```{console, remove=list("alias", "cache"), callouts=c("textFile", "flatMap", "grep", "wc", "res3", "toInt", "res5")}
 alias spark-shell=echo
@@ -259,7 +302,7 @@ cat /data/.cache/spark
 <7> The above steps combined into a single command.
 
 ```{block2, type="rmdwarning"}
-The `pipe()` transformation is also available in PySpark and SparkR.
+The `pipe()` transformation is also available in PySpark, SparkR, and sparklyr.
 ```
 
 <!-- https://stackoverflow.com/questions/54239583/question-about-rdd-pipe-operator-on-apache-spark -->
@@ -267,8 +310,9 @@ The `pipe()` transformation is also available in PySpark and SparkR.
 If you want to use a custom command-line tool in your pipeline, then you need to make sure that it's present on all nodes in the cluster (known as the executors).
 One way to do this is to specify the filename(s) with the `--files` option when you're submitting Spark applications using `spark-submit`.
 
-Bill Chambers and Matei Zaharia (the original author of Spark) mention in their book *Spark: The Definitive Guide* that "[t]he `pipe` method is probably one of Spark's more interesting methods."
-I too find it interesting that the developers of Spark added the ability to leverage a 50-year old technology.
+Matei Zaharia and Bill Chambers (the original author of Apache Spark) mention in their book *Spark: The Definitive Guide* that "[t]he `pipe` method is probably one of Spark's more interesting methods."
+That's quite the compliment!
+I think it's fantastic that the developers of Apache Spark added the ability to leverage a 50-year old technology.
 
 
 <!-- ### Notable mentions -->
