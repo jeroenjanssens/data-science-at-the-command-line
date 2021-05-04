@@ -62,7 +62,7 @@ ch%: book/2e/%.utf8.md
 book/2e/atlas/ch%.asciidoc: book/2e/%.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
-asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch11.asciidoc
+asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch09.asciidoc book/2e/atlas/ch10.asciidoc book/2e/atlas/ch11.asciidoc
 
 sync-atlas: asciidoc
 	@cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
