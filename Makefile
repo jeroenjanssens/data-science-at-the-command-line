@@ -1,4 +1,4 @@
-.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc hugo
+.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc hugo lab
 .SUFFIXES:
 
 .ONESHELL:
@@ -105,3 +105,6 @@ ref-tools-per-chapter:
 
 
 ref-check: ref-text-duplicate-per-chapter
+
+lab:
+	docker run --rm -it -p 8888:8888 -p 4040:4040 -v "$$(pwd)":/opt/notebooks jupyter/pyspark-notebook:42f4c82a07ff /bin/bash -c "/opt/conda/bin/jupyter lab --notebook-dir=/opt/notebooks --ip='0.0.0.0' --port=8888 --no-browser --allow-root"
