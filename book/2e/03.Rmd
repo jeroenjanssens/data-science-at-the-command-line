@@ -34,6 +34,8 @@ cd /data/ch03
 l
 ```
 
+
+
 ## Copying Local Files to the Data Science Toolbox
 
 A common situation is that you already have the necessary files on your own computer.

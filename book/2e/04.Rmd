@@ -403,3 +403,7 @@ Let's test both tools:
 seq 20 | fizzbuzz.py
 seq 20 | fizzbuzz.R
 ```
+
+<!-- TODO: Add summary / conclusion -->
+
+<!-- Maybe add reference to https://github.com/modernish/modernish -->

@@ -232,6 +232,7 @@ close(out_con); close(in_con); unlink("out")
 Because this requires quite a bit of boilerplate code (creating connections, writing, reading, cleaning up), I have written a helper function `sh()`.
 Using the pipe operator (`%>%`) from the `magrittr` package I chain together multiple shell commands.
 
+
 ```{console}
 library(magrittr)
 
@@ -331,7 +332,9 @@ I think it's fantastic that the developers of Apache Spark added the ability to 
 <!-- - VIM (using ! command) -->
 <!-- - OS: Guake, -->
 <!-- - OS: iTerm2:    https://www.sharmaprakash.com.np/guake-like-dropdown-terminal-in-mac/ -->
-
+https://github.com/shelljs/shelljs
+https://amoffat.github.io/sh/
+https://plumbum.readthedocs.io/en/latest/
 <!-- ## Other Combinations -->
 
 <!-- - reticulate -->
