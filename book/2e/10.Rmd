@@ -116,7 +116,7 @@ knitr::include_graphics("images/screenshot_jupyterlab.png")
 ```
 
 
-```{block2, type="rmdwarning"}
+```{block2, type="rmdcaution"}
 This notebook in the screenshot also contains a cell using so-called `%%bash` magic, which allows you to write multi-line Bash scripts.
 Because it's much more difficult to use Python variables, I don't recommend this approach.
 You're better off creating a Bash script in a separate file, and then executing it by using the exclamation mark (`!`).
@@ -163,6 +163,10 @@ In R, there are several ways to leverage the command line.
 
 In the example below, I start an R session and count the number of occurrences of the string *alice* in the book *Alice’s Adventures in Wonderland* using the `system2()` function.
 
+```{r, include=FALSE}
+# set_prompt(engine$session, prompts$R)
+```
+
 ```{console, callouts=c("readLines", "strsplit", "system2")}
 R --quiet
 lines <- readLines("alice.txt")
@@ -182,7 +186,7 @@ A disadvantage of `system2()` is that it first writes the character vector to a 
 This can be problematic when dealing with a lot of data and a lot of invocations.
 
 It's better to use a named pipe, because then no data will be written to disk, which is much more efficient.
-This can be done with `pipe()` and `fifo()` functions. 
+This can be done with `pipe()` and `fifo()` functions.
 Thanks to Jim Hester for suggesting this.
 The code below demonstrates this:
 
@@ -225,34 +229,38 @@ close(out_con); close(in_con); unlink("out")
 <!-- when formatting emailadresses -->
 
 
-Because this requires quite a bit of boilerplate code (creating connections, writing, reading, cleaning up), I have written a helper function `sh()`. 
+Because this requires quite a bit of boilerplate code (creating connections, writing, reading, cleaning up), I have written a helper function `sh()`.
 Using the pipe operator (`%>%`) from the `magrittr` package I chain together multiple shell commands.
 
 ```{console}
 library(magrittr)
 
-sh <- function(.data, command) {
-  temp_file <- tempfile()
-  out_con <- fifo(temp_file, "w+")
-  in_con <- pipe(paste0(command, " > ", temp_file))
-  writeLines(as.character(.data), in_con)
-  result <- readLines(out_con)
-  close(out_con)
-  close(in_con)
-  unlink(temp_file)
-  result
+sh <- function(.data, command) {#! expect_prompt=FALSE
+  temp_file <- tempfile()#! expect_prompt=FALSE
+  out_con <- fifo(temp_file, "w+")#! expect_prompt=FALSE
+  in_con <- pipe(paste0(command, " > ", temp_file))#! expect_prompt=FALSE
+  writeLines(as.character(.data), in_con)#! expect_prompt=FALSE
+  result <- readLines(out_con)#! expect_prompt=FALSE
+  close(out_con)#! expect_prompt=FALSE
+  close(in_con)#! expect_prompt=FALSE
+  unlink(temp_file)#! expect_prompt=FALSE
+  result#! expect_prompt=FALSE
 }
 
 lines <- readLines("alice.txt")
 words <- unlist(strsplit(lines, " "))
 
-sh(words, "grep -i alice") %>%
-  sh("wc -l") %>%
-  sh("cowsay") %>%
+sh(words, "grep -i alice") %>%#! expect_prompt=FALSE
+  sh("wc -l") %>%#! expect_prompt=FALSE
+  sh("cowsay") %>%#! expect_prompt=FALSE
   cli::cat_boxx()
-q("no")
+
+q("no")#! expect_prompt=FALSE
 ```
 
+```{r, include=FALSE}
+# set_prompt(engine$session, prompts$bash)
+```
 
 ## RStudio
 
@@ -301,7 +309,7 @@ cat /data/.cache/spark
 <6> Sum all counts to get a final count. Note that elements first need to be converted from strings to integers.
 <7> The above steps combined into a single command.
 
-```{block2, type="rmdwarning"}
+```{block2, type="rmdtip"}
 The `pipe()` transformation is also available in PySpark, SparkR, and sparklyr.
 ```
 
