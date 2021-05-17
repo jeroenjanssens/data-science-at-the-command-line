@@ -60,17 +60,14 @@ sed -re 's/\s+//'
 echo ' hello     world!' |\
 sed -re 's/hello/bye/;s/\s+/ /g;s/\s+//'
 echo -e "value\n7\n2\n5\n3" | body sort -n
-bat $(which body)
 seq 5 | header -a count
 seq 5 | header -a count | wc -l
 seq 5 | header -a count | body wc -l
-bat $(which header)
 < tips.csv header
 seq 5 | header -a count
 < iris.csv header -d | trim
 seq 5 | header -a line | body wc -l | header -r count
 seq 5 | header -a line | header -e "tr '[a-z]' '[A-Z]'"
-bat $(which cols)
 < tips.csv cols -c day body "tr '[a-z]' '[A-Z]'" | head -n 5 | csvlook
 seq 5 | header -a value | csvsql --query "SELECT SUM(value) AS sum FROM stdin"
 < iris.csv csvcut -c sepal_length,petal_length,sepal_width,petal_width | csvlook

@@ -1,0 +1,8 @@
+cd /data/ch10
+l
+cat /data/.cache/jupyter-console
+bat count.py
+./count.py alice.txt alice
+R --quiet
+alias spark-shell=echo
+cat /data/.cache/spark

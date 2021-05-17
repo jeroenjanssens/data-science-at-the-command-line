@@ -106,7 +106,7 @@ Now you're ready to use `rush` to create a bar chart.
 rush plot -x value -y count --geom col fb.csv > fb.png
 display fb.png
 ```
-```{r fb_image, echo=FALSE, fig.cap="Counting fizz, buzz, and fizzbuzz.", fig.align="center", out.width="90%"}
+```{r fb_image, echo=FALSE, fig.cap="Counting fizz, buzz, and fizzbuzz", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/fb.png")
 ```
 
@@ -475,13 +475,6 @@ echo -e "value\n7\n2\n5\n3" | body sort -n
 ```
 
 It assumes that the header of the CSV file only spans one row.
-Here’s the source code for completeness:
-
-<!-- #TODO: Annotate body -->
-```{console}
-bat $(which body)
-```
-
 It works like this:
 
 - Take one line from standard in and store it as a variable named *\$header*.
@@ -510,12 +503,6 @@ seq 5 | header -a count | body wc -l
 Note that the header is not used and is also printed again in the output.
 
 The second command-line tool, `header` allows you to manipulate the header of a CSV file.
-The complete source code is as follows:
-
-```{console}
-bat $(which header)
-```
-
 If no arguments are provided, the header of the CSV file is printed:
 
 ```{console}
@@ -552,12 +539,6 @@ seq 5 | header -a line | header -e "tr '[a-z]' '[A-Z]'"
 ```
 
 The third command-line tool is called `cols`, which allows you to apply a certain command to only a subset of the columns.
-The code is as follows:
-
-```{console}
-bat $(which cols)
-```
-
 For example, if you wanted to uppercase the values in the day column in the tips data set (without affecting the other columns and the header), you would use `cols` in combination with `body`, as follows:
 
 ```{console}
@@ -894,7 +875,7 @@ Like many other command-line tools, `sed` does not make use of the structure of 
 Better is to either use a tool that makes use of the structure of the data (such as `jq` which I discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.
 
 I'm going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case.
-The command-line tools that I’ll be using here are: `curl`, `scrape` [@scrape], `xml2json` [@xml2json], `jq` [@jq], and `json2csv` [@json2csv].
+The command-line tools that I’ll be using here are: `curl`, `scrape` [@scrape], `xml2json` [@xml2json], `jq` and `json2csv` [@json2csv].
 
 Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets.
 For example, [this page](http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio) contains a list of countries and territories together with their border length, their area, and the ration between the two.

@@ -1,3 +1,14 @@
+---
+suppress-bibliography: true
+---
+
+```{console setup_history, include=FALSE}
+ export CHAPTER="09"
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
+```
+
+
 # Modeling Data {#chapter-9-modeling-data}
 
 In this chapter we’re going to perform the fourth and last step of the OSEMN model that we can do on a computer: modeling data.
@@ -18,7 +29,7 @@ These algorithms come from the field of machine learning.
 As such, I'm going to change the vocabulary a bit.
 Let’s assume that I have a CSV file, also known as a *dataset*.
 Each row, except for the header, is considered to be a *data point*.
-Each data point has one or more *features*; properties that have been measured. 
+Each data point has one or more *features*; properties that have been measured.
 Sometimes, a data point also has a *label*; which is, generally speaking, a judgment.
 This becomes more concrete when I introduce the wine dataset below.
 
@@ -31,7 +42,7 @@ That implies that I must skim over many details.
 My general advise is that you become familiar with an algorithm before applying it blindly to your data.
 ```
 
-## Overview 
+## Overview
 
 In this chapter, you’ll learn how to:
 
@@ -47,7 +58,7 @@ l
 ```
 
 
-## More Wine Please! 
+## More Wine Please!
 
 In this chapter, I’ll be using a dataset of wine tastings.
 Specifically, red and white Portuguese "Vinho Verde" wine.
@@ -65,20 +76,20 @@ C-C#!literal=FALSE
 
 The triple colon is just another way to pass data to `parallel`.
 
-```{console cp_cache_wine, include=FALSE}
+```{console cp_cache_wine}
 cp /data/.cache/wine-*.csv .
 ```
 
 Let’s inspect both files using and count the number of lines:
 
 ```{console, callouts=c(1, 2)}
-< wine-red.csv | nl |
+< wine-red.csv nl |
 fold |
 trim
-< wine-white.csv | nl | fold | trim
+< wine-white.csv nl | fold | trim
 wc -l wine-{red,white}.csv
 ```
-<1> For clarity I use `nl` to add line numbers
+<1> For clarity I use `nl`[@nl] to add line numbers
 <2> To see the entire header, I use `fold`
 
 At first sight this data appears to be quite clean.
@@ -136,13 +147,13 @@ rush plot --x alcohol --y quality --color type --geom smooth wine.csv > wine-alc
 display wine-alcohol-vs-quality.png
 ```
 ```{r plot_wine_alchohol_vs_quality, echo=FALSE, fig.cap="Correlation between the alcohol contents of wine and its quality", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/wine-alchohol-vs-quality.png")
+knitr::include_graphics("images/wine-alcohol-vs-quality.png")
 ```
 
 Eureka! Ahem, let’s carry on with some modeling, shall we?
 
-    
-## Dimensionality Reduction with Tapkee 
+
+## Dimensionality Reduction with Tapkee
 
 The goal of dimensionality reduction is to map high-dimensional data points onto a lower dimensional mapping.
 The challenge is to keep similar data points close together on the lower-dimensional mapping.
@@ -160,7 +171,7 @@ This means that they don’t employ the labels of the data points in order to co
 In this section I’ll look at two techniques: PCA, which stands for Principal Components Analysis [@Pearson1901] and t-SNE, which stands for t-distributed Stochastic Neighbor Embedding [@van2008visualizing].
 
 
-### Introducing Tapkee 
+### Introducing Tapkee
 
 Tapkee is a C++ template library for dimensionality reduction [@Lisitsyn2013].
 The library contains implementations of many dimensionality reduction algorithms, including:
@@ -172,18 +183,18 @@ The library contains implementations of many dimensionality reduction algorithms
 - t-SNE
 
 More information about these algorithms can be found on [Tapkee’s website](http://tapkee.lisitsyn.me/).
-Although Tapkee is mainly a library that can be included in other applications, it also offers a command-line tool `tapkee`[@tapkee].
+Although Tapkee is mainly a library that can be included in other applications, it also offers a command-line tool `tapkee`.
 I’ll use this to perform dimensionality reduction on our wine dataset.
 
 
-### Linear and Non-linear Mappings 
+### Linear and Non-linear Mappings
 
 First, I’ll scale the features using standardization such that each feature is equally important.
 This generally leads to better results when applying machine learning algorithms.
 
 To scale I use `rush` and the `tidyverse` package.
 
-```{console callouts=2:5)
+```{console, callouts=c(2:5)}
 rush run --tidyverse --output wine-scaled.csv \
 'select(df, -type) %>%
 scale() %>%
@@ -215,7 +226,7 @@ tee wine-pca.csv | csvlook
 
 
 ```{console plot_pca}
-rush plot --x pc1 --y pc2 --color type wine-both-pca.csv > wine-pca.png
+rush plot --x pc1 --y pc2 --color type wine-pca.csv > wine-pca.png
 display wine-pca.png
 ```
 ```{r, echo=FALSE, fig.cap="Linear dimensionality reduction with PCA", fig.align="center", out.width="90%"}
@@ -324,8 +335,8 @@ So, the predictions are on average about 0.6 points off.
 Using `rush`, I visualize the correlation between the observed values and the predicted values:
 
 ```{console}
-< results.csv | header -a "predicted,observed" |
-rush plot --x observed --y predicted --geom smooth > wine-regression.png
+< results.csv header -a "predicted,observed" |
+rush plot --x observed --y predicted --geom jitter > wine-regression.png
 display wine-regression.png
 ```
 ```{r, echo=FALSE, fig.cap="Regression with Vowpal Wabbit", fig.align="center", out.width="90%"}
@@ -334,13 +345,13 @@ knitr::include_graphics("images/wine-regression.png")
 
 
 
-## Classification with SciKit-Learn Laboratory 
+## Classification with SciKit-Learn Laboratory
 
 <!-- TODO: Explain SKLL better -->
 
-In this section I'm going to classify wines as either red or wine. 
+In this section I'm going to classify wines as either red or wine.
 I’ll be using SciKit-Learn Laboratory (SKLL) for this.
-SKLL is a Python package that provides the `run_experiment` command-line tool. 
+SKLL is a Python package that provides the `run_experiment` command-line tool.
 I have aliased this to `skll` because I find it easier to remember as it corresponds to the package name:
 
 ```{console skll_alias}
@@ -349,7 +360,7 @@ skll
 ```
 
 
-### Preparing the Data 
+### Preparing the Data
 
 
 <!-- However, in this example, I'm going to use cross-validation, meaning that I only need to specify a training dataset. -->
@@ -369,12 +380,12 @@ wine-red-clean.csv \
 <(< wine-white-clean.csv body shuf | head -n $NUM_RED) |
 body shuf |
 nl -s, -w1 -v0 |
-sed '1s/0,/id,/' | 
+sed '1s/0,/id,/' |
 tee wine-balanced.csv | csvlook | trim
 ```
 <1> Store the number of red wines in variable *NUM_RED*
 <2> Combine all red wines with a random sample of white wines.
-<3> Add "line numbers" using `nl` [@nl] in front of each line
+<3> Add "line numbers" using `nl` in front of each line
 <4> Replace the "0" on the first line with "id" so that it's a proper column
 
 Let's split this balanced dataset into a training set and a test set:
@@ -390,7 +401,7 @@ wc -l t*/features.csv
 ```
 
 
-### Running the Experiment 
+### Running the Experiment
 
 <!-- TODO: Annotate configuration file -->
 
@@ -400,10 +411,10 @@ Create a configuration file called *predict-quality.cfg*:
 bat classify.cfg
 ```
 
-I run the experiment using `skull`:
+I run the experiment using `skll`:
 
 ```{console skll}
-skll -l classify.cfg
+skll -l classify.cfg 2>/dev/null
 ```
 
 The option`-l` specifies to run in local mode.
@@ -411,7 +422,7 @@ The option`-l` specifies to run in local mode.
 The time it takes to run an experiment depends on the complexity of the chosen algorithms and the size of the data.
 
 
-### Parsing the Results 
+### Parsing the Results
 
 Once all algorithms are done, the results can now be found in the directory *output*:
 
@@ -438,9 +449,8 @@ jq -r '.[] | "\(.learner_name):\n\(.result_table)\n"' output/*.json
 ```
 
 
-## Further Reading 
+## Further Reading
 
 * Cortez, P., A. Cerdeira, F. Almeida, T. Matos, and J. Reis. 2009. “Modeling Wine Preferences by Data Mining from Physicochemical Properties.” <em>Decision Support Systems</em> 47 (4). Elsevier:547–53.
 * Pearson, K. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2 (11):559–72.
 * Maaten, Laurens van der, and Geoffrey Everest Hinton. 2008. “Visualizing Data Using T-SNE.” <em>Journal of Machine Learning Research</em> 9:2579–2605.
-

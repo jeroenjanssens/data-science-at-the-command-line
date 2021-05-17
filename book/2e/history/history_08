@@ -5,7 +5,7 @@ for i in {0..100..2}  #<1> <2>\
 do\
 echo "$i^2" | bc      #<3>\
 done | trim
-curl -s "https://randomuser.me/api/1.2/?results=5" > users.json
+curl -s "https://randomuser.me/api/1.2/?results=5&seed=dsatcl2e" > users.json
 < users.json jq -r '.results[].email' > emails
 bat emails
 while read line                         #<1>\
@@ -17,12 +17,101 @@ for chapter in /data/*\
 do\
 echo "Processing Chapter ${chapter}."\
 done
-find /data -type d -name 'ch*' -exec echo "Processing chapter {}" \;
+find /data -type f -name '*.csv' -size -2k
 bat slow.sh
 for i in {A..C}; do\
 ./slow.sh $i &\
 done
-parallel --version | head -n 1
+seq 0 2 100 | parallel "echo {}^2 | bc" | trim
+parallel --jobs 2 ./slow.sh ::: {A..C}
+parallel --jobs 1 --keep-order cowsay ::: 1 2 3
+cowsay 1 > /dev/null #<1>
+cowsay 2 > /dev/null
+cowsay 3 > /dev/null
+seq 3 | parallel cowsay {} > /dev/null
+find /data/ch03 -type f | parallel echo '{#}\) File \"{}\" has basename \"{/}\"'
+touch input.csv
+seq 5 | parallel -j0 "echo Hi {}"
+seq 5 | parallel -j200% "echo Hi {}"
+seq 5 | parallel "echo \"Hi {}\" > hi-{}.txt"
+seq 5 | parallel "echo Hi {}" >> one-big-file.txt
+seq 5 | parallel --results outdir "echo Hello from job {}"
+tree outdir
+seq 5 | parallel --tag "echo 'sqrt({})' | bc -l"
+parallel --tag --keep-order "echo '{1}*{2}' | bc -l" ::: 3 4 ::: 5 6 7
 bat $(which pbc)
 seq 100 | pbc '{1}^2' | trim
 paste -d, <(seq 4) <(seq 4) <(seq 4) | pbc 'sqrt({1}+{2})^{3}'
+echo '{'
+echo '  "state": "running",'
+echo '  "public_dns": "ec2-54-88-122-140.compute-1.amazonaws.com"'
+echo '}'
+echo '{'
+echo '  "state": "stopped",'
+echo '  "public_dns": null'
+echo '}'
+echo 'ec2-54-88-122-140.compute-1.amazonaws.com'
+echo 'ec2-54-88-89-208.compute-1.amazonaws.com'
+echo 'ip-172-31-23-204'
+echo 'ip-172-31-23-205'
+echo 'data-science-toolbox'
+alias fake=echo
+fake 'bash: parallel: command not found'
+fake -n 'parallel: Warning: Could not figure out number of cpus on' &&\
+fake ' ec2-54-88-122-140.compute-1.amazonaws.com (). Using 1.'
+fake '1'
+fake '2'
+echo 'ip-172-31-23-204:100'
+echo 'ip-172-31-23-205:100'
+echo 'ip-172-31-23-205:100'
+echo 'ip-172-31-23-204:100'
+echo 'ip-172-31-23-205:100'
+echo 'ip-172-31-23-204:100'
+echo 'ip-172-31-23-205:100'
+echo 'ip-172-31-23-204:100'
+echo 'ip-172-31-23-205:100'
+echo 'ip-172-31-23-204:100'
+echo '500500'
+seq 1000 | paste -sd+ | bc
+echo '#!/usr/bin/env bash' > add
+echo 'paste -sd+ | bc' >> add
+bat add
+chmod u+x add
+seq 1000 | ./add
+seq 1000 |\
+parallel -N100 --basefile add --pipe --slf hostnames './add' |
+echo '500500'
+seq 0 100 900 | parallel  "curl -sL 'http://data.cityofnewyork.us/resource/erm2-nwe9.json?\$limit=100&\$offset={}' | jq -c '.[]' | gzip > nyc-{#}.json.gz"
+l nyc*json.gz
+zcat nyc-1.json.gz | trim
+zcat nyc-1.json.gz | head -n 1
+zcat nyc*json.gz |\
+jq -r '.borough' |\
+tr '[A-Z] ' '[a-z]_' |\
+sort | uniq -c | sort -nr |\
+awk '{print $2","$1}' |\
+header -a borough,count |\
+csvlook
+ls *.json.gz |\
+parallel -v --basefile jq \\
+--trc {.}.csv \\
+--slf hostnames \
+ls *.json.gz |\
+parallel -v --basefile jq \\
+--trc {.}.csv \\
+--sshlogin : \\
+"zcat {} | jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{print \$2\",\"\$1}' > {.}.csv"
+echo 'nyc-1.json.csv'
+echo 'nyc-1.json.gz'
+echo 'jq'
+echo 'bronx,3'
+echo 'brooklyn,5'
+echo 'manhattan,24'
+echo 'queens,3'
+echo 'staten_island,2'
+cat nyc*csv | header -a borough,count |\
+rush run -t 'group_by(df, borough) %>% summarize(count = sum(count))' - |\
+csvsort -rc count | csvlook
+cat nyc*csv | header -a borough,count |\
+csvsql --query 'SELECT borough, SUM(count) AS count FROM stdin GROUP BY borough ORDER BY count DESC' |\
+csvlook
