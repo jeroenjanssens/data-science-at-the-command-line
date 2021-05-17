@@ -1,5 +1,0 @@
-alice
-cat
-hat
-csv
-world
