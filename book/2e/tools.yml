@@ -1,0 +1,1111 @@
+alias:
+  description: Define or display aliases
+  builtin: true
+  example: |
+    alias l
+    alias python=python3
+  help: man zshbuiltins | grep -A 10 alias
+
+awk:
+  author:
+  - Mike D. Brennan
+  - Thomas E. Dickey
+  bib_title: '{awk} -- Pattern scanning and text processing language'
+  cite: true
+  description: Pattern scanning and text processing language
+  url: https://invisible-island.net/mawk
+  version: 1.3.4
+  year: 2019
+  example: seq 5 | awk '{sum+=$1} END {print sum}'
+  help: man
+
+aws:
+  author:
+  - Amazon Web Services
+  bib_title: '{aws} -- Unified tool to manage {AWS} services'
+  cite: true
+  description: Unified tool to manage AWS services
+  url: https://aws.amazon.com/cli
+  version: 2.1.32
+  year: 2021
+  help: --help
+
+bash:
+  author:
+  - Brian Fox
+  - Chet Ramey
+  bib_title: '{bash} -- {GNU Bourne-Again SHell}'
+  cite: true
+  description: GNU Bourne-Again SHell
+  url: https://www.gnu.org/software/bash
+  version: 5.0.17
+  year: 2019
+  help: man
+
+bat:
+  author:
+  - David Peter
+  bib_title: '{bat} -- A {cat} clone with syntax highlighting and Git integration'
+  cite: true
+  description: A cat clone with syntax highlighting and Git integration
+  url: https://github.com/sharkdp/bat
+  version: 0.18.0
+  year: 2021
+  help: man
+
+bc:
+  author:
+  - Philip A. Nelson
+  bib_title: '{bc} -- An arbitrary precision calculator language'
+  cite: true
+  description: An arbitrary precision calculator language
+  url: https://www.gnu.org/software/bc
+  version: 1.07.1
+  year: 2017
+  help: man
+  example: bc -l <<< 'e(1)'
+
+body:
+  author:
+  - Jeroen Janssens
+  bib_title: '{body} -- Apply command to all but the first line'
+  cite: true
+  description: Apply command to all but the first line
+  url: https://github.com/jeroenjanssens/dsutils
+  version: '0.1'
+  year: 2021
+  example: seq 10 | header -a 'values' | body shuf
+
+cat:
+  author:
+  - Torbjorn Granlund
+  - Richard M. Stallman
+  bib_title: '{cat} -- Concatenate files and print on the standard output'
+  cite: true
+  description: Concatenate files and print on the standard output
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2018
+  help: man
+  example: |
+    cat *.log > all.log#!enter=FALSE
+    C-C#!literal=FALSE
+
+cd:
+  description: Change the shell working directory
+  builtin: true
+  help: man zshbuiltins | grep -A 10 cd
+  example: |
+    cd ~
+    pwd
+    cd ..
+    pwd
+    cd /data/ch01
+
+chmod:
+  author:
+  - David MacKenzie
+  - Jim Meyering
+  bib_title: '{chmod} -- Change file mode bits'
+  cite: true
+  description: Change file mode bits
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2018
+  example: |
+    chmod u+x script.sh#!enter=FALSE
+    C-C#!literal=FALSE
+  help: man
+  note: I use `chmod` in Chapter 4 to make a tool executable
+
+cols:
+  author:
+  - Jeroen Janssens
+  bib_title: '{cols} -- Apply command to subset of columns'
+  cite: true
+  description: Apply command to subset of columns
+  url: https://github.com/jeroenjanssens/dsutils
+  version: '0.1'
+  year: 2021
+
+cowsay:
+  author:
+  - Tony Monroe
+  bib_title: '{cowsay} -- Configurable speaking cow'
+  cite: true
+  description: Configurable speaking cow
+  url: https://github.com/tnalpgge/rank-amateur-cowsay
+  version: 3.0.3
+  year: 1999
+  help: man
+  example: echo 'The command line is awesome!' | cowsay
+
+cp:
+  author:
+  - Torbjorn Granlund
+  - David MacKenzie
+  - Jim Meyering
+  bib_title: '{cp} -- Copy files and directories'
+  cite: true
+  description: Copy files and directories
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2018
+  help: man
+  example: |
+    cp -r ~/Downloads/*.xlsx /data#!enter=FALSE
+    C-C#!literal=FALSE
+
+csvcut:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvcut} -- Filter and truncate {CSV} files'
+  cite: true
+  description: Filter and truncate CSV files
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+  example: csvcut -c bill,tip /data/ch05/tips.csv | trim
+
+csvgrep:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvgrep} -- Search {CSV} files'
+  cite: true
+  description: Search CSV files
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+csvjoin:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvjoin} -- Execute a {SQL}-like join to merge {CSV} files on a specified
+    column or columns'
+  cite: true
+  description: Execute a SQL-like join to merge CSV files on a specified column or
+    columns
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+csvlook:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvlook} -- Render a {CSV} file in the console as a Markdown-compatible,
+    fixed-width table'
+  cite: true
+  description: Render a CSV file in the console as a Markdown-compatible, fixed-width
+    table
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+  example: |
+    csvlook /data/ch05/tips.csv
+
+csvquote:
+  author:
+  - Dan Brown
+  bib_title: '{csvquote} -- Enable common unix utlities to work correctly with {CSV}
+    data'
+  cite: true
+  description: Enable common unix utlities to work correctly with CSV data
+  url: https://github.com/dbro/csvquote
+  version: '0.1'
+  year: 2018
+
+csvsort:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvsort} -- Sort {CSV} files'
+  cite: true
+  description: Sort CSV files
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+csvsql:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvsql} -- Execute {SQL} statements on {CSV} files'
+  cite: true
+  description: Execute SQL statements on CSV files
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+csvstack:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvstack} -- Stack up the rows from multiple {CSV} files'
+  cite: true
+  description: Stack up the rows from multiple CSV files
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+csvstat:
+  author:
+  - Christopher Groskopf
+  bib_title: '{csvstat} -- Print descriptive statistics for each column in a {CSV}
+    file'
+  cite: true
+  description: Print descriptive statistics for each column in a CSV file
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+curl:
+  author:
+  - Daniel Stenberg
+  bib_title: '{curl} -- Transfer a {URL}'
+  cite: true
+  description: Transfer a URL
+  url: https://curl.haxx.se
+  version: 7.68.0
+  year: 2016
+  help: man
+
+cut:
+  author:
+  - David M. Ihnat
+  - David MacKenzie
+  - Jim Meyering
+  bib_title: '{cut} -- Remove sections from each line of files'
+  cite: true
+  description: Remove sections from each line of files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+
+display:
+  author:
+  - ImageMagick Studio LLC
+  bib_title: '{display} -- Displays an image or image sequence on any {X} server'
+  cite: true
+  description: Displays an image or image sequence on any X server
+  url: https://imagemagick.org
+  version: 6.9.10-23
+  year: 2019
+
+dseq:
+  author:
+  - Jeroen Janssens
+  bib_title: '{dseq} -- Generate sequence of dates'
+  cite: true
+  description: Generate sequence of dates
+  url: https://github.com/jeroenjanssens/dsutils
+  version: '0.1'
+  year: 2021
+  example: |
+    dseq 3
+
+echo:
+  author:
+  - Brian Fox
+  - Chet Ramey
+  bib_title: '{echo} -- Display a line of text'
+  cite: true
+  description: Display a line of text
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  note: Useful for using literal text as standard input to the next tool
+  help: man
+  example: |
+    echo Hippopotomonstrosesquippedaliophobia | cowsay
+    echo -n Hippopotomonstrosesquippedaliophobia | wc -c
+
+env:
+  author:
+  - Richard Mlynarik
+  - David MacKenzie
+  - Assaf Gordon
+  bib_title: '{env} -- Run a program in a modified environment'
+  cite: true
+  description: Run a program in a modified environment
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2018
+  help: man
+
+export:
+  description: "Set export attribute for shell variables. Useful for making shell variables available to other command-line tools."
+  builtin: true
+  help: man zshbuiltins | grep -A 10 export
+  example: |
+    export PATH="$PATH:$HOME/bin"
+
+find:
+  author:
+  - Eric B. Decker
+  - James Youngman
+  - Kevin Dalley
+  bib_title: '{find} -- Search for files in a directory hierarchy'
+  cite: true
+  description: Search for files in a directory hierarchy
+  url: https://www.gnu.org/software/findutils
+  version: 4.7.0
+  year: 2019
+  example: |
+    find /data -type f -name '*.csv' -size -3
+  help: man
+
+for:
+  description: "Execute commands for each member in a list. In Chapter 8, I discuss the advantages of using `parallel` instead of `for`."
+  help: man zshmisc | grep -EA 10 '^ *for '
+  example: |
+    for i in {A..C} "It's easy as" {1..3}; do echo $i; done
+
+fx:
+  author:
+  - Anton Medvedev
+  bib_title: '{fx} -- Interactive {JSON} viewer'
+  cite: true
+  description: Interactive JSON viewer
+  url: https://github.com/antonmedv/fx
+  version: 20.0.2
+  year: 2020
+  help: --help
+  example: |
+    echo '[1,2,3]' | fx 'this.map(x => x * 2)'
+
+git:
+  author:
+  - Linus Torvalds
+  - Junio C. Hamano
+  bib_title: '{git} -- The stupid content tracker'
+  cite: true
+  description: The stupid content tracker
+  url: https://git-scm.com
+  version: 2.25.1
+  year: 2021
+  help: man
+
+grep:
+  author:
+  - Jim Meyering
+  bib_title: '{grep} -- Print lines that match patterns'
+  cite: true
+  description: Print lines that match patterns
+  url: https://www.gnu.org/software/grep
+  version: '3.4'
+  year: 2019
+  help: man
+  example: |
+    seq 100 | grep 3 | wc -l
+
+gron:
+  author:
+  - Tom Hudson
+  bib_title: '{gron} -- Make JSON greppable'
+  cite: true
+  description: Make JSON greppable
+  url: https://github.com/TomNomNom/gron
+  version: 0.6.1
+  help: man
+  year: 2021
+
+head:
+  author:
+  - David MacKenzie
+  - Jim Meyering
+  bib_title: '{head} -- Output the first part of files'
+  cite: true
+  description: Output the first part of files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example:
+    seq 100 | head -n 5
+
+header:
+  author:
+  - Jeroen Janssens
+  bib_title: '{header} -- Add, replace, and delete header lines'
+  cite: true
+  description: Add, replace, and delete header lines
+  url: https://github.com/jeroenjanssens/dsutils
+  version: '0.1'
+  year: 2021
+
+hostname:
+  author:
+  - Peter Tobias
+  - Bernd Eckenfels
+  - Michael Meskes
+  bib_title: '{hostname} -- Show or set the system''s host name'
+  cite: true
+  description: Show or set the system's host name
+  url: https://sourceforge.net/projects/net-tools/
+  version: '3.23'
+  year: 2021
+  help: man
+  example: |
+    hostname
+    hostname -i
+
+in2csv:
+  author:
+  - Christopher Groskopf
+  bib_title: '{in2csv} -- Convert common, but less awesome, tabular data formats to
+    {CSV}'
+  cite: true
+  description: Convert common, but less awesome, tabular data formats to CSV
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+jq:
+  author:
+  - Stephen Dolan
+  bib_title: '{jq} -- Command-line {JSON} processor'
+  cite: true
+  description: Command-line JSON processor
+  url: https://stedolan.github.com/jq
+  version: '1.6'
+  year: 2021
+  help: man
+
+json2csv:
+  author:
+  - Jehiah Czebotar
+  bib_title: '{json2csv} -- Convert {JSON} to {CSV}'
+  cite: true
+  description: Convert JSON to CSV
+  url: https://github.com/jehiah/json2csv
+  version: 1.2.1
+  year: 2019
+  help: --help
+
+less:
+  author:
+  - Mark Nudelman
+  bib_title: '{less} -- opposite of {more}'
+  cite: true
+  description: opposite of more
+  url: https://www.greenwoodsoftware.com/less
+  version: '551'
+  year: 2019
+  help: man
+  example: |
+    less README#!enter=FALSE
+    C-C#!literal=FALSE
+
+ls:
+  author:
+  - Richard M. Stallman
+  - David MacKenzie
+  bib_title: '{ls} -- List directory contents'
+  cite: true
+  description: List directory contents
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    ls /data
+
+make:
+  author:
+  - Stuart I. Feldman
+  bib_title: '{make} -- {A} Program for Maintaining Computer Programs'
+  cite: true
+  description: A Program for Maintaining Computer Programs
+  url: https://www.gnu.org/software/make
+  version: '4.3'
+  year: 2020
+  help: man
+  example: |
+    make sandwich#!enter=FALSE
+    C-C#!literal=FALSE
+
+man:
+  author:
+  - John W. Eaton
+  - Colin Watson
+  bib_title: '{man} -- An interface to the system reference manuals'
+  cite: true
+  description: An interface to the system reference manuals
+  url: https://nongnu.org/man-db
+  version: 2.9.1
+  year: 2020
+  help: man
+  example: |
+    man excel
+
+mkdir:
+  author:
+  - David MacKenzie
+  bib_title: '{mkdir} -- Make directories'
+  cite: true
+  description: Make directories
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    mkdir -p /data/ch{01..10}#!enter=FALSE
+    C-C#!literal=FALSE
+
+mv:
+  author:
+  - Mike Parker
+  - David MacKenzie
+  - Jim Meyering
+  bib_title: '{mv} -- Move (rename) files'
+  cite: true
+  description: Move (rename) files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2020
+  help: man
+  example: |
+    mv results{,.bak}#!enter=FALSE
+    C-C#!literal=FALSE
+
+nl:
+  author:
+  - Scott Bartram
+  - David MacKenzie
+  bib_title: '{nl} -- Number lines of files'
+  cite: true
+  description: Number lines of files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2020
+  help: man
+  example: |
+    nl /data/ch05/alice.txt | head
+
+parallel:
+  author:
+  - Ole Tange
+  bib_title: '{parallel} -- Build and execute shell command lines from standard input
+    in parallel'
+  cite: true
+  description: Build and execute shell command lines from standard input in parallel
+  url: https://www.gnu.org/software/parallel
+  version: '20161222'
+  year: 2016
+  help: man
+  example: |
+    seq 3 | parallel "echo Processing file {}.csv"
+
+paste:
+  author:
+  - David M. Ihnat
+  - David MacKenzie
+  bib_title: '{paste} -- Merge lines of files'
+  cite: true
+  description: Merge lines of files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    paste -d, <(seq 5) <(dseq 5)
+    seq 5 | paste -sd+
+
+pbc:
+  author:
+  - Jeroen Janssens
+  bib_title: '{pbc} -- Parallel {bc}'
+  cite: true
+  description: Parallel bc
+  url: https://github.com/jeroenjanssens/dsutils
+  year: 2021
+  example: |
+    seq 3 | pbc '{1}^2'
+
+pip:
+  author:
+  - PyPA
+  bib_title: '{pip} -- A tool for installing and managing Python packages'
+  cite: true
+  description: A tool for installing and managing Python packages
+  url: https://pip.pypa.io
+  version: 20.0.2
+  year: 2020
+  help: man
+  example: |
+    pip install pandas#!enter=FALSE
+    C-C#!literal=FALSE
+    pip freeze | grep sci
+
+pwd:
+  author:
+  - Jim Meyering
+  bib_title: '{pwd} -- Print name of working directory'
+  cite: true
+  description: Print name of working directory
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    cd ~
+    pwd
+
+python:
+  author:
+  - The Python Software Foundation
+  bib_title: '{python} -- An interpreted, interactive, object-oriented programming
+    language'
+  cite: true
+  description: An interpreted, interactive, object-oriented programming language
+  url: https://www.python.org
+  version: 3.8.5
+  year: 2021
+  help: man
+
+R:
+  author:
+  - The R Foundation for Statistical Computing
+  bib_title: '{R} -- A Language and Environment for Statistical Computing'
+  cite: true
+  description: A Language and Environment for Statistical Computing
+  url: https://www.r-project.org
+  version: 4.0.4
+  year: 2021
+  help: man
+
+rm:
+  author:
+  - Paul Rubin
+  - David MacKenzie
+  - Richard M. Stallman
+  - Jim Meyering
+  bib_title: '{rm} -- Remove files or directories'
+  cite: true
+  description: Remove files or directories
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    rm *.old#!enter=FALSE
+    C-C#!literal=FALSE
+
+rush:
+  author:
+  - Jeroen Janssens
+  bib_title: '{rush} -- {R} One-Liners from the Shell'
+  cite: true
+  description: R One-Liners from the Shell
+  url: https://github.com/jeroenjanssens/rush
+  version: '0.1'
+  year: 2021
+  help: --help
+  example: |
+    rush run '6*7'
+    rush run -t 'starwars %>% filter(species == "Human") %>% select(name)'
+
+sample:
+  author:
+  - Jeroen Janssens
+  bib_title: '{sample} -- Filter lines from standard input according to some probability,
+    with a given delay, and for a certain duration'
+  cite: true
+  description: Filter lines from standard input according to some probability, with
+    a given delay, and for a certain duration
+  url: https://github.com/jeroenjanssens/sample-stream
+  version: 0.2.4
+  year: 2021
+  help: --help
+  example: |
+    seq 1000 | sample -r 0.01 | trim 5
+
+scp:
+  author:
+  - Timo Rinne
+  - Tatu Ylonen
+  bib_title: '{scp} -- {OpenSSH} secure file copy'
+  cite: true
+  description: OpenSSH secure file copy
+  url: https://www.openssh.com
+  version: 1:8.2p1-4ubuntu0.2
+  year: 2019
+  help: man
+
+scrape:
+  author:
+  - Jeroen Janssens
+  bib_title: '{scrape} -- Extract {HTML} elements using an {XPath} query or {CSS3}
+    selector'
+  cite: true
+  description: Extract HTML elements using an XPath query or CSS3 selector
+  url: https://github.com/jeroenjanssens/dsutils
+  version: '0.1'
+  year: 2021
+
+sed:
+  author:
+  - Jay Fenlason
+  - Tom Lord
+  - Ken Pizzini
+  - Paolo Bonzini
+  bib_title: '{sed} -- Stream editor for filtering and transforming text'
+  cite: true
+  description: Stream editor for filtering and transforming text
+  url: https://www.gnu.org/software/sed
+  version: '4.7'
+  year: 2018
+  help: man
+
+seq:
+  author:
+  - Ulrich Drepper
+  bib_title: '{seq} -- Print a sequence of numbers'
+  cite: true
+  description: Print a sequence of numbers
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    seq 3
+    seq 10 5 20
+
+shuf:
+  author:
+  - Paul Eggert
+  bib_title: '{shuf} -- Generate random permutations'
+  cite: true
+  description: Generate random permutations
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    echo {a..z} | tr ' ' '\n' | shuf | trim 5
+    shuf -i 1-100 | trim 5
+
+skll:
+  author:
+  - Educational Testing Service
+  bib_title: '{skll} -- {SciKit-Learn} Laboratory'
+  cite: true
+  description: SciKit-Learn Laboratory
+  url: https://skll.readthedocs.org
+  note: The actual tool is `run_experiment`. I use the alias `skll` because I find that easier to remember
+  version: 2.5.0
+  year: 2021
+  help: --help
+
+sort:
+  author:
+  - Mike Haertel
+  - Paul Eggert
+  bib_title: '{sort} -- Sort lines of text files'
+  cite: true
+  description: Sort lines of text files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+  example: |
+    echo '3\n7\n1\n3' | sort
+
+split:
+  author:
+  - Torbjorn Granlund
+  - Richard M. Stallman
+  bib_title: '{split} -- Split a file into pieces'
+  cite: true
+  description: Split a file into pieces
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+
+sql2csv:
+  author:
+  - Christopher Groskopf
+  bib_title: '{sql2csv} -- Execute an {SQL} query on a database and output the result
+    to a {CSV} file'
+  cite: true
+  description: Execute an SQL query on a database and output the result to a CSV file
+  url: https://csvkit.rtfd.org
+  version: 1.0.5
+  year: 2020
+  help: --help
+
+ssh:
+  author:
+  - Tatu Ylonen
+  - Aaron Campbell
+  - Bob Beck
+  - Markus Friedl
+  - Niels Provos
+  - Theo Raadt
+  - Dug Song
+  - Markus Friedl
+  bib_title: '{ssh} -- {OpenSSH} remote login client'
+  cite: true
+  description: OpenSSH remote login client
+  url: https://www.openssh.com
+  version: 1:8.2p1-4ubuntu0.2
+  year: 2020
+  help: man
+
+sudo:
+  author:
+  - Todd C. Miller
+  bib_title: '{sudo} -- Execute a command as another user'
+  cite: true
+  description: Execute a command as another user
+  url: https://www.sudo.ws
+  version: 1.8.31
+  year: 2019
+  help: man
+
+tail:
+  author:
+  - Paul Rubin
+  - David MacKenzie
+  - Ian Lance Taylor
+  - Jim Meyering
+  bib_title: '{tail} -- Output the last part of files'
+  cite: true
+  description: Output the last part of files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+
+tapkee:
+  author:
+  - Sergey Lisitsyn
+  - Christian Widmer
+  - Fernando J.Iglesias Garcia
+  bib_title: '{tapkee} -- An efficient dimension reduction library'
+  cite: true
+  description: An efficient dimension reduction library
+  url: http://tapkee.lisitsyn.me
+  version: '1.2'
+  year: 2013
+  help: --help
+
+tar:
+  author:
+  - John Gilmore
+  - Jay Fenlason
+  bib_title: '{tar} -- An archiving utility'
+  cite: true
+  description: An archiving utility
+  url: https://www.gnu.org/software/tar
+  version: '1.30'
+  year: 2014
+  help: man
+
+tee:
+  author:
+  - Mike Parker
+  - Richard M. Stallman
+  - David MacKenzie
+  bib_title: '{tee} -- Read from standard input and write to standard output and files'
+  cite: true
+  description: Read from standard input and write to standard output and files
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+
+tr:
+  author:
+  - Jim Meyering
+  bib_title: '{tr} -- Translate or delete characters'
+  cite: true
+  description: Translate or delete characters
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2018
+  help: man
+
+tree:
+  author:
+  - Steve Baker
+  bib_title: '{tree} -- List contents of directories in a tree-like format'
+  cite: true
+  description: List contents of directories in a tree-like format
+  url: https://launchpad.net/ubuntu/+source/tree
+  version: 1.8.0
+  year: 2018
+  help: man
+  example: |
+    tree / | trim
+
+trim:
+  author:
+  - Jeroen Janssens
+  bib_title: '{trim} -- Trim output to a given height and width'
+  cite: true
+  description: Trim output to a given height and width
+  url: https://github.com/jeroenjanssens/dsutils
+  year: 2021
+  example: |
+    shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+
+uniq:
+  author:
+  - Richard M. Stallman
+  - David MacKenzie
+  bib_title: '{uniq} -- Report or omit repeated lines'
+  cite: true
+  description: Report or omit repeated lines
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+
+unpack:
+  author:
+  - Patrick Brisbin
+  bib_title: '{unpack} -- Extract common file formats'
+  cite: true
+  description: Extract common file formats
+  url: https://github.com/jeroenjanssens/dsutils
+  version: '0.1'
+  year: 2013
+
+unrar:
+  author:
+  - Ben Asselstine
+  - Christian Scheurer
+  - Johannes Winkelmann
+  bib_title: '{unrar} -- Extract files from rar archives'
+  cite: true
+  description: Extract files from rar archives
+  url: http://home.gna.org/unrar
+  version: 0.0.1
+  year: 2014
+  help: man
+
+unzip:
+  author:
+  - Samuel H. Smith
+  - Ed Gordon
+  - Christian Spieler
+  - Onno Linden
+  - Mike White
+  - Kai Uwe Rommel
+  - Steven M. Schweda
+  - Paul Kienitz
+  - Chris Herborth
+  - Jonathan Hudson
+  - Sergio Monesi
+  - Harald Denker
+  - John Bush
+  - Hunter Goatley
+  - Steve Salisbury
+  - Steve Miller
+  - Dave Smith
+  bib_title: '{unzip} -- List, test and extract compressed files in a {ZIP} archive'
+  cite: true
+  description: List, test and extract compressed files in a ZIP archive
+  url: http://www.info-zip.org/pub/infozip
+  version: '6.0'
+  year: 2009
+  help: man
+
+vw:
+  author:
+  - John Langford
+  bib_title: '{vw} -- Fast machine learning library for online learning'
+  cite: true
+  description: Fast machine learning library for online learning
+  url: https://vowpalwabbit.org
+  version: 8.10.1
+  year: 2021
+  help: vw --help --quiet
+
+wc:
+  author:
+  - Paul Rubin
+  - David MacKenzie
+  bib_title: '{wc} -- Print newline, word, and byte counts for each file'
+  cite: true
+  description: Print newline, word, and byte counts for each file
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2019
+  help: man
+
+which:
+  author:
+  - Unknown
+  bib_title: '{which} -- Locate a command'
+  cite: true
+  description: Locate a command
+  url: ''
+  version: '0.1'
+  year: 2016
+  help: man
+
+xml2json:
+  author:
+  - "Fran\xE7ois Parmentier"
+  bib_title: '{xml2json} -- Convert an {XML} input to a {JSON} output, using {xml-mapping}'
+  cite: true
+  description: Convert an XML input to a JSON output, using xml-mapping
+  url: https://github.com/parmentf/xml2json
+  version: 0.0.3
+  year: 2016
+
+xmlstarlet:
+  author:
+  - Dagobert Michelsen
+  - Noam Postavsky
+  - Mikhail Grushinskiy
+  bib_title: '{xmlstarlet} -- Command line {XML}/{XSLT} toolkit'
+  cite: true
+  description: Command line XML/XSLT toolkit
+  url: https://sourceforge.net/projects/xmlstar
+  version: 1.6.1
+  year: 2019
+  help: man
+
+xsv:
+  author:
+  - Andrew Gallant
+  bib_title: '{xsv} -- A fast {CSV} command line toolkit written in Rust'
+  cite: true
+  description: A fast CSV command line toolkit written in Rust
+  url: https://github.com/BurntSushi/xsv
+  version: 0.13.0
+  year: 2018
+  help: --help
+
+zcat:
+  author:
+  - Paul Eggert
+  bib_title: '{zcat} -- Decompress and concatenate files to standard output'
+  cite: true
+  description: Decompress and concatenate files to standard output
+  url: https://www.nongnu.org/zutils/zutils.html
+  version: '1.10'
+  year: 2021
+  help: man
+
+zsh:
+  author:
+  - Paul Falstad
+  - Peter Stephenson
+  bib_title: '{zsh} -- The {Z} shell'
+  cite: true
+  description: The Z shell
+  url: https://www.zsh.org
+  version: '5.8'
+  year: 2020

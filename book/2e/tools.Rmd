@@ -1,0 +1,1342 @@
+---
+suppress-bibliography: true
+---
+
+# List of Command-Line Tools {-}
+
+This is an overview of all the command-line tools discussed in this book.
+This includes binary executables, interpreted scripts, and Z Shell builtins and keywords.
+For each command-line tool, the following information, when available and appropriate, is provided:
+
+- The actual command to type at the command line
+- A description
+- The version used in the book
+- The year that version was released
+- The primary author(s)
+- A website to find more information
+- How to obtain help
+- An example usage
+
+All command-line tools listed here are included in the Docker image.
+See [Chapter 2](#chapter-2-getting-started) for instructions on how to set it up.
+Please note that citing open source software is not trivial, and that some information may be missing or incorrect.
+
+```{console, include=FALSE}
+unalias csvlook
+```
+
+
+## alias
+
+Define or display aliases.
+`alias`
+is a Z shell builtin.
+
+```{console alias}
+type alias
+man zshbuiltins | grep -A 10 alias | trim
+
+alias l
+alias python=python3
+```
+
+
+## awk
+
+Pattern scanning and text processing language.
+`awk`
+(version 1.3.4)
+by Mike D. Brennan and Thomas E. Dickey (2019).
+More information: https://invisible-island.net/mawk.
+
+```{console awk}
+type awk
+man awk | trim
+
+seq 5 | awk '{sum+=$1} END {print sum}'
+```
+
+
+## aws
+
+Unified tool to manage AWS services.
+`aws`
+(version 2.1.32)
+by Amazon Web Services (2021).
+More information: https://aws.amazon.com/cli.
+
+```{console aws}
+type aws
+aws --help | trim
+```
+
+
+## bash
+
+GNU Bourne-Again SHell.
+`bash`
+(version 5.0.17)
+by Brian Fox and Chet Ramey (2019).
+More information: https://www.gnu.org/software/bash.
+
+```{console bash}
+type bash
+man bash | trim
+```
+
+
+## bat
+
+A cat clone with syntax highlighting and Git integration.
+`bat`
+(version 0.18.0)
+by David Peter (2021).
+More information: https://github.com/sharkdp/bat.
+
+```{console bat}
+type bat
+man bat | trim
+```
+
+
+## bc
+
+An arbitrary precision calculator language.
+`bc`
+(version 1.07.1)
+by Philip A. Nelson (2017).
+More information: https://www.gnu.org/software/bc.
+
+```{console bc}
+type bc
+man bc | trim
+
+bc -l <<< 'e(1)'
+```
+
+
+## body
+
+Apply command to all but the first line.
+`body`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console body}
+type body
+
+seq 10 | header -a 'values' | body shuf
+```
+
+
+## cat
+
+Concatenate files and print on the standard output.
+`cat`
+(version 8.30)
+by Torbjorn Granlund and Richard M. Stallman (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console cat}
+type cat
+man cat | trim
+
+cat *.log > all.log#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## cd
+
+Change the shell working directory.
+`cd`
+is a Z shell builtin.
+
+```{console cd}
+type cd
+man zshbuiltins | grep -A 10 cd | trim
+
+cd ~
+pwd
+cd ..
+pwd
+cd /data/ch01
+```
+
+
+## chmod
+
+Change file mode bits.
+`chmod`
+(version 8.30)
+by David MacKenzie and Jim Meyering (2018).
+I use `chmod` in Chapter 4 to make a tool executable.
+More information: https://www.gnu.org/software/coreutils.
+
+```{console chmod}
+type chmod
+man chmod | trim
+
+chmod u+x script.sh#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## cols
+
+Apply command to subset of columns.
+`cols`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console cols}
+type cols
+```
+
+
+## cowsay
+
+Configurable speaking cow.
+`cowsay`
+(version 3.0.3)
+by Tony Monroe (1999).
+More information: https://github.com/tnalpgge/rank-amateur-cowsay.
+
+```{console cowsay}
+type cowsay
+man cowsay | trim
+
+echo 'The command line is awesome!' | cowsay
+```
+
+
+## cp
+
+Copy files and directories.
+`cp`
+(version 8.30)
+by Torbjorn Granlund, David MacKenzie, and Jim Meyering (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console cp}
+type cp
+man cp | trim
+
+cp -r ~/Downloads/*.xlsx /data#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## csvcut
+
+Filter and truncate CSV files.
+`csvcut`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvcut}
+type csvcut
+csvcut --help | trim
+
+csvcut -c bill,tip /data/ch05/tips.csv | trim
+```
+
+
+## csvgrep
+
+Search CSV files.
+`csvgrep`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvgrep}
+type csvgrep
+csvgrep --help | trim
+```
+
+
+## csvjoin
+
+Execute a SQL-like join to merge CSV files on a specified column or columns.
+`csvjoin`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvjoin}
+type csvjoin
+csvjoin --help | trim
+```
+
+
+## csvlook
+
+Render a CSV file in the console as a Markdown-compatible, fixed-width table.
+`csvlook`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvlook}
+type csvlook
+csvlook --help | trim
+
+csvlook /data/ch05/tips.csv
+```
+
+
+## csvquote
+
+Enable common unix utlities to work correctly with CSV data.
+`csvquote`
+(version 0.1)
+by Dan Brown (2018).
+More information: https://github.com/dbro/csvquote.
+
+```{console csvquote}
+type csvquote
+```
+
+
+## csvsort
+
+Sort CSV files.
+`csvsort`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvsort}
+type csvsort
+csvsort --help | trim
+```
+
+
+## csvsql
+
+Execute SQL statements on CSV files.
+`csvsql`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvsql}
+type csvsql
+csvsql --help | trim
+```
+
+
+## csvstack
+
+Stack up the rows from multiple CSV files.
+`csvstack`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvstack}
+type csvstack
+csvstack --help | trim
+```
+
+
+## csvstat
+
+Print descriptive statistics for each column in a CSV file.
+`csvstat`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console csvstat}
+type csvstat
+csvstat --help | trim
+```
+
+
+## curl
+
+Transfer a URL.
+`curl`
+(version 7.68.0)
+by Daniel Stenberg (2016).
+More information: https://curl.haxx.se.
+
+```{console curl}
+type curl
+man curl | trim
+```
+
+
+## cut
+
+Remove sections from each line of files.
+`cut`
+(version 8.30)
+by David M. Ihnat, David MacKenzie, and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console cut}
+type cut
+man cut | trim
+```
+
+
+## display
+
+Displays an image or image sequence on any X server.
+`display`
+(version 6.9.10-23)
+by ImageMagick Studio LLC (2019).
+More information: https://imagemagick.org.
+
+```{console display}
+type display
+```
+
+
+## dseq
+
+Generate sequence of dates.
+`dseq`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console dseq}
+type dseq
+
+dseq 3
+```
+
+
+## echo
+
+Display a line of text.
+`echo`
+(version 8.30)
+by Brian Fox and Chet Ramey (2019).
+Useful for using literal text as standard input to the next tool.
+More information: https://www.gnu.org/software/coreutils.
+
+```{console echo}
+type echo
+man echo | trim
+
+echo Hippopotomonstrosesquippedaliophobia | cowsay
+echo -n Hippopotomonstrosesquippedaliophobia | wc -c
+```
+
+
+## env
+
+Run a program in a modified environment.
+`env`
+(version 8.30)
+by Richard Mlynarik, David MacKenzie, and Assaf Gordon (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console env}
+type env
+man env | trim
+```
+
+
+## export
+
+Set export attribute for shell variables. Useful for making shell variables available to other command-line tools..
+`export`
+is a Z shell builtin.
+
+```{console export}
+type export
+man zshbuiltins | grep -A 10 export | trim
+
+export PATH="$PATH:$HOME/bin"
+```
+
+
+## find
+
+Search for files in a directory hierarchy.
+`find`
+(version 4.7.0)
+by Eric B. Decker, James Youngman, and Kevin Dalley (2019).
+More information: https://www.gnu.org/software/findutils.
+
+```{console find}
+type find
+man find | trim
+
+find /data -type f -name '*.csv' -size -3
+```
+
+
+## for
+
+Execute commands for each member in a list. In Chapter 8, I discuss the advantages of using `parallel` instead of `for`..
+`for`
+
+```{console for}
+type for
+man zshmisc | grep -EA 10 '^ *for ' | trim
+
+for i in {A..C} "It's easy as" {1..3}; do echo $i; done
+```
+
+
+## fx
+
+Interactive JSON viewer.
+`fx`
+(version 20.0.2)
+by Anton Medvedev (2020).
+More information: https://github.com/antonmedv/fx.
+
+```{console fx}
+type fx
+fx --help | trim
+
+echo '[1,2,3]' | fx 'this.map(x => x * 2)'
+```
+
+
+## git
+
+The stupid content tracker.
+`git`
+(version 2.25.1)
+by Linus Torvalds and Junio C. Hamano (2021).
+More information: https://git-scm.com.
+
+```{console git}
+type git
+man git | trim
+```
+
+
+## grep
+
+Print lines that match patterns.
+`grep`
+(version 3.4)
+by Jim Meyering (2019).
+More information: https://www.gnu.org/software/grep.
+
+```{console grep}
+type grep
+man grep | trim
+
+seq 100 | grep 3 | wc -l
+```
+
+
+## gron
+
+Make JSON greppable.
+`gron`
+(version 0.6.1)
+by Tom Hudson (2021).
+More information: https://github.com/TomNomNom/gron.
+
+```{console gron}
+type gron
+man gron | trim
+```
+
+
+## head
+
+Output the first part of files.
+`head`
+(version 8.30)
+by David MacKenzie and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console head}
+type head
+man head | trim
+
+seq 100 | head -n 5
+```
+
+
+## header
+
+Add, replace, and delete header lines.
+`header`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console header}
+type header
+```
+
+
+## hostname
+
+Show or set the system's host name.
+`hostname`
+(version 3.23)
+by Peter Tobias, Bernd Eckenfels, and Michael Meskes (2021).
+More information: https://sourceforge.net/projects/net-tools/.
+
+```{console hostname}
+type hostname
+man hostname | trim
+
+hostname
+hostname -i
+```
+
+
+## in2csv
+
+Convert common, but less awesome, tabular data formats to CSV.
+`in2csv`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console in2csv}
+type in2csv
+in2csv --help | trim
+```
+
+
+## jq
+
+Command-line JSON processor.
+`jq`
+(version 1.6)
+by Stephen Dolan (2021).
+More information: https://stedolan.github.com/jq.
+
+```{console jq}
+type jq
+man jq | trim
+```
+
+
+## json2csv
+
+Convert JSON to CSV.
+`json2csv`
+(version 1.2.1)
+by Jehiah Czebotar (2019).
+More information: https://github.com/jehiah/json2csv.
+
+```{console json2csv}
+type json2csv
+json2csv --help | trim
+```
+
+
+## less
+
+opposite of more.
+`less`
+(version 551)
+by Mark Nudelman (2019).
+More information: https://www.greenwoodsoftware.com/less.
+
+```{console less}
+type less
+man less | trim
+
+less README#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## ls
+
+List directory contents.
+`ls`
+(version 8.30)
+by Richard M. Stallman and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console ls}
+type ls
+man ls | trim
+
+ls /data
+```
+
+
+## make
+
+A Program for Maintaining Computer Programs.
+`make`
+(version 4.3)
+by Stuart I. Feldman (2020).
+More information: https://www.gnu.org/software/make.
+
+```{console make}
+type make
+man make | trim
+
+make sandwich#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## man
+
+An interface to the system reference manuals.
+`man`
+(version 2.9.1)
+by John W. Eaton and Colin Watson (2020).
+More information: https://nongnu.org/man-db.
+
+```{console man}
+type man
+man man | trim
+
+man excel
+```
+
+
+## mkdir
+
+Make directories.
+`mkdir`
+(version 8.30)
+by David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console mkdir}
+type mkdir
+man mkdir | trim
+
+mkdir -p /data/ch{01..10}#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## mv
+
+Move (rename) files.
+`mv`
+(version 8.30)
+by Mike Parker, David MacKenzie, and Jim Meyering (2020).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console mv}
+type mv
+man mv | trim
+
+mv results{,.bak}#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## nl
+
+Number lines of files.
+`nl`
+(version 8.30)
+by Scott Bartram and David MacKenzie (2020).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console nl}
+type nl
+man nl | trim
+
+nl /data/ch05/alice.txt | head
+```
+
+
+## parallel
+
+Build and execute shell command lines from standard input in parallel.
+`parallel`
+(version 20161222)
+by Ole Tange (2016).
+More information: https://www.gnu.org/software/parallel.
+
+```{console parallel}
+type parallel
+man parallel | trim
+
+seq 3 | parallel "echo Processing file {}.csv"
+```
+
+
+## paste
+
+Merge lines of files.
+`paste`
+(version 8.30)
+by David M. Ihnat and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console paste}
+type paste
+man paste | trim
+
+paste -d, <(seq 5) <(dseq 5)
+seq 5 | paste -sd+
+```
+
+
+## pbc
+
+Parallel bc.
+`pbc`
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console pbc}
+type pbc
+
+seq 3 | pbc '{1}^2'
+```
+
+
+## pip
+
+A tool for installing and managing Python packages.
+`pip`
+(version 20.0.2)
+by PyPA (2020).
+More information: https://pip.pypa.io.
+
+```{console pip}
+type pip
+man pip | trim
+
+pip install pandas#!enter=FALSE
+C-C#!literal=FALSE
+pip freeze | grep sci
+```
+
+
+## pwd
+
+Print name of working directory.
+`pwd`
+(version 8.30)
+by Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console pwd}
+type pwd
+man pwd | trim
+
+cd ~
+pwd
+```
+
+
+## python
+
+An interpreted, interactive, object-oriented programming language.
+`python`
+(version 3.8.5)
+by The Python Software Foundation (2021).
+More information: https://www.python.org.
+
+```{console python}
+type python
+man python | trim
+```
+
+
+## R
+
+A Language and Environment for Statistical Computing.
+`R`
+(version 4.0.4)
+by The R Foundation for Statistical Computing (2021).
+More information: https://www.r-project.org.
+
+```{console R}
+type R
+man R | trim
+```
+
+
+## rm
+
+Remove files or directories.
+`rm`
+(version 8.30)
+by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console rm}
+type rm
+man rm | trim
+
+rm *.old#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
+## rush
+
+R One-Liners from the Shell.
+`rush`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/rush.
+
+```{console rush}
+type rush
+rush --help | trim
+
+rush run '6*7'
+rush run -t 'starwars %>% filter(species == "Human") %>% select(name)'
+```
+
+
+## sample
+
+Filter lines from standard input according to some probability, with a given delay, and for a certain duration.
+`sample`
+(version 0.2.4)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/sample-stream.
+
+```{console sample}
+type sample
+sample --help | trim
+
+seq 1000 | sample -r 0.01 | trim 5
+```
+
+
+## scp
+
+OpenSSH secure file copy.
+`scp`
+(version 1:8.2p1-4ubuntu0.2)
+by Timo Rinne and Tatu Ylonen (2019).
+More information: https://www.openssh.com.
+
+```{console scp}
+type scp
+man scp | trim
+```
+
+
+## scrape
+
+Extract HTML elements using an XPath query or CSS3 selector.
+`scrape`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console scrape}
+type scrape
+```
+
+
+## sed
+
+Stream editor for filtering and transforming text.
+`sed`
+(version 4.7)
+by Jay Fenlason, Tom Lord, Ken Pizzini, and Paolo Bonzini (2018).
+More information: https://www.gnu.org/software/sed.
+
+```{console sed}
+type sed
+man sed | trim
+```
+
+
+## seq
+
+Print a sequence of numbers.
+`seq`
+(version 8.30)
+by Ulrich Drepper (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console seq}
+type seq
+man seq | trim
+
+seq 3
+seq 10 5 20
+```
+
+
+## shuf
+
+Generate random permutations.
+`shuf`
+(version 8.30)
+by Paul Eggert (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console shuf}
+type shuf
+man shuf | trim
+
+echo {a..z} | tr ' ' '\n' | shuf | trim 5
+shuf -i 1-100 | trim 5
+```
+
+
+## skll
+
+SciKit-Learn Laboratory.
+`skll`
+(version 2.5.0)
+by Educational Testing Service (2021).
+The actual tool is `run_experiment`. I use the alias `skll` because I find that easier to remember.
+More information: https://skll.readthedocs.org.
+
+```{console skll}
+type skll
+skll --help | trim
+```
+
+
+## sort
+
+Sort lines of text files.
+`sort`
+(version 8.30)
+by Mike Haertel and Paul Eggert (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console sort}
+type sort
+man sort | trim
+
+echo '3\n7\n1\n3' | sort
+```
+
+
+## split
+
+Split a file into pieces.
+`split`
+(version 8.30)
+by Torbjorn Granlund and Richard M. Stallman (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console split}
+type split
+man split | trim
+```
+
+
+## sql2csv
+
+Execute an SQL query on a database and output the result to a CSV file.
+`sql2csv`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{console sql2csv}
+type sql2csv
+sql2csv --help | trim
+```
+
+
+## ssh
+
+OpenSSH remote login client.
+`ssh`
+(version 1:8.2p1-4ubuntu0.2)
+by Tatu Ylonen, Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo Raadt, Dug Song, and Markus Friedl (2020).
+More information: https://www.openssh.com.
+
+```{console ssh}
+type ssh
+man ssh | trim
+```
+
+
+## sudo
+
+Execute a command as another user.
+`sudo`
+(version 1.8.31)
+by Todd C. Miller (2019).
+More information: https://www.sudo.ws.
+
+```{console sudo}
+type sudo
+man sudo | trim
+```
+
+
+## tail
+
+Output the last part of files.
+`tail`
+(version 8.30)
+by Paul Rubin, David MacKenzie, Ian Lance Taylor, and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console tail}
+type tail
+man tail | trim
+```
+
+
+## tapkee
+
+An efficient dimension reduction library.
+`tapkee`
+(version 1.2)
+by Sergey Lisitsyn, Christian Widmer, and Fernando J.Iglesias Garcia (2013).
+More information: http://tapkee.lisitsyn.me.
+
+```{console tapkee}
+type tapkee
+tapkee --help | trim
+```
+
+
+## tar
+
+An archiving utility.
+`tar`
+(version 1.30)
+by John Gilmore and Jay Fenlason (2014).
+More information: https://www.gnu.org/software/tar.
+
+```{console tar}
+type tar
+man tar | trim
+```
+
+
+## tee
+
+Read from standard input and write to standard output and files.
+`tee`
+(version 8.30)
+by Mike Parker, Richard M. Stallman, and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console tee}
+type tee
+man tee | trim
+```
+
+
+## tr
+
+Translate or delete characters.
+`tr`
+(version 8.30)
+by Jim Meyering (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console tr}
+type tr
+man tr | trim
+```
+
+
+## tree
+
+List contents of directories in a tree-like format.
+`tree`
+(version 1.8.0)
+by Steve Baker (2018).
+More information: https://launchpad.net/ubuntu/+source/tree.
+
+```{console tree}
+type tree
+man tree | trim
+
+tree / | trim
+```
+
+
+## trim
+
+Trim output to a given height and width.
+`trim`
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console trim}
+type trim
+
+shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+```
+
+
+## uniq
+
+Report or omit repeated lines.
+`uniq`
+(version 8.30)
+by Richard M. Stallman and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console uniq}
+type uniq
+man uniq | trim
+```
+
+
+## unpack
+
+Extract common file formats.
+`unpack`
+(version 0.1)
+by Patrick Brisbin (2013).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console unpack}
+type unpack
+```
+
+
+## unrar
+
+Extract files from rar archives.
+`unrar`
+(version 0.0.1)
+by Ben Asselstine, Christian Scheurer, and Johannes Winkelmann (2014).
+More information: http://home.gna.org/unrar.
+
+```{console unrar}
+type unrar
+man unrar | trim
+```
+
+
+## unzip
+
+List, test and extract compressed files in a ZIP archive.
+`unzip`
+(version 6.0)
+by Samuel H. Smith, Ed Gordon, Christian Spieler, Onno Linden, Mike White, Kai Uwe Rommel, Steven M. Schweda, Paul Kienitz, Chris Herborth, Jonathan Hudson, Sergio Monesi, Harald Denker, John Bush, Hunter Goatley, Steve Salisbury, Steve Miller, and Dave Smith (2009).
+More information: http://www.info-zip.org/pub/infozip.
+
+```{console unzip}
+type unzip
+man unzip | trim
+```
+
+
+## vw
+
+Fast machine learning library for online learning.
+`vw`
+(version 8.10.1)
+by John Langford (2021).
+More information: https://vowpalwabbit.org.
+
+```{console vw}
+type vw
+vw --help --quiet | trim
+```
+
+
+## wc
+
+Print newline, word, and byte counts for each file.
+`wc`
+(version 8.30)
+by Paul Rubin and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console wc}
+type wc
+man wc | trim
+```
+
+
+## which
+
+Locate a command.
+`which`
+(version 0.1)
+by Unknown (2016).
+More information: .
+
+```{console which}
+type which
+man which | trim
+```
+
+
+## xml2json
+
+Convert an XML input to a JSON output, using xml-mapping.
+`xml2json`
+(version 0.0.3)
+by François Parmentier (2016).
+More information: https://github.com/parmentf/xml2json.
+
+```{console xml2json}
+type xml2json
+```
+
+
+## xmlstarlet
+
+Command line XML/XSLT toolkit.
+`xmlstarlet`
+(version 1.6.1)
+by Dagobert Michelsen, Noam Postavsky, and Mikhail Grushinskiy (2019).
+More information: https://sourceforge.net/projects/xmlstar.
+
+```{console xmlstarlet}
+type xmlstarlet
+man xmlstarlet | trim
+```
+
+
+## xsv
+
+A fast CSV command line toolkit written in Rust.
+`xsv`
+(version 0.13.0)
+by Andrew Gallant (2018).
+More information: https://github.com/BurntSushi/xsv.
+
+```{console xsv}
+type xsv
+xsv --help | trim
+```
+
+
+## zcat
+
+Decompress and concatenate files to standard output.
+`zcat`
+(version 1.10)
+by Paul Eggert (2021).
+More information: https://www.nongnu.org/zutils/zutils.html.
+
+```{console zcat}
+type zcat
+man zcat | trim
+```
+
+
+## zsh
+
+The Z shell.
+`zsh`
+(version 5.8)
+by Paul Falstad and Peter Stephenson (2020).
+More information: https://www.zsh.org.
+
+```{console zsh}
+type zsh
+```
+
+

@@ -1,4 +1,4 @@
-.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc hugo lab
+.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc hugo lab appendix
 .SUFFIXES:
 
 .ONESHELL:
@@ -20,7 +20,6 @@ redirects: www/static/_redirects
 
 www/static/1e/index.html: book/1e/*
 	cd book/1e && Rscript --vanilla -e 'bookdown::render_book("index.Rmd", encoding = "UTF-8")'
-
 
 www/static/_redirects:
 	curl -sL datascienceatthecommandline.com/1e | \
@@ -56,13 +55,14 @@ ch08: book/2e/08.utf8.md
 ch09: book/2e/09.utf8.md
 ch10: book/2e/10.utf8.md
 ch11: book/2e/11.utf8.md
+tools: book/2e/tools.utf8.md
 
 ch%: book/2e/%.utf8.md
 
 book/2e/atlas/ch%.asciidoc: book/2e/%.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
-asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch09.asciidoc book/2e/atlas/ch10.asciidoc book/2e/atlas/ch11.asciidoc
+asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch09.asciidoc book/2e/atlas/ch10.asciidoc book/2e/atlas/tools.asciidoc book/2e/atlas/ch11.asciidoc
 
 sync-atlas: asciidoc
 	@cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
@@ -74,8 +74,8 @@ docker-run:
 
 update-cache:
 	cd book/2e/data/cache && \
-  curl -sL 'https://github.com/r-dbi/RSQLite/raw/master/inst/db/datasets.sqlite' -O && \
-  ls -lAshF
+	curl -sL 'https://github.com/r-dbi/RSQLite/raw/master/inst/db/datasets.sqlite' -O && \
+	ls -lAshF
 
 attach:
 	tmux set-option window-size manual &&\
@@ -99,12 +99,10 @@ ref-text-duplicate-per-chapter:
 ref-tools-per-chapter:
 	@ggrep -oE ' `[A-Za-z]+`' book/2e/*.Rmd | sort | uniq | tr -d '` ' | tr ':' '\t' | sort -k 2
 
-
-
-
-
-
 ref-check: ref-text-duplicate-per-chapter
 
 lab:
 	docker run --rm -it -p 8888:8888 -p 4040:4040 -v "$$(pwd)":/opt/notebooks jupyter/pyspark-notebook:42f4c82a07ff /bin/bash -c "/opt/conda/bin/jupyter lab --notebook-dir=/opt/notebooks --ip='0.0.0.0' --port=8888 --no-browser --allow-root"
+
+appendix:
+	cd book/2e/bin && ./appendix.py > ../tools.Rmd
