@@ -2,9 +2,20 @@
 suppress-bibliography: true
 ---
 
-<!--A [appendix]
+```{r console_start, include=FALSE}
+console_start()
+```
+
+```{console setup_history, include=FALSE}
+ export CHAPTER="tools"
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
+```
+
+
+<!--A[appendix]
 [[appendix-tools]]
--->
+A-->
 # List of Command-Line Tools {-}
 
 This is an overview of all the command-line tools discussed in this book.

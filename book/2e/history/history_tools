@@ -1,0 +1,133 @@
+unalias csvlook
+type alias
+alias l
+alias python=python3
+type awk
+seq 5 | awk '{sum+=$1} END {print sum}'
+type aws
+type bash
+type bat
+type bc
+bc -l <<< 'e(1)'
+type body
+seq 10 | header -a 'values' | body shuf
+type cat
+type cd
+cd ~
+pwd
+cd ..
+pwd
+cd /data/ch01
+type chmod
+type cols
+type cowsay
+echo 'The command line is awesome!' | cowsay
+type cp
+type csvcut
+csvcut -c bill,tip /data/ch05/tips.csv | trim
+type csvgrep
+type csvjoin
+type csvlook
+csvlook /data/ch05/tips.csv
+type csvquote
+type csvsort
+type csvsql
+type csvstack
+type csvstat
+type curl
+type cut
+type display
+type dseq
+dseq 3
+type echo
+echo Hippopotomonstrosesquippedaliophobia | cowsay
+echo -n Hippopotomonstrosesquippedaliophobia | wc -c
+type env
+type export
+export PATH="$PATH:$HOME/bin"
+type find
+find /data -type f -name '*.csv' -size -3
+type for
+for i in {A..C} "It's easy as" {1..3}; do echo $i; done
+type fx
+echo '[1,2,3]' | fx 'this.map(x => x * 2)'
+type git
+type grep
+seq 100 | grep 3 | wc -l
+type gron
+type head
+seq 100 | head -n 5
+type header
+type hostname
+hostname
+hostname -i
+type in2csv
+type jq
+type json2csv
+type less
+type ls
+ls /data
+type make
+type man
+man excel
+type mkdir
+type mv
+type nl
+nl /data/ch05/alice.txt | head
+type parallel
+seq 3 | parallel "echo Processing file {}.csv"
+type paste
+paste -d, <(seq 5) <(dseq 5)
+seq 5 | paste -sd+
+type pbc
+seq 3 | pbc '{1}^2'
+type pip
+pip freeze | grep sci
+type pwd
+cd ~
+pwd
+type python
+type R
+type rm
+type rush
+rush run '6*7'
+rush run --tidyverse 'starwars %>% filter(species == "Human") %>% select(name)'
+type sample
+seq 1000 | sample -r 0.01 | trim 5
+type scp
+type scrape
+type sed
+type seq
+seq 3
+seq 10 5 20
+type shuf
+echo {a..z} | tr ' ' '\n' | shuf | trim 5
+shuf -i 1-100 | trim 5
+type skll
+type sort
+echo '3\n7\n1\n3' | sort
+type split
+type sql2csv
+type ssh
+type sudo
+type tail
+type tapkee
+type tar
+type tee
+type tr
+type tree
+tree / | trim
+type trim
+shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+type uniq
+type unpack
+type unrar
+type unzip
+type vw
+type wc
+type which
+type xml2json
+type xmlstarlet
+type xsv
+type zcat
+type zsh

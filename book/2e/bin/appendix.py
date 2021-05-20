@@ -16,6 +16,17 @@ if __name__ == "__main__":
 suppress-bibliography: true
 ---
 
+```{r console_start, include=FALSE}
+console_start()
+```
+
+```{console setup_history, include=FALSE}
+ export CHAPTER="tools"
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
+```
+
+
 <!--A[appendix]
 [[appendix-tools]]
 A-->

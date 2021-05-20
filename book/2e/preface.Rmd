@@ -133,10 +133,3 @@ Over the course of five years they have taught me many lessons.
 Although writing a technical book is quite different from writing a PhD thesis, many of those lessons proved to be very helpful in the past nine months as well.
 
 Finally, I’d like to thank my colleagues at YPlan, my friends, my family, and especially my wife Esther for supporting me and for pulling me away from the command line at just the right times.
-
-
-<!--H
-## Dedication {-}
-
-*To my wife, Esther. Without her encouragement, support, and patience, this book would surely have ended up in `/dev/null`.*
-H-->

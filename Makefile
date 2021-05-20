@@ -44,6 +44,9 @@ publish-production: hugo
 book/2e/%.utf8.md: book/2e/%.Rmd
 	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE, clean = FALSE)'
 
+
+foreword: book/2e/foreword.utf8.md
+preface: book/2e/preface.utf8.md
 ch01: book/2e/01.utf8.md
 ch02: book/2e/02.utf8.md
 ch03: book/2e/03.utf8.md
@@ -62,10 +65,16 @@ ch%: book/2e/%.utf8.md
 book/2e/atlas/ch%.asciidoc: book/2e/%.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
+book/2e/atlas/foreword.asciidoc: book/2e/foreword.utf8.md
+	< $< book/2e/bin/atlas.sh > $@
+
+book/2e/atlas/preface.asciidoc: book/2e/preface.utf8.md
+	< $< book/2e/bin/atlas.sh > $@
+
 book/2e/atlas/tools.asciidoc: book/2e/tools.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
-asciidoc: book/2e/atlas/ch00.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch09.asciidoc book/2e/atlas/ch10.asciidoc book/2e/atlas/ch11.asciidoc book/2e/atlas/tools.asciidoc
+asciidoc: book/2e/atlas/foreword.asciidoc book/2e/atlas/preface.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch09.asciidoc book/2e/atlas/ch10.asciidoc book/2e/atlas/ch11.asciidoc book/2e/atlas/tools.asciidoc
 
 sync-atlas: asciidoc
 	@cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/

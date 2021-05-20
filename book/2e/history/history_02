@@ -12,7 +12,6 @@ cd ..
 pwd
 cd ch02
 head -n 3 movies.txt
-alias bat='bat --tabs 8 --paging never --terminal-width 70 --theme "Solarized (dark)"'
 bat fac.py
 ./fac.py 5
 fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
@@ -26,7 +25,6 @@ type -a pwd
 type -a cd
 type -a fac
 type -a l
-alias bat='bat --tabs 8 --paging never --theme \"Solarized (dark)\"'
 seq 5
 seq 30 | grep 3
 seq 100 | grep 3 | wc -l

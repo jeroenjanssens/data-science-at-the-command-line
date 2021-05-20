@@ -1,12 +1,12 @@
 cd /data/ch03
 l
-curl https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands | trim
-curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland |\
+curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands" |\
+trim
+curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland" |\
 pup -n 'table.wikitable tr' # <1>
-curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland -O
+curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland" -O
 l
-curl -s https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland \\
-> friesland.html
+curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland" > friesland.html
 curl -s ftp://ftp.gnu.org/welcome.msg | trim
 curl -s dict://dict.org/d:windmill | trim
 curl -s https://bit.ly/2XBxvwK
@@ -18,7 +18,6 @@ mkdir logs
 tar -xzf logs.tar.gz -C logs
 ls logs | wc -l
 cat logs/* | trim
-bat $(which unpack)
 bat -A tmnt-basic.csv # <1>
 bat -A tmnt-missing-newline.csv
 bat -A tmnt-with-header.csv
