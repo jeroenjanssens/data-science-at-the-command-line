@@ -51,6 +51,7 @@ Please note that citing open source software is not trivial, and that some infor
 
 ```{console, include=FALSE}
 unalias csvlook
+unalias parallel
 ```
 
 

@@ -182,7 +182,8 @@ Find us on Facebook: link:$$http://facebook.com/oreilly$$[]
 
 Follow us on Twitter: link:$$http://twitter.com/oreillymedia$$[]
 
-Watch us on YouTube: link:$$http://www.youtube.com/oreillymedia$$[] -->
+Watch us on YouTube: link:$$http://www.youtube.com/oreillymedia$$[]
+
 
 
 A-->
