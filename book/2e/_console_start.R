@@ -1,4 +1,4 @@
-if (knitr::current_input() %in% c(sprintf("%02d.Rmd", seq(10)), "tools.Rmd")) {
+console_start <- function() {
   library(knitractive)
   library(rexpect)
   library(rlang)

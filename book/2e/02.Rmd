@@ -2,6 +2,10 @@
 suppress-bibliography: true
 ---
 
+```{r console_start, include=FALSE}
+console_start()
+```
+
 ```{console setup_history, include=FALSE}
  export CHAPTER="02"
  export HISTFILE=/history/history_${CHAPTER}
@@ -117,6 +121,7 @@ One of the advantages of the [Docker image](#docker-image) is that a lot is alre
 If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
 ```
 
+
 ### The Environment
 
 So you’ve just logged into a brand new environment.
@@ -151,6 +156,7 @@ Shell
 Operating system
 
 :   The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The [Docker image](#docker-image) is based on a particular Linux distribution called Ubuntu.
+
 
 ### Executing a Command-line Tool
 

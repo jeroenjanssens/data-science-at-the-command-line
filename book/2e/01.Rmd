@@ -2,6 +2,10 @@
 suppress-bibliography: true
 ---
 
+```{r console_start, include=FALSE}
+console_start()
+```
+
 ```{console setup_history, include=FALSE}
  export CHAPTER="01"
  export HISTFILE=/history/history_${CHAPTER}
@@ -299,6 +303,14 @@ csvlook
 In this section we’ve peeked at some important concepts and some exciting command-line tools.
 Don’t worry if some things don’t make sense yet.
 Most of the concepts will be discussed in [Chapter 2](#chapter-2-getting-started), and in the subsequent chapters I’ll go into more detail for all the command-line tools used in this section.
+
+## Summary
+
+
+
+## For Further Exploration
+
+
 
 
 [^1]: The development of the UNIX operating system started back in 1969. It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3](#essential-concepts), was added in 1973.

@@ -24,15 +24,17 @@ conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)
 
 callout_code_re = re.compile(r'#? ?&lt;([0-9]{1,2})&gt;')
 callout_text_re = re.compile(r'<([0-9]{1,2})>')
-comment_adoc_re = re.compile(r'<!--A (.*)-->', re.MULTILINE|re.DOTALL)
+comment_adoc_re = re.compile(r'<!--A(.*)A-->', re.MULTILINE|re.DOTALL)
+comment_html_re = re.compile(r'<!--H(.*)H-->', re.MULTILINE|re.DOTALL)
 
 def pygments(key, value, format, _):
 
     if format == "asciidoc":
+
+        # Only keep <!--A...A---> comments
         if key == "RawBlock":
             try:
                 if (match := comment_adoc_re.fullmatch(value[1])):
-                    # stderr.write(f"MATCH: {match.group(1)}\n")
                     return RawBlock("asciidoc", match.group(1))
             except:
                 pass
@@ -63,6 +65,14 @@ def pygments(key, value, format, _):
                 return Plain([Str(f"[[{fig_id}]]\n.{alt}\nimage::{src}[{alt}]")])
 
     elif format == "html4":
+
+        # Only keep <!--H...H---> comments
+        if key == "RawBlock":
+            try:
+                if (match := comment_html_re.fullmatch(value[1])):
+                    return RawBlock("html", match.group(1))
+            except:
+                pass
 
         # Turn text callout number into unicode char
         if (key == "Str") and (match := callout_text_re.fullmatch(value)):

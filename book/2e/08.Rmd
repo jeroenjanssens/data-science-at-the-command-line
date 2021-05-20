@@ -2,11 +2,16 @@
 suppress-bibliography: true
 ---
 
+```{r console_start, include=FALSE}
+console_start()
+```
+
 ```{console setup_history, include=FALSE}
  export CHAPTER="08"
  export HISTFILE=/history/history_${CHAPTER}
  rm -f $HISTFILE
 ```
+
 
 # Parallel Pipelines {#chapter-8-parallel-pipelines}
 

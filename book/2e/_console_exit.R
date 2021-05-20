@@ -1,1 +1,3 @@
-send_lines(engine$session, " exit")
+if (exists("engine")) {
+  send_lines(engine$session, " exit")
+}

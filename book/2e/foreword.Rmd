@@ -1,0 +1,48 @@
+---
+suppress-bibliography: true
+---
+
+
+<!--A[foreword]
+A-->
+# Foreword {-}
+
+It was love at first sight. 
+
+It must have been around 1981 or 1982 that I got my first taste of Unix.
+Its command-line shell, which uses the same language for single commands and complex programs, changed my world, and I never looked back.
+ 
+I was a writer who had discovered the joys of computing, and regular expressions were my gateway drug.
+I'd first tried them in the text editor in HP's RTE operating system, but it was only when I came to Unix and its philosophy of small cooperating tools with the command line shell as the glue that tied them together that I fully understood their power.
+Regular expressions in `ed`, `ex`, `vi` (now `vim`), and `emacs` were powerful, sure, but it wasn't until I saw how `ex` scripts unbound became `sed`, the Unix stream editor, and then AWK, which allowed you to bind programmed actions to regular expressions, and how shell scripts let you build pipelines not only out of the existing tools but out of new ones you'd written yourself, that I really got it.
+Programming is how you speak with computers, how you tell them what you want them to do, not just once, but in ways that persist, in ways that can be varied like human language, with repeatable structure but different verbs and objects.
+ 
+As a beginner, other forms of programming seemed more like recipes to be followed exactly, careful incantations where you had to get everything right, or like waiting for a teacher to grade an essay you'd written.
+With shell programming, there was no compilation and waiting.
+It was more like a conversation with a friend.
+When the friend didn't understand, you could easily try again.
+What's more, if you had something simple to say, you could just say it with one word.
+And there were already words for a whole lot of the things you might want to say.
+But if there weren't, you could easily make up new words.
+And you could string the words you learned and the words you made up into gradually more complex sentences, paragraphs, and eventually get to persuasive essays.
+
+Almost every other programming language is more powerful than the shell and its associated tools, but for me at least, none provides an easier pathway into the programming mindset, and none provides a better environment for a kind of everyday conversation with the machines that we ask to help us with our work.
+As Brian Kernighan, one of the creators of AWK as well as the co-author of the marvelous book *The Unix Programming Environment*, said in his 2019 interview with Lex Fridman, "[Unix] was meant to be an environment where it was really easy to write programs." [\[00:23:10\]](https://www.happyscribe.com/public/lex-fridman-podcast-artificial-intelligence-ai/109-brian-kernighan-unix-c-awk-ampl-and-go-programming#paragraph_1371)
+He went on to explain why he often still uses AWK rather than writing a Python program when he's exploring data.
+"It doesn't scale to big programs, but it does pretty darn well on these little things where you just want to see all the somethings in something."
+[\[00:37:01\]](https://www.happyscribe.com/public/lex-fridman-podcast-artificial-intelligence-ai/109-brian-kernighan-unix-c-awk-ampl-and-go-programming#paragraph_2221)
+
+In *Data Science at the Command Line*, Jeroen Janssens demonstrates just how powerful the Unix/Linux approach to the command line is even today.
+If Jeroen hadn't already done so, I'd write an essay here about just why the command line is such a sweet and powerful match with the kinds of tasks so often encountered in data science.
+But he already starts out his book by explaining that.
+So I'll just say this: the more you use the command line, the more often you will find yourself coming back to it as the easiest way to do much of your work.
+And whether you're a shell newbie, or just someone who hasn't thought much about what a great fit shell programming is for data science, this is a book you will come to treasure.
+Jeroen is a great teacher, and the material he covers is priceless.
+
+<!--A[role="byline"]
+A-->
+Tim O'Reilly
+
+<!--A[role="byline cont"]
+A-->
+May 2021

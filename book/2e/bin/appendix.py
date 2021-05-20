@@ -16,9 +16,9 @@ if __name__ == "__main__":
 suppress-bibliography: true
 ---
 
-<!--A [appendix]
+<!--A[appendix]
 [[appendix-tools]]
--->
+A-->
 # List of Command-Line Tools {-}
 
 This is an overview of all the command-line tools discussed in this book.

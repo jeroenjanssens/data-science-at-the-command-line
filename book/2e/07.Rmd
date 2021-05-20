@@ -2,6 +2,10 @@
 suppress-bibliography: true
 ---
 
+```{r console_start, include=FALSE}
+console_start()
+```
+
 ```{console setup_history, include=FALSE}
  export CHAPTER="07"
  export HISTFILE=/history/history_${CHAPTER}

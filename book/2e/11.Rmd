@@ -2,11 +2,6 @@
 suppress-bibliography: true
 ---
 
-```{console setup_history, include=FALSE}
- export CHAPTER="11"
- export HISTFILE=/history/history_${CHAPTER}
- rm -f $HISTFILE
-```
 
 # Conclusion {#chapter-11-conclusion}
 
