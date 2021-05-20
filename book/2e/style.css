@@ -35,6 +35,11 @@ h1.title {
   font-style: normal;
 }
 
+dt {
+  font-style: normal !important;
+  font-weight: normal !important;
+}
+
 .rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning, .rmdcomment {
   padding: 1em 1em 1em 5em;
   margin-bottom: 2em;
