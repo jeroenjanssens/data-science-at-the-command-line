@@ -16,6 +16,9 @@ if __name__ == "__main__":
 suppress-bibliography: true
 ---
 
+<!--A [appendix]
+[[appendix-tools]]
+-->
 # List of Command-Line Tools {-}
 
 This is an overview of all the command-line tools discussed in this book.
@@ -46,7 +49,7 @@ unalias csvlook
         tools = safe_load(file)
 
     for name, tool in sorted(tools.items(), key = lambda x: x[0].lower()):
-        stdout.write(f"## {name}\n\n")
+        stdout.write(f"## {name} {{-}}\n\n")
         stdout.write(f"{tool['description']}.\n`{name}`\n")
         if tool.get("builtin", False):
             stdout.write(f"is a Z shell builtin.\n")
@@ -64,13 +67,13 @@ unalias csvlook
         stdout.write(f"type {name}\n")
         if "help" in tool:
             if tool["help"] == "man":
-                stdout.write(f"man {name} | trim\n")
+                stdout.write(f"man {name}")
             elif tool["help"] == "--help":
-                stdout.write(f"{name} --help | trim\n")
+                stdout.write(f"{name} --help")
             else:
-                stdout.write(f"{tool['help']} | trim\n")
+                stdout.write(f"{tool['help']}")
+            stdout.write("#!enter=FALSE\nC-C#!literal=FALSE\n")
         if "example" in tool:
-            stdout.write("\n")
             stdout.write(f"{tool['example'].strip()}\n")
         stdout.write("```\n")
         stdout.write("\n\n")
