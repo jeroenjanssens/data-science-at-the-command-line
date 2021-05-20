@@ -645,6 +645,17 @@ pip:
     C-C#!literal=FALSE
     pip freeze | grep sci
 
+pup:
+  author:
+    - Eric Chiang
+  bib_title: '{pup} -- Parsing HTML at the command line'
+  cite: true
+  description: Parsing HTML at the command line
+  url: https://github.com/EricChiang/pup
+  version: 0.4.0
+  year: 2016
+  help: --help
+
 pwd:
   author:
   - Jim Meyering
@@ -740,17 +751,6 @@ scp:
   year: 2019
   help: man
 
-scrape:
-  author:
-  - Jeroen Janssens
-  bib_title: '{scrape} -- Extract {HTML} elements using an {XPath} query or {CSS3}
-    selector'
-  cite: true
-  description: Extract HTML elements using an XPath query or CSS3 selector
-  url: https://github.com/jeroenjanssens/dsutils
-  version: '0.1'
-  year: 2021
-
 sed:
   author:
   - Jay Fenlason
@@ -764,6 +764,16 @@ sed:
   version: '4.7'
   year: 2018
   help: man
+
+servewd:
+  author:
+  - Jeroen Janssens
+  bib_title: '{servewd} -- Serve the current working directory using a simple {HTTP} server'
+  cite: true
+  description: Serve the current working directory using a simple HTTP server
+  url: https://github.com/jeroenjanssens/dsutils
+  version: 0.1
+  year: 2021
 
 seq:
   author:
@@ -958,6 +968,11 @@ trim:
   year: 2021
   example: |
     shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+
+type:
+  description: Show the type and location of a command-line tool
+  builtin: true
+  help: man zshbuiltins| grep -A 10 '^ *type '
 
 uniq:
   author:

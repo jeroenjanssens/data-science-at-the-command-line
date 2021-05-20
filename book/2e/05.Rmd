@@ -879,7 +879,7 @@ Like many other command-line tools, `sed` does not make use of the structure of 
 Better is to either use a tool that makes use of the structure of the data (such as `jq` which I discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.
 
 I'm going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case.
-The command-line tools that I’ll be using here are: `curl`, `scrape` [@scrape], `xml2json` [@xml2json], `jq` and `json2csv` [@json2csv].
+The command-line tools that I’ll be using here are: `curl`, `pup` [@pup], `xml2json` [@xml2json], `jq` and `json2csv` [@json2csv].
 
 Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets.
 For example, [this page](http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio) contains a list of countries and territories together with their border length, their area, and the ration between the two.
@@ -911,7 +911,7 @@ grep wikitable -A 21 wiki.html
 
 You now actually see the countries and their values.
 The next step is to extract the necessary elements from the HTML file.
-For this you can use `scrape`:
+For this you can use `pup`:
 
 ```{console}
 < wiki.html pup 'table.wikitable tbody' | tee table.html | trim

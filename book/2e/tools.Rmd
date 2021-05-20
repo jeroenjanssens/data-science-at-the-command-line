@@ -847,6 +847,21 @@ pip freeze | grep sci
 ```
 
 
+## pup {-}
+
+Parsing HTML at the command line.
+`pup`
+(version 0.4.0)
+by Eric Chiang (2016).
+More information: https://github.com/EricChiang/pup.
+
+```{console pup}
+type pup
+pup --help#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
 ## pwd {-}
 
 Print name of working directory.
@@ -959,19 +974,6 @@ C-C#!literal=FALSE
 ```
 
 
-## scrape {-}
-
-Extract HTML elements using an XPath query or CSS3 selector.
-`scrape`
-(version 0.1)
-by Jeroen Janssens (2021).
-More information: https://github.com/jeroenjanssens/dsutils.
-
-```{console scrape}
-type scrape
-```
-
-
 ## sed {-}
 
 Stream editor for filtering and transforming text.
@@ -1001,6 +1003,19 @@ man seq#!enter=FALSE
 C-C#!literal=FALSE
 seq 3
 seq 10 5 20
+```
+
+
+## servewd {-}
+
+Serve the current working directory using a simple HTTP server.
+`servewd`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console servewd}
+type servewd
 ```
 
 
@@ -1214,6 +1229,19 @@ More information: https://github.com/jeroenjanssens/dsutils.
 ```{console trim}
 type trim
 shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+```
+
+
+## type {-}
+
+Show the type and location of a command-line tool.
+`type`
+is a Z shell builtin.
+
+```{console type}
+type type
+man zshbuiltins| grep -A 10 '^ *type '#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
