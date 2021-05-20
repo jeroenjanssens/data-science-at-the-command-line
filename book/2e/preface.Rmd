@@ -107,7 +107,92 @@ You don’t have to waste time figuring out how to install all the command-line 
 The book contains some code in Bash, Python, and R so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.
 
 
+## Conventions Used in This Book {-}
+
+The following typographical conventions are used in this book:
+
+*Italic*
+
+:   Indicates new terms, URLs, email addresses, filenames, and file extensions.
+
+`Constant width`
+
+:   Used for code and commands, as well as within paragraphs to refer to command-line tools.
+
+**`Constant width bold`**
+
+:   Shows commands or other text that should be typed literally by the user.
+
+
+```{block2, type="rmdtip"}
+This element signifies a tip or suggestion.
+```
+
+```{block2, type="rmdnote"}
+This element signifies a general note.
+```
+
+```{block2, type="rmdcaution"}
+This element indicates a warning or caution.
+```
+
+<!--A
+=== Using Code Examples
+
+Supplemental material (code examples, exercises, etc.) is available for download at link:$$https://github.com/jeroenjanssens/data-science-at-the-command-line$$[].
+
+This book is here to help you get your job done. In general, if example code is offered with this book, you may use it in your programs and documentation. You do not need to contact us for permission unless you’re reproducing a significant portion of the code. For example, writing a program that uses several chunks of code from this book does not require permission. Selling or distributing examples from O’Reilly books does require permission. Answering a question by citing this book and quoting example code does not require permission. Incorporating a significant amount of example code from this book into your product’s documentation does require permission.
+
+We appreciate, but generally do not require, attribution. An attribution usually includes the title, author, publisher, and ISBN. For example: “Data Science at the Command Line by Jeroen Janssens (O’Reilly). Copyright 2021 Jeroen Janssens, 978-1-492-08791-5.”
+
+If you feel your use of code examples falls outside fair use or the permission given above, feel free to contact us at pass:[<a class="email" href="mailto:permissions@oreilly.com"><em>permissions@oreilly.com</em></a>].
+
+=== O'Reilly Online Learning
+
+[role = "ormenabled"]
+[NOTE]
+====
+For more than 40 years, pass:[<a href="http://oreilly.com" class="orm:hideurl"><em class="hyperlink">O’Reilly Media</em></a>] has provided technology and business training, knowledge, and insight to help companies succeed.
+====
+
+Our unique network of experts and innovators share their knowledge and expertise through books, articles, and our online learning platform. O’Reilly’s online learning platform gives you on-demand access to live training courses, in-depth learning paths, interactive coding environments, and a vast collection of text and video from O'Reilly and 200+ other publishers. For more information, visit pass:[<a href="http://oreilly.com" class="orm:hideurl"><em>http://oreilly.com</em></a>].
+
+=== How to Contact Us
+
+Please address comments and questions concerning this book to the publisher:
+
+++++
+<ul class="simplelist">
+  <li>O’Reilly Media, Inc.</li>
+  <li>1005 Gravenstein Highway North</li>
+  <li>Sebastopol, CA 95472</li>
+  <li>800-998-9938 (in the United States or Canada)</li>
+  <li>707-829-0515 (international or local)</li>
+  <li>707-829-0104 (fax)</li>
+</ul>
+++++
+
+We have a web page for this book, where we list errata, examples, and any additional information. You can access this page at link:$$https://wwww.datascienceatthecommandline.com$$[].
+
+Email pass:[<a class="email" href="mailto:bookquestions@oreilly.com"><em>bookquestions@oreilly.com</em></a>] to comment or ask technical questions about this book.
+
+For news and information about our books and courses, visit link:$$http://oreilly.com$$[].
+
+Find us on Facebook: link:$$http://facebook.com/oreilly$$[]
+
+Follow us on Twitter: link:$$http://twitter.com/oreillymedia$$[]
+
+Watch us on YouTube: link:$$http://www.youtube.com/oreillymedia$$[]
+A-->
+
+
 ## Acknowledgments {-}
+
+
+### Acknowledgments for the Second Edition (2021) {-}
+
+
+### Acknowledgments for the First Edition (2014) {-}
 
 First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post [Seven Command-Line Tools for Data Science](http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html), which I wrote in September 2013, could be expanded into a book.
 
