@@ -24,11 +24,18 @@ conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)
 
 callout_code_re = re.compile(r'#? ?&lt;([0-9]{1,2})&gt;')
 callout_text_re = re.compile(r'<([0-9]{1,2})>')
-
+comment_adoc_re = re.compile(r'<!--A (.*)-->', re.MULTILINE|re.DOTALL)
 
 def pygments(key, value, format, _):
 
     if format == "asciidoc":
+        if key == "RawBlock":
+            try:
+                if (match := comment_adoc_re.fullmatch(value[1])):
+                    # stderr.write(f"MATCH: {match.group(1)}\n")
+                    return RawBlock("asciidoc", match.group(1))
+            except:
+                pass
 
         # Fix references to figures
         if (key == "Str") and value.startswith("@ref"):

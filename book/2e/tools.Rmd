@@ -2,6 +2,9 @@
 suppress-bibliography: true
 ---
 
+<!--A [appendix]
+[[appendix-tools]]
+-->
 # List of Command-Line Tools {-}
 
 This is an overview of all the command-line tools discussed in this book.
@@ -26,7 +29,7 @@ unalias csvlook
 ```
 
 
-## alias
+## alias {-}
 
 Define or display aliases.
 `alias`
@@ -34,14 +37,14 @@ is a Z shell builtin.
 
 ```{console alias}
 type alias
-man zshbuiltins | grep -A 10 alias | trim
-
+man zshbuiltins | grep -A 10 alias#!enter=FALSE
+C-C#!literal=FALSE
 alias l
 alias python=python3
 ```
 
 
-## awk
+## awk {-}
 
 Pattern scanning and text processing language.
 `awk`
@@ -51,13 +54,13 @@ More information: https://invisible-island.net/mawk.
 
 ```{console awk}
 type awk
-man awk | trim
-
+man awk#!enter=FALSE
+C-C#!literal=FALSE
 seq 5 | awk '{sum+=$1} END {print sum}'
 ```
 
 
-## aws
+## aws {-}
 
 Unified tool to manage AWS services.
 `aws`
@@ -67,11 +70,12 @@ More information: https://aws.amazon.com/cli.
 
 ```{console aws}
 type aws
-aws --help | trim
+aws --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## bash
+## bash {-}
 
 GNU Bourne-Again SHell.
 `bash`
@@ -81,11 +85,12 @@ More information: https://www.gnu.org/software/bash.
 
 ```{console bash}
 type bash
-man bash | trim
+man bash#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## bat
+## bat {-}
 
 A cat clone with syntax highlighting and Git integration.
 `bat`
@@ -95,11 +100,12 @@ More information: https://github.com/sharkdp/bat.
 
 ```{console bat}
 type bat
-man bat | trim
+man bat#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## bc
+## bc {-}
 
 An arbitrary precision calculator language.
 `bc`
@@ -109,13 +115,13 @@ More information: https://www.gnu.org/software/bc.
 
 ```{console bc}
 type bc
-man bc | trim
-
+man bc#!enter=FALSE
+C-C#!literal=FALSE
 bc -l <<< 'e(1)'
 ```
 
 
-## body
+## body {-}
 
 Apply command to all but the first line.
 `body`
@@ -125,12 +131,11 @@ More information: https://github.com/jeroenjanssens/dsutils.
 
 ```{console body}
 type body
-
 seq 10 | header -a 'values' | body shuf
 ```
 
 
-## cat
+## cat {-}
 
 Concatenate files and print on the standard output.
 `cat`
@@ -140,14 +145,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console cat}
 type cat
-man cat | trim
-
+man cat#!enter=FALSE
+C-C#!literal=FALSE
 cat *.log > all.log#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## cd
+## cd {-}
 
 Change the shell working directory.
 `cd`
@@ -155,8 +160,8 @@ is a Z shell builtin.
 
 ```{console cd}
 type cd
-man zshbuiltins | grep -A 10 cd | trim
-
+man zshbuiltins | grep -A 10 cd#!enter=FALSE
+C-C#!literal=FALSE
 cd ~
 pwd
 cd ..
@@ -165,7 +170,7 @@ cd /data/ch01
 ```
 
 
-## chmod
+## chmod {-}
 
 Change file mode bits.
 `chmod`
@@ -176,14 +181,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console chmod}
 type chmod
-man chmod | trim
-
+man chmod#!enter=FALSE
+C-C#!literal=FALSE
 chmod u+x script.sh#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## cols
+## cols {-}
 
 Apply command to subset of columns.
 `cols`
@@ -196,7 +201,7 @@ type cols
 ```
 
 
-## cowsay
+## cowsay {-}
 
 Configurable speaking cow.
 `cowsay`
@@ -206,13 +211,13 @@ More information: https://github.com/tnalpgge/rank-amateur-cowsay.
 
 ```{console cowsay}
 type cowsay
-man cowsay | trim
-
+man cowsay#!enter=FALSE
+C-C#!literal=FALSE
 echo 'The command line is awesome!' | cowsay
 ```
 
 
-## cp
+## cp {-}
 
 Copy files and directories.
 `cp`
@@ -222,14 +227,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console cp}
 type cp
-man cp | trim
-
+man cp#!enter=FALSE
+C-C#!literal=FALSE
 cp -r ~/Downloads/*.xlsx /data#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## csvcut
+## csvcut {-}
 
 Filter and truncate CSV files.
 `csvcut`
@@ -239,13 +244,13 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvcut}
 type csvcut
-csvcut --help | trim
-
+csvcut --help#!enter=FALSE
+C-C#!literal=FALSE
 csvcut -c bill,tip /data/ch05/tips.csv | trim
 ```
 
 
-## csvgrep
+## csvgrep {-}
 
 Search CSV files.
 `csvgrep`
@@ -255,11 +260,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvgrep}
 type csvgrep
-csvgrep --help | trim
+csvgrep --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## csvjoin
+## csvjoin {-}
 
 Execute a SQL-like join to merge CSV files on a specified column or columns.
 `csvjoin`
@@ -269,11 +275,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvjoin}
 type csvjoin
-csvjoin --help | trim
+csvjoin --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## csvlook
+## csvlook {-}
 
 Render a CSV file in the console as a Markdown-compatible, fixed-width table.
 `csvlook`
@@ -283,13 +290,13 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvlook}
 type csvlook
-csvlook --help | trim
-
+csvlook --help#!enter=FALSE
+C-C#!literal=FALSE
 csvlook /data/ch05/tips.csv
 ```
 
 
-## csvquote
+## csvquote {-}
 
 Enable common unix utlities to work correctly with CSV data.
 `csvquote`
@@ -302,7 +309,7 @@ type csvquote
 ```
 
 
-## csvsort
+## csvsort {-}
 
 Sort CSV files.
 `csvsort`
@@ -312,11 +319,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvsort}
 type csvsort
-csvsort --help | trim
+csvsort --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## csvsql
+## csvsql {-}
 
 Execute SQL statements on CSV files.
 `csvsql`
@@ -326,11 +334,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvsql}
 type csvsql
-csvsql --help | trim
+csvsql --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## csvstack
+## csvstack {-}
 
 Stack up the rows from multiple CSV files.
 `csvstack`
@@ -340,11 +349,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvstack}
 type csvstack
-csvstack --help | trim
+csvstack --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## csvstat
+## csvstat {-}
 
 Print descriptive statistics for each column in a CSV file.
 `csvstat`
@@ -354,11 +364,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console csvstat}
 type csvstat
-csvstat --help | trim
+csvstat --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## curl
+## curl {-}
 
 Transfer a URL.
 `curl`
@@ -368,11 +379,12 @@ More information: https://curl.haxx.se.
 
 ```{console curl}
 type curl
-man curl | trim
+man curl#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## cut
+## cut {-}
 
 Remove sections from each line of files.
 `cut`
@@ -382,11 +394,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console cut}
 type cut
-man cut | trim
+man cut#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## display
+## display {-}
 
 Displays an image or image sequence on any X server.
 `display`
@@ -399,7 +412,7 @@ type display
 ```
 
 
-## dseq
+## dseq {-}
 
 Generate sequence of dates.
 `dseq`
@@ -409,12 +422,11 @@ More information: https://github.com/jeroenjanssens/dsutils.
 
 ```{console dseq}
 type dseq
-
 dseq 3
 ```
 
 
-## echo
+## echo {-}
 
 Display a line of text.
 `echo`
@@ -425,14 +437,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console echo}
 type echo
-man echo | trim
-
+man echo#!enter=FALSE
+C-C#!literal=FALSE
 echo Hippopotomonstrosesquippedaliophobia | cowsay
 echo -n Hippopotomonstrosesquippedaliophobia | wc -c
 ```
 
 
-## env
+## env {-}
 
 Run a program in a modified environment.
 `env`
@@ -442,11 +454,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console env}
 type env
-man env | trim
+man env#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## export
+## export {-}
 
 Set export attribute for shell variables. Useful for making shell variables available to other command-line tools..
 `export`
@@ -454,13 +467,13 @@ is a Z shell builtin.
 
 ```{console export}
 type export
-man zshbuiltins | grep -A 10 export | trim
-
+man zshbuiltins | grep -A 10 export#!enter=FALSE
+C-C#!literal=FALSE
 export PATH="$PATH:$HOME/bin"
 ```
 
 
-## find
+## find {-}
 
 Search for files in a directory hierarchy.
 `find`
@@ -470,26 +483,27 @@ More information: https://www.gnu.org/software/findutils.
 
 ```{console find}
 type find
-man find | trim
-
+man find#!enter=FALSE
+C-C#!literal=FALSE
 find /data -type f -name '*.csv' -size -3
 ```
 
 
-## for
+## for {-}
 
-Execute commands for each member in a list. In Chapter 8, I discuss the advantages of using `parallel` instead of `for`..
+Execute commands for each member in a list. In Chapter 8, I discuss the advantages of using `parallel` instead of `for`.
 `for`
+is a Z shell builtin.
 
 ```{console for}
 type for
-man zshmisc | grep -EA 10 '^ *for ' | trim
-
+man zshmisc | grep -EA 10 '^ *for '#!enter=FALSE
+C-C#!literal=FALSE
 for i in {A..C} "It's easy as" {1..3}; do echo $i; done
 ```
 
 
-## fx
+## fx {-}
 
 Interactive JSON viewer.
 `fx`
@@ -499,13 +513,13 @@ More information: https://github.com/antonmedv/fx.
 
 ```{console fx}
 type fx
-fx --help | trim
-
+fx --help#!enter=FALSE
+C-C#!literal=FALSE
 echo '[1,2,3]' | fx 'this.map(x => x * 2)'
 ```
 
 
-## git
+## git {-}
 
 The stupid content tracker.
 `git`
@@ -515,11 +529,12 @@ More information: https://git-scm.com.
 
 ```{console git}
 type git
-man git | trim
+man git#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## grep
+## grep {-}
 
 Print lines that match patterns.
 `grep`
@@ -529,13 +544,13 @@ More information: https://www.gnu.org/software/grep.
 
 ```{console grep}
 type grep
-man grep | trim
-
+man grep#!enter=FALSE
+C-C#!literal=FALSE
 seq 100 | grep 3 | wc -l
 ```
 
 
-## gron
+## gron {-}
 
 Make JSON greppable.
 `gron`
@@ -545,11 +560,12 @@ More information: https://github.com/TomNomNom/gron.
 
 ```{console gron}
 type gron
-man gron | trim
+man gron#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## head
+## head {-}
 
 Output the first part of files.
 `head`
@@ -559,13 +575,13 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console head}
 type head
-man head | trim
-
+man head#!enter=FALSE
+C-C#!literal=FALSE
 seq 100 | head -n 5
 ```
 
 
-## header
+## header {-}
 
 Add, replace, and delete header lines.
 `header`
@@ -578,7 +594,7 @@ type header
 ```
 
 
-## hostname
+## hostname {-}
 
 Show or set the system's host name.
 `hostname`
@@ -588,14 +604,14 @@ More information: https://sourceforge.net/projects/net-tools/.
 
 ```{console hostname}
 type hostname
-man hostname | trim
-
+man hostname#!enter=FALSE
+C-C#!literal=FALSE
 hostname
 hostname -i
 ```
 
 
-## in2csv
+## in2csv {-}
 
 Convert common, but less awesome, tabular data formats to CSV.
 `in2csv`
@@ -605,11 +621,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console in2csv}
 type in2csv
-in2csv --help | trim
+in2csv --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## jq
+## jq {-}
 
 Command-line JSON processor.
 `jq`
@@ -619,11 +636,12 @@ More information: https://stedolan.github.com/jq.
 
 ```{console jq}
 type jq
-man jq | trim
+man jq#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## json2csv
+## json2csv {-}
 
 Convert JSON to CSV.
 `json2csv`
@@ -633,11 +651,12 @@ More information: https://github.com/jehiah/json2csv.
 
 ```{console json2csv}
 type json2csv
-json2csv --help | trim
+json2csv --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## less
+## less {-}
 
 opposite of more.
 `less`
@@ -647,14 +666,14 @@ More information: https://www.greenwoodsoftware.com/less.
 
 ```{console less}
 type less
-man less | trim
-
+man less#!enter=FALSE
+C-C#!literal=FALSE
 less README#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## ls
+## ls {-}
 
 List directory contents.
 `ls`
@@ -664,13 +683,13 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console ls}
 type ls
-man ls | trim
-
+man ls#!enter=FALSE
+C-C#!literal=FALSE
 ls /data
 ```
 
 
-## make
+## make {-}
 
 A Program for Maintaining Computer Programs.
 `make`
@@ -680,14 +699,14 @@ More information: https://www.gnu.org/software/make.
 
 ```{console make}
 type make
-man make | trim
-
+man make#!enter=FALSE
+C-C#!literal=FALSE
 make sandwich#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## man
+## man {-}
 
 An interface to the system reference manuals.
 `man`
@@ -697,13 +716,13 @@ More information: https://nongnu.org/man-db.
 
 ```{console man}
 type man
-man man | trim
-
+man man#!enter=FALSE
+C-C#!literal=FALSE
 man excel
 ```
 
 
-## mkdir
+## mkdir {-}
 
 Make directories.
 `mkdir`
@@ -713,14 +732,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console mkdir}
 type mkdir
-man mkdir | trim
-
+man mkdir#!enter=FALSE
+C-C#!literal=FALSE
 mkdir -p /data/ch{01..10}#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## mv
+## mv {-}
 
 Move (rename) files.
 `mv`
@@ -730,14 +749,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console mv}
 type mv
-man mv | trim
-
+man mv#!enter=FALSE
+C-C#!literal=FALSE
 mv results{,.bak}#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## nl
+## nl {-}
 
 Number lines of files.
 `nl`
@@ -747,13 +766,13 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console nl}
 type nl
-man nl | trim
-
+man nl#!enter=FALSE
+C-C#!literal=FALSE
 nl /data/ch05/alice.txt | head
 ```
 
 
-## parallel
+## parallel {-}
 
 Build and execute shell command lines from standard input in parallel.
 `parallel`
@@ -763,13 +782,13 @@ More information: https://www.gnu.org/software/parallel.
 
 ```{console parallel}
 type parallel
-man parallel | trim
-
+man parallel#!enter=FALSE
+C-C#!literal=FALSE
 seq 3 | parallel "echo Processing file {}.csv"
 ```
 
 
-## paste
+## paste {-}
 
 Merge lines of files.
 `paste`
@@ -779,14 +798,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console paste}
 type paste
-man paste | trim
-
+man paste#!enter=FALSE
+C-C#!literal=FALSE
 paste -d, <(seq 5) <(dseq 5)
 seq 5 | paste -sd+
 ```
 
 
-## pbc
+## pbc {-}
 
 Parallel bc.
 `pbc`
@@ -795,12 +814,11 @@ More information: https://github.com/jeroenjanssens/dsutils.
 
 ```{console pbc}
 type pbc
-
 seq 3 | pbc '{1}^2'
 ```
 
 
-## pip
+## pip {-}
 
 A tool for installing and managing Python packages.
 `pip`
@@ -810,15 +828,15 @@ More information: https://pip.pypa.io.
 
 ```{console pip}
 type pip
-man pip | trim
-
+man pip#!enter=FALSE
+C-C#!literal=FALSE
 pip install pandas#!enter=FALSE
 C-C#!literal=FALSE
 pip freeze | grep sci
 ```
 
 
-## pwd
+## pwd {-}
 
 Print name of working directory.
 `pwd`
@@ -828,14 +846,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console pwd}
 type pwd
-man pwd | trim
-
+man pwd#!enter=FALSE
+C-C#!literal=FALSE
 cd ~
 pwd
 ```
 
 
-## python
+## python {-}
 
 An interpreted, interactive, object-oriented programming language.
 `python`
@@ -845,11 +863,12 @@ More information: https://www.python.org.
 
 ```{console python}
 type python
-man python | trim
+man python#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## R
+## R {-}
 
 A Language and Environment for Statistical Computing.
 `R`
@@ -859,11 +878,12 @@ More information: https://www.r-project.org.
 
 ```{console R}
 type R
-man R | trim
+man R#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## rm
+## rm {-}
 
 Remove files or directories.
 `rm`
@@ -873,14 +893,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console rm}
 type rm
-man rm | trim
-
+man rm#!enter=FALSE
+C-C#!literal=FALSE
 rm *.old#!enter=FALSE
 C-C#!literal=FALSE
 ```
 
 
-## rush
+## rush {-}
 
 R One-Liners from the Shell.
 `rush`
@@ -890,14 +910,14 @@ More information: https://github.com/jeroenjanssens/rush.
 
 ```{console rush}
 type rush
-rush --help | trim
-
+rush --help#!enter=FALSE
+C-C#!literal=FALSE
 rush run '6*7'
-rush run -t 'starwars %>% filter(species == "Human") %>% select(name)'
+rush run --tidyverse 'starwars %>% filter(species == "Human") %>% select(name)'
 ```
 
 
-## sample
+## sample {-}
 
 Filter lines from standard input according to some probability, with a given delay, and for a certain duration.
 `sample`
@@ -907,13 +927,13 @@ More information: https://github.com/jeroenjanssens/sample-stream.
 
 ```{console sample}
 type sample
-sample --help | trim
-
+sample --help#!enter=FALSE
+C-C#!literal=FALSE
 seq 1000 | sample -r 0.01 | trim 5
 ```
 
 
-## scp
+## scp {-}
 
 OpenSSH secure file copy.
 `scp`
@@ -923,11 +943,12 @@ More information: https://www.openssh.com.
 
 ```{console scp}
 type scp
-man scp | trim
+man scp#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## scrape
+## scrape {-}
 
 Extract HTML elements using an XPath query or CSS3 selector.
 `scrape`
@@ -940,7 +961,7 @@ type scrape
 ```
 
 
-## sed
+## sed {-}
 
 Stream editor for filtering and transforming text.
 `sed`
@@ -950,11 +971,12 @@ More information: https://www.gnu.org/software/sed.
 
 ```{console sed}
 type sed
-man sed | trim
+man sed#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## seq
+## seq {-}
 
 Print a sequence of numbers.
 `seq`
@@ -964,14 +986,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console seq}
 type seq
-man seq | trim
-
+man seq#!enter=FALSE
+C-C#!literal=FALSE
 seq 3
 seq 10 5 20
 ```
 
 
-## shuf
+## shuf {-}
 
 Generate random permutations.
 `shuf`
@@ -981,14 +1003,14 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console shuf}
 type shuf
-man shuf | trim
-
+man shuf#!enter=FALSE
+C-C#!literal=FALSE
 echo {a..z} | tr ' ' '\n' | shuf | trim 5
 shuf -i 1-100 | trim 5
 ```
 
 
-## skll
+## skll {-}
 
 SciKit-Learn Laboratory.
 `skll`
@@ -999,11 +1021,12 @@ More information: https://skll.readthedocs.org.
 
 ```{console skll}
 type skll
-skll --help | trim
+skll --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## sort
+## sort {-}
 
 Sort lines of text files.
 `sort`
@@ -1013,13 +1036,13 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console sort}
 type sort
-man sort | trim
-
+man sort#!enter=FALSE
+C-C#!literal=FALSE
 echo '3\n7\n1\n3' | sort
 ```
 
 
-## split
+## split {-}
 
 Split a file into pieces.
 `split`
@@ -1029,11 +1052,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console split}
 type split
-man split | trim
+man split#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## sql2csv
+## sql2csv {-}
 
 Execute an SQL query on a database and output the result to a CSV file.
 `sql2csv`
@@ -1043,11 +1067,12 @@ More information: https://csvkit.rtfd.org.
 
 ```{console sql2csv}
 type sql2csv
-sql2csv --help | trim
+sql2csv --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## ssh
+## ssh {-}
 
 OpenSSH remote login client.
 `ssh`
@@ -1057,11 +1082,12 @@ More information: https://www.openssh.com.
 
 ```{console ssh}
 type ssh
-man ssh | trim
+man ssh#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## sudo
+## sudo {-}
 
 Execute a command as another user.
 `sudo`
@@ -1071,11 +1097,12 @@ More information: https://www.sudo.ws.
 
 ```{console sudo}
 type sudo
-man sudo | trim
+man sudo#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## tail
+## tail {-}
 
 Output the last part of files.
 `tail`
@@ -1085,11 +1112,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console tail}
 type tail
-man tail | trim
+man tail#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## tapkee
+## tapkee {-}
 
 An efficient dimension reduction library.
 `tapkee`
@@ -1099,11 +1127,12 @@ More information: http://tapkee.lisitsyn.me.
 
 ```{console tapkee}
 type tapkee
-tapkee --help | trim
+tapkee --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## tar
+## tar {-}
 
 An archiving utility.
 `tar`
@@ -1113,11 +1142,12 @@ More information: https://www.gnu.org/software/tar.
 
 ```{console tar}
 type tar
-man tar | trim
+man tar#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## tee
+## tee {-}
 
 Read from standard input and write to standard output and files.
 `tee`
@@ -1127,11 +1157,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console tee}
 type tee
-man tee | trim
+man tee#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## tr
+## tr {-}
 
 Translate or delete characters.
 `tr`
@@ -1141,11 +1172,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console tr}
 type tr
-man tr | trim
+man tr#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## tree
+## tree {-}
 
 List contents of directories in a tree-like format.
 `tree`
@@ -1155,13 +1187,13 @@ More information: https://launchpad.net/ubuntu/+source/tree.
 
 ```{console tree}
 type tree
-man tree | trim
-
+man tree#!enter=FALSE
+C-C#!literal=FALSE
 tree / | trim
 ```
 
 
-## trim
+## trim {-}
 
 Trim output to a given height and width.
 `trim`
@@ -1170,12 +1202,11 @@ More information: https://github.com/jeroenjanssens/dsutils.
 
 ```{console trim}
 type trim
-
 shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
 ```
 
 
-## uniq
+## uniq {-}
 
 Report or omit repeated lines.
 `uniq`
@@ -1185,11 +1216,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console uniq}
 type uniq
-man uniq | trim
+man uniq#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## unpack
+## unpack {-}
 
 Extract common file formats.
 `unpack`
@@ -1202,7 +1234,7 @@ type unpack
 ```
 
 
-## unrar
+## unrar {-}
 
 Extract files from rar archives.
 `unrar`
@@ -1212,11 +1244,12 @@ More information: http://home.gna.org/unrar.
 
 ```{console unrar}
 type unrar
-man unrar | trim
+man unrar#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## unzip
+## unzip {-}
 
 List, test and extract compressed files in a ZIP archive.
 `unzip`
@@ -1226,11 +1259,12 @@ More information: http://www.info-zip.org/pub/infozip.
 
 ```{console unzip}
 type unzip
-man unzip | trim
+man unzip#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## vw
+## vw {-}
 
 Fast machine learning library for online learning.
 `vw`
@@ -1240,11 +1274,12 @@ More information: https://vowpalwabbit.org.
 
 ```{console vw}
 type vw
-vw --help --quiet | trim
+vw --help --quiet#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## wc
+## wc {-}
 
 Print newline, word, and byte counts for each file.
 `wc`
@@ -1254,11 +1289,12 @@ More information: https://www.gnu.org/software/coreutils.
 
 ```{console wc}
 type wc
-man wc | trim
+man wc#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## which
+## which {-}
 
 Locate a command.
 `which`
@@ -1268,11 +1304,12 @@ More information: .
 
 ```{console which}
 type which
-man which | trim
+man which#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## xml2json
+## xml2json {-}
 
 Convert an XML input to a JSON output, using xml-mapping.
 `xml2json`
@@ -1285,7 +1322,7 @@ type xml2json
 ```
 
 
-## xmlstarlet
+## xmlstarlet {-}
 
 Command line XML/XSLT toolkit.
 `xmlstarlet`
@@ -1295,11 +1332,12 @@ More information: https://sourceforge.net/projects/xmlstar.
 
 ```{console xmlstarlet}
 type xmlstarlet
-man xmlstarlet | trim
+man xmlstarlet#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## xsv
+## xsv {-}
 
 A fast CSV command line toolkit written in Rust.
 `xsv`
@@ -1309,11 +1347,12 @@ More information: https://github.com/BurntSushi/xsv.
 
 ```{console xsv}
 type xsv
-xsv --help | trim
+xsv --help#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## zcat
+## zcat {-}
 
 Decompress and concatenate files to standard output.
 `zcat`
@@ -1323,11 +1362,12 @@ More information: https://www.nongnu.org/zutils/zutils.html.
 
 ```{console zcat}
 type zcat
-man zcat | trim
+man zcat#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
-## zsh
+## zsh {-}
 
 The Z shell.
 `zsh`
@@ -1337,6 +1377,8 @@ More information: https://www.zsh.org.
 
 ```{console zsh}
 type zsh
+man zsh#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
