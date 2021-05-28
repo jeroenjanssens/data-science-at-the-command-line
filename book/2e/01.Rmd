@@ -31,7 +31,7 @@ These are all valid questions.
 In this first chapter I will answer these questions as follows.
 First, I provide a practical definition of data science that will act as the backbone of this book.
 Second, I'll list five important advantages of the command line.
-Third, I demonstrate the power and flexibility of the command line through a real-world use case.
+<!-- TODO put back in when use case is back: Third, I demonstrate the power and flexibility of the command line through a real-world use case. -->
 By the end of this chapter I hope to have convinced you that the command line is indeed worth learning for doing data science.
 
 
@@ -88,7 +88,7 @@ In [Chapter 5](#chapter-5-scrubbing-data), I demonstrate how the command line ca
 ### Exploring Data
 
 Once you have scrubbed your data, you are ready to explore it.
-This is where it gets interesting because here you will get really into your data.
+This is where it gets interesting because when you're exploring, you will truly get to know your data.
 In [Chapter 7](#chapter-7-exploring-data) I show you how the command line can be used to:
 
 - Look at your data
@@ -137,9 +137,9 @@ In [Chapter 6](#chapter-6-managing-your-data-workflow), I demonstrate a command-
 This tool increases the reproducibility of your workflow, not only for you but also for your colleagues and peers.
 
 In [Chapter 8](#chapter-8-parallel-processing), I explain how your commands and tools can be sped up by running them in parallel.
-Using a command-line tool called GNU Parallel [@parallel], you can apply command-line tools to very large datasets and run them on multiple cores and remote machines.
+Using a command-line tool called GNU Parallel [@parallel], you can apply command-line tools to very large datasets and run them on multiple cores or even remote machines.
 
-In [Chapter 10](#chapter-10-polyglot-data-science), I discuss how to employ the power of the command line in other environments and programming languages such as R, Jupyter Notebooks, Julia, and even Apache Spark.
+In [Chapter 10](#chapter-10-polyglot-data-science), I discuss how to employ the power of the command line in other environments and programming languages such as R, RStudio, Python, Jupyter Notebooks, and even Apache Spark.
 
 
 ## What is the Command Line?
@@ -245,7 +245,7 @@ Working on the command line is very different from using a *graphical user inter
 On the command line you do things by typing, whereas with a GUI, you do things by pointing and clicking with a mouse.
 
 Everything that you type manually on the command line can also be automated through scripts and tools.
-This makes it very easy to re-run your commands in case you made a mistake, when the dataset changed, or because your colleague wants to perform the same analysis.
+This makes it very easy to re-run your commands in case you made a mistake, when the input data has changed, or because your colleague wants to perform the same analysis.
 Moreover, your commands can be run at specific intervals, on a remote server, and in parallel on many chunks of data (more on that in Chapter 8).
 
 Because the command line is automatable, it becomes scalable and repeatable.
@@ -269,19 +269,20 @@ You can also create your own tools, allowing you to extending the effective func
 
 Because the command line comes with any Unix-like operating system, including Ubuntu Linux and macOS, it can be found in many places.
 Plus, 100% of the top 500 supercomputers are running Linux.[^2]
-So, if you ever get your hands on one of those supercomputers (or if you ever find yourself in Jurassic Park with the doors locks not working), you better know your way around the command line!
+So, if you ever get your hands on one of those supercomputers (or if you ever find yourself in Jurassic Park with the doorlocks not working), you better know your way around the command line!
 
 But GNU/Linux not only runs on supercomputers.
 It also runs on servers, laptops, and embedded systems.
 These days, many companies offer cloud computing, where you can easily launch new machines on the fly.
-If you ever log in to such a machine (or a server in general), there’s a good chance that you’ll arrive at the command line.
+If you ever log in to such a machine (or a server in general), it's almost certain that you’ll arrive at the command line.
 
 It's also important to note that the command line isn't just a hype.
 This technology has been around for more than five decades, and I'm convinced that it's here to stay for another five.
 Learning how to use the command line (for data science and in general) is therefore a worthwhile investment.
 
 
-## A Real-world Use Case
+<!--
+A Real-world Use Case
 
 In the previous sections, I’ve given you a definition of data science and explained to you why the command line can be a great environment for doing data science.
 Now it’s time to demonstrate the power and flexibility of the command line through a real-world use case.
@@ -303,6 +304,7 @@ csvlook
 In this section we’ve peeked at some important concepts and some exciting command-line tools.
 Don’t worry if some things don’t make sense yet.
 Most of the concepts will be discussed in [Chapter 2](#chapter-2-getting-started), and in the subsequent chapters I’ll go into more detail for all the command-line tools used in this section.
+-->
 
 ## Summary
 

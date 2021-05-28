@@ -17,8 +17,8 @@ console_start()
 
 # Creating Command-line Tools {#chapter-4-creating-reusable-command-line-tools}
 
-Throughout the book, I'll introduce you to a lot of commands and pipelines that basically fit on one line.
-Let's call those one-liners.
+Throughout the book, I'll introduce you to many commands and pipelines that basically fit on one line.
+These are known as one-liners.
 Being able to perform complex tasks with just a one-liner is what makes the command line powerful.
 It’s a very different experience from writing and using traditional programs.
 
@@ -35,7 +35,7 @@ This means that you can easily edit and reuse that code.
 If the code has parameters it can even be generalized and re-applied to problems that follow a similar pattern.
 
 Command-line tools have the best of both worlds: they can be used from the command line, accept parameters, and only have to be created once.
-In this chapter you’re going to get familiar with creating command-line tools in two ways.
+In this chapter, you’re going to get familiar with creating command-line tools in two ways.
 First, I explain how to turn those one-liners into reusable command-line tools.
 By adding parameters to your commands, you can add the same flexibility that a programming language offers.
 Subsequently, I demonstrate how to create reusable command-line tools from code that's written in a programming language.
@@ -71,7 +71,7 @@ l
 ## Converting One-liners into Shell Scripts
 
 In this section I'm going to explain how to turn a one-liner into a reusable command-line tool.
-Let's say that you would like to get the top most frequent words used in a text.
+Let's say that you would like to get the top most frequent words used in a piece of text.
 Take the book *Alice’s Adventures in Wonderland* by Lewis Carroll, which is, like many other great books, freely available on Project Gutenberg.
 
 ```{console alice_txt}

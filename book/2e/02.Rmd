@@ -16,24 +16,31 @@ console_start()
 # Getting Started {#chapter-2-getting-started}
 
 In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line.
-The prerequisites fall into two parts: (1) having a proper environment with all the command-line tools that we employ in this book installed, and (2) understanding the essential concepts that come into play when using the command line.
+The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use troughout this book, and (3) understanding the essential concepts that come into play when using the command line.
 
-First, I describe how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools.
-Subsequently, I explain the essential command-line concepts through examples.
+First, I describe how to download the datasets.
+Second, I explain how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools.
+Subsequently, I go over the essential command-line concepts through examples.
 
 By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.
 
 
 ## Getting the Data
 
-One directory for each chapter
-data.zip
-unzip
+The datasets that I use in this book can be downloaded as a single ZIP file. 
+
+1. Download the ZIP file from https://www.datascienceatthecommandline.com/2e/data.zip.
+2. Create a new directory. You can give this directory any name you want, but I recommend you stick to lowercase letters, numbers, and maybe a hyphen or underscore so that it's easier to work with at the command line. For example: *dsatcl2e-data*. Remember where this directory is.
+3. Move the ZIP file to that new directory and unpack it.
+4. This directory now contains one subdirectory per chapter.
+
+In the next section I explain how to install the environment containing all the command-line tools to work with this data.
+
 
 ## Installing the Docker Image {#docker-image}
 
 In this book we use many different command-line tools.
-Linux often comes with a whole bunch of command-line tools pre-installed and offers many packages that contain other, relevant tools.
+Linux often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools.
 Installing these packages yourself is often not too difficult.
 However, we'll also use tools that are not available as packages and require a more manual, and more involved, installation.
 In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
@@ -207,7 +214,9 @@ cd ch02
 
 The part after `cd` specifies to which directory you want to navigate to.
 Values that come after the command are called command-line *arguments* or *options*.
-The two dots refer to the parent directory.
+Two dots refer to the parent directory. 
+One dot, by the way, refers to the current directory. 
+While `cd .` wouldn't have any effect, you'll still see one dot being used in other places.
 Let’s try a different command:
 
 ```{console}
@@ -332,7 +341,7 @@ seq 5
 ```
 
 The output of a command-line tool is by default passed on to the terminal, which displays it on our screen.
-We can *pipe* the ouput of `seq` to `grep` to filter lines on a pattern.
+We can *pipe* the output of `seq` to `grep` to filter lines on a pattern.
 Imagine that we only want to see numbers contain a "3".
 We can combine `seq` and `grep` as follows:
 
@@ -349,6 +358,7 @@ seq 100 | grep 3 | wc -l
 The option `-l` specifies that `wc` should only output the number of lines that are pass into it.
 By default it also returns the number of characters and words.
 
+<!-- TODO: Add command subsitution -->
 
 ### Redirecting Input and Output
 
@@ -357,35 +367,35 @@ You can also save this output to a file.
 This is called *output redirection*, and works as follows:
 
 ```{console seq_redirect}
-seq 10 > ten-numbers
-cat ten-numbers
+seq 10 > ten-numbers.txt
+cat ten-numbers.txt
 ```
 
-Here, we save the output of the `seq` tool to a file named *ten-numbers* in the directory */data/ch02*.
+Here, we save the output of the `seq` tool to a file named *ten-numbers.txt* in the directory */data/ch02*.
 If this file does not exist yet, it will be created.
 If this file already exists, its contents are overwritten.
 You can also append the output to a file with `>>`, meaning the output is added after the original contents:
 
 ```{console echo_append}
-echo -n "Hello" > greeting
-echo " World" >> greeting
+echo -n "Hello" > greeting.txt
+echo " World" >> greeting.txt
 ```
 
 The tool echo just outputs the value you specify.
 The `-n` option, which stands for *newline*, specifies that `echo` should *not* output a trailing newline.
 
 Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage.
-To use the contents of the file *greeting* again, we can use `cat`, which reads a file prints it.
+To use the contents of the file *greeting.txt* again, we can use `cat`, which reads a file prints it.
 
 ```{console}
-cat greeting
-cat greeting | wc -w
+cat greeting.txt
+cat greeting.txt | wc -w
 ```
 
 (Note that the `-w` option indicates `wc` to only count words.) The same result can be achieved with the following notation:
 
 ```{console}
-< greeting wc -w
+< greeting.txt wc -w
 ```
 
 This way, you are directly passing the file to the standard input of `wc` without running an additional process.
@@ -393,7 +403,7 @@ Like many command-line tools, `wc` allows one or more filenames to be specified 
 For example:
 
 ```{console}
-wc -w greeting ten-numbers
+wc -w greeting.txt ten-numbers.txt
 ```
 
 Note that in this case, `wc` also outputs the name of the files.
@@ -509,7 +519,7 @@ You can search by pressing **`/`** and exit by pressing **`q`**.
 Try to find the appropriate section for `cd`.
 
 Newer command-line tools often lack a manual page as well.
-In that case, your best bet is to invoke the tool with the `--help` option (and sometimes the `-h` option).
+In that case, your best bet is to invoke the tool with the `--help` option or the short-hand version which is `-h`.
 For example:
 
 ```{console}
@@ -521,3 +531,10 @@ However, the corresponding man page often provides more information.
 If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet.
 In the appendix, there’s a list of all command-line tools used in this book.
 Besides how each command-line tool can be installed, it also shows how you can get help.
+
+## Summary
+
+
+## For Further Exploration
+
+

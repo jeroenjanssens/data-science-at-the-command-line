@@ -25,8 +25,8 @@ Almost every command-line tool takes text as input, produces text as output, or 
 This is the main reason why command-line tools can work so well together.
 However, as we'll see, even just text can come in multiple forms.
 
-Data can be obtained in several ways---for example by downloading it from a server, by querying a database, or by connecting to a Web API.
-Sometimes, the data comes in a compressed form or in a binary format such as Microsoft Excel.
+Data can be obtained in several ways---for example by downloading it from a server, querying a database, or connecting to a Web API.
+Sometimes, the data comes in a compressed form or in a binary format such as a Microsoft Excel Spreadsheet.
 In this chapter, I discuss several tools that help tackle this from the command line, including: `curl`[@curl], `in2csv`[@in2csv], `sql2csv`[@sql2csv], and `tar`[@tar].
 
 
@@ -175,7 +175,6 @@ If you don't, you can get something like:
 
 ```{console curl_bitly}
 curl -s https://bit.ly/2XBxvwK
-
 ```
 
 Sometimes you get nothing back, just like when we follow the URL mentioned above:
@@ -285,6 +284,7 @@ Trust me, you'll get the hang of it.
 Luckily, there is a command-line tool called `in2csv`, that converts Microsoft Excel spreadsheets to CSV files.
 CSV stands for comma-separated values.
 Working with CSV can be tricky because it lacks a formal specification.
+<!-- TODO: MUST: check and possibly fix reference? -->
 [@shafranovich2005common] defines the CSV format according to the following three points:
 
 1.  Each record is located on a separate line, delimited by a line break (`␊`). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:
@@ -365,10 +365,10 @@ Fortunately, there is a command-line tool called `sql2csv`, which is part of the
 It works with many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase.
 The output of `sql2csv` is, as its name suggests, in CSV format.
 
-We can obtain data from relational databases by executing a *SELECT* query on them.
-(`sql2csv` also support *INSERT*, *UPDATE*, and *DELETE* queries, but that's not the purpose of this chapter.)
+We can obtain data from relational databases by executing a *`SELECT`* query on them.
+(`sql2csv` also support *`INSERT`*, *`UPDATE`*, and *`DELETE`* queries, but that's not the purpose of this chapter.)
 
-`sql2csv` needs two arguments: `--db`, which specifies the database URL, of which the typical form is: `dialect+driver://username:password@host:port/database` and `--query`, which contains the *SELECT* query.
+`sql2csv` needs two arguments: `--db`, which specifies the database URL, of which the typical form is: `dialect+driver://username:password@host:port/database` and `--query`, which contains the *`SELECT`* query.
 For example, given an SQLite database that contains the standard datasets from R[^3] , I can select all the rows from the table *mtcars* and sort them by the *mpg* column as follows:
 
 ```{console sql2csv}
@@ -380,7 +380,7 @@ This SQLite database is simply a local file, so in this I don't need to specify 
 If you wish to query the database of your employer, you'd of course need know how you can access it and you'd need the permission to do so.
 
 
-## Calling web APIs
+## Calling Web APIs
 
 In the previous section I explained how to download files from the Internet.
 Another way data can come from the Internet is through a web API, which stands for *Application Programming Interface*.
@@ -401,7 +401,7 @@ The data is piped to a command-line tool `jq` just to display it in a nice way.
 
 ### Authentication
 
-Some web APIs require you to authenticate (that is, prove your identity) before you can consume their output.
+Some web APIs require you to authenticate (that is, to prove your identity) before you can consume their output.
 There are several ways to do this.
 Some web APIs use API keys while others use the OAuth protocol.
 News API, an independent source of headlines and news articles, is a great example.
