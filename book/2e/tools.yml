@@ -360,6 +360,17 @@ find:
     find /data -type f -name '*.csv' -size -3
   help: man
 
+fold:
+  author:
+  - David MacKenzie
+  bib_title: '{fold} -- Wrap each input line to fit in specified width'
+  cite: true
+  description: Wrap each input line to fit in specified width
+  url: https://www.gnu.org/software/coreutils
+  version: '8.30'
+  year: 2020
+  help: man
+
 for:
   builtin: true
   description: "Execute commands for each member in a list. In Chapter 8, I discuss the advantages of using `parallel` instead of `for`"

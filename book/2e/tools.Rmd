@@ -501,6 +501,21 @@ find /data -type f -name '*.csv' -size -3
 ```
 
 
+## fold {-}
+
+Wrap each input line to fit in specified width.
+`fold`
+(version 8.30)
+by David MacKenzie (2020).
+More information: https://www.gnu.org/software/coreutils.
+
+```{console fold}
+type fold
+man fold#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
 ## for {-}
 
 Execute commands for each member in a list. In Chapter 8, I discuss the advantages of using `parallel` instead of `for`.

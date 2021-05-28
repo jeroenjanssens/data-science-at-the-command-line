@@ -384,7 +384,7 @@ Let's demonstrate this by creating a few common data visualizations.
 
 ### Bar chart
 
-```{console plot_bar_ansi, trailing_spaces=TRUE, remove=-1}
+```{console plot_bar_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot -x time tips.csv
 ```
 
@@ -405,7 +405,7 @@ The column type that is specified with the `-x` option is automatically detected
 In this it's a histogram because *OBS_VALUE* is continuous.
 If the `--fill` option is specified, it creates a stacked histogram.
 
-```{console plot_hist_ansi, trailing_spaces=TRUE, remove=-1}
+```{console plot_hist_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot -x obs_value --fill unit venture.csv
 ```
 
@@ -421,7 +421,7 @@ knitr::include_graphics("images/obs-histogram.png")
 Something strange is going on with *OBS_VALUE*. It takes on vastly different values depending on the *UNIT*.
 Let's invoke `ggplot2` directly to investigate:
 
-```{console plot_facets_ansi, trailing_spaces=TRUE, remove=-1}
+```{console plot_facets_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 cat venture.csv |
 rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) +
 geom_histogram() +
@@ -442,7 +442,7 @@ knitr::include_graphics("images/obs-facets.png")
 ### Density plot
 
 
-```{console plot_density_ansi, trailing_spaces=TRUE, remove=-1}
+```{console plot_density_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot -x bill --geom density --title "Density plot" tips.csv
 ```
 

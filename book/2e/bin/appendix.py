@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from yaml import safe_load
-from sys import stdout
+from sys import stdout, stderr
 
 
 def combine(items):
@@ -60,7 +60,8 @@ unalias parallel
     with open("../tools.yml") as file:
         tools = safe_load(file)
 
-    for name, tool in sorted(tools.items(), key = lambda x: x[0].lower()):
+    for i, (name, tool) in enumerate(sorted(tools.items(), key = lambda x: x[0].lower()), start=1):
+        stderr.write(f"{i}: {name}\n")
         stdout.write(f"## {name} {{-}}\n\n")
         stdout.write(f"{tool['description']}.\n`{name}`\n")
         if tool.get("builtin", False):
