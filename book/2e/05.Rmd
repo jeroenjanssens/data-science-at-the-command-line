@@ -947,8 +947,18 @@ That concludes the demonstration of conversion XML/HTML to JSON to CSV.
 While `jq` can perform much more operations, and while there exist specialized tools to work with XML data, in my experience, converting the data to CSV format as quickly as possible tends to work well.
 This way, you can spend more time becoming proficient at generic command-line tools, rather than very specific tools.
 
-## Further Reading
 
-* Molinaro, Anthony. 2005. <em>SQL Cookbook</em>. O’Reilly Media.
-* Goyvaerts, Jan, and Steven Levithan. 2012. <em>Regular Expressions Cookbook</em>. 2nd Ed. O’Reilly Media.
-* Dougherty, Dale, and Arnold Robbins. 1997. <em>Sed &amp; Awk</em>. 2nd Ed. O’Reilly Media.
+## Summary
+
+In this chapter we've looked at cleaning or scrubbing data.
+As we've seen there is not a single tool that can magically get rid of all the messiness of our data; we often need to combine multiple different tools to get the desired result.
+It's important to keep in mind that especially the classic command-line tools are unable to interpret structured data.
+Luckily there exist tools that convert one data format such as JSON and XML into another data format such as CSV.
+In the next chapter, which is again an intermezzo chapter, I'm going to show you how you can manage your project using `make`.
+You're free to skip this chapter if you can't wait to start exploring and visualizing your data in Chapter 7.
+
+
+## For Further Exploration
+
+- I wish I could've explain more about `awk`. It's such a powerful tool and programming language. I highly recommend that you take the time to learn it. Two good resources are the book said *sed & awk* by Doherty and Robbins and the online [GNU Awk User's Guide](https://www.gnu.org/software/gawk/manual/gawk.html).
+- In this chapter I have used regular expressions in a couple of places. A tutorial about them is unfortunately beyond the scope of this book. Because regular expressions can be used in many different tools I can recommend that you learn about them. A good book that I can recommend is *Regular Expressions Cookbook* by Jan Goyvaerts and Steven Levithan.

@@ -281,40 +281,43 @@ This technology has been around for more than five decades, and I'm convinced th
 Learning how to use the command line (for data science and in general) is therefore a worthwhile investment.
 
 
-<!--
-A Real-world Use Case
+<!-- A Real-world Use Case -->
 
-In the previous sections, I’ve given you a definition of data science and explained to you why the command line can be a great environment for doing data science.
-Now it’s time to demonstrate the power and flexibility of the command line through a real-world use case.
-I'll go pretty fast, so don't worry if some things don't make sense yet.
+<!-- In the previous sections, I’ve given you a definition of data science and explained to you why the command line can be a great environment for doing data science. -->
+<!-- Now it’s time to demonstrate the power and flexibility of the command line through a real-world use case. -->
+<!-- I'll go pretty fast, so don't worry if some things don't make sense yet. -->
 
-```{console}
-curl -sL 'https://www.openml.org/data/get_csv/21854866/penguins.arff' |
-tee penguin.csv | trim
-sed -i -re '1s/_(mm|g)//g' penguin.csv
-```
+<!-- ```{console} -->
+<!-- curl -sL 'https://www.openml.org/data/get_csv/21854866/penguins.arff' | -->
+<!-- tee penguin.csv | trim -->
+<!-- sed -i -re '1s/_(mm|g)//g' penguin.csv -->
+<!-- ``` -->
 
-```{console}
-cat penguin.csv |
-xsv sample 15 |
-xsv select species,culmen_length,culmen_depth,flipper_length,body_mass |
-csvlook
-```
+<!-- ```{console} -->
+<!-- cat penguin.csv | -->
+<!-- xsv sample 15 | -->
+<!-- xsv select species,culmen_length,culmen_depth,flipper_length,body_mass | -->
+<!-- csvlook -->
+<!-- ``` -->
 
-In this section we’ve peeked at some important concepts and some exciting command-line tools.
-Don’t worry if some things don’t make sense yet.
-Most of the concepts will be discussed in [Chapter 2](#chapter-2-getting-started), and in the subsequent chapters I’ll go into more detail for all the command-line tools used in this section.
--->
+<!-- In this section we’ve peeked at some important concepts and some exciting command-line tools. -->
+<!-- Don’t worry if some things don’t make sense yet. -->
+<!-- Most of the concepts will be discussed in [Chapter 2](#chapter-2-getting-started), and in the subsequent chapters I’ll go into more detail for all the command-line tools used in this section. -->
+
 
 ## Summary
 
+In this chapter I have introduced you to OSEMN model for doing the data science, which I use as a guide throughout the book.
+I have provided some background about the Unix command line and hopefully convinced you that it's a suitable environment for doing data science.
+In the next chapter I'm going to show you how to get started by installing the tools and explaining the fundamental concepts.
 
 
 ## For Further Exploration
 
-
-
+- The book *UNIX: A History and a Memoir* by Brian W. Kernighan tells the story of Unix, explaining what it is, how it was developed, and why it matters.
+- In 2018 I gave a presentation titled *50 Reasons to Learn the Shell for Doing Data Science* at Strata London. You can [read the slides](https://datascienceatthecommandline.com/resources/50-reasons.pdf) if you need even more convincing.
+- The short but sweet book *Thinking with Data* by Max Shron focuses on the *why* instead of the *how* and provides a framework for defining your data science project that will help you ask the right questions and solve the right problems.
 
 [^1]: The development of the UNIX operating system started back in 1969. It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3](#essential-concepts), was added in 1973.
 
-[^2]: See [this press release](http://top500.org/blog/lists/2013/11/press-release).
+[^2]: See [the 56th edition of the TOP500](https://www.top500.org/lists/top500/2020/11/) from November 2020.

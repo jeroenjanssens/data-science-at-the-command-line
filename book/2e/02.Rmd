@@ -16,7 +16,7 @@ console_start()
 # Getting Started {#chapter-2-getting-started}
 
 In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line.
-The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use troughout this book, and (3) understanding the essential concepts that come into play when using the command line.
+The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use throughout this book, and (3) understanding the essential concepts that come into play when using the command line.
 
 First, I describe how to download the datasets.
 Second, I explain how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools.
@@ -532,9 +532,30 @@ If, after trying these three approaches, you are still stuck, then it is perfect
 In the appendix, there’s a list of all command-line tools used in this book.
 Besides how each command-line tool can be installed, it also shows how you can get help.
 
+Manual pages can be quite verbose and difficult to read.
+The tool `tldr` [@tldr] is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional manual pages.
+Here's an example showing the tldr page for `tar`:
+
+```{console, include=FALSE} 
+tldr --update
+```
+
+```{console}
+tldr tar | trim 20
+```
+
+As you can see, rather than listing the many options alphabetically like `man` often does, `tldr` cuts to the chase by giving you a list of practical examples.
+
+
 ## Summary
+
+In this chapter I explained how to get all the required command-line tools by installing a Docker image.
+I also went over some essential command-line concepts and how to get help.
+Now that you have all the necessary ingredients, you're ready to con with the first step of the OSEMN model for data science, which is to obtaining data.
 
 
 ## For Further Exploration
 
-
+- The subtitle of this book pays homage to the epic *Unix Power Tools* by Jerry Peek, Shelley Powers, Tim O'Reilly, and Mike Loukides. And rightly so. In 51 chapters, spanning over 1000 pages, it covers just about everything there's to know about Unix. It weighs nearly 2 kg, so you might want to consider getting the ebook.
+- The website [explainshell](https://explainshell.com/) parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages. 
+- Docker is truly a magic piece of software. In this chapter I've briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to [learn how to create a your own Docker images](https://www.docker.com/101-tutorial) yourself.

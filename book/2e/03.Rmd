@@ -491,12 +491,17 @@ Sure, it's probably not a good source of data, but there's nothing wrong with en
 
 ## Summary
 
+Congratulations, you have finished the first step of the OSEMN model.
+You've learned a variety of ways to obtain data, ranging from simply downloading to querying a relational database.
+In the next chapter, which is an intermezzo chapter, I'll teach you how to create your own command-line tools.
+Feel free to skip this and go to [Chapter 5](#chapter-5-scrubbing-data) (the second step of the OSEMN model) if you cannot wait to learn about scrubbing data.
 
 
 ## For Further Exploration
 
-
-
+- Looking for a dataset to practice on? The GitHub repository [*Awesome Public Datasets*](https://github.com/awesomedata/awesome-public-datasets) lists hundreds of high-quality datasets that are publicly available.
+- Or perhaps you'd rather practice with an API? The GitHub repority [*Public APIs*](https://github.com/public-apis/public-apis) lists many free APIs. [City Bikes](http://api.citybik.es/v2/) and [The One API](https://the-one-api.dev/) are among my favorites.
+- Writing SQL queries to obtain data from a relational database remains an important skill to have. The first 15 lessons of the book *Sams Teach Yourself SQL in 10 Minutes a Day* by Ben Forta form a great resource to learn about the *`SELECT`* statement and its filtering, grouping, and sorting capabilities. 
 
 [^3]: Available on [GitHub](https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite).
 

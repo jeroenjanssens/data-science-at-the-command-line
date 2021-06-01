@@ -234,12 +234,23 @@ make
 No surprises here. Because we didn't specify any target, the *all* target will be built, which, in turn, causes both the *top10* and *heights.png* targets to be built. The output of the former is printed to standard output and the latter creates a file *heights.png*. The *data* directory is created only once, just like the csv file is only downloaded once.
 
 
-## Discussion
+There’s nothing more fun than just playing with your data and forgetting everything else.
+But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a *Makefile*.
+Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps.
+Just as with your command-line toolbox, which you expand over time, the same holds for `make` workflows.
+The more steps you have defined, the easier it gets to keep doing it, because very often you can reuse certain steps.
+I hope that you will get used to `make`, and that it will make your life easier.
 
-One of the beauties of the command line is that it allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It is therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.
 
-I have shown you that just putting every command in one bash script is suboptimal. I have proposed to use `make` as a command-line tool to manage your data workflow. By using a running example, I have shown you how to define steps and the dependencies between them. I’ve also discussed how to use variables and tags.
+## Summary
 
-There’s nothing more fun than just playing with your data and forgetting everything else. But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a *Makefile*. Not only will it make your life easier, but you will also start thinking about your data workflow in terms of steps. Just as with your command-line toolbox, which you expand over time, the same holds for `make` workflows. The more steps you have defined, The easier it gets to keep doing it, because very often you can reuse certain steps. I hope that you will get used to `make`, and that it will make your life easier.
+One of the beauties of the command line is that it allows you to play with your data.
+You can easily execute different commands and process different data files.
+It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result.
+It is therefore very important to document your steps every once in a while.
+This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.
 
+In this chapter I've shown you that just putting every command in one bash script is suboptimal.
+Instead, I proposed to use `make` as a command-line tool to manage your data workflow.
+The next chapter covers the third step of the OSEMN model for data science namely exploring data.
 

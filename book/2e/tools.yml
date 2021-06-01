@@ -956,6 +956,19 @@ tr:
   year: 2018
   help: man
 
+tldr:
+  author:
+  - Owen Voke
+  bib_title: '{tldr} -- Collaborative cheatsheets for console commands'
+  cite: true
+  description: Collaborative cheatsheets for console commands
+  url: https://tldr.sh
+  version: 3.3.7
+  year: 2021
+  help: '--help'
+  example: |
+    tldr tar | trim
+
 tree:
   author:
   - Steve Baker

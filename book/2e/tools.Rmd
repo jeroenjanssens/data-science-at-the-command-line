@@ -1204,6 +1204,22 @@ C-C#!literal=FALSE
 ```
 
 
+## tldr {-}
+
+Collaborative cheatsheets for console commands.
+`tldr`
+(version 3.3.7)
+by Owen Voke (2021).
+More information: https://tldr.sh.
+
+```{console tldr}
+type tldr
+tldr --help#!enter=FALSE
+C-C#!literal=FALSE
+tldr tar | trim
+```
+
+
 ## tr {-}
 
 Translate or delete characters.

@@ -350,3 +350,17 @@ I think it's fantastic that the developers of Apache Spark added the ability to 
 <!-- TODO: MUST: Write Summary or Conclusion -->
 <!-- # Summary -->
 <!-- TODO: MUST: Talk about other combinations between languages. This is already possible with this approah, but there are tighter integrations. -->
+
+## Summary
+
+In this chapter I have demonstrated several situations where the command line can be leveraged including programming languages and other environments.
+I think it's important to realize that the command line doesn't exist in a vacuum.
+I hope that this chapter has demonstrated that what matters most is that you used tools which ever get the job done.
+And sometimes that is a combination of tools.
+Now that we've had all the four OSEMN chapters and the four intermezzo chapters, it's time to wrap this up and conclude in the final chapter.
+
+
+## For Further Exploration
+
+- There exist solutions for integrating two programming languages, without the use of the command line. For example the [`reticulate` package](https://rstudio.github.io/reticulate/) in R allows you to interface with Python directly.
+

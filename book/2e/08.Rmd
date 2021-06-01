@@ -712,16 +712,16 @@ csvlook
 ```
 
 
-## Discussion
+## Summary
 
 As data scientists, we work with data, and sometimes a lot of data.
 This means that sometimes you need to run a command multiple times or distribute data-intensive commands over multiple cores.
 In this chapter I have shown you how easy it is to parallelize commands.
-`parallel` is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them over multiple cores and remote machines. It offers a lot of functionality and in this chapter I’ve only been able to scratch the surface. Some features of `parallel` are that I haven’t covered:
+`parallel` is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them over multiple cores and remote machines. It offers a lot of functionality and in this chapter I’ve only been able to scratch the surface.
+In the next chapter I'm going to cover the fourth step of the OSEMN model namely modeling data.
 
-- Different ways of specifying input
-- Keep a log of all the jobs
-- Only start new jobs when the machine is under a certain load
-- Timeout, resume, and retry jobs
 
-Once you have a basic understanding of `parallel` and its most important options, I recommend that you take a look at its tutorial listed in the Further Reading section.
+## For Further Exploration
+
+- Once you have a basic understanding of `parallel` and its most important options, I recommend that you take a look at [its online tutorial](https://www.gnu.org/software/parallel/parallel_tutorial.html). You'll learn, among other things, how to specify different ways of specifying input, keep a log of all the jobs, and how to timeout, resume, and retry jobs. As Ole Tange says, "your command line will love you for it."
+

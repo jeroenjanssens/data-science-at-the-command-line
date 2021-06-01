@@ -453,7 +453,20 @@ jq -r '.[] | "\(.learner_name):\n\(.result_table)\n"' output/*.json
 ```
 
 
-## Further Reading
+## Summary
+
+In this chapter we've looked at modeling data.
+Through examples I dived into three different machine learning tasks namely dimensionality reduction which is unsupervised and regression and classification which are both supervised.
+A proper machine learning tutorial is unfortunately beyond the scope of this book.
+In the next section I have a couple of recommendations in case you want to learn more about machine learning.
+This was the fourth and last step of the OSEMN model for data science that I'm covering in this book.
+The next chapter is the last intermezzo chapter and will be about leveraging the command line elsewhere.
+
+## For Further Exploration
+
+- 
+-
+- 
 
 * Cortez, P., A. Cerdeira, F. Almeida, T. Matos, and J. Reis. 2009. “Modeling Wine Preferences by Data Mining from Physicochemical Properties.” <em>Decision Support Systems</em> 47 (4). Elsevier:547–53.
 * Pearson, K. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2 (11):559–72.

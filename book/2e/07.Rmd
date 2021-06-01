@@ -456,14 +456,16 @@ knitr::include_graphics("images/bill-density.png")
 
 ### Summary
 
+In this chapter we've looked at various ways to explore your data.
 Both textual and graphical data visualizations have their pros and cons.
 The latter are obviously of much higher quality.
 The only down-side would be that the output is not viewable from the command line.
 This is where textual visualizations may come in handy.
 At least `rush` has, thanks to `R` and `ggplot2`, a consistent syntax for both types.
+The next chapter is, once again, an intermezzo chapter in which I discuss how you can speed up your commands and pipelines.
+Feel free to read that chapter at a later point if you can't wait to start modeling your data in Chapter 9.
 
-## Further Reading
 
-* Wickham, Hadley. 2009. <em>ggplot2: Elegant Graphics for Data Analysis</em>. Springer.
-* Janert, Philipp K. 2009. <em>Gnuplot in Action</em>. Manning Publications.
-* Tukey, John W. 1977. <em>Exploratory Data Analysis</em>. Pearson.
+## For Further Exploration
+
+- A proper `ggplot2` tutorial is unfortunately beyond the scope of this book. If you want to get better at visualizing your data I strongly recommend that you invest some time in understanding the power and beauty of the grammar of graphics. Chapters 3 and 28 of the book [*R for Data Science*](https://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund are an excellent resource.
