@@ -118,3 +118,6 @@ lab:
 
 appendix:
 	cd book/2e/bin && ./appendix.py > ../tools.Rmd
+
+figure-log:
+	cd book/2e && cat {01..11}.utf8.md | /usr/local/bin/pandoc --to muse --filter bin/pygments-filter.py > /dev/null
