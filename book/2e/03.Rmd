@@ -333,9 +333,6 @@ csvgrep top2000.csv -c ARTIEST -r '^Queen$' | csvlook -I
 ```
 
 By the way, the tools `in2csv`, `csvgrep`, and `csvlook` are part of CSVkit, which is a collection of command-line tools to work with CSV data.
-CSVkit will be used quite often in this book because it has so many valuable tools.
-If you’re running the Data Science Toolbox, you already have CSVkit installed.
-Otherwise, see the appendix for instructions on how to install it.
 
 The format of the file is automatically determined by the extension, *.xlsx* in this case.
 If you were to pipe the data into `in2csv`, you would have to specify the format explicitly.

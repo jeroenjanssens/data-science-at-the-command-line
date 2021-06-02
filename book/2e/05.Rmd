@@ -960,5 +960,5 @@ You're free to skip this chapter if you can't wait to start exploring and visual
 
 ## For Further Exploration
 
-- I wish I could've explain more about `awk`. It's such a powerful tool and programming language. I highly recommend that you take the time to learn it. Two good resources are the book said *sed & awk* by Doherty and Robbins and the online [GNU Awk User's Guide](https://www.gnu.org/software/gawk/manual/gawk.html).
+- I wish I could've explained more about `awk`. It's such a powerful tool and programming language. I highly recommend that you take the time to learn it. Two good resources are the book said *sed & awk* by Doherty and Robbins and the online [GNU Awk User's Guide](https://www.gnu.org/software/gawk/manual/gawk.html).
 - In this chapter I have used regular expressions in a couple of places. A tutorial about them is unfortunately beyond the scope of this book. Because regular expressions can be used in many different tools I can recommend that you learn about them. A good book that I can recommend is *Regular Expressions Cookbook* by Jan Goyvaerts and Steven Levithan.

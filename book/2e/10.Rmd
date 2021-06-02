@@ -34,10 +34,10 @@ As for me, when I'm analysing some data I often use the RStudio IDE and when I'm
 I use whatever helps me to get the job done.
 
 <!-- Why be polyglot? -->
-I find it comforting to know that the command-line is often within arm's reach, without having to switch to a different application.
+I find it comforting to know that the command line is often within arm's reach, without having to switch to a different application.
 It allows me to quickly run a command without switching to a separate application and break my workflow.
 Examples are downloading files with `curl`, inspecting a piece of data with `head`, creating a backup with `git`, and compiling a website with `make`.
-Generally speaking, tasks that normally require a lot of code or simply cannot be done at all without the commandl line.
+Generally speaking, tasks that normally require a lot of code or simply cannot be done at all without the command line.
 
 <!-- A word of caution -->
 <!-- Language wars are boring and unproductive. -->
@@ -75,7 +75,6 @@ The instructions to get these files are in [Chapter 2](#chapter-2-getting-starte
 <!-- * filter (send data to and receive data from command) -->
 
 <!-- Shell capabilities or not? -->
-
 
 
 

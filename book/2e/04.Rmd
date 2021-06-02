@@ -18,7 +18,7 @@ console_start()
 # Creating Command-line Tools {#chapter-4-creating-reusable-command-line-tools}
 
 Throughout the book, I'll introduce you to many commands and pipelines that basically fit on one line.
-These are known as one-liners.
+These are known as one-liners or pipelines.
 Being able to perform complex tasks with just a one-liner is what makes the command line powerful.
 It’s a very different experience from writing and using traditional programs.
 
@@ -135,7 +135,6 @@ Or imagine that you wanted the top 10 words of a news website on a hourly basis.
 In those cases, it would be best to have this one-liner as a separate building block that can be part of something bigger.
 To add some flexibility to this one-liner in terms of parameters, let's turn it into a shell script.
 
-Because we use Bash as our shell, the script will be written in the programming language Bash.
 This allows us to take the one-liner as the starting point, and gradually improve on it.
 To turn this one-liner into a reusable command-line tool, I’ll walk you through the following six steps:
 
@@ -271,12 +270,11 @@ Although we can already execute the file on its own, we should add a so-called s
 The *shebang* is a special line in the script that instructs the system which executable it should use to interpret the commands.
 
 The name *shebang* comes from the first two characters: a hash (she) and an exclamation mark (bang): `#!`.
-It is not a good idea to leave it out, as we have done in the previous step, because then the behavior of the script is undefined.
-The Bash shell uses the executable */bin/sh* by default.
-Other shells may have different defaults.
-In our case we want to use `bash` to interpret our commands.
+It's not a good idea to leave it out, as we have done in the previous step, because each shell has a different default executable.
+The Z shell, the one we're using throughout the book, uses the executable */bin/sh* by default if no shebang is defined.
+In this case I'd like `bash` to interpret the commands as that will give us some more functionality than `sh`.
 
-Again, you're free to use whatever editor you like, but I'm going to stick with `nano`.
+Again, you're free to use whatever editor you like, but I'm going to stick with `nano`, which is installed in the Docker image.
 
 ```{console nano_start}
 cp -v top-words-{2,3}.sh
@@ -401,7 +399,7 @@ However, if your command-line tool could be applied in multiple situations, then
 
 To accomplish this, Bash needs to know where to look for your command-line tools.
 It does this by traversing a list of directories which are stored in an environment variable called *PATH*.
-In a fresh Data Science Toolbox, the *PATH* looks like this:
+In a fresh Docker container, the *PATH* looks like this:
 
 ```{console echo_path}
 echo $PATH
@@ -435,8 +433,8 @@ The command-line tool that we created in the previous section was written in Bas
 
 In this section I'm going demonstrate that command-line tools can be created in other programming languages as well.
 I'll focus on Python and R because these are the two most popular programming languages within the data science community.
-I cannot offer a complete introduction to either language, so we assume that you have some familiarity with Python and or R.
-Programming languages such as Java, Go, and Julia, follow a similar pattern when it comes to creating command-line tools.
+I cannot offer a complete introduction to either language, so I assume that you have some familiarity with Python and or R.
+Other programming languages such as Java, Go, and Julia, follow a similar pattern when it comes to creating command-line tools.
 
 There are three main reasons for creating command-line tools in another programming language than Bash.
 First, you may already have some code that you'd like to be able to use from the command line.
@@ -445,7 +443,7 @@ Third, the command-line tool needs to be more robust.
 
 The six steps that I discussed in the previous section roughly apply to creating command-line tools in other programming languages as well.
 The first step, however, would not be copy pasting from the command line, but rather copy pasting the relevant code into a new file.
-Command-line tools in Python and R need to specify `python` and `Rscript` [@R], respectively, as the interpreter after the shebang.
+Command-line tools written in Python and R need to specify `python` and `Rscript` [@R], respectively, as the interpreter after the shebang.
 
 When it comes to creating command-line tools using Python and R, there are two more aspects that deserve special attention.
 First, processing standard input, which comes natural to shell scripts, has to be taken care of explicitly in Python and R.
@@ -498,27 +496,36 @@ Whichever approach works best for the task at hand.
 In the previous two code snippets, both Python and R read the complete standard input at once.
 On the command line, most tools pipe data to the next command-line tool in a streaming fashion.
 (There are a few command-line tools which require the complete data before they write any data to standard output, like `sort`.) This means the pipeline is blocked by such command-line tools.
-This does not have to be a problem when the input data is finite, like a file.
+This doesn't have to be a problem when the input data is finite, like a file.
 However, when the input data is a non-stop stream, such blocking command-line tools are useless.
 
 Luckily Python and R support processing streaming data.
 You can apply a function on a line-per-line basis, for example.
 Here are two minimal examples that demonstrate how this works in Python and R, respectively.
 
+Both the Python and R tool solve the, by now infamous, Fizz Buzz problem, which is defined as follows: Print the numbers from 1 to 100, except that if the number is divisible by 3, instead print "fizz"; if the number is divisible by 5, instead print "buzz"; and if the number is divisible by 15, instead print "fizzbuzz". Here's the Python code[^fb]:
+
 ```{console bat_stream_py}
 bat fizzbuzz.py
 ```
+
+And here's the R code:
 
 ```{console bat_stream_r}
 bat fizzbuzz.R
 ```
 
-Let's test both tools:
+Let's test both tools on numbers 1 through 20:
 
 ```{console test_streams}
 seq 20 | fizzbuzz.py
 seq 20 | fizzbuzz.R
 ```
+
+This output looks correct to me!
+It's difficult to demonstrate that these two tools actually work in a streaming manner.
+You can test this yourself by piping the input data through `sample -d 100` before it's piped to the Python or R tool.
+That way, you'll add a small delay in between each line so that it's easier to confirm that the tools don't wait for all the input data, operate on a line by line basis.
 
 
 ## Summary
@@ -535,3 +542,6 @@ The next chapter covers the second step of the OSEMN model for data science, nam
 - Adding help to your tool becomes important when the tool has many options to remember. Even more so when you want to share your tool with others. `docopt` is a language-agnostic approach to provide help and define the possible options that your tool accepts. There are implementations available in just about any programming language including Bash, Python, and R.
 - If you want to learn more about programming in Bash, there are two books that I can recommend: *Classic Shell Programming* by Arnold Robbins and Nelson Beebe and *Bash Cookbook* by Carl Albing and JP Vossen.
 - Writing a robust and safe Bash script is quite tricky. [ShellCheck](https://www.shellcheck.net/) is an online tool that will check your Bash code for any possible mistakes and vulnerabilities. There's also a command-line tool available if you rather not post your code on a website.
+- The book *Ten Essays on Fizz Buzz* by Joel Grus is an insightful and fun collection of ten different ways to solve Fizz Buzz with Python.
+
+[^fb]: This code is adapted from a [Python script by Joel Grus](https://github.com/joelgrus/fizzbuzz/blob/master/fizzbuzz/cycle_of_15.py).
