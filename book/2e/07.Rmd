@@ -385,7 +385,7 @@ Using the same syntax, `rush plot` can create both graphical visualizations (con
 Let's demonstrate this.
 Don't worry about the actual syntax just yet; I'll explain that in a moment.
 
-```{console plot_demo_ansi}
+```{console plot_demo_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x bill --y tip --color size --facets '~day' tips.csv
 ```
 
@@ -409,15 +409,15 @@ This is the pattern that I follow. First ansi then png.
 ### Viewing Images
 
 When it comes to viewing images that you create with the command line, you have at least four options.
-Figure \@ref(fig:screenshot-display-ansi-and-inline) is awesome.
+\@ref(fig:screenshot-display-ansi-and-inline) is awesome.
 
-```{r screenshot-display-ansi-and-inline, echo=FALSE, fig.cap="Viewing an image in the terminal via ANSI (top) and via the iTerm2 inline images protocol (bottom)", fig.align="center"}
+```{r screenshot-display-ansi-and-inline, echo=FALSE, fig.cap="Viewing an image in the terminal via ASCII characters and ANSI escape sequences (top) and via the iTerm2 inline images protocol (bottom)", fig.align="center"}
 knitr::include_graphics("images/screenshot_display_ansi_and_inline.png")
 ```
 
-Figure \@ref(fig:screenshot-display-preview-and-browser) is awesome too.
+\@ref(fig:screenshot-display-preview-and-browser) is awesome too.
 
-```{r screenshot-display-preview-and-browser, echo=FALSE, fig.cap="Viewing an image externally via an image viewer (left) and a browser (browser)", fig.align="center"}
+```{r screenshot-display-preview-and-browser, echo=FALSE, fig.cap="Viewing an image externally via a file explorer and an image viewer (left) and via a webserver and a browser (right)", fig.align="center"}
 knitr::include_graphics("images/screenshot_display_preview_and_browser.png")
 ```
 
