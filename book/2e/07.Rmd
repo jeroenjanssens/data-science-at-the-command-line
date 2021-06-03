@@ -83,14 +83,14 @@ Alternatively, you can use `trim`:
 ```
 
 In this case, it's clear that the first line is a header because it contains only uppercase names and the subsequent lines contain numbers.
-This is indeed quite a manual process and it's up to you to decide whether the first line is a header or already the first data point.
+This is indeed quite a subjective process and it's up to you to decide whether the first line is a header or already the first data point.
 When the dataset contains no header, you’re best off using the `header` tool (discussed in [Chapter 5](#chapter-5-scrubbing-data)) to correct that.
 
 
 ### Inspect All The Data
 
 If you want to inspect the raw data at your own pace, then it’s probably not a good idea to use `cat`, because then all the data will be printed in one go.
-I recommend `less` [@less].
+I recommend using `less` [@less], which allows you to interactively inspect your data in the command line.
 You can prevent long lines (as with *venture.csv*) from wrapping by specifying the `-S` option:
 
 ```{console less}
@@ -117,7 +117,7 @@ One advantage of `less` is that it does not load the entire file into memory, wh
 
 ### Feature Names and Data Types
 
-The feature names may indicate the meaning of the feature.
+The column (or feature) names may indicate the meaning of the feature.
 You can use the following `head` and `tr` combo for this:
 
 ```{console head_tr}

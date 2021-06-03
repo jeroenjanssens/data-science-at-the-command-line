@@ -128,6 +128,8 @@ cols:
   version: '0.1'
   year: 2021
 
+
+
 cowsay:
   author:
   - Tony Monroe
@@ -991,12 +993,12 @@ trim:
   url: https://github.com/jeroenjanssens/dsutils
   year: 2021
   example: |
-    shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+    echo {a..z}-{0..9} | fold | trim 5 60
 
 type:
   description: Show the type and location of a command-line tool
   builtin: true
-  help: man zshbuiltins| grep -A 10 '^ *type '
+  help: man zshbuiltins | grep -A 10 '^ *type '
 
 uniq:
   author:

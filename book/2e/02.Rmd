@@ -45,8 +45,14 @@ Installing these packages yourself is often not too difficult.
 However, we'll also use tools that are not available as packages and require a more manual, and more involved, installation.
 In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
 
+A Docker image is a bundle of one or more applications together with all their dependencies.
+A Docker container is an isolated environment that runs an image.
+You can manage Docker images and containers the `docker` command-line tool (which is what you'll do below) or the Docker GUI. 
+In a way, a Docker container is like a virtual machine, only a Docker container uses far fewer resources.
+At the end of this chapter I suggest some resources to learn more about Docker.
+
 ```{block2, type="rmdtip"}
-If you still prefer to run the command-line tools natively rather than inside a Docker image, then you can, of course, install the command-line tools individually yourself.
+If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself.
 Please be aware that this is a very time-consuming process.
 The Appendix lists all the command-line tools used in the book.
 The installation instructions are for Ubuntu only.
@@ -158,7 +164,7 @@ The text below `seq 3` is the output of the command.
 
 Shell
 
-:   The third layer is the shell. Once we have typed in our command and pressed **`Enter`**, the terminal sends that command to the shell. The *shell* is a program that interprets the command. The Section [Docker image](#docker-image) uses Zsh as the shell, but there are many others available such as Bash and Fish.
+:   The third layer is the shell. Once we have typed in our command and pressed **`Enter`**, the terminal sends that command to the shell. The *shell* is a program that interprets the command. The Section [Docker image](#docker-image) uses the Z shell, but there are many others available such as Bash and Fish.
 
 Operating system
 
@@ -246,6 +252,10 @@ Under the hood, each command-line tool is one of the following five types:
 - A shell function
 - An alias
 
+```{r umbrella, echo=FALSE, fig.cap="I use the term command-line tool as an umbrella term", fig.align="center"}
+knitr::include_graphics("images/diagram_umbrella.png")
+```
+
 It’s good to know the difference between the types.
 The command-line tools that come pre-installed with the Docker image mostly comprise of the first two types (binary executable and shell builtin).
 The other three types (interpreted script, shell function, and alias) allow us to further build up our data science toolbox and become more efficient and more productive data scientists.
@@ -256,7 +266,7 @@ Binary Executable
 
 Shell Builtin
 
-:   Shell builtins are command-line tools provided by the shell, which is Bash in our case. Examples include `cd` and `help`. These cannot be changed. Shell builtins may differ between shells. Like binary executables, they cannot be easily inspected or changed.
+:   Shell builtins are command-line tools provided by the shell, which is the Z shell (or `zsh`) in our case. Examples include `cd` and `help`. These cannot be changed. Shell builtins may differ between shells. Like binary executables, they cannot be easily inspected or changed.
 
 Interpreted Script
 
@@ -304,7 +314,8 @@ Alias
 
     Aliases are simpler than shell functions as they don’t allow parameters. The function `fac` could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in *.bashrc* or *.bash\_aliases* configuration files, which are located in your home directory. To see all aliases currently defined, you simply run `alias` without arguments. Try it. What do you see?
 
-In this book I'll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases. This is because these can easily be changed.
+In this book I'll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases.
+This is because these can easily be changed.
 The purpose of a command-line tool is to make your life on the easier, and to make you a more productive and more efficient data scientist.
 You can find out the type of a command-line tool with `type` (which is itself a shell builtin):
 
@@ -558,4 +569,4 @@ Now that you have all the necessary ingredients, you're ready to con with the fi
 
 - The subtitle of this book pays homage to the epic *Unix Power Tools* by Jerry Peek, Shelley Powers, Tim O'Reilly, and Mike Loukides. And rightly so. In 51 chapters, spanning over 1000 pages, it covers just about everything there's to know about Unix. It weighs nearly 2 kg, so you might want to consider getting the ebook.
 - The website [explainshell](https://explainshell.com/) parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages. 
-- Docker is truly a magic piece of software. In this chapter I've briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to [learn how to create a your own Docker images](https://www.docker.com/101-tutorial) yourself.
+- Docker is truly a brilliant piece of software. In this chapter I've briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to [learn how to create a your own Docker images](https://www.docker.com/101-tutorial) yourself. The book *Docker: Up & Running* by Sean Kane and Karl Matthias is a good resource as well.

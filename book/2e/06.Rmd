@@ -21,7 +21,9 @@ I hope that by now you have come to appreciate that the command line is a very c
 - Develop our own command-line tools.
 - Obtain and generate many (intermediate) files.
 
-Since this is an exploratory process, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done. It's important that our steps can be reproduced, by us or by others. When you continue with a project from a few weeks ago, chances are that you have forgotten which commands you ran, from which directory, on which files, with which parameters, and in which order. Imagine the challenges of sharing your project with a collaborator.
+Since this is an exploratory process, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done.
+It's important that our steps can be reproduced, by us or by others. When you continue with a project from some time ago, chances are that you have forgotten which commands you ran, from which directory, on which files, with which parameters, and in which order.
+Imagine the challenges of sharing your project with a collaborator.
 
 You can recover some commands by digging through the output of the `history` command, but this is, of course, not a reliable approach.
 A somewhat better approach would be to save your commands to a shell script.
@@ -118,7 +120,7 @@ bat tasks.make
 
 The above is taken from a *Makefile* I use while working on this book.
 You could say that I'm using `make` as a glorified task runner.
-Although this wasn't `make`s purpose, it still provides a lot of value because I don't need to remember or look up what incantation I used.
+Although this wasn't the primary purpose of `make`, it still provides a lot of value because I don't need to remember or look up what incantation I used.
 Instead, I type `make publish` and the latest version of the book is published.
 And yes, it's perfectly fine to put long-running commands in a *Makefile*.
 

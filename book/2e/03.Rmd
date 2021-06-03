@@ -285,7 +285,7 @@ Luckily, there is a command-line tool called `in2csv`, that converts Microsoft E
 CSV stands for comma-separated values.
 Working with CSV can be tricky because it lacks a formal specification.
 <!-- TODO: MUST: check and possibly fix reference? -->
-[@shafranovich2005common] defines the CSV format according to the following three points:
+Yakov Shafranovich defines the CSV format according to the following three points:[@shafranovich2005common]
 
 1.  Each record is located on a separate line, delimited by a line break (`␊`). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:
 
@@ -456,10 +456,12 @@ Let's take a peek using `trim`:
 
 With a little bit of `sed` and `jq` I can scrub this data to get a glimpse of the changes happening on the English version of Wikipedia:
 
-```{console wikimedia_jq}
+```{console wikimedia_jq, callouts=c("sed", "jq")}
 < wikimedia-stream-sample sed -n 's/^data: //p' |
 jq 'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'
 ```
+<1> This `sed` expression only prints lines that start with *`data: `* and prints the part after the semicolon, which happens to be JSON.
+<2> This `jq` expression prints the *`title`* key of JSON objects that have a certain *`type`* and *`server_name`*.
 
 Speaking of streaming, did you know that you could stream *Star Wars: Episode IV – A New Hope* for free using `telnet`?
 

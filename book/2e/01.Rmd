@@ -167,7 +167,7 @@ The good news is that you can install a Docker image on Microsoft Windows so tha
 How to install the Docker image is explained in [Chapter 2](#chapter-2-getting-started).
 ```
 
-Typing commands is a very different way of interacting with your computer than through a graphical user interface.
+Typing commands is a very different way of interacting with your computer than through a *graphical user interface* (GUI).
 If you are mostly used to processing data in, say, Microsoft Excel, then this approach may seem intimidating at first.
 Don’t be afraid.
 Trust me when I say that you’ll get used to working at the command line very quickly.
@@ -221,13 +221,14 @@ Whatever technology your data science workflow currently includes (whether it's 
 Instead, consider the command line as an augmenting technology that amplifies the technologies you’re currently employing.
 It can do so in three ways.
 
-First, the command line can work with data from various sources, including databases, RESTful APIs, and Microsoft Excel.
-I cover this in [Chapter 2](#chapter-2-getting-started).
+First, the command line can act as a glue between many different data science tools.
+One way to glue tools is by connecting the output from the first tool to the input of the second tool.
+In [Chapter 2](#chapter-2-getting-started) I explain how this works.
 
 Second, you can often delegate tasks to the command line from your own environment.
 For example, Python, R, and Apache Spark allow you to run command-line tools and capture their output.
 I demonstrate this with examples in [Chapter 10](#chapter-10-polyglot-data-science).
-The command line can act as a glue between many different data science tools.
+
 
 Third, you can convert your code (e.g., a Python or R script) into a reusable command-line tool.
 That way, it doesn't matter anymore in what language it's written.
@@ -241,15 +242,15 @@ By the end of this book you’ll have a solid understanding of when you should u
 
 ### The Command Line is Scalable
 
-Working on the command line is very different from using a *graphical user interface* (GUI).
+As I've said before, working on the command line is very different from using a GUI.
 On the command line you do things by typing, whereas with a GUI, you do things by pointing and clicking with a mouse.
 
 Everything that you type manually on the command line can also be automated through scripts and tools.
 This makes it very easy to re-run your commands in case you made a mistake, when the input data has changed, or because your colleague wants to perform the same analysis.
-Moreover, your commands can be run at specific intervals, on a remote server, and in parallel on many chunks of data (more on that in Chapter 8).
+Moreover, your commands can be run at specific intervals, on a remote server, and in parallel on many chunks of data (more on that in [Chapter 8](#chapter-8-parallel-pipelines)).
 
 Because the command line is automatable, it becomes scalable and repeatable.
-It is not straightforward to automate pointing and clicking, which makes a GUI a less suitable environment for doing scalable and repeatable data science.
+It's not straightforward to automate pointing and clicking, which makes a GUI a less suitable environment for doing scalable and repeatable data science.
 
 
 ### The Command Line is Extensible
@@ -320,4 +321,4 @@ In the next chapter I'm going to show you how to get started by installing the t
 
 [^1]: The development of the UNIX operating system started back in 1969. It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3](#essential-concepts), was added in 1973.
 
-[^2]: See [the 56th edition of the TOP500](https://www.top500.org/lists/top500/2020/11/) from November 2020.
+[^2]: See [TOP500](https://top500.org/statistics/details/osfam/1/) which keeps track of how many super computers run Linux.
