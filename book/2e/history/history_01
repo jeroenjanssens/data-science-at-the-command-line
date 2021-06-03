@@ -1,10 +1,3 @@
 whoami
 date
 echo 'The command line is awesome!' | cowsay -f tux
-curl -sL 'https://www.openml.org/data/get_csv/21854866/penguins.arff' |\
-tee penguin.csv | trim
-sed -i -re '1s/_(mm|g)//g' penguin.csv
-cat penguin.csv |\
-xsv sample 15 |\
-xsv select species,culmen_length,culmen_depth,flipper_length,body_mass |\
-csvlook

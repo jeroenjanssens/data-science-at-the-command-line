@@ -117,6 +117,8 @@ type tail
 type tapkee
 type tar
 type tee
+type tldr
+tldr tar | trim
 type tr
 type tree
 tree / | trim

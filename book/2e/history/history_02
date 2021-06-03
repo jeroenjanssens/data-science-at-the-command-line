@@ -28,14 +28,14 @@ type -a l
 seq 5
 seq 30 | grep 3
 seq 100 | grep 3 | wc -l
-seq 10 > ten-numbers
-cat ten-numbers
-echo -n "Hello" > greeting
-echo " World" >> greeting
-cat greeting
-cat greeting | wc -w
-< greeting wc -w
-wc -w greeting ten-numbers
+seq 10 > ten-numbers.txt
+cat ten-numbers.txt
+echo -n "Hello" > greeting.txt
+echo " World" >> greeting.txt
+cat greeting.txt
+cat greeting.txt | wc -w
+< greeting.txt wc -w
+wc -w greeting.txt ten-numbers.txt
 mkdir -v backup
 cp -v * backup
 rm -i *
@@ -43,3 +43,5 @@ man tar | trim 20
 man cd
 man zshbuiltins | trim
 jq --help | trim
+tldr --update
+tldr tar | trim 20
