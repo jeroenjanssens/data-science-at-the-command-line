@@ -378,9 +378,55 @@ All the knowledge that you already have about `R` can now be used from the comma
 It's helpful to distinguish between *creating* a visualization at the command line and *viewing* a visualization at the command line.
 Of course you're going to use the command line to *create* the visualization.
 But sometimes you cannot *view* any pixels and you're stuck with the capabilities of your terminal.
-Using the same syntax, `rush` can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and maybe ANSI escape sequences if you have a modern terminal).
 
-Let's demonstrate this by creating a few common data visualizations.
+
+
+Using the same syntax, `rush plot` can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and ANSI escape sequences to provide colors).
+Let's demonstrate this.
+Don't worry about the actual syntax just yet; I'll explain that in a moment.
+
+```{console plot_demo_ansi}
+rush plot --x bill --y tip --color size --facets '~day' tips.csv
+```
+
+You can create a graphical version (by default in PNG format) by redirecting the output to a file.
+I use the `!!` syntax to repeat the previous command.
+
+```{console plot_demo_png}
+!! > tips.png
+display tips.png
+```
+
+If you run `display` you'll likely find that it doesn't work for you.
+In fact, displaying images from the command line is tricky in general.
+
+Use option `--dpi` to change dpi.
+
+This is the pattern that I follow. First ansi then png.
+
+- Depending on how your reading this book .
+
+### Viewing Images
+
+When it comes to viewing images that you create with the command line, you have at least four options.
+Figure \@ref(fig:screenshot-display-ansi-and-inline) is awesome.
+
+```{r screenshot-display-ansi-and-inline, echo=FALSE, fig.cap="Viewing an image in the terminal via ANSI (top) and via the iTerm2 inline images protocol (bottom)", fig.align="center"}
+knitr::include_graphics("images/screenshot_display_ansi_and_inline.png")
+```
+
+Figure \@ref(fig:screenshot-display-preview-and-browser) is awesome too.
+
+```{r screenshot-display-preview-and-browser, echo=FALSE, fig.cap="Viewing an image externally via an image viewer (left) and a browser (browser)", fig.align="center"}
+knitr::include_graphics("images/screenshot_display_preview_and_browser.png")
+```
+
+
+
+
+### 
+
+
 
 ### Bar chart
 
@@ -388,8 +434,6 @@ Let's demonstrate this by creating a few common data visualizations.
 rush plot -x time tips.csv
 ```
 
-You can create a graphical version (by default in PNG format) by redirecting the output to a file.
-I use the `!!` syntax to repeat the previous command.
 
 ```{console plot_bar_png}
 !! > plot-bar.png
