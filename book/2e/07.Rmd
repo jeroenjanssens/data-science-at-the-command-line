@@ -461,13 +461,17 @@ knitr::include_graphics("images/screenshot_display_preview_and_browser.png")
 You can create a graphical version (by default in PNG format) by redirecting the output to a file.
 I use the `!!` syntax to repeat the previous command.
 
-```{console plot_demo_png}
-!! > tips.png
-display tips.png
-```
+<!-- ```{console plot_demo_png} -->
+<!-- !! > tips.png -->
+<!-- display tips.png -->
+<!-- ``` -->
 
 
 ### rush plot
+
+rush plot
+qplot
+rush plot --help
 
 
 
