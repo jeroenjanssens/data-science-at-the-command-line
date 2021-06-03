@@ -57,7 +57,7 @@ def pygments(key, value, format, _):
                 html = code[0]["c"][0]["c"][1]
                 _, src, _, alt, *_ = html.split("\"")
                 src = src.split("/")[-1]
-                redraw = "Redraw" if src.endswith("jpg") else "As-is"
+                redraw = "Redraw" if src.startswith("diagram_") else "Use as-is"
                 stderr.write(f"{CHAPTER_NUM},{FIG_COUNTER},Yes,\"N/A\",{src},{redraw},\"{alt}\"\n")
 
         return None
