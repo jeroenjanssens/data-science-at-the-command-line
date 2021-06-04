@@ -436,18 +436,23 @@ Please consult your favorite search engine.
 knitr::include_graphics("images/screenshot_display_preview_and_browser.png")
 ```
 
-Option 3, 
+Option 3 is to manually open the image (*tips.csv* in this example) in an image viewer.
+\@ref(fig:screenshot-display-preview-and-browser) shows, on the left, the file explorer (Finder) and image viewer (Preview) on macOS.
+When you're working locally, this option always works.
+When you're working inside a Docker container, you can only access the generated image from your OS when you've mapped a local directory using the `-v` option.
+See [Chapter 2](#chapter-2-getting-started) for instructions on how to do this.
+An advantage of this option is that most image viewers automatically update the image when it has changed, which allows for quick iterations as you fine-tune your visualization.
 
-\@ref(fig:screenshot-display-preview-and-browser) is a screenshot of options 3 and 4.
-
-
-You can create a graphical version (by default in PNG format) by redirecting the output to a file.
-I use the `!!` syntax to repeat the previous command.
-
-<!-- ```{console plot_demo_png} -->
-<!-- !! > tips.png -->
-<!-- display tips.png -->
-<!-- ``` -->
+Option 4 is to open the image in a browser.
+The right side of \@ref(fig:screenshot-display-preview-and-browser) is a screenshot of Firefox showing *http://localhost:8000/tips.png*.
+Any browser will do, but you need two other prerequisites for this option to work.
+First, you need to have made a port (port 8000 in this example) accessible on the Docker container using the `-p` option.
+(Again, see [Chapter 2](#chapter-2-getting-started) for instructions on how to do this.)
+Second, you need to start a webserver. 
+The Docker container has a tool called `servewd`, which serves the current working directory.
+You only need to run `servewd` once from a directory (for example, */data/*) and it will happily run in the background.
+You can then visit *localhost:8000* in your browser and access the contents of that directory and all of its subdirectories. 
+This option potentially also works when you're logged in to a remote machine.
 
 
 ### Plotting in a Rush
@@ -460,8 +465,14 @@ qplot
 rush plot --help
 
 
+<!-- You can create a graphical version (by default in PNG format) by redirecting the output to a file. -->
+<!-- I use the `!!` syntax to repeat the previous command. -->
+<!-- ```{console plot_demo_png} -->
+<!-- !! > tips.png -->
+<!-- display tips.png -->
+<!-- ``` -->
 
-### Bar chart
+### Bar Chart
 
 ```{console plot_bar_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot -x time tips.csv
@@ -475,6 +486,7 @@ display plot-bar.png
 ```{r plot_bar_image, echo=FALSE, fig.cap="Bar plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-bar.png")
 ```
+
 
 ### Histogram
 

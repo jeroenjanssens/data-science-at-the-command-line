@@ -290,7 +290,7 @@ knitr::include_graphics("images/screenshot_rstudio_terminal.png")
 <!-- pipe(command, [envVars]) -->
 
 Apache Spark is a cluster-computing framework.
-It's the 800-pound gorilla you turn to when its impossible to fit your data in memory.
+It's the 800-pound gorilla you turn to when it's impossible to fit your data in memory.
 Spark itself is written in Scala, but you can also interact with it from Python using [PySpark](https://spark.apache.org/docs/latest/api/python/index.html) and from R using [SparkR](https://spark.apache.org/docs/latest/sparkr.html) or [sparklyr](https://spark.rstudio.com/).
 
 Data processing and machine learning pipelines are defined through a series of transformations and one final action.
