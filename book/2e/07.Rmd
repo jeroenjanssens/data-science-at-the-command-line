@@ -385,7 +385,7 @@ But sometimes you cannot *view* any pixels and you're stuck with the capabilitie
 
 ### Displaying Images from the Command Line
 
-Before we dive into creating data visualizations I'd first like to explain how you can actually display them.
+Before we dive into creating data visualizations I'd first like to explain how you can display them.
 Let's take the image *tips.png* as an example (see \@ref(fig:plot-demo)), which is a data visualization created using `rush` and the *tips.csv* dataset.
 (Don't worry about the syntax or the contents for now.)
 
@@ -449,10 +449,30 @@ Any browser will do, but you need two other prerequisites for this option to wor
 First, you need to have made a port (port 8000 in this example) accessible on the Docker container using the `-p` option.
 (Again, see [Chapter 2](#chapter-2-getting-started) for instructions on how to do this.)
 Second, you need to start a webserver. 
-The Docker container has a tool called `servewd`, which serves the current working directory.
+The Docker container has a small tool called `servewd`[@servewd], which serves the current working directory using Python:
+
+```{console}
+bat $(which servewd)
+```
+
 You only need to run `servewd` once from a directory (for example, */data/*) and it will happily run in the background.
-You can then visit *localhost:8000* in your browser and access the contents of that directory and all of its subdirectories. 
-This option potentially also works when you're logged in to a remote machine.
+Once you've plotting something, you can visit *localhost:8000* in your browser and access the contents of that directory and all of its subdirectories. 
+The default port is 8000, but you can easily change this:
+
+```{console}
+servewd 9999 > display#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+Just make sure that this port is accessible.
+Because `servewd` runs in the background, you need to stop it as follows:
+
+```{console}
+pkill -f http.server
+```
+
+Option 4 potentially also works when you're working on a remote machine.
+Now that we've covered four options to display images, let's move on to actually creating some.
 
 
 ### Plotting in a Rush
