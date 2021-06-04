@@ -391,6 +391,9 @@ Consider the following image:
 rush plot --x bill --y tip --color size --facets '~day' tips.csv > tips.png
 display tips.png
 ```
+```{r plot_demo_image, echo=FALSE, fig.cap="Demo image", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/tips.png")
+```
 
 (Don't worry about this syntax of `rush` or the contents of the image; that'll come later.)
 I use the `display` tool to magically insert the image in the book, but if you run `display` you'll find that it doesn't work.
