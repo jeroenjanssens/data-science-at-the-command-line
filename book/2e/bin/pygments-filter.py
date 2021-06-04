@@ -75,8 +75,8 @@ def pygments(key, value, format, _):
 
         # Fix references to figures
         if (key == "Str") and value.startswith("@ref"):
-            # stderr.write(f"{key}\t{value}\n")
-            _, ref_type, ref_id, _ = re.split("\(|:|\)", value)
+            #stderr.write(f"{key}\t{value}\n")
+            _, ref_type, ref_id, *_ = re.split("\(|:|\)", value)
             return Str(f"<<{ref_type}:{ref_id}>>")
 
         elif key == "Div":
@@ -116,7 +116,9 @@ def pygments(key, value, format, _):
 
         # Insert "Figure" or "Example" in front of internal references
         if (key == "Str") and value.startswith("@ref"):
-            _, ref_type, ref_id, _ = re.split("\(|:|\)", value)
+            # stderr.write(f"{key}\t{value}\n")
+            _, ref_type, ref_id, *_ = re.split("\(|:|\)", value)
+            # stderr.write(f"REF: {ref_type}\t{ref_id}\n")
             return Str(f"{REF_TYPE[ref_type]} {value}")
 
         elif key == "CodeBlock":
