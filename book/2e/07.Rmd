@@ -337,7 +337,7 @@ You can override these defaults using the `--no-header` (or `-H`), `--delimiter`
 The help gives a good overview of the available options for the `run` subcommand:
 
 ```{console rush_run_help}
-rush run -h
+rush run --help
 ```
 
 Under the hood, `rush` generates an `R` script and subsequently executes it.
@@ -441,7 +441,7 @@ Option 3 is to manually open the image (*tips.csv* in this example) in an image 
 When you're working locally, this option always works.
 When you're working inside a Docker container, you can only access the generated image from your OS when you've mapped a local directory using the `-v` option.
 See [Chapter 2](#chapter-2-getting-started) for instructions on how to do this.
-An advantage of this option is that most image viewers automatically update the image when it has changed, which allows for quick iterations as you fine-tune your visualization.
+An advantage of this option is that most image viewers automatically update the display when the image has changed, which allows for quick iterations as you fine-tune your visualization.
 
 Option 4 is to open the image in a browser.
 The right side of \@ref(fig:screenshot-display-preview-and-browser) is a screenshot of Firefox showing *http://localhost:8000/tips.png*.
@@ -449,7 +449,7 @@ Any browser will do, but you need two other prerequisites for this option to wor
 First, you need to have made a port (port 8000 in this example) accessible on the Docker container using the `-p` option.
 (Again, see [Chapter 2](#chapter-2-getting-started) for instructions on how to do this.)
 Second, you need to start a webserver. 
-The Docker container has a small tool called `servewd`[@servewd], which serves the current working directory using Python:
+For this, the Docker container has a small tool called `servewd` [@servewd], which serves the current working directory using Python:
 
 ```{console}
 bat $(which servewd)
@@ -457,7 +457,7 @@ bat $(which servewd)
 
 You only need to run `servewd` once from a directory (for example, */data/*) and it will happily run in the background.
 Once you've plotting something, you can visit *localhost:8000* in your browser and access the contents of that directory and all of its subdirectories. 
-The default port is 8000, but you can easily change this:
+The default port is 8000, but you can change this by specifying it as an argument to `servewd`:
 
 ```{console}
 servewd 9999 > display#!enter=FALSE
@@ -477,13 +477,54 @@ Now that we've covered four options to display images, let's move on to actually
 
 ### Plotting in a Rush
 
-<!-- Using the same syntax, `rush plot` can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and ANSI escape sequences to provide colors). -->
-<!-- Use option `--dpi` to change dpi. -->
-<!-- This is the pattern that I follow. First ansi then png. -->
-rush plot
-qplot
-rush plot --help
+When it comes to creating data visualizations, there's a plethora of options.
+Personally, I’m a staunch proponent of `ggplot2`, which is a visualization package for R.
+The underlying grammar of graphics is accompanied by a consistent API that allows you to quickly and iteratively create different types of beautiful data visualizations while rarely having to consult the documentation.
+A welcoming set of properties when exploring data.
 
+We're not really in a rush, but we also don't want to fiddle too much about any single visualization.
+Moreover, we'd like to stay at the command line as much as possible.
+Luckily, we still have `rush`, which allows us to `ggplot2` from the command line. 
+The data visualization from \@ref(fig:plot-demo) could have been created as follows:
+
+```{console rush_ggplot2}
+rush run --library ggplot2 'ggplot(df, aes(x = bill, y = tip, color = size)) + geom_point() + facet_wrap(~day)' tips.csv > tips.png#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+However, as you may have noticed, I had used a very different command to create *tips.png*:
+
+```{console rush_plot_again}
+rush plot --x bill --y tip --color size --facets '~day' tips.csv > tips.png#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+While the syntax of `ggplot2` is relatively concise, especially considering the flexibility it offers, there's a shortcut to create basic plots quickly.
+This shortcut is available through the `plot` subcommand of `rush`.
+This allows us to avoid learning R and the grammar of graphics while still creating beautiful basic plots.
+
+Under the hood, `rush plot` uses the function `qplot` from the `ggplot2` package.
+Here's the first part of its documentation:
+
+```{console}
+R -q -e '?ggplot2::qplot' | trim 14
+```
+
+I agree with this advice; once you're done reading this book, it'll be worthwhile to learn `ggplot2`, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication.
+For now, while we're at the command line and don't want to fiddle too much about any single visualization, let's take that shortcut.
+
+As \@ref(fig:screenshot-display-ansi-and-inline) already showed, `rush plot` can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and ANSI escape sequences) with the same syntax.
+When `rush` detects that its output is piped to another command (such as `display` or redirected to a file such as *tips.png* it will produce a graphical visualization; otherwise it will produce a textual visualization.
+
+Let's take a moment to read through the plotting and saving options of `rush plot`:
+
+```{console}
+rush plot --help
+```
+
+The plotting options that take a *`<name>`* ...
+
+<!-- plot uses heuristics to determine the appropriate geometry, but you can override this. -->
 
 <!-- You can create a graphical version (by default in PNG format) by redirecting the output to a file. -->
 <!-- I use the `!!` syntax to repeat the previous command. -->
@@ -491,6 +532,9 @@ rush plot --help
 <!-- !! > tips.png -->
 <!-- display tips.png -->
 <!-- ``` -->
+
+<!-- Use option `--dpi` to change dpi. -->
+<!-- This is the pattern that I follow. First ansi then png. -->
 
 ### Bar Chart
 

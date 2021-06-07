@@ -787,6 +787,10 @@ servewd:
   url: https://github.com/jeroenjanssens/dsutils
   version: 0.1
   year: 2021
+  help: --help
+  example: |
+    cd /data && servewd 8000#!enter=FALSE
+    C-C#!literal=FALSE
 
 seq:
   author:
