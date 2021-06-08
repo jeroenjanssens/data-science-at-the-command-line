@@ -553,13 +553,14 @@ knitr::include_graphics("images/plot-bar.png")
 
 ### Creating Histograms
 
+counts of a continuous variable 
 auto geom
 <!-- plot uses heuristics to determine the appropriate geometry, but you can override this. -->
 
 fill color
 
 ```{console plot_histogram_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot --x tip --fill sex tips.csv
+rush plot --x tip --fill time tips.csv
 ```
 
 
@@ -569,8 +570,8 @@ rush plot --x tip --fill sex tips.csv
 display !$
 ```
 
-```{r plot_bar_image, echo=FALSE, fig.cap="Bar chart", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/plot-bar.png")
+```{r plot_histogram_image, echo=FALSE, fig.cap="Bar chart", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-histogram.png")
 ```
 
 
@@ -584,21 +585,22 @@ knitr::include_graphics("images/plot-bar.png")
 
 ### Creating Density Plots
 
+distribution
 geom override
 
 doesn't look too good (not everything looks equally good).
 textual output certainly has limitations. 
 ```{console plot_density_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot --x tip --fill sex --geom density tips.csv
+rush plot --x tip --fill time --geom density tips.csv
 ```
 
 
 ```{console plot_density_png}
-rush plot --x tip --fill sex --geom density tips.csv > plot-density.png
+rush plot --x tip --fill time --geom density tips.csv > plot-density.png
 display plot-density.png
 ```
 ```{r plot_density_image, echo=FALSE, fig.cap="density", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/plotdensity-.png")
+knitr::include_graphics("images/plot-density.png")
 ```
 
 
@@ -625,7 +627,7 @@ rush plot --x tip --y bill --color size --size day --geom path tips.csv > plot-a
 display plot-accident.png
 ```
 ```{r plot_accident_image, echo=FALSE, fig.cap="Happy Little Accident", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/plotaccident-.png")
+knitr::include_graphics("images/plot-accident.png")
 ```
 
 
@@ -637,11 +639,11 @@ geom is "point", no need to specify it.
 Try "jitter", which adds noise
 
 ```{console plot_scatter_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot --x bill --y tip --color sex tips.csv
+rush plot --x bill --y tip --color time tips.csv
 ```
 
 ```{console plot_scatter_png}
-rush plot --x bill --y tip --color sex tips.csv > plot-scatter.png
+rush plot --x bill --y tip --color time tips.csv > plot-scatter.png
 display plot-scatter.png
 ```
 ```{r plot_scatter_image, echo=FALSE, fig.cap="Scatter Plot", fig.align="center", out.width="90%"}
@@ -654,11 +656,11 @@ knitr::include_graphics("images/plot-scatter.png")
 override
 
 ```{console plot_trend_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot --x bill --y tip --color sex --geom smooth tips.csv
+rush plot --x bill --y tip --color time --geom smooth tips.csv
 ```
 
 ```{console plot_trend_png}
-rush plot --x bill --y tip --color sex --geom smooth tips.csv > plot-trend.png
+rush plot --x bill --y tip --color time --geom smooth tips.csv > plot-trend.png
 display plot-trend.png
 ```
 ```{r plot_trend_image, echo=FALSE, fig.cap="Trend lines", fig.align="center", out.width="90%"}
@@ -783,7 +785,7 @@ plotnine?
 <!-- ``` -->
 
 
-### Summary
+## Summary
 
 In this chapter we've looked at various ways to explore your data.
 Both textual and graphical data visualizations have their pros and cons.
