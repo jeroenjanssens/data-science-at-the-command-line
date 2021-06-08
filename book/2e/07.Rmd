@@ -12,6 +12,7 @@ console_start()
  rm -f $HISTFILE
 ```
 
+
 # Exploring Data {#chapter-7-exploring-data}
 
 After all that hard work (unless you already had clean data lying around), it's time for some fun.
@@ -189,14 +190,14 @@ csvstat venture.csv --unique
 If there's only one unique value (such as with *OBS_STATUS*), then there's a chance that you can discard that column because it doesn't provide any value.
 If you wanted to automatically discard all such columns, then you could use the following pipeline:
 
-```{console discard_columns}
-< venture.csv csvcut -C $(           #<1>
-  csvstat venture.csv --unique |     #<2>
-  grep ': 1$' |                      #<3>
-  cut -d. -f 1 |                     #<4>
-  tr -d ' ' |                        #<5>
-  paste -sd,                         #<6>
-) | trim                             #<7>
+```{console discard_columns, callouts=1:7}
+< venture.csv csvcut -C $(
+  csvstat venture.csv --unique |
+  grep ': 1$' |
+  cut -d. -f 1 |
+  tr -d ' ' |
+  paste -sd,
+) | trim
 ```
 <1> The `-C` option deselects columns given their locations (or names), which is provided with command substitution
 <2> Obtain the number of unique values for each column in *venture.csv*
@@ -524,7 +525,54 @@ rush plot --help
 
 The plotting options that take a *`<name>`* ...
 
+plot loads the `ggplot2` package
+
+
+
+<!-- Use option `--dpi` to change dpi. -->
+<!-- This is the pattern that I follow. First ansi then png. -->
+
+Let's create a few basic plots
+
+
+### Creating Bar Charts
+
+```{console plot_bar_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x time tips.csv
+```
+
+
+```{console plot_bar_png}
+rush plot --x time tips.csv > plot-bar.png
+display plot-bar.png
+```
+```{r plot_bar_image, echo=FALSE, fig.cap="Bar chart", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-bar.png")
+```
+
+
+### Creating Histograms
+
+auto geom
 <!-- plot uses heuristics to determine the appropriate geometry, but you can override this. -->
+
+fill color
+
+```{console plot_histogram_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x tip --fill sex tips.csv
+```
+
+
+
+```{console plot_histogram_png}
+!! > plot-histogram.png
+display !$
+```
+
+```{r plot_bar_image, echo=FALSE, fig.cap="Bar chart", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-bar.png")
+```
+
 
 <!-- You can create a graphical version (by default in PNG format) by redirecting the output to a file. -->
 <!-- I use the `!!` syntax to repeat the previous command. -->
@@ -533,79 +581,207 @@ The plotting options that take a *`<name>`* ...
 <!-- display tips.png -->
 <!-- ``` -->
 
-<!-- Use option `--dpi` to change dpi. -->
-<!-- This is the pattern that I follow. First ansi then png. -->
 
-### Bar Chart
+### Creating Density Plots
 
-```{console plot_bar_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot -x time tips.csv
+geom override
+
+doesn't look too good (not everything looks equally good).
+textual output certainly has limitations. 
+```{console plot_density_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x tip --fill sex --geom density tips.csv
 ```
 
 
-```{console plot_bar_png}
-!! > plot-bar.png
-display plot-bar.png
+```{console plot_density_png}
+rush plot --x tip --fill sex --geom density tips.csv > plot-density.png
+display plot-density.png
 ```
-```{r plot_bar_image, echo=FALSE, fig.cap="Bar plot", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/plot-bar.png")
-```
-
-
-### Histogram
-
-The column type that is specified with the `-x` option is automatically detected, and determines the geometry.
-In this it's a histogram because *OBS_VALUE* is continuous.
-If the `--fill` option is specified, it creates a stacked histogram.
-
-```{console plot_hist_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot -x obs_value --fill unit venture.csv
+```{r plot_density_image, echo=FALSE, fig.cap="density", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plotdensity-.png")
 ```
 
-The graphical version looks like this:
 
-```{console plot_hist_png}
-!! > obs-histogram.png
-display obs-histogram.png
+### Happy Little Accidents
+
+There are 52 geometry types available in `ggplot2`:
+
+```{console geoms}
+rush run --library ggplot2 'apropos("^geom_")' | trim
 ```
-```{r plot_hist_image, echo=FALSE, fig.cap="Histogram", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/obs-histogram.png")
+
+Which geometry types and aesthetics you can use depend on the columns you specify.
+Not every combination makes sense:
+
+
+```{console plot_accident_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x tip --y bill --color size --size day --geom path tips.csv
 ```
-Something strange is going on with *OBS_VALUE*. It takes on vastly different values depending on the *UNIT*.
-Let's invoke `ggplot2` directly to investigate:
+
+
+
+```{console plot_accident_png}
+rush plot --x tip --y bill --color size --size day --geom path tips.csv > plot-accident.png
+display plot-accident.png
+```
+```{r plot_accident_image, echo=FALSE, fig.cap="Happy Little Accident", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plotaccident-.png")
+```
+
+
+### Creating Scatter Plots
+
+two variables
+color, not fill
+geom is "point", no need to specify it.
+Try "jitter", which adds noise
+
+```{console plot_scatter_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x bill --y tip --color sex tips.csv
+```
+
+```{console plot_scatter_png}
+rush plot --x bill --y tip --color sex tips.csv > plot-scatter.png
+display plot-scatter.png
+```
+```{r plot_scatter_image, echo=FALSE, fig.cap="Scatter Plot", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-scatter.png")
+```
+
+
+### Creating Trend Lines
+
+override
+
+```{console plot_trend_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x bill --y tip --color sex --geom smooth tips.csv
+```
+
+```{console plot_trend_png}
+rush plot --x bill --y tip --color sex --geom smooth tips.csv > plot-trend.png
+display plot-trend.png
+```
+```{r plot_trend_image, echo=FALSE, fig.cap="Trend lines", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-trend.png")
+```
+
+
+### Creating Box Plots
+
+factor is needed because otherwise
+
+```{console plot_boxplot_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv
+```
+
+
+```{console plot_boxplot_png}
+rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv > plot-boxplot.png
+display plot-boxplot.png
+```
+```{r plot_boxplot_image, echo=FALSE, fig.cap="Box plot", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-boxplot.png")
+```
+
+
+### Adding Labels
+
+default label is based on column specification.
+
+add title and label the axes
+
+also violin
+
+
+```{console plot_labels_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
+rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv
+```
+
+
+```{console plot_labels_png}
+rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv > plot-labels.png
+display plot-labels.png
+```
+```{r plot_labels_image, echo=FALSE, fig.cap="Violin plot with a title and labels", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-labels.png")
+```
+
+
+### Adding Facets
+
+already seen it in the two screenshots from the previous section
+weird syntax (out of scope). Also I().
+
 
 ```{console plot_facets_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-cat venture.csv |
-rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) +
-geom_histogram() +
-facet_wrap(~ unit, scales = "free")' -
+rush plot --x size --y bill --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv
 ```
 
-The graphical version looks much more clear:
 
-
-```{console}
-!! > obs-facets.png
-display obs-facets.png
+```{console plot_facets_png}
+rush plot --x size --y bill --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv > plot-facets.png
+display plot-facets.png
 ```
-```{r, echo=FALSE, fig.cap="Histogram with facets", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/obs-facets.png")
+```{r plot_facets_image, echo=FALSE, fig.cap="A bubble chart with eight facets", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-facets.png")
 ```
 
-### Density plot
+No lunch on Saturday and Sunday
+Days out of order. Need more R for this.
+
+Time you learn R.
 
 
-```{console plot_density_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot -x bill --geom density --title "Density plot" tips.csv
-```
+### Going Beyond Basic Plots
 
-```{console}
-!! > bill-density.png
-display bill-density.png
-```
-```{r, echo=FALSE, fig.cap="Density plot", fig.align="center", out.width="90%"}
-knitr::include_graphics("images/bill-density.png")
-```
+you need ggplot2
+multiple layers, (scatter plus trend lines)
+theming
+many extensions available for ggplot2
+plotnine?
+
+
+
+<!-- ### Histogram -->
+
+<!-- The column type that is specified with the `-x` option is automatically detected, and determines the geometry. -->
+<!-- In this it's a histogram because *OBS_VALUE* is continuous. -->
+<!-- If the `--fill` option is specified, it creates a stacked histogram. -->
+
+<!-- ```{console plot_hist_ansi, trailing_spaces=TRUE, remove=c(-2, -1)} -->
+<!-- rush plot -x obs_value --fill unit venture.csv -->
+<!-- ``` -->
+
+<!-- The graphical version looks like this: -->
+
+<!-- ```{console plot_hist_png} -->
+<!-- !! > obs-histogram.png -->
+<!-- display obs-histogram.png -->
+<!-- ``` -->
+<!-- ```{r plot_hist_image, echo=FALSE, fig.cap="Histogram", fig.align="center", out.width="90%"} -->
+<!-- knitr::include_graphics("images/obs-histogram.png") -->
+<!-- ``` -->
+<!-- Something strange is going on with *OBS_VALUE*. It takes on vastly different values depending on the *UNIT*. -->
+<!-- Let's invoke `ggplot2` directly to investigate: -->
+
+<!-- ```{console plot_facets_ansi, trailing_spaces=TRUE, remove=c(-2, -1)} -->
+<!-- cat venture.csv | -->
+<!-- rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) + -->
+<!-- geom_histogram() + -->
+<!-- facet_wrap(~ unit, scales = "free")' - -->
+<!-- ``` -->
+
+<!-- The graphical version looks much more clear: -->
+
+
+<!-- ```{console} -->
+<!-- !! > obs-facets.png -->
+<!-- display obs-facets.png -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE, fig.cap="Histogram with facets", fig.align="center", out.width="90%"} -->
+<!-- knitr::include_graphics("images/obs-facets.png") -->
+<!-- ``` -->
+
 
 ### Summary
 
