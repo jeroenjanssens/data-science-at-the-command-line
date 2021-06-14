@@ -394,7 +394,7 @@ Let's take the image *tips.png* as an example (see \@ref(fig:plot-demo)), which 
 rush plot --x bill --y tip --color size --facets '~day' tips.csv > tips.png
 display tips.png
 ```
-```{r plot-demo, echo=FALSE, fig.cap="Demo image", fig.align="center", out.width="90%"}
+```{r plot-demo, echo=FALSE, fig.cap="Displaying this image yourself can be tricky", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/tips.png")
 ```
 
@@ -527,6 +527,7 @@ The plotting options that take a *`<name>`* ...
 
 plot loads the `ggplot2` package
 
+stands on the shoulder of giants: ggplot2 and devoutansi package.
 
 
 <!-- Use option `--dpi` to change dpi. -->
@@ -539,126 +540,127 @@ Let's create a few basic plots
 
 <!-- You can create a graphical version (by default in PNG format) by redirecting the output to a file. -->
 
-
-
-\@ref(fig:s
+A bar chart is useful for displaying the value counts of a categorical feature. 
+Here's a textual visualization of the *time* feature in the tips dataset:
 
 ```{console plot_bar_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x time tips.csv
 ```
 
+\@ref(fig:plot_bar_image) shows the graphical visualization, which is created by `rush plot` when the output is redirected to a file.
 
 ```{console plot_bar_png}
 rush plot --x time tips.csv > plot-bar.png
 display plot-bar.png
 ```
-```{r plot_bar_image, echo=FALSE, fig.cap="Bar chart", fig.align="center", out.width="90%"}
+```{r plot_bar_image, echo=FALSE, fig.cap="A bar chart", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-bar.png")
 ```
 
 
 ### Creating Histograms
 
-counts of a continuous variable 
-auto geom
-<!-- plot uses heuristics to determine the appropriate geometry, but you can override this. -->
+The counts of a continuous variable can be visualized with a histogram.
 
-fill color
+Here, I have used the *time* feature to set the fill color.
+As a result, `rush plot` conveniently creates a stacked histogram.
 
 ```{console plot_histogram_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x tip --fill time tips.csv
 ```
 
-
+\@ref(fig:plot_histogram_image) shows again the graphical visualization. 
+Below, I use two syntax shortcuts.
+The double exclamation mark (`!!`) gets replaced with the previous command.
+The new command gets printed by the Z shell so you know what it executes.
+The exclamation mark and dollar sign (`!$`) get replaced by the last part of the previous command, which is the filename *plot-histogram.png*.
+This two shortcuts can save a lot of typing but I have to admit that they're not easy to remember.
 
 ```{console plot_histogram_png}
 !! > plot-histogram.png
 display !$
 ```
-
-```{r plot_histogram_image, echo=FALSE, fig.cap="Bar chart", fig.align="center", out.width="90%"}
+```{r plot_histogram_image, echo=FALSE, fig.cap="A histogram", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-histogram.png")
 ```
 
 
-<!-- I use the `!!` syntax to repeat the previous command. -->
-<!-- ```{console plot_demo_png} -->
-<!-- !! > tips.png -->
-<!-- display tips.png -->
-<!-- ``` -->
-
-
 ### Creating Density Plots
 
-distribution
-geom override
+A density plot is useful for visualizing the distribution of a continuous variable. 
+`rush plot` uses heuristics to determine the appropriate geometry, but you can override this with the `geom` option:
 
-doesn't look too good (not everything looks equally good).
-textual output certainly has limitations. 
 ```{console plot_density_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x tip --fill time --geom density tips.csv
 ```
 
+In this case, the textual representation really shows its limitations when compared to the visual representation in \@ref(fig:plot_density_image).
 
 ```{console plot_density_png}
 rush plot --x tip --fill time --geom density tips.csv > plot-density.png
 display plot-density.png
 ```
-```{r plot_density_image, echo=FALSE, fig.cap="density", fig.align="center", out.width="90%"}
+```{r plot_density_image, echo=FALSE, fig.cap="A density plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-density.png")
 ```
 
 
 ### Happy Little Accidents
 
+You've already seen three types of visualizations.
+In `ggplot2`, these correspond to the functions `geom_bar`, `geom_histogram`, and `geom_density`.
+*geom* is short for geometry and dictates what is actually being plotted.
 There are 52 geometry types available in `ggplot2`:
 
 ```{console geoms}
 rush run --library ggplot2 'apropos("^geom_")' | trim
 ```
 
-Which geometry types and aesthetics you can use depend on the columns you specify.
-Not every combination makes sense:
-
+Which geometry types you can use depend on the columns (and their types) you specify.
+Not every combination makes sense.
+Take this line plot for example:
 
 ```{console plot_accident_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x tip --y bill --color size --size day --geom path tips.csv
 ```
 
-
+This happy little accident becomes clearer in the visual representation in \@ref(fig:plot_accident_image).
 
 ```{console plot_accident_png}
 rush plot --x tip --y bill --color size --size day --geom path tips.csv > plot-accident.png
 display plot-accident.png
 ```
-```{r plot_accident_image, echo=FALSE, fig.cap="Happy Little Accident", fig.align="center", out.width="90%"}
+```{r plot_accident_image, echo=FALSE, fig.cap="A happy little accident", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-accident.png")
 ```
+
+There's [cheat sheet for `ggplot2`](https://ggplot2.tidyverse.org/) which provides a good overview of the available geometry types. 
 
 
 ### Creating Scatter Plots
 
-two variables
-color, not fill
-geom is "point", no need to specify it.
-Try "jitter", which adds noise
+Because the rows in *tips.csv* are independent, it's better to visualize the relationship between the *tip* and the *bill* with a scatter plot.
+This happens to be the default geometry when specifying two continuous features:
 
 ```{console plot_scatter_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x bill --y tip --color time tips.csv
 ```
 
+Note that the color of each point is specified with the `--color` option (and not with the `--fill` option).
+See \@ref(fig:plot_scatter_image) for the visual representation.
+
 ```{console plot_scatter_png}
 rush plot --x bill --y tip --color time tips.csv > plot-scatter.png
 display plot-scatter.png
 ```
-```{r plot_scatter_image, echo=FALSE, fig.cap="Scatter Plot", fig.align="center", out.width="90%"}
+```{r plot_scatter_image, echo=FALSE, fig.cap="A scatter plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-scatter.png")
 ```
 
 
 ### Creating Trend Lines
 
-override
+
 
 ```{console plot_trend_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x bill --y tip --color time --geom smooth tips.csv
@@ -686,7 +688,7 @@ rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv
 rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv > plot-boxplot.png
 display plot-boxplot.png
 ```
-```{r plot_boxplot_image, echo=FALSE, fig.cap="Box plot", fig.align="center", out.width="90%"}
+```{r plot_boxplot_image, echo=FALSE, fig.cap="A Box plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-boxplot.png")
 ```
 
@@ -709,7 +711,7 @@ rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bil
 rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv > plot-labels.png
 display plot-labels.png
 ```
-```{r plot_labels_image, echo=FALSE, fig.cap="Violin plot with a title and labels", fig.align="center", out.width="90%"}
+```{r plot_labels_image, echo=FALSE, fig.cap="A violin plot with a title and labels", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-labels.png")
 ```
 
