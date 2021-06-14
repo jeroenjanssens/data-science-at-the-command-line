@@ -547,13 +547,13 @@ Here's a textual visualization of the *time* feature in the tips dataset:
 rush plot --x time tips.csv
 ```
 
-\@ref(fig:plot_bar_image) shows the graphical visualization, which is created by `rush plot` when the output is redirected to a file.
+\@ref(fig:plot-bar-image) shows the graphical visualization, which is created by `rush plot` when the output is redirected to a file.
 
 ```{console plot_bar_png}
 rush plot --x time tips.csv > plot-bar.png
 display plot-bar.png
 ```
-```{r plot_bar_image, echo=FALSE, fig.cap="A bar chart", fig.align="center", out.width="90%"}
+```{r plot-bar-image, echo=FALSE, fig.cap="A bar chart", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-bar.png")
 ```
 
@@ -569,7 +569,7 @@ As a result, `rush plot` conveniently creates a stacked histogram.
 rush plot --x tip --fill time tips.csv
 ```
 
-\@ref(fig:plot_histogram_image) shows again the graphical visualization. 
+\@ref(fig:plot-histogram-image) shows again the graphical visualization. 
 Below, I use two syntax shortcuts.
 The double exclamation mark (`!!`) gets replaced with the previous command.
 The new command gets printed by the Z shell so you know what it executes.
@@ -580,7 +580,7 @@ This two shortcuts can save a lot of typing but I have to admit that they're not
 !! > plot-histogram.png
 display !$
 ```
-```{r plot_histogram_image, echo=FALSE, fig.cap="A histogram", fig.align="center", out.width="90%"}
+```{r plot-histogram-image, echo=FALSE, fig.cap="A histogram", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-histogram.png")
 ```
 
@@ -594,13 +594,13 @@ A density plot is useful for visualizing the distribution of a continuous variab
 rush plot --x tip --fill time --geom density tips.csv
 ```
 
-In this case, the textual representation really shows its limitations when compared to the visual representation in \@ref(fig:plot_density_image).
+In this case, the textual representation really shows its limitations when compared to the visual representation in \@ref(fig:plot-density-image).
 
 ```{console plot_density_png}
 rush plot --x tip --fill time --geom density tips.csv > plot-density.png
 display plot-density.png
 ```
-```{r plot_density_image, echo=FALSE, fig.cap="A density plot", fig.align="center", out.width="90%"}
+```{r plot-density-image, echo=FALSE, fig.cap="A density plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-density.png")
 ```
 
@@ -624,13 +624,13 @@ Take this line plot for example:
 rush plot --x tip --y bill --color size --size day --geom path tips.csv
 ```
 
-This happy little accident becomes clearer in the visual representation in \@ref(fig:plot_accident_image).
+This happy little accident becomes clearer in the visual representation in \@ref(fig:plot-accident-image).
 
 ```{console plot_accident_png}
 rush plot --x tip --y bill --color size --size day --geom path tips.csv > plot-accident.png
 display plot-accident.png
 ```
-```{r plot_accident_image, echo=FALSE, fig.cap="A happy little accident", fig.align="center", out.width="90%"}
+```{r plot-accident-image, echo=FALSE, fig.cap="A happy little accident", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-accident.png")
 ```
 
@@ -647,13 +647,13 @@ rush plot --x bill --y tip --color time tips.csv
 ```
 
 Note that the color of each point is specified with the `--color` option (and not with the `--fill` option).
-See \@ref(fig:plot_scatter_image) for the visual representation.
+See \@ref(fig:plot-scatter-image) for the visual representation.
 
 ```{console plot_scatter_png}
 rush plot --x bill --y tip --color time tips.csv > plot-scatter.png
 display plot-scatter.png
 ```
-```{r plot_scatter_image, echo=FALSE, fig.cap="A scatter plot", fig.align="center", out.width="90%"}
+```{r plot-scatter-image, echo=FALSE, fig.cap="A scatter plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-scatter.png")
 ```
 
@@ -667,23 +667,23 @@ These are useful for seeing the bigger picture.
 rush plot --x bill --y tip --color time --geom smooth tips.csv
 ```
 
-`rush plot` cannot handle transparency, so a visual representation (see \@ref(fig:plot_trend_image) is much better in this case.
+`rush plot` cannot handle transparency, so a visual representation (see \@ref(fig:plot-trend-image) is much better in this case.
 
 ```{console plot_trend_png}
 rush plot --x bill --y tip --color time --geom smooth tips.csv > plot-trend.png
 display plot-trend.png
 ```
-```{r plot_trend_image, echo=FALSE, fig.cap="Trend lines", fig.align="center", out.width="90%"}
+```{r plot-trend-image, echo=FALSE, fig.cap="Trend lines", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-trend.png")
 ```
 
-If you like to visualize the original points along with the trend lines, you need to resort to writing `ggplot2` code with `rush run` (see \@ref(fig:plot_trend_points_image)).
+If you like to visualize the original points along with the trend lines, you need to resort to writing `ggplot2` code with `rush run` (see \@ref(fig:plot-trend-points-image)).
 
 ```{console plot_trend_points_png}
 rush run --library ggplot2 'ggplot(df, aes(x = bill, y = tip, color = time)) + geom_point() + geom_smooth()' tips.csv > plot-trend-points.png
 display plot-trend-points.png
 ```
-```{r plot_trend_points_image, echo=FALSE, fig.cap="Trend lines and original points combined", fig.align="center", out.width="90%"}
+```{r plot-trend-points-image, echo=FALSE, fig.cap="Trend lines and original points combined", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-trend-points.png")
 ```
 
@@ -696,12 +696,13 @@ factor is needed because otherwise
 rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv
 ```
 
+\@ref(fig:plot-boxplot-image)
 
 ```{console plot_boxplot_png}
 rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv > plot-boxplot.png
 display plot-boxplot.png
 ```
-```{r plot_boxplot_image, echo=FALSE, fig.cap="A Box plot", fig.align="center", out.width="90%"}
+```{r plot-boxplot-image, echo=FALSE, fig.cap="A Box plot", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-boxplot.png")
 ```
 
@@ -719,12 +720,13 @@ also violin
 rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv
 ```
 
+\@ref(fig:plot-labels-image)
 
 ```{console plot_labels_png}
 rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv > plot-labels.png
 display plot-labels.png
 ```
-```{r plot_labels_image, echo=FALSE, fig.cap="A violin plot with a title and labels", fig.align="center", out.width="90%"}
+```{r plot-labels-image, echo=FALSE, fig.cap="A violin plot with a title and labels", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-labels.png")
 ```
 
@@ -736,15 +738,16 @@ weird syntax (out of scope). Also I().
 
 
 ```{console plot_facets_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot --x size --y bill --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv
+rush plot --x bill --y tip --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv
 ```
 
+\@ref(fig:plot-facets-image)
 
 ```{console plot_facets_png}
-rush plot --x size --y bill --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv > plot-facets.png
+rush plot --x bill --y tip --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv > plot-facets.png
 display plot-facets.png
 ```
-```{r plot_facets_image, echo=FALSE, fig.cap="A bubble chart with eight facets", fig.align="center", out.width="90%"}
+```{r plot-facets-image, echo=FALSE, fig.cap="A bubble chart with eight facets", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-facets.png")
 ```
 
@@ -780,7 +783,7 @@ plotnine?
 <!-- !! > obs-histogram.png -->
 <!-- display obs-histogram.png -->
 <!-- ``` -->
-<!-- ```{r plot_hist_image, echo=FALSE, fig.cap="Histogram", fig.align="center", out.width="90%"} -->
+<!-- ```{r plot-hist-image, echo=FALSE, fig.cap="Histogram", fig.align="center", out.width="90%"} -->
 <!-- knitr::include_graphics("images/obs-histogram.png") -->
 <!-- ``` -->
 <!-- Something strange is going on with *OBS_VALUE*. It takes on vastly different values depending on the *UNIT*. -->

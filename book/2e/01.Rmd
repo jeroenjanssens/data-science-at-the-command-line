@@ -282,35 +282,11 @@ This technology has been around for more than five decades, and I'm convinced th
 Learning how to use the command line (for data science and in general) is therefore a worthwhile investment.
 
 
-<!-- A Real-world Use Case -->
-
-<!-- In the previous sections, I’ve given you a definition of data science and explained to you why the command line can be a great environment for doing data science. -->
-<!-- Now it’s time to demonstrate the power and flexibility of the command line through a real-world use case. -->
-<!-- I'll go pretty fast, so don't worry if some things don't make sense yet. -->
-
-<!-- ```{console} -->
-<!-- curl -sL 'https://www.openml.org/data/get_csv/21854866/penguins.arff' | -->
-<!-- tee penguin.csv | trim -->
-<!-- sed -i -re '1s/_(mm|g)//g' penguin.csv -->
-<!-- ``` -->
-
-<!-- ```{console} -->
-<!-- cat penguin.csv | -->
-<!-- xsv sample 15 | -->
-<!-- xsv select species,culmen_length,culmen_depth,flipper_length,body_mass | -->
-<!-- csvlook -->
-<!-- ``` -->
-
-<!-- In this section we’ve peeked at some important concepts and some exciting command-line tools. -->
-<!-- Don’t worry if some things don’t make sense yet. -->
-<!-- Most of the concepts will be discussed in [Chapter 2](#chapter-2-getting-started), and in the subsequent chapters I’ll go into more detail for all the command-line tools used in this section. -->
-
-
 ## Summary
 
 In this chapter I have introduced you to OSEMN model for doing the data science, which I use as a guide throughout the book.
 I have provided some background about the Unix command line and hopefully convinced you that it's a suitable environment for doing data science.
-In the next chapter I'm going to show you how to get started by installing the tools and explaining the fundamental concepts.
+In the next chapter I'm going to show you how to get started by installing the datasets and tools and explaining the fundamental concepts.
 
 
 ## For Further Exploration
