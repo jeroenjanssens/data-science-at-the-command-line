@@ -660,11 +660,14 @@ knitr::include_graphics("images/plot-scatter.png")
 
 ### Creating Trend Lines
 
-
+If you override the default geometry with *`smooth`*, you can visualize trend lines.
+These are useful for seeing the bigger picture.
 
 ```{console plot_trend_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x bill --y tip --color time --geom smooth tips.csv
 ```
+
+`rush plot` cannot handle transparency, so a visual representation (see \@ref(fig:plot_trend_image) is much better in this case.
 
 ```{console plot_trend_png}
 rush plot --x bill --y tip --color time --geom smooth tips.csv > plot-trend.png
@@ -672,6 +675,16 @@ display plot-trend.png
 ```
 ```{r plot_trend_image, echo=FALSE, fig.cap="Trend lines", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-trend.png")
+```
+
+If you like to visualize the original points along with the trend lines, you need to resort to writing `ggplot2` code with `rush run` (see \@ref(fig:plot_trend_points_image)).
+
+```{console plot_trend_points_png}
+rush run --library ggplot2 'ggplot(df, aes(x = bill, y = tip, color = time)) + geom_point() + geom_smooth()' tips.csv > plot-trend-points.png
+display plot-trend-points.png
+```
+```{r plot_trend_points_image, echo=FALSE, fig.cap="Trend lines and original points combined", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/plot-trend-points.png")
 ```
 
 
