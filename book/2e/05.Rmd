@@ -27,7 +27,7 @@ Most command-line tools only work with one or two formats, so it's important tha
 Once the data is in the desired format, there could still be issues like missing values, inconsistencies, weird characters, or unnecessary parts.
 You can fix these by applying filters, replacing values, and combining multiple files.
 The command line is especially well-suited for these kind of transformations, because there are many specialized tools available, most of which can handle large amounts of data.
-In this chapter I’ll discuss classic tools such as `grep` [@grep] and `awk` [@awk], and newer ones such as `jq` [@jq] and `xmlstarlet` [@xmlstarlet].
+In this chapter I’ll discuss classic tools such as `grep` [@grep] and `awk` [@awk], and newer tools such as `jq` [@jq] and `xmlstarlet` [@xmlstarlet].
 
 Sometimes you can use the same command-line tool to perform several operations or multiple tools to perform the same operation.
 This chapter is more structured like a cookbook, where the focus is on the problems or recipes, rather than diving deeply into the command-line tools themselves.
@@ -63,8 +63,7 @@ Before I dive into the actual transformations, I'd like to demonstrate their ubi
 In Chapter 1 I mentioned that, in practice, the steps of the OSEMN model will rarely be followed linearly.
 In this vein, although scrubbing is the second step of the OSEMN model, I want you to know that it's not *just* the obtained data that needs scrubbing.
 The transformations that you'll learn in this chapter can be useful at any part of your pipeline and at any step of the OSEMN model.
-Generally speaking, it depends on whether the previous tool generates output that can immediately be used by the next tool.
-If so, then you can simply chain the two tools using the pipe operator (`|`).
+Generally, if one command line tool generates output that can be used immediately by the next tool, you can chain the two tools together by using the pipe operator (`|`).
 Otherwise, a transformation needs to be applied to the data first by inserting an intermediate tool into the pipeline.
 
 Let me walk you through an example to make this more concrete.
@@ -107,14 +106,14 @@ Now you're ready to use `rush` to create a bar chart.
 (I'll cover this syntax of `rush` in detail in Chapter 7.)
 
 ```{console fb_rush}
-rush plot -x value -y count --geom col fb.csv > fb.png
+rush plot -x value -y count --geom col --height 2 fb.csv > fb.png
 display fb.png
 ```
 ```{r fb_image, echo=FALSE, fig.cap="Counting fizz, buzz, and fizzbuzz", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/fb.png")
 ```
 
-Although this example is a bit contrived, it reveals a pattern that is common while working at the command line.
+Although this example is a bit contrived, it reveals a pattern that is common when working at the command line.
 The key tools, such as the ones that obtain data, create a visualization, or train a model, often require intermediate transformations in order to be chained into a pipeline.
 In that sense, writing a pipeline is like solving a puzzle, where the key pieces often require helper pieces to fit.
 
@@ -137,7 +136,7 @@ Meaning, most tools accept plain text as input and produce plain text as output.
 That's reason enough for me to start with plain text.
 The other formats that I discuss in this chapter, CSV, JSON, XML, and HTML are indeed also plain text.
 For now, I assume that the plain text has no clear tabular structure (like CSV does) or nested structure (like JSON, XML, and HTML do).
-Later in this chapter I'll introduce some tools that are specifically designed for working with these formats.
+Later in this chapter, I'll introduce some tools that are specifically designed for working with these formats.
 
 <!-- #TODO: SHOULD: What to do with this part? -->
 <!-- Although the tools in this section can also be applied to these other formats (because they're still text), -->
@@ -163,11 +162,12 @@ seq -f "Line %g" 10 | tee lines
 
 You can print the first 3 lines using either `head` [@head], `sed` [@sed], or `awk`:
 
-```{console}
+```{console, callout="NR"}
 < lines head -n 3
 < lines sed -n '1,3p'
 < lines awk 'NR <= 3'
 ```
+<1> In `awk`, *NR* refers to the total number of input records seen so far.
 
 Similarly, you can print the last 3 lines using `tail` [@tail]:
 
@@ -219,10 +219,11 @@ Printing even lines works in a similar manner:
 <!-- #TODO: COULD: Mention useless use of cat award -->
 
 ```{block2, type="rmdnote"}
-Many of these examples start with the greater-than sign (`>`) followed by the filename.
+Many of these examples start with the smaller-than sign (`<`) followed by the filename.
 I do this because this allows me to read the pipeline from left to right.
 Please know that this is my own preference.
-Many command-line tools also accept the filename as an argument.
+You can also use `cat` to pipe the contents of a file[^cat]. 
+Also, many command-line tools also accept the filename as an argument.
 ```
 
 
@@ -962,3 +963,6 @@ You're free to skip this chapter if you can't wait to start exploring and visual
 
 - I wish I could've explained more about `awk`. It's such a powerful tool and programming language. I highly recommend that you take the time to learn it. Two good resources are the book said *sed & awk* by Doherty and Robbins and the online [GNU Awk User's Guide](https://www.gnu.org/software/gawk/manual/gawk.html).
 - In this chapter I have used regular expressions in a couple of places. A tutorial about them is unfortunately beyond the scope of this book. Because regular expressions can be used in many different tools I can recommend that you learn about them. A good book that I can recommend is *Regular Expressions Cookbook* by Jan Goyvaerts and Steven Levithan.
+
+
+[^cat]: [Some](http://porkmail.org/era/unix/award.html) consider this a useless use of `cat`, arguing that the purpose of `cat` is to concatenate files and if you're not using it for this purpose, it's a waste of time, and costs you a process. I think this is silly. We've got more important things to do!

@@ -30,7 +30,7 @@ In short, we have already been doing polyglot data science without fully realizi
 In this chapter I'm going take this further by flipping it around.
 I'm going to show you how to leverage the command line from various programming languages and environments.
 Because let's be honest, we're not going to spend our entire data science careers at the command line.
-As for me, when I'm analysing some data I often use the RStudio IDE and when I'm implementing something, I often use Python.
+As for me, when I'm analyzing some data I often use the RStudio IDE and when I'm implementing something, I often use Python.
 I use whatever helps me to get the job done.
 
 <!-- Why be polyglot? -->
@@ -204,7 +204,7 @@ close(out_con); close(in_con); unlink("out")
 <2> The tool `grep` will only keep lines that contain a *b* and write them the named pipe *out* .
 <3> Write two values to standard input of the shell command.
 <4> Read the standard output produces by `grep` as a character vector.
-<5> Clean up the connections and delete the special file
+<5> Clean up the connections and delete the special file.
 
 
 <!-- check out the processx package https://processx.r-lib.org/. experimental at the time of writing. but seems very promising to working with connections in a more robust manner. -->
@@ -282,12 +282,10 @@ If offers a complete shell:
 knitr::include_graphics("images/screenshot_rstudio_terminal.png")
 ```
 
+Note that, just as with JupyterLab, this terminal is not connected to the console or any R scripts.
+
 
 ## Apache Spark
-
-<!-- TODO: SHOULD include reference to spark and https://scala-lang.org/ -->
-<!-- https://spark.apache.org/docs/latest/rdd-programming-guide.html -->
-<!-- pipe(command, [envVars]) -->
 
 Apache Spark is a cluster-computing framework.
 It's the 800-pound gorilla you turn to when it's impossible to fit your data in memory.

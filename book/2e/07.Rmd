@@ -419,7 +419,7 @@ rush plot --x bill --y tip --color size --facets '~day' tips.csv
 If you only see ASCII characters, then that's because the ANSI escape sequences, which provide the colors, are not supported.
 Fortunately, if you run the above command yourself, it will look just like the screenshot.
 
-Option 2, as seen at the bottom of \@ref(fig:screenshot-display-ansi-and-inline), also diplays images inside the terminal.
+Option 2, as seen at the bottom of \@ref(fig:screenshot-display-ansi-and-inline), also displays images inside the terminal.
 This is the iTerm2 terminal, which is only available for macOS, and uses the [Inline Images Protocol](https://iterm2.com/documentation-images.html) through a small script (which I have named `display`).
 This script is not included with the Docker image, but you can easily install it:
 
@@ -537,6 +537,12 @@ Let's create a few basic plots
 
 ### Creating Bar Charts
 
+<!-- You can create a graphical version (by default in PNG format) by redirecting the output to a file. -->
+
+
+
+\@ref(fig:s
+
 ```{console plot_bar_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x time tips.csv
 ```
@@ -575,7 +581,6 @@ knitr::include_graphics("images/plot-histogram.png")
 ```
 
 
-<!-- You can create a graphical version (by default in PNG format) by redirecting the output to a file. -->
 <!-- I use the `!!` syntax to repeat the previous command. -->
 <!-- ```{console plot_demo_png} -->
 <!-- !! > tips.png -->

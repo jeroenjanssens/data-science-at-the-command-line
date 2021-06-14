@@ -34,7 +34,7 @@ As such, I'm going to change the vocabulary a bit.
 Let’s assume that I have a CSV file, also known as a *dataset*.
 Each row, except for the header, is considered to be a *data point*.
 Each data point has one or more *features*; properties that have been measured.
-Sometimes, a data point also has a *label*; which is, generally speaking, a judgment.
+Sometimes, a data point also has a *label*; which is, generally speaking, a judgment or outcome.
 This becomes more concrete when I introduce the wine dataset below.
 
 The first type of algorithm (dimensionality reduction) is most often unsupervised, which means that they create a model based on the features of the dataset only.
@@ -143,14 +143,14 @@ knitr::include_graphics("images/wine-quality.png")
 From the density plot you can see the quality of white wine is distributed more towards higher values.
 Does this mean that white wines are overall better than red wines, or that the white wine experts more easily give higher scores than red wine experts?
 That’s something that the data doesn't tell us.
-Or is there perhaps a correlation between alcohol and quality?
+Or is there perhaps a relationship between alcohol and quality?
 Let’s use `rush` to find out:
 
 ```{console}
 rush plot --x alcohol --y quality --color type --geom smooth wine.csv > wine-alcohol-vs-quality.png
 display wine-alcohol-vs-quality.png
 ```
-```{r plot_wine_alchohol_vs_quality, echo=FALSE, fig.cap="Correlation between the alcohol contents of wine and its quality", fig.align="center", out.width="90%"}
+```{r plot_wine_alchohol_vs_quality, echo=FALSE, fig.cap="Relationship between the alcohol contents of wine and its quality", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/wine-alcohol-vs-quality.png")
 ```
 
@@ -182,7 +182,7 @@ The library contains implementations of many dimensionality reduction algorithms
 
 - Locally Linear Embedding
 - Isomap
-- Multidimensional scaling
+- Multidimensional Scaling
 - PCA
 - t-SNE
 
@@ -257,6 +257,7 @@ knitr::include_graphics("images/wine-tsne.png")
 <!-- TODO: MUST Improve this sentence: something with only custom tools -->
 <!-- Note that there’s not a single *classic*  (i.e., classic command-line tool) in this one-liner. Now that’s the power of creating your own tools! -->
 
+<!-- TODO: wrap up section -->
 
 ## Regression with Vowpal Wabbit
 
@@ -274,6 +275,8 @@ shuf |
 split -d -n r/5 - wine-part-
 wc -l wine-part-*
 ```
+
+<!-- TODO: CH: I'm assuming audience from context, but I think if supervised vs. unsupervised is explained (earlier in the  chapter), it might make sense to add a quick (even one sentence) explanation of training and test datasets. -->
 
 Combine parts into training and test datasets:
 
@@ -336,7 +339,7 @@ cowsay
 ```
 
 So, the predictions are on average about 0.6 points off.
-Using `rush`, I visualize the correlation between the observed values and the predicted values:
+Using `rush`, I visualize the relationship between the observed values and the predicted values:
 
 ```{console}
 < results.csv header -a "predicted,observed" |
@@ -347,7 +350,7 @@ display wine-regression.png
 knitr::include_graphics("images/wine-regression.png")
 ```
 
-
+<!-- TODO: CH: Similar to the previous section, a quick wrap-up would tie this section up nicely. -->
 
 ## Classification with SciKit-Learn Laboratory
 

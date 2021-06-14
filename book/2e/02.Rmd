@@ -198,7 +198,6 @@ The following command is exactly the same:
 echo 'Hello world' | wc
 ```
 
-This is as simple as it gets.
 You just executed a command that contained a single command-line tool.
 The command-line tool `pwd` [@pwd] prints the name of the directory where you currently are.
 By default, when you login, this is your home directory.

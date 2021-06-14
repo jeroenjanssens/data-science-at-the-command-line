@@ -76,7 +76,7 @@ These three types of items will be discussed in the next three subsections, resp
 
 ### Looping Over Numbers
 
-Imagine that you need to compute the square of every even integer between 0 and 100. There’s a tool called `bc`[@bc], which is basically a calculator on the command line where you can pipe an equation to.
+Imagine that you need to compute the square of every even integer between 0 and 100. There’s a tool called `bc`[@bc], which is a *basic calculator* where you can pipe an equation to.
 The command to compute the square of 4 looks as follows:
 
 ```{console bc}
@@ -154,7 +154,7 @@ echo "Processing Chapter ${chapter}."
 done
 ```
 
-Just as with brace expansion, the expression `/data/\**` is first expanded into a list by the Z shell before it's being processed by the for loop.
+Just as with brace expansion, the expression `/data/*` is first expanded into a list by the Z shell before it's being processed by the for loop.
 
 A more elaborate alternative to listing files is `find`[@find], which:
 
@@ -648,7 +648,7 @@ Because this is quite a long pipeline, and because I'm using it again in a momen
 Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally.
 You can use `parallel` to distribute the local files among the remote machines, let them do the processing, and retrieve the results:
 
-```{console}
+```{console, callouts=1:5}
 ls *.json.gz |
 parallel -v --basefile jq \
 --trc {.}.csv \
@@ -656,6 +656,11 @@ parallel -v --basefile jq \
 "zcat {} | ./jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{print \$2\",\"\$1}' > {.}.csv"#! enter=FALSE
 C-C#! literal=FALSE
 ```
+<1> Print the list of files and pipe it into `parallel`
+<2> Transmit the `jq` binary to each remote machine. Luckily, `jq` has no dependencies. This file will be removed from the remote machines afterwards because I specified the `--trc` option (which implies the `--cleanup` option). Note that the pipeline uses `./jq` instead of just `jq`. That's because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.
+<3> The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
+<4> Specify a list of hostnames. Remember, if you want to try this out locally, you can specify `--sshlogin :` instead of `--slf hostnames`
+<5> Note the escaping in the `awk` expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. If quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with `add`
 
 ```{console, include=FALSE}
 ls *.json.gz |
@@ -664,14 +669,6 @@ parallel -v --basefile jq \
 --sshlogin : \
 "zcat {} | jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{print \$2\",\"\$1}' > {.}.csv"
 ```
-
-This long command breaks down as follows:
-
-- Print the list of files and pipe it into `parallel`
-- Transmit the `jq` binary to each remote machine. Luckily, `jq` has no dependencies. This file will be removed from the remote machines afterwards because I specified the `--trc` option (which implies the `--cleanup` option). Note that the pipeline uses `./jq` instead of just `jq`. That's because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.
-- The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
-- Specify a list of hostnames. Remember, if you want to try this out locally, you can specify `--sshlogin :` instead of `--slf hostnames`
-- Note the escaping in the `awk` expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. If quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with `add`
 
 If you, at some point during this process, run `ls` on one of the remote machines, you would see that `parallel` indeed transfers (and cleans up) the binary `jq`, the JSON files, and CSV files:
 
