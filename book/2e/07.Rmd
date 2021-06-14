@@ -376,17 +376,13 @@ All the knowledge that you already have about `R` can now be used from the comma
 
 ## Creating Visualizations
 
-In this section, I'm going to show you 
-
-It's helpful to distinguish between *creating* a visualization at the command line and *viewing* a visualization at the command line.
-Of course you're going to use the command line to *create* the visualization.
-But sometimes you cannot *view* any pixels and you're stuck with the capabilities of your terminal.
-
+In this section, I'm going to show you how to create data visualizations at the command line.
+Using `rush plot` I'll be creating bar charts, scatter plots, and box plots.
+Before we dive into creating data visualizations I'd first like to explain how you can display them.
 
 
 ### Displaying Images from the Command Line
 
-Before we dive into creating data visualizations I'd first like to explain how you can display them.
 Let's take the image *tips.png* as an example (see \@ref(fig:plot-demo)), which is a data visualization created using `rush` and the *tips.csv* dataset.
 (Don't worry about the syntax or the contents for now.)
 
@@ -493,7 +489,7 @@ rush run --library ggplot2 'ggplot(df, aes(x = bill, y = tip, color = size)) + g
 C-C#!literal=FALSE
 ```
 
-However, as you may have noticed, I had used a very different command to create *tips.png*:
+However, as you may have noticed, I have used a very different command to create *tips.png*:
 
 ```{console rush_plot_again}
 rush plot --x bill --y tip --color size --facets '~day' tips.csv > tips.png#!enter=FALSE
@@ -512,7 +508,7 @@ R -q -e '?ggplot2::qplot' | trim 14
 ```
 
 I agree with this advice; once you're done reading this book, it'll be worthwhile to learn `ggplot2`, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication.
-For now, while we're at the command line and don't want to fiddle too much about any single visualization, let's take that shortcut.
+For now, while we're at the command line, let's take that shortcut.
 
 As \@ref(fig:screenshot-display-ansi-and-inline) already showed, `rush plot` can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and ANSI escape sequences) with the same syntax.
 When `rush` detects that its output is piped to another command (such as `display` or redirected to a file such as *tips.png* it will produce a graphical visualization; otherwise it will produce a textual visualization.
@@ -523,22 +519,17 @@ Let's take a moment to read through the plotting and saving options of `rush plo
 rush plot --help
 ```
 
-The plotting options that take a *`<name>`* ...
-
-plot loads the `ggplot2` package
-
-stands on the shoulder of giants: ggplot2 and devoutansi package.
-
-
-<!-- Use option `--dpi` to change dpi. -->
-<!-- This is the pattern that I follow. First ansi then png. -->
-
-Let's create a few basic plots
+The most important options are the plotting options that take a *`<name>`* as an argument.
+For example, the `--x` option allows you to specify which column should be used to determine where *things* should be placed along the x axis.
+The same holds for the `--y` option. 
+The `--color` and `--fill` options are used to specify which column you want to use for coloring.
+You can probably guess what the `--size` and `--alpha` options are about.
+Other common options are explained throughout the sections as I create various visualizations.
+Note that for each visualization, I first show its textual representation (ASCII and ANSI characters) and then its visual representation (pixels).
 
 
 ### Creating Bar Charts
 
-<!-- You can create a graphical version (by default in PNG format) by redirecting the output to a file. -->
 
 A bar chart is useful for displaying the value counts of a categorical feature. 
 Here's a textual visualization of the *time* feature in the tips dataset:
@@ -561,7 +552,6 @@ knitr::include_graphics("images/plot-bar.png")
 ### Creating Histograms
 
 The counts of a continuous variable can be visualized with a histogram.
-
 Here, I have used the *time* feature to set the fill color.
 As a result, `rush plot` conveniently creates a stacked histogram.
 
@@ -571,10 +561,10 @@ rush plot --x tip --fill time tips.csv
 
 \@ref(fig:plot-histogram-image) shows again the graphical visualization. 
 Below, I use two syntax shortcuts.
-The double exclamation mark (`!!`) gets replaced with the previous command.
-The new command gets printed by the Z shell so you know what it executes.
+The two exclamation marks (`!!`) get replaced with the previous command.
 The exclamation mark and dollar sign (`!$`) get replaced by the last part of the previous command, which is the filename *plot-histogram.png*.
-This two shortcuts can save a lot of typing but I have to admit that they're not easy to remember.
+As you can see, the updated commands are first printed by the Z shell so you know exactly what it executes.
+These two shortcuts can save a lot of typing but I have to admit that they're not easy to remember.
 
 ```{console plot_histogram_png}
 !! > plot-histogram.png
@@ -690,13 +680,14 @@ knitr::include_graphics("images/plot-trend-points.png")
 
 ### Creating Box Plots
 
-factor is needed because otherwise
+A box plot visualizes, for one or more features, a five-number summary: the minimum, the maximum, the sample median, and the first and third quartiles. 
+In this case we need to convert the *size* feature to a categorical one using the `factor()` function, otherwise all values of the *bill* feature will be lumped together. 
 
 ```{console plot_boxplot_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv
 ```
 
-\@ref(fig:plot-boxplot-image)
+While the textual representation is not too bad, the visual one is much clearer (see \@ref(fig:plot-boxplot-image)).
 
 ```{console plot_boxplot_png}
 rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv > plot-boxplot.png
@@ -709,18 +700,15 @@ knitr::include_graphics("images/plot-boxplot.png")
 
 ### Adding Labels
 
-default label is based on column specification.
-
-add title and label the axes
-
-also violin
-
+The default labels are based on column names (or specification).
+In the previous image, the label *`factor(size)`* should be improved.
+Using the `--xlab` and `--ylab` options you can override the labels of the x and y axes.
+A title can be added with the `--title` option.
+Here's a violin plot demonstrating this (see also \@ref(fig:plot-labels-image).
 
 ```{console plot_labels_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv
 ```
-
-\@ref(fig:plot-labels-image)
 
 ```{console plot_labels_png}
 rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv > plot-labels.png
@@ -733,15 +721,11 @@ knitr::include_graphics("images/plot-labels.png")
 
 ### Adding Facets
 
-already seen it in the two screenshots from the previous section
-weird syntax (out of scope). Also I().
+Facets allow you to slice the data on one or two columns and place multiple visualizations side-by-side.
+It requires a syntax which is unfortunately out of scope to explain.
+Here, I also demonstrate how to use a constant value instead of the values of a particular feature using the `I()` syntax. 
 
-
-```{console plot_facets_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
-rush plot --x bill --y tip --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv
-```
-
-\@ref(fig:plot-facets-image)
+I'm skipping the textual representation because there's just too much going for it to make sense (see \@ref(fig:plot-facets-image)).
 
 ```{console plot_facets_png}
 rush plot --x bill --y tip --color smoker --size size --facets 'time ~ day' --alpha 'I(0.7)' --title 'Bubble chart' tips.csv > plot-facets.png
@@ -751,61 +735,18 @@ display plot-facets.png
 knitr::include_graphics("images/plot-facets.png")
 ```
 
-No lunch on Saturday and Sunday
-Days out of order. Need more R for this.
-
-Time you learn R.
+Adding facets to your visualization can be useful for incorporating one or to more features.
+This visualization is showing six features at once, which is really pushing it.
+In this case you might consider to apply a dimensionality reduction algorithm before you visualize it.
+This is discussed in Chapter 9.
 
 
 ### Going Beyond Basic Plots
 
-you need ggplot2
-multiple layers, (scatter plus trend lines)
-theming
-many extensions available for ggplot2
-plotnine?
-
-
-
-<!-- ### Histogram -->
-
-<!-- The column type that is specified with the `-x` option is automatically detected, and determines the geometry. -->
-<!-- In this it's a histogram because *OBS_VALUE* is continuous. -->
-<!-- If the `--fill` option is specified, it creates a stacked histogram. -->
-
-<!-- ```{console plot_hist_ansi, trailing_spaces=TRUE, remove=c(-2, -1)} -->
-<!-- rush plot -x obs_value --fill unit venture.csv -->
-<!-- ``` -->
-
-<!-- The graphical version looks like this: -->
-
-<!-- ```{console plot_hist_png} -->
-<!-- !! > obs-histogram.png -->
-<!-- display obs-histogram.png -->
-<!-- ``` -->
-<!-- ```{r plot-hist-image, echo=FALSE, fig.cap="Histogram", fig.align="center", out.width="90%"} -->
-<!-- knitr::include_graphics("images/obs-histogram.png") -->
-<!-- ``` -->
-<!-- Something strange is going on with *OBS_VALUE*. It takes on vastly different values depending on the *UNIT*. -->
-<!-- Let's invoke `ggplot2` directly to investigate: -->
-
-<!-- ```{console plot_facets_ansi, trailing_spaces=TRUE, remove=c(-2, -1)} -->
-<!-- cat venture.csv | -->
-<!-- rush run --library ggplot2 'ggplot(df, aes(x = obs_value, fill = unit)) + -->
-<!-- geom_histogram() + -->
-<!-- facet_wrap(~ unit, scales = "free")' - -->
-<!-- ``` -->
-
-<!-- The graphical version looks much more clear: -->
-
-
-<!-- ```{console} -->
-<!-- !! > obs-facets.png -->
-<!-- display obs-facets.png -->
-<!-- ``` -->
-<!-- ```{r, echo=FALSE, fig.cap="Histogram with facets", fig.align="center", out.width="90%"} -->
-<!-- knitr::include_graphics("images/obs-facets.png") -->
-<!-- ``` -->
+Although `rush plot` is suitable for creating basic plots when you're exploring data, it certainly has its limitations. 
+Sometimes you need more flexibility and sophisticated options such as multiple geometries, coordinate transformations, and theming.
+In that case it might be worthwhile to learn more about the underlying package from which `rush plot` draws its capabilities, namely the `ggplot2` package for R. 
+When you're more into Python than R, there's the [`plotnine` package](https://plotnine.readthedocs.io), which is reimplementation of `ggplot2` for Python.
 
 
 ## Summary
@@ -817,9 +758,10 @@ The only down-side would be that the output is not viewable from the command lin
 This is where textual visualizations may come in handy.
 At least `rush` has, thanks to `R` and `ggplot2`, a consistent syntax for both types.
 The next chapter is, once again, an intermezzo chapter in which I discuss how you can speed up your commands and pipelines.
-Feel free to read that chapter at a later point if you can't wait to start modeling your data in Chapter 9.
+Feel free to read that chapter at a later point if you can't wait to start modeling your data in [Chapter 9](#chapter-9-modeling-data).
 
 
 ## For Further Exploration
 
 - A proper `ggplot2` tutorial is unfortunately beyond the scope of this book. If you want to get better at visualizing your data I strongly recommend that you invest some time in understanding the power and beauty of the grammar of graphics. Chapters 3 and 28 of the book [*R for Data Science*](https://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund are an excellent resource.
+- Speaking of Chapters 3 and 28, I [translated those to Python using Plotnine and Pandas](https://datascienceworkshops.com/blog/plotnine-grammar-of-graphics-for-python/) in case you're more into Python than R.
