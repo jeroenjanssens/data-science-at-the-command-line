@@ -22,6 +22,7 @@ ADM_TYPE = {"comment": "NOTE",
 
 conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)
 
+ref_re = re.compile(f'@ref\(([a-z]+):([a-z\-]+)\)(.*)')
 callout_code_re = re.compile(r'#? ?&lt;([0-9]{1,2})&gt;')
 callout_text_re = re.compile(r'<([0-9]{1,2})>')
 comment_adoc_re = re.compile(r'<!--A(.*)A-->', re.MULTILINE|re.DOTALL)
@@ -65,6 +66,11 @@ def pygments(key, value, format, _):
 
     if format == "asciidoc":
 
+        # Fix chapter cross ref
+        # if key == "Link" and value[2][0].startswith("#chapter"):
+        #     return RawInline("asciidoc", f"<<{value[2][0][1:]}>>")
+
+
         # Only keep <!--A...A---> comments
         if key == "RawBlock":
             try:
@@ -73,11 +79,19 @@ def pygments(key, value, format, _):
             except:
                 pass
 
+
         # Fix references to figures
         if (key == "Str") and value.startswith("@ref"):
-            #stderr.write(f"{key}\t{value}\n")
-            _, ref_type, ref_id, *_ = re.split("\(|:|\)", value)
-            return Str(f"<<{ref_type}:{ref_id}>>")
+            # stderr.write(f"{key}\t{value}\n")
+            #_, ref_type, ref_id, *rest = re.split("\(|:|\)", value)
+
+            match = ref_re.fullmatch(value)
+            ref_type = match.group(1)
+            ref_id = match.group(2)
+            ref_rest = match.group(3)
+            new_ref = f"<<{ref_type}:{ref_id}>>{ref_rest}"
+            # stderr.write(new_ref + "\n")
+            return Str(new_ref)
 
         elif key == "Div":
             [[ident, classes, keyvals], code] = value
@@ -94,7 +108,7 @@ def pygments(key, value, format, _):
             elif div_type == "figure":
                 fig_id = code[2]["c"][0]["c"].split(")")[0][2:]
                 html = code[0]["c"][0]["c"][1]
-                stderr.write(f"{html}\n")
+                # stderr.write(f"{html}\n")
                 _, src, _, alt, *_ = html.split("\"")
                 return Plain([Str(f"[[{fig_id}]]\n.{alt}\nimage::{src}[{alt}]")])
 
