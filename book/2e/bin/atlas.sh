@@ -10,6 +10,7 @@ gsed -E ':1
   s/^\s*//
   b1
 }' |
-gsed -E 's/<<chapter\-([0-9]+)\-([^>]*)>>/Chapter \1/g' |
+# gsed -E 's/<<chapter\-([0-9]+)\-([^>]*)>>/Chapter \1/g' |
 gsed -E 's/\x1b\[[0-9;]*m//g' |
-gsed -E 's/`footnote/` footnote/g'
+gsed -E 's/`footnote/` footnote/g' |
+gsed -E 's/_`/_++/g' | gsed -E 's/`_/++_/g'
