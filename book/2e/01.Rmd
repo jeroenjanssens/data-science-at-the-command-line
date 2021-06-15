@@ -31,7 +31,6 @@ These are all valid questions.
 In this first chapter I will answer these questions as follows.
 First, I provide a practical definition of data science that will act as the backbone of this book.
 Second, I'll list five important advantages of the command line.
-<!-- TODO put back in when use case is back: Third, I demonstrate the power and flexibility of the command line through a real-world use case. -->
 By the end of this chapter I hope to have convinced you that the command line is indeed worth learning for doing data science.
 
 

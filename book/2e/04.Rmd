@@ -535,15 +535,15 @@ That way, you'll add a small delay in between each line so that it's easier to c
 In this intermezzo chapter, I have shown you how to build your own command-line tool.
 Only six steps are needed to turn your code into a reusable building block.
 You'll find that it makes you much more productive.
-I advise you to keep an eye out for opportunities to create one.
+I advise you to keep an eye out for opportunities to create your own tools.
 The next chapter covers the second step of the OSEMN model for data science, namely scrubbing data.
 
 
 ## For Further Exploration
 
-- Adding help to your tool becomes important when the tool has many options to remember. Even more so when you want to share your tool with others. `docopt` is a language-agnostic approach to provide help and define the possible options that your tool accepts. There are implementations available in just about any programming language including Bash, Python, and R.
-- If you want to learn more about programming in Bash, there are two books that I can recommend: *Classic Shell Programming* by Arnold Robbins and Nelson Beebe and *Bash Cookbook* by Carl Albing and JP Vossen.
-- Writing a robust and safe Bash script is quite tricky. [ShellCheck](https://www.shellcheck.net/) is an online tool that will check your Bash code for any possible mistakes and vulnerabilities. There's also a command-line tool available if you rather not post your code on a website.
+- Adding help documentation to your tool becomes important when the tool has many options to remember, and even more so when you want to share your tool with others. `docopt` is a language-agnostic framework to provide help and define the possible options that your tool accepts. There are implementations available in just about any programming language including Bash, Python, and R.
+- If you want to learn more about programming in Bash, I recommend *Classic Shell Programming* by Arnold Robbins and Nelson Beebe and *Bash Cookbook* by Carl Albing and JP Vossen.
+- Writing a robust and safe Bash script is quite tricky. [ShellCheck](https://www.shellcheck.net/) is an online tool that will check your Bash code for mistakes and vulnerabilities. There's also a command-line tool available.
 - The book *Ten Essays on Fizz Buzz* by Joel Grus is an insightful and fun collection of ten different ways to solve Fizz Buzz with Python.
 
 [^fb]: This code is adapted from a [Python script by Joel Grus](https://github.com/joelgrus/fizzbuzz/blob/master/fizzbuzz/cycle_of_15.py).

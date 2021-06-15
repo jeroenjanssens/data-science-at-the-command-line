@@ -903,7 +903,7 @@ Let’s see how the first 10 lines look like:
 ```
 
 That seems to be in order.
-Image that you've been able to determine that the root HTML element that we’re interested in is a *&&lt;table&gt;* with the class *wikitable*.
+Image that you've been able to determine that the root HTML element that we’re interested in is a *&lt;table&gt;* with the class *wikitable*.
 This allows you to look at the part that you’re interest in using `grep` (the `-A` option specifies the number of lines you want to print after the matching line):
 
 ```{console}
@@ -951,18 +951,18 @@ This way, you can spend more time becoming proficient at generic command-line to
 
 ## Summary
 
-In this chapter we've looked at cleaning or scrubbing data.
-As we've seen there is not a single tool that can magically get rid of all the messiness of our data; we often need to combine multiple different tools to get the desired result.
-It's important to keep in mind that especially the classic command-line tools are unable to interpret structured data.
-Luckily there exist tools that convert one data format such as JSON and XML into another data format such as CSV.
+In this chapter we've looked at cleaning, or scrubbing, data.
+As you've seen there is no single tool that can magically get rid of all the messiness of data; you'll often need to combine multiple different tools to get the desired result.
+Keep in mind that classic command-line tools such as `cut` and `sort` can't interpret structured data.
+Luckily, there are tools that convert one data format, such as JSON and XML, into another data format, such as CSV.
 In the next chapter, which is again an intermezzo chapter, I'm going to show you how you can manage your project using `make`.
 You're free to skip this chapter if you can't wait to start exploring and visualizing your data in Chapter 7.
 
 
 ## For Further Exploration
 
-- I wish I could've explained more about `awk`. It's such a powerful tool and programming language. I highly recommend that you take the time to learn it. Two good resources are the book said *sed & awk* by Doherty and Robbins and the online [GNU Awk User's Guide](https://www.gnu.org/software/gawk/manual/gawk.html).
-- In this chapter I have used regular expressions in a couple of places. A tutorial about them is unfortunately beyond the scope of this book. Because regular expressions can be used in many different tools I can recommend that you learn about them. A good book that I can recommend is *Regular Expressions Cookbook* by Jan Goyvaerts and Steven Levithan.
+- I wish I could've explained more about `awk`. It's such a powerful tool and programming language. I highly recommend that you take the time to learn it. Two good resources are the book *sed & awk* by Doherty and Robbins and the online [GNU Awk User's Guide](https://www.gnu.org/software/gawk/manual/gawk.html).
+- In this chapter I have used regular expressions in a couple of places. A tutorial about them is unfortunately beyond the scope of this book. Because regular expressions can be used in many different tools, I recommend that you learn about them. A good book is *Regular Expressions Cookbook* by Jan Goyvaerts and Steven Levithan.
 
 
 [^cat]: [Some](http://porkmail.org/era/unix/award.html) consider this a useless use of `cat`, arguing that the purpose of `cat` is to concatenate files and if you're not using it for this purpose, it's a waste of time, and costs you a process. I think this is silly. We've got more important things to do!

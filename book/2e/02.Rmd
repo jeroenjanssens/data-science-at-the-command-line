@@ -19,8 +19,8 @@ In this chapter I'm going to make sure that you have all the prerequisites for d
 The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use throughout this book, and (3) understanding the essential concepts that come into play when using the command line.
 
 First, I describe how to download the datasets.
-Second, I explain how to install the Docker image, which is a virtual environment based on Linux that contains all the necessary command-line tools.
-Subsequently, I go over the essential command-line concepts through examples.
+Second, I explain how to install the Docker image, which is a virtual environment based on Ubuntu Linux that contains all the necessary command-line tools.
+Subsequently, I go over the essential Unix concepts through examples.
 
 By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.
 
@@ -40,7 +40,7 @@ In the next section I explain how to install the environment containing all the 
 ## Installing the Docker Image {#docker-image}
 
 In this book we use many different command-line tools.
-Linux often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools.
+Unix often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools.
 Installing these packages yourself is often not too difficult.
 However, we'll also use tools that are not available as packages and require a more manual, and more involved, installation.
 In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
@@ -80,7 +80,7 @@ docker run --rm -it datasciencetoolbox/dsatcl2e#! enter=FALSE
 C-C #! literal=FALSE
 ```
 
-You're now inside an isolated Linux environment---known as a *Docker container*---with all the necessary command-line tools installed.
+You're now inside an isolated environment---known as a *Docker container*---with all the necessary command-line tools installed.
 If the following command produces an enthusiastic cow, then you know everything is working correctly:
 
 ```{console cowsay_lets_moove}
@@ -119,19 +119,19 @@ If you would like to know more about the Docker image you can [visit it on Docke
 ```
 
 
-## Essential GNU/Linux Concepts {#essential-concepts}
+## Essential Unix Concepts {#essential-concepts}
 
 In [Chapter 1](#chapter-1-introduction), I briefly showed you what the command line is.
-Now that you are running the [Docker image](#docker-image), we can really get started.
+Now that you are running the Docker image, we can really get started.
 In this section, I discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line.
 If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change.
 But don’t worry, I’ll start at the beginning, and very gradually go to more advanced topics.
 
 ```{block2, type="rmdnote"}
-This section is not a complete course in GNU/Linux.
+This section is not a complete course in Unix.
 I will only explain the concepts and tools that are relevant for to doing data science.
-One of the advantages of the [Docker image](#docker-image) is that a lot is already set up.
-If you wish to know more about GNU/Linux, consult the Further Reading Section at the end of this chapter.
+One of the advantages of the Docker image is that a lot is already set up.
+If you wish to know more, consult the Further Reading Section at the end of this chapter.
 ```
 
 
@@ -164,11 +164,11 @@ The text below `seq 3` is the output of the command.
 
 Shell
 
-:   The third layer is the shell. Once we have typed in our command and pressed **`Enter`**, the terminal sends that command to the shell. The *shell* is a program that interprets the command. The Section [Docker image](#docker-image) uses the Z shell, but there are many others available such as Bash and Fish.
+:   The third layer is the shell. Once we have typed in our command and pressed **`Enter`**, the terminal sends that command to the shell. The *shell* is a program that interprets the command. I use the Z shell, but there are many others available such as Bash and Fish.
 
 Operating system
 
-:   The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The [Docker image](#docker-image) is based on a particular Linux distribution called Ubuntu.
+:   The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The Docker image is based on a particular GNU/Linux distribution called Ubuntu.
 
 
 ### Executing a Command-line Tool
@@ -190,7 +190,7 @@ wc
 ```
 
 The greater-than sign is the continuation prompt, which indicates that this line is a continuation of the previous one.
-A long command can be broken up with either a backslash or a pipe symbol.
+A long command can be broken up with either a backslash or a pipe symbol (`|`).
 Be sure to first match any quotation marks.
 The following command is exactly the same:
 
@@ -547,7 +547,7 @@ In Chapter 7, I explain four options for you to display generated images from th
 ### Help!
 
 As you're finding your way around the command-line, it may happen that you need help.
-Even the most seasoned Linux users need help at some point.
+Even the most seasoned Unix users need help at some point.
 It is impossible to remember all the different command-line tools and their possible arguments.
 Fortunately, the command line offers severals ways to get help.
 
@@ -584,7 +584,7 @@ For example:
 jq --help | trim
 ```
 
-Specifying the `--help` option also works for the GNU command-line tools such as `cat`.
+Specifying the `--help` option also works for command-line tools such as `cat`.
 However, the corresponding man page often provides more information.
 If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet.
 In the appendix, there’s a list of all command-line tools used in this book.
@@ -607,13 +607,13 @@ As you can see, rather than listing the many options alphabetically like `man` o
 
 ## Summary
 
-In this chapter I explained how to get all the required command-line tools by installing a Docker image.
+In this chapter you learned how to get all the required command-line tools by installing a Docker image.
 I also went over some essential command-line concepts and how to get help.
-Now that you have all the necessary ingredients, you're ready to con with the first step of the OSEMN model for data science, which is to obtaining data.
+Now that you have all the necessary ingredients, you're ready for the first step of the OSEMN model for data science: obtaining data.
 
 
 ## For Further Exploration
 
-- The subtitle of this book pays homage to the epic *Unix Power Tools* by Jerry Peek, Shelley Powers, Tim O'Reilly, and Mike Loukides. And rightly so. In 51 chapters, spanning over 1000 pages, it covers just about everything there's to know about Unix. It weighs nearly 2 kg, so you might want to consider getting the ebook.
+- The subtitle of this book pays homage to the epic *Unix Power Tools* by Jerry Peek, Shelley Powers, Tim O'Reilly, and Mike Loukides. And rightly so. In 51 chapters and more than a thousand pages, it covers just about everything there is to know about Unix. It weighs over 4 pounds, so you might want to consider getting the ebook.
 - The website [explainshell](https://explainshell.com/) parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages. 
-- Docker is truly a brilliant piece of software. In this chapter I've briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to [learn how to create a your own Docker images](https://www.docker.com/101-tutorial) yourself. The book *Docker: Up & Running* by Sean Kane and Karl Matthias is a good resource as well.
+- Docker is truly a brilliant piece of software. In this chapter I've briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to [learn how to create your own Docker images](https://www.docker.com/101-tutorial). The book *Docker: Up & Running* by Sean Kane and Karl Matthias is a good resource as well.
