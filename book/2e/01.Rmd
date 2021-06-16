@@ -41,13 +41,16 @@ Throughout this book I employ a very practical definition by @Mason2010.
 They define data science according to the following five steps: (1) obtaining data, (2) scrubbing data, (3) exploring data, (4) modeling data, and (5) interpreting data.
 Together, these steps form the OSEMN model (which is pronounced as *awesome*).
 This definition serves as the backbone of this book because each step, (except step 5, interpreting data, which I explain below) has its own chapter.
-Below I explain what each step entails.
 
-```{block2, type="rmdcomment"}
 Although the five steps are discussed in a linear and incremental fashion, in practice it is very common to move back and forth between them or to perform multiple steps at the same time.
-Doing data science is an iterative and non-linear process.
+\@ref(fig:osemn) illustrates that doing data science is an iterative and non-linear process.
 For example, once you have modeled your data, and you look at the results, you may decide to go back to the scrubbing step to the adjust the features of the dataset.
+
+```{r osemn, echo=FALSE, fig.cap="Doing data science is an iterative and non-linear process", fig.align="center"}
+knitr::include_graphics("images/diagram_osemn.png")
 ```
+
+Below I explain what each step entails.
 
 
 ### Obtaining Data
@@ -271,7 +274,7 @@ Because the command line comes with any Unix-like operating system, including Ub
 Plus, 100% of the top 500 supercomputers are running Linux.[^2]
 So, if you ever get your hands on one of those supercomputers (or if you ever find yourself in Jurassic Park with the doorlocks not working), you better know your way around the command line!
 
-But GNU/Linux not only runs on supercomputers.
+But Linux not only runs on supercomputers.
 It also runs on servers, laptops, and embedded systems.
 These days, many companies offer cloud computing, where you can easily launch new machines on the fly.
 If you ever log in to such a machine (or a server in general), it's almost certain that you’ll arrive at the command line.

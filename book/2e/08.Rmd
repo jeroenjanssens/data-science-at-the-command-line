@@ -656,6 +656,7 @@ parallel -v --basefile jq \
 "zcat {} | ./jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{print \$2\",\"\$1}' > {.}.csv"#! enter=FALSE
 C-C#! literal=FALSE
 ```
+
 <1> Print the list of files and pipe it into `parallel`
 <2> Transmit the `jq` binary to each remote machine. Luckily, `jq` has no dependencies. This file will be removed from the remote machines afterwards because I specified the `--trc` option (which implies the `--cleanup` option). Note that the pipeline uses `./jq` instead of just `jq`. That's because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.
 <3> The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
@@ -711,14 +712,15 @@ csvlook
 
 ## Summary
 
-As data scientists, we work with data, and sometimes a lot of data.
+As a data scientist, you work with data--sometimes a lot of data.
 This means that sometimes you need to run a command multiple times or distribute data-intensive commands over multiple cores.
 In this chapter I have shown you how easy it is to parallelize commands.
-`parallel` is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them over multiple cores and remote machines. It offers a lot of functionality and in this chapter I’ve only been able to scratch the surface.
-In the next chapter I'm going to cover the fourth step of the OSEMN model namely modeling data.
+`parallel` is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them.
+It offers a lot of functionality and in this chapter I’ve only been able to scratch the surface.
+In the next chapter I'm going to cover the fourth step of the OSEMN model: modeling data.
 
 
 ## For Further Exploration
 
-- Once you have a basic understanding of `parallel` and its most important options, I recommend that you take a look at [its online tutorial](https://www.gnu.org/software/parallel/parallel_tutorial.html). You'll learn, among other things, how to specify different ways of specifying input, keep a log of all the jobs, and how to timeout, resume, and retry jobs. As Ole Tange says, "your command line will love you for it."
+- Once you have a basic understanding of `parallel` and its most important options, I recommend that you take a look at [its online tutorial](https://www.gnu.org/software/parallel/parallel_tutorial.html). You'll learn, among other things, how to specify different ways of specifying input, keep a log of all the jobs, and how to timeout, resume, and retry jobs. As creator of `parallel` Ole Tange in this tutorial says, "Your command line will love you for it."
 

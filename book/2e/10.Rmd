@@ -157,9 +157,6 @@ This is different from passing a single string.
 This is also means that you don't have any other shell syntax available that would allow for things such as redirection and piping.
 
 
-
-
-
 ## R
 
 In R, there are several ways to leverage the command line.
@@ -350,14 +347,14 @@ I think it's fantastic that the developers of Apache Spark added the ability to 
 
 ## Summary
 
-In this chapter I have demonstrated several situations where the command line can be leveraged including programming languages and other environments.
-I think it's important to realize that the command line doesn't exist in a vacuum.
-I hope that this chapter has demonstrated that what matters most is that you used tools which ever get the job done.
-And sometimes that is a combination of tools.
+In this chapter you learned several ways to leverage the command line in other situations, including programming languages and other environments.
+It's important to realize that the command line doesn't exist in a vacuum.
+What matters most is that you use tools, sometimes in combination, that reliably get the job done.
+
 Now that we've had all the four OSEMN chapters and the four intermezzo chapters, it's time to wrap this up and conclude in the final chapter.
 
 
 ## For Further Exploration
 
-- There exist solutions for integrating two programming languages, without the use of the command line. For example the [`reticulate` package](https://rstudio.github.io/reticulate/) in R allows you to interface with Python directly.
+- There are also ways to integrating two programming languages directly, without the use of the command line. For example the [`reticulate` package](https://rstudio.github.io/reticulate/) in R allows you to interface with Python directly.
 

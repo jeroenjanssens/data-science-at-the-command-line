@@ -656,6 +656,9 @@ display plot-scatter.png
 knitr::include_graphics("images/plot-scatter.png")
 ```
 
+From this scatter plot we may conclude that there's a relationship between the amount of the bill and the tip. 
+Perhaps we it's useful to examine this data from a higher level by creating trend lines.
+
 
 ### Creating Trend Lines
 
@@ -706,6 +709,7 @@ display plot-boxplot.png
 knitr::include_graphics("images/plot-boxplot.png")
 ```
 
+Unsurprisingly, this box plot shows that, on average, a larger party size leads to a higher bill.
 
 ### Adding Labels
 
@@ -713,7 +717,7 @@ The default labels are based on column names (or specification).
 In the previous image, the label *`factor(size)`* should be improved.
 Using the `--xlab` and `--ylab` options you can override the labels of the x and y axes.
 A title can be added with the `--title` option.
-Here's a violin plot demonstrating this (see also \@ref(fig:plot-labels-image).
+Here's a violin plot (which is a mashup of a box plot and a density plot) demonstrating this (see also \@ref(fig:plot-labels-image).
 
 ```{console plot_labels_ansi, trailing_spaces=TRUE, remove=c(-2, -1)}
 rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv
@@ -726,6 +730,8 @@ display plot-labels.png
 ```{r plot-labels-image, echo=FALSE, fig.cap="A violin plot with a title and labels", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/plot-labels.png")
 ```
+
+Annotating your visualization with proper labels and a title is especially useful if you want to share it with others (or your future self) so that it's easier to understand what's being shown.
 
 
 ### Going Beyond Basic Plots
@@ -740,12 +746,12 @@ When you're more into Python than R, there's the [`plotnine` package](https://pl
 
 In this chapter we've looked at various ways to explore your data.
 Both textual and graphical data visualizations have their pros and cons.
-The latter are obviously of much higher quality.
-The only down-side would be that the output is not viewable from the command line.
-This is where textual visualizations may come in handy.
-At least `rush` has, thanks to `R` and `ggplot2`, a consistent syntax for both types.
+The graphical ones are obviously of much higher quality, but can be tricky to view at the command line.
+This is where textual visualizations come in handy.
+At least `rush` has, thanks to `R` and `ggplot2`, a consistent syntax for creating both types.
+
 The next chapter is, once again, an intermezzo chapter in which I discuss how you can speed up your commands and pipelines.
-Feel free to read that chapter at a later point if you can't wait to start modeling your data in [Chapter 9](#chapter-9-modeling-data).
+Feel free to read that chapter later if you can't wait to start modeling your data in [Chapter 9](#chapter-9-modeling-data).
 
 
 ## For Further Exploration
