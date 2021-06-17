@@ -14,8 +14,7 @@ console_start()
 
 
 # Parallel Pipelines {#chapter-8-parallel-pipelines}
-
-<!-- #TODO: MUST: Check whether I use the terms machine and instance correctly. -->
+ 
 <!-- #TODO: MUST Check spelling: "Z shell" -->
 <!-- #TODO: SHOULD: Dicuss progress bar -->
 <!-- #TODO: COULD: Discuss resume mechanism, using a tool that sometimes fails -->
@@ -194,24 +193,28 @@ done#! hold=7
 <1> The ampersand sends the command to the background, allowing the for loop to continue immediately with the next iteration.
 <2> This line shows the job number given by the Z shell and the process ID, which can be used for more fine-grained job control. This topic, while powerful, is beyond the scope of this book.
 
-
 ```{block2, type="rmdnote"}
 Keep in mind that not everything can be parallelized.
 API calls may be limited to a certain number, or some commands can only have one instance.
 ```
 
+
+\@ref(fig:osemn) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything. 
+
+```{r processing, echo=FALSE, fig.cap="Serial processing, naive parallel processing, and parallel processing with GNU Parallel", fig.align="center"}
+knitr::include_graphics("images/diagram_processing.png")
+```
+
 There are two problems with this naive approach.
 First, there’s no way to control how many processes you are running concurrently.
-If you start too many jobs at once, your system may run out of memory.
+If you start too many jobs at once, they could be competing for the same resources such as CPU, memory, disk access, and network bandwidth.
+This could lead to a longer time to run everything.
 Second, it's difficult to tell which output belongs to which input.
 Let's look at a better approach.
-
-
 
 ### Introducing GNU Parallel
 
 Allow me to introduce `parallel`, a command-line that allows you to parallelize and distribute commands and pipelines.
-<!-- TODO: MUST: More exciting intro needed -->
 The beauty of this tool is that existing tools can be used as they are; they do not need to be modified.
 
 ```{block2, type="rmdcaution"}
@@ -241,9 +244,9 @@ parallel --jobs 2 ./slow.sh ::: {A..C}
 Here, using the `--jobs` option, I specify that `parallel` can run at most two jobs concurrently. The arguments to `slow.sh` are specified as an argument instead of via standard input.
 
 With a whopping 159 different options, `parallel` offers a lot of functionality.
-Perhaps too much.
+(Perhaps too much.)
 Luckily you only need to know a handful in order to be effective.
-The manual page is quite informative in case you need to use a more obscure option.
+The manual page is quite informative in case you need to use a less common option.
 
 
 ### Specifying Input
