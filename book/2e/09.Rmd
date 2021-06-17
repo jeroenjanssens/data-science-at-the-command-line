@@ -15,35 +15,35 @@ console_start()
 
 # Modeling Data {#chapter-9-modeling-data}
 
-In this chapter we’re going to perform the fourth and last step of the OSEMN model that we can do on a computer: modeling data.
+In this chapter we’re going to perform the fourth step of the OSEMN model: modeling data.
 Generally speaking, a model is an abstract or higher-level description of your data.
-Just as with creating visualizations, it’s like taking a step back from the individual data points to see the bigger picture.
+Modeling is a bit like creating visualizations in the sense that we're taking a step back from the individual data points to see the bigger picture.
 
-Visualizations, on the one hand, are characterized by shapes, positions, and colors such that we can interpret them by looking at them.
-Models, on the other hand, are internally characterized by a bunch of numbers, which means that computers can use them, for example, to make predictions about a new data points.
+Visualizations are characterized by shapes, positions, and colors: we can interpret them by looking at them.
+Models, on the other hand, are internally characterized by numbers, which means that computers can use them to do things like make predictions about a new data points.
 (We can still visualize models so that we can try to understand them and see how they are performing.)
 
-In this chapter I’ll consider three common types of algorithms to model data:
+In this chapter I’ll consider three types of algorithms commonly used to model data:
 
-- Dimensionality reduction.
-- Regression.
-- Classification.
+- Dimensionality reduction
+- Regression
+- Classification
 
-These algorithms come from the field of machine learning.
-As such, I'm going to change the vocabulary a bit.
+These algorithms come from the field of machine learning, so I'm going to change the vocabulary a bit.
 Let’s assume that I have a CSV file, also known as a *dataset*.
 Each row, except for the header, is considered to be a *data point*.
-Each data point has one or more *features*; properties that have been measured.
-Sometimes, a data point also has a *label*; which is, generally speaking, a judgment or outcome.
+Each data point has one or more *features*, or properties that have been measured.
+Sometimes, a data point also has a *label*, which is, generally speaking, a judgment or outcome.
 This becomes more concrete when I introduce the wine dataset below.
 
 The first type of algorithm (dimensionality reduction) is most often unsupervised, which means that they create a model based on the features of the dataset only.
 The last two types of algorithms (regression and classification) are by definition supervised algorithms, which means that they also incorporate the labels into the model.
 
 ```{block2, type="rmdcaution"}
-This is by no means an introduction to machine learning.
+This chapter is by no means an introduction to machine learning.
 That implies that I must skim over many details.
-My general advise is that you become familiar with an algorithm before applying it blindly to your data.
+My general advice is that you become familiar with an algorithm before applying it to your data.
+At the end of this chapter I recommend a few books about machine learning. 
 ```
 
 ## Overview
@@ -64,11 +64,9 @@ l
 
 ## More Wine Please!
 
-In this chapter, I’ll be using a dataset of wine tastings.
-Specifically, red and white Portuguese "Vinho Verde" wine.
-Each data point represents a wine, and consists of 11 physicochemical properties: (1) fixed acidity, (2) volatile acidity, (3) citric acid, (4) residual sugar, (5) chlorides, (6) free sulfur dioxide, (7) total sulfur dioxide, (8) density, (9) pH, (10) sulphates, and (11) alcohol.
-There is also a quality score.
-This score lies between 0 (very bad) and 10 (excellent) and is the median of at least three evaluation by wine experts. More information about this dataset is available at the [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Wine+Quality).
+In this chapter, I’ll be using a dataset of wine tasters' notes on red and white varieties of Portuguese wine called vinho verde.
+Each data point represents a wine. Each wine is rated on 11 physicochemical properties: (1) fixed acidity, (2) volatile acidity, (3) citric acid, (4) residual sugar, (5) chlorides, (6) free sulfur dioxide, (7) total sulfur dioxide, (8) density, (9) pH, (10) sulphates, and (11) alcohol.
+There is also an overall quality score between 0 (very bad) and 10 (excellent), which is the median of at least three evaluation by wine experts. More information about this dataset is available at the [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Wine+Quality).
 
 The dataset is split into two files: one for white wine and one for red wine.
 The very first step is to obtain the two files using `curl` (and of course `parallel` because I haven’t got all day):
@@ -84,7 +82,7 @@ The triple colon is just another way to pass data to `parallel`.
 cp /data/.cache/wine-*.csv .
 ```
 
-Let’s inspect both files using and count the number of lines:
+Let’s inspect both files and count the number of lines:
 
 ```{console, callouts=c(1, 2)}
 < wine-red.csv nl |
@@ -93,11 +91,11 @@ trim
 < wine-white.csv nl | fold | trim
 wc -l wine-{red,white}.csv
 ```
-<1> For clarity I use `nl`[@nl] to add line numbers
-<2> To see the entire header, I use `fold`
+<1> For clarity I use `nl` to add line numbers.
+<2> To see the entire header, I use `fold`.
 
 At first sight this data appears to be quite clean.
-Still, let’s scrub this data a little bit so that it conforms more with what most command-line tools are expecting.
+Still, let’s scrub it so that it conforms more with what most command-line tools expect.
 Specifically, I’ll:
 
 - Convert the header to lowercase.
@@ -105,7 +103,7 @@ Specifically, I’ll:
 - Replace spaces with underscores.
 - Remove unnecessary quotes.
 
-These things can all be taken care of by `tr`.
+The tool `tr` can take care of all these things.
 Let’s use a for loop this time---for old times’ sake---to process both files:
 
 ```{console}
@@ -115,13 +113,13 @@ done
 ```
 
 Let’s also create a single dataset by combining the two files.
-I’ll use `csvstack`[@csvstack] to add a column named *type* which will be "red" for rows of the first file, and "white" for rows of the second file:
+I’ll use `csvstack`[@csvstack] to add a column named *type*, which will be "red" for rows of the first file, and "white" for rows of the second file:
 
-```{console, callouts=2}
+```{console, callouts=c(1, 2)}
 csvstack -g red,white -n type wine-{red,white}-clean.csv |
 xsv select 2-,1 > wine.csv
 ```
-<1> The new column *type* is placed at the beginning.
+<1> The new column *type* is placed at the beginning by `csvstack`.
 <2> Some algorithms assume that the label is the last column, so I use `xsv` to move the column *type* to the end.
 
 It’s good practice to check whether there are any missing values in this dataset, because most machine learning algorithms can't handle them:
@@ -130,7 +128,10 @@ It’s good practice to check whether there are any missing values in this datas
 csvstat wine.csv --nulls
 ```
 
-Excellent! Just out of curiosity, let’s see what the how the distribution of quality looks like for both red and white wines.
+Excellent!
+If there were any missing values, we could fill them with, say, the average or most common value of that feature.
+An alternative, less subtle approach is to remove any data points that have at least one missing value.
+Just out of curiosity, let’s see what the how the distribution of quality looks like for both red and white wines.
 
 ```{console}
 rush run -t 'ggplot(df, aes(x = quality, fill = type)) + geom_density(adjust = 3, alpha = 0.5)' wine.csv > wine-quality.png
@@ -162,9 +163,9 @@ Eureka! Ahem, let’s carry on with some modeling, shall we?
 The goal of dimensionality reduction is to map high-dimensional data points onto a lower dimensional mapping.
 The challenge is to keep similar data points close together on the lower-dimensional mapping.
 As we’ve seen in the previous section, our wine dataset contains 13 features.
-I’ll stick with two dimensions because that’s straight forward to visualize.
+I’ll stick with two dimensions because that’s straightforward to visualize.
 
-Dimensionality reduction is often regarded as being part of exploration.
+Dimensionality reduction is often regarded as part of exploration.
 It’s useful for when there are too many features for plotting.
 You could do a scatter-plot matrix, but that only shows you two features at a time.
 It’s also useful as a pre-processing step for other machine learning algorithms.
@@ -213,72 +214,105 @@ csvlook wine-scaled.csv
 
 Now we apply both dimensionality reduction techniques and visualize the mapping using `Rio-scatter`:
 
-```{console create_wine_pca}
+```{console create_wine_pca, callouts=1:3}
 xsv select '!type' wine-scaled.csv |
 header -d |
 tapkee --method pca |
 tee wine-pca.txt | trim
 ```
+<1> Deselect the column *type*
+<2> Remove the header
+<3> Apply PCA
 
-<!-- TODO: MUST: Add some text in between these code snippets -->
-
-```{console apply_pca}
+```{console apply_pca, callouts=1:2}
 < wine-pca.txt header -a pc1,pc2 |
 paste -d, - <(xsv select type wine-scaled.csv) |
 tee wine-pca.csv | csvlook
 ```
+<1> Add back the header with columns *pc1* and *pc2*
+<2> Add back the column *type*
 
+Now we can create a scatter plot:
 
 ```{console plot_pca}
-rush plot --x pc1 --y pc2 --color type wine-pca.csv > wine-pca.png
+rush plot --x pc1 --y pc2 --color type --shape type wine-pca.csv > wine-pca.png
 display wine-pca.png
 ```
 ```{r, echo=FALSE, fig.cap="Linear dimensionality reduction with PCA", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/wine-pca.png")
 ```
 
-<!-- TODO: Fix cols util so that perhaps the next snippet can be improved -->
-<!-- TODO: Annotate snippets -->
+Let's perform t-SNE with the same approach:
 
-```{console apply_tsne}
+```{console apply_tsne, callouts=1:6}
 xsv select '!type' wine-scaled.csv |
 header -d |
 tapkee --method t-sne |
 header -a x,y |
 paste -d, - <(xsv select type wine-scaled.csv) |
-rush plot --x x --y y --color type > wine-tsne.png
+rush plot --x x --y y --color type --shape type > wine-tsne.png
+```
+<1> Deselect the column *type*
+<2> Remove the header
+<3> Apply t-SNE
+<4> Add back the header with columns *x* and *y*
+<5> Add back the column *type*
+<6> Create a scatter plot
+
+```{console}
 display wine-tsne.png
 ```
-
 ```{r, echo=FALSE, fig.cap="Non-linear dimensionality reduction with t-SNE", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/wine-tsne.png")
 ```
 
-<!-- TODO: MUST Improve this sentence: something with only custom tools -->
-<!-- Note that there’s not a single *classic*  (i.e., classic command-line tool) in this one-liner. Now that’s the power of creating your own tools! -->
+We can see that t-SNE does a better job than PCA at separating the red and white wines based on their physicochemical properties.
+These scatter plots verify that the dataset has a certain structure; there's a relationship between the features and the labels.
+Knowing this, I'm comfortable moving forward by applying supervised machine learning.
+I'll start with a regression task and then continue with a classification task.
 
-<!-- TODO: wrap up section -->
 
 ## Regression with Vowpal Wabbit
 
+In this section, I’ll be using Vowpal Wabbit, or `vw`, to create a model that predicts the quality of the white wine, based on their physicochemical properties.
+Because the quality is a number between 0 and 10, we can consider this as a regression task.
 
-In this section, I’ll be predicting the quality of the white wine, based on their physicochemical properties.
-Because the quality is a number between 0 and 10, we can consider predicting the quality as a regression task.
+
+
 
 ### Preparing the Data
 
-Convert to `vw` format and split into 5 parts:
+Vowpal Wabbit, or `vw` as the tool is invoked, has its own data format.
+The tool `csv2vw` can, as its name implies, convert CSV to this format.
+The `--label` option is used to indicate which column contains the labels.
+Let's examine the `vw` format:
 
 ```{console}
+csv2vw wine-white-clean.csv --label quality | trim
+```
+
+In this format, each line is one data point.
+The line starts with the label, followed by a pipe symbol and then feature name/value pairs.
+While this format may seem overly verbose when compared to the CSV format, it does offer more flexibility such as weights, tags, namespaces, and a sparse feature representation.
+This [article](https://github.com/VowpalWabbit/vowpal_wabbit/wiki/Input-format) explains the `vw` format in more detail.
+
+One we've created, or *trained* a regression model, it can be used to make predictions about new, unseen data points.
+In other words, if we give the model a wine it hasn't seen before, it can predict, or *test*, its quality.
+To properly evaluate the accuracy of these predictions, we need to set aside some data that will not be used for training.
+It's common to use 80% of the complete dataset for training and the remaining 20% for testing.
+
+I can do this by first splitting the complete dataset into five equal parts using `split`[@split].
+I verify the number of data points in each part using `wc`.
+
+```{console, callouts=2}
 csv2vw wine-white-clean.csv --label quality |
 shuf |
 split -d -n r/5 - wine-part-
 wc -l wine-part-*
 ```
+<1> The tool `shuf`[@shuf] randomizes the dataset to ensure that both the training and the test have similar quality distribution.
 
-<!-- TODO: CH: I'm assuming audience from context, but I think if supervised vs. unsupervised is explained (earlier in the  chapter), it might make sense to add a quick (even one sentence) explanation of training and test datasets. -->
-
-Combine parts into training and test datasets:
+Now I can use the first part (so 20%) for the testing set *wine-test.vw* and combine the four remaining parts (so 80%) into the training set *wine-train.vw*:
 
 ```{console}
 mv wine-part-00 wine-test.vw
@@ -287,20 +321,16 @@ rm wine-part-*
 wc -l wine-*.vw
 ```
 
-Let's have a look at the format:
+Now we're ready to train a model using `vw`.
 
-```{console}
-< wine-test.vw trim
-```
 
 ### Train
 
-Now we're ready to train a model using `vw`.
-This tool accepts many different options (nearly 400!).
+The tool `vw` accepts many different options (nearly 400!).
 Luckily, you don't need all of them in order to be effective.
-To explain the ones I use here properly, I’ll put each one on a separate line.
+To annotate the options I use here, I’ll put each one on a separate line:
 
-```{console}
+```{console, callouts=2:9}
 vw \
 --data wine-train.vw \
 --final_regressor wine.model \
@@ -311,10 +341,21 @@ vw \
 --l2 0.000005 \
 --bit_precision 25
 ```
+<1> The file *wine-train.vw* is used to train the model.
+<2> The model, or *regressor*, will be stored in the file *wine.model*.
+<3> Number of training passes.
+<4> Caching is needed when making multiple passes.
+<5> Use a neural network with 3 hidden units.
+<6> Create and use quadratic features, based on all input features. Any duplicates will be removed by `vw`.
+<7> Use l2 regularization
+<8> Use 25 bits to store the features
+
+
+
 
 ### Test
 
-The model, also known as the regressor, is stored in file *wine.model*.
+The model, also known as the *final regressor*, is stored in the file *wine.model*.
 To use that model to make predictions, I run `vw` again, but now with a different set of options:
 
 ```{console}
@@ -325,6 +366,9 @@ vw \
 --predictions predictions \
 --quiet
 ```
+
+!! Only testing, label is not being used!
+
 
 The predictions are stored in a file called *predictions*.
 Let's combine those predictions with the true or observed values that are in *wine-test.vw* using `paste`.
@@ -351,6 +395,24 @@ knitr::include_graphics("images/wine-regression.png")
 ```
 
 <!-- TODO: CH: Similar to the previous section, a quick wrap-up would tie this section up nicely. -->
+
+
+
+```{console}
+vw \
+--data wine-train.vw \
+--final_regressor wine2.model
+vw \
+--data wine-test.vw \
+--initial_regressor wine2.model \
+--testonly \
+--predictions predictions \
+--quiet
+paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |
+tee results.csv |
+awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'
+```
+
 
 ## Classification with SciKit-Learn Laboratory
 
@@ -466,10 +528,6 @@ This was the fourth and last step of the OSEMN model for data science that I'm c
 The next chapter is the last intermezzo chapter and will be about leveraging the command line elsewhere.
 
 ## For Further Exploration
-
-- 
--
-- 
 
 * Cortez, P., A. Cerdeira, F. Almeida, T. Matos, and J. Reis. 2009. “Modeling Wine Preferences by Data Mining from Physicochemical Properties.” <em>Decision Support Systems</em> 47 (4). Elsevier:547–53.
 * Pearson, K. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2 (11):559–72.

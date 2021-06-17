@@ -199,7 +199,7 @@ API calls may be limited to a certain number, or some commands can only have one
 ```
 
 
-\@ref(fig:osemn) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything. 
+\@ref(fig:processing) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything. 
 
 ```{r processing, echo=FALSE, fig.cap="Serial processing, naive parallel processing, and parallel processing with GNU Parallel", fig.align="center"}
 knitr::include_graphics("images/diagram_processing.png")
@@ -466,25 +466,27 @@ echo 'ec2-54-88-89-208.compute-1.amazonaws.com'
 (Without the `-r` or `--raw-output` option, the hostnames would have been surrounded by double quotes.)
 The output is saved to *hostnames*, so that I can pass this to `parallel` later.
 
-<!-- #TODO: Add link to instructions on how to do this. -->
-
 As mentioned, `parallel` employs `ssh`[@ssh] to connect to the remote machines.
 If you want to connect to your EC2 instances without typing the credentials every time, you can add something like the following text to the file *\~/.ssh/config*.
 
+```{console, include=FALSE}
+mkdir -p ~/.ssh
+echo "Host *.amazonaws.com\n\tIdentityFile ~/.ssh/MyKeyFile.pem\n\tUser ubuntu" > ~/.ssh/config
 ```
-Host *.amazonaws.com
-    IdentityFile ~/.ssh/MyKeyFile.pem
-    User ubuntu
+
+```{console}
+bat ~/.ssh/config
 ```
 
 Depending on your which distribution your running, your user name may be different than *ubuntu*.
+
 
 ### Running Commands on Remote Machines
 
 The first flavor of distributed processing is to simply run ordinary commands on remote machines.
 Let’s first double check that `parallel` is working by running the tool `hostname`[@hostname] on each EC2 instance:
 
-```{console, remove="echo"}
+```{console, remove=list(2, 4, "echo")}
 parallel --nonall --sshloginfile hostnames hostname#! enter=FALSE
 C-C#! literal=FALSE
 echo 'ip-172-31-23-204'
@@ -495,7 +497,7 @@ Here, the `--sshloginfile`  or `--slf` option is used to refer to the file *host
 The `--nonall` option instructs `parallel` to execute the same command on every remote machine in the *hostnames* file without using any parameters.
 Remember, if you don’t have any remote machines to utilize, you can replace `--slf hostnames` with `--sshlogin :` so that the command is run on your local machine:
 
-```{console, remove="echo"}
+```{console, remove=list(2, "echo")}
 parallel --nonall --sshlogin : hostname#! enter=FALSE
 C-C#! literal=FALSE
 echo 'data-science-toolbox'
@@ -503,14 +505,14 @@ echo 'data-science-toolbox'
 
 Running the same command on every remote machine once only requires one core per machine. If you wanted to distribute the list of arguments passed in to `parallel` then it could potentially use more than one core. If the number of cores are not specified explicitly, `parallel` will try to determine this.
 
-```{console, remove="fake"}
+```{console, remove=list(2, 4, "fake")}
 alias fake=echo
 seq 2 | parallel --slf hostnames echo 2>&1#! enter=FALSE
 C-C#! literal=FALSE
-fake 'bash: parallel: command not found'
+fake 'bash: parallel: command not found' &&
 fake -n 'parallel: Warning: Could not figure out number of cpus on' &&
-fake ' ec2-54-88-122-140.compute-1.amazonaws.com (). Using 1.'
-fake '1'
+fake ' ec2-54-88-122-140.compute-1.amazonaws.com (). Using 1.' &&
+fake '1' &&
 fake '2'
 ```
 
