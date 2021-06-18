@@ -419,6 +419,15 @@ wc -w greeting.txt ten-numbers.txt
 Note that in this case, `wc` also outputs the name of the files.
 
 
+```{r piping, echo=FALSE, fig.cap="Piping output to another tool (placeholder)", fig.align="center"}
+knitr::include_graphics("images/diagram_piping.png")
+```
+
+```{r redirection, echo=FALSE, fig.cap="Redirecting output to a file (placeholder)", fig.align="center"}
+knitr::include_graphics("images/diagram_redirection.png")
+```
+
+
 ### Working With Files
 
 As data scientists, we work with a lot of data.
@@ -547,7 +556,7 @@ In Chapter 7, I explain four options for you to display generated images from th
 ### Help!
 
 As you're finding your way around the command-line, it may happen that you need help.
-Even the most seasoned Unix users need help at some point.
+Even the most seasoned  users need help at some point.
 It is impossible to remember all the different command-line tools and their possible arguments.
 Fortunately, the command line offers severals ways to get help.
 

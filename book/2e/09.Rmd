@@ -324,7 +324,7 @@ wc -l wine-*.vw
 Now we're ready to train a model using `vw`.
 
 
-### Train
+### Training the Model
 
 The tool `vw` accepts many different options (nearly 400!).
 Luckily, you don't need all of them in order to be effective.
@@ -350,32 +350,34 @@ vw \
 <7> Use l2 regularization
 <8> Use 25 bits to store the features
 
+Now that I have trained a regression model, let's use it to make predictions.
 
 
+### Testing the Model
 
-### Test
-
-The model, also known as the *final regressor*, is stored in the file *wine.model*.
+The model is stored in the file *wine.model*.
 To use that model to make predictions, I run `vw` again, but now with a different set of options:
 
-```{console}
+```{console, callouts=2:6}
 vw \
 --data wine-test.vw \
 --initial_regressor wine.model \
 --testonly \
 --predictions predictions \
 --quiet
+bat predictions | trim
 ```
+<1> The file *wine-test.vw* is used to test the model.
+<2> Use the model stored in the file *wine.model*.
+<3> Ignore label information and just test.
+<4> The predictions are stored in a file called *predictions*.
+<5> Don't output diagnostics and progress updates.
 
-!! Only testing, label is not being used!
-
-
-The predictions are stored in a file called *predictions*.
-Let's combine those predictions with the true or observed values that are in *wine-test.vw* using `paste`.
+Let's use `paste` to combine the predictions in the file *predictions* with the true, or *observed*, values that are in the file *wine-test.vw*.
 Using `awk`, I can compare the predicted values with the observed values and compute the mean absolute error (MAE).
 The MAE tells us how far off `vw` is on average, when it comes to predicting the quality of a white wine.
 
-```{console}
+```{console callouts="cowsay"}
 paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |
 tee results.csv |
 awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}' |
@@ -383,7 +385,7 @@ cowsay
 ```
 
 So, the predictions are on average about 0.6 points off.
-Using `rush`, I visualize the relationship between the observed values and the predicted values:
+Let's visualize the relationship between the observed values and the predicted values using `rush plot`:
 
 ```{console}
 < results.csv header -a "predicted,observed" |
@@ -396,31 +398,30 @@ knitr::include_graphics("images/wine-regression.png")
 
 <!-- TODO: CH: Similar to the previous section, a quick wrap-up would tie this section up nicely. -->
 
+I can imagine that the options used to the train the model can be a bit overwhelming.
+Let's see how `vw` performs when I use all the default values:
 
-
-```{console}
-vw \
---data wine-train.vw \
---final_regressor wine2.model
-vw \
---data wine-test.vw \
---initial_regressor wine2.model \
---testonly \
---predictions predictions \
---quiet
+```{console, callouts=c(1, 3, 5)}
+vw -d wine-train.vw -f wine2.model --quiet
+vw -data wine-test.vw -i wine2.model -t -p predictions --quiet
 paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |
-tee results.csv |
 awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'
 ```
+<1> Train a regression model
+<2> Test the regression model
+<3> Compute mean absolute error
+
+
 
 
 ## Classification with SciKit-Learn Laboratory
 
 <!-- TODO: Explain SKLL better -->
 
-In this section I'm going to classify wines as either red or wine.
-I’ll be using SciKit-Learn Laboratory (SKLL) for this.
+In this section I'm going to train a model that can classify wines as either red or wine.
+While `vw` could be used for this, I'd like to demonstrate another tool: SciKit-Learn Laboratory (SKLL).
 SKLL is a Python package that provides the `run_experiment` command-line tool.
+
 I have aliased this to `skll` because I find it easier to remember as it corresponds to the package name:
 
 ```{console skll_alias}
@@ -450,7 +451,7 @@ wine-red-clean.csv \
 body shuf |
 nl -s, -w1 -v0 |
 sed '1s/0,/id,/' |
-tee wine-balanced.csv | csvlook | trim
+tee wine-balanced.csv | csvlook
 ```
 <1> Store the number of red wines in variable *NUM_RED*
 <2> Combine all red wines with a random sample of white wines.

@@ -354,14 +354,19 @@ Or, if you want to save everything into one big file you could do the following:
 seq 5 | parallel "echo Hi {}" >> one-big-file.txt
 ```
 
-However, `parallel` offers the `--results` option, which stores the output of each job into a separate file, where the filename is based on the input values:
+However, `parallel` offers the `--results` option, which stores the output in separate files.
+For each job, `parallel` creates three files: *seq*, which holds the job number, *stdout* which contains the output produced by the job, and *stderr* which contains any errors produced by the job.
+\@ref(fig:processing) illustrates this.
+These three files are placed in subdirectories based on the input values:
 
 ```{console}
 seq 5 | parallel --results outdir "echo Hello from job {}"
 tree outdir
 ```
 
-<!-- #TODO: Explain the files seq, stderr, and stdout -->
+```{r parallel, echo=FALSE, fig.cap="Storing results in separate files (placeholder)", fig.align="center"}
+knitr::include_graphics("images/diagram_parallel.png")
+```
 
 When you're running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input.
 The output of jobs is therefore also mixed up.
