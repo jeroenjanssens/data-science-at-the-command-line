@@ -54,7 +54,7 @@ In this chapter, you’ll learn how to:
 - Predict the quality of white wine using `vw` [@vw].
 - Classify wine as red or white using `skll` [@skll].
 
-This chapter starts with the following files:
+This chapter starts with the following file:
 
 ```{console cd}
 cd /data/ch09
@@ -64,7 +64,7 @@ l
 
 ## More Wine Please!
 
-In this chapter, I’ll be using a dataset of wine tasters' notes on red and white varieties of Portuguese wine called vinho verde.
+Throughout this chapter, I’ll be using a dataset of wine tasters' notes on red and white varieties of Portuguese wine called vinho verde.
 Each data point represents a wine. Each wine is rated on 11 physicochemical properties: (1) fixed acidity, (2) volatile acidity, (3) citric acid, (4) residual sugar, (5) chlorides, (6) free sulfur dioxide, (7) total sulfur dioxide, (8) density, (9) pH, (10) sulphates, and (11) alcohol.
 There is also an overall quality score between 0 (very bad) and 10 (excellent), which is the median of at least three evaluation by wine experts. More information about this dataset is available at the [UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Wine+Quality).
 
@@ -207,10 +207,10 @@ as_tibble() %>%
 mutate(type = df$type)' wine.csv
 csvlook wine-scaled.csv
 ```
-<1> I need to temporary remove the column *type* because `scale()` only works on numerical columns.
+<1> I need to temporary remove the column *`type`* because `scale()` only works on numerical columns.
 <2> The `scale()` function accepts a data frame, but returns a matrix.
-<3> The function `as_tibble` converts the matrix back to a data frame.
-<4> Finally, I add back the *type* column.
+<3> The function `as_tibble()` converts the matrix back to a data frame.
+<4> Finally, I add back the *`type`* column.
 
 Now we apply both dimensionality reduction techniques and visualize the mapping using `Rio-scatter`:
 
@@ -220,7 +220,7 @@ header -d |
 tapkee --method pca |
 tee wine-pca.txt | trim
 ```
-<1> Deselect the column *type*
+<1> Deselect the column *`type`*
 <2> Remove the header
 <3> Apply PCA
 
@@ -229,8 +229,8 @@ tee wine-pca.txt | trim
 paste -d, - <(xsv select type wine-scaled.csv) |
 tee wine-pca.csv | csvlook
 ```
-<1> Add back the header with columns *pc1* and *pc2*
-<2> Add back the column *type*
+<1> Add back the header with columns *`pc1`* and *`pc2`*
+<2> Add back the column *`type`*
 
 Now we can create a scatter plot:
 
@@ -252,11 +252,11 @@ header -a x,y |
 paste -d, - <(xsv select type wine-scaled.csv) |
 rush plot --x x --y y --color type --shape type > wine-tsne.png
 ```
-<1> Deselect the column *type*
+<1> Deselect the column *`type`*
 <2> Remove the header
 <3> Apply t-SNE
-<4> Add back the header with columns *x* and *y*
-<5> Add back the column *type*
+<4> Add back the header with columns *`x`* and *`y`*
+<5> Add back the column *`type`*
 <6> Create a scatter plot
 
 ```{console}
@@ -274,18 +274,19 @@ I'll start with a regression task and then continue with a classification task.
 
 ## Regression with Vowpal Wabbit
 
-In this section, I’ll be using Vowpal Wabbit, or `vw`, to create a model that predicts the quality of the white wine, based on their physicochemical properties.
+In this section, I'm going to create a model that predicts the quality of the white wine, based on their physicochemical properties.
 Because the quality is a number between 0 and 10, we can consider this as a regression task.
 
+For this I'll be using Vowpal Wabbit, or `vw`. 
 
 
 
 ### Preparing the Data
 
-Vowpal Wabbit, or `vw` as the tool is invoked, has its own data format.
+Instead of working with CSV, `vw` has its own data format.
 The tool `csv2vw` can, as its name implies, convert CSV to this format.
 The `--label` option is used to indicate which column contains the labels.
-Let's examine the `vw` format:
+Let's examine the result:
 
 ```{console}
 csv2vw wine-white-clean.csv --label quality | trim
@@ -347,8 +348,8 @@ vw \
 <4> Caching is needed when making multiple passes.
 <5> Use a neural network with 3 hidden units.
 <6> Create and use quadratic features, based on all input features. Any duplicates will be removed by `vw`.
-<7> Use l2 regularization
-<8> Use 25 bits to store the features
+<7> Use l2 regularization.
+<8> Use 25 bits to store the features.
 
 Now that I have trained a regression model, let's use it to make predictions.
 
@@ -396,8 +397,6 @@ display wine-regression.png
 knitr::include_graphics("images/wine-regression.png")
 ```
 
-<!-- TODO: CH: Similar to the previous section, a quick wrap-up would tie this section up nicely. -->
-
 I can imagine that the options used to the train the model can be a bit overwhelming.
 Let's see how `vw` performs when I use all the default values:
 
@@ -411,18 +410,23 @@ awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'
 <2> Test the regression model
 <3> Compute mean absolute error
 
+Apparently, with the default values, the MAE is 0.04 higher, meaning that the predictions are slightly worse.
 
+In this section, I've only been able to scratch the surface of what `vw` can do.
+There's reason why it accepts so many options.
+Besides regression, it also supports, among other things, binary classification, multi-class classification, reinforcement learning, and Latent Dirichlet Allocation. 
+[Its website](https://vowpalwabbit.org/) contains many tutorials and articles to learn more.
 
 
 ## Classification with SciKit-Learn Laboratory
 
 <!-- TODO: Explain SKLL better -->
 
-In this section I'm going to train a model that can classify wines as either red or wine.
-While `vw` could be used for this, I'd like to demonstrate another tool: SciKit-Learn Laboratory (SKLL).
-SKLL is a Python package that provides the `run_experiment` command-line tool.
-
-I have aliased this to `skll` because I find it easier to remember as it corresponds to the package name:
+In this section I'm going to train a classification model, or *classifier*, that predicts whether a wines is either red or white.
+While we could use `vw` for this, I'd like to demonstrate another tool: SciKit-Learn Laboratory (SKLL).
+As the name implies, it's built on top of SciKit-Learn, a popular machine learning package for Python.
+SKLL, itself a Python package, provides the `run_experiment` tool, which makes it possible to use SciKit-Learn from the command line.
+Instead of `run_experiment`, I use the alias `skll` because I find it easier to remember as it corresponds to the package name:
 
 ```{console skll_alias}
 alias skll=run_experiment
@@ -432,15 +436,8 @@ skll
 
 ### Preparing the Data
 
-
-<!-- However, in this example, I'm going to use cross-validation, meaning that I only need to specify a training dataset. -->
-<!-- Cross-validation is a technique that splits up the whole dataset into a certain number of subsets. These subsets are  called folds. (Usually, five or ten folds are used.) -->
-
-<!-- TODO: Explain cross validation better, why is it used? -->
-<!-- CV does the splitting for us. -->
-
-`skll` expects that the training and test dataset have the same filenames, located in separate directories.
-Because the predictions produced by `skll` are not necessarily in the same order as the original dataset, I add a column *id* that contains a unique identifier so that I can match the predictions and with the correct data points.
+`skll` expects the training and test dataset to have the same filenames, located in separate directories.
+Because its predictions are not necessarily in the same order as the original dataset, I add a column, *`id`*, that contains a unique identifier so that I can match the predictions with the correct data points.
 Let's create a balanced dataset:
 
 ```{console skll_create_features, callouts=c("NUM_RED", "csvstack", "nl", "sed")}
@@ -453,10 +450,10 @@ nl -s, -w1 -v0 |
 sed '1s/0,/id,/' |
 tee wine-balanced.csv | csvlook
 ```
-<1> Store the number of red wines in variable *NUM_RED*
+<1> Store the number of red wines in variable *`NUM_RED`*.
 <2> Combine all red wines with a random sample of white wines.
-<3> Add "line numbers" using `nl` in front of each line
-<4> Replace the "0" on the first line with "id" so that it's a proper column
+<3> Add "line numbers" using `nl` in front of each line.
+<4> Replace the "0" on the first line with "id" so that it's a proper column name.
 
 Let's split this balanced dataset into a training set and a test set:
 
@@ -470,12 +467,14 @@ cat wine-part-* | header -a $HEADER > train/features.csv && rm wine-part-*
 wc -l t*/features.csv
 ```
 
+Now that I have a balanced training dataset and a balanced test dataset, I can continue with building a classifier.
+
 
 ### Running the Experiment
 
-<!-- TODO: Annotate configuration file -->
-
-Create a configuration file called *predict-quality.cfg*:
+Training a classifier in `skll` is done by defining an experiment in a configuration file.
+It consists of several sections that specify, for example, where to look for the datasets, which classifiers 
+Here's the configuration file *classify.cfg* that I'll use:
 
 ```{console bat_cfg}
 bat classify.cfg
@@ -494,29 +493,40 @@ The time it takes to run an experiment depends on the complexity of the chosen a
 
 ### Parsing the Results
 
-Once all algorithms are done, the results can now be found in the directory *output*:
+Once all classifiers have been trained and tested, the results can be found in the directory *output*:
 
 ```{console ls_output}
 ls -1 output
 ```
 
-`skll` generates four files for each learner: one log, two with results, and one with predictions.
-
+`skll` generates four files for each classifier: one log, two with results, and one with predictions.
 I  extract the algorithm names and sort them by their accuracies using the following SQL query:
 
 ```{console}
 < output/wine_summary.tsv csvsql --query "SELECT learner_name, accuracy FROM stdin ORDER BY accuracy DESC" | csvlook -I
 ```
 
-The relevant column here is *accuracy*, which indicates the percentage of data points that are classified correctly.
+The relevant column here is *`accuracy`*, which indicates the percentage of data points that are classified correctly.
 From this we see that actually all algorithms are performing really well.
 The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.
 
-Each *json* file also contains a confusion matrix, giving you additional insight into the performance of each classifier.
+Each JSON file contains a confusion matrix, giving you additional insight into the performance of each classifier.
+A confusion matrix is a table where the columns refer to the true labels (red and white) and the rows refer to the predicted labels. 
+Higher numbers on the diagonal mean more correct predictions.
+With `jq` I can print the name of each classifier and extract the associated confusion matrix:
 
 ```{console}
 jq -r '.[] | "\(.learner_name):\n\(.result_table)\n"' output/*.json
 ```
+
+A confusion matrix is especially helpful when you have more than two classes, so that you can see which kind of misclassifications happen, and when the cost of an incorrect classification is not the same for each class.
+
+From a usage perspective, it's interesting to consider that `vw` and `skll` take two different approaches.
+`vw` uses command-line options, whereas `skll` requires a separate file.
+Both approaches have their advantages and disadvantages. 
+While command-line options enable more ad-hoc usage, a configuration file is perhaps easier to reproduce. 
+Then again, as we've seen, invoking `vw` with any number of options can easily be placed in script or in a *Makefile*.
+The opposite, making `skll` accept options such that it doesn't need a configuration file, is less straightforward.
 
 
 ## Summary
@@ -527,6 +537,7 @@ A proper machine learning tutorial is unfortunately beyond the scope of this boo
 In the next section I have a couple of recommendations in case you want to learn more about machine learning.
 This was the fourth and last step of the OSEMN model for data science that I'm covering in this book.
 The next chapter is the last intermezzo chapter and will be about leveraging the command line elsewhere.
+
 
 ## For Further Exploration
 

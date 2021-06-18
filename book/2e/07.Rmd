@@ -284,7 +284,7 @@ Before I explain what `rush` does and why it exists, lets talk a bit about `R` i
 
 `R` is a very powerful statistical software package to do data science.
 It’s an interpreted programming language, has an extensive collection of packages, and offers its own REPL, which allows you, similar to the command line, to play with your data.
-Unfortunately, once you start R, you’re in an interactive session that is separated from the command line.
+Note that, once you start R, you’re in an interactive session that is separated from the Unix command line.
 
 Imagine that you have a CSV file called *tips.csv*, and you would like compute the tip percentage, and save the result.
 To accomplish this in `R` you would first run, `R`:
