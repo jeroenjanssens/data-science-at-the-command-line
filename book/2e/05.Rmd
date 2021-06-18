@@ -103,13 +103,14 @@ csvlook fb.csv
 ```
 
 Now you're ready to use `rush` to create a bar chart.
+See \@ref(fig:fb-image) for the result.
 (I'll cover this syntax of `rush` in detail in Chapter 7.)
 
 ```{console fb_rush}
 rush plot -x value -y count --geom col --height 2 fb.csv > fb.png
 display fb.png
 ```
-```{r fb_image, echo=FALSE, fig.cap="Counting fizz, buzz, and fizzbuzz", fig.align="center", out.width="90%"}
+```{r fb-image, echo=FALSE, fig.cap="Counting fizz, buzz, and fizzbuzz", fig.align="center", out.width="90%"}
 knitr::include_graphics("images/fb.png")
 ```
 
@@ -569,7 +570,7 @@ If your data originally comes from a relational database, then, if possible, try
 In the scrubbing tasks below, I’ll include several solutions that involve `csvsql`. A basic command is this:
 
 ```{console}
-seq 5 | header -a value | csvsql --query "SELECT SUM(value) AS sum FROM stdin"
+seq 5 | header -a val | csvsql --query "SELECT SUM(val) AS sum FROM stdin"
 ```
 
 If you pass standard input to `csvsql`, then the table is named *stdin*.

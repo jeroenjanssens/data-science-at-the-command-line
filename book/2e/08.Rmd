@@ -295,7 +295,7 @@ find /data/ch03 -type f | parallel echo '{#}\) File \"{}\" has basename \"{/}\"'
 
 If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:
 
-```{console remove="touch"}
+```{console remove=c(1, 2)}
 touch input.csv
 < input.csv parallel --colsep , "mv {2} {1}" > /dev/null#! enter=FALSE
 C-C#! literal=FALSE
@@ -445,26 +445,26 @@ You can extract the relevant fields using `jq`:
 
 <!-- TODO: Run these EC2 commands once for real in the docker image and use a bunch of echo statements -->
 
-```{console, remove="echo"}
+```{console, remove=list(2, "echo")}
 aws ec2 describe-instances | jq '.Reservations[].Instances[] | {public_dns: .PublicDnsName, state: .State.Name}'#! enter=FALSE
 C-C#!literal=FALSE
-echo '{'
-echo '  "state": "running",'
-echo '  "public_dns": "ec2-54-88-122-140.compute-1.amazonaws.com"'
-echo '}'
-echo '{'
-echo '  "state": "stopped",'
-echo '  "public_dns": null'
-echo '}'
+echo '{' &&
+echo '  "state": "running",' &&
+echo '  "public_dns": "ec2-54-88-122-140.compute-1.amazonaws.com"' &&
+echo '}' &&
+echo '{' &&
+echo '  "state": "stopped",' &&
+echo '  "public_dns": null' &&
+echo '}' &&
 ```
 
 The possible states of an EC2 instance are: *pending*, *running*, *shutting-down*, *terminated*, *stopping*, and *stopped*.
 Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:
 
-```{console, remove="echo"}
+```{console, remove=list(2, "echo")}
 aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | select(.State.Name=="running") | .PublicDnsName' | tee hostnames#! enter=FALSE
 C-C#! literal=FALSE
-echo 'ec2-54-88-122-140.compute-1.amazonaws.com'
+echo 'ec2-54-88-122-140.compute-1.amazonaws.com' &&
 echo 'ec2-54-88-89-208.compute-1.amazonaws.com'
 ```
 
@@ -491,11 +491,10 @@ Depending on your which distribution your running, your user name may be differe
 The first flavor of distributed processing is to simply run ordinary commands on remote machines.
 Let’s first double check that `parallel` is working by running the tool `hostname`[@hostname] on each EC2 instance:
 
-```{console, remove=list(2, 4, "echo")}
+```{console, remove=list(2, "echo")}
 parallel --nonall --sshloginfile hostnames hostname#! enter=FALSE
 C-C#! literal=FALSE
-echo 'ip-172-31-23-204'
-echo 'ip-172-31-23-205'
+echo 'ip-172-31-23-204\nip-172-31-23-205'
 ```
 
 Here, the `--sshloginfile`  or `--slf` option is used to refer to the file *hostnames*.
@@ -544,25 +543,25 @@ Imagine that you have one very large dataset that you want to process it using m
 For simplicity, let's sum all integers from 1 to 1000.
 First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using `wc`:
 
-```{console, remove="echo"}
+```{console, remove=list(2, "echo")}
 seq 1000 | parallel -N100 --pipe --slf hostnames "(hostname; wc -l) | paste -sd:"#! enter=FALSE
 C-C#! literal=FALSE
-echo 'ip-172-31-23-204:100'
-echo 'ip-172-31-23-205:100'
-echo 'ip-172-31-23-205:100'
-echo 'ip-172-31-23-204:100'
-echo 'ip-172-31-23-205:100'
-echo 'ip-172-31-23-204:100'
-echo 'ip-172-31-23-205:100'
-echo 'ip-172-31-23-204:100'
-echo 'ip-172-31-23-205:100'
+echo 'ip-172-31-23-204:100' &&
+echo 'ip-172-31-23-205:100' &&
+echo 'ip-172-31-23-205:100' &&
+echo 'ip-172-31-23-204:100' &&
+echo 'ip-172-31-23-205:100' &&
+echo 'ip-172-31-23-204:100' &&
+echo 'ip-172-31-23-205:100' &&
+echo 'ip-172-31-23-204:100' &&
+echo 'ip-172-31-23-205:100' &&
 echo 'ip-172-31-23-204:100'
 ```
 
 Excellent. You can see that your 1000 numbers get distributed evenly in subsets of 100 (as specified by `-N100`).
 Now, you’re ready to sum all those numbers:
 
-```{console, remove="echo"}
+```{console, remove=list(2, "echo")}
 seq 1000 | parallel -N100 --pipe --slf hostnames "paste -sd+ | bc" | paste -sd+ | bc#! enter=FALSE
 C-C#! literal=FALSE
 echo '500500'
@@ -591,7 +590,7 @@ Using the `--basefile` option, `parallel` first uploads the file *add* to all re
 
 <!-- #TODO: Explain --pipe -->
 
-```{console use_add, remove="echo"}
+```{console use_add, remove=list(4, "echo")}
 seq 1000 |
 parallel -N100 --basefile add --pipe --slf hostnames './add' |
 ./add #! enter=FALSE
@@ -658,7 +657,7 @@ Because this is quite a long pipeline, and because I'm using it again in a momen
 Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally.
 You can use `parallel` to distribute the local files among the remote machines, let them do the processing, and retrieve the results:
 
-```{console, callouts=1:5}
+```{console, callouts=c(1, 2, 3, 4, 6)}
 ls *.json.gz |
 parallel -v --basefile jq \
 --trc {.}.csv \
@@ -669,7 +668,7 @@ C-C#! literal=FALSE
 
 <1> Print the list of files and pipe it into `parallel`
 <2> Transmit the `jq` binary to each remote machine. Luckily, `jq` has no dependencies. This file will be removed from the remote machines afterwards because I specified the `--trc` option (which implies the `--cleanup` option). Note that the pipeline uses `./jq` instead of just `jq`. That's because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.
-<3> The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *{.}* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
+<3> The command-line argument `--trc {.}.csv` is short for `--transfer --return {.}.csv --cleanup`. (The replacement string *`{.}`* gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
 <4> Specify a list of hostnames. Remember, if you want to try this out locally, you can specify `--sshlogin :` instead of `--slf hostnames`
 <5> Note the escaping in the `awk` expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. If quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with `add`
 
@@ -683,12 +682,12 @@ parallel -v --basefile jq \
 
 If you, at some point during this process, run `ls` on one of the remote machines, you would see that `parallel` indeed transfers (and cleans up) the binary `jq`, the JSON files, and CSV files:
 
-```{console, remove="echo"}
+```{console, remove=list(2, "echo")}
 ssh $(head -n 1 hostnames) ls#! enter=FALSE
 C-C#! literal=FALSE
-echo 'nyc-1.json.csv'
-echo 'nyc-1.json.gz'
-echo 'jq'
+echo 'nyc-1.json.csv' &&
+echo 'nyc-1.json.gz' &&
+echo 'jq' &&
 ```
 
 Each CSV file looks something like this:

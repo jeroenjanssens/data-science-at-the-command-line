@@ -350,9 +350,9 @@ rush run -nt 'mutate(df, percent = tip / bill * 100)' tips.csv
 
 This generated script:
 
-- Writes out the shebang (`#!`; see [Chapter 4](#chapter-4-creating-reusable-command-line-tools)) needed for running an `R` script from the command line.
+- Writes out the shebang (*`#!`*; see [Chapter 4](#chapter-4-creating-reusable-command-line-tools)) needed for running an `R` script from the command line.
 - Imports the *tidyverse* and *glue* packages.
-- Loads `tips.csv` as a data frame, cleans the column names, and assigns it to a variable *df*.
+- Loads *tips.csv* as a data frame, cleans the column names, and assigns it to a variable *df*.
 - Runs the specified expression.
 - Prints the result to standard output.
 

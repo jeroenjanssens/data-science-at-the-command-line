@@ -326,7 +326,7 @@ type -a l
 ```
 
 ```{console, include=FALSE}
- alias bat='bat --tabs 8 --paging never --theme \"Solarized (dark)\"'
+ alias bat='bat --tabs 8 --paging never --terminal-width 80 --theme "Solarized (dark)"'
 ```
 
 `type` returns three command-line tools for `pwd`.

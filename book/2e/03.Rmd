@@ -320,7 +320,7 @@ csvlook -H tmnt-missing-newline.csv # <1>
 Let’s demonstrate `in2csv` using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program [Top 2000](https://www.top2000nl.com).
 To extract its data, you invoke `in2csv` as follows:
 
-```{console in2csv_save}
+```{console in2csv_save, remove=c("openpyxl", "silence", "behavior", "numpy", "guidance", "release")}
 curl https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx > top2000.xlsx
 in2csv top2000.xlsx | tee top2000.csv | trim
 ```
@@ -344,7 +344,7 @@ To extract a different worksheet, you need to pass the name of worksheet to the 
 If you're not sure what's the worksheet is called, you can use the `--names` option, which prints the names of all the worksheets.
 Here we see that *top2000.xlsx* has only one sheet, named *Blad1* (which is Dutch for *Sheet1*).
 
-```{console in2csv_names}
+```{console in2csv_names, remove=c("openpyxl", "silence", "behavior", "numpy", "guidance", "release")}
 in2csv --names top2000.xlsx
 ```
 

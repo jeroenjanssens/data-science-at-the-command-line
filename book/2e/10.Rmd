@@ -294,7 +294,7 @@ The items in the dataset are written to standard input and the standard output i
 
 In the session below, I start a Spark shell and again count the number of occurrences of *alice* in the book *Alice’s Adventures in Wonderland*.
 
-```{console, remove=list("alias", "cache"), callouts=c("textFile", "flatMap", "grep", "wc", "res3", "toInt", "res5")}
+```{console, remove=list("alias", 2, 4, "cache"), callouts=c("textFile", "flatMap", "grep", "wc", "res3", "toInt", "res5")}
 alias spark-shell=echo
 spark-shell --master local[6]#!enter=FALSE
 C-C#!literal=FALSE
