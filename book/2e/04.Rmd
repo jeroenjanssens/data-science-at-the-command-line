@@ -285,7 +285,7 @@ nano top-words-3.sh #! enter=FALSE
 ```{console nano_open, fullscreen=TRUE, highlight=FALSE}
 Enter #! literal=FALSE
 ```
-Go ahead and type `#!/usr/bin/env/bash` and press **`Enter`**.
+Go ahead and type *`#!/usr/bin/env/bash`* and press **`Enter`**.
 When you're ready, press **`Ctrl-X`** to save and exit.
 
 ```{console nano_edit, fullscreen=TRUE, highlight=FALSE}
@@ -312,7 +312,7 @@ bat top-words-3.sh
 
 That's exactly what we need: our original pipeline with a shebang in front of it.
 
-Sometimes you will come across scripts that have a shebang in the form of *`!/usr/bin/bash`* or *`!/usr/bin/pytho`n* (in the case of Python, as we will see in the next section).
+Sometimes you will come across scripts that have a shebang in the form of *`!/usr/bin/bash`* or *`!/usr/bin/python`* (in the case of Python, as we will see in the next section).
 While this generally works, if the `bash` or `python` [@python] executables are installed in a different location than */usr/bin*, then the script does not work anymore.
 It is better to use the form that I present here, namely *`!/usr/bin/env bash`* and *`!/usr/bin/env python`*, because the `env` [@env] executable is aware where `bash` and `python` are installed.
 In short, using `env` makes your scripts more portable.
