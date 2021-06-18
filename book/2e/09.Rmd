@@ -284,7 +284,7 @@ For this I'll be using Vowpal Wabbit, or `vw`.
 ### Preparing the Data
 
 Instead of working with CSV, `vw` has its own data format.
-The tool `csv2vw` can, as its name implies, convert CSV to this format.
+The tool `csv2vw`[@csv2vw] can, as its name implies, convert CSV to this format.
 The `--label` option is used to indicate which column contains the labels.
 Let's examine the result:
 
@@ -293,8 +293,9 @@ csv2vw wine-white-clean.csv --label quality | trim
 ```
 
 In this format, each line is one data point.
-The line starts with the label, followed by a pipe symbol and then feature name/value pairs.
+The line starts with the label, followed by a pipe symbol and then feature name/value pairs separated by spaces.
 While this format may seem overly verbose when compared to the CSV format, it does offer more flexibility such as weights, tags, namespaces, and a sparse feature representation.
+With the wine dataset we don't need this flexibility, but it might be useful when applying `vw` to more complicated problems.
 This [article](https://github.com/VowpalWabbit/vowpal_wabbit/wiki/Input-format) explains the `vw` format in more detail.
 
 One we've created, or *trained* a regression model, it can be used to make predictions about new, unseen data points.

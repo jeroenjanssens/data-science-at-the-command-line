@@ -246,6 +246,19 @@ C-C#!literal=FALSE
 ```
 
 
+## csv2vw {-}
+
+Convert CSV to Vowpal Wabbit format.
+`csv2vw`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{console csv2vw}
+type csv2vw
+```
+
+
 ## csvcut {-}
 
 Filter and truncate CSV files.
@@ -955,7 +968,7 @@ type rush
 rush --help#!enter=FALSE
 C-C#!literal=FALSE
 rush run '6*7'
-rush run --tidyverse 'starwars %>% filter(species == "Human") %>% select(name)'
+rush run --tidyverse 'filter(starwars, species == "Human") %>% select(name)'
 ```
 
 
@@ -1032,6 +1045,10 @@ More information: https://github.com/jeroenjanssens/dsutils.
 
 ```{console servewd}
 type servewd
+servewd --help#!enter=FALSE
+C-C#!literal=FALSE
+cd /data && servewd 8000#!enter=FALSE
+C-C#!literal=FALSE
 ```
 
 
@@ -1260,7 +1277,7 @@ More information: https://github.com/jeroenjanssens/dsutils.
 
 ```{console trim}
 type trim
-shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+echo {a..z}-{0..9} | fold | trim 5 60
 ```
 
 
@@ -1272,7 +1289,7 @@ is a Z shell builtin.
 
 ```{console type}
 type type
-man zshbuiltins| grep -A 10 '^ *type '#!enter=FALSE
+man zshbuiltins | grep -A 10 '^ *type '#!enter=FALSE
 C-C#!literal=FALSE
 ```
 

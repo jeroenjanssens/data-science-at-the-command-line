@@ -158,6 +158,16 @@ cp:
     cp -r ~/Downloads/*.xlsx /data#!enter=FALSE
     C-C#!literal=FALSE
 
+csv2vw:
+  author:
+  - Jeroen Janssens
+  bib_title: '{csv2vw} -- Convert {CSV} to Vowpal Wabbit format'
+  cite: true
+  description: Convert CSV to Vowpal Wabbit format
+  url: https://github.com/jeroenjanssens/dsutils
+  version: '0.1'
+  year: 2021
+
 csvcut:
   author:
   - Christopher Groskopf
@@ -735,7 +745,7 @@ rush:
   help: --help
   example: |
     rush run '6*7'
-    rush run --tidyverse 'starwars %>% filter(species == "Human") %>% select(name)'
+    rush run --tidyverse 'filter(starwars, species == "Human") %>% select(name)'
 
 sample:
   author:

@@ -15,7 +15,6 @@ console_start()
 
 # Parallel Pipelines {#chapter-8-parallel-pipelines}
  
-<!-- #TODO: MUST Check spelling: "Z shell" -->
 <!-- #TODO: SHOULD: Dicuss progress bar -->
 <!-- #TODO: COULD: Discuss resume mechanism, using a tool that sometimes fails -->
 
@@ -692,13 +691,13 @@ echo 'jq' &&
 
 Each CSV file looks something like this:
 
-```{console, remove="echo"}
+```{console, remove=list(2, "echo")}
 cat nyc-1.json.csv #! enter=FALSE
 C-C#! literal=FALSE
-echo 'bronx,3'
-echo 'brooklyn,5'
-echo 'manhattan,24'
-echo 'queens,3'
+echo 'bronx,3' &&
+echo 'brooklyn,5' &&
+echo 'manhattan,24' &&
+echo 'queens,3' &&
 echo 'staten_island,2'
 ```
 
