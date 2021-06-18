@@ -161,7 +161,7 @@ knitr::include_graphics("images/screenshot_terminal_ubuntu_dst.png")
 The window shown in the two screenshots is called the *terminal*.
 This is the program that enables you to interact with the shell.
 It is the shell that executes the commands I type in.
-(On both Ubuntu the default shell is `bash`; on macOS, it's `zsh`.)
+In [Chapter 2](#chapter-2-getting-started), I explain these two terms in more detail.
 
 ```{block2, type="rmdnote"}
 I’m not showing the Microsoft Windows command line (also known as the Command Prompt or PowerShell), because it's fundamentally different and incompatible with the commands presented in this book.

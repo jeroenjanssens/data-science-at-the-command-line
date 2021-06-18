@@ -445,7 +445,7 @@ You can extract the relevant fields using `jq`:
 
 <!-- TODO: Run these EC2 commands once for real in the docker image and use a bunch of echo statements -->
 
-```{console, remove=list(2, "echo")}
+```{console, remove=list(3, "echo")}
 aws ec2 describe-instances | jq '.Reservations[].Instances[] | {public_dns: .PublicDnsName, state: .State.Name}'#! enter=FALSE
 C-C#!literal=FALSE
 echo '{' &&
@@ -461,7 +461,7 @@ echo '}' &&
 The possible states of an EC2 instance are: *pending*, *running*, *shutting-down*, *terminated*, *stopping*, and *stopped*.
 Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:
 
-```{console, remove=list(2, "echo")}
+```{console, remove=list(3, "echo")}
 aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | select(.State.Name=="running") | .PublicDnsName' | tee hostnames#! enter=FALSE
 C-C#! literal=FALSE
 echo 'ec2-54-88-122-140.compute-1.amazonaws.com' &&
@@ -543,7 +543,7 @@ Imagine that you have one very large dataset that you want to process it using m
 For simplicity, let's sum all integers from 1 to 1000.
 First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using `wc`:
 
-```{console, remove=list(2, "echo")}
+```{console, remove=list(3, "echo")}
 seq 1000 | parallel -N100 --pipe --slf hostnames "(hostname; wc -l) | paste -sd:"#! enter=FALSE
 C-C#! literal=FALSE
 echo 'ip-172-31-23-204:100' &&
