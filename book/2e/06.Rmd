@@ -110,7 +110,7 @@ The whitespace in front of the rule is a single tab character.
 Beware that some editors insert spaces when you press the **`TAB`** key, known as a soft tab, which will cause `make` to produce an error.
 The following code illustrates this by expanding the tab to eight spaces:
 
-```{console expand, callout=("-f", "top.")}
+```{console expand, callouts=c("-f", "top.")}
 < numbers.make expand > spaces.make
 bat -A spaces.make
 make -f spaces.make #<1>
@@ -207,12 +207,13 @@ bat numbers
 Another reason for `make` to rebuild a target is its dependencies, so let's discuss that next.
 
 
-## Adding Dependencies between Targets
+## Adding Dependencies
 
 So far, we've looked at targets that exist in isolation.
 In a typical data science workflow, many steps depend on other steps.
 In order to properly talk about dependencies in a *Makefile*, let's consider two tasks that work with a dataset about Star Wars characters.
-Here's an excerpt of that data set:
+
+Here's an excerpt of that dataset:
 
 ```{console}
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
@@ -245,7 +246,7 @@ display heights.png
 knitr::include_graphics("images/heights.png")
 ```
 
-We can put these two tasks into a *Makefile*.
+Let's put these two tasks into a *Makefile*.
 Instead of doing this incrementally, I'd first like to show what a complete *Makefile* looks like and then explain all the syntax step by step.
 
 ```{console}
@@ -266,7 +267,13 @@ Even though this is only used once, I find it helpful to put information like th
 With the special target *`.PHONY`* we can indicate which targets are not represented by files. In our case that holds for targets *`all`* and *`top10`*. These targets will now be executed regardless of whether the directory contains files with the same name.
 
 There are five targets: *`all`*, *`data`*, *`data/starwars.csv`*, *`top10`*, and *`heights.png`*.
-Let's discuss each of them in turn:
+\@ref(fig:starwars-image) provides an overview of these targets and the dependencies between them.
+
+```{r dependencies, echo=FALSE, fig.cap="Dependencies between targets (placeholder)", fig.align="center"}
+knitr::include_graphics("images/diagram_dependencies.png")
+```
+
+Let's discuss each target in turn:
 
 1. The target *`all`* has two dependencies but no rule. This is like a shortcut to execute one or more targets in the order in which they are specified. In this case: *`top10`* and *`heights.png`*. The target *`all`* appears as the first target in the *Makefile*, which means that if we run `make`, this target will be built.
 2. The target *`data`* creates the directory *data*. Earlier I said that `make` is all about files. Well, it's also about directories. This target will only be executed when the directory *data* doesn't yet exist.
