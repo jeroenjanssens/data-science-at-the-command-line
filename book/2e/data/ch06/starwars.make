@@ -21,4 +21,4 @@ top10: data/starwars.csv
 	head
 
 heights.png: data/starwars.csv
-	< $< Rio -ge 'g + geom_boxplot(aes(x = height, y = species))' > $@
+	< $< rush plot --x height --y species --geom boxplot > $@
