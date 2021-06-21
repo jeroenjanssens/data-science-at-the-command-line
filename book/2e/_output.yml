@@ -24,5 +24,5 @@ bookdown::gitbook:
       after: |
         <li><a href="/1e">The second edition is currently being written. You can read the first edition here.</a></li>
     edit:
-      link: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/%s
+      link: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/%s
       text: "Edit"
