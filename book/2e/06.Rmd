@@ -110,13 +110,14 @@ The whitespace in front of the rule is a single tab character.
 Beware that some editors insert spaces when you press the **`TAB`** key, known as a soft tab, which will cause `make` to produce an error.
 The following code illustrates this by expanding the tab to eight spaces:
 
-```{console expand}
+```{console expand, callout=("-f", "top.")}
 < numbers.make expand > spaces.make
 bat -A spaces.make
 make -f spaces.make #<1>
 rm spaces.make
 ```
 <1> I need to add the `-f` option (short for the `--makefile` option) because the configuration file isn't called *Makefile*, which is the default.
+<2> One of the more helpful error messages you'll find at the command line!
 
 From now on, I'll rename the appropriate file to *Makefile* because that matches real-world use more closely.
 So, if I just run `make`:
@@ -279,7 +280,7 @@ Last but not least, let's verify that this *Makefile* works:
 make
 ```
 
-No surprises here. Because we didn't specify any target, the *`all`* target will be built, which, in turn, causes both the *`top10`* and *`heights.png`* targets to be built. The output of the former is printed to standard output and the latter creates a file *`heights.png`*. The *data* directory is created only once, just like the CSV file is only downloaded once.
+No surprises here. Because we didn't specify any target, the *`all`* target will be built, which, in turn, causes both the *`top10`* and *`heights.png`* targets to be built. The output of the former is printed to standard output and the latter creates a file *heights.png*. The *data* directory is created only once, just like the CSV file is only downloaded once.
 
 There’s nothing more fun than just playing with your data and forgetting everything else.
 But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a *Makefile*.
@@ -307,4 +308,4 @@ The next chapter covers the third step of the OSEMN model for data science namel
 
 - The book *Managing Projects with GNU Make* by Robert Mecklenburg and the online *GNU Make Manual* provide a comprehensive and advanced overview of `make`.
 - There exist plenty of other workflow managers besides `make`. Although they differ in syntax and features, they also use concepts such as targets, rules, and dependencies. Examples include [Luigi](https://luigi.readthedocs.io), [Apache Airflow](https://airflow.apache.org), and [Nextflow](https://www.nextflow.io).
-- To learn more about version control, in particular `git` and `GitHub` I recommend the book *Pro Git* by Scott Chacon and Ben Straub. It's [available for free](https://git-scm.com/book/en/v2). The [online GitHub documentation](https://docs.github.com/en/get-started) is also a great starting point.
+- To learn more about version control, in particular `git` and GitHub, I recommend the book *Pro Git* by Scott Chacon and Ben Straub. It's [available for free](https://git-scm.com/book/en/v2). The [online GitHub documentation](https://docs.github.com/en/get-started) is also a great starting point.
