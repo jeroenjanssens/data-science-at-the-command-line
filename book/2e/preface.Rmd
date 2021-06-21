@@ -42,12 +42,12 @@ If you’re already familiar with the command line, or even if you’re already 
 
 ## What to Expect from This Book {-}
 
-In this book, we’re going to obtain, scrub, explore, and model data - a lot of it.
+In this book, we’re going to obtain, scrub, explore, and model data---a lot of it.
 This book is not so much about how become *better* at those data science tasks.
 There are already great resources available that discuss, for example, when to apply which statistical test or how data can be best visualized.
 Instead, this practical book aims to make you more *efficient* and *productive* by teaching you how to perform those data science tasks at the command line.
 
-While this book discusses over 80 command-line tools, it’s not the tools themselves that matter most.
+While this book discusses over 90 command-line tools, it’s not the tools themselves that matter most.
 Some command-line tools have been around for a very long time, while others will be replaced by better ones.
 There are even command-line tools that are being created as you’re reading this.
 In the past nine months, I have discovered many amazing command-line tools.
@@ -63,7 +63,7 @@ Once you become familiar with the command line, know how to combine command-line
 
 ## Changes for the Second Edition {-}
 
-While the command line as a technology and as a way of working is timeless, some of the tools discussed in the first edition have either: (1) been superseded by newer tools (e.g., `csvkit` has been replaced by `xsv`), (2) been abandoned by their developers (e.g., `drake`), or (3) been suboptimal choices (e.g., `weka`).
+While the command line as a technology and as a way of working is timeless, some of the tools discussed in the first edition have either: (1) been superseded by newer tools (e.g., `csvkit` has largely been replaced by `xsv`), (2) been abandoned by their developers (e.g., `drake`), or (3) been suboptimal choices (e.g., `weka`).
 Since the first edition was published in October 2014 I have learned a lot, either through my own experience or through the useful feedback from its readers.
 Even though the book is quite niche because it lies at the intersection of two subjects, there remains a steady interest from the data science community.
 I notice this from the many positive messages I receive almost every day.
@@ -71,9 +71,7 @@ By updating the first edition I hope to keep the book relevant for at least anot
 Here's a non-exhaustive list of changes I made:
 
 * I replaced `csvkit` with `xsv` as much as possible. `xsv` is a much faster alternative to working with CSV files.
-* In Section 1.6 I replaced the used data set with one that is accessible without an API key.
 * In Section 2.2 and 3.2 I replaced the VirtualBox image with a Docker image. Docker is a faster and more lightweight way of running an isolated environment than VirtualBox.
-* I now use `xmlstarlet` for working with XML.
 * I now use `pup` instead of `scrape` to work with HTML. `scrape` is a Python tool I created myself. `pup` is much faster, has more features, and is easier to install.
 * Chapter 6 has been rewritten from scratch. Instead of `drake` I now use `make` to do project management. `drake` is no longer maintained and `make` is much more mature and very popular with developers.
 * I replaced `Rio` with `rush`. `Rio` is a clunky Bash script I created myself. `rush` is an R package that is a much more stable and flexible way of using R from the command line.
@@ -83,13 +81,13 @@ Here's a non-exhaustive list of changes I made:
 
 ## How to Read This Book {-}
 
-In general, you’re advised to read this book in a linear fashion.
+In general, I advise you to read this book in a linear fashion.
 Once a concept or command-line tool has been introduced, chances are that I employ it in a later chapter.
 For example, in Chapter 9, I make heavy use of `parallel`, which is introduced extensively in Chapter 8.
 
 Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning.
 As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length.
-Throughout the book, there are suggestions for additional reading.
+Throughout the book, at the end of each chapter, there are suggestions for further exploration.
 It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.
 
 
@@ -99,7 +97,7 @@ This book makes just one assumption about you: that you work with data.
 It doesn’t matter which programming language or statistical computing environment you’re currently using.
 The book explains all the necessary concepts from the beginning.
 
-It also doesn’t matter whether your operating system is Microsoft Windows, MacOS, or some form of Linux.
+It also doesn’t matter whether your operating system is Microsoft Windows, macOS, or some flavor of Linux.
 The book comes with a Docker image, which is an easy-to-install virtual environment.
 It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written.
 You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.
@@ -113,15 +111,16 @@ The following typographical conventions are used in this book:
 
 *Italic*
 
-:   Indicates new terms, URLs, email addresses, filenames, and file extensions.
+:   Indicates new terms, URLs, directory names, and filenames.
 
 `Constant width`
 
-:   Used for code and commands, as well as within paragraphs to refer to command-line tools.
+:   Used for code and commands, as well as within paragraphs to refer to command-line tools and their options.
 
 **`Constant width bold`**
 
 :   Shows commands or other text that should be typed literally by the user.
+
 
 
 ```{block2, type="rmdtip"}

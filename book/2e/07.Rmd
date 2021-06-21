@@ -273,7 +273,7 @@ csvstat venture.csv | tail -n 1
 xsv count venture.csv
 ```
 
-Note that these two options are different from using `wc -l`, which simply counts the number of newlines.
+Note that these two options are different from using `wc -l`, which counts the number of newlines.
 
 
 ### R One-Liners on the Shell

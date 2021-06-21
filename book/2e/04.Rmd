@@ -330,7 +330,7 @@ What if we wanted to obtain the top 10 most-used words from another e-book, or a
 It would be better to separate the data from the command-line tool.
 
 If we assume that the user of the command-line tool will provide the text, the tool will become generally applicable.
-So, the solution is to simply remove the `curl` command from the script.
+So, the solution is to remove the `curl` command from the script.
 Here is the updated script named *top-words-4.sh*:
 
 ```{console remove_fixed_input}

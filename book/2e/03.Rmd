@@ -97,7 +97,7 @@ The command-line tool `curl` can be considered the command line's Swiss Army kni
 
 When you browse to a URL, which stands for *uniform resource locator*, your browser often interprets the data it downloads.
 For example, the browser renders HTML files, plays video files automatically, and shows PDF files.
-However, when you use `curl` to access a URL, it simply downloads the data and, by default, prints it to standard output.
+However, when you use `curl` to access a URL, it downloads the data and, by default, prints it to standard output.
 `curl` doesn't do any interpretation, but luckily other command-line tools can be used to process the data further.
 
 The easiest invocation of `curl` is to specify a URL as a command-line argument.
@@ -374,7 +374,7 @@ sql2csv --db 'sqlite:///r-datasets.db' \
 --query 'SELECT row_names AS car, mpg FROM mtcars ORDER BY mpg' | csvlook
 ```
 
-This SQLite database is simply a local file, so in this I don't need to specify any username, password or host.
+This SQLite database is a local file, so in this I don't need to specify any username, password or host.
 If you wish to query the database of your employer, you'd of course need know how you can access it and you'd need the permission to do so.
 
 
@@ -492,7 +492,7 @@ Sure, it's probably not a good source of data, but there's nothing wrong with en
 ## Summary
 
 Congratulations, you have finished the first step of the OSEMN model.
-You've learned a variety of ways to obtain data, ranging from simply downloading to querying a relational database.
+You've learned a variety of ways to obtain data, ranging from downloading to querying a relational database.
 In the next chapter, which is an intermezzo chapter, I'll teach you how to create your own command-line tools.
 Feel free to skip this and go to [Chapter 5](#chapter-5-scrubbing-data) (the second step of the OSEMN model) if you cannot wait to learn about scrubbing data.
 

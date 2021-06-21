@@ -15,25 +15,21 @@ console_start()
 
 # Polyglot Data Science {#chapter-10-polyglot-data-science}
 
-<!-- What's a polyglot? -->
 A polyglot is someone who speaks multiple languages.
 A polyglot data scientist, as I see it, is someone who uses multiple programming languages, tools, and techniques to obtain, scrub, explore, and model data.
 
-<!-- Already a polyglot -->
 The command line stimulates a polyglot approach.
 The command line doesn't care in which programming language a tool is written, as long as they adhere to the Unix philosophy.
 We saw that very clearly in [Chapter 4](#chapter-4-creating-reusable-command-line-tools), where we created command-line tools in Bash, Python, and R.
 Moreover, we executed SQL queries directly on CSV files and executed R expressions from the command line.
 In short, we have already been doing polyglot data science without fully realizing it!
 
-<!-- In this chapter -->
 In this chapter I'm going take this further by flipping it around.
 I'm going to show you how to leverage the command line from various programming languages and environments.
 Because let's be honest, we're not going to spend our entire data science careers at the command line.
 As for me, when I'm analyzing some data I often use the RStudio IDE and when I'm implementing something, I often use Python.
 I use whatever helps me to get the job done.
 
-<!-- Why be polyglot? -->
 I find it comforting to know that the command line is often within arm's reach, without having to switch to a different application.
 It allows me to quickly run a command without switching to a separate application and break my workflow.
 Examples are downloading files with `curl`, inspecting a piece of data with `head`, creating a backup with `git`, and compiling a website with `make`.

@@ -311,7 +311,7 @@ Alias
     cd ch02
     ```
 
-    Aliases are simpler than shell functions as they don’t allow parameters. The function `fac` could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in *.bashrc* or *.bash\_aliases* configuration files, which are located in your home directory. To see all aliases currently defined, you simply run `alias` without arguments. Try it. What do you see?
+    Aliases are simpler than shell functions as they don’t allow parameters. The function `fac` could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in *.bashrc* or *.bash\_aliases* configuration files, which are located in your home directory. To see all aliases currently defined, you run `alias` without arguments. Try it. What do you see?
 
 In this book I'll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases.
 This is because these can easily be changed.

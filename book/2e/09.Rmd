@@ -542,6 +542,8 @@ The next chapter is the last intermezzo chapter and will be about leveraging the
 
 ## For Further Exploration
 
-* Cortez, P., A. Cerdeira, F. Almeida, T. Matos, and J. Reis. 2009. “Modeling Wine Preferences by Data Mining from Physicochemical Properties.” <em>Decision Support Systems</em> 47 (4). Elsevier:547–53.
-* Pearson, K. 1901. “On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>Philosophical Magazine</em> 2 (11):559–72.
-* Maaten, Laurens van der, and Geoffrey Everest Hinton. 2008. “Visualizing Data Using T-SNE.” <em>Journal of Machine Learning Research</em> 9:2579–2605.
+- The book *Python Machine Learning* by Sebastian Raschka and Vahid Mirjalili offers a comprehensive overview of machine learning and how to apply it using Python.
+- The later chapters of *R for Everyone* by Jared Lander explain how to accomplish various machine learning tasks using R.
+- If you want to get a deeper understanding of machine learning, I highly recommend you pick up *Pattern Recognition and Machine Learning* by Christopher Bishop and *Information Theory, Inference, and Learning Algorithms* by David MacKay.
+- If you're interested in learning more about the t-SNE algorithm, I recommend the original article about it: *Visualizing Data Using T-SNE* by Laurens van der Maaten and Geoffrey Hinton.
+

@@ -297,7 +297,7 @@ C-C#!literal=FALSE
 
 In order to prevent unnecessary computation, try to put `sample` as early as possible in your pipeline.
 In fact, this argument holds any command-line tool that reduces data, like `head` and `tail`.
-Once you’re confident your pipeline works, you simply take it out of the pipeline.
+Once you’re confident your pipeline works, you take it out of the pipeline.
 
 
 ### Extracting Values
@@ -500,7 +500,7 @@ With `wc -l`, you can count the number of all lines:
 seq 5 | header -a count | wc -l
 ```
 
-If you only want to consider the lines in the body (so everything except the header), you simply add `body`:
+If you only want to consider the lines in the body (so everything except the header), you  add `body`:
 
 ```{console}
 seq 5 | header -a count | body wc -l
@@ -820,7 +820,7 @@ head -n 3 | csvlook -I
 head -n 3 | csvlook
 ```
 
-Assuming that the rows line up, you can simply `paste` [@paste] the files together:
+Assuming that the rows line up, you can `paste` [@paste] the files together:
 
 ```{console}
 paste -d, {bills,customers,datetime}.csv | head -n 3 | csvlook -I
@@ -830,7 +830,7 @@ Here, the command-line argument `-d` instructs `paste` to use a comma as the del
 
 #### Joining
 
-Sometimes data cannot simply by combined by vertical or horizontal concatenation.
+Sometimes data cannot be combined by vertical or horizontal concatenation.
 In some cases, especially in relational databases, the data is spread over multiple tables (or files) in order to minimize redundancy.
 Imagine you wanted to extend the Iris data set with more information about the three types of Iris flowers, namely the USDA identifier.
 It so happens that I have a separate CSV file with these identifiers:
@@ -868,7 +868,7 @@ CSV is inherently in tabular form, but JSON and HTML/XML data can have a deeply 
 
 Second, many command-line tools, especially the classic ones such as `cut` and `grep`, operate on plain text.
 This is because text is regarded as a universal interface between command-line tools.
-Moreover, the other formats are simply younger. Each of these formats can be treated as plain text, allowing us to apply such command-line tools to the other formats as well.
+Moreover, the other formats are younger. Each of these formats can be treated as plain text, allowing us to apply such command-line tools to the other formats as well.
 
 Sometimes you can get away with applying the classic tools to structured data.
 For example, by treating the JSON data below as plain text, you can change the attribute *gender* to *sex* using `sed`:

@@ -79,7 +79,9 @@ bat -A numbers.make
 
 This *Makefile* contains one *target* called `numbers`. A *target* is like a task. It's usually the name of a file you'd like to create but it can also be more generic than that. The line below, `seq 7`, is known as a *rule*. Think of a rule as a recipe; one or more commands that specify how the target should be built.
 
-The space in front of the rule is a single tab character. `make` is picky when it comes to white space. Beware that some editors insert spaces when you press the __TAB__ key, known as a soft tab, which will cause `make` to produce an error. The following code illustrates this by expanding the tab to eight spaces:
+The space in front of the rule is a single tab character. `make` is picky when it comes to white space.
+Beware that some editors insert spaces when you press the **`TAB`** key, known as a soft tab, which will cause `make` to produce an error.
+The following code illustrates this by expanding the tab to eight spaces:
 
 ```{console expand}
 < numbers.make expand > spaces.make
@@ -88,7 +90,9 @@ make -f spaces.make
 rm spaces.make
 ```
 
-I needed the add the `-f` option because the configuration file wasn't actually called *Makefile*. From now on, I'll rename the appropriate file to *Makefile* because that matches real-world use more closely. So, if I just run `make`:
+I need to add the `-f` option because the configuration file isn't actually called *Makefile*.
+From now on, I'll rename the appropriate file to *Makefile* because that matches real-world use more closely.
+So, if I just run `make`:
 
 ```{console make_numbers}
 cp numbers.make Makefile
@@ -221,7 +225,7 @@ With the special target *.PHONY* we can indicate which targets are not represent
 
 There are five targets: *all*, *data*, *data/starwars.csv*, *top10*, and *heights.png*. Let's discuss each of them in turn:
 
-1. The target *all* has two dependencies but no rule. This is like a shortcut to execute one or more targets in the order in which they are specified. In this case: *top10* and *heights.png*. The target *all* appears as the first target in the *Makefile*, which means that if we simply run *make*, this target will be built.
+1. The target *all* has two dependencies but no rule. This is like a shortcut to execute one or more targets in the order in which they are specified. In this case: *top10* and *heights.png*. The target *all* appears as the first target in the *Makefile*, which means that if we run *make*, this target will be built.
 2. The target *data* create the directory *data*. Earlier I said that `make` is all about files. Well, it's also about directories. This target will only be executed when the directory *data* doesn't yet exist.
 3. The target *data/starwars.csv* depends on the target *data*. If there's no *data* directory, it will first be created. Once all dependencies are satisfied, the rule will be executed, which involves downloading a file and saving it to a file with the same name as the target.
 4. The target *top10* is marked as phony, so it will always be built if specified. It depends on the *data/starwars.csv* target. It makes use of a special variable, *$<* which expands to the name of the first prerequisite, namely *data/starwars.csv*.
@@ -233,7 +237,7 @@ Last but not least, let's verify that this *Makefile* works:
 make
 ```
 
-No surprises here. Because we didn't specify any target, the *all* target will be built, which, in turn, causes both the *top10* and *heights.png* targets to be built. The output of the former is printed to standard output and the latter creates a file *heights.png*. The *data* directory is created only once, just like the csv file is only downloaded once.
+No surprises here. Because we didn't specify any target, the *all* target will be built, which, in turn, causes both the *top10* and *heights.png* targets to be built. The output of the former is printed to standard output and the latter creates a file *heights.png*. The *data* directory is created only once, just like the CSV file is only downloaded once.
 
 
 There’s nothing more fun than just playing with your data and forgetting everything else.
