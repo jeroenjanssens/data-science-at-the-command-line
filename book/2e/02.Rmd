@@ -514,8 +514,8 @@ n#! enter=FALSE, expect_prompt=TRUE
 
 ### Managing Output
 
-Sometimes a tools or sequence of tool produces too much output to include in the book.
-Instead of manually altering such output, I prefer to be transparent by I piping it through a helper tool.
+Sometimes a tools or sequence of tools produces too much output to include in the book.
+Instead of manually altering such output, I prefer to be transparent by piping it through a helper tool.
 You don't necessarily have to do this, especially if you're interested in the complete output.
 
 Here are the tools that I use for making output manageable:
