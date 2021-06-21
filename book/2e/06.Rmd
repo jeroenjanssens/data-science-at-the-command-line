@@ -215,7 +215,7 @@ Here's an excerpt of that data set:
 
 ```{console}
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
-xsv select name,height,mass,sex,homeworld,species |
+xsv select name,height,mass,homeworld,species |
 csvlook
 ```
 
