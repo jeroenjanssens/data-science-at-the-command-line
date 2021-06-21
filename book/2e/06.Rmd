@@ -221,7 +221,7 @@ csvlook
 
 The first task computes the ten tallest humans:
 
-```{console, callouts=c("grep", "cut", "sort", "head"}
+```{console, callouts=c("grep", "cut", "sort", "head")}
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
 grep Human |
 cut -d, -f 1,2 |

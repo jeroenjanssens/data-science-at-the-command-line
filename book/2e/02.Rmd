@@ -42,7 +42,7 @@ In the next section I explain how to install the environment containing all the 
 In this book we use many different command-line tools.
 Unix often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools.
 Installing these packages yourself is often not too difficult.
-However, we'll also use tools that are not available as packages and require a more manual, and more involved, installation.
+However, we'll also use tools that are not available as packages and require a more manual, and more involved installation.
 In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
 
 A Docker image is a bundle of one or more applications together with all their dependencies.
@@ -87,7 +87,6 @@ If the following command produces an enthusiastic cow, then you know everything 
 cowsay "Let's moove\!"
 ```
 
-Run `exit` to exit the container.
 If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container.
 I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
 
@@ -117,6 +116,8 @@ In the above commands, the option `-v` instructs `docker` to map the current dir
 ```{block2, type="rmdnote"}
 If you would like to know more about the Docker image you can [visit it on Docker Hub](https://hub.docker.com/r/datasciencetoolbox/dsatcl2e).
 ```
+
+When you're done, you can shut down the Docker container by typing `exit`.
 
 
 ## Essential Unix Concepts {#essential-concepts}
