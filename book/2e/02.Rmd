@@ -92,7 +92,7 @@ If you want to get data in and out of the container, you can add a volume, which
 I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
 
 ```{console docker_run_v}
-docker run --rm -it -v`pwd`:/data datasciencetoolbox/dsatcl2e#! enter=FALSE
+docker run --rm -it -v "$(pwd)":/data datasciencetoolbox/dsatcl2e#! enter=FALSE
 ```
 
 ```{console, docker_run_v_cancel, include=FALSE}
@@ -102,7 +102,7 @@ C-C #! literal=FALSE
 Or the following when you're on Windows and using the Command Prompt (also known as `cmd`):
 
 ```{console eval=FALSE}
-C:\> docker run --rm -it -v %cd%:/data datasciencetoolbox/dsatcl2e
+C:\> docker run --rm -it -v "%cd%":/data datasciencetoolbox/dsatcl2e
 ```
 
 Or the following when you're using Windows PowerShell:
