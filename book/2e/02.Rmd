@@ -420,13 +420,31 @@ wc -w greeting.txt ten-numbers.txt
 Note that in this case, `wc` also outputs the name of the files.
 
 
-```{r piping, echo=FALSE, fig.cap="Piping output to another tool (placeholder)", fig.align="center"}
-knitr::include_graphics("images/diagram_piping.png")
+
+```{r diagram-essential-channels, echo=FALSE, fig.cap="Diagram", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_channels.png")
 ```
 
-```{r redirection, echo=FALSE, fig.cap="Redirecting output to a file (placeholder)", fig.align="center"}
-knitr::include_graphics("images/diagram_redirection.png")
+```{r diagram-essential-pipe-redirect, echo=FALSE, fig.cap="Diagram", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_pipe_redirect.png")
 ```
+
+```{r diagram-essential-stdin-cat, echo=FALSE, fig.cap="Diagram", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_stdin_cat.png")
+```
+
+```{r diagram-essential-devnull, echo=FALSE, fig.cap="Diagram", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_devnull.png")
+```
+
+```{r diagram-essential-tee, echo=FALSE, fig.cap="Diagram", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_tee.png")
+```
+
+```{r diagram-essential-sponge, echo=FALSE, fig.cap="Diagram", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_sponge.png")
+```
+
 
 
 ### Working With Files
