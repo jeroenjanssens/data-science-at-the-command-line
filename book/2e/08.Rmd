@@ -197,11 +197,10 @@ Keep in mind that not everything can be parallelized.
 API calls may be limited to a certain number, or some commands can only have one instance.
 ```
 
+\@ref(fig:diagram-parallel-processing) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything. 
 
-\@ref(fig:processing) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything. 
-
-```{r processing, echo=FALSE, fig.cap="Serial processing, naive parallel processing, and parallel processing with GNU Parallel", fig.align="center"}
-knitr::include_graphics("images/diagram_processing.png")
+```{r diagram-parallel-processing, echo=FALSE, fig.cap="Serial processing, naive parallel processing, and parallel processing with GNU Parallel", fig.align="center"}
+knitr::include_graphics("images/diagram_parallel_processing.png")
 ```
 
 There are two problems with this naive approach.
@@ -229,10 +228,13 @@ Before I go into the details of `parallel`, here’s a little teaser to show you
 seq 0 2 100 | parallel "echo {}^2 | bc" | trim
 ```
 
-<!-- find /usr/share/man/man1/ | -->
-<!-- parallel --tag 'man {} | grep -oE -- "(-[-_:alnum:])|(--[-_[:alnum:]]+)" | sort | uniq | wc -l' 2>/dev/null | sort -nrk2 | head -n 20 -->
+This is `parallel` in its simplest form: the items to loop over are passed via standard input and there aren't any arguments other than the command that `parallel` needs to run.
+See \@ref(fig:diagram-parallel-results) for an illustration of how `parallel` concurrently distributes input among processes and collects their outputs.
 
-This is `parallel` in its simplest form: the items to loop over are passed via standard input and there aren't any any arguments other than the command that `parallel` needs to run.
+```{r diagram-parallel-results, echo=FALSE, fig.cap="GNU Parallel concurrently distributes input among processes and collects their outputs", fig.align="center"}
+knitr::include_graphics("images/diagram_parallel_results.png")
+```
+
 As you can see it basically acts as a for loop.
 Here's another teaser, which replaces the for loop from the previous section.
 
@@ -355,16 +357,20 @@ seq 5 | parallel "echo Hi {}" >> one-big-file.txt
 
 However, `parallel` offers the `--results` option, which stores the output in separate files.
 For each job, `parallel` creates three files: *seq*, which holds the job number, *stdout* which contains the output produced by the job, and *stderr* which contains any errors produced by the job.
-\@ref(fig:processing) illustrates this.
-These three files are placed in subdirectories based on the input values:
+These three files are placed in subdirectories based on the input values.
+
+`parallel` still prints all the output, which is redundant in this case.
+You can redirect both the standard input and standard output to */dev/null* as follows:
 
 ```{console}
-seq 5 | parallel --results outdir "echo Hello from job {}"
-tree outdir
+seq 10 | parallel --results outdir "curl 'https://anapioficeandfire.com/api/characters/{}' | jq -r '.aliases[0]'" 2>/dev/null 1>&2
+tree outdir | trim
 ```
 
-```{r parallel, echo=FALSE, fig.cap="Storing results in separate files (placeholder)", fig.align="center"}
-knitr::include_graphics("images/diagram_parallel.png")
+See \@ref(fig:diagram-parallel-results) for a pictorial overview of how the `--results` option works.
+
+```{r diagram-parallel-results, echo=FALSE, fig.cap="GNU Parallel stores output in separate files with the `--results` option", fig.align="center"}
+knitr::include_graphics("images/diagram_parallel_results.png")
 ```
 
 When you're running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input.
@@ -432,17 +438,11 @@ I'm using Amazon Web Services (AWS) as an example.
 I assume that you have an AWS account and that you know how to launch instances.
 If you’re using a different cloud computing service (such as Google Cloud Platform or Microsoft Azure), or if you have your own servers, please make sure that you create a *hostnames* file yourself before continuing to the next section.
 
-<!-- #TODO: Add link to AWS Management console -->
-
 You can obtain a list of running AWS EC2 instances using `aws` [@aws], the command-line interface to the AWS API.
 With `aws`, you can virtually do everything you can do with the online AWS Management Console.
 
-<!-- #TODO: Change the URL below into a footnote -->
-
 The command `aws ec2 describe-instances` returns a lot of information about all your EC2 instances in JSON format (see [the online documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instances.html) for more information).
 You can extract the relevant fields using `jq`:
-
-<!-- TODO: Run these EC2 commands once for real in the docker image and use a bunch of echo statements -->
 
 ```{console, remove=list(3, "echo")}
 aws ec2 describe-instances | jq '.Reservations[].Instances[] | {public_dns: .PublicDnsName, state: .State.Name}'#! enter=FALSE
@@ -457,7 +457,7 @@ echo '  "public_dns": null' &&
 echo '}' &&
 ```
 
-The possible states of an EC2 instance are: *pending*, *running*, *shutting-down*, *terminated*, *stopping*, and *stopped*.
+The possible states of an EC2 instance are: *`pending`*, *`running`*, *`shutting-down`*, *`terminated`*, *`stopping`*, and *`stopped`*.
 Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:
 
 ```{console, remove=list(3, "echo")}
@@ -482,7 +482,7 @@ echo "Host *.amazonaws.com\n\tIdentityFile ~/.ssh/MyKeyFile.pem\n\tUser ubuntu" 
 bat ~/.ssh/config
 ```
 
-Depending on your which distribution your running, your user name may be different than *ubuntu*.
+Depending on your which distribution your running, your user name may be different than *`ubuntu`*.
 
 
 ### Running Commands on Remote Machines
