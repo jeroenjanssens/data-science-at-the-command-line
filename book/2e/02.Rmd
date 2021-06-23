@@ -471,8 +471,8 @@ Note that in this case, `wc` also outputs the name of the files.
 knitr::include_graphics("images/diagram_essential_stdin_cat.png")
 ```
 
-```{r diagram-essential-devnull, echo=FALSE, fig.cap="Redirecting *`stderr`* to */dev/null*", fig.align="center"}
-knitr::include_graphics("images/diagram_essential_devnull.png")
+```{r diagram-essential-redirect-devnull, echo=FALSE, fig.cap="Redirecting *`stderr`* to */dev/null*", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_redirect_devnull.png")
 ```
 
 ```{r diagram-essential-tee, echo=FALSE, fig.cap="With `tee`, you can write intermediate output to a file", fig.align="center"}
