@@ -192,7 +192,7 @@ By default, when you login, this is your home directory.
 
 The command-line tool `cd`, which is a Z shell builtin, allows you to navigate to a different directory:
 
-```{console, callouts=c(1, 3, 6, 8}
+```{console, callouts=c(1, 3, 6, 8)}
 cd /data/ch02
 pwd
 cd ..
