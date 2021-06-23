@@ -229,10 +229,10 @@ seq 0 2 100 | parallel "echo {}^2 | bc" | trim
 ```
 
 This is `parallel` in its simplest form: the items to loop over are passed via standard input and there aren't any arguments other than the command that `parallel` needs to run.
-See \@ref(fig:diagram-parallel-results) for an illustration of how `parallel` concurrently distributes input among processes and collects their outputs.
+See \@ref(fig:diagram-parallel-output) for an illustration of how `parallel` concurrently distributes input among processes and collects their outputs.
 
-```{r diagram-parallel-results, echo=FALSE, fig.cap="GNU Parallel concurrently distributes input among processes and collects their outputs", fig.align="center"}
-knitr::include_graphics("images/diagram_parallel_results.png")
+```{r diagram-parallel-output, echo=FALSE, fig.cap="GNU Parallel concurrently distributes input among processes and collects their outputs", fig.align="center"}
+knitr::include_graphics("images/diagram_parallel_output.png")
 ```
 
 As you can see it basically acts as a for loop.
