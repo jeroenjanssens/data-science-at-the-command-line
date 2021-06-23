@@ -388,7 +388,7 @@ curl -s "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"
 
 And if we wanted to know *how many* chapters the book has, we can use `wc`, which is very good at counting things:
 
-```{console seq_grep_wc callouts="wc"}
+```{console seq_grep_wc, callouts="wc"}
 curl -s "https://www.gutenberg.org/files/11/11-0.txt" |
 grep " CHAPTER" |
 wc -l
