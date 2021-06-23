@@ -387,12 +387,14 @@ Most often, you'll use a different source of input, such as other tools and file
 
 
 
-```{r diagram-essential-pipe-redirect, echo=FALSE, fig.cap="The output from a tool can be piped to another tool or redirected to a file.", fig.align="center"}
+```{r diagram-essential-pipe, echo=FALSE, fig.cap="The output from a tool can be piped to another tool", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_pipe.png")
 ```
 
 
-
+```{r diagram-essential-redirect-stdout, echo=FALSE, fig.cap="The output from a tool can be redirected to a file", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_redirect_stdout.png")
+```
 
 
 We can *pipe* the output of `seq` to `grep` to filter lines on a pattern.
