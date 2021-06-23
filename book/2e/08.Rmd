@@ -189,7 +189,7 @@ for i in {A..C}; do
 ./slow.sh $i &
 done#! hold=7
 ```
-<1> The ampersand sends the command to the background, allowing the for loop to continue immediately with the next iteration.
+<1> The ampersand (`&`) sends the command to the background, allowing the for loop to continue immediately with the next iteration.
 <2> This line shows the job number given by the Z shell and the process ID, which can be used for more fine-grained job control. This topic, while powerful, is beyond the scope of this book.
 
 ```{block2, type="rmdnote"}
@@ -209,6 +209,7 @@ If you start too many jobs at once, they could be competing for the same resourc
 This could lead to a longer time to run everything.
 Second, it's difficult to tell which output belongs to which input.
 Let's look at a better approach.
+
 
 ### Introducing GNU Parallel
 

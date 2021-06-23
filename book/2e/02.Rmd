@@ -255,7 +255,7 @@ This particular command outputs the first three lines of file */data/ch02/movies
 ```
 
 I use the term *command-line tool* a lot, but so far, I haven't yet explained what I actually mean by it.
-I use it as an umbrella term for *anything* that can be executed from the command line.
+I use it as an umbrella term for *anything* that can be executed from the command line (see \@ref(fig:umbrella)).
 Under the hood, each command-line tool is one of the following five types:
 
 - A binary executable
@@ -363,7 +363,7 @@ Each tool has three standard communication streams: standard input, standard out
 These are often abbreviated as  *`stdin`*, *`stdout`*, and *`stderr`*.
 
 Both the standard output and standard error are, by default, redirected to the terminal, so that both normal output and any error messages are printed on the screen. 
-@\ref(fig:diagram-essential-streams) illustrates this for both `pwd` and `rev`[@rev].
+\@ref(fig:diagram-essential-streams) illustrates this for both `pwd` and `rev`[@rev].
 If you run `rev`, you'll see that nothing happens.
 That's because `rev` expects input, and by the default, that's any keys pressed on the keyboard.
 Try typing a sentence and press **`Enter`**.
@@ -375,7 +375,6 @@ knitr::include_graphics("images/diagram_essential_streams.png")
 ```
 
 Most often, you'll use a different source of input, such as other tools and files.
-
 
 
 <!-- The most important way of combining command-line tools is through a so-called pipe. -->
@@ -483,6 +482,8 @@ knitr::include_graphics("images/diagram_essential_tee.png")
 ```{r diagram-essential-sponge, echo=FALSE, fig.cap="Unless you use `sponge`, you cannot read from and write to the same file in one pipeline", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_sponge.png")
 ```
+
+
 
 
 
