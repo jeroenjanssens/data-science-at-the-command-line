@@ -192,7 +192,7 @@ By default, when you login, this is your home directory.
 
 The command-line tool `cd`, which is a Z shell builtin, allows you to navigate to a different directory:
 
-```{console, callouts=1:5}
+```{console, callouts=c(1, 3, 6, 8}
 cd /data/ch02
 pwd
 cd ..
@@ -347,11 +347,6 @@ In that case, the first reported command-line tool is used when you type `pwd`.
 In the next section we'll look at how to combine command-line tools.
 
 
-
-
-
-
-
 ### Combining Command-line Tools {#combining-command-line-tools}
 
 Because most command-line tools adhere to the Unix philosophy [@raymond2003art], they are designed to do only thing, and do it really well.
@@ -375,63 +370,55 @@ knitr::include_graphics("images/diagram_essential_streams.png")
 ```
 
 Most often, you'll use a different source of input, such as other tools and files.
-
-
-<!-- The most important way of combining command-line tools is through a so-called pipe. -->
-<!-- The output from the first tool is passed to the second tool. -->
-<!-- There are virtually no limits to this. -->
-
-
-
-
-
-
+For example, with `curl` we can download the book *Alice’s Adventures in Wonderland* by Lewis Carrol and *pipe* that to  the next tool.
+(I'll discuss `curl` in more detail in [Chapter 3](#chapter-3-obtaining-data).)
+This is done using the pipe operator (`|`).
 
 ```{r diagram-essential-pipe, echo=FALSE, fig.cap="The output from a tool can be piped to another tool", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_pipe.png")
 ```
 
+We can *pipe* the output of `curl` to `grep` to filter lines on a pattern.
+Imagine that we want to see the chapters listed in the table of contents:
+We can combine `curl` and `grep` as follows:
+
+```{console}
+curl -s "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"
+```
+
+And if we wanted to know *how many* chapters the book has, we can use `wc`, which is very good at counting things:
+
+```{console seq_grep_wc callouts="wc"}
+curl -s "https://www.gutenberg.org/files/11/11-0.txt" |
+grep " CHAPTER" |
+wc -l
+```
+<1> The option `-l` specifies that `wc` should only output the number of lines that are pass into it. By default it also returns the number of characters and words.
+
+You can think of piping as an automated copy and paste. 
+Once you get the hang of combining tools using the pipe operator, you'll find that there are virtually no limits to this.
+
+
+### Redirecting Input and Output
+
+Besides piping the output from one tool to another tool, you can also save it to a file.
+This is called *output redirection*, and works as follows:
+
+```{console seq_redirect}
+curl "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER" > chapters.txt
+cat chapters.txt
+```
+
+Here, we save the output of `grep` to a file named *chapters.txt* in the directory */data/ch02*.
+If this file does not exist yet, it will be created.
+If this file already exists, its contents are overwritten.
+\@ref(fig:diagram-essential-redirect-stdout) illustrates how output redirection works conceptually.
+Note that the standard error is still redirected to the terminal.
 
 ```{r diagram-essential-redirect-stdout, echo=FALSE, fig.cap="The output from a tool can be redirected to a file", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_redirect_stdout.png")
 ```
 
-
-We can *pipe* the output of `seq` to `grep` to filter lines on a pattern.
-Imagine that we only want to see numbers contain a "3".
-We can combine `seq` and `grep` as follows:
-
-```{console seq_grep}
-seq 30 | grep 3
-```
-
-And if we wanted to know *how many* numbers between 1 and 100 that contain a three, we can use `wc`, which is very good at counting things:
-
-```{console seq_grep_wc}
-seq 100 | grep 3 | wc -l
-```
-
-The option `-l` specifies that `wc` should only output the number of lines that are pass into it.
-By default it also returns the number of characters and words.
-
-
-
-
-
-### Redirecting Input and Output
-
-I mentioned that, by default, the output of the last command-line tool in the pipeline is outputted to the terminal.
-You can also save this output to a file.
-This is called *output redirection*, and works as follows:
-
-```{console seq_redirect}
-seq 10 > ten-numbers.txt
-cat ten-numbers.txt
-```
-
-Here, we save the output of the `seq` tool to a file named *ten-numbers.txt* in the directory */data/ch02*.
-If this file does not exist yet, it will be created.
-If this file already exists, its contents are overwritten.
 You can also append the output to a file with `>>`, meaning the output is added after the original contents:
 
 ```{console echo_append}
@@ -439,7 +426,7 @@ echo -n "Hello" > greeting.txt
 echo " World" >> greeting.txt
 ```
 
-The tool echo just outputs the value you specify.
+The tool `echo` outputs the value you specify.
 The `-n` option, which stands for *newline*, specifies that `echo` should *not* output a trailing newline.
 
 Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage.
@@ -451,7 +438,7 @@ cat greeting.txt | wc -w
 ```
 <1> The `-w` option indicates `wc` to only count words.
 
-The same result can be achieved with the following syntax:
+The same result can be achieved by using the smaller-than-sign (`<`):
 
 ```{console}
 < greeting.txt wc -w
@@ -475,14 +462,6 @@ wc -w greeting.txt ten-numbers.txt
 Note that in this case, `wc` also outputs the name of the files.
 
 
-
-
-
-
-
-
-
-
 You can suppress the output of any tool by redirecting it to a special file called */dev/null*.
 I often do this to suppress error messages (see \@ref(fig:diagram-essential-redirect-devnull) for an illustration).
 The following causes `cat` to produce an error message because it cannot find the file *404.txt*:
@@ -502,22 +481,6 @@ cat movies.txt 404.txt 2> /dev/null
 knitr::include_graphics("images/diagram_essential_redirect_devnull.png")
 ```
 
-
-
-
-Sometimes it's useful to write intermediate output to a file.
-This allows you to inspect any step in your pipeline once it has completed.
-You can insert the tool `tee` as often as you like in your pipeline.
-I often use it to inspect a portion of the final output, while writing the complete output to file (see \@ref(fig:diagram-essential-tee).
-Here, the complete output is written to *even.txt* and the first 5 lines are printed using `trim`:
-
-```{console}
-seq 0 2 100 | tee even.txt | trim 5
-```
-
-```{r diagram-essential-tee, echo=FALSE, fig.cap="With `tee`, you can write intermediate output to a file", fig.align="center"}
-knitr::include_graphics("images/diagram_essential_tee.png")
-```
 
 
 
@@ -675,6 +638,20 @@ bat /data/ch04/stream.py
 ```
 
 Sometimes I add the `-A` option when I want to explicitly point out the spaces, tabs, and newlines in a file.
+
+Sometimes it's useful to write intermediate output to a file.
+This allows you to inspect any step in your pipeline once it has completed.
+You can insert the tool `tee` as often as you like in your pipeline.
+I often use it to inspect a portion of the final output, while writing the complete output to file (see \@ref(fig:diagram-essential-tee).
+Here, the complete output is written to *even.txt* and the first 5 lines are printed using `trim`:
+
+```{console}
+seq 0 2 100 | tee even.txt | trim 5
+```
+
+```{r diagram-essential-tee, echo=FALSE, fig.cap="With `tee`, you can write intermediate output to a file", fig.align="center"}
+knitr::include_graphics("images/diagram_essential_tee.png")
+```
 
 Lastly, to insert images that have been generated by command-line tools (so every image except screenshots and diagrams) I use `display`.
 If you run `display` you'll find that it doesn't work.
