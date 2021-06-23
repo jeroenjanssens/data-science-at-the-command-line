@@ -192,7 +192,7 @@ By default, when you login, this is your home directory.
 
 The command-line tool `cd`, which is a Z shell builtin, allows you to navigate to a different directory:
 
-```{console, callouts=c(1, 3, 6, 8)}
+```{console, callouts=c(1, 3, 6, 8, 11)}
 cd /data/ch02
 pwd
 cd ..
@@ -203,7 +203,7 @@ cd ch02
 <2> Print the current directory.
 <3> Navigate to the parent directory.
 <4> Print the current directory again.
-<5> Navigate the subdirectory *ch02*.
+<5> Navigate to the subdirectory *ch02*.
 
 The part after `cd` specifies to which directory you want to navigate to.
 Values that come after the command are called *command-line arguments* or *options*.
