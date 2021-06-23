@@ -217,13 +217,12 @@ Printing even lines works in a similar manner:
 ```
 
 <!-- #TODO: SHOULD: Mention somewhere in the book that Linux doesn't care about file extensions -->
-<!-- #TODO: COULD: Mention useless use of cat award -->
 
 ```{block2, type="rmdnote"}
 Many of these examples start with the smaller-than sign (`<`) followed by the filename.
 I do this because this allows me to read the pipeline from left to right.
 Please know that this is my own preference.
-You can also use `cat` to pipe the contents of a file[^cat]. 
+You can also use `cat` to pipe the contents of a file. 
 Also, many command-line tools also accept the filename as an argument.
 ```
 
@@ -966,4 +965,3 @@ You're free to skip this chapter if you can't wait to start exploring and visual
 - In this chapter I have used regular expressions in a couple of places. A tutorial about them is unfortunately beyond the scope of this book. Because regular expressions can be used in many different tools, I recommend that you learn about them. A good book is *Regular Expressions Cookbook* by Jan Goyvaerts and Steven Levithan.
 
 
-[^cat]: [Some](http://porkmail.org/era/unix/award.html) consider this a useless use of `cat`, arguing that the purpose of `cat` is to concatenate files and if you're not using it for this purpose, it's a waste of time, and costs you a process. I think this is silly. We've got more important things to do!
