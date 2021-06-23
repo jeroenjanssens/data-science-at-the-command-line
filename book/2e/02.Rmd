@@ -469,23 +469,85 @@ Note that in this case, `wc` also outputs the name of the files.
 
 
 
+
+
+
 ```{r diagram-essential-stdin-cat, echo=FALSE, fig.cap="Two ways to use the contents of a file as input", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_stdin_cat.png")
 ```
 
+
+
+
+
+You can suppress the output of any tool by redirecting it to a special file called */dev/null*.
+I often do this to suppress error messages (see \@ref(fig:diagram-essential-redirect-devnull) for an illustration).
+The following causes `cat` to produce an error message because it cannot find the file *404.txt*:
+
+```{console}
+cat movies.txt 404.txt 2> /dev/null
+```
+
+You can redirect standard error to */dev/null* as follows:
+
+```{console callouts=1}
+cat movies.txt 404.txt 2> /dev/null 
+```
+<1> The *`2`* refers to standard error.
+
 ```{r diagram-essential-redirect-devnull, echo=FALSE, fig.cap="Redirecting *`stderr`* to */dev/null*", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_redirect_devnull.png")
+```
+
+
+
+
+Sometimes it's useful to write intermediate output to a file.
+This allows you to inspect any step in your pipeline once it has completed.
+You can insert the tool `tee` as often as you like in your pipeline.
+I often use it to inspect a portion of the final output, while writing the complete output to file (see \@ref(fig:diagram-essential-tee).
+Here, the complete output is written to *even.txt* and the first 5 lines are printed using `trim`:
+
+```{console}
+seq 0 2 100 | tee even.txt | trim 5
 ```
 
 ```{r diagram-essential-tee, echo=FALSE, fig.cap="With `tee`, you can write intermediate output to a file", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_tee.png")
 ```
 
+
+
+
+Be careful not to read from and write to the same file.
+If you do, you'll end up with an empty file.
+That's because the tool of which the output is redirected, immediately opens that file for writing, and thereby emptying it.
+There are two workarounds for this: (1) write to a different file and rename it afterwards with `mv` or (2) use `sponge` [@sponge], which soaks up all its input before writing to a file.
+\@ref(fig:diagram-essential-sponge) illustrates how this works.
+
 ```{r diagram-essential-sponge, echo=FALSE, fig.cap="Unless you use `sponge`, you cannot read from and write to the same file in one pipeline", fig.align="center"}
 knitr::include_graphics("images/diagram_essential_sponge.png")
 ```
 
+For example, imagine you have a file *dates.txt* and you want to add line numbers using `nl`[@nl].
+If you run the following, *dates.txt* will end up empty.
 
+```{console}
+dseq 5 > dates.txt
+< dates.txt nl > dates.txt
+bat dates.txt
+```
+
+Instead, you can use one of the workarounds I just described:
+
+```{console}
+dseq 5 > dates.txt
+< dates.txt nl > dates-nl.txt
+bat dates-nl.txt
+dseq 5 > dates.txt
+< dates.txt nl | sponge dates.txt
+bat dates.txt
+```
 
 
 
