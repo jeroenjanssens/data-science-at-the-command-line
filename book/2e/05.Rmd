@@ -60,14 +60,14 @@ Before I dive into the actual transformations, I'd like to demonstrate their ubi
 
 ## Transformations, Transformations Everywhere
 
-In Chapter 1 I mentioned that, in practice, the steps of the OSEMN model will rarely be followed linearly.
+In [Chapter 1](#chapter-1-introduction) I mentioned that, in practice, the steps of the OSEMN model will rarely be followed linearly.
 In this vein, although scrubbing is the second step of the OSEMN model, I want you to know that it's not *just* the obtained data that needs scrubbing.
 The transformations that you'll learn in this chapter can be useful at any part of your pipeline and at any step of the OSEMN model.
 Generally, if one command line tool generates output that can be used immediately by the next tool, you can chain the two tools together by using the pipe operator (`|`).
 Otherwise, a transformation needs to be applied to the data first by inserting an intermediate tool into the pipeline.
 
 Let me walk you through an example to make this more concrete.
-Imagine that you have obtained the first 100 items of a *fizzbuzz* sequence (cf. Chapter 4) and that you'd like to visualize how often the words *fizz*, *buzz*, and *fizzbuzz* appear using a bar chart.
+Imagine that you have obtained the first 100 items of a *fizzbuzz* sequence (cf. [Chapter 4](#chapter-4-creating-reusable-command-line-tools)) and that you'd like to visualize how often the words *fizz*, *buzz*, and *fizzbuzz* appear using a bar chart.
 Don't worry if this example uses tools that you might not be familiar with yet, they'll all be covered in more detail later.
 
 First you obtain the data by generating the sequence and write it to *fb.seq*:
@@ -77,7 +77,7 @@ seq 100 |
 /data/ch04/fizzbuzz.py |
 tee fb.seq | trim
 ```
-<1> The custom tool `fizzbuzz.py` comes from Chapter 4.
+<1> The custom tool `fizzbuzz.py` comes from [Chapter 4](#chapter-4-creating-reusable-command-line-tools).
 
 Then you use `grep` to keep the lines that match the pattern *fizz* or *buzz* and count how often each word appears using `sort` and `uniq`:
 
@@ -104,7 +104,7 @@ csvlook fb.csv
 
 Now you're ready to use `rush` to create a bar chart.
 See \@ref(fig:fb-image) for the result.
-(I'll cover this syntax of `rush` in detail in Chapter 7.)
+(I'll cover this syntax of `rush` in detail in [Chapter 7](#chapter-7-exploring-data).)
 
 ```{console fb_rush}
 rush plot -x value -y count --geom col --height 2 fb.csv > fb.png
@@ -282,7 +282,7 @@ This percentage can also be specified as a fraction (namely `1/100`) or as a pro
 
 `sample` has two other purposes, which can be useful when you’re debugging your pipeline.
 First, it’s possible to add some delay to the output.
-This comes in handy when the input is a constant stream (for example, the Wikipedia stream we saw in Chapter 3), and the data comes in too fast to see what’s going on.
+This comes in handy when the input is a constant stream (for example, the Wikipedia stream we saw in [Chapter 3](#chapter-3-obtaining-data)), and the data comes in too fast to see what’s going on.
 Secondly, you can put a timer on `sample`, so that you don’t have to kill the ongoing process manually.
 For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:
 
@@ -563,7 +563,7 @@ The tool `csvsql` [@csvsql] allows you to execute SQL queries directly on CSV fi
 SQL is a powerful language to define operations for scrubbing data; it's a very different way than using individual command-line tools.
 
 ```{block2, type="rmdnote"}
-If your data originally comes from a relational database, then, if possible, try to execute SQL queries on that database and subsequently extract the data as CSV. As I discussed in Chapter 3, you can use the command-line tool `sql2csv` for this. When you first export data from the database to a CSV file, and then apply SQL, it is not only slower, but there is also a possibility that the column types are not correctly inferred from the CSV data.
+If your data originally comes from a relational database, then, if possible, try to execute SQL queries on that database and subsequently extract the data as CSV. As I discussed in [Chapter 3](#chapter-3-obtaining-data), you can use the command-line tool `sql2csv` for this. When you first export data from the database to a CSV file, and then apply SQL, it is not only slower, but there is also a possibility that the column types are not correctly inferred from the CSV data.
 ```
 
 In the scrubbing tasks below, I’ll include several solutions that involve `csvsql`. A basic command is this:
@@ -956,7 +956,8 @@ As you've seen there is no single tool that can magically get rid of all the mes
 Keep in mind that classic command-line tools such as `cut` and `sort` can't interpret structured data.
 Luckily, there are tools that convert one data format, such as JSON and XML, into another data format, such as CSV.
 In the next chapter, which is again an intermezzo chapter, I'm going to show you how you can manage your project using `make`.
-You're free to skip this chapter if you can't wait to start exploring and visualizing your data in Chapter 7.
+You're free to skip this chapter if you can't wait to start exploring and visualizing your data in [Chapter 7](#chapter-7-exploring-data).
+
 
 
 ## For Further Exploration

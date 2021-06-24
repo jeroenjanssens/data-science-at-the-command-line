@@ -30,7 +30,7 @@ I have, however, provided some pointers for further reading on this topic.
 In the four intermezzo chapters, we looked at some broader topics of doing data science at the command line, topics which are not really specific to one particular step.
 In [Chapter 4](#chapter-4-creating-reusable-command-line-tools), I explained how you can turn one-liners and existing code into reusable command-line tools.
 In [Chapter 6](#chapter-6-managing-your-data-workflow), I described how you can manage your data workflow using a command-line tool called `make`.
-In [Chapter 8](#chapter-8-parallel-processing), I demonstrated how ordinary command-line tools and pipelines can be run in parallel using GNU Parallel.
+In [Chapter 8](#chapter-8-parallel-pipelines), I demonstrated how ordinary command-line tools and pipelines can be run in parallel using GNU Parallel.
 In [Chapter 10](#chapter-10-polyglot-data-science), I showed that the command line doesn't exist in a vacuum but that it can be leveraged from other programming languages and environments.
 The topics discussed in these intermezzo chapters can be applied at any point in your data workflow.
 
@@ -71,7 +71,7 @@ And when you do have to use a programming language, think about whether the code
 If so, consider creating your own command-line tool with that code using the steps I discussed in [Chapter 4](#chapter-4-creating-reusable-command-line-tools).
 If you believe your command-line tool may be beneficial for others, you could even go one step further by making it open source.
 Maybe there's a step you know how to perform at the command line, but you would rather not leave the comfort of the main programming language or environment you're working in.
-Perhaps you can use one of the approaches listed in [Chapter 10]
+Perhaps you can use one of the approaches listed in [Chapter 10](#chapter-10-polyglot-data-science).
 
 
 ### Be Practical

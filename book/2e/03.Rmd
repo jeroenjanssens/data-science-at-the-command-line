@@ -122,7 +122,7 @@ While this information can be useful when downloading very large files, I usuall
 curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland" |
 pup -n 'table.wikitable tr' # <1>
 ```
-<1> I'll discuss `pup`[@pup], a handy tool for scraping websites, in more detail in Chapter 5.
+<1> I'll discuss `pup`[@pup], a handy tool for scraping websites, in more detail in [Chapter 5](#chapter-5-scrubbing-data).
 
 And what do you know, there are apparently 234 windmills in the province of Friesland alone!
 
@@ -252,7 +252,7 @@ cat logs/* | trim
 ```
 
 Excellent.
-Now, I understand that you'd like to scrub and explore these log files, but that's for later in Chapter 5 and 7.
+Now, I understand that you'd like to scrub and explore these log files, but that's for later in [Chapter 5](#chapter-5-scrubbing-data) and [Chapter 7](#chapter-7-exploring-data).
 
 In time, you'll get used to these options, but I'd like to show you an alternative option, which might be convenient.
 Rather than remembering the different command-line tools and their options, there's a handy script called `unpack` [@unpack], which will decompress many different formats.

@@ -13,6 +13,8 @@ console_start()
 ```
 
 
+<!--A[role="pagenumrestart"]
+A-->
 # Introduction {#chapter-1-introduction}
 
 This book is about doing data science at the command line.
@@ -138,7 +140,7 @@ Because the command line is an interactive environment for doing data science, i
 In [Chapter 6](#chapter-6-managing-your-data-workflow), I demonstrate a command-line tool called `make`, which allows you to define your data science workflow in terms of tasks and the dependencies between them.
 This tool increases the reproducibility of your workflow, not only for you but also for your colleagues and peers.
 
-In [Chapter 8](#chapter-8-parallel-processing), I explain how your commands and tools can be sped up by running them in parallel.
+In [Chapter 8](#chapter-8-parallel-pipelines), I explain how your commands and tools can be sped up by running them in parallel.
 Using a command-line tool called GNU Parallel [@parallel], you can apply command-line tools to very large datasets and run them on multiple cores or even remote machines.
 
 In [Chapter 10](#chapter-10-polyglot-data-science), I discuss how to employ the power of the command line in other environments and programming languages such as R, RStudio, Python, Jupyter Notebooks, and even Apache Spark.
