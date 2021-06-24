@@ -116,8 +116,7 @@ chmod:
     chmod u+x script.sh#!enter=FALSE
     C-C#!literal=FALSE
   help: man
-  note: |
-    I use `chmod` in [Chapter 4](#chapter-4-creating-reusable-command-line-tools) to make a tool executable
+  note: "I use `chmod` in [Chapter 4](#chapter-4-creating-reusable-command-line-tools) to make a tool executable"
 
 cols:
   author:
@@ -390,8 +389,7 @@ for:
   help: man zshmisc | grep -EA 10 '^ *for '
   example: |
     for i in {A..C} "It's easy as" {1..3}; do echo $i; done
-  note: |
-     In [Chapter 8](#chapter-8-parallel-pipelines), I discuss the advantages of using `parallel` instead of `for`
+  note: "In [Chapter 8](#chapter-8-parallel-pipelines), I discuss the advantages of using `parallel` instead of `for`"
 
 fx:
   author:

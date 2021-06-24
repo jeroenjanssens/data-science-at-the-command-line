@@ -83,7 +83,7 @@ Here's a non-exhaustive list of changes I made:
 
 In general, I advise you to read this book in a linear fashion.
 Once a concept or command-line tool has been introduced, chances are that I employ it in a later chapter.
-For example, in Chapter 9, I make heavy use of `parallel`, which is introduced extensively in Chapter 8.
+For example, in [Chapter 9](#chapter-9-modeling-data), I make heavy use of `parallel`, which is introduced extensively in [Chapter 8](#chapter-8-parallel-pipelines).
 
 Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning.
 As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length.
