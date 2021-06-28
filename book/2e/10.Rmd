@@ -35,16 +35,6 @@ It allows me to quickly run a command without switching to a separate applicatio
 Examples are downloading files with `curl`, inspecting a piece of data with `head`, creating a backup with `git`, and compiling a website with `make`.
 Generally speaking, tasks that normally require a lot of code or simply cannot be done at all without the command line.
 
-<!-- A word of caution -->
-<!-- Language wars are boring and unproductive. -->
-<!-- Integrate into the rest of your workflow or toolset. -->
-<!-- Goal is to be productive. -->
-<!-- In a digital product or service, it's good idea to rely on as a little as possible, including programming languages. -->
-<!-- I believe you should take a pragmatic approach. -->
-<!-- The command line is everywhere. -->
-<!-- It's a super glue. -->
-<!-- Useful for when you're in another environment. -->
-
 
 ## Overview
 
@@ -54,24 +44,14 @@ In this chapter, you’ll learn how to:
 * Interact with arbitrary command-line tools in Python and R
 * Transform RDDs using shell commands in Apache Spark
 
+This chapter starts with the following files:
+
 ```{console}
 cd /data/ch10
 l
 ```
 
 The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
-
-
-<!-- TODO: SHOULD: Write about four modes -->
-<!-- ## Four Modes of Leveraging the Command Line in a Language -->
-
-<!-- * run (don't involved data) -->
-<!-- * read (receive data from command line) -->
-<!-- * write (send data to command line) -->
-<!-- * filter (send data to and receive data from command) -->
-
-<!-- Shell capabilities or not? -->
-
 
 
 ## Jupyter
@@ -102,7 +82,7 @@ The biggest difference is that a notebook cannot only contain code, but also mar
 It's very popular among data scientists for this reason.
 Jupyter Notebook is a separate project and environment, but I'd like to use JupyterLab to work with notebooks, because it offers a more complete IDE.
 
-Figure X is a screenshot of JupyterLab, showing the file explorer (left), a code editor (middle), a notebook (right), and a terminal (bottom). The latter three all show ways to leverage the command line.
+Figure \@ref(fig:jupyterlab) is a screenshot of JupyterLab, showing the file explorer (left), a code editor (middle), a notebook (right), and a terminal (bottom). The latter three all show ways to leverage the command line.
 The code is something I get back to in the next section.
 This particular notebook is quite similar to the console session I just discussed.
 The terminal offers a complete shell for you to run command line tools.
@@ -129,9 +109,6 @@ You're better off creating a Bash script in a separate file, and then executing 
 The `subprocess` module allows you to run command-line tools from Python and connect to their standard input and output.
 This module is recommended over the older `os.system()` function.
 It's not run in a shell by default, but it's possible to change that with the `shell` argument to `run()` function.
-
-<!-- TODO Link to run function -->
-<!-- #TODO: Add link to recommendation below -->
 
 ```{console, callouts=c("run", "open", "split", "grep", "stdout")}
 bat count.py

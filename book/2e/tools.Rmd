@@ -188,7 +188,7 @@ Change file mode bits.
 `chmod`
 (version 8.30)
 by David MacKenzie and Jim Meyering (2018).
-I use `chmod` in [Chapter 4](#chapter-4-creating-command-line-tools) to make a tool executable.
+I use `chmod` in [Chapter 4](#chapter-4-creating-reusable-command-line-tools) to make a tool executable.
 More information: https://www.gnu.org/software/coreutils.
 
 ```{console chmod}
@@ -210,6 +210,19 @@ More information: https://github.com/jeroenjanssens/dsutils.
 
 ```{console cols}
 type cols
+```
+
+
+## column {-}
+
+Columnate lists.
+`column`
+(version 2.36.1)
+by Karel Zak (2021).
+More information: https://www.kernel.org/pub/linux/utils/util-linux.
+
+```{console column}
+type column
 ```
 
 
@@ -498,6 +511,20 @@ export PATH="$PATH:$HOME/bin"
 ```
 
 
+## fc {-}
+
+Control the interactive history mechanism.
+`fc`
+is a Z shell builtin.
+I use `fc` in [Chapter 4](#chapter-4-creating-command-line-tools) to edit the command in `nano`.
+
+```{console fc}
+type fc
+man zshbuiltins | grep -A 10 '^ *fc '#!enter=FALSE
+C-C#!literal=FALSE
+```
+
+
 ## find {-}
 
 Search for files in a directory hierarchy.
@@ -635,6 +662,19 @@ type header
 ```
 
 
+## history {-}
+
+GNU History Library.
+`history`
+(version 8.1)
+by Brian Fox and Chet Ramey (2020).
+More information: https://www.gnu.org/software/bash.
+
+```{console history}
+type history
+```
+
+
 ## hostname {-}
 
 Show or set the system's host name.
@@ -694,6 +734,18 @@ More information: https://github.com/jehiah/json2csv.
 type json2csv
 json2csv --help#!enter=FALSE
 C-C#!literal=FALSE
+```
+
+
+## l {-}
+
+List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions..
+`l`
+by Jeroen Janssens (2021).
+
+```{console l}
+type l
+cd /data/ch03 ls l
 ```
 
 
@@ -794,6 +846,19 @@ man mv#!enter=FALSE
 C-C#!literal=FALSE
 mv results{,.bak}#!enter=FALSE
 C-C#!literal=FALSE
+```
+
+
+## nano {-}
+
+Nano's ANOther editor, inspired by Pico.
+`nano`
+(version 5.4)
+by Benno Schulenberg, David Lawrence Ramsey, Jordi Mallach, Chris Allegretta, Robert Siemborski, and Adam Rogoyski (2020).
+More information: https://nano-editor.org.
+
+```{console nano}
+type nano
 ```
 
 
@@ -936,6 +1001,21 @@ More information: https://www.r-project.org.
 type R
 man R#!enter=FALSE
 C-C#!literal=FALSE
+```
+
+
+## rev {-}
+
+Reverse lines characterwise.
+`rev`
+(version 2.36.1)
+by Karel Zak (2021).
+More information: https://www.kernel.org/pub/linux/utils/util-linux.
+
+```{console rev}
+type rev
+echo 'A man, a plan, a canal: Panama' | rev
+echo 'Ça va?' | rev | cut -c 2- | rev
 ```
 
 
@@ -1114,6 +1194,20 @@ More information: https://www.gnu.org/software/coreutils.
 type split
 man split#!enter=FALSE
 C-C#!literal=FALSE
+```
+
+
+## sponge {-}
+
+Soak up standard input and write to a file.
+`sponge`
+(version 0.65)
+by Colin Watson and Tollef Fog Heen (2021).
+Useful if you want to read from and write to the same file in a single pipeline.
+More information: https://joeyh.name/code/moreutils.
+
+```{console sponge}
+type sponge
 ```
 
 

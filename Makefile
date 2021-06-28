@@ -103,7 +103,7 @@ ref-text-all:
 	grep -noE '\[@([^]]+)\]' book/2e/*.Rmd | column -s ':' -t
 
 ref-text-num-per-chapter:
-	@ggrep -oE '\[@([^]]+)\]' book/2e/*.Rmd | sort | uniq -c
+	@grep -oE '\[@([^]]+)\]' book/2e/*.Rmd | sort | uniq -c
 
 ref-text-duplicate-per-chapter:
 	@make ref-text-num-per-chapter | grep -v '1 '

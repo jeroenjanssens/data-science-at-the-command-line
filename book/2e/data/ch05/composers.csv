@@ -1,6 +1,6 @@
-first_name,last_name,born,birthplace
-Hans,Zimmer,1957,"Frankfurt, Germany"
-Danny,Elfman,1953,"Los Angeles, CA, USA"
-Wendy,Carlos,1939,"Pawtucket, RI, USA"
-John,Williams,1932,"Floral Park, NY, USA"
-Clara,Schumann,1819,"Leipzig, Germany"
+id,last_name,first_name,birthplace,born
+1,Zimmer,Hans,"Frankfurt, Germany",1957
+2,Elfman,Danny,"Los Angeles, CA, USA"1953
+3,Carlos,Wendy,"Pawtucket, RI, USA",1939
+4,Williams,John,"Floral Park, NY, USA",1932
+5,Schumann,Clara,"Leipzig, Germany",1819

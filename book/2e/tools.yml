@@ -128,8 +128,6 @@ cols:
   version: '0.1'
   year: 2021
 
-
-
 cowsay:
   author:
   - Tony Monroe
@@ -928,7 +926,7 @@ tapkee:
   author:
   - Sergey Lisitsyn
   - Christian Widmer
-  - Fernando J.Iglesias Garcia
+  - Fernando J. Iglesias Garcia
   bib_title: '{tapkee} -- An efficient dimension reduction library'
   cite: true
   description: An efficient dimension reduction library
@@ -1167,3 +1165,80 @@ zsh:
   version: '5.8'
   year: 2020
   help: man
+
+history:
+  author:
+  - Brian Fox
+  - Chet Ramey
+  bib_title: '{history} -- {GNU History Library}'
+  cite: true
+  description: GNU History Library
+  url: https://www.gnu.org/software/bash
+  version: '8.1'
+  year: 2020
+
+rev:
+  author:
+  - Karel Zak
+  bib_title: '{rev} -- Reverse lines characterwise'
+  cite: true
+  description: Reverse lines characterwise
+  url: https://www.kernel.org/pub/linux/utils/util-linux
+  version: 2.36.1
+  year: 2021
+  example: |
+    echo 'A man, a plan, a canal: Panama' | rev
+    echo 'Ça va?' | rev | cut -c 2- | rev
+
+sponge:
+  author:
+  - Colin Watson
+  - Tollef Fog Heen
+  bib_title: '{sponge} -- Soak up standard input and write to a file'
+  cite: true
+  description: Soak up standard input and write to a file
+  url: https://joeyh.name/code/moreutils
+  version: '0.65'
+  year: 2021
+  note: "Useful if you want to read from and write to the same file in a single pipeline"
+
+fc:
+  description: Control the interactive history mechanism
+  builtin: true
+  help: man zshbuiltins | grep -A 10 '^ *fc '
+  note: "I use `fc` in [Chapter 4](#chapter-4-creating-command-line-tools) to edit the command in `nano`"
+
+nano:
+  author:
+  - Benno Schulenberg
+  - David Lawrence Ramsey
+  - Jordi Mallach
+  - Chris Allegretta
+  - Robert Siemborski
+  - Adam Rogoyski
+  bib_title: '{nano} -- {Nano''s ANOther editor, inspired by Pico}'
+  cite: true
+  description: Nano's ANOther editor, inspired by Pico
+  url: https://nano-editor.org
+  version: '5.4'
+  year: 2020
+
+column:
+  author:
+  - Karel Zak
+  bib_title: '{column} -- Columnate lists'
+  cite: true
+  description: Columnate lists
+  url: https://www.kernel.org/pub/linux/utils/util-linux
+  version: 2.36.1
+  year: 2021
+
+l:
+  author:
+  - Jeroen Janssens
+  year: 2021
+  description: List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions.
+  example:
+    cd /data/ch03
+    ls
+    l
