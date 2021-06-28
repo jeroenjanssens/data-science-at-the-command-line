@@ -672,29 +672,32 @@ I'll present four different approaches for this task: `sed`, `awk`, `cols` + `tr
 Let’s have a look at the input CSV:
 
 ```{console}
-< names.csv csvlook -I
+csvlook -I names.csv
 ```
 
 The first approach, `sed`, uses two statements.
 The first is to replace the header and the second is a regular expression with back references applied to the second row onwards:
 
 ```{console}
-< names.csv sed -re '1s/.*/id,full_name,born/g;'\
-'2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | csvlook -I
+< names.csv sed -re '1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' |
+csvlook -I
 ```
 
 The `awk` approach looks as follows:
 
 ```{console}
-< names.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"}'\
-'{if(NR > 1) {print $1,$3" "$2,$4}}' | csvlook -I
+< names.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"} {if(NR > 1) {print $1,$3" "$2,$4}}' |
+csvlook -I
 ```
 
 The `cols` approach in combination with `tr`:
 
 ```{console}
-< names.csv | cols -c first_name,last_name tr \",\" \" \" |
-header -r full_name,id,born | csvcut -c id,full_name,born | csvlook -I
+< names.csv |
+cols -c first_name,last_name tr \",\" \" \" |
+header -r full_name,id,born |
+csvcut -c id,full_name,born |
+csvlook -I
 ```
 
 Please note that `csvsql` employ SQLite as the database to execute the query and that `||` stands for concatenation:
@@ -722,13 +725,11 @@ cat names-comma.csv
 Well, it appears that the first three approaches fail; all in different ways. Only `csvsql` is able to combine first\_name and full\_name:
 
 ```{console}
-< names-comma.csv sed -re '1s/.*/id,full_name,born/g;'\
-'2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | tail -n 1
+< names-comma.csv sed -re '1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | tail -n 1
 ```
 
 ```{console}
-< names-comma.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"}'\
-'{if(NR > 1) {print $1,$3" "$2,$4}}' | tail -n 1
+< names-comma.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"} {if(NR > 1) {print $1,$3" "$2,$4}}' | tail -n 1
 ```
 
 ```{console}
@@ -941,7 +942,7 @@ Those were quite a few steps to get from a Wikipedia page to a CSV data set.
 However, when you combine all of the above commands into one, you will see that it’s actually really concise and expressive.
 
 ```{console}
-csvlook --max-column-width 28 countries.csv | trim
+csvlook --max-column-width 28 countries.csv
 ```
 
 That concludes the demonstration of conversion XML/HTML to JSON to CSV.
