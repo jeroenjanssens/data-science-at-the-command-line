@@ -24,6 +24,7 @@ type cols
 type cowsay
 echo 'The command line is awesome!' | cowsay
 type cp
+type csv2vw
 type csvcut
 csvcut -c bill,tip /data/ch05/tips.csv | trim
 type csvgrep
@@ -94,7 +95,7 @@ type R
 type rm
 type rush
 rush run '6*7'
-rush run --tidyverse 'starwars %>% filter(species == "Human") %>% select(name)'
+rush run --tidyverse 'filter(starwars, species == "Human") %>% select(name)'
 type sample
 seq 1000 | sample -r 0.01 | trim 5
 type scp
@@ -123,7 +124,7 @@ type tr
 type tree
 tree / | trim
 type trim
-shuf -ri 1-9 | paste -sd\  | fold | head | trim 5 40
+echo {a..z}-{0..9} | fold | trim 5 60
 type type
 type uniq
 type unpack

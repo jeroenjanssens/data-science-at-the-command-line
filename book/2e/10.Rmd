@@ -20,7 +20,7 @@ A polyglot data scientist, as I see it, is someone who uses multiple programming
 
 The command line stimulates a polyglot approach.
 The command line doesn't care in which programming language a tool is written, as long as they adhere to the Unix philosophy.
-We saw that very clearly in [Chapter 4](#chapter-4-creating-reusable-command-line-tools), where we created command-line tools in Bash, Python, and R.
+We saw that very clearly in [Chapter 4](#chapter-4-creating-command-line-tools), where we created command-line tools in Bash, Python, and R.
 Moreover, we executed SQL queries directly on CSV files and executed R expressions from the command line.
 In short, we have already been doing polyglot data science without fully realizing it!
 

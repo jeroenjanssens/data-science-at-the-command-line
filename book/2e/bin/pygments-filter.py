@@ -20,7 +20,7 @@ ADM_TYPE = {"comment": "NOTE",
             "caution": "WARNING",
             "tip": "TIP"}
 
-conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)
+conv = Ansi2HTMLConverter(inline=True, scheme="github", linkify=False)
 
 ref_re = re.compile(f'@ref\(([a-z]+):([a-z\-]+)\)(.*)')
 callout_code_re = re.compile(r'#? ?&lt;([0-9]{1,2})&gt;')
@@ -30,11 +30,14 @@ comment_html_re = re.compile(r'<!--H(.*)H-->', re.MULTILINE|re.DOTALL)
 
 FIG_COUNTER = 0
 CHAPTER_NUM = None
+CO_COUNTER = 0
+CO_ID = ""
 
 def pygments(key, value, format, _):
 
     global FIG_COUNTER
     global CHAPTER_NUM
+
 
     # Used for figure log
     if format == "muse":
@@ -70,6 +73,12 @@ def pygments(key, value, format, _):
         # if key == "Link" and value[2][0].startswith("#chapter"):
         #     return RawInline("asciidoc", f"<<{value[2][0][1:]}>>")
 
+        # if key == "Header":
+        #     level = value[0]
+        #     chapter_id = "_".join(value[1][0].split("-")[2:])
+        #     if level == 1:
+        #         stderr.write(f"HEADER: {value}\n\n")
+        #         stderr.write(f"HEADER_ID: {chapter_id}\n\n")
 
         # Only keep <!--A...A---> comments
         if key == "RawBlock":
@@ -111,6 +120,24 @@ def pygments(key, value, format, _):
                 # stderr.write(f"{html}\n")
                 _, src, _, alt, *_ = html.split("\"")
                 return Plain([Str(f"[[{fig_id}]]\n.{alt}\nimage::{src}[\"{alt}\"]")])
+
+        # elif key == "CodeBlock":
+        #     [[ident, classes, keyvals], code] = value
+        #     if classes:
+        #         language = classes[0]
+        #         # stderr.write(f"{key}\t{value}\t{format}\n")
+        #         html_code = conv.convert(code, full=False)
+        #         # html_code = html_code.replace("\n", "<span></span>\n") + "<span></span>"
+        #         #result = "[subs=callouts]\n++++\n<pre data-type=\"programlisting\" style=\"color: #4f4f4f\">" + html_code + "</pre>\n++++\n\n"
+        #         result = "[source,subs=callouts]\n----\n" + html_code + "\n----\n\n"
+
+        #         # Turn code callout number into image
+        #         # result = callout_code_re.sub(lambda x: f"<img src=\"callouts/{int(x.group(1))}.png\" alt=\"{int(x.group(1))}\">", result)
+        #         result = callout_code_re.sub(lambda x: f"<a class=\"co\"><img src=\"callouts/{int(x.group(1))}.png\" /></a>", result)
+        #         # result = callout_code_re.sub(lambda x: f"<!--{int(x.group(1))}-->", result)
+        #     else:
+        #         result = code
+        #     return RawBlock("asciidoc", result)
 
     elif format == "html4":
 

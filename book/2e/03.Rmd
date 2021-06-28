@@ -328,7 +328,7 @@ in2csv top2000.xlsx | tee top2000.csv | trim
 Who is Danny Vera? The most popular song is supposed to be *Bohemian Rhapsody*, of course.
 Well, at least Queen appears plenty of times in the Top 2000 so I can't really complain:
 
-```{console cvsgrep, callout=1}
+```{console cvsgrep, callouts=1}
 csvgrep top2000.csv --columns ARTIEST --regex '^Queen$' | csvlook -I
 ```
 <1> The value after the `--regex` options is a regular expression (or *regex*). It's a special syntax for defining patterns. Here, I only want to match artists that exactly match "Queen", so I use the caret (`^`) and dollar sign (`$`) to match the start and end of the values in the column *`ARTIEST`*.
@@ -501,8 +501,7 @@ Feel free to skip this and go to [Chapter 5](#chapter-5-scrubbing-data) (the sec
 
 - Looking for a dataset to practice on? The GitHub repository [*Awesome Public Datasets*](https://github.com/awesomedata/awesome-public-datasets) lists hundreds of high-quality datasets that are publicly available.
 - Or perhaps you'd rather practice with an API? The GitHub repository [*Public APIs*](https://github.com/public-apis/public-apis) lists many free APIs. [City Bikes](http://api.citybik.es/v2/) and [The One API](https://the-one-api.dev/) are among my favorites.
-- Writing SQL queries to obtain data from a relational database is an important skill. The first 15 lessons of the book *SQL in 10 Minutes a Day* by Ben Forta teach the *`SELECT`* statement and its filtering, grouping, and sorting capabilities. 
+- Writing SQL queries to obtain data from a relational database is an important skill. The first 15 lessons of the book *SQL in 10 Minutes a Day* by Ben Forta teach the *`SELECT`* statement and its filtering, grouping, and sorting capabilities.
 
 [^3]: Available on [GitHub](https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite).
 [^starwars]: If you cannot connect to the server, because someone erased it from the archive memory, then you can always enjoy a [recording of the `telnet` session on YouTube](https://www.youtube.com/results?search_query=towel.blinkenlights.nl).
-

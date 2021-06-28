@@ -74,7 +74,7 @@ book/2e/atlas/preface.asciidoc: book/2e/preface.utf8.md
 book/2e/atlas/tools.asciidoc: book/2e/tools.utf8.md
 	< $< book/2e/bin/atlas.sh > $@
 
-asciidoc: book/2e/atlas/foreword.asciidoc book/2e/atlas/preface.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch09.asciidoc book/2e/atlas/ch10.asciidoc book/2e/atlas/ch11.asciidoc book/2e/atlas/tools.asciidoc
+asciidoc: book/2e/bin/pygments-filter.py book/2e/atlas/foreword.asciidoc book/2e/atlas/preface.asciidoc book/2e/atlas/ch01.asciidoc book/2e/atlas/ch02.asciidoc book/2e/atlas/ch03.asciidoc book/2e/atlas/ch04.asciidoc book/2e/atlas/ch05.asciidoc book/2e/atlas/ch06.asciidoc book/2e/atlas/ch07.asciidoc book/2e/atlas/ch08.asciidoc book/2e/atlas/ch09.asciidoc book/2e/atlas/ch10.asciidoc book/2e/atlas/ch11.asciidoc book/2e/atlas/tools.asciidoc
 
 sync-atlas: asciidoc
 	@cp -v book/2e/atlas/*.asciidoc ../../atlas/data-science-at-the-command-line-2e/
@@ -121,3 +121,6 @@ appendix:
 
 figure-log:
 	cd book/2e && cat {01..11}.utf8.md | /usr/local/bin/pandoc --to muse --filter bin/pygments-filter.py > /dev/null
+
+test-color:
+	cd book/2e && cat 02.utf8.md | /usr/local/bin/pandoc --to asciidoc --filter bin/pygments-filter.py

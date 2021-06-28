@@ -29,15 +29,16 @@ tee wine-pca.txt | trim
 < wine-pca.txt header -a pc1,pc2 |\
 paste -d, - <(xsv select type wine-scaled.csv) |\
 tee wine-pca.csv | csvlook
-rush plot --x pc1 --y pc2 --color type wine-pca.csv > wine-pca.png
+rush plot --x pc1 --y pc2 --color type --shape type wine-pca.csv > wine-pca.png
 display wine-pca.png
 xsv select '!type' wine-scaled.csv |\
 header -d |\
 tapkee --method t-sne |\
 header -a x,y |\
 paste -d, - <(xsv select type wine-scaled.csv) |\
-rush plot --x x --y y --color type > wine-tsne.png
+rush plot --x x --y y --color type --shape type > wine-tsne.png
 display wine-tsne.png
+csv2vw wine-white-clean.csv --label quality | trim
 csv2vw wine-white-clean.csv --label quality |\
 shuf |\
 split -d -n r/5 - wine-part-
@@ -46,7 +47,6 @@ mv wine-part-00 wine-test.vw
 cat wine-part-* > wine-train.vw
 rm wine-part-*
 wc -l wine-*.vw
-< wine-test.vw trim
 vw \\
 --data wine-train.vw \\
 --final_regressor wine.model \\
@@ -62,6 +62,7 @@ vw \\
 --testonly \\
 --predictions predictions \\
 --quiet
+bat predictions | trim
 paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |\
 tee results.csv |\
 awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}' |\
@@ -69,6 +70,10 @@ cowsay
 < results.csv header -a "predicted,observed" |\
 rush plot --x observed --y predicted --geom jitter > wine-regression.png
 display wine-regression.png
+vw -d wine-train.vw -f wine2.model --quiet
+vw -data wine-test.vw -i wine2.model -t -p predictions --quiet
+paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |\
+awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'
 alias skll=run_experiment
 skll
 NUM_RED="$(< wine-red-clean.csv wc -l)"
@@ -78,7 +83,7 @@ wine-red-clean.csv \\
 body shuf |\
 nl -s, -w1 -v0 |\
 sed '1s/0,/id,/' |\
-tee wine-balanced.csv | csvlook | trim
+tee wine-balanced.csv | csvlook
 mkdir -p {train,test}
 HEADER="$(< wine-balanced.csv header)"
 < wine-balanced.csv header -d | shuf | split -d -n r/5 - wine-part-

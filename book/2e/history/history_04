@@ -64,5 +64,5 @@ time < alice.txt top-words.py 5
 time < alice.txt top-words.R 5
 bat fizzbuzz.py
 bat fizzbuzz.R
-seq 20 | fizzbuzz.py
-seq 20 | fizzbuzz.R
+seq 30 | fizzbuzz.py | column -x
+seq 30 | fizzbuzz.R | column -x

@@ -47,7 +47,7 @@ In order to acquire the necessary command-line tools without having to go throug
 
 A Docker image is a bundle of one or more applications together with all their dependencies.
 A Docker container is an isolated environment that runs an image.
-You can manage Docker images and containers the `docker` command-line tool (which is what you'll do below) or the Docker GUI. 
+You can manage Docker images and containers the `docker` command-line tool (which is what you'll do below) or the Docker GUI.
 In a way, a Docker container is like a virtual machine, only a Docker container uses far fewer resources.
 At the end of this chapter I suggest some resources to learn more about Docker.
 
@@ -207,8 +207,8 @@ cd ch02
 
 The part after `cd` specifies to which directory you want to navigate to.
 Values that come after the command are called *command-line arguments* or *options*.
-Two dots refer to the parent directory. 
-One dot, by the way, refers to the current directory. 
+Two dots refer to the parent directory.
+One dot, by the way, refers to the current directory.
 While `cd .` wouldn't have any effect, you'll still see one dot being used in other places.
 Let’s try a different command:
 
@@ -251,7 +251,7 @@ This particular command outputs the first three lines of file */data/ch02/movies
 ### Five Types of Command-line Tools
 
 ```{console, include=FALSE}
- alias bat='bat --tabs 8 --paging never --terminal-width 70 --theme "Solarized (dark)"'
+ alias bat='bat --tabs 8 --paging never --terminal-width 70'
 ```
 
 I use the term *command-line tool* a lot, but so far, I haven't yet explained what I actually mean by it.
@@ -294,7 +294,7 @@ Interpreted Script
     ./fac.py 5
     ```
 
-    In [Chapter 4](#chapter-4-creating-reusable-command-line-tools), I’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.
+    In [Chapter 4](#chapter-4-creating-command-line-tools), I’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.
 
 Shell Function
 
@@ -339,7 +339,7 @@ type -a l
 ```
 
 ```{console, include=FALSE}
- alias bat='bat --tabs 8 --paging never --terminal-width 80 --theme "Solarized (dark)"'
+ alias bat='bat --tabs 8 --paging never --terminal-width 80'
 ```
 
 `type` returns three command-line tools for `pwd`.
@@ -357,7 +357,7 @@ This power is made possible by managing the communication streams of these tools
 Each tool has three standard communication streams: standard input, standard output, and standard error.
 These are often abbreviated as  *`stdin`*, *`stdout`*, and *`stderr`*.
 
-Both the standard output and standard error are, by default, redirected to the terminal, so that both normal output and any error messages are printed on the screen. 
+Both the standard output and standard error are, by default, redirected to the terminal, so that both normal output and any error messages are printed on the screen.
 \@ref(fig:diagram-essential-streams) illustrates this for both `pwd` and `rev`[@rev].
 If you run `rev`, you'll see that nothing happens.
 That's because `rev` expects input, and by the default, that's any keys pressed on the keyboard.
@@ -395,7 +395,7 @@ wc -l
 ```
 <1> The option `-l` specifies that `wc` should only output the number of lines that are pass into it. By default it also returns the number of characters and words.
 
-You can think of piping as an automated copy and paste. 
+You can think of piping as an automated copy and paste.
 Once you get the hang of combining tools using the pipe operator, you'll find that there are virtually no limits to this.
 
 
@@ -456,7 +456,7 @@ Like many command-line tools, `wc` allows one or more filenames to be specified 
 For example:
 
 ```{console}
-wc -w greeting.txt ten-numbers.txt
+wc -w greeting.txt movies.txt
 ```
 
 Note that in this case, `wc` also outputs the name of the files.
@@ -467,13 +467,13 @@ I often do this to suppress error messages (see \@ref(fig:diagram-essential-redi
 The following causes `cat` to produce an error message because it cannot find the file *404.txt*:
 
 ```{console}
-cat movies.txt 404.txt 2> /dev/null
+cat movies.txt 404.txt
 ```
 
 You can redirect standard error to */dev/null* as follows:
 
 ```{console callouts=1}
-cat movies.txt 404.txt 2> /dev/null 
+cat movies.txt 404.txt 2> /dev/null
 ```
 <1> The *`2`* refers to standard error.
 
@@ -527,7 +527,7 @@ In this section I introduce the most important ones to list, create, move, copy,
 
 Listing the contents of a directory can be done with `ls`.
 If you don't specify a directory, it lists the contents of the current directory.
-I prefer `ls` to have a long listing format and the directories grouped before files. 
+I prefer `ls` to have a long listing format and the directories grouped before files.
 Instead of typing the corresponding options each time, I use the alias `l`.
 
 ```{console}
@@ -708,7 +708,7 @@ Manual pages can be quite verbose and difficult to read.
 The tool `tldr` [@tldr] is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional manual pages.
 Here's an example showing the tldr page for `tar`:
 
-```{console, include=FALSE} 
+```{console, include=FALSE}
 tldr --update
 ```
 
@@ -729,7 +729,7 @@ Now that you have all the necessary ingredients, you're ready for the first step
 ## For Further Exploration
 
 - The subtitle of this book pays homage to the epic *Unix Power Tools* by Jerry Peek, Shelley Powers, Tim O'Reilly, and Mike Loukides. And rightly so. In 51 chapters and more than a thousand pages, it covers just about everything there is to know about Unix. It weighs over 4 pounds, so you might want to consider getting the ebook.
-- The website [explainshell](https://explainshell.com/) parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages. 
+- The website [explainshell](https://explainshell.com/) parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages.
 - Docker is truly a brilliant piece of software. In this chapter I've briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to [learn how to create your own Docker images](https://www.docker.com/101-tutorial). The book *Docker: Up & Running* by Sean Kane and Karl Matthias is a good resource as well.
 
 

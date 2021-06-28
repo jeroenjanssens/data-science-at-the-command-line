@@ -9,7 +9,7 @@ bat -A fb.cnt
 < fb.cnt awk 'BEGIN { print "value,count" } { print $2","$1 }' > fb.csv
 bat fb.csv
 csvlook fb.csv
-rush plot -x value -y count --geom col fb.csv > fb.png
+rush plot -x value -y count --geom col --height 2 fb.csv > fb.png
 display fb.png
 seq -f "Line %g" 10 | tee lines
 < lines head -n 3
@@ -69,7 +69,7 @@ seq 5 | header -a count
 seq 5 | header -a line | body wc -l | header -r count
 seq 5 | header -a line | header -e "tr '[a-z]' '[A-Z]'"
 < tips.csv cols -c day body "tr '[a-z]' '[A-Z]'" | head -n 5 | csvlook
-seq 5 | header -a value | csvsql --query "SELECT SUM(value) AS sum FROM stdin"
+seq 5 | header -a val | csvsql --query "SELECT SUM(val) AS sum FROM stdin"
 < iris.csv csvcut -c sepal_length,petal_length,sepal_width,petal_width | csvlook
 < iris.csv csvcut -C species | csvlook
 echo 'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9' |\

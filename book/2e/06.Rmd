@@ -13,7 +13,7 @@ console_start()
 ```
 
 
-# Project Management with Make {#chapter-6-managing-your-data-workflow}
+# Project Management with Make {#chapter-6-project-management-with-make}
 
 I hope that by now you have come to appreciate that the command line is a very convenient environment for working with data.
 You may have noticed that, as a consequence of working with the command line, we:

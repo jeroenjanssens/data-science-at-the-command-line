@@ -15,7 +15,7 @@ console_start()
 <!-- TODO: Remove dashes from filenames top-words.sh etc. -->
 
 
-# Creating Command-line Tools {#chapter-4-creating-reusable-command-line-tools}
+# Creating Command-line Tools {#chapter-4-creating-command-line-tools}
 
 Throughout the book, I'll introduce you to many commands and pipelines that basically fit on one line.
 These are known as one-liners or pipelines.

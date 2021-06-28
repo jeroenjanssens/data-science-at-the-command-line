@@ -26,7 +26,7 @@ csvlook tmnt-basic.csv
 csvlook -H tmnt-missing-newline.csv # <1>
 curl https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx > top2000.xlsx
 in2csv top2000.xlsx | tee top2000.csv | trim
-csvgrep top2000.csv -c ARTIEST -r '^Queen$' | csvlook -I
+csvgrep top2000.csv --columns ARTIEST --regex '^Queen$' | csvlook -I
 in2csv --names top2000.xlsx
 sql2csv --db 'sqlite:///r-datasets.db' \\
 --query 'SELECT row_names AS car, mpg FROM mtcars ORDER BY mpg' | csvlook

@@ -67,7 +67,7 @@ Generally, if one command line tool generates output that can be used immediatel
 Otherwise, a transformation needs to be applied to the data first by inserting an intermediate tool into the pipeline.
 
 Let me walk you through an example to make this more concrete.
-Imagine that you have obtained the first 100 items of a *fizzbuzz* sequence (cf. [Chapter 4](#chapter-4-creating-reusable-command-line-tools)) and that you'd like to visualize how often the words *fizz*, *buzz*, and *fizzbuzz* appear using a bar chart.
+Imagine that you have obtained the first 100 items of a *fizzbuzz* sequence (cf. [Chapter 4](#chapter-4-creating-command-line-tools)) and that you'd like to visualize how often the words *fizz*, *buzz*, and *fizzbuzz* appear using a bar chart.
 Don't worry if this example uses tools that you might not be familiar with yet, they'll all be covered in more detail later.
 
 First you obtain the data by generating the sequence and write it to *fb.seq*:
@@ -77,7 +77,7 @@ seq 100 |
 /data/ch04/fizzbuzz.py |
 tee fb.seq | trim
 ```
-<1> The custom tool `fizzbuzz.py` comes from [Chapter 4](#chapter-4-creating-reusable-command-line-tools).
+<1> The custom tool `fizzbuzz.py` comes from [Chapter 4](#chapter-4-creating-command-line-tools).
 
 Then you use `grep` to keep the lines that match the pattern *fizz* or *buzz* and count how often each word appears using `sort` and `uniq`:
 

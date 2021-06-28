@@ -188,7 +188,7 @@ Change file mode bits.
 `chmod`
 (version 8.30)
 by David MacKenzie and Jim Meyering (2018).
-I use `chmod` in [Chapter 4](#chapter-4-creating-reusable-command-line-tools) to make a tool executable.
+I use `chmod` in [Chapter 4](#chapter-4-creating-command-line-tools) to make a tool executable.
 More information: https://www.gnu.org/software/coreutils.
 
 ```{console chmod}
