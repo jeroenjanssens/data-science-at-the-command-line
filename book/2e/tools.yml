@@ -1238,7 +1238,7 @@ l:
   - Jeroen Janssens
   year: 2021
   description: List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions.
-  example:
+  example: |
     cd /data/ch03
     ls
     l

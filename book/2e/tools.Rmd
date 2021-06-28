@@ -745,7 +745,9 @@ by Jeroen Janssens (2021).
 
 ```{console l}
 type l
-cd /data/ch03 ls l
+cd /data/ch03
+ls
+l
 ```
 
 
