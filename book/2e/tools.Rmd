@@ -1014,7 +1014,7 @@ More information: https://www.kernel.org/pub/linux/utils/util-linux.
 
 ```{console rev}
 type rev
-echo 'A man, a plan, a canal: Panama' | rev
+echo 'Satire: Veritas' | rev
 echo 'Ça va?' | rev | cut -c 2- | rev
 ```
 
@@ -1276,7 +1276,7 @@ C-C#!literal=FALSE
 An efficient dimension reduction library.
 `tapkee`
 (version 1.2)
-by Sergey Lisitsyn, Christian Widmer, and Fernando J.Iglesias Garcia (2013).
+by Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia (2013).
 More information: http://tapkee.lisitsyn.me.
 
 ```{console tapkee}

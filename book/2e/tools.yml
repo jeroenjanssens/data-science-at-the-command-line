@@ -1187,7 +1187,7 @@ rev:
   version: 2.36.1
   year: 2021
   example: |
-    echo 'A man, a plan, a canal: Panama' | rev
+    echo 'Satire: Veritas' | rev
     echo 'Ça va?' | rev | cut -c 2- | rev
 
 sponge:
