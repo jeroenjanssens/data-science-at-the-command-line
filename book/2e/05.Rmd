@@ -79,7 +79,7 @@ tee fb.seq | trim
 ```
 <1> The custom tool `fizzbuzz.py` comes from [Chapter 4](#chapter-4-creating-command-line-tools).
 
-Then you use `grep` to keep the lines that match the pattern *fizz* or *buzz* and count how often each word appears using `sort` and `uniq`:
+Then you use `grep` to keep the lines that match the pattern *fizz* or *buzz* and count how often each word appears using `sort` and `uniq` [@uniq]:
 
 ```{console fb_count}
 grep -E "fizz|buzz" fb.seq | # <1>
@@ -87,7 +87,7 @@ sort | uniq -c | sort -nr > fb.cnt # <2>
 bat -A fb.cnt
 ```
 <1> This regular expression also matches *fizzbuzz*.
-<2> Using `sort` and `uniq` this way is a common way to count lines and sort them in descending order.
+<2> Using `sort` and `uniq` this way is a common way to count lines and sort them in descending order. It's the `-c` option that adds the counts.
 
 Note that `sort` is used twice: first because `uniq` assumes its input data to be sorted and second to sort the counts numerically.
 In a way, this is an intermediate transformation, albeit a subtle one.
@@ -286,16 +286,13 @@ This comes in handy when the input is a constant stream (for example, the Wikipe
 Secondly, you can put a timer on `sample`, so that you don’t have to kill the ongoing process manually.
 For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:
 
-```{console}
-seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5#!enter=FALSE
+```{console callouts="ts"}
+seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts
 ```
-
-```{console, include=FALSE}
-C-C#!literal=FALSE
-```
+<1> The tool `ts`[@ts] adds a timestamp in front of each line.
 
 In order to prevent unnecessary computation, try to put `sample` as early as possible in your pipeline.
-In fact, this argument holds any command-line tool that reduces data, like `head` and `tail`.
+In fact, this argument holds for any command-line tool that reduces data, like `head` and `tail`.
 Once you’re confident your pipeline works, you take it out of the pipeline.
 
 
@@ -878,13 +875,13 @@ sed -e 's/"gender":/"sex":/g' users.json | jq | trim
 ```
 
 Like many other command-line tools, `sed` does not make use of the structure of the data.
-Better is to either use a tool that makes use of the structure of the data (such as `jq` which I discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.
+Better to either use a tool that makes use of the structure of the data (such as `jq` which I discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.
 
 I'm going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case.
 The command-line tools that I’ll be using here are: `curl`, `pup` [@pup], `xml2json` [@xml2json], `jq` and `json2csv` [@json2csv].
 
 Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets.
-For example, [this page](http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio) contains a list of countries and territories together with their border length, their area, and the ration between the two.
+For example, [this page](http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio) contains a list of countries and territories together with their border length, their area, and the ratio between the two.
 
 Let’s imagine that you’re interested in analyzing this data. In this section, I’ll walk you through all the necessary steps and their corresponding commands. I won’t go into every little detail, so it could be that you won’t understand everything right away. Don’t worry, I’re confident that you’ll get the gist of it. Remember that the purpose of this section is to demonstrate the command line. All tools and concepts used in this section (and more) will be explained in the subsequent chapters.
 
@@ -919,7 +916,7 @@ For this you can use `pup`:
 < wiki.html pup 'table.wikitable tbody' | tee table.html | trim
 ```
 
-The expression passed to `pup` is a so-called CSS-selector.
+The expression passed to `pup` is a CSS-selector.
 The syntax is usually used to style web pages, but you can also use it to select certain elements from HTML.
 In this case, you want to select the *tbody* of the *table* which has the *wikitable* class.
 Up next is `xml2json`, which converts XML (and HTML) to JSON.
@@ -946,8 +943,8 @@ csvlook --max-column-width 28 countries.csv
 ```
 
 That concludes the demonstration of conversion XML/HTML to JSON to CSV.
-While `jq` can perform much more operations, and while there exist specialized tools to work with XML data, in my experience, converting the data to CSV format as quickly as possible tends to work well.
-This way, you can spend more time becoming proficient at generic command-line tools, rather than very specific tools.
+While `jq` can perform many more operations, and while there exist specialized tools to work with XML data, in my experience, converting the data to CSV format as quickly as possible tends to work well.
+This way you can spend more time becoming proficient at generic command-line tools, rather than very specific tools.
 
 
 ## Summary

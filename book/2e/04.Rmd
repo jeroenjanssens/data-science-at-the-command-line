@@ -245,13 +245,13 @@ l top-words-{1,2}.sh
 ```
 
 The first column shows the access permissions for each file.
-For *top-words-2.sh*, this is *-rwxrw-r--*.
-The first character *-* (hyphen) indicates the file type.
-A *-* means regular file and a *d* means directory.
-The next three characters, *rwx*, indicate the access permissions for the user who owns the file.
-The *r* and *w* mean *read* and *write*, respectively.
-(As you can see, *top-words-1.sh* has a *-* instead of an *x*, which means that we cannot *execute* that file.) The next three characters *rw-* indicate the access permissions for all members of the group that owns the file.
-Finally, the last three characters in the column, *r--*, indicate access permissions for all other users.
+For *top-words-2.sh*, this is *`-rwxrw-r--`*.
+The first character *`-`* (hyphen) indicates the file type.
+A *`-`* means regular file and a *`d`* means directory.
+The next three characters, *`rwx`*, indicate the access permissions for the user who owns the file.
+The *`r`* and *`w`* mean *read* and *write*, respectively.
+(As you can see, *top-words-1.sh* has a *`-`* instead of an *`x`*, which means that we cannot *execute* that file.) The next three characters *`rw-`* indicate the access permissions for all members of the group that owns the file.
+Finally, the last three characters in the column, *`r--`*, indicate access permissions for all other users.
 
 Now you can execute the file as follows:
 
@@ -275,7 +275,7 @@ It's not a good idea to leave it out, as we have done in the previous step, beca
 The Z shell, the one we're using throughout the book, uses the executable */bin/sh* by default if no shebang is defined.
 In this case I'd like `bash` to interpret the commands as that will give us some more functionality than `sh`.
 
-Again, you're free to use whatever editor you like, but I'm going to stick with `nano`, which is installed in the Docker image.
+Again, you're free to use whatever editor you like, but I'm going to stick with `nano` [@nano], which is installed in the Docker image.
 
 ```{console nano_start}
 cp -v top-words-{2,3}.sh

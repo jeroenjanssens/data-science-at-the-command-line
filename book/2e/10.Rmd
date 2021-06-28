@@ -42,7 +42,7 @@ In this chapter, you’ll learn how to:
 
 * Run a terminal within JupyterLab and RStudio IDE
 * Interact with arbitrary command-line tools in Python and R
-* Transform RDDs using shell commands in Apache Spark
+* Transform data using shell commands in Apache Spark
 
 This chapter starts with the following files:
 

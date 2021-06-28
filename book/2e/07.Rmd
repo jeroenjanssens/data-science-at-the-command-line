@@ -148,7 +148,7 @@ csvlook datatypes.csv
 
 I have already used `csvsql` in [Chapter 5](#chapter-5-scrubbing-data) to execute SQL queries directly on CSV data.
 When no command-line arguments are passed, it generates the necessary SQL statement that would be needed if you were to insert this data into an actual database.
-You can use the output also for to inspect what the inferred column types are.
+You can use the output also to inspect what the inferred column types are.
 If a column has the *NOT NULL* string printed after the data type, then that column contains no missing values.
 
 ```{console csvsql_datatypes}
@@ -273,7 +273,7 @@ csvstat venture.csv | tail -n 1
 xsv count venture.csv
 ```
 
-Note that these two options are different from using `wc -l`, which counts the number of newlines.
+Note that these two options are different from using `wc -l`, which counts the number of newlines (and therefore also counts the header).
 
 
 ### R One-Liners on the Shell
@@ -345,7 +345,7 @@ Under the hood, `rush` generates an `R` script and subsequently executes it.
 You can view this generated script by specifying the `--dry-run` (or `-n`) option:
 
 ```{console rush_dryrun}
-rush run -nt 'mutate(df, percent = tip / bill * 100)' tips.csv
+rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tips.csv
 ```
 
 This generated script:

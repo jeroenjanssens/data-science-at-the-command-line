@@ -29,7 +29,7 @@ In this chapter I’ll consider three types of algorithms commonly used to model
 - Regression
 - Classification
 
-These algorithms come from the field of machine learning, so I'm going to change the vocabulary a bit.
+These algorithms come from the field of statistics and machine learning, so I'm going to change the vocabulary a bit.
 Let’s assume that I have a CSV file, also known as a *dataset*.
 Each row, except for the header, is considered to be a *data point*.
 Each data point has one or more *features*, or properties that have been measured.
@@ -131,7 +131,7 @@ csvstat wine.csv --nulls
 Excellent!
 If there were any missing values, we could fill them with, say, the average or most common value of that feature.
 An alternative, less subtle approach is to remove any data points that have at least one missing value.
-Just out of curiosity, let’s see what the how the distribution of quality looks like for both red and white wines.
+Just out of curiosity, let’s see what the distribution of quality looks like for both red and white wines.
 
 ```{console}
 rush run -t 'ggplot(df, aes(x = quality, fill = type)) + geom_density(adjust = 3, alpha = 0.5)' wine.csv > wine-quality.png

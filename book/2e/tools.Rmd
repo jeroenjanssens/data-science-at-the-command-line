@@ -739,9 +739,9 @@ C-C#!literal=FALSE
 
 ## l {-}
 
-List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions..
+List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions.
 `l`
-by Jeroen Janssens (2021).
+by Unknown (1999).
 
 ```{console l}
 type l
@@ -1061,7 +1061,7 @@ Filter lines from standard input according to some probability, with a given del
 `sample`
 (version 0.2.4)
 by Jeroen Janssens (2021).
-More information: https://github.com/jeroenjanssens/sample-stream.
+More information: https://github.com/jeroenjanssens/sample.
 
 ```{console sample}
 type sample
@@ -1318,6 +1318,19 @@ C-C#!literal=FALSE
 ```
 
 
+## telnet {-}
+
+User interface to the TELNET protocol.
+`telnet`
+(version 0.17)
+by Mats Erik Andersson, Andreas Henriksson, and Christoph Biedl (1999).
+More information: http://www.hcs.harvard.edu/~dholland/computers/netkit.html.
+
+```{console telnet}
+type telnet
+```
+
+
 ## tldr {-}
 
 Collaborative cheatsheets for console commands.
@@ -1375,6 +1388,19 @@ More information: https://github.com/jeroenjanssens/dsutils.
 ```{console trim}
 type trim
 echo {a..z}-{0..9} | fold | trim 5 60
+```
+
+
+## ts {-}
+
+Timestamp input.
+`ts`
+(version 0.65)
+by Joey Hess (2021).
+More information: https://joeyh.name/code/moreutils.
+
+```{console ts}
+type ts
 ```
 
 

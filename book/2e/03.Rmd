@@ -95,7 +95,7 @@ The command-line tool `curl` can be considered the command line's Swiss Army kni
 
 ### Introducing `curl`
 
-When you browse to a URL, which stands for *uniform resource locator*, your browser often interprets the data it downloads.
+When you browse to a URL, which stands for *uniform resource locator*, your browser interprets the data it downloads.
 For example, the browser renders HTML files, plays video files automatically, and shows PDF files.
 However, when you use `curl` to access a URL, it downloads the data and, by default, prints it to standard output.
 `curl` doesn't do any interpretation, but luckily other command-line tools can be used to process the data further.
@@ -382,16 +382,17 @@ If you wish to query the database of your employer, you'd of course need know ho
 
 In the previous section I explained how to download files from the Internet.
 Another way data can come from the Internet is through a web API, which stands for *Application Programming Interface*.
-The number of APIs that are being offered is growing at increasing rate, which means a lot of interesting data for us data scientists.
+The number of APIs that are being offered is growing at an increasing rate, which means a lot of interesting data for us data scientists.
 
-Web APIs are not meant to be presented in nice layout, such as websites.
+Web APIs are not meant to be presented in a nice layout, such as websites.
 Instead, most web APIs return data in a structured format, such as JSON or XML.
 Having data in a structured form has the advantage that the data can be easily processed by other tools, such as `jq`.
 For example, the API of Ice and Fire, which contains a lot of information about George R.R. Martin's fictional world, in which the Game of Thrones book and TV shows take place, returns data in the following JSON structure:
 
-```{console curl_api}
+```{console curl_api, callouts="died"}
 curl -s "https://anapioficeandfire.com/api/characters/583" | jq '.'
 ```
+<1> Spoiler alert: this data is not entirely up-to-date.
 
 The data is piped to a command-line tool `jq` just to display it in a nice way.
 `jq` has many more scrubbing and exploring possibilities that I will explore in [Chapter 5](#chapter-5-scrubbing-data) and [Chapter 7](#chapter-7-exploring-data).
@@ -464,7 +465,7 @@ jq 'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'
 <1> This `sed` expression only prints lines that start with *`data: `* and prints the part after the semicolon, which happens to be JSON.
 <2> This `jq` expression prints the *`title`* key of JSON objects that have a certain *`type`* and *`server_name`*.
 
-Speaking of streaming, did you know that you could stream *Star Wars: Episode IV – A New Hope* for free using `telnet`?
+Speaking of streaming, did you know that you could stream *Star Wars: Episode IV – A New Hope* for free using `telnet`[@telnet]?
 
 ```{console telnet_setup, include=FALSE}
  cd /data/.cache/

@@ -16,7 +16,6 @@ console_start()
 # Parallel Pipelines {#chapter-8-parallel-pipelines}
  
 <!-- #TODO: SHOULD: Dicuss progress bar -->
-<!-- #TODO: COULD: Discuss resume mechanism, using a tool that sometimes fails -->
 
 In the previous chapters, we've been dealing with commands and pipelines that take care of an entire task at once.
 In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times.
@@ -35,9 +34,9 @@ Such an approach quickly becomes cumbersome, inefficient, and prone to errors.
 The good news is that you can write such loops on the command line as well.
 That's what this chapter is all about.
 
-Sometimes, repeating a fast command on after the other (in a *serial* manner) is sufficient.
+Sometimes, repeating a fast command one after the other (in a *serial* manner) is sufficient.
 When you have multiple cores (and perhaps even multiple machines) it would be nice if you could make use of those, especially when you’re faced with a data-intensive task.
-When using multiple cores or machines, the total running time of may be reduced significantly.
+When using multiple cores or machines, the total running time may be reduced significantly.
 In this chapter I will introduce a very powerful tool called `parallel`[@parallel] that can take care of exactly this. It enables you to apply a command or pipeline for a range of arguments such as numbers, lines, and files.
 Plus, as the name implies, it allows you to run your commands in *parallel*.
 
@@ -91,9 +90,9 @@ do
 echo "$i^2" | bc      #<3>
 done | trim
 ```
-<1> The Z shell has a feature called brace expansion, which transforms *{0..100..2}* into a list separated by spaces: *0 2 4 … 98 100*.
-<2> The variable *i* is assigned the value *1* in the first iteration, *2* in the second iteration, and so forth.
-<3> The value of this variable can be used by prefixing it with a dollar sign *\$*. The shell will replace *\$i* with its value before `echo` is being executed. Note that there can be more than one command between `do` and `done`.
+<1> The Z shell has a feature called brace expansion, which transforms *`{0..100..2}`* into a list separated by spaces: *`0 2 4 … 98 100`*.
+<2> The variable *`i`* is assigned the value "0" in the first iteration, "1" in the second iteration, and so forth.
+<3> The value of this variable can be used by prefixing it with a dollar sign (*`$`*). The shell will replace *`$i`* with its value before `echo` is being executed. Note that there can be more than one command between *`do`* and *`done`*.
 
 Although the syntax may appear a bit odd compared to your favorite programming language, it's worth remembering this because it's always available in the shell.
 I'll introduce a better and more flexible way of repeating commands in a moment.
@@ -136,7 +135,7 @@ three#! expect_prompt=FALSE
 C-D#! literal=FALSE, expect_prompt=TRUE
 ```
 
-This method, however, has the disadvantage that, once you press **`Enter`**, the commands between `do` and `done` are run immediately for that line of input. There's no turning back.
+This method, however, has the disadvantage that, once you press **`Enter`**, the commands between _`do`_ and _`done`_ are run immediately for that line of input. There's no turning back.
 
 
 ### Looping Over Files
@@ -152,7 +151,7 @@ echo "Processing Chapter ${chapter}."
 done
 ```
 
-Just as with brace expansion, the expression `/data/*` is first expanded into a list by the Z shell before it's being processed by the for loop.
+Just as with brace expansion, the expression _`/data/*`_ is first expanded into a list by the Z shell before it's being processed by the for loop.
 
 A more elaborate alternative to listing files is `find`[@find], which:
 
@@ -171,11 +170,12 @@ find /data -type f -name '*.csv' -size -2k
 
 Let's say that you have a very long running tool, such as the one shown here:
 
-```{console bat_slow, callouts=list("RANDOM", "sleep")}
+```{console bat_slow, callouts=list("RANDOM", "sleep", "ts")}
 bat slow.sh
 ```
-<1> The magic variable *RANDOM* calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that *duration* is between 1 and 5.
+<1> The magic variable *`RANDOM`* calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that *duration* is between 1 and 5.
 <2> `sleep` pauses execution for a given number of seconds.
+<3> `ts`[@ts] adds a timestamp.
 
 This process probably doesn't take up all the available resources.
 And it so happens that you need to run this command a lot of times.
@@ -213,7 +213,7 @@ Let's look at a better approach.
 
 ### Introducing GNU Parallel
 
-Allow me to introduce `parallel`, a command-line that allows you to parallelize and distribute commands and pipelines.
+Allow me to introduce `parallel`, a command-line tool that allows you to parallelize and distribute commands and pipelines.
 The beauty of this tool is that existing tools can be used as they are; they do not need to be modified.
 
 ```{block2, type="rmdcaution"}
@@ -292,8 +292,9 @@ When the input items are filenames, there are a couple of modifiers you can use 
 For example, with `{/}`, only the basename of the filename will be used:
 
 ```{console}
-find /data/ch03 -type f | parallel echo '{#}\) File \"{}\" has basename \"{/}\"'
+find /data/ch03 -type f | parallel echo '{#}\) \"{}\" has basename \"{/}\"'# <1>
 ```
+<1> Characters such as parentheses (`)`) and quotes (`"`) have a special meaning in the shell. To use them literally you put a backslash `\` in front of them. This is called *escaping*. 
 
 If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:
 
@@ -440,7 +441,7 @@ I assume that you have an AWS account and that you know how to launch instances.
 If you’re using a different cloud computing service (such as Google Cloud Platform or Microsoft Azure), or if you have your own servers, please make sure that you create a *hostnames* file yourself before continuing to the next section.
 
 You can obtain a list of running AWS EC2 instances using `aws` [@aws], the command-line interface to the AWS API.
-With `aws`, you can virtually do everything you can do with the online AWS Management Console.
+With `aws`, you can almost do everything you can do with the online AWS Management Console.
 
 The command `aws ec2 describe-instances` returns a lot of information about all your EC2 instances in JSON format (see [the online documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instances.html) for more information).
 You can extract the relevant fields using `jq`:
@@ -539,7 +540,7 @@ C-C#! literal=FALSE
 ### Distributing Local Data among Remote Machines
 
 The second flavor of distributed processing is to distribute local data directly among remote machines.
-Imagine that you have one very large dataset that you want to process it using multiple remote machines.
+Imagine that you have one very large dataset that you want to process using multiple remote machines.
 For simplicity, let's sum all integers from 1 to 1000.
 First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using `wc`:
 
@@ -575,7 +576,7 @@ seq 1000 | paste -sd+ | bc
 ```
 
 Good, that works.
-If you have a larger pipeline that you want to execute on the remote machines, you can also put it in a separate script and upload it script with `parallel`.
+If you have a larger pipeline that you want to execute on the remote machines, you can also put it in a separate script and upload it with `parallel`.
 I'll demonstrate this by creating a very simple command-line tool called `add`:
 
 ```{console create_add, marker="#~"}
@@ -675,7 +676,7 @@ parallel -v --basefile jq \
 "zcat {} | jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{print \$2\",\"\$1}' > {.}.csv"
 ```
 
-If you, at some point during this process, run `ls` on one of the remote machines, you would see that `parallel` indeed transfers (and cleans up) the binary `jq`, the JSON files, and CSV files:
+If you, during this process, run `ls` on one of the remote machines, you would see that `parallel` indeed transfers (and cleans up) the binary `jq`, the JSON files, and CSV files:
 
 ```{console, remove=list(2, "echo")}
 ssh $(head -n 1 hostnames) ls#! enter=FALSE
@@ -716,7 +717,7 @@ csvlook
 
 ## Summary
 
-As a data scientist, you work with data--sometimes a lot of data.
+As a data scientist, you work with data--occasionally a lot of data.
 This means that sometimes you need to run a command multiple times or distribute data-intensive commands over multiple cores.
 In this chapter I have shown you how easy it is to parallelize commands.
 `parallel` is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them.

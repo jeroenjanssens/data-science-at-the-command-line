@@ -43,7 +43,7 @@ In this book we use many different command-line tools.
 Unix often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools.
 Installing these packages yourself is often not too difficult.
 However, we'll also use tools that are not available as packages and require a more manual, and more involved installation.
-In order to acquire the necessary command-line tools without having to go through the involved installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
+In order to acquire the necessary command-line tools without having to go through the installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
 
 A Docker image is a bundle of one or more applications together with all their dependencies.
 A Docker container is an isolated environment that runs an image.
@@ -402,6 +402,7 @@ Once you get the hang of combining tools using the pipe operator, you'll find th
 ### Redirecting Input and Output
 
 Besides piping the output from one tool to another tool, you can also save it to a file.
+The file will be saved it in the current directory, unless a full path is given.
 This is called *output redirection*, and works as follows:
 
 ```{console seq_redirect}

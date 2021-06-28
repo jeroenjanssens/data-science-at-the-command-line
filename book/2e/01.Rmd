@@ -81,7 +81,7 @@ Common scrubbing operations include:
 - Extracting certain columns
 - Replacing values
 - Extracting words
-- Handling missing values
+- Handling missing values and duplicates
 - Converting data from one format to another
 
 While we data scientists love to create exciting data visualizations and insightful models (steps 3 and 4), usually much effort goes into obtaining and scrubbing the required data first (steps 1 and 2).
@@ -106,7 +106,7 @@ Command-line tools introduced in [Chapter 7](#chapter-7-exploring-data) include:
 
 If you want to explain the data or predict what will happen, you probably want to create a statistical model of your data.
 Techniques to create a model include clustering, classification, regression, and dimensionality reduction.
-The command line is not suitable for implementing a new model from scratch.
+The command line is not suitable for programming a new type of model from scratch.
 It is, however, very useful to be able to build a model from the command line.
 In [Chapter 9](#chapter-9-modeling-data) I will introduce several command-line tools that either build a model locally or employ an API to perform the computation in the cloud.
 

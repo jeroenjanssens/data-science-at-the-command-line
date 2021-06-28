@@ -754,7 +754,7 @@ sample:
   cite: true
   description: Filter lines from standard input according to some probability, with
     a given delay, and for a certain duration
-  url: https://github.com/jeroenjanssens/sample-stream
+  url: https://github.com/jeroenjanssens/sample
   version: 0.2.4
   year: 2021
   help: --help
@@ -1235,10 +1235,34 @@ column:
 
 l:
   author:
-  - Jeroen Janssens
-  year: 2021
-  description: List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions.
+  - Unknown
+  year: 1999
+  description: List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions
   example: |
     cd /data/ch03
     ls
     l
+
+telnet:
+  author:
+  - Mats Erik Andersson
+  - Andreas Henriksson
+  - Christoph Biedl
+  bib_title: '{telnet} -- User interface to the {TELNET} protocol'
+  cite: true
+  description: User interface to the TELNET protocol
+  url: http://www.hcs.harvard.edu/~dholland/computers/netkit.html
+  version: '0.17'
+  year: 1999
+
+ts:
+  author:
+  - Joey Hess
+  bib_title: '{ts} -- Timestamp input'
+  cite: true
+  description: Timestamp input
+  url: https://joeyh.name/code/moreutils
+  version: '0.65'
+  year: 2021
+  example: |
+    echo seq 5 | sample -d 500 | ts
