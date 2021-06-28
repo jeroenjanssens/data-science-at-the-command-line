@@ -170,7 +170,7 @@ find /data -type f -name '*.csv' -size -2k
 
 Let's say that you have a very long running tool, such as the one shown here:
 
-```{console bat_slow, callouts=list("RANDOM", "sleep", "ts")}
+```{console bat_slow, callouts=list("ts", "RANDOM", "sleep")}
 bat slow.sh
 ```
 <1> The magic variable *`RANDOM`* calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that *duration* is between 1 and 5.
