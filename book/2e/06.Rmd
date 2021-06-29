@@ -76,7 +76,7 @@ l
 ## Introducing Make
 
 `make` organizes command execution around data and its dependencies.
-Your data processing steps are formalized in a separate text file (a workflow). 
+Your data processing steps are formalized in a separate text file (a workflow).
 Each step may have inputs and outputs.
 `make` automatically resolves their dependencies and determines which commands need to be run and in which order.
 
@@ -113,7 +113,7 @@ The following code illustrates this by expanding the tab to eight spaces:
 ```{console expand, callouts=c("-f", "top.")}
 < numbers.make expand > spaces.make
 bat -A spaces.make
-make -f spaces.make #<1>
+make -f spaces.make
 rm spaces.make
 ```
 <1> I need to add the `-f` option (short for the `--makefile` option) because the configuration file isn't called *Makefile*, which is the default.
@@ -232,7 +232,7 @@ head
 ```
 <1> Only keep lines that contain the pattern *`Human`*.
 <2> Extract the first two columns.
-<3> Sort the lines by the second column in reverse numeric order. 
+<3> Sort the lines by the second column in reverse numeric order.
 <4> By default, `head` prints the first 10 lines. You can override this with the `-n` option.
 
 The second task creates a box plot showing the distribution of heights per species (see \@ref(fig:starwars-image)):

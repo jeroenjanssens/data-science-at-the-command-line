@@ -32,7 +32,7 @@ rm percent.csv
 rush run -t 'mutate(df, percent = tip / bill * 100)' tips.csv > percent.csv
 < percent.csv trim 5
 rush run --help
-rush run -nt 'mutate(df, percent = tip / bill * 100)' tips.csv
+rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tips.csv
 < percent.csv rush run 'mean(df$percent)' -
 < percent.csv rush run 'max(df$size)' -
 < percent.csv rush run 'unique(df$time)' -

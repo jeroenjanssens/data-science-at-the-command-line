@@ -121,23 +121,38 @@ def pygments(key, value, format, _):
                 _, src, _, alt, *_ = html.split("\"")
                 return Plain([Str(f"[[{fig_id}]]\n.{alt}\nimage::{src}[\"{alt}\"]")])
 
-        # elif key == "CodeBlock":
-        #     [[ident, classes, keyvals], code] = value
-        #     if classes:
-        #         language = classes[0]
-        #         # stderr.write(f"{key}\t{value}\t{format}\n")
-        #         html_code = conv.convert(code, full=False)
-        #         # html_code = html_code.replace("\n", "<span></span>\n") + "<span></span>"
-        #         #result = "[subs=callouts]\n++++\n<pre data-type=\"programlisting\" style=\"color: #4f4f4f\">" + html_code + "</pre>\n++++\n\n"
-        #         result = "[source,subs=callouts]\n----\n" + html_code + "\n----\n\n"
+        elif key == "CodeBlock":
+            [[ident, classes, keyvals], code] = value
+            if classes:
+                language = classes[0]
+                # stderr.write(f"{key}\t{value}\t{format}\n")
+                html_code = conv.convert(code, full=False)
+                html_code = html_code.replace("+", "&#43;")
 
-        #         # Turn code callout number into image
-        #         # result = callout_code_re.sub(lambda x: f"<img src=\"callouts/{int(x.group(1))}.png\" alt=\"{int(x.group(1))}\">", result)
-        #         result = callout_code_re.sub(lambda x: f"<a class=\"co\"><img src=\"callouts/{int(x.group(1))}.png\" /></a>", result)
-        #         # result = callout_code_re.sub(lambda x: f"<!--{int(x.group(1))}-->", result)
-        #     else:
-        #         result = code
-        #     return RawBlock("asciidoc", result)
+                result = "[source,subs=\"+macros\"]\n----\n"
+                for line in html_code.split("\n"):
+                    line += "<span></span>"
+                    if match := callout_code_re.search(line):
+                        line = callout_code_re.sub("", line)
+                        line = f"+++{line}+++ <{match.group(1)}>"
+                    else:
+                        line = f"+++{line}+++"
+                    result += line + "\n"
+                result += "----\n\n"
+
+                # html_code = "+++" + html_code.replace("\n", "<span></span>+++\n+++") + "<span></span>+++"
+                html_code = html_code.replace("<span", "+++<span").replace("</span>", "</span>+++")
+                #result = "[subs=callouts]\n++++\n<pre data-type=\"programlisting\" style=\"color: #4f4f4f\">" + html_code + "</pre>\n++++\n\n"
+                # result = "[source,subs=\"+macros\"]\n----\n" + html_code + "\n----\n\n"
+
+                # Turn code callout number into image
+                # result = callout_code_re.sub(lambda x: f"<img src=\"callouts/{int(x.group(1))}.png\" alt=\"{int(x.group(1))}\">", result)
+                # result = callout_code_re.sub(lambda x: f"<a class=\"co\"><img src=\"callouts/{int(x.group(1))}.png\" /></a>", result)
+                # result = callout_code_re.sub(lambda x: f"<!--{int(x.group(1))}-->", result)
+                # result = result.replace("+++<span></span>+++", "")
+            else:
+                result = code
+            return RawBlock("asciidoc", result)
 
     elif format == "html4":
 

@@ -163,7 +163,7 @@ seq -f "Line %g" 10 | tee lines
 
 You can print the first 3 lines using either `head` [@head], `sed` [@sed], or `awk`:
 
-```{console, callout="NR"}
+```{console, callouts="NR"}
 < lines head -n 3
 < lines sed -n '1,3p'
 < lines awk 'NR <= 3'
@@ -222,7 +222,7 @@ Printing even lines works in a similar manner:
 Many of these examples start with the smaller-than sign (`<`) followed by the filename.
 I do this because this allows me to read the pipeline from left to right.
 Please know that this is my own preference.
-You can also use `cat` to pipe the contents of a file. 
+You can also use `cat` to pipe the contents of a file.
 Also, many command-line tools also accept the filename as an argument.
 ```
 
@@ -962,5 +962,3 @@ You're free to skip this chapter if you can't wait to start exploring and visual
 
 - I wish I could've explained more about `awk`. It's such a powerful tool and programming language. I highly recommend that you take the time to learn it. Two good resources are the book *sed & awk* by Doherty and Robbins and the online [GNU Awk User's Guide](https://www.gnu.org/software/gawk/manual/gawk.html).
 - In this chapter I have used regular expressions in a couple of places. A tutorial about them is unfortunately beyond the scope of this book. Because regular expressions can be used in many different tools, I recommend that you learn about them. A good book is *Regular Expressions Cookbook* by Jan Goyvaerts and Steven Levithan.
-
-

@@ -14,7 +14,7 @@ console_start()
 
 
 # Parallel Pipelines {#chapter-8-parallel-pipelines}
- 
+
 <!-- #TODO: SHOULD: Dicuss progress bar -->
 
 In the previous chapters, we've been dealing with commands and pipelines that take care of an entire task at once.
@@ -85,13 +85,12 @@ However, as mentioned in the introduction, you would need to be crazy to press *
 In this case it's better to let the shell do the hard work for you by using a for loop:
 
 ```{console for_loop}
-for i in {0..100..2}  #<1> <2>
+for i in {0..100..2}  #<1>
 do
-echo "$i^2" | bc      #<3>
+echo "$i^2" | bc      #<2>
 done | trim
 ```
-<1> The Z shell has a feature called brace expansion, which transforms *`{0..100..2}`* into a list separated by spaces: *`0 2 4 … 98 100`*.
-<2> The variable *`i`* is assigned the value "0" in the first iteration, "1" in the second iteration, and so forth.
+<1> The Z shell has a feature called brace expansion, which transforms *`{0..100..2}`* into a list separated by spaces: *`0 2 4 … 98 100`*. The variable *`i`* is assigned the value "0" in the first iteration, "1" in the second iteration, and so forth.
 <3> The value of this variable can be used by prefixing it with a dollar sign (*`$`*). The shell will replace *`$i`* with its value before `echo` is being executed. Note that there can be more than one command between *`do`* and *`done`*.
 
 Although the syntax may appear a bit odd compared to your favorite programming language, it's worth remembering this because it's always available in the shell.
@@ -173,9 +172,9 @@ Let's say that you have a very long running tool, such as the one shown here:
 ```{console bat_slow, callouts=list("ts", "RANDOM", "sleep")}
 bat slow.sh
 ```
-<1> The magic variable *`RANDOM`* calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that *duration* is between 1 and 5.
-<2> `sleep` pauses execution for a given number of seconds.
-<3> `ts`[@ts] adds a timestamp.
+<1> `ts`[@ts] adds a timestamp.
+<2> The magic variable *`RANDOM`* calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that *duration* is between 1 and 5.
+<3> `sleep` pauses execution for a given number of seconds.
 
 This process probably doesn't take up all the available resources.
 And it so happens that you need to run this command a lot of times.
@@ -197,7 +196,7 @@ Keep in mind that not everything can be parallelized.
 API calls may be limited to a certain number, or some commands can only have one instance.
 ```
 
-\@ref(fig:diagram-parallel-processing) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything. 
+\@ref(fig:diagram-parallel-processing) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything.
 
 ```{r diagram-parallel-processing, echo=FALSE, fig.cap="Serial processing, naive parallel processing, and parallel processing with GNU Parallel", fig.align="center"}
 knitr::include_graphics("images/diagram_parallel_processing.png")
@@ -291,10 +290,10 @@ Having said that, they do enable additional functionality, such as iterating ove
 When the input items are filenames, there are a couple of modifiers you can use only parts of the filename.
 For example, with `{/}`, only the basename of the filename will be used:
 
-```{console}
-find /data/ch03 -type f | parallel echo '{#}\) \"{}\" has basename \"{/}\"'# <1>
+```{console callouts=list(1)}
+find /data/ch03 -type f | parallel echo '{#}\) \"{}\" has basename \"{/}\"'
 ```
-<1> Characters such as parentheses (`)`) and quotes (`"`) have a special meaning in the shell. To use them literally you put a backslash `\` in front of them. This is called *escaping*. 
+<1> Characters such as parentheses (`)`) and quotes (`"`) have a special meaning in the shell. To use them literally you put a backslash `\` in front of them. This is called *escaping*.
 
 If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:
 
@@ -635,7 +634,7 @@ zcat nyc-1.json.gz | head -n 1
 
 If you were to get the total number of service calls per borough on your local machine, you would run the following command:
 
-```{console, callouts=1:5}
+```{console, callouts=1:6}
 zcat nyc*json.gz |
 jq -r '.borough' |
 tr '[A-Z] ' '[a-z]_' |
@@ -649,7 +648,7 @@ csvlook
 <3> Convert borough names to lowercase and replace spaces with underscores (because `awk` splits on whitespace by default).
 <4> Count the occurrences of each borough using `sort` and `uniq`.
 <5> Reverse the two columns and delimit them by comma delimited using `awk`.
-<5> Add a header using `header`.
+<6> Add a header using `header`.
 
 Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally.
 You can use `parallel` to distribute the local files among the remote machines, let them do the processing, and retrieve the results:
@@ -728,4 +727,3 @@ In the next chapter I'm going to cover the fourth step of the OSEMN model: model
 ## For Further Exploration
 
 - Once you have a basic understanding of `parallel` and its most important options, I recommend that you take a look at [its online tutorial](https://www.gnu.org/software/parallel/parallel_tutorial.html). You'll learn, among other things, how to specify different ways of specifying input, keep a log of all the jobs, and how to timeout, resume, and retry jobs. As creator of `parallel` Ole Tange in this tutorial says, "Your command line will love you for it."
-

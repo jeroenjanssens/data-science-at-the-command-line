@@ -21,6 +21,7 @@ pwd
 cd /data/ch01
 type chmod
 type cols
+type column
 type cowsay
 echo 'The command line is awesome!' | cowsay
 type cp
@@ -47,6 +48,7 @@ echo -n Hippopotomonstrosesquippedaliophobia | wc -c
 type env
 type export
 export PATH="$PATH:$HOME/bin"
+type fc
 type find
 find /data -type f -name '*.csv' -size -3
 type fold
@@ -61,12 +63,17 @@ type gron
 type head
 seq 100 | head -n 5
 type header
+type history
 type hostname
 hostname
 hostname -i
 type in2csv
 type jq
 type json2csv
+type l
+cd /data/ch03
+ls
+l
 type less
 type ls
 ls /data
@@ -75,6 +82,7 @@ type man
 man excel
 type mkdir
 type mv
+type nano
 type nl
 nl /data/ch05/alice.txt | head
 type parallel
@@ -92,6 +100,9 @@ cd ~
 pwd
 type python
 type R
+type rev
+echo 'Satire: Veritas' | rev
+echo 'Ãƒ§a va?' | rev | cut -c 2- | rev
 type rm
 type rush
 rush run '6*7'
@@ -111,6 +122,7 @@ type skll
 type sort
 echo '3\n7\n1\n3' | sort
 type split
+type sponge
 type sql2csv
 type ssh
 type sudo
@@ -118,6 +130,7 @@ type tail
 type tapkee
 type tar
 type tee
+type telnet
 type tldr
 tldr tar | trim
 type tr
@@ -125,6 +138,7 @@ type tree
 tree / | trim
 type trim
 echo {a..z}-{0..9} | fold | trim 5 60
+type ts
 type type
 type uniq
 type unpack
