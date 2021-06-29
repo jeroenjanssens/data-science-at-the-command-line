@@ -27,7 +27,7 @@ Most command-line tools only work with one or two formats, so it's important tha
 Once the data is in the desired format, there could still be issues like missing values, inconsistencies, weird characters, or unnecessary parts.
 You can fix these by applying filters, replacing values, and combining multiple files.
 The command line is especially well-suited for these kind of transformations, because there are many specialized tools available, most of which can handle large amounts of data.
-In this chapter I’ll discuss classic tools such as `grep` [@grep] and `awk` [@awk], and newer tools such as `jq` [@jq] and `xmlstarlet` [@xmlstarlet].
+In this chapter I’ll discuss classic tools such as `grep` [@grep] and `awk` [@awk], and newer tools such as `jq` [@jq] and `pup` [@pup].
 
 Sometimes you can use the same command-line tool to perform several operations or multiple tools to perform the same operation.
 This chapter is more structured like a cookbook, where the focus is on the problems or recipes, rather than diving deeply into the command-line tools themselves.
