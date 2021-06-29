@@ -47,7 +47,7 @@ l
 ```
 
 The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
-
+Any other files are either downloaded or generated using command-line tools.
 
 ## Inspecting Data and its Properties
 

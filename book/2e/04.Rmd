@@ -60,13 +60,15 @@ In this chapter, you’ll learn how to:
 - Convert one-liners into parameterized shell scripts
 - Turn existing Python and R code into reusable command-line tools
 
-This chapter starts with with the following files:
+This chapter starts with the following files:
 
 ```{console list_files}
 cd /data/ch04
 l
 ```
 
+The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
+Any other files are either downloaded or generated using command-line tools.
 
 ## Converting One-liners into Shell Scripts
 

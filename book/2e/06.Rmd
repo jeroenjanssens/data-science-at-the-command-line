@@ -61,7 +61,8 @@ At the end of this chapter I recommend a few resources to learn more.
 
 ## Overview
 
-Managing your data workflow with `make` is the main topic of this chapter. As such, you’ll learn about:
+Managing your data workflow with `make` is the main topic of this chapter.
+As such, you’ll learn about:
 
 - Defining your workflow with a *Makefile*.
 - Thinking about your workflow in terms of input and output dependencies.
@@ -71,6 +72,9 @@ Managing your data workflow with `make` is the main topic of this chapter. As su
 cd /data/ch06
 l
 ```
+
+The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
+Any other files are either downloaded or generated using command-line tools.
 
 
 ## Introducing Make

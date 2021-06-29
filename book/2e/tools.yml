@@ -481,8 +481,7 @@ hostname:
 in2csv:
   author:
   - Christopher Groskopf
-  bib_title: '{in2csv} -- Convert common, but less awesome, tabular data formats to
-    {CSV}'
+  bib_title: '{in2csv} -- Convert common, but less awesome, tabular data formats to {CSV}'
   cite: true
   description: Convert common, but less awesome, tabular data formats to CSV
   url: https://csvkit.rtfd.org
@@ -515,7 +514,7 @@ json2csv:
 less:
   author:
   - Mark Nudelman
-  bib_title: '{less} -- opposite of {more}'
+  bib_title: '{less} -- Opposite of {more}'
   cite: true
   description: opposite of more
   url: https://www.greenwoodsoftware.com/less
@@ -615,8 +614,7 @@ nl:
 parallel:
   author:
   - Ole Tange
-  bib_title: '{parallel} -- Build and execute shell command lines from standard input
-    in parallel'
+  bib_title: '{parallel} -- Build and execute shell command lines from standard input in parallel'
   cite: true
   description: Build and execute shell command lines from standard input in parallel
   url: https://www.gnu.org/software/parallel
@@ -695,8 +693,7 @@ pwd:
 python:
   author:
   - The Python Software Foundation
-  bib_title: '{python} -- An interpreted, interactive, object-oriented programming
-    language'
+  bib_title: '{python} -- An interpreted, interactive, object-oriented programming language'
   cite: true
   description: An interpreted, interactive, object-oriented programming language
   url: https://www.python.org
@@ -749,8 +746,7 @@ rush:
 sample:
   author:
   - Jeroen Janssens
-  bib_title: '{sample} -- Filter lines from standard input according to some probability,
-    with a given delay, and for a certain duration'
+  bib_title: '{sample} -- Filter lines from standard input according to some probability, with a given delay, and for a certain duration'
   cite: true
   description: Filter lines from standard input according to some probability, with
     a given delay, and for a certain duration
@@ -870,8 +866,7 @@ split:
 sql2csv:
   author:
   - Christopher Groskopf
-  bib_title: '{sql2csv} -- Execute an {SQL} query on a database and output the result
-    to a {CSV} file'
+  bib_title: '{sql2csv} -- Execute an {SQL} query on a database and output the result to a {CSV} file'
   cite: true
   description: Execute an SQL query on a database and output the result to a CSV file
   url: https://csvkit.rtfd.org

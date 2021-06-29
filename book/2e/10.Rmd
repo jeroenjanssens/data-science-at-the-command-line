@@ -52,7 +52,7 @@ l
 ```
 
 The instructions to get these files are in [Chapter 2](#chapter-2-getting-started).
-
+Any other files are either downloaded or generated using command-line tools.
 
 ## Jupyter
 
@@ -88,7 +88,6 @@ This particular notebook is quite similar to the console session I just discusse
 The terminal offers a complete shell for you to run command line tools.
 Be aware that there's no interactivity possible between this terminal, the code, and the notebook.
 So this terminal is not really different from having a separate terminal application open, but it's still helpful when you're working inside a Docker container or on a remote server.
-<!-- TODO: Explain above sentence about remote -->
 
 ```{r jupyterlab, echo=FALSE, fig.cap="JupyterLab with the file explorer, a code editor, a notebook, and a terminal", fig.align="center"}
 knitr::include_graphics("images/screenshot_jupyterlab.png")
@@ -101,8 +100,6 @@ Because it's much more difficult to use Python variables, I don't recommend this
 You're better off creating a Bash script in a separate file, and then executing it by using the exclamation mark (`!`).
 ```
 
-
-<!-- TODO: Write out voice recordings -->
 
 ## Python
 
@@ -235,6 +232,7 @@ q("no")#! expect_prompt=FALSE
 ```{r, include=FALSE}
 # set_prompt(engine$session, prompts$bash)
 ```
+
 
 ## RStudio
 

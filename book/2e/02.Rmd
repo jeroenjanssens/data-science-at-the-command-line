@@ -185,11 +185,6 @@ You just executed a command that contained a single command-line tool.
 The tool `pwd` [@pwd] outputs the name of the directory where you currently are.
 By default, when you login, this is your home directory.
 
-<!-- You can view the contents of this directory with `ls`: -->
-<!-- ```{console} -->
-<!-- ls -->
-<!-- ``` -->
-
 The command-line tool `cd`, which is a Z shell builtin, allows you to navigate to a different directory:
 
 ```{console, callouts=c(1, 3, 6, 8, 11)}
@@ -223,29 +218,6 @@ Sometimes a short option has a long variant, which would be `--lines` in this ca
 The second one is a value that belongs to the option.
 The third one is a filename.
 This particular command outputs the first three lines of file */data/ch02/movies.txt*.
-
-
-<!-- Sometimes I use commands and pipelines that are too long to fit on the page. -->
-<!-- In that case you’ll see something like the following: -->
-
-<!-- ```{console} -->
-<!-- echo 'Hello'\ -->
-<!-- ' world' | -->
-<!-- wc -->
-<!-- ``` -->
-
-<!-- The greater-than sign is the continuation prompt, which indicates that this line is a continuation of the previous one. -->
-<!-- A long command can be broken up with either a backslash or a pipe symbol (`|`), which I'll explain below. -->
-<!-- Be sure to first match any quotation marks. -->
-<!-- The following command is the same as above, but then written on one line: -->
-
-<!-- ```{console} -->
-<!-- echo 'Hello world' | wc -->
-<!-- ``` -->
-
-<!-- So far, you've been executing individual tools. -->
-<!-- In that sense it's not so different from running individual GUI applications by clicking on their icon.  -->
-<!-- In the next section I'll explain more about the different types of tools we're going to use in this book. -->
 
 
 ### Five Types of Command-line Tools
@@ -428,7 +400,7 @@ echo " World" >> greeting.txt
 ```
 
 The tool `echo` outputs the value you specify.
-The `-n` option, which stands for *newline*, specifies that `echo` should *not* output a trailing newline.
+The `-n` option, which stands for *newline*, specifies that `echo` should not output a trailing newline.
 
 Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage.
 To use the contents of the file *greeting.txt* again, we can use `cat`, which reads a file prints it.
@@ -483,9 +455,6 @@ knitr::include_graphics("images/diagram_essential_redirect_devnull.png")
 ```
 
 
-
-
-
 Be careful not to read from and write to the same file.
 If you do, you'll end up with an empty file.
 That's because the tool of which the output is redirected, immediately opens that file for writing, and thereby emptying it.
@@ -515,7 +484,6 @@ dseq 5 > dates.txt
 < dates.txt nl | sponge dates.txt
 bat dates.txt
 ```
-
 
 
 ### Working With Files and Directories
