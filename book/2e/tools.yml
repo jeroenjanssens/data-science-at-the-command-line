@@ -116,7 +116,7 @@ chmod:
     chmod u+x script.sh#!enter=FALSE
     C-C#!literal=FALSE
   help: man
-  note: "I use `chmod` in [Chapter 4](#chapter-4-creating-reusable-command-line-tools) to make a tool executable"
+  note: "I use `chmod` in [Chapter 4](#chapter-4-creating-command-line-tools) to make a tool executable"
 
 cols:
   author:
