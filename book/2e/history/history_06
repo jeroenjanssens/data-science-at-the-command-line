@@ -3,7 +3,7 @@ l
 bat -A numbers.make
 < numbers.make expand > spaces.make
 bat -A spaces.make
-make -f spaces.make #<1>
+make -f spaces.make
 rm spaces.make
 cp numbers.make Makefile
 make

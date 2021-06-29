@@ -151,7 +151,7 @@ To download from an FTP server, which stands for File Transfer Protocol, you use
 Here I download the file *welcome.msg* from *ftp.gnu.org*:
 
 ```{console curl_ftp}
-curl -s ftp://ftp.gnu.org/welcome.msg | trim
+curl -s "ftp://ftp.gnu.org/welcome.msg" | trim
 ```
 
 If the specified URL is a directory, `curl` will list the contents of that directory.
@@ -161,7 +161,7 @@ Or how about the DICT protocol, which allows you to access various dictionaries 
 Here's the definition of "windmill" according to the Collaborative International Dictionary of English:
 
 ```{console curl_dict}
-curl -s dict://dict.org/d:windmill | trim
+curl -s "dict://dict.org/d:windmill" | trim
 ```
 
 When downloading data from the Internet, however, the protocol will most likely be HTTP, so the URL will start with either *http://* or *https://*.
@@ -174,19 +174,19 @@ With `curl`, however, you need to specify the `-L` or `--location` option in ord
 If you don't, you can get something like:
 
 ```{console curl_bitly}
-curl -s https://bit.ly/2XBxvwK
+curl -s "https://bit.ly/2XBxvwK"
 ```
 
 Sometimes you get nothing back, just like when we follow the URL mentioned above:
 
 ```{console curl_youtube}
-curl -s https://youtu.be/dQw4w9WgXcQ
+curl -s "https://youtu.be/dQw4w9WgXcQ"
 ```
 
 By specifying the `-I` or `--head` option, `curl` fetches only the HTTP header of the response, which allows you to inspect the status code and other information returned by the server.
 
 ```{console curl_head}
-curl -sI https://youtu.be/dQw4w9WgXcQ | trim
+curl -sI "https://youtu.be/dQw4w9WgXcQ" | trim
 ```
 
 The first line shows the protocol followed by the HTTP status code, which is 303 in this case.
@@ -321,7 +321,7 @@ Let’s demonstrate `in2csv` using a spreadsheet that contains the 2000 most pop
 To extract its data, you invoke `in2csv` as follows:
 
 ```{console in2csv_save, remove=c("openpyxl", "silence", "behavior", "numpy", "guidance", "release")}
-curl https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx > top2000.xlsx
+curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > top2000.xlsx
 in2csv top2000.xlsx | tee top2000.csv | trim
 ```
 

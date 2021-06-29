@@ -140,7 +140,7 @@ In the example below, I start an R session and count the number of occurrences o
 # set_prompt(engine$session, prompts$R)
 ```
 
-```{console, callouts=c("readLines", "strsplit", "system2")}
+```{console, callouts=c("readLines", "strsplit", "system2", "length")}
 R --quiet
 lines <- readLines("alice.txt")
 head(lines)
@@ -330,4 +330,3 @@ Now that we've had all the four OSEMN chapters and the four intermezzo chapters,
 ## For Further Exploration
 
 - There are also ways to integrating two programming languages directly, without the use of the command line. For example the [`reticulate` package](https://rstudio.github.io/reticulate/) in R allows you to interface with Python directly.
-

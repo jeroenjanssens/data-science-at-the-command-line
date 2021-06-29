@@ -33,6 +33,7 @@ seq -f "Line %g" 10 | tee lines
 < alice.txt grep -Ev '^\s$' | wc -l
 RANDOM=1337
 seq -f "Line %g" 1000 | sample -r 1%
+seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts
 grep -i chapter alice.txt | cut -d ' ' -f 3-
 sed -rn 's/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p' alice.txt | trim 3
 grep -i chapter alice.txt | cut -c 9-
@@ -82,20 +83,21 @@ seq 5 | header -a count | body sed -n '3,5p'
 csvgrep -c size -i -r "[1-4]" tips.csv
 < tips.csv awk -F, 'NR==1 || ($1 > 40.0) && ($5 ~ /^S/)'
 csvsql --query "SELECT * FROM tips WHERE bill > 40 AND day LIKE 'S%'" tips.csv
-< names.csv csvlook -I
-< names.csv sed -re '1s/.*/id,full_name,born/g;'\\
-'2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | csvlook -I
-< names.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"}'\\
-'{if(NR > 1) {print $1,$3" "$2,$4}}' | csvlook -I
-< names.csv | cols -c first_name,last_name tr \",\" \" \" |\
-header -r full_name,id,born | csvcut -c id,full_name,born | csvlook -I
+csvlook -I names.csv
+< names.csv sed -re '1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' |\
+csvlook -I
+< names.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"} {if(NR > 1) {print $1,$3" "$2,$4}}' |\
+csvlook -I
+< names.csv |\
+cols -c first_name,last_name tr \",\" \" \" |\
+header -r full_name,id,born |\
+csvcut -c id,full_name,born |\
+csvlook -I
 < names.csv csvsql --query "SELECT id, first_name || ' ' || last_name "\\
 "AS full_name, born FROM stdin" | csvlook -I
 cat names-comma.csv
-< names-comma.csv sed -re '1s/.*/id,full_name,born/g;'\\
-'2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | tail -n 1
-< names-comma.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"}'\\
-'{if(NR > 1) {print $1,$3" "$2,$4}}' | tail -n 1
+< names-comma.csv sed -re '1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/\1,\3 \2,\4/g' | tail -n 1
+< names-comma.csv awk -F, 'BEGIN{OFS=","; print "id,full_name,born"} {if(NR > 1) {print $1,$3" "$2,$4}}' | tail -n 1
 < names-comma.csv | cols -c first_name,last_name tr \",\" \" \" |\
 header -r full_name,id,born | csvcut -c id,full_name,born | tail -n 1
 < names-comma.csv csvsql --query "SELECT id, first_name || ' ' || last_name AS full_name, born FROM stdin" | tail -n 1
@@ -117,4 +119,4 @@ grep wikitable -A 21 wiki.html
 < table.html xml2json > table.json
 jq . table.json | trim 20
 < table.json jq -r '.tbody.tr[1:][] | [.td[]["$t"]] | @csv' | header -a rank,country,border,surface,ratio > countries.csv
-csvlook --max-column-width 28 countries.csv | trim
+csvlook --max-column-width 28 countries.csv

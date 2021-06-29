@@ -1,9 +1,9 @@
 cd /data/ch08
 l
 echo "4^2" | bc
-for i in {0..100..2}  #<1> <2>\
+for i in {0..100..2}  #<1>\
 do\
-echo "$i^2" | bc      #<3>\
+echo "$i^2" | bc      #<2>\
 done | trim
 curl -s "https://randomuser.me/api/1.2/?results=5&seed=dsatcl2e" > users.json
 < users.json jq -r '.results[].email' > emails
@@ -29,7 +29,7 @@ cowsay 1 > /dev/null #<1>
 cowsay 2 > /dev/null
 cowsay 3 > /dev/null
 seq 3 | parallel cowsay {} > /dev/null
-find /data/ch03 -type f | parallel echo '{#}\) File \"{}\" has basename \"{/}\"'
+find /data/ch03 -type f | parallel echo '{#}\) \"{}\" has basename \"{/}\"'
 touch input.csv
 seq 5 | parallel -j0 "echo Hi {}"
 seq 5 | parallel -j200% "echo Hi {}"
