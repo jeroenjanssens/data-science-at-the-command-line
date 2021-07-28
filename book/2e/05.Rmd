@@ -108,7 +108,7 @@ See \@ref(fig:fb-image) for the result.
 (I'll cover this syntax of `rush` in detail in [Chapter 7](#chapter-7-exploring-data).)
 
 ```{console fb_rush}
-rush plot -x value -y count --geom col --height 2 fb.csv > fb.png
+rush qplot -x value -y count --geom col --height 2 fb.csv > fb.png
 display fb.png
 ```
 ```{r fb-image, echo=FALSE, fig.cap="Counting fizz, buzz, and fizzbuzz", fig.align="center", out.width="90%"}
