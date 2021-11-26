@@ -12,6 +12,13 @@ console_start()
  rm -f $HISTFILE
 ```
 
+```{console install_pup_arm64, include=FALSE}
+curl -sL https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_arm64.zip -o pup.zip
+unzip pup.zip
+sudo mv pup /usr/bin/
+rm pup.zip
+```
+
 # Scrubbing Data {#chapter-5-scrubbing-data}
 
 Two chapters ago, in the first step of the OSEMN model for data science, we looked at *obtaining* data from a variety of sources.

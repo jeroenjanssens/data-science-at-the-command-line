@@ -38,10 +38,7 @@ So I'll just say this: the more you use the command line, the more often you wil
 And whether you're a shell newbie, or just someone who hasn't thought much about what a great fit shell programming is for data science, this is a book you will come to treasure.
 Jeroen is a great teacher, and the material he covers is priceless.
 
-<!--A[role="byline"]
-A-->
-Tim O'Reilly
-
-<!--A[role="byline cont"]
-A-->
+<p style="text-align: right; font-style: italic">
+&mdash;Tim O'Reilly<br />
 May 2021
+</p>

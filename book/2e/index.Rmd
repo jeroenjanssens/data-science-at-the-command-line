@@ -6,15 +6,109 @@ site: bookdown::bookdown_site
 documentclass: book
 bibliography: [library.bib, tools.bib]
 notes-after-punctuation: false
-suppress-bibliography: true
+suppress-bibliography: false
 nocite: |
   @Schutt2013, @Peek2002, @Heddings2006, @Molinaro2005, @HTTP, @docopt, @Rossant2013, @manpages, @Raymond2003, @Goyvaerts2012, @Dougherty1997, @Tange2011a, @Cortez2009, @commandlinefu, @Cooper2014, @Russell2013, @Warden2011
 link-citations: yes
-description: "This hands-on guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small, yet powerful, command-line tools to quickly obtain, scrub, explore, and model your data."
+description: "This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You'll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux."
 cover-image: "images/cover.png"
 github-repo: "jeroenjanssens/data-science-at-the-command-line"
 ---
 
 # Welcome {-}
 
-The second edition of Data Science at the Command Line is currently being written. It is scheduled to be published by O’Reilly Media in October 2021. You’re welcome to take a look around.
+<div class="h1" style="margin-top: 1.5rem;">Data Science at the Command Line</div>
+
+<div class="h4">Obtain, Scrub, Explore, and Model Data with Unix Power Tools</div>
+
+<div class="cover-in-text">
+<img class="d-block d-lg-none" src="images/cover-small.png">
+</div>
+
+Welcome to the website of the second edition of *Data Science at the Command Line* by Jeroen Janssens, published by O'Reilly Media in October 2021. This website is free to use. The contents is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nd/4.0/). You can order a physical copy at [Amazon](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912).
+
+If you find this book helpful, consider spreading the word! You could, for instance,
+share it on [Twitter](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdatascienceatthecommandline.com&via=jeroenhjanssens&text=Data%20Science%20at%20the%20Command%20Line%2C%20second%20edition),
+write a review on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912), or
+star the [Github repository](https://github.com/jeroenjanssens/data-science-at-the-command-line). Thank you.
+
+Want to learn from Jeroen in person? Through his company, Data Science Workshops, Jeroen provides in-company training about data science at the command line and related topics such as Python, R, and machine learning. Visit [Data Science Workshops](https://datascienceworkshops.com) for more information.
+
+
+## Description {-}
+
+This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You'll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.
+
+You'll quickly discover why the command line is an agile, scalable, and extensible technology. Even if you're comfortable processing data with Python or R, you'll learn how to greatly improve your data science workflow by leveraging the command line's power. This book is ideal for data scientists, analysts, engineers, system administrators, and researchers.
+
+* Obtain data from websites, APIs, databases, and spreadsheets
+* Perform scrub operations on text, CSV, HTML, XML, and JSON files
+* Explore data, compute descriptive statistics, and create visualizations
+* Manage your data science workflow
+* Create your own tools from one-liners and existing Python or R code
+* Parallelize and distribute data-intensive pipelines
+* Model data with dimensionality reduction, regression, and classification algorithms
+* Leverage the command line from Python, Jupyter, R, RStudio, and Apache Spark
+
+
+
+## Praise {-}
+
+<blockquote>
+    <p>Traditional computer and data science curricula all too often mistake the command line as an obsolete relic instead of teaching it as the modern and vital toolset that it is. Only well into my career did I come to grasp the elegance and power of the command line <span class="keep-together">for easily</span> exploring messy datasets and even creating reproducible data pipelines <span class="keep-together">for work. The</span> first edition of <em>Data Science at the Command Line</em> was one of the <span class="keep-together">most comprehensive and clear</span> references when I was a novice in the art, and now <span class="keep-together">with the second edition,</span> I'm again learning new tools and applications from it.</p>
+    <p data-type="attribution">**Dan Nguyen**, data scientist, former news application developer at ProPublica, and former Lorry I. Lokey Visiting Professor in <span class="keep-together">Professional Journalism at Stanford University</span></p>
+</blockquote>
+
+<blockquote>
+<p>The Unix philosophy of simple tools, each doing one job well, then cleverly piped <span class="keep-together">together, is</span> embodied by the command line. Jeroen expertly discusses how to <span class="keep-together">bring that philosophy</span> into your work in data science, illustrating how the <span class="keep-together">command line is not only the</span> world of file input/output, but also the <span class="keep-together">world of data manipulation, exploration, and even modeling.</span></p>
+
+<p data-type="attribution">**Chris H. Wiggins**, associate professor in the department of applied physics and applied mathematics at Columbia University, <span class="keep-together">and chief data scientist at <span class="plain">The New York Times</span></span></p>
+</blockquote>
+
+<blockquote>
+<p>This book explains how to integrate common data science tasks into a <span class="keep-together">coherent workflow. It’s</span> not just about tactics for breaking down problems, <span class="keep-together">it’s also about strategies for assembling the pieces of the solution.</span></p>
+
+<p data-type="attribution">**John D. Cook**, consultant in applied mathematics, <span class="keep-together">statistics, and technical computing</span></p>
+</blockquote>
+
+<blockquote class="pagebreak-before">
+    <p>Despite what you may hear, most practical data science is still focused on interesting <span class="keep-together">visualizations and insights</span> derived from flat files. Jeroen's book leans into this <span class="keep-together">reality, and helps</span> reduce complexity for data practitioners by showing how <span class="keep-together">time-tested command-line tools</span> can be repurposed for data science.</p>
+    <p data-type="attribution">**Paige Bailey**, principal product manager <span class="keep-together">code intelligence at Microsoft, GitHub</span></p>
+</blockquote>
+
+<blockquote>
+    <p>It's amazing how fast so much data work can be performed at the command line <span class="keep-together">before ever pulling</span> the data into R, Python, or a database. Older technologies like <span class="keep-together">sed and awk are still</span> incredibly powerful and versatile. Until I read <em>Data Science <span class="keep-together">at the Command Line</span></em>, I had only heard of these tools but never saw their full power. <span class="keep-together">Thanks to Jeroen,</span> it's like I now have a secret weapon for working with large data.</p>
+    <p data-type="attribution">**Jared Lander**, chief data scientist at Lander Analytics, organizer of the New York Open Statistical Programming Meetup, <span class="keep-together">and author of <span class="plain">R for Everyone</span></span></p>
+</blockquote>
+
+<blockquote>
+ <p>The command line is an essential tool in every data scientist's toolbox, <span class="keep-together">and knowing it well</span> makes it easy to translate questions you have of your <span class="keep-together">data to real-time insights. Jeroen</span> not only explains the basic Unix philosophy <span class="keep-together">of how to chain together single-purpose</span> tools to arrive at simple solutions <span class="keep-together">for complex problems, but also</span> introduces new command-line tools <span class="keep-together">for data cleaning, analysis, visualization, and modeling</span>.</p>
+ <p data-type="attribution">**Jake Hofman**, senior principal researcher at <span class="keep-together">Microsoft Research,</span> and adjunct assistant professor in the <span class="keep-together">department of applied mathematics at Columbia University</span></p>
+</blockquote>
+
+
+## Dedication {-}
+
+<div style="text-align: center;"> 
+*Once again to my wife, Esther. Without her continued encouragement, support,<br/>
+and patience, this second edition would surely have ended up in* /dev/null*.*
+</div>
+
+## About the Author {-}
+
+**Jeroen Janssens** is an independent data science consultant and instructor. He enjoys visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. Jeroen manages [Data Science Workshops](https://datascienceworkshops.com), a training and coaching firm that organizes open enrollment workshops, in-company courses, inspiration sessions, hackathons, and meetups. Previously, he was an
+assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and various startups in New York City. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He lives with his wife and two kids in Rotterdam, the Netherlands.
+You can find Jeroen on [Twitter](https://twitter.com/jeroenhjanssens), [GitHub](https://github.com/jeroenjanssens), and [LinkedIn](https://www.linkedin.com/in/jeroenjanssens/).
+
+
+## Colophon {-}
+
+The animal on the cover of *Data Science at the Command Line* is a wreathed hornbill (*Rhytidoceros undulatus*). Also known as the bar-pouched wreathed hornbill, the species is found in forests in mainland Southeast Asia and in northeastern India and Bhutan. Hornbills are named for the *casques* that form on the upper part of the birds' bills. No single obvious purpose exists for these hollow, keratizined structures, but they may serve as a means of recognition between members of the species, as an amplifier for the birds' calls, or—because males often exhibit larger casques than females of the species—for gender recognition. Wreathed hornbills can be distinguished from plain-pouched hornbills, to whom they are closely related and otherwise similar in appearance, by a dark bar on the lower part of the wreathed hornbills' throats.
+
+Wreathed hornbills roost in flocks of up to four hundred but mate in monogamous, lifelong partnerships. With help from the males, females seal themselves up in tree cavities behind dung and mud to lay eggs and brood. Through a slit large enough for his beak alone, the male feeds his mate and their young for up to four months. A diet of animal prey becomes predominantly fruit when females and their young leave the nest. Hornbill couples have been known to return to the same nest for as many as nine years.
+
+Many of the animals on O'Reilly covers are endangered; all of them are important to the world.
+
+The color illustration is by Karen Montgomery, based on a black and white engraving from Braukhaus's *Lexicon*. The cover fonts are Gilroy Semibold and Guardian Sans. The text and heading font is Source Sans Pro and the code font is Fira Mono.
+
+

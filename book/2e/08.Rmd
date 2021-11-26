@@ -200,8 +200,8 @@ API calls may be limited to a certain number, or some commands can only have one
 
 \@ref(fig:diagram-parallel-processing) illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything.
 
-```{r diagram-parallel-processing, echo=FALSE, fig.cap="Serial processing, naive parallel processing, and parallel processing with GNU Parallel", fig.align="center"}
-knitr::include_graphics("images/diagram_parallel_processing.png")
+```{r diagram-parallel-processing, echo=FALSE, fig.cap="Serial processing, naive parallel processing, and parallel processing with GNU Parallel", fig.align="center", out.width="60%"}
+knitr::include_graphics("images/dscl_0801.png")
 ```
 
 There are two problems with this naive approach.
@@ -234,7 +234,7 @@ This is `parallel` in its simplest form: the items to loop over are passed via s
 See \@ref(fig:diagram-parallel-output) for an illustration of how `parallel` concurrently distributes input among processes and collects their outputs.
 
 ```{r diagram-parallel-output, echo=FALSE, fig.cap="GNU Parallel concurrently distributes input among processes and collects their outputs", fig.align="center"}
-knitr::include_graphics("images/diagram_parallel_output.png")
+knitr::include_graphics("images/dscl_0802.png")
 ```
 
 As you can see it basically acts as a for loop.
@@ -373,7 +373,7 @@ tree outdir | trim
 See \@ref(fig:diagram-parallel-results) for a pictorial overview of how the `--results` option works.
 
 ```{r diagram-parallel-results, echo=FALSE, fig.cap="GNU Parallel stores output in separate files with the `--results` option", fig.align="center"}
-knitr::include_graphics("images/diagram_parallel_results.png")
+knitr::include_graphics("images/dscl_0803.png")
 ```
 
 When you're running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input.

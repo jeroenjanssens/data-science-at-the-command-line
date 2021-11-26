@@ -462,7 +462,7 @@ Once you've plotted something, you can visit *localhost:8000* in your browser an
 The default port is 8000, but you can change this by specifying it as an argument to `servewd`:
 
 ```{console}
-servewd 9999 > display#!enter=FALSE
+servewd 9999#!enter=FALSE
 C-C#!literal=FALSE
 ```
 

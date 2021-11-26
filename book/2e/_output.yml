@@ -1,5 +1,7 @@
-bookdown::gitbook:
-  css: style.css
+bookdown::bs4_book:
+  template: "template.html"
+  twitter-handle: jeroenhjanssens
+  css: dsatcl2e.css
   split_bib: no
   keep_md: yes
   includes:
@@ -9,20 +11,24 @@ bookdown::gitbook:
     - bin/pygments-filter.py
     - --csl
     - chicago-fullnote-bibliography.csl
-  config:
-    fontsettings:
-      theme: white
-      family: serif
-      size: 2
-    sharing:
-      facebook: no
-      twitter: no
-    toc:
-      collapse: section
-      before: |
-        <li><a href="./">Data Science at the Command Line, 2e</a></li>
-      after: |
-        <li><a href="/1e">The second edition is currently being written. You can read the first edition here.</a></li>
-    edit:
-      link: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/%s
-      text: "Edit"
+  repo:
+    base: https://github.com/jeroenjanssens/data-science-at-the-command-line
+    branch: master
+    subdir: book/2e
+    icon: ""
+  theme:
+    primary: "#0369a1"
+    base_font:
+      google:
+        family: Source Sans Pro
+        wght: [400, 600]
+        ital: [0, 1]
+    heading_font:
+      google:
+        family: Source Sans Pro
+        wght: 600
+    code_font:
+      google:
+        family: Fira Mono
+        wght: [400, 600]
+        local: false

@@ -48,8 +48,8 @@ Although the five steps are discussed in a linear and incremental fashion, in pr
 \@ref(fig:diagram-osemn) illustrates that doing data science is an iterative and non-linear process.
 For example, once you have modeled your data, and you look at the results, you may decide to go back to the scrubbing step to the adjust the features of the dataset.
 
-```{r diagram-osemn, echo=FALSE, fig.cap="Doing data science is an iterative and non-linear process", fig.align="center"}
-knitr::include_graphics("images/diagram_osemn.png")
+```{r diagram-osemn, echo=FALSE, fig.cap="Doing data science is an iterative and non-linear process", fig.align="center", out.width="90%"}
+knitr::include_graphics("images/dscl_0101.png")
 ```
 
 Below I explain what each step entails.

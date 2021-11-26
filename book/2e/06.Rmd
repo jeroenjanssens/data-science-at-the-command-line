@@ -274,7 +274,7 @@ There are five targets: *`all`*, *`data`*, *`data/starwars.csv`*, *`top10`*, and
 \@ref(fig:starwars-image) provides an overview of these targets and the dependencies between them.
 
 ```{r dependencies, echo=FALSE, fig.cap="Dependencies between targets", fig.align="center"}
-knitr::include_graphics("images/diagram_dependencies.png")
+knitr::include_graphics("images/dscl_0602.png")
 ```
 
 Let's discuss each target in turn:

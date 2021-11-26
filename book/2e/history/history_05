@@ -1,3 +1,7 @@
+curl -sL https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_arm64.zip -o pup.zip
+unzip pup.zip
+sudo mv pup /usr/bin/
+rm pup.zip
 cd /data/ch05
 l
 seq 100 |\

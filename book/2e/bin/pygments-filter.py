@@ -6,9 +6,9 @@ from sys import stderr
 
 from pandocfilters import toJSONFilter, Plain, Str, RawBlock, RawInline
 
-from pygments import highlight
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters import HtmlFormatter
+# from pygments import highlight
+# from pygments.lexers import get_lexer_by_name
+# from pygments.formatters import HtmlFormatter
 
 from ansi2html import Ansi2HTMLConverter
 
@@ -20,7 +20,8 @@ ADM_TYPE = {"comment": "NOTE",
             "caution": "WARNING",
             "tip": "TIP"}
 
-conv = Ansi2HTMLConverter(inline=True, scheme="github", linkify=False)
+# conv = Ansi2HTMLConverter(inline=True, scheme="github", linkify=False)
+conv = Ansi2HTMLConverter(inline=True, scheme="solarized", linkify=False)
 
 ref_re = re.compile(f'@ref\(([a-z]+):([a-z\-]+)\)(.*)')
 callout_code_re = re.compile(r'#? ?&lt;([0-9]{1,2})&gt;')

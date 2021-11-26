@@ -8,7 +8,7 @@ language:
     edit: "Edit"
 view: https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/%s
 edit: https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/%s
-new_session: yes
+new_session: true
 before_chapter_script: "_console_start.R"
 after_chapter_script: "_console_exit.R"
 rmd_files:

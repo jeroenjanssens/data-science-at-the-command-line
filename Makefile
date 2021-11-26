@@ -26,7 +26,7 @@ publish-production: hugo
 	netlify deploy --prod --dir www/public
 
 book/2e/%.utf8.md: book/2e/%.Rmd
-	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE, clean = FALSE)'
+	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE, clean = FALSE, new_session = TRUE)'
 
 foreword: book/2e/foreword.utf8.md
 preface: book/2e/preface.utf8.md

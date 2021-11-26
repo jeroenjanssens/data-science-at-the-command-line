@@ -8,67 +8,68 @@ A-->
 # Preface {-}
 
 Data science is an exciting field to work in.
-It’s also still very young.
-Unfortunately, many people, and especially companies, believe that you need new technology in order to tackle the problems posed by data science.
+It’s also still relatively young.
+Unfortunately, many people, and many companies as well, believe that you need new technology to tackle the problems posed by data science.
 However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.
 
-Around five years ago, during my PhD program, I gradually switched from using Microsoft Windows to Linux.
-Because it was a bit scary at first, I started with having both operating systems installed next to each other (known as dual-boot).
-The urge to switch back and forth between Microsoft Windows faded and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch.
-All you’re given is the command line, and it’s up to you what you want to make of it.
-Out of necessity I quickly became very comfortable using the command line.
+During my PhD program, I gradually switched from using Microsoft Windows to using Linux.
+Because this transition was a bit scary at first, I started with having both operating systems installed next to each other (known as a dual-boot).
+The urge to switch back and forth between Microsoft Windows and Linux eventually faded, and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch.
+All you’re given is the command line, and it’s up to you what to make of it.
+Out of necessity, I quickly became very comfortable using the command line.
 Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its ease of use and large community.
-However, the command line is still where I’m spending most of time.
+However, the command line is still where I’m spending most of my time.
 
-It actually hasn’t been too long ago that I realized that the command line is not just for installing software, system configuration, and searching files.
-I started learning about command-line tools such as `cut`, `sort`, and `sed`.
+It actually wasn’t too long ago that I realized that the command line is not just for installing software, configuring systems, and searching files.
+I started learning about tools such as `cut`, `sort`, and `sed`.
 These are examples of command-line tools that take data as input, do something to it, and print the result.
 Ubuntu comes with quite a few of them.
 Once I understood the potential of combining these small tools, I was hooked.
 
-After my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible.
-Thanks to a couple of new, open-source command-line tools including `xml2json`, `jq`, and `json2csv` I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data.
-In September 2013, I decided to write a blog post titled *Seven Command-line Tools for Data Science*, which is available at <http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html>.
-To my surprise, the blog post got quite some attention and I received a lot of suggestions of other command-line tools.
-I started wondering whether this blog post could be turned into a book.
-I’m pleased that, some ten months later, with the help of many talented people (see the acknowledgments below), the answer is a yes.
+After earning my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible.
+Thanks to a couple of new, open source command-line tools including `xml2json`, `jq`, and `json2csv`, I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data.
+
+In September 2013, I decided to write a blog post titled [Seven Command-line Tools for Data Science](http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html).
+To my surprise, the blog post got quite some attention, and I received a lot of suggestions of other command-line tools.
+I started wondering whether the blog post could be turned into a book.
+I was pleased that, some 10 months later, and with the help of many talented people (see the acknowledgments), the answer was yes.
 
 I am sharing this personal story not so much because I think you should know how this book came about, but because I want to you know that I had to learn about the command line as well.
 Because the command line is so different from using a graphical user interface, it can seem scary at first.
-But if I can learn it, then you can as well.
+But if I could learn it, then you can as well.
 No matter what your current operating system is and no matter how you currently work with data, after reading this book you will be able to do data science at the command line.
 If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.
 
 
 ## What to Expect from This Book {-}
 
-In this book, we’re going to obtain, scrub, explore, and model data---a lot of it.
-This book is not so much about how become *better* at those data science tasks.
-There are already great resources available that discuss, for example, when to apply which statistical test or how data can be best visualized.
-Instead, this practical book aims to make you more *efficient* and *productive* by teaching you how to perform those data science tasks at the command line.
 
-While this book discusses over 90 command-line tools, it’s not the tools themselves that matter most.
+In this book, we’re going to obtain, scrub, explore, and model data—a lot of it.
+This book is not so much about how to become _better_ at those data science tasks.
+There are already great resources available that discuss, for example, when to apply which statistical test or how data can best be visualized.
+Instead, this practical book aims to make you more _efficient_ and _productive_ by teaching you how to perform those data science tasks at the command line.
+
+While this book discusses more than 90 command-line tools, it’s not the tools themselves that matter most.
 Some command-line tools have been around for a very long time, while others will be replaced by better ones.
-There are even command-line tools that are being created as you’re reading this.
-In the past nine months, I have discovered many amazing command-line tools.
+New command-line tools are being created even as you’re reading this.
+Over the years, I have discovered many amazing command-line tools.
 Unfortunately, some of them were discovered too late to be included in the book.
 In short, command-line tools come and go.
 But that’s OK.
 
 What matters most is the underlying idea of working with tools, pipes, and data.
-Most of the command-line tools do one thing and do it well.
-This is part the Unix philosophy, which makes several appearances throughout the book.
-Once you become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.
+Most command-line tools do one thing and do it well.
+This is part of the Unix philosophy, which makes several appearances throughout the book.
+Once you have become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.
 
 
 ## Changes for the Second Edition {-}
 
-While the command line as a technology and as a way of working is timeless, some of the tools discussed in the first edition have either: (1) been superseded by newer tools (e.g., `csvkit` has largely been replaced by `xsv`), (2) been abandoned by their developers (e.g., `drake`), or (3) been suboptimal choices (e.g., `weka`).
-Since the first edition was published in October 2014 I have learned a lot, either through my own experience or through the useful feedback from its readers.
-Even though the book is quite niche because it lies at the intersection of two subjects, there remains a steady interest from the data science community.
-I notice this from the many positive messages I receive almost every day.
-By updating the first edition I hope to keep the book relevant for at least another five years.
-Here's a non-exhaustive list of changes I made:
+While the command line as a technology and as a way of working is timeless, some of the tools discussed in the first edition have either  been superseded by newer tools (e.g., `csvkit` has largely been replaced by `xsv`) or abandoned by their developers (e.g., `drake`), or they've been suboptimal choices (e.g., `weka`).
+I have learned a lot since the first edition was published in October 2014, either through my own experience or as a result of the useful feedback from my readers.
+Even though the book is quite niche because it lies at the intersection of two subjects, there remains a steady interest from the data science community, as evidenced by the many positive messages I receive almost every day.
+By updating the first edition, I hope to keep the book relevant for at least another five years.
+Here’s a nonexhaustive list of changes I have made:
 
 * I replaced `csvkit` with `xsv` as much as possible. `xsv` is a much faster alternative to working with CSV files.
 * In Section 2.2 and 3.2 I replaced the VirtualBox image with a Docker image. Docker is a faster and more lightweight way of running an isolated environment than VirtualBox.
@@ -93,6 +94,7 @@ It’s not required to read this material in order to follow along with the book
 
 ## Who This Book Is For {-}
 
+
 This book makes just one assumption about you: that you work with data.
 It doesn’t matter which programming language or statistical computing environment you’re currently using.
 The book explains all the necessary concepts from the beginning.
@@ -102,7 +104,7 @@ The book comes with a Docker image, which is an easy-to-install virtual environm
 It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written.
 You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.
 
-The book contains some code in Bash, Python, and R so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.
+The book contains some code in Bash, Python, and R, so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.
 
 
 ## Conventions Used in This Book {-}
@@ -192,6 +194,104 @@ A-->
 
 
 ### Acknowledgments for the Second Edition (2021) {-}
+
+Seven years have passed since the first edition came out.
+During this time, and especially during the last 13 months, many people have helped me.
+Without them, I would have never been able to write a second edition.
+
+I was once again blessed with three wonderful editors at O'Reilly.
+I would like to thank Sarah "Embrace the deadline" Grey, Jess "Pedal to the metal" Haberman, and Kate "Let it go" Galloway. Their middle names say it all. With their incredible help, I was able to embrace the deadlines, put the pedal to metal when it mattered, and eventually let it go.
+I'd also like to thank their colleagues Angela Rufino, Arthur Johnson, Cassandra Furtado, David Futato, Helen Monroe, Karen Montgomery, Kate Dullea, Kristen Brown, Marie Beaugureau, Marsee Henon, Nick Adams, Regina Wilkinson, Shannon Cutt, Shannon Turlington, and Yasmina Greco, for making the collaboration with O'Reilly such a pleasure.
+
+Despite having an automated process to execute the code and paste back the results (thanks to R Markdown and Docker), the number of mistakes I was able to make is impressive.
+Thank you Aaditya Maruthi, Brian Eoff, Caitlin Hudon, Julia Silge, Mike Dewar, and Shane Reustle for reducing this number immensely.
+Of course, any mistakes left are my responsibility.
+
+Marc Canaleta deserves a special thank you.
+In October 2014, shortly after the first edition came out, Marc invited me to give a one-day workshop about _Data Science at the Command Line_ to his team at Social Point in Barcelona.
+Little did we both know that many workshops would follow.
+It eventually led me to start my own company: Data Science Workshops.
+Every time I teach, I learn something new.
+They probably don't know it, but each student has had an impact, in one way or another, on this book.
+To them I say: thank you.
+I hope I can teach for a very long time.
+
+Captivating conversations, splendid suggestions, and passionate pull requests.
+I greatly appreciate each and every contribution by following generous people:
+Adam Johnson,
+Andre Manook,
+Andrea Borruso,
+Andres Lowrie,
+Andrew Berisha,
+Andrew Gallant,
+Andrew Sanchez,
+Anicet Ebou,
+Anthony Egerton,
+Ben Isenhart,
+[.keep-together]#Chris Wiggins#,
+Chrys Wu,
+Dan Nguyen,
+Darryl Amatsetam,
+Dmitriy Rozhkov,
+Doug Needham,
+Edgar Manukyan,
+Erik Swan,
+Felienne Hermans,
+George Kampolis,
+Giel van Lankveld,
+Greg Wilson,
+Hay Kranen,
+Ioannis Cherouvim,
+Jake Hofman,
+Jannes Muenchow,
+Jared Lander,
+Jay Roaf,
+Jeffrey Perkel,
+Jim Hester,
+Joachim Hagege,
+Joel Grus,
+John Cook,
+John Sandall,
+Joost Helberg,
+Joost van Dijk,
+Joyce Robbins,
+Julian Hatwell,
+Karlo Guidoni,
+Karthik Ram,
+Lissa Hyacinth,
+Longhow Lam,
+Lui Pillmann,
+Lukas Schmid,
+Luke Reding,
+Maarten van Gompel,
+Martin Braun,
+Max Schelker,
+Max Shron,
+Nathan Furnal,
+Noah Chase,
+Oscar Chic,
+Paige Bailey,
+Peter Saalbrink,
+Rich Pauloo,
+Richard Groot,
+Rico Huijbers,
+Rob Doherty,
+Robbert van Vlijmen,
+Russell Scudder,
+Sylvain Lapoix,
+TJ Lavelle,
+Tan Long,
+Thomas Stone,
+Tim O'Reilly,
+Vincent Warmerdam, and
+Yihui Xie.
+
+Throughout this book, and especially in the footnotes and appendix, you'll find hundreds of names.
+These names belong to the authors of the many tools, books, and other resources on which this book stands.
+I'm incredibly grateful for their hard work, regardless of whether that work was done 50 years or 50 days ago.
+
+Above all, I would like to thank my wife Esther, my daughter Florien, and my son Olivier for reminding me daily what truly matters.
+I promise it'll be a few years before I start writing the third edition.
 
 
 ### Acknowledgments for the First Edition (2014) {-}

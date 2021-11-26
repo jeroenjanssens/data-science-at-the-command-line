@@ -1,3 +1,7 @@
+curl -sL https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_arm64.zip -o pup.zip
+unzip pup.zip
+sudo mv pup /usr/bin/
+rm pup.zip
 unalias csvlook
 unalias parallel
 type alias
@@ -139,6 +143,7 @@ tree / | trim
 type trim
 echo {a..z}-{0..9} | fold | trim 5 60
 type ts
+echo seq 5 | sample -d 500 | ts
 type type
 type uniq
 type unpack
