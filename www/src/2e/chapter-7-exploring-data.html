@@ -115,10 +115,10 @@ The output is often brief and textual and can therefore be printed on the comman
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 104K
--rw-r--r-- 1 dst dst  125 Dec  6 21:36 datatypes.csv
--rw-r--r-- 1 dst dst 7.8K Dec  6 21:36 tips.csv
--rw-r--r-- 1 dst dst  83K Dec  6 21:36 venture.csv
--rw-r--r-- 1 dst dst 4.6K Dec  6 21:36 venture-wide.csv</pre>
+-rw-r--r-- 1 dst dst  125 Dec 14 11:49 datatypes.csv
+-rw-r--r-- 1 dst dst 7.8K Dec 14 11:49 tips.csv
+-rw-r--r-- 1 dst dst  83K Dec 14 11:49 venture.csv
+-rw-r--r-- 1 dst dst 4.6K Dec 14 11:49 venture-wide.csv</pre>
 <p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -183,21 +183,21 @@ When the dataset contains no header, you’re best off using the <code>header</c
 I recommend using <code>less</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-less" role="doc-biblioref"&gt;Mark Nudelman, &lt;em&gt;&lt;span class="nocase"&gt;less&lt;/span&gt; – Opposite of &lt;span class="nocase"&gt;more&lt;/span&gt;&lt;/em&gt;, version 551, 2019, &lt;/a&gt;&lt;a href="https://www.greenwoodsoftware.com/less" role="doc-biblioref"&gt;https://www.greenwoodsoftware.com/less&lt;/a&gt;.&lt;/p&gt;'><sup>90</sup></a></span>, which allows you to interactively inspect your data in the command line.
 You can prevent long lines (as with <em>venture.csv</em>) from wrapping by specifying the <code>-S</code> option:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">less</span> -S <span style="text-decoration: underline">venture.csv</span></pre>
-<pre>,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIME_FORMAT_DESC,TIME_PERIOD_DESC,OBS_STATU<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
-</span>al,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+<pre>FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIM<span style="font-style: italic">&gt;
+</span>A,P1Y,2015,INV_VEN,PC_GDP,CZ,,0.002,Annual,Annual,Year 2015,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2007,INV_VEN,PC_GDP,DE,,0.034,Annual,Annual,Year 2007,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2008,INV_VEN,PC_GDP,DE,,0.039,Annual,Annual,Year 2008,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2009,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2009,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2010,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2010,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2011,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2011,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2012,INV_VEN,PC_GDP,DE,,0.021,Annual,Annual,Year 2012,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2013,INV_VEN,PC_GDP,DE,,0.023,Annual,Annual,Year 2013,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2014,INV_VEN,PC_GDP,DE,,0.021,Annual,Annual,Year 2014,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2015,INV_VEN,PC_GDP,DE,,0.025,Annual,Annual,Year 2015,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2007,INV_VEN,PC_GDP,DK,,0.092,Annual,Annual,Year 2007,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2008,INV_VEN,PC_GDP,DK,,0.074,Annual,Annual,Year 2008,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2009,INV_VEN,PC_GDP,DK,,0.051,Annual,Annual,Year 2009,No data,"Venture ca<span style="font-style: italic">&gt;
+</span>A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<span style="font-style: italic">&gt;
 </span>:                   </pre>
 <p>The greater-than signs on the right indicate that you can scroll horizontally.
 You can scroll up and down by pressing <strong><code>Up</code></strong> and <strong><code>Down</code></strong>.
@@ -1288,7 +1288,7 @@ Feel free to read that chapter later if you can’t wait to start modeling your 
     <div class="row">
       <div class="d-none d-lg-block col-lg-2 sidebar"></div>
       <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
-        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 14, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
       </div>
       <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
     </div>

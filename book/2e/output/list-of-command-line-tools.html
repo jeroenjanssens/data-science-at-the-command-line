@@ -205,15 +205,15 @@ body is /usr/bin/dsutils/body
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 10 | <span style="color: #5f8700">header</span> -a <span style="color: #af8700">'values'</span> | <span style="color: #5f8700">body</span> shuf
 values
 3
-1
+7
+10
 9
-2
 5
-8
 4
 6
-7
-10</pre>
+8
+2
+1</pre>
 </div>
 <div id="cat" class="section level2 unnumbered">
 <h2>cat<a class="anchor" aria-label="anchor" href="#cat"><i class="fas fa-link"></i></a>
@@ -531,9 +531,9 @@ More information: <a href="https://github.com/jeroenjanssens/dsutils" class="uri
 dseq is /usr/bin/dsutils/dseq
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">dseq</span> 3
-2021-12-07
-2021-12-08
-2021-12-09</pre>
+2021-12-15
+2021-12-16
+2021-12-17</pre>
 </div>
 <div id="echo" class="section level2 unnumbered">
 <h2>echo<a class="anchor" aria-label="anchor" href="#echo"><i class="fas fa-link"></i></a>
@@ -774,7 +774,7 @@ hostname is /usr/bin/hostname
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> hostname
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">hostname</span>
-5b6ce74548d7
+2c3edb64827b
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">hostname</span> -i
 172.17.0.2</pre>
@@ -835,12 +835,12 @@ r-datasets.db  tmnt-missing-newline.csv  top2000.xlsx
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 924K
--rw-r--r-- 1 dst dst 627K Dec  6 21:50 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
--rw-r--r-- 1 dst dst 189K Dec  6 21:50 r-datasets.db
--rw-r--r-- 1 dst dst  149 Dec  6 21:50 tmnt-basic.csv
--rw-r--r-- 1 dst dst  148 Dec  6 21:50 tmnt-missing-newline.csv
--rw-r--r-- 1 dst dst  181 Dec  6 21:50 tmnt-with-header.csv
--rw-r--r-- 1 dst dst  91K Dec  6 21:50 top2000.xlsx</pre>
+-rw-r--r-- 1 dst dst 627K Dec 14 12:03 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec 14 12:03 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec 14 12:03 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec 14 12:03 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec 14 12:03 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec 14 12:03 top2000.xlsx</pre>
 </div>
 <div id="less" class="section level2 unnumbered">
 <h2>less<a class="anchor" aria-label="anchor" href="#less"><i class="fas fa-link"></i></a>
@@ -1002,11 +1002,11 @@ paste is /usr/bin/paste
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> paste
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">paste</span> -d, <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">seq</span> 5<span style="color: #af005f">)</span> <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">dseq</span> 5<span style="color: #af005f">)</span>
-1,2021-12-07
-2,2021-12-08
-3,2021-12-09
-4,2021-12-10
-5,2021-12-11
+1,2021-12-15
+2,2021-12-16
+3,2021-12-17
+4,2021-12-18
+5,2021-12-19
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">paste</span> -sd+
 1+2+3+4+5</pre>
@@ -1180,12 +1180,12 @@ sample is /usr/local/bin/sample
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">sample</span> --help
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 1000 | <span style="color: #5f8700">sample</span> -r 0.01 | <span style="color: #5f8700">trim</span> 5
-260
-270
-283
-331
-338
-… with 7 more lines</pre>
+160
+300
+337
+340
+434
+… with 6 more lines</pre>
 </div>
 <div id="scp" class="section level2 unnumbered">
 <h2>scp<a class="anchor" aria-label="anchor" href="#scp"><i class="fas fa-link"></i></a>
@@ -1265,19 +1265,19 @@ shuf is /usr/bin/shuf
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> shuf
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> {a..z} | <span style="color: #5f8700">tr</span> <span style="color: #af8700">' '</span> <span style="color: #af8700">'\n'</span> | <span style="color: #5f8700">shuf</span> | <span style="color: #5f8700">trim</span> 5
-v
-o
-u
 s
-d
+a
+k
+x
+y
 … with 21 more lines
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">shuf</span> -i 1-100 | <span style="color: #5f8700">trim</span> 5
-26
-13
-7
-71
-9
+61
+60
+5
+92
+10
 … with 95 more lines</pre>
 </div>
 <div id="skll" class="section level2 unnumbered">
@@ -1537,7 +1537,7 @@ More information: <a href="https://joeyh.name/code/moreutils" class="uri">https:
 ts is /usr/bin/ts
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> seq 5 | <span style="color: #5f8700">sample</span> -d 500 | <span style="color: #5f8700">ts</span>
-Dec 06 21:54:55 seq 5</pre>
+Dec 14 12:07:20 seq 5</pre>
 </div>
 <div id="type" class="section level2 unnumbered">
 <h2>type<a class="anchor" aria-label="anchor" href="#type"><i class="fas fa-link"></i></a>
@@ -1951,7 +1951,7 @@ zsh is /usr/bin/zsh
     <div class="row">
       <div class="d-none d-lg-block col-lg-2 sidebar"></div>
       <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
-        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 14, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
       </div>
       <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
     </div>

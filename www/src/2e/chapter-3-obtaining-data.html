@@ -118,12 +118,12 @@ In this chapter, I discuss several tools that help tackle this from the command 
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 924K
--rw-r--r-- 1 dst dst 627K Dec  6 21:30 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
--rw-r--r-- 1 dst dst 189K Dec  6 21:30 r-datasets.db
--rw-r--r-- 1 dst dst  149 Dec  6 21:30 tmnt-basic.csv
--rw-r--r-- 1 dst dst  148 Dec  6 21:30 tmnt-missing-newline.csv
--rw-r--r-- 1 dst dst  181 Dec  6 21:30 tmnt-with-header.csv
--rw-r--r-- 1 dst dst  91K Dec  6 21:30 top2000.xlsx</pre>
+-rw-r--r-- 1 dst dst 627K Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec 14 11:46 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec 14 11:46 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx</pre>
 <p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -178,8 +178,8 @@ DOCTYPE html&gt;
 ,"site.styles":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","us…
 "ext.growthExperiments.SuggestedEditSession"];&lt;/script&gt;
 &lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…
-100  249k  100  249k    0     0   846k      0 --:--:-- --:--:-- --:--:--  860k
-… with 1766 more lines</pre>
+100  249k    0  249k    0     0   853k      0 --:--:-- --:--:-- --:--:--  867k
+… with 1754 more lines</pre>
 <p><span class="callout">➊</span> Remember, <code>trim</code> is used only to make the output fit nicely in the book.</p>
 <p>As you can see, <code>curl</code> downloads the raw HTML returned by Wikipedia’s server; no interpretation is being done and all the contents is immediately printed on standard output.
 Because of the URL, you’d think that this article would list all the windmills in the Netherlands.
@@ -204,13 +204,13 @@ The filename will be based on the last part of the URL.</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 1.4M
--rw-r--r-- 1 dst dst 432K Dec  6 21:30 List_of_windmills_in_Friesland
--rw-r--r-- 1 dst dst 627K Dec  6 21:30 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
--rw-r--r-- 1 dst dst 189K Dec  6 21:30 r-datasets.db
--rw-r--r-- 1 dst dst  149 Dec  6 21:30 tmnt-basic.csv
--rw-r--r-- 1 dst dst  148 Dec  6 21:30 tmnt-missing-newline.csv
--rw-r--r-- 1 dst dst  181 Dec  6 21:30 tmnt-with-header.csv
--rw-r--r-- 1 dst dst  91K Dec  6 21:30 top2000.xlsx</pre>
+-rw-r--r-- 1 dst dst 432K Dec 14 11:46 List_of_windmills_in_Friesland
+-rw-r--r-- 1 dst dst 627K Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec 14 11:46 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec 14 11:46 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx</pre>
 <p>If you don’t like that filename then you can use the <code>-o</code> option together with a filename or redirect the output to a file yourself:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color: #af8700">&gt;</span> fries
 land.html</pre>
@@ -239,7 +239,7 @@ When the URL is password protected, you can specify a username and a password as
 <p>Or how about the DICT protocol, which allows you to access various dictionaries and lookup definitions.
 Here’s the definition of “windmill” according to the Collaborative International Dictionary of English:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"dict://dict.org/d:windmill"</span> | <span style="color: #5f8700">trim</span>
-220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 &lt;auth.mime&gt; &lt;8122421…
+220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 &lt;auth.mime&gt; &lt;8291886…
 250 ok
 150 1 definitions retrieved
 151 "Windmill" gcide "The Collaborative International Dictionary of English v.0…
@@ -274,7 +274,7 @@ x-content-type-options: nosniff
 cache-control: no-cache, no-store, max-age=0, must-revalidate
 pragma: no-cache
 expires: Mon, 01 Jan 1990 00:00:00 GMT
-date: Mon, 06 Dec 2021 20:30:50 GMT
+date: Tue, 14 Dec 2021 10:46:22 GMT
 location: https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;feature=youtu.be
 content-length: 0
 x-frame-options: SAMEORIGIN
@@ -458,7 +458,7 @@ To extract its data, you invoke <code>in2csv</code> as follows:</p>
 x</span>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 41579  100 41579    0     0  87167      0 --:--:-- --:--:-- --:--:-- 88278
+100 41744  100 41744    0     0  46024      0 --:--:-- --:--:-- --:--:-- 46228
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">in2csv</span> <span style="text-decoration: underline">top2000.xlsx</span> | <span style="color: #5f8700">tee</span> top2000.csv | <span style="color: #5f8700">trim</span>
 BadZipFile: File is not a zip file</pre>
@@ -600,7 +600,7 @@ sapi.org_apikey</span><span style="color: #af005f"></span><span style="color: #a
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">jq</span> <span style="color: #af8700">'.'</span> | <span style="color: #5f8700">trim</span> 30
 {
   "status": "ok",
-  "totalResults": 9668,
+  "totalResults": 9653,
   "articles": [
     {
       "source": {
@@ -776,7 +776,7 @@ Feel free to skip this and go to <a href="chapter-5-scrubbing-data.html#chapter-
     <div class="row">
       <div class="d-none d-lg-block col-lg-2 sidebar"></div>
       <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
-        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 14, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
       </div>
       <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
     </div>

@@ -130,10 +130,10 @@ In this chapter, you’ll learn about:</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 20K
--rw-r--r-- 1 dst dst  126 Dec  6 21:40 emails.txt
--rw-r--r-- 1 dst dst   61 Dec  6 21:40 movies.txt
--rwxr-xr-x 1 dst dst  125 Dec  6 21:40 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">slow.sh</span>*
--rw-r--r-- 1 dst dst 5.1K Dec  6 21:40 users.json</pre>
+-rw-r--r-- 1 dst dst  126 Dec 14 11:54 emails.txt
+-rw-r--r-- 1 dst dst   61 Dec 14 11:54 movies.txt
+-rwxr-xr-x 1 dst dst  125 Dec 14 11:54 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">slow.sh</span>*
+-rw-r--r-- 1 dst dst 5.1K Dec 14 11:54 users.json</pre>
 <p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -290,16 +290,16 @@ Let’s run <code>slow.sh</code> three times:</p>
 [3] 388
 [4] 391
  
-<span style="font-weight: bold">$</span> Dec 06 21:41:08 Starting job A
-Dec 06 21:41:08 Starting job B
-Dec 06 21:41:08 Starting job C
-Dec 06 21:41:10 Job C took 2 seconds
+<span style="font-weight: bold">$</span> Dec 14 11:54:18 Starting job A
+Dec 14 11:54:18 Starting job B
+Dec 14 11:54:18 Starting job C
+Dec 14 11:54:20Dec 14 11:54:20 Job B took 2 seconds
+ Job C took 2 seconds
  
+[3]  - done       ./slow.sh $i
+<span style="font-weight: bold">$</span>
 [4]  + done       ./slow.sh $i
-<span style="font-weight: bold">$</span> Dec 06 21:41:11 Job B took 3 seconds
- 
-[3]  + done       ./slow.sh $i
-<span style="font-weight: bold">$</span> Dec 06 21:41:12 Job A took 4 seconds
+<span style="font-weight: bold">$</span> Dec 14 11:54:23 Job A took 5 seconds
  
 [2]  + done       ./slow.sh $i
 <span style="font-weight: bold">$</span></pre>
@@ -339,15 +339,15 @@ It should say “GNU parallel.”
 <p>Before I go into the details of <code>parallel</code>, here’s a little teaser to show you how easy it is to replace the for-loop from earlier:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 0 2 100 | <span style="color: #5f8700">parallel</span> <span style="color: #af8700">"echo {}^2 | bc"</span> | <span style="color: #5f8700">trim</span>
 0
-4
 16
+4
 36
-100
 64
+100
 144
 196
-256
 324
+400
 … with 41 more lines</pre>
 <p>This is <code>parallel</code> in its simplest form: the items to loop over are passed via standard input and there aren’t any arguments other than the command that <code>parallel</code> needs to run.
 See Figure <a href="chapter-8-parallel-pipelines.html#fig:diagram-parallel-output">8.2</a> for an illustration of how <code>parallel</code> concurrently distributes input among processes and collects their outputs.</p>
@@ -360,12 +360,12 @@ Figure 8.2: GNU Parallel concurrently distributes input among processes and coll
 <p>As you can see it basically acts as a for loop.
 Here’s another teaser, which replaces the for loop from the previous section.</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --jobs 2 <span style="text-decoration: underline">./slow.sh</span> ::: {A..C}
-Dec 06 21:41:19 Starting job B
-Dec 06 21:41:22 Job B took 3 seconds
-Dec 06 21:41:19 Starting job A
-Dec 06 21:41:23 Job A took 4 seconds
-Dec 06 21:41:23 Starting job C
-Dec 06 21:41:24 Job C took 1 seconds</pre>
+Dec 14 11:54:28 Starting job B
+Dec 14 11:54:31 Job B took 3 seconds
+Dec 14 11:54:28 Starting job A
+Dec 14 11:54:33 Job A took 5 seconds
+Dec 14 11:54:32 Starting job C
+Dec 14 11:54:37 Job C took 5 seconds</pre>
 <p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
 <p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality.
 (Perhaps too much.)
@@ -427,8 +427,8 @@ Having said that, they do enable additional functionality, such as iterating ove
 For example, with <code>{/}</code>, only the basename of the filename will be used:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">find</span> <span style="text-decoration: underline">/data/ch03</span> -type f | <span style="color: #5f8700">parallel</span> echo <span style="color: #af8700">'{#}\) \"{}\" has basename \"{/}\"'</span> <span class="callout">➊</span>
 1) "/data/ch03/tmnt-basic.csv" has basename "tmnt-basic.csv"
-3) "/data/ch03/tmnt-missing-newline.csv" has basename "tmnt-missing-newline.csv"
 2) "/data/ch03/logs.tar.gz" has basename "logs.tar.gz"
+3) "/data/ch03/tmnt-missing-newline.csv" has basename "tmnt-missing-newline.csv"
 4) "/data/ch03/r-datasets.db" has basename "r-datasets.db"
 5) "/data/ch03/top2000.xlsx" has basename "top2000.xlsx"
 6) "/data/ch03/tmnt-with-header.csv" has basename "tmnt-with-header.csv"</pre>
@@ -459,14 +459,14 @@ The optimal number of jobs to run concurrently depends on the actual commands yo
 <!-- #TODO: Figure out where to type concurrently instead of parallel. And make sure all occurences of parallel are surrounded by backticks -->
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> -j0 <span style="color: #af8700">"echo Hi {}"</span>
 Hi 1
-Hi 3
 Hi 2
+Hi 3
 Hi 4
 Hi 5</pre>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> -j200% <span style="color: #af8700">"echo Hi {}"</span>
 Hi 1
-Hi 3
 Hi 2
+Hi 3
 Hi 4
 Hi 5</pre>
 <p>If you specify <code>-j1</code>, then the commands will be run in serial. Even though this doesn’t do the name of the tool of justice, it still has its uses. For example, when you need to access an API which only allows one connection at a time. If you specify <code>-j0</code>, then parallel will run as many jobs in parallel as possible. This can be compared to your loop with the ampersand. This is not advised.</p>
@@ -612,7 +612,7 @@ ublicDnsName, state: .State.Name}'</span></pre>
 <p>The possible states of an EC2 instance are: <em><code>pending</code></em>, <em><code>running</code></em>, <em><code>shutting-down</code></em>, <em><code>terminated</code></em>, <em><code>stopping</code></em>, and <em><code>stopped</code></em>.
 Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:</p>
 <pre><span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">aws</span> ec2 describe-instances | <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.Reservations[].Instances[] | select(.Stat
-e.Name=="running") | .PublicDnsName'</span> | tee hostnames
+e.Name=="running") | .PublicDnsName'</span> | <span style="color: #5f8700">tee</span> hostnames
 ec2-54-88-122-140.compute-1.amazonaws.com
 ec2-54-88-89-208.compute-1.amazonaws.com</pre>
 <p>(Without the <code>-r</code> or <code>--raw-output</code> option, the hostnames would have been surrounded by double quotes.)
@@ -727,55 +727,48 @@ Still, I hope it’s clear from this that <code>parallel</code> can be incredibl
 <p>The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results.
 Imagine that you want to count for each borough of New York City, how often they receive service calls on 311.
 You don’t have that data on your local machine yet, so let’s first obtain it from the free <a href="https://data.cityofnewyork.us/">NYC Open Data API</a>:</p>
-<pre><span style="font-weight: bold">$</span> seq 0 100 900 | parallel  "curl -sL 'http://data.cityofnewyork.us/resource/erm
-2-nwe9.json?\$limit=100&amp;\$offset={}'</pre>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 0 100 900 | <span style="color: #5f8700">parallel</span>  <span style="color: #af8700">"curl -sL 'http://data.cityofnewyork.us/resource/erm
+2-nwe9.json?</span><span style="color: #00afaf">\$</span><span style="color: #af8700">limit=100&amp;</span><span style="color: #00afaf">\$</span><span style="color: #af8700">offset={}' | jq -c '.[]' | gzip &gt; nyc-{#}.json.gz"</span></pre>
 <p>You now have 10 files containing compressed JSON data:</p>
-<pre><span style="color: #af8700">2-nwe9.json?</span><span style="color: #00afaf">\$</span><span style="color: #af8700">limit=100&amp;</span><span style="color: #00afaf">\$</span><span style="color: #af8700">offset={}' | jq -c '.[]' | gzip &gt; nyc-{#}.json.gz"</span>
-l nyc*json.gz
- 
-<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> nyc<span style="color: #0087ff">*</span>json.gz
--rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-10.json.gz</span>
--rw-r--r-- 1 dst dst 13K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-1.json.gz</span>
--rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-2.json.gz</span>
--rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-3.json.gz</span>
--rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-4.json.gz</span>
--rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-5.json.gz</span>
--rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-6.json.gz</span>
--rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-7.json.gz</span>
--rw-r--r-- 1 dst dst 15K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-8.json.gz</span>
--rw-r--r-- 1 dst dst 16K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-9.json.gz</span></pre>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> nyc<span style="color: #0087ff">*</span>json.gz
+-rw-r--r-- 1 dst dst 16K Dec 14 11:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-10.json.gz</span>
+-rw-r--r-- 1 dst dst 13K Dec 14 11:56 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-1.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec 14 11:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-2.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec 14 11:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-3.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec 14 11:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-4.json.gz</span>
+-rw-r--r-- 1 dst dst 16K Dec 14 11:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-5.json.gz</span>
+-rw-r--r-- 1 dst dst 16K Dec 14 11:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-6.json.gz</span>
+-rw-r--r-- 1 dst dst 16K Dec 14 11:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-7.json.gz</span>
+-rw-r--r-- 1 dst dst 16K Dec 14 11:56 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-8.json.gz</span>
+-rw-r--r-- 1 dst dst 15K Dec 14 11:56 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-9.json.gz</span></pre>
 <p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file.
 Using <code>zcat</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-zcat" role="doc-biblioref"&gt;Paul Eggert, &lt;em&gt;&lt;span class="nocase"&gt;zcat&lt;/span&gt; – Decompress and Concatenate Files to Standard Output&lt;/em&gt;, version 1.10, 2021, &lt;/a&gt;&lt;a href="https://www.nongnu.org/zutils/zutils.html" role="doc-biblioref"&gt;https://www.nongnu.org/zutils/zutils.html&lt;/a&gt;.&lt;/p&gt;'><sup>104</sup></a></span>, you directly print the contents of a compress file:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> <span style="text-decoration: underline">nyc-1.json.gz</span> | <span style="color: #5f8700">trim</span>
-{"unique_key":"52707712","created_date":"2021-12-05T02:00:55.000","agency":"DOH…
-{"unique_key":"52703819","created_date":"2021-12-05T02:00:41.000","agency":"NYP…
-{"unique_key":"52707505","created_date":"2021-12-05T02:00:29.000","agency":"NYP…
-{"unique_key":"52704440","created_date":"2021-12-05T02:00:26.000","agency":"NYP…
-{"unique_key":"52705496","created_date":"2021-12-05T02:00:11.000","agency":"NYP…
-{"unique_key":"52706548","created_date":"2021-12-05T01:59:58.000","agency":"NYP…
-{"unique_key":"52708557","created_date":"2021-12-05T01:59:30.000","agency":"NYP…
-{"unique_key":"52703483","created_date":"2021-12-05T01:59:18.000","agency":"NYP…
-{"unique_key":"52707750","created_date":"2021-12-05T01:59:11.000","agency":"NYP…
-{"unique_key":"52703484","created_date":"2021-12-05T01:59:03.000","agency":"NYP…
+{"unique_key":"52779474","created_date":"2021-12-13T02:10:31.000","agency":"NYP…
+{"unique_key":"52776058","created_date":"2021-12-13T02:09:50.000","agency":"NYP…
+{"unique_key":"52775678","created_date":"2021-12-13T02:08:53.000","agency":"NYP…
+{"unique_key":"52782776","created_date":"2021-12-13T02:07:37.000","closed_date"…
+{"unique_key":"52778629","created_date":"2021-12-13T02:07:32.000","agency":"NYP…
+{"unique_key":"52776019","created_date":"2021-12-13T02:07:23.000","agency":"NYP…
+{"unique_key":"52776002","created_date":"2021-12-13T02:04:07.000","agency":"NYP…
+{"unique_key":"52775975","created_date":"2021-12-13T02:02:46.000","agency":"NYP…
+{"unique_key":"52776757","created_date":"2021-12-13T02:01:36.000","agency":"NYP…
+{"unique_key":"52780492","created_date":"2021-12-13T02:01:35.000","agency":"NYP…
 … with 90 more lines</pre>
 <p>Let’s see what one line of JSON looks like using:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> <span style="text-decoration: underline">nyc-1.json.gz</span> | <span style="color: #5f8700">head</span> -n 1
-{"unique_key":"52707712","created_date":"2021-12-05T02:00:55.000","agency":"DOHM
-H","agency_name":"Department of Health and Mental Hygiene","complaint_type":"Rod
-ent","descriptor":"Rat Sighting","location_type":"Single Room Occupancy (SRO)","
-incident_zip":"10455","incident_address":"455 EAST  148 STREET","street_name":"E
-AST  148 STREET","cross_street_1":"BERGEN AVENUE","cross_street_2":"BROOK AVENUE
-","intersection_street_1":"BERGEN AVENUE","intersection_street_2":"BROOK AVENUE"
-,"address_type":"ADDRESS","city":"BRONX","landmark":"EAST  148 STREET","status":
-"In Progress","community_board":"01 BRONX","bbl":"2022930058","borough":"BRONX",
-"x_coordinate_state_plane":"1007353","y_coordinate_state_plane":"236096","open_d
-ata_channel_type":"PHONE","park_facility_name":"Unspecified","park_borough":"BRO
-NX","latitude":"40.814674509013855","longitude":"-73.91653656075259","location":
-{"latitude":"40.814674509013855","longitude":"-73.91653656075259","human_address
-":"{\"address\": \"\", \"city\": \"\", \"state\": \"\", \"zip\": \"\"}"},":@comp
-uted_region_efsh_h5xi":"10933",":@computed_region_f5dn_yrer":"49",":@computed_re
-gion_yeji_bk3q":"5",":@computed_region_92fq_4b7q":"35",":@computed_region_sbqj_e
-nih":"23"}</pre>
+{"unique_key":"52779474","created_date":"2021-12-13T02:10:31.000","agency":"NYPD
+","agency_name":"New York City Police Department","complaint_type":"Encampment",
+"descriptor":"N/A","location_type":"Subway","status":"In Progress","community_bo
+ard":"Unspecified QUEENS","borough":"QUEENS","x_coordinate_state_plane":"1039396
+","y_coordinate_state_plane":"195150","open_data_channel_type":"MOBILE","park_fa
+cility_name":"Unspecified","park_borough":"QUEENS","bridge_highway_name":"E","br
+idge_highway_segment":"Mezzanine","latitude":"40.702146602995356","longitude":"-
+73.80111202259863","location":{"latitude":"40.702146602995356","longitude":"-73.
+80111202259863","human_address":"{\"address\": \"\", \"city\": \"\", \"state\":
+\"\", \"zip\": \"\"}"},":@computed_region_efsh_h5xi":"24340",":@computed_region_
+f5dn_yrer":"41",":@computed_region_yeji_bk3q":"3",":@computed_region_92fq_4b7q":
+"6",":@computed_region_sbqj_enih":"61"}</pre>
 <p>If you were to get the total number of service calls per borough on your local machine, you would run the following command:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> nyc<span style="color: #0087ff">*</span>json.gz | <span class="callout">➊</span>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.borough'</span> | <span class="callout">➋</span>
@@ -786,12 +779,11 @@ nih":"23"}</pre>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvlook</span>
 │ borough       │ count │
 ├───────────────┼───────┤
-│ manhattan     │   316 │
-│ brooklyn      │   264 │
-│ queens        │   215 │
-│ bronx         │   172 │
-│ staten_island │    31 │
-│ unspecified   │     2 │</pre>
+│ brooklyn      │   285 │
+│ queens        │   271 │
+│ manhattan     │   226 │
+│ bronx         │   200 │
+│ staten_island │    18 │</pre>
 <p><span class="callout">➊</span> Expand all compressed files using <code>zcat</code>.
 <br><span class="callout">➋</span> For each call, extract the name of the borough using <code>jq</code>.
 <br><span class="callout">➌</span> Convert borough names to lowercase and replace spaces with underscores (because <code>awk</code> splits on whitespace by default).
@@ -826,12 +818,11 @@ staten_island,2</pre>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvsort</span> -rc count | <span style="color: #5f8700">csvlook</span>
 │ borough       │ count │
 ├───────────────┼───────┤
-│ manhattan     │   316 │
-│ brooklyn      │   264 │
-│ queens        │   215 │
-│ bronx         │   172 │
-│ staten_island │    31 │
-│ unspecified   │     2 │</pre>
+│ brooklyn      │   285 │
+│ queens        │   271 │
+│ manhattan     │   226 │
+│ bronx         │   200 │
+│ staten_island │    18 │</pre>
 <p>Or, if you prefer to use SQL to aggregate results, you can use <code>csvsql</code> as discussed in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a>:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> nyc<span style="color: #0087ff">*</span>csv | <span style="color: #5f8700">header</span> -a borough,count |
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvsql</span> --query <span style="color: #af8700">'SELECT borough, SUM(count) AS count FROM stdin GROUP BY boroug
@@ -839,12 +830,11 @@ h ORDER BY count DESC'</span> |
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvlook</span>
 │ borough       │ count │
 ├───────────────┼───────┤
-│ manhattan     │   316 │
-│ brooklyn      │   264 │
-│ queens        │   215 │
-│ bronx         │   172 │
-│ staten_island │    31 │
-│ unspecified   │     2 │</pre>
+│ brooklyn      │   285 │
+│ queens        │   271 │
+│ manhattan     │   226 │
+│ bronx         │   200 │
+│ staten_island │    18 │</pre>
 </div>
 </div>
 <div id="summary-7" class="section level2" number="8.5">
@@ -920,7 +910,7 @@ In the next chapter I’m going to cover the fourth step of the OSEMN model: mod
     <div class="row">
       <div class="d-none d-lg-block col-lg-2 sidebar"></div>
       <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
-        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 14, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
       </div>
       <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
     </div>

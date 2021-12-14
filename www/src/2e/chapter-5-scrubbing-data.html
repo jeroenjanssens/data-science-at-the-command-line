@@ -122,13 +122,13 @@ This chapter is more structured like a cookbook, where the focus is on the probl
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 200K
--rw-r--r-- 1 dst dst 164K Dec  6 21:33 alice.txt
--rw-r--r-- 1 dst dst 4.5K Dec  6 21:33 iris.csv
--rw-r--r-- 1 dst dst  179 Dec  6 21:33 irismeta.csv
--rw-r--r-- 1 dst dst  160 Dec  6 21:33 names-comma.csv
--rw-r--r-- 1 dst dst  129 Dec  6 21:33 names.csv
--rw-r--r-- 1 dst dst 7.8K Dec  6 21:33 tips.csv
--rw-r--r-- 1 dst dst 5.1K Dec  6 21:33 users.json</pre>
+-rw-r--r-- 1 dst dst 164K Dec 14 11:47 alice.txt
+-rw-r--r-- 1 dst dst 4.5K Dec 14 11:47 iris.csv
+-rw-r--r-- 1 dst dst  179 Dec 14 11:47 irismeta.csv
+-rw-r--r-- 1 dst dst  160 Dec 14 11:47 names-comma.csv
+-rw-r--r-- 1 dst dst  129 Dec 14 11:47 names.csv
+-rw-r--r-- 1 dst dst 7.8K Dec 14 11:47 tips.csv
+-rw-r--r-- 1 dst dst 5.1K Dec 14 11:47 users.json</pre>
 <p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 <p>Before I dive into the actual transformations, I’d like to demonstrate their ubiquity when working at the command line.</p>
@@ -422,17 +422,13 @@ In that case, generating a smaller sample from the data might be useful.
 This is where <code>sample</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-sample" role="doc-biblioref"&gt;Jeroen Janssens, &lt;em&gt;&lt;span class="nocase"&gt;sample&lt;/span&gt; – Filter Lines from Standard Input According to Some Probability, with a Given Delay, and for a Certain Duration&lt;/em&gt;, version 0.2.4, 2021, &lt;/a&gt;&lt;a href="https://github.com/jeroenjanssens/sample" role="doc-biblioref"&gt;https://github.com/jeroenjanssens/sample&lt;/a&gt;.&lt;/p&gt;'><sup>72</sup></a></span> comes in handy.
 The main purpose of <code>sample</code> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> -f <span style="color: #af8700">"Line %g"</span> 1000 | <span style="color: #5f8700">sample</span> -r 1%
-Line 24
-Line 140
-Line 285
-Line 439
-Line 466
-Line 554
-Line 596
-Line 611
-Line 855
-Line 880
-Line 978</pre>
+Line 45
+Line 223
+Line 355
+Line 369
+Line 438
+Line 807
+Line 813</pre>
 <p>Here, every input line has a one percent chance of being printed.
 This percentage can also be specified as a fraction (namely <code>1/100</code>) or as a probability (namely <code>0.01</code>).</p>
 <p><code>sample</code> has two other purposes, which can be useful when you’re debugging your pipeline.
@@ -441,12 +437,12 @@ This comes in handy when the input is a constant stream (for example, the Wikipe
 Secondly, you can put a timer on <code>sample</code>, so that you don’t have to kill the ongoing process manually.
 For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> -f <span style="color: #af8700">"Line %g"</span> 1000 | <span style="color: #5f8700">sample</span> -r 1% -d 1000 -s 5 | <span style="color: #5f8700">ts</span> <span class="callout">➊</span>
-Dec 06 21:34:05 Line 66
-Dec 06 21:34:06 Line 396
-Dec 06 21:34:07 Line 484
-Dec 06 21:34:08 Line 540
-Dec 06 21:34:09 Line 637
-Dec 06 21:34:10 Line 679</pre>
+Dec 14 11:48:10 Line 58
+Dec 14 11:48:11 Line 60
+Dec 14 11:48:12 Line 230
+Dec 14 11:48:13 Line 250
+Dec 14 11:48:14 Line 785
+Dec 14 11:48:15 Line 786</pre>
 <p><span class="callout">➊</span> The tool <code>ts</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-ts" role="doc-biblioref"&gt;Joey Hess, &lt;em&gt;&lt;span class="nocase"&gt;ts&lt;/span&gt; – Timestamp Input&lt;/em&gt;, version 0.65, 2021, &lt;/a&gt;&lt;a href="https://joeyh.name/code/moreutils" role="doc-biblioref"&gt;https://joeyh.name/code/moreutils&lt;/a&gt;.&lt;/p&gt;'><sup>73</sup></a></span> adds a timestamp in front of each line.</p>
 <p>In order to prevent unnecessary computation, try to put <code>sample</code> as early as possible in your pipeline.
 In fact, this argument holds for any command-line tool that reduces data, like <code>head</code> and <code>tail</code>.
@@ -1291,7 +1287,7 @@ You’re free to skip this chapter if you can’t wait to start exploring and vi
     <div class="row">
       <div class="d-none d-lg-block col-lg-2 sidebar"></div>
       <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
-        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 14, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
       </div>
       <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
     </div>

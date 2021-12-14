@@ -134,14 +134,14 @@ If you want to dive deeper into shell scripting, I recommend the book <em>Classi
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 32K
--rwxr-xr-x 1 dst dst 400 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
--rwxr-xr-x 1 dst dst 391 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
--rwxr-xr-x 1 dst dst 182 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
--rwxr-xr-x 1 dst dst 147 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
--rwxr-xr-x 1 dst dst 105 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
--rwxr-xr-x 1 dst dst 128 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
--rwxr-xr-x 1 dst dst 647 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
--rwxr-xr-x 1 dst dst 584 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*</pre>
+-rwxr-xr-x 1 dst dst 400 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
+-rwxr-xr-x 1 dst dst 391 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
+-rwxr-xr-x 1 dst dst 182 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
+-rwxr-xr-x 1 dst dst 147 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
+-rwxr-xr-x 1 dst dst 105 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
+-rwxr-xr-x 1 dst dst 128 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
+-rwxr-xr-x 1 dst dst 647 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
+-rwxr-xr-x 1 dst dst 584 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*</pre>
 <p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -270,7 +270,7 @@ Let’s name the file <em>top-words-1.sh</em> to indicate that this is the first
 <p>Running <code>fc</code> invokes the default text editor, which is stored in the environment variable <em>EDITOR</em>.
 In the Docker container, this is set to <code>nano</code>, a straightforward text editor.
 As you can see, this file contains our one-liner:</p>
-<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshpu0emE                               
 </span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
 tr '[:upper:]' '[:lower:]' |            
 grep -oE "[a-z\']{2,}" |                
@@ -287,7 +287,7 @@ head -n 10
 <span style="background-color: #AAAAAA; color: #000000">^G</span> Help      <span style="background-color: #AAAAAA; color: #000000">^O</span> Write Out <span style="background-color: #AAAAAA; color: #000000">^W</span> Where Is  <span style="background-color: #AAAAAA; color: #000000">^K</span> Cut       <span style="background-color: #AAAAAA; color: #000000">^T</span> Execute   <span style="background-color: #AAAAAA; color: #000000">^C</span> Location    
 <span style="background-color: #AAAAAA; color: #000000">^X</span> Exit      <span style="background-color: #AAAAAA; color: #000000">^R</span> Read File <span style="background-color: #AAAAAA; color: #000000">^\</span> Replace   <span style="background-color: #AAAAAA; color: #000000">^U</span> Paste     <span style="background-color: #AAAAAA; color: #000000">^J</span> Justify   <span style="background-color: #AAAAAA; color: #000000">^_</span> Go To Line  </pre>
 <p>Let’s give this temporary file a proper name by pressing <strong><code>Ctrl-O</code></strong>, removing the temporary filename, and typing <code>top-words-1.sh</code>:</p>
-<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshpu0emE                               
 </span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
 tr '[:upper:]' '[:lower:]' |            
 grep -oE "[a-z\']{2,}" |                
@@ -304,7 +304,7 @@ head -n 10
 ^G</span> Help             <span style="background-color: #AAAAAA; color: #000000">M-D</span> DOS Format      <span style="background-color: #AAAAAA; color: #000000">M-A</span> Append          <span style="background-color: #AAAAAA; color: #000000">M-B</span> Backup File     
 <span style="background-color: #AAAAAA; color: #000000">^C</span> Cancel           <span style="background-color: #AAAAAA; color: #000000">M-M</span> Mac Format      <span style="background-color: #AAAAAA; color: #000000">M-P</span> Prepend         <span style="background-color: #AAAAAA; color: #000000">^T</span> Browse           </pre>
 <p>Press <strong><code>Enter</code></strong>:</p>
-<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshpu0emE                               
 </span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
 tr '[:upper:]' '[:lower:]' |            
 grep -oE "[a-z\']{2,}" |                
@@ -347,16 +347,16 @@ In fact, command-line tools rarely have extensions.</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 44K
--rwxr-xr-x 1 dst dst  400 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
--rwxr-xr-x 1 dst dst  391 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
--rw-r--r-- 1 dst dst 7.5K Dec  6 21:31 stopwords
--rwxr-xr-x 1 dst dst  182 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
--rwxr-xr-x 1 dst dst  147 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
--rw-r--r-- 1 dst dst  173 Dec  6 21:31 top-words-1.sh
--rwxr-xr-x 1 dst dst  105 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
--rwxr-xr-x 1 dst dst  128 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
--rwxr-xr-x 1 dst dst  647 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
--rwxr-xr-x 1 dst dst  584 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*
+-rwxr-xr-x 1 dst dst  400 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
+-rwxr-xr-x 1 dst dst  391 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
+-rw-r--r-- 1 dst dst 7.5K Dec 14 11:47 stopwords
+-rwxr-xr-x 1 dst dst  182 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
+-rwxr-xr-x 1 dst dst  147 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
+-rw-r--r-- 1 dst dst  173 Dec 14 11:47 top-words-1.sh
+-rwxr-xr-x 1 dst dst  105 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
+-rwxr-xr-x 1 dst dst  128 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
+-rwxr-xr-x 1 dst dst  647 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
+-rwxr-xr-x 1 dst dst  584 Dec 14 11:46 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words-1.sh
 </span>───────┬────────────────────────────────────────────────────────────────────────
@@ -410,8 +410,8 @@ The following command gives the user, you, permission to execute <em>top-words-2
 <p>The argument <code>u+x</code> consists of three characters: (1) <code>u</code> indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) <code>+</code> indicates that we want to add a permission; and (3) <code>x</code>, which indicates the permissions to execute.</p>
 <p>Let’s now have a look at the access permissions of both files:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> top-words-{1,2}.sh
--rw-r--r-- 1 dst dst 173 Dec  6 21:31 top-words-1.sh
--rwxr--r-- 1 dst dst 173 Dec  6 21:32 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-2.sh</span>*</pre>
+-rw-r--r-- 1 dst dst 173 Dec 14 11:47 top-words-1.sh
+-rwxr--r-- 1 dst dst 173 Dec 14 11:47 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-2.sh</span>*</pre>
 <p>The first column shows the access permissions for each file.
 For <em>top-words-2.sh</em>, this is <em><code>-rwxrw-r--</code></em>.
 The first character <em><code>-</code></em> (hyphen) indicates the file type.
@@ -713,7 +713,7 @@ sr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/ch04
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">top-words</span> 10
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  170k  100  170k    0     0  21525      0  0:00:08  0:00:08 --:--:-- 36179
+100  170k  100  170k    0     0   115k      0  0:00:01  0:00:01 --:--:--  116k
     403 alice
      98 gutenberg
      88 project
@@ -822,7 +822,7 @@ If you’re going to work with a lot of numerical data, then I recommend you use
      88 project
      76 queen
      71 time
-top-words 5 &lt; alice.txt  0.47s user 0.05s system 160% cpu 0.326 total
+top-words 5 &lt; alice.txt  0.38s user 0.04s system 149% cpu 0.278 total
  
 <span style="font-weight: bold">$</span> <span style="color: #af8700">time</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">top-words.py</span> 5
     403 alice
@@ -830,7 +830,7 @@ top-words 5 &lt; alice.txt  0.47s user 0.05s system 160% cpu 0.326 total
      88 project
      76 queen
      71 time
-top-words.py 5 &lt; alice.txt  1.50s user 0.03s system 96% cpu 1.578 total
+top-words.py 5 &lt; alice.txt  1.36s user 0.03s system 95% cpu 1.454 total
  
 <span style="font-weight: bold">$</span> <span style="color: #af8700">time</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">top-words.R</span> 5
     403 alice
@@ -838,7 +838,7 @@ top-words.py 5 &lt; alice.txt  1.50s user 0.03s system 96% cpu 1.578 total
      88 project
      76 queen
      71 time
-top-words.R 5 &lt; alice.txt  1.48s user 0.15s system 91% cpu 1.774 total</pre>
+top-words.R 5 &lt; alice.txt  1.48s user 0.14s system 91% cpu 1.774 total</pre>
 <p>Wonderful! Sure, the output itself is not very exciting.
 What’s exciting is that we can accomplish the same task with multiple languages.
 Let’s look at the differences between the approaches.</p>
@@ -996,7 +996,7 @@ The next chapter covers the second step of the OSEMN model for data science, nam
     <div class="row">
       <div class="d-none d-lg-block col-lg-2 sidebar"></div>
       <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
-        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 14, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
       </div>
       <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
     </div>
