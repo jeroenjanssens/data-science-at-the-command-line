@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Parallel Pipelines | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="In the previous chapters, we’ve been dealing with commands and pipelines that take care of an entire task at once. In practice, however, you may find yourself facing a task which requires the same...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Parallel Pipelines | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-8-parallel-pipelines.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="In the previous chapters, we’ve been dealing with commands and pipelines that take care of an entire task at once. In practice, however, you may find yourself facing a task which requires the same...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 8 Parallel Pipelines | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="In the previous chapters, we’ve been dealing with commands and pipelines that take care of an entire task at once. In practice, however, you may find yourself facing a task which requires the same...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="active" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-8-parallel-pipelines" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Parallel Pipelines<a class="anchor" aria-label="anchor" href="#chapter-8-parallel-pipelines"><i class="fas fa-link"></i></a>
+</h1>
+<!-- #TODO: SHOULD: Dicuss progress bar -->
+<p>In the previous chapters, we’ve been dealing with commands and pipelines that take care of an entire task at once.
+In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times.
+For, example, you may need to:</p>
+<ul>
+<li>Scrape hundreds of web pages</li>
+<li>Make dozens of API calls and transform their output</li>
+<li>Train a classifier for a range of parameter values</li>
+<li>Generate scatter plots for every pair of features in your dataset</li>
+</ul>
+<p>In any of the above examples, there’s a certain form of repetition involved.
+With your favorite scripting or programming language, you take care of this with a for loop or a while loop.
+On the command line, the first thing you might be inclined to do is to press <strong><code>Up</code></strong> to bring back the previous command, modify it if necessary, and press <strong><code>Enter</code></strong> to run the command again.
+This is fine for two or three times, but imagine doing this dozens of times.
+Such an approach quickly becomes cumbersome, inefficient, and prone to errors.
+The good news is that you can write such loops on the command line as well.
+That’s what this chapter is all about.</p>
+<p>Sometimes, repeating a fast command one after the other (in a <em>serial</em> manner) is sufficient.
+When you have multiple cores (and perhaps even multiple machines) it would be nice if you could make use of those, especially when you’re faced with a data-intensive task.
+When using multiple cores or machines, the total running time may be reduced significantly.
+In this chapter I will introduce a very powerful tool called <code>parallel</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-parallel" role="doc-biblioref"&gt;Tange, &lt;em&gt;&lt;span class="nocase"&gt;parallel&lt;/span&gt; – Build and Execute Shell Command Lines from Standard Input in Parallel&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>95</sup></a></span> that can take care of exactly this. It enables you to apply a command or pipeline for a range of arguments such as numbers, lines, and files.
+Plus, as the name implies, it allows you to run your commands in <em>parallel</em>.</p>
+<div id="overview-5" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>This intermezzo chapter discusses several approaches to speed up tasks that require commands and pipelines to be run many times.
+My main goal is to demonstrate to you the flexibility and power of <code>parallel</code>.
+Because this tool can be combined with any other tool discussed in this book, it will positively change the way you use the command line for data science.
+In this chapter, you’ll learn about:</p>
+<ul>
+<li>Running commands in serial to a range of numbers, lines, and files</li>
+<li>Breaking a large task into several smaller tasks</li>
+<li>Running pipelines in parallel</li>
+<li>Distributing pipelines to multiple machines</li>
+</ul>
+<p>This chapter starts with the following files:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch08</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 20K
+-rw-r--r-- 1 dst dst  126 Dec  6 21:40 emails.txt
+-rw-r--r-- 1 dst dst   61 Dec  6 21:40 movies.txt
+-rwxr-xr-x 1 dst dst  125 Dec  6 21:40 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">slow.sh</span>*
+-rw-r--r-- 1 dst dst 5.1K Dec  6 21:40 users.json</pre>
+<p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
+Any other files are either downloaded or generated using command-line tools.</p>
+</div>
+<div id="serial-processing" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Serial Processing<a class="anchor" aria-label="anchor" href="#serial-processing"><i class="fas fa-link"></i></a>
+</h2>
+<p>Before I dive into parallelization, I’ll briefly discuss looping in a serial fashion.
+It’s worthwhile to know how to do this because this functionality is always available, the syntax closely resembles looping in other programming languages, and it will really make you appreciate <code>parallel</code>.</p>
+<p>From the examples provided in the introduction of this chapter, we can distill three types of items to loop over: numbers, lines, and files.
+These three types of items will be discussed in the next three subsections, respectively.</p>
+<div id="looping-over-numbers" class="section level3" number="8.2.1">
+<h3>
+<span class="header-section-number">8.2.1</span> Looping Over Numbers<a class="anchor" aria-label="anchor" href="#looping-over-numbers"><i class="fas fa-link"></i></a>
+</h3>
+<p>Imagine that you need to compute the square of every even integer between 0 and 100. There’s a tool called <code>bc</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-bc" role="doc-biblioref"&gt;Nelson, &lt;em&gt;&lt;span class="nocase"&gt;bc&lt;/span&gt; – an Arbitrary Precision Calculator Language&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>96</sup></a></span>, which is a <em>basic calculator</em> where you can pipe an equation to.
+The command to compute the square of 4 looks as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">"4^2"</span> | <span style="color: #5f8700">bc</span>
+16</pre>
+<p>For a one-off calculation, this will do.
+However, as mentioned in the introduction, you would need to be crazy to press <strong><code>Up</code></strong>, change the number, and press <strong><code>Enter</code></strong> 50 times!
+In this case it’s better to let the shell do the hard work for you by using a for loop:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">for</span> i in {0..100..2}  <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">do</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">"</span><span style="color: #00afaf">$i</span><span style="color: #af8700">^2"</span> | <span style="color: #5f8700">bc</span>      <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➋</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">done</span> | <span style="color: #5f8700">trim</span>
+0
+4
+16
+36
+64
+100
+144
+196
+256
+324
+… with 41 more lines</pre>
+<p><span class="callout">➊</span> The Z shell has a feature called brace expansion, which transforms <em><code>{0..100..2}</code></em> into a list separated by spaces: <em><code>0 2 4 … 98 100</code></em>. The variable <em><code>i</code></em> is assigned the value “0” in the first iteration, “1” in the second iteration, and so forth.
+<br><span class="callout">➌</span> The value of this variable can be used by prefixing it with a dollar sign (<em><code>$</code></em>). The shell will replace <em><code>$i</code></em> with its value before <code>echo</code> is being executed. Note that there can be more than one command between <em><code>do</code></em> and <em><code>done</code></em>.</p>
+<p>Although the syntax may appear a bit odd compared to your favorite programming language, it’s worth remembering this because it’s always available in the shell.
+I’ll introduce a better and more flexible way of repeating commands in a moment.</p>
+</div>
+<div id="looping-over-lines" class="section level3" number="8.2.2">
+<h3>
+<span class="header-section-number">8.2.2</span> Looping Over Lines<a class="anchor" aria-label="anchor" href="#looping-over-lines"><i class="fas fa-link"></i></a>
+</h3>
+<p>The second type of items you can loop over are lines.
+These lines can come from either a file or from standard input.
+This is a very generic approach because the lines can contain anything, including: numbers, dates, and email addresses.</p>
+<p>Imagine that you’d want to send an email to all your contacts.
+Let’s first generate some fake users using the free <a href="https://randomuser.me">Random User Generator API</a>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://randomuser.me/api/1.2/?results=5&amp;seed=dsatcl2e"</span> <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">users.json</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">users.json</span> <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.results[].email'</span> <span style="color: #af8700">&gt;</span> emails
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">emails</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">emails</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ selma.andersen@example.com
+   2   │ kent.clark@example.com
+   3   │ ditmar.niehaus@example.com
+   4   │ benjamin.robinson@example.com
+   5   │ paulo.muller@example.com
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>You can loop over the lines from <em>emails</em> with a while loop:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">while</span> <span style="color: #5f8700">read</span> line                         <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">do</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">"Sending invitation to </span><span style="color: #00afaf">${line}</span><span style="color: #af8700">."</span>   <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➋</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">done</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">emails</span>                           <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➌</span></span>
+Sending invitation to selma.andersen@example.com.
+Sending invitation to kent.clark@example.com.
+Sending invitation to ditmar.niehaus@example.com.
+Sending invitation to benjamin.robinson@example.com.
+Sending invitation to paulo.muller@example.com.</pre>
+<p><span class="callout">➊</span> In this case you need to use a while loop because the Z shell does not know beforehand how many lines the input consists of.
+<br><span class="callout">➋</span> Although the curly braces around the <em>line</em> variable are not necessary in this case (since variable names cannot contain periods), it’s still good practice.
+<br><span class="callout">➌</span> This redirection can also be placed before <code>while</code>.</p>
+<p>You can also provide input to a while loop interactively by specifying the special file standard input <em>/dev/stdin</em>. Press <strong><code>Ctrl-D</code></strong> when you are done.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">while</span> <span style="color: #5f8700">read</span> line; <span style="color: #af8700">do</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">"You typed: </span><span style="color: #00afaf">${line}</span><span style="color: #af8700">."</span>; <span style="color: #af8700">done</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">/dev/stdin</span>
+one
+You typed: one.
+two
+You typed: two.
+three
+You typed: three.</pre>
+<p>This method, however, has the disadvantage that, once you press <strong><code>Enter</code></strong>, the commands between <em><code>do</code></em> and <em><code>done</code></em> are run immediately for that line of input. There’s no turning back.</p>
+</div>
+<div id="looping-over-files" class="section level3" number="8.2.3">
+<h3>
+<span class="header-section-number">8.2.3</span> Looping Over Files<a class="anchor" aria-label="anchor" href="#looping-over-files"><i class="fas fa-link"></i></a>
+</h3>
+<p>In this section I discuss the third type of item that we often need to loop over: files.</p>
+<p>To handle special characters, use <em>globbing</em> (i.e., pathname expansion) instead of <code>ls</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-ls" role="doc-biblioref"&gt;Stallman and MacKenzie, &lt;em&gt;&lt;span class="nocase"&gt;ls&lt;/span&gt; – List Directory Contents&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>97</sup></a></span>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">for</span> chapter in /data/<span style="color: #0087ff">*</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">do</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">"Processing Chapter </span><span style="color: #00afaf">${chapter}</span><span style="color: #af8700">."</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">done</span>
+Processing Chapter /data/ch02.
+Processing Chapter /data/ch03.
+Processing Chapter /data/ch04.
+Processing Chapter /data/ch05.
+Processing Chapter /data/ch06.
+Processing Chapter /data/ch07.
+Processing Chapter /data/ch08.
+Processing Chapter /data/ch09.
+Processing Chapter /data/ch10.
+Processing Chapter /data/csvconf.</pre>
+<p>Just as with brace expansion, the expression <em><code>/data/*</code></em> is first expanded into a list by the Z shell before it’s being processed by the for loop.</p>
+<p>A more elaborate alternative to listing files is <code>find</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-find" role="doc-biblioref"&gt;Eric B. Decker, James Youngman, and Kevin Dalley, &lt;em&gt;&lt;span class="nocase"&gt;find&lt;/span&gt; – Search for Files in a Directory Hierarchy&lt;/em&gt;, version 4.7.0, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/findutils" role="doc-biblioref"&gt;https://www.gnu.org/software/findutils&lt;/a&gt;.&lt;/p&gt;'><sup>98</sup></a></span>, which:</p>
+<ul>
+<li>Can traverse down directories</li>
+<li>Allows for elaborate searching on properties such as size, access time, and permissions</li>
+<li>Handles special characters such as spaces and newlines</li>
+</ul>
+<p>For example, the following <code>find</code> invocation lists all files located under the directory <em>/data</em> that have <em>csv</em> as extension and are smaller than 2 kilobyte:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">find</span> <span style="text-decoration: underline">/data</span> -type f -name <span style="color: #af8700">'*.csv'</span> -size -2k
+/data/ch03/tmnt-basic.csv
+/data/ch03/tmnt-missing-newline.csv
+/data/ch03/tmnt-with-header.csv
+/data/ch05/irismeta.csv
+/data/ch05/names-comma.csv
+/data/ch05/names.csv
+/data/ch07/datatypes.csv</pre>
+</div>
+</div>
+<div id="parallel-processing" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Parallel Processing<a class="anchor" aria-label="anchor" href="#parallel-processing"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s say that you have a very long running tool, such as the one shown here:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">slow.sh</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">slow.sh</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/bin/bash
+</span>   2   │ <span style="color: #00afaf">echo</span> <span style="color: #5f8700">"Starting job $1"</span> <span style="color: #af005f">|</span> ts <span class="callout">➊</span>
+   3   │ duration<span style="color: #af005f">=</span><span style="color: #5f8700">$((</span><span style="color: #af8700">1</span><span style="color: #af005f">+</span><span style="color: #5f8700">RANDOM</span><span style="color: #af005f">%</span><span style="color: #af8700">5</span><span style="color: #5f8700">))</span> <span class="callout">➋</span>
+   4   │ sleep $duration <span class="callout">➌</span>
+   5   │ <span style="color: #00afaf">echo</span> <span style="color: #5f8700">"Job $1 took ${duration} seconds"</span> <span style="color: #af005f">|</span> ts
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p><span class="callout">➊</span> <code>ts</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-ts" role="doc-biblioref"&gt;Hess, &lt;em&gt;&lt;span class="nocase"&gt;ts&lt;/span&gt; – Timestamp Input&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>99</sup></a></span> adds a timestamp.
+<br><span class="callout">➋</span> The magic variable <em><code>RANDOM</code></em> calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that <em>duration</em> is between 1 and 5.
+<br><span class="callout">➌</span> <code>sleep</code> pauses execution for a given number of seconds.</p>
+<p>This process probably doesn’t take up all the available resources.
+And it so happens that you need to run this command a lot of times.
+For example, you need to download a whole sequence of files.</p>
+<p>A naive way to parallelize is to run the commands in the background.
+Let’s run <code>slow.sh</code> three times:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">for</span> i in {A..C}; <span style="color: #af8700">do</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">./slow.sh</span> $i &amp; <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">done</span>
+[2] 386 <span class="callout">➋</span>
+[3] 388
+[4] 391
+ 
+<span style="font-weight: bold">$</span> Dec 06 21:41:08 Starting job A
+Dec 06 21:41:08 Starting job B
+Dec 06 21:41:08 Starting job C
+Dec 06 21:41:10 Job C took 2 seconds
+ 
+[4]  + done       ./slow.sh $i
+<span style="font-weight: bold">$</span> Dec 06 21:41:11 Job B took 3 seconds
+ 
+[3]  + done       ./slow.sh $i
+<span style="font-weight: bold">$</span> Dec 06 21:41:12 Job A took 4 seconds
+ 
+[2]  + done       ./slow.sh $i
+<span style="font-weight: bold">$</span></pre>
+<p><span class="callout">➊</span> The ampersand (<code>&amp;</code>) sends the command to the background, allowing the for loop to continue immediately with the next iteration.
+<br><span class="callout">➋</span> This line shows the job number given by the Z shell and the process ID, which can be used for more fine-grained job control. This topic, while powerful, is beyond the scope of this book.</p>
+
+<div class="rmdnote">
+Keep in mind that not everything can be parallelized.
+API calls may be limited to a certain number, or some commands can only have one instance.
+</div>
+<p>Figure <a href="chapter-8-parallel-pipelines.html#fig:diagram-parallel-processing">8.1</a> illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-parallel-processing"></span>
+<img src="images/dscl_0801.png" alt="Serial processing, naive parallel processing, and parallel processing with GNU Parallel" width="60%"><p class="caption">
+Figure 8.1: Serial processing, naive parallel processing, and parallel processing with GNU Parallel
+</p>
+</div>
+<p>There are two problems with this naive approach.
+First, there’s no way to control how many processes you are running concurrently.
+If you start too many jobs at once, they could be competing for the same resources such as CPU, memory, disk access, and network bandwidth.
+This could lead to a longer time to run everything.
+Second, it’s difficult to tell which output belongs to which input.
+Let’s look at a better approach.</p>
+<div id="introducing-gnu-parallel" class="section level3" number="8.3.1">
+<h3>
+<span class="header-section-number">8.3.1</span> Introducing GNU Parallel<a class="anchor" aria-label="anchor" href="#introducing-gnu-parallel"><i class="fas fa-link"></i></a>
+</h3>
+<p>Allow me to introduce <code>parallel</code>, a command-line tool that allows you to parallelize and distribute commands and pipelines.
+The beauty of this tool is that existing tools can be used as they are; they do not need to be modified.</p>
+
+<div class="rmdcaution">
+Be aware that there are two command-line tools with the name <code>parallel</code>.
+If you’re using the Docker image then you already have the correct one installed.
+Otherwise, you can check that you have the correct one by running <code>parallel --version</code>.
+It should say “GNU parallel.”
+</div>
+<p>Before I go into the details of <code>parallel</code>, here’s a little teaser to show you how easy it is to replace the for-loop from earlier:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 0 2 100 | <span style="color: #5f8700">parallel</span> <span style="color: #af8700">"echo {}^2 | bc"</span> | <span style="color: #5f8700">trim</span>
+0
+4
+16
+36
+100
+64
+144
+196
+256
+324
+… with 41 more lines</pre>
+<p>This is <code>parallel</code> in its simplest form: the items to loop over are passed via standard input and there aren’t any arguments other than the command that <code>parallel</code> needs to run.
+See Figure <a href="chapter-8-parallel-pipelines.html#fig:diagram-parallel-output">8.2</a> for an illustration of how <code>parallel</code> concurrently distributes input among processes and collects their outputs.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-parallel-output"></span>
+<img src="images/dscl_0802.png" alt="GNU Parallel concurrently distributes input among processes and collects their outputs" width="90%"><p class="caption">
+Figure 8.2: GNU Parallel concurrently distributes input among processes and collects their outputs
+</p>
+</div>
+<p>As you can see it basically acts as a for loop.
+Here’s another teaser, which replaces the for loop from the previous section.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --jobs 2 <span style="text-decoration: underline">./slow.sh</span> ::: {A..C}
+Dec 06 21:41:19 Starting job B
+Dec 06 21:41:22 Job B took 3 seconds
+Dec 06 21:41:19 Starting job A
+Dec 06 21:41:23 Job A took 4 seconds
+Dec 06 21:41:23 Starting job C
+Dec 06 21:41:24 Job C took 1 seconds</pre>
+<p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
+<p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality.
+(Perhaps too much.)
+Luckily you only need to know a handful in order to be effective.
+The manual page is quite informative in case you need to use a less common option.</p>
+</div>
+<div id="specifying-input" class="section level3" number="8.3.2">
+<h3>
+<span class="header-section-number">8.3.2</span> Specifying Input<a class="anchor" aria-label="anchor" href="#specifying-input"><i class="fas fa-link"></i></a>
+</h3>
+<p>The most important argument to <code>parallel</code>, is the command or pipeline that you’d like to run for every input.
+The question is: where should the input item be inserted in the command line?
+If you don’t specify anything, then the input item will be appended to the end of the pipeline.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 3 | <span style="color: #5f8700">parallel</span> cowsay
+ 
+ ___
+&lt; 1 &gt;
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+&lt; 2 &gt;
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+ ___
+&lt; 3 &gt;
+ ---
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||</pre>
+<p>The above is the same as running:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cowsay</span> 1 <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">/dev/null</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span></span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cowsay</span> 2 <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">/dev/null</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cowsay</span> 3 <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">/dev/null</span></pre>
+<p><span class="callout">➊</span> Because the output is the same as before, I redirect it to <em>/dev/null</em> to suppress it.</p>
+<p>Although this often works, I advise you to be explicit about where the input item should be inserted in the command by using placeholders.
+In this case, because you want to use the entire input line (a number) at once, you only need one placeholder.
+You specify the placeholder, in other words, where to put the input item, with a pair of curly braces (<code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 3 | <span style="color: #5f8700">parallel</span> cowsay {} <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">/dev/null</span></pre>
+
+<div class="rmdnote">
+There are other ways to provide input to <code>parallel</code>.
+I prefer piping the input (as I do throughout this chapter) because that’s how most command-line tools are chained together into a pipeline.
+The other ways involve syntax that’s not seen anywhere else.
+Having said that, they do enable additional functionality, such as iterating over all possible combinations of multiple lists, so be sure to read <code>parallel</code>s manual page if you like to know more.
+</div>
+<p>When the input items are filenames, there are a couple of modifiers you can use only parts of the filename.
+For example, with <code>{/}</code>, only the basename of the filename will be used:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">find</span> <span style="text-decoration: underline">/data/ch03</span> -type f | <span style="color: #5f8700">parallel</span> echo <span style="color: #af8700">'{#}\) \"{}\" has basename \"{/}\"'</span> <span class="callout">➊</span>
+1) "/data/ch03/tmnt-basic.csv" has basename "tmnt-basic.csv"
+3) "/data/ch03/tmnt-missing-newline.csv" has basename "tmnt-missing-newline.csv"
+2) "/data/ch03/logs.tar.gz" has basename "logs.tar.gz"
+4) "/data/ch03/r-datasets.db" has basename "r-datasets.db"
+5) "/data/ch03/top2000.xlsx" has basename "top2000.xlsx"
+6) "/data/ch03/tmnt-with-header.csv" has basename "tmnt-with-header.csv"</pre>
+<p><span class="callout">➊</span> Characters such as parentheses (<code>)</code>) and quotes (<code>"</code>) have a special meaning in the shell. To use them literally you put a backslash <code>\</code> in front of them. This is called <em>escaping</em>.</p>
+<p>If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">input.csv</span> <span style="color: #5f8700">parallel</span> --colsep , <span style="color: #af8700">"mv {2} {1}"</span> <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">/dev/null</span></pre>
+<p>Here, you can apply the same placeholder modifiers.
+It is also possible to reuse the same input item.
+If the input to <code>parallel</code> is a CSV file with a header, then you can use the column names as placeholders:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">input.csv</span> <span style="color: #5f8700">parallel</span> -C, --header : <span style="color: #af8700">"invite {name} {email}"</span></pre>
+
+<div class="rmdtip">
+If you ever wonder whether your placeholders are set up correctly, you can add the <code>--dryrun</code> option.
+Instead of actually executing the command, <code>parallel</code> will print out all the commands exactly as if they would have been executed.
+</div>
+</div>
+<div id="controlling-the-number-of-concurrent-jobs" class="section level3" number="8.3.3">
+<h3>
+<span class="header-section-number">8.3.3</span> Controlling the Number of Concurrent Jobs<a class="anchor" aria-label="anchor" href="#controlling-the-number-of-concurrent-jobs"><i class="fas fa-link"></i></a>
+</h3>
+<p>By default, parallel runs one job per CPU core.
+You can control the number of jobs that will be run concurrently with the <code>--jobs</code> or <code>-j</code> option.
+Specifying a number means that many jobs will be run concurrently.
+If you put a plus sign in front of the number then <code>parallel</code> will run <em>N</em> jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run <em>N-M</em> jobs.
+Where <em>N</em> is the number of CPU cores.
+You can also specify a percentage, where the default is 100% of the number of CPU cores.
+The optimal number of jobs to run concurrently depends on the actual commands you are running.</p>
+<!-- #TODO: Figure out where to type concurrently instead of parallel. And make sure all occurences of parallel are surrounded by backticks -->
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> -j0 <span style="color: #af8700">"echo Hi {}"</span>
+Hi 1
+Hi 3
+Hi 2
+Hi 4
+Hi 5</pre>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> -j200% <span style="color: #af8700">"echo Hi {}"</span>
+Hi 1
+Hi 3
+Hi 2
+Hi 4
+Hi 5</pre>
+<p>If you specify <code>-j1</code>, then the commands will be run in serial. Even though this doesn’t do the name of the tool of justice, it still has its uses. For example, when you need to access an API which only allows one connection at a time. If you specify <code>-j0</code>, then parallel will run as many jobs in parallel as possible. This can be compared to your loop with the ampersand. This is not advised.</p>
+</div>
+<div id="logging-and-output" class="section level3" number="8.3.4">
+<h3>
+<span class="header-section-number">8.3.4</span> Logging and Output<a class="anchor" aria-label="anchor" href="#logging-and-output"><i class="fas fa-link"></i></a>
+</h3>
+<p>To save the output of each command, you might be tempted to the following:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> <span style="color: #af8700">"echo </span><span style="color: #00afaf">\"</span><span style="color: #af8700">Hi {}</span><span style="color: #00afaf">\"</span><span style="color: #af8700"> &gt; hi-{}.txt"</span></pre>
+<p>This will save the output into individual files.
+Or, if you want to save everything into one big file you could do the following:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> <span style="color: #af8700">"echo Hi {}"</span> <span style="color: #af8700">&gt;&gt;</span> one-big-file.txt</pre>
+<p>However, <code>parallel</code> offers the <code>--results</code> option, which stores the output in separate files.
+For each job, <code>parallel</code> creates three files: <em>seq</em>, which holds the job number, <em>stdout</em> which contains the output produced by the job, and <em>stderr</em> which contains any errors produced by the job.
+These three files are placed in subdirectories based on the input values.</p>
+<p><code>parallel</code> still prints all the output, which is redundant in this case.
+You can redirect both the standard input and standard output to <em>/dev/null</em> as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 10 | <span style="color: #5f8700">parallel</span> --results outdir <span style="color: #af8700">"curl 'https://anapioficeandfire.com/api/ch
+aracters/{}' | jq -r '.aliases[0]'"</span> <span style="color: #af8700">2&gt;</span><span style="text-decoration: underline; color: #af8700"></span><span style="text-decoration: underline">/dev/null</span> <span style="color: #af8700">1&gt;&amp;</span>2
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">tree</span> <span style="text-decoration: underline">outdir</span> | <span style="color: #5f8700">trim
+</span>outdir
+└── 1
+    ├── 1
+    │   ├── seq
+    │   ├── stderr
+    │   └── stdout
+    ├── 10
+    │   ├── seq
+    │   ├── stderr
+    │   └── stdout
+… with 34 more lines</pre>
+<p>See Figure <a href="chapter-8-parallel-pipelines.html#fig:diagram-parallel-results">8.3</a> for a pictorial overview of how the <code>--results</code> option works.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-parallel-results"></span>
+<img src="images/dscl_0803.png" alt="GNU Parallel stores output in separate files with the `--results` option" width="90%"><p class="caption">
+Figure 8.3: GNU Parallel stores output in separate files with the <code>--results</code> option
+</p>
+</div>
+<p>When you’re running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input.
+The output of jobs is therefore also mixed up.
+To keep the same order, specify the <code>--keep-order</code> option or <code>-k</code> option.</p>
+<p>Sometimes it’s useful to record which input generated which output.
+<code>parallel</code> allows you to <em>tag</em> the output with the <code>--tag</code> option, which prepends each line with the input item.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> --tag <span style="color: #af8700">"echo 'sqrt({})' | bc -l"</span>
+1       1
+3       1.73205080756887729352
+4       2.00000000000000000000
+2       1.41421356237309504880
+5       2.23606797749978969640
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --tag --keep-order <span style="color: #af8700">"echo '{1}*{2}' | bc -l"</span> ::: 3 4 ::: 5 6 7
+3 5     15
+3 6     18
+3 7     21
+4 5     20
+4 6     24
+4 7     28</pre>
+</div>
+<div id="creating-parallel-tools" class="section level3" number="8.3.5">
+<h3>
+<span class="header-section-number">8.3.5</span> Creating Parallel Tools<a class="anchor" aria-label="anchor" href="#creating-parallel-tools"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <code>bc</code> tool, which I used in the beginning of the chapter, is not parallel by itself.
+However, you can parallelize it using <code>parallel</code>.
+The Docker image contains a tool called <code>pbc</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-pbc" role="doc-biblioref"&gt;Jeroen Janssens, &lt;em&gt;&lt;span class="nocase"&gt;pbc&lt;/span&gt; – Parallel &lt;span class="nocase"&gt;bc&lt;/span&gt;&lt;/em&gt;, version 0.1, 2021, &lt;/a&gt;&lt;a href="https://github.com/jeroenjanssens/dsutils" role="doc-biblioref"&gt;https://github.com/jeroenjanssens/dsutils&lt;/a&gt;.&lt;/p&gt;'><sup>100</sup></a></span>.
+Its code is shown here:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="color: #af005f">$(</span><span style="color: #5f8700">which</span> pbc<span style="color: #af005f">)</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">/usr/bin/dsutils/pbc</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/bin/bash
+</span>   2   │ <span style="color: #5f8700"># pbc: parallel bc. First column of input CSV is mapped to {1}, second
+</span>       │ <span style="color: #5f8700">to {2}, and so forth.</span>
+   3   │ <span style="color: #5f8700">#</span>
+   4   │ <span style="color: #5f8700"># Example usage: paste -d, &lt;(seq 100) &lt;(seq 100 -1 1) | ./pbc 'sqrt({1}
+</span>       │ <span style="color: #5f8700">*{2})'</span>
+   5   │ <span style="color: #5f8700">#</span>
+   6   │ <span style="color: #5f8700"># Dependency: GNU parallel</span>
+   7   │ <span style="color: #5f8700">#</span>
+   8   │ <span style="color: #5f8700"># Author: http://jeroenjanssens.com</span>
+   9   │
+  10   │ parallel -C, -k -j100% <span style="color: #5f8700">"echo '$1' | bc -l"</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>This tool allows us to simplify the code used in the beginning of the chapter too.
+And it can process comma-separated values simultaneously:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 100 | <span style="color: #5f8700">pbc</span> <span style="color: #af8700">'{1}^2'</span> | <span style="color: #5f8700">trim</span>
+1
+4
+9
+16
+25
+36
+49
+64
+81
+100
+… with 90 more lines
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">paste</span> -d, <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">seq</span> 4<span style="color: #af005f">)</span> <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">seq</span> 4<span style="color: #af005f">)</span> <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">seq</span> 4<span style="color: #af005f">)</span> | <span style="color: #5f8700">pbc</span> <span style="color: #af8700">'sqrt({1}+{2})^{3}'</span>
+1.41421356237309504880
+4.00000000000000000000
+14.69693845669906858905
+63.99999999999999999969</pre>
+</div>
+</div>
+<div id="distributed-processing" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Distributed Processing<a class="anchor" aria-label="anchor" href="#distributed-processing"><i class="fas fa-link"></i></a>
+</h2>
+<p>Sometimes you need more power than your local machine, even with all its cores, can offer.
+Luckily, <code>parallel</code> can also leverage the power of remote machines, which really allows you to speed up your pipeline.</p>
+<p>What’s great is that <code>parallel</code> doesn’t have to be installed on the remote machine.
+All that’s required is that you can connect to the remote machine with the <em>Secure Shell</em> protocol (or SSH), which is also what <code>parallel</code> uses to distribute your pipeline.
+(Having <code>parallel</code> installed is helpful because it can then determine how many cores to employ on each remote machine; more on this later.)</p>
+<!-- #TODO: Introduce AWS EC2 -->
+<!-- #TODO: COULD: Talk about Google Cloud and MS Azure -->
+<p>First, I’m going to obtain a list of running AWS EC2 instances.
+Don’t worry if you don’t have any remote machines, you can replace any occurrence of <code>--slf hostnames</code>, which tells <code>parallel</code> which remote machines to use, with <code>--sshlogin :</code>.
+This way, you can still follow along with the examples in this section.</p>
+<p>Once you know which remote machines to take over, we’re going to consider three flavors of distributed processing:</p>
+<ul>
+<li>Running ordinary commands on remote machines</li>
+<li>Distributing local data directly among remote machines</li>
+<li>Sending files to remote machines, process them, and retrieve the results</li>
+</ul>
+<div id="get-list-of-running-aws-ec2-instances" class="section level3" number="8.4.1">
+<h3>
+<span class="header-section-number">8.4.1</span> Get List of Running AWS EC2 Instances<a class="anchor" aria-label="anchor" href="#get-list-of-running-aws-ec2-instances"><i class="fas fa-link"></i></a>
+</h3>
+<!-- #TODO: Add links to GCP And Azure -->
+<p>In this section we’re creating a file named <em>hostnames</em> that will contain one hostname of a remote machine per line.
+I’m using Amazon Web Services (AWS) as an example.
+I assume that you have an AWS account and that you know how to launch instances.
+If you’re using a different cloud computing service (such as Google Cloud Platform or Microsoft Azure), or if you have your own servers, please make sure that you create a <em>hostnames</em> file yourself before continuing to the next section.</p>
+<p>You can obtain a list of running AWS EC2 instances using <code>aws</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-aws" role="doc-biblioref"&gt;Amazon Web Services, &lt;em&gt;&lt;span class="nocase"&gt;aws&lt;/span&gt; – Unified Tool to Manage &lt;span&gt;AWS&lt;/span&gt; Services&lt;/em&gt;, version 2.1.32, 2021, &lt;/a&gt;&lt;a href="https://aws.amazon.com/cli" role="doc-biblioref"&gt;https://aws.amazon.com/cli&lt;/a&gt;.&lt;/p&gt;'><sup>101</sup></a></span>, the command-line interface to the AWS API.
+With <code>aws</code>, you can almost do everything you can do with the online AWS Management Console.</p>
+<p>The command <code>aws ec2 describe-instances</code> returns a lot of information about all your EC2 instances in JSON format (see <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instances.html">the online documentation</a> for more information).
+You can extract the relevant fields using <code>jq</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">aws</span> ec2 describe-instances | <span style="color: #5f8700">jq</span> <span style="color: #af8700">'.Reservations[].Instances[] | {public_dns: .P
+ublicDnsName, state: .State.Name}'</span></pre>
+<p>The possible states of an EC2 instance are: <em><code>pending</code></em>, <em><code>running</code></em>, <em><code>shutting-down</code></em>, <em><code>terminated</code></em>, <em><code>stopping</code></em>, and <em><code>stopped</code></em>.
+Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:</p>
+<pre><span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">aws</span> ec2 describe-instances | <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.Reservations[].Instances[] | select(.Stat
+e.Name=="running") | .PublicDnsName'</span> | tee hostnames
+ec2-54-88-122-140.compute-1.amazonaws.com
+ec2-54-88-89-208.compute-1.amazonaws.com</pre>
+<p>(Without the <code>-r</code> or <code>--raw-output</code> option, the hostnames would have been surrounded by double quotes.)
+The output is saved to <em>hostnames</em>, so that I can pass this to <code>parallel</code> later.</p>
+<p>As mentioned, <code>parallel</code> employs <code>ssh</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-ssh" role="doc-biblioref"&gt;Tatu Ylonen et al., &lt;em&gt;&lt;span class="nocase"&gt;ssh&lt;/span&gt; – &lt;span&gt;OpenSSH&lt;/span&gt; Remote Login Client&lt;/em&gt;, version 1:8.2p1-4ubuntu0.2, 2020, &lt;/a&gt;&lt;a href="https://www.openssh.com" role="doc-biblioref"&gt;https://www.openssh.com&lt;/a&gt;.&lt;/p&gt;'><sup>102</sup></a></span> to connect to the remote machines.
+If you want to connect to your EC2 instances without typing the credentials every time, you can add something like the following text to the file <em>~/.ssh/config</em>.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">~/.ssh/config</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">/home/dst/.ssh/config</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #af005f">Host</span> <span style="color: #af005f">*</span><span style="color: #00afaf">.amazonaws.com</span>
+   2   │         <span style="color: #af005f">IdentityFile</span> <span style="color: #5f8700">~/.ssh/MyKeyFile.pem</span>
+   3   │         <span style="color: #af005f">User</span> <span style="color: #5f8700">ubuntu</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Depending on your which distribution your running, your user name may be different than <em><code>ubuntu</code></em>.</p>
+</div>
+<div id="running-commands-on-remote-machines" class="section level3" number="8.4.2">
+<h3>
+<span class="header-section-number">8.4.2</span> Running Commands on Remote Machines<a class="anchor" aria-label="anchor" href="#running-commands-on-remote-machines"><i class="fas fa-link"></i></a>
+</h3>
+<p>The first flavor of distributed processing is to run ordinary commands on remote machines.
+Let’s first double check that <code>parallel</code> is working by running the tool <code>hostname</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-hostname" role="doc-biblioref"&gt;Peter Tobias, Bernd Eckenfels, and Michael Meskes, &lt;em&gt;&lt;span class="nocase"&gt;hostname&lt;/span&gt; – Show or Set the System’s Host Name&lt;/em&gt;, version 3.23, 2021, &lt;/a&gt;&lt;a href="https://sourceforge.net/projects/net-tools/" role="doc-biblioref"&gt;https://sourceforge.net/projects/net-tools/&lt;/a&gt;.&lt;/p&gt;'><sup>103</sup></a></span> on each EC2 instance:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --nonall --sshloginfile hostnames hostname
+ip-172-31-23-204
+ip-172-31-23-205</pre>
+<p>Here, the <code>--sshloginfile</code> or <code>--slf</code> option is used to refer to the file <em>hostnames</em>.
+The <code>--nonall</code> option instructs <code>parallel</code> to execute the same command on every remote machine in the <em>hostnames</em> file without using any parameters.
+Remember, if you don’t have any remote machines to utilize, you can replace <code>--slf hostnames</code> with <code>--sshlogin :</code> so that the command is run on your local machine:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --nonall --sshlogin : hostname
+data-science-toolbox</pre>
+<p>Running the same command on every remote machine once only requires one core per machine. If you wanted to distribute the list of arguments passed in to <code>parallel</code> then it could potentially use more than one core. If the number of cores are not specified explicitly, <code>parallel</code> will try to determine this.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 2 | <span style="color: #5f8700">parallel</span> --slf hostnames echo <span style="color: #af8700">2&gt;&amp;</span>1
+bash: parallel: command not found
+parallel: Warning: Could not figure out number of cpus on ec2-54-88-122-140.comp
+ute-1.amazonaws.com (). Using 1.
+1
+2</pre>
+<p>In this case, I have <code>parallel</code> installed on one of the two remote machines.
+I’m getting a warning message indicating that <code>parallel</code> is not found on one of them.
+As a result, <code>parallel</code> cannot determine the number of cores and will default to using one core.
+When you receive this warning message, you can do one of the following four things:</p>
+<ul>
+<li>Don’t worry, and be happy with using one core per machine</li>
+<li>Specify the number of jobs for each machine via the <code>--jobs</code> or <code>-j</code> option</li>
+<li>Specify the number of cores to use per machine by putting, for example, <em>2/</em> if you want two cores, in front of each hostname in the <em>hostnames</em> file</li>
+<li>Install <code>parallel</code> using a package manager. For example, if the remote machines all run Ubuntu:</li>
+</ul>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --nonall --slf hostnames <span style="color: #af8700">"sudo apt-get install -y parallel"</span></pre>
+</div>
+<div id="distributing-local-data-among-remote-machines" class="section level3" number="8.4.3">
+<h3>
+<span class="header-section-number">8.4.3</span> Distributing Local Data among Remote Machines<a class="anchor" aria-label="anchor" href="#distributing-local-data-among-remote-machines"><i class="fas fa-link"></i></a>
+</h3>
+<p>The second flavor of distributed processing is to distribute local data directly among remote machines.
+Imagine that you have one very large dataset that you want to process using multiple remote machines.
+For simplicity, let’s sum all integers from 1 to 1000.
+First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using <code>wc</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 1000 | <span style="color: #5f8700">parallel</span> -N100 --pipe --slf hostnames <span style="color: #af8700">"(hostname; wc -l) | paste -s
+d:"</span>
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100
+ip-172-31-23-205:100
+ip-172-31-23-204:100</pre>
+<p>Excellent. You can see that your 1000 numbers get distributed evenly in subsets of 100 (as specified by <code>-N100</code>).
+Now, you’re ready to sum all those numbers:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 1000 | <span style="color: #5f8700">parallel</span> -N100 --pipe --slf hostnames <span style="color: #af8700">"paste -sd+ | bc"</span> | <span style="color: #5f8700">paste</span> -sd
+ 
+500500</pre>
+<p>Here, you immediately also sum the ten sums you get back from the remote machines.
+Let’s check that the answer is correct by doing the same calculation without <code>parallel</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 1000 | <span style="color: #5f8700">paste</span> -sd+ | <span style="color: #5f8700">bc</span>
+500500</pre>
+<p>Good, that works.
+If you have a larger pipeline that you want to execute on the remote machines, you can also put it in a separate script and upload it with <code>parallel</code>.
+I’ll demonstrate this by creating a very simple command-line tool called <code>add</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">'#!/usr/bin/env bash'</span> <span style="color: #af8700">&gt;</span> add
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">'paste -sd+ | bc'</span> <span style="color: #af8700">&gt;&gt;</span> <span style="text-decoration: underline">add</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">add</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">add</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env bash</span>
+   2   │ paste -sd+ <span style="color: #af005f">|</span> bc
+───────┴────────────────────────────────────────────────────────────────────────
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">chmod</span> u+x <span style="text-decoration: underline">add</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 1000 | <span style="color: #5f8700">./add</span>
+500500</pre>
+<p>Using the <code>--basefile</code> option, <code>parallel</code> first uploads the file <em>add</em> to all remote machines before running the jobs:</p>
+<!-- #TODO: Explain --pipe -->
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 1000 |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">parallel</span> -N100 --basefile <span style="text-decoration: underline">add</span> --pipe --slf hostnames <span style="color: #af8700">'./add'</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">./add</span>
+500500</pre>
+<p>Summing 1000 numbers is of course only a toy example.
+Plus, it would’ve been much faster to do this locally.
+Still, I hope it’s clear from this that <code>parallel</code> can be incredibly powerful.</p>
+</div>
+<div id="processing-files-on-remote-machines" class="section level3" number="8.4.4">
+<h3>
+<span class="header-section-number">8.4.4</span> Processing Files on Remote Machines<a class="anchor" aria-label="anchor" href="#processing-files-on-remote-machines"><i class="fas fa-link"></i></a>
+</h3>
+<p>The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results.
+Imagine that you want to count for each borough of New York City, how often they receive service calls on 311.
+You don’t have that data on your local machine yet, so let’s first obtain it from the free <a href="https://data.cityofnewyork.us/">NYC Open Data API</a>:</p>
+<pre><span style="font-weight: bold">$</span> seq 0 100 900 | parallel  "curl -sL 'http://data.cityofnewyork.us/resource/erm
+2-nwe9.json?\$limit=100&amp;\$offset={}'</pre>
+<p>You now have 10 files containing compressed JSON data:</p>
+<pre><span style="color: #af8700">2-nwe9.json?</span><span style="color: #00afaf">\$</span><span style="color: #af8700">limit=100&amp;</span><span style="color: #00afaf">\$</span><span style="color: #af8700">offset={}' | jq -c '.[]' | gzip &gt; nyc-{#}.json.gz"</span>
+l nyc*json.gz
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> nyc<span style="color: #0087ff">*</span>json.gz
+-rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-10.json.gz</span>
+-rw-r--r-- 1 dst dst 13K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-1.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-2.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-3.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-4.json.gz</span>
+-rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-5.json.gz</span>
+-rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-6.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-7.json.gz</span>
+-rw-r--r-- 1 dst dst 15K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-8.json.gz</span>
+-rw-r--r-- 1 dst dst 16K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-9.json.gz</span></pre>
+<p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file.
+Using <code>zcat</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-zcat" role="doc-biblioref"&gt;Paul Eggert, &lt;em&gt;&lt;span class="nocase"&gt;zcat&lt;/span&gt; – Decompress and Concatenate Files to Standard Output&lt;/em&gt;, version 1.10, 2021, &lt;/a&gt;&lt;a href="https://www.nongnu.org/zutils/zutils.html" role="doc-biblioref"&gt;https://www.nongnu.org/zutils/zutils.html&lt;/a&gt;.&lt;/p&gt;'><sup>104</sup></a></span>, you directly print the contents of a compress file:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> <span style="text-decoration: underline">nyc-1.json.gz</span> | <span style="color: #5f8700">trim</span>
+{"unique_key":"52707712","created_date":"2021-12-05T02:00:55.000","agency":"DOH…
+{"unique_key":"52703819","created_date":"2021-12-05T02:00:41.000","agency":"NYP…
+{"unique_key":"52707505","created_date":"2021-12-05T02:00:29.000","agency":"NYP…
+{"unique_key":"52704440","created_date":"2021-12-05T02:00:26.000","agency":"NYP…
+{"unique_key":"52705496","created_date":"2021-12-05T02:00:11.000","agency":"NYP…
+{"unique_key":"52706548","created_date":"2021-12-05T01:59:58.000","agency":"NYP…
+{"unique_key":"52708557","created_date":"2021-12-05T01:59:30.000","agency":"NYP…
+{"unique_key":"52703483","created_date":"2021-12-05T01:59:18.000","agency":"NYP…
+{"unique_key":"52707750","created_date":"2021-12-05T01:59:11.000","agency":"NYP…
+{"unique_key":"52703484","created_date":"2021-12-05T01:59:03.000","agency":"NYP…
+… with 90 more lines</pre>
+<p>Let’s see what one line of JSON looks like using:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> <span style="text-decoration: underline">nyc-1.json.gz</span> | <span style="color: #5f8700">head</span> -n 1
+{"unique_key":"52707712","created_date":"2021-12-05T02:00:55.000","agency":"DOHM
+H","agency_name":"Department of Health and Mental Hygiene","complaint_type":"Rod
+ent","descriptor":"Rat Sighting","location_type":"Single Room Occupancy (SRO)","
+incident_zip":"10455","incident_address":"455 EAST  148 STREET","street_name":"E
+AST  148 STREET","cross_street_1":"BERGEN AVENUE","cross_street_2":"BROOK AVENUE
+","intersection_street_1":"BERGEN AVENUE","intersection_street_2":"BROOK AVENUE"
+,"address_type":"ADDRESS","city":"BRONX","landmark":"EAST  148 STREET","status":
+"In Progress","community_board":"01 BRONX","bbl":"2022930058","borough":"BRONX",
+"x_coordinate_state_plane":"1007353","y_coordinate_state_plane":"236096","open_d
+ata_channel_type":"PHONE","park_facility_name":"Unspecified","park_borough":"BRO
+NX","latitude":"40.814674509013855","longitude":"-73.91653656075259","location":
+{"latitude":"40.814674509013855","longitude":"-73.91653656075259","human_address
+":"{\"address\": \"\", \"city\": \"\", \"state\": \"\", \"zip\": \"\"}"},":@comp
+uted_region_efsh_h5xi":"10933",":@computed_region_f5dn_yrer":"49",":@computed_re
+gion_yeji_bk3q":"5",":@computed_region_92fq_4b7q":"35",":@computed_region_sbqj_e
+nih":"23"}</pre>
+<p>If you were to get the total number of service calls per borough on your local machine, you would run the following command:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> nyc<span style="color: #0087ff">*</span>json.gz | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.borough'</span> | <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tr</span> <span style="color: #af8700">'[A-Z] '</span> <span style="color: #af8700">'[a-z]_'</span> | <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sort</span> | <span style="color: #5f8700">uniq</span> -c | <span style="color: #5f8700">sort</span> -nr | <span class="callout">➍</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">awk</span> <span style="color: #af8700">'{print $2","$1}'</span> | <span class="callout">➎</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">header</span> -a borough,count | <span class="callout">➏</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvlook</span>
+│ borough       │ count │
+├───────────────┼───────┤
+│ manhattan     │   316 │
+│ brooklyn      │   264 │
+│ queens        │   215 │
+│ bronx         │   172 │
+│ staten_island │    31 │
+│ unspecified   │     2 │</pre>
+<p><span class="callout">➊</span> Expand all compressed files using <code>zcat</code>.
+<br><span class="callout">➋</span> For each call, extract the name of the borough using <code>jq</code>.
+<br><span class="callout">➌</span> Convert borough names to lowercase and replace spaces with underscores (because <code>awk</code> splits on whitespace by default).
+<br><span class="callout">➍</span> Count the occurrences of each borough using <code>sort</code> and <code>uniq</code>.
+<br><span class="callout">➎</span> Reverse the two columns and delimit them by comma delimited using <code>awk</code>.
+<br><span class="callout">➏</span> Add a header using <code>header</code>.</p>
+<p>Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally.
+You can use <code>parallel</code> to distribute the local files among the remote machines, let them do the processing, and retrieve the results:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">ls</span> <span style="color: #0087ff">*</span>.json.gz | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">parallel</span> -v --basefile jq \ <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> --trc {.}.csv \ <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> --slf hostnames \ <span class="callout">➍</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">"zcat {} | ./jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{
+print </span><span style="color: #00afaf">\$</span><span style="color: #af8700">2</span><span style="color: #00afaf">\"</span><span style="color: #af8700">,</span><span style="color: #00afaf">\"\$</span><span style="color: #af8700">1}' &gt; {.}.csv"</span> <span class="callout">➎</span></pre>
+<p><span class="callout">➊</span> Print the list of files and pipe it into <code>parallel</code>
+<br><span class="callout">➋</span> Transmit the <code>jq</code> binary to each remote machine. Luckily, <code>jq</code> has no dependencies. This file will be removed from the remote machines afterwards because I specified the <code>--trc</code> option (which implies the <code>--cleanup</code> option). Note that the pipeline uses <code>./jq</code> instead of just <code>jq</code>. That’s because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.
+<br><span class="callout">➌</span> The command-line argument <code>--trc {.}.csv</code> is short for <code>--transfer --return {.}.csv --cleanup</code>. (The replacement string <em><code>{.}</code></em> gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine
+<br><span class="callout">➍</span> Specify a list of hostnames. Remember, if you want to try this out locally, you can specify <code>--sshlogin :</code> instead of <code>--slf hostnames</code>
+<br><span class="callout">➎</span> Note the escaping in the <code>awk</code> expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. If quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with <code>add</code></p>
+<p>If you, during this process, run <code>ls</code> on one of the remote machines, you would see that <code>parallel</code> indeed transfers (and cleans up) the binary <code>jq</code>, the JSON files, and CSV files:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">ssh</span> <span style="color: #af005f">$(</span><span style="color: #5f8700">head</span> -n 1 hostnames<span style="color: #af005f">)</span> ls</pre>
+<p>Each CSV file looks something like this:</p>
+<pre><span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">nyc-1.json.csv</span>
+bronx,3
+brooklyn,5
+manhattan,24
+queens,3
+staten_island,2</pre>
+<p>You can sum the counts in each CSV file using <code>rush</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-rush" role="doc-biblioref"&gt;Janssens, &lt;em&gt;&lt;span class="nocase"&gt;rush&lt;/span&gt; – &lt;span&gt;R&lt;/span&gt; One-Liners from the Shell&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>105</sup></a></span> and the tidyverse:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> nyc<span style="color: #0087ff">*</span>csv | <span style="color: #5f8700">header</span> -a borough,count |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">rush</span> run -t <span style="color: #af8700">'group_by(df, borough) %&gt;% summarize(count = sum(count))'</span> - |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvsort</span> -rc count | <span style="color: #5f8700">csvlook</span>
+│ borough       │ count │
+├───────────────┼───────┤
+│ manhattan     │   316 │
+│ brooklyn      │   264 │
+│ queens        │   215 │
+│ bronx         │   172 │
+│ staten_island │    31 │
+│ unspecified   │     2 │</pre>
+<p>Or, if you prefer to use SQL to aggregate results, you can use <code>csvsql</code> as discussed in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> nyc<span style="color: #0087ff">*</span>csv | <span style="color: #5f8700">header</span> -a borough,count |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvsql</span> --query <span style="color: #af8700">'SELECT borough, SUM(count) AS count FROM stdin GROUP BY boroug
+h ORDER BY count DESC'</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvlook</span>
+│ borough       │ count │
+├───────────────┼───────┤
+│ manhattan     │   316 │
+│ brooklyn      │   264 │
+│ queens        │   215 │
+│ bronx         │   172 │
+│ staten_island │    31 │
+│ unspecified   │     2 │</pre>
+</div>
+</div>
+<div id="summary-7" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Summary<a class="anchor" aria-label="anchor" href="#summary-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>As a data scientist, you work with data–occasionally a lot of data.
+This means that sometimes you need to run a command multiple times or distribute data-intensive commands over multiple cores.
+In this chapter I have shown you how easy it is to parallelize commands.
+<code>parallel</code> is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them.
+It offers a lot of functionality and in this chapter I’ve only been able to scratch the surface.
+In the next chapter I’m going to cover the fourth step of the OSEMN model: modeling data.</p>
+</div>
+<div id="for-further-exploration-7" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> For Further Exploration<a class="anchor" aria-label="anchor" href="#for-further-exploration-7"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Once you have a basic understanding of <code>parallel</code> and its most important options, I recommend that you take a look at <a href="https://www.gnu.org/software/parallel/parallel_tutorial.html">its online tutorial</a>. You’ll learn, among other things, how to specify different ways of specifying input, keep a log of all the jobs, and how to timeout, resume, and retry jobs. As creator of <code>parallel</code> Ole Tange in this tutorial says, “Your command line will love you for it.”</li>
+</ul>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></div>
+<div class="next"><a href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-8-parallel-pipelines"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="nav-link" href="#overview-5"><span class="header-section-number">8.1</span> Overview</a></li>
+<li>
+<a class="nav-link" href="#serial-processing"><span class="header-section-number">8.2</span> Serial Processing</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#looping-over-numbers"><span class="header-section-number">8.2.1</span> Looping Over Numbers</a></li>
+<li><a class="nav-link" href="#looping-over-lines"><span class="header-section-number">8.2.2</span> Looping Over Lines</a></li>
+<li><a class="nav-link" href="#looping-over-files"><span class="header-section-number">8.2.3</span> Looping Over Files</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#parallel-processing"><span class="header-section-number">8.3</span> Parallel Processing</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducing-gnu-parallel"><span class="header-section-number">8.3.1</span> Introducing GNU Parallel</a></li>
+<li><a class="nav-link" href="#specifying-input"><span class="header-section-number">8.3.2</span> Specifying Input</a></li>
+<li><a class="nav-link" href="#controlling-the-number-of-concurrent-jobs"><span class="header-section-number">8.3.3</span> Controlling the Number of Concurrent Jobs</a></li>
+<li><a class="nav-link" href="#logging-and-output"><span class="header-section-number">8.3.4</span> Logging and Output</a></li>
+<li><a class="nav-link" href="#creating-parallel-tools"><span class="header-section-number">8.3.5</span> Creating Parallel Tools</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#distributed-processing"><span class="header-section-number">8.4</span> Distributed Processing</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#get-list-of-running-aws-ec2-instances"><span class="header-section-number">8.4.1</span> Get List of Running AWS EC2 Instances</a></li>
+<li><a class="nav-link" href="#running-commands-on-remote-machines"><span class="header-section-number">8.4.2</span> Running Commands on Remote Machines</a></li>
+<li><a class="nav-link" href="#distributing-local-data-among-remote-machines"><span class="header-section-number">8.4.3</span> Distributing Local Data among Remote Machines</a></li>
+<li><a class="nav-link" href="#processing-files-on-remote-machines"><span class="header-section-number">8.4.4</span> Processing Files on Remote Machines</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-7"><span class="header-section-number">8.5</span> Summary</a></li>
+<li><a class="nav-link" href="#for-further-exploration-7"><span class="header-section-number">8.6</span> For Further Exploration</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/08.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/08.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

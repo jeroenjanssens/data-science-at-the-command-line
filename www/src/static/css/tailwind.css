@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#intro ul li::before {
+  background: none;
+  margin: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+#intro ul li:nth-of-type(1)::before {
+  content: "📖" !important;
+}
+
+#intro ul li:nth-of-type(2)::before {
+  content: "✍️" !important;
+}
+
+#intro ul li:nth-of-type(3)::before {
+  content: "✨" !important;
+}
+
+a {
+  text-decoration-thickness: 0.1em !important;
+}
+
+a:hover {
+  text-decoration-thickness: 0.15em !important;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.text {
+  @apply prose sm:prose-lg xl:prose-xl;
+}
+
+.text-larger {
+  @apply prose prose-lg sm:prose-xl xl:prose-2xl;
+}
+
+.text-smaller {
+  font-size: 0.7rem;
+}
+
+#intro p:nth-of-type(1) strong {
+  @apply text-blue-700 !important;
+}
+
+#intro p:nth-of-type(2) strong {
+  @apply text-orange-700 !important;
+}
+
+.strong-blue strong {
+  @apply text-blue-800;
+}
+
+.square {
+  @apply aspect-w-1 aspect-h-1;
+}
+
+.button {
+  @apply inline-block rounded-lg px-3 py-2 md:px-4 md:py-2 lg:px-6 lg:py-2 align-bottom;
+}
+
+.container {
+  @apply mx-auto sm:w-5/6 lg:w-2/3 max-w-6xl;
+}
+
+.dmt {
+  @apply mt-8 sm:mt-8 md:mt-16 lg:mt-20
+}
+
+.dmb {
+  @apply mb-8 sm:mb-8 md:mb-16 lg:mb-20
+}
+
+.dpy {
+  @apply py-8 sm:py-8 md:py-16 lg:py-20;
+}
+
+article {
+  @apply p-8 sm:py-8 md:py-16 lg:py-20;
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/fonts/source-sans-pro-v14-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'),
+       url('/static/fonts/source-sans-pro-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/static/fonts/source-sans-pro-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/static/fonts/source-sans-pro-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('/static/fonts/source-sans-pro-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/static/fonts/source-sans-pro-v14-latin-regular.svg#SourceSansPro') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  src: url('/static/fonts/source-sans-pro-v14-latin-600.eot'); /* IE9 Compat Modes */
+  src: local('Source Sans Pro SemiBold'), local('SourceSansPro-SemiBold'),
+       url('/static/fonts/source-sans-pro-v14-latin-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/static/fonts/source-sans-pro-v14-latin-600.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/static/fonts/source-sans-pro-v14-latin-600.woff') format('woff'), /* Modern Browsers */
+       url('/static/fonts/source-sans-pro-v14-latin-600.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/static/fonts/source-sans-pro-v14-latin-600.svg#SourceSansPro') format('svg'); /* Legacy iOS */
+}
+
+.poster {
+  @apply object-cover object-center block w-full h-full absolute blur-[1px] lg:blur-none;
+}
+
+.first-p-only p:not(:first-of-type) {
+  @apply hidden;
+}
+
+.thumbnail {
+  @apply object-cover w-full h-full;
+}
+
+#contact .poster {
+  @apply object-right lg:scale-x-[-1];
+}
+
+.wide {
+  @apply aspect-w-3 aspect-h-2;
+}
+
+.gallery {
+  @apply object-contain object-center block w-full h-full absolute;
+}
+
+.social .icon {
+  @apply fill-current w-5 text-gray-600 hover:text-blue-600;
+}
+
+footer .icon {
+  @apply fill-current w-6 hover:text-orange-200;
+}
+
+footer a {
+  @apply underline hover:text-orange-200;
+}
+
+@responsive {
+    .grid-flow-none {
+        grid-auto-flow: unset;
+    }
+}
+
+.overflow-x-scroll::-webkit-scrollbar {
+    display: none;
+}
+.overflow-x-scroll {
+    scrollbar-width: none;
+}
+
+
+code[class*=language-],pre[class*=language-]{color:#000;background:0 0;text-shadow:0 1px #fff;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.2;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#f5f5f4}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#b3d4fc}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:#f5f5f4}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#708090}.token.punctuation{color:#999}.token.namespace{opacity:.7}.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag{color:#905}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#690}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url{color:#9a6e3a;background:hsla(0,0%,100%,.5)}.token.atrule,.token.attr-value,.token.keyword{color:#07a}.token.class-name,.token.function{color:#dd4a68}.token.important,.token.regex,.token.variable{color:#e90}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}

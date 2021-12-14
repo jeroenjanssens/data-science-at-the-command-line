@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 11 Conclusion | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="In this final chapter, the book comes to a close. I’ll first recap what I’ve discussed in the previous ten chapters, and will then offer you three pieces of advice and provide some resources to...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Conclusion | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-11-conclusion.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="In this final chapter, the book comes to a close. I’ll first recap what I’ve discussed in the previous ten chapters, and will then offer you three pieces of advice and provide some resources to...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 11 Conclusion | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="In this final chapter, the book comes to a close. I’ll first recap what I’ve discussed in the previous ten chapters, and will then offer you three pieces of advice and provide some resources to...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="active" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-11-conclusion" class="section level1" number="11">
+<h1>
+<span class="header-section-number">11</span> Conclusion<a class="anchor" aria-label="anchor" href="#chapter-11-conclusion"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this final chapter, the book comes to a close.
+I’ll first recap what I’ve discussed in the previous ten chapters, and will then offer you three pieces of advice and provide some resources to further explore the related topics we touched upon.
+Finally, in case you have any questions, comments, or new command-line tools to share, I provide a few ways to get in touch with me.</p>
+<div id="lets-recap" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Let’s Recap<a class="anchor" aria-label="anchor" href="#lets-recap"><i class="fas fa-link"></i></a>
+</h2>
+<p>This book explored the power of using the command line to do data science.
+I find it an interesting observation that the challenges posed by this relatively young field can be tackled by such a time-tested technology.
+I hope that you now see what the command line is capable of.
+The many command-line tools offer all sorts of possibilities that are well suited to the variety of tasks encompassing data science.</p>
+<p>There are many definitions for data science available.
+In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, I introduced the OSEMN model as defined by Mason and Wiggins, because it is a very practical one that translates to very specific tasks.
+The acronym OSEMN stands for obtaining, scrubbing, exploring, modeling, and interpreting data. <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a> also explained why the command line is very suitable for doing these data science tasks.</p>
+<p>In <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>, I explained how you can get all the tools used in this book. <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a> also provided an introduction to the essential tools and concepts of the command line.</p>
+<p>The four OSEMN model chapters focused on performing those practical tasks using the command line.
+I haven’t devoted a chapter to the fifth step, interpreting data, because, quite frankly, the computer, let alone the command line, is of very little use here.
+I have, however, provided some pointers for further reading on this topic.</p>
+<p>In the four intermezzo chapters, we looked at some broader topics of doing data science at the command line, topics which are not really specific to one particular step.
+In <a href="chapter-4-creating-command-line-tools.html#chapter-4-creating-command-line-tools">Chapter 4</a>, I explained how you can turn one-liners and existing code into reusable command-line tools.
+In <a href="chapter-6-project-management-with-make.html#chapter-6-project-management-with-make">Chapter 6</a>, I described how you can manage your data workflow using a tool called <code>make</code>.
+In <a href="chapter-8-parallel-pipelines.html#chapter-8-parallel-pipelines">Chapter 8</a>, I demonstrated how ordinary command-line tools and pipelines can be run in parallel using GNU Parallel.
+In <a href="chapter-10-polyglot-data-science.html#chapter-10-polyglot-data-science">Chapter 10</a>, I showed that the command line doesn’t exist in a vacuum but that it can be leveraged from other programming languages and environments.
+The topics discussed in these intermezzo chapters can be applied at any point in your data workflow.</p>
+<p>It’s impossible to demonstrate all command-line tools that are available and relevant for doing data science.
+New tools are created on a daily basis.
+As you may have come to understand by now, this book is more about the idea of using the command line, rather than giving you an exhaustive list of tools.</p>
+</div>
+<div id="three-pieces-of-advice" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> Three Pieces of Advice<a class="anchor" aria-label="anchor" href="#three-pieces-of-advice"><i class="fas fa-link"></i></a>
+</h2>
+<p>You probably spent quite some time reading these chapters and perhaps also following along with the code examples.
+In the hope that it maximizes the return on this investment and increases the probability that you’ll continue to incorporate the command line into your data science workflow, I would like to offer you three pieces of advice: (1) be patient, (2) be creative, and (3) be practical. In the next three subsections I elaborate on each piece of advice.</p>
+<div id="be-patient" class="section level3" number="11.2.1">
+<h3>
+<span class="header-section-number">11.2.1</span> Be Patient<a class="anchor" aria-label="anchor" href="#be-patient"><i class="fas fa-link"></i></a>
+</h3>
+<p>The first piece of advice that I can give is to be patient.
+Working with data on the command line is different from using a programming language, and therefore it requires a different mindset.</p>
+<p>Moreover, the command-line tools themselves are not without their quirks and inconsistencies.
+This is partly because they have been developed by many different people, over the course of multiple decades.
+If you ever find yourself at a loss regarding their mind-dazzling options, don’t forget to use <code>--help</code>, <code>man</code>, <code>tldr</code>, or your favorite search engine to learn more.</p>
+<p>Still, especially in the beginning, it can be a frustrating experience.
+Trust me, you’ll become more proficient as you practice using the command line and its tools.
+The command line has been around for many decades, and will be around for many more to come.
+It’s a worthwhile investment.</p>
+</div>
+<div id="be-creative" class="section level3" number="11.2.2">
+<h3>
+<span class="header-section-number">11.2.2</span> Be Creative<a class="anchor" aria-label="anchor" href="#be-creative"><i class="fas fa-link"></i></a>
+</h3>
+<p>The second, related piece of advice is to be creative.
+The command line is very flexible.
+By combining the command-line tools, you can accomplish more than you might think.</p>
+<p>I encourage you to not immediately fall back onto your programming language.
+And when you do have to use a programming language, think about whether the code can be generalized or reused in some way.
+If so, consider creating your own command-line tool with that code using the steps I discussed in <a href="chapter-4-creating-command-line-tools.html#chapter-4-creating-command-line-tools">Chapter 4</a>.
+If you believe your tool may be beneficial for others, you could even go one step further by making it open source.
+Maybe there’s a step you know how to perform at the command line, but you would rather not leave the comfort of the main programming language or environment you’re working in.
+Perhaps you can use one of the approaches listed in <a href="chapter-10-polyglot-data-science.html#chapter-10-polyglot-data-science">Chapter 10</a>.</p>
+</div>
+<div id="be-practical" class="section level3" number="11.2.3">
+<h3>
+<span class="header-section-number">11.2.3</span> Be Practical<a class="anchor" aria-label="anchor" href="#be-practical"><i class="fas fa-link"></i></a>
+</h3>
+<p>The third piece of advice is to be practical.
+Being practical is related to being creative, but deserves a separate explanation.
+In the previous subsection, I mentioned that you should not immediately fall back to a programming language.
+Of course, the command line has its limits.
+Throughout the book, I have emphasized that the command line should be regarded as a companion approach to doing data science.</p>
+<p>I’ve discussed four steps for doing data science at the command line.
+In practice, the applicability of the command line is higher for step 1 than it is for step 4.
+You should use whatever approach works best for the task at hand.
+And it’s perfectly fine to mix and match approaches at any point in your workflow.
+As I’ve shown in <a href="chapter-10-polyglot-data-science.html#chapter-10-polyglot-data-science">Chapter 10</a>, the command line is wonderful at being integrated with other approaches, programming languages, and statistical environments.
+There’s a certain trade-off with each approach, and part of becoming proficient at the command line is to learn when to use which.</p>
+<p>In conclusion, when you’re patient, creative, and practical, the command line will make you a more efficient and productive data scientist.</p>
+</div>
+</div>
+<div id="where-to-go-from-here" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Where To Go From Here?<a class="anchor" aria-label="anchor" href="#where-to-go-from-here"><i class="fas fa-link"></i></a>
+</h2>
+<p>As this book is on the intersection of the command line and data science, many related topics have only been touched upon.
+Now, it’s up to you to further explore these topics.
+The following subsections provide a list of topics and suggested resources to consult.</p>
+</div>
+<div id="the-command-line" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> The Command Line<a class="anchor" aria-label="anchor" href="#the-command-line"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<em>The Linux Command Line: A Complete Introduction, 2nd Edition</em> By William E. Shotts, Jr. (No Starch Press, 2019)</li>
+<li>
+<em>Unix Power Tools, 3rd Edition</em> by Jerry Peek, Shelley Powers, Tim O’Reilly, and Mike Loukides (O’Reilly Media, 2002)</li>
+<li>
+<em>Learning the Vi and Vim Editors, 7th Edition</em> by Arnold Robbins, Elbert Hannah, and Linda Lamb (O’Reilly Media, 2008)</li>
+</ul>
+<div id="shell-programming" class="section level3" number="11.4.1">
+<h3>
+<span class="header-section-number">11.4.1</span> Shell Programming<a class="anchor" aria-label="anchor" href="#shell-programming"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<em>Classic Shell Scripting</em> by Arnold Robbins and Nelson H.F. Beebe (O’Reilly Media, 2005)</li>
+<li>
+<em>Wicked Cool Shell Scripts, 2nd Edition</em> by Dave Taylor and Brandon Perry (No Starch Press, 2017)</li>
+<li>
+<em>Bash Cookbook</em> by Carl Albing JP Vossen (O’Reilly Media, 2018)</li>
+</ul>
+</div>
+<div id="python-r-and-sql" class="section level3" number="11.4.2">
+<h3>
+<span class="header-section-number">11.4.2</span> Python, R, and SQL<a class="anchor" aria-label="anchor" href="#python-r-and-sql"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<em>Learn Python 3 the Hard Way</em> by Zed A. Shaw (Addison-Wesley Professional, 2017)</li>
+<li>
+<em>Python for Data Analysis, 2nd Edition</em> by Wes McKinney (O’Reilly Media, 2017)</li>
+<li>
+<em>Data Science from Scratch, 2nd Edition</em> by Joel Grus (O’Reilly Media, 2019)</li>
+<li>
+<em>R for Data Science</em> by Garrett Grolemund and Hadley Wickham (O’Reilly Media, 2016)</li>
+<li>
+<em>R for Everyone, 2nd edition</em> by Jared Lander (Addison-Wesley Professional, 2017)</li>
+<li>
+<em>Sams Teach Yourself SQL in 10 Minutes a Day, 5th Edition</em> by Ben Forta (Sams, 2020)</li>
+</ul>
+</div>
+<div id="apis" class="section level3" number="11.4.3">
+<h3>
+<span class="header-section-number">11.4.3</span> APIs<a class="anchor" aria-label="anchor" href="#apis"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<em>Mining the Social Web, 3rd Edition</em> by Matthew A. Russell and Mikhail Klassen (O’Reilly Media, 2019)</li>
+<li>
+<em>Data Source Handbook</em> by Pete Warden (O’Reilly Media, 2011)</li>
+</ul>
+</div>
+<div id="machine-learning" class="section level3" number="11.4.4">
+<h3>
+<span class="header-section-number">11.4.4</span> Machine Learning<a class="anchor" aria-label="anchor" href="#machine-learning"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<em>Python Machine Learning, 3rd Edition</em> by Sebastian Raschka and Vahid Mirjalili (Packt Publishing, 2019)</li>
+<li>
+<em>Pattern Recognition and Machine Learning</em> by Christopher M. Bishop (Springer, 2006)</li>
+<li>
+<em>Information Theory, Inference, and Learning Algorithms</em> by David MacKay (Cambridge University Press, 2003)</li>
+</ul>
+</div>
+</div>
+<div id="getting-in-touch" class="section level2" number="11.5">
+<h2>
+<span class="header-section-number">11.5</span> Getting in Touch<a class="anchor" aria-label="anchor" href="#getting-in-touch"><i class="fas fa-link"></i></a>
+</h2>
+<p>This book would not have been possible without the many people who created the command line and the numerous tools.
+It’s safe to say that the current ecosystem of command-line tools for data science is a community effort.
+I have only been able to give you a glimpse of the many command-line tools available.
+New ones are created everyday, and perhaps some day you will create one yourself.
+In that case, I would love to hear from you.
+I’d also appreciate it if you would drop me a line whenever you have a question, comment, or suggestion.
+There are a couple of ways to get in touch:</p>
+<ul>
+<li>Email: <a href="mailto:jeroen@jeroenjanssens.com" class="email">jeroen@jeroenjanssens.com</a>
+</li>
+<li>Twitter: <a href="https://twitter.com/jeroenhjanssens/">@jeroenhjanssens</a>
+</li>
+<li>Book website: <a href="https://datascienceatthecommandline.com/" class="uri">https://datascienceatthecommandline.com/</a>
+</li>
+<li>Book GitHub repository: <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line" class="uri">https://github.com/jeroenjanssens/data-science-at-the-command-line</a>
+</li>
+</ul>
+<p>Thank you.</p>
+
+<!--A[appendix]
+[[appendix-tools]]
+A-->
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></div>
+<div class="next"><a href="list-of-command-line-tools.html">List of Command-Line Tools</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-11-conclusion"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="nav-link" href="#lets-recap"><span class="header-section-number">11.1</span> Let’s Recap</a></li>
+<li>
+<a class="nav-link" href="#three-pieces-of-advice"><span class="header-section-number">11.2</span> Three Pieces of Advice</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#be-patient"><span class="header-section-number">11.2.1</span> Be Patient</a></li>
+<li><a class="nav-link" href="#be-creative"><span class="header-section-number">11.2.2</span> Be Creative</a></li>
+<li><a class="nav-link" href="#be-practical"><span class="header-section-number">11.2.3</span> Be Practical</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#where-to-go-from-here"><span class="header-section-number">11.3</span> Where To Go From Here?</a></li>
+<li>
+<a class="nav-link" href="#the-command-line"><span class="header-section-number">11.4</span> The Command Line</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#shell-programming"><span class="header-section-number">11.4.1</span> Shell Programming</a></li>
+<li><a class="nav-link" href="#python-r-and-sql"><span class="header-section-number">11.4.2</span> Python, R, and SQL</a></li>
+<li><a class="nav-link" href="#apis"><span class="header-section-number">11.4.3</span> APIs</a></li>
+<li><a class="nav-link" href="#machine-learning"><span class="header-section-number">11.4.4</span> Machine Learning</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#getting-in-touch"><span class="header-section-number">11.5</span> Getting in Touch</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/11.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/11.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

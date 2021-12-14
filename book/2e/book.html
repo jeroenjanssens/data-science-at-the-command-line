@@ -91,6 +91,10 @@
         <div class="book-extra">
           <p><a id="book-repo" href="#">View book repository <i class="fab fa-github"></i></a></li></p>
         </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -110,11 +114,11 @@ Obtain, Scrub, Explore, and Model Data with Unix Power Tools
 <p><img class="d-block d-lg-none" src="images/cover-small.png"></p>
 </div>
 <p>Welcome to the website of the second edition of <em>Data Science at the Command Line</em> by Jeroen Janssens, published by O’Reilly Media in October 2021. This website is free to use. The contents is licensed under the <a href="https://creativecommons.org/licenses/by-nd/4.0/">Creative Commons Attribution-NoDerivatives 4.0 International License</a>. You can order a physical copy at <a href="https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912">Amazon</a>.</p>
-<p>If you find this book helpful, consider spreading the word! You could, for instance,
-share it on <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdatascienceatthecommandline.com&amp;via=jeroenhjanssens&amp;text=Data%20Science%20at%20the%20Command%20Line%2C%20second%20edition">Twitter</a>,
-write a review on <a href="https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912">Amazon</a>, or
-star the <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">Github repository</a>. Thank you.</p>
 <p>Want to learn from Jeroen in person? Through his company, Data Science Workshops, Jeroen provides in-company training about data science at the command line and related topics such as Python, R, and machine learning. Visit <a href="https://datascienceworkshops.com">Data Science Workshops</a> for more information.</p>
+
+<div class="rmdtip">
+Jeroen is currently working on a new course, tentatively titled <a href="/#course">Embracing the Command Line</a>. If you haven’t fully embraced the command line yet, then this course might be for you. The beta cohort is expected to start in Q1 2021. You can learn more about this course and tell Jeroen what you think <a href="/#course">here</a>.
+</div>
 <div id="description" class="section level2 unnumbered">
 <h2 class="unnumbered">Description</h2>
 <p>This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.</p>
@@ -129,6 +133,13 @@ star the <a href="https://github.com/jeroenjanssens/data-science-at-the-command-
 <li>Model data with dimensionality reduction, regression, and classification algorithms</li>
 <li>Leverage the command line from Python, Jupyter, R, RStudio, and Apache Spark</li>
 </ul>
+
+<div class="rmdnote">
+If you find this book helpful, consider spreading the word! You could, for instance,
+share it on <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdatascienceatthecommandline.com&amp;via=jeroenhjanssens&amp;text=Data%20Science%20at%20the%20Command%20Line%2C%20second%20edition">Twitter</a>,
+write a review on <a href="https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912">Amazon</a>, or
+star the <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">Github repository</a>. Much appreciated!
+</div>
 </div>
 <div id="praise" class="section level2 unnumbered">
 <h2 class="unnumbered">Praise</h2>
@@ -678,7 +689,7 @@ For example, the contents of the terminal in the two screenshots would look like
 dst
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">date</span>
-Mon Nov 22 04:55:27 PM CET 2021
+Mon Dec  6 09:25:19 PM CET 2021
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">'The command line is awesome!'</span> | <span style="color: #5f8700">cowsay</span> -f tux
  ______________________________
@@ -1021,16 +1032,16 @@ The other three types (interpreted script, shell function, and alias) allow us t
 
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 40K
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch02</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch03</span>/
-drwxr-xr-x 3 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch04</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch05</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch06</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch07</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch08</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch09</span>/
-drwxr-xr-x 4 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch10</span>/
-drwxr-xr-x 3 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">csvconf</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch02</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch03</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch04</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch05</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch06</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch07</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch08</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch09</span>/
+drwxr-xr-x 4 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch10</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">csvconf</span>/
 
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">ch02</span></pre>
 <p>Aliases are simpler than shell functions as they don’t allow parameters. The function <code>fac</code> could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in the file <em>.zshrc</em>, which is located in your home directory. To see all aliases currently defined, you run <code>alias</code> without arguments. Try it. What do you see?</p>
@@ -1108,7 +1119,7 @@ We can combine <code>curl</code> and <code>grep</code> as follows:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">grep</span> <span style="color: #af8700">" CHAPTER"</span> |
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">wc</span> -l <span class="callout">&#10122;</span>
-12</pre>
+0</pre>
 <p><span class="callout">&#10122;</span> The option <code>-l</code> specifies that <code>wc</code> should only output the number of lines that are pass into it. By default it also returns the number of characters and words.</p>
 <p>You can think of piping as an automated copy and paste.
 Once you get the hang of combining tools using the pipe operator, you’ll find that there are virtually no limits to this.</p>
@@ -1122,21 +1133,11 @@ This is called <em>output redirection</em>, and works as follows:</p>
 s.txt
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  170k  100  170k    0     0  75821      0  0:00:02  0:00:02 --:--:-- 75986
+  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0
+curl: (35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to www.gutenberg
+.org:443
  
-<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">chapters.txt</span>
- CHAPTER I.     Down the Rabbit-Hole
- CHAPTER II.    The Pool of Tears
- CHAPTER III.   A Caucus-Race and a Long Tale
- CHAPTER IV.    The Rabbit Sends in a Little Bill
- CHAPTER V.     Advice from a Caterpillar
- CHAPTER VI.    Pig and Pepper
- CHAPTER VII.   A Mad Tea-Party
- CHAPTER VIII.  The Queen’s Croquet-Ground
- CHAPTER IX.    The Mock Turtle’s Story
- CHAPTER X.     The Lobster Quadrille
- CHAPTER XI.    Who Stole the Tarts?
- CHAPTER XII.   Alice’s Evidence</pre>
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">chapters.txt</span></pre>
 <p>Here, we save the output of <code>grep</code> to a file named <em>chapters.txt</em> in the directory <em>/data/ch02</em>.
 If this file does not exist yet, it will be created.
 If this file already exists, its contents are overwritten.
@@ -1235,11 +1236,11 @@ If you run the following, the file <em>dates.txt</em> will end up empty.</p>
 ───────┬────────────────────────────────────────────────────────────────────────
        │ File: <span style="font-weight: bold">dates-nl.txt</span>
 ───────┼────────────────────────────────────────────────────────────────────────
-   1   │      1  2021-11-23
-   2   │      2  2021-11-24
-   3   │      3  2021-11-25
-   4   │      4  2021-11-26
-   5   │      5  2021-11-27
+   1   │      1  2021-12-07
+   2   │      2  2021-12-08
+   3   │      3  2021-12-09
+   4   │      4  2021-12-10
+   5   │      5  2021-12-11
 ───────┴────────────────────────────────────────────────────────────────────────
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">dseq</span> 5 <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">dates.txt
@@ -1250,11 +1251,11 @@ If you run the following, the file <em>dates.txt</em> will end up empty.</p>
 ───────┬────────────────────────────────────────────────────────────────────────
        │ File: <span style="font-weight: bold">dates.txt</span>
 ───────┼────────────────────────────────────────────────────────────────────────
-   1   │      1  2021-11-23
-   2   │      2  2021-11-24
-   3   │      3  2021-11-25
-   4   │      4  2021-11-26
-   5   │      5  2021-11-27
+   1   │      1  2021-12-07
+   2   │      2  2021-12-08
+   3   │      3  2021-12-09
+   4   │      4  2021-12-10
+   5   │      5  2021-12-11
 ───────┴────────────────────────────────────────────────────────────────────────</pre>
 </div>
 <div id="working-with-files-and-directories" class="section level3" number="2.3.6">
@@ -1276,11 +1277,11 @@ l='ls --color -lhF --group-directories-first'
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> <span style="text-decoration: underline">/data/ch10</span>
 total 180K
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">__pycache__</span>/
--rw-r--r-- 1 dst dst 164K Nov 22 16:55 alice.txt
--rwxr--r-- 1 dst dst  408 Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">count.py</span>*
--rw-r--r-- 1 dst dst  460 Nov 22 16:55 count.R
--rw-r--r-- 1 dst dst 1.7K Nov 22 16:55 Untitled1337.ipynb</pre>
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">__pycache__</span>/
+-rw-r--r-- 1 dst dst 164K Dec  6 21:25 alice.txt
+-rwxr--r-- 1 dst dst  408 Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">count.py</span>*
+-rw-r--r-- 1 dst dst  460 Dec  6 21:25 count.R
+-rw-r--r-- 1 dst dst 1.7K Dec  6 21:25 Untitled1337.ipynb</pre>
 <p>You have already seen how we can create new files by redirecting the output with either <code>&gt;</code> or <code>&gt;&gt;</code>.
 If you need to move a file to a different directory you can use <code>mv</code><span class="citation"><a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></span>:</p>
 <pre>$ mv hello.txt /data/ch02</pre>
@@ -1302,17 +1303,17 @@ This is useful for creating backups:</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 44K
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch02</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch03</span>/
-drwxr-xr-x 3 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch04</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch05</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch06</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch07</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch08</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch09</span>/
-drwxr-xr-x 4 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch10</span>/
-drwxr-xr-x 3 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">csvconf</span>/
-drwxr-xr-x 2 dst dst 4.0K Nov 22 16:55 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">logs</span>/</pre>
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:27 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch02</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch03</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch04</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch05</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch06</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch07</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch08</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch09</span>/
+drwxr-xr-x 4 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch10</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">csvconf</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:27 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">logs</span>/</pre>
 
 <div class="rmdtip">
 Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the file system to provide immediate feedback.
@@ -1563,12 +1564,12 @@ In this chapter, I discuss several tools that help tackle this from the command 
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 924K
--rw-r--r-- 1 dst dst 627K Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
--rw-r--r-- 1 dst dst 189K Nov 22 16:58 r-datasets.db
--rw-r--r-- 1 dst dst  149 Nov 22 16:58 tmnt-basic.csv
--rw-r--r-- 1 dst dst  148 Nov 22 16:58 tmnt-missing-newline.csv
--rw-r--r-- 1 dst dst  181 Nov 22 16:58 tmnt-with-header.csv
--rw-r--r-- 1 dst dst  91K Nov 22 16:58 top2000.xlsx</pre>
+-rw-r--r-- 1 dst dst 627K Dec  6 21:30 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec  6 21:30 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec  6 21:30 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec  6 21:30 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec  6 21:30 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec  6 21:30 top2000.xlsx</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -1614,11 +1615,11 @@ DOCTYPE html&gt;
 &lt;title&gt;List of windmills in the Netherlands - Wikipedia&lt;/title&gt;
 &lt;script&gt;document.documentElement.className="client-js";RLCONF={"wgBreakFrames":…
 "wgRelevantPageName":"List_of_windmills_in_the_Netherlands","wgRelevantArticleI…
-"user.styles":"ready","ext.globalCssJs.user":"ready","user":"ready","user.optio…
+,"site.styles":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","us…
 "ext.growthExperiments.SuggestedEditSession"];&lt;/script&gt;
 &lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…
-100  248k  100  248k    0     0   999k      0 --:--:-- --:--:-- --:--:-- 1028k
-… with 1800 more lines</pre>
+100  249k  100  249k    0     0   846k      0 --:--:-- --:--:-- --:--:--  860k
+… with 1766 more lines</pre>
 <p><span class="callout">&#10122;</span> Remember, <code>trim</code> is used only to make the output fit nicely in the book.</p>
 <p>As you can see, <code>curl</code> downloads the raw HTML returned by Wikipedia’s server; no interpretation is being done and all the contents is immediately printed on standard output.
 Because of the URL, you’d think that this article would list all the windmills in the Netherlands.
@@ -1641,13 +1642,13 @@ The filename will be based on the last part of the URL.</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 1.4M
--rw-r--r-- 1 dst dst 428K Nov 22 16:58 List_of_windmills_in_Friesland
--rw-r--r-- 1 dst dst 627K Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
--rw-r--r-- 1 dst dst 189K Nov 22 16:58 r-datasets.db
--rw-r--r-- 1 dst dst  149 Nov 22 16:58 tmnt-basic.csv
--rw-r--r-- 1 dst dst  148 Nov 22 16:58 tmnt-missing-newline.csv
--rw-r--r-- 1 dst dst  181 Nov 22 16:58 tmnt-with-header.csv
--rw-r--r-- 1 dst dst  91K Nov 22 16:58 top2000.xlsx</pre>
+-rw-r--r-- 1 dst dst 432K Dec  6 21:30 List_of_windmills_in_Friesland
+-rw-r--r-- 1 dst dst 627K Dec  6 21:30 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec  6 21:30 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec  6 21:30 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec  6 21:30 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec  6 21:30 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec  6 21:30 top2000.xlsx</pre>
 <p>If you don’t like that filename then you can use the <code>-o</code> option together with a filename or redirect the output to a file yourself:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color: #af8700">&gt;</span> fries
 land.html</pre>
@@ -1674,7 +1675,7 @@ When the URL is password protected, you can specify a username and a password as
 <p>Or how about the DICT protocol, which allows you to access various dictionaries and lookup definitions.
 Here’s the definition of “windmill” according to the Collaborative International Dictionary of English:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"dict://dict.org/d:windmill"</span> | <span style="color: #5f8700">trim</span>
-220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 &lt;auth.mime&gt; &lt;7799705…
+220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 &lt;auth.mime&gt; &lt;8122421…
 250 ok
 150 1 definitions retrieved
 151 "Windmill" gcide "The Collaborative International Dictionary of English v.0…
@@ -1707,7 +1708,7 @@ x-content-type-options: nosniff
 cache-control: no-cache, no-store, max-age=0, must-revalidate
 pragma: no-cache
 expires: Mon, 01 Jan 1990 00:00:00 GMT
-date: Mon, 22 Nov 2021 15:58:14 GMT
+date: Mon, 06 Dec 2021 20:30:50 GMT
 location: https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;feature=youtu.be
 content-length: 0
 x-frame-options: SAMEORIGIN
@@ -1887,7 +1888,7 @@ To extract its data, you invoke <code>in2csv</code> as follows:</p>
 x</span>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100 41579  100 41579    0     0   103k      0 --:--:-- --:--:-- --:--:--  104k
+100 41579  100 41579    0     0  87167      0 --:--:-- --:--:-- --:--:-- 88278
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">in2csv</span> <span style="text-decoration: underline">top2000.xlsx</span> | <span style="color: #5f8700">tee</span> top2000.csv | <span style="color: #5f8700">trim</span>
 BadZipFile: File is not a zip file</pre>
@@ -2023,33 +2024,33 @@ sapi.org_apikey</span><span style="color: #af005f"></span><span style="color: #a
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">jq</span> <span style="color: #af8700">'.'</span> | <span style="color: #5f8700">trim</span> 30
 {
   "status": "ok",
-  "totalResults": 10001,
+  "totalResults": 9668,
   "articles": [
+    {
+      "source": {
+        "id": "engadget",
+        "name": "Engadget"
+      },
+      "author": "Igor Bonifacic",
+      "title": "'Arma 3' and 'DayZ' add BattlEye anti-cheat support through Val…
+      "description": "While there are still many unknowns about Steam Deck\r\n
+      "url": "https://www.engadget.com/arma-3-dayz-proton-battleye-support-2246…
+      "urlToImage": "https://s.yimg.com/os/creatr-uploaded-images/2021-12/bcb0f…
+      "publishedAt": "2021-12-03T22:46:25Z",
+      "content": "While there are still many unknowns about Steam Deck\r\ns lib…
+    },
     {
       "source": {
         "id": null,
         "name": "Slashdot.org"
       },
       "author": "EditorDavid",
-      "title": "Linux Distros Beat Windows 11 in Phoronix Performance Testing",
-      "description": "Phoronix ran some fun performance tests this week. \"Now …
-      "url": "https://tech.slashdot.org/story/21/10/30/051201/linux-distros-bea…
-      "urlToImage": "https://a.fsdn.com/sd/topics/windows_64.png",
-      "publishedAt": "2021-10-30T17:34:00Z",
-      "content": "First up is the fresh look at the Windows 11 vs. Linux perfor…
-    },
-    {
-      "source": {
-        "id": "the-verge",
-        "name": "The Verge"
-      },
-      "author": "Sean Hollister",
-      "title": "Valve says supporting the Steam Deck with BattlEye anti-cheat i…
-      "description": "“BattlEye on Proton integration has reached a point whe…
-      "url": "https://www.theverge.com/2021/11/8/22737127/valve-steam-deck-batt…
-      "urlToImage": "https://cdn.vox-cdn.com/thumbor/e_O5T81FDO_TobpZ7Ev9nWoKHw…
-      "publishedAt": "2021-11-09T03:30:16Z",
-      "content": "Image: Valve\r\n\n \n\n We knew from the beginning that Valve…
+      "title": "AWS Embraces Fedora Linux for Its Cloud-Based 'Amazon Linux'",
+      "description": "ZDNet reports:\n\nBy and large, the public cloud runs on …
+      "url": "https://linux.slashdot.org/story/21/11/27/0328223/aws-embraces-fe…
+      "urlToImage": "https://a.fsdn.com/sd/topics/cloud_64.png",
+      "publishedAt": "2021-11-27T16:34:00Z",
+      "content": "By and large, the public cloud runs on Linux. Most users, eve…
     },
 … with 236 more lines</pre>
 <p>You can get your own API key at <a href="https://newsapi.org">News API’s website</a>.</p>
@@ -2192,14 +2193,14 @@ If you want to dive deeper into shell scripting, I recommend the book <em>Classi
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 32K
--rwxr-xr-x 1 dst dst 400 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
--rwxr-xr-x 1 dst dst 391 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
--rwxr-xr-x 1 dst dst 182 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
--rwxr-xr-x 1 dst dst 147 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
--rwxr-xr-x 1 dst dst 105 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
--rwxr-xr-x 1 dst dst 128 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
--rwxr-xr-x 1 dst dst 647 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
--rwxr-xr-x 1 dst dst 584 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*</pre>
+-rwxr-xr-x 1 dst dst 400 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
+-rwxr-xr-x 1 dst dst 391 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
+-rwxr-xr-x 1 dst dst 182 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
+-rwxr-xr-x 1 dst dst 147 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
+-rwxr-xr-x 1 dst dst 105 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
+-rwxr-xr-x 1 dst dst 128 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
+-rwxr-xr-x 1 dst dst 647 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
+-rwxr-xr-x 1 dst dst 584 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -2324,7 +2325,7 @@ Let’s name the file <em>top-words-1.sh</em> to indicate that this is the first
 <p>Running <code>fc</code> invokes the default text editor, which is stored in the environment variable <em>EDITOR</em>.
 In the Docker container, this is set to <code>nano</code>, a straightforward text editor.
 As you can see, this file contains our one-liner:</p>
-<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zsh8xuCtz                               
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
 </span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
 tr '[:upper:]' '[:lower:]' |            
 grep -oE "[a-z\']{2,}" |                
@@ -2341,7 +2342,7 @@ head -n 10
 <span style="background-color: #AAAAAA; color: #000000">^G</span> Help      <span style="background-color: #AAAAAA; color: #000000">^O</span> Write Out <span style="background-color: #AAAAAA; color: #000000">^W</span> Where Is  <span style="background-color: #AAAAAA; color: #000000">^K</span> Cut       <span style="background-color: #AAAAAA; color: #000000">^T</span> Execute   <span style="background-color: #AAAAAA; color: #000000">^C</span> Location    
 <span style="background-color: #AAAAAA; color: #000000">^X</span> Exit      <span style="background-color: #AAAAAA; color: #000000">^R</span> Read File <span style="background-color: #AAAAAA; color: #000000">^\</span> Replace   <span style="background-color: #AAAAAA; color: #000000">^U</span> Paste     <span style="background-color: #AAAAAA; color: #000000">^J</span> Justify   <span style="background-color: #AAAAAA; color: #000000">^_</span> Go To Line  </pre>
 <p>Let’s give this temporary file a proper name by pressing <strong><code>Ctrl-O</code></strong>, removing the temporary filename, and typing <code>top-words-1.sh</code>:</p>
-<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zsh8xuCtz                               
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
 </span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
 tr '[:upper:]' '[:lower:]' |            
 grep -oE "[a-z\']{2,}" |                
@@ -2358,7 +2359,7 @@ head -n 10
 ^G</span> Help             <span style="background-color: #AAAAAA; color: #000000">M-D</span> DOS Format      <span style="background-color: #AAAAAA; color: #000000">M-A</span> Append          <span style="background-color: #AAAAAA; color: #000000">M-B</span> Backup File     
 <span style="background-color: #AAAAAA; color: #000000">^C</span> Cancel           <span style="background-color: #AAAAAA; color: #000000">M-M</span> Mac Format      <span style="background-color: #AAAAAA; color: #000000">M-P</span> Prepend         <span style="background-color: #AAAAAA; color: #000000">^T</span> Browse           </pre>
 <p>Press <strong><code>Enter</code></strong>:</p>
-<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zsh8xuCtz                               
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
 </span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
 tr '[:upper:]' '[:lower:]' |            
 grep -oE "[a-z\']{2,}" |                
@@ -2401,16 +2402,16 @@ In fact, command-line tools rarely have extensions.</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 44K
--rwxr-xr-x 1 dst dst  400 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
--rwxr-xr-x 1 dst dst  391 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
--rw-r--r-- 1 dst dst 7.5K Nov 22 16:58 stopwords
--rwxr-xr-x 1 dst dst  182 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
--rwxr-xr-x 1 dst dst  147 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
--rw-r--r-- 1 dst dst  173 Nov 22 16:58 top-words-1.sh
--rwxr-xr-x 1 dst dst  105 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
--rwxr-xr-x 1 dst dst  128 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
--rwxr-xr-x 1 dst dst  647 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
--rwxr-xr-x 1 dst dst  584 Nov 22 16:58 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*
+-rwxr-xr-x 1 dst dst  400 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
+-rwxr-xr-x 1 dst dst  391 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
+-rw-r--r-- 1 dst dst 7.5K Dec  6 21:31 stopwords
+-rwxr-xr-x 1 dst dst  182 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
+-rwxr-xr-x 1 dst dst  147 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
+-rw-r--r-- 1 dst dst  173 Dec  6 21:31 top-words-1.sh
+-rwxr-xr-x 1 dst dst  105 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
+-rwxr-xr-x 1 dst dst  128 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
+-rwxr-xr-x 1 dst dst  647 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
+-rwxr-xr-x 1 dst dst  584 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words-1.sh
 </span>───────┬────────────────────────────────────────────────────────────────────────
@@ -2462,8 +2463,8 @@ The following command gives the user, you, permission to execute <em>top-words-2
 <p>The argument <code>u+x</code> consists of three characters: (1) <code>u</code> indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) <code>+</code> indicates that we want to add a permission; and (3) <code>x</code>, which indicates the permissions to execute.</p>
 <p>Let’s now have a look at the access permissions of both files:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> top-words-{1,2}.sh
--rw-r--r-- 1 dst dst 173 Nov 22 16:58 top-words-1.sh
--rwxr--r-- 1 dst dst 173 Nov 22 16:59 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-2.sh</span>*</pre>
+-rw-r--r-- 1 dst dst 173 Dec  6 21:31 top-words-1.sh
+-rwxr--r-- 1 dst dst 173 Dec  6 21:32 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-2.sh</span>*</pre>
 <p>The first column shows the access permissions for each file.
 For <em>top-words-2.sh</em>, this is <em><code>-rwxrw-r--</code></em>.
 The first character <em><code>-</code></em> (hyphen) indicates the file type.
@@ -2502,19 +2503,19 @@ In this case I’d like <code>bash</code> to interpret the commands as that will
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">nano</span> <span style="text-decoration: underline">top-words-3.sh</span></pre>
 <pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     top-words-3.sh                               
+</span>curl -sL <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #5f8700">|</span>                        
+tr <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:upper:]'</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:lower:]'</span> <span style="color: #5f8700">|</span>            
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -oE <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"[a-z\']{2,}"</span> <span style="color: #5f8700">|</span>                
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> <span style="color: #5f8700">|</span>              
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -Fvwf stopwords <span style="color: #5f8700">|</span>                  
+uniq<span style="font-weight: bold"></span><span style="font-weight: bold; color: #af005f"> -c</span> <span style="color: #5f8700">|</span>           
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> -nr <span style="color: #5f8700">|</span>          
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">head</span><span style="font-weight: bold; color: #af005f"> -n</span> 10          
  
  
  
  
- 
- 
- 
- 
- 
- 
- 
- 
-</span>                                <span style="background-color: #AAAAAA; color: #000000">[ Read 8 lines ]</span>                                
+                                <span style="background-color: #AAAAAA; color: #000000">[ Read 8 lines ]</span>                                
 <span style="background-color: #AAAAAA; color: #000000">^G</span> Help      <span style="background-color: #AAAAAA; color: #000000">^O</span> Write Out <span style="background-color: #AAAAAA; color: #000000">^W</span> Where Is  <span style="background-color: #AAAAAA; color: #000000">^K</span> Cut       <span style="background-color: #AAAAAA; color: #000000">^T</span> Execute   <span style="background-color: #AAAAAA; color: #000000">^C</span> Location    
 <span style="background-color: #AAAAAA; color: #000000">^X</span> Exit      <span style="background-color: #AAAAAA; color: #000000">^R</span> Read File <span style="background-color: #AAAAAA; color: #000000">^\</span> Replace   <span style="background-color: #AAAAAA; color: #000000">^U</span> Paste     <span style="background-color: #AAAAAA; color: #000000">^J</span> Justify   <span style="background-color: #AAAAAA; color: #000000">^_</span> Go To Line  </pre>
 <p>Go ahead and type <em><code>#!/usr/bin/env/bash</code></em> and press <strong><code>Enter</code></strong>.
@@ -2757,7 +2758,7 @@ sr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/ch04
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">top-words</span> 10
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  170k  100  170k    0     0   143k      0  0:00:01  0:00:01 --:--:--  146k
+100  170k  100  170k    0     0  21525      0  0:00:08  0:00:08 --:--:-- 36179
     403 alice
      98 gutenberg
      88 project
@@ -2862,7 +2863,7 @@ If you’re going to work with a lot of numerical data, then I recommend you use
      88 project
      76 queen
      71 time
-top-words 5 &lt; alice.txt  0.36s user 0.03s system 142% cpu 0.274 total
+top-words 5 &lt; alice.txt  0.47s user 0.05s system 160% cpu 0.326 total
  
 <span style="font-weight: bold">$</span> <span style="color: #af8700">time</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">top-words.py</span> 5
     403 alice
@@ -2870,7 +2871,7 @@ top-words 5 &lt; alice.txt  0.36s user 0.03s system 142% cpu 0.274 total
      88 project
      76 queen
      71 time
-top-words.py 5 &lt; alice.txt  1.34s user 0.02s system 96% cpu 1.418 total
+top-words.py 5 &lt; alice.txt  1.50s user 0.03s system 96% cpu 1.578 total
  
 <span style="font-weight: bold">$</span> <span style="color: #af8700">time</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">top-words.R</span> 5
     403 alice
@@ -2878,7 +2879,7 @@ top-words.py 5 &lt; alice.txt  1.34s user 0.02s system 96% cpu 1.418 total
      88 project
      76 queen
      71 time
-top-words.R 5 &lt; alice.txt  1.32s user 0.09s system 93% cpu 1.505 total</pre>
+top-words.R 5 &lt; alice.txt  1.48s user 0.15s system 91% cpu 1.774 total</pre>
 <p>Wonderful! Sure, the output itself is not very exciting.
 What’s exciting is that we can accomplish the same task with multiple languages.
 Let’s look at the differences between the approaches.</p>
@@ -3019,13 +3020,13 @@ This chapter is more structured like a cookbook, where the focus is on the probl
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 200K
--rw-r--r-- 1 dst dst 164K Nov 22 16:59 alice.txt
--rw-r--r-- 1 dst dst 4.5K Nov 22 16:59 iris.csv
--rw-r--r-- 1 dst dst  179 Nov 22 16:59 irismeta.csv
--rw-r--r-- 1 dst dst  160 Nov 22 16:59 names-comma.csv
--rw-r--r-- 1 dst dst  129 Nov 22 16:59 names.csv
--rw-r--r-- 1 dst dst 7.8K Nov 22 16:59 tips.csv
--rw-r--r-- 1 dst dst 5.1K Nov 22 16:59 users.json</pre>
+-rw-r--r-- 1 dst dst 164K Dec  6 21:33 alice.txt
+-rw-r--r-- 1 dst dst 4.5K Dec  6 21:33 iris.csv
+-rw-r--r-- 1 dst dst  179 Dec  6 21:33 irismeta.csv
+-rw-r--r-- 1 dst dst  160 Dec  6 21:33 names-comma.csv
+-rw-r--r-- 1 dst dst  129 Dec  6 21:33 names.csv
+-rw-r--r-- 1 dst dst 7.8K Dec  6 21:33 tips.csv
+-rw-r--r-- 1 dst dst 5.1K Dec  6 21:33 users.json</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 <p>Before I dive into the actual transformations, I’d like to demonstrate their ubiquity when working at the command line.</p>
@@ -3307,14 +3308,17 @@ In that case, generating a smaller sample from the data might be useful.
 This is where <code>sample</code><span class="citation"><a href="#fn72" class="footnote-ref" id="fnref72"><sup>72</sup></a></span> comes in handy.
 The main purpose of <code>sample</code> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> -f <span style="color: #af8700">"Line %g"</span> 1000 | <span style="color: #5f8700">sample</span> -r 1%
-Line 93
-Line 171
-Line 187
-Line 196
-Line 271
-Line 316
-Line 461
-Line 675</pre>
+Line 24
+Line 140
+Line 285
+Line 439
+Line 466
+Line 554
+Line 596
+Line 611
+Line 855
+Line 880
+Line 978</pre>
 <p>Here, every input line has a one percent chance of being printed.
 This percentage can also be specified as a fraction (namely <code>1/100</code>) or as a probability (namely <code>0.01</code>).</p>
 <p><code>sample</code> has two other purposes, which can be useful when you’re debugging your pipeline.
@@ -3323,12 +3327,12 @@ This comes in handy when the input is a constant stream (for example, the Wikipe
 Secondly, you can put a timer on <code>sample</code>, so that you don’t have to kill the ongoing process manually.
 For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> -f <span style="color: #af8700">"Line %g"</span> 1000 | <span style="color: #5f8700">sample</span> -r 1% -d 1000 -s 5 | <span style="color: #5f8700">ts</span> <span class="callout">&#10122;</span>
-Nov 22 16:59:58 Line 175
-Nov 22 16:59:59 Line 510
-Nov 22 17:00:00 Line 654
-Nov 22 17:00:01 Line 691
-Nov 22 17:00:02 Line 834
-Nov 22 17:00:03 Line 851</pre>
+Dec 06 21:34:05 Line 66
+Dec 06 21:34:06 Line 396
+Dec 06 21:34:07 Line 484
+Dec 06 21:34:08 Line 540
+Dec 06 21:34:09 Line 637
+Dec 06 21:34:10 Line 679</pre>
 <p><span class="callout">&#10122;</span> The tool <code>ts</code><span class="citation"><a href="#fn73" class="footnote-ref" id="fnref73"><sup>73</sup></a></span> adds a timestamp in front of each line.</p>
 <p>In order to prevent unnecessary computation, try to put <code>sample</code> as early as possible in your pipeline.
 In fact, this argument holds for any command-line tool that reduces data, like <code>head</code> and <code>tail</code>.
@@ -3984,10 +3988,10 @@ Let’s see how the first 10 lines look like:</p>
 &lt;title&gt;List of countries and territories by border/area ratio - Wikipedia&lt;/titl…
 &lt;script&gt;document.documentElement.className="client-js";RLCONF={"wgBreakFrames":…
 "Lists of countries by geography","Lists by area","Border-related lists"],"wgPa…
-!0,"wgGEAskQuestionEnabled":!1,"wgGELinkRecommendationsFrontendEnabled":!1};RLS…
+"wgGENewcomerTasksGuidanceEnabled":true,"wgGEAskQuestionEnabled":false,"wgGELin…
 "ext.cx.eventlogging.campaigns","ext.centralNotice.geoIP","ext.centralNotice.st…
 &lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…
-… with 3033 more lines</pre>
+… with 3070 more lines</pre>
 <p>That seems to be in order.
 Image that you’ve been able to determine that the root HTML element that we’re interested in is a <em>&lt;table&gt;</em> with the class <em>wikitable</em>.
 This allows you to look at the part that you’re interest in using <code>grep</code> (the <code>-A</code> option specifies the number of lines you want to print after the matching line):</p>
@@ -4154,13 +4158,13 @@ As such, you’ll learn about:</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 28K
--rw-r--r-- 1 dst dst  37 Nov 22 17:01 Makefile.test
--rw-r--r-- 1 dst dst  16 Nov 22 17:01 numbers.make
--rw-r--r-- 1 dst dst  26 Nov 22 17:01 numbers-write.make
--rw-r--r-- 1 dst dst  21 Nov 22 17:01 numbers-write-var.make
--rw-r--r-- 1 dst dst 432 Nov 22 17:01 starwars.make
--rw-r--r-- 1 dst dst 263 Nov 22 17:01 tasks.make
--rw-r--r-- 1 dst dst  27 Nov 22 17:01 template.make</pre>
+-rw-r--r-- 1 dst dst  37 Dec  6 21:35 Makefile.test
+-rw-r--r-- 1 dst dst  16 Dec  6 21:35 numbers.make
+-rw-r--r-- 1 dst dst  26 Dec  6 21:35 numbers-write.make
+-rw-r--r-- 1 dst dst  21 Dec  6 21:35 numbers-write-var.make
+-rw-r--r-- 1 dst dst 432 Dec  6 21:35 starwars.make
+-rw-r--r-- 1 dst dst 263 Dec  6 21:35 tasks.make
+-rw-r--r-- 1 dst dst  27 Dec  6 21:35 template.make</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -4535,10 +4539,10 @@ The output is often brief and textual and can therefore be printed on the comman
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 104K
--rw-r--r-- 1 dst dst  125 Nov 22 17:01 datatypes.csv
--rw-r--r-- 1 dst dst 7.8K Nov 22 17:01 tips.csv
--rw-r--r-- 1 dst dst  83K Nov 22 17:01 venture.csv
--rw-r--r-- 1 dst dst 4.6K Nov 22 17:01 venture-wide.csv</pre>
+-rw-r--r-- 1 dst dst  125 Dec  6 21:36 datatypes.csv
+-rw-r--r-- 1 dst dst 7.8K Dec  6 21:36 tips.csv
+-rw-r--r-- 1 dst dst  83K Dec  6 21:36 venture.csv
+-rw-r--r-- 1 dst dst 4.6K Dec  6 21:36 venture-wide.csv</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -4597,21 +4601,21 @@ When the dataset contains no header, you’re best off using the <code>header</c
 I recommend using <code>less</code><span class="citation"><a href="#fn90" class="footnote-ref" id="fnref90"><sup>90</sup></a></span>, which allows you to interactively inspect your data in the command line.
 You can prevent long lines (as with <em>venture.csv</em>) from wrapping by specifying the <code>-S</code> option:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">less</span> -S <span style="text-decoration: underline">venture.csv</span></pre>
-<pre>FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIM<span style="font-style: italic">&gt;
-</span>A,P1Y,2015,INV_VEN,PC_GDP,CZ,,0.002,Annual,Annual,Year 2015,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2007,INV_VEN,PC_GDP,DE,,0.034,Annual,Annual,Year 2007,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2008,INV_VEN,PC_GDP,DE,,0.039,Annual,Annual,Year 2008,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2009,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2009,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2010,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2010,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2011,INV_VEN,PC_GDP,DE,,0.029,Annual,Annual,Year 2011,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2012,INV_VEN,PC_GDP,DE,,0.021,Annual,Annual,Year 2012,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2013,INV_VEN,PC_GDP,DE,,0.023,Annual,Annual,Year 2013,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2014,INV_VEN,PC_GDP,DE,,0.021,Annual,Annual,Year 2014,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2015,INV_VEN,PC_GDP,DE,,0.025,Annual,Annual,Year 2015,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2007,INV_VEN,PC_GDP,DK,,0.092,Annual,Annual,Year 2007,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2008,INV_VEN,PC_GDP,DK,,0.074,Annual,Annual,Year 2008,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2009,INV_VEN,PC_GDP,DK,,0.051,Annual,Annual,Year 2009,No data,"Venture ca<span style="font-style: italic">&gt;
-</span>A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<span style="font-style: italic">&gt;
+<pre>,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIME_FORMAT_DESC,TIME_PERIOD_DESC,OBS_STATU<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2011,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2012,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2013,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2014,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2015,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2007,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2008,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2009,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
+</span>al,Annual,Year 2010,No data,"Venture capital investment (seed, start-up and lat<span style="font-style: italic">&gt;
 </span>:                   </pre>
 <p>The greater-than signs on the right indicate that you can scroll horizontally.
 You can scroll up and down by pressing <strong><code>Up</code></strong> and <strong><code>Down</code></strong>.
@@ -5638,10 +5642,10 @@ In this chapter, you’ll learn about:</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 20K
--rw-r--r-- 1 dst dst  126 Nov 22 17:05 emails.txt
--rw-r--r-- 1 dst dst   61 Nov 22 17:05 movies.txt
--rwxr-xr-x 1 dst dst  125 Nov 22 17:05 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">slow.sh</span>*
--rw-r--r-- 1 dst dst 5.1K Nov 22 17:05 users.json</pre>
+-rw-r--r-- 1 dst dst  126 Dec  6 21:40 emails.txt
+-rw-r--r-- 1 dst dst   61 Dec  6 21:40 movies.txt
+-rwxr-xr-x 1 dst dst  125 Dec  6 21:40 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">slow.sh</span>*
+-rw-r--r-- 1 dst dst 5.1K Dec  6 21:40 users.json</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -5784,22 +5788,22 @@ Let’s run <code>slow.sh</code> three times:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #af8700">for</span> i in {A..C}; <span style="color: #af8700">do</span>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">./slow.sh</span> $i &amp; <span class="callout">&#10122;</span>
 <span style="font-weight: bold">&gt;</span> <span style="color: #af8700">done</span>
-[2] 385 <span class="callout">&#10123;</span>
-[3] 387
-[4] 390
+[2] 386 <span class="callout">&#10123;</span>
+[3] 388
+[4] 391
  
-<span style="font-weight: bold">$</span> Nov 22 17:05:59Nov 22 17:05:59 Starting job B
- Starting job A
-Nov 22 17:05:59 Starting job C
-Nov 22 17:06:01 Job A took 2 seconds
-Nov 22 17:06:01 Job B took 2 seconds
- 
-[2]    done       ./slow.sh $i
-<span style="font-weight: bold">$</span>
-[3]  - done       ./slow.sh $i
-<span style="font-weight: bold">$</span> Nov 22 17:06:03 Job C took 4 seconds
+<span style="font-weight: bold">$</span> Dec 06 21:41:08 Starting job A
+Dec 06 21:41:08 Starting job B
+Dec 06 21:41:08 Starting job C
+Dec 06 21:41:10 Job C took 2 seconds
  
 [4]  + done       ./slow.sh $i
+<span style="font-weight: bold">$</span> Dec 06 21:41:11 Job B took 3 seconds
+ 
+[3]  + done       ./slow.sh $i
+<span style="font-weight: bold">$</span> Dec 06 21:41:12 Job A took 4 seconds
+ 
+[2]  + done       ./slow.sh $i
 <span style="font-weight: bold">$</span></pre>
 <p><span class="callout">&#10122;</span> The ampersand (<code>&amp;</code>) sends the command to the background, allowing the for loop to continue immediately with the next iteration.
 <br><span class="callout">&#10123;</span> This line shows the job number given by the Z shell and the process ID, which can be used for more fine-grained job control. This topic, while powerful, is beyond the scope of this book.</p>
@@ -5835,15 +5839,15 @@ It should say “GNU parallel.”
 <p>Before I go into the details of <code>parallel</code>, here’s a little teaser to show you how easy it is to replace the for-loop from earlier:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 0 2 100 | <span style="color: #5f8700">parallel</span> <span style="color: #af8700">"echo {}^2 | bc"</span> | <span style="color: #5f8700">trim</span>
 0
-16
 4
+16
 36
-64
 100
+64
 144
 196
-324
 256
+324
 … with 41 more lines</pre>
 <p>This is <code>parallel</code> in its simplest form: the items to loop over are passed via standard input and there aren’t any arguments other than the command that <code>parallel</code> needs to run.
 See Figure @ref(fig:diagram-parallel-output) for an illustration of how <code>parallel</code> concurrently distributes input among processes and collects their outputs.</p>
@@ -5856,12 +5860,12 @@ See Figure @ref(fig:diagram-parallel-output) for an illustration of how <code>pa
 <p>As you can see it basically acts as a for loop.
 Here’s another teaser, which replaces the for loop from the previous section.</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --jobs 2 <span style="text-decoration: underline">./slow.sh</span> ::: {A..C}
-Nov 22 17:06:09 Starting job A
-Nov 22 17:06:13 Job A took 4 seconds
-Nov 22 17:06:09 Starting job B
-Nov 22 17:06:13 Job B took 4 seconds
-Nov 22 17:06:14 Starting job C
-Nov 22 17:06:16 Job C took 2 seconds</pre>
+Dec 06 21:41:19 Starting job B
+Dec 06 21:41:22 Job B took 3 seconds
+Dec 06 21:41:19 Starting job A
+Dec 06 21:41:23 Job A took 4 seconds
+Dec 06 21:41:23 Starting job C
+Dec 06 21:41:24 Job C took 1 seconds</pre>
 <p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
 <p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality.
 (Perhaps too much.)
@@ -5921,8 +5925,8 @@ Having said that, they do enable additional functionality, such as iterating ove
 For example, with <code>{/}</code>, only the basename of the filename will be used:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">find</span> <span style="text-decoration: underline">/data/ch03</span> -type f | <span style="color: #5f8700">parallel</span> echo <span style="color: #af8700">'{#}\) \"{}\" has basename \"{/}\"'</span> <span class="callout">&#10122;</span>
 1) "/data/ch03/tmnt-basic.csv" has basename "tmnt-basic.csv"
-2) "/data/ch03/logs.tar.gz" has basename "logs.tar.gz"
 3) "/data/ch03/tmnt-missing-newline.csv" has basename "tmnt-missing-newline.csv"
+2) "/data/ch03/logs.tar.gz" has basename "logs.tar.gz"
 4) "/data/ch03/r-datasets.db" has basename "r-datasets.db"
 5) "/data/ch03/top2000.xlsx" has basename "top2000.xlsx"
 6) "/data/ch03/tmnt-with-header.csv" has basename "tmnt-with-header.csv"</pre>
@@ -5957,8 +5961,8 @@ Hi 4
 Hi 5</pre>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> -j200% <span style="color: #af8700">"echo Hi {}"</span>
 Hi 1
-Hi 2
 Hi 3
+Hi 2
 Hi 4
 Hi 5</pre>
 <p>If you specify <code>-j1</code>, then the commands will be run in serial. Even though this doesn’t do the name of the tool of justice, it still has its uses. For example, when you need to access an API which only allows one connection at a time. If you specify <code>-j0</code>, then parallel will run as many jobs in parallel as possible. This can be compared to your loop with the ampersand. This is not advised.</p>
@@ -6005,8 +6009,8 @@ To keep the same order, specify the <code>--keep-order</code> option or <code>-k
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">parallel</span> --tag <span style="color: #af8700">"echo 'sqrt({})' | bc -l"</span>
 1       1
 3       1.73205080756887729352
-2       1.41421356237309504880
 4       2.00000000000000000000
+2       1.41421356237309504880
 5       2.23606797749978969640
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> --tag --keep-order <span style="color: #af8700">"echo '{1}*{2}' | bc -l"</span> ::: 3 4 ::: 5 6 7
@@ -6095,8 +6099,8 @@ You can extract the relevant fields using <code>jq</code>:</p>
 ublicDnsName, state: .State.Name}'</span></pre>
 <p>The possible states of an EC2 instance are: <em><code>pending</code></em>, <em><code>running</code></em>, <em><code>shutting-down</code></em>, <em><code>terminated</code></em>, <em><code>stopping</code></em>, and <em><code>stopped</code></em>.
 Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:</p>
-<pre><span style="font-weight: bold">&gt;</span> aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | select(.Stat
-e.Name=="running") | .PublicDnsName' | tee hostnames
+<pre><span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">aws</span> ec2 describe-instances | <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.Reservations[].Instances[] | select(.Stat
+e.Name=="running") | .PublicDnsName'</span> | tee hostnames
 ec2-54-88-122-140.compute-1.amazonaws.com
 ec2-54-88-89-208.compute-1.amazonaws.com</pre>
 <p>(Without the <code>-r</code> or <code>--raw-output</code> option, the hostnames would have been surrounded by double quotes.)
@@ -6205,52 +6209,55 @@ Still, I hope it’s clear from this that <code>parallel</code> can be incredibl
 <p>The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results.
 Imagine that you want to count for each borough of New York City, how often they receive service calls on 311.
 You don’t have that data on your local machine yet, so let’s first obtain it from the free <a href="https://data.cityofnewyork.us/">NYC Open Data API</a>:</p>
-<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 0 100 900 | <span style="color: #5f8700">parallel</span>  <span style="color: #af8700">"curl -sL 'http://data.cityofnewyork.us/resource/erm
-2-nwe9.json?</span><span style="color: #00afaf">\$</span><span style="color: #af8700">limit=100&amp;</span><span style="color: #00afaf">\$</span><span style="color: #af8700">offset={}' | jq -c '.[]' | gzip &gt; nyc-{#}.json.gz"</span></pre>
+<pre><span style="font-weight: bold">$</span> seq 0 100 900 | parallel  "curl -sL 'http://data.cityofnewyork.us/resource/erm
+2-nwe9.json?\$limit=100&amp;\$offset={}'</pre>
 <p>You now have 10 files containing compressed JSON data:</p>
-<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> nyc<span style="color: #0087ff">*</span>json.gz
--rw-r--r-- 1 dst dst 16K Nov 22 17:08 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-10.json.gz</span>
--rw-r--r-- 1 dst dst 14K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-1.json.gz</span>
--rw-r--r-- 1 dst dst 14K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-2.json.gz</span>
--rw-r--r-- 1 dst dst 15K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-3.json.gz</span>
--rw-r--r-- 1 dst dst 15K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-4.json.gz</span>
--rw-r--r-- 1 dst dst 15K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-5.json.gz</span>
--rw-r--r-- 1 dst dst 15K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-6.json.gz</span>
--rw-r--r-- 1 dst dst 15K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-7.json.gz</span>
--rw-r--r-- 1 dst dst 16K Nov 22 17:08 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-8.json.gz</span>
--rw-r--r-- 1 dst dst 15K Nov 22 17:07 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-9.json.gz</span></pre>
+<pre><span style="color: #af8700">2-nwe9.json?</span><span style="color: #00afaf">\$</span><span style="color: #af8700">limit=100&amp;</span><span style="color: #00afaf">\$</span><span style="color: #af8700">offset={}' | jq -c '.[]' | gzip &gt; nyc-{#}.json.gz"</span>
+l nyc*json.gz
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> nyc<span style="color: #0087ff">*</span>json.gz
+-rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-10.json.gz</span>
+-rw-r--r-- 1 dst dst 13K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-1.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-2.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-3.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-4.json.gz</span>
+-rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-5.json.gz</span>
+-rw-r--r-- 1 dst dst 15K Dec  6 21:43 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-6.json.gz</span>
+-rw-r--r-- 1 dst dst 14K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-7.json.gz</span>
+-rw-r--r-- 1 dst dst 15K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-8.json.gz</span>
+-rw-r--r-- 1 dst dst 16K Dec  6 21:42 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">nyc-9.json.gz</span></pre>
 <p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file.
 Using <code>zcat</code><span class="citation"><a href="#fn104" class="footnote-ref" id="fnref104"><sup>104</sup></a></span>, you directly print the contents of a compress file:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> <span style="text-decoration: underline">nyc-1.json.gz</span> | <span style="color: #5f8700">trim</span>
-{"unique_key":"52579420","created_date":"2021-11-21T02:00:01.000","agency":"NYP…
-{"unique_key":"52575478","created_date":"2021-11-21T01:59:23.000","agency":"NYP…
-{"unique_key":"52579413","created_date":"2021-11-21T01:59:14.000","agency":"NYP…
-{"unique_key":"52572758","created_date":"2021-11-21T01:59:03.000","agency":"NYP…
-{"unique_key":"52574395","created_date":"2021-11-21T01:58:41.000","agency":"NYP…
-{"unique_key":"52573711","created_date":"2021-11-21T01:58:18.000","agency":"NYP…
-{"unique_key":"52578455","created_date":"2021-11-21T01:57:26.000","agency":"NYP…
-{"unique_key":"52579423","created_date":"2021-11-21T01:57:16.000","agency":"NYP…
-{"unique_key":"52579501","created_date":"2021-11-21T01:56:39.000","agency":"NYP…
-{"unique_key":"52573766","created_date":"2021-11-21T01:56:38.000","agency":"NYP…
+{"unique_key":"52707712","created_date":"2021-12-05T02:00:55.000","agency":"DOH…
+{"unique_key":"52703819","created_date":"2021-12-05T02:00:41.000","agency":"NYP…
+{"unique_key":"52707505","created_date":"2021-12-05T02:00:29.000","agency":"NYP…
+{"unique_key":"52704440","created_date":"2021-12-05T02:00:26.000","agency":"NYP…
+{"unique_key":"52705496","created_date":"2021-12-05T02:00:11.000","agency":"NYP…
+{"unique_key":"52706548","created_date":"2021-12-05T01:59:58.000","agency":"NYP…
+{"unique_key":"52708557","created_date":"2021-12-05T01:59:30.000","agency":"NYP…
+{"unique_key":"52703483","created_date":"2021-12-05T01:59:18.000","agency":"NYP…
+{"unique_key":"52707750","created_date":"2021-12-05T01:59:11.000","agency":"NYP…
+{"unique_key":"52703484","created_date":"2021-12-05T01:59:03.000","agency":"NYP…
 … with 90 more lines</pre>
 <p>Let’s see what one line of JSON looks like using:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> <span style="text-decoration: underline">nyc-1.json.gz</span> | <span style="color: #5f8700">head</span> -n 1
-{"unique_key":"52579420","created_date":"2021-11-21T02:00:01.000","agency":"NYPD
-","agency_name":"New York City Police Department","complaint_type":"Noise - Resi
-dential","descriptor":"Loud Music/Party","location_type":"Residential Building/H
-ouse","incident_zip":"11420","incident_address":"130-33 116 STREET","street_name
-":"116 STREET","cross_street_1":"SUTTER AVENUE","cross_street_2":"133 AVENUE","i
-ntersection_street_1":"SUTTER AVENUE","intersection_street_2":"133 AVENUE","addr
-ess_type":"ADDRESS","city":"SOUTH OZONE PARK","landmark":"116 STREET","status":"
-In Progress","community_board":"10 QUEENS","bbl":"4117230019","borough":"QUEENS"
-,"x_coordinate_state_plane":"1033459","y_coordinate_state_plane":"185021","open_
-data_channel_type":"ONLINE","park_facility_name":"Unspecified","park_borough":"Q
-UEENS","latitude":"40.67437988831109","longitude":"-73.82259815629543","location
-":{"latitude":"40.67437988831109","longitude":"-73.82259815629543","human_addres
-s":"{\"address\": \"\", \"city\": \"\", \"state\": \"\", \"zip\": \"\"}"},":@com
-puted_region_efsh_h5xi":"24016",":@computed_region_f5dn_yrer":"62",":@computed_r
-egion_yeji_bk3q":"3",":@computed_region_92fq_4b7q":"41",":@computed_region_sbqj_
-enih":"64"}</pre>
+{"unique_key":"52707712","created_date":"2021-12-05T02:00:55.000","agency":"DOHM
+H","agency_name":"Department of Health and Mental Hygiene","complaint_type":"Rod
+ent","descriptor":"Rat Sighting","location_type":"Single Room Occupancy (SRO)","
+incident_zip":"10455","incident_address":"455 EAST  148 STREET","street_name":"E
+AST  148 STREET","cross_street_1":"BERGEN AVENUE","cross_street_2":"BROOK AVENUE
+","intersection_street_1":"BERGEN AVENUE","intersection_street_2":"BROOK AVENUE"
+,"address_type":"ADDRESS","city":"BRONX","landmark":"EAST  148 STREET","status":
+"In Progress","community_board":"01 BRONX","bbl":"2022930058","borough":"BRONX",
+"x_coordinate_state_plane":"1007353","y_coordinate_state_plane":"236096","open_d
+ata_channel_type":"PHONE","park_facility_name":"Unspecified","park_borough":"BRO
+NX","latitude":"40.814674509013855","longitude":"-73.91653656075259","location":
+{"latitude":"40.814674509013855","longitude":"-73.91653656075259","human_address
+":"{\"address\": \"\", \"city\": \"\", \"state\": \"\", \"zip\": \"\"}"},":@comp
+uted_region_efsh_h5xi":"10933",":@computed_region_f5dn_yrer":"49",":@computed_re
+gion_yeji_bk3q":"5",":@computed_region_92fq_4b7q":"35",":@computed_region_sbqj_e
+nih":"23"}</pre>
 <p>If you were to get the total number of service calls per borough on your local machine, you would run the following command:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">zcat</span> nyc<span style="color: #0087ff">*</span>json.gz | <span class="callout">&#10122;</span>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.borough'</span> | <span class="callout">&#10123;</span>
@@ -6261,11 +6268,12 @@ enih":"64"}</pre>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvlook</span>
 │ borough       │ count │
 ├───────────────┼───────┤
-│ brooklyn      │   277 │
-│ queens        │   259 │
-│ manhattan     │   256 │
-│ bronx         │   175 │
-│ staten_island │    33 │</pre>
+│ manhattan     │   316 │
+│ brooklyn      │   264 │
+│ queens        │   215 │
+│ bronx         │   172 │
+│ staten_island │    31 │
+│ unspecified   │     2 │</pre>
 <p><span class="callout">&#10122;</span> Expand all compressed files using <code>zcat</code>.
 <br><span class="callout">&#10123;</span> For each call, extract the name of the borough using <code>jq</code>.
 <br><span class="callout">&#10124;</span> Convert borough names to lowercase and replace spaces with underscores (because <code>awk</code> splits on whitespace by default).
@@ -6300,11 +6308,12 @@ staten_island,2</pre>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvsort</span> -rc count | <span style="color: #5f8700">csvlook</span>
 │ borough       │ count │
 ├───────────────┼───────┤
-│ brooklyn      │   277 │
-│ queens        │   259 │
-│ manhattan     │   256 │
-│ bronx         │   175 │
-│ staten_island │    33 │</pre>
+│ manhattan     │   316 │
+│ brooklyn      │   264 │
+│ queens        │   215 │
+│ bronx         │   172 │
+│ staten_island │    31 │
+│ unspecified   │     2 │</pre>
 <p>Or, if you prefer to use SQL to aggregate results, you can use <code>csvsql</code> as discussed in <a href="#chapter-5-scrubbing-data">Chapter 5</a>:</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> nyc<span style="color: #0087ff">*</span>csv | <span style="color: #5f8700">header</span> -a borough,count |
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvsql</span> --query <span style="color: #af8700">'SELECT borough, SUM(count) AS count FROM stdin GROUP BY boroug
@@ -6312,11 +6321,12 @@ h ORDER BY count DESC'</span> |
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvlook</span>
 │ borough       │ count │
 ├───────────────┼───────┤
-│ brooklyn      │   277 │
-│ queens        │   259 │
-│ manhattan     │   256 │
-│ bronx         │   175 │
-│ staten_island │    33 │</pre>
+│ manhattan     │   316 │
+│ brooklyn      │   264 │
+│ queens        │   215 │
+│ bronx         │   172 │
+│ staten_island │    31 │
+│ unspecified   │     2 │</pre>
 </div>
 </div>
 <div id="summary-7" class="section level2" number="8.5">
@@ -6378,7 +6388,7 @@ At the end of this chapter I recommend a few books about machine learning.
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 4.0K
--rw-r--r-- 1 dst dst 503 Nov 22 17:09 classify.cfg</pre>
+-rw-r--r-- 1 dst dst 503 Dec  6 21:43 classify.cfg</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -6389,8 +6399,8 @@ Each data point represents a wine. Each wine is rated on 11 physicochemical prop
 There is also an overall quality score between 0 (very bad) and 10 (excellent), which is the median of at least three evaluation by wine experts. More information about this dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">UCI Machine Learning Repository</a>.</p>
 <p>The dataset is split into two files: one for white wine and one for red wine.
 The very first step is to obtain the two files using <code>curl</code> (and of course <code>parallel</code> because I haven’t got all day):</p>
-<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">parallel</span> <span style="color: #af8700">"curl -sL http://archive.ics.uci.edu/ml/machine-learning-databases/wi
-ne-quality/winequality-{}.csv &gt; wine-{}.csv"</span> ::: red white</pre>
+<pre><span style="font-weight: bold">$</span> parallel "curl -sL http://archive.ics.uci.edu/ml/machine-learning-databases/wi
+ne-quality/winequality-{}.csv &gt; wine-{}.csv" ::: red white</pre>
 <p>The triple colon is just another way to pass data to <code>parallel</code>.</p>
 <pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> /data/.cache/wine-<span style="color: #0087ff">*</span>.csv <span style="text-decoration: underline">.</span></pre>
 <p>Let’s inspect both files and count the number of lines:</p>
@@ -6711,30 +6721,30 @@ Enabled reductions: gd, generate_interactions, nn, scorer
 average  since         example        example  current  current  current
 loss     last          counter         weight    label  predict features
 25.000000 25.000000            1            1.0   5.0000   0.0000       78
-20.974678 16.949356            2            2.0   5.0000   0.8830       78
-16.427634 11.880589            4            4.0   5.0000   1.2384       78
-15.530752 14.633871            8            8.0   7.0000   2.0807       78
-13.912025 12.293298           16           16.0   6.0000   3.0057       78
-9.472406 5.032787           32           32.0   5.0000   3.9677       78
-5.886762 2.301118           64           64.0   6.0000   4.9832       78
-3.320436 0.754111          128          128.0   6.0000   5.7439       78
-2.111546 0.902656          256          256.0   5.0000   5.8678       78
-1.470652 0.829758          512          512.0   8.0000   5.7492       78
-1.132530 0.794407         1024         1024.0   6.0000   5.9520       78
-0.954632 0.776735         2048         2048.0   5.0000   5.8582       78
-0.814906 0.814906         4096         4096.0   7.0000   6.1136       78 h
-0.773767 0.732629         8192         8192.0   6.0000   5.8925       78 h
-0.724042 0.674317        16384        16384.0   7.0000   6.6063       78 h
-0.691324 0.658605        32768        32768.0   5.0000   5.6510       78 h
+32.492550 39.985100            2            2.0   7.0000   0.6766       78
+30.340140 28.187730            4            4.0   5.0000   1.6112       78
+20.930364 11.520588            8            8.0   6.0000   2.1220       78
+14.776192 8.622020           16           16.0   5.0000   2.9122       78
+11.124898 7.473605           32           32.0   6.0000   3.9509       78
+7.094311 3.063724           64           64.0   5.0000   4.9906       78
+4.054508 1.014704          128          128.0   6.0000   5.6339       78
+2.394025 0.733543          256          256.0   6.0000   5.9277       78
+1.656735 0.919446          512          512.0   6.0000   6.0210       78
+1.260600 0.864465         1024         1024.0   5.0000   5.7877       78
+1.004074 0.747547         2048         2048.0   6.0000   5.9650       78
+0.766658 0.766658         4096         4096.0   5.0000   4.9800       78 h
+0.707512 0.648366         8192         8192.0   7.0000   6.4843       78 h
+0.634252 0.560993        16384        16384.0   4.0000   5.3143       78 h
+0.601988 0.569723        32768        32768.0   7.0000   6.1962       78 h
  
 finished run
 number of examples per pass = 3527
 passes used = 10
 weighted example sum = 35270.000000
-weighted label sum = 206800.000000
-average loss = 0.646676 h
-best constant = 5.863340
-total feature number = 2749500</pre>
+weighted label sum = 207390.000000
+average loss = 0.562260 h
+best constant = 5.880068
+total feature number = 2749020</pre>
 <p><span class="callout">&#10122;</span> The file <em>wine-train.vw</em> is used to train the model.
 <br><span class="callout">&#10123;</span> The model, or <em>regressor</em>, will be stored in the file <em>wine.model</em>.
 <br><span class="callout">&#10124;</span> Number of training passes.
@@ -6757,16 +6767,16 @@ To use that model to make predictions, I run <code>vw</code> again, but now with
 <span style="font-weight: bold">&gt;</span> --quiet <span class="callout">&#10126;</span>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">predictions</span> | <span style="color: #5f8700">trim</span>
-6.650332
-6.065171
-6.231692
-5.841260
-6.075598
-6.188356
-5.790715
-6.383407
-6.022245
-5.524695
+6.218554
+5.284217
+6.041228
+5.707762
+5.839301
+6.759735
+6.196512
+5.883849
+6.059498
+5.539646
 … with 970 more lines</pre>
 <p><span class="callout">&#10122;</span> The file <em>wine-test.vw</em> is used to test the model.
 <br><span class="callout">&#10123;</span> Use the model stored in the file <em>wine.model</em>.
@@ -6781,7 +6791,7 @@ The MAE tells us how far off <code>vw</code> is on average, when it comes to pre
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">awk</span> -F, <span style="color: #af8700">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span> |
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">cowsay</span> <span class="callout">&#10122;</span>
  _______________
-&lt; MAE: 0.565391 &gt;
+&lt; MAE: 0.556191 &gt;
  ---------------
         \   ^__^
          \  (oo)\_______
@@ -6808,7 +6818,7 @@ Let’s see how <code>vw</code> performs when I use all the default values:</p>
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">paste</span> -d, <span style="text-decoration: underline">predictions</span> <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">cut</span> -d <span style="color: #af8700">'|'</span> -f 1 <span style="text-decoration: underline">wine-test.vw</span><span style="color: #af005f"></span><span style="color: #af005f">)</span> | <span class="callout">&#10124;</span>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">awk</span> -F, <span style="color: #af8700">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span>
-MAE: 0.599319</pre>
+MAE: 0.605996</pre>
 <p><span class="callout">&#10122;</span> Train a regression model
 <br><span class="callout">&#10123;</span> Test the regression model
 <br><span class="callout">&#10124;</span> Compute mean absolute error</p>
@@ -6850,14 +6860,14 @@ Let’s create a balanced dataset:</p>
 <span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tee</span> wine-balanced.csv | <span style="color: #5f8700">csvlook</span>
 │    id │ type  │ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sug…
 ├───────┼───────┼───────────────┼──────────────────┼─────────────┼─────────────…
-│     1 │ white │          5.80 │            0.280 │        0.66 │           9.…
-│     2 │ white │          5.70 │            0.220 │        0.20 │          16.…
-│     3 │ white │          7.70 │            0.270 │        0.34 │           1.…
-│     4 │ red   │          7.40 │            0.390 │        0.48 │           2.…
-│     5 │ white │          7.60 │            0.180 │        0.28 │           7.…
-│     6 │ white │          6.00 │            0.410 │        0.05 │           1.…
-│     7 │ white │          7.40 │            0.180 │        0.24 │           1.…
-│     8 │ red   │          6.70 │            0.640 │        0.23 │           2.…
+│     1 │ red   │         11.50 │            0.420 │        0.48 │           2.…
+│     2 │ white │          7.00 │            0.150 │        0.28 │          14.…
+│     3 │ white │          7.00 │            0.240 │        0.35 │           1.…
+│     4 │ white │          6.10 │            0.180 │        0.36 │           2.…
+│     5 │ red   │          7.20 │            0.655 │        0.03 │           1.…
+│     6 │ white │          6.30 │            0.220 │        0.22 │           5.…
+│     7 │ red   │          7.30 │            0.380 │        0.21 │           2.…
+│     8 │ red   │          7.90 │            0.690 │        0.21 │           2.…
 … with 3190 more lines</pre>
 <p><span class="callout">&#10122;</span> Store the number of red wines in variable <em><code>NUM_RED</code></em>.
 <br><span class="callout">&#10123;</span> Combine all red wines with a random sample of white wines.
@@ -6962,10 +6972,10 @@ I extract the algorithm names and sort them by their accuracies using the follow
 tdin ORDER BY accuracy DESC"</span> | <span style="color: #5f8700">csvlook</span> -I
 │ learner_name           │ accuracy  │
 ├────────────────────────┼───────────┤
-│ RandomForestClassifier │ 0.990625  │
-│ LogisticRegression     │ 0.9875    │
-│ KNeighborsClassifier   │ 0.9796875 │
-│ DecisionTreeClassifier │ 0.96875   │</pre>
+│ RandomForestClassifier │ 0.996875  │
+│ LogisticRegression     │ 0.9953125 │
+│ KNeighborsClassifier   │ 0.9890625 │
+│ DecisionTreeClassifier │ 0.975     │</pre>
 <p>The relevant column here is <em><code>accuracy</code></em>, which indicates the percentage of data points that are classified correctly.
 From this we see that actually all algorithms are performing really well.
 The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.</p>
@@ -6978,9 +6988,9 @@ DecisionTreeClassifier:
 +-------+-------+---------+-------------+----------+-------------+
 |       |   red |   white |   Precision |   Recall |   F-measure |
 +=======+=======+=========+=============+==========+=============+
-|   red | [324] |       7 |       0.961 |    0.979 |       0.970 |
+|   red | [315] |       9 |       0.978 |    0.972 |       0.975 |
 +-------+-------+---------+-------------+----------+-------------+
-| white |    13 |   [296] |       0.977 |    0.958 |       0.967 |
+| white |     7 |   [309] |       0.972 |    0.978 |       0.975 |
 +-------+-------+---------+-------------+----------+-------------+
 (row = reference; column = predicted)
  
@@ -6988,9 +6998,9 @@ KNeighborsClassifier:
 +-------+-------+---------+-------------+----------+-------------+
 |       |   red |   white |   Precision |   Recall |   F-measure |
 +=======+=======+=========+=============+==========+=============+
-|   red | [324] |       7 |       0.982 |    0.979 |       0.980 |
+|   red | [321] |       3 |       0.988 |    0.991 |       0.989 |
 +-------+-------+---------+-------------+----------+-------------+
-| white |     6 |   [303] |       0.977 |    0.981 |       0.979 |
+| white |     4 |   [312] |       0.990 |    0.987 |       0.989 |
 +-------+-------+---------+-------------+----------+-------------+
 (row = reference; column = predicted)
  
@@ -6998,9 +7008,9 @@ LogisticRegression:
 +-------+-------+---------+-------------+----------+-------------+
 |       |   red |   white |   Precision |   Recall |   F-measure |
 +=======+=======+=========+=============+==========+=============+
-|   red | [325] |       6 |       0.994 |    0.982 |       0.988 |
+|   red | [321] |       3 |       1.000 |    0.991 |       0.995 |
 +-------+-------+---------+-------------+----------+-------------+
-| white |     2 |   [307] |       0.981 |    0.994 |       0.987 |
+| white |     0 |   [316] |       0.991 |    1.000 |       0.995 |
 +-------+-------+---------+-------------+----------+-------------+
 (row = reference; column = predicted)
  
@@ -7008,9 +7018,9 @@ RandomForestClassifier:
 +-------+-------+---------+-------------+----------+-------------+
 |       |   red |   white |   Precision |   Recall |   F-measure |
 +=======+=======+=========+=============+==========+=============+
-|   red | [326] |       5 |       0.997 |    0.985 |       0.991 |
+|   red | [322] |       2 |       1.000 |    0.994 |       0.997 |
 +-------+-------+---------+-------------+----------+-------------+
-| white |     1 |   [308] |       0.984 |    0.997 |       0.990 |
+| white |     0 |   [316] |       0.994 |    1.000 |       0.997 |
 +-------+-------+---------+-------------+----------+-------------+
 (row = reference; column = predicted)
  </pre>
@@ -7074,11 +7084,11 @@ Generally speaking, tasks that normally require a lot of code or simply cannot b
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 180K
-drwxr-xr-x 2 dst dst 4.0K Nov 22 17:15 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">__pycache__</span>/
--rw-r--r-- 1 dst dst 164K Nov 22 17:15 alice.txt
--rwxr--r-- 1 dst dst  408 Nov 22 17:15 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">count.py</span>*
--rw-r--r-- 1 dst dst  460 Nov 22 17:15 count.R
--rw-r--r-- 1 dst dst 1.7K Nov 22 17:15 Untitled1337.ipynb</pre>
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:50 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">__pycache__</span>/
+-rw-r--r-- 1 dst dst 164K Dec  6 21:50 alice.txt
+-rwxr--r-- 1 dst dst  408 Dec  6 21:50 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">count.py</span>*
+-rw-r--r-- 1 dst dst  460 Dec  6 21:50 count.R
+-rw-r--r-- 1 dst dst 1.7K Dec  6 21:50 Untitled1337.ipynb</pre>
 <p>The instructions to get these files are in <a href="#chapter-2-getting-started">Chapter 2</a>.
 Any other files are either downloaded or generated using command-line tools.</p>
 </div>
@@ -7724,15 +7734,15 @@ body is /usr/bin/dsutils/body
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 10 | <span style="color: #5f8700">header</span> -a <span style="color: #af8700">'values'</span> | <span style="color: #5f8700">body</span> shuf
 values
 3
-10
-4
 1
-6
-5
-2
-7
 9
-8</pre>
+2
+5
+8
+4
+6
+7
+10</pre>
 </div>
 <div id="cat" class="section level2 unnumbered">
 <h2 class="unnumbered">cat</h2>
@@ -8029,9 +8039,9 @@ More information: <a href="https://github.com/jeroenjanssens/dsutils" class="uri
 dseq is /usr/bin/dsutils/dseq
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">dseq</span> 3
-2021-11-23
-2021-11-24
-2021-11-25</pre>
+2021-12-07
+2021-12-08
+2021-12-09</pre>
 </div>
 <div id="echo" class="section level2 unnumbered">
 <h2 class="unnumbered">echo</h2>
@@ -8257,10 +8267,10 @@ hostname is /usr/bin/hostname
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> hostname
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">hostname</span>
-6db00465adf0
+5b6ce74548d7
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">hostname</span> -i
-172.17.0.13</pre>
+172.17.0.2</pre>
 </div>
 <div id="in2csv" class="section level2 unnumbered">
 <h2 class="unnumbered">in2csv</h2>
@@ -8314,12 +8324,12 @@ r-datasets.db  tmnt-missing-newline.csv  top2000.xlsx
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
 total 924K
--rw-r--r-- 1 dst dst 627K Nov 22 17:15 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
--rw-r--r-- 1 dst dst 189K Nov 22 17:15 r-datasets.db
--rw-r--r-- 1 dst dst  149 Nov 22 17:15 tmnt-basic.csv
--rw-r--r-- 1 dst dst  148 Nov 22 17:15 tmnt-missing-newline.csv
--rw-r--r-- 1 dst dst  181 Nov 22 17:15 tmnt-with-header.csv
--rw-r--r-- 1 dst dst  91K Nov 22 17:15 top2000.xlsx</pre>
+-rw-r--r-- 1 dst dst 627K Dec  6 21:50 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec  6 21:50 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec  6 21:50 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec  6 21:50 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec  6 21:50 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec  6 21:50 top2000.xlsx</pre>
 </div>
 <div id="less" class="section level2 unnumbered">
 <h2 class="unnumbered">less</h2>
@@ -8471,11 +8481,11 @@ paste is /usr/bin/paste
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> paste
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">paste</span> -d, <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">seq</span> 5<span style="color: #af005f">)</span> <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">dseq</span> 5<span style="color: #af005f">)</span>
-1,2021-11-23
-2,2021-11-24
-3,2021-11-25
-4,2021-11-26
-5,2021-11-27
+1,2021-12-07
+2,2021-12-08
+3,2021-12-09
+4,2021-12-10
+5,2021-12-11
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 5 | <span style="color: #5f8700">paste</span> -sd+
 1+2+3+4+5</pre>
@@ -8639,12 +8649,12 @@ sample is /usr/local/bin/sample
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">sample</span> --help
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 1000 | <span style="color: #5f8700">sample</span> -r 0.01 | <span style="color: #5f8700">trim</span> 5
-181
-208
+260
+270
 283
-527
-643
-… with 3 more lines</pre>
+331
+338
+… with 7 more lines</pre>
 </div>
 <div id="scp" class="section level2 unnumbered">
 <h2 class="unnumbered">scp</h2>
@@ -8719,19 +8729,19 @@ shuf is /usr/bin/shuf
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> shuf
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> {a..z} | <span style="color: #5f8700">tr</span> <span style="color: #af8700">' '</span> <span style="color: #af8700">'\n'</span> | <span style="color: #5f8700">shuf</span> | <span style="color: #5f8700">trim</span> 5
-q
-j
-w
-f
+v
+o
 u
+s
+d
 … with 21 more lines
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">shuf</span> -i 1-100 | <span style="color: #5f8700">trim</span> 5
-56
-17
-1
-87
-59
+26
+13
+7
+71
+9
 … with 95 more lines</pre>
 </div>
 <div id="skll" class="section level2 unnumbered">
@@ -8944,7 +8954,7 @@ tree is /usr/bin/tree
 │   ├── ch03
 │   │   ├── logs.tar.gz
 │   │   ├── r-datasets.db
-… with 121571 more lines</pre>
+… with 121572 more lines</pre>
 </div>
 <div id="trim" class="section level2 unnumbered">
 <h2 class="unnumbered">trim</h2>
@@ -8974,7 +8984,7 @@ More information: <a href="https://joeyh.name/code/moreutils" class="uri">https:
 ts is /usr/bin/ts
  
 <span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> seq 5 | <span style="color: #5f8700">sample</span> -d 500 | <span style="color: #5f8700">ts</span>
-Nov 22 17:19:35 seq 5</pre>
+Dec 06 21:54:55 seq 5</pre>
 </div>
 <div id="type" class="section level2 unnumbered">
 <h2 class="unnumbered">type</h2>
@@ -9273,7 +9283,7 @@ zsh is /usr/bin/zsh
     <div class="row">
       <div class="d-none d-lg-block col-lg-2 sidebar"></div>
       <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
-        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on November 22, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
       </div>
       <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
     </div>

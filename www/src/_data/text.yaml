@@ -1,0 +1,52 @@
+hello: Hi there! I'm [Jeroen](#about).
+
+intro: |
+  I wrote **the book** *Data Science at the Command Line*. The second edition was published by O'Reilly in October. You can read the book entirely for free.
+
+  At the moment I'm working on a brand **new course**, tentatively titled *Embrace the Command Line*. You can learn more about this course and let me know what you think below.
+
+about_heading: "About Jeroen"
+about_text: |
+  Jeroen Janssens, PhD, is a data science consultant and certified instructor. His expertise lies in visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. He’s passionate about helping and teaching others to do such things.
+
+  Since 2013, Jeroen runs [Data Science Workshops](https://datascienceworkshops.com), a training and coaching firm that organizes open enrollment workshops, in-company courses, inspiration sessions, hackathons, and meetups. Clients include Amazon, eHealth Africa, Schiphol Airport, The New York Times, and T-Mobile.
+
+  Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and various startups in New York City. He is the author of Data Science at the Command Line (O’Reilly Media, 2021). Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University.
+
+  He lives with his wife and two kids in Rotterdam, the Netherlands.
+  If you would like to know more about his services, fees, and availability, then please [email Jeroen](mailto:jeroen@datascienceworkshops.com). You can also find him on [Twitter](https://twitter.com/jeroenhjanssens), [GitHub](https://github.com/jeroenjanssens), and [LinkedIn](https://www.linkedin.com/in/jeroenjanssens/).
+
+course_heading: "Embrace the Command Line"
+course_text: |
+  The Unix or Linux command line, sometimes referred to as the shell or the terminal, is as powerful as it is intimidating. By typing commands, you can rename thousands of files, process large amounts of data, and work on remote machines with ease. But make one mistake and everything will explode!
+
+  At least, that's what many think when they first encounter this stark and unforgiving environment. I can't blame them, the command line just doesn't look very inviting. But still, the fact remains that the command line successfully enables thousands of developers, researchers, system administrators, and data analysts to be more efficient and productive at work. But how did they acquire this power?
+
+  I know how, because I've been there. Around 15 years ago, I did everything on Windows through clicking and dragging. I knew there was a better way, but I was afraid to try it. At first. It took me well over a year of switching back and forth between Windows and Linux to embrace the command line. These days I mainly use macOS, which has a command line baked in because it's a form of Unix. And guess what, you can nowadays also use a Linux command line on Windows thanks to an extension called WSL. But I'm getting ahead of myself.
+
+  I want to help you embrace the command line. Why? Well, two reasons.
+
+  First and foremost, I truly believe that the command line can make you more efficient and productive when you work with large amounts of files, data, or machines. It's been around for fifty years, and it's not going anywhere, so learning to use the command line is a good investment for the rest of your career.
+
+  Second, I love teaching. In 2014 I wrote the book Data Science at the Command Line (O'Reilly Media) which explains how the command line can be used to work with data. Thanks to this book I started giving workshops which eventually led to my own company [Data Science Workshops](https://datascienceworkshops.com) through which I regulary give in-company workshops on a variety of topics related to data science. By the way, the second edition just came out and can be read entirely for free (see top of this page).
+
+  There are plenty of resources available to learn the command line, but I don't want you to take such a long time (like me) to fully embrace it. That's why I'm going to organize a cohort based course titled Embrace the Command Line. The program is still under development, but it's going to be a four-week program filled with live sessions with me, plenty of exercises, and a valuable and inclusive community. By the end of this course, you'll be able to use the command line comfortably and you'll have a solid foundation to expand your toolbox with tools and techniques that are relevent to your daily work.
+
+  The first cohort is expected to start in Q1 2022. Since this will be a beta cohort, the price will be $500. Subsequent cohorts will most likely be priced between $1000 and $1500. I want to start with a small group of people that are willing to invest time and effort into learning all about the command line.
+
+  If you're interested, please fill out the form below. I'll only use your email address to give you updates about the course. Your location will be used to determine the schedule of the live sessions. I would love to hear why you're interested, but that field is optional.
+
+  By submitting this form, you're just indicating that you might be interested in the course. You're not committing yourself to anything. I will only use your information in relation to this course and nothing else. If you have any questions, please don't hesitate to reach out (contact details below).
+
+  Cheers,
+
+  Jeroen
+
+
+signup_name: "Name"
+signup_email: "Email address"
+signup_location: "Country"
+signup_message: "I'm interested because..."
+signup_button: "Send"
+signup_success: "Thank you very much! I'll be in touch."
+signup_error: "Something went wrong."

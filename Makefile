@@ -8,22 +8,18 @@ SHELL = /usr/bin/env bash -o pipefail
 clean:
 	rm -f book/2e/book.md
 
-live:
-	cd www && hugo server --disableFastRender
-
 2e: book/2e/*.Rmd
-	cd book/2e && rm -f book.md && Rscript --vanilla -e 'bookdown::render_book("index.Rmd", encoding = "UTF-8", clean = FALSE)'
+	cd book/2e &&\
+	rm -f book.md &&\
+	Rscript --vanilla -e 'bookdown::render_book("index.Rmd", encoding = "UTF-8", clean = FALSE)'
 
-hugo:
-	(cd www && hugo) && \
-	(cd book/2e/data && zip data */*) && \
-	mv book/2e/data/data.zip www/static/2e/
-
-publish-draft: hugo
-	netlify deploy --dir www/public
-
-publish-production: hugo
-	netlify deploy --prod --dir www/public
+copy-2e:
+	cd book/2e/output &&\
+	rm -f *.md &&\
+	cp -vr * ../../../www/src/2e/ &&\
+    cd ../data &&\
+    zip data */* &&\
+    mv -v data.zip ../../../www/src/2e/
 
 book/2e/%.utf8.md: book/2e/%.Rmd
 	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE, clean = FALSE, new_session = TRUE)'
@@ -60,3 +56,15 @@ lab:
 
 appendix:
 	cd book/2e/bin && ./appendix.py > ../tools.Rmd
+
+build-www:
+	cd www && npm run build
+
+live:
+	cd www && npm run start
+
+publish-draft: build-www
+	netlify deploy --dir www/_site
+
+publish-production: build-www
+	netlify deploy --prod --dir www/_site

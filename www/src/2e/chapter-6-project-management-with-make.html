@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Project Management with Make | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="I hope that by now you have come to appreciate that the command line is a very convenient environment for working with data. You may have noticed that, as a consequence of working with the command...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Project Management with Make | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-6-project-management-with-make.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="I hope that by now you have come to appreciate that the command line is a very convenient environment for working with data. You may have noticed that, as a consequence of working with the command...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 6 Project Management with Make | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="I hope that by now you have come to appreciate that the command line is a very convenient environment for working with data. You may have noticed that, as a consequence of working with the command...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="active" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-6-project-management-with-make" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Project Management with Make<a class="anchor" aria-label="anchor" href="#chapter-6-project-management-with-make"><i class="fas fa-link"></i></a>
+</h1>
+<p>I hope that by now you have come to appreciate that the command line is a very convenient environment for working with data.
+You may have noticed that, as a consequence of working with the command line, we:</p>
+<ul>
+<li>Invoke many different commands.</li>
+<li>Work from various directories.</li>
+<li>Develop our own command-line tools.</li>
+<li>Obtain and generate many (intermediate) files.</li>
+</ul>
+<p>Since this is an exploratory process, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done.
+It’s important that our steps can be reproduced, by us or by others.
+When you continue with a project from some time ago, chances are that you have forgotten which commands you ran, from which directory, on which files, with which parameters, and in which order.
+Imagine the challenges of sharing your project with a collaborator.</p>
+<p>You can recover some commands by digging through the output of the <code>history</code> command, but this is, of course, not a reliable approach.
+A somewhat better approach would be to save your commands to a shell script.
+At least this allows you and your collaborators to reproduce the project.
+A shell script is, however, also a sub-optimal approach because:</p>
+<ul>
+<li>It is difficult to read and to maintain.</li>
+<li>Dependencies between steps are unclear.</li>
+<li>Every step gets executed every time, which is inefficient and sometimes undesirable.</li>
+</ul>
+<p>This is where <code>make</code> really shines<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-make" role="doc-biblioref"&gt;Stuart I. Feldman, &lt;em&gt;&lt;span class="nocase"&gt;make&lt;/span&gt; – &lt;span&gt;A&lt;/span&gt; Program for Maintaining Computer Programs&lt;/em&gt;, version 4.3, 2020, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/make" role="doc-biblioref"&gt;https://www.gnu.org/software/make&lt;/a&gt;.&lt;/p&gt;'><sup>87</sup></a></span>. <code>make</code> is a command-line tool that allows you to:</p>
+<ul>
+<li>Formalize your data workflow steps in terms of input and output dependencies.</li>
+<li>Run specific steps of your workflow.</li>
+<li>Use inline code.</li>
+<li>Store and retrieve data from external sources.</li>
+</ul>
+<div class="rmdnote">
+In the first edition, this chapter used <code>drake</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-drake" role="doc-biblioref"&gt;Factual, &lt;em&gt;&lt;span class="nocase"&gt;drake&lt;/span&gt; – Data Workflow Tool, Like a "Make for Data"&lt;/em&gt;, version 1.0.3, 2016, &lt;/a&gt;&lt;a href="https://github.com/Factual/drake" role="doc-biblioref"&gt;https://github.com/Factual/drake&lt;/a&gt;.&lt;/p&gt;'><sup>88</sup></a></span> instead of <code>make</code>.
+Drake was supposed to be a successor to <code>make</code> with additional features to work with data.
+Unfortunately, Drake was abandoned by its creators in 2016 with too many unresolved bugs.
+That’s why I’ve decided to use <code>make</code> instead.
+</div>
+<p>An important, related topic is <em>version control</em>, which allows you to track changes of your project, back up your project to a server, collaborate with others, and retrieve earlier versions when things go wrong.
+A popular command-line tool to do version control is <code>git</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-git" role="doc-biblioref"&gt;Torvalds and Hamano, &lt;em&gt;&lt;span class="nocase"&gt;git&lt;/span&gt; – the Stupid Content Tracker&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>89</sup></a></span>.
+It’s often used in combination with GitHub, an online service for distributed version control.
+Many open source projects, including <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">this book</a>, are hosted on GitHub.
+The topic of version control is beyond the scope of this book, but I highly recommend that you look into this, especially once you start collaborating with others.
+At the end of this chapter I recommend a few resources to learn more.</p>
+<div id="overview-3" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Managing your data workflow with <code>make</code> is the main topic of this chapter.
+As such, you’ll learn about:</p>
+<ul>
+<li>Defining your workflow with a <em>Makefile</em>.</li>
+<li>Thinking about your workflow in terms of input and output dependencies.</li>
+<li>Running tasks and building targets.</li>
+</ul>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch06</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 28K
+-rw-r--r-- 1 dst dst  37 Dec  6 21:35 Makefile.test
+-rw-r--r-- 1 dst dst  16 Dec  6 21:35 numbers.make
+-rw-r--r-- 1 dst dst  26 Dec  6 21:35 numbers-write.make
+-rw-r--r-- 1 dst dst  21 Dec  6 21:35 numbers-write-var.make
+-rw-r--r-- 1 dst dst 432 Dec  6 21:35 starwars.make
+-rw-r--r-- 1 dst dst 263 Dec  6 21:35 tasks.make
+-rw-r--r-- 1 dst dst  27 Dec  6 21:35 template.make</pre>
+<p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
+Any other files are either downloaded or generated using command-line tools.</p>
+</div>
+<div id="introducing-make" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Introducing Make<a class="anchor" aria-label="anchor" href="#introducing-make"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>make</code> organizes command execution around data and its dependencies.
+Your data processing steps are formalized in a separate text file (a workflow).
+Each step may have inputs and outputs.
+<code>make</code> automatically resolves their dependencies and determines which commands need to be run and in which order.</p>
+<p>This means that when you have, say, an SQL query that takes ten minutes, it only has to be executed when the result is missing or when the query has changed afterwards.
+Also, if you want to (re-)run a specific step, <code>make</code> only re-runs the steps on which that step depends.
+This can save you a lot of time.</p>
+<p>Having a formalized workflow allows you to easily pick up your project after a few weeks and to collaborate with others. I strongly advise you to do this, even when you think this will be a one-off project, because you never know when you need to run certain steps again, or reuse them in another project.</p>
+</div>
+<div id="running-tasks" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Running Tasks<a class="anchor" aria-label="anchor" href="#running-tasks"><i class="fas fa-link"></i></a>
+</h2>
+<p>By default, <code>make</code> searches for a configuration file called <em>Makefile</em> in the current directory.
+It can also be named <em>makefile</em> (lower case), but I recommend calling your file <em>Makefile</em> because it’s more common and that way it appears at the top of a directory listing.
+Normally you would only have one configuration file per project.
+Because this chapter discusses many different ones, I haven given each of them a different filename with the <em>.make</em> extension.
+Let’s start with the following <em>Makefile</em>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> -A <span style="text-decoration: underline">numbers.make</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">numbers.make</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ numbers:<span style="color: #af005f">␊</span>
+   2   │ <span style="color: #00afaf">├──────┤</span>seq<span style="color: #00afaf">·</span>7<span style="color: #af005f">␊</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>This <em>Makefile</em> contains one <em>target</em> called <em><code>numbers</code></em>.
+A <em>target</em> is like a task.
+It’s usually the name of a file you’d like to create but it can also be more generic than that.
+The line below, <em><code>seq 7</code></em>, is known as a <em>rule</em>.
+Think of a rule as a recipe; one or more commands that specify how the target should be built.</p>
+<p>The whitespace in front of the rule is a single tab character.
+<code>make</code> is picky when it comes to whitespace.
+Beware that some editors insert spaces when you press the <strong><code>TAB</code></strong> key, known as a soft tab, which will cause <code>make</code> to produce an error.
+The following code illustrates this by expanding the tab to eight spaces:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">numbers.make</span> <span style="color: #5f8700">expand</span> <span style="color: #af8700">&gt;</span> spaces.make
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> -A <span style="text-decoration: underline">spaces.make
+</span>───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">spaces.make</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ numbers:<span style="color: #af005f">␊</span>
+   2   │ <span style="color: #00afaf">········</span>seq<span style="color: #00afaf">·</span>7<span style="color: #af005f">␊</span>
+───────┴────────────────────────────────────────────────────────────────────────
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">make</span> -f <span style="text-decoration: underline">spaces.make</span> <span class="callout">➊</span>
+spaces.make:2: *** missing separator (did you mean TAB instead of 8 spaces?).  S
+top. <span class="callout">➋</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">rm</span> <span style="text-decoration: underline">spaces.make</span></pre>
+<p><span class="callout">➊</span> I need to add the <code>-f</code> option (short for the <code>--makefile</code> option) because the configuration file isn’t called <em>Makefile</em>, which is the default.
+<br><span class="callout">➋</span> One of the more helpful error messages you’ll find at the command line!</p>
+<p>From now on, I’ll rename the appropriate file to <em>Makefile</em> because that matches real-world use more closely.
+So, if I just run <code>make</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> <span style="text-decoration: underline">numbers.make</span> Makefile
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">make</span>
+seq 7
+1
+2
+3
+4
+5
+6
+7</pre>
+<p>Then we see that <code>make</code> first prints the rule itself (<em><code>seq 7</code></em>), and then the output generated by the rule.
+This process is known as <em>building</em> a target.
+If you don’t specify the name of a target, then <code>make</code> will build the first target specified in the <em>Makefile</em>.
+In practice though, you’ll most often be specifying the target you’d want to build:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">make</span> numbers
+seq 7
+1
+2
+3
+4
+5
+6
+7</pre>
+
+<div class="rmdnote">
+<code>make</code> was originally created to ease the compilation of source code, which explains some of the terminology like <em>target</em>, <em>rule</em>, and <em>building</em>.
+</div>
+<p>In this case, we’re not actually building anything, as in, we’re not creating any new files.
+<code>make</code> will happily <em>build</em> our target <code>numbers</code> again, because it’s not finding a file called <em>numbers</em>.
+In the next section I’ll go into this.</p>
+<p>Sometimes it’s useful to have a target that builds regardless of whether a file with the same name exists.
+Think of tasks that you need to perform as part of a project.
+It’s good practice to declare those targets as phony by using a special target called <code>.PHONY</code> at the top of your <em>Makefile</em>, followed by the names of the phony targets.
+Here’s an example <em>Makefile</em> that illustrates to use of phony targets:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">tasks.make</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">tasks.make</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #0087ff">.PHONY</span><span style="color: #af005f">:</span> <span style="color: #5f8700">clean publish docker-run</span>
+   2   │
+   3   │ <span style="color: #0087ff">clean</span><span style="color: #af005f">:</span>
+   4   │         rm book/2e/book.md book/2e/render<span style="color: #af005f">*</span>.rds
+   5   │
+   6   │ <span style="color: #0087ff">publish</span><span style="color: #af005f">:</span>
+   7   │         (<span style="color: #00afaf">cd</span> www <span style="color: #af005f">&amp;&amp;</span> hugo) <span style="color: #af005f">&amp;&amp;</span> netlify deploy --prod --dir www/public
+   8   │
+   9   │ <span style="color: #0087ff">docker-run</span><span style="color: #af005f">:
+</span>  10   │         docker run -it --rm -v <span style="color: #af005f">$$(</span>pwd<span style="color: #af005f">)</span>/book/2e/data:/data -p 8000:8000
+       │ datasciencetoolbox/dsatcl2e:latest <span class="callout">➊</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p><span class="callout">➊</span> Note the extra dollar sign in front of <em><code>$(pwd)</code></em>. This is needed because <code>make</code> uses a single dollar sign to refer to various special variables, which I’ll explain later.</p>
+<p>The above is taken from a <em>Makefile</em> I use while working on this book.
+You could say that I’m using <code>make</code> as a glorified task runner.
+Although this wasn’t the primary purpose of <code>make</code>, it still provides a lot of value because I don’t need to remember or look up what incantation I used.
+Instead, I type <code>make publish</code> and the latest version of the book is published.
+It’s perfectly fine to put long-running commands in a <em>Makefile</em>.</p>
+<p>And <code>make</code> can do much more for us!</p>
+</div>
+<div id="building-for-real" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Building, For Real<a class="anchor" aria-label="anchor" href="#building-for-real"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s modify our <em>Makefile</em> such the output of the rule is written to a file <em>numbers</em>.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> <span style="text-decoration: underline">numbers-write.make</span> <span style="text-decoration: underline">Makefile</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">Makefile</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">Makefile</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #0087ff">numbers</span><span style="color: #af005f">:</span>
+   2   │         seq 7 <span style="color: #af005f">&gt;</span> numbers
+───────┴────────────────────────────────────────────────────────────────────────
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">make</span> numbers
+seq 7 &gt; numbers
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">numbers</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">numbers</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ 1
+   2   │ 2
+   3   │ 3
+   4   │ 4
+   5   │ 5
+   6   │ 6
+   7   │ 7
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Now we can say that <code>make</code> is actually building something.
+What’s more, if we run it again, we see that <code>make</code> reports that target <em><code>numbers</code></em> is up-to-date.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">make</span> <span style="text-decoration: underline">numbers</span>
+make: 'numbers' is up to date.</pre>
+<p>There’s no need to rebuild the target <em><code>numbers</code></em> because the file <em>numbers</em> already exists.
+That’s great because <code>make</code> is saving us time by not repeating work.</p>
+<p>In <code>make</code>, it’s all about files.
+But keep in mind that <code>make</code> only cares about the <em>name</em> of the target.
+It does not check whether a file of the same name actually gets created by the rule.
+If we were to write to a file called <em>nummers</em>, which is Dutch for “numbers,” and the target was still called <em><code>numbers</code></em>, then <code>make</code> would always build this target. Vice versa, if the file <em>numbers</em> was created by some other process, whether automated or manual, then <code>make</code> would still consider that target up-to-date.</p>
+<p>We can avoid some repetition by using the automatic variable <code>$@</code>, which gets expanded to the name of the target:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> <span style="text-decoration: underline">numbers-write-var.make</span> <span style="text-decoration: underline">Makefile</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">Makefile</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">Makefile</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #0087ff">numbers</span><span style="color: #af005f">:</span>
+   2   │         seq 7 <span style="color: #af005f">&gt;</span> $@
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Let’s verify that this works by removing the file <em>numbers</em> and calling <code>make</code> again:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">rm</span> <span style="text-decoration: underline">numbers</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">make</span> numbers
+seq 7 &gt; numbers
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">numbers</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">numbers</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ 1
+   2   │ 2
+   3   │ 3
+   4   │ 4
+   5   │ 5
+   6   │ 6
+   7   │ 7
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Another reason for <code>make</code> to rebuild a target is its dependencies, so let’s discuss that next.</p>
+</div>
+<div id="adding-dependencies" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Adding Dependencies<a class="anchor" aria-label="anchor" href="#adding-dependencies"><i class="fas fa-link"></i></a>
+</h2>
+<p>So far, we’ve looked at targets that exist in isolation.
+In a typical data science workflow, many steps depend on other steps.
+In order to properly talk about dependencies in a <em>Makefile</em>, let’s consider two tasks that work with a dataset about Star Wars characters.</p>
+<p>Here’s an excerpt of that dataset:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st
+arwars.csv'</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">xsv</span> select name,height,mass,homeworld,species |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">csvlook</span>
+│ name                  │ height │    mass │ homeworld      │ species        │
+├───────────────────────┼────────┼─────────┼────────────────┼────────────────┤
+│ Luke Skywalker        │    172 │    77.0 │ Tatooine       │ Human          │
+│ C-3PO                 │    167 │    75.0 │ Tatooine       │ Droid          │
+│ R2-D2                 │     96 │    32.0 │ Naboo          │ Droid          │
+│ Darth Vader           │    202 │   136.0 │ Tatooine       │ Human          │
+│ Leia Organa           │    150 │    49.0 │ Alderaan       │ Human          │
+│ Owen Lars             │    178 │   120.0 │ Tatooine       │ Human          │
+│ Beru Whitesun lars    │    165 │    75.0 │ Tatooine       │ Human          │
+│ R5-D4                 │     97 │    32.0 │ Tatooine       │ Droid          │
+… with 79 more lines</pre>
+<p>The first task computes the ten tallest humans:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st
+arwars.csv'</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">grep</span> Human | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">cut</span> -d, -f 1,2 | <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sort</span> -t, -k2 -nr | <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">head</span> <span class="callout">➍</span>
+Darth Vader,202
+Qui-Gon Jinn,193
+Dooku,193
+Bail Prestor Organa,191
+Raymus Antilles,188
+Mace Windu,188
+Anakin Skywalker,188
+Gregar Typho,185
+Jango Fett,183
+Cliegg Lars,183</pre>
+<p><span class="callout">➊</span> Only keep lines that contain the pattern <em><code>Human</code></em>.
+<br><span class="callout">➋</span> Extract the first two columns.
+<br><span class="callout">➌</span> Sort the lines by the second column in reverse numeric order.
+<br><span class="callout">➍</span> By default, <code>head</code> prints the first 10 lines. You can override this with the <code>-n</code> option.</p>
+<p>The second task creates a box plot showing the distribution of heights per species (see Figure <a href="chapter-6-project-management-with-make.html#fig:starwars-image">6.1</a>):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st
+arwars.csv'</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">rush</span> plot --x height --y species --geom boxplot <span style="color: #af8700">&gt;</span> heights.png
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">display</span> <span style="text-decoration: underline">heights.png</span></pre>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:starwars-image"></span>
+<img src="images/heights.png" alt="Distribution of heights per species in Star Wars" width="90%"><p class="caption">
+Figure 6.1: Distribution of heights per species in Star Wars
+</p>
+</div>
+<p>Let’s put these two tasks into a <em>Makefile</em>.
+Instead of doing this incrementally, I’d first like to show what a complete <em>Makefile</em> looks like and then explain all the syntax step by step.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> <span style="text-decoration: underline">starwars.make</span> <span style="text-decoration: underline">Makefile</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">Makefile</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">Makefile</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ SHELL <span style="color: #af005f">:=</span> <span style="color: #5f8700">bash</span>
+   2   │ <span style="color: #0087ff">.ONESHELL</span><span style="color: #af005f">:</span>
+   3   │ .SHELLFLAGS <span style="color: #af005f">:=</span> <span style="color: #5f8700">-eu -o pipefail -c</span>
+   4   │
+   5   │ <span style="color: #0087ff">URL = "https</span><span style="color: #af005f">:</span><span style="color: #5f8700">//raw.githubusercontent.com/tidyverse/dplyr/master/data-ra
+</span>       │ <span style="color: #5f8700">w/starwars.csv"</span>
+   6   │
+   7   │ <span style="color: #0087ff">.PHONY</span><span style="color: #af005f">:</span> <span style="color: #5f8700">all top10</span>
+   8   │
+   9   │ <span style="color: #0087ff">all</span><span style="color: #af005f">:</span> <span style="color: #5f8700">top10 heights.png</span>
+  10   │
+  11   │ <span style="color: #0087ff">data</span><span style="color: #af005f">:</span>
+  12   │         mkdir $@
+  13   │
+  14   │ <span style="color: #0087ff">data/starwars.csv</span><span style="color: #af005f">:</span> <span style="color: #5f8700">data</span>
+  15   │         curl -sL <span style="color: #af005f">$(</span>URL<span style="color: #af005f">)</span> <span style="color: #af005f">&gt;</span> $@
+  16   │
+  17   │ <span style="color: #0087ff">top10</span><span style="color: #af005f">:</span> <span style="color: #5f8700">data/starwars.csv</span>
+  18   │         grep Human $&lt; <span style="color: #af005f">|</span>
+  19   │         cut -d, -f 1,2 <span style="color: #af005f">|</span>
+  20   │         sort -t, -k2 -nr <span style="color: #af005f">|</span>
+  21   │         head
+  22   │
+  23   │ <span style="color: #0087ff">heights.png</span><span style="color: #af005f">:</span> <span style="color: #5f8700">data/starwars.csv</span>
+  24   │         <span style="color: #af005f">&lt;</span> $&lt; rush plot --x height --y species --geom boxplot <span style="color: #af005f">&gt;</span> $@
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Let’s go through this <em>Makefile</em> step by step.
+The first three lines are there to change some default settings related to <code>make</code> itself:</p>
+<ol style="list-style-type: decimal">
+<li>All rules are executed in a shell, which by default, is <code>sh</code>. With the <em><code>SHELL</code></em> variable we can change this to another shell, like <code>bash</code>. This way we can use everything that Bash has to offer such as for loops.</li>
+<li>By default, every line in a rule is sent separately to the shell. With the special target <em><code>.ONESHELL</code></em> we can override this so the rule for target <em><code>top10</code></em> works.</li>
+<li>The <em><code>.SHELLFLAGS</code></em> line makes Bash more strict, which is considered a <a href="http://redsymbol.net/articles/unofficial-bash-strict-mode/">best practice</a>. For example, because of this, the pipeline in the rule for target <em><code>top10</code></em> now stops as soon as there is an error.</li>
+</ol>
+<p>We define a custom variable called <em><code>URL</code></em>.
+Even though this is only used once, I find it helpful to put information like this near the beginning of the file, so that you can easily make changes to these kinds of settings.</p>
+<p>With the special target <em><code>.PHONY</code></em> we can indicate which targets are not represented by files. In our case that holds for targets <em><code>all</code></em> and <em><code>top10</code></em>. These targets will now be executed regardless of whether the directory contains files with the same name.</p>
+<p>There are five targets: <em><code>all</code></em>, <em><code>data</code></em>, <em><code>data/starwars.csv</code></em>, <em><code>top10</code></em>, and <em><code>heights.png</code></em>.
+Figure <a href="chapter-6-project-management-with-make.html#fig:starwars-image">6.1</a> provides an overview of these targets and the dependencies between them.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:dependencies"></span>
+<img src="images/dscl_0602.png" alt="Dependencies between targets" width="90%"><p class="caption">
+Figure 6.2: Dependencies between targets
+</p>
+</div>
+<p>Let’s discuss each target in turn:</p>
+<ol style="list-style-type: decimal">
+<li>The target <em><code>all</code></em> has two dependencies but no rule. This is like a shortcut to execute one or more targets in the order in which they are specified. In this case: <em><code>top10</code></em> and <em><code>heights.png</code></em>. The target <em><code>all</code></em> appears as the first target in the <em>Makefile</em>, which means that if we run <code>make</code>, this target will be built.</li>
+<li>The target <em><code>data</code></em> creates the directory <em>data</em>. Earlier I said that <code>make</code> is all about files. Well, it’s also about directories. This target will only be executed when the directory <em>data</em> doesn’t yet exist.</li>
+<li>The target <em><code>data/starwars.csv</code></em> depends on the target <em><code>data</code></em>. If there’s no <em><code>data</code></em> directory, it will first be created. Once all dependencies are satisfied, the rule will be executed, which involves downloading a file and saving it to a file with the same name as the target.</li>
+<li>The target <em><code>top10</code></em> is marked as phony, so it will always be built if specified. It depends on the <em><code>data/starwars.csv</code></em> target. It makes use of a special variable, <em><code>$&lt;</code></em> which expands to the name of the first prerequisite, namely <em>data/starwars.csv</em>.</li>
+<li>The target <em><code>heights.png</code></em>, like target <em><code>top10</code></em> depends <em><code>data/starwars.csv</code></em> and makes use of both automatic variables we’ve seen in this chapter. See the <a href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">online documentation</a> if you’d like to learn about other automatic variables.</li>
+</ol>
+<p>Last but not least, let’s verify that this <em>Makefile</em> works:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">make</span>
+mkdir data
+curl -sL "https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/star
+wars.csv" &gt; data/starwars.csv
+grep Human data/starwars.csv |
+cut -d, -f 1,2 |
+sort -t, -k2 -nr |
+head
+Darth Vader,202
+Qui-Gon Jinn,193
+Dooku,193
+Bail Prestor Organa,191
+Raymus Antilles,188
+Mace Windu,188
+Anakin Skywalker,188
+Gregar Typho,185
+Jango Fett,183
+Cliegg Lars,183
+&lt; data/starwars.csv rush plot --x height --y species --geom boxplot &gt; heights.pn
+g</pre>
+<p>No surprises here. Because we didn’t specify any target, the <em><code>all</code></em> target will be built, which, in turn, causes both the <em><code>top10</code></em> and <em><code>heights.png</code></em> targets to be built. The output of the former is printed to standard output and the latter creates a file <em>heights.png</em>. The <em>data</em> directory is created only once, just like the CSV file is only downloaded once.</p>
+<p>There’s nothing more fun than just playing with your data and forgetting everything else.
+But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a <em>Makefile</em>.
+Not only will it make your life easier (pun intended), but you will also start thinking about your data workflow in terms of steps.
+Just as with your own command-line toolbox, which you expand over time, the same holds for <code>make</code> workflows.
+The more steps you have defined, the easier it gets to keep doing it, because very often you can reuse certain steps.
+I hope that you will get used to <code>make</code>, and that it will make your life easier.</p>
+</div>
+<div id="summary-5" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Summary<a class="anchor" aria-label="anchor" href="#summary-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>One of the beauties of the command line is that it allows you to play with your data.
+You can easily execute different commands and process different data files.
+It is a very interactive and iterative process.
+After a while, it is easy to forget which steps you have taken to get the desired result.
+It’s therefore very important to document your steps every once in a while.
+This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.</p>
+<p>In this chapter I’ve shown you that just putting every command in one Bash script is suboptimal.
+Instead, I proposed to use <code>make</code> as a command-line tool to manage your data workflow.
+The next chapter covers the third step of the OSEMN model for data science namely exploring data.</p>
+</div>
+<div id="for-further-exploration-5" class="section level2" number="6.7">
+<h2>
+<span class="header-section-number">6.7</span> For Further Exploration<a class="anchor" aria-label="anchor" href="#for-further-exploration-5"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>The book <em>Managing Projects with GNU Make</em> by Robert Mecklenburg and the online <em>GNU Make Manual</em> provide a comprehensive and advanced overview of <code>make</code>.</li>
+<li>There exist plenty of other workflow managers besides <code>make</code>. Although they differ in syntax and features, they also use concepts such as targets, rules, and dependencies. Examples include <a href="https://luigi.readthedocs.io">Luigi</a>, <a href="https://airflow.apache.org">Apache Airflow</a>, and <a href="https://www.nextflow.io">Nextflow</a>.</li>
+<li>To learn more about version control, in particular <code>git</code> and GitHub, I recommend the book <em>Pro Git</em> by Scott Chacon and Ben Straub. It’s <a href="https://git-scm.com/book/en/v2">available for free</a>. The <a href="https://docs.github.com/en/get-started">online GitHub documentation</a> is also a great starting point.</li>
+</ul>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></div>
+<div class="next"><a href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-6-project-management-with-make"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="nav-link" href="#overview-3"><span class="header-section-number">6.1</span> Overview</a></li>
+<li><a class="nav-link" href="#introducing-make"><span class="header-section-number">6.2</span> Introducing Make</a></li>
+<li><a class="nav-link" href="#running-tasks"><span class="header-section-number">6.3</span> Running Tasks</a></li>
+<li><a class="nav-link" href="#building-for-real"><span class="header-section-number">6.4</span> Building, For Real</a></li>
+<li><a class="nav-link" href="#adding-dependencies"><span class="header-section-number">6.5</span> Adding Dependencies</a></li>
+<li><a class="nav-link" href="#summary-5"><span class="header-section-number">6.6</span> Summary</a></li>
+<li><a class="nav-link" href="#for-further-exploration-5"><span class="header-section-number">6.7</span> For Further Exploration</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/06.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/06.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Creating Command-line Tools | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="Throughout the book, I’ll introduce you to many commands and pipelines that basically fit on one line. These are known as one-liners or pipelines. Being able to perform complex tasks with just a...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Creating Command-line Tools | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-4-creating-command-line-tools.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="Throughout the book, I’ll introduce you to many commands and pipelines that basically fit on one line. These are known as one-liners or pipelines. Being able to perform complex tasks with just a...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 4 Creating Command-line Tools | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="Throughout the book, I’ll introduce you to many commands and pipelines that basically fit on one line. These are known as one-liners or pipelines. Being able to perform complex tasks with just a...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="active" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-4-creating-command-line-tools" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Creating Command-line Tools<a class="anchor" aria-label="anchor" href="#chapter-4-creating-command-line-tools"><i class="fas fa-link"></i></a>
+</h1>
+<p>Throughout the book, I’ll introduce you to many commands and pipelines that basically fit on one line.
+These are known as one-liners or pipelines.
+Being able to perform complex tasks with just a one-liner is what makes the command line powerful.
+It’s a very different experience from writing and using traditional programs.</p>
+<p>Some tasks you perform only once, and some you perform more often.
+Some tasks are very specific and others can be generalized.
+If you need to repeat a certain one-liner on a regular basis, it’s worthwhile to turn this into a command-line tool of its own.
+So, both one-liners and command-line tools have their uses.
+Recognizing the opportunity requires practice and skill.
+The advantages of a command-line tool are that you don’t have to remember the entire one-liner and that it improves readability if you include it into some other pipeline.
+In that sense, you can think of a command-line tool as similar to a function in a programming language.</p>
+<p>The benefit of a working with a programming language, however, is that the code is in one or more file.
+This means that you can easily edit and reuse that code.
+If the code has parameters it can even be generalized and re-applied to problems that follow a similar pattern.</p>
+<p>Command-line tools have the best of both worlds: they can be used from the command line, accept parameters, and only have to be created once.
+In this chapter, you’re going to get familiar with creating command-line tools in two ways.
+First, I explain how to turn those one-liners into reusable command-line tools.
+By adding parameters to your commands, you can add the same flexibility that a programming language offers.
+Subsequently, I demonstrate how to create reusable command-line tools from code that’s written in a programming language.
+By following the Unix philosophy, your code can be combined with other command-line tools, which may be written in an entirely different language.
+In this chapter, I will focus on three programming languages: Bash, Python, and R.</p>
+<p>I believe that creating reusable command-line tools makes you a more efficient and productive data scientist in the long run.
+You will gradually build up your own data science toolbox from which you can draw existing tools and apply it to problems you have encountered previously.
+It requires practice to recognize the opportunity to turn a one-liner or existing code into a command-line tool.</p>
+
+<div class="rmdtip">
+In order to turn a one-liner into a shell script, I’m going to use a tiny bit of shell scripting.
+This book only demonstrates a small subset of concepts from shell scripting, including variables, conditionals, and loops.
+A complete course in shell scripting deserves a book on its own, and is therefore beyond the scope of this one.
+If you want to dive deeper into shell scripting, I recommend the book <em>Classic Shell Scripting</em> by <span class="citation"><a href="#ref-Robbins2005" role="doc-biblioref">Arnold Robbins and Nelson H. F. Beebe</a><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-Robbins2005" role="doc-biblioref"&gt;&lt;em&gt;Classic Shell Scripting&lt;/em&gt; (O’Reilly Media, 2005)&lt;/a&gt;.&lt;/p&gt;'><sup>46</sup></a></span>.
+</div>
+<div id="overview-1" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Convert one-liners into parameterized shell scripts</li>
+<li>Turn existing Python and R code into reusable command-line tools</li>
+</ul>
+<p>This chapter starts with the following files:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch04</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 32K
+-rwxr-xr-x 1 dst dst 400 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
+-rwxr-xr-x 1 dst dst 391 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
+-rwxr-xr-x 1 dst dst 182 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
+-rwxr-xr-x 1 dst dst 147 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
+-rwxr-xr-x 1 dst dst 105 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
+-rwxr-xr-x 1 dst dst 128 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
+-rwxr-xr-x 1 dst dst 647 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
+-rwxr-xr-x 1 dst dst 584 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*</pre>
+<p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
+Any other files are either downloaded or generated using command-line tools.</p>
+</div>
+<div id="converting-one-liners-into-shell-scripts" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Converting One-liners into Shell Scripts<a class="anchor" aria-label="anchor" href="#converting-one-liners-into-shell-scripts"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this section I’m going to explain how to turn a one-liner into a reusable command-line tool.
+Let’s say that you would like to get the top most frequent words used in a piece of text.
+Take the book <em>Alice’s Adventures in Wonderland</em> by Lewis Carroll, which is, like many other great books, freely available on Project Gutenberg.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color: #5f8700">trim</span>
+﻿The Project Gutenberg eBook of Alice’s Adventures in Wonderland, by Lewis …
+ 
+This eBook is for the use of anyone anywhere in the United States and
+most other parts of the world at no cost and with almost no restrictions
+whatsoever. You may copy it, give it away or re-use it under the terms
+of the Project Gutenberg License included with this eBook or online at
+www.gutenberg.org. If you are not located in the United States, you
+will have to check the laws of the country where you are located before
+using this eBook.
+ 
+… with 3751 more lines</pre>
+<p>The following sequence of tools or <em>pipeline</em> should do the job:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tr</span> <span style="color: #af8700">'[:upper:]'</span> <span style="color: #af8700">'[:lower:]'</span> | <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➋</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">grep</span> -oE <span style="color: #af8700">"[a-z\']{2,}"</span> | <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➌</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sort</span> | <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➍</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">uniq</span> -c | <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➎</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sort</span> -nr | <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➏</span></span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">head</span> -n 10 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➐</span></span>
+   1839 the
+    942 and
+    811 to
+    638 of
+    610 it
+    553 she
+    486 you
+    462 said
+    435 in
+    403 alice</pre>
+<p><span class="callout">➊</span> Downloading an ebook using <code>curl</code>.
+<br><span class="callout">➋</span> Converting the entire text to lowercase using <code>tr</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-tr" role="doc-biblioref"&gt;Jim Meyering, &lt;em&gt;&lt;span class="nocase"&gt;tr&lt;/span&gt; – Translate or Delete Characters&lt;/em&gt;, version 8.30, 2018, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>47</sup></a></span>.
+<br><span class="callout">➌</span> Extracting all the words using <code>grep</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-grep" role="doc-biblioref"&gt;Meyering, &lt;em&gt;&lt;span class="nocase"&gt;grep&lt;/span&gt; – Print Lines That Match Patterns&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>48</sup></a></span> and put each word on separate line.
+<br><span class="callout">➍</span> Sort these words in alphabetical order using <code>sort</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-sort" role="doc-biblioref"&gt;Haertel and Eggert, &lt;em&gt;&lt;span class="nocase"&gt;sort&lt;/span&gt; – Sort Lines of Text Files&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;'><sup>49</sup></a></span>.
+<br><span class="callout">➎</span> Remove all the duplicates and count how often each word appears in the list using <code>uniq</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-uniq" role="doc-biblioref"&gt;Richard M. Stallman and David MacKenzie, &lt;em&gt;&lt;span class="nocase"&gt;uniq&lt;/span&gt; – Report or Omit Repeated Lines&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>50</sup></a></span>.
+<br><span class="callout">➏</span> Sort this list of unique words by their count in descending order using <code>sort</code>.
+<br><span class="callout">➐</span> Keep only the top 10 lines (i.e., words) using <code>head</code>.</p>
+<p>Those words indeed appear the most often in the text.
+Because those words (apart from the word “alice”) appear very frequently in many English texts, they carry very little meaning.
+In fact, these are known as <em>stopwords</em>.
+If we get rid of those, we keep the most frequent words that are related to this text.</p>
+<p>Here’s a list of stopwords I’ve found:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">"https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/
+stopwords-en.txt"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sort</span> | <span style="color: #5f8700">tee</span> stopwords | <span style="color: #5f8700">trim</span> 20
+10
+39
+a
+able
+ableabout
+about
+above
+abroad
+abst
+accordance
+according
+accordingly
+across
+act
+actually
+ad
+added
+adj
+adopted
+ae
+… with 1278 more lines</pre>
+<p>With <code>grep</code> we can filter out the stopwords right before we start counting:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tr</span> <span style="color: #af8700">'[:upper:]'</span> <span style="color: #af8700">'[:lower:]'</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">grep</span> -oE <span style="color: #af8700">"[a-z\']{2,}"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sort</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">grep</span> -Fvwf <span style="text-decoration: underline">stopwords</span> | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">uniq</span> -c |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sort</span> -nr |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">head</span> -n 10
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+     63 king
+     60 turtle
+     57 mock
+     56 hatter
+     55 gryphon</pre>
+<p><span class="callout">➊</span> Obtain the patterns from a file (<em>stopwords</em> in our case), one per line, with <code>-f</code>. Interpret those patterns as fixed strings with <code>-F</code>. Select only those lines containing matches that form whole words with <code>-w</code>. Select non-matching lines with <code>-v</code>.</p>
+
+<div class="rmdtip">
+Each command-line tool used in this one-liner offers a man page.
+So in case you would like to know more about, say, <code>grep</code>, you can run <code>man grep</code> from the command line.
+The command-line tools <code>tr</code>, <code>grep</code>, <code>uniq</code>, and <code>sort</code> will be discussed in more detail in the next chapter.
+</div>
+<p>There is nothing wrong with running this one-liner just once.
+However, imagine if you wanted to have the top 10 words of every e-book on Project Gutenberg.
+Or imagine that you wanted the top 10 words of a news website on a hourly basis.
+In those cases, it would be best to have this one-liner as a separate building block that can be part of something bigger.
+To add some flexibility to this one-liner in terms of parameters, let’s turn it into a shell script.</p>
+<p>This allows us to take the one-liner as the starting point, and gradually improve on it.
+To turn this one-liner into a reusable command-line tool, I’ll walk you through the following six steps:</p>
+<ol style="list-style-type: decimal">
+<li>Copy and paste the one-liner into a file.</li>
+<li>Add execute permissions.</li>
+<li>Define a so-called shebang.</li>
+<li>Remove the fixed input part.</li>
+<li>Add a parameter.</li>
+<li>Optionally extend your PATH.</li>
+</ol>
+<div id="step-1-create-file" class="section level3" number="4.2.1">
+<h3>
+<span class="header-section-number">4.2.1</span> Step 1: Create File<a class="anchor" aria-label="anchor" href="#step-1-create-file"><i class="fas fa-link"></i></a>
+</h3>
+<p>The first step is to create a new file.
+You can open your favorite text editor and copy and paste the one-liner.
+Let’s name the file <em>top-words-1.sh</em> to indicate that this is the first step towards our new command-line tool If you like to stay at the command line, you can use the builtin <code>fc</code>, which stands for <em>fix command</em>, and allows you to fix or <em>edit</em> the last-run command.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">fc</span></pre>
+<p>Running <code>fc</code> invokes the default text editor, which is stored in the environment variable <em>EDITOR</em>.
+In the Docker container, this is set to <code>nano</code>, a straightforward text editor.
+As you can see, this file contains our one-liner:</p>
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
+</span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
+tr '[:upper:]' '[:lower:]' |            
+grep -oE "[a-z\']{2,}" |                
+sort |              
+grep -Fvwf stopwords |                  
+uniq -c |           
+sort -nr |          
+head -n 10          
+ 
+ 
+ 
+ 
+                                <span style="background-color: #AAAAAA; color: #000000">[ Read 8 lines ]</span>                                
+<span style="background-color: #AAAAAA; color: #000000">^G</span> Help      <span style="background-color: #AAAAAA; color: #000000">^O</span> Write Out <span style="background-color: #AAAAAA; color: #000000">^W</span> Where Is  <span style="background-color: #AAAAAA; color: #000000">^K</span> Cut       <span style="background-color: #AAAAAA; color: #000000">^T</span> Execute   <span style="background-color: #AAAAAA; color: #000000">^C</span> Location    
+<span style="background-color: #AAAAAA; color: #000000">^X</span> Exit      <span style="background-color: #AAAAAA; color: #000000">^R</span> Read File <span style="background-color: #AAAAAA; color: #000000">^\</span> Replace   <span style="background-color: #AAAAAA; color: #000000">^U</span> Paste     <span style="background-color: #AAAAAA; color: #000000">^J</span> Justify   <span style="background-color: #AAAAAA; color: #000000">^_</span> Go To Line  </pre>
+<p>Let’s give this temporary file a proper name by pressing <strong><code>Ctrl-O</code></strong>, removing the temporary filename, and typing <code>top-words-1.sh</code>:</p>
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
+</span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
+tr '[:upper:]' '[:lower:]' |            
+grep -oE "[a-z\']{2,}" |                
+sort |              
+grep -Fvwf stopwords |                  
+uniq -c |           
+sort -nr |          
+head -n 10          
+ 
+ 
+ 
+ 
+<span style="background-color: #AAAAAA; color: #000000">File Name to Write: top-words-1.sh                                              
+^G</span> Help             <span style="background-color: #AAAAAA; color: #000000">M-D</span> DOS Format      <span style="background-color: #AAAAAA; color: #000000">M-A</span> Append          <span style="background-color: #AAAAAA; color: #000000">M-B</span> Backup File     
+<span style="background-color: #AAAAAA; color: #000000">^C</span> Cancel           <span style="background-color: #AAAAAA; color: #000000">M-M</span> Mac Format      <span style="background-color: #AAAAAA; color: #000000">M-P</span> Prepend         <span style="background-color: #AAAAAA; color: #000000">^T</span> Browse           </pre>
+<p>Press <strong><code>Enter</code></strong>:</p>
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     /tmp/zshLSMOO3                               
+</span>curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |                        
+tr '[:upper:]' '[:lower:]' |            
+grep -oE "[a-z\']{2,}" |                
+sort |              
+grep -Fvwf stopwords |                  
+uniq -c |           
+sort -nr |          
+head -n 10          
+ 
+ 
+ 
+ 
+<span style="background-color: #AAAAAA; color: #000000">Save file under DIFFERENT NAME?                                                 
+ Y</span> Yes                                                                          
+<span style="background-color: #AAAAAA; color: #000000"> N</span> No           <span style="background-color: #AAAAAA; color: #000000">^C</span> Cancel                                                       </pre>
+<p>Press <strong><code>Y</code></strong> to confirm that you want to save under a different filename:</p>
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     top-words-1.sh                               
+</span>curl -sL <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #5f8700">|</span>                        
+tr <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:upper:]'</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:lower:]'</span> <span style="color: #5f8700">|</span>            
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -oE <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"[a-z\']{2,}"</span> <span style="color: #5f8700">|</span>                
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> <span style="color: #5f8700">|</span>              
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -Fvwf stopwords <span style="color: #5f8700">|</span>                  
+uniq<span style="font-weight: bold"></span><span style="font-weight: bold; color: #af005f"> -c</span> <span style="color: #5f8700">|</span>           
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> -nr <span style="color: #5f8700">|</span>          
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">head</span><span style="font-weight: bold; color: #af005f"> -n</span> 10          
+ 
+ 
+ 
+ 
+                               <span style="background-color: #AAAAAA; color: #000000">[ Wrote 8 lines ]</span>                                
+<span style="background-color: #AAAAAA; color: #000000">^G</span> Help      <span style="background-color: #AAAAAA; color: #000000">^O</span> Write Out <span style="background-color: #AAAAAA; color: #000000">^W</span> Where Is  <span style="background-color: #AAAAAA; color: #000000">^K</span> Cut       <span style="background-color: #AAAAAA; color: #000000">^T</span> Execute   <span style="background-color: #AAAAAA; color: #000000">^C</span> Location    
+<span style="background-color: #AAAAAA; color: #000000">^X</span> Exit      <span style="background-color: #AAAAAA; color: #000000">^R</span> Read File <span style="background-color: #AAAAAA; color: #000000">^\</span> Replace   <span style="background-color: #AAAAAA; color: #000000">^U</span> Paste     <span style="background-color: #AAAAAA; color: #000000">^J</span> Justify   <span style="background-color: #AAAAAA; color: #000000">^_</span> Go To Line  </pre>
+<p>Press <strong><code>Ctrl-X</code></strong> to exit <code>nano</code> and go back from whence you came.</p>
+<p>We are using the file extension <em>.sh</em> to make clear that we are creating a shell script.
+However, command-line tools don’t need to have an extension.
+In fact, command-line tools rarely have extensions.</p>
+<p>Confirm the contents of the file:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">pwd</span>
+/data/ch04
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 44K
+-rwxr-xr-x 1 dst dst  400 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.py</span>*
+-rwxr-xr-x 1 dst dst  391 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">fizzbuzz.R</span>*
+-rw-r--r-- 1 dst dst 7.5K Dec  6 21:31 stopwords
+-rwxr-xr-x 1 dst dst  182 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.py</span>*
+-rwxr-xr-x 1 dst dst  147 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">stream.R</span>*
+-rw-r--r-- 1 dst dst  173 Dec  6 21:31 top-words-1.sh
+-rwxr-xr-x 1 dst dst  105 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-4.sh</span>*
+-rwxr-xr-x 1 dst dst  128 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-5.sh</span>*
+-rwxr-xr-x 1 dst dst  647 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.py</span>*
+-rwxr-xr-x 1 dst dst  584 Dec  6 21:31 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words.R</span>*
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words-1.sh
+</span>───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">top-words-1.sh</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ curl -sL <span style="color: #5f8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #af005f">|</span>
+   2   │ tr <span style="color: #5f8700">'[:upper:]'</span> <span style="color: #5f8700">'[:lower:]'</span> <span style="color: #af005f">|</span>
+   3   │ grep -oE <span style="color: #5f8700">"[a-z\']{2,}"</span> <span style="color: #af005f">|</span>
+   4   │ sort <span style="color: #af005f">|</span>
+   5   │ grep -Fvwf stopwords <span style="color: #af005f">|</span>
+   6   │ uniq -c <span style="color: #af005f">|</span>
+   7   │ sort -nr <span style="color: #af005f">|</span>
+   8   │ head -n 10
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>You can now use <code>bash</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-bash" role="doc-biblioref"&gt;Brian Fox and Chet Ramey, &lt;em&gt;&lt;span class="nocase"&gt;bash&lt;/span&gt; – &lt;span&gt;GNU Bourne-Again SHell&lt;/span&gt;&lt;/em&gt;, version 5.0.17, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/bash" role="doc-biblioref"&gt;https://www.gnu.org/software/bash&lt;/a&gt;.&lt;/p&gt;'><sup>51</sup></a></span> to interpret and execute the commands in the file:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bash</span> <span style="text-decoration: underline">top-words-1.sh</span>
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+     63 king
+     60 turtle
+     57 mock
+     56 hatter
+     55 gryphon</pre>
+<p>This saves you from typing the one-liner again next time.</p>
+<p>However, because the file cannot be executed on its own, it’s not yet a <em>real</em> command-line tool.
+Let’s change that in the next step.</p>
+</div>
+<div id="step-2-give-permission-to-execute" class="section level3" number="4.2.2">
+<h3>
+<span class="header-section-number">4.2.2</span> Step 2: Give Permission to Execute<a class="anchor" aria-label="anchor" href="#step-2-give-permission-to-execute"><i class="fas fa-link"></i></a>
+</h3>
+<p>The reason we cannot execute our file directly is that we don’t have the correct access permissions.
+In particular, you, as a user, need to have permission to execute the file.
+In this section we change the access permissions of our file.</p>
+<p>In order to compare differences between steps, copy the file to <em>top-words-2.sh</em> using <code>cp -v top-words-{1,2}.sh</code>.</p>
+
+<div class="rmdtip">
+If you ever want to verify what the brace expansion or any other form of file expansion leads to, replace the command with <code>echo</code> to just print the result.
+For example, <code>echo book_{draft,final}.md</code> or <code>echo agent-{001..007}</code>.
+</div>
+<p>To change the access permissions of a file, we need to use a command-line tool called <code>chmod</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-chmod" role="doc-biblioref"&gt;David MacKenzie and Jim Meyering, &lt;em&gt;&lt;span class="nocase"&gt;chmod&lt;/span&gt; – Change File Mode Bits&lt;/em&gt;, version 8.30, 2018, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>52</sup></a></span>, which stands for <em>change mode</em>.
+It changes the file mode bits of a specific file.
+The following command gives the user, you, permission to execute <em>top-words-2.sh</em>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> -v top-words-{1,2}.sh
+'top-words-1.sh' -&gt; 'top-words-2.sh'
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">chmod</span> u+x <span style="text-decoration: underline">top-words-2.sh</span></pre>
+<p>The argument <code>u+x</code> consists of three characters: (1) <code>u</code> indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) <code>+</code> indicates that we want to add a permission; and (3) <code>x</code>, which indicates the permissions to execute.</p>
+<p>Let’s now have a look at the access permissions of both files:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> top-words-{1,2}.sh
+-rw-r--r-- 1 dst dst 173 Dec  6 21:31 top-words-1.sh
+-rwxr--r-- 1 dst dst 173 Dec  6 21:32 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">top-words-2.sh</span>*</pre>
+<p>The first column shows the access permissions for each file.
+For <em>top-words-2.sh</em>, this is <em><code>-rwxrw-r--</code></em>.
+The first character <em><code>-</code></em> (hyphen) indicates the file type.
+A <em><code>-</code></em> means regular file and a <em><code>d</code></em> means directory.
+The next three characters, <em><code>rwx</code></em>, indicate the access permissions for the user who owns the file.
+The <em><code>r</code></em> and <em><code>w</code></em> mean <em>read</em> and <em>write</em>, respectively.
+(As you can see, <em>top-words-1.sh</em> has a <em><code>-</code></em> instead of an <em><code>x</code></em>, which means that we cannot <em>execute</em> that file.) The next three characters <em><code>rw-</code></em> indicate the access permissions for all members of the group that owns the file.
+Finally, the last three characters in the column, <em><code>r--</code></em>, indicate access permissions for all other users.</p>
+<p>Now you can execute the file as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">./top-words-2.sh</span>
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+     63 king
+     60 turtle
+     57 mock
+     56 hatter
+     55 gryphon</pre>
+<p>If you try to execute a file for which you don’t have the correct access permissions, as with <em>top-words-1.sh</em>, you will see the following error message:</p>
+<pre><span style="font-weight: bold">$</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">./top-words-1.sh</span>
+zsh: permission denied: ./top-words-1.sh</pre>
+</div>
+<div id="step-3-define-shebang" class="section level3" number="4.2.3">
+<h3>
+<span class="header-section-number">4.2.3</span> Step 3: Define Shebang<a class="anchor" aria-label="anchor" href="#step-3-define-shebang"><i class="fas fa-link"></i></a>
+</h3>
+<p>Although we can already execute the file on its own, we should add a so-called shebang to the file.
+The <em>shebang</em> is a special line in the script that instructs the system which executable it should use to interpret the commands.</p>
+<p>The name <em>shebang</em> comes from the first two characters: a hash (she) and an exclamation mark (bang): <code>#!</code>.
+It’s not a good idea to leave it out, as we have done in the previous step, because each shell has a different default executable.
+The Z shell, the one we’re using throughout the book, uses the executable <em>/bin/sh</em> by default if no shebang is defined.
+In this case I’d like <code>bash</code> to interpret the commands as that will give us some more functionality than <code>sh</code>.</p>
+<p>Again, you’re free to use whatever editor you like, but I’m going to stick with <code>nano</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-nano" role="doc-biblioref"&gt;Benno Schulenberg et al., &lt;em&gt;&lt;span class="nocase"&gt;nano&lt;/span&gt; – &lt;span class="nocase"&gt;Nano’s ANOther editor, inspired by Pico&lt;/span&gt;&lt;/em&gt;, version 5.4, 2020, &lt;/a&gt;&lt;a href="https://nano-editor.org" role="doc-biblioref"&gt;https://nano-editor.org&lt;/a&gt;.&lt;/p&gt;'><sup>53</sup></a></span>, which is installed in the Docker image.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> -v top-words-{2,3}.sh
+'top-words-2.sh' -&gt; 'top-words-3.sh'
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">nano</span> <span style="text-decoration: underline">top-words-3.sh</span></pre>
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     top-words-3.sh                               
+</span>curl -sL <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #5f8700">|</span>                        
+tr <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:upper:]'</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:lower:]'</span> <span style="color: #5f8700">|</span>            
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -oE <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"[a-z\']{2,}"</span> <span style="color: #5f8700">|</span>                
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> <span style="color: #5f8700">|</span>              
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -Fvwf stopwords <span style="color: #5f8700">|</span>                  
+uniq<span style="font-weight: bold"></span><span style="font-weight: bold; color: #af005f"> -c</span> <span style="color: #5f8700">|</span>           
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> -nr <span style="color: #5f8700">|</span>          
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">head</span><span style="font-weight: bold; color: #af005f"> -n</span> 10          
+ 
+ 
+ 
+ 
+                                <span style="background-color: #AAAAAA; color: #000000">[ Read 8 lines ]</span>                                
+<span style="background-color: #AAAAAA; color: #000000">^G</span> Help      <span style="background-color: #AAAAAA; color: #000000">^O</span> Write Out <span style="background-color: #AAAAAA; color: #000000">^W</span> Where Is  <span style="background-color: #AAAAAA; color: #000000">^K</span> Cut       <span style="background-color: #AAAAAA; color: #000000">^T</span> Execute   <span style="background-color: #AAAAAA; color: #000000">^C</span> Location    
+<span style="background-color: #AAAAAA; color: #000000">^X</span> Exit      <span style="background-color: #AAAAAA; color: #000000">^R</span> Read File <span style="background-color: #AAAAAA; color: #000000">^\</span> Replace   <span style="background-color: #AAAAAA; color: #000000">^U</span> Paste     <span style="background-color: #AAAAAA; color: #000000">^J</span> Justify   <span style="background-color: #AAAAAA; color: #000000">^_</span> Go To Line  </pre>
+<p>Go ahead and type <em><code>#!/usr/bin/env/bash</code></em> and press <strong><code>Enter</code></strong>.
+When you’re ready, press <strong><code>Ctrl-X</code></strong> to save and exit.</p>
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     top-words-3.sh *                             
+</span><span style="color: #00afaf"></span><span style="color: #00afaf">#!/usr/bin/env bash</span><span style="background-color: #5f8700"> 
+</span>curl -sL <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #5f8700">|</span>                        
+tr <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:upper:]'</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:lower:]'</span> <span style="color: #5f8700">|</span>            
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -oE <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"[a-z\']{2,}"</span> <span style="color: #5f8700">|</span>                
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> <span style="color: #5f8700">|</span>              
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -Fvwf stopwords <span style="color: #5f8700">|</span>                  
+uniq<span style="font-weight: bold"></span><span style="font-weight: bold; color: #af005f"> -c</span> <span style="color: #5f8700">|</span>           
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> -nr <span style="color: #5f8700">|</span>          
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">head</span><span style="font-weight: bold; color: #af005f"> -n</span> 10          
+ 
+ 
+ 
+<span style="background-color: #AAAAAA; color: #000000">Save modified buffer?                                                           
+ Y</span> Yes                                                                          
+<span style="background-color: #AAAAAA; color: #000000"> N</span> No           <span style="background-color: #AAAAAA; color: #000000">^C</span> Cancel                                                       </pre>
+<p>Press <strong><code>Y</code></strong> to indicate that you want to save the file.</p>
+<pre><span style="background-color: #AAAAAA; color: #000000">  GNU nano 5.4                     top-words-3.sh *                             
+</span><span style="color: #00afaf"></span><span style="color: #00afaf">#!/usr/bin/env bash</span><span style="background-color: #5f8700"> 
+</span>curl -sL <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #5f8700">|</span>                        
+tr <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:upper:]'</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">'[:lower:]'</span> <span style="color: #5f8700">|</span>            
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -oE <span style="font-weight: bold"></span><span style="font-weight: bold; color: #af8700">"[a-z\']{2,}"</span> <span style="color: #5f8700">|</span>                
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> <span style="color: #5f8700">|</span>              
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">grep</span> -Fvwf stopwords <span style="color: #5f8700">|</span>                  
+uniq<span style="font-weight: bold"></span><span style="font-weight: bold; color: #af005f"> -c</span> <span style="color: #5f8700">|</span>           
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">sort</span> -nr <span style="color: #5f8700">|</span>          
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">head</span><span style="font-weight: bold; color: #af005f"> -n</span> 10          
+ 
+ 
+ 
+<span style="background-color: #AAAAAA; color: #000000">File Name to Write: top-words-3.sh                                              
+^G</span> Help             <span style="background-color: #AAAAAA; color: #000000">M-D</span> DOS Format      <span style="background-color: #AAAAAA; color: #000000">M-A</span> Append          <span style="background-color: #AAAAAA; color: #000000">M-B</span> Backup File     
+<span style="background-color: #AAAAAA; color: #000000">^C</span> Cancel           <span style="background-color: #AAAAAA; color: #000000">M-M</span> Mac Format      <span style="background-color: #AAAAAA; color: #000000">M-P</span> Prepend         <span style="background-color: #AAAAAA; color: #000000">^T</span> Browse           </pre>
+<p>Let’s confirm what <em>top-words-3.sh</em> looks like:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words-3.sh
+</span>───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">top-words-3.sh</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env bash </span>
+   2   │ curl -sL <span style="color: #5f8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #af005f">|</span>
+   3   │ tr <span style="color: #5f8700">'[:upper:]'</span> <span style="color: #5f8700">'[:lower:]'</span> <span style="color: #af005f">|</span>
+   4   │ grep -oE <span style="color: #5f8700">"[a-z\']{2,}"</span> <span style="color: #af005f">|</span>
+   5   │ sort <span style="color: #af005f">|</span>
+   6   │ grep -Fvwf stopwords <span style="color: #af005f">|</span>
+   7   │ uniq -c <span style="color: #af005f">|</span>
+   8   │ sort -nr <span style="color: #af005f">|</span>
+   9   │ head -n 10
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>That’s exactly what we need: our original pipeline with a shebang in front of it.</p>
+<p>Sometimes you will come across scripts that have a shebang in the form of <em><code>!/usr/bin/bash</code></em> or <em><code>!/usr/bin/python</code></em> (in the case of Python, as we will see in the next section).
+While this generally works, if the <code>bash</code> or <code>python</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-python" role="doc-biblioref"&gt;The Python Software Foundation, &lt;em&gt;&lt;span class="nocase"&gt;python&lt;/span&gt; – an Interpreted, Interactive, Object-Oriented Programming Language&lt;/em&gt;, version 3.8.5, 2021, &lt;/a&gt;&lt;a href="https://www.python.org" role="doc-biblioref"&gt;https://www.python.org&lt;/a&gt;.&lt;/p&gt;'><sup>54</sup></a></span> executables are installed in a different location than <em>/usr/bin</em>, then the script does not work anymore.
+It is better to use the form that I present here, namely <em><code>!/usr/bin/env bash</code></em> and <em><code>!/usr/bin/env python</code></em>, because the <code>env</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-env" role="doc-biblioref"&gt;Richard Mlynarik, David MacKenzie, and Assaf Gordon, &lt;em&gt;&lt;span class="nocase"&gt;env&lt;/span&gt; – Run a Program in a Modified Environment&lt;/em&gt;, version 8.32, 2020, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>55</sup></a></span> executable is aware where <code>bash</code> and <code>python</code> are installed.
+In short, using <code>env</code> makes your scripts more portable.</p>
+</div>
+<div id="step-4-remove-fixed-input" class="section level3" number="4.2.4">
+<h3>
+<span class="header-section-number">4.2.4</span> Step 4: Remove Fixed Input<a class="anchor" aria-label="anchor" href="#step-4-remove-fixed-input"><i class="fas fa-link"></i></a>
+</h3>
+<p>We know have a valid command-line tool that we can execute from the command line.
+But we can do better than this.
+We can make our command-line tool more reusable.
+The first command in our file is <code>curl</code>, which downloads the text from which we wish to obtain the top 10 most-used words.
+So, the data and operations are combined into one.</p>
+<p>What if we wanted to obtain the top 10 most-used words from another e-book, or any other text for that matter? The input data is fixed within the tools itself.
+It would be better to separate the data from the command-line tool.</p>
+<p>If we assume that the user of the command-line tool will provide the text, the tool will become generally applicable.
+So, the solution is to remove the <code>curl</code> command from the script.
+Here is the updated script named <em>top-words-4.sh</em>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> -v top-words-{3,4}.sh
+'top-words-3.sh' -&gt; 'top-words-4.sh'
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">sed</span> -i <span style="color: #af8700">'2d'</span> <span style="text-decoration: underline">top-words-4.sh</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words-4.sh
+</span>───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">top-words-4.sh</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env bash </span>
+   2   │ tr <span style="color: #5f8700">'[:upper:]'</span> <span style="color: #5f8700">'[:lower:]'</span> <span style="color: #af005f">|</span>
+   3   │ grep -oE <span style="color: #5f8700">"[a-z\']{2,}"</span> <span style="color: #af005f">|</span>
+   4   │ sort <span style="color: #af005f">|</span>
+   5   │ grep -Fvwf stopwords <span style="color: #af005f">|</span>
+   6   │ uniq -c <span style="color: #af005f">|</span>
+   7   │ sort -nr <span style="color: #af005f">|</span>
+   8   │ head -n 10
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>This works because if a script starts with a command that needs data from standard input, like <code>tr</code>, it will take the input that is given to the command-line tools.
+For example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">'https://www.gutenberg.org/files/11/11-0.txt'</span> | <span style="color: #5f8700">./top-words-4.sh</span>
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+     63 king
+     60 turtle
+     57 mock
+     56 hatter
+     55 gryphon
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">'https://www.gutenberg.org/files/12/12-0.txt'</span> | <span style="color: #5f8700">./top-words-4.sh</span>
+    469 alice
+    189 queen
+     98 gutenberg
+     88 project
+     72 time
+     71 red
+     70 white
+     67 king
+     63 head
+     59 knight
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> bash | <span style="color: #5f8700">./top-words-4.sh</span>
+    585 command
+    332 set
+    313 word
+    313 option
+    304 file
+    300 variable
+    298 bash
+    258 list
+    257 expansion
+    238 history</pre>
+
+<div class="rmdtip">
+Although we have not done so in our script, the same principle holds for saving data.
+It is, in general, better to let the user take care of that using output redirection than to let the script write to a specific file.
+Of course, if you intend to use a command-line tool only for your own projects, then there are no limits to how specific you can be.
+</div>
+</div>
+<div id="step-5-add-arguments" class="section level3" number="4.2.5">
+<h3>
+<span class="header-section-number">4.2.5</span> Step 5: Add Arguments<a class="anchor" aria-label="anchor" href="#step-5-add-arguments"><i class="fas fa-link"></i></a>
+</h3>
+<p>There is one more step to make our command-line tool even more reusable: parameters.
+In our command-line tool there are a number of fixed command-line arguments, for example <code>-nr</code> for <code>sort</code> and <code>-n 10</code> for <code>head</code>.
+It is probably best to keep the former argument fixed.
+However, it would be very useful to allow for different values for the <code>head</code> command.
+This would allow the end user to set the number of most-often used words to output.
+Below shows what our file <em>top-words-5.sh</em> looks like:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words-5.sh
+</span>───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">top-words-5.sh</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env bash</span>
+   2   │
+   3   │ NUM_WORDS<span style="color: #af005f">=</span><span style="color: #5f8700">"${1</span><span style="color: #af005f">:-</span><span style="color: #5f8700">10}"</span>
+   4   │
+   5   │ tr <span style="color: #5f8700">'[:upper:]'</span> <span style="color: #5f8700">'[:lower:]'</span> <span style="color: #af005f">|</span>
+   6   │ grep -oE <span style="color: #5f8700">"[a-z\']{2,}"</span> <span style="color: #af005f">|</span>
+   7   │ sort <span style="color: #af005f">|</span>
+   8   │ grep -Fvwf stopwords <span style="color: #af005f">|</span>
+   9   │ uniq -c <span style="color: #af005f">|</span>
+  10   │ sort -nr <span style="color: #af005f">|</span>
+  11   │ head -n <span style="color: #5f8700">"${NUM_WORDS}"</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<ul>
+<li>The variable <em>NUM_WORDS</em> is set to the value of <em>$1</em>, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers. If no value is specified, it will take on the value “10.”</li>
+<li>Note that in order to <em>use</em> the value of the <em>$NUM_WORDS</em> variable, you need to put a dollar sign in front of it. When you <em>set</em> it, you don’t write a dollar sign.</li>
+</ul>
+<p>We could have also used <em>$1</em> directly as an argument for <code>head</code> and not bother creating an extra variable such <em>NUM_WORDS</em>.
+However, with larger scripts and a few more command-line arguments such as <em>$2</em> and <em>$3</em>, your code becomes more readable when you use named variables.</p>
+<p>Now if you wanted to see the top 20 most-used words of our text, we would invoke our command-line tool as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sL <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color: #af8700">&gt;</span> alice.txt
+ 
+<span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">./top-words-5.sh</span> 20
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+     63 king
+     60 turtle
+     57 mock
+     56 hatter
+     55 gryphon
+     53 rabbit
+     50 head
+     48 voice
+     45 looked
+     44 mouse
+     42 duchess
+     40 tone
+     40 dormouse
+     37 cat
+     34 march</pre>
+<p>If the user does not specify a number, then our script will show the top 10 most common words:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">./top-words-5.sh</span>
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+     63 king
+     60 turtle
+     57 mock
+     56 hatter
+     55 gryphon</pre>
+</div>
+<div id="step-6-extend-your-path" class="section level3" number="4.2.6">
+<h3>
+<span class="header-section-number">4.2.6</span> Step 6: Extend Your PATH<a class="anchor" aria-label="anchor" href="#step-6-extend-your-path"><i class="fas fa-link"></i></a>
+</h3>
+<p>After the previous five steps we are finally finished building a reusable command-line tool.
+There is, however, one more step that can be very useful.
+In this optional step we are going to ensure that you can execute your command-line tools from everywhere.</p>
+<p>Currently, when you want to execute your command-line tool, you either have to navigate to the directory it is in or include the full path name as shown in step 2.
+This is fine if the command-line tool is specifically built for, say, a certain project.
+However, if your command-line tool could be applied in multiple situations, then it is useful to be able to execute it from everywhere, just like the command-line tools that come with Ubuntu.</p>
+<p>To accomplish this, Bash needs to know where to look for your command-line tools.
+It does this by traversing a list of directories which are stored in an environment variable called <em>PATH</em>.
+In a fresh Docker container, the <em>PATH</em> looks like this:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> $PATH
+/usr/local/lib/R/site-library/rush/exec:/usr/bin/dsutils:/home/dst/.local/bin:/u
+sr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</pre>
+<p>The directories are delimited by colons.
+We can print it as a list of directories by <em>translating</em> the colons to newlines:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> $PATH | <span style="color: #5f8700">tr</span> <span style="color: #af8700">':'</span> <span style="color: #af8700">'\n'</span>
+/usr/local/lib/R/site-library/rush/exec
+/usr/bin/dsutils
+/home/dst/.local/bin
+/usr/local/sbin
+/usr/local/bin
+/usr/sbin
+/usr/bin
+/sbin
+/bin</pre>
+<p>To change the <em>PATH</em> permanently, you’ll need to edit the <em>.bashrc</em> or <em>.profile</em> file located in your home directory.
+If you put all your custom command-line tools into one directory, say, <em>~/tools</em>, then you only change the <em>PATH</em> once.
+Now, you no longer need to add the <em>./</em>, but you can just use the filename.
+Moreover, you do no longer need to remember where the command-line tool is located.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> -v top-words{-5.sh,}
+'top-words-5.sh' -&gt; 'top-words'
+ 
+<span style="font-weight: bold">$</span> <span style="color: #af8700">export</span> PATH=<span style="color: #af8700">"</span><span style="color: #00afaf">${PATH}</span><span style="color: #af8700">:/data/ch04"</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> $PATH
+/usr/local/lib/R/site-library/rush/exec:/usr/bin/dsutils:/home/dst/.local/bin:/u
+sr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/ch04
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">top-words</span> 10
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  170k  100  170k    0     0  21525      0  0:00:08  0:00:08 --:--:-- 36179
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+     63 king
+     60 turtle
+     57 mock
+     56 hatter
+     55 gryphon</pre>
+</div>
+</div>
+<div id="creating-command-line-tools-with-python-and-r" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Creating Command-line Tools with Python and R<a class="anchor" aria-label="anchor" href="#creating-command-line-tools-with-python-and-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>The command-line tool that we created in the previous section was written in Bash.
+(Sure, not every feature of the Bash programming language was employed, but the interpreter still was <code>bash</code>.) As you know by now, the command line is language agnostic, so we don’t necessarily have to use Bash for creating command-line tools.</p>
+<p>In this section I’m going demonstrate that command-line tools can be created in other programming languages as well.
+I’ll focus on Python and R because these are the two most popular programming languages within the data science community.
+I cannot offer a complete introduction to either language, so I assume that you have some familiarity with Python and or R.
+Other programming languages such as Java, Go, and Julia, follow a similar pattern when it comes to creating command-line tools.</p>
+<p>There are three main reasons for creating command-line tools in another programming language than Bash.
+First, you may already have some code that you’d like to be able to use from the command line.
+Second, the command-line tool would end up encompassing more than a hundred lines of Bash code.
+Third, the command-line tool needs to be more safe and robust (Bash lacks many features such as type checking).</p>
+<p>The six steps that I discussed in the previous section roughly apply to creating command-line tools in other programming languages as well.
+The first step, however, would not be copy pasting from the command line, but rather copy pasting the relevant code into a new file.
+Command-line tools written in Python and R need to specify <code>python</code> and <code>Rscript</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-R" role="doc-biblioref"&gt;The R Foundation for Statistical Computing, &lt;em&gt;&lt;span&gt;R&lt;/span&gt; – a Language and Environment for Statistical Computing&lt;/em&gt;, version 4.0.4, 2021, &lt;/a&gt;&lt;a href="https://www.r-project.org" role="doc-biblioref"&gt;https://www.r-project.org&lt;/a&gt;.&lt;/p&gt;'><sup>56</sup></a></span>, respectively, as the interpreter after the shebang.</p>
+<p>When it comes to creating command-line tools using Python and R, there are two more aspects that deserve special attention.
+First, processing standard input, which comes natural to shell scripts, has to be taken care of explicitly in Python and R.
+Second, as command-line tools written in Python and R tend to be more complex, we may also want to offer the user the ability to specify more elaborate command-line arguments.</p>
+<div id="porting-the-shell-script" class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Porting The Shell Script<a class="anchor" aria-label="anchor" href="#porting-the-shell-script"><i class="fas fa-link"></i></a>
+</h3>
+<p>As a starting point, let’s see how we would port the shell script we just created to both Python and R.
+In other words, what Python and R code gives us the top most-often used words from standard input? We will first show the two files <em>top-words.py</em> and <em>top-words.R</em> and then discuss the differences with the shell code.
+In Python, the code would look something like:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch04</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words.py</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">top-words.py</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env python</span>
+   2   │ <span style="color: #af005f">import</span> re
+   3   │ <span style="color: #af005f">import</span> sys
+   4   │
+   5   │ <span style="color: #af005f">from</span> collections <span style="color: #af005f">import</span> Counter
+   6   │ <span style="color: #af005f">from</span> urllib.request <span style="color: #af005f">import</span> urlopen
+   7   │
+   8   │ <span style="color: #af005f">def</span> <span style="color: #0087ff">top_words</span>(text, n):
+   9   │     <span style="color: #af005f">with</span> urlopen(<span style="color: #5f8700">"https://raw.githubusercontent.com/stopwords-iso/stopw
+</span>       │ <span style="color: #5f8700">ords-en/master/stopwords-en.txt"</span>) <span style="color: #af005f">as</span> f:
+  10   │         stopwords <span style="color: #af005f">=</span> f.read().decode(<span style="color: #5f8700">"utf-8"</span>).split(<span style="color: #5f8700">"</span><span style="color: #00afaf">\n</span><span style="color: #5f8700">"</span>)
+  11   │
+  12   │     words <span style="color: #af005f">=</span> re.findall(<span style="color: #5f8700">"[a-z']{2,}"</span>, text.lower())
+  13   │     words <span style="color: #af005f">=</span> (w <span style="color: #af005f">for</span> w <span style="color: #af005f">in</span> words <span style="color: #af005f">if</span> w <span style="color: #af005f">not</span> <span style="color: #af005f">in</span> stopwords)
+  14   │
+  15   │     <span style="color: #af005f">for</span> word, count <span style="color: #af005f">in</span> Counter(words).most_common(n):
+  16   │         <span style="color: #00afaf">print</span>(<span style="color: #af005f">f</span><span style="color: #5f8700">"</span>{count<span style="color: #af8700">:&gt;7</span>}<span style="color: #5f8700"> </span>{word}<span style="color: #5f8700">"</span>)
+  17   │
+  18   │
+  19   │ <span style="color: #af005f">if</span> __name__ <span style="color: #af005f">==</span> <span style="color: #5f8700">"__main__"</span>:
+  20   │     text <span style="color: #af005f">=</span> sys.stdin.read()
+  21   │
+  22   │     <span style="color: #af005f">try</span>:
+  23   │         n <span style="color: #af005f">=</span> int(sys.argv[<span style="color: #af8700">1</span>])
+  24   │     <span style="color: #af005f">except</span>:
+  25   │         n <span style="color: #af005f">=</span> <span style="color: #af8700">10</span>
+  26   │
+  27   │     top_words(text, n)
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Note that this Python example doesn’t use any third-party packages.
+If you want to do advanced text processing, then I recommend you check out the NLTK package<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-Perkins2010" role="doc-biblioref"&gt;Jacob Perkins, &lt;em&gt;Python Text Processing with NLTK 2.0 Cookbook&lt;/em&gt; (Packt Publishing, 2010)&lt;/a&gt;.&lt;/p&gt;'><sup>57</sup></a></span>.
+If you’re going to work with a lot of numerical data, then I recommend you use the Pandas package<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-McKinney2012" role="doc-biblioref"&gt;Wes McKinney, &lt;em&gt;Python for Data Analysis&lt;/em&gt; (O’Reilly Media, 2012)&lt;/a&gt;.&lt;/p&gt;'><sup>58</sup></a></span>.</p>
+<p>And in R the code would look something like:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">top-words.R</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">top-words.R</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env Rscript</span>
+   2   │ n <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">as.integer</span>(<span style="color: #00afaf">commandArgs</span>(trailingOnly <span style="color: #af005f">=</span> <span style="color: #af8700">TRUE</span>))
+   3   │ <span style="color: #af005f">if</span> (<span style="color: #00afaf">length</span>(n) <span style="color: #af005f">==</span> <span style="color: #af8700">0</span>) n <span style="color: #af005f">&lt;-</span> <span style="color: #af8700">10</span>
+   4   │
+   5   │ f_stopwords <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">url</span>(<span style="color: #5f8700">"https://raw.githubusercontent.com/stopwords-iso/sto
+</span>       │ <span style="color: #5f8700">pwords-en/master/stopwords-en.txt"</span>)
+   6   │ stopwords <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">readLines</span>(f_stopwords, warn <span style="color: #af005f">=</span> <span style="color: #af8700">FALSE</span>)
+   7   │ <span style="color: #00afaf">close</span>(f_stopwords)
+   8   │
+   9   │ f_text <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">file</span>(<span style="color: #5f8700">"stdin"</span>)
+  10   │ lines <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">tolower</span>(<span style="color: #00afaf">readLines</span>(f_text))
+  11   │
+  12   │ words <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">unlist</span>(<span style="color: #00afaf">regmatches</span>(lines, <span style="color: #00afaf">gregexpr</span>(<span style="color: #5f8700">"[a-z']{2,}"</span>, lines)))
+  13   │ words <span style="color: #af005f">&lt;-</span> words[<span style="color: #00afaf">is.na</span>(<span style="color: #00afaf">match</span>(words, stopwords))]
+  14   │
+  15   │ counts <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">sort</span>(<span style="color: #00afaf">table</span>(words), decreasing <span style="color: #af005f">=</span> <span style="color: #af8700">TRUE</span>)
+  16   │ <span style="color: #00afaf">cat</span>(<span style="color: #00afaf">sprintf</span>(<span style="color: #5f8700">"%7d %s</span><span style="color: #00afaf">\n</span><span style="color: #5f8700">"</span>, counts[<span style="color: #af8700">1</span><span style="color: #af005f">:</span>n], <span style="color: #00afaf">names</span>(counts[<span style="color: #af8700">1</span><span style="color: #af005f">:</span>n])), sep <span style="color: #af005f">=</span> <span style="color: #5f8700">""</span>)
+  17   │ <span style="color: #00afaf">close</span>(f_text)
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Let’s check that all three implementations (i.e., Bash, Python, and R) return the same top 5 words with the same counts:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">time</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">top-words</span> 5
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+top-words 5 &lt; alice.txt  0.47s user 0.05s system 160% cpu 0.326 total
+ 
+<span style="font-weight: bold">$</span> <span style="color: #af8700">time</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">top-words.py</span> 5
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+top-words.py 5 &lt; alice.txt  1.50s user 0.03s system 96% cpu 1.578 total
+ 
+<span style="font-weight: bold">$</span> <span style="color: #af8700">time</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">alice.txt</span> <span style="color: #5f8700">top-words.R</span> 5
+    403 alice
+     98 gutenberg
+     88 project
+     76 queen
+     71 time
+top-words.R 5 &lt; alice.txt  1.48s user 0.15s system 91% cpu 1.774 total</pre>
+<p>Wonderful! Sure, the output itself is not very exciting.
+What’s exciting is that we can accomplish the same task with multiple languages.
+Let’s look at the differences between the approaches.</p>
+<p>First, what’s immediately obvious is the difference in amount of code.
+For this specific task, both Python and R require much more code than Bash.
+This illustrates that, for some tasks, it is better to use the command line.
+For other tasks, you may better off using a programming language.
+As you gain more experience on the command line, you will start to recognize when to use which approach.
+When everything is a command-line tool, you can even split up the task into subtasks, and combine a Bash command-line tool with, say, a Python command-line tool.
+Whichever approach works best for the task at hand.</p>
+</div>
+<div id="processing-streaming-data-from-standard-input" class="section level3" number="4.3.2">
+<h3>
+<span class="header-section-number">4.3.2</span> Processing Streaming Data from Standard Input<a class="anchor" aria-label="anchor" href="#processing-streaming-data-from-standard-input"><i class="fas fa-link"></i></a>
+</h3>
+<p>In the previous two code snippets, both Python and R read the complete standard input at once.
+On the command line, most tools pipe data to the next command-line tool in a streaming fashion.
+There are a few command-line tools which require the complete data before they write any data to standard output, like <code>sort</code>.
+This means the pipeline is blocked by such command-line tools.
+This doesn’t have to be a problem when the input data is finite, like a file.
+However, when the input data is a non-stop stream, such blocking command-line tools are useless.</p>
+<p>Luckily Python and R support processing streaming data.
+You can apply a function on a line-per-line basis, for example.
+Here are two minimal examples that demonstrate how this works in Python and R, respectively.</p>
+<p>Both the Python and R tool solve the, by now infamous, Fizz Buzz problem, which is defined as follows: Print the numbers from 1 to 100, except that if the number is divisible by 3, instead print “fizz”; if the number is divisible by 5, instead print “buzz”; and if the number is divisible by 15, instead print “fizzbuzz.” Here’s the Python code<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;This code is adapted from a &lt;a href="https://github.com/joelgrus/fizzbuzz/blob/master/fizzbuzz/cycle_of_15.py"&gt;Python script by Joel Grus&lt;/a&gt;.&lt;/p&gt;'><sup>59</sup></a>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">fizzbuzz.py</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">fizzbuzz.py</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env python</span>
+   2   │ <span style="color: #af005f">import</span> sys
+   3   │
+   4   │ CYCLE_OF_15 <span style="color: #af005f">=</span> [<span style="color: #5f8700">"fizzbuzz"</span>, <span style="color: #af8700">None</span>, <span style="color: #af8700">None</span>, <span style="color: #5f8700">"fizz"</span>, <span style="color: #af8700">None</span>,
+   5   │                <span style="color: #5f8700">"buzz"</span>, <span style="color: #5f8700">"fizz"</span>, <span style="color: #af8700">None</span>, <span style="color: #af8700">None</span>, <span style="color: #5f8700">"fizz"</span>,
+   6   │                <span style="color: #5f8700">"buzz"</span>, <span style="color: #af8700">None</span>, <span style="color: #5f8700">"fizz"</span>, <span style="color: #af8700">None</span>, <span style="color: #af8700">None</span>]
+   7   │
+   8   │ <span style="color: #af005f">def</span> <span style="color: #0087ff">fizz_buzz</span>(n: int) -&gt; str:
+   9   │     <span style="color: #af005f">return</span> CYCLE_OF_15[n <span style="color: #af005f">%</span> <span style="color: #af8700">15</span>] <span style="color: #af005f">or</span> str(n)
+  10   │
+  11   │ <span style="color: #af005f">if</span> __name__ <span style="color: #af005f">==</span> <span style="color: #5f8700">"__main__"</span>:
+  12   │     <span style="color: #af005f">try</span>:
+  13   │         <span style="color: #af005f">while</span> (n<span style="color: #af005f">:=</span> sys.stdin.readline()):
+  14   │             <span style="color: #00afaf">print</span>(fizz_buzz(int(n)))
+  15   │     <span style="color: #af005f">except</span>:
+  16   │         <span style="color: #af005f">pass</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>And here’s the R code:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">fizzbuzz.R</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">fizzbuzz.R</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env Rscript</span>
+   2   │ cycle_of_15 <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">c</span>(<span style="color: #5f8700">"fizzbuzz"</span>, <span style="color: #af8700">NA</span>, <span style="color: #af8700">NA</span>, <span style="color: #5f8700">"fizz"</span>, <span style="color: #af8700">NA</span>,
+   3   │                  <span style="color: #5f8700">"buzz"</span>, <span style="color: #5f8700">"fizz"</span>, <span style="color: #af8700">NA</span>, <span style="color: #af8700">NA</span>, <span style="color: #5f8700">"fizz"</span>,
+   4   │                  <span style="color: #5f8700">"buzz"</span>, <span style="color: #af8700">NA</span>, <span style="color: #5f8700">"fizz"</span>, <span style="color: #af8700">NA</span>, <span style="color: #af8700">NA</span>)
+   5   │
+   6   │ <span style="color: #0087ff">fizz_buzz</span> <span style="color: #af005f">&lt;-</span> <span style="color: #af005f">function</span>(n) {
+   7   │   word <span style="color: #af005f">&lt;-</span> cycle_of_15[<span style="color: #00afaf">as.integer</span>(n) <span style="color: #af005f">%%</span> <span style="color: #af8700">15</span> <span style="color: #af005f">+</span> <span style="color: #af8700">1</span>]
+   8   │   <span style="color: #00afaf">ifelse</span>(<span style="color: #00afaf">is.na</span>(word), n, word)
+   9   │ }
+  10   │
+  11   │ f <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">file</span>(<span style="color: #5f8700">"stdin"</span>)
+  12   │ <span style="color: #00afaf">open</span>(f)
+  13   │ <span style="color: #af005f">while</span>(<span style="color: #00afaf">length</span>(n <span style="color: #af005f">&lt;-</span> <span style="color: #00afaf">readLines</span>(f, n <span style="color: #af005f">=</span> <span style="color: #af8700">1</span>)) <span style="color: #af005f">&gt;</span> <span style="color: #af8700">0</span>) {
+  14   │   <span style="color: #00afaf">write</span>(fizz_buzz(n), <span style="color: #00afaf">stdout</span>())
+  15   │ }
+  16   │ <span style="color: #00afaf">close</span>(f)
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Let’s test both tools (to save space I pipe the output to <code>column</code>):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 30 | <span style="color: #5f8700">fizzbuzz.py</span> | <span style="color: #5f8700">column</span> -x
+1               2               fizz            4               buzz
+fizz            7               8               fizz            buzz
+11              fizz            13              14              fizzbuzz
+16              17              fizz            19              buzz
+fizz            22              23              fizz            buzz
+26              fizz            28              29              fizzbuzz
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 30 | <span style="color: #5f8700">fizzbuzz.R</span> | <span style="color: #5f8700">column</span> -x
+1               2               fizz            4               buzz
+fizz            7               8               fizz            buzz
+11              fizz            13              14              fizzbuzz
+16              17              fizz            19              buzz
+fizz            22              23              fizz            buzz
+26              fizz            28              29              fizzbuzz</pre>
+<p>This output looks correct to me!
+It’s difficult to demonstrate that these two tools actually work in a streaming manner.
+You can verify this yourself by piping the input data to <code>sample -d 100</code> before it’s piped to the Python or R tool.
+That way, you’ll add a small delay in between each line so that it’s easier to confirm that the tools don’t wait for all the input data, operate on a line by line basis.</p>
+</div>
+</div>
+<div id="summary-3" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Summary<a class="anchor" aria-label="anchor" href="#summary-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this intermezzo chapter, I have shown you how to build your own command-line tool.
+Only six steps are needed to turn your code into a reusable building block.
+You’ll find that it makes you much more productive.
+I advise you to keep an eye out for opportunities to create your own tools.
+The next chapter covers the second step of the OSEMN model for data science, namely scrubbing data.</p>
+</div>
+<div id="for-further-exploration-3" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> For Further Exploration<a class="anchor" aria-label="anchor" href="#for-further-exploration-3"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Adding help documentation to your tool becomes important when the tool has many options to remember, and even more so when you want to share your tool with others. <code>docopt</code> is a language-agnostic framework to provide help and define the possible options that your tool accepts. There are implementations available in just about any programming language including Bash, Python, and R.</li>
+<li>If you want to learn more about programming in Bash, I recommend <em>Classic Shell Programming</em> by Arnold Robbins and Nelson Beebe and <em>Bash Cookbook</em> by Carl Albing and JP Vossen.</li>
+<li>Writing a robust and safe Bash script is quite tricky. <a href="https://www.shellcheck.net/">ShellCheck</a> is an online tool that will check your Bash code for mistakes and vulnerabilities. There’s also a command-line tool available.</li>
+<li>The book <em>Ten Essays on Fizz Buzz</em> by Joel Grus is an insightful and fun collection of ten different ways to solve Fizz Buzz with Python.</li>
+</ul>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></div>
+<div class="next"><a href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-4-creating-command-line-tools"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="nav-link" href="#overview-1"><span class="header-section-number">4.1</span> Overview</a></li>
+<li>
+<a class="nav-link" href="#converting-one-liners-into-shell-scripts"><span class="header-section-number">4.2</span> Converting One-liners into Shell Scripts</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#step-1-create-file"><span class="header-section-number">4.2.1</span> Step 1: Create File</a></li>
+<li><a class="nav-link" href="#step-2-give-permission-to-execute"><span class="header-section-number">4.2.2</span> Step 2: Give Permission to Execute</a></li>
+<li><a class="nav-link" href="#step-3-define-shebang"><span class="header-section-number">4.2.3</span> Step 3: Define Shebang</a></li>
+<li><a class="nav-link" href="#step-4-remove-fixed-input"><span class="header-section-number">4.2.4</span> Step 4: Remove Fixed Input</a></li>
+<li><a class="nav-link" href="#step-5-add-arguments"><span class="header-section-number">4.2.5</span> Step 5: Add Arguments</a></li>
+<li><a class="nav-link" href="#step-6-extend-your-path"><span class="header-section-number">4.2.6</span> Step 6: Extend Your PATH</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#creating-command-line-tools-with-python-and-r"><span class="header-section-number">4.3</span> Creating Command-line Tools with Python and R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#porting-the-shell-script"><span class="header-section-number">4.3.1</span> Porting The Shell Script</a></li>
+<li><a class="nav-link" href="#processing-streaming-data-from-standard-input"><span class="header-section-number">4.3.2</span> Processing Streaming Data from Standard Input</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-3"><span class="header-section-number">4.4</span> Summary</a></li>
+<li><a class="nav-link" href="#for-further-exploration-3"><span class="header-section-number">4.5</span> For Further Exploration</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/04.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/04.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

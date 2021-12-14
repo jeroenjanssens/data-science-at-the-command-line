@@ -1,0 +1,6 @@
+---
+url: "https://datascienceatthecommandline.com"
+name: "Data Science at the Command Line"
+author: "Jeroen Janssens"
+description: "This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux."
+

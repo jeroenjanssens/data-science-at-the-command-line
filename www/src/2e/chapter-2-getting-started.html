@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Getting Started | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="In this chapter I’m going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into three parts: (1) having the same data sets that I...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Getting Started | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-2-getting-started.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="In this chapter I’m going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into three parts: (1) having the same data sets that I...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 2 Getting Started | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="In this chapter I’m going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into three parts: (1) having the same data sets that I...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="active" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-2-getting-started" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Getting Started<a class="anchor" aria-label="anchor" href="#chapter-2-getting-started"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this chapter I’m going to make sure that you have all the prerequisites for doing data science at the command line.
+The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use throughout this book, and (3) understanding the essential concepts that come into play when using the command line.</p>
+<p>First, I describe how to download the datasets.
+Second, I explain how to install the Docker image, which is a virtual environment based on Ubuntu Linux that contains all the necessary command-line tools.
+Subsequently, I go over the essential Unix concepts through examples.</p>
+<p>By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.</p>
+<div id="getting-the-data" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Getting the Data<a class="anchor" aria-label="anchor" href="#getting-the-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>The datasets that I use in this book can be downloaded as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Download the ZIP file from <a href="https://www.datascienceatthecommandline.com/2e/data.zip" class="uri">https://www.datascienceatthecommandline.com/2e/data.zip</a>.</li>
+<li>Create a new directory. You can give this directory any name you want, but I recommend you stick to lowercase letters, numbers, and maybe a hyphen or underscore so that it’s easier to work with at the command line. For example: <em>dsatcl2e-data</em>. Remember where this directory is.</li>
+<li>Move the ZIP file to that new directory and unpack it.</li>
+<li>This directory now contains one subdirectory per chapter.</li>
+</ol>
+<p>In the next section I explain how to install the environment containing all the command-line tools to work with this data.</p>
+</div>
+<div id="docker-image" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Installing the Docker Image<a class="anchor" aria-label="anchor" href="#docker-image"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this book we use many different command-line tools.
+Unix often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools.
+Installing these packages yourself is often not too difficult.
+However, we’ll also use tools that are not available as packages and require a more manual, and more involved installation.
+In order to acquire the necessary command-line tools without having to go through the installation process of each, I encourage you, whether you’re on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.</p>
+<p>A Docker image is a bundle of one or more applications together with all their dependencies.
+A Docker container is an isolated environment that runs an image.
+You can manage Docker images and containers the <code>docker</code> command-line tool (which is what you’ll do below) or the Docker GUI.
+In a way, a Docker container is like a virtual machine, only a Docker container uses far fewer resources.
+At the end of this chapter I suggest some resources to learn more about Docker.</p>
+
+<div class="rmdtip">
+If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself.
+Please be aware that this is a very time-consuming process.
+The Appendix lists all the command-line tools used in the book.
+The installation instructions are for Ubuntu only.
+The scripts and data sets used in the book can be obtained by cloning this book’s <a href="https://github.com/datasciencetoolbox/datasciencetoolbox">GitHub repository</a>.
+</div>
+<p>To install the Docker image, you first need to download and install Docker itself from <a href="https://www.docker.com/products/docker">the Docker website</a>.
+Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don’t type the dollar sign):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">docker</span> pull datasciencetoolbox/dsatcl2e</pre>
+<p>You can run the Docker image as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">docker</span> run --rm -it datasciencetoolbox/dsatcl2e</pre>
+<p>You’re now inside an isolated environment—known as a <em>Docker container</em>—with all the necessary command-line tools installed.
+If the following command produces an enthusiastic cow, then you know everything is working correctly:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cowsay</span> <span style="color: #af8700">"Let's moove</span><span style="color: #00afaf">\!</span><span style="color: #af8700">"</span>
+ ______________
+&lt; Let's moove! &gt;
+ --------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||</pre>
+<p>If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container.
+I recommend that you first create a new directory, navigate to this new directory, and then run the following when you’re on macOS or Linux:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">docker</span> run --rm -it -v <span style="color: #af8700">"</span><span style="color: #af005f">$(</span><span style="color: #5f8700">pwd</span><span style="color: #af005f">)</span><span style="color: #af8700">"</span>:/data datasciencetoolbox/dsatcl2e</pre>
+<p>Or the following when you’re on Windows and using the Command Prompt (also known as <code>cmd</code>):</p>
+<pre>C:\&gt; docker run --rm -it -v "%cd%":/data datasciencetoolbox/dsatcl2e</pre>
+<p>Or the following when you’re using Windows PowerShell:</p>
+<pre>PS C:\&gt; docker run --rm -it -v ${PWD}:/data datasciencetoolbox/dsatcl2e</pre>
+<p>In the above commands, the option <code>-v</code> instructs <code>docker</code> to map the current directory to the <em>/data</em> directory inside the container, so this is the place to get data in and out of the Docker container.</p>
+
+<div class="rmdnote">
+If you would like to know more about the Docker image you can <a href="https://hub.docker.com/r/datasciencetoolbox/dsatcl2e">visit it on Docker Hub</a>.
+</div>
+<p>When you’re done, you can shut down the Docker container by typing <code>exit</code>.</p>
+</div>
+<div id="essential-concepts" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Essential Unix Concepts<a class="anchor" aria-label="anchor" href="#essential-concepts"><i class="fas fa-link"></i></a>
+</h2>
+<p>In <a href="chapter-1-introduction.html#chapter-1-introduction">Chapter 1</a>, I briefly showed you what the command line is.
+Now that you are running the Docker image, we can really get started.
+In this section, I discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line.
+If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change.
+But don’t worry, I’ll start at the beginning, and very gradually go to more advanced topics.</p>
+
+<div class="rmdnote">
+This section is not a complete course in Unix.
+I will only explain the concepts and tools that are relevant for to doing data science.
+One of the advantages of the Docker image is that a lot is already set up.
+If you wish to know more, consult the Further Reading Section at the end of this chapter.
+</div>
+<div id="the-environment" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> The Environment<a class="anchor" aria-label="anchor" href="#the-environment"><i class="fas fa-link"></i></a>
+</h3>
+<p>So you’ve just logged into a brand new environment.
+Before you do anything, it’s worthwhile to get a high-level understanding of this environment.
+It’s roughly defined by four layers, which I briefly discuss from the top down.</p>
+<dl>
+<dt>Command-line tools</dt>
+<dd>
+<p>First and foremost, there are the command-line tools that you work with.
+We use them by typing their corresponding commands.
+There are different types of command-line tools, which I will discuss in the next section.
+Examples of tools are: <code>ls</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-ls" role="doc-biblioref"&gt;Richard M. Stallman and David MacKenzie, &lt;em&gt;&lt;span class="nocase"&gt;ls&lt;/span&gt; – List Directory Contents&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>10</sup></a></span>, <code>cat</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-cat" role="doc-biblioref"&gt;Torbjorn Granlund and Richard M. Stallman, &lt;em&gt;&lt;span class="nocase"&gt;cat&lt;/span&gt; – Concatenate Files and Print on the Standard Output&lt;/em&gt;, version 8.30, 2018, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>11</sup></a></span>, and <code>jq</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-jq" role="doc-biblioref"&gt;Stephen Dolan, &lt;em&gt;&lt;span class="nocase"&gt;jq&lt;/span&gt; – Command-Line &lt;span&gt;JSON&lt;/span&gt; Processor&lt;/em&gt;, version 1.6, 2021, &lt;/a&gt;&lt;a href="https://stedolan.github.com/jq" role="doc-biblioref"&gt;https://stedolan.github.com/jq&lt;/a&gt;.&lt;/p&gt;'><sup>12</sup></a></span>.</p>
+</dd>
+<dt>Terminal</dt>
+<dd>
+<p>The terminal, which is the second layer, is the application where we type our commands in. If you see the following text mentioned in the book:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 3
+1
+2
+3</pre>
+<p>then you would type <code>seq 3</code> into your terminal and press <strong><code>Enter</code></strong>.
+(The command-line tool <code>seq</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-seq" role="doc-biblioref"&gt;Ulrich Drepper, &lt;em&gt;&lt;span class="nocase"&gt;seq&lt;/span&gt; – Print a Sequence of Numbers&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>13</sup></a></span>, as you can see, generates a sequence of numbers.) You do not type the dollar sign.
+It’s just there to tell you that this a command you can type in the terminal.
+This dollar sign is known as the prompt.
+The text below <code>seq 3</code> is the output of the command.</p>
+</dd>
+<dt>Shell</dt>
+<dd>
+<p>The third layer is the shell. Once we have typed in our command and pressed <strong><code>Enter</code></strong>, the terminal sends that command to the shell. The <em>shell</em> is a program that interprets the command. I use the Z shell, but there are many others available such as Bash and Fish.</p>
+</dd>
+<dt>Operating system</dt>
+<dd>
+<p>The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The Docker image is based on a particular GNU/Linux distribution called Ubuntu.</p>
+</dd>
+</dl>
+</div>
+<div id="executing-a-command-line-tool" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> Executing a Command-line Tool<a class="anchor" aria-label="anchor" href="#executing-a-command-line-tool"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now that you have a basic understanding of the environment, it is high time that you try out some commands.
+Type the following in your terminal (without the dollar sign) and press <strong><code>Enter</code></strong>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">pwd</span>
+/home/dst</pre>
+<p>You just executed a command that contained a single command-line tool.
+The tool <code>pwd</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-pwd" role="doc-biblioref"&gt;Jim Meyering, &lt;em&gt;&lt;span class="nocase"&gt;pwd&lt;/span&gt; – Print Name of Working Directory&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>14</sup></a></span> outputs the name of the directory where you currently are.
+By default, when you login, this is your home directory.</p>
+<p>The command-line tool <code>cd</code>, which is a Z shell builtin, allows you to navigate to a different directory:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch02</span> <span class="callout">➊</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">pwd</span> <span class="callout">➋</span>
+/data/ch02
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">..</span> <span class="callout">➌</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">pwd</span> <span class="callout">➍</span>
+/data
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">ch02</span> <span class="callout">➎</span></pre>
+<p><span class="callout">➊</span> Navigate to the directory <em>/data/ch02</em>.
+<br><span class="callout">➋</span> Print the current directory.
+<br><span class="callout">➌</span> Navigate to the parent directory.
+<br><span class="callout">➍</span> Print the current directory again.
+<br><span class="callout">➎</span> Navigate to the subdirectory <em>ch02</em>.</p>
+<p>The part after <code>cd</code> specifies to which directory you want to navigate to.
+Values that come after the command are called <em>command-line arguments</em> or <em>options</em>.
+Two dots refer to the parent directory.
+One dot, by the way, refers to the current directory.
+While <code>cd .</code> wouldn’t have any effect, you’ll still see one dot being used in other places.
+Let’s try a different command:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">head</span> -n 3 <span style="text-decoration: underline">movies.txt</span>
+Matrix
+Star Wars
+Home Alone</pre>
+<p>Here we pass three command-line arguments to <code>head</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-head" role="doc-biblioref"&gt;David MacKenzie and Jim Meyering, &lt;em&gt;&lt;span class="nocase"&gt;head&lt;/span&gt; – Output the First Part of Files&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>15</sup></a></span>.
+The first one is an option.
+Here I used the short option <code>-n</code>.
+Sometimes a short option has a long variant, which would be <code>--lines</code> in this case.
+The second one is a value that belongs to the option.
+The third one is a filename.
+This particular command outputs the first three lines of file <em>/data/ch02/movies.txt</em>.</p>
+</div>
+<div id="five-types-of-command-line-tools" class="section level3" number="2.3.3">
+<h3>
+<span class="header-section-number">2.3.3</span> Five Types of Command-line Tools<a class="anchor" aria-label="anchor" href="#five-types-of-command-line-tools"><i class="fas fa-link"></i></a>
+</h3>
+<p>I use the term <em>command-line tool</em> a lot, but so far, I haven’t yet explained what I actually mean by it.
+I use it as an umbrella term for <em>anything</em> that can be executed from the command line (see Figure <a href="chapter-2-getting-started.html#fig:umbrella">2.1</a>).
+Under the hood, each command-line tool is one of the following five types:</p>
+<ul>
+<li>A binary executable</li>
+<li>A shell builtin</li>
+<li>An interpreted script</li>
+<li>A shell function</li>
+<li>An alias</li>
+</ul>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:umbrella"></span>
+<img src="images/dscl_0201.png" alt="I use the term command-line tool as an umbrella term" width="90%"><p class="caption">
+Figure 2.1: I use the term command-line tool as an umbrella term
+</p>
+</div>
+<p>It’s good to know the difference between the types.
+The command-line tools that come pre-installed with the Docker image mostly comprise of the first two types (binary executable and shell builtin).
+The other three types (interpreted script, shell function, and alias) allow us to further build up our data science toolbox and become more efficient and more productive data scientists.</p>
+<dl>
+<dt>Binary Executable</dt>
+<dd>
+<p>Binary executables are programs in the classical sense. A binary executable is created by compiling source code to machine code. This means that when you open the file in a text editor you cannot read it.</p>
+</dd>
+<dt>Shell Builtin</dt>
+<dd>
+<p>Shell builtins are command-line tools provided by the shell, which is the Z shell (or <code>zsh</code>) in our case. Examples include <code>cd</code> and <code>pwd</code>. Shell builtins may differ between shells. Like binary executables, they cannot be easily inspected or changed.</p>
+</dd>
+<dt>Interpreted Script</dt>
+<dd>
+<p>An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. The script below is interpreted by Python not because of the file extension <em>.py</em>, but because the first line of the script defines the binary that should execute it.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">fac.py</span>
+───────┬──────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">fac.py</span>
+───────┼──────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env python</span>
+   2   │
+   3   │ <span style="color: #af005f">def</span> <span style="color: #0087ff">factorial</span>(x):
+   4   │     result <span style="color: #af005f">=</span> <span style="color: #af8700">1</span>
+   5   │     <span style="color: #af005f">for</span> i <span style="color: #af005f">in</span> <span style="color: #00afaf">range</span>(<span style="color: #af8700">2</span>, x <span style="color: #af005f">+</span> <span style="color: #af8700">1</span>):
+   6   │         result <span style="color: #af005f">*=</span> i
+   7   │     <span style="color: #af005f">return</span> result
+   8   │
+   9   │ <span style="color: #af005f">if</span> __name__ <span style="color: #af005f">==</span> <span style="color: #5f8700">"__main__"</span>:
+  10   │     <span style="color: #af005f">import</span> sys
+  11   │     x <span style="color: #af005f">=</span> int(sys.argv[<span style="color: #af8700">1</span>])
+  12   │     sys.stdout.write(<span style="color: #af005f">f</span><span style="color: #5f8700">"</span>{factorial(x)}<span style="color: #00afaf">\n</span><span style="color: #5f8700">"</span>)
+───────┴──────────────────────────────────────────────────────────────</pre>
+<p>This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">./fac.py</span> 5
+120</pre>
+<p>In <a href="chapter-4-creating-command-line-tools.html#chapter-4-creating-command-line-tools">Chapter 4</a>, I’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.</p>
+</dd>
+<dt>Shell Function</dt>
+<dd>
+<p>A shell function is a function that is, in our case, executed by <code>zsh</code>. They provide similar functionality to a script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called <code>fac</code>, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using <code>seq</code>, putting those numbers on one line with <code>*</code> as the delimiter using <code>paste</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-paste" role="doc-biblioref"&gt;David M. Ihnat and David MacKenzie, &lt;em&gt;&lt;span class="nocase"&gt;paste&lt;/span&gt; – Merge Lines of Files&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>16</sup></a></span>, and passing this equation into <code>bc</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-bc" role="doc-biblioref"&gt;Philip A. Nelson, &lt;em&gt;&lt;span class="nocase"&gt;bc&lt;/span&gt; – an Arbitrary Precision Calculator Language&lt;/em&gt;, version 1.07.1, 2017, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/bc" role="doc-biblioref"&gt;https://www.gnu.org/software/bc&lt;/a&gt;.&lt;/p&gt;'><sup>17</sup></a></span>, which evaluates it and outputs the result.</p>
+<pre><span style="font-weight: bold">$</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">fac</span><span style="color: #af8700"></span><span style="color: #af8700">()</span> <span style="color: #af8700">{</span> <span style="color: #af8700">(</span><span style="color: #5f8700">echo</span> 1; <span style="color: #5f8700">seq</span> $1<span style="color: #af8700">)</span> | <span style="color: #5f8700">paste</span> -s -d\* - | <span style="color: #5f8700">bc</span>; <span style="color: #af8700">}</span>
+
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">fac</span> 5
+120</pre>
+<p>The file <em>~/.zshrc</em>, which is a configuration file for Z shell, is a good place to define your shell functions, so that they are always available.</p>
+</dd>
+<dt>Alias</dt>
+<dd>
+<p>Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for it to save time. Aliases are also very useful when you continue to misspell a certain command (Chris Wiggins maintains a <a href="https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh">useful list of aliases</a>). The following command defines such an alias:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">alias</span> l=<span style="color: #af8700">'ls --color -lhF --group-directories-first'</span>
+
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">alias</span> les=less</pre>
+<p>Now, if you type the following on the command line, the shell will replace each alias it finds with its value:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data</span>
+
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 40K
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch02</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch03</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch04</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch05</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch06</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch07</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch08</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch09</span>/
+drwxr-xr-x 4 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch10</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">csvconf</span>/
+
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">ch02</span></pre>
+<p>Aliases are simpler than shell functions as they don’t allow parameters. The function <code>fac</code> could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in the file <em>.zshrc</em>, which is located in your home directory. To see all aliases currently defined, you run <code>alias</code> without arguments. Try it. What do you see?</p>
+</dd>
+</dl>
+<p>In this book I’ll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases.
+This is because these can easily be changed.
+The purpose of a command-line tool is to make your life on the easier, and to make you a more productive and more efficient data scientist.
+You can find out the type of a command-line tool with <code>type</code> (which is itself a shell builtin):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">type</span> -a pwd
+pwd is a shell builtin
+pwd is /usr/bin/pwd
+pwd is /bin/pwd
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">type</span> -a cd
+cd is a shell builtin
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">type</span> -a fac
+fac is a shell function
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">type</span> -a l
+l is an alias for ls --color -lhF --group-directories-first</pre>
+<p><code>type</code> returns three command-line tools for <code>pwd</code>.
+In that case, the first reported command-line tool is used when you type <code>pwd</code>.
+In the next section we’ll look at how to combine command-line tools.</p>
+</div>
+<div id="combining-command-line-tools" class="section level3" number="2.3.4">
+<h3>
+<span class="header-section-number">2.3.4</span> Combining Command-line Tools<a class="anchor" aria-label="anchor" href="#combining-command-line-tools"><i class="fas fa-link"></i></a>
+</h3>
+<p>Because most command-line tools adhere to the Unix philosophy<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-raymond2003art" role="doc-biblioref"&gt;Eric S Raymond, &lt;em&gt;The Art of Unix Programming&lt;/em&gt; (Addison-Wesley Professional, 2003)&lt;/a&gt;.&lt;/p&gt;'><sup>18</sup></a></span>, they are designed to do only thing, and do it really well.
+For example, the command-line tool <code>grep</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-grep" role="doc-biblioref"&gt;Jim Meyering, &lt;em&gt;&lt;span class="nocase"&gt;grep&lt;/span&gt; – Print Lines That Match Patterns&lt;/em&gt;, version 3.4, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/grep" role="doc-biblioref"&gt;https://www.gnu.org/software/grep&lt;/a&gt;.&lt;/p&gt;'><sup>19</sup></a></span> can filter lines, <code>wc</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-wc" role="doc-biblioref"&gt;Paul Rubin and David MacKenzie, &lt;em&gt;&lt;span class="nocase"&gt;wc&lt;/span&gt; – Print Newline, Word, and Byte Counts for Each File&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>20</sup></a></span> can count lines, and <code>sort</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-sort" role="doc-biblioref"&gt;Mike Haertel and Paul Eggert, &lt;em&gt;&lt;span class="nocase"&gt;sort&lt;/span&gt; – Sort Lines of Text Files&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>21</sup></a></span> can sort lines.
+The power of the command line comes from its ability to combine these small, yet powerful command-line tools.</p>
+<p>This power is made possible by managing the communication streams of these tools.
+Each tool has three standard communication streams: standard input, standard output, and standard error.
+These are often abbreviated as <em><code>stdin</code></em>, <em><code>stdout</code></em>, and <em><code>stderr</code></em>.</p>
+<p>Both the standard output and standard error are, by default, redirected to the terminal, so that both normal output and any error messages are printed on the screen.
+Figure <a href="chapter-2-getting-started.html#fig:diagram-essential-streams">2.2</a> illustrates this for both <code>pwd</code> and <code>rev</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-rev" role="doc-biblioref"&gt;Karel Zak, &lt;em&gt;&lt;span class="nocase"&gt;rev&lt;/span&gt; – Reverse Lines Characterwise&lt;/em&gt;, version 2.36.1, 2021, &lt;/a&gt;&lt;a href="https://www.kernel.org/pub/linux/utils/util-linux" role="doc-biblioref"&gt;https://www.kernel.org/pub/linux/utils/util-linux&lt;/a&gt;.&lt;/p&gt;'><sup>22</sup></a></span>.
+If you run <code>rev</code>, you’ll see that nothing happens.
+That’s because <code>rev</code> expects input, and by the default, that’s any keys pressed on the keyboard.
+Try typing a sentence and press <strong><code>Enter</code></strong>.
+<code>rev</code> immediately responds with your input in reverse.
+You can stop sending input by pressing <strong><code>Ctrl-D</code></strong> after which <code>rev</code> will stop.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-essential-streams"></span>
+<img src="images/dscl_0202.png" alt="Every tool has three standard streams: standard input (*`stdin`*), standard output (*`stdout`*), and standard error (*`stderr`*)" width="90%"><p class="caption">
+Figure 2.2: Every tool has three standard streams: standard input (<em><code>stdin</code></em>), standard output (<em><code>stdout</code></em>), and standard error (<em><code>stderr</code></em>)
+</p>
+</div>
+<p>In practice, you’ll not use the keyboard as a source of input, but the output generated by other tools and the contents of files.
+For example, with <code>curl</code> we can download the book <em>Alice’s Adventures in Wonderland</em> by Lewis Carrol and <em>pipe</em> that to the next tool.
+(I’ll discuss <code>curl</code> in more detail in <a href="chapter-3-obtaining-data.html#chapter-3-obtaining-data">Chapter 3</a>.)
+This is done using the pipe operator (<code>|</code>).</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-essential-pipe"></span>
+<img src="images/dscl_0203.png" alt="The output from a tool can be piped to another tool" width="90%"><p class="caption">
+Figure 2.3: The output from a tool can be piped to another tool
+</p>
+</div>
+<p>We can <em>pipe</em> the output of <code>curl</code> to <code>grep</code> to filter lines on a pattern.
+Imagine that we want to see the chapters listed in the table of contents:
+We can combine <code>curl</code> and <code>grep</code> as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color: #5f8700">grep</span> <span style="color: #af8700">" CHAPTER"</span>
+ CHAPTER I.     Down the Rabbit-Hole
+ CHAPTER II.    The Pool of Tears
+ CHAPTER III.   A Caucus-Race and a Long Tale
+ CHAPTER IV.    The Rabbit Sends in a Little Bill
+ CHAPTER V.     Advice from a Caterpillar
+ CHAPTER VI.    Pig and Pepper
+ CHAPTER VII.   A Mad Tea-Party
+ CHAPTER VIII.  The Queen’s Croquet-Ground
+ CHAPTER IX.    The Mock Turtle’s Story
+ CHAPTER X.     The Lobster Quadrille
+ CHAPTER XI.    Who Stole the Tarts?
+ CHAPTER XII.   Alice’s Evidence</pre>
+<p>And if we wanted to know <em>how many</em> chapters the book has, we can use <code>wc</code>, which is very good at counting things:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">grep</span> <span style="color: #af8700">" CHAPTER"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">wc</span> -l <span class="callout">➊</span>
+0</pre>
+<p><span class="callout">➊</span> The option <code>-l</code> specifies that <code>wc</code> should only output the number of lines that are pass into it. By default it also returns the number of characters and words.</p>
+<p>You can think of piping as an automated copy and paste.
+Once you get the hang of combining tools using the pipe operator, you’ll find that there are virtually no limits to this.</p>
+</div>
+<div id="redirecting-input-and-output" class="section level3" number="2.3.5">
+<h3>
+<span class="header-section-number">2.3.5</span> Redirecting Input and Output<a class="anchor" aria-label="anchor" href="#redirecting-input-and-output"><i class="fas fa-link"></i></a>
+</h3>
+<p>Besides piping the output from one tool to another tool, you can also save it to a file.
+The file will be saved it in the current directory, unless a full path is given.
+This is called <em>output redirection</em>, and works as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> <span style="color: #af8700">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color: #5f8700">grep</span> <span style="color: #af8700">" CHAPTER"</span> <span style="color: #af8700">&gt;</span> chapter
+s.txt
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0
+curl: (35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL in connection to www.gutenberg
+.org:443
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">chapters.txt</span></pre>
+<p>Here, we save the output of <code>grep</code> to a file named <em>chapters.txt</em> in the directory <em>/data/ch02</em>.
+If this file does not exist yet, it will be created.
+If this file already exists, its contents are overwritten.
+Figure <a href="chapter-2-getting-started.html#fig:diagram-essential-redirect-stdout">2.4</a> illustrates how output redirection works conceptually.
+Note that the standard error is still redirected to the terminal.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-essential-redirect-stdout"></span>
+<img src="images/dscl_0204.png" alt="The output from a tool can be redirected to a file" width="90%"><p class="caption">
+Figure 2.4: The output from a tool can be redirected to a file
+</p>
+</div>
+<p>You can also append the output to a file with <code>&gt;&gt;</code>, meaning the output is added after the original contents:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> -n <span style="color: #af8700">"Hello"</span> <span style="color: #af8700">&gt;</span> greeting.txt
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">echo</span> <span style="color: #af8700">" World"</span> <span style="color: #af8700">&gt;&gt;</span> <span style="text-decoration: underline">greeting.txt</span></pre>
+<p>The tool <code>echo</code> outputs the value you specify.
+The <code>-n</code> option, which stands for <em>newline</em>, specifies that <code>echo</code> should not output a trailing newline.</p>
+<p>Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage.
+To use the contents of the file <em>greeting.txt</em> again, we can use <code>cat</code>, which reads a file prints it.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">greeting.txt</span>
+Hello World
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">greeting.txt</span> | <span style="color: #5f8700">wc</span> -w <span class="callout">➊</span>
+2</pre>
+<p><span class="callout">➊</span> The <code>-w</code> option indicates <code>wc</code> to only count words.</p>
+<p>The same result can be achieved by using the smaller-than-sign (<code>&lt;</code>):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">greeting.txt</span> <span style="color: #5f8700">wc</span> -w
+2</pre>
+<p>This way, you are directly passing the file to the standard input of <code>wc</code> without running an additional process<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="http://porkmail.org/era/unix/award.html"&gt;Some&lt;/a&gt; consider this a useless use of &lt;code&gt;cat&lt;/code&gt;, arguing that the purpose of &lt;code&gt;cat&lt;/code&gt; is to concatenate files and if you’re not using it for this purpose, it’s a waste of time, and costs you a process. I think this is silly. We’ve got more important things to do!&lt;/p&gt;'><sup>23</sup></a>.
+Figure <a href="chapter-2-getting-started.html#fig:diagram-essential-stdin-cat">2.5</a> illustrates how these two ways work.
+Again, the final output is the same.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-essential-stdin-cat"></span>
+<img src="images/dscl_0205.png" alt="Two ways to use the contents of a file as input" width="90%"><p class="caption">
+Figure 2.5: Two ways to use the contents of a file as input
+</p>
+</div>
+<p>Like many command-line tools, <code>wc</code> allows one or more filenames to be specified as arguments.
+For example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">wc</span> -w <span style="text-decoration: underline">greeting.txt</span> <span style="text-decoration: underline">movies.txt</span>
+ 2 greeting.txt
+11 movies.txt
+13 total</pre>
+<p>Note that in this case, <code>wc</code> also outputs the name of the files.</p>
+<p>You can suppress the output of any tool by redirecting it to a special file called <em>/dev/null</em>.
+I often do this to suppress error messages (see Figure <a href="chapter-2-getting-started.html#fig:diagram-essential-redirect-devnull">2.6</a> for an illustration).
+The following causes <code>cat</code> to produce an error message because it cannot find the file <em>404.txt</em>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">movies.txt</span> 404.txt
+Matrix
+Star Wars
+Home Alone
+Indiana Jones
+Back to the Future
+/usr/bin/cat: 404.txt: No such file or directory</pre>
+<p>You can redirect standard error to <em>/dev/null</em> as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">movies.txt</span> 404.txt <span style="color: #af8700">2&gt;</span> <span style="text-decoration: underline">/dev/null</span> <span class="callout">➊</span>
+Matrix
+Star Wars
+Home Alone
+Indiana Jones
+Back to the Future</pre>
+<p><span class="callout">➊</span> The <em><code>2</code></em> refers to standard error.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-essential-redirect-devnull"></span>
+<img src="images/dscl_0206.png" alt="Redirecting *`stderr`* to */dev/null*" width="50%"><p class="caption">
+Figure 2.6: Redirecting <em><code>stderr</code></em> to <em>/dev/null</em>
+</p>
+</div>
+<p>Be careful not to read from and write to the same file.
+If you do, you’ll end up with an empty file.
+That’s because the tool of which the output is redirected, immediately opens that file for writing, and thereby emptying it.
+There are two workarounds for this: (1) write to a different file and rename it afterwards with <code>mv</code> or (2) use <code>sponge</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-sponge" role="doc-biblioref"&gt;Colin Watson and Tollef Fog Heen, &lt;em&gt;&lt;span class="nocase"&gt;sponge&lt;/span&gt; – Soak up Standard Input and Write to a File&lt;/em&gt;, version 0.65, 2021, &lt;/a&gt;&lt;a href="https://joeyh.name/code/moreutils" role="doc-biblioref"&gt;https://joeyh.name/code/moreutils&lt;/a&gt;.&lt;/p&gt;'><sup>24</sup></a></span>, which soaks up all its input before writing to a file.
+Figure <a href="chapter-2-getting-started.html#fig:diagram-essential-sponge">2.7</a> illustrates how this works.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-essential-sponge"></span>
+<img src="images/dscl_0207.png" alt="Unless you use `sponge`, you cannot read from and write to the same file in one pipeline" width="90%"><p class="caption">
+Figure 2.7: Unless you use <code>sponge</code>, you cannot read from and write to the same file in one pipeline
+</p>
+</div>
+<p>For example, imagine you have used <code>dseq</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-dseq" role="doc-biblioref"&gt;Jeroen Janssens, &lt;em&gt;&lt;span class="nocase"&gt;dseq&lt;/span&gt; – Generate Sequence of Dates&lt;/em&gt;, version 0.1, 2021, &lt;/a&gt;&lt;a href="https://github.com/jeroenjanssens/dsutils" role="doc-biblioref"&gt;https://github.com/jeroenjanssens/dsutils&lt;/a&gt;.&lt;/p&gt;'><sup>25</sup></a></span> to generate a file <em>dates.txt</em> and now you’d like to add line numbers using <code>nl</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-nl" role="doc-biblioref"&gt;Scott Bartram and David MacKenzie, &lt;em&gt;&lt;span class="nocase"&gt;nl&lt;/span&gt; – Number Lines of Files&lt;/em&gt;, version 8.30, 2020, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>26</sup></a></span>.
+If you run the following, the file <em>dates.txt</em> will end up empty.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">dseq</span> 5 <span style="color: #af8700">&gt;</span> dates.txt
+ 
+<span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">dates.txt</span> <span style="color: #5f8700">nl</span> <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">dates.txt</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">dates.txt</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">dates.txt</span>   &lt;EMPTY&gt;
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Instead, you can use one of the workarounds I just described:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">dseq</span> 5 <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">dates.txt
+</span>
+<span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">dates.txt</span> <span style="color: #5f8700">nl</span> <span style="color: #af8700">&gt;</span> dates-nl.txt
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">dates-nl.txt</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">dates-nl.txt</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │      1  2021-12-07
+   2   │      2  2021-12-08
+   3   │      3  2021-12-09
+   4   │      4  2021-12-10
+   5   │      5  2021-12-11
+───────┴────────────────────────────────────────────────────────────────────────
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">dseq</span> 5 <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">dates.txt
+</span>
+<span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">dates.txt</span> <span style="color: #5f8700">nl</span> | <span style="color: #5f8700">sponge</span> <span style="text-decoration: underline">dates.txt</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">dates.txt</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">dates.txt</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │      1  2021-12-07
+   2   │      2  2021-12-08
+   3   │      3  2021-12-09
+   4   │      4  2021-12-10
+   5   │      5  2021-12-11
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+</div>
+<div id="working-with-files-and-directories" class="section level3" number="2.3.6">
+<h3>
+<span class="header-section-number">2.3.6</span> Working With Files and Directories<a class="anchor" aria-label="anchor" href="#working-with-files-and-directories"><i class="fas fa-link"></i></a>
+</h3>
+<p>As data scientists, we work with a lot of data.
+This data is often stored in files.
+It is important to know how to work with files (and the directories they live in) on the command line.
+Every action that you can do using a GUI, you can do with command-line tools (and much more).
+In this section I introduce the most important ones to list, create, move, copy, rename, and delete files and directories.</p>
+<p>Listing the contents of a directory can be done with <code>ls</code>.
+If you don’t specify a directory, it lists the contents of the current directory.
+I prefer <code>ls</code> to have a long listing format and the directories grouped before files.
+Instead of typing the corresponding options each time, I use the alias <code>l</code>.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">ls</span> <span style="text-decoration: underline">/data/ch10</span>
+alice.txt  count.py  count.R  __pycache__  Untitled1337.ipynb
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">alias</span> l
+l='ls --color -lhF --group-directories-first'
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span> <span style="text-decoration: underline">/data/ch10</span>
+total 180K
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">__pycache__</span>/
+-rw-r--r-- 1 dst dst 164K Dec  6 21:25 alice.txt
+-rwxr--r-- 1 dst dst  408 Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">count.py</span>*
+-rw-r--r-- 1 dst dst  460 Dec  6 21:25 count.R
+-rw-r--r-- 1 dst dst 1.7K Dec  6 21:25 Untitled1337.ipynb</pre>
+<p>You have already seen how we can create new files by redirecting the output with either <code>&gt;</code> or <code>&gt;&gt;</code>.
+If you need to move a file to a different directory you can use <code>mv</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-mv" role="doc-biblioref"&gt;Mike Parker, David MacKenzie, and Jim Meyering, &lt;em&gt;&lt;span class="nocase"&gt;mv&lt;/span&gt; – Move (Rename) Files&lt;/em&gt;, version 8.30, 2020, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>27</sup></a></span>:</p>
+<pre>$ mv hello.txt /data/ch02</pre>
+<p>You can also rename files with <code>mv</code>:</p>
+<pre>$ cd data
+$ mv hello.txt bye.txt</pre>
+<p>You can also rename or move entire directories.
+If you no longer need a file, you delete (or remove) it with <code>rm</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-rm" role="doc-biblioref"&gt;Paul Rubin et al., &lt;em&gt;&lt;span class="nocase"&gt;rm&lt;/span&gt; – Remove Files or Directories&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>28</sup></a></span>:</p>
+<pre>$ rm bye.txt</pre>
+<p>If you want to remove an entire directory with all its contents, specify the <code>-r</code> option, which stands for recursive:</p>
+<pre>$ rm -r /data/ch02/old</pre>
+<p>If you want to copy a file, use <code>cp</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-cp" role="doc-biblioref"&gt;Torbjorn Granlund, David MacKenzie, and Jim Meyering, &lt;em&gt;&lt;span class="nocase"&gt;cp&lt;/span&gt; – Copy Files and Directories&lt;/em&gt;, version 8.30, 2018, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>29</sup></a></span>.
+This is useful for creating backups:</p>
+<pre>$ cp server.log server.log.bak</pre>
+<p>You can create directories using <code>mkdir</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-mkdir" role="doc-biblioref"&gt;David MacKenzie, &lt;em&gt;&lt;span class="nocase"&gt;mkdir&lt;/span&gt; – Make Directories&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>30</sup></a></span>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">mkdir</span> logs
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 44K
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:27 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch02</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch03</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch04</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch05</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch06</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch07</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch08</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch09</span>/
+drwxr-xr-x 4 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">ch10</span>/
+drwxr-xr-x 3 dst dst 4.0K Dec  6 21:25 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">csvconf</span>/
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:27 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">logs</span>/</pre>
+
+<div class="rmdtip">
+Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the file system to provide immediate feedback.
+There are a few visual file managers that can help with this, such as GNU Midnight Commander, Ranger, and Vifm.
+These are not installed in the Docker image, but you can install one yourself by running <code>sudo apt install</code> followed by either <code>mc</code>, <code>ranger</code>, or <code>vifm</code>.
+</div>
+<p>All of the above command-line tools accept the <code>-v</code> option, which stands for verbose, so that they output what’s going on.
+For example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">mkdir</span> -v backup
+/usr/bin/mkdir: created directory 'backup'
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> -v <span style="color: #0087ff">*</span> <span style="text-decoration: underline">backup</span>
+/usr/bin/cp: -r not specified; omitting directory 'backup'
+/usr/bin/cp: -r not specified; omitting directory 'ch02'
+/usr/bin/cp: -r not specified; omitting directory 'ch03'
+/usr/bin/cp: -r not specified; omitting directory 'ch04'
+/usr/bin/cp: -r not specified; omitting directory 'ch05'
+/usr/bin/cp: -r not specified; omitting directory 'ch06'
+/usr/bin/cp: -r not specified; omitting directory 'ch07'
+/usr/bin/cp: -r not specified; omitting directory 'ch08'
+/usr/bin/cp: -r not specified; omitting directory 'ch09'
+/usr/bin/cp: -r not specified; omitting directory 'ch10'
+/usr/bin/cp: -r not specified; omitting directory 'csvconf'
+/usr/bin/cp: -r not specified; omitting directory 'logs'</pre>
+<p>All tools but <code>mkdir</code> also accept the <code>-i</code> option, which stands for interactive, and causes the tools to ask you for confirmation.
+For example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">rm</span> -i <span style="color: #0087ff">*</span>
+zsh: sure you want to delete all 12 files in /data [yn]? n</pre>
+</div>
+<div id="managing-output" class="section level3" number="2.3.7">
+<h3>
+<span class="header-section-number">2.3.7</span> Managing Output<a class="anchor" aria-label="anchor" href="#managing-output"><i class="fas fa-link"></i></a>
+</h3>
+<p>Sometimes a tools or sequence of tools produces too much output to include in the book.
+Instead of manually altering such output, I prefer to be transparent by piping it through a helper tool.
+You don’t necessarily have to do this, especially if you’re interested in the complete output.</p>
+<p>Here are the tools that I use for making output manageable:</p>
+<p>If often use <code>trim</code> to limit the output to a given height and width.
+By default, output is trimmed to 10 lines and the width of the terminal.
+Pass a negative number to disable trimming the height and or width.
+For example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">/data/ch07/tips.csv</span> | <span style="color: #5f8700">trim</span> 5 25
+bill,tip,sex,smoker,day,…
+16.99,1.01,Female,No,Sun…
+10.34,1.66,Male,No,Sun,D…
+21.01,3.5,Male,No,Sun,Di…
+23.68,3.31,Male,No,Sun,D…
+… with 240 more lines</pre>
+<p>Other tools that I use to massage the output are: <code>head</code>, <code>tail</code>, <code>fold</code>, <code>paste</code>, and <code>column</code>.
+The appendix contains examples for each of these.</p>
+<p>If the output is a comma-separated values, I often pipe it through<code>csvlook</code> to turn it into a nice-looking table.
+If you run <code>csvlook</code>, you’ll see the complete table.
+I have redefined <code>csvlook</code> such that the table is shortened by <code>trim</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">which</span> csvlook
+csvlook () {
+        /usr/bin/csvlook "$@" | trim | sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──
+┤/;s/|/│/g;2s/-/─/g'
+}
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">csvlook</span> <span style="text-decoration: underline">/data/ch07/tips.csv</span>
+│  bill │   tip │ sex    │ smoker │ day  │ time   │ size │
+├───────┼───────┼────────┼────────┼──────┼────────┼──────┤
+│ 16.99 │  1.01 │ Female │  False │ Sun  │ Dinner │    2 │
+│ 10.34 │  1.66 │ Male   │  False │ Sun  │ Dinner │    3 │
+│ 21.01 │  3.50 │ Male   │  False │ Sun  │ Dinner │    3 │
+│ 23.68 │  3.31 │ Male   │  False │ Sun  │ Dinner │    2 │
+│ 24.59 │  3.61 │ Female │  False │ Sun  │ Dinner │    4 │
+│ 25.29 │  4.71 │ Male   │  False │ Sun  │ Dinner │    4 │
+│  8.77 │  2.00 │ Male   │  False │ Sun  │ Dinner │    2 │
+│ 26.88 │  3.12 │ Male   │  False │ Sun  │ Dinner │    4 │
+… with 236 more lines</pre>
+<p>I use <code>bat</code> to show the contents of a file where line numbers and syntax highlighting matters.
+For example source code:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">/data/ch04/stream.py</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">/data/ch04/stream.py</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env python</span>
+   2   │ <span style="color: #af005f">from</span> sys <span style="color: #af005f">import</span> stdin, stdout
+   3   │ <span style="color: #af005f">while</span> <span style="color: #af8700">True</span>:
+   4   │     line <span style="color: #af005f">=</span> stdin.readline()
+   5   │     <span style="color: #af005f">if</span> <span style="color: #af005f">not</span> line:
+   6   │         <span style="color: #af005f">break</span>
+   7   │     stdout.write(<span style="color: #5f8700">"</span><span style="color: #af8700">%d</span><span style="color: #00afaf">\n</span><span style="color: #5f8700">"</span> <span style="color: #af005f">%</span> int(line)<span style="color: #af005f">**</span><span style="color: #af8700">2</span>)
+   8   │     stdout.flush()
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>Sometimes I add the <code>-A</code> option when I want to explicitly point out the spaces, tabs, and newlines in a file.</p>
+<p>Sometimes it’s useful to write intermediate output to a file.
+This allows you to inspect any step in your pipeline once it has completed.
+You can insert the tool <code>tee</code> as often as you like in your pipeline.
+I often use it to inspect a portion of the final output, while writing the complete output to file (see Figure <a href="chapter-2-getting-started.html#fig:diagram-essential-tee">2.8</a>.
+Here, the complete output is written to <em>even.txt</em> and the first 5 lines are printed using <code>trim</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">seq</span> 0 2 100 | <span style="color: #5f8700">tee</span> even.txt | <span style="color: #5f8700">trim</span> 5
+0
+2
+4
+6
+8
+… with 46 more lines</pre>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:diagram-essential-tee"></span>
+<img src="images/dscl_0208.png" alt="With `tee`, you can write intermediate output to a file" width="90%"><p class="caption">
+Figure 2.8: With <code>tee</code>, you can write intermediate output to a file
+</p>
+</div>
+<p>Lastly, to insert images that have been generated by command-line tools (so every image except screenshots and diagrams) I use <code>display</code>.
+If you run <code>display</code> you’ll find that it doesn’t work.
+In <a href="chapter-7-exploring-data.html#chapter-7-exploring-data">Chapter 7</a>, I explain four options for you to display generated images from the command line.</p>
+</div>
+<div id="help" class="section level3" number="2.3.8">
+<h3>
+<span class="header-section-number">2.3.8</span> Help!<a class="anchor" aria-label="anchor" href="#help"><i class="fas fa-link"></i></a>
+</h3>
+<p>As you’re finding your way around the command-line, it may happen that you need help.
+Even the most seasoned users need help at some point.
+It is impossible to remember all the different command-line tools and their possible arguments.
+Fortunately, the command line offers severals ways to get help.</p>
+<p>The most important command to get help is perhaps <code>man</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-man" role="doc-biblioref"&gt;John W. Eaton and Colin Watson, &lt;em&gt;&lt;span class="nocase"&gt;man&lt;/span&gt; – an Interface to the System Reference Manuals&lt;/em&gt;, version 2.9.1, 2020, &lt;/a&gt;&lt;a href="https://nongnu.org/man-db" role="doc-biblioref"&gt;https://nongnu.org/man-db&lt;/a&gt;.&lt;/p&gt;'><sup>31</sup></a></span>, which is short for <em>manual</em>.
+It contains information for most command-line tools.
+In case I forgot the options to the tool <code>tar</code>, which happens all the time, I just access its manual page using:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> tar | <span style="color: #5f8700">trim</span> 20
+TAR(1)                          GNU TAR Manual                          TAR(1)
+ 
+NAME
+       tar - an archiving utility
+ 
+SYNOPSIS
+   Traditional usage
+       tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]
+ 
+   UNIX-style usage
+       tar -A [OPTIONS] ARCHIVE ARCHIVE
+ 
+       tar -c [-f ARCHIVE] [OPTIONS] [FILE...]
+ 
+       tar -d [-f ARCHIVE] [OPTIONS] [FILE...]
+ 
+       tar -t [-f ARCHIVE] [OPTIONS] [MEMBER...]
+ 
+       tar -r [-f ARCHIVE] [OPTIONS] [FILE...]
+ 
+… with 1147 more lines</pre>
+<p>Not every command-line tool has a manual page.
+Take <code>cd</code> for example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> cd
+No manual entry for cd</pre>
+<p>For shell builtins like <code>cd</code> you can consult the <em>zshbuiltins</em> manual page:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> zshbuiltins | <span style="color: #5f8700">trim</span>
+ZSHBUILTINS(1)              General Commands Manual             ZSHBUILTINS(1)
+ 
+NAME
+       zshbuiltins - zsh built-in commands
+ 
+SHELL BUILTIN COMMANDS
+       Some shell builtin commands take options as described in individual en‐
+       tries; these are often referred to in the  list  below  as  `flags'  to
+       avoid  confusion  with  shell options, which may also have an effect on
+       the behaviour of builtin commands.  In this introductory section,  `op‐
+… with 2735 more lines</pre>
+<p>You can search by pressing <strong><code>/</code></strong> and exit by pressing <strong><code>q</code></strong>.
+Try to find the appropriate section for <code>cd</code>.</p>
+<p>Newer command-line tools often lack a manual page as well.
+In that case, your best bet is to invoke the tool with the <code>--help</code> (or <code>-h</code>) option.
+For example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">jq</span> --help | <span style="color: #5f8700">trim</span>
+jq - commandline JSON processor [version 1.6]
+ 
+Usage:  /usr/bin/jq [options] &lt;jq filter&gt; [file...]
+        /usr/bin/jq [options] --args &lt;jq filter&gt; [strings...]
+        /usr/bin/jq [options] --jsonargs &lt;jq filter&gt; [JSON_TEXTS...]
+ 
+jq is a tool for processing JSON inputs, applying the given filter to
+its JSON text inputs and producing the filter's results as JSON on
+standard output.
+ 
+… with 37 more lines</pre>
+<p>Specifying the <code>--help</code> option also works for command-line tools such as <code>cat</code>.
+However, the corresponding man page often provides more information.
+If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet.
+In the appendix, there’s a list of all command-line tools used in this book.
+Besides how each command-line tool can be installed, it also shows how you can get help.</p>
+<p>Manual pages can be quite verbose and difficult to read.
+The tool <code>tldr</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-tldr" role="doc-biblioref"&gt;Owen Voke, &lt;em&gt;&lt;span class="nocase"&gt;tldr&lt;/span&gt; – Collaborative Cheatsheets for Console Commands&lt;/em&gt;, version 3.3.7, 2021, &lt;/a&gt;&lt;a href="https://tldr.sh" role="doc-biblioref"&gt;https://tldr.sh&lt;/a&gt;.&lt;/p&gt;'><sup>32</sup></a></span> is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional manual pages.
+Here’s an example showing the tldr page for <code>tar</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">tldr</span> tar | <span style="color: #5f8700">trim</span> 20
+ 
+  tar
+ 
+  Archiving utility.
+  Often combined with a compression method, such as gzip or bzip2.
+  More information: https://www.gnu.org/software/tar.
+ 
+  - [c]reate an archive and write it to a [f]ile:
+    tar cf target.tar file1 file2 file3
+ 
+  - [c]reate a g[z]ipped archive and write it to a [f]ile:
+    tar czf target.tar.gz file1 file2 file3
+ 
+  - [c]reate a g[z]ipped archive from a directory using relative paths:
+    tar czf target.tar.gz --directory=path/to/directory .
+ 
+  - E[x]tract a (compressed) archive [f]ile into the current directory [v]erbos…
+    tar xvf source.tar[.gz|.bz2|.xz]
+ 
+  - E[x]tract a (compressed) archive [f]ile into the target directory:
+… with 12 more lines</pre>
+<p>As you can see, rather than listing the many options alphabetically like <code>man</code> often does, <code>tldr</code> cuts to the chase by giving you a list of practical examples.</p>
+</div>
+</div>
+<div id="summary-1" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Summary<a class="anchor" aria-label="anchor" href="#summary-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter you learned how to get all the required command-line tools by installing a Docker image.
+I also went over some essential command-line concepts and how to get help.
+Now that you have all the necessary ingredients, you’re ready for the first step of the OSEMN model for data science: obtaining data.</p>
+</div>
+<div id="for-further-exploration-1" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> For Further Exploration<a class="anchor" aria-label="anchor" href="#for-further-exploration-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>The subtitle of this book pays homage to the epic <em>Unix Power Tools</em> by Jerry Peek, Shelley Powers, Tim O’Reilly, and Mike Loukides. And rightly so. In 51 chapters and more than a thousand pages, it covers just about everything there is to know about Unix. It weighs over 4 pounds, so you might want to consider getting the ebook.</li>
+<li>The website <a href="https://explainshell.com/">explainshell</a> parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages.</li>
+<li>Docker is truly a brilliant piece of software. In this chapter I’ve briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to <a href="https://www.docker.com/101-tutorial">learn how to create your own Docker images</a>. The book <em>Docker: Up &amp; Running</em> by Sean Kane and Karl Matthias is a good resource as well.</li>
+</ul>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></div>
+<div class="next"><a href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-2-getting-started"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="nav-link" href="#getting-the-data"><span class="header-section-number">2.1</span> Getting the Data</a></li>
+<li><a class="nav-link" href="#docker-image"><span class="header-section-number">2.2</span> Installing the Docker Image</a></li>
+<li>
+<a class="nav-link" href="#essential-concepts"><span class="header-section-number">2.3</span> Essential Unix Concepts</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-environment"><span class="header-section-number">2.3.1</span> The Environment</a></li>
+<li><a class="nav-link" href="#executing-a-command-line-tool"><span class="header-section-number">2.3.2</span> Executing a Command-line Tool</a></li>
+<li><a class="nav-link" href="#five-types-of-command-line-tools"><span class="header-section-number">2.3.3</span> Five Types of Command-line Tools</a></li>
+<li><a class="nav-link" href="#combining-command-line-tools"><span class="header-section-number">2.3.4</span> Combining Command-line Tools</a></li>
+<li><a class="nav-link" href="#redirecting-input-and-output"><span class="header-section-number">2.3.5</span> Redirecting Input and Output</a></li>
+<li><a class="nav-link" href="#working-with-files-and-directories"><span class="header-section-number">2.3.6</span> Working With Files and Directories</a></li>
+<li><a class="nav-link" href="#managing-output"><span class="header-section-number">2.3.7</span> Managing Output</a></li>
+<li><a class="nav-link" href="#help"><span class="header-section-number">2.3.8</span> Help!</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-1"><span class="header-section-number">2.4</span> Summary</a></li>
+<li><a class="nav-link" href="#for-further-exploration-1"><span class="header-section-number">2.5</span> For Further Exploration</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/02.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/02.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

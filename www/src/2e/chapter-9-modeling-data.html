@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Modeling Data | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="In this chapter we’re going to perform the fourth step of the OSEMN model: modeling data. Generally speaking, a model is an abstract or higher-level description of your data. Modeling is a bit...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Modeling Data | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-9-modeling-data.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="In this chapter we’re going to perform the fourth step of the OSEMN model: modeling data. Generally speaking, a model is an abstract or higher-level description of your data. Modeling is a bit...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 9 Modeling Data | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="In this chapter we’re going to perform the fourth step of the OSEMN model: modeling data. Generally speaking, a model is an abstract or higher-level description of your data. Modeling is a bit...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="active" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-9-modeling-data" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Modeling Data<a class="anchor" aria-label="anchor" href="#chapter-9-modeling-data"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this chapter we’re going to perform the fourth step of the OSEMN model: modeling data.
+Generally speaking, a model is an abstract or higher-level description of your data.
+Modeling is a bit like creating visualizations in the sense that we’re taking a step back from the individual data points to see the bigger picture.</p>
+<p>Visualizations are characterized by shapes, positions, and colors: we can interpret them by looking at them.
+Models, on the other hand, are internally characterized by numbers, which means that computers can use them to do things like make predictions about a new data points.
+(We can still visualize models so that we can try to understand them and see how they are performing.)</p>
+<p>In this chapter I’ll consider three types of algorithms commonly used to model data:</p>
+<ul>
+<li>Dimensionality reduction</li>
+<li>Regression</li>
+<li>Classification</li>
+</ul>
+<p>These algorithms come from the field of statistics and machine learning, so I’m going to change the vocabulary a bit.
+Let’s assume that I have a CSV file, also known as a <em>dataset</em>.
+Each row, except for the header, is considered to be a <em>data point</em>.
+Each data point has one or more <em>features</em>, or properties that have been measured.
+Sometimes, a data point also has a <em>label</em>, which is, generally speaking, a judgment or outcome.
+This becomes more concrete when I introduce the wine dataset below.</p>
+<p>The first type of algorithm (dimensionality reduction) is most often unsupervised, which means that they create a model based on the features of the dataset only.
+The last two types of algorithms (regression and classification) are by definition supervised algorithms, which means that they also incorporate the labels into the model.</p>
+
+<div class="rmdcaution">
+This chapter is by no means an introduction to machine learning.
+That implies that I must skim over many details.
+My general advice is that you become familiar with an algorithm before applying it to your data.
+At the end of this chapter I recommend a few books about machine learning.
+</div>
+<div id="overview-6" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Reduce the dimensionality of your dataset using <code>tapkee</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-tapkee" role="doc-biblioref"&gt;Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, &lt;em&gt;&lt;span class="nocase"&gt;tapkee&lt;/span&gt; – an Efficient Dimension Reduction Library&lt;/em&gt;, version 1.2, 2013, &lt;/a&gt;&lt;a href="http://tapkee.lisitsyn.me" role="doc-biblioref"&gt;http://tapkee.lisitsyn.me&lt;/a&gt;.&lt;/p&gt;'><sup>106</sup></a></span>.</li>
+<li>Predict the quality of white wine using <code>vw</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-vw" role="doc-biblioref"&gt;John Langford, &lt;em&gt;&lt;span class="nocase"&gt;vw&lt;/span&gt; – Fast Machine Learning Library for Online Learning&lt;/em&gt;, version 8.10.1, 2021, &lt;/a&gt;&lt;a href="https://vowpalwabbit.org" role="doc-biblioref"&gt;https://vowpalwabbit.org&lt;/a&gt;.&lt;/p&gt;'><sup>107</sup></a></span>.</li>
+<li>Classify wine as red or white using <code>skll</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-skll" role="doc-biblioref"&gt;Educational Testing Service, &lt;em&gt;&lt;span class="nocase"&gt;skll&lt;/span&gt; – &lt;span&gt;SciKit-Learn&lt;/span&gt; Laboratory&lt;/em&gt;, version 2.5.0, 2021, &lt;/a&gt;&lt;a href="https://skll.readthedocs.org" role="doc-biblioref"&gt;https://skll.readthedocs.org&lt;/a&gt;.&lt;/p&gt;'><sup>108</sup></a></span>.</li>
+</ul>
+<p>This chapter starts with the following file:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch09</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 4.0K
+-rw-r--r-- 1 dst dst 503 Dec  6 21:43 classify.cfg</pre>
+<p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
+Any other files are either downloaded or generated using command-line tools.</p>
+</div>
+<div id="more-wine-please" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> More Wine Please!<a class="anchor" aria-label="anchor" href="#more-wine-please"><i class="fas fa-link"></i></a>
+</h2>
+<p>Throughout this chapter, I’ll be using a dataset of wine tasters’ notes on red and white varieties of Portuguese wine called vinho verde.
+Each data point represents a wine. Each wine is rated on 11 physicochemical properties: (1) fixed acidity, (2) volatile acidity, (3) citric acid, (4) residual sugar, (5) chlorides, (6) free sulfur dioxide, (7) total sulfur dioxide, (8) density, (9) pH, (10) sulphates, and (11) alcohol.
+There is also an overall quality score between 0 (very bad) and 10 (excellent), which is the median of at least three evaluation by wine experts. More information about this dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">UCI Machine Learning Repository</a>.</p>
+<p>The dataset is split into two files: one for white wine and one for red wine.
+The very first step is to obtain the two files using <code>curl</code> (and of course <code>parallel</code> because I haven’t got all day):</p>
+<pre><span style="font-weight: bold">$</span> parallel "curl -sL http://archive.ics.uci.edu/ml/machine-learning-databases/wi
+ne-quality/winequality-{}.csv &gt; wine-{}.csv" ::: red white</pre>
+<p>The triple colon is just another way to pass data to <code>parallel</code>.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> /data/.cache/wine-<span style="color: #0087ff">*</span>.csv <span style="text-decoration: underline">.</span></pre>
+<p>Let’s inspect both files and count the number of lines:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wine-red.csv</span> <span style="color: #5f8700">nl</span> | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">fold</span> | <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">trim</span>
+     1  "fixed acidity";"volatile acidity";"citric acid";"residual sugar";"chlor
+ides";"free sulfur dioxide";"total sulfur dioxide";"density";"pH";"sulphates";"a
+lcohol";"quality"
+     2  7.4;0.7;0;1.9;0.076;11;34;0.9978;3.51;0.56;9.4;5
+     3  7.8;0.88;0;2.6;0.098;25;67;0.9968;3.2;0.68;9.8;5
+     4  7.8;0.76;0.04;2.3;0.092;15;54;0.997;3.26;0.65;9.8;5
+     5  11.2;0.28;0.56;1.9;0.075;17;60;0.998;3.16;0.58;9.8;6
+     6  7.4;0.7;0;1.9;0.076;11;34;0.9978;3.51;0.56;9.4;5
+     7  7.4;0.66;0;1.8;0.075;13;40;0.9978;3.51;0.56;9.4;5
+     8  7.9;0.6;0.06;1.6;0.069;15;59;0.9964;3.3;0.46;9.4;5
+… with 1592 more lines
+ 
+<span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wine-white.csv</span> <span style="color: #5f8700">nl</span> | <span style="color: #5f8700">fold</span> | <span style="color: #5f8700">trim</span>
+     1  "fixed acidity";"volatile acidity";"citric acid";"residual sugar";"chlor
+ides";"free sulfur dioxide";"total sulfur dioxide";"density";"pH";"sulphates";"a
+lcohol";"quality"
+     2  7;0.27;0.36;20.7;0.045;45;170;1.001;3;0.45;8.8;6
+     3  6.3;0.3;0.34;1.6;0.049;14;132;0.994;3.3;0.49;9.5;6
+     4  8.1;0.28;0.4;6.9;0.05;30;97;0.9951;3.26;0.44;10.1;6
+     5  7.2;0.23;0.32;8.5;0.058;47;186;0.9956;3.19;0.4;9.9;6
+     6  7.2;0.23;0.32;8.5;0.058;47;186;0.9956;3.19;0.4;9.9;6
+     7  8.1;0.28;0.4;6.9;0.05;30;97;0.9951;3.26;0.44;10.1;6
+     8  6.2;0.32;0.16;7;0.045;30;136;0.9949;3.18;0.47;9.6;6
+… with 4891 more lines
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">wc</span> -l wine-{red,white}.csv
+  1600 wine-red.csv
+  4899 wine-white.csv
+  6499 total</pre>
+<p><span class="callout">➊</span> For clarity I use <code>nl</code> to add line numbers.
+<br><span class="callout">➋</span> To see the entire header, I use <code>fold</code>.</p>
+<p>At first sight this data appears to be quite clean.
+Still, let’s scrub it so that it conforms more with what most command-line tools expect.
+Specifically, I’ll:</p>
+<ul>
+<li>Convert the header to lowercase.</li>
+<li>Replace the semi-colons with commas.</li>
+<li>Replace spaces with underscores.</li>
+<li>Remove unnecessary quotes.</li>
+</ul>
+<p>The tool <code>tr</code> can take care of all these things.
+Let’s use a for loop this time—for old times’ sake—to process both files:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">for</span> COLOR in red white; <span style="color: #af8700">do</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">&lt;</span> wine-$COLOR.csv <span style="color: #5f8700">tr</span> <span style="color: #af8700">'[A-Z]; '</span> <span style="color: #af8700">'[a-z],_'</span> | <span style="color: #5f8700">tr</span> -d \" <span style="color: #af8700">&gt;</span> wine-${COLOR}-clean.csv
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">done</span></pre>
+<p>Let’s also create a single dataset by combining the two files.
+I’ll use <code>csvstack</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-csvstack" role="doc-biblioref"&gt;Christopher Groskopf, &lt;em&gt;&lt;span class="nocase"&gt;csvstack&lt;/span&gt; – Stack up the Rows from Multiple &lt;span&gt;CSV&lt;/span&gt; Files&lt;/em&gt;, version 1.0.5, 2020, &lt;/a&gt;&lt;a href="https://csvkit.rtfd.org" role="doc-biblioref"&gt;https://csvkit.rtfd.org&lt;/a&gt;.&lt;/p&gt;'><sup>109</sup></a></span> to add a column named <em>type</em>, which will be “red” for rows of the first file, and “white” for rows of the second file:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvstack</span> -g red,white -n type wine-{red,white}-clean.csv | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">xsv</span> select 2-,1 <span style="color: #af8700">&gt;</span> wine.csv <span class="callout">➋</span></pre>
+<p><span class="callout">➊</span> The new column <em>type</em> is placed at the beginning by <code>csvstack</code>.
+<br><span class="callout">➋</span> Some algorithms assume that the label is the last column, so I use <code>xsv</code> to move the column <em>type</em> to the end.</p>
+<p>It’s good practice to check whether there are any missing values in this dataset, because most machine learning algorithms can’t handle them:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvstat</span> <span style="text-decoration: underline">wine.csv</span> --nulls
+  1. fixed_acidity: False
+  2. volatile_acidity: False
+  3. citric_acid: False
+  4. residual_sugar: False
+  5. chlorides: False
+  6. free_sulfur_dioxide: False
+  7. total_sulfur_dioxide: False
+  8. density: False
+  9. ph: False
+ 10. sulphates: False
+ 11. alcohol: False
+ 12. quality: False
+ 13. type: False</pre>
+<p>Excellent!
+If there were any missing values, we could fill them with, say, the average or most common value of that feature.
+An alternative, less subtle approach is to remove any data points that have at least one missing value.
+Just out of curiosity, let’s see what the distribution of quality looks like for both red and white wines.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">rush</span> run -t <span style="color: #af8700">'ggplot(df, aes(x = quality, fill = type)) + geom_density(adjust =
+ 3, alpha = 0.5)'</span> <span style="text-decoration: underline">wine.csv</span> <span style="color: #af8700">&gt;</span> wine-quality.png
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">display</span> <span style="text-decoration: underline">wine-quality.png</span></pre>
+<div class="figure" style="text-align: center">
+<img src="images/wine-quality.png" alt="Comparing the quality of red and white wines using a density plot" width="90%"><p class="caption">
+(#fig:plot_wine_quality)Comparing the quality of red and white wines using a density plot
+</p>
+</div>
+<p>From the density plot you can see the quality of white wine is distributed more towards higher values.
+Does this mean that white wines are overall better than red wines, or that the white wine experts more easily give higher scores than red wine experts?
+That’s something that the data doesn’t tell us.
+Or is there perhaps a relationship between alcohol and quality?
+Let’s use <code>rush</code> to find out:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">rush</span> plot --x alcohol --y quality --color type --geom smooth <span style="text-decoration: underline">wine.csv</span> <span style="color: #af8700">&gt;</span> wine-a
+lcohol-vs-quality.png
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">display</span> <span style="text-decoration: underline">wine-alcohol-vs-quality.png</span></pre>
+<div class="figure" style="text-align: center">
+<img src="images/wine-alcohol-vs-quality.png" alt="Relationship between the alcohol contents of wine and its quality" width="90%"><p class="caption">
+(#fig:plot_wine_alchohol_vs_quality)Relationship between the alcohol contents of wine and its quality
+</p>
+</div>
+<p>Eureka! Ahem, let’s carry on with some modeling, shall we?</p>
+</div>
+<div id="dimensionality-reduction-with-tapkee" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Dimensionality Reduction with Tapkee<a class="anchor" aria-label="anchor" href="#dimensionality-reduction-with-tapkee"><i class="fas fa-link"></i></a>
+</h2>
+<p>The goal of dimensionality reduction is to map high-dimensional data points onto a lower dimensional mapping.
+The challenge is to keep similar data points close together on the lower-dimensional mapping.
+As we’ve seen in the previous section, our wine dataset contains 13 features.
+I’ll stick with two dimensions because that’s straightforward to visualize.</p>
+<p>Dimensionality reduction is often regarded as part of exploration.
+It’s useful for when there are too many features for plotting.
+You could do a scatter-plot matrix, but that only shows you two features at a time.
+It’s also useful as a pre-processing step for other machine learning algorithms.</p>
+<p>Most dimensionality reduction algorithms are unsupervised.
+This means that they don’t employ the labels of the data points in order to construct the lower-dimensional mapping.</p>
+<p>In this section I’ll look at two techniques: PCA, which stands for Principal Components Analysis<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-Pearson1901" role="doc-biblioref"&gt;K. Pearson, &lt;span&gt;“On Lines and Planes of Closest Fit to Systems of Points in Space,”&lt;/span&gt; &lt;em&gt;Philosophical Magazine&lt;/em&gt; 2, no. 11 (1901): 559–72&lt;/a&gt;.&lt;/p&gt;'><sup>110</sup></a></span> and t-SNE, which stands for t-distributed Stochastic Neighbor Embedding<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-van2008visualizing" role="doc-biblioref"&gt;Laurens van der Maaten and Geoffrey Everest Hinton, &lt;span&gt;“Visualizing Data Using t-&lt;span&gt;SNE&lt;/span&gt;,”&lt;/span&gt; &lt;em&gt;Journal of Machine Learning Research&lt;/em&gt; 9 (2008): 2579–2605&lt;/a&gt;.&lt;/p&gt;'><sup>111</sup></a></span>.</p>
+<div id="introducing-tapkee" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> Introducing Tapkee<a class="anchor" aria-label="anchor" href="#introducing-tapkee"><i class="fas fa-link"></i></a>
+</h3>
+<p>Tapkee is a C++ template library for dimensionality reduction<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-Lisitsyn2013" role="doc-biblioref"&gt;Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, &lt;span&gt;“Tapkee: An Efficient Dimension Reduction Library,”&lt;/span&gt; &lt;em&gt;Journal of Machine Learning Research&lt;/em&gt; 14 (2013): 2355–59&lt;/a&gt;.&lt;/p&gt;'><sup>112</sup></a></span>.
+The library contains implementations of many dimensionality reduction algorithms, including:</p>
+<ul>
+<li>Locally Linear Embedding</li>
+<li>Isomap</li>
+<li>Multidimensional Scaling</li>
+<li>PCA</li>
+<li>t-SNE</li>
+</ul>
+<p>More information about these algorithms can be found on <a href="http://tapkee.lisitsyn.me/">Tapkee’s website</a>.
+Although Tapkee is mainly a library that can be included in other applications, it also offers a command-line tool <code>tapkee</code>.
+I’ll use this to perform dimensionality reduction on our wine dataset.</p>
+</div>
+<div id="linear-and-non-linear-mappings" class="section level3" number="9.3.2">
+<h3>
+<span class="header-section-number">9.3.2</span> Linear and Non-linear Mappings<a class="anchor" aria-label="anchor" href="#linear-and-non-linear-mappings"><i class="fas fa-link"></i></a>
+</h3>
+<p>First, I’ll scale the features using standardization such that each feature is equally important.
+This generally leads to better results when applying machine learning algorithms.</p>
+<p>To scale I use <code>rush</code> and the <code>tidyverse</code> package.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">rush</span> run --tidyverse --output wine-scaled.csv \
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">'select(df, -type) %&gt;%</span> <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">scale() %&gt;%</span> <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">as_tibble() %&gt;%</span> <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #af8700">mutate(type = df$type)'</span> <span style="text-decoration: underline">wine.csv</span> <span class="callout">➍</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">csvlook</span> <span style="text-decoration: underline">wine-scaled.csv</span>
+│ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sugar │ chlorides │…
+├───────────────┼──────────────────┼─────────────┼────────────────┼───────────┤…
+│        0.142… │           2.189… │     -2.193… │        -0.745… │    …
+│        0.451… │           3.282… │     -2.193… │        -0.598… │    …
+│        0.451… │           2.553… │     -1.917… │        -0.661… │    …
+│        3.074… │          -0.362… │      1.661… │        -0.745… │    …
+│        0.142… │           2.189… │     -2.193… │        -0.745… │    …
+│        0.142… │           1.946… │     -2.193… │        -0.766… │    …
+│        0.528… │           1.581… │     -1.780… │        -0.808… │    …
+│        0.065… │           1.885… │     -2.193… │        -0.892… │    …
+… with 6489 more lines</pre>
+<p><span class="callout">➊</span> I need to temporary remove the column <em><code>type</code></em> because <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> only works on numerical columns.
+<br><span class="callout">➋</span> The <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> function accepts a data frame, but returns a matrix.
+<br><span class="callout">➌</span> The function <code>as_tibble()</code> converts the matrix back to a data frame.
+<br><span class="callout">➍</span> Finally, I add back the <em><code>type</code></em> column.</p>
+<p>Now we apply both dimensionality reduction techniques and visualize the mapping using <code>Rio-scatter</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">xsv</span> select <span style="color: #af8700">'!type'</span> <span style="text-decoration: underline">wine-scaled.csv</span> | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">header</span> -d | <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tapkee</span> --method pca | <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tee</span> wine-pca.txt | <span style="color: #5f8700">trim</span>
+-0.568882,3.34818
+-1.19724,3.22835
+-0.952507,3.23722
+-1.60046,1.67243
+-0.568882,3.34818
+-0.556231,3.15199
+-0.53894,2.28288
+1.104,2.56479
+0.231315,2.86763
+-1.18363,1.81641
+… with 6487 more lines</pre>
+<p><span class="callout">➊</span> Deselect the column <em><code>type</code></em>
+<br><span class="callout">➋</span> Remove the header
+<br><span class="callout">➌</span> Apply PCA</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wine-pca.txt</span> <span style="color: #5f8700">header</span> -a pc1,pc2 | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">paste</span> -d, - <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">xsv</span> select type <span style="text-decoration: underline">wine-scaled.csv</span><span style="color: #af005f"></span><span style="color: #af005f">)</span> | <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tee</span> wine-pca.csv | <span style="color: #5f8700">csvlook</span>
+│      pc1 │     pc2 │ type  │
+├──────────┼─────────┼───────┤
+│  -0.569… │  3.348… │ red   │
+│  -1.197… │  3.228… │ red   │
+│  -0.953… │  3.237… │ red   │
+│  -1.600… │  1.672… │ red   │
+│  -0.569… │  3.348… │ red   │
+│  -0.556… │  3.152… │ red   │
+│  -0.539… │  2.283… │ red   │
+│   1.104… │  2.565… │ red   │
+… with 6489 more lines</pre>
+<p><span class="callout">➊</span> Add back the header with columns <em><code>pc1</code></em> and <em><code>pc2</code></em>
+<br><span class="callout">➋</span> Add back the column <em><code>type</code></em></p>
+<p>Now we can create a scatter plot:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">rush</span> plot --x pc1 --y pc2 --color type --shape type <span style="text-decoration: underline">wine-pca.csv</span> <span style="color: #af8700">&gt;</span> wine-pca.pn
+g
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">display</span> <span style="text-decoration: underline">wine-pca.png</span></pre>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="images/wine-pca.png" alt="Linear dimensionality reduction with PCA" width="90%"><p class="caption">
+Figure 9.1: Linear dimensionality reduction with PCA
+</p>
+</div>
+<p>Let’s perform t-SNE with the same approach:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">xsv</span> select <span style="color: #af8700">'!type'</span> <span style="text-decoration: underline">wine-scaled.csv</span> | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">header</span> -d | <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tapkee</span> --method t-sne | <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">header</span> -a x,y | <span class="callout">➍</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">paste</span> -d, - <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">xsv</span> select type <span style="text-decoration: underline">wine-scaled.csv</span><span style="color: #af005f"></span><span style="color: #af005f">)</span> | <span class="callout">➎</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">rush</span> plot --x x --y y --color type --shape type <span style="color: #af8700">&gt;</span> wine-tsne.png <span class="callout">➏</span></pre>
+<p><span class="callout">➊</span> Deselect the column <em><code>type</code></em>
+<br><span class="callout">➋</span> Remove the header
+<br><span class="callout">➌</span> Apply t-SNE
+<br><span class="callout">➍</span> Add back the header with columns <em><code>x</code></em> and <em><code>y</code></em>
+<br><span class="callout">➎</span> Add back the column <em><code>type</code></em>
+<br><span class="callout">➏</span> Create a scatter plot</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">display</span> <span style="text-decoration: underline">wine-tsne.png</span></pre>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<img src="images/wine-tsne.png" alt="Non-linear dimensionality reduction with t-SNE" width="90%"><p class="caption">
+Figure 9.2: Non-linear dimensionality reduction with t-SNE
+</p>
+</div>
+<p>We can see that t-SNE does a better job than PCA at separating the red and white wines based on their physicochemical properties.
+These scatter plots verify that the dataset has a certain structure; there’s a relationship between the features and the labels.
+Knowing this, I’m comfortable moving forward by applying supervised machine learning.
+I’ll start with a regression task and then continue with a classification task.</p>
+</div>
+</div>
+<div id="regression-with-vowpal-wabbit" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Regression with Vowpal Wabbit<a class="anchor" aria-label="anchor" href="#regression-with-vowpal-wabbit"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this section, I’m going to create a model that predicts the quality of the white wine, based on their physicochemical properties.
+Because the quality is a number between 0 and 10, we can consider this as a regression task.</p>
+<p>For this I’ll be using Vowpal Wabbit, or <code>vw</code>.</p>
+<div id="preparing-the-data" class="section level3" number="9.4.1">
+<h3>
+<span class="header-section-number">9.4.1</span> Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Instead of working with CSV, <code>vw</code> has its own data format.
+The tool <code>csv2vw</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-csv2vw" role="doc-biblioref"&gt;Jeroen Janssens, &lt;em&gt;&lt;span class="nocase"&gt;csv2vw&lt;/span&gt; – Convert &lt;span&gt;CSV&lt;/span&gt; to Vowpal Wabbit Format&lt;/em&gt;, version 0.1, 2021, &lt;/a&gt;&lt;a href="https://github.com/jeroenjanssens/dsutils" role="doc-biblioref"&gt;https://github.com/jeroenjanssens/dsutils&lt;/a&gt;.&lt;/p&gt;'><sup>113</sup></a></span> can, as its name implies, convert CSV to this format.
+The <code>--label</code> option is used to indicate which column contains the labels.
+Let’s examine the result:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csv2vw</span> <span style="text-decoration: underline">wine-white-clean.csv</span> --label quality | <span style="color: #5f8700">trim</span>
+6 | alcohol:8.8 chlorides:0.045 citric_acid:0.36 density:1.001 fixed_acidity:7 …
+6 | alcohol:9.5 chlorides:0.049 citric_acid:0.34 density:0.994 fixed_acidity:6.…
+6 | alcohol:10.1 chlorides:0.05 citric_acid:0.4 density:0.9951 fixed_acidity:8.…
+6 | alcohol:9.9 chlorides:0.058 citric_acid:0.32 density:0.9956 fixed_acidity:7…
+6 | alcohol:9.9 chlorides:0.058 citric_acid:0.32 density:0.9956 fixed_acidity:7…
+6 | alcohol:10.1 chlorides:0.05 citric_acid:0.4 density:0.9951 fixed_acidity:8.…
+6 | alcohol:9.6 chlorides:0.045 citric_acid:0.16 density:0.9949 fixed_acidity:6…
+6 | alcohol:8.8 chlorides:0.045 citric_acid:0.36 density:1.001 fixed_acidity:7 …
+6 | alcohol:9.5 chlorides:0.049 citric_acid:0.34 density:0.994 fixed_acidity:6.…
+6 | alcohol:11 chlorides:0.044 citric_acid:0.43 density:0.9938 fixed_acidity:8.…
+… with 4888 more lines</pre>
+<p>In this format, each line is one data point.
+The line starts with the label, followed by a pipe symbol and then feature name/value pairs separated by spaces.
+While this format may seem overly verbose when compared to the CSV format, it does offer more flexibility such as weights, tags, namespaces, and a sparse feature representation.
+With the wine dataset we don’t need this flexibility, but it might be useful when applying <code>vw</code> to more complicated problems.
+This <a href="https://github.com/VowpalWabbit/vowpal_wabbit/wiki/Input-format">article</a> explains the <code>vw</code> format in more detail.</p>
+<p>One we’ve created, or <em>trained</em> a regression model, it can be used to make predictions about new, unseen data points.
+In other words, if we give the model a wine it hasn’t seen before, it can predict, or <em>test</em>, its quality.
+To properly evaluate the accuracy of these predictions, we need to set aside some data that will not be used for training.
+It’s common to use 80% of the complete dataset for training and the remaining 20% for testing.</p>
+<p>I can do this by first splitting the complete dataset into five equal parts using <code>split</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-split" role="doc-biblioref"&gt;Torbjorn Granlund and Richard M. Stallman, &lt;em&gt;&lt;span class="nocase"&gt;split&lt;/span&gt; – Split a File into Pieces&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>114</sup></a></span>.
+I verify the number of data points in each part using <code>wc</code>.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csv2vw</span> <span style="text-decoration: underline">wine-white-clean.csv</span> --label quality |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">shuf</span> | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">split</span> -d -n r/5 - wine-part-
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">wc</span> -l wine-part-<span style="color: #0087ff">*</span>
+   980 wine-part-00
+   980 wine-part-01
+   980 wine-part-02
+   979 wine-part-03
+   979 wine-part-04
+  4898 total</pre>
+<p><span class="callout">➊</span> The tool <code>shuf</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-shuf" role="doc-biblioref"&gt;Paul Eggert, &lt;em&gt;&lt;span class="nocase"&gt;shuf&lt;/span&gt; – Generate Random Permutations&lt;/em&gt;, version 8.30, 2019, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/coreutils" role="doc-biblioref"&gt;https://www.gnu.org/software/coreutils&lt;/a&gt;.&lt;/p&gt;'><sup>115</sup></a></span> randomizes the dataset to ensure that both the training and the test have similar quality distribution.</p>
+<p>Now I can use the first part (so 20%) for the testing set <em>wine-test.vw</em> and combine the four remaining parts (so 80%) into the training set <em>wine-train.vw</em>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">mv</span> <span style="text-decoration: underline">wine-part-00</span> wine-test.vw
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> wine-part-<span style="color: #0087ff">*</span> <span style="color: #af8700">&gt;</span> wine-train.vw
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">rm</span> wine-part-<span style="color: #0087ff">*</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">wc</span> -l wine-<span style="color: #0087ff">*</span>.vw
+   980 wine-test.vw
+  3918 wine-train.vw
+  4898 total</pre>
+<p>Now we’re ready to train a model using <code>vw</code>.</p>
+</div>
+<div id="training-the-model" class="section level3" number="9.4.2">
+<h3>
+<span class="header-section-number">9.4.2</span> Training the Model<a class="anchor" aria-label="anchor" href="#training-the-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>The tool <code>vw</code> accepts many different options (nearly 400!).
+Luckily, you don’t need all of them in order to be effective.
+To annotate the options I use here, I’ll put each one on a separate line:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">vw</span> \
+<span style="font-weight: bold">&gt;</span> --data <span style="text-decoration: underline">wine-train.vw</span> \ <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> --final_regressor wine.model \ <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> --passes 10 \ <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> --cache_file wine.cache \ <span class="callout">➍</span>
+<span style="font-weight: bold">&gt;</span> --nn 3 \ <span class="callout">➎</span>
+<span style="font-weight: bold">&gt;</span> --quadratic :: \ <span class="callout">➏</span>
+<span style="font-weight: bold">&gt;</span> --l2 0.000005 \ <span class="callout">➐</span>
+<span style="font-weight: bold">&gt;</span> --bit_precision 25 <span class="callout">➑</span>
+creating quadratic features for pairs: ::
+WARNING: any duplicate namespace interactions will be removed
+You can use --leave_duplicate_interactions to disable this behaviour.
+using l2 regularization = 5e-06
+final_regressor = wine.model
+Num weight bits = 25
+learning rate = 0.5
+initial_t = 0
+power_t = 0.5
+decay_learning_rate = 1
+creating cache_file = wine.cache
+Reading datafile = wine-train.vw
+num sources = 1
+Enabled reductions: gd, generate_interactions, nn, scorer
+average  since         example        example  current  current  current
+loss     last          counter         weight    label  predict features
+25.000000 25.000000            1            1.0   5.0000   0.0000       78
+32.492550 39.985100            2            2.0   7.0000   0.6766       78
+30.340140 28.187730            4            4.0   5.0000   1.6112       78
+20.930364 11.520588            8            8.0   6.0000   2.1220       78
+14.776192 8.622020           16           16.0   5.0000   2.9122       78
+11.124898 7.473605           32           32.0   6.0000   3.9509       78
+7.094311 3.063724           64           64.0   5.0000   4.9906       78
+4.054508 1.014704          128          128.0   6.0000   5.6339       78
+2.394025 0.733543          256          256.0   6.0000   5.9277       78
+1.656735 0.919446          512          512.0   6.0000   6.0210       78
+1.260600 0.864465         1024         1024.0   5.0000   5.7877       78
+1.004074 0.747547         2048         2048.0   6.0000   5.9650       78
+0.766658 0.766658         4096         4096.0   5.0000   4.9800       78 h
+0.707512 0.648366         8192         8192.0   7.0000   6.4843       78 h
+0.634252 0.560993        16384        16384.0   4.0000   5.3143       78 h
+0.601988 0.569723        32768        32768.0   7.0000   6.1962       78 h
+ 
+finished run
+number of examples per pass = 3527
+passes used = 10
+weighted example sum = 35270.000000
+weighted label sum = 207390.000000
+average loss = 0.562260 h
+best constant = 5.880068
+total feature number = 2749020</pre>
+<p><span class="callout">➊</span> The file <em>wine-train.vw</em> is used to train the model.
+<br><span class="callout">➋</span> The model, or <em>regressor</em>, will be stored in the file <em>wine.model</em>.
+<br><span class="callout">➌</span> Number of training passes.
+<br><span class="callout">➍</span> Caching is needed when making multiple passes.
+<br><span class="callout">➎</span> Use a neural network with 3 hidden units.
+<br><span class="callout">➏</span> Create and use quadratic features, based on all input features. Any duplicates will be removed by <code>vw</code>.
+<br><span class="callout">➐</span> Use l2 regularization.
+<br><span class="callout">➑</span> Use 25 bits to store the features.</p>
+<p>Now that I have trained a regression model, let’s use it to make predictions.</p>
+</div>
+<div id="testing-the-model" class="section level3" number="9.4.3">
+<h3>
+<span class="header-section-number">9.4.3</span> Testing the Model<a class="anchor" aria-label="anchor" href="#testing-the-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>The model is stored in the file <em>wine.model</em>.
+To use that model to make predictions, I run <code>vw</code> again, but now with a different set of options:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">vw</span> \
+<span style="font-weight: bold">&gt;</span> --data <span style="text-decoration: underline">wine-test.vw</span> \ <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> --initial_regressor <span style="text-decoration: underline">wine.model</span> \ <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> --testonly \ <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> --predictions predictions \ <span class="callout">➍</span>
+<span style="font-weight: bold">&gt;</span> --quiet <span class="callout">➎</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">predictions</span> | <span style="color: #5f8700">trim</span>
+6.218554
+5.284217
+6.041228
+5.707762
+5.839301
+6.759735
+6.196512
+5.883849
+6.059498
+5.539646
+… with 970 more lines</pre>
+<p><span class="callout">➊</span> The file <em>wine-test.vw</em> is used to test the model.
+<br><span class="callout">➋</span> Use the model stored in the file <em>wine.model</em>.
+<br><span class="callout">➌</span> Ignore label information and just test.
+<br><span class="callout">➍</span> The predictions are stored in a file called <em>predictions</em>.
+<br><span class="callout">➎</span> Don’t output diagnostics and progress updates.</p>
+<p>Let’s use <code>paste</code> to combine the predictions in the file <em>predictions</em> with the true, or <em>observed</em>, values that are in the file <em>wine-test.vw</em>.
+Using <code>awk</code>, I can compare the predicted values with the observed values and compute the mean absolute error (MAE).
+The MAE tells us how far off <code>vw</code> is on average, when it comes to predicting the quality of a white wine.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">paste</span> -d, <span style="text-decoration: underline">predictions</span> <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">cut</span> -d <span style="color: #af8700">'|'</span> -f 1 <span style="text-decoration: underline">wine-test.vw</span><span style="color: #af005f"></span><span style="color: #af005f">)</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tee</span> results.csv |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">awk</span> -F, <span style="color: #af8700">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">cowsay</span> <span class="callout">➊</span>
+ _______________
+&lt; MAE: 0.556191 &gt;
+ ---------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||</pre>
+<p>So, the predictions are on average about 0.6 points off.
+Let’s visualize the relationship between the observed values and the predicted values using <code>rush plot</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">results.csv</span> <span style="color: #5f8700">header</span> -a <span style="color: #af8700">"predicted,observed"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">rush</span> plot --x observed --y predicted --geom jitter <span style="color: #af8700">&gt;</span> wine-regression.png
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">display</span> <span style="text-decoration: underline">wine-regression.png</span></pre>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<img src="images/wine-regression.png" alt="Regression with Vowpal Wabbit" width="90%"><p class="caption">
+Figure 9.3: Regression with Vowpal Wabbit
+</p>
+</div>
+<p>I can imagine that the options used to the train the model can be a bit overwhelming.
+Let’s see how <code>vw</code> performs when I use all the default values:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">vw</span> -d <span style="text-decoration: underline">wine-train.vw</span> -f wine2.model --quiet <span class="callout">➊</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">vw</span> -data <span style="text-decoration: underline">wine-test.vw</span> -i <span style="text-decoration: underline">wine2.model</span> -t -p <span style="text-decoration: underline">predictions</span> --quiet <span class="callout">➋</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">paste</span> -d, <span style="text-decoration: underline">predictions</span> <span style="color: #af005f">&lt;(</span><span style="color: #5f8700">cut</span> -d <span style="color: #af8700">'|'</span> -f 1 <span style="text-decoration: underline">wine-test.vw</span><span style="color: #af005f"></span><span style="color: #af005f">)</span> | <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">awk</span> -F, <span style="color: #af8700">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span>
+MAE: 0.605996</pre>
+<p><span class="callout">➊</span> Train a regression model
+<br><span class="callout">➋</span> Test the regression model
+<br><span class="callout">➌</span> Compute mean absolute error</p>
+<p>Apparently, with the default values, the MAE is 0.04 higher, meaning that the predictions are slightly worse.</p>
+<p>In this section, I’ve only been able to scratch the surface of what <code>vw</code> can do.
+There’s reason why it accepts so many options.
+Besides regression, it also supports, among other things, binary classification, multi-class classification, reinforcement learning, and Latent Dirichlet Allocation.
+<a href="https://vowpalwabbit.org/">Its website</a> contains many tutorials and articles to learn more.</p>
+</div>
+</div>
+<div id="classification-with-scikit-learn-laboratory" class="section level2" number="9.5">
+<h2>
+<span class="header-section-number">9.5</span> Classification with SciKit-Learn Laboratory<a class="anchor" aria-label="anchor" href="#classification-with-scikit-learn-laboratory"><i class="fas fa-link"></i></a>
+</h2>
+<!-- TODO: Explain SKLL better -->
+<p>In this section I’m going to train a classification model, or <em>classifier</em>, that predicts whether a wines is either red or white.
+While we could use <code>vw</code> for this, I’d like to demonstrate another tool: SciKit-Learn Laboratory (SKLL).
+As the name implies, it’s built on top of SciKit-Learn, a popular machine learning package for Python.
+SKLL, itself a Python package, provides the <code>run_experiment</code> tool, which makes it possible to use SciKit-Learn from the command line.
+Instead of <code>run_experiment</code>, I use the alias <code>skll</code> because I find it easier to remember as it corresponds to the package name:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">alias</span> skll=run_experiment
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">skll</span>
+usage: run_experiment [-h] [-a NUM_FEATURES] [-A] [-k] [-l] [-m MACHINES]
+                      [-q QUEUE] [-r] [-v] [--version]
+                      config_file [config_file ...]
+run_experiment: error: the following arguments are required: config_file</pre>
+<div id="preparing-the-data-1" class="section level3" number="9.5.1">
+<h3>
+<span class="header-section-number">9.5.1</span> Preparing the Data<a class="anchor" aria-label="anchor" href="#preparing-the-data-1"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>skll</code> expects the training and test dataset to have the same filenames, located in separate directories.
+Because its predictions are not necessarily in the same order as the original dataset, I add a column, <em><code>id</code></em>, that contains a unique identifier so that I can match the predictions with the correct data points.
+Let’s create a balanced dataset:</p>
+<pre><span style="font-weight: bold">$</span> NUM_RED=<span style="color: #af8700">"</span><span style="color: #af005f">$(</span><span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wine-red-clean.csv</span> <span style="color: #5f8700">wc</span> -l<span style="color: #af005f">)</span><span style="color: #af8700">"</span> <span class="callout">➊</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">csvstack</span> -n type -g red,white \ <span class="callout">➋</span>
+<span style="font-weight: bold">&gt;</span> <span style="text-decoration: underline">wine-red-clean.csv</span> \
+<span style="font-weight: bold">&gt;</span> <span style="color: #af005f">&lt;(</span><span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wine-white-clean.csv</span> <span style="color: #5f8700">body</span> shuf | <span style="color: #5f8700">head</span> -n $NUM_RED<span style="color: #af005f">)</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">body</span> shuf |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">nl</span> -s, -w1 -v0 | <span class="callout">➌</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sed</span> <span style="color: #af8700">'1s/0,/id,/'</span> | <span class="callout">➍</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">tee</span> wine-balanced.csv | <span style="color: #5f8700">csvlook</span>
+│    id │ type  │ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sug…
+├───────┼───────┼───────────────┼──────────────────┼─────────────┼─────────────…
+│     1 │ red   │         11.50 │            0.420 │        0.48 │           2.…
+│     2 │ white │          7.00 │            0.150 │        0.28 │          14.…
+│     3 │ white │          7.00 │            0.240 │        0.35 │           1.…
+│     4 │ white │          6.10 │            0.180 │        0.36 │           2.…
+│     5 │ red   │          7.20 │            0.655 │        0.03 │           1.…
+│     6 │ white │          6.30 │            0.220 │        0.22 │           5.…
+│     7 │ red   │          7.30 │            0.380 │        0.21 │           2.…
+│     8 │ red   │          7.90 │            0.690 │        0.21 │           2.…
+… with 3190 more lines</pre>
+<p><span class="callout">➊</span> Store the number of red wines in variable <em><code>NUM_RED</code></em>.
+<br><span class="callout">➋</span> Combine all red wines with a random sample of white wines.
+<br><span class="callout">➌</span> Add “line numbers” using <code>nl</code> in front of each line.
+<br><span class="callout">➍</span> Replace the “0” on the first line with “id” so that it’s a proper column name.</p>
+<p>Let’s split this balanced dataset into a training set and a test set:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">mkdir</span> -p {train,test}
+ 
+<span style="font-weight: bold">$</span> HEADER=<span style="color: #af8700">"</span><span style="color: #af005f">$(</span><span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wine-balanced.csv</span> <span style="color: #5f8700">header</span><span style="color: #af005f">)</span><span style="color: #af8700">"
+</span>
+<span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wine-balanced.csv</span> <span style="color: #5f8700">header</span> -d | <span style="color: #5f8700">shuf</span> | <span style="color: #5f8700">split</span> -d -n r/5 - wine-part-
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">wc</span> -l wine-part-<span style="color: #0087ff">*</span>
+   640 wine-part-00
+   640 wine-part-01
+   640 wine-part-02
+   639 wine-part-03
+   639 wine-part-04
+  3198 total
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> <span style="text-decoration: underline">wine-part-00</span> | <span style="color: #5f8700">header</span> -a $HEADER <span style="color: #af8700">&gt;</span> test/features.csv &amp;&amp; <span style="color: #5f8700">rm</span> <span style="text-decoration: underline">wine-part-00</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> wine-part-<span style="color: #0087ff">*</span> | <span style="color: #5f8700">header</span> -a $HEADER <span style="color: #af8700">&gt;</span> train/features.csv &amp;&amp; <span style="color: #5f8700">rm</span> wine-part-<span style="color: #0087ff">*</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">wc</span> -l t<span style="color: #0087ff">*</span>/features.csv
+   641 test/features.csv
+  2559 train/features.csv
+  3200 total</pre>
+<p>Now that I have a balanced training dataset and a balanced test dataset, I can continue with building a classifier.</p>
+</div>
+<div id="running-the-experiment" class="section level3" number="9.5.2">
+<h3>
+<span class="header-section-number">9.5.2</span> Running the Experiment<a class="anchor" aria-label="anchor" href="#running-the-experiment"><i class="fas fa-link"></i></a>
+</h3>
+<p>Training a classifier in <code>skll</code> is done by defining an experiment in a configuration file.
+It consists of several sections that specify, for example, where to look for the datasets, which classifiers
+Here’s the configuration file <em>classify.cfg</em> that I’ll use:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">classify.cfg</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">classify.cfg</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ [General]
+   2   │ <span style="color: #af005f">experiment_name</span> = <span style="color: #5f8700">wine</span>
+   3   │ <span style="color: #af005f">task</span> = <span style="color: #5f8700">evaluate</span>
+   4   │
+   5   │ [Input]
+   6   │ <span style="color: #af005f">train_directory</span> = <span style="color: #5f8700">train</span>
+   7   │ <span style="color: #af005f">test_directory</span> = <span style="color: #5f8700">test</span>
+   8   │ <span style="color: #af005f">featuresets</span> = <span style="color: #5f8700">[["features"]]</span>
+   9   │ <span style="color: #af005f">feature_scaling</span> = <span style="color: #5f8700">both</span>
+  10   │ <span style="color: #af005f">label_col</span> = <span style="color: #5f8700">type</span>
+  11   │ <span style="color: #af005f">id_col</span> = <span style="color: #5f8700">id
+</span>  12   │ <span style="color: #af005f">shuffle</span> = <span style="color: #5f8700">true</span>
+  13   │ <span style="color: #af005f">learners</span> = <span style="color: #5f8700">["KNeighborsClassifier", "LogisticRegression", "DecisionTree
+</span>       │ <span style="color: #5f8700">Classifier", "RandomForestClassifier"]</span>
+  14   │ <span style="color: #af005f">suffix</span> = <span style="color: #5f8700">.csv</span>
+  15   │
+  16   │ [Tuning]
+  17   │ <span style="color: #af005f">grid_search</span> = <span style="color: #5f8700">false</span>
+  18   │ <span style="color: #af005f">objectives</span> = <span style="color: #5f8700">["neg_mean_squared_error"]</span>
+  19   │ <span style="color: #af005f">param_grids</span> = <span style="color: #5f8700">[{}, {}, {}, {}]</span>
+  20   │
+  21   │ [Output]
+  22   │ <span style="color: #af005f">logs</span> = <span style="color: #5f8700">output</span>
+  23   │ <span style="color: #af005f">results</span> = <span style="color: #5f8700">output</span>
+  24   │ <span style="color: #af005f">predictions</span> = <span style="color: #5f8700">output</span>
+  25   │ <span style="color: #af005f">models</span> = <span style="color: #5f8700">output</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>I run the experiment using <code>skll</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">skll</span> -l <span style="text-decoration: underline">classify.cfg</span> <span style="color: #af8700">2&gt;</span><span style="text-decoration: underline; color: #af8700"></span><span style="text-decoration: underline">/dev/null</span></pre>
+<p>The option<code>-l</code> specifies to run in local mode.
+<code>skll</code> also offers the possibility to run experiments on clusters.
+The time it takes to run an experiment depends on the complexity of the chosen algorithms and the size of the data.</p>
+</div>
+<div id="parsing-the-results" class="section level3" number="9.5.3">
+<h3>
+<span class="header-section-number">9.5.3</span> Parsing the Results<a class="anchor" aria-label="anchor" href="#parsing-the-results"><i class="fas fa-link"></i></a>
+</h3>
+<p>Once all classifiers have been trained and tested, the results can be found in the directory <em>output</em>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">ls</span> -1 <span style="text-decoration: underline">output</span>
+wine_features_DecisionTreeClassifier.log
+wine_features_DecisionTreeClassifier.model
+wine_features_DecisionTreeClassifier_predictions.tsv
+wine_features_DecisionTreeClassifier.results
+wine_features_DecisionTreeClassifier.results.json
+wine_features_KNeighborsClassifier.log
+wine_features_KNeighborsClassifier.model
+wine_features_KNeighborsClassifier_predictions.tsv
+wine_features_KNeighborsClassifier.results
+wine_features_KNeighborsClassifier.results.json
+wine_features_LogisticRegression.log
+wine_features_LogisticRegression.model
+wine_features_LogisticRegression_predictions.tsv
+wine_features_LogisticRegression.results
+wine_features_LogisticRegression.results.json
+wine_features_RandomForestClassifier.log
+wine_features_RandomForestClassifier.model
+wine_features_RandomForestClassifier_predictions.tsv
+wine_features_RandomForestClassifier.results
+wine_features_RandomForestClassifier.results.json
+wine.log
+wine_summary.tsv</pre>
+<p><code>skll</code> generates four files for each classifier: one log, two with results, and one with predictions.
+I extract the algorithm names and sort them by their accuracies using the following SQL query:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">output/wine_summary.tsv</span> <span style="color: #5f8700">csvsql</span> --query <span style="color: #af8700">"SELECT learner_name, accuracy FROM s
+tdin ORDER BY accuracy DESC"</span> | <span style="color: #5f8700">csvlook</span> -I
+│ learner_name           │ accuracy  │
+├────────────────────────┼───────────┤
+│ RandomForestClassifier │ 0.996875  │
+│ LogisticRegression     │ 0.9953125 │
+│ KNeighborsClassifier   │ 0.9890625 │
+│ DecisionTreeClassifier │ 0.975     │</pre>
+<p>The relevant column here is <em><code>accuracy</code></em>, which indicates the percentage of data points that are classified correctly.
+From this we see that actually all algorithms are performing really well.
+The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.</p>
+<p>Each JSON file contains a confusion matrix, giving you additional insight into the performance of each classifier.
+A confusion matrix is a table where the columns refer to the true labels (red and white) and the rows refer to the predicted labels.
+Higher numbers on the diagonal mean more correct predictions.
+With <code>jq</code> I can print the name of each classifier and extract the associated confusion matrix:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">jq</span> -r <span style="color: #af8700">'.[] | "\(.learner_name):\n\(.result_table)\n"'</span> output/<span style="color: #0087ff">*</span>.json
+DecisionTreeClassifier:
++-------+-------+---------+-------------+----------+-------------+
+|       |   red |   white |   Precision |   Recall |   F-measure |
++=======+=======+=========+=============+==========+=============+
+|   red | [315] |       9 |       0.978 |    0.972 |       0.975 |
++-------+-------+---------+-------------+----------+-------------+
+| white |     7 |   [309] |       0.972 |    0.978 |       0.975 |
++-------+-------+---------+-------------+----------+-------------+
+(row = reference; column = predicted)
+ 
+KNeighborsClassifier:
++-------+-------+---------+-------------+----------+-------------+
+|       |   red |   white |   Precision |   Recall |   F-measure |
++=======+=======+=========+=============+==========+=============+
+|   red | [321] |       3 |       0.988 |    0.991 |       0.989 |
++-------+-------+---------+-------------+----------+-------------+
+| white |     4 |   [312] |       0.990 |    0.987 |       0.989 |
++-------+-------+---------+-------------+----------+-------------+
+(row = reference; column = predicted)
+ 
+LogisticRegression:
++-------+-------+---------+-------------+----------+-------------+
+|       |   red |   white |   Precision |   Recall |   F-measure |
++=======+=======+=========+=============+==========+=============+
+|   red | [321] |       3 |       1.000 |    0.991 |       0.995 |
++-------+-------+---------+-------------+----------+-------------+
+| white |     0 |   [316] |       0.991 |    1.000 |       0.995 |
++-------+-------+---------+-------------+----------+-------------+
+(row = reference; column = predicted)
+ 
+RandomForestClassifier:
++-------+-------+---------+-------------+----------+-------------+
+|       |   red |   white |   Precision |   Recall |   F-measure |
++=======+=======+=========+=============+==========+=============+
+|   red | [322] |       2 |       1.000 |    0.994 |       0.997 |
++-------+-------+---------+-------------+----------+-------------+
+| white |     0 |   [316] |       0.994 |    1.000 |       0.997 |
++-------+-------+---------+-------------+----------+-------------+
+(row = reference; column = predicted)
+ </pre>
+<p>A confusion matrix is especially helpful when you have more than two classes, so that you can see which kind of misclassifications happen, and when the cost of an incorrect classification is not the same for each class.</p>
+<p>From a usage perspective, it’s interesting to consider that <code>vw</code> and <code>skll</code> take two different approaches.
+<code>vw</code> uses command-line options, whereas <code>skll</code> requires a separate file.
+Both approaches have their advantages and disadvantages.
+While command-line options enable more ad-hoc usage, a configuration file is perhaps easier to reproduce.
+Then again, as we’ve seen, invoking <code>vw</code> with any number of options can easily be placed in script or in a <em>Makefile</em>.
+The opposite, making <code>skll</code> accept options such that it doesn’t need a configuration file, is less straightforward.</p>
+</div>
+</div>
+<div id="summary-8" class="section level2" number="9.6">
+<h2>
+<span class="header-section-number">9.6</span> Summary<a class="anchor" aria-label="anchor" href="#summary-8"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter we’ve looked at modeling data.
+Through examples I dived into three different machine learning tasks namely dimensionality reduction which is unsupervised and regression and classification which are both supervised.
+A proper machine learning tutorial is unfortunately beyond the scope of this book.
+In the next section I have a couple of recommendations in case you want to learn more about machine learning.
+This was the fourth and last step of the OSEMN model for data science that I’m covering in this book.
+The next chapter is the last intermezzo chapter and will be about leveraging the command line elsewhere.</p>
+</div>
+<div id="for-further-exploration-8" class="section level2" number="9.7">
+<h2>
+<span class="header-section-number">9.7</span> For Further Exploration<a class="anchor" aria-label="anchor" href="#for-further-exploration-8"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>The book <em>Python Machine Learning</em> by Sebastian Raschka and Vahid Mirjalili offers a comprehensive overview of machine learning and how to apply it using Python.</li>
+<li>The later chapters of <em>R for Everyone</em> by Jared Lander explain how to accomplish various machine learning tasks using R.</li>
+<li>If you want to get a deeper understanding of machine learning, I highly recommend you pick up <em>Pattern Recognition and Machine Learning</em> by Christopher Bishop and <em>Information Theory, Inference, and Learning Algorithms</em> by David MacKay.</li>
+<li>If you’re interested in learning more about the t-SNE algorithm, I recommend the original article about it: <em>Visualizing Data Using T-SNE</em> by Laurens van der Maaten and Geoffrey Hinton.</li>
+</ul>
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></div>
+<div class="next"><a href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-9-modeling-data"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="nav-link" href="#overview-6"><span class="header-section-number">9.1</span> Overview</a></li>
+<li><a class="nav-link" href="#more-wine-please"><span class="header-section-number">9.2</span> More Wine Please!</a></li>
+<li>
+<a class="nav-link" href="#dimensionality-reduction-with-tapkee"><span class="header-section-number">9.3</span> Dimensionality Reduction with Tapkee</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducing-tapkee"><span class="header-section-number">9.3.1</span> Introducing Tapkee</a></li>
+<li><a class="nav-link" href="#linear-and-non-linear-mappings"><span class="header-section-number">9.3.2</span> Linear and Non-linear Mappings</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#regression-with-vowpal-wabbit"><span class="header-section-number">9.4</span> Regression with Vowpal Wabbit</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preparing-the-data"><span class="header-section-number">9.4.1</span> Preparing the Data</a></li>
+<li><a class="nav-link" href="#training-the-model"><span class="header-section-number">9.4.2</span> Training the Model</a></li>
+<li><a class="nav-link" href="#testing-the-model"><span class="header-section-number">9.4.3</span> Testing the Model</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#classification-with-scikit-learn-laboratory"><span class="header-section-number">9.5</span> Classification with SciKit-Learn Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preparing-the-data-1"><span class="header-section-number">9.5.1</span> Preparing the Data</a></li>
+<li><a class="nav-link" href="#running-the-experiment"><span class="header-section-number">9.5.2</span> Running the Experiment</a></li>
+<li><a class="nav-link" href="#parsing-the-results"><span class="header-section-number">9.5.3</span> Parsing the Results</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-8"><span class="header-section-number">9.6</span> Summary</a></li>
+<li><a class="nav-link" href="#for-further-exploration-8"><span class="header-section-number">9.7</span> For Further Exploration</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/09.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/09.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

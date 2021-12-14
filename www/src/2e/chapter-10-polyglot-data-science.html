@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 10 Polyglot Data Science | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="A polyglot is someone who speaks multiple languages. A polyglot data scientist, as I see it, is someone who uses multiple programming languages, tools, and techniques to obtain, scrub, explore,...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 10 Polyglot Data Science | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-10-polyglot-data-science.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="A polyglot is someone who speaks multiple languages. A polyglot data scientist, as I see it, is someone who uses multiple programming languages, tools, and techniques to obtain, scrub, explore,...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 10 Polyglot Data Science | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="A polyglot is someone who speaks multiple languages. A polyglot data scientist, as I see it, is someone who uses multiple programming languages, tools, and techniques to obtain, scrub, explore,...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="active" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-10-polyglot-data-science" class="section level1" number="10">
+<h1>
+<span class="header-section-number">10</span> Polyglot Data Science<a class="anchor" aria-label="anchor" href="#chapter-10-polyglot-data-science"><i class="fas fa-link"></i></a>
+</h1>
+<p>A polyglot is someone who speaks multiple languages.
+A polyglot data scientist, as I see it, is someone who uses multiple programming languages, tools, and techniques to obtain, scrub, explore, and model data.</p>
+<p>The command line stimulates a polyglot approach.
+The command line doesn’t care in which programming language a tool is written, as long as they adhere to the Unix philosophy.
+We saw that very clearly in <a href="chapter-4-creating-command-line-tools.html#chapter-4-creating-command-line-tools">Chapter 4</a>, where we created command-line tools in Bash, Python, and R.
+Moreover, we executed SQL queries directly on CSV files and executed R expressions from the command line.
+In short, we have already been doing polyglot data science without fully realizing it!</p>
+<p>In this chapter I’m going take this further by flipping it around.
+I’m going to show you how to leverage the command line from various programming languages and environments.
+Because let’s be honest, we’re not going to spend our entire data science careers at the command line.
+As for me, when I’m analyzing some data I often use the RStudio IDE and when I’m implementing something, I often use Python.
+I use whatever helps me to get the job done.</p>
+<p>I find it comforting to know that the command line is often within arm’s reach, without having to switch to a different application.
+It allows me to quickly run a command without switching to a separate application and break my workflow.
+Examples are downloading files with <code>curl</code>, inspecting a piece of data with <code>head</code>, creating a backup with <code>git</code>, and compiling a website with <code>make</code>.
+Generally speaking, tasks that normally require a lot of code or simply cannot be done at all without the command line.</p>
+<div id="overview-7" class="section level2" number="10.1">
+<h2>
+<span class="header-section-number">10.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Run a terminal within JupyterLab and RStudio IDE</li>
+<li>Interact with arbitrary command-line tools in Python and R</li>
+<li>Transform data using shell commands in Apache Spark</li>
+</ul>
+<p>This chapter starts with the following files:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch10</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 180K
+drwxr-xr-x 2 dst dst 4.0K Dec  6 21:50 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">__pycache__</span>/
+-rw-r--r-- 1 dst dst 164K Dec  6 21:50 alice.txt
+-rwxr--r-- 1 dst dst  408 Dec  6 21:50 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">count.py</span>*
+-rw-r--r-- 1 dst dst  460 Dec  6 21:50 count.R
+-rw-r--r-- 1 dst dst 1.7K Dec  6 21:50 Untitled1337.ipynb</pre>
+<p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
+Any other files are either downloaded or generated using command-line tools.</p>
+</div>
+<div id="jupyter" class="section level2" number="10.2">
+<h2>
+<span class="header-section-number">10.2</span> Jupyter<a class="anchor" aria-label="anchor" href="#jupyter"><i class="fas fa-link"></i></a>
+</h2>
+<p>Project Jupyter is an open-source project, born out of the IPython Project in 2014 as it evolved to support interactive data science and scientific computing across all programming languages.
+Jupyter supports over 40 programming languages, including Python, R, Julia, and Scala.
+In this section I’ll focus on Python.</p>
+<p>The project includes JupyterLab, Jupyter Notebook, and Jupyter Console.
+I’ll start with Jupyter Console, as it is the most basic one to work with Python in an interactive way.
+Here’s a Jupyter Console session illustrating a couple of ways to leverage the command line.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">jupyter</span> console
+Jupyter console 6.4.0
+ 
+Python 3.9.4 (default, Apr  4 2021, 19:38:44)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.23.0 -- An enhanced Interactive Python. Type '?' for help.
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">1</span><span style="color: #008700"></span><span style="color: #008700">]: </span>! date <span class="callout">➊</span>
+Sun May  2 01:45:06 PM CEST 2021
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">2</span><span style="color: #008700"></span><span style="color: #008700">]: </span>! pip install --upgrade requests
+Requirement already satisfied: requests in /home/dst/.local/lib/python3.9/site-p
+ackages (2.25.1)
+Collecting requests
+  Using cached requests-2.25.1-py2.py3-none-any.whl (61 kB)
+  Downloading requests-2.25.0-py2.py3-none-any.whl (61 kB)
+     |████████████████████████████████| 61 kB 2.1 MB/s
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /home/dst/.local/lib/pyt
+hon3.9/site-packages (from requests) (1.26.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /home/dst/.local/lib/python
+3.9/site-packages (from requests) (2020.12.5)
+Requirement already satisfied: chardet&lt;5,&gt;=3.0.2 in /usr/lib/python3/dist-packag
+es (from requests) (4.0.0)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /home/dst/.local/lib/python3.9/si
+te-packages (from requests) (2.10)
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">3</span><span style="color: #008700"></span><span style="color: #008700">]: </span>! head alice.txt
+﻿Project Gutenberg's Alice's Adventures in Wonderland, by Lewis Carroll
+ 
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.org
+ 
+ 
+Title: Alice's Adventures in Wonderland
+ 
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">4</span><span style="color: #008700"></span><span style="color: #008700">]: len</span>(<span style="color: #008700">open</span>(<span style="color: #af5f00">"alice.txt"</span>).read().strip().split(<span style="color: #af5f00">"</span><span style="font-weight: bold; color: #af5f00">\n</span><span style="color: #af5f00"></span><span style="color: #af5f00">"</span>)) <span class="callout">➋</span>
+<span style="color: #ff0000">Out[</span><span style="font-weight: bold; color: #ff0000">4</span><span style="color: #ff0000"></span><span style="color: #ff0000">]: </span>3735
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">5</span><span style="color: #008700"></span><span style="color: #008700">]: </span>total_lines = ! &lt; alice.txt wc -l
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">6</span><span style="color: #008700"></span><span style="color: #008700">]: </span>total_lines
+<span style="color: #ff0000">Out[</span><span style="font-weight: bold; color: #ff0000">6</span><span style="color: #ff0000"></span><span style="color: #ff0000">]: </span>['3735']
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">7</span><span style="color: #008700"></span><span style="color: #008700">]: int</span>(total_lines[<span style="color: #008700">0</span>]) <span class="callout">➌</span>
+<span style="color: #ff0000">Out[</span><span style="font-weight: bold; color: #ff0000">7</span><span style="color: #ff0000"></span><span style="color: #ff0000">]: </span>3735
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">8</span><span style="color: #008700"></span><span style="color: #008700">]: </span>url = <span style="color: #af5f00">"https://www.gutenberg.org/files/11/old/11.txt"</span>
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">9</span><span style="color: #008700"></span><span style="color: #008700">]: </span><span style="font-weight: bold; color: #008700">import</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087d7">requests</span> <span class="callout">➍</span>
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">10</span><span style="color: #008700"></span><span style="color: #008700">]: </span><span style="font-weight: bold; color: #008700">with</span> <span style="color: #008700">open</span>(<span style="color: #af5f00">"alice2.txt"</span>, <span style="color: #af5f00">"wb"</span>) <span style="font-weight: bold"></span><span style="font-weight: bold; color: #008700">as</span> f:
+<span style="color: #008700">    ...: </span>    response = requests.get(url)
+<span style="color: #008700">    ...: </span>    f.write(response.content)
+<span style="color: #008700">    ...: </span>
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">11</span><span style="color: #008700"></span><span style="color: #008700">]: </span>! curl <span style="color: #af5f00">'</span><span style="font-weight: bold; color: #af5f00"></span><span style="font-weight: bold; color: #af5f87">{url}</span><span style="color: #af5f00"></span><span style="color: #af5f00">'</span> &gt; alice3.txt <span class="callout">➎</span>
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  163k  100  163k    0     0   211k      0 --:--:-- --:--:-- --:--:--  211k
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">12</span><span style="color: #008700"></span><span style="color: #008700">]: </span>! ls alice*txt
+alice2.txt  alice3.txt  alice.txt
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">13</span><span style="color: #008700"></span><span style="color: #008700">]: </span>! rm -v alice{<span style="color: #008700">2</span>,<span style="color: #008700">3</span>}.txt <span class="callout">➏</span>
+zsh:1: no matches found: alice(2, 3).txt
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">14</span><span style="color: #008700"></span><span style="color: #008700">]: </span>! rm -v alice{{<span style="color: #008700">2</span>,<span style="color: #008700">3</span>}}.txt
+removed 'alice2.txt'
+removed 'alice3.txt'
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">15</span><span style="color: #008700"></span><span style="color: #008700">]: </span>lower = [<span style="color: #af5f00">"foo"</span>, <span style="color: #af5f00">"bar"</span>, <span style="color: #af5f00">"baz"</span>]
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">16</span><span style="color: #008700"></span><span style="color: #008700">]: </span>upper = ! echo <span style="color: #af5f00">'{"</span><span style="font-weight: bold; color: #af5f00">\n</span><span style="color: #af5f00"></span><span style="color: #af5f00">".join(lower)}'</span> | tr <span style="color: #af5f00">'[a-z]'</span> <span style="color: #af5f00">'[A-Z]'</span> <span class="callout">➐</span>
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">17</span><span style="color: #008700"></span><span style="color: #008700">]: </span>upper
+<span style="color: #ff0000">Out[</span><span style="font-weight: bold; color: #ff0000">17</span><span style="color: #ff0000"></span><span style="color: #ff0000">]: </span>['FOO', 'BAR', 'BAZ']
+ 
+<span style="color: #008700">In [</span><span style="font-weight: bold; color: #008700"></span><span style="font-weight: bold; color: #00ff00">18</span><span style="color: #008700"></span><span style="color: #008700">]: </span>exit
+Shutting down kernel
+ </pre>
+<p><span class="callout">➊</span> You can run arbitrary shell commands and pipelines such as <code>date</code> or <code>pip</code> to install a Python package.
+<br><span class="callout">➋</span> Compare this line of Pyton code to count the number of lines in <em>alice.txt</em> with the invocation of <code>wc</code> below it.
+<br><span class="callout">➌</span> Note that standard output is returned as a list of strings, so in order to use the value of <em>total_lines</em>, get the first item and cast it to an integer.
+<br><span class="callout">➍</span> Compare this cell and the next to download a file with the invocation of <code>curl</code> below it.
+<br><span class="callout">➎</span> You can use Python variables as part of the shell command by using curly braces.
+<br><span class="callout">➏</span> If you want to use literal curly braces, type them twice.
+<br><span class="callout">➐</span> Using a Python variable as standard input can be done, but gets quite tricky as you can see.</p>
+<p>Jupyter Notebook is, in essence, a browser-based version of Jupyter Console.
+It supports the same ways to leverage the command line, including the exclamation mark and bash magic.
+The biggest difference is that a notebook cannot only contain code, but also marked-up text, equations, and data visualizations.
+It’s very popular among data scientists for this reason.
+Jupyter Notebook is a separate project and environment, but I’d like to use JupyterLab to work with notebooks, because it offers a more complete IDE.</p>
+<p>Figure Figure <a href="chapter-10-polyglot-data-science.html#fig:jupyterlab">10.1</a> is a screenshot of JupyterLab, showing the file explorer (left), a code editor (middle), a notebook (right), and a terminal (bottom). The latter three all show ways to leverage the command line.
+The code is something I get back to in the next section.
+This particular notebook is quite similar to the console session I just discussed.
+The terminal offers a complete shell for you to run command line tools.
+Be aware that there’s no interactivity possible between this terminal, the code, and the notebook.
+So this terminal is not really different from having a separate terminal application open, but it’s still helpful when you’re working inside a Docker container or on a remote server.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:jupyterlab"></span>
+<img src="images/screenshot_jupyterlab.png" alt="JupyterLab with the file explorer, a code editor, a notebook, and a terminal" width="90%"><p class="caption">
+Figure 10.1: JupyterLab with the file explorer, a code editor, a notebook, and a terminal
+</p>
+</div>
+
+<div class="rmdcaution">
+This notebook in the screenshot also contains a cell using so-called <code>%%bash</code> magic, which allows you to write multi-line Bash scripts.
+Because it’s much more difficult to use Python variables, I don’t recommend this approach.
+You’re better off creating a Bash script in a separate file, and then executing it by using the exclamation mark (<code>!</code>).
+</div>
+</div>
+<div id="python" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Python<a class="anchor" aria-label="anchor" href="#python"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <code>subprocess</code> module allows you to run command-line tools from Python and connect to their standard input and output.
+This module is recommended over the older <code>os.system()</code> function.
+It’s not run in a shell by default, but it’s possible to change that with the <code>shell</code> argument to <code>run()</code> function.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> <span style="text-decoration: underline">count.py</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">count.py</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ <span style="color: #5f8700">#!/usr/bin/env python</span>
+   2   │
+   3   │ <span style="color: #af005f">from</span> subprocess <span style="color: #af005f">import</span> run <span class="callout">➊</span>
+   4   │ <span style="color: #af005f">from</span> sys <span style="color: #af005f">import</span> argv
+   5   │
+   6   │ <span style="color: #af005f">if</span> __name__ <span style="color: #af005f">==</span> <span style="color: #5f8700">"__main__"</span>:
+   7   │
+   8   │     _, filename, pattern <span style="color: #af005f">=</span> argv
+   9   │
+  10   │     <span style="color: #af005f">with</span> <span style="color: #00afaf">open</span>(filename) <span style="color: #af005f">as</span> f: <span class="callout">➋</span>
+  11   │         alice <span style="color: #af005f">=</span> f.read()
+  12   │
+  13   │     words <span style="color: #af005f">=</span> <span style="color: #5f8700">"</span><span style="color: #00afaf">\n</span><span style="color: #5f8700">"</span>.join(alice.split()) <span class="callout">➌</span>
+  14   │
+  15   │     grep <span style="color: #af005f">=</span> run([<span style="color: #5f8700">"grep"</span>, <span style="color: #5f8700">"-i"</span>, pattern], <span class="callout">➍</span>
+  16   │                input <span style="color: #af005f">=</span> words,
+  17   │                capture_output<span style="color: #af005f">=</span><span style="color: #af8700">True</span>,
+  18   │                text<span style="color: #af005f">=</span><span style="color: #af8700">True</span>)
+  19   │
+  20   │     <span style="color: #00afaf">print</span>(<span style="color: #00afaf">len</span>(grep.stdout.strip().split(<span style="color: #5f8700">"</span><span style="color: #00afaf">\n</span><span style="color: #5f8700">"</span>))) <span class="callout">➎</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p><span class="callout">➊</span> The recommended way to leverage the command line is to use the <code>run()</code> function of the <code>subprocess</code> module.
+<br><span class="callout">➋</span> Open the file <em>filename</em>
+<br><span class="callout">➌</span> Split the entire text into words
+<br><span class="callout">➍</span> Run the command-line tool <code>grep</code>, where <em>words</em> is passed as standard input.
+<br><span class="callout">➎</span> The standard output is available as one long string. Here, I split it on each newline character to count the number of occurrences of <em>pattern</em>.</p>
+<p>This command-line tools is used as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">./count.py</span> <span style="text-decoration: underline">alice.txt</span> alice
+403</pre>
+<p>Notice that the first argument of the <code>run</code> call on line 15 is a list of strings, where the first item is the name of the command-line tool, and the remaining items are arguments.
+This is different from passing a single string.
+This is also means that you don’t have any other shell syntax available that would allow for things such as redirection and piping.</p>
+</div>
+<div id="r" class="section level2" number="10.4">
+<h2>
+<span class="header-section-number">10.4</span> R<a class="anchor" aria-label="anchor" href="#r"><i class="fas fa-link"></i></a>
+</h2>
+<p>In R, there are several ways to leverage the command line.</p>
+<p>In the example below, I start an R session and count the number of occurrences of the string <em>alice</em> in the book <em>Alice’s Adventures in Wonderland</em> using the <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> function.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">R</span> --quiet
+&gt; lines &lt;- readLines("alice.txt") <span class="callout">➊</span>
+&gt; head(lines)
+[1] "Project Gutenberg's Alice's Adventures in Wonderland, by Lewis Carroll"
+[2] ""
+[3] "This eBook is for the use of anyone anywhere at no cost and with"
+[4] "almost no restrictions whatsoever.  You may copy it, give it away or"
+[5] "re-use it under the terms of the Project Gutenberg License included"
+[6] "with this eBook or online at www.gutenberg.org"
+&gt; words &lt;- unlist(strsplit(lines, " ")) <span class="callout">➋</span>
+&gt; head(words)
+[1] "Project"     "Gutenberg's" "Alice's"     "Adventures"  "in"
+[6] "Wonderland,"
+&gt; alice &lt;- system2("grep", c("-i", "alice"), input = words, stdout = TRUE) <span class="callout">➌</span>
+&gt; head(alice)
+[1] "Alice's" "Alice's" "ALICE'S" "ALICE'S" "Alice"   "Alice"
+&gt; length(alice) <span class="callout">➍</span></pre>
+<p><span class="callout">➊</span> Read in the file <em>alice.txt</em>
+<br><span class="callout">➋</span> Split the text into words
+<br><span class="callout">➌</span> Invoke the command-line tool <code>grep</code> to only keep the lines that match the string <em>alice</em>. The character vector <em>words</em> is passed as standard input.
+<br><span class="callout">➍</span> Count the number of elements in the character vector <em>alice</em></p>
+<p>A disadvantage of <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> is that it first writes the character vector to a file before passing it as standard input to the command-line tool.
+This can be problematic when dealing with a lot of data and a lot of invocations.</p>
+<p>It’s better to use a named pipe, because then no data will be written to disk, which is much more efficient.
+This can be done with <code><a href="https://rdrr.io/r/base/connections.html">pipe()</a></code> and <code><a href="https://rdrr.io/r/base/connections.html">fifo()</a></code> functions.
+Thanks to Jim Hester for suggesting this.
+The code below demonstrates this:</p>
+<pre>&gt; out_con &lt;- fifo("out", "w+") <span class="callout">➊</span>
+&gt; in_con &lt;- pipe("grep b &gt; out") <span class="callout">➋</span>
+&gt; writeLines(c("foo", "bar"), in_con) <span class="callout">➌</span>
+&gt; readLines(out_con) <span class="callout">➍</span>
+[1] "bar"</pre>
+<p><span class="callout">➊</span> The function <code><a href="https://rdrr.io/r/base/connections.html">fifo()</a></code> creates a special first-in-first-out file called <em>out</em>. This is just a reference to a pipe connection (like stdin and stdout are). No data is actually written to disk.
+<br><span class="callout">➋</span> The tool <code>grep</code> will only keep lines that contain a <em>b</em> and write them the named pipe <em>out</em> .
+<br><span class="callout">➌</span> Write two values to standard input of the shell command.
+<br><span class="callout">➍</span> Read the standard output produces by <code>grep</code> as a character vector.
+<br><span class="callout">➎</span> Clean up the connections and delete the special file.</p>
+<!-- check out the processx package https://processx.r-lib.org/. experimental at the time of writing. but seems very promising to working with connections in a more robust manner. -->
+<!-- # all four options are executed in a shell.  -->
+<!-- # no stdin and no stdout: system -->
+<!-- # stdin but no stdout: writeLines(pipe) -->
+<!-- # stdout but no stdin: readLines(pipe) -->
+<!-- readLines(pipe("")) -->
+<!-- # both stdin and stdout: fifo, readLines, writeLines -->
+<!-- first-in first-out special file, named pipe -->
+<!-- When processes are -->
+<!-- exchanging data via the FIFO, the kernel passes all data -->
+<!-- internally without writing it to the filesystem. -->
+<!-- ## Leveraging the Command Line Elsewhere -->
+<!-- ### Clipboard -->
+<!-- yank -->
+<!-- pbcopy pbpaste -->
+<!-- when formatting emailadresses -->
+<p>Because this requires quite a bit of boilerplate code (creating connections, writing, reading, cleaning up), I have written a helper function <code>sh()</code>.
+Using the pipe operator (<code>%&gt;%</code>) from the <code>magrittr</code> package I chain together multiple shell commands.</p>
+<pre>&gt; library(magrittr)
+&gt;
+&gt; sh &lt;- function(.data, command) {
++   temp_file &lt;- tempfile()
++   out_con &lt;- fifo(temp_file, "w+")
++   in_con &lt;- pipe(paste0(command, " &gt; ", temp_file))
++   writeLines(as.character(.data), in_con)
++   result &lt;- readLines(out_con)
++   close(out_con)
++   close(in_con)
++   unlink(temp_file)
++   result
++ }
+&gt;
+&gt; lines &lt;- readLines("alice.txt")
+&gt; words &lt;- unlist(strsplit(lines, " "))
+&gt;
+&gt; sh(words, "grep -i alice") %&gt;%
++   sh("wc -l") %&gt;%
++   sh("cowsay") %&gt;%
++   cli::cat_boxx()
+┌──────────────────────────────────┐
+│                                  │
+│    _____                         │
+│   &lt; 403 &gt;                        │
+│    -----                         │
+│           \   ^__^               │
+│            \  (oo)\_______       │
+│               (__)\       )\/\   │
+│                   ||----w |      │
+│                   ||     ||      │
+│                                  │
+└──────────────────────────────────┘
+&gt;
+&gt; q("no")</pre>
+</div>
+<div id="rstudio" class="section level2" number="10.5">
+<h2>
+<span class="header-section-number">10.5</span> RStudio<a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>The RStudio IDE is arguably the most popular environment for working with R.
+When you open RStudio, you will first see the console tab:</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:rstudio-console"></span>
+<img src="images/screenshot_rstudio_console.png" alt="RStudio IDE with console tab open" width="90%"><p class="caption">
+Figure 10.2: RStudio IDE with console tab open
+</p>
+</div>
+<p>The terminal tab is right next to the console tab.
+If offers a complete shell:</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:rstudio-terminal"></span>
+<img src="images/screenshot_rstudio_terminal.png" alt="RStudio IDE with terminal tab open" width="90%"><p class="caption">
+Figure 10.3: RStudio IDE with terminal tab open
+</p>
+</div>
+<p>Note that, just as with JupyterLab, this terminal is not connected to the console or any R scripts.</p>
+</div>
+<div id="apache-spark" class="section level2" number="10.6">
+<h2>
+<span class="header-section-number">10.6</span> Apache Spark<a class="anchor" aria-label="anchor" href="#apache-spark"><i class="fas fa-link"></i></a>
+</h2>
+<p>Apache Spark is a cluster-computing framework.
+It’s the 800-pound gorilla you turn to when it’s impossible to fit your data in memory.
+Spark itself is written in Scala, but you can also interact with it from Python using <a href="https://spark.apache.org/docs/latest/api/python/index.html">PySpark</a> and from R using <a href="https://spark.apache.org/docs/latest/sparkr.html">SparkR</a> or <a href="https://spark.rstudio.com/">sparklyr</a>.</p>
+<p>Data processing and machine learning pipelines are defined through a series of transformations and one final action.
+One such transformation is the <code><a href="https://rdrr.io/r/base/connections.html">pipe()</a></code> transformation, which allows you to run the entire dataset through a shell command such as a Bash or Perl script.
+The items in the dataset are written to standard input and the standard output is returned as an RDD of strings.</p>
+<p>In the session below, I start a Spark shell and again count the number of occurrences of <em>alice</em> in the book <em>Alice’s Adventures in Wonderland</em>.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">spark-shell</span> --master local[6]
+Spark context Web UI available at http://3d1bec8f2543:4040
+Spark context available as 'sc' (master = local[6], app id = local-16193763).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.1.1
+      /_/
+ 
+Using Scala version 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.10)
+Type in expressions to have them evaluated.
+Type :help for more information.
+ 
+<span style="color: #af005f">scala&gt; </span>val lines = sc.textFile("alice.txt") <span class="callout">➊</span>
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">lines</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">org.apache.spark.rdd.RDD[String]</span> = alice.txt MapPartitionsRDD[1] at textF
+ile at &lt;console&gt;:24
+ 
+<span style="color: #af005f">scala&gt; </span>lines.first()
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">res0</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">String</span> = Project Gutenberg's Alice's Adventures in Wonderland, by Lewis Ca
+rroll
+ 
+<span style="color: #af005f">scala&gt; </span>val words = lines.flatMap(line =&gt; line.split(" ")) <span class="callout">➋</span>
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">words</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">org.apache.spark.rdd.RDD[String]</span> = MapPartitionsRDD[2] at flatMap at &lt;con
+sole&gt;:25
+ 
+<span style="color: #af005f">scala&gt; </span>words.take(5)
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">res1</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">Array[String]</span> = Array(Project, Gutenberg's, Alice's, Adventures, in)
+ 
+<span style="color: #af005f">scala&gt; </span>val alice = words.pipe("grep -i alice") <span class="callout">➌</span>
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">alice</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">org.apache.spark.rdd.RDD[String]</span> = PipedRDD[3] at pipe at &lt;console&gt;:25
+ 
+<span style="color: #af005f">scala&gt; </span>alice.take(5)
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">res2</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">Array[String]</span> = Array(Alice's, Alice's, ALICE'S, ALICE'S, Alice)
+ 
+<span style="color: #af005f">scala&gt; </span>val counts = alice.pipe("wc -l") <span class="callout">➍</span>
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">counts</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">org.apache.spark.rdd.RDD[String]</span> = PipedRDD[4] at pipe at &lt;console&gt;:25
+ 
+<span style="color: #af005f">scala&gt; </span>counts.collect()
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">res3</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">Array[String]</span> = Array(64, 72, 94, 93, 67, 13) <span class="callout">➎</span>
+ 
+<span style="color: #af005f">scala&gt; </span>counts.map(x =&gt; x.toInt).reduce(_ + _) <span class="callout">➏</span>
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">res4</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">Int</span> = 403
+ 
+<span style="color: #af005f">scala&gt; </span>sc.textFile("alice.txt").flatMap(line =&gt; line.split(" ")).pipe("grep -i a
+lice").pipe("wc -l").map(x =&gt; x.toInt).reduce(_ + _)
+<span style="font-weight: bold"></span><span style="font-weight: bold; color: #0087ff">res5</span>: <span style="font-weight: bold"></span><span style="font-weight: bold; color: #5f8700">Int</span> = 403 <span class="callout">➐</span>
+ </pre>
+<p><span class="callout">➊</span> Read <em>alice.txt</em> such that each line is an element.
+<br><span class="callout">➋</span> Split each element on spaces. In other words, each line is split into words.
+<br><span class="callout">➌</span> Pipe each partition through <code>grep</code> to keep only the elements that match the string <em>alice</em>.
+<br><span class="callout">➍</span> Pipe each partition through <code>wc</code> to count the number of elements.
+<br><span class="callout">➎</span> There’s one count for each partition.
+<br><span class="callout">➏</span> Sum all counts to get a final count. Note that elements first need to be converted from strings to integers.
+<br><span class="callout">➐</span> The above steps combined into a single command.</p>
+
+<div class="rmdtip">
+The <code><a href="https://rdrr.io/r/base/connections.html">pipe()</a></code> transformation is also available in PySpark, SparkR, and sparklyr.
+</div>
+<!-- https://stackoverflow.com/questions/54239583/question-about-rdd-pipe-operator-on-apache-spark -->
+<p>If you want to use a custom command-line tool in your pipeline, then you need to make sure that it’s present on all nodes in the cluster (known as the executors).
+One way to do this is to specify the filename(s) with the <code>--files</code> option when you’re submitting Spark applications using <code>spark-submit</code>.</p>
+<p>Matei Zaharia and Bill Chambers (the original author of Apache Spark) mention in their book <em>Spark: The Definitive Guide</em> that “[t]he <code>pipe</code> method is probably one of Spark’s more interesting methods.”
+That’s quite the compliment!
+I think it’s fantastic that the developers of Apache Spark added the ability to leverage a 50-year old technology.</p>
+<!-- ### Notable mentions -->
+<!-- - Julia: Blog post with an introduction: https://blog.leahhanson.us/post/julia/julia-commands.html -->
+<!-- - Visual Studio Code https://code.visualstudio.com/docs/editor/integrated-terminal -->
+<!-- - Emacs -->
+<!-- - VIM (using ! command) -->
+<!-- - OS: Guake, -->
+<!-- - OS: iTerm2:    https://www.sharmaprakash.com.np/guake-like-dropdown-terminal-in-mac/ -->
+<!-- https://github.com/shelljs/shelljs -->
+<!-- https://amoffat.github.io/sh/ -->
+<!-- https://plumbum.readthedocs.io/en/latest/ -->
+<!-- <\!-- ## Other Combinations -\-> -->
+<!-- - reticulate -->
+<!-- - Rpy2 -->
+<!-- - sparkr -->
+<!-- - sparklyr -->
+<!-- TODO: MUST: Write Summary or Conclusion -->
+<!-- # Summary -->
+<!-- TODO: MUST: Talk about other combinations between languages. This is already possible with this approah, but there are tighter integrations. -->
+</div>
+<div id="summary-9" class="section level2" number="10.7">
+<h2>
+<span class="header-section-number">10.7</span> Summary<a class="anchor" aria-label="anchor" href="#summary-9"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter you learned several ways to leverage the command line in other situations, including programming languages and other environments.
+It’s important to realize that the command line doesn’t exist in a vacuum.
+What matters most is that you use tools, sometimes in combination, that reliably get the job done.</p>
+<p>Now that we’ve had all the four OSEMN chapters and the four intermezzo chapters, it’s time to wrap this up and conclude in the final chapter.</p>
+</div>
+<div id="for-further-exploration-9" class="section level2" number="10.8">
+<h2>
+<span class="header-section-number">10.8</span> For Further Exploration<a class="anchor" aria-label="anchor" href="#for-further-exploration-9"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>There are also ways to integrating two programming languages directly, without the use of the command line. For example the <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code> package</a> in R allows you to interface with Python directly.</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></div>
+<div class="next"><a href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-10-polyglot-data-science"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="nav-link" href="#overview-7"><span class="header-section-number">10.1</span> Overview</a></li>
+<li><a class="nav-link" href="#jupyter"><span class="header-section-number">10.2</span> Jupyter</a></li>
+<li><a class="nav-link" href="#python"><span class="header-section-number">10.3</span> Python</a></li>
+<li><a class="nav-link" href="#r"><span class="header-section-number">10.4</span> R</a></li>
+<li><a class="nav-link" href="#rstudio"><span class="header-section-number">10.5</span> RStudio</a></li>
+<li><a class="nav-link" href="#apache-spark"><span class="header-section-number">10.6</span> Apache Spark</a></li>
+<li><a class="nav-link" href="#summary-9"><span class="header-section-number">10.7</span> Summary</a></li>
+<li><a class="nav-link" href="#for-further-exploration-9"><span class="header-section-number">10.8</span> For Further Exploration</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/10.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/10.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

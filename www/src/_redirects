@@ -1,0 +1,26 @@
+/1e/chapter-1-introduction.html /2e/chapter-1-introduction.html
+/1e/chapter-2-getting-started.html /2e/chapter-2-getting-started.html
+/1e/chapter-3-obtaining-data.html /2e/chapter-3-obtaining-data.html
+/1e/chapter-4-creating-reusable-command-line-tools.html /2e/chapter-4-creating-command-line-tools.html
+/1e/chapter-5-scrubbing-data.html /2e/chapter-5-scrubbing-data.html
+/1e/chapter-6-managing-your-data-workflow.html /2e/chapter-6-project-management-with-make.html
+/1e/chapter-7-exploring-data.html /2e/chapter-7-exploring-data.html
+/1e/chapter-8-parallel-pipelines.html /2e/chapter-8-parallel-pipelines.html
+/1e/chapter-9-modeling-data.html /2e/chapter-9-modeling-data.html
+/1e/chapter-10-conclusion.html /2e/chapter-11-conclusion.html
+/1e/* /2e/
+
+/chapter-1-introduction.html /2e/chapter-1-introduction.html
+/chapter-2-getting-started.html /2e/chapter-2-getting-started.html
+/chapter-3-obtaining-data.html /2e/chapter-3-obtaining-data.html
+/chapter-4-creating-reusable-command-line-tools.html /2e/chapter-4-creating-command-line-tools.html
+/chapter-5-scrubbing-data.html /2e/chapter-5-scrubbing-data.html
+/chapter-6-managing-your-data-workflow.html /2e/chapter-6-project-management-with-make.html
+/chapter-7-exploring-data.html /2e/chapter-7-exploring-data.html
+/chapter-8-parallel-pipelines.html /2e/chapter-8-parallel-pipelines.html
+/chapter-9-modeling-data.html /2e/chapter-9-modeling-data.html
+/chapter-10-conclusion.html /2e/chapter-11-conclusion.html
+/preface.html /2e/preface.html
+/references.html /2e/
+
+/2e/* /2e/404.html 404

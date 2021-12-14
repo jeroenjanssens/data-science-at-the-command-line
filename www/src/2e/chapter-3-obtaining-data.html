@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Obtaining Data | Data Science at the Command Line, 2e</title>
+<meta name="author" content="Jeroen Janssens">
+<meta name="description" content="This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. I assume that the data you need to solve your...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Obtaining Data | Data Science at the Command Line, 2e">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://datascienceatthecommandline.com/chapter-3-obtaining-data.html">
+<meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+<meta property="og:description" content="This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. I assume that the data you need to solve your...">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chapter 3 Obtaining Data | Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. I assume that the data you need to solve your...">
+<meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.9/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira%20Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="dsatcl2e.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-2 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <img id="cover" class="d-none d-lg-block" src="images/cover-small.png"><h1 class="d-lg-none">
+        <a href="index.html" title="">Data Science at the Command Line, 2e</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="foreword.html">Foreword</a></li>
+<li><a class="" href="preface.html">Preface</a></li>
+<li><a class="" href="chapter-1-introduction.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></li>
+<li><a class="active" href="chapter-3-obtaining-data.html"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="" href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></li>
+<li><a class="" href="chapter-5-scrubbing-data.html"><span class="header-section-number">5</span> Scrubbing Data</a></li>
+<li><a class="" href="chapter-6-project-management-with-make.html"><span class="header-section-number">6</span> Project Management with Make</a></li>
+<li><a class="" href="chapter-7-exploring-data.html"><span class="header-section-number">7</span> Exploring Data</a></li>
+<li><a class="" href="chapter-8-parallel-pipelines.html"><span class="header-section-number">8</span> Parallel Pipelines</a></li>
+<li><a class="" href="chapter-9-modeling-data.html"><span class="header-section-number">9</span> Modeling Data</a></li>
+<li><a class="" href="chapter-10-polyglot-data-science.html"><span class="header-section-number">10</span> Polyglot Data Science</a></li>
+<li><a class="" href="chapter-11-conclusion.html"><span class="header-section-number">11</span> Conclusion</a></li>
+<li><a class="" href="list-of-command-line-tools.html">List of Command-Line Tools</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jeroenjanssens/data-science-at-the-command-line">View book repository <i class=""></i></a></p>
+        </div>
+
+        <div>
+          <a id="course-signup" href="/#course">Embrace the Command Line</a>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="chapter-3-obtaining-data" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Obtaining Data<a class="anchor" aria-label="anchor" href="#chapter-3-obtaining-data"><i class="fas fa-link"></i></a>
+</h1>
+<p>This chapter deals with the first step of the OSEMN model: obtaining data.
+After all, without any data, there is not much data science that we can do.
+I assume that the data you need to solve your data science problem already exists.
+Your first task is to get this data onto your computer (and possibly also inside the Docker container) in a form that you can work with.</p>
+<p>According to the Unix philosophy, text is a universal interface.
+Almost every command-line tool takes text as input, produces text as output, or both.
+This is the main reason why command-line tools can work so well together.
+However, as we’ll see, even just text can come in multiple forms.</p>
+<p>Data can be obtained in several ways—for example by downloading it from a server, querying a database, or connecting to a Web API.
+Sometimes, the data comes in a compressed form or in a binary format such as a Microsoft Excel Spreadsheet.
+In this chapter, I discuss several tools that help tackle this from the command line, including: <code>curl</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-curl" role="doc-biblioref"&gt;Daniel Stenberg, &lt;em&gt;&lt;span class="nocase"&gt;curl&lt;/span&gt; – Transfer a &lt;span&gt;URL&lt;/span&gt;&lt;/em&gt;, version 7.68.0, 2016, &lt;/a&gt;&lt;a href="https://curl.haxx.se" role="doc-biblioref"&gt;https://curl.haxx.se&lt;/a&gt;.&lt;/p&gt;'><sup>33</sup></a></span>, <code>in2csv</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-in2csv" role="doc-biblioref"&gt;Christopher Groskopf, &lt;em&gt;&lt;span class="nocase"&gt;in2csv&lt;/span&gt; – Convert Common, but Less Awesome, Tabular Data Formats to &lt;span&gt;CSV&lt;/span&gt;&lt;/em&gt;, version 1.0.5, 2020, &lt;/a&gt;&lt;a href="https://csvkit.rtfd.org" role="doc-biblioref"&gt;https://csvkit.rtfd.org&lt;/a&gt;.&lt;/p&gt;'><sup>34</sup></a></span>, <code>sql2csv</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-sql2csv" role="doc-biblioref"&gt;Christopher Groskopf, &lt;em&gt;&lt;span class="nocase"&gt;sql2csv&lt;/span&gt; – Execute an &lt;span&gt;SQL&lt;/span&gt; Query on a Database and Output the Result to a &lt;span&gt;CSV&lt;/span&gt; File&lt;/em&gt;, version 1.0.5, 2020, &lt;/a&gt;&lt;a href="https://csvkit.rtfd.org" role="doc-biblioref"&gt;https://csvkit.rtfd.org&lt;/a&gt;.&lt;/p&gt;'><sup>35</sup></a></span>, and <code>tar</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-tar" role="doc-biblioref"&gt;John Gilmore and Jay Fenlason, &lt;em&gt;&lt;span class="nocase"&gt;tar&lt;/span&gt; – an Archiving Utility&lt;/em&gt;, version 1.30, 2014, &lt;/a&gt;&lt;a href="https://www.gnu.org/software/tar" role="doc-biblioref"&gt;https://www.gnu.org/software/tar&lt;/a&gt;.&lt;/p&gt;'><sup>36</sup></a></span>.</p>
+<div id="overview" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Copy local files to the Docker image</li>
+<li>Download data from the Internet</li>
+<li>Decompress files</li>
+<li>Extract data from spreadsheets</li>
+<li>Query relational databases</li>
+<li>Call web APIs</li>
+</ul>
+<p>This chapter starts with the following files:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cd</span> <span style="text-decoration: underline">/data/ch03</span>
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 924K
+-rw-r--r-- 1 dst dst 627K Dec  6 21:30 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec  6 21:30 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec  6 21:30 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec  6 21:30 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec  6 21:30 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec  6 21:30 top2000.xlsx</pre>
+<p>The instructions to get these files are in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a>.
+Any other files are either downloaded or generated using command-line tools.</p>
+</div>
+<div id="copying-local-files-to-the-docker-container" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Copying Local Files to the Docker Container<a class="anchor" aria-label="anchor" href="#copying-local-files-to-the-docker-container"><i class="fas fa-link"></i></a>
+</h2>
+<p>A common situation is that you already have the necessary files on your own computer.
+This section explains how you can get those files into the Docker container.</p>
+<p>I mentioned in <a href="chapter-2-getting-started.html#chapter-2-getting-started">Chapter 2</a> that the Docker container is an isolated virtual environment.
+Luckily there is one exception to that: files can be transferred in and out the Docker container.
+The local directory from which you ran <code>docker run</code>, is mapped to a directory in the Docker container.
+This directory is called <em>/data</em>.
+Note that this is not the home directory, which is <em>/home/dst</em>.</p>
+<p>If you have one or more files on your local computer, and you want to apply some command-line tools to them, all you have to do is copy or move the files to that mapped directory.
+Let’s assume that you have a file called <em>logs.csv</em> in your Downloads directory.</p>
+<p>If you’re running Windows, open the command prompt or PowerShell and run the following two commands:</p>
+<pre>&gt; cd %UserProfile%\Downloads
+&gt; copy logs.csv MyDataScienceToolbox\</pre>
+<p>If you are running Linux or macOS, open a terminal and execute the following command on your operating system (and not inside the Docker container):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">cp</span> ~/Downloads/logs.csv ~/my-data-science-toolbox</pre>
+<p>You can also drag-and-drop the file into the right directory using a graphical file manager such as Windows Explorer or macOS Finder.</p>
+</div>
+<div id="downloading-from-the-internet" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Downloading from the Internet<a class="anchor" aria-label="anchor" href="#downloading-from-the-internet"><i class="fas fa-link"></i></a>
+</h2>
+<p>The Internet provides, without a doubt, the largest resource for interesting data.
+The command-line tool <code>curl</code> can be considered the command line’s Swiss Army knife when it comes to downloading data from the Internet.</p>
+<div id="introducing-curl" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> Introducing <code>curl</code><a class="anchor" aria-label="anchor" href="#introducing-curl"><i class="fas fa-link"></i></a>
+</h3>
+<p>When you browse to a URL, which stands for <em>uniform resource locator</em>, your browser interprets the data it downloads.
+For example, the browser renders HTML files, plays video files automatically, and shows PDF files.
+However, when you use <code>curl</code> to access a URL, it downloads the data and, by default, prints it to standard output.
+<code>curl</code> doesn’t do any interpretation, but luckily other command-line tools can be used to process the data further.</p>
+<p>The easiest invocation of <code>curl</code> is to specify a URL as a command-line argument.
+Let’s, try downloading an article from Wikipedia:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> <span style="color: #af8700">"https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">trim</span> <span class="callout">➊</span>
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0&lt;!
+DOCTYPE html&gt;
+&lt;html class="client-nojs" lang="en" dir="ltr"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"/&gt;
+&lt;title&gt;List of windmills in the Netherlands - Wikipedia&lt;/title&gt;
+&lt;script&gt;document.documentElement.className="client-js";RLCONF={"wgBreakFrames":…
+"wgRelevantPageName":"List_of_windmills_in_the_Netherlands","wgRelevantArticleI…
+,"site.styles":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","us…
+"ext.growthExperiments.SuggestedEditSession"];&lt;/script&gt;
+&lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…
+100  249k  100  249k    0     0   846k      0 --:--:-- --:--:-- --:--:--  860k
+… with 1766 more lines</pre>
+<p><span class="callout">➊</span> Remember, <code>trim</code> is used only to make the output fit nicely in the book.</p>
+<p>As you can see, <code>curl</code> downloads the raw HTML returned by Wikipedia’s server; no interpretation is being done and all the contents is immediately printed on standard output.
+Because of the URL, you’d think that this article would list all the windmills in the Netherlands.
+However, there are apparently so many windmills left that each province has its own page.
+Fascinating.</p>
+<p>By default, <code>curl</code> outputs a progress meter that shows the download rate and the expected time of completion.
+This output isn’t written to standard output, but a separate channel, known as <em>standard error</em>, so this doesn’t interfere when you add another tool to the pipeline.
+While this information can be useful when downloading very large files, I usually find it distracting, so I specify the <code>-s</code> option to <em>silence</em> this output.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">pup</span> -n <span style="color: #af8700">'table.wikitable tr'</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span></span>
+234</pre>
+<p><span class="callout">➊</span> I’ll discuss <code>pup</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-pup" role="doc-biblioref"&gt;Eric Chiang, &lt;em&gt;&lt;span class="nocase"&gt;pup&lt;/span&gt; – Parsing HTML at the Command Line&lt;/em&gt;, version 0.4.0, 2016, &lt;/a&gt;&lt;a href="https://github.com/EricChiang/pup" role="doc-biblioref"&gt;https://github.com/EricChiang/pup&lt;/a&gt;.&lt;/p&gt;'><sup>37</sup></a></span>, a handy tool for scraping websites, in more detail in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a>.</p>
+<p>And what do you know, there are apparently 234 windmills in the province of Friesland alone!</p>
+</div>
+<div id="saving" class="section level3" number="3.3.2">
+<h3>
+<span class="header-section-number">3.3.2</span> Saving<a class="anchor" aria-label="anchor" href="#saving"><i class="fas fa-link"></i></a>
+</h3>
+<p>You can let <code>curl</code> save the output to a file by adding the <code>-O</code> option.
+The filename will be based on the last part of the URL.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> -O
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">l</span>
+total 1.4M
+-rw-r--r-- 1 dst dst 432K Dec  6 21:30 List_of_windmills_in_Friesland
+-rw-r--r-- 1 dst dst 627K Dec  6 21:30 <span style="font-weight: bold"></span><span style="font-weight: bold; color: #d70000">logs.tar.gz</span>
+-rw-r--r-- 1 dst dst 189K Dec  6 21:30 r-datasets.db
+-rw-r--r-- 1 dst dst  149 Dec  6 21:30 tmnt-basic.csv
+-rw-r--r-- 1 dst dst  148 Dec  6 21:30 tmnt-missing-newline.csv
+-rw-r--r-- 1 dst dst  181 Dec  6 21:30 tmnt-with-header.csv
+-rw-r--r-- 1 dst dst  91K Dec  6 21:30 top2000.xlsx</pre>
+<p>If you don’t like that filename then you can use the <code>-o</code> option together with a filename or redirect the output to a file yourself:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color: #af8700">&gt;</span> fries
+land.html</pre>
+</div>
+<div id="other-protocols" class="section level3" number="3.3.3">
+<h3>
+<span class="header-section-number">3.3.3</span> Other Protocols<a class="anchor" aria-label="anchor" href="#other-protocols"><i class="fas fa-link"></i></a>
+</h3>
+<p>In total, <code>curl</code> supports <a href="https://ec.haxx.se/protocols/protocols-curl">more than 20 protocols</a>.
+To download from an FTP server, which stands for File Transfer Protocol, you use <code>curl</code> the same way.
+Here I download the file <em>welcome.msg</em> from <em>ftp.gnu.org</em>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"ftp://ftp.gnu.org/welcome.msg"</span> | <span style="color: #5f8700">trim</span>
+NOTICE (Updated October 15 2021):
+ 
+If you maintain scripts used to access ftp.gnu.org over FTP,
+we strongly encourage you to change them to use HTTPS instead.
+ 
+Eventually we hope to shut down FTP protocol access, but plan
+to give notice here and other places for several months ahead
+of time.
+ 
+--
+… with 19 more lines</pre>
+<p>If the specified URL is a directory, <code>curl</code> will list the contents of that directory.
+When the URL is password protected, you can specify a username and a password as follows with the <code>-u</code> option.</p>
+<p>Or how about the DICT protocol, which allows you to access various dictionaries and lookup definitions.
+Here’s the definition of “windmill” according to the Collaborative International Dictionary of English:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"dict://dict.org/d:windmill"</span> | <span style="color: #5f8700">trim</span>
+220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 &lt;auth.mime&gt; &lt;8122421…
+250 ok
+150 1 definitions retrieved
+151 "Windmill" gcide "The Collaborative International Dictionary of English v.0…
+Windmill \Wind"mill`\, n.
+   A mill operated by the power of the wind, usually by the
+   action of the wind upon oblique vanes or sails which radiate
+   from a horizontal shaft. --Chaucer.
+   [1913 Webster]
+.
+… with 2 more lines</pre>
+<p>When downloading data from the Internet, however, the protocol will most likely be HTTP, so the URL will start with either <em><a href="http://" class="uri">http://</a></em> or <em><a href="https://" class="uri">https://</a></em>.</p>
+</div>
+<div id="following-redirects" class="section level3" number="3.3.4">
+<h3>
+<span class="header-section-number">3.3.4</span> Following Redirects<a class="anchor" aria-label="anchor" href="#following-redirects"><i class="fas fa-link"></i></a>
+</h3>
+<p>When you access a shortened URL, such as the ones that start with <em><a href="http://bit.ly/" class="uri">http://bit.ly/</a></em> or <em><a href="http://t.co/" class="uri">http://t.co/</a></em>, your browser automatically redirects you to the correct location.
+With <code>curl</code>, however, you need to specify the <code>-L</code> or <code>--location</code> option in order to be redirected.
+If you don’t, you can get something like:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://bit.ly/2XBxvwK"</span>
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Bitly&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;&lt;a href="https://youtu.be/dQw4w9WgXcQ"&gt;moved here&lt;/a&gt;&lt;/body&gt;
+&lt;/html&gt;<span style="font-weight: bold; font-style: italic">%</span></pre>
+<p>Sometimes you get nothing back, just like when we follow the URL mentioned above:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://youtu.be/dQw4w9WgXcQ"</span></pre>
+<p>By specifying the <code>-I</code> or <code>--head</code> option, <code>curl</code> fetches only the HTTP header of the response, which allows you to inspect the status code and other information returned by the server.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -sI <span style="color: #af8700">"https://youtu.be/dQw4w9WgXcQ"</span> | <span style="color: #5f8700">trim</span>
+HTTP/2 303
+content-type: application/binary
+x-content-type-options: nosniff
+cache-control: no-cache, no-store, max-age=0, must-revalidate
+pragma: no-cache
+expires: Mon, 01 Jan 1990 00:00:00 GMT
+date: Mon, 06 Dec 2021 20:30:50 GMT
+location: https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;feature=youtu.be
+content-length: 0
+x-frame-options: SAMEORIGIN
+… with 11 more lines</pre>
+<p>The first line shows the protocol followed by the HTTP status code, which is 303 in this case.
+You can also see the location this URL redirects to.
+Inspecting the header and getting the status code is a useful debugging tool in case <code>curl</code> does not give you the expected result.
+Other common HTTP status codes include 404 (not found) and 403 (forbidden).
+Wikipedia has a page that lists <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">all HTTP status codes</a>.</p>
+<p>In summary, <code>curl</code> is a useful command-line tool for downloading data from the Internet.
+Its three most common options are <code>-s</code> to silence the progress meter, <code>-u</code> to specify a username and password, and <code>-L</code> to automatically follow redirects.
+See its man page for more information (and to make your head spin):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">man</span> curl | <span style="color: #5f8700">trim</span> 20
+curl(1)                           Curl Manual                          curl(1)
+ 
+NAME
+       curl - transfer a URL
+ 
+SYNOPSIS
+       curl [options / URLs]
+ 
+DESCRIPTION
+       curl  is  a tool to transfer data from or to a server, using one of the
+       supported protocols (DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS,  IMAP,
+       IMAPS,  LDAP,  LDAPS,  MQTT, POP3, POP3S, RTMP, RTMPS, RTSP, SCP, SFTP,
+       SMB, SMBS, SMTP, SMTPS, TELNET and TFTP). The command  is  designed  to
+       work without user interaction.
+ 
+       curl offers a busload of useful tricks like proxy support, user authen‐
+       tication, FTP upload, HTTP post, SSL connections, cookies, file  trans‐
+       fer  resume,  Metalink,  and more. As you will see below, the number of
+       features will make your head spin!
+ 
+… with 3986 more lines</pre>
+</div>
+</div>
+<div id="decompressing-files" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Decompressing Files<a class="anchor" aria-label="anchor" href="#decompressing-files"><i class="fas fa-link"></i></a>
+</h2>
+<p>If the original dataset is very large or it’s a collection of many files, the file may be a compressed archive.
+Datasets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.</p>
+<p>Common file extensions of compressed archives are: <em>.tar.gz</em>, <em>.zip</em>, and <em>.rar</em>.
+To decompress these, you would use the command-line tools <code>tar</code>, <code>unzip</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-unzip" role="doc-biblioref"&gt;Samuel H. Smith et al., &lt;em&gt;&lt;span class="nocase"&gt;unzip&lt;/span&gt; – List, Test and Extract Compressed Files in a &lt;span&gt;ZIP&lt;/span&gt; Archive&lt;/em&gt;, version 6.0, 2009, &lt;/a&gt;&lt;a href="http://www.info-zip.org/pub/infozip" role="doc-biblioref"&gt;http://www.info-zip.org/pub/infozip&lt;/a&gt;.&lt;/p&gt;'><sup>38</sup></a></span>, and <code>unrar</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-unrar" role="doc-biblioref"&gt;Ben Asselstine, Christian Scheurer, and Johannes Winkelmann, &lt;em&gt;&lt;span class="nocase"&gt;unrar&lt;/span&gt; – Extract Files from Rar Archives&lt;/em&gt;, version 0.0.1, 2014, &lt;/a&gt;&lt;a href="http://home.gna.org/unrar" role="doc-biblioref"&gt;http://home.gna.org/unrar&lt;/a&gt;.&lt;/p&gt;'><sup>39</sup></a></span>, respectively.
+(There are a few more, though less common, file extensions for which you would need yet other tools.)</p>
+<p>Let’s take <em>tar.gz</em> (pronounced as “gzipped tarball”) as an example.
+In order to extract an archive named <em>logs.tar.gz</em>, you would use the following incantation:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">tar</span> -xzf <span style="text-decoration: underline">logs.tar.gz</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span> </span></pre>
+<p><span class="callout">➊</span> It’s common to combine these three short options, like I did here, but you can also specify them separately as <code>-x -z -f</code>.
+In fact, many command-tools allow you to combine options that consist of a single character.</p>
+<p>Indeed, <code>tar</code> is notorious for its many command-line arguments.
+In this case, the three options <code>-x</code>, <code>-z</code>, and <code>-f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm and use file <em>logs.tar.gz</em>.</p>
+<p>However, since we’re not yet familiar with this archive, it’s a good idea to first examine its contents.
+This can be done with the <code>-t</code> option (instead of the <code>-x</code> option):</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">tar</span> -tzf <span style="text-decoration: underline">logs.tar.gz</span> | <span style="color: #5f8700">trim</span>
+E1FOSPSAYDNUZI.2020-09-01-00.0dd00628
+E1FOSPSAYDNUZI.2020-09-01-00.b717c457
+E1FOSPSAYDNUZI.2020-09-01-01.05f904a4
+E1FOSPSAYDNUZI.2020-09-01-02.36588daf
+E1FOSPSAYDNUZI.2020-09-01-02.6cea8b1d
+E1FOSPSAYDNUZI.2020-09-01-02.be4bc86d
+E1FOSPSAYDNUZI.2020-09-01-03.16f3fa32
+E1FOSPSAYDNUZI.2020-09-01-03.1c0a370f
+E1FOSPSAYDNUZI.2020-09-01-03.76df64bf
+E1FOSPSAYDNUZI.2020-09-01-04.0a1ade1b
+… with 2427 more lines</pre>
+<p>Is seems that this archive contains a lot of files, and they are not inside a directory.
+In order to keep the current directory clean, it’s a good idea to first create a new directory using <code>mkdir</code> and extract those files there using the <code>-C</code> option.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">mkdir</span> logs
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">tar</span> -xzf <span style="text-decoration: underline">logs.tar.gz</span> -C <span style="text-decoration: underline">logs</span></pre>
+<p>Let’s verify the number of files and some of their contents:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">ls</span> <span style="text-decoration: underline">logs</span> | <span style="color: #5f8700">wc</span> -l
+2437
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">cat</span> logs/<span style="color: #0087ff">*</span> | <span style="color: #5f8700">trim</span>
+#Version: 1.0
+#Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem…
+2020-09-01      00:51:54        SEA19-C1        391     206.55.174.150  GET    …
+2020-09-01      00:54:59        CPH50-C2        384     82.211.213.95   GET    …
+#Version: 1.0
+#Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem…
+2020-09-01      00:04:28        DFW50-C1        391     2a03:2880:11ff:9::face:…
+#Version: 1.0
+#Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem…
+2020-09-01      01:04:14        ATL56-C4        385     2600:1700:2760:da20:548…
+… with 10279 more lines</pre>
+<p>Excellent.
+Now, I understand that you’d like to scrub and explore these log files, but that’s for later in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a> and <a href="chapter-7-exploring-data.html#chapter-7-exploring-data">Chapter 7</a>.</p>
+<p>In time, you’ll get used to these options, but I’d like to show you an alternative option, which might be convenient.
+Rather than remembering the different command-line tools and their options, there’s a handy script called <code>unpack</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-unpack" role="doc-biblioref"&gt;Patrick Brisbin, &lt;em&gt;&lt;span class="nocase"&gt;unpack&lt;/span&gt; – Extract Common File Formats&lt;/em&gt;, version 0.1, 2013, &lt;/a&gt;&lt;a href="https://github.com/jeroenjanssens/dsutils" role="doc-biblioref"&gt;https://github.com/jeroenjanssens/dsutils&lt;/a&gt;.&lt;/p&gt;'><sup>40</sup></a></span>, which will decompress many different formats.
+<code>unpack</code> looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool.
+Now, in order to decompress this same file, you would run:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">unpack</span> <span style="text-decoration: underline">logs.tar.gz</span></pre>
+</div>
+<div id="converting-microsoft-excel-spreadsheets-to-csv" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> Converting Microsoft Excel Spreadsheets to CSV<a class="anchor" aria-label="anchor" href="#converting-microsoft-excel-spreadsheets-to-csv"><i class="fas fa-link"></i></a>
+</h2>
+<p>For many people, Microsoft Excel offers an intuitive way to work with small datasets and perform calculations on them.
+As a result, a lot of data is embedded into Microsoft Excel spreadsheets.
+These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (<em>.xls</em>) or as a collection of compressed XML files (<em>.xlsx</em>).
+In both cases, the data is not readily usable by most command-line tools.
+It would be a shame if we could not use those valuable datasets just because they are stored this way.</p>
+<p>Especially when you’re just starting out at the command line, you might be tempted to convert your spreadsheet to CSV by opening it in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually exporting it to CSV.
+While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and cannot be automated.
+Furthermore, when you’re working on a server, chances are that you don’t have such an application available.
+Trust me, you’ll get the hang of it.</p>
+<p>Luckily, there is a command-line tool called <code>in2csv</code>, that converts Microsoft Excel spreadsheets to CSV files.
+CSV stands for comma-separated values.
+Working with CSV can be tricky because it lacks a formal specification.
+<!-- TODO: MUST: check and possibly fix reference? -->
+Yakov Shafranovich defines the CSV format according to the following three points:<span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-shafranovich2005common" role="doc-biblioref"&gt;Yakov Shafranovich, &lt;span&gt;“Common Format and &lt;span&gt;MIME&lt;/span&gt; Type for Comma-Separated Values &lt;span&gt;(CSV)&lt;/span&gt; Files,”&lt;/span&gt; 2005&lt;/a&gt;.&lt;/p&gt;'><sup>41</sup></a></span></p>
+<ol style="list-style-type: decimal">
+<li>Each record is located on a separate line, delimited by a line break (<code>␊</code>). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:</li>
+</ol>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> -A <span style="text-decoration: underline">tmnt-basic.csv</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span></span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">tmnt-basic.csv</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ Leonardo,Leo,blue,two<span style="color: #00afaf">·</span>ninjakens<span style="color: #af005f">␊</span>
+   2   │ Raphael,Raph,red,pair<span style="color: #00afaf">·</span>of<span style="color: #00afaf">·</span>sai<span style="color: #af005f">␊</span>
+   3   │ Michelangelo,Mikey<span style="color: #00afaf">·</span>or<span style="color: #00afaf">·</span>Mike,orange,pair<span style="color: #00afaf">·</span>of<span style="color: #00afaf">·</span>nunchaku<span style="color: #af005f">␊</span>
+   4   │ Donatello,Donnie<span style="color: #00afaf">·</span>or<span style="color: #00afaf">·</span>Don,purple,staff<span style="color: #af005f">␊</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p><span class="callout">➊</span> The <code>-A</code> option makes <code>bat</code> show all non-printable characters like spaces, tabs, and newlines.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The last record in the file may or may not have an ending line break. For example:</li>
+</ol>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> -A <span style="text-decoration: underline">tmnt-missing-newline.csv</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">tmnt-missing-newline.csv</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ Leonardo,Leo,blue,two<span style="color: #00afaf">·</span>ninjakens<span style="color: #af005f">␊</span>
+   2   │ Raphael,Raph,red,pair<span style="color: #00afaf">·</span>of<span style="color: #00afaf">·</span>sai<span style="color: #af005f">␊</span>
+   3   │ Michelangelo,Mikey<span style="color: #00afaf">·</span>or<span style="color: #00afaf">·</span>Mike,orange,pair<span style="color: #00afaf">·</span>of<span style="color: #00afaf">·</span>nunchaku<span style="color: #af005f">␊</span>
+   4   │ Donatello,Donnie<span style="color: #00afaf">·</span>or<span style="color: #00afaf">·</span>Don,purple,staff
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<ol start="3" style="list-style-type: decimal">
+<li>There may be a header appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file. For example:</li>
+</ol>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">bat</span> -A <span style="text-decoration: underline">tmnt-with-header.csv</span>
+───────┬────────────────────────────────────────────────────────────────────────
+       │ File: <span style="font-weight: bold">tmnt-with-header.csv</span>
+───────┼────────────────────────────────────────────────────────────────────────
+   1   │ name,nickname,mask_color,weapon<span style="color: #af005f">␊</span>
+   2   │ Leonardo,Leo,blue,two<span style="color: #00afaf">·</span>ninjakens<span style="color: #af005f">␊</span>
+   3   │ Raphael,Raph,red,pair<span style="color: #00afaf">·</span>of<span style="color: #00afaf">·</span>sai<span style="color: #af005f">␊</span>
+   4   │ Michelangelo,Mikey<span style="color: #00afaf">·</span>or<span style="color: #00afaf">·</span>Mike,orange,pair<span style="color: #00afaf">·</span>of<span style="color: #00afaf">·</span>nunchaku<span style="color: #af005f">␊</span>
+   5   │ Donatello,Donnie<span style="color: #00afaf">·</span>or<span style="color: #00afaf">·</span>Don,purple,staff<span style="color: #af005f">␊</span>
+───────┴────────────────────────────────────────────────────────────────────────</pre>
+<p>As you can see, CSV by default is not too readable.
+You can pipe the data to a tool called <code>csvlook</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-csvlook" role="doc-biblioref"&gt;Christopher Groskopf, &lt;em&gt;&lt;span class="nocase"&gt;csvlook&lt;/span&gt; – Render a &lt;span&gt;CSV&lt;/span&gt; File in the Console as a Markdown-Compatible, Fixed-Width Table&lt;/em&gt;, version 1.0.5, 2020, &lt;/a&gt;&lt;a href="https://csvkit.rtfd.org" role="doc-biblioref"&gt;https://csvkit.rtfd.org&lt;/a&gt;.&lt;/p&gt;'><sup>42</sup></a></span>, which will nicely format it into a table.
+If the CSV data has no header, like <em>tmnt-missing-newline.csv</em> then you need to add the <code>-H</code> option, otherwise the first line will be interpreted as the header.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvlook</span> <span style="text-decoration: underline">tmnt-with-header.csv</span>
+│ name         │ nickname      │ mask_color │ weapon           │
+├──────────────┼───────────────┼────────────┼──────────────────┤
+│ Leonardo     │ Leo           │ blue       │ two ninjakens    │
+│ Raphael      │ Raph          │ red        │ pair of sai      │
+│ Michelangelo │ Mikey or Mike │ orange     │ pair of nunchaku │
+│ Donatello    │ Donnie or Don │ purple     │ staff            │
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">csvlook</span> <span style="text-decoration: underline">tmnt-basic.csv</span>
+│ Leonardo     │ Leo           │ blue   │ two ninjakens    │
+├──────────────┼───────────────┼────────┼──────────────────┤
+│ Raphael      │ Raph          │ red    │ pair of sai      │
+│ Michelangelo │ Mikey or Mike │ orange │ pair of nunchaku │
+│ Donatello    │ Donnie or Don │ purple │ staff            │
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">csvlook</span> -H <span style="text-decoration: underline">tmnt-missing-newline.csv</span> <span style="font-weight: bold"></span><span style="font-weight: bold; color: #262626"><span class="callout">➊</span></span>
+│ a            │ b             │ c      │ d                │
+├──────────────┼───────────────┼────────┼──────────────────┤
+│ Leonardo     │ Leo           │ blue   │ two ninjakens    │
+│ Raphael      │ Raph          │ red    │ pair of sai      │
+│ Michelangelo │ Mikey or Mike │ orange │ pair of nunchaku │
+│ Donatello    │ Donnie or Don │ purple │ staff            │</pre>
+<p><span class="callout">➊</span> The <code>-H</code> option specifies that the CSV file has no header.</p>
+<p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program <a href="https://www.top2000nl.com">Top 2000</a>.
+To extract its data, you invoke <code>in2csv</code> as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> <span style="color: #af8700">"https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx"</span> <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">top2000.xls
+x</span>
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 41579  100 41579    0     0  87167      0 --:--:-- --:--:-- --:--:-- 88278
+ 
+<span style="font-weight: bold">$</span> <span style="color: #5f8700">in2csv</span> <span style="text-decoration: underline">top2000.xlsx</span> | <span style="color: #5f8700">tee</span> top2000.csv | <span style="color: #5f8700">trim</span>
+BadZipFile: File is not a zip file</pre>
+<p>Who is Danny Vera? The most popular song is supposed to be <em>Bohemian Rhapsody</em>, of course.
+Well, at least Queen appears plenty of times in the Top 2000 so I can’t really complain:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvgrep</span> <span style="text-decoration: underline">top2000.csv</span> --columns ARTIEST --regex <span style="color: #af8700">'^Queen$'</span> | <span style="color: #5f8700">csvlook</span> -I <span class="callout">➊</span>
+StopIteration:
+StopIteration:</pre>
+<p><span class="callout">➊</span> The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>ARTIEST</code></em>.</p>
+<p>By the way, the tools <code>in2csv</code>, <code>csvgrep</code>, and <code>csvlook</code> are part of CSVkit, which is a collection of command-line tools to work with CSV data.</p>
+<p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case.
+If you were to pipe the data into <code>in2csv</code>, you would have to specify the format explicitly.</p>
+<p>A spreadsheet can contain multiple worksheets.
+<code>in2csv</code> extracts, by default, the first worksheet.
+To extract a different worksheet, you need to pass the name of worksheet to the <code>--sheet</code> option.
+If you’re not sure what’s the worksheet is called, you can use the <code>--names</code> option, which prints the names of all the worksheets.
+Here we see that <em>top2000.xlsx</em> has only one sheet, named <em>Blad1</em> (which is Dutch for <em>Sheet1</em>).</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">in2csv</span> --names <span style="text-decoration: underline">top2000.xlsx</span>
+BadZipFile: File is not a zip file
+sys:1: ResourceWarning: unclosed file &lt;_io.BufferedReader name='top2000.xlsx'&gt;</pre>
+</div>
+<div id="querying-relational-databases" class="section level2" number="3.6">
+<h2>
+<span class="header-section-number">3.6</span> Querying Relational Databases<a class="anchor" aria-label="anchor" href="#querying-relational-databases"><i class="fas fa-link"></i></a>
+</h2>
+<p>Many companies store their data in a relational database.
+Just as with spreadsheets, it would be great if we could obtain that data from the command line.</p>
+<p>Examples of relational databases are MySQL, PostgreSQL, and SQLite.
+These databases all have a slightly different way of interfacing with them.
+Some provide a command-line tool or a command-line interface, while others do not.
+Moreover, they are not very consistent when it comes to their usage and output.</p>
+<p>Fortunately, there is a command-line tool called <code>sql2csv</code>, which is part of the CSVkit suite.
+It works with many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase.
+The output of <code>sql2csv</code> is, as its name suggests, in CSV format.</p>
+<p>We can obtain data from relational databases by executing a <em><code>SELECT</code></em> query on them.
+(<code>sql2csv</code> also support <em><code>INSERT</code></em>, <em><code>UPDATE</code></em>, and <em><code>DELETE</code></em> queries, but that’s not the purpose of this chapter.)</p>
+<p><code>sql2csv</code> needs two arguments: <code>--db</code>, which specifies the database URL, of which the typical form is: <code>dialect+driver://username:password@host:port/database</code> and <code>--query</code>, which contains the <em><code>SELECT</code></em> query.
+For example, given an SQLite database that contains the standard datasets from R<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;Available on &lt;a href="https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;'><sup>43</sup></a> , I can select all the rows from the table <em>mtcars</em> and sort them by the <em>mpg</em> column as follows:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">sql2csv</span> --db <span style="color: #af8700">'sqlite:///r-datasets.db'</span> \
+<span style="font-weight: bold">&gt;</span> --query <span style="color: #af8700">'SELECT row_names AS car, mpg FROM mtcars ORDER BY mpg'</span> | <span style="color: #5f8700">csvlook</span>
+│ car                 │  mpg │
+├─────────────────────┼──────┤
+│ Cadillac Fleetwood  │ 10.4 │
+│ Lincoln Continental │ 10.4 │
+│ Camaro Z28          │ 13.3 │
+│ Duster 360          │ 14.3 │
+│ Chrysler Imperial   │ 14.7 │
+│ Maserati Bora       │ 15.0 │
+│ Merc 450SLC         │ 15.2 │
+│ AMC Javelin         │ 15.2 │
+… with 24 more lines</pre>
+<p>This SQLite database is a local file, so in this I don’t need to specify any username, password or host.
+If you wish to query the database of your employer, you’d of course need know how you can access it and you’d need the permission to do so.</p>
+</div>
+<div id="calling-web-apis" class="section level2" number="3.7">
+<h2>
+<span class="header-section-number">3.7</span> Calling Web APIs<a class="anchor" aria-label="anchor" href="#calling-web-apis"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous section I explained how to download files from the Internet.
+Another way data can come from the Internet is through a web API, which stands for <em>Application Programming Interface</em>.
+The number of APIs that are being offered is growing at an increasing rate, which means a lot of interesting data for us data scientists.</p>
+<p>Web APIs are not meant to be presented in a nice layout, such as websites.
+Instead, most web APIs return data in a structured format, such as JSON or XML.
+Having data in a structured form has the advantage that the data can be easily processed by other tools, such as <code>jq</code>.
+For example, the API of Ice and Fire, which contains a lot of information about George R.R. Martin’s fictional world, in which the Game of Thrones book and TV shows take place, returns data in the following JSON structure:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://anapioficeandfire.com/api/characters/583"</span> | <span style="color: #5f8700">jq</span> <span style="color: #af8700">'.'</span>
+<span style="font-weight: bold">{</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"url"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"https://anapioficeandfire.com/api/characters/583"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"name"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Jon Snow"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"gender"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Male"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"culture"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Northmen"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"born"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"In 283 AC"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"died"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">""</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span> <span class="callout">➊</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"titles"</span><span style="font-weight: bold">: [</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Lord Commander of the Night's Watch"</span>
+<span style="font-weight: bold">  ],</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"aliases"</span><span style="font-weight: bold">: [</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Lord Snow"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Ned Stark's Bastard"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"The Snow of Winterfell"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"The Crow-Come-Over"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"The 998th Lord Commander of the Night's Watch"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"The Bastard of Winterfell"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"The Black Bastard of the Wall"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Lord Crow"</span>
+<span style="font-weight: bold">  ],</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"father"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">""</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"mother"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">""</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"spouse"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">""</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"allegiances"</span><span style="font-weight: bold">: [</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"https://anapioficeandfire.com/api/houses/362"</span>
+<span style="font-weight: bold">  ],</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"books"</span><span style="font-weight: bold">: [</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"https://anapioficeandfire.com/api/books/5"</span>
+<span style="font-weight: bold">  ],</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"povBooks"</span><span style="font-weight: bold">: [</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"https://anapioficeandfire.com/api/books/1"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"https://anapioficeandfire.com/api/books/2"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"https://anapioficeandfire.com/api/books/3"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"https://anapioficeandfire.com/api/books/8"</span>
+<span style="font-weight: bold">  ],</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"tvSeries"</span><span style="font-weight: bold">: [</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Season 1"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Season 2"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Season 3"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Season 4"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Season 5"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Season 6"</span>
+<span style="font-weight: bold">  ],</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"playedBy"</span><span style="font-weight: bold">: [</span>
+<span style="font-weight: bold">    </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Kit Harington"</span>
+<span style="font-weight: bold">  ]</span>
+<span style="font-weight: bold">}</span></pre>
+<p><span class="callout">➊</span> Spoiler alert: this data is not entirely up-to-date.</p>
+<p>The data is piped to a command-line tool <code>jq</code> just to display it in a nice way.
+<code>jq</code> has many more scrubbing and exploring possibilities that I will explore in <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a> and <a href="chapter-7-exploring-data.html#chapter-7-exploring-data">Chapter 7</a>.</p>
+<div id="authentication" class="section level3" number="3.7.1">
+<h3>
+<span class="header-section-number">3.7.1</span> Authentication<a class="anchor" aria-label="anchor" href="#authentication"><i class="fas fa-link"></i></a>
+</h3>
+<p>Some web APIs require you to authenticate (that is, to prove your identity) before you can consume their output.
+There are several ways to do this.
+Some web APIs use API keys while others use the OAuth protocol.
+News API, an independent source of headlines and news articles, is a great example.
+Let’s see what happens when you try to access this API without an API key:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"http://newsapi.org/v2/everything?q=linux"</span> | <span style="color: #5f8700">jq</span> <span style="text-decoration: underline">.</span>
+<span style="font-weight: bold">{</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"status"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"error"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,
+  </span><span style="font-weight: bold; color: #0087ff">"code"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"apiKeyMissing"</span><span style="font-weight: bold; color: #5f8700"></span><span style="font-weight: bold">,</span>
+<span style="font-weight: bold">  </span><span style="font-weight: bold; color: #0087ff">"message"</span><span style="font-weight: bold">: </span><span style="color: #5f8700"></span><span style="color: #5f8700">"Your API key is missing. Append this to the URL with the apiKey pa
+ram, or use the x-api-key HTTP header."</span>
+<span style="font-weight: bold">}</span></pre>
+<p>Well, that was to be expected.
+The part after the question mark, by the way, is where we pass any query parameters.
+That’s also the place where you need to specify an API key.
+I’d like to keep my own API key a secret, so I insert it below by reading the file <em>/data/.secret/newsapi.org_apikey</em> using command substitution.</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"http://newsapi.org/v2/everything?q=linux&amp;apiKey=</span><span style="color: #af005f">$(</span><span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">/data/.secret/new
+sapi.org_apikey</span><span style="color: #af005f"></span><span style="color: #af005f">)</span><span style="color: #af8700">"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">jq</span> <span style="color: #af8700">'.'</span> | <span style="color: #5f8700">trim</span> 30
+{
+  "status": "ok",
+  "totalResults": 9668,
+  "articles": [
+    {
+      "source": {
+        "id": "engadget",
+        "name": "Engadget"
+      },
+      "author": "Igor Bonifacic",
+      "title": "'Arma 3' and 'DayZ' add BattlEye anti-cheat support through Val…
+      "description": "While there are still many unknowns about Steam Deck\r\n
+      "url": "https://www.engadget.com/arma-3-dayz-proton-battleye-support-2246…
+      "urlToImage": "https://s.yimg.com/os/creatr-uploaded-images/2021-12/bcb0f…
+      "publishedAt": "2021-12-03T22:46:25Z",
+      "content": "While there are still many unknowns about Steam Deck\r\ns lib…
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Slashdot.org"
+      },
+      "author": "EditorDavid",
+      "title": "AWS Embraces Fedora Linux for Its Cloud-Based 'Amazon Linux'",
+      "description": "ZDNet reports:\n\nBy and large, the public cloud runs on …
+      "url": "https://linux.slashdot.org/story/21/11/27/0328223/aws-embraces-fe…
+      "urlToImage": "https://a.fsdn.com/sd/topics/cloud_64.png",
+      "publishedAt": "2021-11-27T16:34:00Z",
+      "content": "By and large, the public cloud runs on Linux. Most users, eve…
+    },
+… with 236 more lines</pre>
+<p>You can get your own API key at <a href="https://newsapi.org">News API’s website</a>.</p>
+</div>
+<div id="streaming-apis" class="section level3" number="3.7.2">
+<h3>
+<span class="header-section-number">3.7.2</span> Streaming APIs<a class="anchor" aria-label="anchor" href="#streaming-apis"><i class="fas fa-link"></i></a>
+</h3>
+<p>Some web APIs return data in a streaming manner.
+This means that once you connect to it, the data will continue to pour in, until the connection is closed.
+A well-known example is the Twitter “firehose,” which constantly streams all the tweets being sent around the world.
+Luckily, most command-line tools also operate in a streaming matter.</p>
+<p>Let’s take a 10 second sample of one of Wikimedia’s streaming APIs, for example:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> -s <span style="color: #af8700">"https://stream.wikimedia.org/v2/stream/recentchange"</span> |
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">sample</span> -s 10 <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">wikimedia-stream-sample</span></pre>
+<p>This particular API returns all changes that have been made to Wikipedia and other properties of Wikimedia.
+The command-line tool <code>sample</code> is used to close the connection after 10 seconds.
+The connection can also be closed manually by pressing <strong><code>Ctrl-C</code></strong> to send an interrupt.
+The output is saved to a file <em>wikimedia-stream-sample</em>.
+Let’s take a peek using <code>trim</code>:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wikimedia-stream-sample</span> <span style="color: #5f8700">trim</span>
+:ok
+ 
+event: message
+id: [{"topic":"eqiad.mediawiki.recentchange","partition":0,"timestamp":16101133…
+data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://en.wiki…
+ 
+event: message
+id: [{"topic":"eqiad.mediawiki.recentchange","partition":0,"timestamp":16101133…
+data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://www.wik…
+ 
+… with 1078 more lines</pre>
+<p>With a little bit of <code>sed</code> and <code>jq</code> I can scrub this data to get a glimpse of the changes happening on the English version of Wikipedia:</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #af8700">&lt;</span> <span style="text-decoration: underline">wikimedia-stream-sample</span> <span style="color: #5f8700">sed</span> -n <span style="color: #af8700">'s/^data: //p'</span> | <span class="callout">➊</span>
+<span style="font-weight: bold">&gt;</span> <span style="color: #5f8700">jq</span> <span style="color: #af8700">'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'</span> <span class="callout">➋</span>
+<span style="color: #5f8700">"Odion Ighalo"</span>
+<span style="color: #5f8700">"Hold Up (song)"</span>
+<span style="color: #5f8700">"Talk:Royal Bermuda Yacht Club"</span>
+<span style="color: #5f8700">"Jenna Ushkowitz"</span>
+<span style="color: #5f8700">"List of films released by Yash Raj Films"</span>
+<span style="color: #5f8700">"SP.A"</span>
+<span style="color: #5f8700">"Odette (musician)"</span>
+<span style="color: #5f8700">"Talk:Pierre Avoi"</span>
+<span style="color: #5f8700">"User:Curlymanjaro/sandbox3"</span>
+<span style="color: #5f8700">"List of countries by electrification rate"</span>
+<span style="color: #5f8700">"Grieg (crater)"</span>
+<span style="color: #5f8700">"Gorman, Edmonton"</span>
+<span style="color: #5f8700">"Khabza"</span>
+<span style="color: #5f8700">"QAnon"</span>
+<span style="color: #5f8700">"Khaw Boon Wan"</span>
+<span style="color: #5f8700">"Draft:Oggy and the Cockroaches (1975 TV series)"</span>
+<span style="color: #5f8700">"Renzo Reggiardo"</span>
+<span style="color: #5f8700">"Greer, Arizona"</span>
+<span style="color: #5f8700">"National Curriculum for England"</span>
+<span style="color: #5f8700">"Mod DB"</span>
+<span style="color: #5f8700">"Jordanian Pro League"</span>
+<span style="color: #5f8700">"List of foreign Serie A players"</span></pre>
+<p><span class="callout">➊</span> This <code>sed</code> expression only prints lines that start with <em><code>data:</code></em> and prints the part after the semicolon, which happens to be JSON.
+<br><span class="callout">➋</span> This <code>jq</code> expression prints the <em><code>title</code></em> key of JSON objects that have a certain <em><code>type</code></em> and <em><code>server_name</code></em>.</p>
+<p>Speaking of streaming, did you know that you could stream <em>Star Wars: Episode IV – A New Hope</em> for free using <code>telnet</code><span class="citation"><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;&lt;a href="#ref-telnet" role="doc-biblioref"&gt;Mats Erik Andersson, Andreas Henriksson, and Christoph Biedl, &lt;em&gt;&lt;span class="nocase"&gt;telnet&lt;/span&gt; – User Interface to the &lt;span&gt;TELNET&lt;/span&gt; Protocol&lt;/em&gt;, version 0.17, 1999, &lt;/a&gt;&lt;a href="http://www.hcs.harvard.edu/~dholland/computers/netkit.html" role="doc-biblioref"&gt;http://www.hcs.harvard.edu/~dholland/computers/netkit.html&lt;/a&gt;.&lt;/p&gt;'><sup>44</sup></a></span>?</p>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">telnet</span> <span style="text-decoration: underline">towel.blinkenlights.nl</span></pre>
+<p>And after some time, we see that Han Solo did shoot first!</p>
+<pre> 
+ 
+                       -===                    `"',
+       I'll bet you   ""o o                    O O|)
+           have!      _\ -/_                  _\o/ _
+                     || || |*                /|\ / |\
+                     \\ || ***              //| |  |\\
+                      \\o=***********      // | |  | ||
+                      |\(#'***\\        -==#  | |  | ||
+                      |====|*  ')         '\  |====| /#
+                      |/|| |                  | || |  "
+                      ( )( )                  | || |
+                      |-||-|                  | || |
+                      | || |                  | || |
+      ________________[_][__\________________/__)(_)_____________________
+ </pre>
+<p>Sure, it’s probably not a good source of data, but there’s nothing wrong with enjoying an old classic while training your machine learning models<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content='&lt;p&gt;If you cannot connect to the server, because someone erased it from the archive memory, then you can always enjoy a &lt;a href="https://www.youtube.com/results?search_query=towel.blinkenlights.nl"&gt;recording of the &lt;code&gt;telnet&lt;/code&gt; session on YouTube&lt;/a&gt;.&lt;/p&gt;'><sup>45</sup></a>.</p>
+</div>
+</div>
+<div id="summary-2" class="section level2" number="3.8">
+<h2>
+<span class="header-section-number">3.8</span> Summary<a class="anchor" aria-label="anchor" href="#summary-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Congratulations, you have finished the first step of the OSEMN model.
+You’ve learned a variety of ways to obtain data, ranging from downloading to querying a relational database.
+In the next chapter, which is an intermezzo chapter, I’ll teach you how to create your own command-line tools.
+Feel free to skip this and go to <a href="chapter-5-scrubbing-data.html#chapter-5-scrubbing-data">Chapter 5</a> (the second step of the OSEMN model) if you cannot wait to learn about scrubbing data.</p>
+</div>
+<div id="for-further-exploration-2" class="section level2" number="3.9">
+<h2>
+<span class="header-section-number">3.9</span> For Further Exploration<a class="anchor" aria-label="anchor" href="#for-further-exploration-2"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Looking for a dataset to practice on? The GitHub repository <a href="https://github.com/awesomedata/awesome-public-datasets"><em>Awesome Public Datasets</em></a> lists hundreds of high-quality datasets that are publicly available.</li>
+<li>Or perhaps you’d rather practice with an API? The GitHub repository <a href="https://github.com/public-apis/public-apis"><em>Public APIs</em></a> lists many free APIs. <a href="http://api.citybik.es/v2/">City Bikes</a> and <a href="https://the-one-api.dev/">The One API</a> are among my favorites.</li>
+<li>Writing SQL queries to obtain data from a relational database is an important skill. The first 15 lessons of the book <em>SQL in 10 Minutes a Day</em> by Ben Forta teach the <em><code>SELECT</code></em> statement and its filtering, grouping, and sorting capabilities.</li>
+</ul>
+<!-- TODO: Remove dashes from filenames top-words.sh etc. -->
+</div>
+</div>
+
+  <div class="chapter-nav">
+<div class="prev"><a href="chapter-2-getting-started.html"><span class="header-section-number">2</span> Getting Started</a></div>
+<div class="next"><a href="chapter-4-creating-command-line-tools.html"><span class="header-section-number">4</span> Creating Command-line Tools</a></div>
+</div></main><div class="col-md-3 col-lg-3 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#chapter-3-obtaining-data"><span class="header-section-number">3</span> Obtaining Data</a></li>
+<li><a class="nav-link" href="#overview"><span class="header-section-number">3.1</span> Overview</a></li>
+<li><a class="nav-link" href="#copying-local-files-to-the-docker-container"><span class="header-section-number">3.2</span> Copying Local Files to the Docker Container</a></li>
+<li>
+<a class="nav-link" href="#downloading-from-the-internet"><span class="header-section-number">3.3</span> Downloading from the Internet</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducing-curl"><span class="header-section-number">3.3.1</span> Introducing curl</a></li>
+<li><a class="nav-link" href="#saving"><span class="header-section-number">3.3.2</span> Saving</a></li>
+<li><a class="nav-link" href="#other-protocols"><span class="header-section-number">3.3.3</span> Other Protocols</a></li>
+<li><a class="nav-link" href="#following-redirects"><span class="header-section-number">3.3.4</span> Following Redirects</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#decompressing-files"><span class="header-section-number">3.4</span> Decompressing Files</a></li>
+<li><a class="nav-link" href="#converting-microsoft-excel-spreadsheets-to-csv"><span class="header-section-number">3.5</span> Converting Microsoft Excel Spreadsheets to CSV</a></li>
+<li><a class="nav-link" href="#querying-relational-databases"><span class="header-section-number">3.6</span> Querying Relational Databases</a></li>
+<li>
+<a class="nav-link" href="#calling-web-apis"><span class="header-section-number">3.7</span> Calling Web APIs</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#authentication"><span class="header-section-number">3.7.1</span> Authentication</a></li>
+<li><a class="nav-link" href="#streaming-apis"><span class="header-section-number">3.7.2</span> Streaming APIs</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#summary-2"><span class="header-section-number">3.8</span> Summary</a></li>
+<li><a class="nav-link" href="#for-further-exploration-2"><span class="header-section-number">3.9</span> For Further Exploration</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2e/03.Rmd">View source <i class=""></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2e/03.Rmd">Edit this page <i class=""></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container-fluid">
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2 sidebar"></div>
+      <div class="col-sm-12 col-md-9 col-lg-7 mt-3" style="max-width: 45rem;">
+        <p><strong>Data Science at the Command Line, 2e</strong> by <a href="https://twitter.com/jeroenhjanssens" class="text-light">Jeroen Janssens</a>. Updated on December 6, 2021. This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+      </div>
+      <div class="col-md-3 col-lg-3 d-none d-md-block sidebar"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

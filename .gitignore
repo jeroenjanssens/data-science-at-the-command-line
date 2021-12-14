@@ -7,10 +7,7 @@ docs/*.md
 _book_output
 
 node_modules/
-www/public/
-www/resources/
-www/static/1e/
-www/static/2e/
+www/_site
 
 *.rds
 /book/2e/*.md

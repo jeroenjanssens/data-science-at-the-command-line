@@ -1,0 +1,205 @@
+---
+permalink: "index.html"
+---
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preload" href="/static/fonts/source-sans-pro-v14-latin-600.woff2" as="font" crossorigin />
+    <link rel="preload" href="/static/fonts/source-sans-pro-v14-latin-regular.woff2" as="font" crossorigin />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <title>Home | {{ site.name }}</title>
+    <meta name="author" content="Jeroen Janssens">
+    <link rel="icon" type="image/png" href="{{ site.url }}/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="{{ site.url }}/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="{{ site.url }}/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ site.url }}/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="{{ site.url }}/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="{{ site.name }}"/>
+    <meta name="description" content="{{ site.description }}">
+    <meta itemprop="description" content="{{ site.description }}">
+    <meta property="og:title" content="Home | Data Science at the Command Line">
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:url" content="https://datascienceatthecommandline.com">
+    <meta property="og:image" content="https://datascienceatthecommandline.com/og.png">
+    <meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Home | Data Science at the Command Line">
+    <meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+    <meta name="twitter:image" content="https://datascienceatthecommandline.com/twitter.png">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-43246574-3', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body class="-debug-screens">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:min-h-screen overflow-hidden">
+      <div class="col-span-full row-span-full lg:col-auto lg:row-auto lg:bg-white order-2 lg:order-1 z-30">
+        <div class="flex items-center h-full py-8 lg:py-8">
+          <div class="relative w-5/6 sm:w-2/3 bg-[#ffffffcc] drop-shadow mx-auto lg:drop-shadow-none md:w-2/3 lg:w-5/6  xl:w-2/3 2xl:w-10/12 2xl:max-w-2xl p-4 sm:p-6 md:p-8 2xl:px-0">
+            <!-- <div  id="intro" class="my-6 md:my-8 lg:my-12 text 2xl:prose-2xl !max-w-none">
+                 <h2>{% t "hello" %}</h2>
+                 <p>{% t "intro" %}</p>
+                 </div> -->
+
+
+            <div id="intro" class="my-6 md:my-8 lg:my-12 text 2xl:prose-2xl !max-w-none">
+              <h2>👋 Hi there! I&rsquo;m <a href="#about" class="!font-bold !text-gray-800" style="text-decoration-color: #0369a1; ">Jeroen</a>.</h2>
+              <p>
+                I recently wrote the second edition of <em>Data Science at the Command Line</em>, which you can read entirely for free here. Since 2014, I regularly give workshops about this exciting topic and I&rsquo;m currently working on a brand new course titled <em>Embrace the Command Line</em>. Below you can learn more about this course and tell me if you&rsquo;re interested in joining the beta cohort.
+              </p>
+
+              <ul class="">
+                <li><a href="/2e/">Read <em>Data Science at the Command Line</em> for free</a></li>
+                <li> <a href="https://datascienceworkshops.gumroad.com/l/data-science-at-the-command-line">Sign up for the next workshop on March 10&ndash;11, 2022</a></li>
+                <li><a href="#course">Learn about the new course <em>Embrace the Command Line</em></a></li>
+              </ul>
+              <p>
+                Be sure to <a href="https://datascienceworkshops.com/#contact">let me know</a> if you have questions.
+              </p>
+              <p>
+                Cheers, Jeroen
+              </p>
+            </div>
+
+
+            <!-- <div class="flex flex-wrap -m-2 md:-m-3 lg:-m-4">
+                 <div class="p-2 md:p-3 lg:p-4">
+                 <a href="/2e/" class="button inline-block !text-white text bg-blue-700 hover:bg-blue-500 drop-shadow hover:drop-shadow-none">Read the book</a>
+                 </div>
+                 <div class="p-2 md:p-3 lg:p-4">
+                 <a href="#course" class="button inline-block !text-white text bg-orange-700 hover:bg-orange-500 drop-shadow hover:drop-shadow-none">Learn about the course</a>
+                 </div>
+                 </div> -->
+
+          </div>
+        </div>
+      </div>
+      <div class="col-span-full row-span-full lg:col-auto lg:row-auto order-1 lg:order-2 relative z-0 overflow-hidden -m-8">
+        {% poster "src/img/poster.png", "", "50% 50%" %}
+      </div>
+    </div>
+
+
+    <article id="course" class="bg-orange-200">
+      <div class="container">
+        <section class="mx-auto text !max-w-prose bg-white p-4 lg:p-8 drop-shadow">
+          <h2>{% t "course_heading" %}</h2>
+          <p>
+            {% t "course_text" %}
+          </p>
+
+          <div x-data="signupForm()" x-on:submit.prevent="submitData">
+            <form name="signup" method="POST" action="{{ page.url }}" data-netlify="true">
+              <div class="grid grid-cols-1 gap-6">
+                <label class="block">
+                  <span class="text">{% t "signup_name" %}<strong class="ml-1 !text-orange-600">*</strong></span>
+                  <input @keydown.stop x-model="formData.name" name="name" type="text" class="text mt-1 block w-full rounded bg-gray-100 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 lg:shadow-inner" placeholder="" required="true" />
+                </label>
+                <label class="block">
+                  <span class="text">{% t "signup_email" %}<strong class="ml-1 !text-orange-600">*</strong></span>
+                  <input @keydown.stop x-model="formData.email" name="email" type="email" class="text mt-1 block w-full rounded bg-gray-100 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 lg:shadow-inner" placeholder="" required="true" />
+                </label>
+                <label class="block">
+                  <span class="text">{% t "signup_location" %}<strong class="ml-1 !text-orange-600">*</strong></span>
+                  <input @keydown.stop x-model="formData.location" name="location" type="text" class="text mt-1 block w-full rounded bg-gray-100 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 lg:shadow-inner" placeholder="" required="true" />
+                </label>
+                <label class="block">
+                  <span class="text">{% t "signup_message" %}</span>
+                  <textarea @keydown.stop x-model="formData.message" name="message" class="text mt-1 block w-full rounded bg-gray-100 border-transparent focus:border-blue-500 focus:bg-white focus:ring-0 lg:shadow-inner" rows="3"></textarea>
+                </label>
+                <div class="flex items-center">
+                  <button x-text="buttonLabel" :disabled="loading" type="submit" class="button block !text-white text bg-blue-500 hover:bg-blue-600 shadow">{% t "signup_button" %}</button>
+                  <div class="px-4"><em class="text" x-text="feedback"></em></div>
+                </div>
+              </div>
+              <input name="url" type="hidden" value="{{ page.url }}">
+            </form>
+          </div>
+
+
+        </section>
+
+
+
+
+      </div>
+    </article>
+
+
+
+
+    <article class="bg-gray-200">
+      <div id="about" class="container">
+        <section class="mx-auto text !max-w-prose bg-white p-4 lg:p-8 drop-shadow">
+          <h2>{% t "about_heading" %}</h2>
+
+          <img class="w-2/5 sm:w-1/3 float-right !mt-2 !mb-2 !ml-4 rounded-full" src="/static/img/jeroen-janssens.png">
+          <p>
+            {% t "about_text" %}
+          </p>
+        </section>
+      </div>
+    </article>
+
+
+<script>
+    function encode(data) {
+        return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&")
+    }
+
+    function signupForm() {
+        return {
+            formData: {
+                'form-name': 'signup',
+                'name': '',
+                'email': '',
+                'location': '',
+                'message': '',
+                'url': '{{ page.url }}'
+            },
+            feedback: '',
+            loading: false,
+            buttonLabel: '{% t "signup_button" %}',
+
+            submitData() {
+                this.loading = true;
+                this.feedback = ''
+
+                fetch('{{ page.url }}', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: encode(this.formData)
+                })
+                .then(() => {
+                    this.feedback = '{% t "signup_success" %}'
+                    this.formData.name = ''
+                    this.formData.email = ''
+                    this.formData.location = ''
+                    this.formData.message = ''
+                })
+                .catch(() => {
+                    this.feedback = '{% t "signup_error" %}'
+                })
+                .finally(() => {
+                    this.loading = false;
+                })
+            }
+        }
+    }
+</script>
+
+  </body>
+</html>
