@@ -454,7 +454,7 @@ If the CSV data has no header, like <em>tmnt-missing-newline.csv</em> then you n
 <p><span class="callout">➊</span> The <code>-H</code> option specifies that the CSV file has no header.</p>
 <p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program <a href="https://www.top2000nl.com">Top 2000</a>.
 To extract its data, you invoke <code>in2csv</code> as follows:</p>
-<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> <span style="color: #af8700">"https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx"</span> <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">top2000.xls
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">curl</span> <span style="color: #af8700">"https://cms-assets.nporadio.nl/npoRadio2/TOP-2000-2021.xlsx?v=1639653660"</span> <span style="color: #af8700">&gt;</span> <span style="text-decoration: underline">top2000.xls
 x</span>
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -464,10 +464,10 @@ x</span>
 BadZipFile: File is not a zip file</pre>
 <p>Who is Danny Vera? The most popular song is supposed to be <em>Bohemian Rhapsody</em>, of course.
 Well, at least Queen appears plenty of times in the Top 2000 so I can’t really complain:</p>
-<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvgrep</span> <span style="text-decoration: underline">top2000.csv</span> --columns ARTIEST --regex <span style="color: #af8700">'^Queen$'</span> | <span style="color: #5f8700">csvlook</span> -I <span class="callout">➊</span>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvgrep</span> <span style="text-decoration: underline">top2000.csv</span> --columns artiest --regex <span style="color: #af8700">'^Queen$'</span> | <span style="color: #5f8700">csvlook</span> -I <span class="callout">➊</span>
 StopIteration:
 StopIteration:</pre>
-<p><span class="callout">➊</span> The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>ARTIEST</code></em>.</p>
+<p><span class="callout">➊</span> The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>artiest</code></em>.</p>
 <p>By the way, the tools <code>in2csv</code>, <code>csvgrep</code>, and <code>csvlook</code> are part of CSVkit, which is a collection of command-line tools to work with CSV data.</p>
 <p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case.
 If you were to pipe the data into <code>in2csv</code>, you would have to specify the format explicitly.</p>
