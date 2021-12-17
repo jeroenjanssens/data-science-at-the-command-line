@@ -148,7 +148,7 @@ If the following command produces an enthusiastic cow, then you know everything 
                 ||     ||</pre>
 <p>If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container.
 I recommend that you first create a new directory, navigate to this new directory, and then run the following when you’re on macOS or Linux:</p>
-<pre><span style="font-weight: bold">$</span> docker run --rm -it -v "$(p</pre>
+<pre><span style="font-weight: bold">$</span> docker run --rm -it -v "$(pwd)":/data datasciencetoolbox/dsatcl2e</pre>
 <p>Or the following when you’re on Windows and using the Command Prompt (also known as <code>cmd</code>):</p>
 <pre>C:\&gt; docker run --rm -it -v "%cd%":/data datasciencetoolbox/dsatcl2e</pre>
 <p>Or the following when you’re using Windows PowerShell:</p>
