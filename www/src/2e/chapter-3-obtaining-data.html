@@ -464,7 +464,7 @@ x</span>
 BadZipFile: File is not a zip file</pre>
 <p>Who is Danny Vera? The most popular song is supposed to be <em>Bohemian Rhapsody</em>, of course.
 Well, at least Queen appears plenty of times in the Top 2000 so I can’t really complain:</p>
-<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvgrep</span> <span style="text-decoration: underline">top2000.csv</span> --columns ARTIEST --regex <span style="color: #af8700">'^Queen$'</span> | <span style="color: #5f8700">csvlook</span> -I <span class="callout">➊</span>
+<pre><span style="font-weight: bold">$</span> <span style="color: #5f8700">csvgrep</span> <span style="text-decoration: underline">top2000.csv</span> --columns artiest --regex <span style="color: #af8700">'^Queen$'</span> | <span style="color: #5f8700">csvlook</span> -I <span class="callout">➊</span>
 StopIteration:
 StopIteration:</pre>
 <p><span class="callout">➊</span> The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>ARTIEST</code></em>.</p>
