@@ -322,7 +322,7 @@ In short, using `env` makes your scripts more portable.
 
 ### Step 4: Remove Fixed Input
 
-We know have a valid command-line tool that we can execute from the command line.
+We now have a valid command-line tool that we can execute from the command line.
 But we can do better than this.
 We can make our command-line tool more reusable.
 The first command in our file is `curl`, which downloads the text from which we wish to obtain the top 10 most-used words.
