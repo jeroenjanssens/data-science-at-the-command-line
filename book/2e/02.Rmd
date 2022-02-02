@@ -403,7 +403,7 @@ The tool `echo` outputs the value you specify.
 The `-n` option, which stands for *newline*, specifies that `echo` should not output a trailing newline.
 
 Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage.
-To use the contents of the file *greeting.txt* again, we can use `cat`, which reads a file prints it.
+To use the contents of the file *greeting.txt* again, we can use `cat`, which reads a file and prints it.
 
 ```{console, callouts="wc"}
 cat greeting.txt
