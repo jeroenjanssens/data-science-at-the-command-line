@@ -365,7 +365,7 @@ curl -s "https://www.gutenberg.org/files/11/11-0.txt" |
 grep " CHAPTER" |
 wc -l
 ```
-<1> The option `-l` specifies that `wc` should only output the number of lines that are pass into it. By default it also returns the number of characters and words.
+<1> The option `-l` specifies that `wc` should only output the number of lines that are passed into it. By default it also returns the number of characters and words.
 
 You can think of piping as an automated copy and paste.
 Once you get the hang of combining tools using the pipe operator, you'll find that there are virtually no limits to this.
