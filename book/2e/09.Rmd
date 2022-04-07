@@ -477,7 +477,7 @@ Now that I have a balanced training dataset and a balanced test dataset, I can c
 ### Running the Experiment
 
 Training a classifier in `skll` is done by defining an experiment in a configuration file.
-It consists of several sections that specify, for example, where to look for the datasets, which classifiers 
+It consists of several sections that specify, for example, where to look for the datasets, which classifiers to use, and how to tune the model. 
 Here's the configuration file *classify.cfg* that I'll use:
 
 ```{console bat_cfg}

@@ -241,7 +241,7 @@ This can be done with the `-t` option (instead of the `-x` option):
 tar -tzf logs.tar.gz | trim
 ```
 
-Is seems that this archive contains a lot of files, and they are not inside a directory.
+It seems that this archive contains a lot of files, and they are not inside a directory.
 In order to keep the current directory clean, it's a good idea to first create a new directory using `mkdir` and extract those files there using the `-C` option.
 
 ```{console tar_mkdir}
