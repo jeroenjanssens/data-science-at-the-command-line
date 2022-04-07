@@ -53,7 +53,7 @@ Any other files are either downloaded or generated using command-line tools.
 
 In this section I’ll demonstrate how to inspect your dataset and its properties. Because the upcoming visualization and modeling techniques expect the data to be in a rectangular shape, I’ll assume that the data is in CSV format. You can use the techniques described in [Chapter 5](#chapter-5-scrubbing-data) to convert your data to CSV if necessary.
 
-For simplicity sake, I’ll also assume that your data has a header.
+For simplicity's sake, I’ll also assume that your data has a header.
 In the first subsection I'll show a way to determine whether that's the case.
 Once you know you have a header, you can continue answering the following questions:
 
