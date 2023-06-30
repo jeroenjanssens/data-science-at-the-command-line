@@ -577,7 +577,7 @@ You don't necessarily have to do this, especially if you're interested in the co
 
 Here are the tools that I use for making output manageable:
 
-If often use `trim` to limit the output to a given height and width.
+I often use `trim` to limit the output to a given height and width.
 By default, output is trimmed to 10 lines and the width of the terminal.
 Pass a negative number to disable trimming the height and or width.
 For example:
