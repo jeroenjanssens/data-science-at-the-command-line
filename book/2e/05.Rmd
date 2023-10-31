@@ -253,12 +253,21 @@ For example, if you only wanted to print the headings that start with *The*:
 < alice.txt grep -E '^CHAPTER (.*)\. The'
 ```
 
-Note that you have to specify the `-E` option in order to enable regular expressions.
-Otherwise, `grep` interprets the pattern as a literal string which most likely results in no matches at all:
+`-E` is for enabling the ERE (extended regular expression) standard. By default, `grep` uses the BRE (basic regular expression). ERE and BRE support different syntaxes, and each could be the more appropriate choice depending on the situation.
+
+To achieve the same result with BREs, run
 
 ```{console}
-< alice.txt grep '^CHAPTER (.*)\. The'
+< alice.txt grep -G '^CHAPTER \(.*\)\. The'
 ```
+
+This command employs the `-G` flag, indicating the usage of BRE. It is equivalent to:
+
+```{console}
+< alice.txt grep '^CHAPTER \(.*\)\. The'
+```
+
+which defaults to using BRE.
 
 With the `-v` option you invert the matches, so that `grep` prints the lines which *don't* match the pattern.
 The regular expression below matches lines that contain white space, only.
