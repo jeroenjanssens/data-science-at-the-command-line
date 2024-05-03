@@ -252,7 +252,7 @@ The first character *`-`* (hyphen) indicates the file type.
 A *`-`* means regular file and a *`d`* means directory.
 The next three characters, *`rwx`*, indicate the access permissions for the user who owns the file.
 The *`r`* and *`w`* mean *read* and *write*, respectively.
-(As you can see, *top-words-1.sh* has a *`-`* instead of an *`x`*, which means that we cannot *execute* that file.) The next three characters *`rw-`* indicate the access permissions for all members of the group that owns the file.
+(As you can see, *top-words-1.sh* has a *`-`* instead of an *`x`*, which means that we cannot *execute* that file.) The next three characters *`r--`* indicate the access permissions for all members of the group that owns the file.
 Finally, the last three characters in the column, *`r--`*, indicate access permissions for all other users.
 
 Now you can execute the file as follows:
