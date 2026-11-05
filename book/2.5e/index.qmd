@@ -16,10 +16,6 @@ Welcome to the website of the second edition of *Data Science at the Command Lin
 
 Want to learn from Jeroen in person? Through his company, Data Science Workshops, Jeroen provides in-company training about data science at the command line and related topics such as Python, R, and machine learning. Visit [Data Science Workshops](https://datascienceworkshops.com) for more information.
 
-::: {.callout-tip}
-Jeroen is currently working on a new course [Embrace the Command Line](/#course). If you haven't fully embraced the command line yet, then this course might be for you. The beta cohort is expected to start in Q1 2021. You can learn more about this course and tell Jeroen what you think [here](/#course).
-:::
-
 ## Description {.unnumbered}
 
 This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You'll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.
