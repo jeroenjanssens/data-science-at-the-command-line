@@ -1,0 +1,205 @@
+:root {
+  --term-fg: #d4d4d4;
+  --term-bg: #1e1e1e;
+  --term-font-family: "JetBrains Mono", "Fira Code", "SF Mono", "Menlo", "Consolas", monospace;
+  --term-font-size: 0.9em;
+  --term-line-height: 1.2;
+  --term-0: #000000;
+  --term-1: #cd3131;
+  --term-2: #0dbc79;
+  --term-3: #e5e510;
+  --term-4: #2472c8;
+  --term-5: #bc3fbc;
+  --term-6: #11a8cd;
+  --term-7: #e5e5e5;
+  --term-8: #666666;
+  --term-9: #f14c4c;
+  --term-10: #23d18b;
+  --term-11: #f5f543;
+  --term-12: #3b8eea;
+  --term-13: #d670d6;
+  --term-14: #29b8db;
+  --term-15: #e5e5e5;
+}
+
+pre.term-output,
+pre.term-screen,
+pre.term-source {
+  background-color: var(--term-bg);
+  color: var(--term-fg);
+  font-family: var(--term-font-family);
+  font-size: var(--term-font-size);
+  line-height: var(--term-line-height);
+  padding: 0.75em 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+pre.term-output code,
+pre.term-screen code,
+pre.term-source code {
+  background-color: transparent;
+  padding: 0;
+  font-size: inherit;
+  color: var(--term-fg);
+}
+
+pre.term-output code span,
+pre.term-screen code span,
+pre.term-source code span {
+  color: inherit;
+}
+
+.reveal pre.term-output,
+.reveal pre.term-screen,
+.reveal pre.term-source {
+  background-color: var(--term-bg);
+  color: var(--term-fg);
+  line-height: var(--term-line-height);
+}
+
+.reveal pre.term-output code,
+.reveal pre.term-screen code,
+.reveal pre.term-source code {
+  background-color: transparent;
+  color: var(--term-fg);
+}
+
+.term-screen {
+  line-height: var(--term-line-height);
+  overflow: hidden;
+}
+
+.term-callout {
+  color: var(--term-8);
+  font-style: italic;
+}
+
+.term-truncated {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Prompt: rendered via ::before so it's not selectable/copyable */
+.term-prompt::before {
+  content: attr(data-prompt);
+}
+
+/* Window chrome */
+.term-chrome {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  margin: 1rem 0;
+}
+
+.term-chrome pre.term-output,
+.term-chrome pre.term-screen,
+.term-chrome pre.term-source {
+  margin: 0;
+  border-radius: 0;
+}
+
+.term-chrome-bar {
+  background: #3c3c3c;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.term-chrome-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.75em;
+  color: #999;
+  font-family: var(--term-font-family);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* macOS: colored filled circles */
+.term-chrome-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.term-chrome-macos .term-chrome-close { background: #ff5f57; }
+.term-chrome-macos .term-chrome-minimize { background: #febc2e; }
+.term-chrome-macos .term-chrome-maximize { background: #28c840; }
+
+/* Windows: right-aligned rectangular buttons */
+.term-chrome-windows .term-chrome-bar {
+  padding: 0 0 0 12px;
+  min-height: 32px;
+  justify-content: flex-end;
+  gap: 0;
+}
+
+.term-chrome-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 32px;
+  background: transparent;
+  color: #cccccc;
+  font-size: 0.7em;
+  flex-shrink: 0;
+}
+
+
+
+/* Linux: small outlined rounded squares */
+.term-chrome-linux .term-chrome-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  background: transparent;
+  border: 1.5px solid;
+}
+
+.term-chrome-linux .term-chrome-close { border-color: #cc575d; }
+.term-chrome-linux .term-chrome-minimize { border-color: #c8a73d; }
+.term-chrome-linux .term-chrome-maximize { border-color: #52a557; }
+
+/* Copy button */
+.term-container {
+  position: relative;
+}
+
+.term-copy-btn {
+  position: absolute;
+  top: 0.4em;
+  right: 0.5em;
+  padding: 0.3em;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--term-fg, #d4d4d4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.term-container:hover .term-copy-btn {
+  opacity: 0.7;
+}
+
+.term-copy-btn:hover {
+  opacity: 1 !important;
+  background: rgba(255, 255, 255, 0.15);
+}
+

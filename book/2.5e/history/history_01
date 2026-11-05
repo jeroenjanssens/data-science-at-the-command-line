@@ -1,0 +1,3 @@
+whoami
+date
+echo 'The command line is awesome!' | cowsay -f tux

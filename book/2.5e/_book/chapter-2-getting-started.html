@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+
+<title>2&nbsp; Getting Started – Data Science at the Command Line, 2e</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./chapter-1-introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-3ecbe2b963004cf679d36818b0076f39.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/quarto-term-0.5.0/term.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
+<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="2&nbsp; Getting Started – Data Science at the Command Line, 2e">
+<meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta property="og:image" content="images/dscl_0201.png">
+<meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta name="twitter:title" content="2&nbsp; Getting Started – Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta name="twitter:image" content="images/dscl_0201.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-2-getting-started.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science at the Command Line, 2e</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-getting-started.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#getting-the-data" id="toc-getting-the-data" class="nav-link active" data-scroll-target="#getting-the-data"><span class="header-section-number">2.1</span> Getting the Data</a></li>
+  <li><a href="#docker-image" id="toc-docker-image" class="nav-link" data-scroll-target="#docker-image"><span class="header-section-number">2.2</span> Installing the Docker Image</a></li>
+  <li><a href="#essential-concepts" id="toc-essential-concepts" class="nav-link" data-scroll-target="#essential-concepts"><span class="header-section-number">2.3</span> Essential Unix Concepts</a>
+  <ul class="collapse">
+  <li><a href="#the-environment" id="toc-the-environment" class="nav-link" data-scroll-target="#the-environment"><span class="header-section-number">2.3.1</span> The Environment</a></li>
+  <li><a href="#executing-a-command-line-tool" id="toc-executing-a-command-line-tool" class="nav-link" data-scroll-target="#executing-a-command-line-tool"><span class="header-section-number">2.3.2</span> Executing a Command-line Tool</a></li>
+  <li><a href="#five-types-of-command-line-tools" id="toc-five-types-of-command-line-tools" class="nav-link" data-scroll-target="#five-types-of-command-line-tools"><span class="header-section-number">2.3.3</span> Five Types of Command-line Tools</a></li>
+  <li><a href="#combining-command-line-tools" id="toc-combining-command-line-tools" class="nav-link" data-scroll-target="#combining-command-line-tools"><span class="header-section-number">2.3.4</span> Combining Command-line Tools</a></li>
+  <li><a href="#redirecting-input-and-output" id="toc-redirecting-input-and-output" class="nav-link" data-scroll-target="#redirecting-input-and-output"><span class="header-section-number">2.3.5</span> Redirecting Input and Output</a></li>
+  <li><a href="#working-with-files-and-directories" id="toc-working-with-files-and-directories" class="nav-link" data-scroll-target="#working-with-files-and-directories"><span class="header-section-number">2.3.6</span> Working With Files and Directories</a></li>
+  <li><a href="#managing-output" id="toc-managing-output" class="nav-link" data-scroll-target="#managing-output"><span class="header-section-number">2.3.7</span> Managing Output</a></li>
+  <li><a href="#help" id="toc-help" class="nav-link" data-scroll-target="#help"><span class="header-section-number">2.3.8</span> Help!</a></li>
+  </ul></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">2.4</span> Summary</a></li>
+  <li><a href="#for-further-exploration-1" id="toc-for-further-exploration-1" class="nav-link" data-scroll-target="#for-further-exploration-1"><span class="header-section-number">2.5</span> For Further Exploration</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-2-getting-started.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-2-getting-started.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="chapter-2-getting-started" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+<p>In this chapter I’m going to make sure that you have all the prerequisites for doing data science at the command line. The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use throughout this book, and (3) understanding the essential concepts that come into play when using the command line.</p>
+<p>First, I describe how to download the datasets. Second, I explain how to install the Docker image, which is a virtual environment based on Ubuntu Linux that contains all the necessary command-line tools. Subsequently, I go over the essential Unix concepts through examples.</p>
+<p>By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.</p>
+<section id="getting-the-data" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="getting-the-data"><span class="header-section-number">2.1</span> Getting the Data</h2>
+<p>The datasets that I use in this book can be downloaded as follows:</p>
+<ol type="1">
+<li>Download the ZIP file from <a href="https://www.datascienceatthecommandline.com/2e/data.zip" class="uri">https://www.datascienceatthecommandline.com/2e/data.zip</a>.</li>
+<li>Create a new directory. You can give this directory any name you want, but I recommend you stick to lowercase letters, numbers, and maybe a hyphen or underscore so that it’s easier to work with at the command line. For example: <em>dsatcl2e-data</em>. Remember where this directory is.</li>
+<li>Move the ZIP file to that new directory and unpack it.</li>
+<li>This directory now contains one subdirectory per chapter.</li>
+</ol>
+<p>In the next section I explain how to install the environment containing all the command-line tools to work with this data.</p>
+</section>
+<section id="docker-image" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="docker-image"><span class="header-section-number">2.2</span> Installing the Docker Image</h2>
+<p>In this book we use many different command-line tools. Unix often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools. Installing these packages yourself is often not too difficult. However, we’ll also use tools that are not available as packages and require a more manual, and more involved installation. In order to acquire the necessary command-line tools without having to go through the installation process of each, I encourage you, whether you’re on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.</p>
+<p>A Docker image is a bundle of one or more applications together with all their dependencies. A Docker container is an isolated environment that runs an image. You can manage Docker images and containers the <code>docker</code> command-line tool (which is what you’ll do below) or the Docker GUI. In a way, a Docker container is like a virtual machine, only a Docker container uses far fewer resources. At the end of this chapter I suggest some resources to learn more about Docker.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s <a href="https://github.com/datasciencetoolbox/datasciencetoolbox">GitHub repository</a>.</p>
+</div>
+</div>
+<p>To install the Docker image, you first need to download and install Docker itself from <a href="https://www.docker.com/products/docker">the Docker website</a>. Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don’t type the dollar sign):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> pull datasciencetoolbox/dsatcl2e</code></pre>
+
+
+<p>You can run the Docker image as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> run --rm -it datasciencetoolbox/dsatcl2e</code></pre>
+
+
+<p>You’re now inside an isolated environment—known as a <em>Docker container</em>—with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> <span style="color:var(--term-3)">"Let's moove</span><span style="color:var(--term-6)">\!</span><span style="color:var(--term-3)">"</span>
+<span class="term-output"> ______________</span>
+<span class="term-output">&lt; Let's moove! &gt;</span>
+<span class="term-output"> --------------</span>
+<span class="term-output">        \   ^__^</span>
+<span class="term-output">         \  (oo)\_______</span>
+<span class="term-output">            (__)\       )\/\</span>
+<span class="term-output">                ||----w |</span>
+<span class="term-output">                ||     ||</span></code></pre>
+
+<p>If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you first create a new directory, navigate to this new directory, and then run the following when you’re on macOS or Linux:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> run --rm -it -v <span style="color:var(--term-3)">"</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">pwd</span><span style="color:var(--term-5)">)</span><span style="color:var(--term-3)">"</span>:/data datasciencetoolbox/dsatcl2e</code></pre>
+
+
+<p>Or the following when you’re on Windows and using the Command Prompt (also known as <code>cmd</code>):</p>
+<pre class="text"><code>C:\&gt; docker run --rm -it -v "%cd%":/data datasciencetoolbox/dsatcl2e</code></pre>
+<p>Or the following when you’re using Windows PowerShell:</p>
+<pre class="text"><code>PS C:\&gt; docker run --rm -it -v ${PWD}:/data datasciencetoolbox/dsatcl2e</code></pre>
+<p>In the above commands, the option <code>-v</code> instructs <code>docker</code> to map the current directory to the <em>/data</em> directory inside the container, so this is the place to get data in and out of the Docker container.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you would like to know more about the Docker image you can <a href="https://hub.docker.com/r/datasciencetoolbox/dsatcl2e">visit it on Docker Hub</a>.</p>
+</div>
+</div>
+<p>When you’re done, you can shut down the Docker container by typing <code>exit</code>.</p>
+</section>
+<section id="essential-concepts" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="essential-concepts"><span class="header-section-number">2.3</span> Essential Unix Concepts</h2>
+<p>In <a href="./chapter-1-introduction.html">Chapter 1</a>, I briefly showed you what the command line is. Now that you are running the Docker image, we can really get started. In this section, I discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line. If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change. But don’t worry, I’ll start at the beginning, and very gradually go to more advanced topics.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This section is not a complete course in Unix. I will only explain the concepts and tools that are relevant for to doing data science. One of the advantages of the Docker image is that a lot is already set up. If you wish to know more, consult the Further Reading Section at the end of this chapter.</p>
+</div>
+</div>
+<section id="the-environment" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="the-environment"><span class="header-section-number">2.3.1</span> The Environment</h3>
+<p>So you’ve just logged into a brand new environment. Before you do anything, it’s worthwhile to get a high-level understanding of this environment. It’s roughly defined by four layers, which I briefly discuss from the top down.</p>
+<dl>
+<dt>Command-line tools</dt>
+<dd>
+<p>First and foremost, there are the command-line tools that you work with. We use them by typing their corresponding commands. There are different types of command-line tools, which I will discuss in the next section. Examples of tools are: <code>ls</code><span class="citation" data-cites="ls"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span>, <code>cat</code><span class="citation" data-cites="cat"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>, and <code>jq</code><span class="citation" data-cites="jq"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span>.</p>
+</dd>
+<dt>Terminal</dt>
+<dd>
+<p>The terminal, which is the second layer, is the application where we type our commands in. If you see the following text mentioned in the book:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3
+<span class="term-output">1</span>
+<span class="term-output">2</span>
+<span class="term-output">3</span></code></pre>
+
+<p>then you would type <code>seq 3</code> into your terminal and press <strong><code>Enter</code></strong>. (The command-line tool <code>seq</code><span class="citation" data-cites="seq"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span>, as you can see, generates a sequence of numbers.) You do not type the dollar sign. It’s just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below <code>seq 3</code> is the output of the command.</p>
+</dd>
+<dt>Shell</dt>
+<dd>
+<p>The third layer is the shell. Once we have typed in our command and pressed <strong><code>Enter</code></strong>, the terminal sends that command to the shell. The <em>shell</em> is a program that interprets the command. I use the Z shell, but there are many others available such as Bash and Fish.</p>
+</dd>
+<dt>Operating system</dt>
+<dd>
+<p>The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The Docker image is based on a particular GNU/Linux distribution called Ubuntu.</p>
+</dd>
+</dl>
+</section>
+<section id="executing-a-command-line-tool" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="executing-a-command-line-tool"><span class="header-section-number">2.3.2</span> Executing a Command-line Tool</h3>
+<p>Now that you have a basic understanding of the environment, it is high time that you try out some commands. Type the following in your terminal (without the dollar sign) and press <strong><code>Enter</code></strong>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pwd</span>
+<span class="term-output">/home/dst</span></code></pre>
+
+<p>You just executed a command that contained a single command-line tool. The tool <code>pwd</code><span class="citation" data-cites="pwd"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> outputs the name of the directory where you currently are. By default, when you login, this is your home directory.</p>
+<p>The command-line tool <code>cd</code>, which is a Z shell builtin, allows you to navigate to a different directory:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch02</span> <span class="term-callout">➊</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pwd</span> <span class="term-callout">➋</span>
+<span class="term-output">/data/ch02</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">..</span> <span class="term-callout">➌</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pwd</span> <span class="term-callout">➍</span>
+<span class="term-output">/data</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">ch02</span> <span class="term-callout">➎</span></code></pre>
+
+<ol type="1">
+<li>Navigate to the directory <em>/data/ch02</em>.</li>
+<li>Print the current directory.</li>
+<li>Navigate to the parent directory.</li>
+<li>Print the current directory again.</li>
+<li>Navigate to the subdirectory <em>ch02</em>.</li>
+</ol>
+<p>The part after <code>cd</code> specifies to which directory you want to navigate to. Values that come after the command are called <em>command-line arguments</em> or <em>options</em>. Two dots refer to the parent directory. One dot, by the way, refers to the current directory. While <code>cd .</code> wouldn’t have any effect, you’ll still see one dot being used in other places. Let’s try a different command:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">head</span> -n 3 <span style="text-decoration:underline">movies.txt</span>
+<span class="term-output">Matrix</span>
+<span class="term-output">Star Wars</span>
+<span class="term-output">Home Alone</span></code></pre>
+
+<p>Here we pass three command-line arguments to <code>head</code><span class="citation" data-cites="head"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>. The first one is an option. Here I used the short option <code>-n</code>. Sometimes a short option has a long variant, which would be <code>--lines</code> in this case. The second one is a value that belongs to the option. The third one is a filename. This particular command outputs the first three lines of file <em>/data/ch02/movies.txt</em>.</p>
+</section>
+<section id="five-types-of-command-line-tools" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="five-types-of-command-line-tools"><span class="header-section-number">2.3.3</span> Five Types of Command-line Tools</h3>
+
+<p>I use the term <em>command-line tool</em> a lot, but so far, I haven’t yet explained what I actually mean by it. I use it as an umbrella term for <em>anything</em> that can be executed from the command line (see <a href="#fig-umbrella" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). Under the hood, each command-line tool is one of the following five types:</p>
+<ul>
+<li>A binary executable</li>
+<li>A shell builtin</li>
+<li>An interpreted script</li>
+<li>A shell function</li>
+<li>An alias</li>
+</ul>
+<div id="fig-umbrella" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-umbrella-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0201.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-umbrella-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: I use the term command-line tool as an umbrella term
+</figcaption>
+</figure>
+</div>
+<p>It’s good to know the difference between the types. The command-line tools that come pre-installed with the Docker image mostly comprise of the first two types (binary executable and shell builtin). The other three types (interpreted script, shell function, and alias) allow us to further build up our data science toolbox and become more efficient and more productive data scientists.</p>
+<dl>
+<dt>Binary Executable</dt>
+<dd>
+<p>Binary executables are programs in the classical sense. A binary executable is created by compiling source code to machine code. This means that when you open the file in a text editor you cannot read it.</p>
+</dd>
+<dt>Shell Builtin</dt>
+<dd>
+<p>Shell builtins are command-line tools provided by the shell, which is the Z shell (or <code>zsh</code>) in our case. Examples include <code>cd</code> and <code>pwd</code>. Shell builtins may differ between shells. Like binary executables, they cannot be easily inspected or changed.</p>
+</dd>
+<dt>Interpreted Script</dt>
+<dd>
+<p>An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. The script below is interpreted by Python not because of the file extension <em>.py</em>, but because the first line of the script defines the binary that should execute it.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">fac.py</span>
+<span class="term-output">───────┬──────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">fac.py</span></span>
+<span class="term-output">───────┼──────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env python</span></span>
+<span class="term-output">   2   │</span>
+<span class="term-output">   3   │ <span style="color:var(--term-5)">def</span> <span style="color:var(--term-4)">factorial</span>(<span style="color:var(--term-6)">x</span>):</span>
+<span class="term-output">   4   │     result <span style="color:var(--term-5)">=</span> <span style="color:var(--term-3)">1</span></span>
+<span class="term-output">   5   │     <span style="color:var(--term-5)">for</span> i <span style="color:var(--term-5)">in</span> <span style="color:var(--term-6)">range</span>(<span style="color:var(--term-3)">2</span>, x <span style="color:var(--term-5)">+</span> <span style="color:var(--term-3)">1</span>):</span>
+<span class="term-output">   6   │         result <span style="color:var(--term-5)">*=</span> i</span>
+<span class="term-output">   7   │     <span style="color:var(--term-5)">return</span> result</span>
+<span class="term-output">   8   │</span>
+<span class="term-output">   9   │ <span style="color:var(--term-5)">if</span> __name__ <span style="color:var(--term-5)">==</span> <span style="color:var(--term-2)">"__main__"</span>:</span>
+<span class="term-output">  10   │     <span style="color:var(--term-5)">import</span> sys</span>
+<span class="term-output">  11   │     x <span style="color:var(--term-5)">=</span> int(sys.argv[<span style="color:var(--term-3)">1</span>])</span>
+<span class="term-output">  12   │     sys.stdout.write(<span style="color:var(--term-5)">f</span><span style="color:var(--term-2)">"</span>{factorial(x)}<span style="color:var(--term-6)">\n</span><span style="color:var(--term-2)">"</span>)</span>
+<span class="term-output">───────┴──────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">./fac.py</span> 5
+<span class="term-output">120</span></code></pre>
+
+<p>In <a href="chapter-4-creating-command-line-tools.qmd">Chapter 4</a>, I’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.</p>
+</dd>
+<dt>Shell Function</dt>
+<dd>
+<p>A shell function is a function that is, in our case, executed by <code>zsh</code>. They provide similar functionality to a script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called <code>fac</code>, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using <code>seq</code>, putting those numbers on one line with <code>*</code> as the delimiter using <code>paste</code><span class="citation" data-cites="paste"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, and passing this equation into <code>bc</code><span class="citation" data-cites="bc"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span>, which evaluates it and outputs the result.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-1);font-weight:bold">fac</span><span style="color:var(--term-3)">()</span> <span style="color:var(--term-3)">{</span> <span style="color:var(--term-3)">(</span><span style="color:var(--term-2)">echo</span> 1; <span style="color:var(--term-2)">seq</span> $1<span style="color:var(--term-3)">)</span> | <span style="color:var(--term-2)">paste</span> -s -d\* - | <span style="color:var(--term-2)">bc</span>; <span style="color:var(--term-3)">}</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">fac</span> 5
+<span class="term-output">120</span></code></pre>
+
+<p>The file <em>~/.zshrc</em>, which is a configuration file for Z shell, is a good place to define your shell functions, so that they are always available.</p>
+</dd>
+<dt>Alias</dt>
+<dd>
+<p>Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for it to save time. Aliases are also very useful when you continue to misspell a certain command (Chris Wiggins maintains a <a href="https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh">useful list of aliases</a>). The following command defines such an alias:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> l=<span style="color:var(--term-3)">'ls --color -lhF --group-directories-first'</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> les=less</code></pre>
+
+<p>Now, if you type the following on the command line, the shell will replace each alias it finds with its value:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 36K</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">ch02</span></code></pre>
+
+<p>Aliases are simpler than shell functions as they don’t allow parameters. The function <code>fac</code> could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in the file <em>.zshrc</em>, which is located in your home directory. To see all aliases currently defined, you run <code>alias</code> without arguments. Try it. What do you see?</p>
+</dd>
+</dl>
+<p>In this book I’ll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases. This is because these can easily be changed. The purpose of a command-line tool is to make your life on the easier, and to make you a more productive and more efficient data scientist. You can find out the type of a command-line tool with <code>type</code> (which is itself a shell builtin):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> -a pwd
+<span class="term-output">pwd is a shell builtin</span>
+<span class="term-output">pwd is /usr/bin/pwd</span>
+<span class="term-output">pwd is /bin/pwd</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> -a cd
+<span class="term-output">cd is a shell builtin</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> -a fac
+<span class="term-output">fac is a shell function</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> -a l
+<span class="term-output">l is an alias for ls --color -lhF --group-directories-first</span></code></pre>
+
+
+<p><code>type</code> returns three command-line tools for <code>pwd</code>. In that case, the first reported command-line tool is used when you type <code>pwd</code>. In the next section we’ll look at how to combine command-line tools.</p>
+</section>
+<section id="combining-command-line-tools" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="combining-command-line-tools"><span class="header-section-number">2.3.4</span> Combining Command-line Tools</h3>
+<p>Because most command-line tools adhere to the Unix philosophy<span class="citation" data-cites="raymond2003art"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span>, they are designed to do only thing, and do it really well. For example, the command-line tool <code>grep</code><span class="citation" data-cites="grep"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span> can filter lines, <code>wc</code><span class="citation" data-cites="wc"><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></span> can count lines, and <code>sort</code><span class="citation" data-cites="sort"><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></span> can sort lines. The power of the command line comes from its ability to combine these small, yet powerful command-line tools.</p>
+<p>This power is made possible by managing the communication streams of these tools. Each tool has three standard communication streams: standard input, standard output, and standard error. These are often abbreviated as <em><code>stdin</code></em>, <em><code>stdout</code></em>, and <em><code>stderr</code></em>.</p>
+<p>Both the standard output and standard error are, by default, redirected to the terminal, so that both normal output and any error messages are printed on the screen. <a href="#fig-diagram-essential-streams" class="quarto-xref">Figure&nbsp;<span>2.2</span></a> illustrates this for both <code>pwd</code> and <code>rev</code><span class="citation" data-cites="rev"><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></span>. If you run <code>rev</code>, you’ll see that nothing happens. That’s because <code>rev</code> expects input, and by the default, that’s any keys pressed on the keyboard. Try typing a sentence and press <strong><code>Enter</code></strong>. <code>rev</code> immediately responds with your input in reverse. You can stop sending input by pressing <strong><code>Ctrl-D</code></strong> after which <code>rev</code> will stop.</p>
+<div id="fig-diagram-essential-streams" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-essential-streams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0202.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-essential-streams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: Every tool has three standard streams: standard input (<em><code>stdin</code></em>), standard output (<em><code>stdout</code></em>), and standard error (<em><code>stderr</code></em>)
+</figcaption>
+</figure>
+</div>
+<p>In practice, you’ll not use the keyboard as a source of input, but the output generated by other tools and the contents of files. For example, with <code>curl</code> we can download the book <em>Alice’s Adventures in Wonderland</em> by Lewis Carrol and <em>pipe</em> that to the next tool. (I’ll discuss <code>curl</code> in more detail in <a href="chapter-3-obtaining-data.qmd">Chapter 3</a>.) This is done using the pipe operator (<code>|</code>).</p>
+<div id="fig-diagram-essential-pipe" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-essential-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0203.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-essential-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: The output from a tool can be piped to another tool
+</figcaption>
+</figure>
+</div>
+<p>We can <em>pipe</em> the output of <code>curl</code> to <code>grep</code> to filter lines on a pattern. Imagine that we want to see the chapters listed in the table of contents: We can combine <code>curl</code> and <code>grep</code> as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span>
+<span class="term-output"> CHAPTER I.     Down the Rabbit-Hole</span>
+<span class="term-output"> CHAPTER II.    The Pool of Tears</span>
+<span class="term-output"> CHAPTER III.   A Caucus-Race and a Long Tale</span>
+<span class="term-output"> CHAPTER IV.    The Rabbit Sends in a Little Bill</span>
+<span class="term-output"> CHAPTER V.     Advice from a Caterpillar</span>
+<span class="term-output"> CHAPTER VI.    Pig and Pepper</span>
+<span class="term-output"> CHAPTER VII.   A Mad Tea-Party</span>
+<span class="term-output"> CHAPTER VIII.  The Queen’s Croquet-Ground</span>
+<span class="term-output"> CHAPTER IX.    The Mock Turtle’s Story</span>
+<span class="term-output"> CHAPTER X.     The Lobster Quadrille</span>
+<span class="term-output"> CHAPTER XI.    Who Stole the Tarts?</span>
+<span class="term-output"> CHAPTER XII.   Alice’s Evidence</span></code></pre>
+
+<p>And if we wanted to know <em>how many</em> chapters the book has, we can use <code>wc</code>, which is very good at counting things:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">wc</span> -l <span class="term-callout">➊</span>
+<span class="term-output">12</span></code></pre>
+
+<ol type="1">
+<li>The option <code>-l</code> specifies that <code>wc</code> should only output the number of lines that are pass into it. By default it also returns the number of characters and words.</li>
+</ol>
+<p>You can think of piping as an automated copy and paste. Once you get the hang of combining tools using the pipe operator, you’ll find that there are virtually no limits to this.</p>
+</section>
+<section id="redirecting-input-and-output" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="redirecting-input-and-output"><span class="header-section-number">2.3.5</span> Redirecting Input and Output</h3>
+<p>Besides piping the output from one tool to another tool, you can also save it to a file. The file will be saved it in the current directory, unless a full path is given. This is called <em>output redirection</em>, and works as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span> <span style="color:var(--term-3)">&gt;</span> chapter
+<span class="term-output">s.txt</span>
+<span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
+<span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
+<span class="term-output">100 170.2k 100 170.2k   0      0 179.1M      0                              0</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">chapters.txt</span>
+<span class="term-output"> CHAPTER I.     Down the Rabbit-Hole</span>
+<span class="term-output"> CHAPTER II.    The Pool of Tears</span>
+<span class="term-output"> CHAPTER III.   A Caucus-Race and a Long Tale</span>
+<span class="term-output"> CHAPTER IV.    The Rabbit Sends in a Little Bill</span>
+<span class="term-output"> CHAPTER V.     Advice from a Caterpillar</span>
+<span class="term-output"> CHAPTER VI.    Pig and Pepper</span>
+<span class="term-output"> CHAPTER VII.   A Mad Tea-Party</span>
+<span class="term-output"> CHAPTER VIII.  The Queen’s Croquet-Ground</span>
+<span class="term-output"> CHAPTER IX.    The Mock Turtle’s Story</span>
+<span class="term-output"> CHAPTER X.     The Lobster Quadrille</span>
+<span class="term-output"> CHAPTER XI.    Who Stole the Tarts?</span>
+<span class="term-output"> CHAPTER XII.   Alice’s Evidence</span></code></pre>
+
+<p>Here, we save the output of <code>grep</code> to a file named <em>chapters.txt</em> in the directory <em>/data/ch02</em>. If this file does not exist yet, it will be created. If this file already exists, its contents are overwritten. <a href="#fig-diagram-essential-redirect-stdout" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> illustrates how output redirection works conceptually. Note that the standard error is still redirected to the terminal.</p>
+<div id="fig-diagram-essential-redirect-stdout" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-essential-redirect-stdout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0204.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-essential-redirect-stdout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: The output from a tool can be redirected to a file
+</figcaption>
+</figure>
+</div>
+<p>You can also append the output to a file with <code>&gt;&gt;</code>, meaning the output is added after the original contents:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> -n <span style="color:var(--term-3)">"Hello"</span> <span style="color:var(--term-3)">&gt;</span> greeting.txt
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">" World"</span> <span style="color:var(--term-3)">&gt;&gt;</span> <span style="text-decoration:underline">greeting.txt</span></code></pre>
+
+<p>The tool <code>echo</code> outputs the value you specify. The <code>-n</code> option, which stands for <em>newline</em>, specifies that <code>echo</code> should not output a trailing newline.</p>
+<p>Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage. To use the contents of the file <em>greeting.txt</em> again, we can use <code>cat</code>, which reads a file prints it.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">greeting.txt</span>
+<span class="term-output">Hello World</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">greeting.txt</span> | <span style="color:var(--term-2)">wc</span> -w <span class="term-callout">➊</span>
+<span class="term-output">2</span></code></pre>
+
+<ol type="1">
+<li>The <code>-w</code> option indicates <code>wc</code> to only count words.</li>
+</ol>
+<p>The same result can be achieved by using the smaller-than-sign (<code>&lt;</code>):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">greeting.txt</span> <span style="color:var(--term-2)">wc</span> -w
+<span class="term-output">2</span></code></pre>
+
+<p>This way, you are directly passing the file to the standard input of <code>wc</code> without running an additional process <a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>. <a href="#fig-diagram-essential-stdin-cat" class="quarto-xref">Figure&nbsp;<span>2.5</span></a> illustrates how these two ways work. Again, the final output is the same.</p>
+<div id="fig-diagram-essential-stdin-cat" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-essential-stdin-cat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0205.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-essential-stdin-cat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: Two ways to use the contents of a file as input
+</figcaption>
+</figure>
+</div>
+<p>Like many command-line tools, <code>wc</code> allows one or more filenames to be specified as arguments. For example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -w <span style="text-decoration:underline">greeting.txt</span> <span style="text-decoration:underline">movies.txt</span>
+<span class="term-output"> 2 greeting.txt</span>
+<span class="term-output">11 movies.txt</span>
+<span class="term-output">13 total</span></code></pre>
+
+<p>Note that in this case, <code>wc</code> also outputs the name of the files.</p>
+<p>You can suppress the output of any tool by redirecting it to a special file called <em>/dev/null</em>. I often do this to suppress error messages (see <a href="#fig-diagram-essential-redirect-devnull" class="quarto-xref">Figure&nbsp;<span>2.6</span></a> for an illustration). The following causes <code>cat</code> to produce an error message because it cannot find the file <em>404.txt</em>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">movies.txt</span> 404.txt
+<span class="term-output">Matrix</span>
+<span class="term-output">Star Wars</span>
+<span class="term-output">Home Alone</span>
+<span class="term-output">Indiana Jones</span>
+<span class="term-output">Back to the Future</span>
+<span class="term-output">cat: 404.txt: No such file or directory</span></code></pre>
+
+<p>You can redirect standard error to <em>/dev/null</em> as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">movies.txt</span> 404.txt <span style="color:var(--term-3)">2&gt;</span> <span style="text-decoration:underline">/dev/null</span> <span class="term-callout">➊</span>
+<span class="term-output">Matrix</span>
+<span class="term-output">Star Wars</span>
+<span class="term-output">Home Alone</span>
+<span class="term-output">Indiana Jones</span>
+<span class="term-output">Back to the Future</span></code></pre>
+
+<ol type="1">
+<li>The <em><code>2</code></em> refers to standard error.</li>
+</ol>
+<div id="fig-diagram-essential-redirect-devnull" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-essential-redirect-devnull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0206.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-essential-redirect-devnull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.6: Redirecting <em><code>stderr</code></em> to <em>/dev/null</em>
+</figcaption>
+</figure>
+</div>
+<p>Be careful not to read from and write to the same file. If you do, you’ll end up with an empty file. That’s because the tool of which the output is redirected, immediately opens that file for writing, and thereby emptying it. There are two workarounds for this: (1) write to a different file and rename it afterwards with <code>mv</code> or (2) use <code>sponge</code><span class="citation" data-cites="sponge"><a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></span>, which soaks up all its input before writing to a file. <a href="#fig-diagram-essential-sponge" class="quarto-xref">Figure&nbsp;<span>2.7</span></a> illustrates how this works.</p>
+<div id="fig-diagram-essential-sponge" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-essential-sponge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0207.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-essential-sponge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.7: Unless you use <code>sponge</code>, you cannot read from and write to the same file in one pipeline
+</figcaption>
+</figure>
+</div>
+<p>For example, imagine you have used <code>dseq</code><span class="citation" data-cites="dseq"><a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></span> to generate a file <em>dates.txt</em> and now you’d like to add line numbers using <code>nl</code><span class="citation" data-cites="nl"><a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></span>. If you run the following, the file <em>dates.txt</em> will end up empty.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 5 <span style="color:var(--term-3)">&gt;</span> dates.txt
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">dates.txt</span> <span style="color:var(--term-2)">nl</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">dates.txt</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">dates.txt</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">dates.txt</span>   &lt;EMPTY&gt;</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Instead, you can use one of the workarounds I just described:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 5 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">dates.txt</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">dates.txt</span> <span style="color:var(--term-2)">nl</span> <span style="color:var(--term-3)">&gt;</span> dates-nl.txt
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">dates-nl.txt</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">dates-nl.txt</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │      1  2026-11-06</span>
+<span class="term-output">   2   │      2  2026-11-07</span>
+<span class="term-output">   3   │      3  2026-11-08</span>
+<span class="term-output">   4   │      4  2026-11-09</span>
+<span class="term-output">   5   │      5  2026-11-10</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 5 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">dates.txt</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">dates.txt</span> <span style="color:var(--term-2)">nl</span> | <span style="color:var(--term-2)">sponge</span> <span style="text-decoration:underline">dates.txt</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">dates.txt</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">dates.txt</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │      1  2026-11-06</span>
+<span class="term-output">   2   │      2  2026-11-07</span>
+<span class="term-output">   3   │      3  2026-11-08</span>
+<span class="term-output">   4   │      4  2026-11-09</span>
+<span class="term-output">   5   │      5  2026-11-10</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+</section>
+<section id="working-with-files-and-directories" class="level3" data-number="2.3.6">
+<h3 data-number="2.3.6" class="anchored" data-anchor-id="working-with-files-and-directories"><span class="header-section-number">2.3.6</span> Working With Files and Directories</h3>
+<p>As data scientists, we work with a lot of data. This data is often stored in files. It is important to know how to work with files (and the directories they live in) on the command line. Every action that you can do using a GUI, you can do with command-line tools (and much more). In this section I introduce the most important ones to list, create, move, copy, rename, and delete files and directories.</p>
+<p>Listing the contents of a directory can be done with <code>ls</code>. If you don’t specify a directory, it lists the contents of the current directory. I prefer <code>ls</code> to have a long listing format and the directories grouped before files. Instead of typing the corresponding options each time, I use the alias <code>l</code>.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="text-decoration:underline">/data/ch10</span>
+<span class="term-output">Untitled1337.ipynb  alice.txt  count.R  count.py</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> l
+<span class="term-output">l='ls --color -lhF --group-directories-first'</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> <span style="text-decoration:underline">/data/ch10</span>
+<span class="term-output">total 176K</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  5 17:49 Untitled1337.ipynb</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  5 17:49 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  5 17:49 count.R</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  5 17:49 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
+
+<p>You have already seen how we can create new files by redirecting the output with either <code>&gt;</code> or <code>&gt;&gt;</code>. If you need to move a file to a different directory you can use <code>mv</code><span class="citation" data-cites="mv"><a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></span>:</p>
+<pre class="text"><code>$ mv hello.txt /data/ch02</code></pre>
+<p>You can also rename files with <code>mv</code>:</p>
+<pre class="text"><code>$ cd data
+$ mv hello.txt bye.txt</code></pre>
+<p>You can also rename or move entire directories. If you no longer need a file, you delete (or remove) it with <code>rm</code><span class="citation" data-cites="rm"><a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></span>:</p>
+<pre class="text"><code>$ rm bye.txt</code></pre>
+<p>If you want to remove an entire directory with all its contents, specify the <code>-r</code> option, which stands for recursive:</p>
+<pre class="text"><code>$ rm -r /data/ch02/old</code></pre>
+<p>If you want to copy a file, use <code>cp</code><span class="citation" data-cites="cp"><a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></span>. This is useful for creating backups:</p>
+<pre class="text"><code>$ cp server.log server.log.bak</code></pre>
+<p>You can create directories using <code>mkdir</code><span class="citation" data-cites="mkdir"><a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></span>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> logs
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 40K</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 <span style="color:var(--term-4);font-weight:bold">logs</span>/</span></code></pre>
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the file system to provide immediate feedback. There are a few visual file managers that can help with this, such as GNU Midnight Commander, Ranger, and Vifm. These are not installed in the Docker image, but you can install one yourself by running <code>sudo apt install</code> followed by either <code>mc</code>, <code>ranger</code>, or <code>vifm</code>.</p>
+</div>
+</div>
+<p>All of the above command-line tools accept the <code>-v</code> option, which stands for verbose, so that they output what’s going on. For example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> -v backup
+<span class="term-output">mkdir: created directory 'backup'</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> -v <span style="color:var(--term-4)">*</span> <span style="text-decoration:underline">backup</span>
+<span class="term-output">cp: -r not specified; omitting directory 'backup'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch02'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch03'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch04'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch05'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch06'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch07'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch08'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch09'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'ch10'</span>
+<span class="term-output">cp: -r not specified; omitting directory 'logs'</span></code></pre>
+
+<p>All tools but <code>mkdir</code> also accept the <code>-i</code> option, which stands for interactive, and causes the tools to ask you for confirmation. For example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> -i <span style="color:var(--term-4)">*</span>
+<span class="term-output">zsh: sure you want to delete all 11 files in /data [yn]? n</span></code></pre>
+
+</section>
+<section id="managing-output" class="level3" data-number="2.3.7">
+<h3 data-number="2.3.7" class="anchored" data-anchor-id="managing-output"><span class="header-section-number">2.3.7</span> Managing Output</h3>
+<p>Sometimes a tools or sequence of tools produces too much output to include in the book. Instead of manually altering such output, I prefer to be transparent by piping it through a helper tool. You don’t necessarily have to do this, especially if you’re interested in the complete output.</p>
+<p>Here are the tools that I use for making output manageable:</p>
+<p>If often use <code>trim</code> to limit the output to a given height and width. By default, output is trimmed to 10 lines and the width of the terminal. Pass a negative number to disable trimming the height and or width. For example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span> | <span style="color:var(--term-2)">trim</span> 5 25
+<span class="term-output">bill,tip,sex,smoker,day,…</span>
+<span class="term-output">16.99,1.01,Female,No,Sun…</span>
+<span class="term-output">10.34,1.66,Male,No,Sun,D…</span>
+<span class="term-output">21.01,3.5,Male,No,Sun,Di…</span>
+<span class="term-output">23.68,3.31,Male,No,Sun,D…</span>
+<span class="term-output">… with 240 more lines</span></code></pre>
+
+<p>Other tools that I use to massage the output are: <code>head</code>, <code>tail</code>, <code>fold</code>, <code>paste</code>, and <code>column</code>. The appendix contains examples for each of these.</p>
+<p>If the output is a comma-separated values, I often pipe it through<code>csvlook</code> to turn it into a nice-looking table. If you run <code>csvlook</code>, you’ll see the complete table. I have redefined <code>csvlook</code> such that the table is shortened by <code>trim</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">which</span> csvlook
+<span class="term-output">csvlook () {</span>
+<span class="term-output">        command csvlook "$@" | trim | sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──┤</span>
+<span class="term-output">/;s/|/│/g;2s/-/─/g'</span>
+<span class="term-output">}</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span>
+<span class="term-output">│  bill │   tip │ sex    │ smoker │ day  │ time   │ size │</span>
+<span class="term-output">├───────┼───────┼────────┼────────┼──────┼────────┼──────┤</span>
+<span class="term-output">│ 16.99 │  1.01 │ Female │  False │ Sun  │ Dinner │    2 │</span>
+<span class="term-output">│ 10.34 │  1.66 │ Male   │  False │ Sun  │ Dinner │    3 │</span>
+<span class="term-output">│ 21.01 │  3.50 │ Male   │  False │ Sun  │ Dinner │    3 │</span>
+<span class="term-output">│ 23.68 │  3.31 │ Male   │  False │ Sun  │ Dinner │    2 │</span>
+<span class="term-output">│ 24.59 │  3.61 │ Female │  False │ Sun  │ Dinner │    4 │</span>
+<span class="term-output">│ 25.29 │  4.71 │ Male   │  False │ Sun  │ Dinner │    4 │</span>
+<span class="term-output">│  8.77 │  2.00 │ Male   │  False │ Sun  │ Dinner │    2 │</span>
+<span class="term-output">│ 26.88 │  3.12 │ Male   │  False │ Sun  │ Dinner │    4 │</span>
+<span class="term-output">… with 236 more lines</span></code></pre>
+
+<p>I use <code>bat</code> to show the contents of a file where line numbers and syntax highlighting matters. For example source code:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">/data/ch04/stream.py</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">/data/ch04/stream.py</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env python</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-5)">from</span> sys <span style="color:var(--term-5)">import</span> stdin, stdout</span>
+<span class="term-output">   3   │ <span style="color:var(--term-5)">while</span> <span style="color:var(--term-3)">True</span>:</span>
+<span class="term-output">   4   │     line <span style="color:var(--term-5)">=</span> stdin.readline()</span>
+<span class="term-output">   5   │     <span style="color:var(--term-5)">if</span> <span style="color:var(--term-5)">not</span> line:</span>
+<span class="term-output">   6   │         <span style="color:var(--term-5)">break</span></span>
+<span class="term-output">   7   │     stdout.write(<span style="color:var(--term-2)">"</span><span style="color:var(--term-3)">%d</span><span style="color:var(--term-6)">\n</span><span style="color:var(--term-2)">"</span> <span style="color:var(--term-5)">%</span> int(line)<span style="color:var(--term-5)">**</span><span style="color:var(--term-3)">2</span>)</span>
+<span class="term-output">   8   │     stdout.flush()</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Sometimes I add the <code>-A</code> option when I want to explicitly point out the spaces, tabs, and newlines in a file.</p>
+<p>Sometimes it’s useful to write intermediate output to a file. This allows you to inspect any step in your pipeline once it has completed. You can insert the tool <code>tee</code> as often as you like in your pipeline. I often use it to inspect a portion of the final output, while writing the complete output to file (see <a href="#fig-diagram-essential-tee" class="quarto-xref">Figure&nbsp;<span>2.8</span></a>. Here, the complete output is written to <em>even.txt</em> and the first 5 lines are printed using <code>trim</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 2 100 | <span style="color:var(--term-2)">tee</span> even.txt | <span style="color:var(--term-2)">trim</span> 5
+<span class="term-output">0</span>
+<span class="term-output">2</span>
+<span class="term-output">4</span>
+<span class="term-output">6</span>
+<span class="term-output">8</span>
+<span class="term-output">… with 46 more lines</span></code></pre>
+
+<div id="fig-diagram-essential-tee" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-essential-tee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0208.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-essential-tee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.8: With <code>tee</code>, you can write intermediate output to a file
+</figcaption>
+</figure>
+</div>
+<p>Lastly, to insert images that have been generated by command-line tools (so every image except screenshots and diagrams) I use <code>display</code>. If you run <code>display</code> you’ll find that it doesn’t work. In <a href="chapter-7-exploring-data.qmd">Chapter 7</a>, I explain four options for you to display generated images from the command line.</p>
+</section>
+<section id="help" class="level3" data-number="2.3.8">
+<h3 data-number="2.3.8" class="anchored" data-anchor-id="help"><span class="header-section-number">2.3.8</span> Help!</h3>
+<p>As you’re finding your way around the command-line, it may happen that you need help. Even the most seasoned users need help at some point. It is impossible to remember all the different command-line tools and their possible arguments. Fortunately, the command line offers severals ways to get help.</p>
+<p>The most important command to get help is perhaps <code>man</code><span class="citation" data-cites="man"><a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></span>, which is short for <em>manual</em>. It contains information for most command-line tools. In case I forgot the options to the tool <code>tar</code>, which happens all the time, I just access its manual page using:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> tar | <span style="color:var(--term-2)">trim</span> 20
+<span class="term-output">TAR(1)                          GNU TAR Manual                          TAR(1)</span>
+<span class="term-output"></span>
+<span class="term-output">NAME</span>
+<span class="term-output">       tar - an archiving utility</span>
+<span class="term-output"></span>
+<span class="term-output">SYNOPSIS</span>
+<span class="term-output">   Traditional usage</span>
+<span class="term-output">       tar {A|c|d|r|t|u|x}[GnSkUWOmpsMBiajJzZhPlRvwo] [ARG...]</span>
+<span class="term-output"></span>
+<span class="term-output">   UNIX-style usage</span>
+<span class="term-output">       tar -A [OPTIONS] -f ARCHIVE ARCHIVE...</span>
+<span class="term-output"></span>
+<span class="term-output">       tar -c [-f ARCHIVE] [OPTIONS] [FILE...]</span>
+<span class="term-output"></span>
+<span class="term-output">       tar -d [-f ARCHIVE] [OPTIONS] [FILE...]</span>
+<span class="term-output"></span>
+<span class="term-output">       tar -r [-f ARCHIVE] [OPTIONS] [FILE...]</span>
+<span class="term-output"></span>
+<span class="term-output">       tar -t [-f ARCHIVE] [OPTIONS] [MEMBER...]</span>
+<span class="term-output"></span>
+<span class="term-output">… with 1144 more lines</span></code></pre>
+
+<p>Not every command-line tool has a manual page. Take <code>cd</code> for example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> cd
+<span class="term-output">No manual entry for cd</span></code></pre>
+
+<p>For shell builtins like <code>cd</code> you can consult the <em>zshbuiltins</em> manual page:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> zshbuiltins | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">ZSHBUILTINS(1)              General Commands Manual             ZSHBUILTINS(1)</span>
+<span class="term-output"></span>
+<span class="term-output">NAME</span>
+<span class="term-output">       zshbuiltins - zsh built-in commands</span>
+<span class="term-output"></span>
+<span class="term-output">SHELL BUILTIN COMMANDS</span>
+<span class="term-output">       Some shell builtin commands take options as described in individual en‐</span>
+<span class="term-output">       tries;  these  are  often  referred  to in the list below as `flags' to</span>
+<span class="term-output">       avoid confusion with shell options, which may also have  an  effect  on</span>
+<span class="term-output">       the  behaviour of builtin commands.  In this introductory section, `op‐</span>
+<span class="term-output">… with 2807 more lines</span></code></pre>
+
+<p>You can search by pressing <strong><code>/</code></strong> and exit by pressing <strong><code>q</code></strong>. Try to find the appropriate section for <code>cd</code>.</p>
+<p>Newer command-line tools often lack a manual page as well. In that case, your best bet is to invoke the tool with the <code>--help</code> (or <code>-h</code>) option. For example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">jq</span> --help | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">jq - commandline JSON processor [version 1.8.1]</span>
+<span class="term-output"></span>
+<span class="term-output">Usage:  jq [options] &lt;jq filter&gt; [file...]</span>
+<span class="term-output">        jq [options] --args &lt;jq filter&gt; [strings...]</span>
+<span class="term-output">        jq [options] --jsonargs &lt;jq filter&gt; [JSON_TEXTS...]</span>
+<span class="term-output"></span>
+<span class="term-output">jq is a tool for processing JSON inputs, applying the given filter to</span>
+<span class="term-output">its JSON text inputs and producing the filter's results as JSON on</span>
+<span class="term-output">standard output.</span>
+<span class="term-output"></span>
+<span class="term-output">… with 52 more lines</span></code></pre>
+
+<p>Specifying the <code>--help</code> option also works for command-line tools such as <code>cat</code>. However, the corresponding man page often provides more information. If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet. In the appendix, there’s a list of all command-line tools used in this book. Besides how each command-line tool can be installed, it also shows how you can get help.</p>
+<p>Manual pages can be quite verbose and difficult to read. The tool <code>tldr</code><span class="citation" data-cites="tldr"><a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></span> is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional manual pages. Here’s an example showing the tldr page for <code>tar</code>:</p>
+
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tldr</span> tar | <span style="color:var(--term-2)">trim</span> 20
+<span class="term-output"></span>
+<span class="term-output">  Archiving utility.</span>
+<span class="term-output">  Often combined with a compression method, such as `gzip` or `bzip2`.</span>
+<span class="term-output">  More information: &lt;https://www.gnu.org/software/tar/manual/tar.html&gt;.</span>
+<span class="term-output"></span>
+<span class="term-output">  [c]reate an archive and write it to a [f]ile:</span>
+<span class="term-output"></span>
+<span class="term-output">      tar cf path/to/target.tar path/to/file1 path/to/file2 ...</span>
+<span class="term-output"></span>
+<span class="term-output">  [c]reate a g[z]ipped archive and write it to a [f]ile:</span>
+<span class="term-output"></span>
+<span class="term-output">      tar czf path/to/target.tar.gz path/to/file1 path/to/file2 ...</span>
+<span class="term-output"></span>
+<span class="term-output">  [c]reate a g[z]ipped (compressed) archive from a directory using relative pat…</span>
+<span class="term-output"></span>
+<span class="term-output">      tar czf path/to/target.tar.gz [-C|--directory] path/to/directory .</span>
+<span class="term-output"></span>
+<span class="term-output">  E[x]tract a (compressed) archive [f]ile into the current directory [v]erbosel…</span>
+<span class="term-output"></span>
+<span class="term-output">      tar xvf path/to/source.tar.ext</span>
+<span class="term-output">… with 17 more lines</span></code></pre>
+
+<p>As you can see, rather than listing the many options alphabetically like <code>man</code> often does, <code>tldr</code> cuts to the chase by giving you a list of practical examples.</p>
+</section>
+</section>
+<section id="summary-1" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="summary-1"><span class="header-section-number">2.4</span> Summary</h2>
+<p>In this chapter you learned how to get all the required command-line tools by installing a Docker image. I also went over some essential command-line concepts and how to get help. Now that you have all the necessary ingredients, you’re ready for the first step of the OSEMN model for data science: obtaining data.</p>
+</section>
+<section id="for-further-exploration-1" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="for-further-exploration-1"><span class="header-section-number">2.5</span> For Further Exploration</h2>
+<ul>
+<li>The subtitle of this book pays homage to the epic <em>Unix Power Tools</em> by Jerry Peek, Shelley Powers, Tim O’Reilly, and Mike Loukides. And rightly so. In 51 chapters and more than a thousand pages, it covers just about everything there is to know about Unix. It weighs over 4 pounds, so you might want to consider getting the ebook.</li>
+<li>The website <a href="https://explainshell.com/">explainshell</a> parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages.</li>
+<li>Docker is truly a brilliant piece of software. In this chapter I’ve briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to <a href="https://www.docker.com/101-tutorial">learn how to create your own Docker images</a>. The book <em>Docker: Up &amp; Running</em> by Sean Kane and Karl Matthias is a good resource as well.</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Richard M. Stallman and David MacKenzie, <em><span class="nocase">ls</span> – List Directory Contents</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Torbjorn Granlund and Richard M. Stallman, <em><span class="nocase">cat</span> – Concatenate Files and Print on the Standard Output</em>, version 8.30, 2018, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Stephen Dolan, <em><span class="nocase">jq</span> – Command-Line <span>JSON</span> Processor</em>, version 1.6, 2021, <a href="https://stedolan.github.com/jq">https://stedolan.github.com/jq</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Ulrich Drepper, <em><span class="nocase">seq</span> – Print a Sequence of Numbers</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Jim Meyering, <em><span class="nocase">pwd</span> – Print Name of Working Directory</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>David MacKenzie and Jim Meyering, <em><span class="nocase">head</span> – Output the First Part of Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>David M. Ihnat and David MacKenzie, <em><span class="nocase">paste</span> – Merge Lines of Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Philip A. Nelson, <em><span class="nocase">bc</span> – an Arbitrary Precision Calculator Language</em>, version 1.07.1, 2017, <a href="https://www.gnu.org/software/bc">https://www.gnu.org/software/bc</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Eric S Raymond, <em>The Art of Unix Programming</em> (Addison-Wesley Professional, 2003).<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Jim Meyering, <em><span class="nocase">grep</span> – Print Lines That Match Patterns</em>, version 3.4, 2019, <a href="https://www.gnu.org/software/grep">https://www.gnu.org/software/grep</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Paul Rubin and David MacKenzie, <em><span class="nocase">wc</span> – Print Newline, Word, and Byte Counts for Each File</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Mike Haertel and Paul Eggert, <em><span class="nocase">sort</span> – Sort Lines of Text Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Karel Zak, <em><span class="nocase">rev</span> – Reverse Lines Characterwise</em>, version 2.36.1, 2021, <a href="https://www.kernel.org/pub/linux/utils/util-linux">https://www.kernel.org/pub/linux/utils/util-linux</a>.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p><a href="http://porkmail.org/era/unix/award.html">Some</a> consider this a useless use of <code>cat</code>, arguing that the purpose of <code>cat</code> is to concatenate files and if you’re not using it for this purpose, it’s a waste of time, and costs you a process. I think this is silly. We’ve got more important things to do!<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Colin Watson and Tollef Fog Heen, <em><span class="nocase">sponge</span> – Soak up Standard Input and Write to a File</em>, version 0.65, 2021, <a href="https://joeyh.name/code/moreutils">https://joeyh.name/code/moreutils</a>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>Jeroen Janssens, <em><span class="nocase">dseq</span> – Generate Sequence of Dates</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>Scott Bartram and David MacKenzie, <em><span class="nocase">nl</span> – Number Lines of Files</em>, version 8.30, 2020, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Mike Parker, David MacKenzie, and Jim Meyering, <em><span class="nocase">mv</span> – Move (Rename) Files</em>, version 8.30, 2020, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>Paul Rubin et al., <em><span class="nocase">rm</span> – Remove Files or Directories</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>Torbjorn Granlund, David MacKenzie, and Jim Meyering, <em><span class="nocase">cp</span> – Copy Files and Directories</em>, version 8.30, 2018, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>David MacKenzie, <em><span class="nocase">mkdir</span> – Make Directories</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p>John W. Eaton and Colin Watson, <em><span class="nocase">man</span> – an Interface to the System Reference Manuals</em>, version 2.9.1, 2020, <a href="https://nongnu.org/man-db">https://nongnu.org/man-db</a>.<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p>Owen Voke, <em><span class="nocase">tldr</span> – Collaborative Cheatsheets for Console Commands</em>, version 3.3.7, 2021, <a href="https://tldr.sh">https://tldr.sh</a>.<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-1-introduction.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-2-getting-started.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-2-getting-started.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>
+(function() {
+  function addCopyButtons() {
+    var pres = document.querySelectorAll('pre.term-output, pre.term-screen, pre.term-source');
+    pres.forEach(function(pre) {
+      var wrap = document.createElement('div');
+      wrap.className = 'term-container';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+      var btn = document.createElement('button');
+      btn.className = 'term-copy-btn';
+      btn.setAttribute('aria-label', 'Copy commands to clipboard');
+      btn.setAttribute('title', 'Copy commands to clipboard');
+      var clipIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>';
+      var checkIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>';
+      btn.innerHTML = clipIcon;
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var source = code || pre;
+        var clone = source.cloneNode(true);
+        clone.querySelectorAll('.term-output').forEach(function(el) { el.remove(); });
+        var text = clone.innerText.replace(/\n{2,}/g, '\n').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          btn.innerHTML = checkIcon;
+          btn.setAttribute('title', 'Copied!');
+          setTimeout(function() {
+            btn.innerHTML = clipIcon;
+            btn.setAttribute('title', 'Copy commands to clipboard');
+          }, 1500);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addCopyButtons);
+  } else {
+    addCopyButtons();
+  }
+})();
+</script>
+
+
+
+
+</body></html>

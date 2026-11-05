@@ -1,0 +1,65 @@
+cowsay "Let's moove\!"
+seq 3
+pwd
+cd /data/ch02
+pwd
+cd ..
+pwd
+cd ch02
+head -n 3 movies.txt
+bat fac.py
+./fac.py 5
+fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
+fac 5
+alias l='ls --color -lhF --group-directories-first'
+alias les=less
+cd /data
+l
+cd ch02
+type -a pwd
+type -a cd
+type -a fac
+type -a l
+curl -s "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"
+curl -s "https://www.gutenberg.org/files/11/11-0.txt" |\
+grep " CHAPTER" |\
+wc -l
+curl "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER" > chapters.txt
+cat chapters.txt
+echo -n "Hello" > greeting.txt
+echo " World" >> greeting.txt
+cat greeting.txt
+cat greeting.txt | wc -w
+< greeting.txt wc -w
+wc -w greeting.txt movies.txt
+cat movies.txt 404.txt
+cat movies.txt 404.txt 2> /dev/null
+dseq 5 > dates.txt
+< dates.txt nl > dates.txt
+bat dates.txt
+dseq 5 > dates.txt
+< dates.txt nl > dates-nl.txt
+bat dates-nl.txt
+dseq 5 > dates.txt
+< dates.txt nl | sponge dates.txt
+bat dates.txt
+ls /data/ch10
+alias l
+l /data/ch10
+cd /data
+mkdir logs
+l
+mkdir -v backup
+cp -v * backup
+rm -i *
+cat /data/ch07/tips.csv | trim 5 25
+which csvlook
+csvlook /data/ch07/tips.csv
+bat /data/ch04/stream.py
+seq 0 2 100 | tee even.txt | trim 5
+man tar | trim 20
+man cd
+man zshbuiltins | trim
+jq --help | trim
+tldr --update
+tldr tar | trim 20
