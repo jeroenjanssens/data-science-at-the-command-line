@@ -204,14 +204,21 @@ def parse_header(header: str):
 # quarto-term cell options
 # --------------------------------------------------------------------------
 
+def rx_escape(text: str) -> str:
+    """Escape regex metacharacters the way Rust's regex::escape does."""
+    return "".join("\\" + c if c in "\\.+*?()|[]{}^$#&-~" else c for c in text)
+
+
 def spec(v) -> str:
     """Format a line spec (int or regex) for a quarto-term list option."""
     if isinstance(v, bool):
         raise ValueError(f"Unexpected boolean line spec: {v}")
     if isinstance(v, int):
         return str(v)
-    escaped = v.replace("\\", "\\\\").replace('"', '\\"')
-    return f'"{escaped}"'
+    # Cell options must be valid YAML for Quarto, and quarto-term's parser
+    # takes quoted list items literally up to the next quote. Single quotes
+    # work for both (YAML keeps backslashes as is); write `'` as \x27.
+    return "'" + v.replace("'", r"\x27") + "'"
 
 
 def spec_list(values) -> str:
@@ -305,9 +312,28 @@ def convert_console(label, options, code_lines, lines_after):
         # The new image ships a native pup for amd64 and arm64.
         return None
 
+    # Callout comments in the code ("cmd | # <1>"): 2e typed them and the
+    # pandoc filter turned them into markers. Remove them from the typed line
+    # and point a callout at the line instead (regex on the command text).
+    inline = []
+    for k, line in enumerate(code_lines):
+        m = re.search(r"\s*#\s?<(\d+)>(?=\s*(#!|$))", line)
+        if m:
+            command = line[: m.start()]
+            inline.append((int(m.group(1)), rx_escape(command.strip()) + r"\s*$"))
+            code_lines[k] = command + line[m.end():]
+    if inline:
+        if "callouts" in options:
+            raise ValueError(f"chunk {label!r} has callouts= and callout comments")
+        inline.sort()
+        if [n for n, _ in inline] != list(range(1, len(inline) + 1)):
+            warn(f"chunk {label!r}: callout comments aren't numbered 1..n")
+
     cell = ["```{term}"]
     if label:
         cell.append(f"#| label: {label}")
+    if inline:
+        cell.append(f"#| callout: {spec_list([rx for _, rx in inline])}")
     marker = "#!"
     for key, value in options.items():
         if key == "include":
@@ -371,6 +397,12 @@ EDITS = [
         '**Jeroen Janssens** is an independent data science consultant and instructor. He enjoys visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. Jeroen manages [Data Science Workshops](https://datascienceworkshops.com), a training and coaching firm that organizes open enrollment workshops, in-company courses, inspiration sessions, hackathons, and meetups. Previously, he was an\nassistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and various startups in New York City. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He lives with his wife and two kids in Rotterdam, the Netherlands.\nYou can find Jeroen on [Twitter](https://twitter.com/jeroenhjanssens), [GitHub](https://github.com/jeroenjanssens), and [LinkedIn](https://www.linkedin.com/in/jeroenjanssens/).',
         '**Jeroen Janssens**, PhD, is Head of Developer Relations at Posit, PBC.\nHis expertise lies in visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash.\nHe’s passionate about open source and sharing knowledge.\nHe’s the author of *Python Polars: The Definitive Guide* (O’Reilly, 2025) and *Data Science at the Command Line* (O’Reilly, 2021).\nJeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University.\nHe lives with his wife and two kids in Rotterdam, the Netherlands.\nYou can find Jeroen on [Bluesky](https://bsky.app/profile/jeroenjanssens.com), [Mastodon](https://fosstodon.org/@jeroenjanssens), [LinkedIn](https://www.linkedin.com/in/jeroenjanssens), and [GitHub](https://github.com/jeroenjanssens).',
         "Current bio and profiles from https://jeroenjanssens.com/about/",
+    ),
+    (
+        "list-of-command-line-tools.qmd",
+        "#| include: false\nunalias csvlook\n",
+        "#| include: false\n# Show the real curl here, not the cache wrapper (container/bin)\nexport PATH=${PATH#/book/bin:}\nunalias csvlook\n",
+        "type curl shows /usr/bin/curl, as in 2e",
     ),
     (
         "chapter-1-introduction.qmd",

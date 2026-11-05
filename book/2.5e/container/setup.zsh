@@ -28,4 +28,13 @@ sudo cp -r /data.bak /data
 sudo chown -R dst:dst /data
 eval $(dircolors -b)
 
-source /book/curl-cache.zsh
+# Cached URLs: bin/curl (first on PATH) sends them to a local server
+export PATH=/book/bin:$PATH
+(python3 /book/cache-server.py > /dev/null 2>&1 &)
+for _ in {1..50}; do
+    /usr/bin/curl -s -o /dev/null http://127.0.0.1:8642/ && break
+    sleep 0.1
+done
+
+# Chapter 3 reads an API key from here; there is no real key (the response is cached)
+mkdir -p /data/.secret && echo "not-a-real-key" > /data/.secret/newsapi.org_apikey
