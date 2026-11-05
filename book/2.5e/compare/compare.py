@@ -335,7 +335,10 @@ def main():
         for entry in yaml.safe_load(DIFFERENCES.read_text()) or []:
             reviewed[entry["id"]] = entry
 
-    names = sys.argv[1:] or sorted(
+    args = sys.argv[1:]
+    skeleton = "--skeleton" in args
+    args = [a for a in args if a != "--skeleton"]
+    names = args or sorted(
         p.name for p in NEW.glob("*.html") if (OLD / p.name).exists()
     )
     REPORTS.mkdir(exist_ok=True)
@@ -374,6 +377,20 @@ def main():
         out += ["", "Entries in differences.yml that no longer occur (resolved?):", ""]
         out += [f"- `{s}`" for s in stale]
     (REPORTS / "README.md").write_text("\n".join(out) + "\n")
+
+    if skeleton:
+        # Print differences.yml entries for everything not (or no longer) reviewed
+        for page in pages:
+            for did, h, title, body in page.diffs:
+                status, entry = page.status(did, h)
+                if status in ("UNREVIEWED", "CHANGED"):
+                    print(yaml.safe_dump([{
+                        "id": did, "hash": h, "title": title,
+                        "cause": (entry or {}).get("cause", "TODO"),
+                        "decision": (entry or {}).get("decision", "TODO"),
+                        "note": (entry or {}).get("note", ""),
+                    }], allow_unicode=True, sort_keys=False, width=1000), end="")
+        return
 
     for name, n, counts in summary:
         print(f"{name:50} {n:4} {counts}")

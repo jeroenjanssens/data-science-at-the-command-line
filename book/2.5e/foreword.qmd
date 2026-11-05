@@ -2,7 +2,7 @@
 engine: markdown
 ---
 
-# Foreword {.unnumbered}
+# Foreword {#foreword .unnumbered}
 
 It was love at first sight.
 

@@ -2,7 +2,7 @@
 engine: markdown
 ---
 
-# Welcome {.unnumbered}
+# Welcome {#welcome .unnumbered}
 
 <div class="h1" style="margin-top: 1.5rem;">Data Science at the Command Line</div>
 

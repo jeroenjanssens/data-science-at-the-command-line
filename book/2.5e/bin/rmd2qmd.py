@@ -60,6 +60,65 @@ def anchor_map(src_dir: Path) -> dict:
     return result
 
 
+def old_heading_ids(src_dir: Path, name: str) -> list:
+    """Heading ids, in order, of the page bookdown rendered (book/2e/output)."""
+    page = src_dir / "output" / name.replace(".qmd", ".html")
+    if not page.exists():
+        return []
+    html = page.read_text()
+    main = html[html.find("<main"):html.find("</main>")]
+    # bookdown puts the id on the section div (or on the h1 of the page)
+    return re.findall(r'<div id="([^"]+)" class="section level\d', main) or re.findall(
+        r'<(?:div|section) [^>]*id="([^"]+)"[^>]*class="section level\d', main)
+
+
+def pandoc_auto_id(text: str) -> str:
+    """Approximation of pandoc's auto_identifiers (per page, without dedup)."""
+    text = re.sub(r"\{.*\}\s*$", "", text)
+    text = re.sub(r"[`*_\[\]]", "", text).strip().lower()
+    text = re.sub(r"[^\w\s.-]", "", text)
+    text = re.sub(r"\s+", "-", text)
+    return re.sub(r"^[^a-z]+", "", text)
+
+
+def keep_heading_ids(text: str, old_ids: list) -> str:
+    """Give headings their bookdown ids where Quarto would generate another one.
+
+    bookdown makes ids unique across the whole book (summary-1, ...); Quarto
+    only per page. Explicit ids keep old deep links working.
+    """
+    lines = text.split("\n")
+    positions, fence = [], None
+    for n, line in enumerate(lines):
+        m = re.match(r"^\s*(```+)", line)
+        if m:
+            if fence is None:
+                fence = m.group(1)
+            elif line.strip() == fence:
+                fence = None
+            continue
+        if fence is None and re.match(r"^#+ ", line):
+            positions.append(n)
+    if len(positions) != len(old_ids):
+        warn(f"{len(positions)} headings but {len(old_ids)} old ids; not keeping ids")
+        return text
+    for n, old in zip(positions, old_ids):
+        hashes, title = lines[n].split(" ", 1)
+        attrs = re.search(r"\{([^}]*)\}\s*$", title)
+        if attrs and "#" in attrs.group(1):
+            continue  # explicit id already
+        # Quarto moves the page's h1 into the title block and only keeps an
+        # explicit id there, so always make the h1 id explicit.
+        if hashes != "#" and pandoc_auto_id(title) == old:
+            continue
+        if attrs:
+            title = title[: attrs.start()] + "{#" + old + " " + attrs.group(1).strip() + "}"
+        else:
+            title = title + " {#" + old + "}"
+        lines[n] = hashes + " " + title
+    return "\n".join(lines)
+
+
 def fig_id(label: str) -> str:
     return "fig-" + label.replace("_", "-")
 
@@ -295,6 +354,35 @@ def convert_console(label, options, code_lines, lines_after):
 # Main conversion
 # --------------------------------------------------------------------------
 
+# Content edits for 2.5e, applied after conversion: (file, old, new, reason).
+# Kept here (instead of editing the .qmd files) while the converter is still
+# being re-run.
+EDITS = [
+    (
+        "index.qmd",
+        "::: {.callout-tip}\nJeroen is currently working on a new course [Embrace the Command Line](/#course). If you haven't fully embraced the command line yet, then this course might be for you. The beta cohort is expected to start in Q1 2021. You can learn more about this course and tell Jeroen what you think [here](/#course).\n:::\n\n",
+        "",
+        "Decision 5: remove outdated course announcement",
+    ),
+    (
+        "chapter-1-introduction.qmd",
+        'cleaning the data".',
+        'cleaning the data."',
+        "pandoc 2.x moved the period inside the quotes in 2e; pandoc 3 doesn't",
+    ),
+]
+
+
+def apply_edits(name: str, text: str) -> str:
+    for file, old, new, reason in EDITS:
+        if file != name:
+            continue
+        if text.count(old) != 1:
+            raise SystemExit(f"Edit for {file} ({reason}) matches {text.count(old)} times")
+        text = text.replace(old, new)
+    return text
+
+
 CALLOUT_TYPES = {"rmdtip": "tip", "rmdnote": "note", "rmdcaution": "warning"}
 
 
@@ -344,7 +432,7 @@ def convert_text(text: str, anchors: dict, this_file: str) -> str:
     return text
 
 
-def convert_file(path: Path, anchors: dict) -> str:
+def convert_file(path: Path, anchors: dict, src_dir: Path) -> str:
     this_file = output_name(path)
     source = path.read_text()
 
@@ -430,6 +518,8 @@ def convert_file(path: Path, anchors: dict) -> str:
         if before.strip():
             text = heading + "\n\n" + before.strip("\n") + "\n" + after
             text = re.sub(r"\n{3,}", "\n\n", text)
+    text = keep_heading_ids(text, old_heading_ids(src_dir, this_file))
+    text = apply_edits(this_file, text)
     leftovers = re.findall(r"^<\d+> .*$", text, re.M)
     for left in leftovers:
         warn(f"callout explanation not attached to a chunk in {this_file}: {left[:60]}")
@@ -444,7 +534,7 @@ def main():
     for name in sys.argv[3:]:
         path = src_dir / name
         dst = dst_dir / output_name(path)
-        dst.write_text(convert_file(path, anchors))
+        dst.write_text(convert_file(path, anchors, src_dir))
         print(f"{path} -> {dst}")
     if WARNINGS:
         print(f"{len(WARNINGS)} warning(s)", file=sys.stderr)
