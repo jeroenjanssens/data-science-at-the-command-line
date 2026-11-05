@@ -7,6 +7,9 @@ export SAVEHIST=1000000
 export HISTSIZE=1000000
 export RIO_DPI=200
 export MANROFFOPT='-c'
+# man-db 2.13 formats to the full terminal width (80); 2e had 78. Wider lines
+# also hit trim's byte-based length check (mawk) on multibyte characters.
+export MANWIDTH=78
 export BAT_THEME=ansi
 export MANPAGER="sh -c 'col -bx | bat -plman --color=always'"
 
