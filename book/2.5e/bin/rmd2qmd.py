@@ -371,6 +371,12 @@ EDITS = [
         "Title, subtitle, and cover come from the Quarto title block (bs4_book template classes)",
     ),
     (
+        "index.qmd",
+        '**Jeroen Janssens** is an independent data science consultant and instructor. He enjoys visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. Jeroen manages [Data Science Workshops](https://datascienceworkshops.com), a training and coaching firm that organizes open enrollment workshops, in-company courses, inspiration sessions, hackathons, and meetups. Previously, he was an\nassistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and various startups in New York City. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He lives with his wife and two kids in Rotterdam, the Netherlands.\nYou can find Jeroen on [Twitter](https://twitter.com/jeroenhjanssens), [GitHub](https://github.com/jeroenjanssens), and [LinkedIn](https://www.linkedin.com/in/jeroenjanssens/).',
+        '**Jeroen Janssens**, PhD, is Head of Developer Relations at Posit, PBC.\nHis expertise lies in visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash.\nHe’s passionate about open source and sharing knowledge.\nHe’s the author of *Python Polars: The Definitive Guide* (O’Reilly, 2025) and *Data Science at the Command Line* (O’Reilly, 2021).\nJeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University.\nHe lives with his wife and two kids in Rotterdam, the Netherlands.\nYou can find Jeroen on [Bluesky](https://bsky.app/profile/jeroenjanssens.com), [Mastodon](https://fosstodon.org/@jeroenjanssens), [LinkedIn](https://www.linkedin.com/in/jeroenjanssens), and [GitHub](https://github.com/jeroenjanssens).',
+        "Current bio and profiles from https://jeroenjanssens.com/about/",
+    ),
+    (
         "chapter-1-introduction.qmd",
         'cleaning the data".',
         'cleaning the data."',

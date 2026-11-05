@@ -167,3 +167,15 @@
   cause: intended
   decision: accept
   note: Links to chapters 3-11 that haven't been converted yet (later rounds)
+- id: index.html:prose:fed28160
+  hash: e30d34ea
+  title: 'Prose (replace): Jeroen Janssens is an independent data science consultant and instruct'
+  cause: intended
+  decision: accept
+  note: Current bio and profiles from https://jeroenjanssens.com/about/
+- id: index.html:external-links
+  hash: 48a00e10
+  title: External links differ
+  cause: intended
+  decision: accept
+  note: New bio links to Bluesky and Mastodon instead of Twitter; the bio no longer links to Data Science Workshops
