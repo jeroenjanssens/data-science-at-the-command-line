@@ -404,12 +404,6 @@ EDITS = [
         "#| include: false\n# Show the real curl here, not the cache wrapper (container/bin)\nexport PATH=${PATH#/book/bin:}\nunalias csvlook\n",
         "type curl shows /usr/bin/curl, as in 2e",
     ),
-    (
-        "chapter-1-introduction.qmd",
-        'cleaning the data".',
-        'cleaning the data."',
-        "pandoc 2.x moved the period inside the quotes in 2e; pandoc 3 doesn't",
-    ),
 ]
 
 
@@ -473,6 +467,14 @@ def convert_text(text: str, anchors: dict, this_file: str) -> str:
         return f"]({target}#{anchor})"
 
     text = re.sub(r"\]\(#([A-Za-z0-9_-]+)\)", link, text)
+
+    # pandoc 2.x (2e) put a period or comma after a closing double quote
+    # inside the quotes (American style); pandoc 3 keeps the source order.
+    # Do the same in the source, outside code spans.
+    parts = re.split(r"(`+[^`]*`+)", text)
+    for k in range(0, len(parts), 2):
+        parts[k] = re.sub(r'"([^"\n]+)"([.,])', r'"\1\2"', parts[k])
+    text = "".join(parts)
 
     # Unnumbered headers
     text = re.sub(r"^(#+ .*?)[ \t]*\{-\}[ \t]*$", r"\1 {.unnumbered}", text, flags=re.M)

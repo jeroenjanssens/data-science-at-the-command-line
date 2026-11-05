@@ -228,7 +228,7 @@ The beauty of this tool is that existing tools can be used as they are; they do 
 Be aware that there are two command-line tools with the name `parallel`.
 If you're using the Docker image then you already have the correct one installed.
 Otherwise, you can check that you have the correct one by running `parallel --version`.
-It should say "GNU parallel".
+It should say "GNU parallel."
 :::
 
 Before I go into the details of `parallel`, here’s a little teaser to show you how easy it is to replace the for-loop from earlier:

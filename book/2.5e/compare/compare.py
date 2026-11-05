@@ -119,9 +119,18 @@ def prose(main):
         if el.name == "li" and el.find(["p", "ul", "ol"]):
             continue  # its children are compared individually
         text = norm(el.get_text(" "))
-        if text:
+        if not text:
+            continue
+        # 2e rendered callout explanations as one paragraph with ➊ ➋ markers;
+        # 2.5e as a numbered list. Compare them item by item.
+        if el.name == "p" and CALLOUT_GLYPH.match(text):
+            out.extend(item.strip() for item in CALLOUT_GLYPH.split(text) if item.strip())
+        else:
             out.append(text)
     return out
+
+
+CALLOUT_GLYPH = re.compile("[\u278a-\u2793]")
 
 
 def anchors(main):

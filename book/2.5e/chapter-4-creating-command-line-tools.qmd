@@ -407,7 +407,7 @@ Below shows what our file *top-words-5.sh* looks like:
 bat top-words-5.sh
 ```
 
-* The variable *NUM\_WORDS* is set to the value of *\$1*, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers. If no value is specified, it will take on the value "10".
+* The variable *NUM\_WORDS* is set to the value of *\$1*, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers. If no value is specified, it will take on the value "10."
 * Note that in order to *use* the value of the *\$NUM\_WORDS* variable, you need to put a dollar sign in front of it. When you *set* it, you don't write a dollar sign.
 
 We could have also used *\$1* directly as an argument for `head` and not bother creating an extra variable such *NUM\_WORDS*.
@@ -549,7 +549,7 @@ Luckily Python and R support processing streaming data.
 You can apply a function on a line-per-line basis, for example.
 Here are two minimal examples that demonstrate how this works in Python and R, respectively.
 
-Both the Python and R tool solve the, by now infamous, Fizz Buzz problem, which is defined as follows: Print the numbers from 1 to 100, except that if the number is divisible by 3, instead print "fizz"; if the number is divisible by 5, instead print "buzz"; and if the number is divisible by 15, instead print "fizzbuzz". Here's the Python code[^fb]:
+Both the Python and R tool solve the, by now infamous, Fizz Buzz problem, which is defined as follows: Print the numbers from 1 to 100, except that if the number is divisible by 3, instead print "fizz"; if the number is divisible by 5, instead print "buzz"; and if the number is divisible by 15, instead print "fizzbuzz." Here's the Python code[^fb]:
 
 ```{term}
 #| label: bat_stream_py

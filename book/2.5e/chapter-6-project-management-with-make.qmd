@@ -194,7 +194,7 @@ That's great because `make` is saving us time by not repeating work.
 In `make`, it's all about files.
 But keep in mind that `make` only cares about the *name* of the target.
 It does not check whether a file of the same name actually gets created by the rule.
-If we were to write to a file called *nummers*, which is Dutch for "numbers", and the target was still called *`numbers`*, then `make` would always build this target. Vice versa, if the file *numbers* was created by some other process, whether automated or manual, then `make` would still consider that target up-to-date.
+If we were to write to a file called *nummers*, which is Dutch for "numbers," and the target was still called *`numbers`*, then `make` would always build this target. Vice versa, if the file *numbers* was created by some other process, whether automated or manual, then `make` would still consider that target up-to-date.
 
 We can avoid some repetition by using the automatic variable `$@`, which gets expanded to the name of the target:
 

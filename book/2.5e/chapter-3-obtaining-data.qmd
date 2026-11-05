@@ -360,7 +360,7 @@ Well, at least Queen appears plenty of times in the Top 2000 so I can't really c
 csvgrep top2000.csv --columns ARTIEST --regex '^Queen$' | csvlook -I
 ```
 
-1. The value after the `--regex` options is a regular expression (or *regex*). It's a special syntax for defining patterns. Here, I only want to match artists that exactly match "Queen", so I use the caret (`^`) and dollar sign (`$`) to match the start and end of the values in the column *`ARTIEST`*.
+1. The value after the `--regex` options is a regular expression (or *regex*). It's a special syntax for defining patterns. Here, I only want to match artists that exactly match "Queen," so I use the caret (`^`) and dollar sign (`$`) to match the start and end of the values in the column *`ARTIEST`*.
 
 By the way, the tools `in2csv`, `csvgrep`, and `csvlook` are part of CSVkit, which is a collection of command-line tools to work with CSV data.
 
@@ -459,7 +459,7 @@ You can get your own API key at [News API's website](https://newsapi.org).
 
 Some web APIs return data in a streaming manner.
 This means that once you connect to it, the data will continue to pour in, until the connection is closed.
-A well-known example is the Twitter "firehose", which constantly streams all the tweets being sent around the world.
+A well-known example is the Twitter "firehose," which constantly streams all the tweets being sent around the world.
 Luckily, most command-line tools also operate in a streaming matter.
 
 ```{term}
