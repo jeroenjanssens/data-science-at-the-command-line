@@ -361,7 +361,13 @@ def convert_console(label, options, code_lines, lines_after):
                     "applies callouts before removal, quarto-term after"
                 )
         elif key == "remove":
-            cell.append(f"#| remove: {spec_list(r_value(value))}")
+            spec_value = r_value(value)
+            # The rush terminal plots removed two capture leftovers at the end
+            # in 2e; quarto-term doesn't produce those, so keep all lines
+            # (otherwise the x-axis is cut off)
+            if spec_value == [-2, -1] and "trailing_spaces" in options:
+                continue
+            cell.append(f"#| remove: {spec_list(spec_value)}")
         elif key == "keep_last_prompt":
             if r_value(value):
                 cell.append("#| keep-last-prompt: true")

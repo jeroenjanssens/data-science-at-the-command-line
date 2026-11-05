@@ -221,16 +221,28 @@ def compare_page(name, reviewed):
     old_soup, old_main = load(OLD / name)
     new_soup, new_main = load(NEW / name)
 
-    # 1. Blocks
+    # 1. Blocks: align old and new blocks by their first line (the command),
+    # so a missing or extra block doesn't shift all following comparisons
     ob, nb = blocks(old_main), blocks(new_main)
-    if len(ob) != len(nb):
-        page.add("block-count", f"Number of code blocks differs: {len(ob)} vs {len(nb)}",
-                 unified([f"[{i}] {b.splitlines()[0] if b else ''}" for i, b in enumerate(ob)],
-                         [f"[{i}] {b.splitlines()[0] if b else ''}" for i, b in enumerate(nb)], n=1000))
-    for i, (a, b) in enumerate(zip(ob, nb)):
+    first = lambda b: (b.splitlines() or [""])[0]
+    sm = difflib.SequenceMatcher(a=[first(b) for b in ob], b=[first(b) for b in nb], autojunk=False)
+    pairs = []
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag in ("equal", "replace"):
+            for k in range(min(i2 - i1, j2 - j1)):
+                pairs.append((i1 + k, j1 + k))
+        if tag in ("replace", "delete"):
+            for i in range(i1 + (j2 - j1 if tag == "replace" else 0), i2):
+                page.add(f"block-missing:{short_hash(ob[i])}", f"Code block {i} missing: `{first(ob[i])[:70]}`",
+                         unified(ob[i].splitlines(), []))
+        if tag in ("replace", "insert"):
+            for j in range(j1 + (i2 - i1 if tag == "replace" else 0), j2):
+                page.add(f"block-extra:{short_hash(nb[j])}", f"Extra code block {j}: `{first(nb[j])[:70]}`",
+                         unified([], nb[j].splitlines()))
+    for i, j in pairs:
+        a, b = ob[i], nb[j]
         if a != b:
-            first = (a.splitlines() or [""])[0][:70]
-            page.add(f"block:{i}", f"Code block {i}: `{first}`",
+            page.add(f"block:{i}", f"Code block {i}: `{first(a)[:70]}`",
                      unified(a.splitlines(), b.splitlines()))
 
     # 2. Prose

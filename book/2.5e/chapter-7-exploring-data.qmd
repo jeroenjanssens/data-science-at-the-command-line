@@ -444,7 +444,6 @@ Depending on how you're reading this book, the output you get when you run this 
 ```{term}
 #| label: plot_demo_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x bill --y tip --color size --facets '~day' tips.csv
 ```
 
@@ -569,7 +568,6 @@ Here's a textual visualization of the *time* feature in the tips dataset:
 ```{term}
 #| label: plot_bar_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x time tips.csv
 ```
 
@@ -593,7 +591,6 @@ As a result, `rush plot` conveniently creates a stacked histogram.
 ```{term}
 #| label: plot_histogram_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x tip --fill time tips.csv
 ```
 
@@ -626,7 +623,6 @@ A density plot is useful for visualizing the distribution of a continuous variab
 ```{term}
 #| label: plot_density_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x tip --fill time --geom density tips.csv
 ```
 
@@ -652,7 +648,6 @@ Take this line plot for example.
 ```{term}
 #| label: plot_accident_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x tip --y bill --color size --size day --geom path tips.csv
 ```
 
@@ -675,7 +670,6 @@ A scatter plot, where the geometry is a point, happens to be the default when sp
 ```{term}
 #| label: plot_scatter_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x bill --y tip --color time tips.csv
 ```
 
@@ -700,7 +694,6 @@ These are useful for seeing the bigger picture.
 ```{term}
 #| label: plot_trend_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x bill --y tip --color time --geom smooth tips.csv
 ```
 
@@ -730,7 +723,6 @@ In this case we need to convert the *size* feature to a categorical one using th
 ```{term}
 #| label: plot_boxplot_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv
 ```
 
@@ -756,7 +748,6 @@ Here's a violin plot (which is a mashup of a box plot and a density plot) demons
 ```{term}
 #| label: plot_labels_ansi
 #| style.trailing-spaces: true
-#| remove: [-2, -1]
 rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv
 ```
 
