@@ -1,0 +1,14 @@
+HTTP/2 301 
+server: nginx
+date: Thu, 05 Nov 2026 21:51:23 GMT
+content-type: text/html; charset=utf-8
+content-length: 81
+cache-control: private, max-age=90
+content-security-policy: referrer always;
+location: https://youtu.be/dQw4w9WgXcQ
+referrer-policy: unsafe-url
+set-cookie: _bit=qa5lPn-672f92e5cdb9643d09-00z; Domain=bit.ly; Expires=Tue, 04 May 2027 21:51:23 GMT
+x-robots-tag: noindex
+via: 1.1 google
+alt-svc: h3=":443"; ma=2592000
+

@@ -1,0 +1,12 @@
+220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 <auth.mime> <8291886.(not recorded in 2e)@dict.dict.org>
+250 ok
+150 1 definitions retrieved
+151 "Windmill" gcide "The Collaborative International Dictionary of English v.0.48"
+Windmill \Wind"mill`\, n.
+   A mill operated by the power of the wind, usually by the
+   action of the wind upon oblique vanes or sails which radiate
+   from a horizontal shaft. --Chaucer.
+   [1913 Webster]
+.
+250 ok [d/m/c = 1/0/16; 0.000r 0.000u 0.000s]
+221 bye [d/m/c = 0/0/0; 0.000r 0.000u 0.000s]
