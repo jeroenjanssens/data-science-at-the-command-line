@@ -61,8 +61,8 @@ I'll start with Jupyter Console, as it is the most basic one to work with Python
 Here's a Jupyter Console session illustrating a couple of ways to leverage the command line.
 
 ```{term}
-#| remove: [1, "1R"]
-#| callout: ["date", "open", "int", "import", "curl", "rm -v", "upper"]
+#| remove: [1, '1R']
+#| callout: ['date', 'open', 'int', 'import', 'curl', 'rm -v', 'upper']
 cat /data/.cache/jupyter-console #! expect-prompt: false
 ctrl-c #! literal: false
 ```
@@ -103,7 +103,7 @@ This module is recommended over the older `os.system()` function.
 It's not run in a shell by default, but it's possible to change that with the `shell` argument to `run()` function.
 
 ```{term}
-#| callout: ["run", "open", "split", "grep", "stdout"]
+#| callout: ['run', 'open', 'split', 'grep', 'stdout']
 bat count.py
 ```
 
@@ -130,7 +130,7 @@ In R, there are several ways to leverage the command line.
 In the example below, I start an R session and count the number of occurrences of the string *alice* in the book *Alice’s Adventures in Wonderland* using the `system2()` function.
 
 ```{term}
-#| callout: ["readLines", "strsplit", "system2", "length"]
+#| callout: ['readLines', 'strsplit', 'system2', 'length']
 R --quiet
 lines <- readLines("alice.txt")
 head(lines)
@@ -155,7 +155,7 @@ Thanks to Jim Hester for suggesting this.
 The code below demonstrates this:
 
 ```{term}
-#| callout: ["fifo", "grep", "writeLines", "readLines", "close"]
+#| callout: ['fifo', 'grep', 'writeLines', 'readLines', 'close']
 out_con <- fifo("out", "w+")
 in_con <- pipe("grep b > out")
 writeLines(c("foo", "bar"), in_con)
@@ -247,8 +247,8 @@ The items in the dataset are written to standard input and the standard output i
 In the session below, I start a Spark shell and again count the number of occurrences of *alice* in the book *Alice’s Adventures in Wonderland*.
 
 ```{term}
-#| remove: ["alias", 2, 4, "cache"]
-#| callout: ["textFile", "flatMap", "grep", "wc", "res3", "toInt", "res5"]
+#| remove: ['alias', 2, 4, 'cache']
+#| callout: ['textFile', 'flatMap', 'grep', 'wc', 'res3', 'toInt', 'res5']
 alias spark-shell=echo
 spark-shell --master local[6] #! enter: false
 ctrl-c #! literal: false

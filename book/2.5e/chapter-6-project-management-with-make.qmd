@@ -112,7 +112,7 @@ The following code illustrates this by expanding the tab to eight spaces:
 
 ```{term}
 #| label: expand
-#| callout: ["-f", "top."]
+#| callout: ['-f', 'top.']
 < numbers.make expand > spaces.make
 bat -A spaces.make
 make -f spaces.make
@@ -156,7 +156,7 @@ Here's an example *Makefile* that illustrates to use of phony targets:
 
 ```{term}
 #| label: bat_tasks
-#| callout: ["latest"]
+#| callout: ['latest']
 bat tasks.make
 ```
 
@@ -232,7 +232,7 @@ csvlook
 The first task computes the ten tallest humans:
 
 ```{term}
-#| callout: ["grep", "cut", "sort", "head"]
+#| callout: ['grep', 'cut', 'sort', 'head']
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
 grep Human |
 cut -d, -f 1,2 |

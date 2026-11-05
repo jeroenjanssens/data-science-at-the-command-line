@@ -315,12 +315,13 @@ And then run the following code:
 
 ```{term}
 #| label: r_code
+#| callout: ['library\(tidyverse\)\s*$', 'df <\- read_csv\("tips\.csv"\)\s*$', 'df <\- mutate\(df, percent = tip / bill \* 100\)\s*$', 'write_csv\(df, "percent\.csv"\)\s*$', 'q\("no"\)\s*$']
 #| keep-last-prompt: true
-library(tidyverse)                            #<1>
-df <- read_csv("tips.csv")                    #<2>
-df <- mutate(df, percent = tip / bill * 100)  #<3>
-write_csv(df, "percent.csv")                  #<4>
-q("no")                                       #<5>
+library(tidyverse)
+df <- read_csv("tips.csv")
+df <- mutate(df, percent = tip / bill * 100)
+write_csv(df, "percent.csv")
+q("no")
 ```
 
 1. Load any required packages

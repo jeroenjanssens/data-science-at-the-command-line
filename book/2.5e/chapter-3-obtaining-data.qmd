@@ -119,8 +119,9 @@ While this information can be useful when downloading very large files, I usuall
 
 ```{term}
 #| label: curl_silent
+#| callout: ['pup \-n \x27table\.wikitable tr\x27\s*$']
 curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland" |
-pup -n 'table.wikitable tr' # <1>
+pup -n 'table.wikitable tr'
 ```
 
 1. I'll discuss `pup`[@pup], a handy tool for scraping websites, in more detail in [Chapter 5](chapter-5-scrubbing-data.qmd).
@@ -223,7 +224,8 @@ In order to extract an archive named *logs.tar.gz*, you would use the following 
 
 ```{term}
 #| label: tar_x
-tar -xzf logs.tar.gz # <1> #! enter: false
+#| callout: ['tar \-xzf logs\.tar\.gz\s*$']
+tar -xzf logs.tar.gz #! enter: false
 ```
 
 1. It's common to combine these three short options, like I did here, but you can also specify them separately as `-x -z -f`.
@@ -305,7 +307,8 @@ Yakov Shafranovich defines the CSV format according to the following three point
 
 ```{term}
 #| label: csv_1
-bat -A tmnt-basic.csv # <1>
+#| callout: ['bat \-A tmnt\-basic\.csv\s*$']
+bat -A tmnt-basic.csv
 ```
 
 1. The `-A` option makes `bat` show all non-printable characters like spaces, tabs, and newlines.
@@ -330,9 +333,10 @@ If the CSV data has no header, like *tmnt-missing-newline.csv* then you need to 
 
 ```{term}
 #| label: csvlook
+#| callout: ['csvlook \-H tmnt\-missing\-newline\.csv\s*$']
 csvlook tmnt-with-header.csv
 csvlook tmnt-basic.csv
-csvlook -H tmnt-missing-newline.csv # <1>
+csvlook -H tmnt-missing-newline.csv
 ```
 
 1. The `-H` option specifies that the CSV file has no header.
@@ -342,7 +346,7 @@ To extract its data, you invoke `in2csv` as follows:
 
 ```{term}
 #| label: in2csv_save
-#| remove: ["openpyxl", "silence", "behavior", "numpy", "guidance", "release"]
+#| remove: ['openpyxl', 'silence', 'behavior', 'numpy', 'guidance', 'release']
 curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > top2000.xlsx
 in2csv top2000.xlsx | tee top2000.csv | trim
 ```
@@ -371,7 +375,7 @@ Here we see that *top2000.xlsx* has only one sheet, named *Blad1* (which is Dutc
 
 ```{term}
 #| label: in2csv_names
-#| remove: ["openpyxl", "silence", "behavior", "numpy", "guidance", "release"]
+#| remove: ['openpyxl', 'silence', 'behavior', 'numpy', 'guidance', 'release']
 in2csv --names top2000.xlsx
 ```
 
@@ -417,7 +421,7 @@ For example, the API of Ice and Fire, which contains a lot of information about 
 
 ```{term}
 #| label: curl_api
-#| callout: ["died"]
+#| callout: ['died']
 curl -s "https://anapioficeandfire.com/api/characters/583" | jq '.'
 ```
 
@@ -493,7 +497,7 @@ With a little bit of `sed` and `jq` I can scrub this data to get a glimpse of th
 
 ```{term}
 #| label: wikimedia_jq
-#| callout: ["sed", "jq"]
+#| callout: ['sed', 'jq']
 < wikimedia-stream-sample sed -n 's/^data: //p' |
 jq 'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'
 ```

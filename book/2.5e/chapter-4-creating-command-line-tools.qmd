@@ -83,13 +83,14 @@ The following sequence of tools or *pipeline* should do the job:
 
 ```{term}
 #| label: one_liner
-curl -sL "https://www.gutenberg.org/files/11/11-0.txt" | # <1>
-tr '[:upper:]' '[:lower:]' | # <2>
-grep -oE "[a-z\']{2,}" | # <3>
-sort | # <4>
-uniq -c | # <5>
-sort -nr | # <6>
-head -n 10 # <7>
+#| callout: ['curl \-sL "https://www\.gutenberg\.org/files/11/11\-0\.txt" \|\s*$', 'tr \x27\[:upper:\]\x27 \x27\[:lower:\]\x27 \|\s*$', 'grep \-oE "\[a\-z\\\x27\]\{2,\}" \|\s*$', 'sort \|\s*$', 'uniq \-c \|\s*$', 'sort \-nr \|\s*$', 'head \-n 10\s*$']
+curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+tr '[:upper:]' '[:lower:]' |
+grep -oE "[a-z\']{2,}" |
+sort |
+uniq -c |
+sort -nr |
+head -n 10
 ```
 
 1. Downloading an ebook using `curl`.
@@ -117,7 +118,7 @@ With `grep` we can filter out the stopwords right before we start counting:
 
 ```{term}
 #| label: one_liner_with_stopwords
-#| callout: ["stopwords"]
+#| callout: ['stopwords']
 curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
 tr '[:upper:]' '[:lower:]' |
 grep -oE "[a-z\']{2,}" |

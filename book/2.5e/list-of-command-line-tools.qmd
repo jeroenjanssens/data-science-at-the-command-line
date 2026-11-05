@@ -31,6 +31,8 @@ Please note that citing open source software is not trivial, and that some infor
 
 ```{term}
 #| include: false
+# Show the real curl here, not the cache wrapper (container/bin)
+export PATH=${PATH#/book/bin:}
 unalias csvlook
 unalias parallel
 ```

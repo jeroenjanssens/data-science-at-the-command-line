@@ -84,8 +84,9 @@ Then you use `grep` to keep the lines that match the pattern *fizz* or *buzz* an
 
 ```{term}
 #| label: fb_count
-grep -E "fizz|buzz" fb.seq | # <1>
-sort | uniq -c | sort -nr > fb.cnt # <2>
+#| callout: ['grep \-E "fizz\|buzz" fb\.seq \|\s*$', 'sort \| uniq \-c \| sort \-nr > fb\.cnt\s*$']
+grep -E "fizz|buzz" fb.seq |
+sort | uniq -c | sort -nr > fb.cnt
 bat -A fb.cnt
 ```
 
@@ -164,7 +165,7 @@ seq -f "Line %g" 10 | tee lines
 You can print the first 3 lines using either `head` [@head], `sed` [@sed], or `awk`:
 
 ```{term}
-#| callout: ["NR"]
+#| callout: ['NR']
 < lines head -n 3
 < lines sed -n '1,3p'
 < lines awk 'NR <= 3'
@@ -291,7 +292,7 @@ Secondly, you can put a timer on `sample`, so that you don’t have to kill the 
 For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:
 
 ```{term}
-#| callout: ["ts"]
+#| callout: ['ts']
 seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts
 ```
 

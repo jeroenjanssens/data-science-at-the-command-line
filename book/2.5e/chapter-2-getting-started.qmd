@@ -365,7 +365,7 @@ And if we wanted to know *how many* chapters the book has, we can use `wc`, whic
 
 ```{term}
 #| label: seq_grep_wc
-#| callout: ["wc"]
+#| callout: ['wc']
 curl -s "https://www.gutenberg.org/files/11/11-0.txt" |
 grep " CHAPTER" |
 wc -l
@@ -411,7 +411,7 @@ Saving the output to a file is useful if you need to store intermediate results,
 To use the contents of the file *greeting.txt* again, we can use `cat`, which reads a file prints it.
 
 ```{term}
-#| callout: ["wc"]
+#| callout: ['wc']
 cat greeting.txt
 cat greeting.txt | wc -w
 ```

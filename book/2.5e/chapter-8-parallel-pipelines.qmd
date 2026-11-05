@@ -84,9 +84,10 @@ In this case it's better to let the shell do the hard work for you by using a fo
 
 ```{term}
 #| label: for_loop
-for i in {0..100..2}  #<1>
+#| callout: ['for i in \{0\.\.100\.\.2\}\s*$', 'echo "\$i\^2" \| bc\s*$']
+for i in {0..100..2}
 do
-echo "$i^2" | bc      #<2>
+echo "$i^2" | bc
 done | trim
 ```
 
@@ -116,10 +117,11 @@ You can loop over the lines from *emails* with a while loop:
 
 ```{term}
 #| label: while_loop
-while read line                         #<1>
+#| callout: ['while read line\s*$', 'echo "Sending invitation to \$\{line\}\."\s*$', 'done < emails\s*$']
+while read line
 do
-echo "Sending invitation to ${line}."   #<2>
-done < emails                           #<3>
+echo "Sending invitation to ${line}."
+done < emails
 ```
 
 1. In this case you need to use a while loop because the Z shell does not know beforehand how many lines the input consists of.
@@ -174,7 +176,7 @@ Let's say that you have a very long running tool, such as the one shown here:
 
 ```{term}
 #| label: bat_slow
-#| callout: ["ts", "RANDOM", "sleep"]
+#| callout: ['ts', 'RANDOM', 'sleep']
 bat slow.sh
 ```
 
@@ -263,7 +265,7 @@ The question is: where should the input item be inserted in the command line?
 If you don't specify anything, then the input item will be appended to the end of the pipeline.
 
 ```{term}
-#| remove: ["keep"]
+#| remove: ['keep']
 seq 3 | parallel cowsay #! enter: false
 ctrl-c #! literal: false
 parallel --jobs 1 --keep-order cowsay ::: 1 2 3
@@ -272,7 +274,8 @@ parallel --jobs 1 --keep-order cowsay ::: 1 2 3
 The above is the same as running:
 
 ```{term}
-cowsay 1 > /dev/null #<1>
+#| callout: ['cowsay 1 > /dev/null\s*$']
+cowsay 1 > /dev/null
 cowsay 2 > /dev/null
 cowsay 3 > /dev/null
 ```
@@ -452,7 +455,7 @@ The command `aws ec2 describe-instances` returns a lot of information about all 
 You can extract the relevant fields using `jq`:
 
 ```{term}
-#| remove: [3, "echo"]
+#| remove: [3, 'echo']
 aws ec2 describe-instances | jq '.Reservations[].Instances[] | {public_dns: .PublicDnsName, state: .State.Name}' #! enter: false
 ctrl-c #! literal: false
 echo '{' &&
@@ -469,7 +472,7 @@ The possible states of an EC2 instance are: *`pending`*, *`running`*, *`shutting
 Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:
 
 ```{term}
-#| remove: [3, "echo"]
+#| remove: [3, 'echo']
 aws ec2 describe-instances | jq -r '.Reservations[].Instances[] | select(.State.Name=="running") | .PublicDnsName' | tee hostnames #! enter: false
 ctrl-c #! literal: false
 echo 'ec2-54-88-122-140.compute-1.amazonaws.com' &&
@@ -500,7 +503,7 @@ The first flavor of distributed processing is to run ordinary commands on remote
 Let’s first double check that `parallel` is working by running the tool `hostname`[@hostname] on each EC2 instance:
 
 ```{term}
-#| remove: [2, "echo"]
+#| remove: [2, 'echo']
 parallel --nonall --sshloginfile hostnames hostname #! enter: false
 ctrl-c #! literal: false
 echo 'ip-172-31-23-204\nip-172-31-23-205'
@@ -511,7 +514,7 @@ The `--nonall` option instructs `parallel` to execute the same command on every 
 Remember, if you don’t have any remote machines to utilize, you can replace `--slf hostnames` with `--sshlogin :` so that the command is run on your local machine:
 
 ```{term}
-#| remove: [2, "echo"]
+#| remove: [2, 'echo']
 parallel --nonall --sshlogin : hostname #! enter: false
 ctrl-c #! literal: false
 echo 'data-science-toolbox'
@@ -520,7 +523,7 @@ echo 'data-science-toolbox'
 Running the same command on every remote machine once only requires one core per machine. If you wanted to distribute the list of arguments passed in to `parallel` then it could potentially use more than one core. If the number of cores are not specified explicitly, `parallel` will try to determine this.
 
 ```{term}
-#| remove: [2, 4, "fake"]
+#| remove: [2, 4, 'fake']
 alias fake=echo
 seq 2 | parallel --slf hostnames echo 2>&1 #! enter: false
 ctrl-c #! literal: false
@@ -554,7 +557,7 @@ For simplicity, let's sum all integers from 1 to 1000.
 First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using `wc`:
 
 ```{term}
-#| remove: [3, "echo"]
+#| remove: [3, 'echo']
 seq 1000 | parallel -N100 --pipe --slf hostnames "(hostname; wc -l) | paste -sd:" #! enter: false
 ctrl-c #! literal: false
 echo 'ip-172-31-23-204:100' &&
@@ -573,7 +576,7 @@ Excellent. You can see that your 1000 numbers get distributed evenly in subsets 
 Now, you’re ready to sum all those numbers:
 
 ```{term}
-#| remove: [2, "echo"]
+#| remove: [2, 'echo']
 seq 1000 | parallel -N100 --pipe --slf hostnames "paste -sd+ | bc" | paste -sd+ | bc #! enter: false
 ctrl-c #! literal: false
 echo '500500'
@@ -605,7 +608,7 @@ Using the `--basefile` option, `parallel` first uploads the file *add* to all re
 
 ```{term}
 #| label: use_add
-#| remove: [4, "echo"]
+#| remove: [4, 'echo']
 seq 1000 |
 parallel -N100 --basefile add --pipe --slf hostnames './add' |
 ./add #! enter: false
@@ -701,7 +704,7 @@ parallel -v --basefile jq \
 If you, during this process, run `ls` on one of the remote machines, you would see that `parallel` indeed transfers (and cleans up) the binary `jq`, the JSON files, and CSV files:
 
 ```{term}
-#| remove: [2, "echo"]
+#| remove: [2, 'echo']
 ssh $(head -n 1 hostnames) ls #! enter: false
 ctrl-c #! literal: false
 echo 'nyc-1.json.csv' &&
@@ -712,7 +715,7 @@ echo 'jq' &&
 Each CSV file looks something like this:
 
 ```{term}
-#| remove: [2, "echo"]
+#| remove: [2, 'echo']
 cat nyc-1.json.csv #! enter: false
 ctrl-c #! literal: false
 echo 'bronx,3' &&
