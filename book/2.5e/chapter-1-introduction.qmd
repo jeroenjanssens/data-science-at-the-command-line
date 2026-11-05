@@ -12,7 +12,6 @@ engine: markdown
  rm -f $HISTFILE
 ```
 
-
 This book is about doing data science at the command line.
 My aim is to make you a more efficient and productive data scientist by teaching you how to leverage the power of the command line.
 

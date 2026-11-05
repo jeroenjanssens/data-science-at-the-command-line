@@ -12,7 +12,6 @@ engine: markdown
  rm -f $HISTFILE
 ```
 
-
 In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line.
 The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use throughout this book, and (3) understanding the essential concepts that come into play when using the command line.
 

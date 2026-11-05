@@ -3,6 +3,7 @@ engine: markdown
 ---
 
 # Welcome {.unnumbered}
+
 <div class="h1" style="margin-top: 1.5rem;">Data Science at the Command Line</div>
 
 <div class="h4">Obtain, Scrub, Explore, and Model Data with Unix Power Tools</div>
@@ -20,6 +21,7 @@ Jeroen is currently working on a new course [Embrace the Command Line](/#course)
 :::
 
 ## Description {.unnumbered}
+
 This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You'll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.
 
 You'll quickly discover why the command line is an agile, scalable, and extensible technology. Even if you're comfortable processing data with Python or R, you'll learn how to greatly improve your data science workflow by leveraging the command line's power. This book is ideal for data scientists, analysts, engineers, system administrators, and researchers.
@@ -41,6 +43,7 @@ star the [Github repository](https://github.com/jeroenjanssens/data-science-at-t
 :::
 
 ## Praise {.unnumbered}
+
 <blockquote>
     <p>Traditional computer and data science curricula all too often mistake the command line as an obsolete relic instead of teaching it as the modern and vital toolset that it is. Only well into my career did I come to grasp the elegance and power of the command line <span class="keep-together">for easily</span> exploring messy datasets and even creating reproducible data pipelines <span class="keep-together">for work. The</span> first edition of <em>Data Science at the Command Line</em> was one of the <span class="keep-together">most comprehensive and clear</span> references when I was a novice in the art, and now <span class="keep-together">with the second edition,</span> I'm again learning new tools and applications from it.</p>
     <p data-type="attribution">**Dan Nguyen**, data scientist, former news application developer at ProPublica, and former Lorry I. Lokey Visiting Professor in <span class="keep-together">Professional Journalism at Stanford University</span></p>
@@ -74,17 +77,20 @@ star the [Github repository](https://github.com/jeroenjanssens/data-science-at-t
 </blockquote>
 
 ## Dedication {.unnumbered}
+
 <div style="text-align: center;"> 
 *Once again to my wife, Esther. Without her continued encouragement, support,<br/>
 and patience, this second edition would surely have ended up in* /dev/null*.*
 </div>
 
 ## About the Author {.unnumbered}
+
 **Jeroen Janssens** is an independent data science consultant and instructor. He enjoys visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. Jeroen manages [Data Science Workshops](https://datascienceworkshops.com), a training and coaching firm that organizes open enrollment workshops, in-company courses, inspiration sessions, hackathons, and meetups. Previously, he was an
 assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and various startups in New York City. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He lives with his wife and two kids in Rotterdam, the Netherlands.
 You can find Jeroen on [Twitter](https://twitter.com/jeroenhjanssens), [GitHub](https://github.com/jeroenjanssens), and [LinkedIn](https://www.linkedin.com/in/jeroenjanssens/).
 
 ## Colophon {.unnumbered}
+
 The animal on the cover of *Data Science at the Command Line* is a wreathed hornbill (*Rhytidoceros undulatus*). Also known as the bar-pouched wreathed hornbill, the species is found in forests in mainland Southeast Asia and in northeastern India and Bhutan. Hornbills are named for the *casques* that form on the upper part of the birds' bills. No single obvious purpose exists for these hollow, keratizined structures, but they may serve as a means of recognition between members of the species, as an amplifier for the birds' calls, or—because males often exhibit larger casques than females of the species—for gender recognition. Wreathed hornbills can be distinguished from plain-pouched hornbills, to whom they are closely related and otherwise similar in appearance, by a dark bar on the lower part of the wreathed hornbills' throats.
 
 Wreathed hornbills roost in flocks of up to four hundred but mate in monogamous, lifelong partnerships. With help from the males, females seal themselves up in tree cavities behind dung and mud to lay eggs and brood. Through a slit large enough for his beak alone, the male feeds his mate and their young for up to four months. A diet of animal prey becomes predominantly fruit when females and their young leave the nest. Hornbill couples have been known to return to the same nest for as many as nine years.

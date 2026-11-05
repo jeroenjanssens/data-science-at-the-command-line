@@ -340,7 +340,7 @@ def convert_text(text: str, anchors: dict, this_file: str) -> str:
     text = re.sub(r"\]\(#([A-Za-z0-9_-]+)\)", link, text)
 
     # Unnumbered headers
-    text = re.sub(r"^(#+ .*?)\s*\{-\}\s*$", r"\1 {.unnumbered}", text, flags=re.M)
+    text = re.sub(r"^(#+ .*?)[ \t]*\{-\}[ \t]*$", r"\1 {.unnumbered}", text, flags=re.M)
     return text
 
 
@@ -425,6 +425,7 @@ def convert_file(path: Path, anchors: dict) -> str:
         before, heading, after = text[: m.start()], m.group(0), text[m.end():]
         if before.strip():
             text = heading + "\n\n" + before.strip("\n") + "\n" + after
+            text = re.sub(r"\n{3,}", "\n\n", text)
     leftovers = re.findall(r"^<\d+> .*$", text, re.M)
     for left in leftovers:
         warn(f"callout explanation not attached to a chunk in {this_file}: {left[:60]}")

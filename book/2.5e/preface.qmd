@@ -3,6 +3,7 @@ engine: markdown
 ---
 
 # Preface {.unnumbered}
+
 Data science is an exciting field to work in.
 It’s also still relatively young.
 Unfortunately, many people, and many companies as well, believe that you need new technology to tackle the problems posed by data science.
@@ -37,6 +38,7 @@ No matter what your current operating system is and no matter how you currently 
 If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.
 
 ## What to Expect from This Book {.unnumbered}
+
 In this book, we’re going to obtain, scrub, explore, and model data—a lot of it.
 This book is not so much about how to become _better_ at those data science tasks.
 There are already great resources available that discuss, for example, when to apply which statistical test or how data can best be visualized.
@@ -56,6 +58,7 @@ This is part of the Unix philosophy, which makes several appearances throughout 
 Once you have become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.
 
 ## Changes for the Second Edition {.unnumbered}
+
 While the command line as a technology and as a way of working is timeless, some of the tools discussed in the first edition have either  been superseded by newer tools (e.g., `csvkit` has largely been replaced by `xsv`) or abandoned by their developers (e.g., `drake`), or they've been suboptimal choices (e.g., `weka`).
 I have learned a lot since the first edition was published in October 2014, either through my own experience or as a result of the useful feedback from my readers.
 Even though the book is quite niche because it lies at the intersection of two subjects, there remains a steady interest from the data science community, as evidenced by the many positive messages I receive almost every day.
@@ -71,6 +74,7 @@ Here’s a nonexhaustive list of changes I have made:
 * [Chapter 10](chapter-10-polyglot-data-science.qmd) is an entirely new chapter about integrating the command line into existing workflows, including Python, R, and Apache Spark. In the first edition I mentioned that the command line can easily be integrated with existing workflows, but I never got into that. This chapter fixes that.
 
 ## How to Read This Book {.unnumbered}
+
 In general, I advise you to read this book in a linear fashion.
 Once a concept or command-line tool has been introduced, chances are that I employ it in a later chapter.
 For example, in [Chapter 9](chapter-9-modeling-data.qmd), I make heavy use of `parallel`, which is introduced extensively in [Chapter 8](chapter-8-parallel-pipelines.qmd).
@@ -81,6 +85,7 @@ Throughout the book, at the end of each chapter, there are suggestions for furth
 It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.
 
 ## Who This Book Is For {.unnumbered}
+
 This book makes just one assumption about you: that you work with data.
 It doesn’t matter which programming language or statistical computing environment you’re currently using.
 The book explains all the necessary concepts from the beginning.
@@ -93,6 +98,7 @@ You don’t have to waste time figuring out how to install all the command-line 
 The book contains some code in Bash, Python, and R, so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.
 
 ## Conventions Used in This Book {.unnumbered}
+
 The following typographical conventions are used in this book:
 
 *Italic*
@@ -120,7 +126,9 @@ This element indicates a warning or caution.
 :::
 
 ## Acknowledgments {.unnumbered}
+
 ### Acknowledgments for the Second Edition (2021) {.unnumbered}
+
 Seven years have passed since the first edition came out.
 During this time, and especially during the last 13 months, many people have helped me.
 Without them, I would have never been able to write a second edition.
@@ -220,6 +228,7 @@ Above all, I would like to thank my wife Esther, my daughter Florien, and my son
 I promise it'll be a few years before I start writing the third edition.
 
 ### Acknowledgments for the First Edition (2014) {.unnumbered}
+
 First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post [Seven Command-Line Tools for Data Science](http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html), which I wrote in September 2013, could be expanded into a book.
 
 Special thanks to my technical reviewers Mike Dewar, Brian Eoff, and Shane Reustle for reading various drafts, meticulously testing all the commands, and providing invaluable feedback.
