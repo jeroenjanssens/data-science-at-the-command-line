@@ -51,18 +51,7 @@ REPORTS = HERE / "reports"
 DIFFERENCES = HERE / "differences.yml"
 
 # Old pages without a counterpart in 2.5e (yet).
-NOT_CONVERTED_YET = {
-    "chapter-3-obtaining-data.html",
-    "chapter-4-creating-command-line-tools.html",
-    "chapter-5-scrubbing-data.html",
-    "chapter-6-project-management-with-make.html",
-    "chapter-7-exploring-data.html",
-    "chapter-8-parallel-pipelines.html",
-    "chapter-9-modeling-data.html",
-    "chapter-10-polyglot-data-science.html",
-    "chapter-11-conclusion.html",
-    "list-of-command-line-tools.html",
-}
+NOT_CONVERTED_YET = set()
 
 
 def norm(text: str) -> str:

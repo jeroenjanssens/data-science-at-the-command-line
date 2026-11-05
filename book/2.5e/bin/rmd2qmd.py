@@ -496,6 +496,8 @@ def convert_file(path: Path, anchors: dict, src_dir: Path) -> str:
         if engine == "r":
             if label == "console_start" or "console_start()" in "\n".join(body):
                 continue
+            if all(not b.strip() or b.strip().startswith("#") for b in body):
+                continue  # only comments, e.g. "# set_prompt(...)" (knitractive)
             out.extend(convert_figure(label, options, body, path))
         elif engine == "block2":
             kind = CALLOUT_TYPES[r_value(options["type"])]

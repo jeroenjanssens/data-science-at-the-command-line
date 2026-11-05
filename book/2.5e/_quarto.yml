@@ -23,17 +23,16 @@ book:
     - preface.qmd
     - chapter-1-introduction.qmd
     - chapter-2-getting-started.qmd
-    # Later rounds:
-    # - chapter-3-obtaining-data.qmd
-    # - chapter-4-creating-command-line-tools.qmd
-    # - chapter-5-scrubbing-data.qmd
-    # - chapter-6-project-management-with-make.qmd
-    # - chapter-7-exploring-data.qmd
-    # - chapter-8-parallel-pipelines.qmd
-    # - chapter-9-modeling-data.qmd
-    # - chapter-10-polyglot-data-science.qmd
-    # - chapter-11-conclusion.qmd
-    # - list-of-command-line-tools.qmd
+    - chapter-3-obtaining-data.qmd
+    - chapter-4-creating-command-line-tools.qmd
+    - chapter-5-scrubbing-data.qmd
+    - chapter-6-project-management-with-make.qmd
+    - chapter-7-exploring-data.qmd
+    - chapter-8-parallel-pipelines.qmd
+    - chapter-9-modeling-data.qmd
+    - chapter-10-polyglot-data-science.qmd
+    - chapter-11-conclusion.qmd
+    - list-of-command-line-tools.qmd
     - references.qmd
 
 bibliography: [library.bib, tools.bib]

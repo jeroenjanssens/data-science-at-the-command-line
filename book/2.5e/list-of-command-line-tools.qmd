@@ -1,0 +1,1589 @@
+---
+engine: markdown
+---
+
+# List of Command-Line Tools {#list-of-command-line-tools .unnumbered}
+
+```{term}
+#| label: setup_history
+#| include: false
+ export CHAPTER="tools"
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
+```
+
+This is an overview of all the command-line tools discussed in this book.
+This includes binary executables, interpreted scripts, and Z Shell builtins and keywords.
+For each command-line tool, the following information, when available and appropriate, is provided:
+
+- The actual command to type at the command line
+- A description
+- The version used in the book
+- The year that version was released
+- The primary author(s)
+- A website to find more information
+- How to obtain help
+- An example usage
+
+All command-line tools listed here are included in the Docker image.
+See [Chapter 2](chapter-2-getting-started.qmd) for instructions on how to set it up.
+Please note that citing open source software is not trivial, and that some information may be missing or incorrect.
+
+```{term}
+#| include: false
+unalias csvlook
+unalias parallel
+```
+
+## alias {.unnumbered}
+
+Define or display aliases.
+`alias`
+is a Z shell builtin.
+
+```{term}
+#| label: alias
+type alias
+man zshbuiltins | grep -A 10 alias #! enter: false
+ctrl-c #! literal: false
+alias l
+alias python=python3
+```
+
+## awk {.unnumbered}
+
+Pattern scanning and text processing language.
+`awk`
+(version 1.3.4)
+by Mike D. Brennan and Thomas E. Dickey (2019).
+More information: https://invisible-island.net/mawk.
+
+```{term}
+#| label: awk
+type awk
+man awk #! enter: false
+ctrl-c #! literal: false
+seq 5 | awk '{sum+=$1} END {print sum}'
+```
+
+## aws {.unnumbered}
+
+Unified tool to manage AWS services.
+`aws`
+(version 2.1.32)
+by Amazon Web Services (2021).
+More information: https://aws.amazon.com/cli.
+
+```{term}
+#| label: aws
+type aws
+aws --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## bash {.unnumbered}
+
+GNU Bourne-Again SHell.
+`bash`
+(version 5.0.17)
+by Brian Fox and Chet Ramey (2019).
+More information: https://www.gnu.org/software/bash.
+
+```{term}
+#| label: bash
+type bash
+man bash #! enter: false
+ctrl-c #! literal: false
+```
+
+## bat {.unnumbered}
+
+A cat clone with syntax highlighting and Git integration.
+`bat`
+(version 0.18.0)
+by David Peter (2021).
+More information: https://github.com/sharkdp/bat.
+
+```{term}
+#| label: bat
+type bat
+man bat #! enter: false
+ctrl-c #! literal: false
+```
+
+## bc {.unnumbered}
+
+An arbitrary precision calculator language.
+`bc`
+(version 1.07.1)
+by Philip A. Nelson (2017).
+More information: https://www.gnu.org/software/bc.
+
+```{term}
+#| label: bc
+type bc
+man bc #! enter: false
+ctrl-c #! literal: false
+bc -l <<< 'e(1)'
+```
+
+## body {.unnumbered}
+
+Apply command to all but the first line.
+`body`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: body
+type body
+seq 10 | header -a 'values' | body shuf
+```
+
+## cat {.unnumbered}
+
+Concatenate files and print on the standard output.
+`cat`
+(version 8.30)
+by Torbjorn Granlund and Richard M. Stallman (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: cat
+type cat
+man cat #! enter: false
+ctrl-c #! literal: false
+cat *.log > all.log #! enter: false
+ctrl-c #! literal: false
+```
+
+## cd {.unnumbered}
+
+Change the shell working directory.
+`cd`
+is a Z shell builtin.
+
+```{term}
+#| label: cd
+type cd
+man zshbuiltins | grep -A 10 cd #! enter: false
+ctrl-c #! literal: false
+cd ~
+pwd
+cd ..
+pwd
+cd /data/ch01
+```
+
+## chmod {.unnumbered}
+
+Change file mode bits.
+`chmod`
+(version 8.30)
+by David MacKenzie and Jim Meyering (2018).
+I use `chmod` in [Chapter 4](chapter-4-creating-command-line-tools.qmd) to make a tool executable.
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: chmod
+type chmod
+man chmod #! enter: false
+ctrl-c #! literal: false
+chmod u+x script.sh #! enter: false
+ctrl-c #! literal: false
+```
+
+## cols {.unnumbered}
+
+Apply command to subset of columns.
+`cols`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: cols
+type cols
+```
+
+## column {.unnumbered}
+
+Columnate lists.
+`column`
+(version 2.36.1)
+by Karel Zak (2021).
+More information: https://www.kernel.org/pub/linux/utils/util-linux.
+
+```{term}
+#| label: column
+type column
+```
+
+## cowsay {.unnumbered}
+
+Configurable speaking cow.
+`cowsay`
+(version 3.0.3)
+by Tony Monroe (1999).
+More information: https://github.com/tnalpgge/rank-amateur-cowsay.
+
+```{term}
+#| label: cowsay
+type cowsay
+man cowsay #! enter: false
+ctrl-c #! literal: false
+echo 'The command line is awesome!' | cowsay
+```
+
+## cp {.unnumbered}
+
+Copy files and directories.
+`cp`
+(version 8.30)
+by Torbjorn Granlund, David MacKenzie, and Jim Meyering (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: cp
+type cp
+man cp #! enter: false
+ctrl-c #! literal: false
+cp -r ~/Downloads/*.xlsx /data #! enter: false
+ctrl-c #! literal: false
+```
+
+## csv2vw {.unnumbered}
+
+Convert CSV to Vowpal Wabbit format.
+`csv2vw`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: csv2vw
+type csv2vw
+```
+
+## csvcut {.unnumbered}
+
+Filter and truncate CSV files.
+`csvcut`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvcut
+type csvcut
+csvcut --help #! enter: false
+ctrl-c #! literal: false
+csvcut -c bill,tip /data/ch05/tips.csv | trim
+```
+
+## csvgrep {.unnumbered}
+
+Search CSV files.
+`csvgrep`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvgrep
+type csvgrep
+csvgrep --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## csvjoin {.unnumbered}
+
+Execute a SQL-like join to merge CSV files on a specified column or columns.
+`csvjoin`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvjoin
+type csvjoin
+csvjoin --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## csvlook {.unnumbered}
+
+Render a CSV file in the console as a Markdown-compatible, fixed-width table.
+`csvlook`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvlook
+type csvlook
+csvlook --help #! enter: false
+ctrl-c #! literal: false
+csvlook /data/ch05/tips.csv
+```
+
+## csvquote {.unnumbered}
+
+Enable common unix utlities to work correctly with CSV data.
+`csvquote`
+(version 0.1)
+by Dan Brown (2018).
+More information: https://github.com/dbro/csvquote.
+
+```{term}
+#| label: csvquote
+type csvquote
+```
+
+## csvsort {.unnumbered}
+
+Sort CSV files.
+`csvsort`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvsort
+type csvsort
+csvsort --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## csvsql {.unnumbered}
+
+Execute SQL statements on CSV files.
+`csvsql`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvsql
+type csvsql
+csvsql --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## csvstack {.unnumbered}
+
+Stack up the rows from multiple CSV files.
+`csvstack`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvstack
+type csvstack
+csvstack --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## csvstat {.unnumbered}
+
+Print descriptive statistics for each column in a CSV file.
+`csvstat`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: csvstat
+type csvstat
+csvstat --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## curl {.unnumbered}
+
+Transfer a URL.
+`curl`
+(version 7.68.0)
+by Daniel Stenberg (2016).
+More information: https://curl.haxx.se.
+
+```{term}
+#| label: curl
+type curl
+man curl #! enter: false
+ctrl-c #! literal: false
+```
+
+## cut {.unnumbered}
+
+Remove sections from each line of files.
+`cut`
+(version 8.30)
+by David M. Ihnat, David MacKenzie, and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: cut
+type cut
+man cut #! enter: false
+ctrl-c #! literal: false
+```
+
+## display {.unnumbered}
+
+Displays an image or image sequence on any X server.
+`display`
+(version 6.9.10-23)
+by ImageMagick Studio LLC (2019).
+More information: https://imagemagick.org.
+
+```{term}
+#| label: display
+type display
+```
+
+## dseq {.unnumbered}
+
+Generate sequence of dates.
+`dseq`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: dseq
+type dseq
+dseq 3
+```
+
+## echo {.unnumbered}
+
+Display a line of text.
+`echo`
+(version 8.30)
+by Brian Fox and Chet Ramey (2019).
+Useful for using literal text as standard input to the next tool.
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: echo
+type echo
+man echo #! enter: false
+ctrl-c #! literal: false
+echo Hippopotomonstrosesquippedaliophobia | cowsay
+echo -n Hippopotomonstrosesquippedaliophobia | wc -c
+```
+
+## env {.unnumbered}
+
+Run a program in a modified environment.
+`env`
+(version 8.30)
+by Richard Mlynarik, David MacKenzie, and Assaf Gordon (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: env
+type env
+man env #! enter: false
+ctrl-c #! literal: false
+```
+
+## export {.unnumbered}
+
+Set export attribute for shell variables. Useful for making shell variables available to other command-line tools..
+`export`
+is a Z shell builtin.
+
+```{term}
+#| label: export
+type export
+man zshbuiltins | grep -A 10 export #! enter: false
+ctrl-c #! literal: false
+export PATH="$PATH:$HOME/bin"
+```
+
+## fc {.unnumbered}
+
+Control the interactive history mechanism.
+`fc`
+is a Z shell builtin.
+I use `fc` in [Chapter 4](chapter-4-creating-command-line-tools.qmd) to edit the command in `nano`.
+
+```{term}
+#| label: fc
+type fc
+man zshbuiltins | grep -A 10 '^ *fc ' #! enter: false
+ctrl-c #! literal: false
+```
+
+## find {.unnumbered}
+
+Search for files in a directory hierarchy.
+`find`
+(version 4.7.0)
+by Eric B. Decker, James Youngman, and Kevin Dalley (2019).
+More information: https://www.gnu.org/software/findutils.
+
+```{term}
+#| label: find
+type find
+man find #! enter: false
+ctrl-c #! literal: false
+find /data -type f -name '*.csv' -size -3
+```
+
+## fold {.unnumbered}
+
+Wrap each input line to fit in specified width.
+`fold`
+(version 8.30)
+by David MacKenzie (2020).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: fold
+type fold
+man fold #! enter: false
+ctrl-c #! literal: false
+```
+
+## for {.unnumbered}
+
+Execute commands for each member in a list.
+`for`
+is a Z shell builtin.
+In [Chapter 8](chapter-8-parallel-pipelines.qmd), I discuss the advantages of using `parallel` instead of `for`.
+
+```{term}
+#| label: for
+type for
+man zshmisc | grep -EA 10 '^ *for ' #! enter: false
+ctrl-c #! literal: false
+for i in {A..C} "It's easy as" {1..3}; do echo $i; done
+```
+
+## fx {.unnumbered}
+
+Interactive JSON viewer.
+`fx`
+(version 20.0.2)
+by Anton Medvedev (2020).
+More information: https://github.com/antonmedv/fx.
+
+```{term}
+#| label: fx
+type fx
+fx --help #! enter: false
+ctrl-c #! literal: false
+echo '[1,2,3]' | fx 'this.map(x => x * 2)'
+```
+
+## git {.unnumbered}
+
+The stupid content tracker.
+`git`
+(version 2.25.1)
+by Linus Torvalds and Junio C. Hamano (2021).
+More information: https://git-scm.com.
+
+```{term}
+#| label: git
+type git
+man git #! enter: false
+ctrl-c #! literal: false
+```
+
+## grep {.unnumbered}
+
+Print lines that match patterns.
+`grep`
+(version 3.4)
+by Jim Meyering (2019).
+More information: https://www.gnu.org/software/grep.
+
+```{term}
+#| label: grep
+type grep
+man grep #! enter: false
+ctrl-c #! literal: false
+seq 100 | grep 3 | wc -l
+```
+
+## gron {.unnumbered}
+
+Make JSON greppable.
+`gron`
+(version 0.6.1)
+by Tom Hudson (2021).
+More information: https://github.com/TomNomNom/gron.
+
+```{term}
+#| label: gron
+type gron
+man gron #! enter: false
+ctrl-c #! literal: false
+```
+
+## head {.unnumbered}
+
+Output the first part of files.
+`head`
+(version 8.30)
+by David MacKenzie and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: head
+type head
+man head #! enter: false
+ctrl-c #! literal: false
+seq 100 | head -n 5
+```
+
+## header {.unnumbered}
+
+Add, replace, and delete header lines.
+`header`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: header
+type header
+```
+
+## history {.unnumbered}
+
+GNU History Library.
+`history`
+(version 8.1)
+by Brian Fox and Chet Ramey (2020).
+More information: https://www.gnu.org/software/bash.
+
+```{term}
+#| label: history
+type history
+```
+
+## hostname {.unnumbered}
+
+Show or set the system's host name.
+`hostname`
+(version 3.23)
+by Peter Tobias, Bernd Eckenfels, and Michael Meskes (2021).
+More information: https://sourceforge.net/projects/net-tools/.
+
+```{term}
+#| label: hostname
+type hostname
+man hostname #! enter: false
+ctrl-c #! literal: false
+hostname
+hostname -i
+```
+
+## in2csv {.unnumbered}
+
+Convert common, but less awesome, tabular data formats to CSV.
+`in2csv`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: in2csv
+type in2csv
+in2csv --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## jq {.unnumbered}
+
+Command-line JSON processor.
+`jq`
+(version 1.6)
+by Stephen Dolan (2021).
+More information: https://stedolan.github.com/jq.
+
+```{term}
+#| label: jq
+type jq
+man jq #! enter: false
+ctrl-c #! literal: false
+```
+
+## json2csv {.unnumbered}
+
+Convert JSON to CSV.
+`json2csv`
+(version 1.2.1)
+by Jehiah Czebotar (2019).
+More information: https://github.com/jehiah/json2csv.
+
+```{term}
+#| label: json2csv
+type json2csv
+json2csv --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## l {.unnumbered}
+
+List directory contents in long format with directories grouped before files, human readable file sizes,  and access permissions.
+`l`
+by Unknown (1999).
+
+```{term}
+#| label: l
+type l
+cd /data/ch03
+ls
+l
+```
+
+## less {.unnumbered}
+
+opposite of more.
+`less`
+(version 551)
+by Mark Nudelman (2019).
+More information: https://www.greenwoodsoftware.com/less.
+
+```{term}
+#| label: less
+type less
+man less #! enter: false
+ctrl-c #! literal: false
+less README #! enter: false
+ctrl-c #! literal: false
+```
+
+## ls {.unnumbered}
+
+List directory contents.
+`ls`
+(version 8.30)
+by Richard M. Stallman and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: ls
+type ls
+man ls #! enter: false
+ctrl-c #! literal: false
+ls /data
+```
+
+## make {.unnumbered}
+
+A Program for Maintaining Computer Programs.
+`make`
+(version 4.3)
+by Stuart I. Feldman (2020).
+More information: https://www.gnu.org/software/make.
+
+```{term}
+#| label: make
+type make
+man make #! enter: false
+ctrl-c #! literal: false
+make sandwich #! enter: false
+ctrl-c #! literal: false
+```
+
+## man {.unnumbered}
+
+An interface to the system reference manuals.
+`man`
+(version 2.9.1)
+by John W. Eaton and Colin Watson (2020).
+More information: https://nongnu.org/man-db.
+
+```{term}
+#| label: man
+type man
+man man #! enter: false
+ctrl-c #! literal: false
+man excel
+```
+
+## mkdir {.unnumbered}
+
+Make directories.
+`mkdir`
+(version 8.30)
+by David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: mkdir
+type mkdir
+man mkdir #! enter: false
+ctrl-c #! literal: false
+mkdir -p /data/ch{01..10} #! enter: false
+ctrl-c #! literal: false
+```
+
+## mv {.unnumbered}
+
+Move (rename) files.
+`mv`
+(version 8.30)
+by Mike Parker, David MacKenzie, and Jim Meyering (2020).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: mv
+type mv
+man mv #! enter: false
+ctrl-c #! literal: false
+mv results{,.bak} #! enter: false
+ctrl-c #! literal: false
+```
+
+## nano {.unnumbered}
+
+Nano's ANOther editor, inspired by Pico.
+`nano`
+(version 5.4)
+by Benno Schulenberg, David Lawrence Ramsey, Jordi Mallach, Chris Allegretta, Robert Siemborski, and Adam Rogoyski (2020).
+More information: https://nano-editor.org.
+
+```{term}
+#| label: nano
+type nano
+```
+
+## nl {.unnumbered}
+
+Number lines of files.
+`nl`
+(version 8.30)
+by Scott Bartram and David MacKenzie (2020).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: nl
+type nl
+man nl #! enter: false
+ctrl-c #! literal: false
+nl /data/ch05/alice.txt | head
+```
+
+## parallel {.unnumbered}
+
+Build and execute shell command lines from standard input in parallel.
+`parallel`
+(version 20161222)
+by Ole Tange (2016).
+More information: https://www.gnu.org/software/parallel.
+
+```{term}
+#| label: parallel
+type parallel
+man parallel #! enter: false
+ctrl-c #! literal: false
+seq 3 | parallel "echo Processing file {}.csv"
+```
+
+## paste {.unnumbered}
+
+Merge lines of files.
+`paste`
+(version 8.30)
+by David M. Ihnat and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: paste
+type paste
+man paste #! enter: false
+ctrl-c #! literal: false
+paste -d, <(seq 5) <(dseq 5)
+seq 5 | paste -sd+
+```
+
+## pbc {.unnumbered}
+
+Parallel bc.
+`pbc`
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: pbc
+type pbc
+seq 3 | pbc '{1}^2'
+```
+
+## pip {.unnumbered}
+
+A tool for installing and managing Python packages.
+`pip`
+(version 20.0.2)
+by PyPA (2020).
+More information: https://pip.pypa.io.
+
+```{term}
+#| label: pip
+type pip
+man pip #! enter: false
+ctrl-c #! literal: false
+pip install pandas #! enter: false
+ctrl-c #! literal: false
+pip freeze | grep sci
+```
+
+## pup {.unnumbered}
+
+Parsing HTML at the command line.
+`pup`
+(version 0.4.0)
+by Eric Chiang (2016).
+More information: https://github.com/EricChiang/pup.
+
+```{term}
+#| label: pup
+type pup
+pup --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## pwd {.unnumbered}
+
+Print name of working directory.
+`pwd`
+(version 8.30)
+by Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: pwd
+type pwd
+man pwd #! enter: false
+ctrl-c #! literal: false
+cd ~
+pwd
+```
+
+## python {#python-1 .unnumbered}
+
+An interpreted, interactive, object-oriented programming language.
+`python`
+(version 3.8.5)
+by The Python Software Foundation (2021).
+More information: https://www.python.org.
+
+```{term}
+#| label: python
+type python
+man python #! enter: false
+ctrl-c #! literal: false
+```
+
+## R {#r-1 .unnumbered}
+
+A Language and Environment for Statistical Computing.
+`R`
+(version 4.0.4)
+by The R Foundation for Statistical Computing (2021).
+More information: https://www.r-project.org.
+
+```{term}
+#| label: R
+type R
+man R #! enter: false
+ctrl-c #! literal: false
+```
+
+## rev {.unnumbered}
+
+Reverse lines characterwise.
+`rev`
+(version 2.36.1)
+by Karel Zak (2021).
+More information: https://www.kernel.org/pub/linux/utils/util-linux.
+
+```{term}
+#| label: rev
+type rev
+echo 'Satire: Veritas' | rev
+echo 'Ça va?' | rev | cut -c 2- | rev
+```
+
+## rm {.unnumbered}
+
+Remove files or directories.
+`rm`
+(version 8.30)
+by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: rm
+type rm
+man rm #! enter: false
+ctrl-c #! literal: false
+rm *.old #! enter: false
+ctrl-c #! literal: false
+```
+
+## rush {.unnumbered}
+
+R One-Liners from the Shell.
+`rush`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/rush.
+
+```{term}
+#| label: rush
+type rush
+rush --help #! enter: false
+ctrl-c #! literal: false
+rush run '6*7'
+rush run --tidyverse 'filter(starwars, species == "Human") %>% select(name)'
+```
+
+## sample {.unnumbered}
+
+Filter lines from standard input according to some probability, with a given delay, and for a certain duration.
+`sample`
+(version 0.2.4)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/sample.
+
+```{term}
+#| label: sample
+type sample
+sample --help #! enter: false
+ctrl-c #! literal: false
+seq 1000 | sample -r 0.01 | trim 5
+```
+
+## scp {.unnumbered}
+
+OpenSSH secure file copy.
+`scp`
+(version 1:8.2p1-4ubuntu0.2)
+by Timo Rinne and Tatu Ylonen (2019).
+More information: https://www.openssh.com.
+
+```{term}
+#| label: scp
+type scp
+man scp #! enter: false
+ctrl-c #! literal: false
+```
+
+## sed {.unnumbered}
+
+Stream editor for filtering and transforming text.
+`sed`
+(version 4.7)
+by Jay Fenlason, Tom Lord, Ken Pizzini, and Paolo Bonzini (2018).
+More information: https://www.gnu.org/software/sed.
+
+```{term}
+#| label: sed
+type sed
+man sed #! enter: false
+ctrl-c #! literal: false
+```
+
+## seq {.unnumbered}
+
+Print a sequence of numbers.
+`seq`
+(version 8.30)
+by Ulrich Drepper (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: seq
+type seq
+man seq #! enter: false
+ctrl-c #! literal: false
+seq 3
+seq 10 5 20
+```
+
+## servewd {.unnumbered}
+
+Serve the current working directory using a simple HTTP server.
+`servewd`
+(version 0.1)
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: servewd
+type servewd
+servewd --help #! enter: false
+ctrl-c #! literal: false
+cd /data && servewd 8000 #! enter: false
+ctrl-c #! literal: false
+```
+
+## shuf {.unnumbered}
+
+Generate random permutations.
+`shuf`
+(version 8.30)
+by Paul Eggert (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: shuf
+type shuf
+man shuf #! enter: false
+ctrl-c #! literal: false
+echo {a..z} | tr ' ' '\n' | shuf | trim 5
+shuf -i 1-100 | trim 5
+```
+
+## skll {.unnumbered}
+
+SciKit-Learn Laboratory.
+`skll`
+(version 2.5.0)
+by Educational Testing Service (2021).
+The actual tool is `run_experiment`. I use the alias `skll` because I find that easier to remember.
+More information: https://skll.readthedocs.org.
+
+```{term}
+#| label: skll
+type skll
+skll --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## sort {.unnumbered}
+
+Sort lines of text files.
+`sort`
+(version 8.30)
+by Mike Haertel and Paul Eggert (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: sort
+type sort
+man sort #! enter: false
+ctrl-c #! literal: false
+echo '3\n7\n1\n3' | sort
+```
+
+## split {.unnumbered}
+
+Split a file into pieces.
+`split`
+(version 8.30)
+by Torbjorn Granlund and Richard M. Stallman (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: split
+type split
+man split #! enter: false
+ctrl-c #! literal: false
+```
+
+## sponge {.unnumbered}
+
+Soak up standard input and write to a file.
+`sponge`
+(version 0.65)
+by Colin Watson and Tollef Fog Heen (2021).
+Useful if you want to read from and write to the same file in a single pipeline.
+More information: https://joeyh.name/code/moreutils.
+
+```{term}
+#| label: sponge
+type sponge
+```
+
+## sql2csv {.unnumbered}
+
+Execute an SQL query on a database and output the result to a CSV file.
+`sql2csv`
+(version 1.0.5)
+by Christopher Groskopf (2020).
+More information: https://csvkit.rtfd.org.
+
+```{term}
+#| label: sql2csv
+type sql2csv
+sql2csv --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## ssh {.unnumbered}
+
+OpenSSH remote login client.
+`ssh`
+(version 1:8.2p1-4ubuntu0.2)
+by Tatu Ylonen, Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo Raadt, Dug Song, and Markus Friedl (2020).
+More information: https://www.openssh.com.
+
+```{term}
+#| label: ssh
+type ssh
+man ssh #! enter: false
+ctrl-c #! literal: false
+```
+
+## sudo {.unnumbered}
+
+Execute a command as another user.
+`sudo`
+(version 1.8.31)
+by Todd C. Miller (2019).
+More information: https://www.sudo.ws.
+
+```{term}
+#| label: sudo
+type sudo
+man sudo #! enter: false
+ctrl-c #! literal: false
+```
+
+## tail {.unnumbered}
+
+Output the last part of files.
+`tail`
+(version 8.30)
+by Paul Rubin, David MacKenzie, Ian Lance Taylor, and Jim Meyering (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: tail
+type tail
+man tail #! enter: false
+ctrl-c #! literal: false
+```
+
+## tapkee {.unnumbered}
+
+An efficient dimension reduction library.
+`tapkee`
+(version 1.2)
+by Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia (2013).
+More information: http://tapkee.lisitsyn.me.
+
+```{term}
+#| label: tapkee
+type tapkee
+tapkee --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## tar {.unnumbered}
+
+An archiving utility.
+`tar`
+(version 1.30)
+by John Gilmore and Jay Fenlason (2014).
+More information: https://www.gnu.org/software/tar.
+
+```{term}
+#| label: tar
+type tar
+man tar #! enter: false
+ctrl-c #! literal: false
+```
+
+## tee {.unnumbered}
+
+Read from standard input and write to standard output and files.
+`tee`
+(version 8.30)
+by Mike Parker, Richard M. Stallman, and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: tee
+type tee
+man tee #! enter: false
+ctrl-c #! literal: false
+```
+
+## telnet {.unnumbered}
+
+User interface to the TELNET protocol.
+`telnet`
+(version 0.17)
+by Mats Erik Andersson, Andreas Henriksson, and Christoph Biedl (1999).
+More information: http://www.hcs.harvard.edu/~dholland/computers/netkit.html.
+
+```{term}
+#| label: telnet
+type telnet
+```
+
+## tldr {.unnumbered}
+
+Collaborative cheatsheets for console commands.
+`tldr`
+(version 3.3.7)
+by Owen Voke (2021).
+More information: https://tldr.sh.
+
+```{term}
+#| label: tldr
+type tldr
+tldr --help #! enter: false
+ctrl-c #! literal: false
+tldr tar | trim
+```
+
+## tr {.unnumbered}
+
+Translate or delete characters.
+`tr`
+(version 8.30)
+by Jim Meyering (2018).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: tr
+type tr
+man tr #! enter: false
+ctrl-c #! literal: false
+```
+
+## tree {.unnumbered}
+
+List contents of directories in a tree-like format.
+`tree`
+(version 1.8.0)
+by Steve Baker (2018).
+More information: https://launchpad.net/ubuntu/+source/tree.
+
+```{term}
+#| label: tree
+type tree
+man tree #! enter: false
+ctrl-c #! literal: false
+tree / | trim
+```
+
+## trim {.unnumbered}
+
+Trim output to a given height and width.
+`trim`
+by Jeroen Janssens (2021).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: trim
+type trim
+echo {a..z}-{0..9} | fold | trim 5 60
+```
+
+## ts {.unnumbered}
+
+Timestamp input.
+`ts`
+(version 0.65)
+by Joey Hess (2021).
+More information: https://joeyh.name/code/moreutils.
+
+```{term}
+#| label: ts
+type ts
+echo seq 5 | sample -d 500 | ts
+```
+
+## type {.unnumbered}
+
+Show the type and location of a command-line tool.
+`type`
+is a Z shell builtin.
+
+```{term}
+#| label: type
+type type
+man zshbuiltins | grep -A 10 '^ *type ' #! enter: false
+ctrl-c #! literal: false
+```
+
+## uniq {.unnumbered}
+
+Report or omit repeated lines.
+`uniq`
+(version 8.30)
+by Richard M. Stallman and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: uniq
+type uniq
+man uniq #! enter: false
+ctrl-c #! literal: false
+```
+
+## unpack {.unnumbered}
+
+Extract common file formats.
+`unpack`
+(version 0.1)
+by Patrick Brisbin (2013).
+More information: https://github.com/jeroenjanssens/dsutils.
+
+```{term}
+#| label: unpack
+type unpack
+```
+
+## unrar {.unnumbered}
+
+Extract files from rar archives.
+`unrar`
+(version 0.0.1)
+by Ben Asselstine, Christian Scheurer, and Johannes Winkelmann (2014).
+More information: http://home.gna.org/unrar.
+
+```{term}
+#| label: unrar
+type unrar
+man unrar #! enter: false
+ctrl-c #! literal: false
+```
+
+## unzip {.unnumbered}
+
+List, test and extract compressed files in a ZIP archive.
+`unzip`
+(version 6.0)
+by Samuel H. Smith, Ed Gordon, Christian Spieler, Onno Linden, Mike White, Kai Uwe Rommel, Steven M. Schweda, Paul Kienitz, Chris Herborth, Jonathan Hudson, Sergio Monesi, Harald Denker, John Bush, Hunter Goatley, Steve Salisbury, Steve Miller, and Dave Smith (2009).
+More information: http://www.info-zip.org/pub/infozip.
+
+```{term}
+#| label: unzip
+type unzip
+man unzip #! enter: false
+ctrl-c #! literal: false
+```
+
+## vw {.unnumbered}
+
+Fast machine learning library for online learning.
+`vw`
+(version 8.10.1)
+by John Langford (2021).
+More information: https://vowpalwabbit.org.
+
+```{term}
+#| label: vw
+type vw
+vw --help --quiet #! enter: false
+ctrl-c #! literal: false
+```
+
+## wc {.unnumbered}
+
+Print newline, word, and byte counts for each file.
+`wc`
+(version 8.30)
+by Paul Rubin and David MacKenzie (2019).
+More information: https://www.gnu.org/software/coreutils.
+
+```{term}
+#| label: wc
+type wc
+man wc #! enter: false
+ctrl-c #! literal: false
+```
+
+## which {.unnumbered}
+
+Locate a command.
+`which`
+(version 0.1)
+by Unknown (2016).
+More information: .
+
+```{term}
+#| label: which
+type which
+man which #! enter: false
+ctrl-c #! literal: false
+```
+
+## xml2json {.unnumbered}
+
+Convert an XML input to a JSON output, using xml-mapping.
+`xml2json`
+(version 0.0.3)
+by François Parmentier (2016).
+More information: https://github.com/parmentf/xml2json.
+
+```{term}
+#| label: xml2json
+type xml2json
+```
+
+## xmlstarlet {.unnumbered}
+
+Command line XML/XSLT toolkit.
+`xmlstarlet`
+(version 1.6.1)
+by Dagobert Michelsen, Noam Postavsky, and Mikhail Grushinskiy (2019).
+More information: https://sourceforge.net/projects/xmlstar.
+
+```{term}
+#| label: xmlstarlet
+type xmlstarlet
+man xmlstarlet #! enter: false
+ctrl-c #! literal: false
+```
+
+## xsv {.unnumbered}
+
+A fast CSV command line toolkit written in Rust.
+`xsv`
+(version 0.13.0)
+by Andrew Gallant (2018).
+More information: https://github.com/BurntSushi/xsv.
+
+```{term}
+#| label: xsv
+type xsv
+xsv --help #! enter: false
+ctrl-c #! literal: false
+```
+
+## zcat {.unnumbered}
+
+Decompress and concatenate files to standard output.
+`zcat`
+(version 1.10)
+by Paul Eggert (2021).
+More information: https://www.nongnu.org/zutils/zutils.html.
+
+```{term}
+#| label: zcat
+type zcat
+man zcat #! enter: false
+ctrl-c #! literal: false
+```
+
+## zsh {.unnumbered}
+
+The Z shell.
+`zsh`
+(version 5.8)
+by Paul Falstad and Peter Stephenson (2020).
+More information: https://www.zsh.org.
+
+```{term}
+#| label: zsh
+type zsh
+man zsh #! enter: false
+ctrl-c #! literal: false
+```
