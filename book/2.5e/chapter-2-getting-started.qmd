@@ -155,7 +155,7 @@ Terminal
 
 :   The terminal, which is the second layer, is the application where we type our commands in. If you see the following text mentioned in the book:
 
-    ```{console}
+    ```{term}
     seq 3
     ```
 
@@ -259,13 +259,15 @@ Interpreted Script
 
 :   An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. The script below is interpreted by Python not because of the file extension *.py*, but because the first line of the script defines the binary that should execute it.
 
-    ```{console bat_fac}
+    ```{term}
+    #| label: bat_fac
     bat fac.py
     ```
 
     This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:
 
-    ```{console run_fac}
+    ```{term}
+    #| label: run_fac
     ./fac.py 5
     ```
 
@@ -275,7 +277,8 @@ Shell Function
 
 :   A shell function is a function that is, in our case, executed by `zsh`. They provide similar functionality to a script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called `fac`, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using `seq`, putting those numbers on one line with `*` as the delimiter using `paste` [@paste], and passing this equation into `bc` [@bc], which evaluates it and outputs the result.
 
-    ```{console fac_zsh}
+    ```{term}
+    #| label: fac_zsh
     fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
     fac 5
     ```
@@ -286,14 +289,16 @@ Alias
 
 :   Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for it to save time. Aliases are also very useful when you continue to misspell a certain command (Chris Wiggins maintains a [useful list of aliases](https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh)). The following command defines such an alias:
 
-    ```{console define_alias}
+    ```{term}
+    #| label: define_alias
     alias l='ls --color -lhF --group-directories-first'
     alias les=less
     ```
 
     Now, if you type the following on the command line, the shell will replace each alias it finds with its value:
 
-    ```{console run_alias}
+    ```{term}
+    #| label: run_alias
     cd /data
     l
     cd ch02

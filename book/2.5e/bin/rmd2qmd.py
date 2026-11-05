@@ -372,19 +372,21 @@ def convert_file(path: Path, anchors: dict) -> str:
 
     while i < len(lines):
         line = lines[i]
-        m = re.match(r"^```(\{.*\})\s*$", line)
+        m = re.match(r"^([ \t]*)```(\{.*\})\s*$", line)
         if not m:
             prose.append(line)
             i += 1
             continue
 
         flush_prose()
-        header = m.group(1)
+        # Chunks may be indented, e.g. inside a definition list
+        indent, header = m.group(1), m.group(2)
         j = i + 1
-        while lines[j].rstrip() != "```":
+        while lines[j].rstrip() != indent + "```":
             j += 1
-        body = lines[i + 1 : j]
+        body = [b[len(indent):] if b.startswith(indent) else b for b in lines[i + 1 : j]]
         i = j + 1
+        start = len(out)
 
         engine, label, options = parse_header(header)
 
@@ -412,6 +414,8 @@ def convert_file(path: Path, anchors: dict) -> str:
                     i += 1
         else:
             raise ValueError(f"Unsupported engine {engine} in {path}")
+        if indent:
+            out[start:] = [indent + o if o else o for o in out[start:]]
 
     flush_prose()
 
