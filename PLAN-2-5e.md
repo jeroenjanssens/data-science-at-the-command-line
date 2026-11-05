@@ -381,3 +381,27 @@ Upstream issues to raise:
 
 - **quarto-term**: push/PR `process-nested-blocks`; handle images with an `ENTRYPOINT` (pass `--entrypoint=` or document it); allow `callout-values`/`callout-format` at project level; disable font ligatures by default; the cache key should include the image digest and `init` files (the book's Makefile works around this); stale `VERSION` in `term.lua`.
 - **datasciencetoolbox**: `trim` measures line length in bytes (mawk), so it cuts multibyte characters (`en�…`) once lines are near the terminal width; use gawk or a UTF-8 aware length. The coreutils statement in `2-5e-report.md` still contradicts the Dockerfile.
+
+## 11. Round 2 status (2026-11-05): all chapters
+
+All chapters and the tools appendix render with Quarto 1.11.9, quarto-term 0.7.1, and datasciencetoolbox/dsatcl2e:latest, without cell errors (about 6 minutes for the whole book; cached renders take seconds). All 166 differences with 2e are reviewed in `book/2.5e/compare/differences.yml`; changed images are in `compare/reports/images.html` (`compare/contact-sheet.py`).
+
+What it took, besides the converter rules for the remaining knitr/knitractive constructs:
+
+- **Network cache**: every URL the book fetches is cached in `data/.cache/http` (2021 Wayback copies where available, otherwise November 2026; newsapi and dict.org rebuilt from the 2e output). `container/bin/curl` (installed in `~/.local/bin`, so `PATH` looks unchanged) sends cached URLs to a local server that also replays headers; `bin/cache-url.py` adds entries and records them in `SOURCES.tsv`.
+- **Harness hidden from the output**: functions typed via `init` (not sourced), `container/` mounted at `/.book` (hidden from `tree /`), `rehash` after installing the wrapper.
+- **Fixes to 2e's own harness**: the csvlook box-drawing `sed` turned negative numbers into box characters; fake-output `echo` chains ending in `&&` never ran in 2e.
+- **R sessions** (chapters 7 and 10): page-level `prompt-regex` that also accepts R's `>`.
+
+Open issues:
+
+- **datasciencetoolbox / rush**
+  - `rush plot --x time tips.csv` fails silently (rush 0.2.1 uses `geom_histogram()` for a discrete x; the old qplot picked a bar chart): ch07 bar chart and `images/plot-bar.png` are empty.
+  - The terminal box plot (`rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv`) exits with status 250 (devoutansi); the PNG works.
+  - Terminal plots (devoutansi) have no legend and a white canvas.
+  - `mgcv` isn't installed, so `geom_smooth()` on > 1000 rows silently fits straight lines (ch09 `wine-alcohol-vs-quality.png`).
+  - `trim` measures line length in bytes (mawk); `MANWIDTH=79` avoids it for man pages.
+- **quarto-term**
+  - Each PTY read is decoded separately (`String::from_utf8_lossy` in `process_bytes`), so a multibyte character split between reads becomes `��` and the line wraps (seen in `bat` borders, ch03 and ch05; it varies between renders).
+  - `{{<` in HTML output (e.g. a coloured `{{2` in the Jupyter transcript) is read by Quarto as a shortcode and swallows the rest of the page; worked around in `data/.cache/jupyter-console`.
+- **Content** (book-changes-plan §C–E): rush prose in ch07, skll output file names in ch09 (`wine_` instead of `wine_features_`), versions in `tools.yml`, the welcome page's Data Science Workshops paragraph.
