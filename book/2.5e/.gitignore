@@ -4,3 +4,5 @@
 /_extensions/jeroenjanssens/term/bin/
 /compare/.venv/
 /_baseline/
+
+**/*.quarto_ipynb

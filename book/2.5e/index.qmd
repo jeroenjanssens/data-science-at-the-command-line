@@ -1,16 +1,9 @@
 ---
 engine: markdown
+hide-description: true
 ---
 
 # Welcome {#welcome .unnumbered}
-
-<div class="h1" style="margin-top: 1.5rem;">Data Science at the Command Line</div>
-
-<div class="h4">Obtain, Scrub, Explore, and Model Data with Unix Power Tools</div>
-
-<div class="cover-in-text">
-<img class="d-block d-lg-none" src="images/cover-small.png">
-</div>
 
 Welcome to the website of the second edition of *Data Science at the Command Line* by Jeroen Janssens, published by O'Reilly Media in October 2021. This website is free to use. The contents is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/). You can order a physical copy at [Amazon](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912).
 

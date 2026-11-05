@@ -365,12 +365,25 @@ EDITS = [
         "Decision 5: remove outdated course announcement",
     ),
     (
+        "index.qmd",
+        '<div class="h1" style="margin-top: 1.5rem;">Data Science at the Command Line</div>\n\n<div class="h4">Obtain, Scrub, Explore, and Model Data with Unix Power Tools</div>\n\n<div class="cover-in-text">\n<img class="d-block d-lg-none" src="images/cover-small.png">\n</div>\n\n',
+        "",
+        "Title, subtitle, and cover come from the Quarto title block (bs4_book template classes)",
+    ),
+    (
         "chapter-1-introduction.qmd",
         'cleaning the data".',
         'cleaning the data."',
         "pandoc 2.x moved the period inside the quotes in 2e; pandoc 3 doesn't",
     ),
 ]
+
+
+# Extra front matter per page (on top of `engine: markdown`)
+FRONT_MATTER = {
+    # The description is the first section of the welcome page already
+    "index.qmd": ["hide-description: true"],
+}
 
 
 def apply_edits(name: str, text: str) -> str:
@@ -523,7 +536,8 @@ def convert_file(path: Path, anchors: dict, src_dir: Path) -> str:
     leftovers = re.findall(r"^<\d+> .*$", text, re.M)
     for left in leftovers:
         warn(f"callout explanation not attached to a chunk in {this_file}: {left[:60]}")
-    return "---\nengine: markdown\n---\n\n" + text
+    front = ["engine: markdown", *FRONT_MATTER.get(this_file, [])]
+    return "---\n" + "\n".join(front) + "\n---\n\n" + text
 
 
 def main():
