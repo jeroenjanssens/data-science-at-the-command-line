@@ -1,0 +1,703 @@
+---
+engine: markdown
+---
+
+# Getting Started {#chapter-2-getting-started}
+
+```{term}
+#| label: setup_history
+#| include: false
+ export CHAPTER="02"
+ export HISTFILE=/history/history_${CHAPTER}
+ rm -f $HISTFILE
+```
+
+
+In this chapter I'm going to make sure that you have all the prerequisites for doing data science at the command line.
+The prerequisites fall into three parts: (1) having the same data sets that I use in this book, (2) having a proper environment with all the command-line tools that I use throughout this book, and (3) understanding the essential concepts that come into play when using the command line.
+
+First, I describe how to download the datasets.
+Second, I explain how to install the Docker image, which is a virtual environment based on Ubuntu Linux that contains all the necessary command-line tools.
+Subsequently, I go over the essential Unix concepts through examples.
+
+By the end of this chapter, you’ll have everything you need in order to continue with the first step of doing data science, namely obtaining data.
+
+## Getting the Data
+
+The datasets that I use in this book can be downloaded as follows:
+
+1. Download the ZIP file from https://www.datascienceatthecommandline.com/2e/data.zip.
+2. Create a new directory. You can give this directory any name you want, but I recommend you stick to lowercase letters, numbers, and maybe a hyphen or underscore so that it's easier to work with at the command line. For example: *dsatcl2e-data*. Remember where this directory is.
+3. Move the ZIP file to that new directory and unpack it.
+4. This directory now contains one subdirectory per chapter.
+
+In the next section I explain how to install the environment containing all the command-line tools to work with this data.
+
+## Installing the Docker Image {#docker-image}
+
+In this book we use many different command-line tools.
+Unix often comes with a lot of command-line tools pre-installed and offers many packages that contain more relevant tools.
+Installing these packages yourself is often not too difficult.
+However, we'll also use tools that are not available as packages and require a more manual, and more involved installation.
+In order to acquire the necessary command-line tools without having to go through the installation process of each, I encourage you, whether you're on Windows, macOS, or Linux, to install the Docker image that was created specifically for this book.
+
+A Docker image is a bundle of one or more applications together with all their dependencies.
+A Docker container is an isolated environment that runs an image.
+You can manage Docker images and containers the `docker` command-line tool (which is what you'll do below) or the Docker GUI.
+In a way, a Docker container is like a virtual machine, only a Docker container uses far fewer resources.
+At the end of this chapter I suggest some resources to learn more about Docker.
+
+::: {.callout-tip}
+If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself.
+Please be aware that this is a very time-consuming process.
+The Appendix lists all the command-line tools used in the book.
+The installation instructions are for Ubuntu only.
+The scripts and data sets used in the book can be obtained by cloning this book’s [GitHub repository](https://github.com/datasciencetoolbox/datasciencetoolbox).
+:::
+
+To install the Docker image, you first need to download and install Docker itself from [the Docker website](https://www.docker.com/products/docker).
+Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don't type the dollar sign):
+
+```{term}
+#| label: docker_pull
+docker pull datasciencetoolbox/dsatcl2e #! enter: false
+```
+
+```{term}
+#| label: docker_pull_cancel
+#| include: false
+ctrl-c #! literal: false
+```
+
+You can run the Docker image as follows:
+
+```{term}
+#| label: docker_run
+docker run --rm -it datasciencetoolbox/dsatcl2e #! enter: false
+```
+
+```{term}
+#| label: docker_run_cancel
+#| include: false
+ctrl-c #! literal: false
+```
+
+You're now inside an isolated environment---known as a *Docker container*---with all the necessary command-line tools installed.
+If the following command produces an enthusiastic cow, then you know everything is working correctly:
+
+```{term}
+#| label: cowsay_lets_moove
+cowsay "Let's moove\!"
+```
+
+If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container.
+I recommend that you first create a new directory, navigate to this new directory, and then run the following when you're on macOS or Linux:
+
+```{term}
+#| label: docker_run_v
+docker run --rm -it -v "$(pwd)":/data datasciencetoolbox/dsatcl2e #! enter: false
+```
+
+```{term}
+#| label: docker_run_v_cancel
+#| include: false
+ctrl-c #! literal: false
+```
+
+Or the following when you're on Windows and using the Command Prompt (also known as `cmd`):
+
+```text
+C:\> docker run --rm -it -v "%cd%":/data datasciencetoolbox/dsatcl2e
+```
+
+Or the following when you're using Windows PowerShell:
+
+```text
+PS C:\> docker run --rm -it -v ${PWD}:/data datasciencetoolbox/dsatcl2e
+```
+
+In the above commands, the option `-v` instructs `docker` to map the current directory to the */data* directory inside the container, so this is the place to get data in and out of the Docker container.
+
+::: {.callout-note}
+If you would like to know more about the Docker image you can [visit it on Docker Hub](https://hub.docker.com/r/datasciencetoolbox/dsatcl2e).
+:::
+
+When you're done, you can shut down the Docker container by typing `exit`.
+
+## Essential Unix Concepts {#essential-concepts}
+
+In [Chapter 1](chapter-1-introduction.qmd), I briefly showed you what the command line is.
+Now that you are running the Docker image, we can really get started.
+In this section, I discuss several concepts and tools that you will need to know in order to feel comfortable doing data science at the command line.
+If, up to now, you have been mainly working with graphical user interfaces, then this might be quite a change.
+But don’t worry, I’ll start at the beginning, and very gradually go to more advanced topics.
+
+::: {.callout-note}
+This section is not a complete course in Unix.
+I will only explain the concepts and tools that are relevant for to doing data science.
+One of the advantages of the Docker image is that a lot is already set up.
+If you wish to know more, consult the Further Reading Section at the end of this chapter.
+:::
+
+### The Environment
+
+So you’ve just logged into a brand new environment.
+Before you do anything, it's worthwhile to get a high-level understanding of this environment.
+It's roughly defined by four layers, which I briefly discuss from the top down.
+
+Command-line tools
+
+:   First and foremost, there are the command-line tools that you work with.
+We use them by typing their corresponding commands.
+There are different types of command-line tools, which I will discuss in the next section.
+Examples of tools are: `ls` [@ls], `cat` [@cat], and `jq` [@jq].
+
+Terminal
+
+:   The terminal, which is the second layer, is the application where we type our commands in. If you see the following text mentioned in the book:
+
+    ```{console}
+    seq 3
+    ```
+
+    then you would type `seq 3` into your terminal and press **`Enter`**.
+(The command-line tool `seq` [@seq], as you can see, generates a sequence of numbers.) You do not type the dollar sign.
+It's just there to tell you that this a command you can type in the terminal.
+This dollar sign is known as the prompt.
+The text below `seq 3` is the output of the command.
+
+Shell
+
+:   The third layer is the shell. Once we have typed in our command and pressed **`Enter`**, the terminal sends that command to the shell. The *shell* is a program that interprets the command. I use the Z shell, but there are many others available such as Bash and Fish.
+
+Operating system
+
+:   The fourth layer is the operating system, which is GNU/Linux in our case. Linux is the name of the kernel, which is the heart of the operating system. The kernel is in direct contact with the CPU, disks, and other hardware. The kernel also executes our command-line tools. GNU, which stands for GNU’s not UNIX, refers to the set of basic tools. The Docker image is based on a particular GNU/Linux distribution called Ubuntu.
+
+### Executing a Command-line Tool
+
+Now that you have a basic understanding of the environment, it is high time that you try out some commands.
+Type the following in your terminal (without the dollar sign) and press **`Enter`**:
+
+```{term}
+pwd
+```
+
+You just executed a command that contained a single command-line tool.
+The tool `pwd` [@pwd] outputs the name of the directory where you currently are.
+By default, when you login, this is your home directory.
+
+The command-line tool `cd`, which is a Z shell builtin, allows you to navigate to a different directory:
+
+```{term}
+#| callout: [1, 3, 6, 8, 11]
+#| callout-values: "➊➋➌➍➎➏➐➑➒"
+#| callout-format: "{}"
+cd /data/ch02
+pwd
+cd ..
+pwd
+cd ch02
+```
+
+1. Navigate to the directory */data/ch02*.
+2. Print the current directory.
+3. Navigate to the parent directory.
+4. Print the current directory again.
+5. Navigate to the subdirectory *ch02*.
+
+The part after `cd` specifies to which directory you want to navigate to.
+Values that come after the command are called *command-line arguments* or *options*.
+Two dots refer to the parent directory.
+One dot, by the way, refers to the current directory.
+While `cd .` wouldn't have any effect, you'll still see one dot being used in other places.
+Let’s try a different command:
+
+```{term}
+head -n 3 movies.txt
+```
+
+Here we pass three command-line arguments to `head` [@head].
+The first one is an option.
+Here I used the short option `-n`.
+Sometimes a short option has a long variant, which would be `--lines` in this case.
+The second one is a value that belongs to the option.
+The third one is a filename.
+This particular command outputs the first three lines of file */data/ch02/movies.txt*.
+
+### Five Types of Command-line Tools
+
+```{term}
+#| include: false
+ alias bat='bat --tabs 8 --paging never --terminal-width 70'
+```
+
+I use the term *command-line tool* a lot, but so far, I haven't yet explained what I actually mean by it.
+I use it as an umbrella term for *anything* that can be executed from the command line (see @fig-umbrella).
+Under the hood, each command-line tool is one of the following five types:
+
+- A binary executable
+- A shell builtin
+- An interpreted script
+- A shell function
+- An alias
+
+![I use the term command-line tool as an umbrella term](images/dscl_0201.png){#fig-umbrella fig-align="center"}
+
+It’s good to know the difference between the types.
+The command-line tools that come pre-installed with the Docker image mostly comprise of the first two types (binary executable and shell builtin).
+The other three types (interpreted script, shell function, and alias) allow us to further build up our data science toolbox and become more efficient and more productive data scientists.
+
+Binary Executable
+
+:   Binary executables are programs in the classical sense. A binary executable is created by compiling source code to machine code. This means that when you open the file in a text editor you cannot read it.
+
+Shell Builtin
+
+:   Shell builtins are command-line tools provided by the shell, which is the Z shell (or `zsh`) in our case. Examples include `cd` and `pwd`. Shell builtins may differ between shells. Like binary executables, they cannot be easily inspected or changed.
+
+Interpreted Script
+
+:   An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. The script below is interpreted by Python not because of the file extension *.py*, but because the first line of the script defines the binary that should execute it.
+
+    ```{console bat_fac}
+    bat fac.py
+    ```
+
+    This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:
+
+    ```{console run_fac}
+    ./fac.py 5
+    ```
+
+    In [Chapter 4](chapter-4-creating-command-line-tools.qmd), I’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.
+
+Shell Function
+
+:   A shell function is a function that is, in our case, executed by `zsh`. They provide similar functionality to a script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called `fac`, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using `seq`, putting those numbers on one line with `*` as the delimiter using `paste` [@paste], and passing this equation into `bc` [@bc], which evaluates it and outputs the result.
+
+    ```{console fac_zsh}
+    fac() { (echo 1; seq $1) | paste -s -d\* - | bc; }
+    fac 5
+    ```
+
+    The file *~/.zshrc*, which is a configuration file for Z shell, is a good place to define your shell functions, so that they are always available.
+
+Alias
+
+:   Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for it to save time. Aliases are also very useful when you continue to misspell a certain command (Chris Wiggins maintains a [useful list of aliases](https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh)). The following command defines such an alias:
+
+    ```{console define_alias}
+    alias l='ls --color -lhF --group-directories-first'
+    alias les=less
+    ```
+
+    Now, if you type the following on the command line, the shell will replace each alias it finds with its value:
+
+    ```{console run_alias}
+    cd /data
+    l
+    cd ch02
+    ```
+
+    Aliases are simpler than shell functions as they don’t allow parameters. The function `fac` could not have been defined using an alias because of the parameter. Still, aliases allow you to save lots of keystrokes. Like shell functions, aliases are often defined in the file *.zshrc*, which is located in your home directory. To see all aliases currently defined, you run `alias` without arguments. Try it. What do you see?
+
+In this book I'll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases.
+This is because these can easily be changed.
+The purpose of a command-line tool is to make your life on the easier, and to make you a more productive and more efficient data scientist.
+You can find out the type of a command-line tool with `type` (which is itself a shell builtin):
+
+```{term}
+#| label: type
+type -a pwd
+type -a cd
+type -a fac
+type -a l
+```
+
+```{term}
+#| include: false
+ alias bat='bat --tabs 8 --paging never --terminal-width 80'
+```
+
+`type` returns three command-line tools for `pwd`.
+In that case, the first reported command-line tool is used when you type `pwd`.
+In the next section we'll look at how to combine command-line tools.
+
+### Combining Command-line Tools {#combining-command-line-tools}
+
+Because most command-line tools adhere to the Unix philosophy [@raymond2003art], they are designed to do only thing, and do it really well.
+For example, the command-line tool `grep` [@grep] can filter lines, `wc` [@wc] can count lines, and `sort` [@sort] can sort lines.
+The power of the command line comes from its ability to combine these small, yet powerful command-line tools.
+
+This power is made possible by managing the communication streams of these tools.
+Each tool has three standard communication streams: standard input, standard output, and standard error.
+These are often abbreviated as  *`stdin`*, *`stdout`*, and *`stderr`*.
+
+Both the standard output and standard error are, by default, redirected to the terminal, so that both normal output and any error messages are printed on the screen.
+@fig-diagram-essential-streams illustrates this for both `pwd` and `rev`[@rev].
+If you run `rev`, you'll see that nothing happens.
+That's because `rev` expects input, and by the default, that's any keys pressed on the keyboard.
+Try typing a sentence and press **`Enter`**.
+`rev` immediately responds with your input in reverse.
+You can stop sending input by pressing **`Ctrl-D`** after which `rev` will stop.
+
+![Every tool has three standard streams: standard input (*`stdin`*), standard output (*`stdout`*), and standard error (*`stderr`*)](images/dscl_0202.png){#fig-diagram-essential-streams fig-align="center"}
+
+In practice, you'll not use the keyboard as a source of input, but the output generated by other tools and the contents of files.
+For example, with `curl` we can download the book *Alice’s Adventures in Wonderland* by Lewis Carrol and *pipe* that to  the next tool.
+(I'll discuss `curl` in more detail in [Chapter 3](chapter-3-obtaining-data.qmd).)
+This is done using the pipe operator (`|`).
+
+![The output from a tool can be piped to another tool](images/dscl_0203.png){#fig-diagram-essential-pipe fig-align="center"}
+
+We can *pipe* the output of `curl` to `grep` to filter lines on a pattern.
+Imagine that we want to see the chapters listed in the table of contents:
+We can combine `curl` and `grep` as follows:
+
+```{term}
+curl -s "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"
+```
+
+And if we wanted to know *how many* chapters the book has, we can use `wc`, which is very good at counting things:
+
+```{term}
+#| label: seq_grep_wc
+#| callout: ["wc"]
+#| callout-values: "➊➋➌➍➎➏➐➑➒"
+#| callout-format: "{}"
+curl -s "https://www.gutenberg.org/files/11/11-0.txt" |
+grep " CHAPTER" |
+wc -l
+```
+
+1. The option `-l` specifies that `wc` should only output the number of lines that are pass into it. By default it also returns the number of characters and words.
+
+You can think of piping as an automated copy and paste.
+Once you get the hang of combining tools using the pipe operator, you'll find that there are virtually no limits to this.
+
+### Redirecting Input and Output
+
+Besides piping the output from one tool to another tool, you can also save it to a file.
+The file will be saved it in the current directory, unless a full path is given.
+This is called *output redirection*, and works as follows:
+
+```{term}
+#| label: seq_redirect
+curl "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER" > chapters.txt
+cat chapters.txt
+```
+
+Here, we save the output of `grep` to a file named *chapters.txt* in the directory */data/ch02*.
+If this file does not exist yet, it will be created.
+If this file already exists, its contents are overwritten.
+@fig-diagram-essential-redirect-stdout illustrates how output redirection works conceptually.
+Note that the standard error is still redirected to the terminal.
+
+![The output from a tool can be redirected to a file](images/dscl_0204.png){#fig-diagram-essential-redirect-stdout fig-align="center"}
+
+You can also append the output to a file with `>>`, meaning the output is added after the original contents:
+
+```{term}
+#| label: echo_append
+echo -n "Hello" > greeting.txt
+echo " World" >> greeting.txt
+```
+
+The tool `echo` outputs the value you specify.
+The `-n` option, which stands for *newline*, specifies that `echo` should not output a trailing newline.
+
+Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage.
+To use the contents of the file *greeting.txt* again, we can use `cat`, which reads a file prints it.
+
+```{term}
+#| callout: ["wc"]
+#| callout-values: "➊➋➌➍➎➏➐➑➒"
+#| callout-format: "{}"
+cat greeting.txt
+cat greeting.txt | wc -w
+```
+
+1. The `-w` option indicates `wc` to only count words.
+
+The same result can be achieved by using the smaller-than-sign (`<`):
+
+```{term}
+< greeting.txt wc -w
+```
+
+This way, you are directly passing the file to the standard input of `wc` without running an additional process [^cat].
+@fig-diagram-essential-stdin-cat illustrates how these two ways work.
+Again, the final output is the same.
+
+![Two ways to use the contents of a file as input](images/dscl_0205.png){#fig-diagram-essential-stdin-cat fig-align="center"}
+
+Like many command-line tools, `wc` allows one or more filenames to be specified as arguments.
+For example:
+
+```{term}
+wc -w greeting.txt movies.txt
+```
+
+Note that in this case, `wc` also outputs the name of the files.
+
+You can suppress the output of any tool by redirecting it to a special file called */dev/null*.
+I often do this to suppress error messages (see @fig-diagram-essential-redirect-devnull for an illustration).
+The following causes `cat` to produce an error message because it cannot find the file *404.txt*:
+
+```{term}
+cat movies.txt 404.txt
+```
+
+You can redirect standard error to */dev/null* as follows:
+
+```{term}
+#| callout: [1]
+#| callout-values: "➊➋➌➍➎➏➐➑➒"
+#| callout-format: "{}"
+cat movies.txt 404.txt 2> /dev/null
+```
+
+1. The *`2`* refers to standard error.
+
+![Redirecting *`stderr`* to */dev/null*](images/dscl_0206.png){#fig-diagram-essential-redirect-devnull fig-align="center" width="50%"}
+
+Be careful not to read from and write to the same file.
+If you do, you'll end up with an empty file.
+That's because the tool of which the output is redirected, immediately opens that file for writing, and thereby emptying it.
+There are two workarounds for this: (1) write to a different file and rename it afterwards with `mv` or (2) use `sponge` [@sponge], which soaks up all its input before writing to a file.
+@fig-diagram-essential-sponge illustrates how this works.
+
+![Unless you use `sponge`, you cannot read from and write to the same file in one pipeline](images/dscl_0207.png){#fig-diagram-essential-sponge fig-align="center"}
+
+For example, imagine you have used `dseq`[@dseq] to generate a file *dates.txt* and now you'd like to add line numbers using `nl`[@nl].
+If you run the following, the file *dates.txt* will end up empty.
+
+```{term}
+dseq 5 > dates.txt
+< dates.txt nl > dates.txt
+bat dates.txt
+```
+
+Instead, you can use one of the workarounds I just described:
+
+```{term}
+dseq 5 > dates.txt
+< dates.txt nl > dates-nl.txt
+bat dates-nl.txt
+dseq 5 > dates.txt
+< dates.txt nl | sponge dates.txt
+bat dates.txt
+```
+
+### Working With Files and Directories
+
+As data scientists, we work with a lot of data.
+This data is often stored in files.
+It is important to know how to work with files (and the directories they live in) on the command line.
+Every action that you can do using a GUI, you can do with command-line tools (and much more).
+In this section I introduce the most important ones to list, create, move, copy, rename, and delete files and directories.
+
+Listing the contents of a directory can be done with `ls`.
+If you don't specify a directory, it lists the contents of the current directory.
+I prefer `ls` to have a long listing format and the directories grouped before files.
+Instead of typing the corresponding options each time, I use the alias `l`.
+
+```{term}
+ls /data/ch10
+alias l
+l /data/ch10
+```
+
+You have already seen how we can create new files by redirecting the output with either `>` or `>>`.
+If you need to move a file to a different directory you can use `mv` [@mv]:
+
+```text
+$ mv hello.txt /data/ch02
+```
+
+You can also rename files with `mv`:
+
+```text
+$ cd data
+$ mv hello.txt bye.txt
+```
+
+You can also rename or move entire directories.
+If you no longer need a file, you delete (or remove) it with `rm` [@rm]:
+
+```text
+$ rm bye.txt
+```
+
+If you want to remove an entire directory with all its contents, specify the `-r` option, which stands for recursive:
+
+```text
+$ rm -r /data/ch02/old
+```
+
+If you want to copy a file, use `cp` [@cp].
+This is useful for creating backups:
+
+```text
+$ cp server.log server.log.bak
+```
+
+You can create directories using `mkdir` [@mkdir]:
+
+```{term}
+cd /data
+mkdir logs
+l
+```
+
+::: {.callout-tip}
+Using the command-line tools to manage your files can be scary at first, because you have no graphical overview of the file system to provide immediate feedback.
+There are a few visual file managers that can help with this, such as GNU Midnight Commander, Ranger, and Vifm.
+These are not installed in the Docker image, but you can install one yourself by running `sudo apt install` followed by either `mc`, `ranger`, or `vifm`.
+:::
+
+All of the above command-line tools accept the `-v` option, which stands for verbose, so that they output what’s going on.
+For example:
+
+```{term}
+mkdir -v backup
+cp -v * backup
+```
+
+All tools but `mkdir` also accept the `-i` option, which stands for interactive, and causes the tools to ask you for confirmation.
+For example:
+
+```{term}
+rm -i * #! expect-prompt: false
+n #! enter: false, expect-prompt: true
+```
+
+### Managing Output
+
+Sometimes a tools or sequence of tools produces too much output to include in the book.
+Instead of manually altering such output, I prefer to be transparent by piping it through a helper tool.
+You don't necessarily have to do this, especially if you're interested in the complete output.
+
+Here are the tools that I use for making output manageable:
+
+If often use `trim` to limit the output to a given height and width.
+By default, output is trimmed to 10 lines and the width of the terminal.
+Pass a negative number to disable trimming the height and or width.
+For example:
+
+```{term}
+cat /data/ch07/tips.csv | trim 5 25
+```
+
+Other tools that I use to massage the output are: `head`, `tail`, `fold`, `paste`, and `column`.
+The appendix contains examples for each of these.
+
+If the output is a comma-separated values, I often pipe it through`csvlook` to turn it into a nice-looking table.
+If you run `csvlook`, you'll see the complete table.
+I have redefined `csvlook` such that the table is shortened by `trim`:
+
+```{term}
+which csvlook
+csvlook /data/ch07/tips.csv
+```
+
+I use `bat` to show the contents of a file where line numbers and syntax highlighting matters.
+For example source code:
+
+```{term}
+bat /data/ch04/stream.py
+```
+
+Sometimes I add the `-A` option when I want to explicitly point out the spaces, tabs, and newlines in a file.
+
+Sometimes it's useful to write intermediate output to a file.
+This allows you to inspect any step in your pipeline once it has completed.
+You can insert the tool `tee` as often as you like in your pipeline.
+I often use it to inspect a portion of the final output, while writing the complete output to file (see @fig-diagram-essential-tee.
+Here, the complete output is written to *even.txt* and the first 5 lines are printed using `trim`:
+
+```{term}
+seq 0 2 100 | tee even.txt | trim 5
+```
+
+![With `tee`, you can write intermediate output to a file](images/dscl_0208.png){#fig-diagram-essential-tee fig-align="center"}
+
+Lastly, to insert images that have been generated by command-line tools (so every image except screenshots and diagrams) I use `display`.
+If you run `display` you'll find that it doesn't work.
+In [Chapter 7](chapter-7-exploring-data.qmd), I explain four options for you to display generated images from the command line.
+
+### Help!
+
+As you're finding your way around the command-line, it may happen that you need help.
+Even the most seasoned  users need help at some point.
+It is impossible to remember all the different command-line tools and their possible arguments.
+Fortunately, the command line offers severals ways to get help.
+
+The most important command to get help is perhaps `man` [@man], which is short for *manual*.
+It contains information for most command-line tools.
+In case I forgot the options to the tool `tar`, which happens all the time, I just access its manual page using:
+
+```{term}
+#| label: man_cat
+man tar | trim 20
+```
+
+Not every command-line tool has a manual page.
+Take `cd` for example:
+
+```{term}
+man cd
+```
+
+For shell builtins like `cd` you can consult the *zshbuiltins* manual page:
+
+```{term}
+man zshbuiltins | trim
+```
+
+You can search by pressing **`/`** and exit by pressing **`q`**.
+Try to find the appropriate section for `cd`.
+
+Newer command-line tools often lack a manual page as well.
+In that case, your best bet is to invoke the tool with the `--help` (or `-h`) option.
+For example:
+
+```{term}
+jq --help | trim
+```
+
+Specifying the `--help` option also works for command-line tools such as `cat`.
+However, the corresponding man page often provides more information.
+If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet.
+In the appendix, there’s a list of all command-line tools used in this book.
+Besides how each command-line tool can be installed, it also shows how you can get help.
+
+Manual pages can be quite verbose and difficult to read.
+The tool `tldr` [@tldr] is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional manual pages.
+Here's an example showing the tldr page for `tar`:
+
+```{term}
+#| include: false
+tldr --update
+```
+
+```{term}
+tldr tar | trim 20
+```
+
+As you can see, rather than listing the many options alphabetically like `man` often does, `tldr` cuts to the chase by giving you a list of practical examples.
+
+## Summary
+
+In this chapter you learned how to get all the required command-line tools by installing a Docker image.
+I also went over some essential command-line concepts and how to get help.
+Now that you have all the necessary ingredients, you're ready for the first step of the OSEMN model for data science: obtaining data.
+
+## For Further Exploration
+
+- The subtitle of this book pays homage to the epic *Unix Power Tools* by Jerry Peek, Shelley Powers, Tim O'Reilly, and Mike Loukides. And rightly so. In 51 chapters and more than a thousand pages, it covers just about everything there is to know about Unix. It weighs over 4 pounds, so you might want to consider getting the ebook.
+- The website [explainshell](https://explainshell.com/) parses a command or a sequence of commands and provides a short explanation of each part. Useful for quickly understanding a new command or option without having to skim through the relevant manual pages.
+- Docker is truly a brilliant piece of software. In this chapter I've briefly explained how to download a Docker image and run a Docker container, but it might be worthwhile to [learn how to create your own Docker images](https://www.docker.com/101-tutorial). The book *Docker: Up & Running* by Sean Kane and Karl Matthias is a good resource as well.
+
+[^cat]: [Some](http://porkmail.org/era/unix/award.html) consider this a useless use of `cat`, arguing that the purpose of `cat` is to concatenate files and if you're not using it for this purpose, it's a waste of time, and costs you a process. I think this is silly. We've got more important things to do!

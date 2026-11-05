@@ -1,0 +1,246 @@
+---
+engine: markdown
+---
+
+# Preface {.unnumbered}
+Data science is an exciting field to work in.
+It’s also still relatively young.
+Unfortunately, many people, and many companies as well, believe that you need new technology to tackle the problems posed by data science.
+However, as this book demonstrates, many things can be accomplished by using the command line instead, and sometimes in a much more efficient way.
+
+During my PhD program, I gradually switched from using Microsoft Windows to using Linux.
+Because this transition was a bit scary at first, I started with having both operating systems installed next to each other (known as a dual-boot).
+The urge to switch back and forth between Microsoft Windows and Linux eventually faded, and at some point I was even tinkering around with Arch Linux, which allows you to build up your own custom Linux machine from scratch.
+All you’re given is the command line, and it’s up to you what to make of it.
+Out of necessity, I quickly became very comfortable using the command line.
+Eventually, as spare time got more precious, I settled down with a Linux distribution known as Ubuntu because of its ease of use and large community.
+However, the command line is still where I’m spending most of my time.
+
+It actually wasn’t too long ago that I realized that the command line is not just for installing software, configuring systems, and searching files.
+I started learning about tools such as `cut`, `sort`, and `sed`.
+These are examples of command-line tools that take data as input, do something to it, and print the result.
+Ubuntu comes with quite a few of them.
+Once I understood the potential of combining these small tools, I was hooked.
+
+After earning my PhD, when I became a data scientist, I wanted to use this approach to do data science as much as possible.
+Thanks to a couple of new, open source command-line tools including `xml2json`, `jq`, and `json2csv`, I was even able to use the command line for tasks such as scraping websites and processing lots of JSON data.
+
+In September 2013, I decided to write a blog post titled [Seven Command-line Tools for Data Science](http://www.jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html).
+To my surprise, the blog post got quite some attention, and I received a lot of suggestions of other command-line tools.
+I started wondering whether the blog post could be turned into a book.
+I was pleased that, some 10 months later, and with the help of many talented people (see the acknowledgments), the answer was yes.
+
+I am sharing this personal story not so much because I think you should know how this book came about, but because I want to you know that I had to learn about the command line as well.
+Because the command line is so different from using a graphical user interface, it can seem scary at first.
+But if I could learn it, then you can as well.
+No matter what your current operating system is and no matter how you currently work with data, after reading this book you will be able to do data science at the command line.
+If you’re already familiar with the command line, or even if you’re already dreaming in shell scripts, chances are that you’ll still discover a few interesting tricks or command-line tools to use for your next data science project.
+
+## What to Expect from This Book {.unnumbered}
+In this book, we’re going to obtain, scrub, explore, and model data—a lot of it.
+This book is not so much about how to become _better_ at those data science tasks.
+There are already great resources available that discuss, for example, when to apply which statistical test or how data can best be visualized.
+Instead, this practical book aims to make you more _efficient_ and _productive_ by teaching you how to perform those data science tasks at the command line.
+
+While this book discusses more than 90 command-line tools, it’s not the tools themselves that matter most.
+Some command-line tools have been around for a very long time, while others will be replaced by better ones.
+New command-line tools are being created even as you’re reading this.
+Over the years, I have discovered many amazing command-line tools.
+Unfortunately, some of them were discovered too late to be included in the book.
+In short, command-line tools come and go.
+But that’s OK.
+
+What matters most is the underlying idea of working with tools, pipes, and data.
+Most command-line tools do one thing and do it well.
+This is part of the Unix philosophy, which makes several appearances throughout the book.
+Once you have become familiar with the command line, know how to combine command-line tools, and can even create new ones, you have developed an invaluable skill.
+
+## Changes for the Second Edition {.unnumbered}
+While the command line as a technology and as a way of working is timeless, some of the tools discussed in the first edition have either  been superseded by newer tools (e.g., `csvkit` has largely been replaced by `xsv`) or abandoned by their developers (e.g., `drake`), or they've been suboptimal choices (e.g., `weka`).
+I have learned a lot since the first edition was published in October 2014, either through my own experience or as a result of the useful feedback from my readers.
+Even though the book is quite niche because it lies at the intersection of two subjects, there remains a steady interest from the data science community, as evidenced by the many positive messages I receive almost every day.
+By updating the first edition, I hope to keep the book relevant for at least another five years.
+Here’s a nonexhaustive list of changes I have made:
+
+* I replaced `csvkit` with `xsv` as much as possible. `xsv` is a much faster alternative to working with CSV files.
+* In Section 2.2 and 3.2 I replaced the VirtualBox image with a Docker image. Docker is a faster and more lightweight way of running an isolated environment than VirtualBox.
+* I now use `pup` instead of `scrape` to work with HTML. `scrape` is a Python tool I created myself. `pup` is much faster, has more features, and is easier to install.
+* [Chapter 6](chapter-6-project-management-with-make.qmd) has been rewritten from scratch. Instead of `drake` I now use `make` to do project management. `drake` is no longer maintained and `make` is much more mature and very popular with developers.
+* I replaced `Rio` with `rush`. `Rio` is a clunky Bash script I created myself. `rush` is an R package that is a much more stable and flexible way of using R from the command line.
+* In [Chapter 9](chapter-9-modeling-data.qmd) I replaced Weka and BigML with Vowpal Wabbit (`vw`). Weka is old and the way it is used from the command line is clunky. BigML is a commercial API on which I no longer want to rely. Vowpal Wabbit is a very mature machine learning tool, developed at Yahoo! and now at Microsoft. 
+* [Chapter 10](chapter-10-polyglot-data-science.qmd) is an entirely new chapter about integrating the command line into existing workflows, including Python, R, and Apache Spark. In the first edition I mentioned that the command line can easily be integrated with existing workflows, but I never got into that. This chapter fixes that.
+
+## How to Read This Book {.unnumbered}
+In general, I advise you to read this book in a linear fashion.
+Once a concept or command-line tool has been introduced, chances are that I employ it in a later chapter.
+For example, in [Chapter 9](chapter-9-modeling-data.qmd), I make heavy use of `parallel`, which is introduced extensively in [Chapter 8](chapter-8-parallel-pipelines.qmd).
+
+Data science is a broad field that intersects many other fields such as programming, data visualization, and machine learning.
+As a result, this book touches on many interesting topics which unfortunately cannot be discussed at full length.
+Throughout the book, at the end of each chapter, there are suggestions for further exploration.
+It’s not required to read this material in order to follow along with the book, but when you are interested, you know that there’s much more to learn.
+
+## Who This Book Is For {.unnumbered}
+This book makes just one assumption about you: that you work with data.
+It doesn’t matter which programming language or statistical computing environment you’re currently using.
+The book explains all the necessary concepts from the beginning.
+
+It also doesn’t matter whether your operating system is Microsoft Windows, macOS, or some flavor of Linux.
+The book comes with a Docker image, which is an easy-to-install virtual environment.
+It allows you to run the command-line tools and follow along with the code examples in the same environment as this book was written.
+You don’t have to waste time figuring out how to install all the command-line tools and their dependencies.
+
+The book contains some code in Bash, Python, and R, so it’s helpful if you have some programming experience, but it’s by no means required to follow along with the examples.
+
+## Conventions Used in This Book {.unnumbered}
+The following typographical conventions are used in this book:
+
+*Italic*
+
+:   Indicates new terms, URLs, directory names, and filenames.
+
+`Constant width`
+
+:   Used for code and commands, as well as within paragraphs to refer to command-line tools and their options.
+
+**`Constant width bold`**
+
+:   Shows commands or other text that should be typed literally by the user.
+
+::: {.callout-tip}
+This element signifies a tip or suggestion.
+:::
+
+::: {.callout-note}
+This element signifies a general note.
+:::
+
+::: {.callout-warning}
+This element indicates a warning or caution.
+:::
+
+## Acknowledgments {.unnumbered}
+### Acknowledgments for the Second Edition (2021) {.unnumbered}
+Seven years have passed since the first edition came out.
+During this time, and especially during the last 13 months, many people have helped me.
+Without them, I would have never been able to write a second edition.
+
+I was once again blessed with three wonderful editors at O'Reilly.
+I would like to thank Sarah "Embrace the deadline" Grey, Jess "Pedal to the metal" Haberman, and Kate "Let it go" Galloway. Their middle names say it all. With their incredible help, I was able to embrace the deadlines, put the pedal to metal when it mattered, and eventually let it go.
+I'd also like to thank their colleagues Angela Rufino, Arthur Johnson, Cassandra Furtado, David Futato, Helen Monroe, Karen Montgomery, Kate Dullea, Kristen Brown, Marie Beaugureau, Marsee Henon, Nick Adams, Regina Wilkinson, Shannon Cutt, Shannon Turlington, and Yasmina Greco, for making the collaboration with O'Reilly such a pleasure.
+
+Despite having an automated process to execute the code and paste back the results (thanks to R Markdown and Docker), the number of mistakes I was able to make is impressive.
+Thank you Aaditya Maruthi, Brian Eoff, Caitlin Hudon, Julia Silge, Mike Dewar, and Shane Reustle for reducing this number immensely.
+Of course, any mistakes left are my responsibility.
+
+Marc Canaleta deserves a special thank you.
+In October 2014, shortly after the first edition came out, Marc invited me to give a one-day workshop about _Data Science at the Command Line_ to his team at Social Point in Barcelona.
+Little did we both know that many workshops would follow.
+It eventually led me to start my own company: Data Science Workshops.
+Every time I teach, I learn something new.
+They probably don't know it, but each student has had an impact, in one way or another, on this book.
+To them I say: thank you.
+I hope I can teach for a very long time.
+
+Captivating conversations, splendid suggestions, and passionate pull requests.
+I greatly appreciate each and every contribution by following generous people:
+Adam Johnson,
+Andre Manook,
+Andrea Borruso,
+Andres Lowrie,
+Andrew Berisha,
+Andrew Gallant,
+Andrew Sanchez,
+Anicet Ebou,
+Anthony Egerton,
+Ben Isenhart,
+[.keep-together]#Chris Wiggins#,
+Chrys Wu,
+Dan Nguyen,
+Darryl Amatsetam,
+Dmitriy Rozhkov,
+Doug Needham,
+Edgar Manukyan,
+Erik Swan,
+Felienne Hermans,
+George Kampolis,
+Giel van Lankveld,
+Greg Wilson,
+Hay Kranen,
+Ioannis Cherouvim,
+Jake Hofman,
+Jannes Muenchow,
+Jared Lander,
+Jay Roaf,
+Jeffrey Perkel,
+Jim Hester,
+Joachim Hagege,
+Joel Grus,
+John Cook,
+John Sandall,
+Joost Helberg,
+Joost van Dijk,
+Joyce Robbins,
+Julian Hatwell,
+Karlo Guidoni,
+Karthik Ram,
+Lissa Hyacinth,
+Longhow Lam,
+Lui Pillmann,
+Lukas Schmid,
+Luke Reding,
+Maarten van Gompel,
+Martin Braun,
+Max Schelker,
+Max Shron,
+Nathan Furnal,
+Noah Chase,
+Oscar Chic,
+Paige Bailey,
+Peter Saalbrink,
+Rich Pauloo,
+Richard Groot,
+Rico Huijbers,
+Rob Doherty,
+Robbert van Vlijmen,
+Russell Scudder,
+Sylvain Lapoix,
+TJ Lavelle,
+Tan Long,
+Thomas Stone,
+Tim O'Reilly,
+Vincent Warmerdam, and
+Yihui Xie.
+
+Throughout this book, and especially in the footnotes and appendix, you'll find hundreds of names.
+These names belong to the authors of the many tools, books, and other resources on which this book stands.
+I'm incredibly grateful for their hard work, regardless of whether that work was done 50 years or 50 days ago.
+
+Above all, I would like to thank my wife Esther, my daughter Florien, and my son Olivier for reminding me daily what truly matters.
+I promise it'll be a few years before I start writing the third edition.
+
+### Acknowledgments for the First Edition (2014) {.unnumbered}
+First of all, I’d like to thank Mike Dewar and Mike Loukides for believing that my blog post [Seven Command-Line Tools for Data Science](http://jeroenjanssens.com/2013/09/19/seven-command-line-tools-for-data-science.html), which I wrote in September 2013, could be expanded into a book.
+
+Special thanks to my technical reviewers Mike Dewar, Brian Eoff, and Shane Reustle for reading various drafts, meticulously testing all the commands, and providing invaluable feedback.
+Your efforts have improved the book greatly.
+The remaining errors are entirely my own responsibility.
+
+I had the privilege of working together with three amazing editors, namely: Ann Spencer, Julie Steele, and Marie Beaugureau.
+Thank you for your guidance and for being such great liaisons with the many talented people at O’Reilly.
+Those people include: Laura Baldwin, Huguette Barriere, Sophia DeMartini, Yasmina Greco, Rachel James, Ben Lorica, Mike Loukides, and Christopher Pappas.
+There are many others whom I haven’t met because they are operating behind the scenes.
+Together they ensured that working with O’Reilly has truly been a pleasure.
+
+This book discusses over 80 command-line tools.
+Needless to say, without these tools, this book wouldn’t have existed in the first place.
+I’m therefore extremely grateful to all the authors who created and contributed to these tools.
+The complete list of authors is unfortunately too long to include here; they are mentioned in the Appendix.
+Thanks especially to Aaron Crow, Jehiah Czebotar, Christoph Groskopf, Dima Kogan, Sergey Lisitsyn, Francisco J.
+Martin, and Ole Tange for providing help with their amazing command-line tools.
+
+Eric Postma and Jaap van den Herik, who supervised me during my PhD program, deserve a special thank you.
+Over the course of five years they have taught me many lessons.
+Although writing a technical book is quite different from writing a PhD thesis, many of those lessons proved to be very helpful in the past nine months as well.
+
+Finally, I’d like to thank my colleagues at YPlan, my friends, my family, and especially my wife Esther for supporting me and for pulling me away from the command line at just the right times.
