@@ -359,3 +359,25 @@ Commits: scaffold → converter → converted sources → manual edits → compa
 ## 9. Open questions
 
 None for round 1. All decisions are in §0. New questions will come up from the compare reports.
+
+## 10. Round 1 status (2026-11-05)
+
+Done: index, foreword, preface, chapters 1–2, references page, 404 page. `make render` + `make compare`; all 27 differences reviewed in `book/2.5e/compare/differences.yml` (no unreviewed ones).
+
+Findings and deviations from the plan:
+
+- **`@software` citations**: pandoc 3 maps biblatex `@software` to CSL `software`, which the 2021 Chicago CSL doesn't know (title in quotes, no version). `book/2.5e/tools.bib` uses `@book` instead, which reproduces the 2e footnotes exactly.
+- **Image ENTRYPOINT**: the image's `ENTRYPOINT` is zsh, so quarto-term's `docker run … image env PS1=… zsh` failed. Fixed with `docker.args: ["--entrypoint="]`.
+- **`engine: markdown`** must be in each page's front matter (not `_quarto.yml`), otherwise Quarto starts Jupyter for `{term}` cells. The converter adds it.
+- **Nested cells**: Chapter 2 has terminal cells inside definition lists, and quarto-term only processed top-level blocks. Fixed in quarto-term (local branch `process-nested-blocks`, commit bbc1a74, **not pushed**); the patched `term.lua` is vendored in the book.
+- **Cache via local HTTP server**: `curl` with `file://` URLs prints an all-zero progress meter, so the wrapper rewrites cached URLs to a small HTTP server in the container (`container/cache-server.py`, named so Chapter 7's `pkill -f http.server` won't stop it). The December 2021 Gutenberg text comes from the Wayback Machine.
+- **man width**: `MANWIDTH=79` reproduces the 2e man page layout; man-db 2.13 is one column wider by default.
+- **Anchors**: bookdown's heading ids are kept (`summary-1`, `#foreword`, …) by making them explicit. Figure anchors change from `#fig:x` to `#fig-x` (accepted).
+- **Re-running the converter**: content edits (course tip, quote punctuation, welcome page title/cover duplicates) live in the converter's `EDITS` table, so it can be re-run safely until manual editing starts.
+- **Cover**: `images/cover.png` is the *Early Release* cover; `cover-small.png` (final cover, which the 2e site displayed) is used.
+- Terminal blocks use quarto-term's default (dark) colorscheme; JetBrains Mono ligatures are turned off in `styles.css`.
+
+Upstream issues to raise:
+
+- **quarto-term**: push/PR `process-nested-blocks`; handle images with an `ENTRYPOINT` (pass `--entrypoint=` or document it); allow `callout-values`/`callout-format` at project level; disable font ligatures by default; the cache key should include the image digest and `init` files (the book's Makefile works around this); stale `VERSION` in `term.lua`.
+- **datasciencetoolbox**: `trim` measures line length in bytes (mawk), so it cuts multibyte characters (`en�…`) once lines are near the terminal width; use gawk or a UTF-8 aware length. The coreutils statement in `2-5e-report.md` still contradicts the Dockerfile.
