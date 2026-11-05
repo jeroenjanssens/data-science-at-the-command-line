@@ -21,7 +21,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 14: `$ cd /data`
 
 - id: `chapter-2-getting-started.html:block:14`
-- hash: `f532a338`
+- hash: `9afb9778`
 - status: **accept**
 - cause: image
 - note: Timestamps (time); /data has no csvconf/ directory and ch04/ has no subdirectory anymore (data); ls sort order (uutils)
@@ -44,15 +44,15 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -drwxr-xr-x 4 dst dst 4.0K Dec 14 11:43 ch10/
 -drwxr-xr-x 3 dst dst 4.0K Dec 14 11:43 csvconf/
 +total 36K
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch02/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch03/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch04/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch05/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch06/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch07/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch08/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch09/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch10/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch02/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch03/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch04/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch05/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch06/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch07/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch08/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch09/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch10/
  
  $ cd ch02
 ```
@@ -60,7 +60,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 18: `$ curl "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"`
 
 - id: `chapter-2-getting-started.html:block:18`
-- hash: `2f554d16`
+- hash: `195cd182`
 - status: **accept**
 - cause: network
 - note: Served from the cache (2021 version of the text, same size). curl 8 progress meter layout differs; speed is local
@@ -76,7 +76,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -100  170k  100  170k    0     0   202k      0 --:--:-- --:--:-- --:--:--  203k
 +  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
 +                                 Dload  Upload  Total   Spent   Left   Speed
-+100 170.2k 100 170.2k   0      0 179.1M      0                              0
++100 170.2k 100 170.2k   0      0 149.3M      0                              0
  
  $ cat chapters.txt
 ```
@@ -144,7 +144,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 27: `$ ls /data/ch10`
 
 - id: `chapter-2-getting-started.html:block:27`
-- hash: `b2afd753`
+- hash: `d5ccba40`
 - status: **accept**
 - cause: uutils
 - note: ls sorts by byte value (uppercase first); no __pycache__/ in data; timestamps; count.py permissions
@@ -168,16 +168,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 --rw-r--r-- 1 dst dst  460 Dec 14 11:43 count.R
 --rw-r--r-- 1 dst dst 1.7K Dec 14 11:43 Untitled1337.ipynb
 +total 176K
-+-rw-r--r-- 1 dst dst 1.7K Nov  5 17:49 Untitled1337.ipynb
-+-rw-r--r-- 1 dst dst 164K Nov  5 17:49 alice.txt
-+-rw-r--r-- 1 dst dst  460 Nov  5 17:49 count.R
-+-rwxr-xr-x 1 dst dst  408 Nov  5 17:49 count.py*
++-rw-r--r-- 1 dst dst 1.7K Nov  5 20:43 Untitled1337.ipynb
++-rw-r--r-- 1 dst dst 164K Nov  5 20:43 alice.txt
++-rw-r--r-- 1 dst dst  460 Nov  5 20:43 count.R
++-rwxr-xr-x 1 dst dst  408 Nov  5 20:43 count.py*
 ```
 
 ## Code block 33: `$ cd /data`
 
 - id: `chapter-2-getting-started.html:block:33`
-- hash: `2c15f70d`
+- hash: `2075c9b9`
 - status: **accept**
 - cause: image
 - note: Same as block 14: timestamps, no csvconf/, ls sort order
@@ -201,16 +201,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -drwxr-xr-x 3 dst dst 4.0K Dec 14 11:43 csvconf/
 -drwxr-xr-x 2 dst dst 4.0K Dec 14 11:44 logs/
 +total 40K
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch02/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch03/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch04/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch05/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch06/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch07/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch08/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch09/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 ch10/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 17:49 logs/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch02/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch03/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch04/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch05/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch06/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch07/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch08/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch09/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch10/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 logs/
 ```
 
 ## Code block 34: `$ mkdir -v backup`

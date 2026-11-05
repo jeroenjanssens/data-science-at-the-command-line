@@ -30,6 +30,10 @@ pre.term-source {
   font-family: var(--term-font-family);
   font-size: var(--term-font-size);
   line-height: var(--term-line-height);
+  /* Show exactly what a terminal shows: no programming ligatures
+     (JetBrains Mono implements most of them as contextual alternates) */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
   padding: 0.75em 1em;
   border-radius: 6px;
   overflow-x: auto;
