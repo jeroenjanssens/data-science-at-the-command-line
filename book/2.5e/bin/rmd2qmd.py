@@ -466,8 +466,9 @@ def convert_figure(label, options, code_lines, path):
         raise ValueError(f"Unsupported r chunk {label!r} in {path}")
     src = m.group(1)
     attrs = []
-    if label:
-        attrs.append("#" + fig_id(label))
+    # Quarto only numbers figures with an id (bookdown numbered all of them),
+    # so unlabeled figures get one from their file name
+    attrs.append("#" + fig_id(label or Path(src).stem))
     if "fig.align" in options:
         attrs.append(f'fig-align="{r_value(options["fig.align"])}"')
     if "out.width" in options:

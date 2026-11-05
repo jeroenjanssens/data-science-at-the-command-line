@@ -245,7 +245,7 @@ Now we can create a scatter plot:
 rush plot --x pc1 --y pc2 --color type --shape type wine-pca.csv > wine-pca.png
 display wine-pca.png
 ```
-![Linear dimensionality reduction with PCA](images/wine-pca.png){fig-align="center" width="90%"}
+![Linear dimensionality reduction with PCA](images/wine-pca.png){#fig-wine-pca fig-align="center" width="90%"}
 
 Let's perform t-SNE with the same approach:
 
@@ -270,7 +270,7 @@ rush plot --x x --y y --color type --shape type > wine-tsne.png
 ```{term}
 display wine-tsne.png
 ```
-![Non-linear dimensionality reduction with t-SNE](images/wine-tsne.png){fig-align="center" width="90%"}
+![Non-linear dimensionality reduction with t-SNE](images/wine-tsne.png){#fig-wine-tsne fig-align="center" width="90%"}
 
 We can see that t-SNE does a better job than PCA at separating the red and white wines based on their physicochemical properties.
 These scatter plots verify that the dataset has a certain structure; there's a relationship between the features and the labels.
@@ -402,7 +402,7 @@ Let's visualize the relationship between the observed values and the predicted v
 rush plot --x observed --y predicted --geom jitter > wine-regression.png
 display wine-regression.png
 ```
-![Regression with Vowpal Wabbit](images/wine-regression.png){fig-align="center" width="90%"}
+![Regression with Vowpal Wabbit](images/wine-regression.png){#fig-wine-regression fig-align="center" width="90%"}
 
 I can imagine that the options used to the train the model can be a bit overwhelming.
 Let's see how `vw` performs when I use all the default values:
