@@ -75,7 +75,7 @@ Common scrubbing operations include:
 - Converting data from one format to another
 
 While we data scientists love to create exciting data visualizations and insightful models (steps 3 and 4), usually much effort goes into obtaining and scrubbing the required data first (steps 1 and 2).
-In *Data Jujitsu*, @Patil2012 states that "80% of the work in any data project is in cleaning the data".
+In *Data Jujitsu*, @Patil2012 states that "80% of the work in any data project is in cleaning the data."
 In [Chapter 5](chapter-5-scrubbing-data.qmd), I demonstrate how the command line can help accomplish such data scrubbing operations.
 
 ### Exploring Data
