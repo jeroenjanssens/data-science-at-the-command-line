@@ -137,8 +137,33 @@ function Pandoc(doc)
   local term_positions = {}
   local cells = {}
 
-  for i, block in ipairs(doc.blocks) do
-    if is_term_block(block) then
+  -- Collect term blocks anywhere in the document (also inside divs, lists,
+  -- definition lists, block quotes, ...), in document order. They are
+  -- replaced in a second walk with the same order (see replace_term_blocks).
+  local term_blocks = {}
+  local replacements = {}
+  doc:walk({
+    CodeBlock = function(block)
+      if is_term_block(block) then
+        table.insert(term_blocks, block)
+      end
+    end,
+  })
+
+  local function replace_term_blocks()
+    local n = 0
+    return doc:walk({
+      CodeBlock = function(block)
+        if is_term_block(block) then
+          n = n + 1
+          return replacements[n]
+        end
+      end,
+    })
+  end
+
+  for i, block in ipairs(term_blocks) do
+    do
       -- Pass config with marker still set so build_cell can use it
       config.marker = _marker
       local cell = build_cell(block, 0, config)
@@ -177,7 +202,7 @@ function Pandoc(doc)
         -- Strip #| option lines from the code block
         block.text = cell.code
         block.classes = {"bash"}
-        doc.blocks[i] = block
+        replacements[i] = block
       end
     end
   end
@@ -185,6 +210,9 @@ function Pandoc(doc)
   config._fmt_key = nil
 
   if #cells == 0 then
+    if next(replacements) then
+      return replace_term_blocks()
+    end
     return nil
   end
 
@@ -244,7 +272,12 @@ function Pandoc(doc)
     verbose = config.verbose,
     version = VERSION,
   })
-  if not results then return nil end
+  if not results then
+    if next(replacements) then
+      return replace_term_blocks()
+    end
+    return nil
+  end
 
   local raw_format = "html"
   if config.format == "latex" then
@@ -267,7 +300,7 @@ function Pandoc(doc)
         end
       end
       if pos.include == false then
-        doc.blocks[pos.block_i] = pandoc.RawBlock(raw_format, "")
+        replacements[pos.block_i] = pandoc.RawBlock(raw_format, "")
       else
         local content = result.markup
         if type(content) == "string" and content ~= "" then
@@ -307,13 +340,15 @@ function Pandoc(doc)
               content = chrome.wrap(content, chrome_cfg)
             end
           end
-          doc.blocks[pos.block_i] = pandoc.RawBlock(raw_format, content)
+          replacements[pos.block_i] = pandoc.RawBlock(raw_format, content)
         else
-          doc.blocks[pos.block_i] = pandoc.RawBlock(raw_format, "")
+          replacements[pos.block_i] = pandoc.RawBlock(raw_format, "")
         end
       end
     end
   end
+
+  doc = replace_term_blocks()
 
   if os.getenv("QUARTO_TERM_CHECK") then
     local assertions = {}
