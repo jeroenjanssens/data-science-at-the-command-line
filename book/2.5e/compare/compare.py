@@ -21,7 +21,7 @@ Every difference gets a stable id (page:kind:key) and a hash of its content.
 compare/differences.yml records the review decision for each difference:
 
   - id: chapter-2-getting-started.html:block:12
-    hash: 3f2a9c1e
+    hash: 3f2a9c1e         # or "any" for output that changes on every render (time)
     cause: uutils          # conversion | quarto-term | image | uutils | network | random | time | intended
     decision: accept       # accept | fix-converter | fix-quarto-term | fix-image | fix-text
     note: "ls sorts uppercase first"
@@ -206,7 +206,8 @@ class Page:
         entry = self.reviewed.get(did)
         if entry is None:
             return "UNREVIEWED", None
-        if str(entry.get("hash")) != h:
+        # hash: any = accept whatever the content (time-dependent output)
+        if str(entry.get("hash")) not in (h, "any"):
             return "CHANGED", entry
         return entry.get("decision", "?"), entry
 

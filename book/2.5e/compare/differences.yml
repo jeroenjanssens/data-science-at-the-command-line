@@ -1,0 +1,169 @@
+# Reviewed differences between the 2e (bookdown) and 2.5e (Quarto) output.
+# See compare/compare.py for the format. Regenerate drafts with:
+#   compare/compare.py --skeleton
+- id: 404.html:prose:093c1922
+  hash: 984a8800
+  title: 'Prose (replace): You may want to try searching to find the page''s new location, or use '
+  cause: conversion
+  decision: accept
+  note: Quarto applies smart quotes (page's -> page’s); bookdown's 404 page was generated without them
+- id: chapter-1-introduction.html:block:0
+  hash: any
+  title: 'Code block 0: `$ whoami`'
+  cause: time
+  decision: accept
+  note: 'date prints the render date; container runs in UTC (decision 8). keep-last-prompt: 2e had an
+    extra empty line before the final prompt'
+- id: chapter-1-introduction.html:anchors-missing
+  hash: 487c3d22
+  title: 3 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-1-introduction.html:broken-links
+  hash: cf5db932
+  title: 8 broken internal link(s)
+  cause: intended
+  decision: accept
+  note: Links to chapters 3-11 that haven't been converted yet (later rounds)
+- id: chapter-2-getting-started.html:block:3
+  hash: 412b4e61
+  title: 'Code block 3: `$ docker run --rm -it -v "$(p`'
+  cause: conversion
+  decision: accept
+  note: 2e showed a truncated command ("$(p"); the full command is shown now
+- id: chapter-2-getting-started.html:block:14
+  hash: any
+  title: 'Code block 14: `$ cd /data`'
+  cause: image
+  decision: accept
+  note: Timestamps (time); /data has no csvconf/ directory and ch04/ has no subdirectory anymore (data);
+    ls sort order (uutils)
+- id: chapter-2-getting-started.html:block:18
+  hash: any
+  title: 'Code block 18: `$ curl "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"`'
+  cause: network
+  decision: accept
+  note: Served from the cache (2021 version of the text, same size). curl 8 progress meter layout differs;
+    speed is local
+- id: chapter-2-getting-started.html:block:23
+  hash: abe457ce
+  title: 'Code block 23: `$ cat movies.txt 404.txt`'
+  cause: uutils
+  decision: accept
+  note: Error messages are prefixed with 'cat:' instead of '/usr/bin/cat:'
+- id: chapter-2-getting-started.html:block:26
+  hash: any
+  title: 'Code block 26: `$ dseq 5 > dates.txt`'
+  cause: time
+  decision: accept
+  note: dseq prints dates relative to the render date
+- id: chapter-2-getting-started.html:block:27
+  hash: any
+  title: 'Code block 27: `$ ls /data/ch10`'
+  cause: uutils
+  decision: accept
+  note: ls sorts by byte value (uppercase first); no __pycache__/ in data; timestamps; count.py permissions
+- id: chapter-2-getting-started.html:block:33
+  hash: any
+  title: 'Code block 33: `$ cd /data`'
+  cause: image
+  decision: accept
+  note: 'Same as block 14: timestamps, no csvconf/, ls sort order'
+- id: chapter-2-getting-started.html:block:34
+  hash: 5a8be738
+  title: 'Code block 34: `$ mkdir -v backup`'
+  cause: uutils
+  decision: accept
+  note: '''mkdir:''/''cp:'' instead of ''/usr/bin/mkdir:''/''/usr/bin/cp:''; no csvconf/ directory'
+- id: chapter-2-getting-started.html:block:35
+  hash: 20766df6
+  title: 'Code block 35: `$ rm -i *`'
+  cause: image
+  decision: accept
+  note: 11 instead of 12 files in /data because csvconf/ is gone
+- id: chapter-2-getting-started.html:block:37
+  hash: 7bbd6fa2
+  title: 'Code block 37: `$ which csvlook`'
+  cause: intended
+  decision: accept
+  note: Rendering harness defines csvlook with 'command csvlook' instead of '/usr/bin/csvlook' (csvlook
+    moved to /opt/uv/bin); line wraps one character later
+- id: chapter-2-getting-started.html:block:40
+  hash: ea75842f
+  title: 'Code block 40: `$ man tar | trim 20`'
+  cause: image
+  decision: accept
+  note: Newer GNU tar man page
+- id: chapter-2-getting-started.html:block:42
+  hash: 0c52123f
+  title: 'Code block 42: `$ man zshbuiltins | trim`'
+  cause: image
+  decision: accept
+  note: Newer zsh/groff justify the man page differently
+- id: chapter-2-getting-started.html:block:43
+  hash: e5b9ceeb
+  title: 'Code block 43: `$ jq --help | trim`'
+  cause: image
+  decision: accept
+  note: jq 1.8.1 instead of 1.6
+- id: chapter-2-getting-started.html:block:44
+  hash: 35bae9d7
+  title: 'Code block 44: `$ tldr tar | trim 20`'
+  cause: image
+  decision: accept
+  note: tldr is tealdeer now; different pages and layout. Prose (02:680-690) still fits
+- id: chapter-2-getting-started.html:prose:fe75e989
+  hash: 8cfbc2a0
+  title: 'Prose (replace): ➊ Navigate to the directory /data/ch02. ➋ Print the current directory.'
+  cause: intended
+  decision: accept
+  note: Callout explanations are a numbered list now (decision 4); see 'Code markers' note in the plan
+- id: chapter-2-getting-started.html:prose:3c698dcb
+  hash: e118c60c
+  title: 'Prose (replace): ➊ The option -l specifies that wc should only output the number of lin'
+  cause: intended
+  decision: accept
+  note: Callout explanation as numbered list (decision 4)
+- id: chapter-2-getting-started.html:prose:2450093a
+  hash: 7a362ed6
+  title: 'Prose (replace): ➊ The -w option indicates wc to only count words.'
+  cause: intended
+  decision: accept
+  note: Callout explanation as numbered list (decision 4)
+- id: chapter-2-getting-started.html:prose:d3d887e7
+  hash: f9b03fe9
+  title: 'Prose (replace): ➊ The 2 refers to standard error.'
+  cause: intended
+  decision: accept
+  note: Callout explanation as numbered list (decision 4)
+- id: chapter-2-getting-started.html:anchors-missing
+  hash: 97aa3a9a
+  title: 8 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-2-getting-started.html:broken-links
+  hash: 17bfa1c3
+  title: 3 broken internal link(s)
+  cause: intended
+  decision: accept
+  note: Links to chapters 3-11 that haven't been converted yet (later rounds)
+- id: index.html:prose:68cbdac3
+  hash: 96704b11
+  title: 'Prose (insert): Data Science at the Command Line, 2e'
+  cause: conversion
+  decision: accept
+  note: Quarto title block shows title and subtitle (bs4_book showed them as hand-written divs)
+- id: index.html:prose:da78fe13
+  hash: 13bb04c6
+  title: 'Prose (delete): Jeroen is currently working on a new course Embrace the Command Line. '
+  cause: intended
+  decision: accept
+  note: Course announcement removed (decision 5)
+- id: preface.html:broken-links
+  hash: e7ff4b7a
+  title: 4 broken internal link(s)
+  cause: intended
+  decision: accept
+  note: Links to chapters 3-11 that haven't been converted yet (later rounds)
