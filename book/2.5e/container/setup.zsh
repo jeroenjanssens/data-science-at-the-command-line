@@ -26,6 +26,8 @@ eval $(dircolors -b)
 # ~/.local/bin, which is already on PATH before /usr/bin, so that PATH looks
 # the same as without the cache (chapter 4 shows it).
 mkdir -p ~/.local/bin && cp /.book/bin/curl ~/.local/bin/curl
+# compinit (.zshrc) already hashed /usr/bin/curl
+rehash
 (python3 /.book/cache-server.py > /dev/null 2>&1 &)
 for _ in {1..50}; do
     /usr/bin/curl -s -o /dev/null http://127.0.0.1:8642/ && break
