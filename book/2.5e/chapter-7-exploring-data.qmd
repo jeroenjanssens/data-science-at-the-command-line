@@ -1,5 +1,10 @@
 ---
 engine: markdown
+extensions:
+  term:
+    # R sessions: R's prompt (>) also ends a command
+    # (inline code, so Pandoc doesn't read the regex as Markdown)
+    prompt-regex: '`^[$>]\s*$`'
 ---
 
 # Exploring Data {#chapter-7-exploring-data}
@@ -316,12 +321,13 @@ And then run the following code:
 ```{term}
 #| label: r_code
 #| callout: ['library\(tidyverse\)\s*$', 'df <\- read_csv\("tips\.csv"\)\s*$', 'df <\- mutate\(df, percent = tip / bill \* 100\)\s*$', 'write_csv\(df, "percent\.csv"\)\s*$', 'q\("no"\)\s*$']
+#| style.trailing-spaces: true
 #| keep-last-prompt: true
-library(tidyverse)
-df <- read_csv("tips.csv")
-df <- mutate(df, percent = tip / bill * 100)
-write_csv(df, "percent.csv")
-q("no")
+library(tidyverse)                            
+df <- read_csv("tips.csv")                    
+df <- mutate(df, percent = tip / bill * 100)  
+write_csv(df, "percent.csv")                  
+q("no")                                       
 ```
 
 1. Load any required packages

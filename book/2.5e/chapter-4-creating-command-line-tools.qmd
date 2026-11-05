@@ -205,7 +205,6 @@ Press **`Ctrl-X`** to exit `nano` and go back from whence you came.
 #| label: fc_exit
 #| include: false
 ctrl-x #! literal: false, expect-prompt: true
-
 ```
 
 We are using the file extension *.sh* to make clear that we are creating a shell script.

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """curl, but cached URLs are served from /data/.cache/http.
 
-The book shows the real curl command; this wrapper (first on PATH, so it
-also works in `parallel` and `sh -c`) rewrites URLs that are in the cache to
+The book shows the real curl command; this wrapper (copied to ~/.local/bin
+by setup.zsh, so it also works in `parallel` and `sh -c`) rewrites URLs that are in the cache to
 the local cache server (cache-server.py), so curl behaves as usual: progress
 meter, -s, -I, -O, -o, -L, ... Other URLs go to the network.
 Add entries with bin/cache-url.py.

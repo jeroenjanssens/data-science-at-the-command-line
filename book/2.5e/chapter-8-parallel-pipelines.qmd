@@ -85,9 +85,10 @@ In this case it's better to let the shell do the hard work for you by using a fo
 ```{term}
 #| label: for_loop
 #| callout: ['for i in \{0\.\.100\.\.2\}\s*$', 'echo "\$i\^2" \| bc\s*$']
-for i in {0..100..2}
+#| style.trailing-spaces: true
+for i in {0..100..2}  
 do
-echo "$i^2" | bc
+echo "$i^2" | bc      
 done | trim
 ```
 
@@ -118,10 +119,11 @@ You can loop over the lines from *emails* with a while loop:
 ```{term}
 #| label: while_loop
 #| callout: ['while read line\s*$', 'echo "Sending invitation to \$\{line\}\."\s*$', 'done < emails\s*$']
-while read line
+#| style.trailing-spaces: true
+while read line                         
 do
-echo "Sending invitation to ${line}."
-done < emails
+echo "Sending invitation to ${line}."   
+done < emails                           
 ```
 
 1. In this case you need to use a while loop because the Z shell does not know beforehand how many lines the input consists of.
@@ -465,7 +467,7 @@ echo '}' &&
 echo '{' &&
 echo '  "state": "stopped",' &&
 echo '  "public_dns": null' &&
-echo '}' &&
+echo '}'
 ```
 
 The possible states of an EC2 instance are: *`pending`*, *`running`*, *`shutting-down`*, *`terminated`*, *`stopping`*, and *`stopped`*.
@@ -709,7 +711,7 @@ ssh $(head -n 1 hostnames) ls #! enter: false
 ctrl-c #! literal: false
 echo 'nyc-1.json.csv' &&
 echo 'nyc-1.json.gz' &&
-echo 'jq' &&
+echo 'jq'
 ```
 
 Each CSV file looks something like this:

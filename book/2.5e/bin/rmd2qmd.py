@@ -315,13 +315,30 @@ def convert_console(label, options, code_lines, lines_after):
     # Callout comments in the code ("cmd | # <1>"): 2e typed them and the
     # pandoc filter turned them into markers. Remove them from the typed line
     # and point a callout at the line instead (regex on the command text).
+    # Aligned comments (padded with 2+ spaces) keep their padding, so the
+    # markers line up like in 2e; that needs trailing spaces in the output.
     inline = []
+    aligned = False
     for k, line in enumerate(code_lines):
-        m = re.search(r"\s*#\s?<(\d+)>(?=\s*(#!|$))", line)
+        m = re.search(r"#\s?<(\d+)>(?=\s*(#!|$))", line)
         if m:
             command = line[: m.start()]
+            padding = command[len(command.rstrip()):]
+            if len(padding) >= 2:
+                aligned = True
+                typed = command
+            else:
+                typed = command.rstrip()
             inline.append((int(m.group(1)), rx_escape(command.strip()) + r"\s*$"))
-            code_lines[k] = command + line[m.end():]
+            code_lines[k] = typed + (" " + line[m.end():].strip() if line[m.end():].strip() else "")
+
+    # A fake-output echo chain that ends with "&&" left zsh waiting for more
+    # input; knitractive counted zsh's continuation prompt as a prompt, so 2e
+    # typed the next cell into it. Let the chain finish instead.
+    while code_lines and not code_lines[-1].strip():
+        code_lines.pop()
+    if code_lines and re.match(r"^echo .*&&\s*$", code_lines[-1]):
+        code_lines[-1] = re.sub(r"\s*&&\s*$", "", code_lines[-1])
     if inline:
         if "callouts" in options:
             raise ValueError(f"chunk {label!r} has callouts= and callout comments")
@@ -334,6 +351,8 @@ def convert_console(label, options, code_lines, lines_after):
         cell.append(f"#| label: {label}")
     if inline:
         cell.append(f"#| callout: {spec_list([rx for _, rx in inline])}")
+        if aligned:
+            cell.append("#| style.trailing-spaces: true")
     marker = "#!"
     for key, value in options.items():
         if key == "include":
@@ -401,7 +420,7 @@ EDITS = [
     (
         "list-of-command-line-tools.qmd",
         "#| include: false\nunalias csvlook\n",
-        "#| include: false\n# Show the real curl here, not the cache wrapper (container/bin)\nexport PATH=${PATH#/book/bin:}\nunalias csvlook\n",
+        "#| include: false\n# Show the real curl here, not the cache wrapper (container/bin)\nrm ~/.local/bin/curl && hash -r\nunalias csvlook\n",
         "type curl shows /usr/bin/curl, as in 2e",
     ),
 ]
@@ -411,6 +430,20 @@ EDITS = [
 FRONT_MATTER = {
     # The description is the first section of the welcome page already
     "index.qmd": ["hide-description: true"],
+    "chapter-7-exploring-data.qmd": [
+        "extensions:",
+        "  term:",
+        "    # R sessions: R's prompt (>) also ends a command",
+        "    # (inline code, so Pandoc doesn't read the regex as Markdown)",
+        "    prompt-regex: '`^[$>]\\s*$`'",
+    ],
+    "chapter-10-polyglot-data-science.qmd": [
+        "extensions:",
+        "  term:",
+        "    # R sessions: R's prompt (>) also ends a command",
+        "    # (inline code, so Pandoc doesn't read the regex as Markdown)",
+        "    prompt-regex: '`^[$>]\\s*$`'",
+    ],
 }
 
 
