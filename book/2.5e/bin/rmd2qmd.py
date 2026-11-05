@@ -315,22 +315,17 @@ def convert_console(label, options, code_lines, lines_after):
     # Callout comments in the code ("cmd | # <1>"): 2e typed them and the
     # pandoc filter turned them into markers. Remove them from the typed line
     # and point a callout at the line instead (regex on the command text).
-    # Aligned comments (padded with 2+ spaces) keep their padding, so the
-    # markers line up like in 2e; that needs trailing spaces in the output.
+    # (2e aligned some of these comments, so its markers lined up. The
+    # padding can't be kept: with trailing-spaces, quarto-term keeps the
+    # whole terminal row, which puts the markers at column 80.)
     inline = []
-    aligned = False
     for k, line in enumerate(code_lines):
         m = re.search(r"#\s?<(\d+)>(?=\s*(#!|$))", line)
         if m:
-            command = line[: m.start()]
-            padding = command[len(command.rstrip()):]
-            if len(padding) >= 2:
-                aligned = True
-                typed = command
-            else:
-                typed = command.rstrip()
+            command = line[: m.start()].rstrip()
             inline.append((int(m.group(1)), rx_escape(command.strip()) + r"\s*$"))
-            code_lines[k] = typed + (" " + line[m.end():].strip() if line[m.end():].strip() else "")
+            rest = line[m.end():].strip()
+            code_lines[k] = command + (" " + rest if rest else "")
 
     # A fake-output echo chain that ends with "&&" left zsh waiting for more
     # input; knitractive counted zsh's continuation prompt as a prompt, so 2e
@@ -351,8 +346,6 @@ def convert_console(label, options, code_lines, lines_after):
         cell.append(f"#| label: {label}")
     if inline:
         cell.append(f"#| callout: {spec_list([rx for _, rx in inline])}")
-        if aligned:
-            cell.append("#| style.trailing-spaces: true")
     marker = "#!"
     for key, value in options.items():
         if key == "include":

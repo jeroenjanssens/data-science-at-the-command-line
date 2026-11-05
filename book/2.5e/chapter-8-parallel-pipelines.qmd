@@ -85,10 +85,9 @@ In this case it's better to let the shell do the hard work for you by using a fo
 ```{term}
 #| label: for_loop
 #| callout: ['for i in \{0\.\.100\.\.2\}\s*$', 'echo "\$i\^2" \| bc\s*$']
-#| style.trailing-spaces: true
-for i in {0..100..2}  
+for i in {0..100..2}
 do
-echo "$i^2" | bc      
+echo "$i^2" | bc
 done | trim
 ```
 
@@ -119,11 +118,10 @@ You can loop over the lines from *emails* with a while loop:
 ```{term}
 #| label: while_loop
 #| callout: ['while read line\s*$', 'echo "Sending invitation to \$\{line\}\."\s*$', 'done < emails\s*$']
-#| style.trailing-spaces: true
-while read line                         
+while read line
 do
-echo "Sending invitation to ${line}."   
-done < emails                           
+echo "Sending invitation to ${line}."
+done < emails
 ```
 
 1. In this case you need to use a while loop because the Z shell does not know beforehand how many lines the input consists of.
