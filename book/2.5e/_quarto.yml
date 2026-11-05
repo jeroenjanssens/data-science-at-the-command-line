@@ -49,6 +49,8 @@ filters:
 
 format:
   html:
+    # bookdown turned bare URLs into links; keep doing that
+    from: markdown+autolink_bare_uris
     include-in-header: favicon.html
     code-copy: true
 
