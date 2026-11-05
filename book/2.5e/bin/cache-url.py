@@ -26,6 +26,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.dont_write_bytecode = True  # no __pycache__ in container/ (it's mounted in the book)
 BOOK = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BOOK / "container"))
 from cache_path import cache_path  # noqa: E402

@@ -11,7 +11,7 @@ import os
 import sys
 import urllib.parse
 
-sys.path.insert(0, "/book")
+sys.path.insert(0, "/.book")
 from cache_path import cache_path  # noqa: E402
 
 CACHE = "/data/.cache/http"

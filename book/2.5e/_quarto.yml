@@ -62,7 +62,7 @@ extensions:
     spacing: true
     callout-values: "➊➋➌➍➎➏➐➑➒"
     callout-format: "{}"
-    # Scripts mounted at /book and sourced by init are part of the cache key
+    # Scripts mounted at /.book (hidden, so `tree /` doesn't show it) and sourced by init are part of the cache key
     cache-depends:
       - container
     style:
@@ -76,6 +76,13 @@ extensions:
         - ./images:/images
         - ./history:/history
         - ./data:/data.bak
-        - ./container:/book:ro
+        - ./container:/.book:ro
     init:
-      - "source /book/setup.zsh"
+      - "source /.book/setup.zsh"
+      # Functions are typed instead of sourced, so `type csvlook` says "csvlook
+      # is a shell function" (like 2e) and not "... from /.book/setup.zsh".
+      # csvlook draws boxes; only line 2 (the header separator) has dashes to
+      # replace, so negative numbers elsewhere are left alone. Inline code, so
+      # Pandoc doesn't read the commands as Markdown.
+      - '`function csvlook { command csvlook "$@" | trim | sed ''2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/──┤/;s/|/│/g;2s/-/─/g'' }`'
+      - '`function display { mv $1 /images/ }`'

@@ -13,16 +13,10 @@ export MANWIDTH=79
 export BAT_THEME=ansi
 export MANPAGER="sh -c 'col -bx | bat -plman --color=always'"
 
-function csvlook {
-    command csvlook "$@" |
-    trim |
-    sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──┤/;s/|/│/g;2s/-/─/g'
-}
 
 alias bat='bat --tabs 8 --paging never'
 alias docker='echo'
 alias less='less -R'
-function display { mv $1 /images/ }
 
 sudo cp -r /data.bak /data
 sudo chown -R dst:dst /data
@@ -31,8 +25,8 @@ eval $(dircolors -b)
 # Cached URLs: bin/curl sends them to a local server. It goes into
 # ~/.local/bin, which is already on PATH before /usr/bin, so that PATH looks
 # the same as without the cache (chapter 4 shows it).
-mkdir -p ~/.local/bin && cp /book/bin/curl ~/.local/bin/curl
-(python3 /book/cache-server.py > /dev/null 2>&1 &)
+mkdir -p ~/.local/bin && cp /.book/bin/curl ~/.local/bin/curl
+(python3 /.book/cache-server.py > /dev/null 2>&1 &)
 for _ in {1..50}; do
     /usr/bin/curl -s -o /dev/null http://127.0.0.1:8642/ && break
     sleep 0.1

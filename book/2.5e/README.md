@@ -20,8 +20,8 @@ Requirements: Quarto, Docker, and uv.
 |---|---|
 | `_quarto.yml` | Book and quarto-term configuration (Docker image, volumes, terminal size) |
 | `*.qmd` | Pages; file names equal the old bookdown URLs |
-| `container/` | Mounted read-only at `/book` in the container: session setup (`setup.zsh`, ported from `../2e/_console_start.R`) and the `curl` cache |
-| `data/` | Chapter data, mounted at `/data.bak` and copied to `/data`. `data/.cache/http/` holds cached URLs (see `bin/cache-url.sh`) |
+| `container/` | Mounted read-only at `/.book` in the container (hidden, so `tree /` doesn't show it): session setup (`setup.zsh`, ported from `../2e/_console_start.R`) and the `curl` cache (`bin/curl`, `cache-server.py`) |
+| `data/` | Chapter data, mounted at `/data.bak` and copied to `/data`. `data/.cache/http/` holds cached URLs (see `bin/cache-url.py` and `SOURCES.tsv`) |
 | `images/`, `history/` | Mounted at `/images` and `/history` |
 | `bin/rmd2qmd.py` | Converter from `../2e/*.Rmd` (bookdown + knitractive). Content edits for 2.5e are listed in its `EDITS` table |
 | `compare/` | `compare.py`, the reviewed `differences.yml`, and generated `reports/` |
