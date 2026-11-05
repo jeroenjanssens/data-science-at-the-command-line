@@ -1,0 +1,76 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Data Science at the Command Line, 2e"
+  subtitle: "Obtain, Scrub, Explore, and Model Data with Unix Power Tools"
+  author: "Jeroen Janssens"
+  date: today
+  date-format: "MMMM D, YYYY"
+  cover-image: images/cover.png
+  description: "This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You'll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux."
+  repo-url: https://github.com/jeroenjanssens/data-science-at-the-command-line
+  repo-subdir: book/2.5e
+  repo-branch: master
+  repo-actions: [edit, source]
+  open-graph: true
+  twitter-card: true
+  chapters:
+    - index.qmd
+    - foreword.qmd
+    - preface.qmd
+    - chapter-1-introduction.qmd
+    - chapter-2-getting-started.qmd
+    # Later rounds:
+    # - chapter-3-obtaining-data.qmd
+    # - chapter-4-creating-command-line-tools.qmd
+    # - chapter-5-scrubbing-data.qmd
+    # - chapter-6-project-management-with-make.qmd
+    # - chapter-7-exploring-data.qmd
+    # - chapter-8-parallel-pipelines.qmd
+    # - chapter-9-modeling-data.qmd
+    # - chapter-10-polyglot-data-science.qmd
+    # - chapter-11-conclusion.qmd
+    # - list-of-command-line-tools.qmd
+    - references.qmd
+
+bibliography: [library.bib, tools.bib]
+csl: chicago-fullnote-bibliography.csl
+notes-after-punctuation: false
+link-citations: true
+# List every entry of both .bib files on the references page.
+nocite: "@*"
+# Only references.qmd shows the list; elsewhere citations are footnotes.
+suppress-bibliography: true
+
+filters:
+  - term
+
+format:
+  html:
+    include-in-header: favicon.html
+    code-copy: true
+
+extensions:
+  term:
+    shell: zsh
+    shell-args: []
+    prompt: "$"
+    timeout: 30
+    spacing: true
+    style:
+      cols: 80
+      rows: 16
+    docker:
+      image: datasciencetoolbox/dsatcl2e:latest
+      pull: missing
+      volumes:
+        - ./images:/images
+        - ./history:/history
+        - ./data:/data.bak
+        - ./container:/book:ro
+      # The image's ENTRYPOINT is zsh; quarto-term supplies its own command.
+      args: ["--entrypoint="]
+    init:
+      - "source /book/setup.zsh"

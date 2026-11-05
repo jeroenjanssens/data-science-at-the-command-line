@@ -1,0 +1,20 @@
+:root {
+  --term-fg: #ffffff;
+  --term-bg: #000000;
+  --term-0: #000000;
+  --term-1: #c91b00;
+  --term-2: #00c200;
+  --term-3: #c7c400;
+  --term-4: #0225c7;
+  --term-5: #ca30c7;
+  --term-6: #00c5c7;
+  --term-7: #c7c7c7;
+  --term-8: #686868;
+  --term-9: #ff6e67;
+  --term-10: #5ffa68;
+  --term-11: #fffc67;
+  --term-12: #6871ff;
+  --term-13: #ff77ff;
+  --term-14: #60fdff;
+  --term-15: #ffffff;
+}

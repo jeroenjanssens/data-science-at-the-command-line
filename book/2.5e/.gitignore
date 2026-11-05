@@ -1,0 +1,6 @@
+/.quarto/
+/.quarto-term-cache/
+/.image-digest
+/_extensions/jeroenjanssens/term/bin/
+/compare/.venv/
+/_baseline/

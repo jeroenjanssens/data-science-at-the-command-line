@@ -1,0 +1,44 @@
+Spark context Web UI available at http://3d1bec8f2543:4040
+Spark context available as 'sc' (master = local[6], app id = local-16193763).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.1.1
+      /_/
+         
+Using Scala version 2.12.10 (OpenJDK 64-Bit Server VM, Java 11.0.10)
+Type in expressions to have them evaluated.
+Type :help for more information.
+[35m
+scala> [0mval lines = sc.textFile("alice.txt")
+[1m[34mlines[0m: [1m[32morg.apache.spark.rdd.RDD[String][0m = alice.txt MapPartitionsRDD[1] at textFile at <console>:24
+[35m
+scala> [0mlines.first()
+[1m[34mres0[0m: [1m[32mString[0m = Project Gutenberg's Alice's Adventures in Wonderland, by Lewis Carroll
+[35m
+scala> [0mval words = lines.flatMap(line => line.split(" "))
+[1m[34mwords[0m: [1m[32morg.apache.spark.rdd.RDD[String][0m = MapPartitionsRDD[2] at flatMap at <console>:25
+[35m
+scala> [0mwords.take(5)
+[1m[34mres1[0m: [1m[32mArray[String][0m = Array(Project, Gutenberg's, Alice's, Adventures, in)
+[35m
+scala> [0mval alice = words.pipe("grep -i alice")
+[1m[34malice[0m: [1m[32morg.apache.spark.rdd.RDD[String][0m = PipedRDD[3] at pipe at <console>:25
+[35m
+scala> [0malice.take(5)
+[1m[34mres2[0m: [1m[32mArray[String][0m = Array(Alice's, Alice's, ALICE'S, ALICE'S, Alice)
+[35m
+scala> [0mval counts = alice.pipe("wc -l")
+[1m[34mcounts[0m: [1m[32morg.apache.spark.rdd.RDD[String][0m = PipedRDD[4] at pipe at <console>:25
+[35m
+scala> [0mcounts.collect()
+[1m[34mres3[0m: [1m[32mArray[String][0m = Array(64, 72, 94, 93, 67, 13)
+[35m
+scala> [0mcounts.map(x => x.toInt).reduce(_ + _)
+[1m[34mres4[0m: [1m[32mInt[0m = 403
+[35m
+scala> [0msc.textFile("alice.txt").flatMap(line => line.split(" ")).pipe("grep -i alice").pipe("wc -l").map(x => x.toInt).reduce(_ + _)
+[1m[34mres5[0m: [1m[32mInt[0m = 403
+[35m

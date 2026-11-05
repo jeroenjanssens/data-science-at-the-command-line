@@ -1,0 +1,12 @@
+title: Term
+author: Jeroen Janssens
+version: 0.6.0
+contributes:
+  filters:
+    - term.lua
+  shortcodes:
+    - term-player.lua
+  metadata:
+    project:
+      pre-render:
+        - install-binary.ts

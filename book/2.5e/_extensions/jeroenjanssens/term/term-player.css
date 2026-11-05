@@ -1,0 +1,14 @@
+.term-player-container {
+  margin: 1em 0;
+}
+
+.term-chrome .ap-player,
+.term-chrome .ap-player pre.ap-terminal {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.term-chrome .gd-termshow {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

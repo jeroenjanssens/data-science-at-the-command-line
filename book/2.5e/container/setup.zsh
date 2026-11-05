@@ -1,0 +1,28 @@
+# Session setup for rendering the book with quarto-term.
+# Sourced once per chapter (see `init` in _quarto.yml); output is never shown.
+# Ported from book/2e/_console_start.R.
+setopt HIST_IGNORE_SPACE INC_APPEND_HISTORY interactivecomments
+history -p
+export SAVEHIST=1000000
+export HISTSIZE=1000000
+export RIO_DPI=200
+export MANROFFOPT='-c'
+export BAT_THEME=ansi
+export MANPAGER="sh -c 'col -bx | bat -plman --color=always'"
+
+function csvlook {
+    command csvlook "$@" |
+    trim |
+    sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──┤/;s/|/│/g;2s/-/─/g'
+}
+
+alias bat='bat --tabs 8 --paging never'
+alias docker='echo'
+alias less='less -R'
+function display { mv $1 /images/ }
+
+sudo cp -r /data.bak /data
+sudo chown -R dst:dst /data
+eval $(dircolors -b)
+
+source /book/curl-cache.zsh
