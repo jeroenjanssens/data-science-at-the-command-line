@@ -7,7 +7,7 @@ Docker image `datasciencetoolbox/dsatcl2e:latest`. See `../../PLAN-2-5e.md`.
 ## Render
 
 ```sh
-make render     # pulls the image, clears stale term cache, runs quarto render
+make render     # quarto render (quarto-term pulls the image and re-runs pages when it or container/ changes)
 make compare    # compares _book/ with ../2e/output/ (bookdown baseline)
 just preview    # (Justfile in repo root; works from any subdirectory) serves _book/ at http://localhost:8000 and opens it; just preview 8080 for another port
 ```
@@ -25,7 +25,7 @@ Requirements: Quarto, Docker, and uv.
 | `images/`, `history/` | Mounted at `/images` and `/history` |
 | `bin/rmd2qmd.py` | Converter from `../2e/*.Rmd` (bookdown + knitractive). Content edits for 2.5e are listed in its `EDITS` table |
 | `compare/` | `compare.py`, the reviewed `differences.yml`, and generated `reports/` |
-| `_extensions/jeroenjanssens/term/` | quarto-term v0.6.0 with a patched `term.lua` (nested cells; quarto-term branch `process-nested-blocks`) |
+| `_extensions/jeroenjanssens/term/` | quarto-term v0.7.0, unmodified |
 | `_book/` | Rendered output (tracked) |
 
 ## Converting more chapters
