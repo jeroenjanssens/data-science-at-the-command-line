@@ -1,0 +1,7 @@
+set shell := ["bash", "-euo", "pipefail", "-c"]
+
+# Serve the rendered book (_book/) at http://localhost:PORT and open it
+preview port="8000":
+    @echo "Serving _book/ at http://localhost:{{port}} (Ctrl-C to stop)"
+    @(sleep 1 && open "http://localhost:{{port}}") &
+    python3 -m http.server {{port}} --bind 127.0.0.1 --directory _book

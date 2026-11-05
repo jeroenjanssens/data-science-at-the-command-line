@@ -9,6 +9,7 @@ Docker image `datasciencetoolbox/dsatcl2e:latest`. See `../../PLAN-2-5e.md`.
 ```sh
 make render     # pulls the image, clears stale term cache, runs quarto render
 make compare    # compares _book/ with ../2e/output/ (bookdown baseline)
+just preview    # serves _book/ at http://localhost:8000 and opens it (just preview 8080 for another port)
 ```
 
 Requirements: Quarto, Docker, and uv.
