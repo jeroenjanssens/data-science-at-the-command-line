@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+
+<title>4&nbsp; Creating Command-line Tools – Data Science at the Command Line, 2e</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-5-scrubbing-data.html" rel="next">
+<link href="./chapter-3-obtaining-data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/quarto-term-0.7.1/term.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
+<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+
+
+<meta property="og:title" content="4&nbsp; Creating Command-line Tools – Data Science at the Command Line, 2e">
+<meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta name="twitter:title" content="4&nbsp; Creating Command-line Tools – Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-4-creating-command-line-tools.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science at the Command Line, 2e</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-obtaining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-creating-command-line-tools.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-5-scrubbing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Scrubbing Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6-project-management-with-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Project Management with Make</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploring Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8-parallel-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-9-modeling-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-10-polyglot-data-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Polyglot Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-11-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./list-of-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">List of Command-Line Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview-1" id="toc-overview-1" class="nav-link active" data-scroll-target="#overview-1"><span class="header-section-number">4.1</span> Overview</a></li>
+  <li><a href="#converting-one-liners-into-shell-scripts" id="toc-converting-one-liners-into-shell-scripts" class="nav-link" data-scroll-target="#converting-one-liners-into-shell-scripts"><span class="header-section-number">4.2</span> Converting One-liners into Shell Scripts</a>
+  <ul class="collapse">
+  <li><a href="#step-1-create-file" id="toc-step-1-create-file" class="nav-link" data-scroll-target="#step-1-create-file"><span class="header-section-number">4.2.1</span> Step 1: Create File</a></li>
+  <li><a href="#step-2-give-permission-to-execute" id="toc-step-2-give-permission-to-execute" class="nav-link" data-scroll-target="#step-2-give-permission-to-execute"><span class="header-section-number">4.2.2</span> Step 2: Give Permission to Execute</a></li>
+  <li><a href="#step-3-define-shebang" id="toc-step-3-define-shebang" class="nav-link" data-scroll-target="#step-3-define-shebang"><span class="header-section-number">4.2.3</span> Step 3: Define Shebang</a></li>
+  <li><a href="#step-4-remove-fixed-input" id="toc-step-4-remove-fixed-input" class="nav-link" data-scroll-target="#step-4-remove-fixed-input"><span class="header-section-number">4.2.4</span> Step 4: Remove Fixed Input</a></li>
+  <li><a href="#step-5-add-arguments" id="toc-step-5-add-arguments" class="nav-link" data-scroll-target="#step-5-add-arguments"><span class="header-section-number">4.2.5</span> Step 5: Add Arguments</a></li>
+  <li><a href="#step-6-extend-your-path" id="toc-step-6-extend-your-path" class="nav-link" data-scroll-target="#step-6-extend-your-path"><span class="header-section-number">4.2.6</span> Step 6: Extend Your PATH</a></li>
+  </ul></li>
+  <li><a href="#creating-command-line-tools-with-python-and-r" id="toc-creating-command-line-tools-with-python-and-r" class="nav-link" data-scroll-target="#creating-command-line-tools-with-python-and-r"><span class="header-section-number">4.3</span> Creating Command-line Tools with Python and R</a>
+  <ul class="collapse">
+  <li><a href="#porting-the-shell-script" id="toc-porting-the-shell-script" class="nav-link" data-scroll-target="#porting-the-shell-script"><span class="header-section-number">4.3.1</span> Porting The Shell Script</a></li>
+  <li><a href="#processing-streaming-data-from-standard-input" id="toc-processing-streaming-data-from-standard-input" class="nav-link" data-scroll-target="#processing-streaming-data-from-standard-input"><span class="header-section-number">4.3.2</span> Processing Streaming Data from Standard Input</a></li>
+  </ul></li>
+  <li><a href="#summary-3" id="toc-summary-3" class="nav-link" data-scroll-target="#summary-3"><span class="header-section-number">4.4</span> Summary</a></li>
+  <li><a href="#for-further-exploration-3" id="toc-for-further-exploration-3" class="nav-link" data-scroll-target="#for-further-exploration-3"><span class="header-section-number">4.5</span> For Further Exploration</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-4-creating-command-line-tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-4-creating-command-line-tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="chapter-4-creating-command-line-tools" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+<!-- TODO: Remove dashes from filenames top-words.sh etc. -->
+<p>Throughout the book, I’ll introduce you to many commands and pipelines that basically fit on one line. These are known as one-liners or pipelines. Being able to perform complex tasks with just a one-liner is what makes the command line powerful. It’s a very different experience from writing and using traditional programs.</p>
+<p>Some tasks you perform only once, and some you perform more often. Some tasks are very specific and others can be generalized. If you need to repeat a certain one-liner on a regular basis, it’s worthwhile to turn this into a command-line tool of its own. So, both one-liners and command-line tools have their uses. Recognizing the opportunity requires practice and skill. The advantages of a command-line tool are that you don’t have to remember the entire one-liner and that it improves readability if you include it into some other pipeline. In that sense, you can think of a command-line tool as similar to a function in a programming language.</p>
+<p>The benefit of a working with a programming language, however, is that the code is in one or more file. This means that you can easily edit and reuse that code. If the code has parameters it can even be generalized and re-applied to problems that follow a similar pattern.</p>
+<p>Command-line tools have the best of both worlds: they can be used from the command line, accept parameters, and only have to be created once. In this chapter, you’re going to get familiar with creating command-line tools in two ways. First, I explain how to turn those one-liners into reusable command-line tools. By adding parameters to your commands, you can add the same flexibility that a programming language offers. Subsequently, I demonstrate how to create reusable command-line tools from code that’s written in a programming language. By following the Unix philosophy, your code can be combined with other command-line tools, which may be written in an entirely different language. In this chapter, I will focus on three programming languages: Bash, Python, and R.</p>
+<p>I believe that creating reusable command-line tools makes you a more efficient and productive data scientist in the long run. You will gradually build up your own data science toolbox from which you can draw existing tools and apply it to problems you have encountered previously. It requires practice to recognize the opportunity to turn a one-liner or existing code into a command-line tool.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In order to turn a one-liner into a shell script, I’m going to use a tiny bit of shell scripting. This book only demonstrates a small subset of concepts from shell scripting, including variables, conditionals, and loops. A complete course in shell scripting deserves a book on its own, and is therefore beyond the scope of this one. If you want to dive deeper into shell scripting, I recommend the book <em>Classic Shell Scripting</em> by <span class="citation" data-cites="Robbins2005">Arnold Robbins and Nelson H. F. Beebe<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span>.</p>
+</div>
+</div>
+<section id="overview-1" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="overview-1"><span class="header-section-number">4.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Convert one-liners into parameterized shell scripts</li>
+<li>Turn existing Python and R code into reusable command-line tools</li>
+</ul>
+<p>This chapter starts with the following files:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch04</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 32K</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 391 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 400 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 147 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 182 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 105 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 128 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 584 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 647 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span></code></pre>
+
+<p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
+</section>
+<section id="converting-one-liners-into-shell-scripts" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="converting-one-liners-into-shell-scripts"><span class="header-section-number">4.2</span> Converting One-liners into Shell Scripts</h2>
+<p>In this section I’m going to explain how to turn a one-liner into a reusable command-line tool. Let’s say that you would like to get the top most frequent words used in a piece of text. Take the book <em>Alice’s Adventures in Wonderland</em> by Lewis Carroll, which is, like many other great books, freely available on Project Gutenberg.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">﻿The Project Gutenberg eBook of Alice’s Adventures in Wonderland, by Lewis …</span>
+<span class="term-output"></span>
+<span class="term-output">This eBook is for the use of anyone anywhere in the United States and</span>
+<span class="term-output">most other parts of the world at no cost and with almost no restrictions</span>
+<span class="term-output">whatsoever. You may copy it, give it away or re-use it under the terms</span>
+<span class="term-output">of the Project Gutenberg License included with this eBook or online at</span>
+<span class="term-output">www.gutenberg.org. If you are not located in the United States, you</span>
+<span class="term-output">will have to check the laws of the country where you are located before</span>
+<span class="term-output">using this eBook.</span>
+<span class="term-output"></span>
+<span class="term-output">… with 3751 more lines</span></code></pre>
+
+<p>The following sequence of tools or <em>pipeline</em> should do the job:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[:upper:]'</span> <span style="color:var(--term-3)">'[:lower:]'</span> | <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> -oE <span style="color:var(--term-3)">"[a-z\']{2,}"</span> | <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> | <span class="term-callout">➍</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">uniq</span> -c | <span class="term-callout">➎</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> -nr | <span class="term-callout">➏</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">head</span> -n 10 <span class="term-callout">➐</span>
+<span class="term-output">   1839 the</span>
+<span class="term-output">    942 and</span>
+<span class="term-output">    811 to</span>
+<span class="term-output">    638 of</span>
+<span class="term-output">    610 it</span>
+<span class="term-output">    553 she</span>
+<span class="term-output">    486 you</span>
+<span class="term-output">    462 said</span>
+<span class="term-output">    435 in</span>
+<span class="term-output">    403 alice</span></code></pre>
+
+<ol type="1">
+<li>Downloading an ebook using <code>curl</code>.</li>
+<li>Converting the entire text to lowercase using <code>tr</code><span class="citation" data-cites="tr"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>.</li>
+<li>Extracting all the words using <code>grep</code><span class="citation" data-cites="grep"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span> and put each word on separate line.</li>
+<li>Sort these words in alphabetical order using <code>sort</code><span class="citation" data-cites="sort"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span>.</li>
+<li>Remove all the duplicates and count how often each word appears in the list using <code>uniq</code><span class="citation" data-cites="uniq"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>.</li>
+<li>Sort this list of unique words by their count in descending order using <code>sort</code>.</li>
+<li>Keep only the top 10 lines (i.e., words) using <code>head</code>.</li>
+</ol>
+<p>Those words indeed appear the most often in the text. Because those words (apart from the word “alice”) appear very frequently in many English texts, they carry very little meaning. In fact, these are known as <em>stopwords</em>. If we get rid of those, we keep the most frequent words that are related to this text.</p>
+<p>Here’s a list of stopwords I’ve found:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">"https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/</span>
+<span class="term-output"><span style="color:var(--term-3)">stopwords-en.txt"</span> |</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> | <span style="color:var(--term-2)">tee</span> stopwords | <span style="color:var(--term-2)">trim</span> 20
+<span class="term-output">10</span>
+<span class="term-output">39</span>
+<span class="term-output">a</span>
+<span class="term-output">able</span>
+<span class="term-output">ableabout</span>
+<span class="term-output">about</span>
+<span class="term-output">above</span>
+<span class="term-output">abroad</span>
+<span class="term-output">abst</span>
+<span class="term-output">accordance</span>
+<span class="term-output">according</span>
+<span class="term-output">accordingly</span>
+<span class="term-output">across</span>
+<span class="term-output">act</span>
+<span class="term-output">actually</span>
+<span class="term-output">ad</span>
+<span class="term-output">added</span>
+<span class="term-output">adj</span>
+<span class="term-output">adopted</span>
+<span class="term-output">ae</span>
+<span class="term-output">… with 1278 more lines</span></code></pre>
+
+<p>With <code>grep</code> we can filter out the stopwords right before we start counting:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[:upper:]'</span> <span style="color:var(--term-3)">'[:lower:]'</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> -oE <span style="color:var(--term-3)">"[a-z\']{2,}"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> -Fvwf <span style="text-decoration:underline">stopwords</span> | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">uniq</span> -c |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> -nr |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">head</span> -n 10
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">     63 king</span>
+<span class="term-output">     60 turtle</span>
+<span class="term-output">     57 mock</span>
+<span class="term-output">     56 hatter</span>
+<span class="term-output">     55 gryphon</span></code></pre>
+
+<ol type="1">
+<li>Obtain the patterns from a file (<em>stopwords</em> in our case), one per line, with <code>-f</code>. Interpret those patterns as fixed strings with <code>-F</code>. Select only those lines containing matches that form whole words with <code>-w</code>. Select non-matching lines with <code>-v</code>.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Each command-line tool used in this one-liner offers a man page. So in case you would like to know more about, say, <code>grep</code>, you can run <code>man grep</code> from the command line. The command-line tools <code>tr</code>, <code>grep</code>, <code>uniq</code>, and <code>sort</code> will be discussed in more detail in the next chapter.</p>
+</div>
+</div>
+<p>There is nothing wrong with running this one-liner just once. However, imagine if you wanted to have the top 10 words of every e-book on Project Gutenberg. Or imagine that you wanted the top 10 words of a news website on a hourly basis. In those cases, it would be best to have this one-liner as a separate building block that can be part of something bigger. To add some flexibility to this one-liner in terms of parameters, let’s turn it into a shell script.</p>
+<p>This allows us to take the one-liner as the starting point, and gradually improve on it. To turn this one-liner into a reusable command-line tool, I’ll walk you through the following six steps:</p>
+<ol type="1">
+<li>Copy and paste the one-liner into a file.</li>
+<li>Add execute permissions.</li>
+<li>Define a so-called shebang.</li>
+<li>Remove the fixed input part.</li>
+<li>Add a parameter.</li>
+<li>Optionally extend your PATH.</li>
+</ol>
+<section id="step-1-create-file" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="step-1-create-file"><span class="header-section-number">4.2.1</span> Step 1: Create File</h3>
+<p>The first step is to create a new file. You can open your favorite text editor and copy and paste the one-liner. Let’s name the file <em>top-words-1.sh</em> to indicate that this is the first step towards our new command-line tool If you like to stay at the command line, you can use the builtin <code>fc</code>, which stands for <em>fix command</em>, and allows you to fix or <em>edit</em> the last-run command.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">fc</span></code></pre>
+
+<p>Running <code>fc</code> invokes the default text editor, which is stored in the environment variable <em>EDITOR</em>. In the Docker container, this is set to <code>nano</code>, a straightforward text editor. As you can see, this file contains our one-liner:</p>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshTVXPcr                              </span>
+curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
+tr '[:upper:]' '[:lower:]' |
+grep -oE "[a-z\']{2,}" |
+sort |
+grep -Fvwf stopwords |
+uniq -c |
+sort -nr |
+head -n 10
+
+
+
+
+                                <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">[ Read 8 lines ]</span>
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^O</span> Write Out <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^F</span> Where Is  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^K</span> Cut       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Execute   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Location
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^X</span> Exit      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^R</span> Read File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^\</span> Replace   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^U</span> Paste     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^J</span> Justify   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^/</span> Go To Line</code></pre>
+
+<p>Let’s give this temporary file a proper name by pressing <strong><code>Ctrl-O</code></strong>, removing the temporary filename, and typing <code>top-words-1.sh</code>:</p>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshTVXPcr                              </span>
+curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
+tr '[:upper:]' '[:lower:]' |
+grep -oE "[a-z\']{2,}" |
+sort |
+grep -Fvwf stopwords |
+uniq -c |
+sort -nr |
+head -n 10
+
+
+
+
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Write to File: top-words-1.sh                                                   </span>
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help         <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-D</span> DOS Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-A</span> Append      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-B</span> Backup File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Browse
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-M</span> Mac Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-P</span> Prepend     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^Q</span> Discard buffer</code></pre>
+
+<p>Press <strong><code>Enter</code></strong>:</p>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshTVXPcr                              </span>
+curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
+tr '[:upper:]' '[:lower:]' |
+grep -oE "[a-z\']{2,}" |
+sort |
+grep -Fvwf stopwords |
+uniq -c |
+sort -nr |
+head -n 10
+
+
+
+
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Save file under DIFFERENT NAME?                                                 </span>
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> Y</span> Yes
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> N</span> No           <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel</code></pre>
+
+<p>Press <strong><code>Y</code></strong> to confirm that you want to save under a different filename:</p>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-1.sh                              </span>
+curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
+tr <span style="color:var(--term-3);font-weight:bold">'[:upper:]'</span> <span style="color:var(--term-3);font-weight:bold">'[:lower:]'</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -oE <span style="color:var(--term-3);font-weight:bold">"[a-z\']{2,}"</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -Fvwf stopwords <span style="color:var(--term-2)">|</span>
+uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> -nr <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">head</span><span style="color:var(--term-5);font-weight:bold"> -n</span> 10
+
+
+
+
+                               <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">[ Wrote 8 lines ]</span>
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^O</span> Write Out <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^F</span> Where Is  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^K</span> Cut       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Execute   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Location
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^X</span> Exit      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^R</span> Read File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^\</span> Replace   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^U</span> Paste     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^J</span> Justify   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^/</span> Go To Line</code></pre>
+
+<p>Press <strong><code>Ctrl-X</code></strong> to exit <code>nano</code> and go back from whence you came.</p>
+
+<p>We are using the file extension <em>.sh</em> to make clear that we are creating a shell script. However, command-line tools don’t need to have an extension. In fact, command-line tools rarely have extensions.</p>
+<p>Confirm the contents of the file:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pwd</span>
+<span class="term-output">/data/ch04</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 44K</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  391 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  400 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.5K Nov  5 22:32 stopwords</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  147 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  182 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  173 Nov  5 22:32 top-words-1.sh</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  105 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  128 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  584 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  647 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words-1.sh</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">top-words-1.sh</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ curl<span style="color:var(--term-6)"> -sL</span> <span style="color:var(--term-2)">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   2   │ tr <span style="color:var(--term-2)">'[:upper:]'</span> <span style="color:var(--term-2)">'[:lower:]'</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   3   │ grep<span style="color:var(--term-6)"> -oE</span> <span style="color:var(--term-2)">"[a-z\']{2,}"</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   4   │ sort <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   5   │ grep<span style="color:var(--term-6)"> -Fvwf</span> stopwords <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   6   │ uniq<span style="color:var(--term-6)"> -c</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   7   │ sort<span style="color:var(--term-6)"> -nr</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   8   │ head<span style="color:var(--term-6)"> -n</span> 10</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>You can now use <code>bash</code><span class="citation" data-cites="bash"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span> to interpret and execute the commands in the file:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bash</span> <span style="text-decoration:underline">top-words-1.sh</span>
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">     63 king</span>
+<span class="term-output">     60 turtle</span>
+<span class="term-output">     57 mock</span>
+<span class="term-output">     56 hatter</span>
+<span class="term-output">     55 gryphon</span></code></pre>
+
+<p>This saves you from typing the one-liner again next time.</p>
+<p>However, because the file cannot be executed on its own, it’s not yet a <em>real</em> command-line tool. Let’s change that in the next step.</p>
+</section>
+<section id="step-2-give-permission-to-execute" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="step-2-give-permission-to-execute"><span class="header-section-number">4.2.2</span> Step 2: Give Permission to Execute</h3>
+<p>The reason we cannot execute our file directly is that we don’t have the correct access permissions. In particular, you, as a user, need to have permission to execute the file. In this section we change the access permissions of our file.</p>
+<p>In order to compare differences between steps, copy the file to <em>top-words-2.sh</em> using <code>cp -v top-words-{1,2}.sh</code>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you ever want to verify what the brace expansion or any other form of file expansion leads to, replace the command with <code>echo</code> to just print the result. For example, <code>echo book_{draft,final}.md</code> or <code>echo agent-{001..007}</code>.</p>
+</div>
+</div>
+<p>To change the access permissions of a file, we need to use a command-line tool called <code>chmod</code><span class="citation" data-cites="chmod"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, which stands for <em>change mode</em>. It changes the file mode bits of a specific file. The following command gives the user, you, permission to execute <em>top-words-2.sh</em>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> -v top-words-{1,2}.sh
+<span class="term-output">'top-words-1.sh' -&gt; 'top-words-2.sh'</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">chmod</span> u+x <span style="text-decoration:underline">top-words-2.sh</span></code></pre>
+
+<p>The argument <code>u+x</code> consists of three characters: (1) <code>u</code> indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) <code>+</code> indicates that we want to add a permission; and (3) <code>x</code>, which indicates the permissions to execute.</p>
+<p>Let’s now have a look at the access permissions of both files:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> top-words-{1,2}.sh
+<span class="term-output">-rw-r--r-- 1 dst dst 173 Nov  5 22:32 top-words-1.sh</span>
+<span class="term-output">-rwxr--r-- 1 dst dst 173 Nov  5 22:32 <span style="color:var(--term-2);font-weight:bold">top-words-2.sh</span>*</span></code></pre>
+
+<p>The first column shows the access permissions for each file. For <em>top-words-2.sh</em>, this is <em><code>-rwxrw-r--</code></em>. The first character <em><code>-</code></em> (hyphen) indicates the file type. A <em><code>-</code></em> means regular file and a <em><code>d</code></em> means directory. The next three characters, <em><code>rwx</code></em>, indicate the access permissions for the user who owns the file. The <em><code>r</code></em> and <em><code>w</code></em> mean <em>read</em> and <em>write</em>, respectively. (As you can see, <em>top-words-1.sh</em> has a <em><code>-</code></em> instead of an <em><code>x</code></em>, which means that we cannot <em>execute</em> that file.) The next three characters <em><code>rw-</code></em> indicate the access permissions for all members of the group that owns the file. Finally, the last three characters in the column, <em><code>r--</code></em>, indicate access permissions for all other users.</p>
+<p>Now you can execute the file as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">./top-words-2.sh</span>
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">     63 king</span>
+<span class="term-output">     60 turtle</span>
+<span class="term-output">     57 mock</span>
+<span class="term-output">     56 hatter</span>
+<span class="term-output">     55 gryphon</span></code></pre>
+
+<p>If you try to execute a file for which you don’t have the correct access permissions, as with <em>top-words-1.sh</em>, you will see the following error message:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-1);font-weight:bold">./top-words-1.sh</span>
+<span class="term-output">zsh: permission denied: ./top-words-1.sh</span></code></pre>
+
+</section>
+<section id="step-3-define-shebang" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="step-3-define-shebang"><span class="header-section-number">4.2.3</span> Step 3: Define Shebang</h3>
+<p>Although we can already execute the file on its own, we should add a so-called shebang to the file. The <em>shebang</em> is a special line in the script that instructs the system which executable it should use to interpret the commands.</p>
+<p>The name <em>shebang</em> comes from the first two characters: a hash (she) and an exclamation mark (bang): <code>#!</code>. It’s not a good idea to leave it out, as we have done in the previous step, because each shell has a different default executable. The Z shell, the one we’re using throughout the book, uses the executable <em>/bin/sh</em> by default if no shebang is defined. In this case I’d like <code>bash</code> to interpret the commands as that will give us some more functionality than <code>sh</code>.</p>
+<p>Again, you’re free to use whatever editor you like, but I’m going to stick with <code>nano</code><span class="citation" data-cites="nano"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span>, which is installed in the Docker image.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> -v top-words-{2,3}.sh
+<span class="term-output">'top-words-2.sh' -&gt; 'top-words-3.sh'</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">nano</span> <span style="text-decoration:underline">top-words-3.sh</span></code></pre>
+
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-3.sh                              </span>
+curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
+tr <span style="color:var(--term-3);font-weight:bold">'[:upper:]'</span> <span style="color:var(--term-3);font-weight:bold">'[:lower:]'</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -oE <span style="color:var(--term-3);font-weight:bold">"[a-z\']{2,}"</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -Fvwf stopwords <span style="color:var(--term-2)">|</span>
+uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> -nr <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">head</span><span style="color:var(--term-5);font-weight:bold"> -n</span> 10
+
+
+
+
+                                <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">[ Read 8 lines ]</span>
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^O</span> Write Out <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^F</span> Where Is  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^K</span> Cut       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Execute   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Location
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^X</span> Exit      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^R</span> Read File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^\</span> Replace   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^U</span> Paste     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^J</span> Justify   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^/</span> Go To Line</code></pre>
+
+<p>Go ahead and type <em><code>#!/usr/bin/env/bash</code></em> and press <strong><code>Enter</code></strong>. When you’re ready, press <strong><code>Ctrl-X</code></strong> to save and exit.</p>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-3.sh *                            </span>
+<span style="color:var(--term-6)">#!/usr/bin/env bash</span>
+curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
+tr <span style="color:var(--term-3);font-weight:bold">'[:upper:]'</span> <span style="color:var(--term-3);font-weight:bold">'[:lower:]'</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -oE <span style="color:var(--term-3);font-weight:bold">"[a-z\']{2,}"</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -Fvwf stopwords <span style="color:var(--term-2)">|</span>
+uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> -nr <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">head</span><span style="color:var(--term-5);font-weight:bold"> -n</span> 10
+
+
+
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Save modified buffer?                                                           </span>
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> Y</span> Yes
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> N</span> No           <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel</code></pre>
+
+<p>Press <strong><code>Y</code></strong> to indicate that you want to save the file.</p>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-3.sh *                            </span>
+<span style="color:var(--term-6)">#!/usr/bin/env bash</span>
+curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
+tr <span style="color:var(--term-3);font-weight:bold">'[:upper:]'</span> <span style="color:var(--term-3);font-weight:bold">'[:lower:]'</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -oE <span style="color:var(--term-3);font-weight:bold">"[a-z\']{2,}"</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">grep</span> -Fvwf stopwords <span style="color:var(--term-2)">|</span>
+uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">sort</span> -nr <span style="color:var(--term-2)">|</span>
+<span style="color:var(--term-4);font-weight:bold">head</span><span style="color:var(--term-5);font-weight:bold"> -n</span> 10
+
+
+
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Write to File: top-words-3.sh                                                   </span>
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help         <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-D</span> DOS Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-A</span> Append      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-B</span> Backup File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Browse
+<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-M</span> Mac Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-P</span> Prepend     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^Q</span> Discard buffer</code></pre>
+
+<p>Let’s confirm what <em>top-words-3.sh</em> looks like:</p>
+
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words-3.sh</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">top-words-3.sh</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env bash</span></span>
+<span class="term-output">   2   │ curl<span style="color:var(--term-6)"> -sL</span> <span style="color:var(--term-2)">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   3   │ tr <span style="color:var(--term-2)">'[:upper:]'</span> <span style="color:var(--term-2)">'[:lower:]'</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   4   │ grep<span style="color:var(--term-6)"> -oE</span> <span style="color:var(--term-2)">"[a-z\']{2,}"</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   5   │ sort <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   6   │ grep<span style="color:var(--term-6)"> -Fvwf</span> stopwords <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   7   │ uniq<span style="color:var(--term-6)"> -c</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   8   │ sort<span style="color:var(--term-6)"> -nr</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   9   │ head<span style="color:var(--term-6)"> -n</span> 10</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>That’s exactly what we need: our original pipeline with a shebang in front of it.</p>
+<p>Sometimes you will come across scripts that have a shebang in the form of <em><code>!/usr/bin/bash</code></em> or <em><code>!/usr/bin/python</code></em> (in the case of Python, as we will see in the next section). While this generally works, if the <code>bash</code> or <code>python</code><span class="citation" data-cites="python"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span> executables are installed in a different location than <em>/usr/bin</em>, then the script does not work anymore. It is better to use the form that I present here, namely <em><code>!/usr/bin/env bash</code></em> and <em><code>!/usr/bin/env python</code></em>, because the <code>env</code><span class="citation" data-cites="env"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span> executable is aware where <code>bash</code> and <code>python</code> are installed. In short, using <code>env</code> makes your scripts more portable.</p>
+</section>
+<section id="step-4-remove-fixed-input" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="step-4-remove-fixed-input"><span class="header-section-number">4.2.4</span> Step 4: Remove Fixed Input</h3>
+<p>We know have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is <code>curl</code>, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.</p>
+<p>What if we wanted to obtain the top 10 most-used words from another e-book, or any other text for that matter? The input data is fixed within the tools itself. It would be better to separate the data from the command-line tool.</p>
+<p>If we assume that the user of the command-line tool will provide the text, the tool will become generally applicable. So, the solution is to remove the <code>curl</code> command from the script. Here is the updated script named <em>top-words-4.sh</em>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> -v top-words-{3,4}.sh
+<span class="term-output">'top-words-3.sh' -&gt; 'top-words-4.sh'</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sed</span> -i <span style="color:var(--term-3)">'2d'</span> <span style="text-decoration:underline">top-words-4.sh</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words-4.sh</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">top-words-4.sh</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env bash</span></span>
+<span class="term-output">   2   │ tr <span style="color:var(--term-2)">'[:upper:]'</span> <span style="color:var(--term-2)">'[:lower:]'</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   3   │ grep<span style="color:var(--term-6)"> -oE</span> <span style="color:var(--term-2)">"[a-z\']{2,}"</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   4   │ sort <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   5   │ grep<span style="color:var(--term-6)"> -Fvwf</span> stopwords <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   6   │ uniq<span style="color:var(--term-6)"> -c</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   7   │ sort<span style="color:var(--term-6)"> -nr</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   8   │ head<span style="color:var(--term-6)"> -n</span> 10</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>This works because if a script starts with a command that needs data from standard input, like <code>tr</code>, it will take the input that is given to the command-line tools. For example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://www.gutenberg.org/files/11/11-0.txt'</span> | <span style="color:var(--term-2)">./top-words-4.sh</span>
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">     63 king</span>
+<span class="term-output">     60 turtle</span>
+<span class="term-output">     57 mock</span>
+<span class="term-output">     56 hatter</span>
+<span class="term-output">     55 gryphon</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://www.gutenberg.org/files/12/12-0.txt'</span> | <span style="color:var(--term-2)">./top-words-4.sh</span>
+<span class="term-output">    469 alice</span>
+<span class="term-output">    189 queen</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     72 time</span>
+<span class="term-output">     71 red</span>
+<span class="term-output">     70 white</span>
+<span class="term-output">     67 king</span>
+<span class="term-output">     63 head</span>
+<span class="term-output">     59 knight</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> bash | <span style="color:var(--term-2)">./top-words-4.sh</span>
+<span class="term-output">    676 command</span>
+<span class="term-output">    392 bash</span>
+<span class="term-output">    362 word</span>
+<span class="term-output">    355 variable</span>
+<span class="term-output">    354 set</span>
+<span class="term-output">    349 option</span>
+<span class="term-output">    330 file</span>
+<span class="term-output">    302 expansion</span>
+<span class="term-output">    280 history</span>
+<span class="term-output">    274 list</span></code></pre>
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Although we have not done so in our script, the same principle holds for saving data. It is, in general, better to let the user take care of that using output redirection than to let the script write to a specific file. Of course, if you intend to use a command-line tool only for your own projects, then there are no limits to how specific you can be.</p>
+</div>
+</div>
+</section>
+<section id="step-5-add-arguments" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="step-5-add-arguments"><span class="header-section-number">4.2.5</span> Step 5: Add Arguments</h3>
+<p>There is one more step to make our command-line tool even more reusable: parameters. In our command-line tool there are a number of fixed command-line arguments, for example <code>-nr</code> for <code>sort</code> and <code>-n 10</code> for <code>head</code>. It is probably best to keep the former argument fixed. However, it would be very useful to allow for different values for the <code>head</code> command. This would allow the end user to set the number of most-often used words to output. Below shows what our file <em>top-words-5.sh</em> looks like:</p>
+
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words-5.sh</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">top-words-5.sh</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env bash</span></span>
+<span class="term-output">   2   │</span>
+<span class="term-output">   3   │ NUM_WORDS<span style="color:var(--term-5)">=</span><span style="color:var(--term-2)">"${1</span><span style="color:var(--term-5)">:-</span><span style="color:var(--term-2)">10}"</span></span>
+<span class="term-output">   4   │</span>
+<span class="term-output">   5   │ tr <span style="color:var(--term-2)">'[:upper:]'</span> <span style="color:var(--term-2)">'[:lower:]'</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   6   │ grep<span style="color:var(--term-6)"> -oE</span> <span style="color:var(--term-2)">"[a-z\']{2,}"</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   7   │ sort <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   8   │ grep<span style="color:var(--term-6)"> -Fvwf</span> stopwords <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">   9   │ uniq<span style="color:var(--term-6)"> -c</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">  10   │ sort<span style="color:var(--term-6)"> -nr</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">  11   │ head<span style="color:var(--term-6)"> -n</span> <span style="color:var(--term-2)">"${NUM_WORDS}"</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<ul>
+<li>The variable <em>NUM_WORDS</em> is set to the value of <em>$1</em>, which is a special variable in Bash. It holds the value of the first command-line argument passed to our command-line tool. The table below lists the other special variables that Bash offers. If no value is specified, it will take on the value “10.”</li>
+<li>Note that in order to <em>use</em> the value of the <em>$NUM_WORDS</em> variable, you need to put a dollar sign in front of it. When you <em>set</em> it, you don’t write a dollar sign.</li>
+</ul>
+<p>We could have also used <em>$1</em> directly as an argument for <code>head</code> and not bother creating an extra variable such <em>NUM_WORDS</em>. However, with larger scripts and a few more command-line arguments such as <em>$2</em> and <em>$3</em>, your code becomes more readable when you use named variables.</p>
+<p>Now if you wanted to see the top 20 most-used words of our text, we would invoke our command-line tool as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-3)">&gt;</span> alice.txt
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">./top-words-5.sh</span> 20
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">     63 king</span>
+<span class="term-output">     60 turtle</span>
+<span class="term-output">     57 mock</span>
+<span class="term-output">     56 hatter</span>
+<span class="term-output">     55 gryphon</span>
+<span class="term-output">     53 rabbit</span>
+<span class="term-output">     50 head</span>
+<span class="term-output">     48 voice</span>
+<span class="term-output">     45 looked</span>
+<span class="term-output">     44 mouse</span>
+<span class="term-output">     42 duchess</span>
+<span class="term-output">     40 tone</span>
+<span class="term-output">     40 dormouse</span>
+<span class="term-output">     37 cat</span>
+<span class="term-output">     34 march</span></code></pre>
+
+<p>If the user does not specify a number, then our script will show the top 10 most common words:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">./top-words-5.sh</span>
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">     63 king</span>
+<span class="term-output">     60 turtle</span>
+<span class="term-output">     57 mock</span>
+<span class="term-output">     56 hatter</span>
+<span class="term-output">     55 gryphon</span></code></pre>
+
+</section>
+<section id="step-6-extend-your-path" class="level3" data-number="4.2.6">
+<h3 data-number="4.2.6" class="anchored" data-anchor-id="step-6-extend-your-path"><span class="header-section-number">4.2.6</span> Step 6: Extend Your PATH</h3>
+<p>After the previous five steps we are finally finished building a reusable command-line tool. There is, however, one more step that can be very useful. In this optional step we are going to ensure that you can execute your command-line tools from everywhere.</p>
+<p>Currently, when you want to execute your command-line tool, you either have to navigate to the directory it is in or include the full path name as shown in step 2. This is fine if the command-line tool is specifically built for, say, a certain project. However, if your command-line tool could be applied in multiple situations, then it is useful to be able to execute it from everywhere, just like the command-line tools that come with Ubuntu.</p>
+<p>To accomplish this, Bash needs to know where to look for your command-line tools. It does this by traversing a list of directories which are stored in an environment variable called <em>PATH</em>. In a fresh Docker container, the <em>PATH</em> looks like this:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> $PATH
+<span class="term-output">/opt/venv/bin:/opt/uv/bin:/usr/bin/dsutils:/home/dst/.local/bin:/usr/local/sbin:</span>
+<span class="term-output">/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span></code></pre>
+
+<p>The directories are delimited by colons. We can print it as a list of directories by <em>translating</em> the colons to newlines:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> $PATH | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">':'</span> <span style="color:var(--term-3)">'\n'</span>
+<span class="term-output">/opt/venv/bin</span>
+<span class="term-output">/opt/uv/bin</span>
+<span class="term-output">/usr/bin/dsutils</span>
+<span class="term-output">/home/dst/.local/bin</span>
+<span class="term-output">/usr/local/sbin</span>
+<span class="term-output">/usr/local/bin</span>
+<span class="term-output">/usr/sbin</span>
+<span class="term-output">/usr/bin</span>
+<span class="term-output">/sbin</span>
+<span class="term-output">/bin</span></code></pre>
+
+<p>To change the <em>PATH</em> permanently, you’ll need to edit the <em>.bashrc</em> or <em>.profile</em> file located in your home directory. If you put all your custom command-line tools into one directory, say, <em>~/tools</em>, then you only change the <em>PATH</em> once. Now, you no longer need to add the <em>./</em>, but you can just use the filename. Moreover, you do no longer need to remember where the command-line tool is located.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> -v top-words{-5.sh,}
+<span class="term-output">'top-words-5.sh' -&gt; 'top-words'</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">export</span> PATH=<span style="color:var(--term-3)">"</span><span style="color:var(--term-6)">${PATH}</span><span style="color:var(--term-3)">:/data/ch04"</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> $PATH
+<span class="term-output">/opt/venv/bin:/opt/uv/bin:/usr/bin/dsutils:/home/dst/.local/bin:/usr/local/sbin:</span>
+<span class="term-output">/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/ch04</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">top-words</span> 10
+<span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
+<span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
+<span class="term-output">100 170.2k 100 170.2k   0      0 74.11M      0                              0</span>
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">     63 king</span>
+<span class="term-output">     60 turtle</span>
+<span class="term-output">     57 mock</span>
+<span class="term-output">     56 hatter</span>
+<span class="term-output">     55 gryphon</span></code></pre>
+
+</section>
+</section>
+<section id="creating-command-line-tools-with-python-and-r" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="creating-command-line-tools-with-python-and-r"><span class="header-section-number">4.3</span> Creating Command-line Tools with Python and R</h2>
+<p>The command-line tool that we created in the previous section was written in Bash. (Sure, not every feature of the Bash programming language was employed, but the interpreter still was <code>bash</code>.) As you know by now, the command line is language agnostic, so we don’t necessarily have to use Bash for creating command-line tools.</p>
+<p>In this section I’m going demonstrate that command-line tools can be created in other programming languages as well. I’ll focus on Python and R because these are the two most popular programming languages within the data science community. I cannot offer a complete introduction to either language, so I assume that you have some familiarity with Python and or R. Other programming languages such as Java, Go, and Julia, follow a similar pattern when it comes to creating command-line tools.</p>
+<p>There are three main reasons for creating command-line tools in another programming language than Bash. First, you may already have some code that you’d like to be able to use from the command line. Second, the command-line tool would end up encompassing more than a hundred lines of Bash code. Third, the command-line tool needs to be more safe and robust (Bash lacks many features such as type checking).</p>
+<p>The six steps that I discussed in the previous section roughly apply to creating command-line tools in other programming languages as well. The first step, however, would not be copy pasting from the command line, but rather copy pasting the relevant code into a new file. Command-line tools written in Python and R need to specify <code>python</code> and <code>Rscript</code><span class="citation" data-cites="R"><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></span>, respectively, as the interpreter after the shebang.</p>
+<p>When it comes to creating command-line tools using Python and R, there are two more aspects that deserve special attention. First, processing standard input, which comes natural to shell scripts, has to be taken care of explicitly in Python and R. Second, as command-line tools written in Python and R tend to be more complex, we may also want to offer the user the ability to specify more elaborate command-line arguments.</p>
+<section id="porting-the-shell-script" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="porting-the-shell-script"><span class="header-section-number">4.3.1</span> Porting The Shell Script</h3>
+<p>As a starting point, let’s see how we would port the shell script we just created to both Python and R. In other words, what Python and R code gives us the top most-often used words from standard input? We will first show the two files <em>top-words.py</em> and <em>top-words.R</em> and then discuss the differences with the shell code. In Python, the code would look something like:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch04</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words.py</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">top-words.py</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env python</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-5)">import</span> re</span>
+<span class="term-output">   3   │ <span style="color:var(--term-5)">import</span> sys</span>
+<span class="term-output">   4   │</span>
+<span class="term-output">   5   │ <span style="color:var(--term-5)">from</span> collections <span style="color:var(--term-5)">import</span> Counter</span>
+<span class="term-output">   6   │ <span style="color:var(--term-5)">from</span> urllib.request <span style="color:var(--term-5)">import</span> urlopen</span>
+<span class="term-output">   7   │</span>
+<span class="term-output">   8   │ <span style="color:var(--term-5)">def</span> <span style="color:var(--term-4)">top_words</span>(<span style="color:var(--term-6)">text</span>, <span style="color:var(--term-6)">n</span>):</span>
+<span class="term-output">   9   │     <span style="color:var(--term-5)">with</span> urlopen(<span style="color:var(--term-2)">"https://raw.githubusercontent.com/stopwords-iso/stopw</span></span>
+<span class="term-output">       │ <span style="color:var(--term-2)">ords-en/master/stopwords-en.txt"</span>) <span style="color:var(--term-5)">as</span> f:</span>
+<span class="term-output">  10   │         stopwords <span style="color:var(--term-5)">=</span> f.read().decode(<span style="color:var(--term-2)">"utf-8"</span>).split(<span style="color:var(--term-2)">"</span><span style="color:var(--term-6)">\n</span><span style="color:var(--term-2)">"</span>)</span>
+<span class="term-output">  11   │</span>
+<span class="term-output">  12   │     words <span style="color:var(--term-5)">=</span> re.findall(<span style="color:var(--term-2)">"[a-z']{2,}"</span>, text.lower())</span>
+<span class="term-output">  13   │     words <span style="color:var(--term-5)">=</span> (w <span style="color:var(--term-5)">for</span> w <span style="color:var(--term-5)">in</span> words <span style="color:var(--term-5)">if</span> w <span style="color:var(--term-5)">not</span> <span style="color:var(--term-5)">in</span> stopwords)</span>
+<span class="term-output">  14   │</span>
+<span class="term-output">  15   │     <span style="color:var(--term-5)">for</span> word, count <span style="color:var(--term-5)">in</span> Counter(words).most_common(n):</span>
+<span class="term-output">  16   │         <span style="color:var(--term-6)">print</span>(<span style="color:var(--term-5)">f</span><span style="color:var(--term-2)">"</span>{count<span style="color:var(--term-3)">:&gt;7</span>}<span style="color:var(--term-2)"> </span>{word}<span style="color:var(--term-2)">"</span>)</span>
+<span class="term-output">  17   │</span>
+<span class="term-output">  18   │</span>
+<span class="term-output">  19   │ <span style="color:var(--term-5)">if</span> __name__ <span style="color:var(--term-5)">==</span> <span style="color:var(--term-2)">"__main__"</span>:</span>
+<span class="term-output">  20   │     text <span style="color:var(--term-5)">=</span> sys.stdin.read()</span>
+<span class="term-output">  21   │</span>
+<span class="term-output">  22   │     <span style="color:var(--term-5)">try</span>:</span>
+<span class="term-output">  23   │         n <span style="color:var(--term-5)">=</span> int(sys.argv[<span style="color:var(--term-3)">1</span>])</span>
+<span class="term-output">  24   │     <span style="color:var(--term-5)">except</span>:</span>
+<span class="term-output">  25   │         n <span style="color:var(--term-5)">=</span> <span style="color:var(--term-3)">10</span></span>
+<span class="term-output">  26   │</span>
+<span class="term-output">  27   │     top_words(text, n)</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Note that this Python example doesn’t use any third-party packages. If you want to do advanced text processing, then I recommend you check out the NLTK package<span class="citation" data-cites="Perkins2010"><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></span>. If you’re going to work with a lot of numerical data, then I recommend you use the Pandas package<span class="citation" data-cites="McKinney2012"><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></span>.</p>
+<p>And in R the code would look something like:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words.R</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">top-words.R</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env Rscript</span></span>
+<span class="term-output">   2   │ n <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">as.integer</span>(<span style="color:var(--term-6)">commandArgs</span>(<span style="color:var(--term-6)">trailingOnly</span> <span style="color:var(--term-5)">=</span> <span style="color:var(--term-3)">TRUE</span>))</span>
+<span class="term-output">   3   │ <span style="color:var(--term-5)">if</span> (<span style="color:var(--term-6)">length</span>(n) <span style="color:var(--term-5)">==</span> <span style="color:var(--term-3)">0</span>) n <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-3)">10</span></span>
+<span class="term-output">   4   │</span>
+<span class="term-output">   5   │ f_stopwords <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">url</span>(<span style="color:var(--term-2)">"https://raw.githubusercontent.com/stopwords-iso/sto</span></span>
+<span class="term-output">       │ <span style="color:var(--term-2)">pwords-en/master/stopwords-en.txt"</span>)</span>
+<span class="term-output">   6   │ stopwords <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">readLines</span>(f_stopwords, <span style="color:var(--term-6)">warn</span> <span style="color:var(--term-5)">=</span> <span style="color:var(--term-3)">FALSE</span>)</span>
+<span class="term-output">   7   │ <span style="color:var(--term-6)">close</span>(f_stopwords)</span>
+<span class="term-output">   8   │</span>
+<span class="term-output">   9   │ f_text <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">file</span>(<span style="color:var(--term-2)">"stdin"</span>)</span>
+<span class="term-output">  10   │ lines <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">tolower</span>(<span style="color:var(--term-6)">readLines</span>(f_text))</span>
+<span class="term-output">  11   │</span>
+<span class="term-output">  12   │ words <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">unlist</span>(<span style="color:var(--term-6)">regmatches</span>(lines, <span style="color:var(--term-6)">gregexpr</span>(<span style="color:var(--term-2)">"[a-z']{2,}"</span>, lines)))</span>
+<span class="term-output">  13   │ words <span style="color:var(--term-5)">&lt;-</span> words[<span style="color:var(--term-6)">is.na</span>(<span style="color:var(--term-6)">match</span>(words, stopwords))]</span>
+<span class="term-output">  14   │</span>
+<span class="term-output">  15   │ counts <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">sort</span>(<span style="color:var(--term-6)">table</span>(words), <span style="color:var(--term-6)">decreasing</span> <span style="color:var(--term-5)">=</span> <span style="color:var(--term-3)">TRUE</span>)</span>
+<span class="term-output">  16   │ <span style="color:var(--term-6)">cat</span>(<span style="color:var(--term-6)">sprintf</span>(<span style="color:var(--term-2)">"%7d %s</span><span style="color:var(--term-6)">\n</span><span style="color:var(--term-2)">"</span>, counts[<span style="color:var(--term-3)">1</span><span style="color:var(--term-5)">:</span>n], <span style="color:var(--term-6)">names</span>(counts[<span style="color:var(--term-3)">1</span><span style="color:var(--term-5)">:</span>n])), <span style="color:var(--term-6)">sep</span> <span style="color:var(--term-5)">=</span> <span style="color:var(--term-2)">""</span>)</span>
+<span class="term-output">  17   │ <span style="color:var(--term-6)">close</span>(f_text)</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Let’s check that all three implementations (i.e., Bash, Python, and R) return the same top 5 words with the same counts:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">time</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">top-words</span> 5
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">top-words 5 &lt; alice.txt  0.04s user 0.02s system 147% cpu 0.036 total</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">time</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">top-words.py</span> 5
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">top-words.py 5 &lt; alice.txt  0.16s user 0.01s system 42% cpu 0.397 total</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">time</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">top-words.R</span> 5
+<span class="term-output">    403 alice</span>
+<span class="term-output">     98 gutenberg</span>
+<span class="term-output">     88 project</span>
+<span class="term-output">     76 queen</span>
+<span class="term-output">     71 time</span>
+<span class="term-output">top-words.R 5 &lt; alice.txt  0.10s user 0.02s system 47% cpu 0.265 total</span></code></pre>
+
+<p>Wonderful! Sure, the output itself is not very exciting. What’s exciting is that we can accomplish the same task with multiple languages. Let’s look at the differences between the approaches.</p>
+<p>First, what’s immediately obvious is the difference in amount of code. For this specific task, both Python and R require much more code than Bash. This illustrates that, for some tasks, it is better to use the command line. For other tasks, you may better off using a programming language. As you gain more experience on the command line, you will start to recognize when to use which approach. When everything is a command-line tool, you can even split up the task into subtasks, and combine a Bash command-line tool with, say, a Python command-line tool. Whichever approach works best for the task at hand.</p>
+</section>
+<section id="processing-streaming-data-from-standard-input" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="processing-streaming-data-from-standard-input"><span class="header-section-number">4.3.2</span> Processing Streaming Data from Standard Input</h3>
+<p>In the previous two code snippets, both Python and R read the complete standard input at once. On the command line, most tools pipe data to the next command-line tool in a streaming fashion. There are a few command-line tools which require the complete data before they write any data to standard output, like <code>sort</code>. This means the pipeline is blocked by such command-line tools. This doesn’t have to be a problem when the input data is finite, like a file. However, when the input data is a non-stop stream, such blocking command-line tools are useless.</p>
+<p>Luckily Python and R support processing streaming data. You can apply a function on a line-per-line basis, for example. Here are two minimal examples that demonstrate how this works in Python and R, respectively.</p>
+<p>Both the Python and R tool solve the, by now infamous, Fizz Buzz problem, which is defined as follows: Print the numbers from 1 to 100, except that if the number is divisible by 3, instead print “fizz”; if the number is divisible by 5, instead print “buzz”; and if the number is divisible by 15, instead print “fizzbuzz.” Here’s the Python code<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">fizzbuzz.py</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">fizzbuzz.py</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env python</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-5)">import</span> sys</span>
+<span class="term-output">   3   │</span>
+<span class="term-output">   4   │ CYCLE_OF_15 <span style="color:var(--term-5)">=</span> [<span style="color:var(--term-2)">"fizzbuzz"</span>, <span style="color:var(--term-3)">None</span>, <span style="color:var(--term-3)">None</span>, <span style="color:var(--term-2)">"fizz"</span>, <span style="color:var(--term-3)">None</span>,</span>
+<span class="term-output">   5   │                <span style="color:var(--term-2)">"buzz"</span>, <span style="color:var(--term-2)">"fizz"</span>, <span style="color:var(--term-3)">None</span>, <span style="color:var(--term-3)">None</span>, <span style="color:var(--term-2)">"fizz"</span>,</span>
+<span class="term-output">   6   │                <span style="color:var(--term-2)">"buzz"</span>, <span style="color:var(--term-3)">None</span>, <span style="color:var(--term-2)">"fizz"</span>, <span style="color:var(--term-3)">None</span>, <span style="color:var(--term-3)">None</span>]</span>
+<span class="term-output">   7   │</span>
+<span class="term-output">   8   │ <span style="color:var(--term-5)">def</span> <span style="color:var(--term-4)">fizz_buzz</span>(<span style="color:var(--term-6)">n</span>: int) -&gt; str:</span>
+<span class="term-output">   9   │     <span style="color:var(--term-5)">return</span> CYCLE_OF_15[n <span style="color:var(--term-5)">%</span> <span style="color:var(--term-3)">15</span>] <span style="color:var(--term-5)">or</span> str(n)</span>
+<span class="term-output">  10   │</span>
+<span class="term-output">  11   │ <span style="color:var(--term-5)">if</span> __name__ <span style="color:var(--term-5)">==</span> <span style="color:var(--term-2)">"__main__"</span>:</span>
+<span class="term-output">  12   │     <span style="color:var(--term-5)">try</span>:</span>
+<span class="term-output">  13   │         <span style="color:var(--term-5)">while</span> (n<span style="color:var(--term-5)">:=</span> sys.stdin.readline()):</span>
+<span class="term-output">  14   │             <span style="color:var(--term-6)">print</span>(fizz_buzz(int(n)))</span>
+<span class="term-output">  15   │     <span style="color:var(--term-5)">except</span>:</span>
+<span class="term-output">  16   │         <span style="color:var(--term-5)">pass</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>And here’s the R code:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">fizzbuzz.R</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">fizzbuzz.R</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env Rscript</span></span>
+<span class="term-output">   2   │ cycle_of_15 <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">c</span>(<span style="color:var(--term-2)">"fizzbuzz"</span>, <span style="color:var(--term-3)">NA</span>, <span style="color:var(--term-3)">NA</span>, <span style="color:var(--term-2)">"fizz"</span>, <span style="color:var(--term-3)">NA</span>,</span>
+<span class="term-output">   3   │                  <span style="color:var(--term-2)">"buzz"</span>, <span style="color:var(--term-2)">"fizz"</span>, <span style="color:var(--term-3)">NA</span>, <span style="color:var(--term-3)">NA</span>, <span style="color:var(--term-2)">"fizz"</span>,</span>
+<span class="term-output">   4   │                  <span style="color:var(--term-2)">"buzz"</span>, <span style="color:var(--term-3)">NA</span>, <span style="color:var(--term-2)">"fizz"</span>, <span style="color:var(--term-3)">NA</span>, <span style="color:var(--term-3)">NA</span>)</span>
+<span class="term-output">   5   │</span>
+<span class="term-output">   6   │ <span style="color:var(--term-4)">fizz_buzz</span> <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-5)">function</span>(<span style="color:var(--term-6)">n</span>) {</span>
+<span class="term-output">   7   │   word <span style="color:var(--term-5)">&lt;-</span> cycle_of_15[<span style="color:var(--term-6)">as.integer</span>(n) <span style="color:var(--term-5)">%%</span> <span style="color:var(--term-3)">15</span> <span style="color:var(--term-5)">+</span> <span style="color:var(--term-3)">1</span>]</span>
+<span class="term-output">   8   │   <span style="color:var(--term-6)">ifelse</span>(<span style="color:var(--term-6)">is.na</span>(word), n, word)</span>
+<span class="term-output">   9   │ }</span>
+<span class="term-output">  10   │</span>
+<span class="term-output">  11   │ f <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">file</span>(<span style="color:var(--term-2)">"stdin"</span>)</span>
+<span class="term-output">  12   │ <span style="color:var(--term-6)">open</span>(f)</span>
+<span class="term-output">  13   │ <span style="color:var(--term-5)">while</span>(<span style="color:var(--term-6)">length</span>(n <span style="color:var(--term-5)">&lt;-</span> <span style="color:var(--term-6)">readLines</span>(f, <span style="color:var(--term-6)">n</span> <span style="color:var(--term-5)">=</span> <span style="color:var(--term-3)">1</span>)) <span style="color:var(--term-5)">&gt;</span> <span style="color:var(--term-3)">0</span>) {</span>
+<span class="term-output">  14   │   <span style="color:var(--term-6)">write</span>(fizz_buzz(n), <span style="color:var(--term-6)">stdout</span>())</span>
+<span class="term-output">  15   │ }</span>
+<span class="term-output">  16   │ <span style="color:var(--term-6)">close</span>(f)</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Let’s test both tools (to save space I pipe the output to <code>column</code>):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 30 | <span style="color:var(--term-2)">fizzbuzz.py</span> | <span style="color:var(--term-2)">column</span> -x
+<span class="term-output">1               2               fizz            4               buzz</span>
+<span class="term-output">fizz            7               8               fizz            buzz</span>
+<span class="term-output">11              fizz            13              14              fizzbuzz</span>
+<span class="term-output">16              17              fizz            19              buzz</span>
+<span class="term-output">fizz            22              23              fizz            buzz</span>
+<span class="term-output">26              fizz            28              29              fizzbuzz</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 30 | <span style="color:var(--term-2)">fizzbuzz.R</span> | <span style="color:var(--term-2)">column</span> -x
+<span class="term-output">1               2               fizz            4               buzz</span>
+<span class="term-output">fizz            7               8               fizz            buzz</span>
+<span class="term-output">11              fizz            13              14              fizzbuzz</span>
+<span class="term-output">16              17              fizz            19              buzz</span>
+<span class="term-output">fizz            22              23              fizz            buzz</span>
+<span class="term-output">26              fizz            28              29              fizzbuzz</span></code></pre>
+
+<p>This output looks correct to me! It’s difficult to demonstrate that these two tools actually work in a streaming manner. You can verify this yourself by piping the input data to <code>sample -d 100</code> before it’s piped to the Python or R tool. That way, you’ll add a small delay in between each line so that it’s easier to confirm that the tools don’t wait for all the input data, operate on a line by line basis.</p>
+</section>
+</section>
+<section id="summary-3" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="summary-3"><span class="header-section-number">4.4</span> Summary</h2>
+<p>In this intermezzo chapter, I have shown you how to build your own command-line tool. Only six steps are needed to turn your code into a reusable building block. You’ll find that it makes you much more productive. I advise you to keep an eye out for opportunities to create your own tools. The next chapter covers the second step of the OSEMN model for data science, namely scrubbing data.</p>
+</section>
+<section id="for-further-exploration-3" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="for-further-exploration-3"><span class="header-section-number">4.5</span> For Further Exploration</h2>
+<ul>
+<li>Adding help documentation to your tool becomes important when the tool has many options to remember, and even more so when you want to share your tool with others. <code>docopt</code> is a language-agnostic framework to provide help and define the possible options that your tool accepts. There are implementations available in just about any programming language including Bash, Python, and R.</li>
+<li>If you want to learn more about programming in Bash, I recommend <em>Classic Shell Programming</em> by Arnold Robbins and Nelson Beebe and <em>Bash Cookbook</em> by Carl Albing and JP Vossen.</li>
+<li>Writing a robust and safe Bash script is quite tricky. <a href="https://www.shellcheck.net/">ShellCheck</a> is an online tool that will check your Bash code for mistakes and vulnerabilities. There’s also a command-line tool available.</li>
+<li>The book <em>Ten Essays on Fizz Buzz</em> by Joel Grus is an insightful and fun collection of ten different ways to solve Fizz Buzz with Python.</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p><em>Classic Shell Scripting</em> (O’Reilly Media, 2005).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Jim Meyering, <em><span class="nocase">tr</span> – Translate or Delete Characters</em>, version 8.30, 2018, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Jim Meyering, <em><span class="nocase">grep</span> – Print Lines That Match Patterns</em>, version 3.4, 2019, <a href="https://www.gnu.org/software/grep">https://www.gnu.org/software/grep</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Mike Haertel and Paul Eggert, <em><span class="nocase">sort</span> – Sort Lines of Text Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Richard M. Stallman and David MacKenzie, <em><span class="nocase">uniq</span> – Report or Omit Repeated Lines</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Brian Fox and Chet Ramey, <em><span class="nocase">bash</span> – <span>GNU Bourne-Again SHell</span></em>, version 5.0.17, 2019, <a href="https://www.gnu.org/software/bash">https://www.gnu.org/software/bash</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>David MacKenzie and Jim Meyering, <em><span class="nocase">chmod</span> – Change File Mode Bits</em>, version 8.30, 2018, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Benno Schulenberg et al., <em><span class="nocase">nano</span> – <span class="nocase">Nano’s ANOther editor, inspired by Pico</span></em>, version 5.4, 2020, <a href="https://nano-editor.org">https://nano-editor.org</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>The Python Software Foundation, <em><span class="nocase">python</span> – an Interpreted, Interactive, Object-Oriented Programming Language</em>, version 3.8.5, 2021, <a href="https://www.python.org">https://www.python.org</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Richard Mlynarik, David MacKenzie, and Assaf Gordon, <em><span class="nocase">env</span> – Run a Program in a Modified Environment</em>, version 8.32, 2020, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>The R Foundation for Statistical Computing, <em><span>R</span> – a Language and Environment for Statistical Computing</em>, version 4.0.4, 2021, <a href="https://www.r-project.org">https://www.r-project.org</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Jacob Perkins, <em>Python Text Processing with NLTK 2.0 Cookbook</em> (Packt Publishing, 2010).<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Wes McKinney, <em>Python for Data Analysis</em> (O’Reilly Media, 2012).<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>This code is adapted from a <a href="https://github.com/joelgrus/fizzbuzz/blob/master/fizzbuzz/cycle_of_15.py">Python script by Joel Grus</a>.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-3-obtaining-data.html" class="pagination-link" aria-label="Obtaining Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-5-scrubbing-data.html" class="pagination-link" aria-label="Scrubbing Data">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Scrubbing Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-4-creating-command-line-tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-4-creating-command-line-tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>
+(function() {
+  function addCopyButtons() {
+    var pres = document.querySelectorAll('pre.term-output, pre.term-screen, pre.term-source');
+    pres.forEach(function(pre) {
+      var wrap = document.createElement('div');
+      wrap.className = 'term-container';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+      var btn = document.createElement('button');
+      btn.className = 'term-copy-btn';
+      btn.setAttribute('aria-label', 'Copy commands to clipboard');
+      btn.setAttribute('title', 'Copy commands to clipboard');
+      var clipIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>';
+      var checkIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>';
+      btn.innerHTML = clipIcon;
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var source = code || pre;
+        var clone = source.cloneNode(true);
+        clone.querySelectorAll('.term-output').forEach(function(el) { el.remove(); });
+        var text = clone.innerText.replace(/\n{2,}/g, '\n').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          btn.innerHTML = checkIcon;
+          btn.setAttribute('title', 'Copied!');
+          setTimeout(function() {
+            btn.innerHTML = clipIcon;
+            btn.setAttribute('title', 'Copy commands to clipboard');
+          }, 1500);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addCopyButtons);
+  } else {
+    addCopyButtons();
+  }
+})();
+</script>
+
+
+
+
+</body></html>

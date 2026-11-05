@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+
+<title>8&nbsp; Parallel Pipelines – Data Science at the Command Line, 2e</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-9-modeling-data.html" rel="next">
+<link href="./chapter-7-exploring-data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/quarto-term-0.7.1/term.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
+<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+
+
+<meta property="og:title" content="8&nbsp; Parallel Pipelines – Data Science at the Command Line, 2e">
+<meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta property="og:image" content="images/dscl_0801.png">
+<meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta name="twitter:title" content="8&nbsp; Parallel Pipelines – Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta name="twitter:image" content="images/dscl_0801.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-8-parallel-pipelines.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science at the Command Line, 2e</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-obtaining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-creating-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-5-scrubbing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Scrubbing Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6-project-management-with-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Project Management with Make</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploring Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8-parallel-pipelines.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-9-modeling-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-10-polyglot-data-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Polyglot Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-11-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./list-of-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">List of Command-Line Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview-5" id="toc-overview-5" class="nav-link active" data-scroll-target="#overview-5"><span class="header-section-number">8.1</span> Overview</a></li>
+  <li><a href="#serial-processing" id="toc-serial-processing" class="nav-link" data-scroll-target="#serial-processing"><span class="header-section-number">8.2</span> Serial Processing</a>
+  <ul class="collapse">
+  <li><a href="#looping-over-numbers" id="toc-looping-over-numbers" class="nav-link" data-scroll-target="#looping-over-numbers"><span class="header-section-number">8.2.1</span> Looping Over Numbers</a></li>
+  <li><a href="#looping-over-lines" id="toc-looping-over-lines" class="nav-link" data-scroll-target="#looping-over-lines"><span class="header-section-number">8.2.2</span> Looping Over Lines</a></li>
+  <li><a href="#looping-over-files" id="toc-looping-over-files" class="nav-link" data-scroll-target="#looping-over-files"><span class="header-section-number">8.2.3</span> Looping Over Files</a></li>
+  </ul></li>
+  <li><a href="#parallel-processing" id="toc-parallel-processing" class="nav-link" data-scroll-target="#parallel-processing"><span class="header-section-number">8.3</span> Parallel Processing</a>
+  <ul class="collapse">
+  <li><a href="#introducing-gnu-parallel" id="toc-introducing-gnu-parallel" class="nav-link" data-scroll-target="#introducing-gnu-parallel"><span class="header-section-number">8.3.1</span> Introducing GNU Parallel</a></li>
+  <li><a href="#specifying-input" id="toc-specifying-input" class="nav-link" data-scroll-target="#specifying-input"><span class="header-section-number">8.3.2</span> Specifying Input</a></li>
+  <li><a href="#controlling-the-number-of-concurrent-jobs" id="toc-controlling-the-number-of-concurrent-jobs" class="nav-link" data-scroll-target="#controlling-the-number-of-concurrent-jobs"><span class="header-section-number">8.3.3</span> Controlling the Number of Concurrent Jobs</a></li>
+  <li><a href="#logging-and-output" id="toc-logging-and-output" class="nav-link" data-scroll-target="#logging-and-output"><span class="header-section-number">8.3.4</span> Logging and Output</a></li>
+  <li><a href="#creating-parallel-tools" id="toc-creating-parallel-tools" class="nav-link" data-scroll-target="#creating-parallel-tools"><span class="header-section-number">8.3.5</span> Creating Parallel Tools</a></li>
+  </ul></li>
+  <li><a href="#distributed-processing" id="toc-distributed-processing" class="nav-link" data-scroll-target="#distributed-processing"><span class="header-section-number">8.4</span> Distributed Processing</a>
+  <ul class="collapse">
+  <li><a href="#get-list-of-running-aws-ec2-instances" id="toc-get-list-of-running-aws-ec2-instances" class="nav-link" data-scroll-target="#get-list-of-running-aws-ec2-instances"><span class="header-section-number">8.4.1</span> Get List of Running AWS EC2 Instances</a></li>
+  <li><a href="#running-commands-on-remote-machines" id="toc-running-commands-on-remote-machines" class="nav-link" data-scroll-target="#running-commands-on-remote-machines"><span class="header-section-number">8.4.2</span> Running Commands on Remote Machines</a></li>
+  <li><a href="#distributing-local-data-among-remote-machines" id="toc-distributing-local-data-among-remote-machines" class="nav-link" data-scroll-target="#distributing-local-data-among-remote-machines"><span class="header-section-number">8.4.3</span> Distributing Local Data among Remote Machines</a></li>
+  <li><a href="#processing-files-on-remote-machines" id="toc-processing-files-on-remote-machines" class="nav-link" data-scroll-target="#processing-files-on-remote-machines"><span class="header-section-number">8.4.4</span> Processing Files on Remote Machines</a></li>
+  </ul></li>
+  <li><a href="#summary-7" id="toc-summary-7" class="nav-link" data-scroll-target="#summary-7"><span class="header-section-number">8.5</span> Summary</a></li>
+  <li><a href="#for-further-exploration-7" id="toc-for-further-exploration-7" class="nav-link" data-scroll-target="#for-further-exploration-7"><span class="header-section-number">8.6</span> For Further Exploration</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="chapter-8-parallel-pipelines" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+<!-- #TODO: SHOULD: Dicuss progress bar -->
+<p>In the previous chapters, we’ve been dealing with commands and pipelines that take care of an entire task at once. In practice, however, you may find yourself facing a task which requires the same command or pipeline to run multiple times. For, example, you may need to:</p>
+<ul>
+<li>Scrape hundreds of web pages</li>
+<li>Make dozens of API calls and transform their output</li>
+<li>Train a classifier for a range of parameter values</li>
+<li>Generate scatter plots for every pair of features in your dataset</li>
+</ul>
+<p>In any of the above examples, there’s a certain form of repetition involved. With your favorite scripting or programming language, you take care of this with a for loop or a while loop. On the command line, the first thing you might be inclined to do is to press <strong><code>Up</code></strong> to bring back the previous command, modify it if necessary, and press <strong><code>Enter</code></strong> to run the command again. This is fine for two or three times, but imagine doing this dozens of times. Such an approach quickly becomes cumbersome, inefficient, and prone to errors. The good news is that you can write such loops on the command line as well. That’s what this chapter is all about.</p>
+<p>Sometimes, repeating a fast command one after the other (in a <em>serial</em> manner) is sufficient. When you have multiple cores (and perhaps even multiple machines) it would be nice if you could make use of those, especially when you’re faced with a data-intensive task. When using multiple cores or machines, the total running time may be reduced significantly. In this chapter I will introduce a very powerful tool called <code>parallel</code><span class="citation" data-cites="parallel"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span> that can take care of exactly this. It enables you to apply a command or pipeline for a range of arguments such as numbers, lines, and files. Plus, as the name implies, it allows you to run your commands in <em>parallel</em>.</p>
+<section id="overview-5" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="overview-5"><span class="header-section-number">8.1</span> Overview</h2>
+<p>This intermezzo chapter discusses several approaches to speed up tasks that require commands and pipelines to be run many times. My main goal is to demonstrate to you the flexibility and power of <code>parallel</code>. Because this tool can be combined with any other tool discussed in this book, it will positively change the way you use the command line for data science. In this chapter, you’ll learn about:</p>
+<ul>
+<li>Running commands in serial to a range of numbers, lines, and files</li>
+<li>Breaking a large task into several smaller tasks</li>
+<li>Running pipelines in parallel</li>
+<li>Distributing pipelines to multiple machines</li>
+</ul>
+<p>This chapter starts with the following files:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch08</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 20K</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  5 22:41 emails.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  5 22:41 movies.txt</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  5 22:41 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  5 22:41 users.json</span></code></pre>
+
+<p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
+</section>
+<section id="serial-processing" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="serial-processing"><span class="header-section-number">8.2</span> Serial Processing</h2>
+<p>Before I dive into parallelization, I’ll briefly discuss looping in a serial fashion. It’s worthwhile to know how to do this because this functionality is always available, the syntax closely resembles looping in other programming languages, and it will really make you appreciate <code>parallel</code>.</p>
+<p>From the examples provided in the introduction of this chapter, we can distill three types of items to loop over: numbers, lines, and files. These three types of items will be discussed in the next three subsections, respectively.</p>
+<section id="looping-over-numbers" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="looping-over-numbers"><span class="header-section-number">8.2.1</span> Looping Over Numbers</h3>
+<p>Imagine that you need to compute the square of every even integer between 0 and 100. There’s a tool called <code>bc</code><span class="citation" data-cites="bc"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>, which is a <em>basic calculator</em> where you can pipe an equation to. The command to compute the square of 4 looks as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"4^2"</span> | <span style="color:var(--term-2)">bc</span>
+<span class="term-output">16</span></code></pre>
+
+<p>For a one-off calculation, this will do. However, as mentioned in the introduction, you would need to be crazy to press <strong><code>Up</code></strong>, change the number, and press <strong><code>Enter</code></strong> 50 times! In this case it’s better to let the shell do the hard work for you by using a for loop:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> i in {0..100..2} <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">do</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"</span><span style="color:var(--term-6)">$i</span><span style="color:var(--term-3)">^2"</span> | <span style="color:var(--term-2)">bc</span> <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">0</span>
+<span class="term-output">4</span>
+<span class="term-output">16</span>
+<span class="term-output">36</span>
+<span class="term-output">64</span>
+<span class="term-output">100</span>
+<span class="term-output">144</span>
+<span class="term-output">196</span>
+<span class="term-output">256</span>
+<span class="term-output">324</span>
+<span class="term-output">… with 41 more lines</span></code></pre>
+
+<ol type="1">
+<li>The Z shell has a feature called brace expansion, which transforms <em><code>{0..100..2}</code></em> into a list separated by spaces: <em><code>0 2 4 … 98 100</code></em>. The variable <em><code>i</code></em> is assigned the value “0” in the first iteration, “1” in the second iteration, and so forth.</li>
+<li>The value of this variable can be used by prefixing it with a dollar sign (<em><code>$</code></em>). The shell will replace <em><code>$i</code></em> with its value before <code>echo</code> is being executed. Note that there can be more than one command between <em><code>do</code></em> and <em><code>done</code></em>.</li>
+</ol>
+<p>Although the syntax may appear a bit odd compared to your favorite programming language, it’s worth remembering this because it’s always available in the shell. I’ll introduce a better and more flexible way of repeating commands in a moment.</p>
+</section>
+<section id="looping-over-lines" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="looping-over-lines"><span class="header-section-number">8.2.2</span> Looping Over Lines</h3>
+<p>The second type of items you can loop over are lines. These lines can come from either a file or from standard input. This is a very generic approach because the lines can contain anything, including: numbers, dates, and email addresses.</p>
+<p>Imagine that you’d want to send an email to all your contacts. Let’s first generate some fake users using the free <a href="https://randomuser.me">Random User Generator API</a>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://randomuser.me/api/1.2/?results=5&amp;seed=dsatcl2e"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">users.json</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">users.json</span> <span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.results[].email'</span> <span style="color:var(--term-3)">&gt;</span> emails
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">emails</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">emails</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ selma.andersen@example.com</span>
+<span class="term-output">   2   │ kent.clark@example.com</span>
+<span class="term-output">   3   │ ditmar.niehaus@example.com</span>
+<span class="term-output">   4   │ benjamin.robinson@example.com</span>
+<span class="term-output">   5   │ paulo.muller@example.com</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>You can loop over the lines from <em>emails</em> with a while loop:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">while</span> <span style="color:var(--term-2)">read</span> line <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">do</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"Sending invitation to </span><span style="color:var(--term-6)">${line}</span><span style="color:var(--term-3)">."</span> <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">emails</span> <span class="term-callout">➌</span>
+<span class="term-output">Sending invitation to selma.andersen@example.com.</span>
+<span class="term-output">Sending invitation to kent.clark@example.com.</span>
+<span class="term-output">Sending invitation to ditmar.niehaus@example.com.</span>
+<span class="term-output">Sending invitation to benjamin.robinson@example.com.</span>
+<span class="term-output">Sending invitation to paulo.muller@example.com.</span></code></pre>
+
+<ol type="1">
+<li>In this case you need to use a while loop because the Z shell does not know beforehand how many lines the input consists of.</li>
+<li>Although the curly braces around the <em>line</em> variable are not necessary in this case (since variable names cannot contain periods), it’s still good practice.</li>
+<li>This redirection can also be placed before <code>while</code>.</li>
+</ol>
+<p>You can also provide input to a while loop interactively by specifying the special file standard input <em>/dev/stdin</em>. Press <strong><code>Ctrl-D</code></strong> when you are done.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">while</span> <span style="color:var(--term-2)">read</span> line; <span style="color:var(--term-3)">do</span> <span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"You typed: </span><span style="color:var(--term-6)">${line}</span><span style="color:var(--term-3)">."</span>; <span style="color:var(--term-3)">done</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">/dev/stdin</span>
+<span class="term-output">one</span>
+<span class="term-output">You typed: one.</span>
+<span class="term-output">two</span>
+<span class="term-output">You typed: two.</span>
+<span class="term-output">three</span>
+<span class="term-output">You typed: three.</span></code></pre>
+
+<p>This method, however, has the disadvantage that, once you press <strong><code>Enter</code></strong>, the commands between <em><code>do</code></em> and <em><code>done</code></em> are run immediately for that line of input. There’s no turning back.</p>
+</section>
+<section id="looping-over-files" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="looping-over-files"><span class="header-section-number">8.2.3</span> Looping Over Files</h3>
+<p>In this section I discuss the third type of item that we often need to loop over: files.</p>
+<p>To handle special characters, use <em>globbing</em> (i.e., pathname expansion) instead of <code>ls</code><span class="citation" data-cites="ls"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> chapter in /data/<span style="color:var(--term-4)">*</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">do</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"Processing Chapter </span><span style="color:var(--term-6)">${chapter}</span><span style="color:var(--term-3)">."</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span>
+<span class="term-output">Processing Chapter /data/ch02.</span>
+<span class="term-output">Processing Chapter /data/ch03.</span>
+<span class="term-output">Processing Chapter /data/ch04.</span>
+<span class="term-output">Processing Chapter /data/ch05.</span>
+<span class="term-output">Processing Chapter /data/ch06.</span>
+<span class="term-output">Processing Chapter /data/ch07.</span>
+<span class="term-output">Processing Chapter /data/ch08.</span>
+<span class="term-output">Processing Chapter /data/ch09.</span>
+<span class="term-output">Processing Chapter /data/ch10.</span></code></pre>
+
+<p>Just as with brace expansion, the expression <em><code>/data/*</code></em> is first expanded into a list by the Z shell before it’s being processed by the for loop.</p>
+<p>A more elaborate alternative to listing files is <code>find</code><span class="citation" data-cites="find"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span>, which:</p>
+<ul>
+<li>Can traverse down directories</li>
+<li>Allows for elaborate searching on properties such as size, access time, and permissions</li>
+<li>Handles special characters such as spaces and newlines</li>
+</ul>
+<p>For example, the following <code>find</code> invocation lists all files located under the directory <em>/data</em> that have <em>csv</em> as extension and are smaller than 2 kilobyte:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">find</span> <span style="text-decoration:underline">/data</span> -type f -name <span style="color:var(--term-3)">'*.csv'</span> -size -2k
+<span class="term-output">/data/ch03/tmnt-missing-newline.csv</span>
+<span class="term-output">/data/ch03/tmnt-with-header.csv</span>
+<span class="term-output">/data/ch03/tmnt-basic.csv</span>
+<span class="term-output">/data/ch07/datatypes.csv</span>
+<span class="term-output">/data/ch05/names.csv</span>
+<span class="term-output">/data/ch05/names-comma.csv</span>
+<span class="term-output">/data/ch05/irismeta.csv</span></code></pre>
+
+</section>
+</section>
+<section id="parallel-processing" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="parallel-processing"><span class="header-section-number">8.3</span> Parallel Processing</h2>
+<p>Let’s say that you have a very long running tool, such as the one shown here:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">slow.sh</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">slow.sh</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/bin/bash</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-6)">echo</span> <span style="color:var(--term-2)">"Starting job $1"</span> <span style="color:var(--term-5)">|</span> ts <span class="term-callout">➊</span></span>
+<span class="term-output">   3   │ duration<span style="color:var(--term-5)">=</span><span style="color:var(--term-2)">$((</span><span style="color:var(--term-3)">1</span><span style="color:var(--term-5)">+</span><span style="color:var(--term-2)">RANDOM</span><span style="color:var(--term-5)">%</span><span style="color:var(--term-3)">5</span><span style="color:var(--term-2)">))</span> <span class="term-callout">➋</span></span>
+<span class="term-output">   4   │ sleep $duration <span class="term-callout">➌</span></span>
+<span class="term-output">   5   │ <span style="color:var(--term-6)">echo</span> <span style="color:var(--term-2)">"Job $1 took ${duration} seconds"</span> <span style="color:var(--term-5)">|</span> ts</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<ol type="1">
+<li><code>ts</code><span class="citation" data-cites="ts"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> adds a timestamp.</li>
+<li>The magic variable <em><code>RANDOM</code></em> calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that <em>duration</em> is between 1 and 5.</li>
+<li><code>sleep</code> pauses execution for a given number of seconds.</li>
+</ol>
+<p>This process probably doesn’t take up all the available resources. And it so happens that you need to run this command a lot of times. For example, you need to download a whole sequence of files.</p>
+<p>A naive way to parallelize is to run the commands in the background. Let’s run <code>slow.sh</code> three times:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> i in {A..C}; <span style="color:var(--term-3)">do</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">./slow.sh</span> $i &amp; <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span>
+<span class="term-output">[2] 174 <span class="term-callout">➋</span></span>
+<span class="term-output">[3] 175</span>
+<span class="term-output">[4] 176</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 05 22:41:20 Starting job A
+<span class="term-output">Nov 05 22:41:20 Starting job B</span>
+<span class="term-output">Nov 05 22:41:20 Starting job C</span>
+<span class="term-output">Nov 05 22:41:22 Job B took 2 seconds</span>
+<span class="term-output"></span>
+<span class="term-output">[3]  - done       ./slow.sh $i</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 05 22:41:23 Job A took 3 seconds
+<span class="term-output">Nov 05 22:41:23 Job C took 3 seconds</span>
+<span class="term-output"></span>
+<span class="term-output">[2]  - done       ./slow.sh $i</span>
+<span class="term-prompt" data-prompt="$"></span>
+<span class="term-output">[4]  + done       ./slow.sh $i</span>
+<span class="term-prompt" data-prompt="$"></span></code></pre>
+
+<ol type="1">
+<li>The ampersand (<code>&amp;</code>) sends the command to the background, allowing the for loop to continue immediately with the next iteration.</li>
+<li>This line shows the job number given by the Z shell and the process ID, which can be used for more fine-grained job control. This topic, while powerful, is beyond the scope of this book.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep in mind that not everything can be parallelized. API calls may be limited to a certain number, or some commands can only have one instance.</p>
+</div>
+</div>
+<p><a href="#fig-diagram-parallel-processing" class="quarto-xref">Figure&nbsp;<span>8.1</span></a> illustrates, on a conceptual level, the difference between serial processing, naive parallel processing, and parallel processing with GNU Parallel in terms of the number of concurrent processes and the total amount of time it takes to run everything.</p>
+<div id="fig-diagram-parallel-processing" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-parallel-processing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0801.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-parallel-processing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: Serial processing, naive parallel processing, and parallel processing with GNU Parallel
+</figcaption>
+</figure>
+</div>
+<p>There are two problems with this naive approach. First, there’s no way to control how many processes you are running concurrently. If you start too many jobs at once, they could be competing for the same resources such as CPU, memory, disk access, and network bandwidth. This could lead to a longer time to run everything. Second, it’s difficult to tell which output belongs to which input. Let’s look at a better approach.</p>
+<section id="introducing-gnu-parallel" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="introducing-gnu-parallel"><span class="header-section-number">8.3.1</span> Introducing GNU Parallel</h3>
+<p>Allow me to introduce <code>parallel</code>, a command-line tool that allows you to parallelize and distribute commands and pipelines. The beauty of this tool is that existing tools can be used as they are; they do not need to be modified.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Be aware that there are two command-line tools with the name <code>parallel</code>. If you’re using the Docker image then you already have the correct one installed. Otherwise, you can check that you have the correct one by running <code>parallel --version</code>. It should say “GNU parallel.”</p>
+</div>
+</div>
+<p>Before I go into the details of <code>parallel</code>, here’s a little teaser to show you how easy it is to replace the for-loop from earlier:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 2 100 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo {}^2 | bc"</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">0</span>
+<span class="term-output">4</span>
+<span class="term-output">16</span>
+<span class="term-output">36</span>
+<span class="term-output">64</span>
+<span class="term-output">100</span>
+<span class="term-output">144</span>
+<span class="term-output">196</span>
+<span class="term-output">256</span>
+<span class="term-output">324</span>
+<span class="term-output">… with 41 more lines</span></code></pre>
+
+<p>This is <code>parallel</code> in its simplest form: the items to loop over are passed via standard input and there aren’t any arguments other than the command that <code>parallel</code> needs to run. See <a href="#fig-diagram-parallel-output" class="quarto-xref">Figure&nbsp;<span>8.2</span></a> for an illustration of how <code>parallel</code> concurrently distributes input among processes and collects their outputs.</p>
+<div id="fig-diagram-parallel-output" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-parallel-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0802.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-parallel-output-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and collects their outputs
+</figcaption>
+</figure>
+</div>
+<p>As you can see it basically acts as a for loop. Here’s another teaser, which replaces the for loop from the previous section.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --jobs 2 <span style="text-decoration:underline">./slow.sh</span> ::: {A..C}
+<span class="term-output">Nov 05 22:41:28 Starting job B</span>
+<span class="term-output">Nov 05 22:41:29 Job B took 1 seconds</span>
+<span class="term-output">Nov 05 22:41:28 Starting job A</span>
+<span class="term-output">Nov 05 22:41:31 Job A took 3 seconds</span>
+<span class="term-output">Nov 05 22:41:29 Starting job C</span>
+<span class="term-output">Nov 05 22:41:34 Job C took 5 seconds</span></code></pre>
+
+<p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
+<p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality. (Perhaps too much.) Luckily you only need to know a handful in order to be effective. The manual page is quite informative in case you need to use a less common option.</p>
+</section>
+<section id="specifying-input" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="specifying-input"><span class="header-section-number">8.3.2</span> Specifying Input</h3>
+<p>The most important argument to <code>parallel</code>, is the command or pipeline that you’d like to run for every input. The question is: where should the input item be inserted in the command line? If you don’t specify anything, then the input item will be appended to the end of the pipeline.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3 | <span style="color:var(--term-2)">parallel</span> cowsay
+<span class="term-output"></span>
+<span class="term-output"> ___</span>
+<span class="term-output">&lt; 1 &gt;</span>
+<span class="term-output"> ---</span>
+<span class="term-output">        \   ^__^</span>
+<span class="term-output">         \  (oo)\_______</span>
+<span class="term-output">            (__)\       )\/\</span>
+<span class="term-output">                ||----w |</span>
+<span class="term-output">                ||     ||</span>
+<span class="term-output"> ___</span>
+<span class="term-output">&lt; 2 &gt;</span>
+<span class="term-output"> ---</span>
+<span class="term-output">        \   ^__^</span>
+<span class="term-output">         \  (oo)\_______</span>
+<span class="term-output">            (__)\       )\/\</span>
+<span class="term-output">                ||----w |</span>
+<span class="term-output">                ||     ||</span>
+<span class="term-output"> ___</span>
+<span class="term-output">&lt; 3 &gt;</span>
+<span class="term-output"> ---</span>
+<span class="term-output">        \   ^__^</span>
+<span class="term-output">         \  (oo)\_______</span>
+<span class="term-output">            (__)\       )\/\</span>
+<span class="term-output">                ||----w |</span>
+<span class="term-output">                ||     ||</span></code></pre>
+
+<p>The above is the same as running:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> 1 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span> <span class="term-callout">➊</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> 2 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> 3 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
+
+<ol type="1">
+<li>Because the output is the same as before, I redirect it to <em>/dev/null</em> to suppress it.</li>
+</ol>
+<p>Although this often works, I advise you to be explicit about where the input item should be inserted in the command by using placeholders. In this case, because you want to use the entire input line (a number) at once, you only need one placeholder. You specify the placeholder, in other words, where to put the input item, with a pair of curly braces (<code>{}</code>):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3 | <span style="color:var(--term-2)">parallel</span> cowsay {} <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are other ways to provide input to <code>parallel</code>. I prefer piping the input (as I do throughout this chapter) because that’s how most command-line tools are chained together into a pipeline. The other ways involve syntax that’s not seen anywhere else. Having said that, they do enable additional functionality, such as iterating over all possible combinations of multiple lists, so be sure to read <code>parallel</code>s manual page if you like to know more.</p>
+</div>
+</div>
+<p>When the input items are filenames, there are a couple of modifiers you can use only parts of the filename. For example, with <code>{/}</code>, only the basename of the filename will be used:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">find</span> <span style="text-decoration:underline">/data/ch03</span> -type f | <span style="color:var(--term-2)">parallel</span> echo <span style="color:var(--term-3)">'{#}\) \"{}\" has basename \"{/}\"'</span> <span class="term-callout">➊</span>
+<span class="term-output">1) "/data/ch03/tmnt-missing-newline.csv" has basename "tmnt-missing-newline.csv"</span>
+<span class="term-output">2) "/data/ch03/r-datasets.db" has basename "r-datasets.db"</span>
+<span class="term-output">3) "/data/ch03/tmnt-with-header.csv" has basename "tmnt-with-header.csv"</span>
+<span class="term-output">4) "/data/ch03/tmnt-basic.csv" has basename "tmnt-basic.csv"</span>
+<span class="term-output">5) "/data/ch03/logs.tar.gz" has basename "logs.tar.gz"</span>
+<span class="term-output">6) "/data/ch03/top2000.xlsx" has basename "top2000.xlsx"</span></code></pre>
+
+<ol type="1">
+<li>Characters such as parentheses (<code>)</code>) and quotes (<code>"</code>) have a special meaning in the shell. To use them literally you put a backslash <code>\</code> in front of them. This is called <em>escaping</em>.</li>
+</ol>
+<p>If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">input.csv</span> <span style="color:var(--term-2)">parallel</span> --colsep , <span style="color:var(--term-3)">"mv {2} {1}"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
+
+<p>Here, you can apply the same placeholder modifiers. It is also possible to reuse the same input item. If the input to <code>parallel</code> is a CSV file with a header, then you can use the column names as placeholders:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">input.csv</span> <span style="color:var(--term-2)">parallel</span> -C, --header : <span style="color:var(--term-3)">"invite {name} {email}"</span></code></pre>
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you ever wonder whether your placeholders are set up correctly, you can add the <code>--dryrun</code> option. Instead of actually executing the command, <code>parallel</code> will print out all the commands exactly as if they would have been executed.</p>
+</div>
+</div>
+</section>
+<section id="controlling-the-number-of-concurrent-jobs" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="controlling-the-number-of-concurrent-jobs"><span class="header-section-number">8.3.3</span> Controlling the Number of Concurrent Jobs</h3>
+<p>By default, parallel runs one job per CPU core. You can control the number of jobs that will be run concurrently with the <code>--jobs</code> or <code>-j</code> option. Specifying a number means that many jobs will be run concurrently. If you put a plus sign in front of the number then <code>parallel</code> will run <em>N</em> jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run <em>N-M</em> jobs. Where <em>N</em> is the number of CPU cores. You can also specify a percentage, where the default is 100% of the number of CPU cores. The optimal number of jobs to run concurrently depends on the actual commands you are running.</p>
+<!-- #TODO: Figure out where to type concurrently instead of parallel. And make sure all occurences of parallel are surrounded by backticks -->
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> -j0 <span style="color:var(--term-3)">"echo Hi {}"</span>
+<span class="term-output">Hi 1</span>
+<span class="term-output">Hi 2</span>
+<span class="term-output">Hi 3</span>
+<span class="term-output">Hi 4</span>
+<span class="term-output">Hi 5</span></code></pre>
+
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> -j200% <span style="color:var(--term-3)">"echo Hi {}"</span>
+<span class="term-output">Hi 1</span>
+<span class="term-output">Hi 2</span>
+<span class="term-output">Hi 3</span>
+<span class="term-output">Hi 4</span>
+<span class="term-output">Hi 5</span></code></pre>
+
+<p>If you specify <code>-j1</code>, then the commands will be run in serial. Even though this doesn’t do the name of the tool of justice, it still has its uses. For example, when you need to access an API which only allows one connection at a time. If you specify <code>-j0</code>, then parallel will run as many jobs in parallel as possible. This can be compared to your loop with the ampersand. This is not advised.</p>
+</section>
+<section id="logging-and-output" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="logging-and-output"><span class="header-section-number">8.3.4</span> Logging and Output</h3>
+<p>To save the output of each command, you might be tempted to the following:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo </span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)">Hi {}</span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)"> &gt; hi-{}.txt"</span></code></pre>
+
+<p>This will save the output into individual files. Or, if you want to save everything into one big file you could do the following:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo Hi {}"</span> <span style="color:var(--term-3)">&gt;&gt;</span> one-big-file.txt</code></pre>
+
+<p>However, <code>parallel</code> offers the <code>--results</code> option, which stores the output in separate files. For each job, <code>parallel</code> creates three files: <em>seq</em>, which holds the job number, <em>stdout</em> which contains the output produced by the job, and <em>stderr</em> which contains any errors produced by the job. These three files are placed in subdirectories based on the input values.</p>
+<p><code>parallel</code> still prints all the output, which is redundant in this case. You can redirect both the standard input and standard output to <em>/dev/null</em> as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 10 | <span style="color:var(--term-2)">parallel</span> --results outdir <span style="color:var(--term-3)">"curl 'https://anapioficeandfire.com/api/ch</span>
+<span class="term-output"><span style="color:var(--term-3)">aracters/{}' | jq -r '.aliases[0]'"</span> <span style="color:var(--term-3)">2&gt;</span><span style="text-decoration:underline">/dev/null</span> <span style="color:var(--term-3)">1&gt;&amp;</span>2</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tree</span> <span style="text-decoration:underline">outdir</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">outdir</span>
+<span class="term-output">└── 1</span>
+<span class="term-output">    ├── 1</span>
+<span class="term-output">    │&nbsp;&nbsp; ├── seq</span>
+<span class="term-output">    │&nbsp;&nbsp; ├── stderr</span>
+<span class="term-output">    │&nbsp;&nbsp; └── stdout</span>
+<span class="term-output">    ├── 10</span>
+<span class="term-output">    │&nbsp;&nbsp; ├── seq</span>
+<span class="term-output">    │&nbsp;&nbsp; ├── stderr</span>
+<span class="term-output">    │&nbsp;&nbsp; └── stdout</span>
+<span class="term-output">… with 34 more lines</span></code></pre>
+
+<p>See <a href="#fig-diagram-parallel-results" class="quarto-xref">Figure&nbsp;<span>8.3</span></a> for a pictorial overview of how the <code>--results</code> option works.</p>
+<div id="fig-diagram-parallel-results" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-diagram-parallel-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0803.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-diagram-parallel-results-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--results</code> option
+</figcaption>
+</figure>
+</div>
+<p>When you’re running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input. The output of jobs is therefore also mixed up. To keep the same order, specify the <code>--keep-order</code> option or <code>-k</code> option.</p>
+<p>Sometimes it’s useful to record which input generated which output. <code>parallel</code> allows you to <em>tag</em> the output with the <code>--tag</code> option, which prepends each line with the input item.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> --tag <span style="color:var(--term-3)">"echo 'sqrt({})' | bc -l"</span>
+<span class="term-output">1       1</span>
+<span class="term-output">2       1.41421356237309504880</span>
+<span class="term-output">3       1.73205080756887729352</span>
+<span class="term-output">4       2.00000000000000000000</span>
+<span class="term-output">5       2.23606797749978969640</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --tag --keep-order <span style="color:var(--term-3)">"echo '{1}*{2}' | bc -l"</span> ::: 3 4 ::: 5 6 7
+<span class="term-output">3 5     15</span>
+<span class="term-output">3 6     18</span>
+<span class="term-output">3 7     21</span>
+<span class="term-output">4 5     20</span>
+<span class="term-output">4 6     24</span>
+<span class="term-output">4 7     28</span></code></pre>
+
+</section>
+<section id="creating-parallel-tools" class="level3" data-number="8.3.5">
+<h3 data-number="8.3.5" class="anchored" data-anchor-id="creating-parallel-tools"><span class="header-section-number">8.3.5</span> Creating Parallel Tools</h3>
+<p>The <code>bc</code> tool, which I used in the beginning of the chapter, is not parallel by itself. However, you can parallelize it using <code>parallel</code>. The Docker image contains a tool called <code>pbc</code><span class="citation" data-cites="pbc"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>. Its code is shown here:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">which</span> pbc<span style="color:var(--term-5)">)</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">/usr/bin/dsutils/pbc</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/bin/bash</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-2)"># pbc: parallel bc. First column of input CSV is mapped to {1}, second </span></span>
+<span class="term-output">       │ <span style="color:var(--term-2)">to {2}, and so forth.</span></span>
+<span class="term-output">   3   │ <span style="color:var(--term-2)">#</span></span>
+<span class="term-output">   4   │ <span style="color:var(--term-2)"># Example usage: paste -d, &lt;(seq 100) &lt;(seq 100 -1 1) | ./pbc 'sqrt({1}</span></span>
+<span class="term-output">       │ <span style="color:var(--term-2)">*{2})'</span></span>
+<span class="term-output">   5   │ <span style="color:var(--term-2)">#</span></span>
+<span class="term-output">   6   │ <span style="color:var(--term-2)"># Dependency: GNU parallel</span></span>
+<span class="term-output">   7   │ <span style="color:var(--term-2)">#</span></span>
+<span class="term-output">   8   │ <span style="color:var(--term-2)"># Author: http://jeroenjanssens.com</span></span>
+<span class="term-output">   9   │</span>
+<span class="term-output">  10   │ parallel<span style="color:var(--term-6)"> -C</span>,<span style="color:var(--term-6)"> -k -j100</span>% <span style="color:var(--term-2)">"echo '$1' | bc -l"</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>This tool allows us to simplify the code used in the beginning of the chapter too. And it can process comma-separated values simultaneously:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 100 | <span style="color:var(--term-2)">pbc</span> <span style="color:var(--term-3)">'{1}^2'</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">1</span>
+<span class="term-output">4</span>
+<span class="term-output">9</span>
+<span class="term-output">16</span>
+<span class="term-output">25</span>
+<span class="term-output">36</span>
+<span class="term-output">49</span>
+<span class="term-output">64</span>
+<span class="term-output">81</span>
+<span class="term-output">100</span>
+<span class="term-output">… with 90 more lines</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">seq</span> 4<span style="color:var(--term-5)">)</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">seq</span> 4<span style="color:var(--term-5)">)</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">seq</span> 4<span style="color:var(--term-5)">)</span> | <span style="color:var(--term-2)">pbc</span> <span style="color:var(--term-3)">'sqrt({1}+{2})^{3}'</span>
+<span class="term-output">1.41421356237309504880</span>
+<span class="term-output">4.00000000000000000000</span>
+<span class="term-output">14.69693845669906858905</span>
+<span class="term-output">63.99999999999999999969</span></code></pre>
+
+</section>
+</section>
+<section id="distributed-processing" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="distributed-processing"><span class="header-section-number">8.4</span> Distributed Processing</h2>
+<p>Sometimes you need more power than your local machine, even with all its cores, can offer. Luckily, <code>parallel</code> can also leverage the power of remote machines, which really allows you to speed up your pipeline.</p>
+<p>What’s great is that <code>parallel</code> doesn’t have to be installed on the remote machine. All that’s required is that you can connect to the remote machine with the <em>Secure Shell</em> protocol (or SSH), which is also what <code>parallel</code> uses to distribute your pipeline. (Having <code>parallel</code> installed is helpful because it can then determine how many cores to employ on each remote machine; more on this later.)</p>
+<!-- #TODO: Introduce AWS EC2 -->
+<!-- #TODO: COULD: Talk about Google Cloud and MS Azure -->
+<p>First, I’m going to obtain a list of running AWS EC2 instances. Don’t worry if you don’t have any remote machines, you can replace any occurrence of <code>--slf hostnames</code>, which tells <code>parallel</code> which remote machines to use, with <code>--sshlogin :</code>. This way, you can still follow along with the examples in this section.</p>
+<p>Once you know which remote machines to take over, we’re going to consider three flavors of distributed processing:</p>
+<ul>
+<li>Running ordinary commands on remote machines</li>
+<li>Distributing local data directly among remote machines</li>
+<li>Sending files to remote machines, process them, and retrieve the results</li>
+</ul>
+<section id="get-list-of-running-aws-ec2-instances" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="get-list-of-running-aws-ec2-instances"><span class="header-section-number">8.4.1</span> Get List of Running AWS EC2 Instances</h3>
+<!-- #TODO: Add links to GCP And Azure -->
+<p>In this section we’re creating a file named <em>hostnames</em> that will contain one hostname of a remote machine per line. I’m using Amazon Web Services (AWS) as an example. I assume that you have an AWS account and that you know how to launch instances. If you’re using a different cloud computing service (such as Google Cloud Platform or Microsoft Azure), or if you have your own servers, please make sure that you create a <em>hostnames</em> file yourself before continuing to the next section.</p>
+<p>You can obtain a list of running AWS EC2 instances using <code>aws</code><span class="citation" data-cites="aws"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, the command-line interface to the AWS API. With <code>aws</code>, you can almost do everything you can do with the online AWS Management Console.</p>
+<p>The command <code>aws ec2 describe-instances</code> returns a lot of information about all your EC2 instances in JSON format (see <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instances.html">the online documentation</a> for more information). You can extract the relevant fields using <code>jq</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">aws</span> ec2 describe-instances | <span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.Reservations[].Instances[] | {public_dns: .P</span>
+<span class="term-output"><span style="color:var(--term-3)">ublicDnsName, state: .State.Name}'</span></span>
+<span class="term-output">{</span>
+<span class="term-output">  "state": "running",</span>
+<span class="term-output">  "public_dns": "ec2-54-88-122-140.compute-1.amazonaws.com"</span>
+<span class="term-output">}</span>
+<span class="term-output">{</span>
+<span class="term-output">  "state": "stopped",</span>
+<span class="term-output">  "public_dns": null</span>
+<span class="term-output">}</span></code></pre>
+
+<p>The possible states of an EC2 instance are: <em><code>pending</code></em>, <em><code>running</code></em>, <em><code>shutting-down</code></em>, <em><code>terminated</code></em>, <em><code>stopping</code></em>, and <em><code>stopped</code></em>. Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">aws</span> ec2 describe-instances | <span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.Reservations[].Instances[] | select(.Stat</span>
+<span class="term-output"><span style="color:var(--term-3)">e.Name=="running") | .PublicDnsName'</span> | <span style="color:var(--term-2)">tee</span> hostnames</span>
+<span class="term-output">ec2-54-88-122-140.compute-1.amazonaws.com</span>
+<span class="term-output">ec2-54-88-89-208.compute-1.amazonaws.com</span></code></pre>
+
+<p>(Without the <code>-r</code> or <code>--raw-output</code> option, the hostnames would have been surrounded by double quotes.) The output is saved to <em>hostnames</em>, so that I can pass this to <code>parallel</code> later.</p>
+<p>As mentioned, <code>parallel</code> employs <code>ssh</code><span class="citation" data-cites="ssh"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span> to connect to the remote machines. If you want to connect to your EC2 instances without typing the credentials every time, you can add something like the following text to the file <em>~/.ssh/config</em>.</p>
+
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">~/.ssh/config</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">/home/dst/.ssh/config</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-5)">Host</span> <span style="color:var(--term-5)">*</span><span style="color:var(--term-6)">.amazonaws.com</span></span>
+<span class="term-output">   2   │         <span style="color:var(--term-5)">IdentityFile</span> <span style="color:var(--term-2)">~/.ssh/MyKeyFile.pem</span></span>
+<span class="term-output">   3   │         <span style="color:var(--term-5)">User</span> <span style="color:var(--term-2)">ubuntu</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Depending on your which distribution your running, your user name may be different than <em><code>ubuntu</code></em>.</p>
+</section>
+<section id="running-commands-on-remote-machines" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="running-commands-on-remote-machines"><span class="header-section-number">8.4.2</span> Running Commands on Remote Machines</h3>
+<p>The first flavor of distributed processing is to run ordinary commands on remote machines. Let’s first double check that <code>parallel</code> is working by running the tool <code>hostname</code><span class="citation" data-cites="hostname"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span> on each EC2 instance:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --sshloginfile hostnames hostname
+<span class="term-output">ip-172-31-23-204</span>
+<span class="term-output">ip-172-31-23-205</span></code></pre>
+
+<p>Here, the <code>--sshloginfile</code> or <code>--slf</code> option is used to refer to the file <em>hostnames</em>. The <code>--nonall</code> option instructs <code>parallel</code> to execute the same command on every remote machine in the <em>hostnames</em> file without using any parameters. Remember, if you don’t have any remote machines to utilize, you can replace <code>--slf hostnames</code> with <code>--sshlogin :</code> so that the command is run on your local machine:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --sshlogin : hostname
+<span class="term-output">data-science-toolbox</span></code></pre>
+
+<p>Running the same command on every remote machine once only requires one core per machine. If you wanted to distribute the list of arguments passed in to <code>parallel</code> then it could potentially use more than one core. If the number of cores are not specified explicitly, <code>parallel</code> will try to determine this.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 2 | <span style="color:var(--term-2)">parallel</span> --slf hostnames echo <span style="color:var(--term-3)">2&gt;&amp;</span>1
+<span class="term-output">bash: parallel: command not found</span>
+<span class="term-output">parallel: Warning: Could not figure out number of cpus on ec2-54-88-122-140.comp</span>
+<span class="term-output">ute-1.amazonaws.com (). Using 1.</span>
+<span class="term-output">1</span>
+<span class="term-output">2</span></code></pre>
+
+<p>In this case, I have <code>parallel</code> installed on one of the two remote machines. I’m getting a warning message indicating that <code>parallel</code> is not found on one of them. As a result, <code>parallel</code> cannot determine the number of cores and will default to using one core. When you receive this warning message, you can do one of the following four things:</p>
+<ul>
+<li>Don’t worry, and be happy with using one core per machine</li>
+<li>Specify the number of jobs for each machine via the <code>--jobs</code> or <code>-j</code> option</li>
+<li>Specify the number of cores to use per machine by putting, for example, <em>2/</em> if you want two cores, in front of each hostname in the <em>hostnames</em> file</li>
+<li>Install <code>parallel</code> using a package manager. For example, if the remote machines all run Ubuntu:</li>
+</ul>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --slf hostnames <span style="color:var(--term-3)">"sudo apt-get install -y parallel"</span></code></pre>
+
+</section>
+<section id="distributing-local-data-among-remote-machines" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="distributing-local-data-among-remote-machines"><span class="header-section-number">8.4.3</span> Distributing Local Data among Remote Machines</h3>
+<p>The second flavor of distributed processing is to distribute local data directly among remote machines. Imagine that you have one very large dataset that you want to process using multiple remote machines. For simplicity, let’s sum all integers from 1 to 1000. First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using <code>wc</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">parallel</span> -N100 --pipe --slf hostnames <span style="color:var(--term-3)">"(hostname; wc -l) | paste -s</span>
+<span class="term-output"><span style="color:var(--term-3)">d:"</span></span>
+<span class="term-output">ip-172-31-23-204:100</span>
+<span class="term-output">ip-172-31-23-205:100</span>
+<span class="term-output">ip-172-31-23-205:100</span>
+<span class="term-output">ip-172-31-23-204:100</span>
+<span class="term-output">ip-172-31-23-205:100</span>
+<span class="term-output">ip-172-31-23-204:100</span>
+<span class="term-output">ip-172-31-23-205:100</span>
+<span class="term-output">ip-172-31-23-204:100</span>
+<span class="term-output">ip-172-31-23-205:100</span>
+<span class="term-output">ip-172-31-23-204:100</span></code></pre>
+
+<p>Excellent. You can see that your 1000 numbers get distributed evenly in subsets of 100 (as specified by <code>-N100</code>). Now, you’re ready to sum all those numbers:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">parallel</span> -N100 --pipe --slf hostnames <span style="color:var(--term-3)">"paste -sd+ | bc"</span> | <span style="color:var(--term-2)">paste</span> -sd
+<span class="term-output"></span>
+<span class="term-output">500500</span></code></pre>
+
+<p>Here, you immediately also sum the ten sums you get back from the remote machines. Let’s check that the answer is correct by doing the same calculation without <code>parallel</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">paste</span> -sd+ | <span style="color:var(--term-2)">bc</span>
+<span class="term-output">500500</span></code></pre>
+
+<p>Good, that works. If you have a larger pipeline that you want to execute on the remote machines, you can also put it in a separate script and upload it with <code>parallel</code>. I’ll demonstrate this by creating a very simple command-line tool called <code>add</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'#!/usr/bin/env bash'</span> <span style="color:var(--term-3)">&gt;</span> add
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'paste -sd+ | bc'</span> <span style="color:var(--term-3)">&gt;&gt;</span> <span style="text-decoration:underline">add</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">add</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">add</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-2)">#!/usr/bin/env bash</span></span>
+<span class="term-output">   2   │ paste<span style="color:var(--term-6)"> -sd</span>+ <span style="color:var(--term-5)">|</span> bc</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">chmod</span> u+x <span style="text-decoration:underline">add</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">./add</span>
+<span class="term-output">500500</span></code></pre>
+
+<p>Using the <code>--basefile</code> option, <code>parallel</code> first uploads the file <em>add</em> to all remote machines before running the jobs:</p>
+<!-- #TODO: Explain --pipe -->
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">parallel</span> -N100 --basefile <span style="text-decoration:underline">add</span> --pipe --slf hostnames <span style="color:var(--term-3)">'./add'</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">./add</span>
+<span class="term-output">500500</span></code></pre>
+
+<p>Summing 1000 numbers is of course only a toy example. Plus, it would’ve been much faster to do this locally. Still, I hope it’s clear from this that <code>parallel</code> can be incredibly powerful.</p>
+</section>
+<section id="processing-files-on-remote-machines" class="level3" data-number="8.4.4">
+<h3 data-number="8.4.4" class="anchored" data-anchor-id="processing-files-on-remote-machines"><span class="header-section-number">8.4.4</span> Processing Files on Remote Machines</h3>
+<p>The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results. Imagine that you want to count for each borough of New York City, how often they receive service calls on 311. You don’t have that data on your local machine yet, so let’s first obtain it from the free <a href="https://data.cityofnewyork.us/">NYC Open Data API</a>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 100 900 | <span style="color:var(--term-2)">parallel</span>  <span style="color:var(--term-3)">"curl -sL 'http://data.cityofnewyork.us/resource/erm</span>
+<span class="term-output"><span style="color:var(--term-3)">2-nwe9.json?</span><span style="color:var(--term-6)">\$</span><span style="color:var(--term-3)">limit=100&amp;</span><span style="color:var(--term-6)">\$</span><span style="color:var(--term-3)">offset={}' | jq -c '.[]' | gzip &gt; nyc-{#}.json.gz"</span></span></code></pre>
+
+<p>You now have 10 files containing compressed JSON data:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> nyc<span style="color:var(--term-4)">*</span>json.gz
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
+
+<p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file. Using <code>zcat</code><span class="citation" data-cites="zcat"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, you directly print the contents of a compress file:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">{"unique_key":"70999722","created_date":"2026-11-04T02:05:23.000","agency":"NYP…</span>
+<span class="term-output">{"unique_key":"70996337","created_date":"2026-11-04T02:04:46.000","agency":"NYP…</span>
+<span class="term-output">{"unique_key":"70992486","created_date":"2026-11-04T02:04:27.000","agency":"DOT…</span>
+<span class="term-output">{"unique_key":"70994889","created_date":"2026-11-04T02:04:03.000","agency":"NYP…</span>
+<span class="term-output">{"unique_key":"70996371","created_date":"2026-11-04T02:03:26.000","agency":"NYP…</span>
+<span class="term-output">{"unique_key":"70996950","created_date":"2026-11-04T02:03:16.000","agency":"NYP…</span>
+<span class="term-output">{"unique_key":"70994472","created_date":"2026-11-04T02:02:45.000","agency":"NYP…</span>
+<span class="term-output">{"unique_key":"71000949","created_date":"2026-11-04T02:02:28.000","agency":"NYP…</span>
+<span class="term-output">{"unique_key":"70993548","created_date":"2026-11-04T02:01:53.000","agency":"DEP…</span>
+<span class="term-output">{"unique_key":"70996360","created_date":"2026-11-04T02:01:21.000","agency":"NYP…</span>
+<span class="term-output">… with 90 more lines</span></code></pre>
+
+<p>Let’s see what one line of JSON looks like using:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">head</span> -n 1
+<span class="term-output">{"unique_key":"70999722","created_date":"2026-11-04T02:05:23.000","agency":"NYPD</span>
+<span class="term-output">","agency_name":"New York City Police Department","complaint_type":"Noise - Resi</span>
+<span class="term-output">dential","descriptor":"Banging/Pounding","location_type":"Residential Building/H</span>
+<span class="term-output">ouse","incident_zip":"10023","incident_address":"21 WEST END AVENUE","street_nam</span>
+<span class="term-output">e":"WEST END AVENUE","cross_street_1":"WEST 60 STREET","cross_street_2":"WEST 61</span>
+<span class="term-output"> STREET","intersection_street_1":"WEST 60 STREET","intersection_street_2":"WEST</span>
+<span class="term-output">61 STREET","address_type":"ADDRESS","city":"NEW YORK","landmark":"WEST END AVENU</span>
+<span class="term-output">E","status":"In Progress","community_board":"07 MANHATTAN","council_district":"0</span>
+<span class="term-output">6","police_precinct":"Precinct 20","bbl":"1011717510","borough":"MANHATTAN","x_c</span>
+<span class="term-output">oordinate_state_plane":"987063","y_coordinate_state_plane":"220706","open_data_c</span>
+<span class="term-output">hannel_type":"MOBILE","park_facility_name":"Unspecified","park_borough":"MANHATT</span>
+<span class="term-output">AN","latitude":"40.772462881371915","longitude":"-73.98984401160628","location":</span>
+<span class="term-output">{"type":"Point","coordinates":[-73.989844011606,40.772462881372]},":@computed_re</span>
+<span class="term-output">gion_f5dn_yrer":"20",":@computed_region_yeji_bk3q":"4",":@computed_region_sbqj_e</span>
+<span class="term-output">nih":"12",":@computed_region_92fq_4b7q":"19"}</span></code></pre>
+
+<p>If you were to get the total number of service calls per borough on your local machine, you would run the following command:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> nyc<span style="color:var(--term-4)">*</span>json.gz | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.borough'</span> | <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[A-Z] '</span> <span style="color:var(--term-3)">'[a-z]_'</span> | <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> | <span style="color:var(--term-2)">uniq</span> -c | <span style="color:var(--term-2)">sort</span> -nr | <span class="term-callout">➍</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> <span style="color:var(--term-3)">'{print $2","$1}'</span> | <span class="term-callout">➎</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -a borough,count | <span class="term-callout">➏</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvlook</span>
+<span class="term-output">│ borough       │ count │</span>
+<span class="term-output">├───────────────┼───────┤</span>
+<span class="term-output">│ brooklyn      │   337 │</span>
+<span class="term-output">│ manhattan     │   246 │</span>
+<span class="term-output">│ queens        │   220 │</span>
+<span class="term-output">│ bronx         │   169 │</span>
+<span class="term-output">│ staten_island │    28 │</span></code></pre>
+
+<ol type="1">
+<li>Expand all compressed files using <code>zcat</code>.</li>
+<li>For each call, extract the name of the borough using <code>jq</code>.</li>
+<li>Convert borough names to lowercase and replace spaces with underscores (because <code>awk</code> splits on whitespace by default).</li>
+<li>Count the occurrences of each borough using <code>sort</code> and <code>uniq</code>.</li>
+<li>Reverse the two columns and delimit them by comma delimited using <code>awk</code>.</li>
+<li>Add a header using <code>header</code>.</li>
+</ol>
+<p>Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally. You can use <code>parallel</code> to distribute the local files among the remote machines, let them do the processing, and retrieve the results:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="color:var(--term-4)">*</span>.json.gz | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">parallel</span> -v --basefile jq \ <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span>--trc {.}.csv \ <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span>--slf hostnames \ <span class="term-callout">➍</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">"zcat {} | ./jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{</span>
+<span class="term-output"><span style="color:var(--term-3)">print </span><span style="color:var(--term-6)">\$</span><span style="color:var(--term-3)">2</span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)">,</span><span style="color:var(--term-6)">\"\$</span><span style="color:var(--term-3)">1}' &gt; {.}.csv"</span> <span class="term-callout">➎</span></span></code></pre>
+
+<ol type="1">
+<li>Print the list of files and pipe it into <code>parallel</code></li>
+<li>Transmit the <code>jq</code> binary to each remote machine. Luckily, <code>jq</code> has no dependencies. This file will be removed from the remote machines afterwards because I specified the <code>--trc</code> option (which implies the <code>--cleanup</code> option). Note that the pipeline uses <code>./jq</code> instead of just <code>jq</code>. That’s because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.</li>
+<li>The command-line argument <code>--trc {.}.csv</code> is short for <code>--transfer --return {.}.csv --cleanup</code>. (The replacement string <em><code>{.}</code></em> gets replaced with the input filename without the last extension.) Here, this means that the JSON file gets transferred to the remote machine, the CSV file gets returned to the local machine, and both files will be removed after each job from the remote machine</li>
+<li>Specify a list of hostnames. Remember, if you want to try this out locally, you can specify <code>--sshlogin :</code> instead of <code>--slf hostnames</code></li>
+<li>Note the escaping in the <code>awk</code> expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. If quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with <code>add</code></li>
+</ol>
+
+<p>If you, during this process, run <code>ls</code> on one of the remote machines, you would see that <code>parallel</code> indeed transfers (and cleans up) the binary <code>jq</code>, the JSON files, and CSV files:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ssh</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">head</span> -n 1 hostnames<span style="color:var(--term-5)">)</span> ls
+<span class="term-output">nyc-1.json.csv</span>
+<span class="term-output">nyc-1.json.gz</span>
+<span class="term-output">jq</span></code></pre>
+
+<p>Each CSV file looks something like this:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">nyc-1.json.csv</span>
+<span class="term-output">bronx,3</span>
+<span class="term-output">brooklyn,5</span>
+<span class="term-output">manhattan,24</span>
+<span class="term-output">queens,3</span>
+<span class="term-output">staten_island,2</span></code></pre>
+
+<p>You can sum the counts in each CSV file using <code>rush</code><span class="citation" data-cites="rush"><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></span> and the tidyverse:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> nyc<span style="color:var(--term-4)">*</span>csv | <span style="color:var(--term-2)">header</span> -a borough,count |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> run -t <span style="color:var(--term-3)">'group_by(df, borough) %&gt;% summarize(count = sum(count))'</span> - |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvsort</span> -rc count | <span style="color:var(--term-2)">csvlook</span>
+<span class="term-output">│ borough       │ count │</span>
+<span class="term-output">├───────────────┼───────┤</span>
+<span class="term-output">│ brooklyn      │   337 │</span>
+<span class="term-output">│ manhattan     │   246 │</span>
+<span class="term-output">│ queens        │   220 │</span>
+<span class="term-output">│ bronx         │   169 │</span>
+<span class="term-output">│ staten_island │    28 │</span></code></pre>
+
+<p>Or, if you prefer to use SQL to aggregate results, you can use <code>csvsql</code> as discussed in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> nyc<span style="color:var(--term-4)">*</span>csv | <span style="color:var(--term-2)">header</span> -a borough,count |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">'SELECT borough, SUM(count) AS count FROM stdin GROUP BY boroug</span>
+<span class="term-output"><span style="color:var(--term-3)">h ORDER BY count DESC'</span> |</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvlook</span>
+<span class="term-output">│ borough       │ count │</span>
+<span class="term-output">├───────────────┼───────┤</span>
+<span class="term-output">│ brooklyn      │   337 │</span>
+<span class="term-output">│ manhattan     │   246 │</span>
+<span class="term-output">│ queens        │   220 │</span>
+<span class="term-output">│ bronx         │   169 │</span>
+<span class="term-output">│ staten_island │    28 │</span></code></pre>
+
+</section>
+</section>
+<section id="summary-7" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="summary-7"><span class="header-section-number">8.5</span> Summary</h2>
+<p>As a data scientist, you work with data–occasionally a lot of data. This means that sometimes you need to run a command multiple times or distribute data-intensive commands over multiple cores. In this chapter I have shown you how easy it is to parallelize commands. <code>parallel</code> is a very powerful and flexible tool to speed up ordinary command-line tools and distribute them. It offers a lot of functionality and in this chapter I’ve only been able to scratch the surface. In the next chapter I’m going to cover the fourth step of the OSEMN model: modeling data.</p>
+</section>
+<section id="for-further-exploration-7" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="for-further-exploration-7"><span class="header-section-number">8.6</span> For Further Exploration</h2>
+<ul>
+<li>Once you have a basic understanding of <code>parallel</code> and its most important options, I recommend that you take a look at <a href="https://www.gnu.org/software/parallel/parallel_tutorial.html">its online tutorial</a>. You’ll learn, among other things, how to specify different ways of specifying input, keep a log of all the jobs, and how to timeout, resume, and retry jobs. As creator of <code>parallel</code> Ole Tange in this tutorial says, “Your command line will love you for it.”</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Ole Tange, <em><span class="nocase">parallel</span> – Build and Execute Shell Command Lines from Standard Input in Parallel</em>, version 20161222, 2016, <a href="https://www.gnu.org/software/parallel">https://www.gnu.org/software/parallel</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Philip A. Nelson, <em><span class="nocase">bc</span> – an Arbitrary Precision Calculator Language</em>, version 1.07.1, 2017, <a href="https://www.gnu.org/software/bc">https://www.gnu.org/software/bc</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Richard M. Stallman and David MacKenzie, <em><span class="nocase">ls</span> – List Directory Contents</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Eric B. Decker, James Youngman, and Kevin Dalley, <em><span class="nocase">find</span> – Search for Files in a Directory Hierarchy</em>, version 4.7.0, 2019, <a href="https://www.gnu.org/software/findutils">https://www.gnu.org/software/findutils</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Joey Hess, <em><span class="nocase">ts</span> – Timestamp Input</em>, version 0.65, 2021, <a href="https://joeyh.name/code/moreutils">https://joeyh.name/code/moreutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Jeroen Janssens, <em><span class="nocase">pbc</span> – Parallel <span class="nocase">bc</span></em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Amazon Web Services, <em><span class="nocase">aws</span> – Unified Tool to Manage <span>AWS</span> Services</em>, version 2.1.32, 2021, <a href="https://aws.amazon.com/cli">https://aws.amazon.com/cli</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Tatu Ylonen et al., <em><span class="nocase">ssh</span> – <span>OpenSSH</span> Remote Login Client</em>, version 1:8.2p1-4ubuntu0.2, 2020, <a href="https://www.openssh.com">https://www.openssh.com</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Peter Tobias, Bernd Eckenfels, and Michael Meskes, <em><span class="nocase">hostname</span> – Show or Set the System’s Host Name</em>, version 3.23, 2021, <a href="https://sourceforge.net/projects/net-tools/">https://sourceforge.net/projects/net-tools/</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Paul Eggert, <em><span class="nocase">zcat</span> – Decompress and Concatenate Files to Standard Output</em>, version 1.10, 2021, <a href="https://www.nongnu.org/zutils/zutils.html">https://www.nongnu.org/zutils/zutils.html</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Jeroen Janssens, <em><span class="nocase">rush</span> – <span>R</span> One-Liners from the Shell</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/rush">https://github.com/jeroenjanssens/rush</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-7-exploring-data.html" class="pagination-link" aria-label="Exploring Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploring Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-9-modeling-data.html" class="pagination-link" aria-label="Modeling Data">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>
+(function() {
+  function addCopyButtons() {
+    var pres = document.querySelectorAll('pre.term-output, pre.term-screen, pre.term-source');
+    pres.forEach(function(pre) {
+      var wrap = document.createElement('div');
+      wrap.className = 'term-container';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+      var btn = document.createElement('button');
+      btn.className = 'term-copy-btn';
+      btn.setAttribute('aria-label', 'Copy commands to clipboard');
+      btn.setAttribute('title', 'Copy commands to clipboard');
+      var clipIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>';
+      var checkIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>';
+      btn.innerHTML = clipIcon;
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var source = code || pre;
+        var clone = source.cloneNode(true);
+        clone.querySelectorAll('.term-output').forEach(function(el) { el.remove(); });
+        var text = clone.innerText.replace(/\n{2,}/g, '\n').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          btn.innerHTML = checkIcon;
+          btn.setAttribute('title', 'Copied!');
+          setTimeout(function() {
+            btn.innerHTML = clipIcon;
+            btn.setAttribute('title', 'Copy commands to clipboard');
+          }, 1500);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addCopyButtons);
+  } else {
+    addCopyButtons();
+  }
+})();
+</script>
+
+
+
+
+</body></html>

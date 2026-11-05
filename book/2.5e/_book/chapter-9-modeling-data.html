@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+
+<title>9&nbsp; Modeling Data – Data Science at the Command Line, 2e</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-10-polyglot-data-science.html" rel="next">
+<link href="./chapter-8-parallel-pipelines.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/quarto-term-0.7.1/term.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
+<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+
+
+<meta property="og:title" content="9&nbsp; Modeling Data – Data Science at the Command Line, 2e">
+<meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta property="og:image" content="images/wine-quality.png">
+<meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta name="twitter:title" content="9&nbsp; Modeling Data – Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta name="twitter:image" content="images/wine-quality.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-9-modeling-data.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science at the Command Line, 2e</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-obtaining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-creating-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-5-scrubbing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Scrubbing Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6-project-management-with-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Project Management with Make</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploring Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8-parallel-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-9-modeling-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-10-polyglot-data-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Polyglot Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-11-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./list-of-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">List of Command-Line Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview-6" id="toc-overview-6" class="nav-link active" data-scroll-target="#overview-6"><span class="header-section-number">9.1</span> Overview</a></li>
+  <li><a href="#more-wine-please" id="toc-more-wine-please" class="nav-link" data-scroll-target="#more-wine-please"><span class="header-section-number">9.2</span> More Wine Please!</a></li>
+  <li><a href="#dimensionality-reduction-with-tapkee" id="toc-dimensionality-reduction-with-tapkee" class="nav-link" data-scroll-target="#dimensionality-reduction-with-tapkee"><span class="header-section-number">9.3</span> Dimensionality Reduction with Tapkee</a>
+  <ul class="collapse">
+  <li><a href="#introducing-tapkee" id="toc-introducing-tapkee" class="nav-link" data-scroll-target="#introducing-tapkee"><span class="header-section-number">9.3.1</span> Introducing Tapkee</a></li>
+  <li><a href="#linear-and-non-linear-mappings" id="toc-linear-and-non-linear-mappings" class="nav-link" data-scroll-target="#linear-and-non-linear-mappings"><span class="header-section-number">9.3.2</span> Linear and Non-linear Mappings</a></li>
+  </ul></li>
+  <li><a href="#regression-with-vowpal-wabbit" id="toc-regression-with-vowpal-wabbit" class="nav-link" data-scroll-target="#regression-with-vowpal-wabbit"><span class="header-section-number">9.4</span> Regression with Vowpal Wabbit</a>
+  <ul class="collapse">
+  <li><a href="#preparing-the-data" id="toc-preparing-the-data" class="nav-link" data-scroll-target="#preparing-the-data"><span class="header-section-number">9.4.1</span> Preparing the Data</a></li>
+  <li><a href="#training-the-model" id="toc-training-the-model" class="nav-link" data-scroll-target="#training-the-model"><span class="header-section-number">9.4.2</span> Training the Model</a></li>
+  <li><a href="#testing-the-model" id="toc-testing-the-model" class="nav-link" data-scroll-target="#testing-the-model"><span class="header-section-number">9.4.3</span> Testing the Model</a></li>
+  </ul></li>
+  <li><a href="#classification-with-scikit-learn-laboratory" id="toc-classification-with-scikit-learn-laboratory" class="nav-link" data-scroll-target="#classification-with-scikit-learn-laboratory"><span class="header-section-number">9.5</span> Classification with SciKit-Learn Laboratory</a>
+  <ul class="collapse">
+  <li><a href="#preparing-the-data-1" id="toc-preparing-the-data-1" class="nav-link" data-scroll-target="#preparing-the-data-1"><span class="header-section-number">9.5.1</span> Preparing the Data</a></li>
+  <li><a href="#running-the-experiment" id="toc-running-the-experiment" class="nav-link" data-scroll-target="#running-the-experiment"><span class="header-section-number">9.5.2</span> Running the Experiment</a></li>
+  <li><a href="#parsing-the-results" id="toc-parsing-the-results" class="nav-link" data-scroll-target="#parsing-the-results"><span class="header-section-number">9.5.3</span> Parsing the Results</a></li>
+  </ul></li>
+  <li><a href="#summary-8" id="toc-summary-8" class="nav-link" data-scroll-target="#summary-8"><span class="header-section-number">9.6</span> Summary</a></li>
+  <li><a href="#for-further-exploration-8" id="toc-for-further-exploration-8" class="nav-link" data-scroll-target="#for-further-exploration-8"><span class="header-section-number">9.7</span> For Further Exploration</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="chapter-9-modeling-data" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+<p>In this chapter we’re going to perform the fourth step of the OSEMN model: modeling data. Generally speaking, a model is an abstract or higher-level description of your data. Modeling is a bit like creating visualizations in the sense that we’re taking a step back from the individual data points to see the bigger picture.</p>
+<p>Visualizations are characterized by shapes, positions, and colors: we can interpret them by looking at them. Models, on the other hand, are internally characterized by numbers, which means that computers can use them to do things like make predictions about a new data points. (We can still visualize models so that we can try to understand them and see how they are performing.)</p>
+<p>In this chapter I’ll consider three types of algorithms commonly used to model data:</p>
+<ul>
+<li>Dimensionality reduction</li>
+<li>Regression</li>
+<li>Classification</li>
+</ul>
+<p>These algorithms come from the field of statistics and machine learning, so I’m going to change the vocabulary a bit. Let’s assume that I have a CSV file, also known as a <em>dataset</em>. Each row, except for the header, is considered to be a <em>data point</em>. Each data point has one or more <em>features</em>, or properties that have been measured. Sometimes, a data point also has a <em>label</em>, which is, generally speaking, a judgment or outcome. This becomes more concrete when I introduce the wine dataset below.</p>
+<p>The first type of algorithm (dimensionality reduction) is most often unsupervised, which means that they create a model based on the features of the dataset only. The last two types of algorithms (regression and classification) are by definition supervised algorithms, which means that they also incorporate the labels into the model.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This chapter is by no means an introduction to machine learning. That implies that I must skim over many details. My general advice is that you become familiar with an algorithm before applying it to your data. At the end of this chapter I recommend a few books about machine learning.</p>
+</div>
+</div>
+<section id="overview-6" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="overview-6"><span class="header-section-number">9.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Reduce the dimensionality of your dataset using <code>tapkee</code><span class="citation" data-cites="tapkee"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span>.</li>
+<li>Predict the quality of white wine using <code>vw</code><span class="citation" data-cites="vw"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>.</li>
+<li>Classify wine as red or white using <code>skll</code><span class="citation" data-cites="skll"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span>.</li>
+</ul>
+<p>This chapter starts with the following file:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch09</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 4.0K</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov  5 22:35 classify.cfg</span></code></pre>
+
+<p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
+</section>
+<section id="more-wine-please" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="more-wine-please"><span class="header-section-number">9.2</span> More Wine Please!</h2>
+<p>Throughout this chapter, I’ll be using a dataset of wine tasters’ notes on red and white varieties of Portuguese wine called vinho verde. Each data point represents a wine. Each wine is rated on 11 physicochemical properties: (1) fixed acidity, (2) volatile acidity, (3) citric acid, (4) residual sugar, (5) chlorides, (6) free sulfur dioxide, (7) total sulfur dioxide, (8) density, (9) pH, (10) sulphates, and (11) alcohol. There is also an overall quality score between 0 (very bad) and 10 (excellent), which is the median of at least three evaluation by wine experts. More information about this dataset is available at the <a href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">UCI Machine Learning Repository</a>.</p>
+<p>The dataset is split into two files: one for white wine and one for red wine. The very first step is to obtain the two files using <code>curl</code> (and of course <code>parallel</code> because I haven’t got all day):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"curl -sL http://archive.ics.uci.edu/ml/machine-learning-databases/wi</span>
+<span class="term-output"><span style="color:var(--term-3)">ne-quality/winequality-{}.csv &gt; wine-{}.csv"</span> ::: red white</span></code></pre>
+
+<p>The triple colon is just another way to pass data to <code>parallel</code>.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> /data/.cache/wine-<span style="color:var(--term-4)">*</span>.csv <span style="text-decoration:underline">.</span></code></pre>
+
+<p>Let’s inspect both files and count the number of lines:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-red.csv</span> <span style="color:var(--term-2)">nl</span> | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">fold</span> | <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">trim</span>
+<span class="term-output">     1  "fixed acidity";"volatile acidity";"citric acid";"residual sugar";"chlor</span>
+<span class="term-output">ides";"free sulfur dioxide";"total sulfur dioxide";"density";"pH";"sulphates";"a</span>
+<span class="term-output">lcohol";"quality"</span>
+<span class="term-output">     2  7.4;0.7;0;1.9;0.076;11;34;0.9978;3.51;0.56;9.4;5</span>
+<span class="term-output">     3  7.8;0.88;0;2.6;0.098;25;67;0.9968;3.2;0.68;9.8;5</span>
+<span class="term-output">     4  7.8;0.76;0.04;2.3;0.092;15;54;0.997;3.26;0.65;9.8;5</span>
+<span class="term-output">     5  11.2;0.28;0.56;1.9;0.075;17;60;0.998;3.16;0.58;9.8;6</span>
+<span class="term-output">     6  7.4;0.7;0;1.9;0.076;11;34;0.9978;3.51;0.56;9.4;5</span>
+<span class="term-output">     7  7.4;0.66;0;1.8;0.075;13;40;0.9978;3.51;0.56;9.4;5</span>
+<span class="term-output">     8  7.9;0.6;0.06;1.6;0.069;15;59;0.9964;3.3;0.46;9.4;5</span>
+<span class="term-output">… with 1592 more lines</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-white.csv</span> <span style="color:var(--term-2)">nl</span> | <span style="color:var(--term-2)">fold</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">     1  "fixed acidity";"volatile acidity";"citric acid";"residual sugar";"chlor</span>
+<span class="term-output">ides";"free sulfur dioxide";"total sulfur dioxide";"density";"pH";"sulphates";"a</span>
+<span class="term-output">lcohol";"quality"</span>
+<span class="term-output">     2  7;0.27;0.36;20.7;0.045;45;170;1.001;3;0.45;8.8;6</span>
+<span class="term-output">     3  6.3;0.3;0.34;1.6;0.049;14;132;0.994;3.3;0.49;9.5;6</span>
+<span class="term-output">     4  8.1;0.28;0.4;6.9;0.05;30;97;0.9951;3.26;0.44;10.1;6</span>
+<span class="term-output">     5  7.2;0.23;0.32;8.5;0.058;47;186;0.9956;3.19;0.4;9.9;6</span>
+<span class="term-output">     6  7.2;0.23;0.32;8.5;0.058;47;186;0.9956;3.19;0.4;9.9;6</span>
+<span class="term-output">     7  8.1;0.28;0.4;6.9;0.05;30;97;0.9951;3.26;0.44;10.1;6</span>
+<span class="term-output">     8  6.2;0.32;0.16;7;0.045;30;136;0.9949;3.18;0.47;9.6;6</span>
+<span class="term-output">… with 4891 more lines</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -l wine-{red,white}.csv
+<span class="term-output">  1600 wine-red.csv</span>
+<span class="term-output">  4899 wine-white.csv</span>
+<span class="term-output">  6499 total</span></code></pre>
+
+<ol type="1">
+<li>For clarity I use <code>nl</code> to add line numbers.</li>
+<li>To see the entire header, I use <code>fold</code>.</li>
+</ol>
+<p>At first sight this data appears to be quite clean. Still, let’s scrub it so that it conforms more with what most command-line tools expect. Specifically, I’ll:</p>
+<ul>
+<li>Convert the header to lowercase.</li>
+<li>Replace the semi-colons with commas.</li>
+<li>Replace spaces with underscores.</li>
+<li>Remove unnecessary quotes.</li>
+</ul>
+<p>The tool <code>tr</code> can take care of all these things. Let’s use a for loop this time—for old times’ sake—to process both files:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> COLOR in red white; <span style="color:var(--term-3)">do</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">&lt;</span> wine-$COLOR.csv <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[A-Z]; '</span> <span style="color:var(--term-3)">'[a-z],_'</span> | <span style="color:var(--term-2)">tr</span> -d \" <span style="color:var(--term-3)">&gt;</span> wine-${COLOR}-clean.csv
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span></code></pre>
+
+<p>Let’s also create a single dataset by combining the two files. I’ll use <code>csvstack</code><span class="citation" data-cites="csvstack"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span> to add a column named <em>type</em>, which will be “red” for rows of the first file, and “white” for rows of the second file:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstack</span> -g red,white -n type wine-{red,white}-clean.csv | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">xsv</span> select 2-,1 <span style="color:var(--term-3)">&gt;</span> wine.csv <span class="term-callout">➋</span></code></pre>
+
+<ol type="1">
+<li>The new column <em>type</em> is placed at the beginning by <code>csvstack</code>.</li>
+<li>Some algorithms assume that the label is the last column, so I use <code>xsv</code> to move the column <em>type</em> to the end.</li>
+</ol>
+<p>It’s good practice to check whether there are any missing values in this dataset, because most machine learning algorithms can’t handle them:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">wine.csv</span> --nulls
+<span class="term-output">  1. fixed_acidity: False</span>
+<span class="term-output">  2. volatile_acidity: False</span>
+<span class="term-output">  3. citric_acid: False</span>
+<span class="term-output">  4. residual_sugar: False</span>
+<span class="term-output">  5. chlorides: False</span>
+<span class="term-output">  6. free_sulfur_dioxide: False</span>
+<span class="term-output">  7. total_sulfur_dioxide: False</span>
+<span class="term-output">  8. density: False</span>
+<span class="term-output">  9. ph: False</span>
+<span class="term-output"> 10. sulphates: False</span>
+<span class="term-output"> 11. alcohol: False</span>
+<span class="term-output"> 12. quality: False</span>
+<span class="term-output"> 13. type: False</span></code></pre>
+
+<p>Excellent! If there were any missing values, we could fill them with, say, the average or most common value of that feature. An alternative, less subtle approach is to remove any data points that have at least one missing value. Just out of curiosity, let’s see what the distribution of quality looks like for both red and white wines.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run -t <span style="color:var(--term-3)">'ggplot(df, aes(x = quality, fill = type)) + geom_density(adjust =</span>
+<span class="term-output"><span style="color:var(--term-3)"> 3, alpha = 0.5)'</span> <span style="text-decoration:underline">wine.csv</span> <span style="color:var(--term-3)">&gt;</span> wine-quality.png</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">wine-quality.png</span></code></pre>
+
+<div id="fig-plot-wine-quality" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plot-wine-quality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/wine-quality.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-wine-quality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.1: Comparing the quality of red and white wines using a density plot
+</figcaption>
+</figure>
+</div>
+<p>From the density plot you can see the quality of white wine is distributed more towards higher values. Does this mean that white wines are overall better than red wines, or that the white wine experts more easily give higher scores than red wine experts? That’s something that the data doesn’t tell us. Or is there perhaps a relationship between alcohol and quality? Let’s use <code>rush</code> to find out:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x alcohol --y quality --color type --geom smooth <span style="text-decoration:underline">wine.csv</span> <span style="color:var(--term-3)">&gt;</span> wine-a
+<span class="term-output">lcohol-vs-quality.png</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">wine-alcohol-vs-quality.png</span></code></pre>
+
+<div id="fig-plot-wine-alchohol-vs-quality" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plot-wine-alchohol-vs-quality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/wine-alcohol-vs-quality.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-wine-alchohol-vs-quality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.2: Relationship between the alcohol contents of wine and its quality
+</figcaption>
+</figure>
+</div>
+<p>Eureka! Ahem, let’s carry on with some modeling, shall we?</p>
+</section>
+<section id="dimensionality-reduction-with-tapkee" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="dimensionality-reduction-with-tapkee"><span class="header-section-number">9.3</span> Dimensionality Reduction with Tapkee</h2>
+<p>The goal of dimensionality reduction is to map high-dimensional data points onto a lower dimensional mapping. The challenge is to keep similar data points close together on the lower-dimensional mapping. As we’ve seen in the previous section, our wine dataset contains 13 features. I’ll stick with two dimensions because that’s straightforward to visualize.</p>
+<p>Dimensionality reduction is often regarded as part of exploration. It’s useful for when there are too many features for plotting. You could do a scatter-plot matrix, but that only shows you two features at a time. It’s also useful as a pre-processing step for other machine learning algorithms.</p>
+<p>Most dimensionality reduction algorithms are unsupervised. This means that they don’t employ the labels of the data points in order to construct the lower-dimensional mapping.</p>
+<p>In this section I’ll look at two techniques: PCA, which stands for Principal Components Analysis<span class="citation" data-cites="Pearson1901"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> and t-SNE, which stands for t-distributed Stochastic Neighbor Embedding<span class="citation" data-cites="van2008visualizing"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>.</p>
+<section id="introducing-tapkee" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="introducing-tapkee"><span class="header-section-number">9.3.1</span> Introducing Tapkee</h3>
+<p>Tapkee is a C++ template library for dimensionality reduction<span class="citation" data-cites="Lisitsyn2013"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>. The library contains implementations of many dimensionality reduction algorithms, including:</p>
+<ul>
+<li>Locally Linear Embedding</li>
+<li>Isomap</li>
+<li>Multidimensional Scaling</li>
+<li>PCA</li>
+<li>t-SNE</li>
+</ul>
+<p>More information about these algorithms can be found on <a href="http://tapkee.lisitsyn.me/">Tapkee’s website</a>. Although Tapkee is mainly a library that can be included in other applications, it also offers a command-line tool <code>tapkee</code>. I’ll use this to perform dimensionality reduction on our wine dataset.</p>
+</section>
+<section id="linear-and-non-linear-mappings" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="linear-and-non-linear-mappings"><span class="header-section-number">9.3.2</span> Linear and Non-linear Mappings</h3>
+<p>First, I’ll scale the features using standardization such that each feature is equally important. This generally leads to better results when applying machine learning algorithms.</p>
+<p>To scale I use <code>rush</code> and the <code>tidyverse</code> package.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run --tidyverse --output wine-scaled.csv \
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">'select(df, -type) %&gt;%</span> <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">scale() %&gt;%</span> <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">as_tibble() %&gt;%</span> <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">mutate(type = df$type)'</span> <span style="text-decoration:underline">wine.csv</span> <span class="term-callout">➍</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">wine-scaled.csv</span>
+<span class="term-output">│ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sugar │ chlorides │…</span>
+<span class="term-output">├───────────────┼──────────────────┼─────────────┼────────────────┼───────────┤…</span>
+<span class="term-output">│        0.142… │           2.189… │     -2.193… │        -0.745… │    …</span>
+<span class="term-output">│        0.451… │           3.282… │     -2.193… │        -0.598… │    …</span>
+<span class="term-output">│        0.451… │           2.553… │     -1.917… │        -0.661… │    …</span>
+<span class="term-output">│        3.074… │          -0.362… │      1.661… │        -0.745… │    …</span>
+<span class="term-output">│        0.142… │           2.189… │     -2.193… │        -0.745… │    …</span>
+<span class="term-output">│        0.142… │           1.946… │     -2.193… │        -0.766… │    …</span>
+<span class="term-output">│        0.528… │           1.581… │     -1.780… │        -0.808… │    …</span>
+<span class="term-output">│        0.065… │           1.885… │     -2.193… │        -0.892… │    …</span>
+<span class="term-output">… with 6489 more lines</span></code></pre>
+
+<ol type="1">
+<li>I need to temporary remove the column <em><code>type</code></em> because <code>scale()</code> only works on numerical columns.</li>
+<li>The <code>scale()</code> function accepts a data frame, but returns a matrix.</li>
+<li>The function <code>as_tibble()</code> converts the matrix back to a data frame.</li>
+<li>Finally, I add back the <em><code>type</code></em> column.</li>
+</ol>
+<p>Now we apply both dimensionality reduction techniques and visualize the mapping using <code>Rio-scatter</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">xsv</span> select <span style="color:var(--term-3)">'!type'</span> <span style="text-decoration:underline">wine-scaled.csv</span> | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -d | <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tapkee</span> --method pca | <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-pca.txt | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">0.568882,-3.34818</span>
+<span class="term-output">1.19724,-3.22835</span>
+<span class="term-output">0.952507,-3.23722</span>
+<span class="term-output">1.60046,-1.67243</span>
+<span class="term-output">0.568882,-3.34818</span>
+<span class="term-output">0.556231,-3.15199</span>
+<span class="term-output">0.53894,-2.28288</span>
+<span class="term-output">-1.104,-2.56479</span>
+<span class="term-output">-0.231315,-2.86763</span>
+<span class="term-output">1.18363,-1.81641</span>
+<span class="term-output">… with 6487 more lines</span></code></pre>
+
+<ol type="1">
+<li>Deselect the column <em><code>type</code></em></li>
+<li>Remove the header</li>
+<li>Apply PCA</li>
+</ol>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-pca.txt</span> <span style="color:var(--term-2)">header</span> -a pc1,pc2 | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">paste</span> -d, - <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">xsv</span> select type <span style="text-decoration:underline">wine-scaled.csv</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-pca.csv | <span style="color:var(--term-2)">csvlook</span>
+<span class="term-output">│     pc1 │     pc2 │ type  │</span>
+<span class="term-output">├─────────┼─────────┼───────┤</span>
+<span class="term-output">│  0.569… │ -3.348… │ red   │</span>
+<span class="term-output">│  1.197… │ -3.228… │ red   │</span>
+<span class="term-output">│  0.953… │ -3.237… │ red   │</span>
+<span class="term-output">│  1.600… │ -1.672… │ red   │</span>
+<span class="term-output">│  0.569… │ -3.348… │ red   │</span>
+<span class="term-output">│  0.556… │ -3.152… │ red   │</span>
+<span class="term-output">│  0.539… │ -2.283… │ red   │</span>
+<span class="term-output">│ -1.104… │ -2.565… │ red   │</span>
+<span class="term-output">… with 6489 more lines</span></code></pre>
+
+<ol type="1">
+<li>Add back the header with columns <em><code>pc1</code></em> and <em><code>pc2</code></em></li>
+<li>Add back the column <em><code>type</code></em></li>
+</ol>
+<p>Now we can create a scatter plot:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x pc1 --y pc2 --color type --shape type <span style="text-decoration:underline">wine-pca.csv</span> <span style="color:var(--term-3)">&gt;</span> wine-pca.pn
+<span class="term-output">g</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">wine-pca.png</span></code></pre>
+
+<div id="fig-wine-pca" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/wine-pca.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wine-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.3: Linear dimensionality reduction with PCA
+</figcaption>
+</figure>
+</div>
+<p>Let’s perform t-SNE with the same approach:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">xsv</span> select <span style="color:var(--term-3)">'!type'</span> <span style="text-decoration:underline">wine-scaled.csv</span> | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -d | <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tapkee</span> --method t-sne | <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -a x,y | <span class="term-callout">➍</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">paste</span> -d, - <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">xsv</span> select type <span style="text-decoration:underline">wine-scaled.csv</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➎</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x x --y y --color type --shape type <span style="color:var(--term-3)">&gt;</span> wine-tsne.png <span class="term-callout">➏</span></code></pre>
+
+<ol type="1">
+<li>Deselect the column <em><code>type</code></em></li>
+<li>Remove the header</li>
+<li>Apply t-SNE</li>
+<li>Add back the header with columns <em><code>x</code></em> and <em><code>y</code></em></li>
+<li>Add back the column <em><code>type</code></em></li>
+<li>Create a scatter plot</li>
+</ol>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">wine-tsne.png</span></code></pre>
+
+<div id="fig-wine-tsne" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine-tsne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/wine-tsne.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wine-tsne-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
+</figcaption>
+</figure>
+</div>
+<p>We can see that t-SNE does a better job than PCA at separating the red and white wines based on their physicochemical properties. These scatter plots verify that the dataset has a certain structure; there’s a relationship between the features and the labels. Knowing this, I’m comfortable moving forward by applying supervised machine learning. I’ll start with a regression task and then continue with a classification task.</p>
+</section>
+</section>
+<section id="regression-with-vowpal-wabbit" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="regression-with-vowpal-wabbit"><span class="header-section-number">9.4</span> Regression with Vowpal Wabbit</h2>
+<p>In this section, I’m going to create a model that predicts the quality of the white wine, based on their physicochemical properties. Because the quality is a number between 0 and 10, we can consider this as a regression task.</p>
+<p>For this I’ll be using Vowpal Wabbit, or <code>vw</code>.</p>
+<section id="preparing-the-data" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="preparing-the-data"><span class="header-section-number">9.4.1</span> Preparing the Data</h3>
+<p>Instead of working with CSV, <code>vw</code> has its own data format. The tool <code>csv2vw</code><span class="citation" data-cites="csv2vw"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span> can, as its name implies, convert CSV to this format. The <code>--label</code> option is used to indicate which column contains the labels. Let’s examine the result:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csv2vw</span> <span style="text-decoration:underline">wine-white-clean.csv</span> --label quality | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">6 | alcohol:8.8 chlorides:0.045 citric_acid:0.36 density:1.001 fixed_acidity:7 …</span>
+<span class="term-output">6 | alcohol:9.5 chlorides:0.049 citric_acid:0.34 density:0.994 fixed_acidity:6.…</span>
+<span class="term-output">6 | alcohol:10.1 chlorides:0.05 citric_acid:0.4 density:0.9951 fixed_acidity:8.…</span>
+<span class="term-output">6 | alcohol:9.9 chlorides:0.058 citric_acid:0.32 density:0.9956 fixed_acidity:7…</span>
+<span class="term-output">6 | alcohol:9.9 chlorides:0.058 citric_acid:0.32 density:0.9956 fixed_acidity:7…</span>
+<span class="term-output">6 | alcohol:10.1 chlorides:0.05 citric_acid:0.4 density:0.9951 fixed_acidity:8.…</span>
+<span class="term-output">6 | alcohol:9.6 chlorides:0.045 citric_acid:0.16 density:0.9949 fixed_acidity:6…</span>
+<span class="term-output">6 | alcohol:8.8 chlorides:0.045 citric_acid:0.36 density:1.001 fixed_acidity:7 …</span>
+<span class="term-output">6 | alcohol:9.5 chlorides:0.049 citric_acid:0.34 density:0.994 fixed_acidity:6.…</span>
+<span class="term-output">6 | alcohol:11 chlorides:0.044 citric_acid:0.43 density:0.9938 fixed_acidity:8.…</span>
+<span class="term-output">… with 4888 more lines</span></code></pre>
+
+<p>In this format, each line is one data point. The line starts with the label, followed by a pipe symbol and then feature name/value pairs separated by spaces. While this format may seem overly verbose when compared to the CSV format, it does offer more flexibility such as weights, tags, namespaces, and a sparse feature representation. With the wine dataset we don’t need this flexibility, but it might be useful when applying <code>vw</code> to more complicated problems. This <a href="https://github.com/VowpalWabbit/vowpal_wabbit/wiki/Input-format">article</a> explains the <code>vw</code> format in more detail.</p>
+<p>One we’ve created, or <em>trained</em> a regression model, it can be used to make predictions about new, unseen data points. In other words, if we give the model a wine it hasn’t seen before, it can predict, or <em>test</em>, its quality. To properly evaluate the accuracy of these predictions, we need to set aside some data that will not be used for training. It’s common to use 80% of the complete dataset for training and the remaining 20% for testing.</p>
+<p>I can do this by first splitting the complete dataset into five equal parts using <code>split</code><span class="citation" data-cites="split"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span>. I verify the number of data points in each part using <code>wc</code>.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csv2vw</span> <span style="text-decoration:underline">wine-white-clean.csv</span> --label quality |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">shuf</span> | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">split</span> -d -n r/5 - wine-part-
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -l wine-part-<span style="color:var(--term-4)">*</span>
+<span class="term-output">   980 wine-part-00</span>
+<span class="term-output">   980 wine-part-01</span>
+<span class="term-output">   980 wine-part-02</span>
+<span class="term-output">   979 wine-part-03</span>
+<span class="term-output">   979 wine-part-04</span>
+<span class="term-output">  4898 total</span></code></pre>
+
+<ol type="1">
+<li>The tool <code>shuf</code><span class="citation" data-cites="shuf"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span> randomizes the dataset to ensure that both the training and the test have similar quality distribution.</li>
+</ol>
+<p>Now I can use the first part (so 20%) for the testing set <em>wine-test.vw</em> and combine the four remaining parts (so 80%) into the training set <em>wine-train.vw</em>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mv</span> <span style="text-decoration:underline">wine-part-00</span> wine-test.vw
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> wine-part-<span style="color:var(--term-4)">*</span> <span style="color:var(--term-3)">&gt;</span> wine-train.vw
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> wine-part-<span style="color:var(--term-4)">*</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -l wine-<span style="color:var(--term-4)">*</span>.vw
+<span class="term-output">   980 wine-test.vw</span>
+<span class="term-output">  3918 wine-train.vw</span>
+<span class="term-output">  4898 total</span></code></pre>
+
+<p>Now we’re ready to train a model using <code>vw</code>.</p>
+</section>
+<section id="training-the-model" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="training-the-model"><span class="header-section-number">9.4.2</span> Training the Model</h3>
+<p>The tool <code>vw</code> accepts many different options (nearly 400!). Luckily, you don’t need all of them in order to be effective. To annotate the options I use here, I’ll put each one on a separate line:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">vw</span> \
+<span class="term-prompt" data-prompt="> "></span>--data <span style="text-decoration:underline">wine-train.vw</span> \ <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span>--final_regressor wine.model \ <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span>--passes 10 \ <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span>--cache_file wine.cache \ <span class="term-callout">➍</span>
+<span class="term-prompt" data-prompt="> "></span>--nn 3 \ <span class="term-callout">➎</span>
+<span class="term-prompt" data-prompt="> "></span>--quadratic :: \ <span class="term-callout">➏</span>
+<span class="term-prompt" data-prompt="> "></span>--l2 0.000005 \ <span class="term-callout">➐</span>
+<span class="term-prompt" data-prompt="> "></span>--bit_precision 25 <span class="term-callout">➑</span>
+<span class="term-output">creating quadratic features for pairs: ::</span>
+<span class="term-output"><span style="color:var(--term-2)">[info]</span> Any duplicate namespace interactions will be removed</span>
+<span class="term-output">You can use --leave_duplicate_interactions to disable this behaviour.</span>
+<span class="term-output">using l2 regularization = 5e-06</span>
+<span class="term-output">final_regressor = wine.model</span>
+<span class="term-output">creating cache_file = wine.cache</span>
+<span class="term-output">Reading datafile = wine-train.vw</span>
+<span class="term-output">num sources = 1</span>
+<span class="term-output">Num weight bits = 25</span>
+<span class="term-output">learning rate = 0.5</span>
+<span class="term-output">initial_t = 0</span>
+<span class="term-output">power_t = 0.5</span>
+<span class="term-output">decay_learning_rate = 1</span>
+<span class="term-output">Enabled learners: gd, generate_interactions, nn, scorer-identity, count_label</span>
+<span class="term-output">Input label = SIMPLE</span>
+<span class="term-output">Output pred = SCALAR</span>
+<span class="term-output">average  since         example        example        current        current  cur</span>
+<span class="term-output">rent</span>
+<span class="term-output">loss     last          counter         weight          label        predict feat</span>
+<span class="term-output">ures</span>
+<span class="term-output">9.000000 9.000000            1            1.0         3.0000         0.0000</span>
+<span class="term-output">  78</span>
+<span class="term-output">13.88804 18.77609            2            2.0         5.0000         0.6669</span>
+<span class="term-output">  78</span>
+<span class="term-output">11.64197 9.395906            4            4.0         6.0000         3.5956</span>
+<span class="term-output">  78</span>
+<span class="term-output">6.821201 2.000425            8            8.0         6.0000         5.0639</span>
+<span class="term-output">  78</span>
+<span class="term-output">3.580663 0.340125           16           16.0         5.0000         5.4395</span>
+<span class="term-output">  78</span>
+<span class="term-output">2.206406 0.832149           32           32.0         6.0000         5.8941</span>
+<span class="term-output">  78</span>
+<span class="term-output">1.689371 1.172337           64           64.0         5.0000         6.2801</span>
+<span class="term-output">  78</span>
+<span class="term-output">1.234863 0.780355          128          128.0         6.0000         5.6123</span>
+<span class="term-output">  78</span>
+<span class="term-output">1.002425 0.769987          256          256.0         7.0000         6.0852</span>
+<span class="term-output">  78</span>
+<span class="term-output">0.926151 0.849878          512          512.0         5.0000         5.8726</span>
+<span class="term-output">  78</span>
+<span class="term-output">0.888630 0.851109         1024         1024.0         6.0000         5.9464</span>
+<span class="term-output">  78</span>
+<span class="term-output">0.801835 0.715040         2048         2048.0         6.0000         5.8318</span>
+<span class="term-output">  78</span>
+<span class="term-output">0.686357 0.686357         4096         4096.0         7.0000         5.6881</span>
+<span class="term-output">  78 h</span>
+<span class="term-output">0.641317 0.596276         8192         8192.0         5.0000         4.9488</span>
+<span class="term-output">  78 h</span>
+<span class="term-output">0.600537 0.559757        16384        16384.0         6.0000         5.9912</span>
+<span class="term-output">  78 h</span>
+<span class="term-output">0.565379 0.530222        32768        32768.0         6.0000         6.1393</span>
+<span class="term-output">  78 h</span>
+<span class="term-output"></span>
+<span class="term-output">finished run</span>
+<span class="term-output">number of examples per pass = 3527</span>
+<span class="term-output">passes used = 10</span>
+<span class="term-output">weighted example sum = 35270.000000</span>
+<span class="term-output">weighted label sum = 207350.000000</span>
+<span class="term-output">average loss = 0.523068 h</span>
+<span class="term-output">best constant = 5.878934</span>
+<span class="term-output">total feature number = 2749380</span></code></pre>
+
+<ol type="1">
+<li>The file <em>wine-train.vw</em> is used to train the model.</li>
+<li>The model, or <em>regressor</em>, will be stored in the file <em>wine.model</em>.</li>
+<li>Number of training passes.</li>
+<li>Caching is needed when making multiple passes.</li>
+<li>Use a neural network with 3 hidden units.</li>
+<li>Create and use quadratic features, based on all input features. Any duplicates will be removed by <code>vw</code>.</li>
+<li>Use l2 regularization.</li>
+<li>Use 25 bits to store the features.</li>
+</ol>
+<p>Now that I have trained a regression model, let’s use it to make predictions.</p>
+</section>
+<section id="testing-the-model" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="testing-the-model"><span class="header-section-number">9.4.3</span> Testing the Model</h3>
+<p>The model is stored in the file <em>wine.model</em>. To use that model to make predictions, I run <code>vw</code> again, but now with a different set of options:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">vw</span> \
+<span class="term-prompt" data-prompt="> "></span>--data <span style="text-decoration:underline">wine-test.vw</span> \ <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span>--initial_regressor <span style="text-decoration:underline">wine.model</span> \ <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span>--testonly \ <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span>--predictions predictions \ <span class="term-callout">➍</span>
+<span class="term-prompt" data-prompt="> "></span>--quiet <span class="term-callout">➎</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">predictions</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">6.004399</span>
+<span class="term-output">6.705706</span>
+<span class="term-output">6.753717</span>
+<span class="term-output">5.980899</span>
+<span class="term-output">6.463269</span>
+<span class="term-output">5.386589</span>
+<span class="term-output">6.122513</span>
+<span class="term-output">5.714643</span>
+<span class="term-output">6.231226</span>
+<span class="term-output">6.124227</span>
+<span class="term-output">… with 970 more lines</span></code></pre>
+
+<ol type="1">
+<li>The file <em>wine-test.vw</em> is used to test the model.</li>
+<li>Use the model stored in the file <em>wine.model</em>.</li>
+<li>Ignore label information and just test.</li>
+<li>The predictions are stored in a file called <em>predictions</em>.</li>
+<li>Don’t output diagnostics and progress updates.</li>
+</ol>
+<p>Let’s use <code>paste</code> to combine the predictions in the file <em>predictions</em> with the true, or <em>observed</em>, values that are in the file <em>wine-test.vw</em>. Using <code>awk</code>, I can compare the predicted values with the observed values and compute the mean absolute error (MAE). The MAE tells us how far off <code>vw</code> is on average, when it comes to predicting the quality of a white wine.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> results.csv |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cowsay</span> <span class="term-callout">➊</span>
+<span class="term-output"> _______________</span>
+<span class="term-output">&lt; MAE: 0.574064 &gt;</span>
+<span class="term-output"> ---------------</span>
+<span class="term-output">        \   ^__^</span>
+<span class="term-output">         \  (oo)\_______</span>
+<span class="term-output">            (__)\       )\/\</span>
+<span class="term-output">                ||----w |</span>
+<span class="term-output">                ||     ||</span></code></pre>
+
+<p>So, the predictions are on average about 0.6 points off. Let’s visualize the relationship between the observed values and the predicted values using <code>rush plot</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">results.csv</span> <span style="color:var(--term-2)">header</span> -a <span style="color:var(--term-3)">"predicted,observed"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x observed --y predicted --geom jitter <span style="color:var(--term-3)">&gt;</span> wine-regression.png
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">wine-regression.png</span></code></pre>
+
+<div id="fig-wine-regression" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/wine-regression.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wine-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.5: Regression with Vowpal Wabbit
+</figcaption>
+</figure>
+</div>
+<p>I can imagine that the options used to the train the model can be a bit overwhelming. Let’s see how <code>vw</code> performs when I use all the default values:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">vw</span> -d <span style="text-decoration:underline">wine-train.vw</span> -f wine2.model --quiet <span class="term-callout">➊</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">vw</span> -data <span style="text-decoration:underline">wine-test.vw</span> -i <span style="text-decoration:underline">wine2.model</span> -t -p <span style="text-decoration:underline">predictions</span> --quiet <span class="term-callout">➋</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span>
+<span class="term-output">MAE: 0.593046</span></code></pre>
+
+<ol type="1">
+<li>Train a regression model</li>
+<li>Test the regression model</li>
+<li>Compute mean absolute error</li>
+</ol>
+<p>Apparently, with the default values, the MAE is 0.04 higher, meaning that the predictions are slightly worse.</p>
+<p>In this section, I’ve only been able to scratch the surface of what <code>vw</code> can do. There’s reason why it accepts so many options. Besides regression, it also supports, among other things, binary classification, multi-class classification, reinforcement learning, and Latent Dirichlet Allocation. <a href="https://vowpalwabbit.org/">Its website</a> contains many tutorials and articles to learn more.</p>
+</section>
+</section>
+<section id="classification-with-scikit-learn-laboratory" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="classification-with-scikit-learn-laboratory"><span class="header-section-number">9.5</span> Classification with SciKit-Learn Laboratory</h2>
+<!-- TODO: Explain SKLL better -->
+<p>In this section I’m going to train a classification model, or <em>classifier</em>, that predicts whether a wines is either red or white. While we could use <code>vw</code> for this, I’d like to demonstrate another tool: SciKit-Learn Laboratory (SKLL). As the name implies, it’s built on top of SciKit-Learn, a popular machine learning package for Python. SKLL, itself a Python package, provides the <code>run_experiment</code> tool, which makes it possible to use SciKit-Learn from the command line. Instead of <code>run_experiment</code>, I use the alias <code>skll</code> because I find it easier to remember as it corresponds to the package name:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> skll=run_experiment
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">skll</span>
+<span class="term-output">usage: run_experiment [-h] [-a NUM_FEATURES] [-A] [-k] [-l] [-m MACHINES]</span>
+<span class="term-output">                      [-q QUEUE] [-r] [-v] [--version]</span>
+<span class="term-output">                      config_file [config_file ...]</span>
+<span class="term-output">run_experiment: error: the following arguments are required: config_file</span></code></pre>
+
+<section id="preparing-the-data-1" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="preparing-the-data-1"><span class="header-section-number">9.5.1</span> Preparing the Data</h3>
+<p><code>skll</code> expects the training and test dataset to have the same filenames, located in separate directories. Because its predictions are not necessarily in the same order as the original dataset, I add a column, <em><code>id</code></em>, that contains a unique identifier so that I can match the predictions with the correct data points. Let’s create a balanced dataset:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span>NUM_RED=<span style="color:var(--term-3)">"</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-red-clean.csv</span> <span style="color:var(--term-2)">wc</span> -l<span style="color:var(--term-5)">)</span><span style="color:var(--term-3)">"</span> <span class="term-callout">➊</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstack</span> -n type -g red,white \ <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="text-decoration:underline">wine-red-clean.csv</span> \
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-white-clean.csv</span> <span style="color:var(--term-2)">body</span> shuf | <span style="color:var(--term-2)">head</span> -n $NUM_RED<span style="color:var(--term-5)">)</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">body</span> shuf |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">nl</span> -s, -w1 -v0 | <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sed</span> <span style="color:var(--term-3)">'1s/0,/id,/'</span> | <span class="term-callout">➍</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-balanced.csv | <span style="color:var(--term-2)">csvlook</span>
+<span class="term-output">│    id │ type  │ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sug…</span>
+<span class="term-output">├───────┼───────┼───────────────┼──────────────────┼─────────────┼─────────────…</span>
+<span class="term-output">│     1 │ red   │           8.2 │            0.700 │        0.23 │           2.…</span>
+<span class="term-output">│     2 │ red   │           8.7 │            0.330 │        0.38 │           3.…</span>
+<span class="term-output">│     3 │ white │           9.2 │            0.230 │        0.30 │           1.…</span>
+<span class="term-output">│     4 │ red   │          11.4 │            0.360 │        0.69 │           2.…</span>
+<span class="term-output">│     5 │ white │           7.6 │            0.200 │        0.30 │          14.…</span>
+<span class="term-output">│     6 │ white │           5.9 │            0.445 │        0.26 │           1.…</span>
+<span class="term-output">│     7 │ white │           7.6 │            0.560 │        0.12 │          10.…</span>
+<span class="term-output">│     8 │ white │           6.6 │            0.320 │        0.26 │           7.…</span>
+<span class="term-output">… with 3190 more lines</span></code></pre>
+
+<ol type="1">
+<li>Store the number of red wines in variable <em><code>NUM_RED</code></em>.</li>
+<li>Combine all red wines with a random sample of white wines.</li>
+<li>Add “line numbers” using <code>nl</code> in front of each line.</li>
+<li>Replace the “0” on the first line with “id” so that it’s a proper column name.</li>
+</ol>
+<p>Let’s split this balanced dataset into a training set and a test set:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> -p {train,test}
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span>HEADER=<span style="color:var(--term-3)">"</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-balanced.csv</span> <span style="color:var(--term-2)">header</span><span style="color:var(--term-5)">)</span><span style="color:var(--term-3)">"</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-balanced.csv</span> <span style="color:var(--term-2)">header</span> -d | <span style="color:var(--term-2)">shuf</span> | <span style="color:var(--term-2)">split</span> -d -n r/5 - wine-part-
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -l wine-part-<span style="color:var(--term-4)">*</span>
+<span class="term-output">   640 wine-part-00</span>
+<span class="term-output">   640 wine-part-01</span>
+<span class="term-output">   640 wine-part-02</span>
+<span class="term-output">   639 wine-part-03</span>
+<span class="term-output">   639 wine-part-04</span>
+<span class="term-output">  3198 total</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">wine-part-00</span> | <span style="color:var(--term-2)">header</span> -a $HEADER <span style="color:var(--term-3)">&gt;</span> test/features.csv &amp;&amp; <span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">wine-part-00</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> wine-part-<span style="color:var(--term-4)">*</span> | <span style="color:var(--term-2)">header</span> -a $HEADER <span style="color:var(--term-3)">&gt;</span> train/features.csv &amp;&amp; <span style="color:var(--term-2)">rm</span> wine-part-<span style="color:var(--term-4)">*</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -l t<span style="color:var(--term-4)">*</span>/features.csv
+<span class="term-output">   641 test/features.csv</span>
+<span class="term-output">  2559 train/features.csv</span>
+<span class="term-output">  3200 total</span></code></pre>
+
+<p>Now that I have a balanced training dataset and a balanced test dataset, I can continue with building a classifier.</p>
+</section>
+<section id="running-the-experiment" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="running-the-experiment"><span class="header-section-number">9.5.2</span> Running the Experiment</h3>
+<p>Training a classifier in <code>skll</code> is done by defining an experiment in a configuration file. It consists of several sections that specify, for example, where to look for the datasets, which classifiers Here’s the configuration file <em>classify.cfg</em> that I’ll use:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">classify.cfg</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">classify.cfg</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ [General]</span>
+<span class="term-output">   2   │ <span style="color:var(--term-5)">experiment_name</span> = <span style="color:var(--term-2)">wine</span></span>
+<span class="term-output">   3   │ <span style="color:var(--term-5)">task</span> = <span style="color:var(--term-2)">evaluate</span></span>
+<span class="term-output">   4   │</span>
+<span class="term-output">   5   │ [Input]</span>
+<span class="term-output">   6   │ <span style="color:var(--term-5)">train_directory</span> = <span style="color:var(--term-2)">train</span></span>
+<span class="term-output">   7   │ <span style="color:var(--term-5)">test_directory</span> = <span style="color:var(--term-2)">test</span></span>
+<span class="term-output">   8   │ <span style="color:var(--term-5)">featuresets</span> = <span style="color:var(--term-2)">[["features"]]</span></span>
+<span class="term-output">   9   │ <span style="color:var(--term-5)">feature_scaling</span> = <span style="color:var(--term-2)">both</span></span>
+<span class="term-output">  10   │ <span style="color:var(--term-5)">label_col</span> = <span style="color:var(--term-2)">type</span></span>
+<span class="term-output">  11   │ <span style="color:var(--term-5)">id_col</span> = <span style="color:var(--term-2)">id</span></span>
+<span class="term-output">  12   │ <span style="color:var(--term-5)">shuffle</span> = <span style="color:var(--term-2)">true</span></span>
+<span class="term-output">  13   │ <span style="color:var(--term-5)">learners</span> = <span style="color:var(--term-2)">["KNeighborsClassifier", "LogisticRegression", "DecisionTree</span></span>
+<span class="term-output">       │ <span style="color:var(--term-2)">Classifier", "RandomForestClassifier"]</span></span>
+<span class="term-output">  14   │ <span style="color:var(--term-5)">suffix</span> = <span style="color:var(--term-2)">.csv</span></span>
+<span class="term-output">  15   │</span>
+<span class="term-output">  16   │ [Tuning]</span>
+<span class="term-output">  17   │ <span style="color:var(--term-5)">grid_search</span> = <span style="color:var(--term-2)">false</span></span>
+<span class="term-output">  18   │ <span style="color:var(--term-5)">objectives</span> = <span style="color:var(--term-2)">["neg_mean_squared_error"]</span></span>
+<span class="term-output">  19   │ <span style="color:var(--term-5)">param_grids</span> = <span style="color:var(--term-2)">[{}, {}, {}, {}]</span></span>
+<span class="term-output">  20   │</span>
+<span class="term-output">  21   │ [Output]</span>
+<span class="term-output">  22   │ <span style="color:var(--term-5)">logs</span> = <span style="color:var(--term-2)">output</span></span>
+<span class="term-output">  23   │ <span style="color:var(--term-5)">results</span> = <span style="color:var(--term-2)">output</span></span>
+<span class="term-output">  24   │ <span style="color:var(--term-5)">predictions</span> = <span style="color:var(--term-2)">output</span></span>
+<span class="term-output">  25   │ <span style="color:var(--term-5)">models</span> = <span style="color:var(--term-2)">output</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>I run the experiment using <code>skll</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">skll</span> -l <span style="text-decoration:underline">classify.cfg</span> <span style="color:var(--term-3)">2&gt;</span><span style="text-decoration:underline">/dev/null</span></code></pre>
+
+<p>The option<code>-l</code> specifies to run in local mode. <code>skll</code> also offers the possibility to run experiments on clusters. The time it takes to run an experiment depends on the complexity of the chosen algorithms and the size of the data.</p>
+</section>
+<section id="parsing-the-results" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="parsing-the-results"><span class="header-section-number">9.5.3</span> Parsing the Results</h3>
+<p>Once all classifiers have been trained and tested, the results can be found in the directory <em>output</em>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> -1 <span style="text-decoration:underline">output</span>
+<span class="term-output">wine.log</span>
+<span class="term-output">wine_DecisionTreeClassifier.log</span>
+<span class="term-output">wine_DecisionTreeClassifier.model</span>
+<span class="term-output">wine_DecisionTreeClassifier.results</span>
+<span class="term-output">wine_DecisionTreeClassifier.results.json</span>
+<span class="term-output">wine_DecisionTreeClassifier_predictions.tsv</span>
+<span class="term-output">wine_KNeighborsClassifier.log</span>
+<span class="term-output">wine_KNeighborsClassifier.model</span>
+<span class="term-output">wine_KNeighborsClassifier.results</span>
+<span class="term-output">wine_KNeighborsClassifier.results.json</span>
+<span class="term-output">wine_KNeighborsClassifier_predictions.tsv</span>
+<span class="term-output">wine_LogisticRegression.log</span>
+<span class="term-output">wine_LogisticRegression.model</span>
+<span class="term-output">wine_LogisticRegression.results</span>
+<span class="term-output">wine_LogisticRegression.results.json</span>
+<span class="term-output">wine_LogisticRegression_predictions.tsv</span>
+<span class="term-output">wine_RandomForestClassifier.log</span>
+<span class="term-output">wine_RandomForestClassifier.model</span>
+<span class="term-output">wine_RandomForestClassifier.results</span>
+<span class="term-output">wine_RandomForestClassifier.results.json</span>
+<span class="term-output">wine_RandomForestClassifier_predictions.tsv</span>
+<span class="term-output">wine_summary.tsv</span></code></pre>
+
+<p><code>skll</code> generates four files for each classifier: one log, two with results, and one with predictions. I extract the algorithm names and sort them by their accuracies using the following SQL query:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">output/wine_summary.tsv</span> <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT learner_name, accuracy FROM s</span>
+<span class="term-output"><span style="color:var(--term-3)">tdin ORDER BY accuracy DESC"</span> | <span style="color:var(--term-2)">csvlook</span> -I</span>
+<span class="term-output">│ learner_name           │ accuracy  │</span>
+<span class="term-output">├────────────────────────┼───────────┤</span>
+<span class="term-output">│ RandomForestClassifier │ 0.996875  │</span>
+<span class="term-output">│ LogisticRegression     │ 0.99375   │</span>
+<span class="term-output">│ KNeighborsClassifier   │ 0.990625  │</span>
+<span class="term-output">│ DecisionTreeClassifier │ 0.9765625 │</span></code></pre>
+
+<p>The relevant column here is <em><code>accuracy</code></em>, which indicates the percentage of data points that are classified correctly. From this we see that actually all algorithms are performing really well. The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.</p>
+<p>Each JSON file contains a confusion matrix, giving you additional insight into the performance of each classifier. A confusion matrix is a table where the columns refer to the true labels (red and white) and the rows refer to the predicted labels. Higher numbers on the diagonal mean more correct predictions. With <code>jq</code> I can print the name of each classifier and extract the associated confusion matrix:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.[] | "\(.learner_name):\n\(.result_table)\n"'</span> output/<span style="color:var(--term-4)">*</span>.json
+<span class="term-output">DecisionTreeClassifier:</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
+<span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
+<span class="term-output">|   red | [333] |       7 |       0.977 |    0.979 |       0.978 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">| white |     8 |   [292] |       0.977 |    0.973 |       0.975 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">(row = reference; column = predicted)</span>
+<span class="term-output"></span>
+<span class="term-output">KNeighborsClassifier:</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
+<span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
+<span class="term-output">|   red | [337] |       3 |       0.991 |    0.991 |       0.991 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">| white |     3 |   [297] |       0.990 |    0.990 |       0.990 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">(row = reference; column = predicted)</span>
+<span class="term-output"></span>
+<span class="term-output">LogisticRegression:</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
+<span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
+<span class="term-output">|   red | [337] |       3 |       0.997 |    0.991 |       0.994 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">| white |     1 |   [299] |       0.990 |    0.997 |       0.993 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">(row = reference; column = predicted)</span>
+<span class="term-output"></span>
+<span class="term-output">RandomForestClassifier:</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
+<span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
+<span class="term-output">|   red | [339] |       1 |       0.997 |    0.997 |       0.997 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">| white |     1 |   [299] |       0.997 |    0.997 |       0.997 |</span>
+<span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
+<span class="term-output">(row = reference; column = predicted)</span></code></pre>
+
+<p>A confusion matrix is especially helpful when you have more than two classes, so that you can see which kind of misclassifications happen, and when the cost of an incorrect classification is not the same for each class.</p>
+<p>From a usage perspective, it’s interesting to consider that <code>vw</code> and <code>skll</code> take two different approaches. <code>vw</code> uses command-line options, whereas <code>skll</code> requires a separate file. Both approaches have their advantages and disadvantages. While command-line options enable more ad-hoc usage, a configuration file is perhaps easier to reproduce. Then again, as we’ve seen, invoking <code>vw</code> with any number of options can easily be placed in script or in a <em>Makefile</em>. The opposite, making <code>skll</code> accept options such that it doesn’t need a configuration file, is less straightforward.</p>
+</section>
+</section>
+<section id="summary-8" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="summary-8"><span class="header-section-number">9.6</span> Summary</h2>
+<p>In this chapter we’ve looked at modeling data. Through examples I dived into three different machine learning tasks namely dimensionality reduction which is unsupervised and regression and classification which are both supervised. A proper machine learning tutorial is unfortunately beyond the scope of this book. In the next section I have a couple of recommendations in case you want to learn more about machine learning. This was the fourth and last step of the OSEMN model for data science that I’m covering in this book. The next chapter is the last intermezzo chapter and will be about leveraging the command line elsewhere.</p>
+</section>
+<section id="for-further-exploration-8" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="for-further-exploration-8"><span class="header-section-number">9.7</span> For Further Exploration</h2>
+<ul>
+<li>The book <em>Python Machine Learning</em> by Sebastian Raschka and Vahid Mirjalili offers a comprehensive overview of machine learning and how to apply it using Python.</li>
+<li>The later chapters of <em>R for Everyone</em> by Jared Lander explain how to accomplish various machine learning tasks using R.</li>
+<li>If you want to get a deeper understanding of machine learning, I highly recommend you pick up <em>Pattern Recognition and Machine Learning</em> by Christopher Bishop and <em>Information Theory, Inference, and Learning Algorithms</em> by David MacKay.</li>
+<li>If you’re interested in learning more about the t-SNE algorithm, I recommend the original article about it: <em>Visualizing Data Using T-SNE</em> by Laurens van der Maaten and Geoffrey Hinton.</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, <em><span class="nocase">tapkee</span> – an Efficient Dimension Reduction Library</em>, version 1.2, 2013, <a href="http://tapkee.lisitsyn.me">http://tapkee.lisitsyn.me</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>John Langford, <em><span class="nocase">vw</span> – Fast Machine Learning Library for Online Learning</em>, version 8.10.1, 2021, <a href="https://vowpalwabbit.org">https://vowpalwabbit.org</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Educational Testing Service, <em><span class="nocase">skll</span> – <span>SciKit-Learn</span> Laboratory</em>, version 2.5.0, 2021, <a href="https://skll.readthedocs.org">https://skll.readthedocs.org</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Christopher Groskopf, <em><span class="nocase">csvstack</span> – Stack up the Rows from Multiple <span>CSV</span> Files</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>K. Pearson, <span>“On Lines and Planes of Closest Fit to Systems of Points in Space,”</span> <em>Philosophical Magazine</em> 2, no. 11 (1901): 559–72.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Laurens van der Maaten and Geoffrey Everest Hinton, <span>“Visualizing Data Using t-<span>SNE</span>,”</span> <em>Journal of Machine Learning Research</em> 9 (2008): 2579–2605.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, <span>“Tapkee: An Efficient Dimension Reduction Library,”</span> <em>Journal of Machine Learning Research</em> 14 (2013): 2355–59.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Jeroen Janssens, <em><span class="nocase">csv2vw</span> – Convert <span>CSV</span> to Vowpal Wabbit Format</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Torbjorn Granlund and Richard M. Stallman, <em><span class="nocase">split</span> – Split a File into Pieces</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Paul Eggert, <em><span class="nocase">shuf</span> – Generate Random Permutations</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-8-parallel-pipelines.html" class="pagination-link" aria-label="Parallel Pipelines">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-10-polyglot-data-science.html" class="pagination-link" aria-label="Polyglot Data Science">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Polyglot Data Science</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>
+(function() {
+  function addCopyButtons() {
+    var pres = document.querySelectorAll('pre.term-output, pre.term-screen, pre.term-source');
+    pres.forEach(function(pre) {
+      var wrap = document.createElement('div');
+      wrap.className = 'term-container';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+      var btn = document.createElement('button');
+      btn.className = 'term-copy-btn';
+      btn.setAttribute('aria-label', 'Copy commands to clipboard');
+      btn.setAttribute('title', 'Copy commands to clipboard');
+      var clipIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>';
+      var checkIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>';
+      btn.innerHTML = clipIcon;
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var source = code || pre;
+        var clone = source.cloneNode(true);
+        clone.querySelectorAll('.term-output').forEach(function(el) { el.remove(); });
+        var text = clone.innerText.replace(/\n{2,}/g, '\n').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          btn.innerHTML = checkIcon;
+          btn.setAttribute('title', 'Copied!');
+          setTimeout(function() {
+            btn.innerHTML = clipIcon;
+            btn.setAttribute('title', 'Copy commands to clipboard');
+          }, 1500);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addCopyButtons);
+  } else {
+    addCopyButtons();
+  }
+})();
+</script>
+
+
+
+
+</body></html>

@@ -21,7 +21,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 14: `$ cd /data`
 
 - id: `chapter-2-getting-started.html:block:14`
-- hash: `9afb9778`
+- hash: `7f3bd044`
 - status: **accept**
 - cause: image
 - note: Timestamps (time); /data has no csvconf/ directory and ch04/ has no subdirectory anymore (data); ls sort order (uutils)
@@ -44,15 +44,15 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -drwxr-xr-x 4 dst dst 4.0K Dec 14 11:43 ch10/
 -drwxr-xr-x 3 dst dst 4.0K Dec 14 11:43 csvconf/
 +total 36K
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch02/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch03/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch04/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch05/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch06/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch07/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch08/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch09/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch10/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch02/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch03/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch04/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch05/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch06/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch07/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch08/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch09/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch10/
  
  $ cd ch02
 ```
@@ -60,7 +60,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 18: `$ curl "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"`
 
 - id: `chapter-2-getting-started.html:block:18`
-- hash: `195cd182`
+- hash: `ba045aac`
 - status: **accept**
 - cause: network
 - note: Served from the cache (2021 version of the text, same size). curl 8 progress meter layout differs; speed is local
@@ -76,7 +76,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -100  170k  100  170k    0     0   202k      0 --:--:-- --:--:-- --:--:--  203k
 +  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
 +                                 Dload  Upload  Total   Spent   Left   Speed
-+100 170.2k 100 170.2k   0      0 149.3M      0                              0
++100 170.2k 100 170.2k   0      0 147.7M      0                              0
  
  $ cat chapters.txt
 ```
@@ -144,7 +144,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 27: `$ ls /data/ch10`
 
 - id: `chapter-2-getting-started.html:block:27`
-- hash: `d5ccba40`
+- hash: `c5b3c9d3`
 - status: **accept**
 - cause: uutils
 - note: ls sorts by byte value (uppercase first); no __pycache__/ in data; timestamps; count.py permissions
@@ -168,16 +168,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 --rw-r--r-- 1 dst dst  460 Dec 14 11:43 count.R
 --rw-r--r-- 1 dst dst 1.7K Dec 14 11:43 Untitled1337.ipynb
 +total 176K
-+-rw-r--r-- 1 dst dst 1.7K Nov  5 20:43 Untitled1337.ipynb
-+-rw-r--r-- 1 dst dst 164K Nov  5 20:43 alice.txt
-+-rw-r--r-- 1 dst dst  460 Nov  5 20:43 count.R
-+-rwxr-xr-x 1 dst dst  408 Nov  5 20:43 count.py*
++-rw-r--r-- 1 dst dst 1.7K Nov  5 22:32 Untitled1337.ipynb
++-rw-r--r-- 1 dst dst 164K Nov  5 22:32 alice.txt
++-rw-r--r-- 1 dst dst  460 Nov  5 22:32 count.R
++-rwxr-xr-x 1 dst dst  408 Nov  5 22:32 count.py*
 ```
 
 ## Code block 33: `$ cd /data`
 
 - id: `chapter-2-getting-started.html:block:33`
-- hash: `2075c9b9`
+- hash: `0a39c6ce`
 - status: **accept**
 - cause: image
 - note: Same as block 14: timestamps, no csvconf/, ls sort order
@@ -201,16 +201,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -drwxr-xr-x 3 dst dst 4.0K Dec 14 11:43 csvconf/
 -drwxr-xr-x 2 dst dst 4.0K Dec 14 11:44 logs/
 +total 40K
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch02/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch03/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch04/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch05/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch06/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch07/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch08/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch09/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 ch10/
-+drwxr-xr-x 2 dst dst 4.0K Nov  5 20:43 logs/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch02/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch03/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch04/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch05/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch06/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch07/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch08/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch09/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 ch10/
++drwxr-xr-x 2 dst dst 4.0K Nov  5 22:32 logs/
 ```
 
 ## Code block 34: `$ mkdir -v backup`
@@ -275,10 +275,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 37: `$ which csvlook`
 
 - id: `chapter-2-getting-started.html:block:37`
-- hash: `7bbd6fa2`
+- hash: `745617c9`
 - status: **accept**
 - cause: intended
-- note: Rendering harness defines csvlook with 'command csvlook' instead of '/usr/bin/csvlook' (csvlook moved to /opt/uv/bin); line wraps one character later
+- note: Rendering harness: csvlook is now a typed function calling `command csvlook`, and only changes dashes on its separator line
 
 ```diff
 --- 2e
@@ -288,8 +288,8 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
  csvlook () {
 -        /usr/bin/csvlook "$@" | trim | sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──
 -┤/;s/|/│/g;2s/-/─/g'
-+        command csvlook "$@" | trim | sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──┤
-+/;s/|/│/g;2s/-/─/g'
++        command csvlook "$@" | trim | sed '2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/
++──┤/;s/|/│/g;2s/-/─/g'
  }
  
 ```
@@ -430,74 +430,6 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 +… with 17 more lines
 ```
 
-## Prose (replace): ➊ Navigate to the directory /data/ch02. ➋ Print the current directory.
-
-- id: `chapter-2-getting-started.html:prose:fe75e989`
-- hash: `8cfbc2a0`
-- status: **accept**
-- cause: intended
-- note: Callout explanations are a numbered list now (decision 4); see 'Code markers' note in the plan
-
-```diff
---- 2e
-+++ 2.5e
-@@ -1 +1,5 @@
--➊ Navigate to the directory /data/ch02. ➋ Print the current directory. ➌ Navigate to the parent directory. ➍ Print the current directory again. ➎ Navigate to the subdirectory ch02.
-+Navigate to the directory /data/ch02.
-+Print the current directory.
-+Navigate to the parent directory.
-+Print the current directory again.
-+Navigate to the subdirectory ch02.
-```
-
-## Prose (replace): ➊ The option -l specifies that wc should only output the number of lin
-
-- id: `chapter-2-getting-started.html:prose:3c698dcb`
-- hash: `e118c60c`
-- status: **accept**
-- cause: intended
-- note: Callout explanation as numbered list (decision 4)
-
-```diff
---- 2e
-+++ 2.5e
-@@ -1 +1 @@
--➊ The option -l specifies that wc should only output the number of lines that are pass into it. By default it also returns the number of characters and words.
-+The option -l specifies that wc should only output the number of lines that are pass into it. By default it also returns the number of characters and words.
-```
-
-## Prose (replace): ➊ The -w option indicates wc to only count words.
-
-- id: `chapter-2-getting-started.html:prose:2450093a`
-- hash: `7a362ed6`
-- status: **accept**
-- cause: intended
-- note: Callout explanation as numbered list (decision 4)
-
-```diff
---- 2e
-+++ 2.5e
-@@ -1 +1 @@
--➊ The -w option indicates wc to only count words.
-+The -w option indicates wc to only count words.
-```
-
-## Prose (replace): ➊ The 2 refers to standard error.
-
-- id: `chapter-2-getting-started.html:prose:d3d887e7`
-- hash: `f9b03fe9`
-- status: **accept**
-- cause: intended
-- note: Callout explanation as numbered list (decision 4)
-
-```diff
---- 2e
-+++ 2.5e
-@@ -1 +1 @@
--➊ The 2 refers to standard error.
-+The 2 refers to standard error.
-```
-
 ## 8 old anchor(s) missing
 
 - id: `chapter-2-getting-started.html:anchors-missing`
@@ -517,19 +449,5 @@ fig:diagram-essential-tee
 fig:umbrella
 
 (new-only: fig-diagram-essential-pipe, fig-diagram-essential-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-redirect-devnull, fig-diagram-essential-redirect-devnull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-redirect-stdout, fig-diagram-essential-redirect-stdout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-sponge, fig-diagram-essential-sponge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-stdin-cat, fig-diagram-essential-stdin-cat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-streams, fig-diagram-essential-streams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-tee, fig-diagram-essential-tee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-umbrella, fig-umbrella-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fn1, fn10, fn11, fn12, fn13, fn14, fn15, fn16, fn17, fn18, fn19, fn2, fn20, fn21, fn22, fn23, fn3, fn4, fn5, fn6, fn7, fn8, fn9, fnref1, fnref10, fnref11, fnref12, fnref13, fnref14, fnref15, fnref16, fnref17, fnref18, fnref19, fnref2, fnref20, fnref21, fnref22, fnref23, fnref3, fnref4, fnref5, fnref6, fnref7, fnref8, fnref9, footnotes, title-block-header)
-```
-
-## 3 broken internal link(s)
-
-- id: `chapter-2-getting-started.html:broken-links`
-- hash: `17bfa1c3`
-- status: **accept**
-- cause: intended
-- note: Links to chapters 3-11 that haven't been converted yet (later rounds)
-
-```diff
-chapter-3-obtaining-data.qmd (page missing)
-chapter-4-creating-command-line-tools.qmd (page missing)
-chapter-7-exploring-data.qmd (page missing)
 ```
 

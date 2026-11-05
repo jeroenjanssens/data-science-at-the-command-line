@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+
+<title>6&nbsp; Project Management with Make – Data Science at the Command Line, 2e</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-7-exploring-data.html" rel="next">
+<link href="./chapter-5-scrubbing-data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/quarto-term-0.7.1/term.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
+<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+
+
+<meta property="og:title" content="6&nbsp; Project Management with Make – Data Science at the Command Line, 2e">
+<meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta property="og:image" content="images/heights.png">
+<meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta name="twitter:title" content="6&nbsp; Project Management with Make – Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta name="twitter:image" content="images/heights.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-6-project-management-with-make.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Project Management with Make</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science at the Command Line, 2e</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-obtaining-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-creating-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-5-scrubbing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Scrubbing Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6-project-management-with-make.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Project Management with Make</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploring Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8-parallel-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-9-modeling-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-10-polyglot-data-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Polyglot Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-11-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./list-of-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">List of Command-Line Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview-3" id="toc-overview-3" class="nav-link active" data-scroll-target="#overview-3"><span class="header-section-number">6.1</span> Overview</a></li>
+  <li><a href="#introducing-make" id="toc-introducing-make" class="nav-link" data-scroll-target="#introducing-make"><span class="header-section-number">6.2</span> Introducing Make</a></li>
+  <li><a href="#running-tasks" id="toc-running-tasks" class="nav-link" data-scroll-target="#running-tasks"><span class="header-section-number">6.3</span> Running Tasks</a></li>
+  <li><a href="#building-for-real" id="toc-building-for-real" class="nav-link" data-scroll-target="#building-for-real"><span class="header-section-number">6.4</span> Building, For Real</a></li>
+  <li><a href="#adding-dependencies" id="toc-adding-dependencies" class="nav-link" data-scroll-target="#adding-dependencies"><span class="header-section-number">6.5</span> Adding Dependencies</a></li>
+  <li><a href="#summary-5" id="toc-summary-5" class="nav-link" data-scroll-target="#summary-5"><span class="header-section-number">6.6</span> Summary</a></li>
+  <li><a href="#for-further-exploration-5" id="toc-for-further-exploration-5" class="nav-link" data-scroll-target="#for-further-exploration-5"><span class="header-section-number">6.7</span> For Further Exploration</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="chapter-6-project-management-with-make" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Project Management with Make</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+<p>I hope that by now you have come to appreciate that the command line is a very convenient environment for working with data. You may have noticed that, as a consequence of working with the command line, we:</p>
+<ul>
+<li>Invoke many different commands.</li>
+<li>Work from various directories.</li>
+<li>Develop our own command-line tools.</li>
+<li>Obtain and generate many (intermediate) files.</li>
+</ul>
+<p>Since this is an exploratory process, our workflow tends to be rather chaotic, which makes it difficult to keep track of what we’ve done. It’s important that our steps can be reproduced, by us or by others. When you continue with a project from some time ago, chances are that you have forgotten which commands you ran, from which directory, on which files, with which parameters, and in which order. Imagine the challenges of sharing your project with a collaborator.</p>
+<p>You can recover some commands by digging through the output of the <code>history</code> command, but this is, of course, not a reliable approach. A somewhat better approach would be to save your commands to a shell script. At least this allows you and your collaborators to reproduce the project. A shell script is, however, also a sub-optimal approach because:</p>
+<ul>
+<li>It is difficult to read and to maintain.</li>
+<li>Dependencies between steps are unclear.</li>
+<li>Every step gets executed every time, which is inefficient and sometimes undesirable.</li>
+</ul>
+<p>This is where <code>make</code> really shines<span class="citation" data-cites="make"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span>. <code>make</code> is a command-line tool that allows you to:</p>
+<ul>
+<li>Formalize your data workflow steps in terms of input and output dependencies.</li>
+<li>Run specific steps of your workflow.</li>
+<li>Use inline code.</li>
+<li>Store and retrieve data from external sources.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the first edition, this chapter used <code>drake</code><span class="citation" data-cites="drake"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span> instead of <code>make</code>. Drake was supposed to be a successor to <code>make</code> with additional features to work with data. Unfortunately, Drake was abandoned by its creators in 2016 with too many unresolved bugs. That’s why I’ve decided to use <code>make</code> instead.</p>
+</div>
+</div>
+<p>An important, related topic is <em>version control</em>, which allows you to track changes of your project, back up your project to a server, collaborate with others, and retrieve earlier versions when things go wrong. A popular command-line tool to do version control is <code>git</code><span class="citation" data-cites="git"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span>. It’s often used in combination with GitHub, an online service for distributed version control. Many open source projects, including <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line">this book</a>, are hosted on GitHub. The topic of version control is beyond the scope of this book, but I highly recommend that you look into this, especially once you start collaborating with others. At the end of this chapter I recommend a few resources to learn more.</p>
+<section id="overview-3" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="overview-3"><span class="header-section-number">6.1</span> Overview</h2>
+<p>Managing your data workflow with <code>make</code> is the main topic of this chapter. As such, you’ll learn about:</p>
+<ul>
+<li>Defining your workflow with a <em>Makefile</em>.</li>
+<li>Thinking about your workflow in terms of input and output dependencies.</li>
+<li>Running tasks and building targets.</li>
+</ul>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch06</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 28K</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  37 Nov  5 22:33 Makefile.test</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  21 Nov  5 22:33 numbers-write-var.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  26 Nov  5 22:33 numbers-write.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  16 Nov  5 22:33 numbers.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 432 Nov  5 22:33 starwars.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 263 Nov  5 22:33 tasks.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  27 Nov  5 22:33 template.make</span></code></pre>
+
+<p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
+</section>
+<section id="introducing-make" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="introducing-make"><span class="header-section-number">6.2</span> Introducing Make</h2>
+<p><code>make</code> organizes command execution around data and its dependencies. Your data processing steps are formalized in a separate text file (a workflow). Each step may have inputs and outputs. <code>make</code> automatically resolves their dependencies and determines which commands need to be run and in which order.</p>
+<p>This means that when you have, say, an SQL query that takes ten minutes, it only has to be executed when the result is missing or when the query has changed afterwards. Also, if you want to (re-)run a specific step, <code>make</code> only re-runs the steps on which that step depends. This can save you a lot of time.</p>
+<p>Having a formalized workflow allows you to easily pick up your project after a few weeks and to collaborate with others. I strongly advise you to do this, even when you think this will be a one-off project, because you never know when you need to run certain steps again, or reuse them in another project.</p>
+</section>
+<section id="running-tasks" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="running-tasks"><span class="header-section-number">6.3</span> Running Tasks</h2>
+<p>By default, <code>make</code> searches for a configuration file called <em>Makefile</em> in the current directory. It can also be named <em>makefile</em> (lower case), but I recommend calling your file <em>Makefile</em> because it’s more common and that way it appears at the top of a directory listing. Normally you would only have one configuration file per project. Because this chapter discusses many different ones, I haven given each of them a different filename with the <em>.make</em> extension. Let’s start with the following <em>Makefile</em>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">numbers.make</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">numbers.make</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ numbers:<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-6)">├──────┤</span>seq<span style="color:var(--term-6)">·</span>7<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>This <em>Makefile</em> contains one <em>target</em> called <em><code>numbers</code></em>. A <em>target</em> is like a task. It’s usually the name of a file you’d like to create but it can also be more generic than that. The line below, <em><code>seq 7</code></em>, is known as a <em>rule</em>. Think of a rule as a recipe; one or more commands that specify how the target should be built.</p>
+<p>The whitespace in front of the rule is a single tab character. <code>make</code> is picky when it comes to whitespace. Beware that some editors insert spaces when you press the <strong><code>TAB</code></strong> key, known as a soft tab, which will cause <code>make</code> to produce an error. The following code illustrates this by expanding the tab to eight spaces:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">numbers.make</span> <span style="color:var(--term-2)">expand</span> <span style="color:var(--term-3)">&gt;</span> spaces.make
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">spaces.make</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">spaces.make</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ numbers:<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-6)">········</span>seq<span style="color:var(--term-6)">·</span>7<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> -f <span style="text-decoration:underline">spaces.make</span> <span class="term-callout">➊</span>
+<span class="term-output">spaces.make:2: *** missing separator (did you mean TAB instead of 8 spaces?).  S</span>
+<span class="term-output">top. <span class="term-callout">➋</span></span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">spaces.make</span></code></pre>
+
+<ol type="1">
+<li>I need to add the <code>-f</code> option (short for the <code>--makefile</code> option) because the configuration file isn’t called <em>Makefile</em>, which is the default.</li>
+<li>One of the more helpful error messages you’ll find at the command line!</li>
+</ol>
+<p>From now on, I’ll rename the appropriate file to <em>Makefile</em> because that matches real-world use more closely. So, if I just run <code>make</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers.make</span> Makefile
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span>
+<span class="term-output">seq 7</span>
+<span class="term-output">1</span>
+<span class="term-output">2</span>
+<span class="term-output">3</span>
+<span class="term-output">4</span>
+<span class="term-output">5</span>
+<span class="term-output">6</span>
+<span class="term-output">7</span></code></pre>
+
+<p>Then we see that <code>make</code> first prints the rule itself (<em><code>seq 7</code></em>), and then the output generated by the rule. This process is known as <em>building</em> a target. If you don’t specify the name of a target, then <code>make</code> will build the first target specified in the <em>Makefile</em>. In practice though, you’ll most often be specifying the target you’d want to build:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> numbers
+<span class="term-output">seq 7</span>
+<span class="term-output">1</span>
+<span class="term-output">2</span>
+<span class="term-output">3</span>
+<span class="term-output">4</span>
+<span class="term-output">5</span>
+<span class="term-output">6</span>
+<span class="term-output">7</span></code></pre>
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>make</code> was originally created to ease the compilation of source code, which explains some of the terminology like <em>target</em>, <em>rule</em>, and <em>building</em>.</p>
+</div>
+</div>
+<p>In this case, we’re not actually building anything, as in, we’re not creating any new files. <code>make</code> will happily <em>build</em> our target <code>numbers</code> again, because it’s not finding a file called <em>numbers</em>. In the next section I’ll go into this.</p>
+<p>Sometimes it’s useful to have a target that builds regardless of whether a file with the same name exists. Think of tasks that you need to perform as part of a project. It’s good practice to declare those targets as phony by using a special target called <code>.PHONY</code> at the top of your <em>Makefile</em>, followed by the names of the phony targets. Here’s an example <em>Makefile</em> that illustrates to use of phony targets:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">tasks.make</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">tasks.make</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-4)">.PHONY</span><span style="color:var(--term-5)">:</span> <span style="color:var(--term-2)">clean publish docker-run</span></span>
+<span class="term-output">   2   │</span>
+<span class="term-output">   3   │ <span style="color:var(--term-4)">clean</span><span style="color:var(--term-5)">:</span></span>
+<span class="term-output">   4   │         rm book/2e/book.md book/2e/render<span style="color:var(--term-5)">*</span>.rds</span>
+<span class="term-output">   5   │</span>
+<span class="term-output">   6   │ <span style="color:var(--term-4)">publish</span><span style="color:var(--term-5)">:</span></span>
+<span class="term-output">   7   │         (<span style="color:var(--term-6)">cd</span> www <span style="color:var(--term-5)">&amp;&amp;</span> hugo) <span style="color:var(--term-5)">&amp;&amp;</span> netlify deploy<span style="color:var(--term-6)"> --prod --dir</span> www/public</span>
+<span class="term-output">   8   │</span>
+<span class="term-output">   9   │ <span style="color:var(--term-4)">docker-run</span><span style="color:var(--term-5)">:</span></span>
+<span class="term-output">  10   │         docker run<span style="color:var(--term-6)"> -it --rm -v</span> <span style="color:var(--term-5)">$$(</span><span style="color:var(--term-6)">pwd</span><span style="color:var(--term-5)">)</span>/book/2e/data:/data<span style="color:var(--term-6)"> -p</span> 8000:8000</span>
+<span class="term-output">       │ datasciencetoolbox/dsatcl2e:latest <span class="term-callout">➊</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<ol type="1">
+<li>Note the extra dollar sign in front of <em><code>$(pwd)</code></em>. This is needed because <code>make</code> uses a single dollar sign to refer to various special variables, which I’ll explain later.</li>
+</ol>
+<p>The above is taken from a <em>Makefile</em> I use while working on this book. You could say that I’m using <code>make</code> as a glorified task runner. Although this wasn’t the primary purpose of <code>make</code>, it still provides a lot of value because I don’t need to remember or look up what incantation I used. Instead, I type <code>make publish</code> and the latest version of the book is published. It’s perfectly fine to put long-running commands in a <em>Makefile</em>.</p>
+<p>And <code>make</code> can do much more for us!</p>
+</section>
+<section id="building-for-real" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="building-for-real"><span class="header-section-number">6.4</span> Building, For Real</h2>
+<p>Let’s modify our <em>Makefile</em> such the output of the rule is written to a file <em>numbers</em>.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers-write.make</span> <span style="text-decoration:underline">Makefile</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">Makefile</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">Makefile</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-4)">numbers</span><span style="color:var(--term-5)">:</span></span>
+<span class="term-output">   2   │         seq 7 <span style="color:var(--term-5)">&gt;</span> numbers</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> numbers
+<span class="term-output">seq 7 &gt; numbers</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">numbers</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">numbers</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ 1</span>
+<span class="term-output">   2   │ 2</span>
+<span class="term-output">   3   │ 3</span>
+<span class="term-output">   4   │ 4</span>
+<span class="term-output">   5   │ 5</span>
+<span class="term-output">   6   │ 6</span>
+<span class="term-output">   7   │ 7</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Now we can say that <code>make</code> is actually building something. What’s more, if we run it again, we see that <code>make</code> reports that target <em><code>numbers</code></em> is up-to-date.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> <span style="text-decoration:underline">numbers</span>
+<span class="term-output">make: 'numbers' is up to date.</span></code></pre>
+
+<p>There’s no need to rebuild the target <em><code>numbers</code></em> because the file <em>numbers</em> already exists. That’s great because <code>make</code> is saving us time by not repeating work.</p>
+<p>In <code>make</code>, it’s all about files. But keep in mind that <code>make</code> only cares about the <em>name</em> of the target. It does not check whether a file of the same name actually gets created by the rule. If we were to write to a file called <em>nummers</em>, which is Dutch for “numbers,” and the target was still called <em><code>numbers</code></em>, then <code>make</code> would always build this target. Vice versa, if the file <em>numbers</em> was created by some other process, whether automated or manual, then <code>make</code> would still consider that target up-to-date.</p>
+<p>We can avoid some repetition by using the automatic variable <code>$@</code>, which gets expanded to the name of the target:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers-write-var.make</span> <span style="text-decoration:underline">Makefile</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">Makefile</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">Makefile</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ <span style="color:var(--term-4)">numbers</span><span style="color:var(--term-5)">:</span></span>
+<span class="term-output">   2   │         seq 7 <span style="color:var(--term-5)">&gt;</span> $@</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Let’s verify that this works by removing the file <em>numbers</em> and calling <code>make</code> again:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">numbers</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> numbers
+<span class="term-output">seq 7 &gt; numbers</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">numbers</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">numbers</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ 1</span>
+<span class="term-output">   2   │ 2</span>
+<span class="term-output">   3   │ 3</span>
+<span class="term-output">   4   │ 4</span>
+<span class="term-output">   5   │ 5</span>
+<span class="term-output">   6   │ 6</span>
+<span class="term-output">   7   │ 7</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Another reason for <code>make</code> to rebuild a target is its dependencies, so let’s discuss that next.</p>
+</section>
+<section id="adding-dependencies" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="adding-dependencies"><span class="header-section-number">6.5</span> Adding Dependencies</h2>
+<p>So far, we’ve looked at targets that exist in isolation. In a typical data science workflow, many steps depend on other steps. In order to properly talk about dependencies in a <em>Makefile</em>, let’s consider two tasks that work with a dataset about Star Wars characters.</p>
+<p>Here’s an excerpt of that dataset:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
+<span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">xsv</span> select name,height,mass,homeworld,species |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvlook</span>
+<span class="term-output">│ name                  │ height │    mass │ homeworld      │ species        │</span>
+<span class="term-output">├───────────────────────┼────────┼─────────┼────────────────┼────────────────┤</span>
+<span class="term-output">│ Luke Skywalker        │    172 │    77.0 │ Tatooine       │ Human          │</span>
+<span class="term-output">│ C-3PO                 │    167 │    75.0 │ Tatooine       │ Droid          │</span>
+<span class="term-output">│ R2-D2                 │     96 │    32.0 │ Naboo          │ Droid          │</span>
+<span class="term-output">│ Darth Vader           │    202 │   136.0 │ Tatooine       │ Human          │</span>
+<span class="term-output">│ Leia Organa           │    150 │    49.0 │ Alderaan       │ Human          │</span>
+<span class="term-output">│ Owen Lars             │    178 │   120.0 │ Tatooine       │ Human          │</span>
+<span class="term-output">│ Beru Whitesun lars    │    165 │    75.0 │ Tatooine       │ Human          │</span>
+<span class="term-output">│ R5-D4                 │     97 │    32.0 │ Tatooine       │ Droid          │</span>
+<span class="term-output">… with 79 more lines</span></code></pre>
+
+<p>The first task computes the ten tallest humans:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
+<span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> Human | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cut</span> -d, -f 1,2 | <span class="term-callout">➋</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> -t, -k2 -nr | <span class="term-callout">➌</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">head</span> <span class="term-callout">➍</span>
+<span class="term-output">Darth Vader,202</span>
+<span class="term-output">Qui-Gon Jinn,193</span>
+<span class="term-output">Dooku,193</span>
+<span class="term-output">Bail Prestor Organa,191</span>
+<span class="term-output">Raymus Antilles,188</span>
+<span class="term-output">Mace Windu,188</span>
+<span class="term-output">Anakin Skywalker,188</span>
+<span class="term-output">Gregar Typho,185</span>
+<span class="term-output">Jango Fett,183</span>
+<span class="term-output">Cliegg Lars,183</span></code></pre>
+
+<ol type="1">
+<li>Only keep lines that contain the pattern <em><code>Human</code></em>.</li>
+<li>Extract the first two columns.</li>
+<li>Sort the lines by the second column in reverse numeric order.</li>
+<li>By default, <code>head</code> prints the first 10 lines. You can override this with the <code>-n</code> option.</li>
+</ol>
+<p>The second task creates a box plot showing the distribution of heights per species (see <a href="#fig-starwars-image" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
+<span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x height --y species --geom boxplot <span style="color:var(--term-3)">&gt;</span> heights.png
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">heights.png</span></code></pre>
+
+<div id="fig-starwars-image" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-starwars-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/heights.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-starwars-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Distribution of heights per species in Star Wars
+</figcaption>
+</figure>
+</div>
+<p>Let’s put these two tasks into a <em>Makefile</em>. Instead of doing this incrementally, I’d first like to show what a complete <em>Makefile</em> looks like and then explain all the syntax step by step.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">starwars.make</span> <span style="text-decoration:underline">Makefile</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">Makefile</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">Makefile</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ SHELL <span style="color:var(--term-5)">:=</span> <span style="color:var(--term-2)">bash</span></span>
+<span class="term-output">   2   │ <span style="color:var(--term-4)">.ONESHELL</span><span style="color:var(--term-5)">:</span></span>
+<span class="term-output">   3   │ .SHELLFLAGS <span style="color:var(--term-5)">:=</span> <span style="color:var(--term-2)">-eu -o pipefail -c</span></span>
+<span class="term-output">   4   │</span>
+<span class="term-output">   5   │ <span style="color:var(--term-4)">URL = "https</span><span style="color:var(--term-5)">:</span><span style="color:var(--term-2)">//raw.githubusercontent.com/tidyverse/dplyr/master/data-ra</span></span>
+<span class="term-output">       │ <span style="color:var(--term-2)">w/starwars.csv"</span></span>
+<span class="term-output">   6   │</span>
+<span class="term-output">   7   │ <span style="color:var(--term-4)">.PHONY</span><span style="color:var(--term-5)">:</span> <span style="color:var(--term-2)">all top10</span></span>
+<span class="term-output">   8   │</span>
+<span class="term-output">   9   │ <span style="color:var(--term-4)">all</span><span style="color:var(--term-5)">:</span> <span style="color:var(--term-2)">top10 heights.png</span></span>
+<span class="term-output">  10   │</span>
+<span class="term-output">  11   │ <span style="color:var(--term-4)">data</span><span style="color:var(--term-5)">:</span></span>
+<span class="term-output">  12   │         mkdir $@</span>
+<span class="term-output">  13   │</span>
+<span class="term-output">  14   │ <span style="color:var(--term-4)">data/starwars.csv</span><span style="color:var(--term-5)">:</span> <span style="color:var(--term-2)">data</span></span>
+<span class="term-output">  15   │         curl<span style="color:var(--term-6)"> -sL</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-6)">URL</span><span style="color:var(--term-5)">)</span> <span style="color:var(--term-5)">&gt;</span> $@</span>
+<span class="term-output">  16   │</span>
+<span class="term-output">  17   │ <span style="color:var(--term-4)">top10</span><span style="color:var(--term-5)">:</span> <span style="color:var(--term-2)">data/starwars.csv</span></span>
+<span class="term-output">  18   │         grep Human $&lt; <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">  19   │         cut<span style="color:var(--term-6)"> -d</span>,<span style="color:var(--term-6)"> -f</span> 1,2 <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">  20   │         sort<span style="color:var(--term-6)"> -t</span>,<span style="color:var(--term-6)"> -k2 -nr</span> <span style="color:var(--term-5)">|</span></span>
+<span class="term-output">  21   │         head</span>
+<span class="term-output">  22   │</span>
+<span class="term-output">  23   │ <span style="color:var(--term-4)">heights.png</span><span style="color:var(--term-5)">:</span> <span style="color:var(--term-2)">data/starwars.csv</span></span>
+<span class="term-output">  24   │         <span style="color:var(--term-5)">&lt;</span> $&lt; rush plot<span style="color:var(--term-6)"> --x</span> height<span style="color:var(--term-6)"> --y</span> species<span style="color:var(--term-6)"> --geom</span> boxplot <span style="color:var(--term-5)">&gt;</span> $@</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>Let’s go through this <em>Makefile</em> step by step. The first three lines are there to change some default settings related to <code>make</code> itself:</p>
+<ol type="1">
+<li>All rules are executed in a shell, which by default, is <code>sh</code>. With the <em><code>SHELL</code></em> variable we can change this to another shell, like <code>bash</code>. This way we can use everything that Bash has to offer such as for loops.</li>
+<li>By default, every line in a rule is sent separately to the shell. With the special target <em><code>.ONESHELL</code></em> we can override this so the rule for target <em><code>top10</code></em> works.</li>
+<li>The <em><code>.SHELLFLAGS</code></em> line makes Bash more strict, which is considered a <a href="http://redsymbol.net/articles/unofficial-bash-strict-mode/">best practice</a>. For example, because of this, the pipeline in the rule for target <em><code>top10</code></em> now stops as soon as there is an error.</li>
+</ol>
+<p>We define a custom variable called <em><code>URL</code></em>. Even though this is only used once, I find it helpful to put information like this near the beginning of the file, so that you can easily make changes to these kinds of settings.</p>
+<p>With the special target <em><code>.PHONY</code></em> we can indicate which targets are not represented by files. In our case that holds for targets <em><code>all</code></em> and <em><code>top10</code></em>. These targets will now be executed regardless of whether the directory contains files with the same name.</p>
+<p>There are five targets: <em><code>all</code></em>, <em><code>data</code></em>, <em><code>data/starwars.csv</code></em>, <em><code>top10</code></em>, and <em><code>heights.png</code></em>. <a href="#fig-starwars-image" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> provides an overview of these targets and the dependencies between them.</p>
+<div id="fig-dependencies" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dependencies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dscl_0602.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dependencies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Dependencies between targets
+</figcaption>
+</figure>
+</div>
+<p>Let’s discuss each target in turn:</p>
+<ol type="1">
+<li>The target <em><code>all</code></em> has two dependencies but no rule. This is like a shortcut to execute one or more targets in the order in which they are specified. In this case: <em><code>top10</code></em> and <em><code>heights.png</code></em>. The target <em><code>all</code></em> appears as the first target in the <em>Makefile</em>, which means that if we run <code>make</code>, this target will be built.</li>
+<li>The target <em><code>data</code></em> creates the directory <em>data</em>. Earlier I said that <code>make</code> is all about files. Well, it’s also about directories. This target will only be executed when the directory <em>data</em> doesn’t yet exist.</li>
+<li>The target <em><code>data/starwars.csv</code></em> depends on the target <em><code>data</code></em>. If there’s no <em><code>data</code></em> directory, it will first be created. Once all dependencies are satisfied, the rule will be executed, which involves downloading a file and saving it to a file with the same name as the target.</li>
+<li>The target <em><code>top10</code></em> is marked as phony, so it will always be built if specified. It depends on the <em><code>data/starwars.csv</code></em> target. It makes use of a special variable, <em><code>$&lt;</code></em> which expands to the name of the first prerequisite, namely <em>data/starwars.csv</em>.</li>
+<li>The target <em><code>heights.png</code></em>, like target <em><code>top10</code></em> depends <em><code>data/starwars.csv</code></em> and makes use of both automatic variables we’ve seen in this chapter. See the <a href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">online documentation</a> if you’d like to learn about other automatic variables.</li>
+</ol>
+<p>Last but not least, let’s verify that this <em>Makefile</em> works:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span>
+<span class="term-output">mkdir data</span>
+<span class="term-output">curl -sL "https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/star</span>
+<span class="term-output">wars.csv" &gt; data/starwars.csv</span>
+<span class="term-output">grep Human data/starwars.csv |</span>
+<span class="term-output">cut -d, -f 1,2 |</span>
+<span class="term-output">sort -t, -k2 -nr |</span>
+<span class="term-output">head</span>
+<span class="term-output">Darth Vader,202</span>
+<span class="term-output">Qui-Gon Jinn,193</span>
+<span class="term-output">Dooku,193</span>
+<span class="term-output">Bail Prestor Organa,191</span>
+<span class="term-output">Raymus Antilles,188</span>
+<span class="term-output">Mace Windu,188</span>
+<span class="term-output">Anakin Skywalker,188</span>
+<span class="term-output">Gregar Typho,185</span>
+<span class="term-output">Jango Fett,183</span>
+<span class="term-output">Cliegg Lars,183</span>
+<span class="term-output">&lt; data/starwars.csv rush plot --x height --y species --geom boxplot &gt; heights.pn</span>
+<span class="term-output">g</span></code></pre>
+
+<p>No surprises here. Because we didn’t specify any target, the <em><code>all</code></em> target will be built, which, in turn, causes both the <em><code>top10</code></em> and <em><code>heights.png</code></em> targets to be built. The output of the former is printed to standard output and the latter creates a file <em>heights.png</em>. The <em>data</em> directory is created only once, just like the CSV file is only downloaded once.</p>
+<p>There’s nothing more fun than just playing with your data and forgetting everything else. But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a <em>Makefile</em>. Not only will it make your life easier (pun intended), but you will also start thinking about your data workflow in terms of steps. Just as with your own command-line toolbox, which you expand over time, the same holds for <code>make</code> workflows. The more steps you have defined, the easier it gets to keep doing it, because very often you can reuse certain steps. I hope that you will get used to <code>make</code>, and that it will make your life easier.</p>
+</section>
+<section id="summary-5" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="summary-5"><span class="header-section-number">6.6</span> Summary</h2>
+<p>One of the beauties of the command line is that it allows you to play with your data. You can easily execute different commands and process different data files. It is a very interactive and iterative process. After a while, it is easy to forget which steps you have taken to get the desired result. It’s therefore very important to document your steps every once in a while. This way, if you or one of your colleagues picks up your project after some time, the same result can be produced again by executing the same steps.</p>
+<p>In this chapter I’ve shown you that just putting every command in one Bash script is suboptimal. Instead, I proposed to use <code>make</code> as a command-line tool to manage your data workflow. The next chapter covers the third step of the OSEMN model for data science namely exploring data.</p>
+</section>
+<section id="for-further-exploration-5" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="for-further-exploration-5"><span class="header-section-number">6.7</span> For Further Exploration</h2>
+<ul>
+<li>The book <em>Managing Projects with GNU Make</em> by Robert Mecklenburg and the online <em>GNU Make Manual</em> provide a comprehensive and advanced overview of <code>make</code>.</li>
+<li>There exist plenty of other workflow managers besides <code>make</code>. Although they differ in syntax and features, they also use concepts such as targets, rules, and dependencies. Examples include <a href="https://luigi.readthedocs.io">Luigi</a>, <a href="https://airflow.apache.org">Apache Airflow</a>, and <a href="https://www.nextflow.io">Nextflow</a>.</li>
+<li>To learn more about version control, in particular <code>git</code> and GitHub, I recommend the book <em>Pro Git</em> by Scott Chacon and Ben Straub. It’s <a href="https://git-scm.com/book/en/v2">available for free</a>. The <a href="https://docs.github.com/en/get-started">online GitHub documentation</a> is also a great starting point.</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Stuart I. Feldman, <em><span class="nocase">make</span> – <span>A</span> Program for Maintaining Computer Programs</em>, version 4.3, 2020, <a href="https://www.gnu.org/software/make">https://www.gnu.org/software/make</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Factual, <em><span class="nocase">drake</span> – Data Workflow Tool, Like a "Make for Data"</em>, version 1.0.3, 2016, <a href="https://github.com/Factual/drake">https://github.com/Factual/drake</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Linus Torvalds and Junio C. Hamano, <em><span class="nocase">git</span> – the Stupid Content Tracker</em>, version 2.25.1, 2021, <a href="https://git-scm.com">https://git-scm.com</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-5-scrubbing-data.html" class="pagination-link" aria-label="Scrubbing Data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Scrubbing Data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-7-exploring-data.html" class="pagination-link" aria-label="Exploring Data">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploring Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>
+(function() {
+  function addCopyButtons() {
+    var pres = document.querySelectorAll('pre.term-output, pre.term-screen, pre.term-source');
+    pres.forEach(function(pre) {
+      var wrap = document.createElement('div');
+      wrap.className = 'term-container';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+      var btn = document.createElement('button');
+      btn.className = 'term-copy-btn';
+      btn.setAttribute('aria-label', 'Copy commands to clipboard');
+      btn.setAttribute('title', 'Copy commands to clipboard');
+      var clipIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>';
+      var checkIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>';
+      btn.innerHTML = clipIcon;
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var source = code || pre;
+        var clone = source.cloneNode(true);
+        clone.querySelectorAll('.term-output').forEach(function(el) { el.remove(); });
+        var text = clone.innerText.replace(/\n{2,}/g, '\n').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          btn.innerHTML = checkIcon;
+          btn.setAttribute('title', 'Copied!');
+          setTimeout(function() {
+            btn.innerHTML = clipIcon;
+            btn.setAttribute('title', 'Copy commands to clipboard');
+          }, 1500);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addCopyButtons);
+  } else {
+    addCopyButtons();
+  }
+})();
+</script>
+
+
+
+
+</body></html>

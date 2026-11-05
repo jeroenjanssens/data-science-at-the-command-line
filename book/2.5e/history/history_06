@@ -1,0 +1,35 @@
+cd /data/ch06
+l
+bat -A numbers.make
+< numbers.make expand > spaces.make
+bat -A spaces.make
+make -f spaces.make
+rm spaces.make
+cp numbers.make Makefile
+make
+make numbers
+bat tasks.make
+cp numbers-write.make Makefile
+bat Makefile
+make numbers
+bat numbers
+make numbers
+cp numbers-write-var.make Makefile
+bat Makefile
+rm numbers
+make numbers
+bat numbers
+curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |\
+xsv select name,height,mass,homeworld,species |\
+csvlook
+curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |\
+grep Human |\
+cut -d, -f 1,2 |\
+sort -t, -k2 -nr |\
+head
+curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |\
+rush plot --x height --y species --geom boxplot > heights.png
+display heights.png
+cp starwars.make Makefile
+bat Makefile
+make

@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+
+<title>3&nbsp; Obtaining Data – Data Science at the Command Line, 2e</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-4-creating-command-line-tools.html" rel="next">
+<link href="./chapter-2-getting-started.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/quarto-term-0.7.1/term.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="manifest" href="./site.webmanifest">
+<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#d42d2d">
+<meta name="apple-mobile-web-app-title" content="Data Science at the Command Line">
+<meta name="application-name" content="Data Science at the Command Line">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="theme-color" content="#ffffff">
+
+
+<meta property="og:title" content="3&nbsp; Obtaining Data – Data Science at the Command Line, 2e">
+<meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta name="twitter:title" content="3&nbsp; Obtaining Data – Data Science at the Command Line, 2e">
+<meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-3-obtaining-data.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science at the Command Line, 2e</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./foreword.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Foreword</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-obtaining-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-creating-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-5-scrubbing-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Scrubbing Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6-project-management-with-make.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Project Management with Make</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Exploring Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8-parallel-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parallel Pipelines</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-9-modeling-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-10-polyglot-data-science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Polyglot Data Science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-11-conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./list-of-command-line-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">List of Command-Line Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">3.1</span> Overview</a></li>
+  <li><a href="#copying-local-files-to-the-docker-container" id="toc-copying-local-files-to-the-docker-container" class="nav-link" data-scroll-target="#copying-local-files-to-the-docker-container"><span class="header-section-number">3.2</span> Copying Local Files to the Docker Container</a></li>
+  <li><a href="#downloading-from-the-internet" id="toc-downloading-from-the-internet" class="nav-link" data-scroll-target="#downloading-from-the-internet"><span class="header-section-number">3.3</span> Downloading from the Internet</a>
+  <ul class="collapse">
+  <li><a href="#introducing-curl" id="toc-introducing-curl" class="nav-link" data-scroll-target="#introducing-curl"><span class="header-section-number">3.3.1</span> Introducing <code>curl</code></a></li>
+  <li><a href="#saving" id="toc-saving" class="nav-link" data-scroll-target="#saving"><span class="header-section-number">3.3.2</span> Saving</a></li>
+  <li><a href="#other-protocols" id="toc-other-protocols" class="nav-link" data-scroll-target="#other-protocols"><span class="header-section-number">3.3.3</span> Other Protocols</a></li>
+  <li><a href="#following-redirects" id="toc-following-redirects" class="nav-link" data-scroll-target="#following-redirects"><span class="header-section-number">3.3.4</span> Following Redirects</a></li>
+  </ul></li>
+  <li><a href="#decompressing-files" id="toc-decompressing-files" class="nav-link" data-scroll-target="#decompressing-files"><span class="header-section-number">3.4</span> Decompressing Files</a></li>
+  <li><a href="#converting-microsoft-excel-spreadsheets-to-csv" id="toc-converting-microsoft-excel-spreadsheets-to-csv" class="nav-link" data-scroll-target="#converting-microsoft-excel-spreadsheets-to-csv"><span class="header-section-number">3.5</span> Converting Microsoft Excel Spreadsheets to CSV</a></li>
+  <li><a href="#querying-relational-databases" id="toc-querying-relational-databases" class="nav-link" data-scroll-target="#querying-relational-databases"><span class="header-section-number">3.6</span> Querying Relational Databases</a></li>
+  <li><a href="#calling-web-apis" id="toc-calling-web-apis" class="nav-link" data-scroll-target="#calling-web-apis"><span class="header-section-number">3.7</span> Calling Web APIs</a>
+  <ul class="collapse">
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication"><span class="header-section-number">3.7.1</span> Authentication</a></li>
+  <li><a href="#streaming-apis" id="toc-streaming-apis" class="nav-link" data-scroll-target="#streaming-apis"><span class="header-section-number">3.7.2</span> Streaming APIs</a></li>
+  </ul></li>
+  <li><a href="#summary-2" id="toc-summary-2" class="nav-link" data-scroll-target="#summary-2"><span class="header-section-number">3.8</span> Summary</a></li>
+  <li><a href="#for-further-exploration-2" id="toc-for-further-exploration-2" class="nav-link" data-scroll-target="#for-further-exploration-2"><span class="header-section-number">3.9</span> For Further Exploration</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-3-obtaining-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-3-obtaining-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="chapter-3-obtaining-data" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Obtaining Data</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+
+<p>This chapter deals with the first step of the OSEMN model: obtaining data. After all, without any data, there is not much data science that we can do. I assume that the data you need to solve your data science problem already exists. Your first task is to get this data onto your computer (and possibly also inside the Docker container) in a form that you can work with.</p>
+<p>According to the Unix philosophy, text is a universal interface. Almost every command-line tool takes text as input, produces text as output, or both. This is the main reason why command-line tools can work so well together. However, as we’ll see, even just text can come in multiple forms.</p>
+<p>Data can be obtained in several ways—for example by downloading it from a server, querying a database, or connecting to a Web API. Sometimes, the data comes in a compressed form or in a binary format such as a Microsoft Excel Spreadsheet. In this chapter, I discuss several tools that help tackle this from the command line, including: <code>curl</code><span class="citation" data-cites="curl"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span>, <code>in2csv</code><span class="citation" data-cites="in2csv"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>, <code>sql2csv</code><span class="citation" data-cites="sql2csv"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span>, and <code>tar</code><span class="citation" data-cites="tar"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span>.</p>
+<section id="overview" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">3.1</span> Overview</h2>
+<p>In this chapter, you’ll learn how to:</p>
+<ul>
+<li>Copy local files to the Docker image</li>
+<li>Download data from the Internet</li>
+<li>Decompress files</li>
+<li>Extract data from spreadsheets</li>
+<li>Query relational databases</li>
+<li>Call web APIs</li>
+</ul>
+<p>This chapter starts with the following files:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch03</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 924K</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  5 22:31 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  5 22:31 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  5 22:31 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  5 22:31 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  5 22:31 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  5 22:31 top2000.xlsx</span></code></pre>
+
+<p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
+</section>
+<section id="copying-local-files-to-the-docker-container" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="copying-local-files-to-the-docker-container"><span class="header-section-number">3.2</span> Copying Local Files to the Docker Container</h2>
+<p>A common situation is that you already have the necessary files on your own computer. This section explains how you can get those files into the Docker container.</p>
+<p>I mentioned in <a href="./chapter-2-getting-started.html">Chapter 2</a> that the Docker container is an isolated virtual environment. Luckily there is one exception to that: files can be transferred in and out the Docker container. The local directory from which you ran <code>docker run</code>, is mapped to a directory in the Docker container. This directory is called <em>/data</em>. Note that this is not the home directory, which is <em>/home/dst</em>.</p>
+<p>If you have one or more files on your local computer, and you want to apply some command-line tools to them, all you have to do is copy or move the files to that mapped directory. Let’s assume that you have a file called <em>logs.csv</em> in your Downloads directory.</p>
+<p>If you’re running Windows, open the command prompt or PowerShell and run the following two commands:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="fu">cd</span> <span class="op">%</span>UserProfile<span class="op">%</span>\Downloads</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="fu">copy</span> logs<span class="op">.</span><span class="fu">csv</span> MyDataScienceToolbox\</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you are running Linux or macOS, open a terminal and execute the following command on your operating system (and not inside the Docker container):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> ~/Downloads/logs.csv ~/my-data-science-toolbox</code></pre>
+
+
+<p>You can also drag-and-drop the file into the right directory using a graphical file manager such as Windows Explorer or macOS Finder.</p>
+</section>
+<section id="downloading-from-the-internet" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="downloading-from-the-internet"><span class="header-section-number">3.3</span> Downloading from the Internet</h2>
+<p>The Internet provides, without a doubt, the largest resource for interesting data. The command-line tool <code>curl</code> can be considered the command line’s Swiss Army knife when it comes to downloading data from the Internet.</p>
+<section id="introducing-curl" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="introducing-curl"><span class="header-section-number">3.3.1</span> Introducing <code>curl</code></h3>
+<p>When you browse to a URL, which stands for <em>uniform resource locator</em>, your browser interprets the data it downloads. For example, the browser renders HTML files, plays video files automatically, and shows PDF files. However, when you use <code>curl</code> to access a URL, it downloads the data and, by default, prints it to standard output. <code>curl</code> doesn’t do any interpretation, but luckily other command-line tools can be used to process the data further.</p>
+<p>The easiest invocation of <code>curl</code> is to specify a URL as a command-line argument. Let’s, try downloading an article from Wikipedia:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">trim</span> <span class="term-callout">➊</span>
+<span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
+<span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
+<span class="term-output">  0      0   0      0   0      0      0      0                              0&lt;!D</span>
+<span class="term-output">OCTYPE html&gt;</span>
+<span class="term-output">&lt;html class="client-nojs" lang="en" dir="ltr"&gt;</span>
+<span class="term-output">&lt;head&gt;</span>
+<span class="term-output">&lt;meta charset="UTF-8"/&gt;</span>
+<span class="term-output">&lt;title&gt;List of windmills in the Netherlands - Wikipedia&lt;/title&gt;</span>
+<span class="term-output">&lt;script&gt;document.documentElement.className="client-js";RLCONF={"wgBreakFrames":…</span>
+<span class="term-output">"wgRelevantPageName":"List_of_windmills_in_the_Netherlands","wgRelevantArticleI…</span>
+<span class="term-output">"noscript":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","user":…</span>
+<span class="term-output">"ext.growthExperiments.SuggestedEditSession"];&lt;/script&gt;</span>
+<span class="term-output">&lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…</span>
+<span class="term-output">100 246.3k 100 246.3k   0      0 91.21M      0                              0</span>
+<span class="term-output">… with 1729 more lines</span></code></pre>
+
+<ol type="1">
+<li>Remember, <code>trim</code> is used only to make the output fit nicely in the book.</li>
+</ol>
+<p>As you can see, <code>curl</code> downloads the raw HTML returned by Wikipedia’s server; no interpretation is being done and all the contents is immediately printed on standard output. Because of the URL, you’d think that this article would list all the windmills in the Netherlands. However, there are apparently so many windmills left that each province has its own page. Fascinating.</p>
+<p>By default, <code>curl</code> outputs a progress meter that shows the download rate and the expected time of completion. This output isn’t written to standard output, but a separate channel, known as <em>standard error</em>, so this doesn’t interfere when you add another tool to the pipeline. While this information can be useful when downloading very large files, I usually find it distracting, so I specify the <code>-s</code> option to <em>silence</em> this output.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">pup</span> -n <span style="color:var(--term-3)">'table.wikitable tr'</span> <span class="term-callout">➊</span>
+<span class="term-output">234</span></code></pre>
+
+<ol type="1">
+<li>I’ll discuss <code>pup</code><span class="citation" data-cites="pup"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>, a handy tool for scraping websites, in more detail in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a>.</li>
+</ol>
+<p>And what do you know, there are apparently 234 windmills in the province of Friesland alone!</p>
+</section>
+<section id="saving" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="saving"><span class="header-section-number">3.3.2</span> Saving</h3>
+<p>You can let <code>curl</code> save the output to a file by adding the <code>-O</code> option. The filename will be based on the last part of the URL.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> -O
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
+<span class="term-output">total 1.4M</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 430K Nov  5 22:31 List_of_windmills_in_Friesland</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  5 22:31 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  5 22:31 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  5 22:31 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  5 22:31 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  5 22:31 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  5 22:31 top2000.xlsx</span></code></pre>
+
+<p>If you don’t like that filename then you can use the <code>-o</code> option together with a filename or redirect the output to a file yourself:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color:var(--term-3)">&gt;</span> fries
+<span class="term-output">land.html</span></code></pre>
+
+</section>
+<section id="other-protocols" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="other-protocols"><span class="header-section-number">3.3.3</span> Other Protocols</h3>
+<p>In total, <code>curl</code> supports <a href="https://ec.haxx.se/protocols/protocols-curl">more than 20 protocols</a>. To download from an FTP server, which stands for File Transfer Protocol, you use <code>curl</code> the same way. Here I download the file <em>welcome.msg</em> from <em>ftp.gnu.org</em>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"ftp://ftp.gnu.org/welcome.msg"</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">NOTICE (Updated October 15 2021):</span>
+<span class="term-output"></span>
+<span class="term-output">If you maintain scripts used to access ftp.gnu.org over FTP,</span>
+<span class="term-output">we strongly encourage you to change them to use HTTPS instead.</span>
+<span class="term-output"></span>
+<span class="term-output">Eventually we hope to shut down FTP protocol access, but plan</span>
+<span class="term-output">to give notice here and other places for several months ahead</span>
+<span class="term-output">of time.</span>
+<span class="term-output"></span>
+<span class="term-output">--</span>
+<span class="term-output">… with 19 more lines</span></code></pre>
+
+<p>If the specified URL is a directory, <code>curl</code> will list the contents of that directory. When the URL is password protected, you can specify a username and a password as follows with the <code>-u</code> option.</p>
+<p>Or how about the DICT protocol, which allows you to access various dictionaries and lookup definitions. Here’s the definition of “windmill” according to the Collaborative International Dictionary of English:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"dict://dict.org/d:windmill"</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 &lt;auth.mime&gt; &lt;8291886…</span>
+<span class="term-output">250 ok</span>
+<span class="term-output">150 1 definitions retrieved</span>
+<span class="term-output">151 "Windmill" gcide "The Collaborative International Dictionary of English v.0…</span>
+<span class="term-output">Windmill \Wind"mill`\, n.</span>
+<span class="term-output">   A mill operated by the power of the wind, usually by the</span>
+<span class="term-output">   action of the wind upon oblique vanes or sails which radiate</span>
+<span class="term-output">   from a horizontal shaft. --Chaucer.</span>
+<span class="term-output">   [1913 Webster]</span>
+<span class="term-output">.</span>
+<span class="term-output">… with 2 more lines</span></code></pre>
+
+<p>When downloading data from the Internet, however, the protocol will most likely be HTTP, so the URL will start with either <em><a href="http://" class="uri">http://</a></em> or <em><a href="https://" class="uri">https://</a></em>.</p>
+</section>
+<section id="following-redirects" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="following-redirects"><span class="header-section-number">3.3.4</span> Following Redirects</h3>
+<p>When you access a shortened URL, such as the ones that start with <em><a href="http://bit.ly/" class="uri">http://bit.ly/</a></em> or <em><a href="http://t.co/" class="uri">http://t.co/</a></em>, your browser automatically redirects you to the correct location. With <code>curl</code>, however, you need to specify the <code>-L</code> or <code>--location</code> option in order to be redirected. If you don’t, you can get something like:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://bit.ly/2XBxvwK"</span>
+<span class="term-output">&lt;html&gt;</span>
+<span class="term-output">&lt;body&gt;&lt;a href="https://youtu.be/dQw4w9WgXcQ"&gt;moved here&lt;/a&gt;&lt;/body&gt;</span>
+<span class="term-output">&lt;/html&gt;<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff);font-weight:bold">%</span></span></code></pre>
+
+<p>Sometimes you get nothing back, just like when we follow the URL mentioned above:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://youtu.be/dQw4w9WgXcQ"</span></code></pre>
+
+<p>By specifying the <code>-I</code> or <code>--head</code> option, <code>curl</code> fetches only the HTTP header of the response, which allows you to inspect the status code and other information returned by the server.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sI <span style="color:var(--term-3)">"https://youtu.be/dQw4w9WgXcQ"</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">HTTP/1.1 303</span>
+<span class="term-output">content-type: application/binary</span>
+<span class="term-output">x-content-type-options: nosniff</span>
+<span class="term-output">connection-allowlist-report-only: (response-origin "https://youtube.com" "https…</span>
+<span class="term-output">cache-control: no-cache, no-store, max-age=0, must-revalidate</span>
+<span class="term-output">pragma: no-cache</span>
+<span class="term-output">expires: Mon, 01 Jan 1990 00:00:00 GMT</span>
+<span class="term-output">date: Thu, 05 Nov 2026 21:51:23 GMT</span>
+<span class="term-output">location: https://www.youtube.com/watch?v=dQw4w9WgXcQ&amp;feature=youtu.be</span>
+<span class="term-output">x-frame-options: SAMEORIGIN</span>
+<span class="term-output">… with 16 more lines</span></code></pre>
+
+<p>The first line shows the protocol followed by the HTTP status code, which is 303 in this case. You can also see the location this URL redirects to. Inspecting the header and getting the status code is a useful debugging tool in case <code>curl</code> does not give you the expected result. Other common HTTP status codes include 404 (not found) and 403 (forbidden). Wikipedia has a page that lists <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">all HTTP status codes</a>.</p>
+<p>In summary, <code>curl</code> is a useful command-line tool for downloading data from the Internet. Its three most common options are <code>-s</code> to silence the progress meter, <code>-u</code> to specify a username and password, and <code>-L</code> to automatically follow redirects. See its man page for more information (and to make your head spin):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> curl | <span style="color:var(--term-2)">trim</span> 20
+<span class="term-output">curl(1)                           curl Manual                          curl(1)</span>
+<span class="term-output"></span>
+<span class="term-output">NAME</span>
+<span class="term-output">       curl - transfer a URL</span>
+<span class="term-output"></span>
+<span class="term-output">SYNOPSIS</span>
+<span class="term-output">       curl [options / URLs]</span>
+<span class="term-output"></span>
+<span class="term-output">DESCRIPTION</span>
+<span class="term-output">       curl is a tool for transferring data from or to a server using URLs. It</span>
+<span class="term-output">       supports these protocols: DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP,</span>
+<span class="term-output">       HTTPS,  IMAP, IMAPS, LDAP, LDAPS, MQTT, POP3, POP3S, RTMP, RTMPS, RTSP,</span>
+<span class="term-output">       SCP, SFTP, SMB, SMBS, SMTP, SMTPS, TELNET, TFTP, WS and WSS.</span>
+<span class="term-output"></span>
+<span class="term-output">       curl is powered by  libcurl  for  all  transfer-related  features.  See</span>
+<span class="term-output">       libcurl(3) for details.</span>
+<span class="term-output"></span>
+<span class="term-output">URL</span>
+<span class="term-output">       The  URL  syntax is protocol-dependent. You find a detailed description</span>
+<span class="term-output">       in RFC 3986.</span>
+<span class="term-output">… with 7571 more lines</span></code></pre>
+
+</section>
+</section>
+<section id="decompressing-files" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="decompressing-files"><span class="header-section-number">3.4</span> Decompressing Files</h2>
+<p>If the original dataset is very large or it’s a collection of many files, the file may be a compressed archive. Datasets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.</p>
+<p>Common file extensions of compressed archives are: <em>.tar.gz</em>, <em>.zip</em>, and <em>.rar</em>. To decompress these, you would use the command-line tools <code>tar</code>, <code>unzip</code><span class="citation" data-cites="unzip"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>, and <code>unrar</code><span class="citation" data-cites="unrar"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, respectively. (There are a few more, though less common, file extensions for which you would need yet other tools.)</p>
+<p>Let’s take <em>tar.gz</em> (pronounced as “gzipped tarball”) as an example. In order to extract an archive named <em>logs.tar.gz</em>, you would use the following incantation:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -xzf <span style="text-decoration:underline">logs.tar.gz</span> <span class="term-callout">➊</span></code></pre>
+
+<ol type="1">
+<li>It’s common to combine these three short options, like I did here, but you can also specify them separately as <code>-x -z -f</code>. In fact, many command-tools allow you to combine options that consist of a single character.</li>
+</ol>
+<p>Indeed, <code>tar</code> is notorious for its many command-line arguments. In this case, the three options <code>-x</code>, <code>-z</code>, and <code>-f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm and use file <em>logs.tar.gz</em>.</p>
+
+<p>However, since we’re not yet familiar with this archive, it’s a good idea to first examine its contents. This can be done with the <code>-t</code> option (instead of the <code>-x</code> option):</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -tzf <span style="text-decoration:underline">logs.tar.gz</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-00.0dd00628</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-00.b717c457</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-01.05f904a4</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-02.36588daf</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-02.6cea8b1d</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-02.be4bc86d</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-03.16f3fa32</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-03.1c0a370f</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-03.76df64bf</span>
+<span class="term-output">E1FOSPSAYDNUZI.2020-09-01-04.0a1ade1b</span>
+<span class="term-output">… with 2427 more lines</span></code></pre>
+
+<p>Is seems that this archive contains a lot of files, and they are not inside a directory. In order to keep the current directory clean, it’s a good idea to first create a new directory using <code>mkdir</code> and extract those files there using the <code>-C</code> option.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> logs
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -xzf <span style="text-decoration:underline">logs.tar.gz</span> -C <span style="text-decoration:underline">logs</span></code></pre>
+
+<p>Let’s verify the number of files and some of their contents:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="text-decoration:underline">logs</span> | <span style="color:var(--term-2)">wc</span> -l
+<span class="term-output">2437</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> logs/<span style="color:var(--term-4)">*</span> | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">#Version: 1.0</span>
+<span class="term-output">#Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem…</span>
+<span class="term-output">2020-09-01      00:51:54        SEA19-C1        391     206.55.174.150  GET    …</span>
+<span class="term-output">2020-09-01      00:54:59        CPH50-C2        384     82.211.213.95   GET    …</span>
+<span class="term-output">#Version: 1.0</span>
+<span class="term-output">#Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem…</span>
+<span class="term-output">2020-09-01      00:04:28        DFW50-C1        391     2a03:2880:11ff:9::face:…</span>
+<span class="term-output">#Version: 1.0</span>
+<span class="term-output">#Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem…</span>
+<span class="term-output">2020-09-01      01:04:14        ATL56-C4        385     2600:1700:2760:da20:548…</span>
+<span class="term-output">… with 10279 more lines</span></code></pre>
+
+<p>Excellent. Now, I understand that you’d like to scrub and explore these log files, but that’s for later in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a> and <a href="./chapter-7-exploring-data.html">Chapter 7</a>.</p>
+<p>In time, you’ll get used to these options, but I’d like to show you an alternative option, which might be convenient. Rather than remembering the different command-line tools and their options, there’s a handy script called <code>unpack</code><span class="citation" data-cites="unpack"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span>, which will decompress many different formats. <code>unpack</code> looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool. Now, in order to decompress this same file, you would run:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">unpack</span> <span style="text-decoration:underline">logs.tar.gz</span></code></pre>
+
+
+</section>
+<section id="converting-microsoft-excel-spreadsheets-to-csv" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="converting-microsoft-excel-spreadsheets-to-csv"><span class="header-section-number">3.5</span> Converting Microsoft Excel Spreadsheets to CSV</h2>
+<p>For many people, Microsoft Excel offers an intuitive way to work with small datasets and perform calculations on them. As a result, a lot of data is embedded into Microsoft Excel spreadsheets. These spreadsheets are, depending on the extension of the filename, stored in either a proprietary binary format (<em>.xls</em>) or as a collection of compressed XML files (<em>.xlsx</em>). In both cases, the data is not readily usable by most command-line tools. It would be a shame if we could not use those valuable datasets just because they are stored this way.</p>
+<p>Especially when you’re just starting out at the command line, you might be tempted to convert your spreadsheet to CSV by opening it in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually exporting it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and cannot be automated. Furthermore, when you’re working on a server, chances are that you don’t have such an application available. Trust me, you’ll get the hang of it.</p>
+<p>Luckily, there is a command-line tool called <code>in2csv</code>, that converts Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. <!-- TODO: MUST: check and possibly fix reference? --> Yakov Shafranovich defines the CSV format according to the following three points:<span class="citation" data-cites="shafranovich2005common"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span></p>
+<ol type="1">
+<li>Each record is located on a separate line, delimited by a line break (<code>␊</code>). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:</li>
+</ol>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-basic.csv</span> <span class="term-callout">➊</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">tmnt-basic.csv</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ Leonardo,Leo,blue,two<span style="color:var(--term-6)">·</span>ninjakens<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   2   │ Raphael,Raph,red,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>sai<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   3   │ Michelangelo,Mikey<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Mike,orange,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>nunchaku<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   4   │ Donatello,Donnie<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Don,purple,staff<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">───────┴──────────────────────────────────────────────��────────────────────────</span>
+<span class="term-output">─</span></code></pre>
+
+<ol type="1">
+<li><p>The <code>-A</code> option makes <code>bat</code> show all non-printable characters like spaces, tabs, and newlines.</p></li>
+<li><p>The last record in the file may or may not have an ending line break. For example:</p></li>
+</ol>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-missing-newline.csv</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">tmnt-missing-newline.csv</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ Leonardo,Leo,blue,two<span style="color:var(--term-6)">·</span>ninjakens<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   2   │ Raphael,Raph,red,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>sai<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   3   │ Michelangelo,Mikey<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Mike,orange,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>nunchaku<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   4   │ Donatello,Donnie<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Don,purple,staff</span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<ol start="3" type="1">
+<li>There may be a header appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file. For example:</li>
+</ol>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-with-header.csv</span>
+<span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">       │ File: <span style="font-weight:bold">tmnt-with-header.csv</span></span>
+<span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
+<span class="term-output">   1   │ name,nickname,mask_color,weapon<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   2   │ Leonardo,Leo,blue,two<span style="color:var(--term-6)">·</span>ninjakens<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   3   │ Raphael,Raph,red,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>sai<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   4   │ Michelangelo,Mikey<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Mike,orange,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>nunchaku<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">   5   │ Donatello,Donnie<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Don,purple,staff<span style="color:var(--term-5)">␊</span></span>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
+
+<p>As you can see, CSV by default is not too readable. You can pipe the data to a tool called <code>csvlook</code><span class="citation" data-cites="csvlook"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, which will nicely format it into a table. If the CSV data has no header, like <em>tmnt-missing-newline.csv</em> then you need to add the <code>-H</code> option, otherwise the first line will be interpreted as the header.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">tmnt-with-header.csv</span>
+<span class="term-output">│ name         │ nickname      │ mask_color │ weapon           │</span>
+<span class="term-output">├──────────────┼───────────────┼────────────┼──────────────────┤</span>
+<span class="term-output">│ Leonardo     │ Leo           │ blue       │ two ninjakens    │</span>
+<span class="term-output">│ Raphael      │ Raph          │ red        │ pair of sai      │</span>
+<span class="term-output">│ Michelangelo │ Mikey or Mike │ orange     │ pair of nunchaku │</span>
+<span class="term-output">│ Donatello    │ Donnie or Don │ purple     │ staff            │</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">tmnt-basic.csv</span>
+<span class="term-output">│ Leonardo     │ Leo           │ blue   │ two ninjakens    │</span>
+<span class="term-output">├──────────────┼───────────────┼────────┼──────────────────┤</span>
+<span class="term-output">│ Raphael      │ Raph          │ red    │ pair of sai      │</span>
+<span class="term-output">│ Michelangelo │ Mikey or Mike │ orange │ pair of nunchaku │</span>
+<span class="term-output">│ Donatello    │ Donnie or Don │ purple │ staff            │</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> -H <span style="text-decoration:underline">tmnt-missing-newline.csv</span> <span class="term-callout">➊</span>
+<span class="term-output">│ a            │ b             │ c      │ d                │</span>
+<span class="term-output">├──────────────┼───────────────┼────────┼──────────────────┤</span>
+<span class="term-output">│ Leonardo     │ Leo           │ blue   │ two ninjakens    │</span>
+<span class="term-output">│ Raphael      │ Raph          │ red    │ pair of sai      │</span>
+<span class="term-output">│ Michelangelo │ Mikey or Mike │ orange │ pair of nunchaku │</span>
+<span class="term-output">│ Donatello    │ Donnie or Don │ purple │ staff            │</span></code></pre>
+
+<ol type="1">
+<li>The <code>-H</code> option specifies that the CSV file has no header.</li>
+</ol>
+<p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program <a href="https://www.top2000nl.com">Top 2000</a>. To extract its data, you invoke <code>in2csv</code> as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">top2000.xls</span>
+<span class="term-output"><span style="text-decoration:underline">x</span></span>
+<span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
+<span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
+<span class="term-output">100      8 100      8   0      0   7575      0                              0</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> <span style="text-decoration:underline">top2000.xlsx</span> | <span style="color:var(--term-2)">tee</span> top2000.csv | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">BadZipFile: File is not a zip file</span></code></pre>
+
+<p>Who is Danny Vera? The most popular song is supposed to be <em>Bohemian Rhapsody</em>, of course. Well, at least Queen appears plenty of times in the Top 2000 so I can’t really complain:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvgrep</span> <span style="text-decoration:underline">top2000.csv</span> --columns ARTIEST --regex <span style="color:var(--term-3)">'^Queen$'</span> | <span style="color:var(--term-2)">csvlook</span> -I <span class="term-callout">➊</span>
+<span class="term-output">││</span>
+<span class="term-output">│  │</span></code></pre>
+
+<ol type="1">
+<li>The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>ARTIEST</code></em>.</li>
+</ol>
+<p>By the way, the tools <code>in2csv</code>, <code>csvgrep</code>, and <code>csvlook</code> are part of CSVkit, which is a collection of command-line tools to work with CSV data.</p>
+<p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case. If you were to pipe the data into <code>in2csv</code>, you would have to specify the format explicitly.</p>
+<p>A spreadsheet can contain multiple worksheets. <code>in2csv</code> extracts, by default, the first worksheet. To extract a different worksheet, you need to pass the name of worksheet to the <code>--sheet</code> option. If you’re not sure what’s the worksheet is called, you can use the <code>--names</code> option, which prints the names of all the worksheets. Here we see that <em>top2000.xlsx</em> has only one sheet, named <em>Blad1</em> (which is Dutch for <em>Sheet1</em>).</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> --names <span style="text-decoration:underline">top2000.xlsx</span>
+<span class="term-output">BadZipFile: File is not a zip file</span></code></pre>
+
+</section>
+<section id="querying-relational-databases" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="querying-relational-databases"><span class="header-section-number">3.6</span> Querying Relational Databases</h2>
+<p>Many companies store their data in a relational database. Just as with spreadsheets, it would be great if we could obtain that data from the command line.</p>
+<p>Examples of relational databases are MySQL, PostgreSQL, and SQLite. These databases all have a slightly different way of interfacing with them. Some provide a command-line tool or a command-line interface, while others do not. Moreover, they are not very consistent when it comes to their usage and output.</p>
+<p>Fortunately, there is a command-line tool called <code>sql2csv</code>, which is part of the CSVkit suite. It works with many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of <code>sql2csv</code> is, as its name suggests, in CSV format.</p>
+<p>We can obtain data from relational databases by executing a <em><code>SELECT</code></em> query on them. (<code>sql2csv</code> also support <em><code>INSERT</code></em>, <em><code>UPDATE</code></em>, and <em><code>DELETE</code></em> queries, but that’s not the purpose of this chapter.)</p>
+<p><code>sql2csv</code> needs two arguments: <code>--db</code>, which specifies the database URL, of which the typical form is: <code>dialect+driver://username:password@host:port/database</code> and <code>--query</code>, which contains the <em><code>SELECT</code></em> query. For example, given an SQLite database that contains the standard datasets from R<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> , I can select all the rows from the table <em>mtcars</em> and sort them by the <em>mpg</em> column as follows:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sql2csv</span> --db <span style="color:var(--term-3)">'sqlite:///r-datasets.db'</span> \
+<span class="term-prompt" data-prompt="> "></span>--query <span style="color:var(--term-3)">'SELECT row_names AS car, mpg FROM mtcars ORDER BY mpg'</span> | <span style="color:var(--term-2)">csvlook</span>
+<span class="term-output">│ car                 │  mpg │</span>
+<span class="term-output">├─────────────────────┼──────┤</span>
+<span class="term-output">│ Cadillac Fleetwood  │ 10.4 │</span>
+<span class="term-output">│ Lincoln Continental │ 10.4 │</span>
+<span class="term-output">│ Camaro Z28          │ 13.3 │</span>
+<span class="term-output">│ Duster 360          │ 14.3 │</span>
+<span class="term-output">│ Chrysler Imperial   │ 14.7 │</span>
+<span class="term-output">│ Maserati Bora       │ 15.0 │</span>
+<span class="term-output">│ Merc 450SLC         │ 15.2 │</span>
+<span class="term-output">│ AMC Javelin         │ 15.2 │</span>
+<span class="term-output">… with 24 more lines</span></code></pre>
+
+<p>This SQLite database is a local file, so in this I don’t need to specify any username, password or host. If you wish to query the database of your employer, you’d of course need know how you can access it and you’d need the permission to do so.</p>
+</section>
+<section id="calling-web-apis" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="calling-web-apis"><span class="header-section-number">3.7</span> Calling Web APIs</h2>
+<p>In the previous section I explained how to download files from the Internet. Another way data can come from the Internet is through a web API, which stands for <em>Application Programming Interface</em>. The number of APIs that are being offered is growing at an increasing rate, which means a lot of interesting data for us data scientists.</p>
+<p>Web APIs are not meant to be presented in a nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as <code>jq</code>. For example, the API of Ice and Fire, which contains a lot of information about George R.R. Martin’s fictional world, in which the Game of Thrones book and TV shows take place, returns data in the following JSON structure:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://anapioficeandfire.com/api/characters/583"</span> | <span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.'</span>
+<span class="term-output"><span style="font-weight:bold">{</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"url"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/characters/583"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"name"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"Jon Snow"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"gender"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"Male"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"culture"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"Northmen"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"born"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"In 283 AC"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"died"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">""</span><span style="font-weight:bold">,</span> <span class="term-callout">➊</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"titles"</span><span style="font-weight:bold">:</span> <span style="font-weight:bold">[</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Lord Commander of the Night's Watch"</span></span>
+<span class="term-output">  <span style="font-weight:bold">],</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"aliases"</span><span style="font-weight:bold">:</span> <span style="font-weight:bold">[</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Lord Snow"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Ned Stark's Bastard"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"The Snow of Winterfell"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"The Crow-Come-Over"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"The 998th Lord Commander of the Night's Watch"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"The Bastard of Winterfell"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"The Black Bastard of the Wall"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Lord Crow"</span></span>
+<span class="term-output">  <span style="font-weight:bold">],</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"father"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">""</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"mother"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">""</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"spouse"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">""</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"allegiances"</span><span style="font-weight:bold">:</span> <span style="font-weight:bold">[</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/houses/362"</span></span>
+<span class="term-output">  <span style="font-weight:bold">],</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"books"</span><span style="font-weight:bold">:</span> <span style="font-weight:bold">[</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/books/5"</span></span>
+<span class="term-output">  <span style="font-weight:bold">],</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"povBooks"</span><span style="font-weight:bold">:</span> <span style="font-weight:bold">[</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/books/1"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/books/2"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/books/3"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/books/8"</span></span>
+<span class="term-output">  <span style="font-weight:bold">],</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"tvSeries"</span><span style="font-weight:bold">:</span> <span style="font-weight:bold">[</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Season 1"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Season 2"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Season 3"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Season 4"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Season 5"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Season 6"</span></span>
+<span class="term-output">  <span style="font-weight:bold">],</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"playedBy"</span><span style="font-weight:bold">:</span> <span style="font-weight:bold">[</span></span>
+<span class="term-output">    <span style="color:var(--term-2)">"Kit Harington"</span></span>
+<span class="term-output">  <span style="font-weight:bold">]</span></span>
+<span class="term-output"><span style="font-weight:bold">}</span></span></code></pre>
+
+<ol type="1">
+<li>Spoiler alert: this data is not entirely up-to-date.</li>
+</ol>
+<p>The data is piped to a command-line tool <code>jq</code> just to display it in a nice way. <code>jq</code> has many more scrubbing and exploring possibilities that I will explore in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a> and <a href="./chapter-7-exploring-data.html">Chapter 7</a>.</p>
+<section id="authentication" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="authentication"><span class="header-section-number">3.7.1</span> Authentication</h3>
+<p>Some web APIs require you to authenticate (that is, to prove your identity) before you can consume their output. There are several ways to do this. Some web APIs use API keys while others use the OAuth protocol. News API, an independent source of headlines and news articles, is a great example. Let’s see what happens when you try to access this API without an API key:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"http://newsapi.org/v2/everything?q=linux"</span> | <span style="color:var(--term-2)">jq</span> <span style="text-decoration:underline">.</span>
+<span class="term-output"><span style="font-weight:bold">{</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"status"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"error"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"code"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"apiKeyMissing"</span><span style="font-weight:bold">,</span></span>
+<span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"message"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"Your API key is missing. Append this to the URL with the apiKey pa</span></span>
+<span class="term-output"><span style="color:var(--term-2)">ram, or use the x-api-key HTTP header."                                         </span></span>
+<span class="term-output"><span style="font-weight:bold">}</span></span></code></pre>
+
+<p>Well, that was to be expected. The part after the question mark, by the way, is where we pass any query parameters. That’s also the place where you need to specify an API key. I’d like to keep my own API key a secret, so I insert it below by reading the file <em>/data/.secret/newsapi.org_apikey</em> using command substitution.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"http://newsapi.org/v2/everything?q=linux&amp;apiKey=</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">/data/.secret/new</span>
+<span class="term-output"><span style="text-decoration:underline">sapi.org_apikey</span><span style="color:var(--term-5)">)</span><span style="color:var(--term-3)">"</span> |</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.'</span> | <span style="color:var(--term-2)">trim</span> 30
+<span class="term-output">{</span>
+<span class="term-output">  "status": "ok",</span>
+<span class="term-output">  "totalResults": 9653,</span>
+<span class="term-output">  "articles": [</span>
+<span class="term-output">    {</span>
+<span class="term-output">      "source": {</span>
+<span class="term-output">        "id": "engadget",</span>
+<span class="term-output">        "name": "Engadget"</span>
+<span class="term-output">      },</span>
+<span class="term-output">      "author": "Igor Bonifacic",</span>
+<span class="term-output">      "title": "'Arma 3' and 'DayZ' add BattlEye anti-cheat support through Val…</span>
+<span class="term-output">      "description": "While there are still many unknowns about Steam Deck\r\n …</span>
+<span class="term-output">      "url": "https://www.engadget.com/arma-3-dayz-proton-battleye-support-2246…</span>
+<span class="term-output">      "urlToImage": "https://s.yimg.com/os/creatr-uploaded-images/2021-12/bcb0f…</span>
+<span class="term-output">      "publishedAt": "2021-12-03T22:46:25Z",</span>
+<span class="term-output">      "content": "While there are still many unknowns about Steam Deck\r\ns lib…</span>
+<span class="term-output">    },</span>
+<span class="term-output">    {</span>
+<span class="term-output">      "source": {</span>
+<span class="term-output">        "id": null,</span>
+<span class="term-output">        "name": "Slashdot.org"</span>
+<span class="term-output">      },</span>
+<span class="term-output">      "author": "EditorDavid",</span>
+<span class="term-output">      "title": "AWS Embraces Fedora Linux for Its Cloud-Based 'Amazon Linux'",</span>
+<span class="term-output">      "description": "ZDNet reports:\n\nBy and large, the public cloud runs on …</span>
+<span class="term-output">      "url": "https://linux.slashdot.org/story/21/11/27/0328223/aws-embraces-fe…</span>
+<span class="term-output">      "urlToImage": "https://a.fsdn.com/sd/topics/cloud_64.png",</span>
+<span class="term-output">      "publishedAt": "2021-11-27T16:34:00Z",</span>
+<span class="term-output">      "content": "By and large, the public cloud runs on Linux. Most users, eve…</span>
+<span class="term-output">    },</span>
+<span class="term-output">… with 236 more lines</span></code></pre>
+
+<p>You can get your own API key at <a href="https://newsapi.org">News API’s website</a>.</p>
+</section>
+<section id="streaming-apis" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="streaming-apis"><span class="header-section-number">3.7.2</span> Streaming APIs</h3>
+<p>Some web APIs return data in a streaming manner. This means that once you connect to it, the data will continue to pour in, until the connection is closed. A well-known example is the Twitter “firehose,” which constantly streams all the tweets being sent around the world. Luckily, most command-line tools also operate in a streaming matter.</p>
+
+<p>Let’s take a 10 second sample of one of Wikimedia’s streaming APIs, for example:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://stream.wikimedia.org/v2/stream/recentchange"</span> |
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sample</span> -s 10 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span></code></pre>
+
+
+<p>This particular API returns all changes that have been made to Wikipedia and other properties of Wikimedia. The command-line tool <code>sample</code> is used to close the connection after 10 seconds. The connection can also be closed manually by pressing <strong><code>Ctrl-C</code></strong> to send an interrupt. The output is saved to a file <em>wikimedia-stream-sample</em>. Let’s take a peek using <code>trim</code>:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span> <span style="color:var(--term-2)">trim</span>
+<span class="term-output">:ok</span>
+<span class="term-output"></span>
+<span class="term-output">event: message</span>
+<span class="term-output">id: [{"topic":"eqiad.mediawiki.recentchange","partition":0,"timestamp":16101133…</span>
+<span class="term-output">data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://en.wiki…</span>
+<span class="term-output"></span>
+<span class="term-output">event: message</span>
+<span class="term-output">id: [{"topic":"eqiad.mediawiki.recentchange","partition":0,"timestamp":16101133…</span>
+<span class="term-output">data: {"$schema":"/mediawiki/recentchange/1.0.0","meta":{"uri":"https://www.wik…</span>
+<span class="term-output"></span>
+<span class="term-output">… with 1078 more lines</span></code></pre>
+
+<p>With a little bit of <code>sed</code> and <code>jq</code> I can scrub this data to get a glimpse of the changes happening on the English version of Wikipedia:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'s/^data: //p'</span> | <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'</span> <span class="term-callout">➋</span>
+<span class="term-output"><span style="color:var(--term-2)">"Odion Ighalo"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Hold Up (song)"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Talk:Royal Bermuda Yacht Club"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Jenna Ushkowitz"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"List of films released by Yash Raj Films"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"SP.A"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Odette (musician)"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Talk:Pierre Avoi"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"User:Curlymanjaro/sandbox3"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"List of countries by electrification rate"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Grieg (crater)"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Gorman, Edmonton"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Khabza"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"QAnon"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Khaw Boon Wan"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Draft:Oggy and the Cockroaches (1975 TV series)"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Renzo Reggiardo"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Greer, Arizona"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"National Curriculum for England"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Mod DB"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"Jordanian Pro League"</span></span>
+<span class="term-output"><span style="color:var(--term-2)">"List of foreign Serie A players"</span></span></code></pre>
+
+<ol type="1">
+<li>This <code>sed</code> expression only prints lines that start with <em><code>data:</code></em> and prints the part after the semicolon, which happens to be JSON.</li>
+<li>This <code>jq</code> expression prints the <em><code>title</code></em> key of JSON objects that have a certain <em><code>type</code></em> and <em><code>server_name</code></em>.</li>
+</ol>
+<p>Speaking of streaming, did you know that you could stream <em>Star Wars: Episode IV – A New Hope</em> for free using <code>telnet</code><span class="citation" data-cites="telnet"><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></span>?</p>
+
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">telnet</span> <span style="text-decoration:underline">towel.blinkenlights.nl</span></code></pre>
+
+<p>And after some time, we see that Han Solo did shoot first!</p>
+
+<pre class="term-output"><code><span class="term-output"></span>
+<span class="term-output"></span>
+<span class="term-output">                       -===                    `"',</span>
+<span class="term-output">       I'll bet you   ""o o                    O O|)</span>
+<span class="term-output">           have!      _\ -/_                  _\o/ _</span>
+<span class="term-output">                     || || |*                /|\ / |\</span>
+<span class="term-output">                     \\ || ***              //| |  |\\</span>
+<span class="term-output">                      \\o=***********      // | |  | ||</span>
+<span class="term-output">                      |\(#'***\\        -==#  | |  | ||</span>
+<span class="term-output">                      |====|*  ')         '\  |====| /#</span>
+<span class="term-output">                      |/|| |                  | || |  "</span>
+<span class="term-output">                      ( )( )                  | || |</span>
+<span class="term-output">                      |-||-|                  | || |</span>
+<span class="term-output">                      | || |                  | || |</span>
+<span class="term-output">      ________________[_][__\________________/__)(_)_____________________</span></code></pre>
+
+<p>Sure, it’s probably not a good source of data, but there’s nothing wrong with enjoying an old classic while training your machine learning models<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>.</p>
+</section>
+</section>
+<section id="summary-2" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="summary-2"><span class="header-section-number">3.8</span> Summary</h2>
+<p>Congratulations, you have finished the first step of the OSEMN model. You’ve learned a variety of ways to obtain data, ranging from downloading to querying a relational database. In the next chapter, which is an intermezzo chapter, I’ll teach you how to create your own command-line tools. Feel free to skip this and go to <a href="./chapter-5-scrubbing-data.html">Chapter 5</a> (the second step of the OSEMN model) if you cannot wait to learn about scrubbing data.</p>
+</section>
+<section id="for-further-exploration-2" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="for-further-exploration-2"><span class="header-section-number">3.9</span> For Further Exploration</h2>
+<ul>
+<li>Looking for a dataset to practice on? The GitHub repository <a href="https://github.com/awesomedata/awesome-public-datasets"><em>Awesome Public Datasets</em></a> lists hundreds of high-quality datasets that are publicly available.</li>
+<li>Or perhaps you’d rather practice with an API? The GitHub repository <a href="https://github.com/public-apis/public-apis"><em>Public APIs</em></a> lists many free APIs. <a href="http://api.citybik.es/v2/">City Bikes</a> and <a href="https://the-one-api.dev/">The One API</a> are among my favorites.</li>
+<li>Writing SQL queries to obtain data from a relational database is an important skill. The first 15 lessons of the book <em>SQL in 10 Minutes a Day</em> by Ben Forta teach the <em><code>SELECT</code></em> statement and its filtering, grouping, and sorting capabilities.</li>
+</ul>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Daniel Stenberg, <em><span class="nocase">curl</span> – Transfer a <span>URL</span></em>, version 7.68.0, 2016, <a href="https://curl.haxx.se">https://curl.haxx.se</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Christopher Groskopf, <em><span class="nocase">in2csv</span> – Convert Common, but Less Awesome, Tabular Data Formats to <span>CSV</span></em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Christopher Groskopf, <em><span class="nocase">sql2csv</span> – Execute an <span>SQL</span> Query on a Database and Output the Result to a <span>CSV</span> File</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>John Gilmore and Jay Fenlason, <em><span class="nocase">tar</span> – an Archiving Utility</em>, version 1.30, 2014, <a href="https://www.gnu.org/software/tar">https://www.gnu.org/software/tar</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Eric Chiang, <em><span class="nocase">pup</span> – Parsing HTML at the Command Line</em>, version 0.4.0, 2016, <a href="https://github.com/EricChiang/pup">https://github.com/EricChiang/pup</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Samuel H. Smith et al., <em><span class="nocase">unzip</span> – List, Test and Extract Compressed Files in a <span>ZIP</span> Archive</em>, version 6.0, 2009, <a href="http://www.info-zip.org/pub/infozip">http://www.info-zip.org/pub/infozip</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Ben Asselstine, Christian Scheurer, and Johannes Winkelmann, <em><span class="nocase">unrar</span> – Extract Files from Rar Archives</em>, version 0.0.1, 2014, <a href="http://home.gna.org/unrar">http://home.gna.org/unrar</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Patrick Brisbin, <em><span class="nocase">unpack</span> – Extract Common File Formats</em>, version 0.1, 2013, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Yakov Shafranovich, <span>“Common Format and <span>MIME</span> Type for Comma-Separated Values <span>(CSV)</span> Files,”</span> 2005.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Christopher Groskopf, <em><span class="nocase">csvlook</span> – Render a <span>CSV</span> File in the Console as a Markdown-Compatible, Fixed-Width Table</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Available on <a href="https://github.com/r-dbi/RSQLite/blob/master/inst/db/datasets.sqlite">GitHub</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>Mats Erik Andersson, Andreas Henriksson, and Christoph Biedl, <em><span class="nocase">telnet</span> – User Interface to the <span>TELNET</span> Protocol</em>, version 0.17, 1999, <a href="http://www.hcs.harvard.edu/~dholland/computers/netkit.html">http://www.hcs.harvard.edu/~dholland/computers/netkit.html</a>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>If you cannot connect to the server, because someone erased it from the archive memory, then you can always enjoy a <a href="https://www.youtube.com/results?search_query=towel.blinkenlights.nl">recording of the <code>telnet</code> session on YouTube</a>.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-2-getting-started.html" class="pagination-link" aria-label="Getting Started">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-4-creating-command-line-tools.html" class="pagination-link" aria-label="Creating Command-line Tools">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Creating Command-line Tools</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-3-obtaining-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-3-obtaining-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div></div></footer><script>
+(function() {
+  function addCopyButtons() {
+    var pres = document.querySelectorAll('pre.term-output, pre.term-screen, pre.term-source');
+    pres.forEach(function(pre) {
+      var wrap = document.createElement('div');
+      wrap.className = 'term-container';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+      var btn = document.createElement('button');
+      btn.className = 'term-copy-btn';
+      btn.setAttribute('aria-label', 'Copy commands to clipboard');
+      btn.setAttribute('title', 'Copy commands to clipboard');
+      var clipIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/></svg>';
+      var checkIcon = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/></svg>';
+      btn.innerHTML = clipIcon;
+      btn.addEventListener('click', function() {
+        var code = pre.querySelector('code');
+        var source = code || pre;
+        var clone = source.cloneNode(true);
+        clone.querySelectorAll('.term-output').forEach(function(el) { el.remove(); });
+        var text = clone.innerText.replace(/\n{2,}/g, '\n').trim();
+        navigator.clipboard.writeText(text).then(function() {
+          btn.innerHTML = checkIcon;
+          btn.setAttribute('title', 'Copied!');
+          setTimeout(function() {
+            btn.innerHTML = clipIcon;
+            btn.setAttribute('title', 'Copy commands to clipboard');
+          }, 1500);
+        });
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addCopyButtons);
+  } else {
+    addCopyButtons();
+  }
+})();
+</script>
+
+
+
+
+</body></html>

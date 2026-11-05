@@ -1,0 +1,414 @@
+# chapter-4-creating-command-line-tools.html
+
+Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47694336e393d72d1811e440455d6`
+
+## Code block 0: `$ cd /data/ch04`
+
+- id: `chapter-4-creating-command-line-tools.html:block:0`
+- hash: `f30d0e9f`
+- status: **accept**
+- cause: uutils
+- note: Timestamps and ls sort order (uutils sorts by byte value)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -3,10 +3,10 @@
+ $ l
+ total 32K
+--rwxr-xr-x 1 dst dst 400 Dec 14 11:46 fizzbuzz.py*
+--rwxr-xr-x 1 dst dst 391 Dec 14 11:46 fizzbuzz.R*
+--rwxr-xr-x 1 dst dst 182 Dec 14 11:46 stream.py*
+--rwxr-xr-x 1 dst dst 147 Dec 14 11:46 stream.R*
+--rwxr-xr-x 1 dst dst 105 Dec 14 11:46 top-words-4.sh*
+--rwxr-xr-x 1 dst dst 128 Dec 14 11:46 top-words-5.sh*
+--rwxr-xr-x 1 dst dst 647 Dec 14 11:46 top-words.py*
+--rwxr-xr-x 1 dst dst 584 Dec 14 11:46 top-words.R*
++-rwxr-xr-x 1 dst dst 391 Nov  5 22:32 fizzbuzz.R*
++-rwxr-xr-x 1 dst dst 400 Nov  5 22:32 fizzbuzz.py*
++-rwxr-xr-x 1 dst dst 147 Nov  5 22:32 stream.R*
++-rwxr-xr-x 1 dst dst 182 Nov  5 22:32 stream.py*
++-rwxr-xr-x 1 dst dst 105 Nov  5 22:32 top-words-4.sh*
++-rwxr-xr-x 1 dst dst 128 Nov  5 22:32 top-words-5.sh*
++-rwxr-xr-x 1 dst dst 584 Nov  5 22:32 top-words.R*
++-rwxr-xr-x 1 dst dst 647 Nov  5 22:32 top-words.py*
+```
+
+## Code block 6: `  GNU nano 5.4                     /tmp/zshpu0emE`
+
+- id: `chapter-4-creating-command-line-tools.html:block:6`
+- hash: `a9f78797`
+- status: **accept**
+- cause: image
+- note: nano 8.7.1: version, temporary file name, and shortcut labels
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+-  GNU nano 5.4                     /tmp/zshpu0emE
++  GNU nano 8.7.1                    /tmp/zshTVXPcr
+ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+ tr '[:upper:]' '[:lower:]' |
+@@ -13,4 +13,4 @@
+ 
+                                 [ Read 8 lines ]
+-^G Help      ^O Write Out ^W Where Is  ^K Cut       ^T Execute   ^C Location
+-^X Exit      ^R Read File ^\ Replace   ^U Paste     ^J Justify   ^_ Go To Line
++^G Help      ^O Write Out ^F Where Is  ^K Cut       ^T Execute   ^C Location
++^X Exit      ^R Read File ^\ Replace   ^U Paste     ^J Justify   ^/ Go To Line
+```
+
+## Code block 7: `  GNU nano 5.4                     /tmp/zshpu0emE`
+
+- id: `chapter-4-creating-command-line-tools.html:block:7`
+- hash: `2068555b`
+- status: **accept**
+- cause: image
+- note: nano 8.7.1: version, temporary file name, and shortcut labels
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+-  GNU nano 5.4                     /tmp/zshpu0emE
++  GNU nano 8.7.1                    /tmp/zshTVXPcr
+ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+ tr '[:upper:]' '[:lower:]' |
+@@ -12,5 +12,5 @@
+ 
+ 
+-File Name to Write: top-words-1.sh
+-^G Help             M-D DOS Format      M-A Append          M-B Backup File
+-^C Cancel           M-M Mac Format      M-P Prepend         ^T Browse
++Write to File: top-words-1.sh
++^G Help         M-D DOS Format  M-A Append      M-B Backup File ^T Browse
++^C Cancel       M-M Mac Format  M-P Prepend     ^Q Discard buffer
+```
+
+## Code block 8: `  GNU nano 5.4                     /tmp/zshpu0emE`
+
+- id: `chapter-4-creating-command-line-tools.html:block:8`
+- hash: `e55e5856`
+- status: **accept**
+- cause: image
+- note: nano 8.7.1: version, temporary file name, and shortcut labels
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+-  GNU nano 5.4                     /tmp/zshpu0emE
++  GNU nano 8.7.1                    /tmp/zshTVXPcr
+ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+ tr '[:upper:]' '[:lower:]' |
+```
+
+## Code block 9: `  GNU nano 5.4                     top-words-1.sh`
+
+- id: `chapter-4-creating-command-line-tools.html:block:9`
+- hash: `47977702`
+- status: **accept**
+- cause: image
+- note: nano 8.7.1: version, temporary file name, and shortcut labels
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+-  GNU nano 5.4                     top-words-1.sh
++  GNU nano 8.7.1                    top-words-1.sh
+ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+ tr '[:upper:]' '[:lower:]' |
+@@ -13,4 +13,4 @@
+ 
+                                [ Wrote 8 lines ]
+-^G Help      ^O Write Out ^W Where Is  ^K Cut       ^T Execute   ^C Location
+-^X Exit      ^R Read File ^\ Replace   ^U Paste     ^J Justify   ^_ Go To Line
++^G Help      ^O Write Out ^F Where Is  ^K Cut       ^T Execute   ^C Location
++^X Exit      ^R Read File ^\ Replace   ^U Paste     ^J Justify   ^/ Go To Line
+```
+
+## Code block 10: `$ pwd`
+
+- id: `chapter-4-creating-command-line-tools.html:block:10`
+- hash: `2a196601`
+- status: **accept**
+- cause: uutils
+- note: Timestamps and ls sort order (uutils sorts by byte value)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -4,14 +4,14 @@
+ $ l
+ total 44K
+--rwxr-xr-x 1 dst dst  400 Dec 14 11:46 fizzbuzz.py*
+--rwxr-xr-x 1 dst dst  391 Dec 14 11:46 fizzbuzz.R*
+--rw-r--r-- 1 dst dst 7.5K Dec 14 11:47 stopwords
+--rwxr-xr-x 1 dst dst  182 Dec 14 11:46 stream.py*
+--rwxr-xr-x 1 dst dst  147 Dec 14 11:46 stream.R*
+--rw-r--r-- 1 dst dst  173 Dec 14 11:47 top-words-1.sh
+--rwxr-xr-x 1 dst dst  105 Dec 14 11:46 top-words-4.sh*
+--rwxr-xr-x 1 dst dst  128 Dec 14 11:46 top-words-5.sh*
+--rwxr-xr-x 1 dst dst  647 Dec 14 11:46 top-words.py*
+--rwxr-xr-x 1 dst dst  584 Dec 14 11:46 top-words.R*
++-rwxr-xr-x 1 dst dst  391 Nov  5 22:32 fizzbuzz.R*
++-rwxr-xr-x 1 dst dst  400 Nov  5 22:32 fizzbuzz.py*
++-rw-r--r-- 1 dst dst 7.5K Nov  5 22:32 stopwords
++-rwxr-xr-x 1 dst dst  147 Nov  5 22:32 stream.R*
++-rwxr-xr-x 1 dst dst  182 Nov  5 22:32 stream.py*
++-rw-r--r-- 1 dst dst  173 Nov  5 22:32 top-words-1.sh
++-rwxr-xr-x 1 dst dst  105 Nov  5 22:32 top-words-4.sh*
++-rwxr-xr-x 1 dst dst  128 Nov  5 22:32 top-words-5.sh*
++-rwxr-xr-x 1 dst dst  584 Nov  5 22:32 top-words.R*
++-rwxr-xr-x 1 dst dst  647 Nov  5 22:32 top-words.py*
+ 
+ $ bat top-words-1.sh
+```
+
+## Code block 13: `$ l top-words-{1,2}.sh`
+
+- id: `chapter-4-creating-command-line-tools.html:block:13`
+- hash: `cc2b5cb0`
+- status: **accept**
+- cause: time
+- note: Timestamps, dates, sizes, or durations of this render
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+ $ l top-words-{1,2}.sh
+--rw-r--r-- 1 dst dst 173 Dec 14 11:47 top-words-1.sh
+--rwxr--r-- 1 dst dst 173 Dec 14 11:47 top-words-2.sh*
++-rw-r--r-- 1 dst dst 173 Nov  5 22:32 top-words-1.sh
++-rwxr--r-- 1 dst dst 173 Nov  5 22:32 top-words-2.sh*
+```
+
+## Code block 17: `  GNU nano 5.4                     top-words-3.sh`
+
+- id: `chapter-4-creating-command-line-tools.html:block:17`
+- hash: `9e2b7eee`
+- status: **accept**
+- cause: image
+- note: nano 8.7.1: version, temporary file name, and shortcut labels
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+-  GNU nano 5.4                     top-words-3.sh
++  GNU nano 8.7.1                    top-words-3.sh
+ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+ tr '[:upper:]' '[:lower:]' |
+@@ -13,4 +13,4 @@
+ 
+                                 [ Read 8 lines ]
+-^G Help      ^O Write Out ^W Where Is  ^K Cut       ^T Execute   ^C Location
+-^X Exit      ^R Read File ^\ Replace   ^U Paste     ^J Justify   ^_ Go To Line
++^G Help      ^O Write Out ^F Where Is  ^K Cut       ^T Execute   ^C Location
++^X Exit      ^R Read File ^\ Replace   ^U Paste     ^J Justify   ^/ Go To Line
+```
+
+## Code block 18: `  GNU nano 5.4                     top-words-3.sh *`
+
+- id: `chapter-4-creating-command-line-tools.html:block:18`
+- hash: `beee4ca2`
+- status: **accept**
+- cause: image
+- note: nano 8.7.1: version, temporary file name, and shortcut labels
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+-  GNU nano 5.4                     top-words-3.sh *
++  GNU nano 8.7.1                    top-words-3.sh *
+ #!/usr/bin/env bash
+ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+```
+
+## Code block 19: `  GNU nano 5.4                     top-words-3.sh *`
+
+- id: `chapter-4-creating-command-line-tools.html:block:19`
+- hash: `531a7577`
+- status: **accept**
+- cause: image
+- note: nano 8.7.1: version, temporary file name, and shortcut labels
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+-  GNU nano 5.4                     top-words-3.sh *
++  GNU nano 8.7.1                    top-words-3.sh *
+ #!/usr/bin/env bash
+ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
+@@ -12,5 +12,5 @@
+ 
+ 
+-File Name to Write: top-words-3.sh
+-^G Help             M-D DOS Format      M-A Append          M-B Backup File
+-^C Cancel           M-M Mac Format      M-P Prepend         ^T Browse
++Write to File: top-words-3.sh
++^G Help         M-D DOS Format  M-A Append      M-B Backup File ^T Browse
++^C Cancel       M-M Mac Format  M-P Prepend     ^Q Discard buffer
+```
+
+## Code block 22: `$ curl -sL 'https://www.gutenberg.org/files/11/11-0.txt' | ./top-words`
+
+- id: `chapter-4-creating-command-line-tools.html:block:22`
+- hash: `e2150541`
+- status: **accept**
+- cause: uutils
+- note: Timestamps and ls sort order (uutils sorts by byte value)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -24,12 +24,12 @@
+ 
+ $ man bash | ./top-words-4.sh
+-    585 command
+-    332 set
+-    313 word
+-    313 option
+-    304 file
+-    300 variable
+-    298 bash
+-    258 list
+-    257 expansion
+-    238 history
++    676 command
++    392 bash
++    362 word
++    355 variable
++    354 set
++    349 option
++    330 file
++    302 expansion
++    280 history
++    274 list
+```
+
+## Code block 26: `$ echo $PATH`
+
+- id: `chapter-4-creating-command-line-tools.html:block:26`
+- hash: `52ca49d9`
+- status: **accept**
+- cause: image
+- note: PATH of the new image (/opt/venv/bin, /opt/uv/bin; no rush/exec)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+ $ echo $PATH
+-/usr/local/lib/R/site-library/rush/exec:/usr/bin/dsutils:/home/dst/.local/bin:/u
+-sr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
++/opt/venv/bin:/opt/uv/bin:/usr/bin/dsutils:/home/dst/.local/bin:/usr/local/sbin:
++/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+```
+
+## Code block 27: `$ echo $PATH | tr ':' '\n'`
+
+- id: `chapter-4-creating-command-line-tools.html:block:27`
+- hash: `3bebf2de`
+- status: **accept**
+- cause: image
+- note: PATH of the new image (/opt/venv/bin, /opt/uv/bin; no rush/exec)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,4 +1,5 @@
+ $ echo $PATH | tr ':' '\n'
+-/usr/local/lib/R/site-library/rush/exec
++/opt/venv/bin
++/opt/uv/bin
+ /usr/bin/dsutils
+ /home/dst/.local/bin
+```
+
+## Code block 28: `$ cp -v top-words{-5.sh,}`
+
+- id: `chapter-4-creating-command-line-tools.html:block:28`
+- hash: `f1241816`
+- status: **accept**
+- cause: image
+- note: curl 8 progress meter layout
+
+```diff
+--- 2e
++++ 2.5e
+@@ -5,12 +5,12 @@
+ 
+ $ echo $PATH
+-/usr/local/lib/R/site-library/rush/exec:/usr/bin/dsutils:/home/dst/.local/bin:/u
+-sr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/ch04
++/opt/venv/bin:/opt/uv/bin:/usr/bin/dsutils:/home/dst/.local/bin:/usr/local/sbin:
++/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/data/ch04
+ 
+ $ curl "https://www.gutenberg.org/files/11/11-0.txt" |
+ > top-words 10
+-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+-                                 Dload  Upload   Total   Spent    Left  Speed
+-100  170k  100  170k    0     0   115k      0  0:00:01  0:00:01 --:--:--  116k
++  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
++                                 Dload  Upload  Total   Spent   Left   Speed
++100 170.2k 100 170.2k   0      0 74.11M      0                              0
+     403 alice
+      98 gutenberg
+```
+
+## Code block 31: `$ time < alice.txt top-words 5`
+
+- id: `chapter-4-creating-command-line-tools.html:block:31`
+- hash: `7929b409`
+- status: **accept**
+- cause: time
+- note: Timings
+
+```diff
+--- 2e
++++ 2.5e
+@@ -5,5 +5,5 @@
+      76 queen
+      71 time
+-top-words 5 < alice.txt  0.38s user 0.04s system 149% cpu 0.278 total
++top-words 5 < alice.txt  0.04s user 0.02s system 147% cpu 0.036 total
+ 
+ $ time < alice.txt top-words.py 5
+@@ -13,5 +13,5 @@
+      76 queen
+      71 time
+-top-words.py 5 < alice.txt  1.36s user 0.03s system 95% cpu 1.454 total
++top-words.py 5 < alice.txt  0.16s user 0.01s system 42% cpu 0.397 total
+ 
+ $ time < alice.txt top-words.R 5
+@@ -21,3 +21,3 @@
+      76 queen
+      71 time
+-top-words.R 5 < alice.txt  1.48s user 0.14s system 91% cpu 1.774 total
++top-words.R 5 < alice.txt  0.10s user 0.02s system 47% cpu 0.265 total
+```
+
+## Footnotes differ (14 vs 14)
+
+- id: `chapter-4-creating-command-line-tools.html:footnotes`
+- hash: `9945c89a`
+- status: **accept**
+- cause: conversion
+- note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter is full
+
+```diff
+--- 2e
++++ 2.5e
+@@ -3,2 +3,2 @@
+-Meyering, grep – Print Lines That Match Patterns.
+-Haertel and Eggert, sort – Sort Lines of Text Files.
++Jim Meyering, grep – Print Lines That Match Patterns, version 3.4, 2019, https://www.gnu.org/software/grep.
++Mike Haertel and Paul Eggert, sort – Sort Lines of Text Files, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+```
+

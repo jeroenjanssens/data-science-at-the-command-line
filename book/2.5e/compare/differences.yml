@@ -1,6 +1,7 @@
 # Reviewed differences between the 2e (bookdown) and 2.5e (Quarto) output.
 # See compare/compare.py for the format. Regenerate drafts with:
 #   compare/compare.py --skeleton
+# Decisions other than accept (fix-image, fix-quarto-term) are open issues.
 - id: 404.html:prose:093c1922
   hash: 984a8800
   title: 'Prose (replace): You may want to try searching to find the page''s new location, or use '
@@ -20,12 +21,6 @@
   cause: conversion
   decision: accept
   note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
-- id: chapter-1-introduction.html:broken-links
-  hash: cf5db932
-  title: 8 broken internal link(s)
-  cause: intended
-  decision: accept
-  note: Links to chapters 3-11 that haven't been converted yet (later rounds)
 - id: chapter-2-getting-started.html:block:3
   hash: 412b4e61
   title: 'Code block 3: `$ docker run --rm -it -v "$(p`'
@@ -83,12 +78,12 @@
   decision: accept
   note: 11 instead of 12 files in /data because csvconf/ is gone
 - id: chapter-2-getting-started.html:block:37
-  hash: 7bbd6fa2
+  hash: 745617c9
   title: 'Code block 37: `$ which csvlook`'
   cause: intended
   decision: accept
-  note: Rendering harness defines csvlook with 'command csvlook' instead of '/usr/bin/csvlook' (csvlook
-    moved to /opt/uv/bin); line wraps one character later
+  note: 'Rendering harness: csvlook is now a typed function calling `command csvlook`, and only changes
+    dashes on its separator line'
 - id: chapter-2-getting-started.html:block:40
   hash: ea75842f
   title: 'Code block 40: `$ man tar | trim 20`'
@@ -113,42 +108,12 @@
   cause: image
   decision: accept
   note: tldr is tealdeer now; different pages and layout. Prose (02:680-690) still fits
-- id: chapter-2-getting-started.html:prose:fe75e989
-  hash: 8cfbc2a0
-  title: 'Prose (replace): ➊ Navigate to the directory /data/ch02. ➋ Print the current directory.'
-  cause: intended
-  decision: accept
-  note: Callout explanations are a numbered list now (decision 4); see 'Code markers' note in the plan
-- id: chapter-2-getting-started.html:prose:3c698dcb
-  hash: e118c60c
-  title: 'Prose (replace): ➊ The option -l specifies that wc should only output the number of lin'
-  cause: intended
-  decision: accept
-  note: Callout explanation as numbered list (decision 4)
-- id: chapter-2-getting-started.html:prose:2450093a
-  hash: 7a362ed6
-  title: 'Prose (replace): ➊ The -w option indicates wc to only count words.'
-  cause: intended
-  decision: accept
-  note: Callout explanation as numbered list (decision 4)
-- id: chapter-2-getting-started.html:prose:d3d887e7
-  hash: f9b03fe9
-  title: 'Prose (replace): ➊ The 2 refers to standard error.'
-  cause: intended
-  decision: accept
-  note: Callout explanation as numbered list (decision 4)
 - id: chapter-2-getting-started.html:anchors-missing
   hash: 97aa3a9a
   title: 8 old anchor(s) missing
   cause: conversion
   decision: accept
   note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
-- id: chapter-2-getting-started.html:broken-links
-  hash: 17bfa1c3
-  title: 3 broken internal link(s)
-  cause: intended
-  decision: accept
-  note: Links to chapters 3-11 that haven't been converted yet (later rounds)
 - id: index.html:prose:68cbdac3
   hash: 96704b11
   title: 'Prose (insert): Data Science at the Command Line, 2e'
@@ -161,12 +126,6 @@
   cause: intended
   decision: accept
   note: Course announcement removed (decision 5)
-- id: preface.html:broken-links
-  hash: e7ff4b7a
-  title: 4 broken internal link(s)
-  cause: intended
-  decision: accept
-  note: Links to chapters 3-11 that haven't been converted yet (later rounds)
 - id: index.html:prose:fed28160
   hash: e30d34ea
   title: 'Prose (replace): Jeroen Janssens is an independent data science consultant and instruct'
@@ -178,4 +137,901 @@
   title: External links differ
   cause: intended
   decision: accept
-  note: New bio links to Bluesky and Mastodon instead of Twitter; the bio no longer links to Data Science Workshops
+  note: New bio links to Bluesky and Mastodon instead of Twitter; the bio no longer links to Data Science
+    Workshops
+- id: chapter-10-polyglot-data-science.html:block:0
+  hash: 0edfad75
+  title: 'Code block 0: `$ cd /data/ch10`'
+  cause: uutils
+  decision: accept
+  note: Timestamps, ls sort order, no __pycache__ in data
+- id: chapter-10-polyglot-data-science.html:block:4
+  hash: 02a4462e
+  title: 'Code block 4: `$ R --quiet`'
+  cause: intended
+  decision: accept
+  note: 2e cut off the last output of the R session; it is shown now
+- id: chapter-10-polyglot-data-science.html:block:5
+  hash: 7705c730
+  title: 'Code block 5: `> out_con <- fifo("out", "w+") ➊`'
+  cause: intended
+  decision: accept
+  note: 2e cut off the last output of the R session; it is shown now
+- id: chapter-10-polyglot-data-science.html:block:7
+  hash: 288c2777
+  title: 'Code block 7: `$ spark-shell --master local[6]`'
+  cause: quarto-term
+  decision: accept
+  note: Spark clears its progress bar with spaces; quarto-term keeps them (styled), so the markers come
+    after them
+- id: chapter-10-polyglot-data-science.html:anchors-missing
+  hash: 6b46fd10
+  title: 3 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-10-polyglot-data-science.html:external-links
+  hash: 0e7b2419
+  title: External links differ
+  cause: conversion
+  decision: accept
+  note: bookdown linked R function names in inline code to rdrr.io; Quarto does not (no R code is run)
+- id: chapter-3-obtaining-data.html:block:0
+  hash: cf14e986
+  title: 'Code block 0: `$ cd /data/ch03`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-3-obtaining-data.html:block:3
+  hash: af6f509d
+  title: 'Code block 3: `$ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherl`'
+  cause: image
+  decision: accept
+  note: curl 8 progress meter layout
+- id: chapter-3-obtaining-data.html:block:5
+  hash: c7574556
+  title: 'Code block 5: `$ curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Frieslan`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-3-obtaining-data.html:block:9
+  hash: '48524532'
+  title: 'Code block 9: `$ curl -s "https://bit.ly/2XBxvwK"`'
+  cause: network
+  decision: accept
+  note: Cached response from November 2026 (no 2021 copy available)
+- id: chapter-3-obtaining-data.html:block:11
+  hash: 31b3b566
+  title: 'Code block 11: `$ curl -sI "https://youtu.be/dQw4w9WgXcQ" | trim`'
+  cause: network
+  decision: accept
+  note: Cached response from November 2026 (no 2021 copy available)
+- id: chapter-3-obtaining-data.html:block:12
+  hash: 0e0089ec
+  title: 'Code block 12: `$ man curl | trim 20`'
+  cause: image
+  decision: accept
+  note: curl 8 man page
+- id: chapter-3-obtaining-data.html:block:18
+  hash: 45010f0e
+  title: 'Code block 18: `$ bat -A tmnt-basic.csv ➊`'
+  cause: quarto-term
+  decision: fix-quarto-term
+  note: quarto-term decodes each PTY read separately, so a multibyte character split between reads becomes
+    two replacement characters and the line wraps
+- id: chapter-3-obtaining-data.html:block:22
+  hash: 7db79873
+  title: 'Code block 22: `$ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > t`'
+  cause: image
+  decision: accept
+  note: curl 8 progress meter layout
+- id: chapter-3-obtaining-data.html:block:23
+  hash: cfb31730
+  title: 'Code block 23: `$ csvgrep top2000.csv --columns ARTIEST --regex ''^Queen$'' | csvlook -I`'
+  cause: image
+  decision: accept
+  note: 'csvkit 1.1.0 on an empty file: an empty table instead of StopIteration; no ResourceWarning'
+- id: chapter-3-obtaining-data.html:block:24
+  hash: 3f8d1215
+  title: 'Code block 24: `$ in2csv --names top2000.xlsx`'
+  cause: image
+  decision: accept
+  note: 'csvkit 1.1.0 on an empty file: an empty table instead of StopIteration; no ResourceWarning'
+- id: chapter-3-obtaining-data.html:block:28
+  hash: 89edfe60
+  title: 'Code block 28: `$ curl -s "http://newsapi.org/v2/everything?q=linux&apiKey=$(< /data/.`'
+  cause: network
+  decision: accept
+  note: newsapi response rebuilt from the 2e output (no API key); the long description is cut at a different
+    place
+- id: chapter-4-creating-command-line-tools.html:block:0
+  hash: f30d0e9f
+  title: 'Code block 0: `$ cd /data/ch04`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-4-creating-command-line-tools.html:block:6
+  hash: a9f78797
+  title: 'Code block 6: `  GNU nano 5.4                     /tmp/zshpu0emE`'
+  cause: image
+  decision: accept
+  note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
+- id: chapter-4-creating-command-line-tools.html:block:7
+  hash: 2068555b
+  title: 'Code block 7: `  GNU nano 5.4                     /tmp/zshpu0emE`'
+  cause: image
+  decision: accept
+  note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
+- id: chapter-4-creating-command-line-tools.html:block:8
+  hash: e55e5856
+  title: 'Code block 8: `  GNU nano 5.4                     /tmp/zshpu0emE`'
+  cause: image
+  decision: accept
+  note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
+- id: chapter-4-creating-command-line-tools.html:block:9
+  hash: '47977702'
+  title: 'Code block 9: `  GNU nano 5.4                     top-words-1.sh`'
+  cause: image
+  decision: accept
+  note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
+- id: chapter-4-creating-command-line-tools.html:block:10
+  hash: 2a196601
+  title: 'Code block 10: `$ pwd`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-4-creating-command-line-tools.html:block:13
+  hash: cc2b5cb0
+  title: 'Code block 13: `$ l top-words-{1,2}.sh`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-4-creating-command-line-tools.html:block:17
+  hash: 9e2b7eee
+  title: 'Code block 17: `  GNU nano 5.4                     top-words-3.sh`'
+  cause: image
+  decision: accept
+  note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
+- id: chapter-4-creating-command-line-tools.html:block:18
+  hash: beee4ca2
+  title: 'Code block 18: `  GNU nano 5.4                     top-words-3.sh *`'
+  cause: image
+  decision: accept
+  note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
+- id: chapter-4-creating-command-line-tools.html:block:19
+  hash: 531a7577
+  title: 'Code block 19: `  GNU nano 5.4                     top-words-3.sh *`'
+  cause: image
+  decision: accept
+  note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
+- id: chapter-4-creating-command-line-tools.html:block:22
+  hash: e2150541
+  title: 'Code block 22: `$ curl -sL ''https://www.gutenberg.org/files/11/11-0.txt'' | ./top-words`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-4-creating-command-line-tools.html:block:26
+  hash: 52ca49d9
+  title: 'Code block 26: `$ echo $PATH`'
+  cause: image
+  decision: accept
+  note: PATH of the new image (/opt/venv/bin, /opt/uv/bin; no rush/exec)
+- id: chapter-4-creating-command-line-tools.html:block:27
+  hash: 3bebf2de
+  title: 'Code block 27: `$ echo $PATH | tr '':'' ''\n''`'
+  cause: image
+  decision: accept
+  note: PATH of the new image (/opt/venv/bin, /opt/uv/bin; no rush/exec)
+- id: chapter-4-creating-command-line-tools.html:block:28
+  hash: f1241816
+  title: 'Code block 28: `$ cp -v top-words{-5.sh,}`'
+  cause: image
+  decision: accept
+  note: curl 8 progress meter layout
+- id: chapter-4-creating-command-line-tools.html:block:31
+  hash: 7929b409
+  title: 'Code block 31: `$ time < alice.txt top-words 5`'
+  cause: time
+  decision: accept
+  note: Timings
+- id: chapter-4-creating-command-line-tools.html:footnotes
+  hash: 9945c89a
+  title: Footnotes differ (14 vs 14)
+  cause: conversion
+  decision: accept
+  note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got
+    the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter
+    is full
+- id: chapter-5-scrubbing-data.html:block:0
+  hash: '68407095'
+  title: 'Code block 0: `$ cd /data/ch05`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-5-scrubbing-data.html:block:2
+  hash: f5723c41
+  title: 'Code block 2: `$ grep -E "fizz|buzz" fb.seq | ➊`'
+  cause: quarto-term
+  decision: fix-quarto-term
+  note: quarto-term decodes each PTY read separately, so a multibyte character split between reads becomes
+    two replacement characters and the line wraps
+- id: chapter-5-scrubbing-data.html:block:17
+  hash: 1ef616a3
+  title: 'Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`'
+  cause: random
+  decision: accept
+  note: sample draws other lines
+- id: chapter-5-scrubbing-data.html:block:18
+  hash: 3f5eb8ff
+  title: 'Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-5-scrubbing-data.html:block:69
+  hash: 096f2d19
+  title: 'Code block 69: `$ < wiki.html trim`'
+  cause: network
+  decision: accept
+  note: Cached 2021 Wikipedia page (October 2021 snapshot), slightly different from the copy 2e fetched
+- id: chapter-5-scrubbing-data.html:anchors-missing
+  hash: 24892e80
+  title: 1 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-5-scrubbing-data.html:footnotes
+  hash: 28b19abc
+  title: Footnotes differ (27 vs 27)
+  cause: conversion
+  decision: accept
+  note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got
+    the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter
+    is full
+- id: chapter-5-scrubbing-data.html:image:images/fb.png
+  hash: 76f0047e
+  title: 'Image changed: images/fb.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-6-project-management-with-make.html:block:0
+  hash: 938f379c
+  title: 'Code block 0: `$ cd /data/ch06`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-6-project-management-with-make.html:anchors-missing
+  hash: ccc01452
+  title: 2 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-6-project-management-with-make.html:footnotes
+  hash: d01b538a
+  title: Footnotes differ (3 vs 3)
+  cause: conversion
+  decision: accept
+  note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got
+    the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter
+    is full
+- id: chapter-6-project-management-with-make.html:image:images/heights.png
+  hash: 8ad89dcd
+  title: 'Image changed: images/heights.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:block:0
+  hash: c0b0d582
+  title: 'Code block 0: `$ cd /data/ch07`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-7-exploring-data.html:block:20
+  hash: a1a77299
+  title: 'Code block 20: `> library(tidyverse)                            ➊`'
+  cause: image
+  decision: accept
+  note: tidyverse 2 startup message; callout marker right after the code (2e aligned the comments)
+- id: chapter-7-exploring-data.html:block:23
+  hash: 3dd91960
+  title: 'Code block 23: `$ rush run --help`'
+  cause: image
+  decision: accept
+  note: 'rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan
+    D, ch 7)'
+- id: chapter-7-exploring-data.html:block:24
+  hash: '75799134'
+  title: 'Code block 24: `$ rush run -n --tidyverse ''mutate(df, percent = tip / bill * 100)'' tip`'
+  cause: image
+  decision: accept
+  note: 'rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan
+    D, ch 7)'
+- id: chapter-7-exploring-data.html:block:26
+  hash: f3bfca45
+  title: 'Code block 26: `$ rush plot --x bill --y tip --color size --facets ''~day'' tips.csv`'
+  cause: image
+  decision: accept
+  note: 'rush terminal plots use devoutansi now: colored blocks instead of characters, a white canvas,
+    and no legend'
+- id: chapter-7-exploring-data.html:block:33
+  hash: 0b9ff530
+  title: 'Code block 33: `$ R -q -e ''?ggplot2::qplot'' | trim 14`'
+  cause: image
+  decision: accept
+  note: qplot() is deprecated in ggplot2 4; prose to update (book-changes-plan D, ch 7)
+- id: chapter-7-exploring-data.html:block:34
+  hash: 1f136cdf
+  title: 'Code block 34: `$ rush plot --help`'
+  cause: image
+  decision: accept
+  note: rush 0.2.1 help text
+- id: chapter-7-exploring-data.html:block:35
+  hash: 1a247663
+  title: 'Code block 35: `$ rush plot --x time tips.csv`'
+  cause: image
+  decision: fix-image
+  note: 'No plot: rush plot --x time fails in the new image (rush 0.2.1 uses geom_histogram for a discrete
+    x, and hides the error)'
+- id: chapter-7-exploring-data.html:block:37
+  hash: 05ae3861
+  title: 'Code block 37: `$ rush plot --x tip --fill time tips.csv`'
+  cause: image
+  decision: accept
+  note: 'rush terminal plots use devoutansi now: colored blocks instead of characters, a white canvas,
+    and no legend'
+- id: chapter-7-exploring-data.html:block:39
+  hash: '46790193'
+  title: 'Code block 39: `$ rush plot --x tip --fill time --geom density tips.csv`'
+  cause: image
+  decision: accept
+  note: 'rush terminal plots use devoutansi now: colored blocks instead of characters, a white canvas,
+    and no legend'
+- id: chapter-7-exploring-data.html:block:41
+  hash: 6ae2a7bb
+  title: 'Code block 41: `$ rush plot --x tip --y bill --color size --size day --geom path tips.`'
+  cause: image
+  decision: accept
+  note: 'rush terminal plots use devoutansi now: colored blocks instead of characters, a white canvas,
+    and no legend'
+- id: chapter-7-exploring-data.html:block:43
+  hash: a3a2b5b7
+  title: 'Code block 43: `$ rush plot --x bill --y tip --color time tips.csv`'
+  cause: image
+  decision: accept
+  note: 'rush terminal plots use devoutansi now: colored blocks instead of characters, a white canvas,
+    and no legend'
+- id: chapter-7-exploring-data.html:block:45
+  hash: 46a6ecc3
+  title: 'Code block 45: `$ rush plot --x bill --y tip --color time --geom smooth tips.csv`'
+  cause: image
+  decision: accept
+  note: 'rush terminal plots use devoutansi now: colored blocks instead of characters, a white canvas,
+    and no legend'
+- id: chapter-7-exploring-data.html:block:48
+  hash: f83cdd70
+  title: 'Code block 48: `$ rush plot --x ''factor(size)'' --y bill --geom boxplot tips.csv`'
+  cause: image
+  decision: fix-image
+  note: 'No plot: the terminal box plot exits with status 250 in the new image (devoutansi); the PNG works'
+- id: chapter-7-exploring-data.html:block:50
+  hash: ff961e1c
+  title: 'Code block 50: `$ rush plot --x ''factor(size)'' --y bill --geom violin --title ''Distrib`'
+  cause: image
+  decision: accept
+  note: 'rush terminal plots use devoutansi now: colored blocks instead of characters, a white canvas,
+    and no legend'
+- id: chapter-7-exploring-data.html:anchors-missing
+  hash: 6439bc3c
+  title: 12 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-7-exploring-data.html:external-links
+  hash: 33ab767b
+  title: External links differ
+  cause: conversion
+  decision: accept
+  note: bookdown linked R function names in inline code to rdrr.io; Quarto does not (no R code is run)
+- id: chapter-7-exploring-data.html:footnotes
+  hash: e0994d15
+  title: Footnotes differ (5 vs 5)
+  cause: conversion
+  decision: accept
+  note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got
+    the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter
+    is full
+- id: chapter-7-exploring-data.html:image:images/plot-accident.png
+  hash: c4db9308
+  title: 'Image changed: images/plot-accident.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/plot-bar.png
+  hash: 9796a9d6
+  title: 'Image changed: images/plot-bar.png'
+  cause: image
+  decision: fix-image
+  note: 'Empty: rush plot --x time fails in the new image (rush 0.2.1 uses geom_histogram for a discrete
+    x)'
+- id: chapter-7-exploring-data.html:image:images/plot-boxplot.png
+  hash: 30c76217
+  title: 'Image changed: images/plot-boxplot.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/plot-density.png
+  hash: a9b07e7e
+  title: 'Image changed: images/plot-density.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/plot-histogram.png
+  hash: 262276a1
+  title: 'Image changed: images/plot-histogram.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/plot-labels.png
+  hash: 6633a019
+  title: 'Image changed: images/plot-labels.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/plot-scatter.png
+  hash: 4480ff3e
+  title: 'Image changed: images/plot-scatter.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/plot-trend-points.png
+  hash: 5e67c765
+  title: 'Image changed: images/plot-trend-points.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/plot-trend.png
+  hash: c919e0f1
+  title: 'Image changed: images/plot-trend.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-7-exploring-data.html:image:images/tips.png
+  hash: 81bdbe0a
+  title: 'Image changed: images/tips.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-8-parallel-pipelines.html:block:0
+  hash: af88d375
+  title: 'Code block 0: `$ cd /data/ch08`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-8-parallel-pipelines.html:block:2
+  hash: f79701bd
+  title: 'Code block 2: `$ for i in {0..100..2}  ➊`'
+  cause: conversion
+  decision: accept
+  note: Callout markers right after the code; 2e aligned the comments
+- id: chapter-8-parallel-pipelines.html:block:4
+  hash: 30cd2da8
+  title: 'Code block 4: `$ while read line                         ➊`'
+  cause: conversion
+  decision: accept
+  note: Callout markers right after the code; 2e aligned the comments
+- id: chapter-8-parallel-pipelines.html:block:6
+  hash: 191b7cb6
+  title: 'Code block 6: `$ for chapter in /data/*`'
+  cause: image
+  decision: accept
+  note: No csvconf directory in /data anymore
+- id: chapter-8-parallel-pipelines.html:block:7
+  hash: 981c51be
+  title: 'Code block 7: `$ find /data -type f -name ''*.csv'' -size -2k`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-8-parallel-pipelines.html:block:9
+  hash: f5ec506c
+  title: 'Code block 9: `$ for i in {A..C}; do`'
+  cause: random
+  decision: accept
+  note: 'Background jobs: PIDs, timestamps, random durations, and order'
+- id: chapter-8-parallel-pipelines.html:block:10
+  hash: c1e5788c
+  title: 'Code block 10: `$ seq 0 2 100 | parallel "echo {}^2 | bc" | trim`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-8-parallel-pipelines.html:block:11
+  hash: ea541658
+  title: 'Code block 11: `$ parallel --jobs 2 ./slow.sh ::: {A..C}`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-8-parallel-pipelines.html:block:15
+  hash: b2507846
+  title: 'Code block 15: `$ find /data/ch03 -type f | parallel echo ''{#}\) \"{}\" has basename \`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-8-parallel-pipelines.html:block:23
+  hash: e38b3981
+  title: 'Code block 23: `$ seq 5 | parallel --tag "echo ''sqrt({})'' | bc -l"`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-8-parallel-pipelines.html:block:26
+  hash: 08a8743e
+  title: 'Code block 26: `$ aws ec2 describe-instances | jq ''.Reservations[].Instances[] | {publ`'
+  cause: intended
+  decision: accept
+  note: 'Fake output is shown now: in 2e the echo chain ended with &&, so it never ran and the next command
+    was typed after a continuation prompt'
+- id: chapter-8-parallel-pipelines.html:block:27
+  hash: 7cec57b4
+  title: 'Code block 27: `> aws ec2 describe-instances | jq -r ''.Reservations[].Instances[] | se`'
+  cause: intended
+  decision: accept
+  note: 'Fake output is shown now: in 2e the echo chain ended with &&, so it never ran and the next command
+    was typed after a continuation prompt'
+- id: chapter-8-parallel-pipelines.html:block:39
+  hash: ac6c71be
+  title: 'Code block 39: `$ l nyc*json.gz`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-8-parallel-pipelines.html:block:40
+  hash: 8b905105
+  title: 'Code block 40: `$ zcat nyc-1.json.gz | trim`'
+  cause: network
+  decision: accept
+  note: NYC Open Data cached in November 2026 (no 2021 copy)
+- id: chapter-8-parallel-pipelines.html:block:41
+  hash: df6b33d7
+  title: 'Code block 41: `$ zcat nyc-1.json.gz | head -n 1`'
+  cause: network
+  decision: accept
+  note: NYC Open Data cached in November 2026 (no 2021 copy)
+- id: chapter-8-parallel-pipelines.html:block:42
+  hash: '83728306'
+  title: 'Code block 42: `$ zcat nyc*json.gz | ➊`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-8-parallel-pipelines.html:block:44
+  hash: 6501c706
+  title: 'Code block 44: `$ ssh $(head -n 1 hostnames) ls`'
+  cause: intended
+  decision: accept
+  note: 'Fake output is shown now: in 2e the echo chain ended with &&, so it never ran and the next command
+    was typed after a continuation prompt'
+- id: chapter-8-parallel-pipelines.html:block:45
+  hash: abcbe18d
+  title: 'Code block 45: `> cat nyc-1.json.csv`'
+  cause: intended
+  decision: accept
+  note: 'Fake output is shown now: in 2e the echo chain ended with &&, so it never ran and the next command
+    was typed after a continuation prompt'
+- id: chapter-8-parallel-pipelines.html:block:46
+  hash: 51511bb1
+  title: 'Code block 46: `$ cat nyc*csv | header -a borough,count |`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-8-parallel-pipelines.html:block:47
+  hash: d4c6bea2
+  title: 'Code block 47: `$ cat nyc*csv | header -a borough,count |`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: chapter-8-parallel-pipelines.html:anchors-missing
+  hash: 711f60a5
+  title: 3 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-8-parallel-pipelines.html:external-links
+  hash: 9dae1f49
+  title: External links differ
+  cause: conversion
+  decision: accept
+  note: bookdown linked R function names in inline code to rdrr.io; Quarto does not (no R code is run)
+- id: chapter-8-parallel-pipelines.html:footnotes
+  hash: 64ccc211
+  title: Footnotes differ (11 vs 11)
+  cause: conversion
+  decision: accept
+  note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got
+    the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter
+    is full
+- id: chapter-9-modeling-data.html:block:0
+  hash: 5a2048b2
+  title: 'Code block 0: `$ cd /data/ch09`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-9-modeling-data.html:block:10
+  hash: 4a8295f0
+  title: 'Code block 10: `$ xsv select ''!type'' wine-scaled.csv | ➊`'
+  cause: image
+  decision: accept
+  note: 'tapkee 1.4 PCA: signs of the components are flipped'
+- id: chapter-9-modeling-data.html:block:11
+  hash: c5d49030
+  title: 'Code block 11: `$ < wine-pca.txt header -a pc1,pc2 | ➊`'
+  cause: image
+  decision: accept
+  note: 'tapkee 1.4 PCA: signs of the components are flipped'
+- id: chapter-9-modeling-data.html:block:18
+  hash: 3a06185f
+  title: 'Code block 18: `$ vw \`'
+  cause: image
+  decision: accept
+  note: vw 9 log format (wider columns, wrapped)
+- id: chapter-9-modeling-data.html:block:19
+  hash: b5ac4cc3
+  title: 'Code block 19: `$ vw \`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-9-modeling-data.html:block:20
+  hash: 67f9d491
+  title: 'Code block 20: `$ paste -d, predictions <(cut -d ''|'' -f 1 wine-test.vw) |`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-9-modeling-data.html:block:22
+  hash: 607d4429
+  title: 'Code block 22: `$ vw -d wine-train.vw -f wine2.model --quiet ➊`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-9-modeling-data.html:block:24
+  hash: dc540c5f
+  title: 'Code block 24: `$ NUM_RED="$(< wine-red-clean.csv wc -l)" ➊`'
+  cause: random
+  decision: accept
+  note: Random shuffle
+- id: chapter-9-modeling-data.html:block:28
+  hash: f874eb22
+  title: 'Code block 28: `$ ls -1 output`'
+  cause: image
+  decision: accept
+  note: skll 5 output file names (wine_ instead of wine_features_); prose may need an update
+- id: chapter-9-modeling-data.html:block:29
+  hash: d7c0c03d
+  title: 'Code block 29: `$ < output/wine_summary.tsv csvsql --query "SELECT learner_name, accur`'
+  cause: random
+  decision: accept
+  note: Model accuracies (random train/test split, newer scikit-learn)
+- id: chapter-9-modeling-data.html:block:30
+  hash: bd6acad9
+  title: 'Code block 30: `$ jq -r ''.[] | "\(.learner_name):\n\(.result_table)\n"'' output/*.json`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: chapter-9-modeling-data.html:anchors-missing
+  hash: 454312f5
+  title: 3 old anchor(s) missing
+  cause: conversion
+  decision: accept
+  note: 'Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged'
+- id: chapter-9-modeling-data.html:external-links
+  hash: c45f50f3
+  title: External links differ
+  cause: conversion
+  decision: accept
+  note: bookdown linked R function names in inline code to rdrr.io; Quarto does not (no R code is run)
+- id: chapter-9-modeling-data.html:figures
+  hash: 6a2e93fe
+  title: Figures differ
+  cause: conversion
+  decision: accept
+  note: All five figures are numbered now; in 2e the two with an underscore in their label were not recognized
+    (raw "(#fig:...)" caption) and the others were 9.1-9.3
+- id: chapter-9-modeling-data.html:image:images/wine-alcohol-vs-quality.png
+  hash: bcda8965
+  title: 'Image changed: images/wine-alcohol-vs-quality.png'
+  cause: image
+  decision: fix-image
+  note: 'Straight lines instead of a smoother: geom_smooth() needs mgcv for > 1000 rows, which the image
+    lacks (ggplot2 then falls back to lm)'
+- id: chapter-9-modeling-data.html:image:images/wine-pca.png
+  hash: bd280931
+  title: 'Image changed: images/wine-pca.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html;
+    PCA components have flipped signs (tapkee 1.4)
+- id: chapter-9-modeling-data.html:image:images/wine-quality.png
+  hash: c3c2961d
+  title: 'Image changed: images/wine-quality.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-9-modeling-data.html:image:images/wine-regression.png
+  hash: 2ecb3dbf
+  title: 'Image changed: images/wine-regression.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: chapter-9-modeling-data.html:image:images/wine-tsne.png
+  hash: 5204b8fc
+  title: 'Image changed: images/wine-tsne.png'
+  cause: image
+  decision: accept
+  note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
+- id: list-of-command-line-tools.html:block:2
+  hash: 01db8da8
+  title: 'Code block 2: `$ type aws`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:6
+  hash: 7b2ca82d
+  title: 'Code block 6: `$ type body`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: list-of-command-line-tools.html:block:12
+  hash: ce20a64f
+  title: 'Code block 12: `$ type cowsay`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:15
+  hash: 243fd91e
+  title: 'Code block 15: `$ type csvcut`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:16
+  hash: 05e5b297
+  title: 'Code block 16: `$ type csvgrep`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:17
+  hash: 4c2a213c
+  title: 'Code block 17: `$ type csvjoin`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:20
+  hash: aae3c1fc
+  title: 'Code block 20: `$ type csvsort`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:21
+  hash: d9c1639c
+  title: 'Code block 21: `$ type csvsql`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:22
+  hash: 9423a16a
+  title: 'Code block 22: `$ type csvstack`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:23
+  hash: 226e4f65
+  title: 'Code block 23: `$ type csvstat`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:27
+  hash: df26ca01
+  title: 'Code block 27: `$ type dseq`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: list-of-command-line-tools.html:block:32
+  hash: 720530b2
+  title: 'Code block 32: `$ type find`'
+  cause: uutils
+  decision: accept
+  note: Timestamps and ls sort order (uutils sorts by byte value)
+- id: list-of-command-line-tools.html:block:42
+  hash: 755c994a
+  title: 'Code block 42: `$ type hostname`'
+  cause: random
+  decision: accept
+  note: Container hostname
+- id: list-of-command-line-tools.html:block:43
+  hash: aab9deab
+  title: 'Code block 43: `$ type in2csv`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:45
+  hash: 24f5a238
+  title: 'Code block 45: `$ type json2csv`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:46
+  hash: aedc7f44
+  title: 'Code block 46: `$ type l`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: list-of-command-line-tools.html:block:48
+  hash: d40db31c
+  title: 'Code block 48: `$ type ls`'
+  cause: image
+  decision: accept
+  note: No csvconf directory in /data anymore
+- id: list-of-command-line-tools.html:block:56
+  hash: 62108aef
+  title: 'Code block 56: `$ type paste`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: list-of-command-line-tools.html:block:58
+  hash: 69a4bcb9
+  title: 'Code block 58: `$ type pip`'
+  cause: image
+  decision: accept
+  note: pip is a uv shim; pip freeze shows the uv environment
+- id: list-of-command-line-tools.html:block:59
+  hash: 05fd273e
+  title: 'Code block 59: `$ type pup`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:65
+  hash: 04a5e579
+  title: 'Code block 65: `$ type rush`'
+  cause: image
+  decision: accept
+  note: rush location; tibble 3 printing; starwars.csv 2021 snapshot capitalizes Lars
+- id: list-of-command-line-tools.html:block:66
+  hash: ea5e4d75
+  title: 'Code block 66: `$ type sample`'
+  cause: random
+  decision: accept
+  note: Random output (sample, shuf)
+- id: list-of-command-line-tools.html:block:71
+  hash: d65663f7
+  title: 'Code block 71: `$ type shuf`'
+  cause: random
+  decision: accept
+  note: Random output (sample, shuf)
+- id: list-of-command-line-tools.html:block:76
+  hash: 636babb4
+  title: 'Code block 76: `$ type sql2csv`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:80
+  hash: fbaf9f20
+  title: 'Code block 80: `$ type tapkee`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image
+- id: list-of-command-line-tools.html:block:84
+  hash: 20a9a30f
+  title: 'Code block 84: `$ type tldr`'
+  cause: image
+  decision: accept
+  note: 'tldr is tealdeer: different location and pages'
+- id: list-of-command-line-tools.html:block:86
+  hash: dbca5a84
+  title: 'Code block 86: `$ type tree`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: list-of-command-line-tools.html:block:88
+  hash: 3676b70f
+  title: 'Code block 88: `$ type ts`'
+  cause: time
+  decision: accept
+  note: Timestamps, dates, sizes, or durations of this render
+- id: list-of-command-line-tools.html:block:99
+  hash: c4bbf5eb
+  title: 'Code block 99: `$ type xsv`'
+  cause: image
+  decision: accept
+  note: Tools live in other places in the new image

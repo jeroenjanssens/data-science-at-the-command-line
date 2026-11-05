@@ -1,0 +1,291 @@
+# chapter-3-obtaining-data.html
+
+Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47694336e393d72d1811e440455d6`
+
+## Code block 0: `$ cd /data/ch03`
+
+- id: `chapter-3-obtaining-data.html:block:0`
+- hash: `cf14e986`
+- status: **accept**
+- cause: time
+- note: Timestamps, dates, sizes, or durations of this render
+
+```diff
+--- 2e
++++ 2.5e
+@@ -3,8 +3,8 @@
+ $ l
+ total 924K
+--rw-r--r-- 1 dst dst 627K Dec 14 11:46 logs.tar.gz
+--rw-r--r-- 1 dst dst 189K Dec 14 11:46 r-datasets.db
+--rw-r--r-- 1 dst dst  149 Dec 14 11:46 tmnt-basic.csv
+--rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
+--rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
+--rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx
++-rw-r--r-- 1 dst dst 627K Nov  5 22:31 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  5 22:31 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  5 22:31 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  5 22:31 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  5 22:31 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  5 22:31 top2000.xlsx
+```
+
+## Code block 3: `$ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherl`
+
+- id: `chapter-3-obtaining-data.html:block:3`
+- hash: `af6f509d`
+- status: **accept**
+- cause: image
+- note: curl 8 progress meter layout
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,8 +1,8 @@
+ $ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands" |
+ > trim ➊
+-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+-                                 Dload  Upload   Total   Spent    Left  Speed
+-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<!
+-DOCTYPE html>
++  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
++                                 Dload  Upload  Total   Spent   Left   Speed
++  0      0   0      0   0      0      0      0                              0<!D
++OCTYPE html>
+ <html class="client-nojs" lang="en" dir="ltr">
+ <head>
+@@ -11,7 +11,7 @@
+ <script>document.documentElement.className="client-js";RLCONF={"wgBreakFrames":…
+ "wgRelevantPageName":"List_of_windmills_in_the_Netherlands","wgRelevantArticleI…
+-,"site.styles":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","us…
++"noscript":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","user":…
+ "ext.growthExperiments.SuggestedEditSession"];</script>
+ <script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…
+-100  249k    0  249k    0     0   853k      0 --:--:-- --:--:-- --:--:--  867k
+-… with 1754 more lines
++100 246.3k 100 246.3k   0      0 91.21M      0                              0
++… with 1729 more lines
+```
+
+## Code block 5: `$ curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Frieslan`
+
+- id: `chapter-3-obtaining-data.html:block:5`
+- hash: `c7574556`
+- status: **accept**
+- cause: time
+- note: Timestamps, dates, sizes, or durations of this render
+
+```diff
+--- 2e
++++ 2.5e
+@@ -3,9 +3,9 @@
+ $ l
+ total 1.4M
+--rw-r--r-- 1 dst dst 432K Dec 14 11:46 List_of_windmills_in_Friesland
+--rw-r--r-- 1 dst dst 627K Dec 14 11:46 logs.tar.gz
+--rw-r--r-- 1 dst dst 189K Dec 14 11:46 r-datasets.db
+--rw-r--r-- 1 dst dst  149 Dec 14 11:46 tmnt-basic.csv
+--rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
+--rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
+--rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx
++-rw-r--r-- 1 dst dst 430K Nov  5 22:31 List_of_windmills_in_Friesland
++-rw-r--r-- 1 dst dst 627K Nov  5 22:31 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  5 22:31 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  5 22:31 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  5 22:31 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  5 22:31 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  5 22:31 top2000.xlsx
+```
+
+## Code block 9: `$ curl -s "https://bit.ly/2XBxvwK"`
+
+- id: `chapter-3-obtaining-data.html:block:9`
+- hash: `48524532`
+- status: **accept**
+- cause: network
+- note: Cached response from November 2026 (no 2021 copy available)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,5 +1,4 @@
+ $ curl -s "https://bit.ly/2XBxvwK"
+ <html>
+-<head><title>Bitly</title></head>
+ <body><a href="https://youtu.be/dQw4w9WgXcQ">moved here</a></body>
+ </html>%
+```
+
+## Code block 11: `$ curl -sI "https://youtu.be/dQw4w9WgXcQ" | trim`
+
+- id: `chapter-3-obtaining-data.html:block:11`
+- hash: `31b3b566`
+- status: **accept**
+- cause: network
+- note: Cached response from November 2026 (no 2021 copy available)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,12 +1,12 @@
+ $ curl -sI "https://youtu.be/dQw4w9WgXcQ" | trim
+-HTTP/2 303
++HTTP/1.1 303
+ content-type: application/binary
+ x-content-type-options: nosniff
++connection-allowlist-report-only: (response-origin "https://youtube.com" "https…
+ cache-control: no-cache, no-store, max-age=0, must-revalidate
+ pragma: no-cache
+ expires: Mon, 01 Jan 1990 00:00:00 GMT
+-date: Tue, 14 Dec 2021 10:46:22 GMT
++date: Thu, 05 Nov 2026 21:51:23 GMT
+ location: https://www.youtube.com/watch?v=dQw4w9WgXcQ&feature=youtu.be
+-content-length: 0
+ x-frame-options: SAMEORIGIN
+-… with 11 more lines
++… with 16 more lines
+```
+
+## Code block 12: `$ man curl | trim 20`
+
+- id: `chapter-3-obtaining-data.html:block:12`
+- hash: `0e0089ec`
+- status: **accept**
+- cause: image
+- note: curl 8 man page
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,4 +1,4 @@
+ $ man curl | trim 20
+-curl(1)                           Curl Manual                          curl(1)
++curl(1)                           curl Manual                          curl(1)
+ 
+ NAME
+@@ -9,14 +9,14 @@
+ 
+ DESCRIPTION
+-       curl  is  a tool to transfer data from or to a server, using one of the
+-       supported protocols (DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS,  IMAP,
+-       IMAPS,  LDAP,  LDAPS,  MQTT, POP3, POP3S, RTMP, RTMPS, RTSP, SCP, SFTP,
+-       SMB, SMBS, SMTP, SMTPS, TELNET and TFTP). The command  is  designed  to
+-       work without user interaction.
++       curl is a tool for transferring data from or to a server using URLs. It
++       supports these protocols: DICT, FILE, FTP, FTPS, GOPHER, GOPHERS, HTTP,
++       HTTPS,  IMAP, IMAPS, LDAP, LDAPS, MQTT, POP3, POP3S, RTMP, RTMPS, RTSP,
++       SCP, SFTP, SMB, SMBS, SMTP, SMTPS, TELNET, TFTP, WS and WSS.
+ 
+-       curl offers a busload of useful tricks like proxy support, user authen‐
+-       tication, FTP upload, HTTP post, SSL connections, cookies, file  trans‐
+-       fer  resume,  Metalink,  and more. As you will see below, the number of
+-       features will make your head spin!
++       curl is powered by  libcurl  for  all  transfer-related  features.  See
++       libcurl(3) for details.
+ 
+-… with 3986 more lines
++URL
++       The  URL  syntax is protocol-dependent. You find a detailed description
++       in RFC 3986.
++… with 7571 more lines
+```
+
+## Code block 18: `$ bat -A tmnt-basic.csv ➊`
+
+- id: `chapter-3-obtaining-data.html:block:18`
+- hash: `45010f0e`
+- status: **fix-quarto-term**
+- cause: quarto-term
+- note: quarto-term decodes each PTY read separately, so a multibyte character split between reads becomes two replacement characters and the line wraps
+
+```diff
+--- 2e
++++ 2.5e
+@@ -7,3 +7,4 @@
+    3   │ Michelangelo,Mikey·or·Mike,orange,pair·of·nunchaku␊
+    4   │ Donatello,Donnie·or·Don,purple,staff␊
+-───────┴────────────────────────────────────────────────────────────────────────
++───────┴──────────────────────────────────────────────��────────────────────────
++─
+```
+
+## Code block 22: `$ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > t`
+
+- id: `chapter-3-obtaining-data.html:block:22`
+- hash: `7db79873`
+- status: **accept**
+- cause: image
+- note: curl 8 progress meter layout
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,7 +1,7 @@
+ $ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > top2000.xls
+ x
+-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+-                                 Dload  Upload   Total   Spent    Left  Speed
+-100 41744  100 41744    0     0  46024      0 --:--:-- --:--:-- --:--:-- 46228
++  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
++                                 Dload  Upload  Total   Spent   Left   Speed
++100      8 100      8   0      0   7575      0                              0
+ 
+ $ in2csv top2000.xlsx | tee top2000.csv | trim
+```
+
+## Code block 23: `$ csvgrep top2000.csv --columns ARTIEST --regex '^Queen$' | csvlook -I`
+
+- id: `chapter-3-obtaining-data.html:block:23`
+- hash: `cfb31730`
+- status: **accept**
+- cause: image
+- note: csvkit 1.1.0 on an empty file: an empty table instead of StopIteration; no ResourceWarning
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,3 @@
+ $ csvgrep top2000.csv --columns ARTIEST --regex '^Queen$' | csvlook -I ➊
+-StopIteration:
+-StopIteration:
++││
++│  │
+```
+
+## Code block 24: `$ in2csv --names top2000.xlsx`
+
+- id: `chapter-3-obtaining-data.html:block:24`
+- hash: `3f8d1215`
+- status: **accept**
+- cause: image
+- note: csvkit 1.1.0 on an empty file: an empty table instead of StopIteration; no ResourceWarning
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,3 +1,2 @@
+ $ in2csv --names top2000.xlsx
+ BadZipFile: File is not a zip file
+-sys:1: ResourceWarning: unclosed file <_io.BufferedReader name='top2000.xlsx'>
+```
+
+## Code block 28: `$ curl -s "http://newsapi.org/v2/everything?q=linux&apiKey=$(< /data/.`
+
+- id: `chapter-3-obtaining-data.html:block:28`
+- hash: `89edfe60`
+- status: **accept**
+- cause: network
+- note: newsapi response rebuilt from the 2e output (no API key); the long description is cut at a different place
+
+```diff
+--- 2e
++++ 2.5e
+@@ -13,5 +13,5 @@
+       "author": "Igor Bonifacic",
+       "title": "'Arma 3' and 'DayZ' add BattlEye anti-cheat support through Val…
+-      "description": "While there are still many unknowns about Steam Deck\r\n
++      "description": "While there are still many unknowns about Steam Deck\r\n …
+       "url": "https://www.engadget.com/arma-3-dayz-proton-battleye-support-2246…
+       "urlToImage": "https://s.yimg.com/os/creatr-uploaded-images/2021-12/bcb0f…
+```
+

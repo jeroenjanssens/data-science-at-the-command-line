@@ -1,0 +1,98 @@
+cd /data/ch09
+l
+cp /data/.cache/wine-*.csv .
+< wine-red.csv nl |\
+fold |\
+trim
+< wine-white.csv nl | fold | trim
+wc -l wine-{red,white}.csv
+for COLOR in red white; do\
+< wine-$COLOR.csv tr '[A-Z]; ' '[a-z],_' | tr -d \" > wine-${COLOR}-clean.csv\
+done
+csvstack -g red,white -n type wine-{red,white}-clean.csv |\
+xsv select 2-,1 > wine.csv
+csvstat wine.csv --nulls
+rush run -t 'ggplot(df, aes(x = quality, fill = type)) + geom_density(adjust = 3, alpha = 0.5)' wine.csv > wine-quality.png
+display wine-quality.png
+rush plot --x alcohol --y quality --color type --geom smooth wine.csv > wine-alcohol-vs-quality.png
+display wine-alcohol-vs-quality.png
+rush run --tidyverse --output wine-scaled.csv \\
+'select(df, -type) %>%\
+scale() %>%\
+as_tibble() %>%\
+mutate(type = df$type)' wine.csv
+csvlook wine-scaled.csv
+xsv select '!type' wine-scaled.csv |\
+header -d |\
+tapkee --method pca |\
+tee wine-pca.txt | trim
+< wine-pca.txt header -a pc1,pc2 |\
+paste -d, - <(xsv select type wine-scaled.csv) |\
+tee wine-pca.csv | csvlook
+rush plot --x pc1 --y pc2 --color type --shape type wine-pca.csv > wine-pca.png
+display wine-pca.png
+xsv select '!type' wine-scaled.csv |\
+header -d |\
+tapkee --method t-sne |\
+header -a x,y |\
+paste -d, - <(xsv select type wine-scaled.csv) |\
+rush plot --x x --y y --color type --shape type > wine-tsne.png
+display wine-tsne.png
+csv2vw wine-white-clean.csv --label quality | trim
+csv2vw wine-white-clean.csv --label quality |\
+shuf |\
+split -d -n r/5 - wine-part-
+wc -l wine-part-*
+mv wine-part-00 wine-test.vw
+cat wine-part-* > wine-train.vw
+rm wine-part-*
+wc -l wine-*.vw
+vw \\
+--data wine-train.vw \\
+--final_regressor wine.model \\
+--passes 10 \\
+--cache_file wine.cache \\
+--nn 3 \\
+--quadratic :: \\
+--l2 0.000005 \\
+--bit_precision 25
+vw \\
+--data wine-test.vw \\
+--initial_regressor wine.model \\
+--testonly \\
+--predictions predictions \\
+--quiet
+bat predictions | trim
+paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |\
+tee results.csv |\
+awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}' |\
+cowsay
+< results.csv header -a "predicted,observed" |\
+rush plot --x observed --y predicted --geom jitter > wine-regression.png
+display wine-regression.png
+vw -d wine-train.vw -f wine2.model --quiet
+vw -data wine-test.vw -i wine2.model -t -p predictions --quiet
+paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |\
+awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'
+alias skll=run_experiment
+skll
+NUM_RED="$(< wine-red-clean.csv wc -l)"
+csvstack -n type -g red,white \\
+wine-red-clean.csv \\
+<(< wine-white-clean.csv body shuf | head -n $NUM_RED) |\
+body shuf |\
+nl -s, -w1 -v0 |\
+sed '1s/0,/id,/' |\
+tee wine-balanced.csv | csvlook
+mkdir -p {train,test}
+HEADER="$(< wine-balanced.csv header)"
+< wine-balanced.csv header -d | shuf | split -d -n r/5 - wine-part-
+wc -l wine-part-*
+cat wine-part-00 | header -a $HEADER > test/features.csv && rm wine-part-00
+cat wine-part-* | header -a $HEADER > train/features.csv && rm wine-part-*
+wc -l t*/features.csv
+bat classify.cfg
+skll -l classify.cfg 2>/dev/null
+ls -1 output
+< output/wine_summary.tsv csvsql --query "SELECT learner_name, accuracy FROM stdin ORDER BY accuracy DESC" | csvlook -I
+jq -r '.[] | "\(.learner_name):\n\(.result_table)\n"' output/*.json

@@ -1,0 +1,73 @@
+cd /data/ch07
+l
+head -n 5 venture.csv
+head -n 3 venture.csv | nl
+< venture.csv trim 5
+less -S venture.csv
+< venture.csv head -n 1 | tr , '\n'
+csvcut -n venture.csv
+bat -A datatypes.csv
+csvlook datatypes.csv
+csvsql datatypes.csv
+csvsql venture.csv
+wc -l tips.csv
+< tips.csv csvcut -c day | header -d | sort | uniq | wc -l
+csvstat tips.csv --unique
+csvstat venture.csv --unique
+< venture.csv csvcut -C $(\
+  csvstat venture.csv --unique |\
+  grep ': 1$' |\
+  cut -d. -f 1 |\
+  tr -d ' ' |\
+  paste -sd,\
+) | trim
+csvstat venture.csv | trim 32
+csvstat venture.csv --freq | trim
+csvstat venture.csv -c 3,GEO
+csvstat venture.csv | tail -n 1
+xsv count venture.csv
+R --quiet
+< percent.csv trim 5
+rm percent.csv
+rush run -t 'mutate(df, percent = tip / bill * 100)' tips.csv > percent.csv
+< percent.csv trim 5
+rush run --help
+rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tips.csv
+< percent.csv rush run 'mean(df$percent)' -
+< percent.csv rush run 'max(df$size)' -
+< percent.csv rush run 'unique(df$time)' -
+< percent.csv rush run 'cor(df$bill, df$tip)' -
+< percent.csv rush run 'df$tip' - | trim
+rush plot --x bill --y tip --color size --facets '~day' tips.csv > tips.png
+display tips.png
+rush plot --x bill --y tip --color size --facets '~day' tips.csv
+bat $(which servewd)
+pkill -f http.server
+R -q -e '?ggplot2::qplot' | trim 14
+rush plot --help
+rush plot --x time tips.csv
+rush plot --x time tips.csv > plot-bar.png
+display plot-bar.png
+rush plot --x tip --fill time tips.csv
+rush plot --x tip --fill time tips.csv > plot-histogram.png
+display plot-histogram.png
+rush plot --x tip --fill time --geom density tips.csv
+rush plot --x tip --fill time --geom density tips.csv > plot-density.png
+display plot-density.png
+rush plot --x tip --y bill --color size --size day --geom path tips.csv
+rush plot --x tip --y bill --color size --size day --geom path tips.csv > plot-accident.png
+display plot-accident.png
+rush plot --x bill --y tip --color time tips.csv
+rush plot --x bill --y tip --color time tips.csv > plot-scatter.png
+display plot-scatter.png
+rush plot --x bill --y tip --color time --geom smooth tips.csv
+rush plot --x bill --y tip --color time --geom smooth tips.csv > plot-trend.png
+display plot-trend.png
+rush run --library ggplot2 'ggplot(df, aes(x = bill, y = tip, color = time)) + geom_point() + geom_smooth()' tips.csv > plot-trend-points.png
+display plot-trend-points.png
+rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv
+rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv > plot-boxplot.png
+display plot-boxplot.png
+rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv
+rush plot --x 'factor(size)' --y bill --geom violin --title 'Distribution of bill amount per party size' --xlab 'Party size' --ylab 'Bill (USD)' tips.csv > plot-labels.png
+display plot-labels.png
