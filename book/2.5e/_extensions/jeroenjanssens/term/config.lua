@@ -44,21 +44,33 @@ local SHELL_PRESETS = {
 
 -- Resolve a volume spec (host:container[:options]) the way `docker run -v`
 -- does: host paths starting with `.` are relative to cwd; absolute paths
--- (including Windows drive paths) and named volumes pass through unchanged
+-- (including Windows drive paths) and named volumes pass through unchanged.
+-- Relative paths are joined with the separator cwd uses, so a Windows cwd
+-- (C:\Users\doc) never yields a mixed path like C:\Users\doc/data
 function M.resolve_volume(spec, cwd)
   local host, rest = spec:match("^(%a:[\\/][^:]*)(:.*)$")
   if not host then
     host, rest = spec:match("^([^:]+)(:.*)$")
   end
-  if not host then
+  if not host or host:sub(1, 1) ~= "." then
     return spec
+  end
+  local sep = cwd:find("\\", 1, true) and "\\" or "/"
+  local function join(relative)
+    if sep == "\\" then
+      relative = relative:gsub("/", "\\")
+    end
+    if cwd:sub(-1) == sep then
+      return cwd .. relative
+    end
+    return cwd .. sep .. relative
   end
   if host == "." then
     host = cwd
   elseif host:match("^%.[\\/]") then
-    host = cwd .. "/" .. host:sub(3)
-  elseif host:sub(1, 1) == "." then
-    host = cwd .. "/" .. host
+    host = join(host:sub(3))
+  else
+    host = join(host)
   end
   return host .. rest
 end
@@ -81,6 +93,11 @@ function M.extract_config(meta)
   if not term_meta then
     return config
   end
+
+  -- Whether the user chose a shell command (shell, profile, or shell-args).
+  -- In Docker mode without one, the image's own ENTRYPOINT/CMD starts the shell.
+  local shell_explicit = term_meta["profile"] ~= nil or term_meta["shell"] ~= nil
+    or term_meta["shell-args"] ~= nil or term_meta["shell_args"] ~= nil
 
   if term_meta["profile"] then
     local profile_name = type(term_meta["profile"]) == "string"
@@ -212,6 +229,9 @@ function M.extract_config(meta)
         local resolved = resolve_init_path(entry)
         if resolved then
           table.insert(config.init, "source " .. resolved)
+          -- Host files are part of the cache key (see cache.lua)
+          config._init_files = config._init_files or {}
+          table.insert(config._init_files, resolved)
         else
           for line in entry:gmatch("[^\n]+") do
             local trimmed = line:match("^%s*(.-)%s*$")
@@ -224,6 +244,27 @@ function M.extract_config(meta)
     end
   end
   if term_meta["cache"] ~= nil then config._cache = meta_bool(term_meta["cache"]) end
+  -- Host files/directories whose contents are part of the cache key, e.g.
+  -- scripts in a mounted volume. Relative paths are relative to the
+  -- working directory, like volume paths.
+  local deps_val = term_meta["cache-depends"] or term_meta["cache_depends"]
+  if deps_val ~= nil then
+    local cwd = pandoc.system.get_working_directory()
+    local list = {}
+    if type(deps_val) == "table" and deps_val.t == nil and #deps_val > 0
+        and type(deps_val[1]) ~= "userdata" then
+      for i = 1, #deps_val do table.insert(list, meta_str(deps_val[i])) end
+    else
+      table.insert(list, meta_str(deps_val))
+    end
+    config._cache_depends = {}
+    for _, path in ipairs(list) do
+      if not path:match("^/") and not path:match("^%a:[\\/]") then
+        path = cwd .. "/" .. path:gsub("^%./", "")
+      end
+      table.insert(config._cache_depends, (path:gsub("/+$", "")))
+    end
+  end
   if term_meta["verbose"] ~= nil then config.verbose = meta_bool(term_meta["verbose"]) end
   if term_meta["strip-auto-indent"] ~= nil then config.strip_auto_indent = meta_bool(term_meta["strip-auto-indent"]) end
   if term_meta["spacing"] ~= nil then config.spacing = meta_bool(term_meta["spacing"]) end
@@ -245,6 +286,23 @@ function M.extract_config(meta)
   if term_meta["marker"] then
     config.marker = meta_str(term_meta["marker"])
   end
+
+  -- Defaults for the cell options callout-values / callout-format. Only used
+  -- in Lua (build_cell); term.lua removes them before the request is sent.
+  local cv_val = term_meta["callout-values"] or term_meta["callout_values"]
+  if cv_val ~= nil then
+    if type(cv_val) == "table" and cv_val.t == nil and #cv_val > 0
+        and type(cv_val[1]) ~= "userdata" then
+      config._callout_values = {}
+      for i = 1, #cv_val do
+        table.insert(config._callout_values, meta_str(cv_val[i]))
+      end
+    else
+      config._callout_values = meta_str(cv_val)
+    end
+  end
+  local cf_val = term_meta["callout-format"] or term_meta["callout_format"]
+  if cf_val ~= nil then config._callout_format = meta_str(cf_val) end
 
   local FORMAT_KEYS = { html = true, pdf = true, revealjs = true, epub = true, markdown = true, latex = true, typst = true }
 
@@ -386,6 +444,11 @@ function M.extract_config(meta)
       if docker_meta["memory"] then docker.memory = meta_str(docker_meta["memory"]) end
       if docker_meta["cpus"] then docker.cpus = meta_str(docker_meta["cpus"]) end
       if docker_meta["name"] then docker.name = meta_str(docker_meta["name"]) end
+      -- An empty value (`entrypoint:` or `entrypoint: ""`) clears the image's
+      -- entrypoint; Pandoc passes both as a present, empty value.
+      if docker_meta["entrypoint"] ~= nil then
+        docker.entrypoint = meta_str(docker_meta["entrypoint"]) or ""
+      end
       if docker_meta["ports"] then
         docker.ports = {}
         local ports_val = docker_meta["ports"]
@@ -427,6 +490,11 @@ function M.extract_config(meta)
       end
       if docker.image then
         config.docker = docker
+        if not shell_explicit then
+          -- Use the image's own shell (ENTRYPOINT/CMD) with its rc files
+          config.shell = nil
+          config.shell_args = {}
+        end
       end
     end
   end

@@ -1,5 +1,5 @@
 local FILTER_DIR = debug.getinfo(1, "S").source:sub(2):match("(.*[/\\])") or "./"
-local VERSION = "0.5.0"
+local VERSION = "0.7.0"
 
 local cell_mod = dofile(FILTER_DIR .. "cell.lua")
 local chrome = dofile(FILTER_DIR .. "chrome.lua")
@@ -130,9 +130,14 @@ function Pandoc(doc)
   local _marker = config.marker
   local _chrome = config._chrome
   local _cache = config._cache
+  local _cache_dependencies = {}
+  for _, path in ipairs(config._init_files or {}) do table.insert(_cache_dependencies, path) end
+  for _, path in ipairs(config._cache_depends or {}) do table.insert(_cache_dependencies, path) end
   config.marker = nil
   config._cache = nil
   config._chrome = nil
+  config._init_files = nil
+  config._cache_depends = nil
 
   local term_positions = {}
   local cells = {}
@@ -142,13 +147,29 @@ function Pandoc(doc)
   -- replaced in a second walk with the same order (see replace_term_blocks).
   local term_blocks = {}
   local replacements = {}
+  local knitr_processed = false
   doc:walk({
     CodeBlock = function(block)
       if is_term_block(block) then
         table.insert(term_blocks, block)
+        -- knitr turns ```{term} chunks into {.term .cell-code} blocks after
+        -- acting on (and removing) their cell options
+        for _, cls in ipairs(block.classes) do
+          if cls == "cell-code" then knitr_processed = true end
+        end
       end
     end,
   })
+  if knitr_processed then
+    local msg = "quarto-term: this document uses knitr, which consumed the ```{term} chunks "
+      .. "(their cell options are lost, and include: false chunks don't run). "
+      .. "Write ```{.term} instead; knitr leaves those alone."
+    if quarto and quarto.log and quarto.log.warning then
+      quarto.log.warning(msg)
+    else
+      io.stderr:write("[WARNING] " .. msg .. "\n")
+    end
+  end
 
   local function replace_term_blocks()
     local n = 0
@@ -208,6 +229,9 @@ function Pandoc(doc)
   end
 
   config._fmt_key = nil
+  -- Cell defaults, already applied by build_cell
+  config._callout_values = nil
+  config._callout_format = nil
 
   if #cells == 0 then
     if next(replacements) then
@@ -264,6 +288,24 @@ function Pandoc(doc)
     cells = cells,
   }
 
+  -- With pull: always and caching, pull before computing the cache key, so
+  -- a new image behind the same tag is a cache miss. The binary then only
+  -- needs to check that the image is present.
+  if _cache ~= false and config.docker and config.docker.pull == "always" then
+    local cmd = "docker pull -q"
+    if config.docker.platform then
+      cmd = cmd .. " --platform '" .. config.docker.platform:gsub("'", "") .. "'"
+    end
+    cmd = cmd .. " '" .. config.docker.image:gsub("'", "") .. "' >&2"
+    if config.verbose then
+      io.stderr:write("quarto-term: pulling image " .. config.docker.image .. "\n")
+    end
+    local ok = os.execute(cmd)
+    if ok == true or ok == 0 then
+      config.docker.pull = "missing"
+    end
+  end
+
   local input_json = pandoc.json.encode(request)
 
   local results = cache.run(input_json, {
@@ -271,6 +313,8 @@ function Pandoc(doc)
     engine = ENGINE,
     verbose = config.verbose,
     version = VERSION,
+    docker_image = config.docker and config.docker.image or nil,
+    dependencies = _cache_dependencies,
   })
   if not results then
     if next(replacements) then

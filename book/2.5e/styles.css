@@ -1,8 +1,0 @@
-/* Terminal output must show exactly what the terminal shows: no ligatures
-   (JetBrains Mono would e.g. join `==` and `->`). */
-pre.term-output,
-pre.term-screen,
-pre.term-source {
-  font-variant-ligatures: none;
-  font-feature-settings: "liga" 0, "calt" 0;
-}

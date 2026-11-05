@@ -212,6 +212,9 @@ function M.build_cell(block, cell_id, config)
   if cell_opts["timeout"] ~= nil then options.timeout = cell_opts["timeout"] end
   if cell_opts["hold"] ~= nil then options.hold = cell_opts["hold"] end
   if cell_opts["callout"] ~= nil then options.callout = as_list(cell_opts["callout"]) end
+  -- Cell > document > project; without any, the binary's defaults apply
+  options.callout_values = config._callout_values
+  options.callout_format = config._callout_format
   if cell_opts["callout-values"] ~= nil then options.callout_values = cell_opts["callout-values"] end
   if cell_opts["callout-format"] ~= nil then options.callout_format = cell_opts["callout-format"] end
   if cell_opts["remove"] ~= nil then options.remove = as_list(cell_opts["remove"]) end
