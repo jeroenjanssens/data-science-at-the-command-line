@@ -204,9 +204,6 @@ def parse_header(header: str):
 # quarto-term cell options
 # --------------------------------------------------------------------------
 
-CALLOUT_VALUES = "➊➋➌➍➎➏➐➑➒"
-
-
 def spec(v) -> str:
     """Format a line spec (int or regex) for a quarto-term list option."""
     if isinstance(v, bool):
@@ -318,9 +315,8 @@ def convert_console(label, options, code_lines, lines_after):
                 cell.append("#| include: false")
         elif key == "callouts":
             v = r_value(value)
+            # callout-values / callout-format are set in _quarto.yml
             cell.append(f"#| callout: {spec_list(v)}")
-            cell.append(f'#| callout-values: "{CALLOUT_VALUES}"')
-            cell.append('#| callout-format: "{}"')
             if "remove" in options:
                 warn(
                     f"chunk {label!r} uses both callouts and remove; knitractive "

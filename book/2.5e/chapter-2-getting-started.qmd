@@ -190,8 +190,6 @@ The command-line tool `cd`, which is a Z shell builtin, allows you to navigate t
 
 ```{term}
 #| callout: [1, 3, 6, 8, 11]
-#| callout-values: "➊➋➌➍➎➏➐➑➒"
-#| callout-format: "{}"
 cd /data/ch02
 pwd
 cd ..
@@ -368,8 +366,6 @@ And if we wanted to know *how many* chapters the book has, we can use `wc`, whic
 ```{term}
 #| label: seq_grep_wc
 #| callout: ["wc"]
-#| callout-values: "➊➋➌➍➎➏➐➑➒"
-#| callout-format: "{}"
 curl -s "https://www.gutenberg.org/files/11/11-0.txt" |
 grep " CHAPTER" |
 wc -l
@@ -416,8 +412,6 @@ To use the contents of the file *greeting.txt* again, we can use `cat`, which re
 
 ```{term}
 #| callout: ["wc"]
-#| callout-values: "➊➋➌➍➎➏➐➑➒"
-#| callout-format: "{}"
 cat greeting.txt
 cat greeting.txt | wc -w
 ```
@@ -457,8 +451,6 @@ You can redirect standard error to */dev/null* as follows:
 
 ```{term}
 #| callout: [1]
-#| callout-values: "➊➋➌➍➎➏➐➑➒"
-#| callout-format: "{}"
 cat movies.txt 404.txt 2> /dev/null
 ```
 

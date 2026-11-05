@@ -53,28 +53,30 @@ format:
     # bookdown turned bare URLs into links; keep doing that
     from: markdown+autolink_bare_uris
     include-in-header: favicon.html
-    css: styles.css
     code-copy: true
 
 extensions:
   term:
-    shell: zsh
-    shell-args: []
+    # No shell: the image's own zsh (its ENTRYPOINT) starts with its .zshrc
     prompt: "$"
     timeout: 30
     spacing: true
+    callout-values: "➊➋➌➍➎➏➐➑➒"
+    callout-format: "{}"
+    # Scripts mounted at /book and sourced by init are part of the cache key
+    cache-depends:
+      - container
     style:
       cols: 80
       rows: 16
     docker:
       image: datasciencetoolbox/dsatcl2e:latest
-      pull: missing
+      # Pulled before the cache key is computed, so a new image re-runs pages
+      pull: always
       volumes:
         - ./images:/images
         - ./history:/history
         - ./data:/data.bak
         - ./container:/book:ro
-      # The image's ENTRYPOINT is zsh; quarto-term supplies its own command.
-      args: ["--entrypoint="]
     init:
       - "source /book/setup.zsh"
