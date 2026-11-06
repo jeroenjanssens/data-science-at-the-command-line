@@ -417,6 +417,13 @@ Summary:
 | 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` in HTML output; then drop the book workaround |
 | 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) |
 
+**Status (2026-11-06):** issues 1 and 2 are fixed:
+- rush `4945ac0` adds `geom_auto()` and shows errors;
+- miniansi `d0cb296` (0.1.3) adds the polygon guard;
+- the datasciencetoolbox branch `terminal-plot-fixes` (`858e898`) pins these and the jeroenjanssens forks of devout/devoutansi, with smoke tests.
+
+A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both plots. Not published yet; the book still uses `:latest`.
+
 ### 1. Bar chart fails: `rush plot --x time tips.csv`
 
 **Where:** ch07, section "Creating Bar Charts". The terminal plot (`plot_bar_ansi`) shows only the command, and `rush plot --x time tips.csv > plot-bar.png` writes an empty file, so Figure 7.4 (`images/plot-bar.png`) is broken. `compare/differences.yml`: `chapter-7-exploring-data.html:block:35`, `…:image:images/plot-bar.png`.
