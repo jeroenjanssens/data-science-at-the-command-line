@@ -393,15 +393,204 @@ What it took, besides the converter rules for the remaining knitr/knitractive co
 - **Fixes to 2e's own harness**: the csvlook box-drawing `sed` turned negative numbers into box characters; fake-output `echo` chains ending in `&&` never ran in 2e.
 - **R sessions** (chapters 7 and 10): page-level `prompt-regex` that also accepts R's `>`.
 
-Open issues:
 
-- **datasciencetoolbox / rush**
-  - `rush plot --x time tips.csv` fails silently (rush 0.2.1 uses `geom_histogram()` for a discrete x; the old qplot picked a bar chart): ch07 bar chart and `images/plot-bar.png` are empty.
-  - The terminal box plot (`rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv`) exits with status 250 (devoutansi); the PNG works.
-  - Terminal plots (devoutansi) have no legend and a white canvas.
-  - `mgcv` isn't installed, so `geom_smooth()` on > 1000 rows silently fits straight lines (ch09 `wine-alcohol-vs-quality.png`).
-  - `trim` measures line length in bytes (mawk); `MANWIDTH=79` avoids it for man pages.
-- **quarto-term**
-  - Each PTY read is decoded separately (`String::from_utf8_lossy` in `process_bytes`), so a multibyte character split between reads becomes `��` and the line wraps (seen in `bat` borders, ch03 and ch05; it varies between renders).
-  - `{{<` in HTML output (e.g. a coloured `{{2` in the Jupyter transcript) is read by Quarto as a shortcode and swallows the rest of the page; worked around in `data/.cache/jupyter-console`.
-- **Content** (book-changes-plan §C–E): rush prose in ch07, skll output file names in ch09 (`wine_` instead of `wine_features_`), versions in `tools.yml`, the welcome page's Data Science Workshops paragraph.
+The open issues are described in §12.
+
+## 12. Open issues in detail
+
+Where a fix can go:
+
+- **book** (`book/2.5e`): the `.qmd` sources (via `bin/rmd2qmd.py`), `_quarto.yml`, `container/` (session setup), `data/`.
+- **image** (`datasciencetoolbox` repo): the Dockerfile, and the projects it installs — **rush**, **miniansi**/devoutansi, and **dsutils** (all yours except devoutansi).
+- **quarto-term**.
+
+Summary:
+
+| # | Issue | Fix in | Recommendation |
+|---|---|---|---|
+| 1 | Bar chart: `rush plot --x time` fails, no output | rush | Pick `geom_bar()` for a discrete x; show errors |
+| 2 | Terminal box plot crashes | miniansi | Skip polygons without edges |
+| 3 | Terminal plots: no legend, white canvas | rush / devoutansi | Investigate; accept for now |
+| 4 | `geom_smooth()` silently fits straight lines | image | Install `mgcv` |
+| 5 | `trim` cuts multibyte characters | dsutils (image) | Count characters, not bytes |
+| 6 | Multibyte characters garbled in terminal output | quarto-term | Keep incomplete UTF-8 sequences between reads |
+| 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` in HTML output; then drop the book workaround |
+| 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) |
+
+### 1. Bar chart fails: `rush plot --x time tips.csv`
+
+**Where:** ch07, section "Creating Bar Charts". The terminal plot (`plot_bar_ansi`) shows only the command, and `rush plot --x time tips.csv > plot-bar.png` writes an empty file, so Figure 7.4 (`images/plot-bar.png`) is broken. `compare/differences.yml`: `chapter-7-exploring-data.html:block:35`, `…:image:images/plot-bar.png`.
+
+**Example:**
+
+```console
+$ rush plot --x time tips.csv > plot-bar.png; echo $?
+1
+$ ls -l plot-bar.png
+-rw-r--r-- 1 dst dst 0 … plot-bar.png
+```
+
+The generated script (`rush plot -n --x time tips.csv`) ends with `ggplot(df, aes(x = time)) + geom_histogram()`. Running it shows the error that `rush` itself doesn't print:
+
+```
+Error in `geom_histogram()`:
+! `stat_bin()` requires a continuous x aesthetic.
+✖ the x aesthetic is discrete.
+```
+
+**Cause:** rush 0.2.1 (`R/rush.R:181`): `geom <- if (!is.null(flags$y)) "point" else "histogram"`. The old rush used `qplot()`, which picks a bar chart for a discrete x. Also, rush exits 1 without printing the R error, so the failure is silent.
+
+**Possible fixes:**
+
+- (a) **rush**: when `--geom` is `auto` and only `--x` is given, choose by the column type: `geom_bar()` for character/factor/logical, `geom_histogram()` for numbers. rush reads the data before plotting, so it can check `df[[x]]`. For `-n` (no data), keep `geom_histogram()`, or emit a small helper that decides at run time.
+- (b) **rush**: always print the R error to stderr.
+- (c) **book**: write `rush plot --x time --geom bar tips.csv`. That changes the text and the lesson ("rush picks a sensible geom").
+
+**Recommendation:** (a) + (b) in rush. Release a new rush, bump `RUSH_COMMIT` in the datasciencetoolbox Dockerfile, rebuild, and re-render (cache invalidates by image id). Keep the book text as is.
+
+### 2. Terminal box plot crashes: `rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv`
+
+**Where:** ch07, "Creating Box Plots" (`plot_boxplot_ansi`): only the command is shown. The PNG version (Figure 7.11) works. `differences.yml`: `chapter-7-exploring-data.html:block:48`.
+
+**Example:** the R process aborts with status 134; rush reports 250, and nothing is printed:
+
+```
+Error in min(all_edges$ymin):max(all_edges$ymax) :
+  result would be too long a vector
+Calls: <Anonymous> ... func -> ansi_polygon -> <Anonymous> -> fill_polygon
+In addition: Warning messages:
+1: In min(all_edges$ymin) : no non-missing arguments to min; returning Inf
+terminate called after throwing an instance of 'Rcpp::LongjumpException'
+```
+
+**Cause:** the box plot draws a polygon without (non-horizontal) edges, probably a box with zero height for a group with one value. In that case miniansi 0.1.1's `fill_polygon` computes `Inf:-Inf`. Because the error happens inside a graphics-device callback (devoutansi 0.1.0, Rcpp), R can't recover and aborts.
+
+**Possible fixes:**
+
+- (a) **miniansi** (`jeroenjanssens/miniansi`): return early in `fill_polygon` when there are no edges (or `ymin`/`ymax` aren't finite).
+- (b) **devoutansi**: catch errors in `ansi_polygon`. That's upstream (coolbutuseless) and slower to change.
+- (c) **book**: drop the terminal box plot. That loses the "textual vs visual" comparison the text makes.
+
+**Recommendation:** (a). Add a test with a degenerate polygon, bump `MINIANSI_COMMIT` in the Dockerfile, and also fix (b) of issue 1 so such failures are visible.
+
+### 3. Terminal plots have no legend and a white canvas
+
+**Where:** all terminal plots in ch07 (e.g. `rush plot --x tip --fill time tips.csv`, "Creating Histograms"). Points and bars are drawn as coloured blocks (fine), but:
+- the legend ("time: Dinner, Lunch") is missing;
+- the plot area is white instead of the terminal background;
+- the y-axis label is printed vertically letter by letter (`c`/`o`/`u`/`n`/`t`).
+
+2e showed character plots with a legend on the right. Accepted for now in `differences.yml` (`…:block:26`–`50`).
+
+**Cause:** not investigated yet. Candidates:
+- devoutansi doesn't draw the legend's text and keys at this size, or rush's canvas size leaves no room;
+- the white canvas is ggplot's background, which devoutansi paints, where the old rush "ansi" device skipped it.
+
+**Possible fixes:**
+
+- (a) **rush**: for terminal output, set a theme without plot/panel background, and check the legend placement and size (e.g. `legend.position = "right"` with a minimum width).
+- (b) **miniansi/devoutansi**: render text/legend keys, and treat white as "default background".
+
+**Recommendation:** look at (a) first, since it's in your own code and cheap to try. It isn't blocking: the plots are readable, the PNG versions are the real figures, and the text says the terminal versions are rough.
+
+### 4. `geom_smooth()` fits straight lines: `mgcv` is missing
+
+**Where:** ch09, Figure 9.2, `images/wine-alcohol-vs-quality.png` (`rush plot --x alcohol --y quality --color type --geom smooth wine.csv > …`). In 2e the curves bend; now they're straight lines. `differences.yml`: `chapter-9-modeling-data.html:image:images/wine-alcohol-vs-quality.png`.
+
+**Example:**
+
+```console
+$ Rscript -e 'requireNamespace("mgcv")'
+Loading required namespace: mgcv
+Failed with error:  'there is no package called 'mgcv''
+```
+
+**Cause:** for more than 1,000 rows, `geom_smooth()` uses `method = "gam"`, which needs `mgcv`. ggplot2 4.0.3 falls back to a linear fit without saying so. `mgcv` is a "recommended" R package. Ubuntu's `r-base-core` doesn't include it, and the image doesn't install `r-recommended`.
+
+**Possible fixes:**
+
+- (a) **image**: add `mgcv` to the `install.packages(...)` list in the Dockerfile (P3M binary, same snapshot), or install `r-cran-mgcv`.
+- (b) **image**: install `r-recommended`, which brings all recommended packages (also `MASS`, `lattice`, `Matrix`, …, which more R code assumes).
+- (c) **book**: `--geom smooth` with `method = "loess"`. That changes the command.
+
+**Recommendation:** (a), plus a smoke test (`Rscript -e 'library(mgcv)'`). (b) is reasonable too if size doesn't matter much.
+
+### 5. `trim` cuts multibyte characters: `man zshbuiltins | trim`
+
+**Where:** ch02 (`man zshbuiltins | trim`, `man tar | trim 20`), and anywhere `trim` shortens lines with non-ASCII characters (`‐`, `─`, `…`). Currently hidden for man pages by `MANWIDTH=79` in `container/setup.zsh`.
+
+**Example** (without `MANWIDTH`), a line of exactly 80 characters containing the hyphen `‐` (3 bytes):
+
+```
+       Some  shell builtin commands take options as described in individual en�…
+```
+
+**Cause:** `trim` (dsutils) uses `awk`'s `length($0)` and `substr()`. The image's awk is mawk 1.3.4, which counts bytes, so a line with multibyte characters looks longer than the terminal and is cut in the middle of a character. The old image had the same mawk, but man pages were narrower, so lines didn't reach the limit.
+
+**Possible fixes:**
+
+- (a) **dsutils** (`trim`): don't rely on awk for widths. For example, use `cut -c` (uutils `cut -c` counts characters) or a small Python/Perl one-liner.
+- (b) **image**: install gawk and use it in `trim`. Don't make gawk the system `awk`, because the tools appendix shows `awk`'s version (mawk) and the book uses mawk.
+- (c) **book**: keep `MANWIDTH=79` (works around it for man pages only).
+
+**Recommendation:** (a) in dsutils, then bump the dsutils commit in the image. Keep `MANWIDTH=79` regardless, because it reproduces the 2e man page layout.
+
+### 6. quarto-term garbles multibyte characters split between reads
+
+**Where:** box-drawing output, e.g. `bat -A tmnt-basic.csv` (ch03) and `bat fb.cnt` (ch05). Which lines are affected varies between renders. `differences.yml`: `chapter-3-obtaining-data.html:block:18`, `chapter-5-scrubbing-data.html:block:2` (decision `fix-quarto-term`).
+
+**Example:** the bottom border of `bat`:
+
+```
+-───────┴────────────────────────────────────────────────────────────────────────
++───────┴──────────────────────────────────────────────��────────────────────────
++─
+```
+
+**Cause:** `src/session.rs`, `process_bytes()`: `let text = String::from_utf8_lossy(bytes); self.vt.feed_str(&text);`. The PTY reader thread delivers chunks of up to 4,096 bytes. When a 3-byte character like `─` is split across two chunks, each half becomes `�`. So one character becomes two, the line gets one column longer, and the terminal wraps it (the extra `─` line).
+
+**Possible fixes:**
+
+- (a) **quarto-term**: keep the incomplete UTF-8 sequence at the end of a chunk (at most 3 bytes) in a buffer, and prepend it to the next chunk before decoding (`std::str::from_utf8` → `Utf8Error::valid_up_to()` / `error_len()`). Add a unit test that feeds `─` in two parts.
+- (b) **book**: none that's reliable. Smaller output makes splits less likely, but they're not prevented.
+
+**Recommendation:** (a). It's a small change in one function, with a clear test, and a patch release. It affects every quarto-term user with non-ASCII output, not just this book.
+
+### 7. `{{<` in terminal output breaks the rest of the page
+
+**Where:** ch10, the Jupyter console transcript (`cat /data/.cache/jupyter-console`). The line `! rm -v alice{{2,3}}.txt`, with a coloured `2`, makes quarto-term emit `alice{{<span style="…">2</span>…`. Quarto reads `{{<` as the start of a shortcode, even in raw HTML, so the transcript was cut off at `! rm -v alice` and the rest of the chapter (prose, a figure, a callout, two more terminal cells) ended up inside it.
+
+**Workaround** (in place, book): `data/.cache/jupyter-console` was edited so that `2` isn't coloured (`{{\x1b[0;38;5;28m2` → `{{2`), so no `<` follows `{{`. Only the colour of one character differs from 2e.
+
+**Cause:** quarto-term outputs raw HTML (or LaTeX/Typst) blocks, and Quarto's shortcode processing runs over them. Any terminal output with `{{<`, or `{{` followed by a coloured span, will break a page. That includes Go templates, Hugo, Jinja, and Quarto itself.
+
+**Possible fixes:**
+
+- (a) **quarto-term**: in the HTML renderer, escape `{` as `&#123;` (the browser shows the same character; Quarto doesn't see `{{<`). Do the same for the other raw formats where Quarto would scan them (Markdown output: `\{`).
+- (b) **book**: keep the workaround (fragile; only covers this one case).
+
+**Recommendation:** (a) in quarto-term, with an e2e test that renders `echo '{{< hello >}}'` through Quarto (`tests/quarto`). Then restore the original transcript in the book.
+
+### 8. Prose and versions no longer match the image
+
+**Where and what** (details in `datasciencetoolbox/book-changes-plan.md` §C–E):
+
+- **ch07:**
+  - "Under the hood, `rush plot` uses the function `qplot`" (line 536): no longer true; the `R -q -e '?ggplot2::qplot'` output now says `qplot()` is deprecated.
+  - The "rush generates an R script" passage: the script now starts with `#!/usr/bin/env -S ir run` and a `#| packages:` header.
+- **ch09:** skll writes `wine_*` instead of `wine_features_*` files; the prose doesn't name them, so only the shown output changed.
+- **Preface / ch02:** the note about the Docker image (versions differ from the printed book; the `:20210628` tag for the exact 2e environment); "Ubuntu" mentions.
+- **`tools.yml` / tools appendix:** versions, authors, and URLs of the tools (coreutils is uutils, tldr is tealdeer, …), and the description of `display`.
+- **Welcome page:** the "Want to learn from Jeroen in person? … Data Science Workshops" paragraph.
+
+**Fix in:** book (via the converter's `EDITS` or directly in the `.qmd` files once the converter is retired), plus `tools.yml` → `bin/appendix.py`.
+
+**Recommendation:** do this as a separate content pass after issues 1–7, so the comparison stays about rendering. Then retire the converter (edit the `.qmd` files directly from that point on).
+
+### Accepted differences that could still be improved (low priority)
+
+- **Repeated citations:** they're full instead of the short Chicago form. bookdown rendered the book as one document; Quarto renders chapters separately. Arguably better on the web.
+- **Callout markers in ch07/ch08:** they come right after the code instead of being aligned like 2e. quarto-term's `trailing-spaces` keeps the whole terminal row; a quarto-term option to place markers at a fixed column would restore the alignment.
+- **Spark transcript (ch10):** markers sit after the spaces Spark uses to clear its progress bar; quarto-term could trim trailing spaces even when they carry colour attributes.
+- **R function links in inline code (rdrr.io):** bookdown/downlit added them; Quarto doesn't for pages without R code.
+- **`curl -sI https://youtu.be/…` (ch03):** shows `HTTP/1.1` instead of `HTTP/2`, because the cache server speaks HTTP/1.1.
