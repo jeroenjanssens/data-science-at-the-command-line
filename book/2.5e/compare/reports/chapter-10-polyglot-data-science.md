@@ -1,11 +1,11 @@
 # chapter-10-polyglot-data-science.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47694336e393d72d1811e440455d6`
+Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
 
 ## Code block 0: `$ cd /data/ch10`
 
 - id: `chapter-10-polyglot-data-science.html:block:0`
-- hash: `0edfad75`
+- hash: `74d7b92b`
 - status: **accept**
 - cause: uutils
 - note: Timestamps, ls sort order, no __pycache__ in data
@@ -23,10 +23,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 --rw-r--r-- 1 dst dst  460 Dec 14 12:03 count.R
 --rw-r--r-- 1 dst dst 1.7K Dec 14 12:03 Untitled1337.ipynb
 +total 176K
-+-rw-r--r-- 1 dst dst 1.7K Nov  5 22:36 Untitled1337.ipynb
-+-rw-r--r-- 1 dst dst 164K Nov  5 22:36 alice.txt
-+-rw-r--r-- 1 dst dst  460 Nov  5 22:36 count.R
-+-rwxr-xr-x 1 dst dst  408 Nov  5 22:36 count.py*
++-rw-r--r-- 1 dst dst 1.7K Nov  7 09:30 Untitled1337.ipynb
++-rw-r--r-- 1 dst dst 164K Nov  7 09:30 alice.txt
++-rw-r--r-- 1 dst dst  460 Nov  7 09:30 count.R
++-rwxr-xr-x 1 dst dst  408 Nov  7 09:30 count.py*
 ```
 
 ## Code block 4: `$ R --quiet`

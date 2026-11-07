@@ -1,11 +1,11 @@
 # chapter-1-introduction.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47694336e393d72d1811e440455d6`
+Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
 
 ## Code block 0: `$ whoami`
 
 - id: `chapter-1-introduction.html:block:0`
-- hash: `9beececc`
+- hash: `896e9d79`
 - status: **accept**
 - cause: time
 - note: date prints the render date; container runs in UTC (decision 8). keep-last-prompt: 2e had an extra empty line before the final prompt
@@ -17,7 +17,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
  
  $ date
 -Tue Dec 14 11:43:30 AM CET 2021
-+Thu Nov  5 10:32:22 PM UTC 2026
++Sat Nov  7 09:26:39 AM UTC 2026
  
  $ echo 'The command line is awesome!' | cowsay -f tux
 @@ -19,4 +19,3 @@

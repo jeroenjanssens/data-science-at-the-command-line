@@ -316,10 +316,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 20K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  5 22:41 emails.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  5 22:41 movies.txt</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  5 22:41 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  5 22:41 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  7 09:29 emails.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  7 09:29 movies.txt</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  7 09:29 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  7 09:29 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -467,19 +467,19 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">[3] 175</span>
 <span class="term-output">[4] 176</span>
 <span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 05 22:41:20 Starting job A
-<span class="term-output">Nov 05 22:41:20 Starting job B</span>
-<span class="term-output">Nov 05 22:41:20 Starting job C</span>
-<span class="term-output">Nov 05 22:41:22 Job B took 2 seconds</span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 07 09:29:28Nov 07 09:29:28Nov 07 09:29:28 Starting job B
+<span class="term-output"> Starting job A</span>
+<span class="term-output"> Starting job C</span>
+<span class="term-output">Nov 07 09:29:32 Job C took 4 seconds</span>
 <span class="term-output"></span>
-<span class="term-output">[3]  - done       ./slow.sh $i</span>
+<span class="term-output">[4]  + done       ./slow.sh $i</span>
 <span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 05 22:41:23 Job A took 3 seconds
-<span class="term-output">Nov 05 22:41:23 Job C took 3 seconds</span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 07 09:29:33 Job A took 5 seconds
+<span class="term-output">Nov 07 09:29:33 Job B took 5 seconds</span>
 <span class="term-output"></span>
 <span class="term-output">[2]  - done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span>
-<span class="term-output">[4]  + done       ./slow.sh $i</span>
+<span class="term-output">[3]  + done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span></code></pre>
 
 <ol type="1">
@@ -554,12 +554,12 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 </div>
 <p>As you can see it basically acts as a for loop. Here’s another teaser, which replaces the for loop from the previous section.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --jobs 2 <span style="text-decoration:underline">./slow.sh</span> ::: {A..C}
-<span class="term-output">Nov 05 22:41:28 Starting job B</span>
-<span class="term-output">Nov 05 22:41:29 Job B took 1 seconds</span>
-<span class="term-output">Nov 05 22:41:28 Starting job A</span>
-<span class="term-output">Nov 05 22:41:31 Job A took 3 seconds</span>
-<span class="term-output">Nov 05 22:41:29 Starting job C</span>
-<span class="term-output">Nov 05 22:41:34 Job C took 5 seconds</span></code></pre>
+<span class="term-output">Nov 07 09:29:36 Starting job A</span>
+<span class="term-output">Nov 07 09:29:38 Job A took 2 seconds</span>
+<span class="term-output">Nov 07 09:29:36 Starting job B</span>
+<span class="term-output">Nov 07 09:29:41 Job B took 5 seconds</span>
+<span class="term-output">Nov 07 09:29:38 Starting job C</span>
+<span class="term-output">Nov 07 09:29:41 Job C took 3 seconds</span></code></pre>
 
 <p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
 <p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality. (Perhaps too much.) Luckily you only need to know a handful in order to be effective. The manual page is quite informative in case you need to use a less common option.</p>
@@ -909,16 +909,16 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 
 <p>You now have 10 files containing compressed JSON data:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> nyc<span style="color:var(--term-4)">*</span>json.gz
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  5 22:41 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  7 09:29 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
 
 <p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file. Using <code>zcat</code><span class="citation" data-cites="zcat"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, you directly print the contents of a compress file:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">trim</span>

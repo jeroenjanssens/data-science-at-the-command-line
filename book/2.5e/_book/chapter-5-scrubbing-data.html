@@ -309,13 +309,13 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 200K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  5 22:33 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  5 22:33 iris.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  5 22:33 irismeta.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  5 22:33 names-comma.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  5 22:33 names.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  5 22:33 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  5 22:33 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  7 09:27 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  7 09:27 iris.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  7 09:27 irismeta.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  7 09:27 names-comma.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  7 09:27 names.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  7 09:27 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  7 09:27 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 <p>Before I dive into the actual transformations, I’d like to demonstrate their ubiquity when working at the command line.</p>
@@ -354,8 +354,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">   1   │ <span style="color:var(--term-6)">·····</span>27<span style="color:var(--term-6)">·</span>fizz<span style="color:var(--term-5)">␊</span></span>
 <span class="term-output">   2   │ <span style="color:var(--term-6)">·····</span>14<span style="color:var(--term-6)">·</span>buzz<span style="color:var(--term-5)">␊</span></span>
 <span class="term-output">   3   │ <span style="color:var(--term-6)">······</span>6<span style="color:var(--term-6)">·</span>fizzbuzz<span style="color:var(--term-5)">␊</span></span>
-<span class="term-output">───────┴───────────────────────────────────────────────────────────���──────────</span>
-<span class="term-output">──</span></code></pre>
+<span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <ol type="1">
 <li>This regular expression also matches <em>fizzbuzz</em>.</li>
@@ -597,24 +596,29 @@ Note
 <p>When you’re in the process of formulating your data pipeline and you have a lot of data, then debugging your pipeline can be cumbersome. In that case, generating a smaller sample from the data might be useful. This is where <code>sample</code><span class="citation" data-cites="sample"><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></span> comes in handy. The main purpose of <code>sample</code> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
 
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1%
-<span class="term-output">Line 24</span>
-<span class="term-output">Line 288</span>
-<span class="term-output">Line 403</span>
-<span class="term-output">Line 410</span>
-<span class="term-output">Line 499</span>
-<span class="term-output">Line 508</span>
-<span class="term-output">Line 643</span>
-<span class="term-output">Line 690</span></code></pre>
+<span class="term-output">Line 44</span>
+<span class="term-output">Line 87</span>
+<span class="term-output">Line 203</span>
+<span class="term-output">Line 217</span>
+<span class="term-output">Line 233</span>
+<span class="term-output">Line 380</span>
+<span class="term-output">Line 388</span>
+<span class="term-output">Line 531</span>
+<span class="term-output">Line 568</span>
+<span class="term-output">Line 574</span>
+<span class="term-output">Line 687</span>
+<span class="term-output">Line 816</span>
+<span class="term-output">Line 994</span></code></pre>
 
 <p>Here, every input line has a one percent chance of being printed. This percentage can also be specified as a fraction (namely <code>1/100</code>) or as a probability (namely <code>0.01</code>).</p>
 <p><code>sample</code> has two other purposes, which can be useful when you’re debugging your pipeline. First, it’s possible to add some delay to the output. This comes in handy when the input is a constant stream (for example, the Wikipedia stream we saw in <a href="./chapter-3-obtaining-data.html">Chapter 3</a>), and the data comes in too fast to see what’s going on. Secondly, you can put a timer on <code>sample</code>, so that you don’t have to kill the ongoing process manually. For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1% -d 1000 -s 5 | <span style="color:var(--term-2)">ts</span> <span class="term-callout">➊</span>
-<span class="term-output">Nov 05 22:33:21 Line 96</span>
-<span class="term-output">Nov 05 22:33:22 Line 224</span>
-<span class="term-output">Nov 05 22:33:23 Line 333</span>
-<span class="term-output">Nov 05 22:33:24 Line 400</span>
-<span class="term-output">Nov 05 22:33:25 Line 545</span>
-<span class="term-output">Nov 05 22:33:26 Line 547</span></code></pre>
+<span class="term-output">Nov 07 09:27:50 Line 18</span>
+<span class="term-output">Nov 07 09:27:51 Line 101</span>
+<span class="term-output">Nov 07 09:27:52 Line 236</span>
+<span class="term-output">Nov 07 09:27:53 Line 275</span>
+<span class="term-output">Nov 07 09:27:54 Line 617</span>
+<span class="term-output">Nov 07 09:27:55 Line 635</span></code></pre>
 
 <ol type="1">
 <li>The tool <code>ts</code><span class="citation" data-cites="ts"><a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></span> adds a timestamp in front of each line.</li>

@@ -422,7 +422,11 @@ Summary:
 - miniansi `d0cb296` (0.1.3) adds the polygon guard;
 - the datasciencetoolbox branch `terminal-plot-fixes` (`858e898`) pins these and the jeroenjanssens forks of devout/devoutansi, with smoke tests.
 
-A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both plots. Not published yet; the book still uses `:latest`.
+A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both plots.
+
+**Status (2026-11-07):** published. datasciencetoolbox#24 (rush `5e75a1d`, the forks, and mgcv/duckdb/RSQLite; 175 smoke tests) is merged, and `:latest` (`sha256:4700058904…`) has it. The whole book was re-rendered with it:
+- the bar chart (block 35, Figure 7.4), the terminal box plot (block 48), and Figure 9.2's GAM smoothers are back;
+- every difference is reviewed; only issue 6 remains open (`fix-quarto-term`). It's intermittent: this render hit ch03 blocks 18 and 19, not ch05 block 2.
 
 ### 1. Bar chart fails: `rush plot --x time tips.csv`
 

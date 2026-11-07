@@ -1,11 +1,11 @@
 # chapter-5-scrubbing-data.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47694336e393d72d1811e440455d6`
+Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
 
 ## Code block 0: `$ cd /data/ch05`
 
 - id: `chapter-5-scrubbing-data.html:block:0`
-- hash: `68407095`
+- hash: `74031b08`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -23,38 +23,19 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 --rw-r--r-- 1 dst dst  129 Dec 14 11:47 names.csv
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:47 tips.csv
 --rw-r--r-- 1 dst dst 5.1K Dec 14 11:47 users.json
-+-rw-r--r-- 1 dst dst 164K Nov  5 22:33 alice.txt
-+-rw-r--r-- 1 dst dst 4.5K Nov  5 22:33 iris.csv
-+-rw-r--r-- 1 dst dst  179 Nov  5 22:33 irismeta.csv
-+-rw-r--r-- 1 dst dst  160 Nov  5 22:33 names-comma.csv
-+-rw-r--r-- 1 dst dst  129 Nov  5 22:33 names.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  5 22:33 tips.csv
-+-rw-r--r-- 1 dst dst 5.1K Nov  5 22:33 users.json
-```
-
-## Code block 2: `$ grep -E "fizz|buzz" fb.seq | ➊`
-
-- id: `chapter-5-scrubbing-data.html:block:2`
-- hash: `f5723c41`
-- status: **fix-quarto-term**
-- cause: quarto-term
-- note: quarto-term decodes each PTY read separately, so a multibyte character split between reads becomes two replacement characters and the line wraps
-
-```diff
---- 2e
-+++ 2.5e
-@@ -9,3 +9,4 @@
-    2   │ ·····14·buzz␊
-    3   │ ······6·fizzbuzz␊
--───────┴────────────────────────────────────────────────────────────────────────
-+───────┴───────────────────────────────────────────────────────────���──────────
-+──
++-rw-r--r-- 1 dst dst 164K Nov  7 09:27 alice.txt
++-rw-r--r-- 1 dst dst 4.5K Nov  7 09:27 iris.csv
++-rw-r--r-- 1 dst dst  179 Nov  7 09:27 irismeta.csv
++-rw-r--r-- 1 dst dst  160 Nov  7 09:27 names-comma.csv
++-rw-r--r-- 1 dst dst  129 Nov  7 09:27 names.csv
++-rw-r--r-- 1 dst dst 7.8K Nov  7 09:27 tips.csv
++-rw-r--r-- 1 dst dst 5.1K Nov  7 09:27 users.json
 ```
 
 ## Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`
 
 - id: `chapter-5-scrubbing-data.html:block:17`
-- hash: `1ef616a3`
+- hash: `98fc5078`
 - status: **accept**
 - cause: random
 - note: sample draws other lines
@@ -62,7 +43,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,8 +1,9 @@
+@@ -1,8 +1,14 @@
  $ seq -f "Line %g" 1000 | sample -r 1%
 -Line 45
 -Line 223
@@ -71,20 +52,25 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -Line 438
 -Line 807
 -Line 813
-+Line 24
-+Line 288
-+Line 403
-+Line 410
-+Line 499
-+Line 508
-+Line 643
-+Line 690
++Line 44
++Line 87
++Line 203
++Line 217
++Line 233
++Line 380
++Line 388
++Line 531
++Line 568
++Line 574
++Line 687
++Line 816
++Line 994
 ```
 
 ## Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`
 
 - id: `chapter-5-scrubbing-data.html:block:18`
-- hash: `3f5eb8ff`
+- hash: `ff255bd8`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -100,12 +86,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -Dec 14 11:48:13 Line 250
 -Dec 14 11:48:14 Line 785
 -Dec 14 11:48:15 Line 786
-+Nov 05 22:33:21 Line 96
-+Nov 05 22:33:22 Line 224
-+Nov 05 22:33:23 Line 333
-+Nov 05 22:33:24 Line 400
-+Nov 05 22:33:25 Line 545
-+Nov 05 22:33:26 Line 547
++Nov 07 09:27:50 Line 18
++Nov 07 09:27:51 Line 101
++Nov 07 09:27:52 Line 236
++Nov 07 09:27:53 Line 275
++Nov 07 09:27:54 Line 617
++Nov 07 09:27:55 Line 635
 ```
 
 ## Code block 69: `$ < wiki.html trim`

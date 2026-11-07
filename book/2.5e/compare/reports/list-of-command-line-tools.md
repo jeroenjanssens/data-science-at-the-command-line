@@ -1,6 +1,6 @@
 # list-of-command-line-tools.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47694336e393d72d1811e440455d6`
+Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
 
 ## Code block 2: `$ type aws`
 
@@ -24,7 +24,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 6: `$ type body`
 
 - id: `list-of-command-line-tools.html:block:6`
-- hash: `7b2ca82d`
+- hash: `52c37663`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -35,24 +35,22 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 @@ -4,12 +4,12 @@
  $ seq 10 | header -a 'values' | body shuf
  values
-+7
-+1
-+9
-+4
-+8
-+6
 +5
-+2
++9
++6
  3
 -7
- 10
+-10
 -9
 -5
--4
++1
+ 4
 -6
--8
--2
+ 8
+ 2
 -1
++10
++7
 ```
 
 ## Code block 12: `$ type cowsay`
@@ -210,7 +208,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 27: `$ type dseq`
 
 - id: `list-of-command-line-tools.html:block:27`
-- hash: `df26ca01`
+- hash: `4f3f040a`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -224,9 +222,9 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -2021-12-15
 -2021-12-16
 -2021-12-17
-+2026-11-06
-+2026-11-07
 +2026-11-08
++2026-11-09
++2026-11-10
 ```
 
 ## Code block 32: `$ type find`
@@ -259,7 +257,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 42: `$ type hostname`
 
 - id: `list-of-command-line-tools.html:block:42`
-- hash: `755c994a`
+- hash: `b3bb1014`
 - status: **accept**
 - cause: random
 - note: Container hostname
@@ -271,7 +269,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
  
  $ hostname
 -2c3edb64827b
-+4d8c70f12021
++325abf2a7e5e
  
  $ hostname -i
 ```
@@ -317,7 +315,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 46: `$ type l`
 
 - id: `list-of-command-line-tools.html:block:46`
-- hash: `aedc7f44`
+- hash: `fab5c83a`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -334,12 +332,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 --rw-r--r-- 1 dst dst  148 Dec 14 12:03 tmnt-missing-newline.csv
 --rw-r--r-- 1 dst dst  181 Dec 14 12:03 tmnt-with-header.csv
 --rw-r--r-- 1 dst dst  91K Dec 14 12:03 top2000.xlsx
-+-rw-r--r-- 1 dst dst 627K Nov  5 22:36 logs.tar.gz
-+-rw-r--r-- 1 dst dst 189K Nov  5 22:36 r-datasets.db
-+-rw-r--r-- 1 dst dst  149 Nov  5 22:36 tmnt-basic.csv
-+-rw-r--r-- 1 dst dst  148 Nov  5 22:36 tmnt-missing-newline.csv
-+-rw-r--r-- 1 dst dst  181 Nov  5 22:36 tmnt-with-header.csv
-+-rw-r--r-- 1 dst dst  91K Nov  5 22:36 top2000.xlsx
++-rw-r--r-- 1 dst dst 627K Nov  7 09:31 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  7 09:31 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  7 09:31 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  7 09:31 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  7 09:31 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  7 09:31 top2000.xlsx
 ```
 
 ## Code block 48: `$ type ls`
@@ -363,7 +361,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 56: `$ type paste`
 
 - id: `list-of-command-line-tools.html:block:56`
-- hash: `62108aef`
+- hash: `72c9dd77`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -379,11 +377,11 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -3,2021-12-17
 -4,2021-12-18
 -5,2021-12-19
-+1,2026-11-06
-+2,2026-11-07
-+3,2026-11-08
-+4,2026-11-09
-+5,2026-11-10
++1,2026-11-08
++2,2026-11-09
++3,2026-11-10
++4,2026-11-11
++5,2026-11-12
  
  $ seq 5 | paste -sd+
 ```
@@ -473,7 +471,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 66: `$ type sample`
 
 - id: `list-of-command-line-tools.html:block:66`
-- hash: `ea5e4d75`
+- hash: `58b6ac51`
 - status: **accept**
 - cause: random
 - note: Random output (sample, shuf)
@@ -495,18 +493,18 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -340
 -434
 -… with 6 more lines
-+173
-+378
-+526
-+586
-+650
++55
++58
++322
++498
++869
 +… with 2 more lines
 ```
 
 ## Code block 71: `$ type shuf`
 
 - id: `list-of-command-line-tools.html:block:71`
-- hash: `d65663f7`
+- hash: `b14e6964`
 - status: **accept**
 - cause: random
 - note: Random output (sample, shuf)
@@ -519,13 +517,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
  $ echo {a..z} | tr ' ' '\n' | shuf | trim 5
 -s
 -a
-+i
-+e
-+v
-+j
  k
 -x
 -y
++m
++r
++t
++p
  … with 21 more lines
  
  $ shuf -i 1-100 | trim 5
@@ -534,11 +532,11 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -5
 -92
 -10
-+31
-+87
-+6
-+98
-+36
++79
++58
++46
++23
++72
  … with 95 more lines
 ```
 
@@ -624,7 +622,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 86: `$ type tree`
 
 - id: `list-of-command-line-tools.html:block:86`
-- hash: `dbca5a84`
+- hash: `f9f50e3b`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -636,13 +634,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
  │   │   ├── logs.tar.gz
  │   │   ├── r-datasets.db
 -… with 121572 more lines
-+… with 105617 more lines
++… with 106047 more lines
 ```
 
 ## Code block 88: `$ type ts`
 
 - id: `list-of-command-line-tools.html:block:88`
-- hash: `3676b70f`
+- hash: `c715054f`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -654,7 +652,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
  
  $ echo seq 5 | sample -d 500 | ts
 -Dec 14 12:07:20 seq 5
-+Nov 05 22:37:46 seq 5
++Nov 07 09:32:13 seq 5
 ```
 
 ## Code block 99: `$ type xsv`

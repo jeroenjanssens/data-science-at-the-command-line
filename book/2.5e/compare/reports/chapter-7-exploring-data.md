@@ -1,11 +1,11 @@
 # chapter-7-exploring-data.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47694336e393d72d1811e440455d6`
+Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
 
 ## Code block 0: `$ cd /data/ch07`
 
 - id: `chapter-7-exploring-data.html:block:0`
-- hash: `c0b0d582`
+- hash: `aa501a91`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -20,10 +20,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:49 tips.csv
 --rw-r--r-- 1 dst dst  83K Dec 14 11:49 venture.csv
 --rw-r--r-- 1 dst dst 4.6K Dec 14 11:49 venture-wide.csv
-+-rw-r--r-- 1 dst dst  125 Nov  5 22:44 datatypes.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  5 22:44 tips.csv
-+-rw-r--r-- 1 dst dst 4.6K Nov  5 22:44 venture-wide.csv
-+-rw-r--r-- 1 dst dst  83K Nov  5 22:44 venture.csv
++-rw-r--r-- 1 dst dst  125 Nov  7 09:28 datatypes.csv
++-rw-r--r-- 1 dst dst 7.8K Nov  7 09:28 tips.csv
++-rw-r--r-- 1 dst dst 4.6K Nov  7 09:28 venture-wide.csv
++-rw-r--r-- 1 dst dst  83K Nov  7 09:28 venture.csv
 ```
 
 ## Code block 20: `> library(tidyverse)                            ➊`
@@ -177,7 +177,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 24: `$ rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tip`
 
 - id: `chapter-7-exploring-data.html:block:24`
-- hash: `75799134`
+- hash: `4de42e3e`
 - status: **accept**
 - cause: image
 - note: rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan D, ch 7)
@@ -190,7 +190,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -#!/usr/bin/env Rscript
 +#!/usr/bin/env -S ir run
 +#| packages:
-+#|   - github::jeroenjanssens/rush@c91f8b4274b1a4ef3c2f98a36e08193aac037dd8
++#|   - github::jeroenjanssens/rush@5e75a1d59384efea243a316dacf3092b36169f26
 +#|   - rlang
 +#|   - cli
 +#|   - tibble
@@ -417,15 +417,15 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 35: `$ rush plot --x time tips.csv`
 
 - id: `chapter-7-exploring-data.html:block:35`
-- hash: `1a247663`
-- status: **fix-image**
+- hash: `263c2a9f`
+- status: **accept**
 - cause: image
-- note: No plot: rush plot --x time fails in the new image (rush 0.2.1 uses geom_histogram for a discrete x, and hides the error)
+- note: Bar chart works again (rush 5e75a1d draws geom_bar for a discrete x); colored blocks instead of characters, like the other terminal plots
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,18 +1 @@
+@@ -1,18 +1,18 @@
  $ rush plot --x time tips.csv
 -         ********************************
 -         ********************************
@@ -442,8 +442,23 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -         ********************************  ********************************
 -         ********************************  ********************************
 -    0    ********************************  ********************************
--                      Dinner                            Lunch
--                                        time
++
++
++  150
++
++
++
++c 100
++o
++u
++n
++t  50
++
++
++
++    0
+                       Dinner                            Lunch
+                                         time
 ```
 
 ## Code block 37: `$ rush plot --x tip --fill time tips.csv`
@@ -683,15 +698,15 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 ## Code block 48: `$ rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv`
 
 - id: `chapter-7-exploring-data.html:block:48`
-- hash: `f83cdd70`
-- status: **fix-image**
+- hash: `053ff9fa`
+- status: **accept**
 - cause: image
-- note: No plot: the terminal box plot exits with status 250 in the new image (devoutansi); the PNG works
+- note: Box plot works again (miniansi 0.1.3); colored blocks instead of characters, like the other terminal plots
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,18 +1 @@
+@@ -1,17 +1,17 @@
  $ rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv
 -  50                               %
 -                                   %           %                        %
@@ -707,9 +722,22 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:e14d28e462d5441405520c216fae7cbdaac47
 -                  %%%%%%%%%%       %
 -  10  %%%%%%%%%%       %
 -      %%%%%%%%%%
--
--          1            2           3           4           5           6
--                                   factor(size)
++  50
++
++
++  40
++
++
++b 30
++i
++l
++l 20
++
++
++  10
++
+ 
+           1            2           3           4           5           6
 ```
 
 ## Code block 50: `$ rush plot --x 'factor(size)' --y bill --geom violin --title 'Distrib`
@@ -833,13 +861,13 @@ images/plot-accident.png: 166958 -> 159168 bytes
 ## Image changed: images/plot-bar.png
 
 - id: `chapter-7-exploring-data.html:image:images/plot-bar.png`
-- hash: `9796a9d6`
-- status: **fix-image**
+- hash: `9b693966`
+- status: **accept**
 - cause: image
-- note: Empty: rush plot --x time fails in the new image (rush 0.2.1 uses geom_histogram for a discrete x)
+- note: Regenerated with the new image (ggplot2 4); same bar chart
 
 ```diff
-images/plot-bar.png: 22375 -> 0 bytes
+images/plot-bar.png: 22375 -> 22514 bytes
 ```
 
 ## Image changed: images/plot-boxplot.png
