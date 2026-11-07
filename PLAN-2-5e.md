@@ -406,16 +406,23 @@ Where a fix can go:
 
 Summary:
 
-| # | Issue | Fix in | Recommendation |
-|---|---|---|---|
-| 1 | Bar chart: `rush plot --x time` fails, no output | rush | Pick `geom_bar()` for a discrete x; show errors |
-| 2 | Terminal box plot crashes | miniansi | Skip polygons without edges |
-| 3 | Terminal plots: no legend, white canvas | rush / devoutansi | Investigate; accept for now |
-| 4 | `geom_smooth()` silently fits straight lines | image | Install `mgcv` |
-| 5 | `trim` cuts multibyte characters | dsutils (image) | Count characters, not bytes |
-| 6 | Multibyte characters garbled in terminal output | quarto-term | Keep incomplete UTF-8 sequences between reads |
-| 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` in HTML output; then drop the book workaround |
-| 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) |
+| # | Issue | Fix in | Recommendation | Status |
+|---|---|---|---|---|
+| 1 | Bar chart: `rush plot --x time` fails, no output | rush | Pick `geom_bar()` for a discrete x; show errors | **Fixed** (rush `5e75a1d`, image #24) |
+| 2 | Terminal box plot crashes | miniansi | Skip polygons without edges | **Fixed** (miniansi 0.1.3, image #24) |
+| 3 | Terminal plots: tiny legend keys, white canvas, vertical y title | rush (+ devoutansi) | Horizontal y title and bigger keys in rush's terminal theme; keep the white canvas | Open |
+| 4 | `geom_smooth()` silently fits straight lines | image | Install `mgcv` | **Fixed** (image #24) |
+| 5 | `trim` cuts multibyte characters | dsutils (image) | Count characters with Perl instead of mawk | Open |
+| 6 | Multibyte characters garbled in terminal output | quarto-term | Keep incomplete UTF-8 sequences between reads | Open (no quarto-term changes for now) |
+| 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` as `&#123;` in HTML output; then drop the book workaround | Open (no quarto-term changes for now) |
+| 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) | Open |
+
+How the code below was checked:
+
+- **Issue 5:** the new `trim` ran in `:latest`. It gives the same output as the current `trim` on ASCII input for 11 height/width combinations, and cuts box-drawing lines correctly.
+- **Issue 6:** the decoder and its 4 tests ran in a scratch crate (not in quarto-term).
+- **Issue 7:** Quarto 1.11.9 rendered the escaped HTML in a scratch document.
+- **Issue 3:** the theme settings were tried in `:latest`. The parts that aren't verified yet are marked as such.
 
 **Status (2026-11-06):** issues 1 and 2 are fixed:
 - rush `4945ac0` adds `geom_auto()` and shows errors;
@@ -428,20 +435,11 @@ A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both pl
 - the bar chart (block 35, Figure 7.4), the terminal box plot (block 48), and Figure 9.2's GAM smoothers are back;
 - every difference is reviewed; only issue 6 remains open (`fix-quarto-term`). It's intermittent: this render hit ch03 blocks 18 and 19, not ch05 block 2.
 
-### 1. Bar chart fails: `rush plot --x time tips.csv`
+### 1. Bar chart fails: `rush plot --x time tips.csv` (fixed)
 
-**Where:** ch07, section "Creating Bar Charts". The terminal plot (`plot_bar_ansi`) shows only the command, and `rush plot --x time tips.csv > plot-bar.png` writes an empty file, so Figure 7.4 (`images/plot-bar.png`) is broken. `compare/differences.yml`: `chapter-7-exploring-data.html:block:35`, `…:image:images/plot-bar.png`.
+**Where:** ch07, "Creating Bar Charts", block 35 and Figure 7.4 (`images/plot-bar.png`).
 
-**Example:**
-
-```console
-$ rush plot --x time tips.csv > plot-bar.png; echo $?
-1
-$ ls -l plot-bar.png
--rw-r--r-- 1 dst dst 0 … plot-bar.png
-```
-
-The generated script (`rush plot -n --x time tips.csv`) ends with `ggplot(df, aes(x = time)) + geom_histogram()`. Running it shows the error that `rush` itself doesn't print:
+**Problem:** rush 0.2.1 always used `geom_histogram()` when only `--x` was given (`geom <- if (!is.null(flags$y)) "point" else "histogram"`). That fails for a discrete column:
 
 ```
 Error in `geom_histogram()`:
@@ -449,106 +447,289 @@ Error in `geom_histogram()`:
 ✖ the x aesthetic is discrete.
 ```
 
-**Cause:** rush 0.2.1 (`R/rush.R:181`): `geom <- if (!is.null(flags$y)) "point" else "histogram"`. The old rush used `qplot()`, which picks a bar chart for a discrete x. Also, rush exits 1 without printing the R error, so the failure is silent.
+rush also discarded the error, so `rush plot --x time tips.csv > plot-bar.png` wrote an empty file and printed nothing.
 
-**Possible fixes:**
+**Fix as committed (rush `5e75a1d`):** the geom is chosen when the plot is built, from the values of the x aesthetic.
 
-- (a) **rush**: when `--geom` is `auto` and only `--x` is given, choose by the column type: `geom_bar()` for character/factor/logical, `geom_histogram()` for numbers. rush reads the data before plotting, so it can check `df[[x]]`. For `-n` (no data), keep `geom_histogram()`, or emit a small helper that decides at run time.
-- (b) **rush**: always print the R error to stderr.
-- (c) **book**: write `rush plot --x time --geom bar tips.csv`. That changes the text and the lesson ("rush picks a sensible geom").
+- **Compact scripts** (`rush plot -n`, which load rush) use `rush::geom_auto()`, from `R/geom-auto.R`:
 
-**Recommendation:** (a) + (b) in rush. Release a new rush, bump `RUSH_COMMIT` in the datasciencetoolbox Dockerfile, rebuild, and re-render (cache invalidates by image id). Keep the book text as is.
+  ```r
+  geom_auto <- function(...) {
+    structure(list(args = list(...)), class = "rush_geom_auto")
+  }
 
-### 2. Terminal box plot crashes: `rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv`
+  # ggplot2 calls this for `plot + geom_auto()`, so the data and the mapping are known
+  ggplot_add.rush_geom_auto <- function(object, plot, object_name, ...) {
+    geom <- if (is_continuous(auto_x(plot))) {
+      ggplot2::geom_histogram
+    } else {
+      ggplot2::geom_bar
+    }
+    plot + do.call(geom, object$args)
+  }
 
-**Where:** ch07, "Creating Box Plots" (`plot_boxplot_ansi`): only the command is shown. The PNG version (Figure 7.11) works. `differences.yml`: `chapter-7-exploring-data.html:block:48`.
+  auto_x <- function(plot) {
+    x <- plot$mapping$x
+    if (is.null(x) || !is.data.frame(plot$data)) {
+      return(NULL)
+    }
+    tryCatch(rlang::eval_tidy(x, plot$data), error = function(e) NULL)
+  }
 
-**Example:** the R process aborts with status 134; rush reports 250, and nothing is printed:
+  is_continuous <- function(x) {
+    # Without values, keep the previous behavior (a histogram)
+    is.null(x) ||
+      (is.numeric(x) && !is.factor(x)) ||
+      inherits(x, c("Date", "POSIXt", "difftime", "hms"))
+  }
+  ```
 
-```
-Error in min(all_edges$ymin):max(all_edges$ymax) :
-  result would be too long a vector
-Calls: <Anonymous> ... func -> ansi_polygon -> <Anonymous> -> fill_polygon
-In addition: Warning messages:
-1: In min(all_edges$ymin) : no non-missing arguments to min; returning Inf
-terminate called after throwing an instance of 'Rcpp::LongjumpException'
-```
+- **Inline scripts** (normal runs, which don't load rush): `build_plot_call(flags, compact = FALSE)` emits the same test inline, as an `{ if (…) geom_histogram() else geom_bar() }` expression.
+- **Errors:** `run_generated_script()` now captures stderr to a temporary file and prints it when the script fails.
 
-**Cause:** the box plot draws a polygon without (non-horizontal) edges, probably a box with zero height for a group with one value. In that case miniansi 0.1.1's `fill_polygon` computes `Inf:-Inf`. Because the error happens inside a graphics-device callback (devoutansi 0.1.0, Rcpp), R can't recover and aborts.
+The image pins rush `5e75a1d` and has two smoke tests: a bar chart as PNG and one in the terminal.
 
-**Possible fixes:**
+### 2. Terminal box plot crashes (fixed)
 
-- (a) **miniansi** (`jeroenjanssens/miniansi`): return early in `fill_polygon` when there are no edges (or `ymin`/`ymax` aren't finite).
-- (b) **devoutansi**: catch errors in `ansi_polygon`. That's upstream (coolbutuseless) and slower to change.
-- (c) **book**: drop the terminal box plot. That loses the "textual vs visual" comparison the text makes.
+**Where:** ch07, "Creating Box Plots", block 48: `rush plot --x 'factor(size)' --y bill --geom boxplot tips.csv`.
 
-**Recommendation:** (a). Add a test with a degenerate polygon, bump `MINIANSI_COMMIT` in the Dockerfile, and also fix (b) of issue 1 so such failures are visible.
+**Problem:** a group with one value gives a box with zero height. miniansi's `fill_polygon()` then had no non-horizontal edges and computed `min(numeric(0)):max(numeric(0))`, i.e. `Inf:-Inf`. The error happened inside a graphics-device callback (Rcpp), so R aborted (status 134, rush 250).
 
-### 3. Terminal plots have no legend and a white canvas
+**Fix as committed (miniansi `d0cb296`, 0.1.3),** in `fill_polygon()` before the scanline loop:
 
-**Where:** all terminal plots in ch07 (e.g. `rush plot --x tip --fill time tips.csv`, "Creating Histograms"). Points and bars are drawn as coloured blocks (fine), but:
-- the legend ("time: Dinner, Lunch") is missing;
-- the plot area is white instead of the terminal background;
-- the y-axis label is printed vertically letter by letter (`c`/`o`/`u`/`n`/`t`).
-
-2e showed character plots with a legend on the right. Accepted for now in `differences.yml` (`…:block:26`–`50`).
-
-**Cause:** not investigated yet. Candidates:
-- devoutansi doesn't draw the legend's text and keys at this size, or rush's canvas size leaves no room;
-- the white canvas is ggplot's background, which devoutansi paints, where the old rush "ansi" device skipped it.
-
-**Possible fixes:**
-
-- (a) **rush**: for terminal output, set a theme without plot/panel background, and check the legend placement and size (e.g. `legend.position = "right"` with a minimum width).
-- (b) **miniansi/devoutansi**: render text/legend keys, and treat white as "default background".
-
-**Recommendation:** look at (a) first, since it's in your own code and cheap to try. It isn't blocking: the plots are readable, the PNG versions are the real figures, and the text says the terminal versions are rough.
-
-### 4. `geom_smooth()` fits straight lines: `mgcv` is missing
-
-**Where:** ch09, Figure 9.2, `images/wine-alcohol-vs-quality.png` (`rush plot --x alcohol --y quality --color type --geom smooth wine.csv > …`). In 2e the curves bend; now they're straight lines. `differences.yml`: `chapter-9-modeling-data.html:image:images/wine-alcohol-vs-quality.png`.
-
-**Example:**
-
-```console
-$ Rscript -e 'requireNamespace("mgcv")'
-Loading required namespace: mgcv
-Failed with error:  'there is no package called 'mgcv''
+```r
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # A polygon with only horizontal edges (e.g. a box with zero height) is
+  # already drawn; there is nothing to scan
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  if (nrow(all_edges) == 0) {
+    if (debug) return(mat)
+    return(NULL)
+  }
 ```
 
-**Cause:** for more than 1,000 rows, `geom_smooth()` uses `method = "gam"`, which needs `mgcv`. ggplot2 4.0.3 falls back to a linear fit without saying so. `mgcv` is a "recommended" R package. Ubuntu's `r-base-core` doesn't include it, and the image doesn't install `r-recommended`.
+It also has testthat tests (`tests/testthat/test-polygon.R`). The image installs miniansi, devout and devoutansi from the jeroenjanssens forks, and has a smoke test for the terminal box plot.
+
+### 3. Terminal plots: tiny legend keys, white canvas, vertical y title
+
+**Where:** all terminal plots in ch07 (blocks 26–50, accepted in `differences.yml`), e.g. `rush plot --x tip --fill time tips.csv`.
+
+**What the output looks like** (from `:latest`, at 80×20, one character per cell: `.` = white canvas, `R`/`C` = red/cyan cells):
+
+```
+c..........RRRRR...RRR...................................................time...
+o..........RRRRR...RRR...................................................Dinner.
+u.20.......RRCCC.RRRRRRRRR...............................................Lunch..
+n..........RRCCC.RRRRRRRRR..RRR...RRR....................................C......
+t..........RRCCCRRRRRRRRRR..RRR...RRR...........................................
+```
+
+The earlier description ("no legend") was wrong. The legend's title and labels are drawn, but:
+
+1. **The legend keys** are one cell wide, sit under the first letter of a label or one row below it, and the first key is painted over. In the book's HTML, the `t` of "time" has a red background and the `D` of "Dinner" a cyan one.
+2. **The canvas is white,** and the plot is drawn on it.
+3. **The y-axis title** is printed one letter per row (`c`/`o`/`u`/`n`/`t`).
+
+**Causes** (found by reading devoutansi and miniansi, and by experiments in the image):
+
+1. **Keys:** in devoutansi a cell is 72 device units, and `ansi_open()` sets `ipr = c(1/72, 1/72/font_aspect)`. So one column is 1 inch wide and one row is 1/0.45 ≈ 2.2 inches tall. ggplot2's default key (1.2 lines ≈ 0.2 inch) rounds to at most one cell. On top of that, `ansi_rect()` rounds both edges and draws them inclusively, so a rectangle *n* cells tall covers *n* + 1 rows and overlaps the next key.
+2. **White canvas:** `ansi_open()` creates the canvas with `background = col2hex(state$dd$startfill)`, and the device's start fill is white. Blanking `plot.background` and `panel.background` in the theme doesn't change it (also tested). miniansi's `set_pixels()` already skips transparent colours, but `col2code()` ignores alpha, so even a transparent canvas would be printed as white (`48;5;231`).
+3. **Vertical title:** miniansi's `text()` with `angle = 90` writes one character per row.
 
 **Possible fixes:**
 
-- (a) **image**: add `mgcv` to the `install.packages(...)` list in the Dockerfile (P3M binary, same snapshot), or install `r-cran-mgcv`.
-- (b) **image**: install `r-recommended`, which brings all recommended packages (also `MASS`, `lattice`, `Matrix`, …, which more R code assumes).
-- (c) **book**: `--geom smooth` with `method = "loess"`. That changes the command.
+- **(a) rush, horizontal y-axis title** (tested: `count` is printed on one line, and the panel moves right a few columns). In `dispatch_plot_output()` (`R/script.R`):
 
-**Recommendation:** (a), plus a smoke test (`Rscript -e 'library(mgcv)'`). (b) is reasonable too if size doesn't matter much.
+  ```r
+      if (restyle) {
+        result <- result +
+          ggplot2::theme_minimal() +
+          ggplot2::theme(
+            panel.grid = ggplot2::element_blank(),
+            # Rotated text becomes one letter per row in the terminal
+            axis.title.y = ggplot2::element_text(angle = 0, vjust = 0.5)
+          )
+      }
+  ```
+
+- **(b) rush, legend keys in cell units.** The keys get as wide as two columns and are drawn next to the labels instead of under them. Tested: with the current `ansi_rect()`, though, both keys come out in the last colour (`CCC` next to both "Dinner" and "Lunch"):
+
+  ```r
+  # devoutansi: 1 column = 1 inch, 1 row = 1 / font_aspect inches (font_aspect = 0.45)
+  cols <- function(n) grid::unit(n, "inches")
+  rows <- function(n) grid::unit(n / 0.45, "inches")
+
+  terminal_theme <- ggplot2::theme(
+    legend.key.width = cols(2),
+    legend.key.height = rows(1),
+    legend.key.spacing.y = rows(0),
+    legend.text = ggplot2::element_text(margin = ggplot2::margin(l = 1, unit = "inches"))
+  )
+  ```
+
+- **(c) devoutansi, half-open rectangles,** so a rectangle *n* cells tall covers *n* rows. Tested by overriding the function with `assignInNamespace()`:
+  - the keys no longer overlap each other;
+  - but both still have the last colour, so there's another cause still to find;
+  - histogram bars now leave a one-column gap between bins.
+
+  It needs more work before it can replace the current function:
+
+  ```r
+  ansi_rect <- function(args, state) {
+    # Device units are 72 per cell; treat [x0, x1) x [y0, y1) as half-open
+    x <- sort(c(args$x0, args$x1)) / 72
+    y <- sort(c(args$y0, args$y1)) / 72
+    xmin <- round(x[1]); xmax <- max(xmin, round(x[2]) - 1)
+    ymin <- round(y[1]); ymax <- max(ymin, round(y[2]) - 1)
+    state$rdata$ansi$rect(xmin, ymin, xmax, ymax,
+                          colour = col2hex(state$gc$col),
+                          fill = col2hex(state$gc$fill))
+    state
+  }
+  ```
+
+- **(d) Transparent canvas** (not tested). It needs three changes, and black text then disappears on dark terminals:
+  - rush: `devoutansi::ansi(width = w, height = h, bg = "transparent")`, if devout passes `bg` through to `startfill`;
+  - miniansi: in `as_character()`, emit the default background (`\033[49m`) for cells whose colour ends in `00`;
+  - rush's terminal theme: `text = element_text(colour = NA)`… there's no "terminal default" colour in ggplot2, so this needs another miniansi convention as well.
+
+**Recommendation:**
+- Do (a) now: it's one line, tested, and makes every terminal plot easier to read.
+- Keep the white canvas: it's readable in light and dark terminals and in the book's HTML, and matches the PNG versions. Drop (d).
+- Investigate the key colours before (b)/(c). For example, trace the rectangles while rendering `p + terminal_theme`, to see which one covers the first key:
+
+  ```r
+  trace("ansi_rect", quote(print(c(args$y0, args$y1, state$gc$fill))),
+        where = asNamespace("devoutansi"), print = FALSE)
+  ```
+
+Not blocking: the PNG versions are the real figures, and the text says the terminal versions are rough.
+
+### 4. `geom_smooth()` fits straight lines: `mgcv` is missing (fixed)
+
+**Where:** ch09, Figure 9.2, `images/wine-alcohol-vs-quality.png`.
+
+**Problem:** for more than 1,000 rows, `geom_smooth()` uses `method = "gam"`, which needs `mgcv`. Without it, ggplot2 4.0.3 silently fits `y ~ x`. Ubuntu's `r-base-core` doesn't include the recommended packages.
+
+**Fix as committed (datasciencetoolbox #24):** `mgcv` added to the Dockerfile's `install.packages(...)` list (P3M binary) and to the `stopifnot` check, with this smoke test:
+
+```bash
+# Chapter 9: geom_smooth() on more than 1,000 rows needs mgcv for its GAM;
+# without it, ggplot2 still says method = 'gam' but fits y ~ x (a straight line)
+check 'geom_smooth uses a GAM (mgcv)' "s(x, bs = " \
+  "Rscript -e 'library(ggplot2); df <- data.frame(x = 1:2000, y = sin(1:2000 / 100)); invisible(ggplot_build(ggplot(df, aes(x, y)) + geom_smooth()))' 2>&1"
+```
 
 ### 5. `trim` cuts multibyte characters: `man zshbuiltins | trim`
 
-**Where:** ch02 (`man zshbuiltins | trim`, `man tar | trim 20`), and anywhere `trim` shortens lines with non-ASCII characters (`‐`, `─`, `…`). Currently hidden for man pages by `MANWIDTH=79` in `container/setup.zsh`.
+**Where:** ch02 (`man zshbuiltins | trim`, `man tar | trim 20`), and anywhere `trim` shortens lines with non-ASCII characters (`‐`, `─`, `…`). For man pages it's currently hidden by `MANWIDTH=79` in `container/setup.zsh`.
 
-**Example** (without `MANWIDTH`), a line of exactly 80 characters containing the hyphen `‐` (3 bytes):
+**Example** (in `:latest`), a line of 100 `─` trimmed to 80 columns:
 
+```console
+$ printf '─%.0s' {1..100} | trim 1 80
+──────────────────────────�…
 ```
-       Some  shell builtin commands take options as described in individual en�…
-```
 
-**Cause:** `trim` (dsutils) uses `awk`'s `length($0)` and `substr()`. The image's awk is mawk 1.3.4, which counts bytes, so a line with multibyte characters looks longer than the terminal and is cut in the middle of a character. The old image had the same mawk, but man pages were narrower, so lines didn't reach the limit.
+That's 26 characters and a broken one instead of 79 and `…`.
+
+**Cause:** `trim` (dsutils `94e795f`) does the work in `awk` with `length($0)` and `substr()`. The image's `awk` is mawk 1.3.4, which counts bytes: `─` is 3 bytes, so the line looks 300 long and is cut after 79 bytes, in the middle of a character.
 
 **Possible fixes:**
 
-- (a) **dsutils** (`trim`): don't rely on awk for widths. For example, use `cut -c` (uutils `cut -c` counts characters) or a small Python/Perl one-liner.
-- (b) **image**: install gawk and use it in `trim`. Don't make gawk the system `awk`, because the tools appendix shows `awk`'s version (mawk) and the book uses mawk.
-- (c) **book**: keep `MANWIDTH=79` (works around it for man pages only).
+- **(a) dsutils: do the work in Perl.** `perl -CSD` reads and writes UTF-8 and counts characters, and Perl is everywhere `trim` runs: Ubuntu's `perl-base` is an essential package (it's `/usr/bin/perl` in the image), and macOS ships Perl. A complete replacement for `trim`, with the same behaviour otherwise:
 
-**Recommendation:** (a) in dsutils, then bump the dsutils commit in the image. Keep `MANWIDTH=79` regardless, because it reproduces the 2e man page layout.
+  ```bash
+  #!/usr/bin/env bash
+  #
+  # NAME
+  #       trim -- trim output to a given height and width.
+  #
+  # USAGE
+  #       trim [height] [width]
+  #
+  #       By default, output is trimmed to 10 lines and the width of the terminal.
+  #       Pass a negative number to disable trimming the height and or width.
+  #       Before trimming, tabs are expanded to spaces. Widths are counted in
+  #       characters, not bytes.
+  #
+  # EXAMPLES
+  #       seq 100 | trim
+  #       seq 100 | trim 20
+  #       seq 100 | trim 20 40
+  #       seq 100 | trim -1 40
+  #       seq 100 | trim 20 -1
+  #
+  # Author: Jeroen Janssens (https://jeroenjanssens.com)
+  #
+  # LICENSE: MIT (2021)
+
+  set -euf -o pipefail
+
+  HEIGHT="${1:-10}"
+  WIDTH="${2:-$(tput cols)}"
+
+  expand |
+  perl -CSD -e '
+  use utf8;
+  no warnings "utf8";
+  my ($height, $width) = @ARGV;
+  my ($n, $last) = (0, undef);
+
+  sub tprint {
+      my ($line) = @_;
+      if ($width > 0 && length($line) > $width) {
+          $line = substr($line, 0, $width - 1) . "…";
+      }
+      print "$line\n";
+  }
+
+  while (my $line = <STDIN>) {
+      chomp $line;
+      $n++;
+      if ($height <= 0 || $n <= $height) {
+          tprint($line);
+      } else {
+          $last = $line;
+      }
+  }
+
+  if ($height > 0) {
+      if ($n == $height + 1) {
+          tprint($last);
+      } elsif ($n > $height + 1) {
+          print "… with ", $n - $height, " more lines\n";
+      }
+  }' -- "${HEIGHT}" "${WIDTH}"
+  ```
+
+  Details that matter:
+  - `--` before the arguments: without it, Perl reads `trim -1 40`'s `-1` as one of its own switches.
+  - `no warnings "utf8"`: invalid UTF-8 input is passed through without warnings (and exit status 0), like before.
+  - `use utf8` makes the `…` literals one character.
+  - A last line without a newline gets one, like awk did.
+
+  Widths are in characters, not terminal columns: wide CJK characters and emoji still count as 1. That's fine for this book; `Text::CharWidth` / `wcwidth` would be needed for more.
+
+  Tested in `:latest`: the same output as the current `trim` for `""`, `20`, `20 40`, `-1 40`, `20 -1`, `-1 -1`, `5 3`, `99 10`, `100`, `99`, and `0 20` (on 100 lines of 47 ASCII characters). The `─` line becomes 79 `─` and `…`, and `MANWIDTH=100 man zshbuiltins | trim 4 80` cuts cleanly.
+
+- **(b) image: install gawk and use it in `trim`** (`gawk` counts characters in a UTF-8 locale). That adds a dependency for `trim` users outside the image, and the locale must be set. Don't make gawk the system `awk`, because the tools appendix shows `awk`'s version (mawk), and the book uses mawk.
+- **(c) book: keep `MANWIDTH=79`.** That only works around man pages.
+
+**Recommendation:** (a).
+1. Commit the new `trim` to dsutils.
+2. Bump `DSUTILS_COMMIT` in the datasciencetoolbox Dockerfile, and add a smoke test:
+
+   ```bash
+   # trim counts characters, not bytes (mawk counts bytes)
+   check 'trim keeps multibyte characters intact' '─────────…' "printf '─%.0s' {1..20} | trim 1 10"
+   ```
+
+3. Keep `MANWIDTH=79` regardless, because it reproduces the 2e man page layout.
 
 ### 6. quarto-term garbles multibyte characters split between reads
 
-**Where:** box-drawing output, e.g. `bat -A tmnt-basic.csv` (ch03) and `bat fb.cnt` (ch05). Which lines are affected varies between renders. `differences.yml`: `chapter-3-obtaining-data.html:block:18`, `chapter-5-scrubbing-data.html:block:2` (decision `fix-quarto-term`).
+**Where:** box-drawing output, e.g. `bat -A tmnt-basic.csv`. Which blocks are affected varies between renders: the last render hit ch03 blocks 18 and 19, and the one before ch03 block 18 and ch05 block 2. `differences.yml` decision: `fix-quarto-term`.
 
 **Example:** the bottom border of `bat`:
 
@@ -558,45 +739,356 @@ Failed with error:  'there is no package called 'mgcv''
 +─
 ```
 
-**Cause:** `src/session.rs`, `process_bytes()`: `let text = String::from_utf8_lossy(bytes); self.vt.feed_str(&text);`. The PTY reader thread delivers chunks of up to 4,096 bytes. When a 3-byte character like `─` is split across two chunks, each half becomes `�`. So one character becomes two, the line gets one column longer, and the terminal wraps it (the extra `─` line).
+**Cause:** `src/session.rs`, `process_bytes()`. The PTY reader thread delivers chunks of up to 4,096 bytes. When a 3-byte character like `─` (`E2 94 80`) is split across two chunks, each half becomes `�`. So one character becomes two, the line gets one column longer, and the terminal wraps it (the extra `─` line):
+
+```rust
+fn process_bytes(&mut self, bytes: &[u8]) {
+    for rec in &mut self.recorders {
+        rec.record_output(bytes);
+    }
+    self.output_since_cell_start.extend_from_slice(bytes);
+    let text = String::from_utf8_lossy(bytes); // decodes each chunk on its own
+    self.vt.feed_str(&text);
+    self.respond_to_dsr(bytes);
+}
+```
+
+`src/recorder.rs`, `record_event()`, has the same problem: it also decodes each chunk on its own, so asciicast recordings get `�` too.
 
 **Possible fixes:**
 
-- (a) **quarto-term**: keep the incomplete UTF-8 sequence at the end of a chunk (at most 3 bytes) in a buffer, and prepend it to the next chunk before decoding (`std::str::from_utf8` → `Utf8Error::valid_up_to()` / `error_len()`). Add a unit test that feeds `─` in two parts.
-- (b) **book**: none that's reliable. Smaller output makes splits less likely, but they're not prevented.
+- **(a) quarto-term: keep the incomplete sequence for the next chunk.** `std::str::from_utf8` reports where the valid part ends (`valid_up_to()`), and whether the problem is invalid bytes (`error_len() == Some(n)`) or a sequence cut off at the end (`error_len() == None`). Only the latter is kept; it's at most 3 bytes.
 
-**Recommendation:** (a). It's a small change in one function, with a clear test, and a patch release. It affects every quarto-term user with non-ASCII output, not just this book.
+  A new helper, e.g. in `src/terminal_line.rs` or a new `src/utf8.rs`:
+
+  ```rust
+  /// Decode a chunk of PTY output. An incomplete UTF-8 sequence at the end is
+  /// kept in `pending` and decoded with the next chunk. Invalid bytes become
+  /// U+FFFD, like `String::from_utf8_lossy`.
+  pub fn decode_utf8_chunk(pending: &mut Vec<u8>, bytes: &[u8]) -> String {
+      pending.extend_from_slice(bytes);
+      let mut out = String::with_capacity(pending.len());
+      let mut rest: &[u8] = pending;
+      loop {
+          match std::str::from_utf8(rest) {
+              Ok(s) => {
+                  out.push_str(s);
+                  rest = &[];
+                  break;
+              }
+              Err(e) => {
+                  let (valid, after) = rest.split_at(e.valid_up_to());
+                  out.push_str(std::str::from_utf8(valid).unwrap());
+                  match e.error_len() {
+                      // Invalid bytes: replace them, like from_utf8_lossy
+                      Some(len) => {
+                          out.push('\u{FFFD}');
+                          rest = &after[len..];
+                      }
+                      // Incomplete sequence at the end: keep it for the next chunk
+                      None => {
+                          rest = after;
+                          break;
+                      }
+                  }
+              }
+          }
+      }
+      *pending = rest.to_vec();
+      out
+  }
+  ```
+
+  In `src/session.rs`, add a field, initialise it in `PtySession::new()`, and decode once for both the terminal and the recorders:
+
+  ```rust
+  pub struct PtySession {
+      // ...
+      output_since_cell_start: Vec<u8>,
+      /// Incomplete UTF-8 sequence at the end of the last PTY chunk
+      utf8_pending: Vec<u8>,
+      // ...
+  }
+
+  // in PtySession::new():
+  //     utf8_pending: Vec::new(),
+
+  fn process_bytes(&mut self, bytes: &[u8]) {
+      let text = decode_utf8_chunk(&mut self.utf8_pending, bytes);
+      for rec in &mut self.recorders {
+          rec.record_output(&text);
+      }
+      self.output_since_cell_start.extend_from_slice(bytes);
+      self.vt.feed_str(&text);
+      self.respond_to_dsr(bytes);
+  }
+  ```
+
+  In `src/recorder.rs`, the recorder takes the decoded text:
+
+  ```rust
+  pub fn record_output(&mut self, text: &str) {
+      self.record_event("o", text);
+  }
+
+  fn record_event(&mut self, event_type: &str, text: &str) {
+      let escaped = serde_json::to_string(text).unwrap_or_default();
+      // ... unchanged
+  }
+  ```
+
+  The other caller, the prompt in `PtySession::new()` (`rec.record_output(prompt_str.as_bytes())`, `src/session.rs:154`), becomes `rec.record_output(&prompt_str)`. `output_since_cell_start` stays bytes: it's decoded as a whole later (`src/session.rs:297`, `:329`), so it doesn't have this problem. `respond_to_dsr()` stays on raw bytes too; it has a similar split problem for escape sequences (`ESC [6n` split between chunks), but that hasn't been seen in practice.
+
+  Unit tests (all 4 pass in a scratch crate):
+
+  ```rust
+  #[cfg(test)]
+  mod tests {
+      use super::*;
+
+      #[test]
+      fn multibyte_char_split_between_chunks() {
+          let bytes = "a─b".as_bytes(); // ─ is E2 94 80
+          let mut pending = Vec::new();
+          assert_eq!(decode_utf8_chunk(&mut pending, &bytes[..2]), "a");
+          assert_eq!(pending, vec![0xE2]);
+          assert_eq!(decode_utf8_chunk(&mut pending, &bytes[2..]), "─b");
+          assert!(pending.is_empty());
+      }
+
+      #[test]
+      fn split_at_every_position() {
+          let text = "┌─┬─┐ ✓ é 😀";
+          let bytes = text.as_bytes();
+          for i in 0..=bytes.len() {
+              let mut pending = Vec::new();
+              let mut out = decode_utf8_chunk(&mut pending, &bytes[..i]);
+              out += &decode_utf8_chunk(&mut pending, &bytes[i..]);
+              assert_eq!(out, text, "split at {i}");
+              assert!(pending.is_empty());
+          }
+      }
+
+      #[test]
+      fn invalid_bytes_are_replaced() {
+          let mut pending = Vec::new();
+          assert_eq!(decode_utf8_chunk(&mut pending, b"a\xffb"), "a\u{FFFD}b");
+          assert!(pending.is_empty());
+      }
+
+      #[test]
+      fn one_byte_at_a_time() {
+          let text = "──── done";
+          let mut pending = Vec::new();
+          let out: String = text
+              .as_bytes()
+              .iter()
+              .map(|b| decode_utf8_chunk(&mut pending, &[*b]))
+              .collect();
+          assert_eq!(out, text);
+      }
+  }
+  ```
+
+- **(b) book:** none that's reliable. Smaller output makes splits less likely, but doesn't prevent them.
+
+**Recommendation:** (a), as a patch release (0.7.2), when quarto-term changes are on the table again. It's one function and a field, with clear tests, and it affects every quarto-term user with non-ASCII output, not just this book. After the release:
+1. Update `_extensions/jeroenjanssens/term` in the book.
+2. Re-render.
+3. Remove the two `fix-quarto-term` entries from `differences.yml` (they'll show up as stale).
 
 ### 7. `{{<` in terminal output breaks the rest of the page
 
-**Where:** ch10, the Jupyter console transcript (`cat /data/.cache/jupyter-console`). The line `! rm -v alice{{2,3}}.txt`, with a coloured `2`, makes quarto-term emit `alice{{<span style="…">2</span>…`. Quarto reads `{{<` as the start of a shortcode, even in raw HTML, so the transcript was cut off at `! rm -v alice` and the rest of the chapter (prose, a figure, a callout, two more terminal cells) ended up inside it.
+**Where:** ch10, the Jupyter console transcript (`cat /data/.cache/jupyter-console`). The line `! rm -v alice{{2,3}}.txt`, with a coloured `2`, makes quarto-term emit `alice{{<span style="…">2</span>…`. Quarto reads `{{<` as the start of a shortcode, even in a raw HTML block. So the transcript was cut off at `! rm -v alice`, and the rest of the chapter (prose, a figure, a callout, two more terminal cells) ended up inside it.
+
+**Reproduced in a scratch document** (Quarto 1.11.9):
+
+````markdown
+```{=html}
+<pre><code>alice{{<span style="color:red">2</span>,3}}.txt</code></pre>
+```
+
+AFTER
+````
+
+Everything after `alice` is gone from the output, including `AFTER`.
 
 **Workaround** (in place, book): `data/.cache/jupyter-console` was edited so that `2` isn't coloured (`{{\x1b[0;38;5;28m2` → `{{2`), so no `<` follows `{{`. Only the colour of one character differs from 2e.
 
-**Cause:** quarto-term outputs raw HTML (or LaTeX/Typst) blocks, and Quarto's shortcode processing runs over them. Any terminal output with `{{<`, or `{{` followed by a coloured span, will break a page. That includes Go templates, Hugo, Jinja, and Quarto itself.
+**Cause:** quarto-term outputs raw HTML (or LaTeX/Typst) blocks, and Quarto's shortcode processing runs over them. Any terminal output with `{{<`, or `{{` followed by a coloured span, breaks a page: Go templates, Hugo, Jinja, Quarto itself. The command text (`term-source` in non-terminal echo modes) has the same problem.
 
 **Possible fixes:**
 
-- (a) **quarto-term**: in the HTML renderer, escape `{` as `&#123;` (the browser shows the same character; Quarto doesn't see `{{<`). Do the same for the other raw formats where Quarto would scan them (Markdown output: `\{`).
-- (b) **book**: keep the workaround (fragile; only covers this one case).
+- **(a) quarto-term: escape `{` as `&#123;` in HTML output.** The browser shows the same character, and Quarto never sees `{{<`. Tested: with `alice&#123;&#123;<span style="color:red">2</span>,3}}.txt`, the page renders completely, and the output HTML contains `alice{{<span …>2</span>,3}}.txt` (Pandoc turns the entity back into `{` after shortcodes are processed).
 
-**Recommendation:** (a) in quarto-term, with an e2e test that renders `echo '{{< hello >}}'` through Quarto (`tests/quarto`). Then restore the original transcript in the book.
+  There are three HTML escapers to change:
+
+  - `src/renderer.rs`, `html_escape()`, used for all terminal output:
+
+    ```rust
+    fn html_escape(s: &str) -> String {
+        let mut out = String::with_capacity(s.len());
+        for ch in s.chars() {
+            match ch {
+                '&' => out.push_str("&amp;"),
+                '<' => out.push_str("&lt;"),
+                '>' => out.push_str("&gt;"),
+                '"' => out.push_str("&quot;"),
+                // Quarto treats `{{<` as a shortcode, even in raw HTML
+                '{' => out.push_str("&#123;"),
+                _ => out.push(ch),
+            }
+        }
+        out
+    }
+    ```
+
+  - `src/session.rs`, `html_escape_basic()`, used for the command in `term-source` blocks:
+
+    ```rust
+    fn html_escape_basic(s: &str) -> String {
+        s.replace('&', "&amp;")
+            .replace('<', "&lt;")
+            .replace('>', "&gt;")
+            .replace('{', "&#123;")
+    }
+    ```
+
+  - `src/output_transform.rs`, `html_escape()` (callout text), the same way.
+
+  Then update the unit tests, e.g. in `src/renderer.rs`:
+
+  ```rust
+  #[test]
+  fn html_escape_braces() {
+      assert_eq!(html_escape("{{< x >}}"), "&#123;&#123;&lt; x &gt;}}");
+  }
+  ```
+
+  LaTeX output already escapes braces (`latex_escape()`: `\{`). Typst output (`typst_escape()`) doesn't escape `{`; whether Quarto scans raw Typst for shortcodes isn't checked yet, so add the same e2e test with `--to typst`. For `gfm`/Markdown output (code fences), entities don't work. There, Quarto's own escape is `{{{< … >}}}`, which is out of scope.
+
+  An end-to-end test in `tests/quarto/run.sh`, after the "No engine" tests:
+
+  ````bash
+  echo ""
+  echo "Shortcode-like output:"
+  cat > "$WORK_DIR/shortcode.qmd" <<'EOF'
+  ---
+  title: "Shortcodes"
+  engine: markdown
+  filters: [term]
+  extensions:
+    term:
+      shell: bash
+      shell-args: ["--norc", "--noprofile"]
+      cache: false
+      timeout: 10
+  ---
+
+  ```{term}
+  printf 'alice{{\e[32m2\e[0m,3}}.txt\n'
+  echo '{{< hello >}}'
+  ```
+
+  AFTER-THE-CELL
+  EOF
+  out=$(render shortcode.qmd)
+  check "{{< in output doesn't start a shortcode" "$out" 'alice{{2,3}}.txt' '{{< hello >}}'
+  if grep -q 'AFTER-THE-CELL' "$WORK_DIR/shortcode.html"; then
+    echo "  PASS: text after the cell is kept"
+    PASS=$((PASS + 1))
+  else
+    echo "  FAIL: text after the cell is missing"
+    FAIL=$((FAIL + 1))
+  fi
+  ````
+
+- **(b) book: keep the workaround.** It's fragile and only covers this one case.
+
+**Recommendation:** (a), in the same patch release as issue 6. Afterwards, restore the original transcript in the book and re-render ch10:
+
+```bash
+cd book/2.5e
+cp ../2e/data/.cache/jupyter-console data/.cache/jupyter-console
+```
+
+The workaround is the only difference between the two files (checked: replacing `{{\x1b[0;38;5;28m2` with `{{2` in the 2e file gives the 2.5e file exactly). Then the ch10 difference for the uncoloured `2` disappears.
 
 ### 8. Prose and versions no longer match the image
 
-**Where and what** (details in `datasciencetoolbox/book-changes-plan.md` §C–E):
+**Fix in:** book. Until the converter is retired, as entries in `EDITS` in `bin/rmd2qmd.py` (`(file, old, new, reason)`, applied after conversion). After that, directly in the `.qmd` files. Details in `datasciencetoolbox/book-changes-plan.md` §C–E. Concrete edits:
 
-- **ch07:**
-  - "Under the hood, `rush plot` uses the function `qplot`" (line 536): no longer true; the `R -q -e '?ggplot2::qplot'` output now says `qplot()` is deprecated.
-  - The "rush generates an R script" passage: the script now starts with `#!/usr/bin/env -S ir run` and a `#| packages:` header.
-- **ch09:** skll writes `wine_*` instead of `wine_features_*` files; the prose doesn't name them, so only the shown output changed.
-- **Preface / ch02:** the note about the Docker image (versions differ from the printed book; the `:20210628` tag for the exact 2e environment); "Ubuntu" mentions.
-- **`tools.yml` / tools appendix:** versions, authors, and URLs of the tools (coreutils is uutils, tldr is tealdeer, …), and the description of `display`.
-- **Welcome page:** the "Want to learn from Jeroen in person? … Data Science Workshops" paragraph.
+- **ch07, `qplot`** (`chapter-7-exploring-data.qmd:536`). The help output that follows now starts with "‘qplot()’ is now deprecated in order to encourage the users to learn ‘ggplot()’", which still fits the next paragraph ("I agree with this advice"):
 
-**Fix in:** book (via the converter's `EDITS` or directly in the `.qmd` files once the converter is retired), plus `tools.yml` → `bin/appendix.py`.
+  ```python
+  (
+      "chapter-7-exploring-data.qmd",
+      "Under the hood, `rush plot` uses the function `qplot` from the `ggplot2` package.\n"
+      "Here's the first part of its documentation:\n",
+      "Under the hood, `rush plot` generates `ggplot2` code.\n"
+      "It used to rely on `ggplot2`'s shortcut function `qplot`, which is now deprecated.\n"
+      "Here's the first part of its documentation:\n",
+      "rush 0.2 no longer uses qplot()",
+  ),
+  ```
 
-**Recommendation:** do this as a separate content pass after issues 1–7, so the comparison stays about rendering. Then retire the converter (edit the `.qmd` files directly from that point on).
+- **ch07, the generated script** (`chapter-7-exploring-data.qmd:380–386`). The script that `rush run -n --tidyverse …` prints now starts with `#!/usr/bin/env -S ir run` and a `#| packages:` header, loads with `rush::read()`, and writes with `rush::write()`:
+
+  ```python
+  (
+      "chapter-7-exploring-data.qmd",
+      "- Writes out the shebang (*`#!`*; see [Chapter 4](chapter-4-creating-command-line-tools.qmd)) needed for running an `R` script from the command line.\n"
+      "- Imports the *tidyverse* and *glue* packages.\n"
+      "- Loads *tips.csv* as a data frame, cleans the column names, and assigns it to a variable *df*.\n"
+      "- Runs the specified expression.\n"
+      "- Prints the result to standard output.\n",
+      "- Writes out the shebang (*`#!`*; see [Chapter 4](chapter-4-creating-command-line-tools.qmd)) needed for running the script from the command line with `ir`.\n"
+      "- Lists the packages the script needs, so that `ir` can install any that are missing.\n"
+      "- Imports the *tidyverse* and *glue* packages.\n"
+      "- Loads *tips.csv* as a data frame, cleans the column names, and assigns it to a variable *df*.\n"
+      "- Runs the specified expression.\n"
+      "- Writes the result to standard output.\n",
+      "rush 0.2 scripts run with ir and declare their packages",
+  ),
+  ```
+
+- **Welcome page** (`index.qmd:10`): remove the "Want to learn from Jeroen in person? …" paragraph, like the course tip (decision 5). Keep the preface's "my own company: Data Science Workshops" (`preface.qmd:147`); that's history.
+
+  ```python
+  (
+      "index.qmd",
+      "Want to learn from Jeroen in person? Through his company, Data Science Workshops, Jeroen provides in-company training about data science at the command line and related topics such as Python, R, and machine learning. Visit [Data Science Workshops](https://datascienceworkshops.com) for more information.\n\n",
+      "",
+      "Decision 5: Data Science Workshops no longer offers this training",
+  ),
+  ```
+
+- **Preface and ch02, the Docker image.** The text is from book-changes-plan §C; the `:20210628` tag exists on Docker Hub (checked with `docker manifest inspect`). In `preface.qmd`, after the list of changes in the second edition:
+
+  ```markdown
+  ::: {.callout-note}
+  ## About the Docker image
+
+  Since this book was published, the Docker image has been updated to a newer version of Ubuntu and newer versions of the command-line tools.
+  It also runs natively on ARM-based computers, such as Macs with Apple Silicon.
+  All the commands in this book still work, but some output may look slightly different, for example version numbers, help texts, and the order of files.
+  If you want the exact environment that was used for this book, run `docker pull datasciencetoolbox/dsatcl2e:20210628` and use that tag in all `docker run` commands.
+  :::
+  ```
+
+  In `chapter-2-getting-started.qmd`, after the `docker_pull` cell, a short version of the same note (`:20210628` and "works on Intel/AMD and ARM computers, including Macs with Apple Silicon").
+
+- **ch09, skll file names:** `wine_*` instead of `wine_features_*`. The prose doesn't name them, so nothing to change.
+- **`tools.yml` / tools appendix:**
+  - versions, authors and URLs (coreutils is uutils, tldr is tealdeer, …);
+  - the description of `display`.
+
+  These come from `../2e/tools.yml` through `bin/appendix.py`. Copy `tools.yml` to `book/2.5e` first, so that 2e stays untouched.
+
+**Recommendation:**
+1. Do this as a separate content pass after issues 1–7, so the comparison stays about rendering.
+2. Re-run `make render compare` and mark the resulting differences with cause `content`.
+3. Retire the converter: delete `bin/rmd2qmd.py`'s `EDITS`/`FRONT_MATTER`, and edit the `.qmd` files directly from then on.
 
 ### Accepted differences that could still be improved (low priority)
 
