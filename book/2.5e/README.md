@@ -23,17 +23,16 @@ Requirements: Quarto, Docker, and uv.
 | `container/` | Mounted read-only at `/.book` in the container (hidden, so `tree /` doesn't show it): session setup (`setup.zsh`, ported from `../2e/_console_start.R`) and the `curl` cache (`bin/curl`, `cache-server.py`) |
 | `data/` | Chapter data, mounted at `/data.bak` and copied to `/data`. `data/.cache/http/` holds cached URLs (see `bin/cache-url.py` and `SOURCES.tsv`) |
 | `images/`, `history/` | Mounted at `/images` and `/history` |
-| `bin/rmd2qmd.py` | Converter from `../2e/*.Rmd` (bookdown + knitractive). Content edits for 2.5e are listed in its `EDITS` table |
+| `bin/cache-url.py` | Adds a URL to the `curl` cache (`data/.cache/http/`) |
 | `compare/` | `compare.py`, the reviewed `differences.yml`, and generated `reports/` |
-| `_extensions/jeroenjanssens/term/` | quarto-term v0.7.0, unmodified |
+| `_extensions/jeroenjanssens/term/` | quarto-term v0.7.3, unmodified (update with `quarto add jeroenjanssens/quarto-term@vX.Y.Z`) |
 | `_book/` | Rendered output (tracked) |
 
-## Converting more chapters
+## Editing
 
-```sh
-bin/rmd2qmd.py ../2e . 03.Rmd    # writes chapter-3-obtaining-data.qmd
-```
+The `.qmd` files are the source. They were converted from `../2e/*.Rmd`
+(bookdown + knitractive) with `bin/rmd2qmd.py`, which was removed after the
+content pass; see its history in git (`git log -- book/2.5e/bin/rmd2qmd.py`).
 
-Then add the page to `chapters:` in `_quarto.yml`, remove it from
-`NOT_CONVERTED_YET` in `compare/compare.py`, run `make render compare`, and
-review every difference in `compare/differences.yml`.
+After editing, run `make render compare` and review every new or changed
+difference in `compare/differences.yml`.
