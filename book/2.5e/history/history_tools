@@ -70,6 +70,8 @@ type hostname
 hostname
 hostname -i
 type in2csv
+type ir
+ir --help | trim
 type jq
 type json2csv
 type l

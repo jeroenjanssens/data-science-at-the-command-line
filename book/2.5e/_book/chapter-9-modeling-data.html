@@ -494,7 +494,7 @@ Figure&nbsp;9.2: Relationship between the alcohol contents of wine and its quali
 <li>The function <code>as_tibble()</code> converts the matrix back to a data frame.</li>
 <li>Finally, I add back the <em><code>type</code></em> column.</li>
 </ol>
-<p>Now we apply both dimensionality reduction techniques and visualize the mapping using <code>Rio-scatter</code>:</p>
+<p>Now we apply both dimensionality reduction techniques and visualize the mapping using <code>rush plot</code>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">xsv</span> select <span style="color:var(--term-3)">'!type'</span> <span style="text-decoration:underline">wine-scaled.csv</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -d | <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tapkee</span> --method pca | <span class="term-callout">➌</span>
@@ -1008,16 +1008,16 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, <em><span class="nocase">tapkee</span> – an Efficient Dimension Reduction Library</em>, version 1.2, 2013, <a href="http://tapkee.lisitsyn.me">http://tapkee.lisitsyn.me</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>John Langford, <em><span class="nocase">vw</span> – Fast Machine Learning Library for Online Learning</em>, version 8.10.1, 2021, <a href="https://vowpalwabbit.org">https://vowpalwabbit.org</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Educational Testing Service, <em><span class="nocase">skll</span> – <span>SciKit-Learn</span> Laboratory</em>, version 2.5.0, 2021, <a href="https://skll.readthedocs.org">https://skll.readthedocs.org</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Christopher Groskopf, <em><span class="nocase">csvstack</span> – Stack up the Rows from Multiple <span>CSV</span> Files</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, <em><span class="nocase">tapkee</span> – an Efficient Dimension Reduction Library</em>, version 1.4.0, 2026, <a href="https://github.com/lisitsyn/tapkee">https://github.com/lisitsyn/tapkee</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>John Langford, <em><span class="nocase">vw</span> – Fast Machine Learning Library for Online Learning</em>, version 9.11.9, 2026, <a href="https://vowpalwabbit.org">https://vowpalwabbit.org</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Educational Testing Service, <em><span class="nocase">skll</span> – <span>SciKit-Learn</span> Laboratory</em>, version 5.1.0, 2024, <a href="https://skll.readthedocs.io">https://skll.readthedocs.io</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Christopher Groskopf, <em><span class="nocase">csvstack</span> – Stack up the Rows from Multiple <span>CSV</span> Files</em>, version 1.1.0, 2023, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>K. Pearson, <span>“On Lines and Planes of Closest Fit to Systems of Points in Space,”</span> <em>Philosophical Magazine</em> 2, no. 11 (1901): 559–72.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>Laurens van der Maaten and Geoffrey Everest Hinton, <span>“Visualizing Data Using t-<span>SNE</span>,”</span> <em>Journal of Machine Learning Research</em> 9 (2008): 2579–2605.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, <span>“Tapkee: An Efficient Dimension Reduction Library,”</span> <em>Journal of Machine Learning Research</em> 14 (2013): 2355–59.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>Jeroen Janssens, <em><span class="nocase">csv2vw</span> – Convert <span>CSV</span> to Vowpal Wabbit Format</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>Torbjorn Granlund and Richard M. Stallman, <em><span class="nocase">split</span> – Split a File into Pieces</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>Paul Eggert, <em><span class="nocase">shuf</span> – Generate Random Permutations</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">split</span> – Split a File into Pieces</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">shuf</span> – Generate Random Permutations</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

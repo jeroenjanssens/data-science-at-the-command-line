@@ -565,26 +565,35 @@ fig:diagram-parallel-results
 ## Footnotes differ (11 vs 11)
 
 - id: `chapter-8-parallel-pipelines.html:footnotes`
-- hash: `64ccc211`
+- hash: `d264a6fb`
 - status: **accept**
 - cause: conversion
-- note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter is full
+- note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,3 +1,3 @@
+@@ -1,5 +1,5 @@
 -Tange, parallel – Build and Execute Shell Command Lines from Standard Input in Parallel.
 -Nelson, bc – an Arbitrary Precision Calculator Language.
 -Stallman and MacKenzie, ls – List Directory Contents.
-+Ole Tange, parallel – Build and Execute Shell Command Lines from Standard Input in Parallel, version 20161222, 2016, https://www.gnu.org/software/parallel.
-+Philip A. Nelson, bc – an Arbitrary Precision Calculator Language, version 1.07.1, 2017, https://www.gnu.org/software/bc.
-+Richard M. Stallman and David MacKenzie, ls – List Directory Contents, version 8.30, 2019, https://www.gnu.org/software/coreutils.
-@@ -5 +5 @@
+-Eric B. Decker, James Youngman, and Kevin Dalley, find – Search for Files in a Directory Hierarchy, version 4.7.0, 2019, https://www.gnu.org/software/findutils.
 -Hess, ts – Timestamp Input.
-+Joey Hess, ts – Timestamp Input, version 0.65, 2021, https://joeyh.name/code/moreutils.
-@@ -11 +11 @@
++Ole Tange, parallel – Build and Execute Shell Command Lines from Standard Input in Parallel, version 20240222, 2024, https://www.gnu.org/software/parallel.
++Philip A. Nelson, bc – an Arbitrary Precision Calculator Language, version 1.07.1, 2017, https://www.gnu.org/software/bc.
++uutils contributors, ls – List Directory Contents, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++Eric B. Decker, James Youngman, and Kevin Dalley, find – Search for Files in a Directory Hierarchy, version 4.10.0, 2024, https://www.gnu.org/software/findutils.
++Joey Hess, ts – Timestamp Input, version 0.69, 2024, https://joeyh.name/code/moreutils.
+@@ -7,5 +7,5 @@
+-Amazon Web Services, aws – Unified Tool to Manage AWS Services, version 2.1.32, 2021, https://aws.amazon.com/cli.
+-Tatu Ylonen et al., ssh – OpenSSH Remote Login Client, version 1:8.2p1-4ubuntu0.2, 2020, https://www.openssh.com.
+-Peter Tobias, Bernd Eckenfels, and Michael Meskes, hostname – Show or Set the System’s Host Name, version 3.23, 2021, https://sourceforge.net/projects/net-tools/.
+-Paul Eggert, zcat – Decompress and Concatenate Files to Standard Output, version 1.10, 2021, https://www.nongnu.org/zutils/zutils.html.
 -Janssens, rush – R One-Liners from the Shell.
-+Jeroen Janssens, rush – R One-Liners from the Shell, version 0.1, 2021, https://github.com/jeroenjanssens/rush.
++Amazon Web Services, aws – Unified Tool to Manage AWS Services, version 2.31.35, 2025, https://aws.amazon.com/cli.
++Tatu Ylonen et al., ssh – OpenSSH Remote Login Client, version 10.2p1, 2025, https://www.openssh.com.
++Peter Tobias, Bernd Eckenfels, and Michael Meskes, hostname – Show or Set the System’s Host Name, version 3.25, 2024, https://sourceforge.net/projects/net-tools/.
++Paul Eggert, zcat – Decompress and Concatenate Files to Standard Output, version 1.14, 2025, https://www.gnu.org/software/gzip.
++Jeroen Janssens, rush – R One-Liners from the Shell, version 0.2.1.9000, 2026, https://github.com/jeroenjanssens/rush.
 ```
 

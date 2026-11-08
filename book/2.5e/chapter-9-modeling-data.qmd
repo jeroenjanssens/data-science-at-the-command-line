@@ -212,7 +212,7 @@ csvlook wine-scaled.csv
 3. The function `as_tibble()` converts the matrix back to a data frame.
 4. Finally, I add back the *`type`* column.
 
-Now we apply both dimensionality reduction techniques and visualize the mapping using `Rio-scatter`:
+Now we apply both dimensionality reduction techniques and visualize the mapping using `rush plot`:
 
 ```{term}
 #| label: create_wine_pca

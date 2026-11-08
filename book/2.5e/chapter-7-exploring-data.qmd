@@ -379,11 +379,12 @@ rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tips.csv
 
 This generated script:
 
-- Writes out the shebang (*`#!`*; see [Chapter 4](chapter-4-creating-command-line-tools.qmd)) needed for running an `R` script from the command line.
+- Writes out the shebang (*`#!`*; see [Chapter 4](chapter-4-creating-command-line-tools.qmd)) needed for running the script from the command line with `ir` [@ir].
+- Lists the packages that the script needs, so that `ir` can prepare them the first time you run it.
 - Imports the *tidyverse* and *glue* packages.
 - Loads *tips.csv* as a data frame, cleans the column names, and assigns it to a variable *df*.
-- Runs the specified expression.
-- Prints the result to standard output.
+- Runs the specified expression and assigns its result to *result*.
+- Writes the result to standard output.
 
 You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.
 
@@ -533,15 +534,16 @@ While the syntax of `ggplot2` is relatively concise, especially considering the 
 This shortcut is available through the `plot` subcommand of `rush`.
 This allows you to create beautiful basic plots without needing to learn R and the grammar of graphics.
 
-Under the hood, `rush plot` uses the function `qplot` from the `ggplot2` package.
-Here's the first part of its documentation:
+Under the hood, `rush plot` constructs a `ggplot2` plot: options such as `--x`, `--y`, and `--color` become aesthetics, and `--geom` becomes the geometry.
+With the `--dry-run` (or `-n`) option you can see the code that it generates; here I only show the line that creates the plot:
 
 ```{term}
-R -q -e '?ggplot2::qplot' | trim 14
+rush plot -n --x bill --y tip tips.csv | grep 'ggplot('
 ```
 
-I agree with this advice; once you're done reading this book, it'll be worthwhile to learn `ggplot2`, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication.
-For now, while we're at the command line, let's take that shortcut.
+Once you're done reading this book, it'll be worthwhile to learn `ggplot2`, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication.
+The code that `rush plot -n` generates is a good starting point.
+For now, while we're at the command line, let's take the shortcut.
 
 As @fig-screenshot-display-ansi-and-inline already showed, `rush plot` can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and ANSI escape sequences) with the same syntax.
 When `rush` detects that its output is piped to another command (such as `display` or redirected to a file such as *tips.png* it will produce a graphical visualization; otherwise it will produce a textual visualization.

@@ -50,7 +50,7 @@ At the end of this chapter I suggest some resources to learn more about Docker.
 If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself.
 Please be aware that this is a very time-consuming process.
 The Appendix lists all the command-line tools used in the book.
-The installation instructions are for Ubuntu only.
+The [Dockerfile](https://github.com/datasciencetoolbox/datasciencetoolbox/blob/main/Dockerfile) of the Docker image shows how each of them is installed on Ubuntu.
 The scripts and data sets used in the book can be obtained by cloning this book’s [GitHub repository](https://github.com/datasciencetoolbox/datasciencetoolbox).
 :::
 
@@ -67,6 +67,12 @@ docker pull datasciencetoolbox/dsatcl2e #! enter: false
 #| include: false
 ctrl-c #! literal: false
 ```
+
+::: {.callout-note}
+The Docker image works on Intel/AMD and ARM computers, including Macs with Apple Silicon.
+It has been updated since the book was published, so some output may look slightly different from the printed book.
+If you want the exact environment that was used for the printed book, use `datasciencetoolbox/dsatcl2e:20210628` instead of `datasciencetoolbox/dsatcl2e` in the commands in this chapter.
+:::
 
 You can run the Docker image as follows:
 
@@ -591,10 +597,20 @@ The appendix contains examples for each of these.
 
 If the output is a comma-separated values, I often pipe it through`csvlook` to turn it into a nice-looking table.
 If you run `csvlook`, you'll see the complete table.
-I have redefined `csvlook` such that the table is shortened by `trim`:
+I have redefined `csvlook` such that the table is shortened by `trim`, and drawn with box-drawing characters:
+
+```text
+csvlook () {
+  command csvlook "$@" | trim |
+    sed '2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/──┤/;s/|/│/g;2s/-/─/g'
+}
+```
+
+`command` makes sure that the original `csvlook` is run, not the function itself.
+To get the same behavior on your own machine, add this function to your *~/.zshrc*.
+Here's the result:
 
 ```{term}
-which csvlook
 csvlook /data/ch07/tips.csv
 ```
 

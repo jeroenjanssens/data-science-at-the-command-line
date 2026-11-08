@@ -50,17 +50,20 @@ fig:starwars-image
 ## Footnotes differ (3 vs 3)
 
 - id: `chapter-6-project-management-with-make.html:footnotes`
-- hash: `d01b538a`
+- hash: `ae259b41`
 - status: **accept**
 - cause: conversion
-- note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter is full
+- note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 
 ```diff
 --- 2e
 +++ 2.5e
+@@ -1 +1 @@
+-Stuart I. Feldman, make – A Program for Maintaining Computer Programs, version 4.3, 2020, https://www.gnu.org/software/make.
++Stuart I. Feldman, make – A Program for Maintaining Computer Programs, version 4.4.1, 2023, https://www.gnu.org/software/make.
 @@ -3 +3 @@
 -Torvalds and Hamano, git – the Stupid Content Tracker.
-+Linus Torvalds and Junio C. Hamano, git – the Stupid Content Tracker, version 2.25.1, 2021, https://git-scm.com.
++Linus Torvalds and Junio C. Hamano, git – the Stupid Content Tracker, version 2.53.0, 2026, https://git-scm.com.
 ```
 
 ## Image changed: images/heights.png

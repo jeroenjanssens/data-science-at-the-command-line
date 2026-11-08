@@ -2,6 +2,32 @@
 
 Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae316735486f496571ddd1293ad4e1`
 
+## Extra code block 38: `$ csvlook /data/ch07/tips.csv`
+
+- id: `chapter-2-getting-started.html:block-extra:6d823d14`
+- hash: `703e6c59`
+- status: **accept**
+- cause: content
+- note: Content pass: csvlook example, now without `which csvlook`
+
+```diff
+--- 2e
++++ 2.5e
+@@ -0,0 +1,12 @@
++$ csvlook /data/ch07/tips.csv
++│  bill │   tip │ sex    │ smoker │ day  │ time   │ size │
++├───────┼───────┼────────┼────────┼──────┼────────┼──────┤
++│ 16.99 │  1.01 │ Female │  False │ Sun  │ Dinner │    2 │
++│ 10.34 │  1.66 │ Male   │  False │ Sun  │ Dinner │    3 │
++│ 21.01 │  3.50 │ Male   │  False │ Sun  │ Dinner │    3 │
++│ 23.68 │  3.31 │ Male   │  False │ Sun  │ Dinner │    2 │
++│ 24.59 │  3.61 │ Female │  False │ Sun  │ Dinner │    4 │
++│ 25.29 │  4.71 │ Male   │  False │ Sun  │ Dinner │    4 │
++│  8.77 │  2.00 │ Male   │  False │ Sun  │ Dinner │    2 │
++│ 26.88 │  3.12 │ Male   │  False │ Sun  │ Dinner │    4 │
++… with 236 more lines
+```
+
 ## Code block 3: `$ docker run --rm -it -v "$(p`
 
 - id: `chapter-2-getting-started.html:block:3`
@@ -21,7 +47,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 14: `$ cd /data`
 
 - id: `chapter-2-getting-started.html:block:14`
-- hash: `51ed497c`
+- hash: `d1875701`
 - status: **accept**
 - cause: image
 - note: Timestamps (time); /data has no csvconf/ directory and ch04/ has no subdirectory anymore (data); ls sort order (uutils)
@@ -44,15 +70,15 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -drwxr-xr-x 4 dst dst 4.0K Dec 14 11:43 ch10/
 -drwxr-xr-x 3 dst dst 4.0K Dec 14 11:43 csvconf/
 +total 36K
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch02/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch03/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch04/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch05/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch06/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch07/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch08/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch09/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch10/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch02/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch03/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch04/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch05/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch06/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch07/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch08/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch09/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch10/
  
  $ cd ch02
 ```
@@ -60,7 +86,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 18: `$ curl "https://www.gutenberg.org/files/11/11-0.txt" | grep " CHAPTER"`
 
 - id: `chapter-2-getting-started.html:block:18`
-- hash: `28a6cf76`
+- hash: `0d3d9f82`
 - status: **accept**
 - cause: network
 - note: Served from the cache (2021 version of the text, same size). curl 8 progress meter layout differs; speed is local
@@ -76,7 +102,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -100  170k  100  170k    0     0   202k      0 --:--:-- --:--:-- --:--:--  203k
 +  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
 +                                 Dload  Upload  Total   Spent   Left   Speed
-+100 170.2k 100 170.2k   0      0 164.5M      0                              0
++100 170.2k 100 170.2k   0      0 126.8M      0                              0
  
  $ cat chapters.txt
 ```
@@ -144,7 +170,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 27: `$ ls /data/ch10`
 
 - id: `chapter-2-getting-started.html:block:27`
-- hash: `cb1acd0d`
+- hash: `24222aa9`
 - status: **accept**
 - cause: uutils
 - note: ls sorts by byte value (uppercase first); no __pycache__/ in data; timestamps; count.py permissions
@@ -168,16 +194,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst  460 Dec 14 11:43 count.R
 --rw-r--r-- 1 dst dst 1.7K Dec 14 11:43 Untitled1337.ipynb
 +total 176K
-+-rw-r--r-- 1 dst dst 1.7K Nov  8 21:16 Untitled1337.ipynb
-+-rw-r--r-- 1 dst dst 164K Nov  8 21:16 alice.txt
-+-rw-r--r-- 1 dst dst  460 Nov  8 21:16 count.R
-+-rwxr-xr-x 1 dst dst  408 Nov  8 21:16 count.py*
++-rw-r--r-- 1 dst dst 1.7K Nov  8 21:47 Untitled1337.ipynb
++-rw-r--r-- 1 dst dst 164K Nov  8 21:47 alice.txt
++-rw-r--r-- 1 dst dst  460 Nov  8 21:47 count.R
++-rwxr-xr-x 1 dst dst  408 Nov  8 21:47 count.py*
 ```
 
 ## Code block 33: `$ cd /data`
 
 - id: `chapter-2-getting-started.html:block:33`
-- hash: `110e24e2`
+- hash: `fbe94778`
 - status: **accept**
 - cause: image
 - note: Same as block 14: timestamps, no csvconf/, ls sort order
@@ -201,16 +227,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -drwxr-xr-x 3 dst dst 4.0K Dec 14 11:43 csvconf/
 -drwxr-xr-x 2 dst dst 4.0K Dec 14 11:44 logs/
 +total 40K
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch02/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch03/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch04/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch05/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch06/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch07/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch08/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch09/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 ch10/
-+drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 logs/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch02/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch03/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch04/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch05/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch06/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch07/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch08/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch09/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 ch10/
++drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 logs/
 ```
 
 ## Code block 34: `$ mkdir -v backup`
@@ -275,23 +301,35 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 37: `$ which csvlook`
 
 - id: `chapter-2-getting-started.html:block:37`
-- hash: `745617c9`
+- hash: `c3b30832`
 - status: **accept**
 - cause: intended
-- note: Rendering harness: csvlook is now a typed function calling `command csvlook`, and only changes dashes on its separator line
+- note: Content pass: the csvlook function as a copyable code block (datasciencetoolbox#20); `command csvlook` instead of /usr/bin/csvlook
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,6 +1,6 @@
- $ which csvlook
+@@ -1,18 +1,4 @@
+-$ which csvlook
  csvlook () {
 -        /usr/bin/csvlook "$@" | trim | sed 's/- | -/──┼──/g;s/| -/├──/g;s/- |/──
 -┤/;s/|/│/g;2s/-/─/g'
-+        command csvlook "$@" | trim | sed '2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/
-+──┤/;s/|/│/g;2s/-/─/g'
++  command csvlook "$@" | trim |
++    sed '2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/──┤/;s/|/│/g;2s/-/─/g'
  }
- 
+-
+-$ csvlook /data/ch07/tips.csv
+-│  bill │   tip │ sex    │ smoker │ day  │ time   │ size │
+-├───────┼───────┼────────┼────────┼──────┼────────┼──────┤
+-│ 16.99 │  1.01 │ Female │  False │ Sun  │ Dinner │    2 │
+-│ 10.34 │  1.66 │ Male   │  False │ Sun  │ Dinner │    3 │
+-│ 21.01 │  3.50 │ Male   │  False │ Sun  │ Dinner │    3 │
+-│ 23.68 │  3.31 │ Male   │  False │ Sun  │ Dinner │    2 │
+-│ 24.59 │  3.61 │ Female │  False │ Sun  │ Dinner │    4 │
+-│ 25.29 │  4.71 │ Male   │  False │ Sun  │ Dinner │    4 │
+-│  8.77 │  2.00 │ Male   │  False │ Sun  │ Dinner │    2 │
+-│ 26.88 │  3.12 │ Male   │  False │ Sun  │ Dinner │    4 │
+-… with 236 more lines
 ```
 
 ## Code block 40: `$ man tar | trim 20`
@@ -430,6 +468,54 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 +… with 17 more lines
 ```
 
+## Prose (replace): If you still prefer to run the command-line tools natively rather than
+
+- id: `chapter-2-getting-started.html:prose:6ff8ee51`
+- hash: `786cda22`
+- status: **accept**
+- cause: content
+- note: Content pass: point to the image's Dockerfile instead of installation instructions that don't exist
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s GitHub repository.
++If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The Dockerfile of the Docker image shows how each of them is installed on Ubuntu. The scripts and data sets used in the book can be obtained by cloning this book’s GitHub repository.
+```
+
+## Prose (insert): The Docker image works on Intel/AMD and ARM computers, including Macs 
+
+- id: `chapter-2-getting-started.html:prose:99530bad`
+- hash: `b4f046ca`
+- status: **accept**
+- cause: content
+- note: Content pass: note about ARM support and the :20210628 image
+
+```diff
+--- 2e
++++ 2.5e
+@@ -0,0 +1 @@
++The Docker image works on Intel/AMD and ARM computers, including Macs with Apple Silicon. It has been updated since the book was published, so some output may look slightly different from the printed book. If you want the exact environment that was used for the printed book, use datasciencetoolbox/dsatcl2e:20210628 instead of datasciencetoolbox/dsatcl2e in the commands in this chapter.
+```
+
+## Prose (replace): If the output is a comma-separated values, I often pipe it through csv
+
+- id: `chapter-2-getting-started.html:prose:25395da1`
+- hash: `49f62c19`
+- status: **accept**
+- cause: content
+- note: Content pass: show the csvlook function as a copyable code block (datasciencetoolbox#20)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1,2 @@
+-If the output is a comma-separated values, I often pipe it through csvlook to turn it into a nice-looking table. If you run csvlook, you’ll see the complete table. I have redefined csvlook such that the table is shortened by trim:
++If the output is a comma-separated values, I often pipe it through csvlook to turn it into a nice-looking table. If you run csvlook, you’ll see the complete table. I have redefined csvlook such that the table is shortened by trim, and drawn with box-drawing characters:
++command makes sure that the original csvlook is run, not the function itself. To get the same behavior on your own machine, add this function to your ~/.zshrc. Here’s the result:
+```
+
 ## 8 old anchor(s) missing
 
 - id: `chapter-2-getting-started.html:anchors-missing`
@@ -449,5 +535,75 @@ fig:diagram-essential-tee
 fig:umbrella
 
 (new-only: fig-diagram-essential-pipe, fig-diagram-essential-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-redirect-devnull, fig-diagram-essential-redirect-devnull-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-redirect-stdout, fig-diagram-essential-redirect-stdout-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-sponge, fig-diagram-essential-sponge-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-stdin-cat, fig-diagram-essential-stdin-cat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-streams, fig-diagram-essential-streams-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-diagram-essential-tee, fig-diagram-essential-tee-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-umbrella, fig-umbrella-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fn1, fn10, fn11, fn12, fn13, fn14, fn15, fn16, fn17, fn18, fn19, fn2, fn20, fn21, fn22, fn23, fn3, fn4, fn5, fn6, fn7, fn8, fn9, fnref1, fnref10, fnref11, fnref12, fnref13, fnref14, fnref15, fnref16, fnref17, fnref18, fnref19, fnref2, fnref20, fnref21, fnref22, fnref23, fnref3, fnref4, fnref5, fnref6, fnref7, fnref8, fnref9, footnotes, title-block-header)
+```
+
+## External links differ
+
+- id: `chapter-2-getting-started.html:external-links`
+- hash: `9985b1eb`
+- status: **accept**
+- cause: content
+- note: Content pass: link to the image's Dockerfile
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,0 +2 @@
++https://github.com/datasciencetoolbox/datasciencetoolbox/blob/main/Dockerfile
+```
+
+## Footnotes differ (23 vs 23)
+
+- id: `chapter-2-getting-started.html:footnotes`
+- hash: `87e88f1a`
+- status: **accept**
+- cause: content
+- note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,7 +1,7 @@
+-Richard M. Stallman and David MacKenzie, ls – List Directory Contents, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Torbjorn Granlund and Richard M. Stallman, cat – Concatenate Files and Print on the Standard Output, version 8.30, 2018, https://www.gnu.org/software/coreutils.
+-Stephen Dolan, jq – Command-Line JSON Processor, version 1.6, 2021, https://stedolan.github.com/jq.
+-Ulrich Drepper, seq – Print a Sequence of Numbers, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Jim Meyering, pwd – Print Name of Working Directory, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-David MacKenzie and Jim Meyering, head – Output the First Part of Files, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-David M. Ihnat and David MacKenzie, paste – Merge Lines of Files, version 8.30, 2019, https://www.gnu.org/software/coreutils.
++uutils contributors, ls – List Directory Contents, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++uutils contributors, cat – Concatenate Files and Print on the Standard Output, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++Stephen Dolan, jq – Command-Line JSON Processor, version 1.8.1, 2025, https://jqlang.org.
++uutils contributors, seq – Print a Sequence of Numbers, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++uutils contributors, pwd – Print Name of Working Directory, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++uutils contributors, head – Output the First Part of Files, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++uutils contributors, paste – Merge Lines of Files, version 0.10.0, 2026, https://github.com/uutils/coreutils.
+@@ -10,4 +10,4 @@
+-Jim Meyering, grep – Print Lines That Match Patterns, version 3.4, 2019, https://www.gnu.org/software/grep.
+-Paul Rubin and David MacKenzie, wc – Print Newline, Word, and Byte Counts for Each File, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Mike Haertel and Paul Eggert, sort – Sort Lines of Text Files, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Karel Zak, rev – Reverse Lines Characterwise, version 2.36.1, 2021, https://www.kernel.org/pub/linux/utils/util-linux.
++Jim Meyering, grep – Print Lines That Match Patterns, version 3.12, 2025, https://www.gnu.org/software/grep.
++uutils contributors, wc – Print Newline, Word, and Byte Counts for Each File, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++uutils contributors, sort – Sort Lines of Text Files, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++Karel Zak, rev – Reverse Lines Characterwise, version 2.41.3, 2025, https://www.kernel.org/pub/linux/utils/util-linux.
+@@ -15 +15 @@
+-Colin Watson and Tollef Fog Heen, sponge – Soak up Standard Input and Write to a File, version 0.65, 2021, https://joeyh.name/code/moreutils.
++Colin Watson and Tollef Fog Heen, sponge – Soak up Standard Input and Write to a File, version 0.69, 2024, https://joeyh.name/code/moreutils.
+@@ -17,7 +17,7 @@
+-Scott Bartram and David MacKenzie, nl – Number Lines of Files, version 8.30, 2020, https://www.gnu.org/software/coreutils.
+-Mike Parker, David MacKenzie, and Jim Meyering, mv – Move (Rename) Files, version 8.30, 2020, https://www.gnu.org/software/coreutils.
+-Paul Rubin et al., rm – Remove Files or Directories, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Torbjorn Granlund, David MacKenzie, and Jim Meyering, cp – Copy Files and Directories, version 8.30, 2018, https://www.gnu.org/software/coreutils.
+-David MacKenzie, mkdir – Make Directories, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-John W. Eaton and Colin Watson, man – an Interface to the System Reference Manuals, version 2.9.1, 2020, https://nongnu.org/man-db.
+-Owen Voke, tldr – Collaborative Cheatsheets for Console Commands, version 3.3.7, 2021, https://tldr.sh.
++uutils contributors, nl – Number Lines of Files, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++Mike Parker, David MacKenzie, and Jim Meyering, mv – Move (Rename) Files, version 9.7, 2025, https://www.gnu.org/software/coreutils.
++Paul Rubin et al., rm – Remove Files or Directories, version 9.7, 2025, https://www.gnu.org/software/coreutils.
++Torbjorn Granlund, David MacKenzie, and Jim Meyering, cp – Copy Files and Directories, version 9.7, 2025, https://www.gnu.org/software/coreutils.
++uutils contributors, mkdir – Make Directories, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++John W. Eaton and Colin Watson, man – an Interface to the System Reference Manuals, version 2.13.1, 2025, https://nongnu.org/man-db.
++Danilo Bargen and Niklas Mohrin, tldr – Collaborative Cheatsheets for Console Commands, version 1.8.1, 2025, https://github.com/tealdeer-rs/tealdeer.
 ```
 

@@ -311,13 +311,26 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The installation instructions are for Ubuntu only. The scripts and data sets used in the book can be obtained by cloning this book’s <a href="https://github.com/datasciencetoolbox/datasciencetoolbox">GitHub repository</a>.</p>
+<p>If you still prefer to run the command-line tools natively rather than inside a Docker container, then you can, of course, install the command-line tools individually yourself. Please be aware that this is a very time-consuming process. The Appendix lists all the command-line tools used in the book. The <a href="https://github.com/datasciencetoolbox/datasciencetoolbox/blob/main/Dockerfile">Dockerfile</a> of the Docker image shows how each of them is installed on Ubuntu. The scripts and data sets used in the book can be obtained by cloning this book’s <a href="https://github.com/datasciencetoolbox/datasciencetoolbox">GitHub repository</a>.</p>
 </div>
 </div>
 <p>To install the Docker image, you first need to download and install Docker itself from <a href="https://www.docker.com/products/docker">the Docker website</a>. Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don’t type the dollar sign):</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> pull datasciencetoolbox/dsatcl2e</code></pre>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Docker image works on Intel/AMD and ARM computers, including Macs with Apple Silicon. It has been updated since the book was published, so some output may look slightly different from the printed book. If you want the exact environment that was used for the printed book, use <code>datasciencetoolbox/dsatcl2e:20210628</code> instead of <code>datasciencetoolbox/dsatcl2e</code> in the commands in this chapter.</p>
+</div>
+</div>
 <p>You can run the Docker image as follows:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> run --rm -it datasciencetoolbox/dsatcl2e</code></pre>
 
@@ -516,15 +529,15 @@ Figure&nbsp;2.1: I use the term command-line tool as an umbrella term
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 36K</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">ch02</span></code></pre>
 
@@ -608,7 +621,7 @@ Figure&nbsp;2.3: The output from a tool can be piped to another tool
 <span class="term-output">s.txt</span>
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
-<span class="term-output">100 170.2k 100 170.2k   0      0 164.5M      0                              0</span>
+<span class="term-output">100 170.2k 100 170.2k   0      0 126.8M      0                              0</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">chapters.txt</span>
 <span class="term-output"> CHAPTER I.     Down the Rabbit-Hole</span>
@@ -768,10 +781,10 @@ Figure&nbsp;2.7: Unless you use <code>sponge</code>, you cannot read from and wr
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> <span style="text-decoration:underline">/data/ch10</span>
 <span class="term-output">total 176K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  8 21:16 Untitled1337.ipynb</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  8 21:16 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  8 21:16 count.R</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  8 21:47 Untitled1337.ipynb</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  8 21:47 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  8 21:47 count.R</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  8 21:47 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
 
 <p>You have already seen how we can create new files by redirecting the output with either <code>&gt;</code> or <code>&gt;&gt;</code>. If you need to move a file to a different directory you can use <code>mv</code><span class="citation" data-cites="mv"><a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></span>:</p>
 <pre class="text"><code>$ mv hello.txt /data/ch02</code></pre>
@@ -791,16 +804,16 @@ $ mv hello.txt bye.txt</code></pre>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 40K</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:16 <span style="color:var(--term-4);font-weight:bold">logs</span>/</span></code></pre>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  8 21:47 <span style="color:var(--term-4);font-weight:bold">logs</span>/</span></code></pre>
 
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -851,14 +864,13 @@ Tip
 <span class="term-output">… with 240 more lines</span></code></pre>
 
 <p>Other tools that I use to massage the output are: <code>head</code>, <code>tail</code>, <code>fold</code>, <code>paste</code>, and <code>column</code>. The appendix contains examples for each of these.</p>
-<p>If the output is a comma-separated values, I often pipe it through<code>csvlook</code> to turn it into a nice-looking table. If you run <code>csvlook</code>, you’ll see the complete table. I have redefined <code>csvlook</code> such that the table is shortened by <code>trim</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">which</span> csvlook
-<span class="term-output">csvlook () {</span>
-<span class="term-output">        command csvlook "$@" | trim | sed '2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/</span>
-<span class="term-output">──┤/;s/|/│/g;2s/-/─/g'</span>
-<span class="term-output">}</span>
-<span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span>
+<p>If the output is a comma-separated values, I often pipe it through<code>csvlook</code> to turn it into a nice-looking table. If you run <code>csvlook</code>, you’ll see the complete table. I have redefined <code>csvlook</code> such that the table is shortened by <code>trim</code>, and drawn with box-drawing characters:</p>
+<pre class="text"><code>csvlook () {
+  command csvlook "$@" | trim |
+    sed '2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/──┤/;s/|/│/g;2s/-/─/g'
+}</code></pre>
+<p><code>command</code> makes sure that the original <code>csvlook</code> is run, not the function itself. To get the same behavior on your own machine, add this function to your <em>~/.zshrc</em>. Here’s the result:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span>
 <span class="term-output">│  bill │   tip │ sex    │ smoker │ day  │ time   │ size │</span>
 <span class="term-output">├───────┼───────┼────────┼────────┼──────┼────────┼──────┤</span>
 <span class="term-output">│ 16.99 │  1.01 │ Female │  False │ Sun  │ Dinner │    2 │</span>
@@ -1014,29 +1026,29 @@ Figure&nbsp;2.8: With <code>tee</code>, you can write intermediate output to a f
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Richard M. Stallman and David MacKenzie, <em><span class="nocase">ls</span> – List Directory Contents</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Torbjorn Granlund and Richard M. Stallman, <em><span class="nocase">cat</span> – Concatenate Files and Print on the Standard Output</em>, version 8.30, 2018, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Stephen Dolan, <em><span class="nocase">jq</span> – Command-Line <span>JSON</span> Processor</em>, version 1.6, 2021, <a href="https://stedolan.github.com/jq">https://stedolan.github.com/jq</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Ulrich Drepper, <em><span class="nocase">seq</span> – Print a Sequence of Numbers</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Jim Meyering, <em><span class="nocase">pwd</span> – Print Name of Working Directory</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>David MacKenzie and Jim Meyering, <em><span class="nocase">head</span> – Output the First Part of Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>David M. Ihnat and David MacKenzie, <em><span class="nocase">paste</span> – Merge Lines of Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">ls</span> – List Directory Contents</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">cat</span> – Concatenate Files and Print on the Standard Output</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Stephen Dolan, <em><span class="nocase">jq</span> – Command-Line <span>JSON</span> Processor</em>, version 1.8.1, 2025, <a href="https://jqlang.org">https://jqlang.org</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">seq</span> – Print a Sequence of Numbers</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">pwd</span> – Print Name of Working Directory</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">head</span> – Output the First Part of Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">paste</span> – Merge Lines of Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>Philip A. Nelson, <em><span class="nocase">bc</span> – an Arbitrary Precision Calculator Language</em>, version 1.07.1, 2017, <a href="https://www.gnu.org/software/bc">https://www.gnu.org/software/bc</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p>Eric S Raymond, <em>The Art of Unix Programming</em> (Addison-Wesley Professional, 2003).<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>Jim Meyering, <em><span class="nocase">grep</span> – Print Lines That Match Patterns</em>, version 3.4, 2019, <a href="https://www.gnu.org/software/grep">https://www.gnu.org/software/grep</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>Paul Rubin and David MacKenzie, <em><span class="nocase">wc</span> – Print Newline, Word, and Byte Counts for Each File</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12"><p>Mike Haertel and Paul Eggert, <em><span class="nocase">sort</span> – Sort Lines of Text Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13"><p>Karel Zak, <em><span class="nocase">rev</span> – Reverse Lines Characterwise</em>, version 2.36.1, 2021, <a href="https://www.kernel.org/pub/linux/utils/util-linux">https://www.kernel.org/pub/linux/utils/util-linux</a>.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Jim Meyering, <em><span class="nocase">grep</span> – Print Lines That Match Patterns</em>, version 3.12, 2025, <a href="https://www.gnu.org/software/grep">https://www.gnu.org/software/grep</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">wc</span> – Print Newline, Word, and Byte Counts for Each File</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">sort</span> – Sort Lines of Text Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Karel Zak, <em><span class="nocase">rev</span> – Reverse Lines Characterwise</em>, version 2.41.3, 2025, <a href="https://www.kernel.org/pub/linux/utils/util-linux">https://www.kernel.org/pub/linux/utils/util-linux</a>.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn14"><p><a href="http://porkmail.org/era/unix/award.html">Some</a> consider this a useless use of <code>cat</code>, arguing that the purpose of <code>cat</code> is to concatenate files and if you’re not using it for this purpose, it’s a waste of time, and costs you a process. I think this is silly. We’ve got more important things to do!<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p>Colin Watson and Tollef Fog Heen, <em><span class="nocase">sponge</span> – Soak up Standard Input and Write to a File</em>, version 0.65, 2021, <a href="https://joeyh.name/code/moreutils">https://joeyh.name/code/moreutils</a>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>Colin Watson and Tollef Fog Heen, <em><span class="nocase">sponge</span> – Soak up Standard Input and Write to a File</em>, version 0.69, 2024, <a href="https://joeyh.name/code/moreutils">https://joeyh.name/code/moreutils</a>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn16"><p>Jeroen Janssens, <em><span class="nocase">dseq</span> – Generate Sequence of Dates</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn17"><p>Scott Bartram and David MacKenzie, <em><span class="nocase">nl</span> – Number Lines of Files</em>, version 8.30, 2020, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn18"><p>Mike Parker, David MacKenzie, and Jim Meyering, <em><span class="nocase">mv</span> – Move (Rename) Files</em>, version 8.30, 2020, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn19"><p>Paul Rubin et al., <em><span class="nocase">rm</span> – Remove Files or Directories</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn20"><p>Torbjorn Granlund, David MacKenzie, and Jim Meyering, <em><span class="nocase">cp</span> – Copy Files and Directories</em>, version 8.30, 2018, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn21"><p>David MacKenzie, <em><span class="nocase">mkdir</span> – Make Directories</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn22"><p>John W. Eaton and Colin Watson, <em><span class="nocase">man</span> – an Interface to the System Reference Manuals</em>, version 2.9.1, 2020, <a href="https://nongnu.org/man-db">https://nongnu.org/man-db</a>.<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn23"><p>Owen Voke, <em><span class="nocase">tldr</span> – Collaborative Cheatsheets for Console Commands</em>, version 3.3.7, 2021, <a href="https://tldr.sh">https://tldr.sh</a>.<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">nl</span> – Number Lines of Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>Mike Parker, David MacKenzie, and Jim Meyering, <em><span class="nocase">mv</span> – Move (Rename) Files</em>, version 9.7, 2025, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>Paul Rubin et al., <em><span class="nocase">rm</span> – Remove Files or Directories</em>, version 9.7, 2025, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>Torbjorn Granlund, David MacKenzie, and Jim Meyering, <em><span class="nocase">cp</span> – Copy Files and Directories</em>, version 9.7, 2025, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">mkdir</span> – Make Directories</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p>John W. Eaton and Colin Watson, <em><span class="nocase">man</span> – an Interface to the System Reference Manuals</em>, version 2.13.1, 2025, <a href="https://nongnu.org/man-db">https://nongnu.org/man-db</a>.<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p>Danilo Bargen and Niklas Mohrin, <em><span class="nocase">tldr</span> – Collaborative Cheatsheets for Console Commands</em>, version 1.8.1, 2025, <a href="https://github.com/tealdeer-rs/tealdeer">https://github.com/tealdeer-rs/tealdeer</a>.<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

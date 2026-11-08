@@ -43,7 +43,7 @@ display tips.png
 rush plot --x bill --y tip --color size --facets '~day' tips.csv
 bat $(which servewd)
 pkill -f http.server
-R -q -e '?ggplot2::qplot' | trim 14
+rush plot -n --x bill --y tip tips.csv | grep 'ggplot('
 rush plot --help
 rush plot --x time tips.csv
 rush plot --x time tips.csv > plot-bar.png

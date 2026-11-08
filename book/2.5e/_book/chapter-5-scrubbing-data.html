@@ -309,13 +309,13 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 200K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  8 21:17 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  8 21:17 iris.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  8 21:17 irismeta.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  8 21:17 names-comma.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  8 21:17 names.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  8 21:17 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  8 21:17 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  8 21:47 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  8 21:47 iris.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  8 21:47 irismeta.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  8 21:47 names-comma.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  8 21:47 names.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  8 21:47 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  8 21:47 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 <p>Before I dive into the actual transformations, I’d like to demonstrate their ubiquity when working at the command line.</p>
@@ -596,27 +596,27 @@ Note
 <p>When you’re in the process of formulating your data pipeline and you have a lot of data, then debugging your pipeline can be cumbersome. In that case, generating a smaller sample from the data might be useful. This is where <code>sample</code><span class="citation" data-cites="sample"><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></span> comes in handy. The main purpose of <code>sample</code> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
 
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1%
-<span class="term-output">Line 242</span>
-<span class="term-output">Line 372</span>
-<span class="term-output">Line 450</span>
-<span class="term-output">Line 495</span>
-<span class="term-output">Line 503</span>
-<span class="term-output">Line 559</span>
-<span class="term-output">Line 614</span>
-<span class="term-output">Line 619</span>
-<span class="term-output">Line 647</span>
-<span class="term-output">Line 750</span>
-<span class="term-output">Line 894</span></code></pre>
+<span class="term-output">Line 154</span>
+<span class="term-output">Line 223</span>
+<span class="term-output">Line 394</span>
+<span class="term-output">Line 400</span>
+<span class="term-output">Line 520</span>
+<span class="term-output">Line 681</span>
+<span class="term-output">Line 710</span>
+<span class="term-output">Line 722</span>
+<span class="term-output">Line 840</span>
+<span class="term-output">Line 909</span>
+<span class="term-output">Line 921</span></code></pre>
 
 <p>Here, every input line has a one percent chance of being printed. This percentage can also be specified as a fraction (namely <code>1/100</code>) or as a probability (namely <code>0.01</code>).</p>
 <p><code>sample</code> has two other purposes, which can be useful when you’re debugging your pipeline. First, it’s possible to add some delay to the output. This comes in handy when the input is a constant stream (for example, the Wikipedia stream we saw in <a href="./chapter-3-obtaining-data.html">Chapter 3</a>), and the data comes in too fast to see what’s going on. Secondly, you can put a timer on <code>sample</code>, so that you don’t have to kill the ongoing process manually. For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1% -d 1000 -s 5 | <span style="color:var(--term-2)">ts</span> <span class="term-callout">➊</span>
-<span class="term-output">Nov 08 21:17:17 Line 213</span>
-<span class="term-output">Nov 08 21:17:18 Line 223</span>
-<span class="term-output">Nov 08 21:17:19 Line 400</span>
-<span class="term-output">Nov 08 21:17:20 Line 418</span>
-<span class="term-output">Nov 08 21:17:21 Line 604</span>
-<span class="term-output">Nov 08 21:17:22 Line 770</span></code></pre>
+<span class="term-output">Nov 08 21:47:41 Line 12</span>
+<span class="term-output">Nov 08 21:47:42 Line 101</span>
+<span class="term-output">Nov 08 21:47:43 Line 225</span>
+<span class="term-output">Nov 08 21:47:44 Line 292</span>
+<span class="term-output">Nov 08 21:47:45 Line 381</span>
+<span class="term-output">Nov 08 21:47:46 Line 392</span></code></pre>
 
 <ol type="1">
 <li>The tool <code>ts</code><span class="citation" data-cites="ts"><a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></span> adds a timestamp in front of each line.</li>
@@ -1245,13 +1245,13 @@ Note
 
 <p>Like many other command-line tools, <code>sed</code> does not make use of the structure of the data. Better to either use a tool that makes use of the structure of the data (such as <code>jq</code> which I discuss below), or first convert the data to a tabular format such as CSV and then apply the appropriate command-line tool.</p>
 <p>I’m going to demonstrate converting XML/HTML and JSON to CSV through a real-world use case. The command-line tools that I’ll be using here are: <code>curl</code>, <code>pup</code><span class="citation" data-cites="pup"><a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a></span>, <code>xml2json</code><span class="citation" data-cites="xml2json"><a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a></span>, <code>jq</code> and <code>json2csv</code><span class="citation" data-cites="json2csv"><a href="#fn27" class="footnote-ref" id="fnref27" role="doc-noteref"><sup>27</sup></a></span>.</p>
-<p>Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets. For example, <a href="http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio">this page</a> contains a list of countries and territories together with their border length, their area, and the ratio between the two.</p>
+<p>Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets. For example, <a href="https://web.archive.org/web/20211005234015/https://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio">this page</a> contains a list of countries and territories together with their border length, their area, and the ratio between the two. The page was deleted from Wikipedia in January 2025, so I use a copy from October 2021 that the Internet Archive keeps.</p>
 <p>Let’s imagine that you’re interested in analyzing this data. In this section, I’ll walk you through all the necessary steps and their corresponding commands. I won’t go into every little detail, so it could be that you won’t understand everything right away. Don’t worry, I’re confident that you’ll get the gist of it. Remember that the purpose of this section is to demonstrate the command line. All tools and concepts used in this section (and more) will be explained in the subsequent chapters.</p>
 <p>The data set that you’re interested in, is embedded in HTML. Your goal is to end up with a representation of this data set that you can work with. The very first step is to download the HTML using <code>curl</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_bo</span>
-<span class="term-output"><span style="color:var(--term-3)">rder/area_ratio'</span> <span style="color:var(--term-3)">&gt;</span> wiki.html</span></code></pre>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://web.archive.org/web/20211005234015id_/https://en.wikipedia.o</span>
+<span class="term-output"><span style="color:var(--term-3)">rg/wiki/List_of_countries_and_territories_by_border/area_ratio'</span> <span style="color:var(--term-3)">&gt;</span> wiki.html</span></code></pre>
 
-<p>The HTML is saved to a file named <em>wiki.html</em>. Let’s see how the first 10 lines look like:</p>
+<p>The <code>id_</code> after the date makes the Internet Archive return the page as it was, without its own navigation bar. The HTML is saved to a file named <em>wiki.html</em>. Let’s see how the first 10 lines look like:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wiki.html</span> <span style="color:var(--term-2)">trim</span>
 <span class="term-output">&lt;!DOCTYPE html&gt;</span>
 <span class="term-output">&lt;html class="client-nojs" lang="en" dir="ltr"&gt;</span>
@@ -1366,30 +1366,30 @@ Note
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Jim Meyering, <em><span class="nocase">grep</span> – Print Lines That Match Patterns</em>, version 3.4, 2019, <a href="https://www.gnu.org/software/grep">https://www.gnu.org/software/grep</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Mike D. Brennan and Thomas E. Dickey, <em><span class="nocase">awk</span> – Pattern Scanning and Text Processing Language</em>, version 1.3.4, 2019, <a href="https://invisible-island.net/mawk">https://invisible-island.net/mawk</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Stephen Dolan, <em><span class="nocase">jq</span> – Command-Line <span>JSON</span> Processor</em>, version 1.6, 2021, <a href="https://stedolan.github.com/jq">https://stedolan.github.com/jq</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Jim Meyering, <em><span class="nocase">grep</span> – Print Lines That Match Patterns</em>, version 3.12, 2025, <a href="https://www.gnu.org/software/grep">https://www.gnu.org/software/grep</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Mike D. Brennan and Thomas E. Dickey, <em><span class="nocase">awk</span> – Pattern Scanning and Text Processing Language</em>, version 1.3.4 20260129, 2026, <a href="https://invisible-island.net/mawk">https://invisible-island.net/mawk</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Stephen Dolan, <em><span class="nocase">jq</span> – Command-Line <span>JSON</span> Processor</em>, version 1.8.1, 2025, <a href="https://jqlang.org">https://jqlang.org</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Eric Chiang, <em><span class="nocase">pup</span> – Parsing HTML at the Command Line</em>, version 0.4.0, 2016, <a href="https://github.com/EricChiang/pup">https://github.com/EricChiang/pup</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Richard M. Stallman and David MacKenzie, <em><span class="nocase">uniq</span> – Report or Omit Repeated Lines</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Jeroen Janssens, <em><span class="nocase">rush</span> – <span>R</span> One-Liners from the Shell</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/rush">https://github.com/jeroenjanssens/rush</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">uniq</span> – Report or Omit Repeated Lines</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Jeroen Janssens, <em><span class="nocase">rush</span> – <span>R</span> One-Liners from the Shell</em>, version 0.2.1.9000, 2026, <a href="https://github.com/jeroenjanssens/rush">https://github.com/jeroenjanssens/rush</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>The Linux Information Project, <span>“Plain Text Definition,”</span> 2007, <a href="http://www.linfo.org/plain_text.html">http://www.linfo.org/plain_text.html</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>Andrew Hunt and David Thomas, <em>The Pragmatic Programmer</em> (Addison-Wesley, 1999).<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p>Eric S Raymond, <em>The Art of Unix Programming</em> (Addison-Wesley Professional, 2003).<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn10"><p>David MacKenzie and Jim Meyering, <em><span class="nocase">head</span> – Output the First Part of Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn11"><p>Jay Fenlason et al., <em><span class="nocase">sed</span> – Stream Editor for Filtering and Transforming Text</em>, version 4.7, 2018, <a href="https://www.gnu.org/software/sed">https://www.gnu.org/software/sed</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn12"><p>Paul Rubin et al., <em><span class="nocase">tail</span> – Output the Last Part of Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn13"><p>Jeroen Janssens, <em><span class="nocase">sample</span> – Filter Lines from Standard Input According to Some Probability, with a Given Delay, and for a Certain Duration</em>, version 0.2.4, 2021, <a href="https://github.com/jeroenjanssens/sample">https://github.com/jeroenjanssens/sample</a>.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn14"><p>Joey Hess, <em><span class="nocase">ts</span> – Timestamp Input</em>, version 0.65, 2021, <a href="https://joeyh.name/code/moreutils">https://joeyh.name/code/moreutils</a>.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn15"><p>Jim Meyering, <em><span class="nocase">tr</span> – Translate or Delete Characters</em>, version 8.30, 2018, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">head</span> – Output the First Part of Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>Jay Fenlason et al., <em><span class="nocase">sed</span> – Stream Editor for Filtering and Transforming Text</em>, version 4.9, 2022, <a href="https://www.gnu.org/software/sed">https://www.gnu.org/software/sed</a>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">tail</span> – Output the Last Part of Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>Jeroen Janssens, <em><span class="nocase">sample</span> – Filter Lines from Standard Input According to Some Probability, with a Given Delay, and for a Certain Duration</em>, version 0.2.5, 2021, <a href="https://github.com/jeroenjanssens/sample">https://github.com/jeroenjanssens/sample</a>.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>Joey Hess, <em><span class="nocase">ts</span> – Timestamp Input</em>, version 0.69, 2024, <a href="https://joeyh.name/code/moreutils">https://joeyh.name/code/moreutils</a>.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">tr</span> – Translate or Delete Characters</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn16"><p>Jeroen Janssens, <em><span class="nocase">body</span> – Apply Command to All but the First Line</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn17"><p>Jeroen Janssens, <em><span class="nocase">header</span> – Add, Replace, and Delete Header Lines</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn18"><p>Jeroen Janssens, <em><span class="nocase">cols</span> – Apply Command to Subset of Columns</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn19"><p>Christopher Groskopf, <em><span class="nocase">csvsql</span> – Execute <span>SQL</span> Statements on <span>CSV</span> Files</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn20"><p>Christopher Groskopf, <em><span class="nocase">csvcut</span> – Filter and Truncate <span>CSV</span> Files</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn21"><p>Christopher Groskopf, <em><span class="nocase">csvgrep</span> – Search <span>CSV</span> Files</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn22"><p>Mike Parker, Richard M. Stallman, and David MacKenzie, <em><span class="nocase">tee</span> – Read from Standard Input and Write to Standard Output and Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn23"><p>David M. Ihnat and David MacKenzie, <em><span class="nocase">paste</span> – Merge Lines of Files</em>, version 8.30, 2019, <a href="https://www.gnu.org/software/coreutils">https://www.gnu.org/software/coreutils</a>.<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn24"><p>Christopher Groskopf, <em><span class="nocase">csvjoin</span> – Execute a <span>SQL</span>-Like Join to Merge <span>CSV</span> Files on a Specified Column or Columns</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref24" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>Christopher Groskopf, <em><span class="nocase">csvsql</span> – Execute <span>SQL</span> Statements on <span>CSV</span> Files</em>, version 1.1.0, 2023, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>Christopher Groskopf, <em><span class="nocase">csvcut</span> – Filter and Truncate <span>CSV</span> Files</em>, version 1.1.0, 2023, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>Christopher Groskopf, <em><span class="nocase">csvgrep</span> – Search <span>CSV</span> Files</em>, version 1.1.0, 2023, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">tee</span> – Read from Standard Input and Write to Standard Output and Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p><span class="nocase">uutils contributors</span>, <em><span class="nocase">paste</span> – Merge Lines of Files</em>, version 0.10.0, 2026, <a href="https://github.com/uutils/coreutils">https://github.com/uutils/coreutils</a>.<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn24"><p>Christopher Groskopf, <em><span class="nocase">csvjoin</span> – Execute a <span>SQL</span>-Like Join to Merge <span>CSV</span> Files on a Specified Column or Columns</em>, version 1.1.0, 2023, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref24" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn25"><p>Chiang, <em><span class="nocase">pup</span> – Parsing HTML at the Command Line</em>.<a href="#fnref25" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn26"><p>François Parmentier, <em><span class="nocase">xml2json</span> – Convert an <span>XML</span> Input to a <span>JSON</span> Output, Using <span class="nocase">xml-mapping</span></em>, version 0.0.3, 2016, <a href="https://github.com/parmentf/xml2json">https://github.com/parmentf/xml2json</a>.<a href="#fnref26" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn27"><p>Jehiah Czebotar, <em><span class="nocase">json2csv</span> – Convert <span>JSON</span> to <span>CSV</span></em>, version 1.2.1, 2019, <a href="https://github.com/jehiah/json2csv">https://github.com/jehiah/json2csv</a>.<a href="#fnref27" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

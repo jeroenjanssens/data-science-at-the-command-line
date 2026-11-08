@@ -73,6 +73,14 @@ Here’s a nonexhaustive list of changes I have made:
 * In [Chapter 9](chapter-9-modeling-data.qmd) I replaced Weka and BigML with Vowpal Wabbit (`vw`). Weka is old and the way it is used from the command line is clunky. BigML is a commercial API on which I no longer want to rely. Vowpal Wabbit is a very mature machine learning tool, developed at Yahoo! and now at Microsoft. 
 * [Chapter 10](chapter-10-polyglot-data-science.qmd) is an entirely new chapter about integrating the command line into existing workflows, including Python, R, and Apache Spark. In the first edition I mentioned that the command line can easily be integrated with existing workflows, but I never got into that. This chapter fixes that.
 
+::: {.callout-note}
+Since this book was published, the Docker image has been updated to a newer version of Ubuntu and newer versions of the command-line tools.
+It also runs natively on ARM-based computers, such as Macs with Apple Silicon.
+All the commands in this book still work, but some output may look slightly different, for example version numbers, help texts, and the order of files.
+This website shows the output of the current image.
+If you want the exact environment that was used for the printed book, run `docker pull datasciencetoolbox/dsatcl2e:20210628` and use that tag in all `docker run` commands.
+:::
+
 ## How to Read This Book {.unnumbered}
 
 In general, I advise you to read this book in a linear fashion.

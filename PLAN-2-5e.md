@@ -415,7 +415,7 @@ Summary:
 | 5 | `trim` cuts multibyte characters | dsutils (image) | Count characters with Perl instead of mawk | **Fixed** (dsutils 4f49774, image #25) |
 | 6 | Multibyte characters garbled in terminal output | quarto-term | Keep incomplete UTF-8 sequences between reads | **Fixed** (quarto-term 0.7.2) |
 | 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` as `&#123;` in HTML output; then drop the book workaround | **Fixed** (quarto-term 0.7.2; workaround removed) |
-| 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) | Open |
+| 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) | **Done** (2026-11-08); converter retired |
 
 How the code below was checked:
 
@@ -449,6 +449,14 @@ A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both pl
   - (d) book: accept the wrapped line.
 
 **Status (2026-11-08, end of day):** the ch04 BOM line is fixed with option (a): quarto-term 0.7.3 leaves U+FEFF, U+200B, and U+2060 out of what it feeds avt (recordings keep them). Option (b) is reported upstream as a comment on asciinema/avt#27 (with a reproduction for avt 0.18 and 0.20). After the re-render, all 168 entries in `differences.yml` are `accept`; no rendering issue is open. Left: 3a (horizontal y title in rush's terminal plots), 3b/c (legend keys), and the content pass (8).
+
+**Status (2026-11-08, content pass):** issue 8 is done, edited in the `.qmd` files directly; `bin/rmd2qmd.py` is removed (its history is in git).
+- Welcome page: the Data Science Workshops paragraph is gone. Preface and ch02: notes about the updated image, ARM, and `:20210628`; ch02's tip points to the image's Dockerfile; ch02 shows the `csvlook` function as a copyable block (datasciencetoolbox#20).
+- ch05: the Wikipedia page was deleted on 2025-01-26; the text and `curl` use the Internet Archive copy of 2021-10-05 (`id_`), byte-identical to the cached page, so the output is unchanged.
+- ch07: `rush plot` builds a `ggplot()` call (qplot is deprecated), shown with `rush plot -n … | grep 'ggplot('`; the generated-script bullets describe `ir`, the packages header, and `result`. New `ir` entry in the appendix and `tools.bib`.
+- ch09: `Rio-scatter` → `rush plot`.
+- Appendix and `tools.bib`: 73 tools get the version, year, authors, and URL of the current image (sources in `compare/tool-versions.tsv`, URL checks in `compare/tool-urls.tsv`): uutils for most coreutils commands, tealdeer for `tldr`, uv behind `pip`, unrar-free, GNU inetutils `telnet`, new homes for jq, curl, tree, tapkee, skll. `display` is described as the book's own function.
+- Not changed: ch03's telnet example (towel.blinkenlights.nl doesn't answer from here, but neither does any telnet server, so port 23 is probably blocked; the footnote already covers an unreachable server); the optional items (shorter `--help` output in ch07, `classify.cfg` cleanup, `-O ansi`/`-O ascii`, Parquet/DuckDB input); the builtins `echo`, `history`, and `which`, whose 2e metadata describes coreutils/bash.
 
 How 0.7.2 differs from the fixes below:
 - **Issue 7 is wider than HTML.** Quarto processes shortcodes in every raw block a filter creates, so Markdown output was affected too (`{{< meta title >}}` was even expanded), and so was Typst's plain output. 0.7.2 escapes `{` in HTML, writes Typst's plain output as a `#raw()` string when it contains `{{<`, and turns such Markdown output into a code block with `shortcodes="false"`.

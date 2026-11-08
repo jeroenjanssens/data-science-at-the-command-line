@@ -470,6 +470,22 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
  (row = reference; column = predicted)
 ```
 
+## Prose (replace): Now we apply both dimensionality reduction techniques and visualize th
+
+- id: `chapter-9-modeling-data.html:prose:fa7f09ae`
+- hash: `ed4b5b70`
+- status: **accept**
+- cause: content
+- note: Content pass: the plots are made with rush plot, not Rio-scatter (a first-edition leftover)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-Now we apply both dimensionality reduction techniques and visualize the mapping using Rio-scatter:
++Now we apply both dimensionality reduction techniques and visualize the mapping using rush plot:
+```
+
 ## 3 old anchor(s) missing
 
 - id: `chapter-9-modeling-data.html:anchors-missing`
@@ -526,6 +542,33 @@ fig:unnamed-chunk-20
 +Figure 9.5: Regression with Vowpal Wabbit
 ```
 
+## Footnotes differ (10 vs 10)
+
+- id: `chapter-9-modeling-data.html:footnotes`
+- hash: `531a0454`
+- status: **accept**
+- cause: content
+- note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,4 +1,4 @@
+-Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, tapkee – an Efficient Dimension Reduction Library, version 1.2, 2013, http://tapkee.lisitsyn.me.
+-John Langford, vw – Fast Machine Learning Library for Online Learning, version 8.10.1, 2021, https://vowpalwabbit.org.
+-Educational Testing Service, skll – SciKit-Learn Laboratory, version 2.5.0, 2021, https://skll.readthedocs.org.
+-Christopher Groskopf, csvstack – Stack up the Rows from Multiple CSV Files, version 1.0.5, 2020, https://csvkit.rtfd.org.
++Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia, tapkee – an Efficient Dimension Reduction Library, version 1.4.0, 2026, https://github.com/lisitsyn/tapkee.
++John Langford, vw – Fast Machine Learning Library for Online Learning, version 9.11.9, 2026, https://vowpalwabbit.org.
++Educational Testing Service, skll – SciKit-Learn Laboratory, version 5.1.0, 2024, https://skll.readthedocs.io.
++Christopher Groskopf, csvstack – Stack up the Rows from Multiple CSV Files, version 1.1.0, 2023, https://csvkit.rtfd.org.
+@@ -9,2 +9,2 @@
+-Torbjorn Granlund and Richard M. Stallman, split – Split a File into Pieces, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Paul Eggert, shuf – Generate Random Permutations, version 8.30, 2019, https://www.gnu.org/software/coreutils.
++uutils contributors, split – Split a File into Pieces, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++uutils contributors, shuf – Generate Random Permutations, version 0.10.0, 2026, https://github.com/uutils/coreutils.
+```
+
 ## Image changed: images/wine-alcohol-vs-quality.png
 
 - id: `chapter-9-modeling-data.html:image:images/wine-alcohol-vs-quality.png`
@@ -565,24 +608,24 @@ images/wine-quality.png: 103752 -> 102062 bytes
 ## Image changed: images/wine-regression.png
 
 - id: `chapter-9-modeling-data.html:image:images/wine-regression.png`
-- hash: `fcc6de82`
+- hash: `b9564a8b`
 - status: **accept**
 - cause: image
 - note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 
 ```diff
-images/wine-regression.png: 91514 -> 209796 bytes
+images/wine-regression.png: 91514 -> 187948 bytes
 ```
 
 ## Image changed: images/wine-tsne.png
 
 - id: `chapter-9-modeling-data.html:image:images/wine-tsne.png`
-- hash: `6fb94d54`
+- hash: `afe0fe4e`
 - status: **accept**
 - cause: image
 - note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 
 ```diff
-images/wine-tsne.png: 97096 -> 360989 bytes
+images/wine-tsne.png: 97096 -> 383174 bytes
 ```
 

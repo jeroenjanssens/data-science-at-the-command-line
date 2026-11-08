@@ -284,6 +284,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#history" id="toc-history" class="nav-link" data-scroll-target="#history">history</a></li>
   <li><a href="#hostname" id="toc-hostname" class="nav-link" data-scroll-target="#hostname">hostname</a></li>
   <li><a href="#in2csv" id="toc-in2csv" class="nav-link" data-scroll-target="#in2csv">in2csv</a></li>
+  <li><a href="#ir" id="toc-ir" class="nav-link" data-scroll-target="#ir">ir</a></li>
   <li><a href="#jq" id="toc-jq" class="nav-link" data-scroll-target="#jq">jq</a></li>
   <li><a href="#json2csv" id="toc-json2csv" class="nav-link" data-scroll-target="#json2csv">json2csv</a></li>
   <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l">l</a></li>
@@ -379,7 +380,7 @@ ul.task-list li input[type="checkbox"] {
 <li>How to obtain help</li>
 <li>An example usage</li>
 </ul>
-<p>All command-line tools listed here are included in the Docker image. See <a href="./chapter-2-getting-started.html">Chapter 2</a> for instructions on how to set it up. Please note that citing open source software is not trivial, and that some information may be missing or incorrect.</p>
+<p>All command-line tools listed here are included in the Docker image. See <a href="./chapter-2-getting-started.html">Chapter 2</a> for instructions on how to set it up. The versions listed are the ones in the current Docker image; the image used for the printed book is available as <code>datasciencetoolbox/dsatcl2e:20210628</code>. Please note that citing open source software is not trivial, and that some information may be missing or incorrect.</p>
 
 <section id="alias" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="alias">alias</h2>
@@ -397,7 +398,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="awk" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="awk">awk</h2>
-<p>Pattern scanning and text processing language. <code>awk</code> (version 1.3.4) by Mike D. Brennan and Thomas E. Dickey (2019). More information: <a href="https://invisible-island.net/mawk" class="uri">https://invisible-island.net/mawk</a>.</p>
+<p>Pattern scanning and text processing language. <code>awk</code> (version 1.3.4 20260129) by Mike D. Brennan and Thomas E. Dickey (2026). More information: <a href="https://invisible-island.net/mawk" class="uri">https://invisible-island.net/mawk</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> awk
 <span class="term-output">awk is /usr/bin/awk</span>
 <span class="term-output"></span>
@@ -409,7 +410,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="aws" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="aws">aws</h2>
-<p>Unified tool to manage AWS services. <code>aws</code> (version 2.1.32) by Amazon Web Services (2021). More information: <a href="https://aws.amazon.com/cli" class="uri">https://aws.amazon.com/cli</a>.</p>
+<p>Unified tool to manage AWS services. <code>aws</code> (version 2.31.35) by Amazon Web Services (2025). More information: <a href="https://aws.amazon.com/cli" class="uri">https://aws.amazon.com/cli</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> aws
 <span class="term-output">aws is /usr/bin/aws</span>
 <span class="term-output"></span>
@@ -418,7 +419,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="bash" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="bash">bash</h2>
-<p>GNU Bourne-Again SHell. <code>bash</code> (version 5.0.17) by Brian Fox and Chet Ramey (2019). More information: <a href="https://www.gnu.org/software/bash" class="uri">https://www.gnu.org/software/bash</a>.</p>
+<p>GNU Bourne-Again SHell. <code>bash</code> (version 5.3.9) by Brian Fox and Chet Ramey (2025). More information: <a href="https://www.gnu.org/software/bash" class="uri">https://www.gnu.org/software/bash</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> bash
 <span class="term-output">bash is /usr/bin/bash</span>
 <span class="term-output"></span>
@@ -427,7 +428,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="bat" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="bat">bat</h2>
-<p>A cat clone with syntax highlighting and Git integration. <code>bat</code> (version 0.18.0) by David Peter (2021). More information: <a href="https://github.com/sharkdp/bat" class="uri">https://github.com/sharkdp/bat</a>.</p>
+<p>A cat clone with syntax highlighting and Git integration. <code>bat</code> (version 0.25.0) by David Peter (2025). More information: <a href="https://github.com/sharkdp/bat" class="uri">https://github.com/sharkdp/bat</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> bat
 <span class="term-output">bat is an alias for bat --tabs 8 --paging never</span>
 <span class="term-output"></span>
@@ -454,21 +455,21 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 10 | <span style="color:var(--term-2)">header</span> -a <span style="color:var(--term-3)">'values'</span> | <span style="color:var(--term-2)">body</span> shuf
 <span class="term-output">values</span>
-<span class="term-output">2</span>
-<span class="term-output">10</span>
-<span class="term-output">9</span>
-<span class="term-output">5</span>
-<span class="term-output">4</span>
 <span class="term-output">3</span>
-<span class="term-output">8</span>
-<span class="term-output">6</span>
+<span class="term-output">10</span>
+<span class="term-output">5</span>
+<span class="term-output">1</span>
 <span class="term-output">7</span>
-<span class="term-output">1</span></code></pre>
+<span class="term-output">4</span>
+<span class="term-output">8</span>
+<span class="term-output">2</span>
+<span class="term-output">9</span>
+<span class="term-output">6</span></code></pre>
 
 </section>
 <section id="cat" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="cat">cat</h2>
-<p>Concatenate files and print on the standard output. <code>cat</code> (version 8.30) by Torbjorn Granlund and Richard M. Stallman (2018). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Concatenate files and print on the standard output. <code>cat</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> cat
 <span class="term-output">cat is /usr/bin/cat</span>
 <span class="term-output"></span>
@@ -501,7 +502,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="chmod" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="chmod">chmod</h2>
-<p>Change file mode bits. <code>chmod</code> (version 8.30) by David MacKenzie and Jim Meyering (2018). I use <code>chmod</code> in <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a> to make a tool executable. More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Change file mode bits. <code>chmod</code> (version 0.10.0) by the uutils contributors (2026). I use <code>chmod</code> in <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a> to make a tool executable. More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> chmod
 <span class="term-output">chmod is /usr/bin/chmod</span>
 <span class="term-output"></span>
@@ -519,7 +520,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="column" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="column">column</h2>
-<p>Columnate lists. <code>column</code> (version 2.36.1) by Karel Zak (2021). More information: <a href="https://www.kernel.org/pub/linux/utils/util-linux" class="uri">https://www.kernel.org/pub/linux/utils/util-linux</a>.</p>
+<p>Columnate lists. <code>column</code> (version 2.41.3) by Karel Zak (2025). More information: <a href="https://www.kernel.org/pub/linux/utils/util-linux" class="uri">https://www.kernel.org/pub/linux/utils/util-linux</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> column
 <span class="term-output">column is /usr/bin/column</span></code></pre>
 
@@ -545,7 +546,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="cp" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="cp">cp</h2>
-<p>Copy files and directories. <code>cp</code> (version 8.30) by Torbjorn Granlund, David MacKenzie, and Jim Meyering (2018). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Copy files and directories. <code>cp</code> (version 9.7) by Torbjorn Granlund, David MacKenzie, and Jim Meyering (2025). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> cp
 <span class="term-output">cp is /usr/bin/cp</span>
 <span class="term-output"></span>
@@ -563,7 +564,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvcut" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvcut">csvcut</h2>
-<p>Filter and truncate CSV files. <code>csvcut</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Filter and truncate CSV files. <code>csvcut</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvcut
 <span class="term-output">csvcut is /opt/uv/bin/csvcut</span>
 <span class="term-output"></span>
@@ -585,7 +586,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvgrep" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvgrep">csvgrep</h2>
-<p>Search CSV files. <code>csvgrep</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Search CSV files. <code>csvgrep</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvgrep
 <span class="term-output">csvgrep is /opt/uv/bin/csvgrep</span>
 <span class="term-output"></span>
@@ -594,7 +595,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvjoin" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvjoin">csvjoin</h2>
-<p>Execute a SQL-like join to merge CSV files on a specified column or columns. <code>csvjoin</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Execute a SQL-like join to merge CSV files on a specified column or columns. <code>csvjoin</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvjoin
 <span class="term-output">csvjoin is /opt/uv/bin/csvjoin</span>
 <span class="term-output"></span>
@@ -603,7 +604,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvlook" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvlook">csvlook</h2>
-<p>Render a CSV file in the console as a Markdown-compatible, fixed-width table. <code>csvlook</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Render a CSV file in the console as a Markdown-compatible, fixed-width table. <code>csvlook</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvlook
 <span class="term-output">csvlook is a shell function</span>
 <span class="term-output"></span>
@@ -632,7 +633,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvsort" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvsort">csvsort</h2>
-<p>Sort CSV files. <code>csvsort</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Sort CSV files. <code>csvsort</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvsort
 <span class="term-output">csvsort is /opt/uv/bin/csvsort</span>
 <span class="term-output"></span>
@@ -641,7 +642,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvsql" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvsql">csvsql</h2>
-<p>Execute SQL statements on CSV files. <code>csvsql</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Execute SQL statements on CSV files. <code>csvsql</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvsql
 <span class="term-output">csvsql is /opt/uv/bin/csvsql</span>
 <span class="term-output"></span>
@@ -650,7 +651,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvstack" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvstack">csvstack</h2>
-<p>Stack up the rows from multiple CSV files. <code>csvstack</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Stack up the rows from multiple CSV files. <code>csvstack</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvstack
 <span class="term-output">csvstack is /opt/uv/bin/csvstack</span>
 <span class="term-output"></span>
@@ -659,7 +660,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="csvstat" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="csvstat">csvstat</h2>
-<p>Print descriptive statistics for each column in a CSV file. <code>csvstat</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Print descriptive statistics for each column in a CSV file. <code>csvstat</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> csvstat
 <span class="term-output">csvstat is /opt/uv/bin/csvstat</span>
 <span class="term-output"></span>
@@ -668,7 +669,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="curl" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="curl">curl</h2>
-<p>Transfer a URL. <code>curl</code> (version 7.68.0) by Daniel Stenberg (2016). More information: <a href="https://curl.haxx.se" class="uri">https://curl.haxx.se</a>.</p>
+<p>Transfer a URL. <code>curl</code> (version 8.18.0) by Daniel Stenberg (2026). More information: <a href="https://curl.se" class="uri">https://curl.se</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> curl
 <span class="term-output">curl is /usr/bin/curl</span>
 <span class="term-output"></span>
@@ -677,7 +678,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="cut" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="cut">cut</h2>
-<p>Remove sections from each line of files. <code>cut</code> (version 8.30) by David M. Ihnat, David MacKenzie, and Jim Meyering (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Remove sections from each line of files. <code>cut</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> cut
 <span class="term-output">cut is /usr/bin/cut</span>
 <span class="term-output"></span>
@@ -686,7 +687,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="display" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="display">display</h2>
-<p>Displays an image or image sequence on any X server. <code>display</code> (version 6.9.10-23) by ImageMagick Studio LLC (2019). More information: <a href="https://imagemagick.org" class="uri">https://imagemagick.org</a>.</p>
+<p>Insert an image into this book. <code>display</code> is a shell function that I use to insert images into this book while it’s being rendered, so it isn’t available in the Docker image (see <a href="./chapter-7-exploring-data.html">Chapter 7</a>). ImageMagick’s <code>display</code>, which shows an image on an X server, isn’t installed either.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> display
 <span class="term-output">display is a shell function</span></code></pre>
 
@@ -727,7 +728,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="env" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="env">env</h2>
-<p>Run a program in a modified environment. <code>env</code> (version 8.30) by Richard Mlynarik, David MacKenzie, and Assaf Gordon (2018). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Run a program in a modified environment. <code>env</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> env
 <span class="term-output">env is /usr/bin/env</span>
 <span class="term-output"></span>
@@ -756,7 +757,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="find" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="find">find</h2>
-<p>Search for files in a directory hierarchy. <code>find</code> (version 4.7.0) by Eric B. Decker, James Youngman, and Kevin Dalley (2019). More information: <a href="https://www.gnu.org/software/findutils" class="uri">https://www.gnu.org/software/findutils</a>.</p>
+<p>Search for files in a directory hierarchy. <code>find</code> (version 4.10.0) by Eric B. Decker, James Youngman, and Kevin Dalley (2024). More information: <a href="https://www.gnu.org/software/findutils" class="uri">https://www.gnu.org/software/findutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> find
 <span class="term-output">find is /usr/bin/find</span>
 <span class="term-output"></span>
@@ -774,7 +775,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="fold" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="fold">fold</h2>
-<p>Wrap each input line to fit in specified width. <code>fold</code> (version 8.30) by David MacKenzie (2020). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Wrap each input line to fit in specified width. <code>fold</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> fold
 <span class="term-output">fold is /usr/bin/fold</span>
 <span class="term-output"></span>
@@ -801,7 +802,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="fx" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="fx">fx</h2>
-<p>Interactive JSON viewer. <code>fx</code> (version 20.0.2) by Anton Medvedev (2020). More information: <a href="https://github.com/antonmedv/fx" class="uri">https://github.com/antonmedv/fx</a>.</p>
+<p>Interactive JSON viewer. <code>fx</code> (version 40.0.1) by Anton Medvedev (2026). More information: <a href="https://github.com/antonmedv/fx" class="uri">https://github.com/antonmedv/fx</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> fx
 <span class="term-output">fx is /usr/local/bin/fx</span>
 <span class="term-output"></span>
@@ -817,7 +818,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="git" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="git">git</h2>
-<p>The stupid content tracker. <code>git</code> (version 2.25.1) by Linus Torvalds and Junio C. Hamano (2021). More information: <a href="https://git-scm.com" class="uri">https://git-scm.com</a>.</p>
+<p>The stupid content tracker. <code>git</code> (version 2.53.0) by Linus Torvalds and Junio C. Hamano (2026). More information: <a href="https://git-scm.com" class="uri">https://git-scm.com</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> git
 <span class="term-output">git is /usr/bin/git</span>
 <span class="term-output"></span>
@@ -826,7 +827,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="grep" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="grep">grep</h2>
-<p>Print lines that match patterns. <code>grep</code> (version 3.4) by Jim Meyering (2019). More information: <a href="https://www.gnu.org/software/grep" class="uri">https://www.gnu.org/software/grep</a>.</p>
+<p>Print lines that match patterns. <code>grep</code> (version 3.12) by Jim Meyering (2025). More information: <a href="https://www.gnu.org/software/grep" class="uri">https://www.gnu.org/software/grep</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> grep
 <span class="term-output">grep is /usr/bin/grep</span>
 <span class="term-output"></span>
@@ -838,7 +839,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="gron" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="gron">gron</h2>
-<p>Make JSON greppable. <code>gron</code> (version 0.6.1) by Tom Hudson (2021). More information: <a href="https://github.com/TomNomNom/gron" class="uri">https://github.com/TomNomNom/gron</a>.</p>
+<p>Make JSON greppable. <code>gron</code> (version 0.7.1) by Tom Hudson (2022). More information: <a href="https://github.com/TomNomNom/gron" class="uri">https://github.com/TomNomNom/gron</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> gron
 <span class="term-output">gron is /usr/bin/gron</span>
 <span class="term-output"></span>
@@ -847,7 +848,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="head" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="head">head</h2>
-<p>Output the first part of files. <code>head</code> (version 8.30) by David MacKenzie and Jim Meyering (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Output the first part of files. <code>head</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> head
 <span class="term-output">head is /usr/bin/head</span>
 <span class="term-output"></span>
@@ -877,14 +878,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="hostname" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="hostname">hostname</h2>
-<p>Show or set the system’s host name. <code>hostname</code> (version 3.23) by Peter Tobias, Bernd Eckenfels, and Michael Meskes (2021). More information: <a href="https://sourceforge.net/projects/net-tools/" class="uri">https://sourceforge.net/projects/net-tools/</a>.</p>
+<p>Show or set the system’s host name. <code>hostname</code> (version 3.25) by Peter Tobias, Bernd Eckenfels, and Michael Meskes (2024). More information: <a href="https://sourceforge.net/projects/net-tools/" class="uri">https://sourceforge.net/projects/net-tools/</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> hostname
 <span class="term-output">hostname is /usr/bin/hostname</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> hostname
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span>
-<span class="term-output">bfb99fc6a0ee</span>
+<span class="term-output">275d70357142</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span> -i
 <span class="term-output">172.17.0.2</span></code></pre>
@@ -892,16 +893,36 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="in2csv" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="in2csv">in2csv</h2>
-<p>Convert common, but less awesome, tabular data formats to CSV. <code>in2csv</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Convert common, but less awesome, tabular data formats to CSV. <code>in2csv</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> in2csv
 <span class="term-output">in2csv is /opt/uv/bin/in2csv</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> --help</code></pre>
 
 </section>
+<section id="ir" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="ir">ir</h2>
+<p>Run standalone R scripts from embedded dependency metadata. <code>ir</code> (version 0.4.1) by Tomasz Kalinowski (2026). More information: <a href="https://github.com/r-lib/ir" class="uri">https://github.com/r-lib/ir</a>.</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> ir
+<span class="term-output">ir is /usr/local/bin/ir</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ir</span> --help | <span style="color:var(--term-2)">trim</span>
+<span class="term-output">Run self-describing R scripts</span>
+<span class="term-output"></span>
+<span class="term-output">Usage: ir [COMMAND]</span>
+<span class="term-output"></span>
+<span class="term-output">Commands:</span>
+<span class="term-output">  run         Run a script or inline R expression</span>
+<span class="term-output">  render      Render a Quarto document or script</span>
+<span class="term-output">  preview     Preview a Quarto document or script</span>
+<span class="term-output">  tool        Run package executables</span>
+<span class="term-output">  quickstart  Show a concise usage guide for AI agents</span>
+<span class="term-output">… with 13 more lines</span></code></pre>
+
+</section>
 <section id="jq" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="jq">jq</h2>
-<p>Command-line JSON processor. <code>jq</code> (version 1.6) by Stephen Dolan (2021). More information: <a href="https://stedolan.github.com/jq" class="uri">https://stedolan.github.com/jq</a>.</p>
+<p>Command-line JSON processor. <code>jq</code> (version 1.8.1) by Stephen Dolan (2025). More information: <a href="https://jqlang.org" class="uri">https://jqlang.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> jq
 <span class="term-output">jq is /usr/bin/jq</span>
 <span class="term-output"></span>
@@ -931,17 +952,17 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 924K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  8 21:20 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  8 21:20 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  8 21:20 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  8 21:20 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  8 21:20 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  8 21:20 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  8 21:49 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  8 21:49 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  8 21:49 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  8 21:49 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  8 21:49 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  8 21:49 top2000.xlsx</span></code></pre>
 
 </section>
 <section id="less" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="less">less</h2>
-<p>opposite of more. <code>less</code> (version 551) by Mark Nudelman (2019). More information: <a href="https://www.greenwoodsoftware.com/less" class="uri">https://www.greenwoodsoftware.com/less</a>.</p>
+<p>opposite of more. <code>less</code> (version 668) by Mark Nudelman (2024). More information: <a href="https://www.greenwoodsoftware.com/less" class="uri">https://www.greenwoodsoftware.com/less</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> less
 <span class="term-output">less is an alias for less -R</span>
 <span class="term-output"></span>
@@ -952,7 +973,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ls" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="ls">ls</h2>
-<p>List directory contents. <code>ls</code> (version 8.30) by Richard M. Stallman and David MacKenzie (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>List directory contents. <code>ls</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> ls
 <span class="term-output">ls is /usr/bin/ls</span>
 <span class="term-output"></span>
@@ -964,7 +985,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="make" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="make">make</h2>
-<p>A Program for Maintaining Computer Programs. <code>make</code> (version 4.3) by Stuart I. Feldman (2020). More information: <a href="https://www.gnu.org/software/make" class="uri">https://www.gnu.org/software/make</a>.</p>
+<p>A Program for Maintaining Computer Programs. <code>make</code> (version 4.4.1) by Stuart I. Feldman (2023). More information: <a href="https://www.gnu.org/software/make" class="uri">https://www.gnu.org/software/make</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> make
 <span class="term-output">make is /usr/bin/make</span>
 <span class="term-output"></span>
@@ -975,7 +996,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="man" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="man">man</h2>
-<p>An interface to the system reference manuals. <code>man</code> (version 2.9.1) by John W. Eaton and Colin Watson (2020). More information: <a href="https://nongnu.org/man-db" class="uri">https://nongnu.org/man-db</a>.</p>
+<p>An interface to the system reference manuals. <code>man</code> (version 2.13.1) by John W. Eaton and Colin Watson (2025). More information: <a href="https://nongnu.org/man-db" class="uri">https://nongnu.org/man-db</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> man
 <span class="term-output">man is /usr/bin/man</span>
 <span class="term-output"></span>
@@ -987,7 +1008,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="mkdir" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="mkdir">mkdir</h2>
-<p>Make directories. <code>mkdir</code> (version 8.30) by David MacKenzie (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Make directories. <code>mkdir</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> mkdir
 <span class="term-output">mkdir is /usr/bin/mkdir</span>
 <span class="term-output"></span>
@@ -998,7 +1019,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="mv" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="mv">mv</h2>
-<p>Move (rename) files. <code>mv</code> (version 8.30) by Mike Parker, David MacKenzie, and Jim Meyering (2020). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Move (rename) files. <code>mv</code> (version 9.7) by Mike Parker, David MacKenzie, and Jim Meyering (2025). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> mv
 <span class="term-output">mv is /usr/bin/mv</span>
 <span class="term-output"></span>
@@ -1009,14 +1030,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="nano" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="nano">nano</h2>
-<p>Nano’s ANOther editor, inspired by Pico. <code>nano</code> (version 5.4) by Benno Schulenberg, David Lawrence Ramsey, Jordi Mallach, Chris Allegretta, Robert Siemborski, and Adam Rogoyski (2020). More information: <a href="https://nano-editor.org" class="uri">https://nano-editor.org</a>.</p>
+<p>Nano’s ANOther editor, inspired by Pico. <code>nano</code> (version 8.7.1) by Benno Schulenberg, David Lawrence Ramsey, Jordi Mallach, Chris Allegretta, Robert Siemborski, and Adam Rogoyski (2026). More information: <a href="https://nano-editor.org" class="uri">https://nano-editor.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> nano
 <span class="term-output">nano is /usr/bin/nano</span></code></pre>
 
 </section>
 <section id="nl" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="nl">nl</h2>
-<p>Number lines of files. <code>nl</code> (version 8.30) by Scott Bartram and David MacKenzie (2020). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Number lines of files. <code>nl</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> nl
 <span class="term-output">nl is /usr/bin/nl</span>
 <span class="term-output"></span>
@@ -1037,7 +1058,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="parallel" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="parallel">parallel</h2>
-<p>Build and execute shell command lines from standard input in parallel. <code>parallel</code> (version 20161222) by Ole Tange (2016). More information: <a href="https://www.gnu.org/software/parallel" class="uri">https://www.gnu.org/software/parallel</a>.</p>
+<p>Build and execute shell command lines from standard input in parallel. <code>parallel</code> (version 20240222) by Ole Tange (2024). More information: <a href="https://www.gnu.org/software/parallel" class="uri">https://www.gnu.org/software/parallel</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> parallel
 <span class="term-output">parallel is /usr/bin/parallel</span>
 <span class="term-output"></span>
@@ -1051,7 +1072,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="paste" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="paste">paste</h2>
-<p>Merge lines of files. <code>paste</code> (version 8.30) by David M. Ihnat and David MacKenzie (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Merge lines of files. <code>paste</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> paste
 <span class="term-output">paste is /usr/bin/paste</span>
 <span class="term-output"></span>
@@ -1082,7 +1103,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="pip" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="pip">pip</h2>
-<p>A tool for installing and managing Python packages. <code>pip</code> (version 20.0.2) by PyPA (2020). More information: <a href="https://pip.pypa.io" class="uri">https://pip.pypa.io</a>.</p>
+<p>A tool for installing and managing Python packages. <code>pip</code> (version 0.13.7) by Astral (2026). In the Docker image, <code>pip</code> runs <code>uv pip</code>, the pip interface of uv, so the version and author are those of uv. More information: <a href="https://docs.astral.sh/uv" class="uri">https://docs.astral.sh/uv</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> pip
 <span class="term-output">pip is /usr/local/bin/pip</span>
 <span class="term-output"></span>
@@ -1105,7 +1126,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="pwd" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="pwd">pwd</h2>
-<p>Print name of working directory. <code>pwd</code> (version 8.30) by Jim Meyering (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Print name of working directory. <code>pwd</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> pwd
 <span class="term-output">pwd is a shell builtin</span>
 <span class="term-output"></span>
@@ -1119,7 +1140,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="python-1" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="python-1">python</h2>
-<p>An interpreted, interactive, object-oriented programming language. <code>python</code> (version 3.8.5) by The Python Software Foundation (2021). More information: <a href="https://www.python.org" class="uri">https://www.python.org</a>.</p>
+<p>An interpreted, interactive, object-oriented programming language. <code>python</code> (version 3.13.18) by The Python Software Foundation (2026). More information: <a href="https://www.python.org" class="uri">https://www.python.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> python
 <span class="term-output">python is an alias for python3</span>
 <span class="term-output"></span>
@@ -1128,7 +1149,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="r-1" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="r-1">R</h2>
-<p>A Language and Environment for Statistical Computing. <code>R</code> (version 4.0.4) by The R Foundation for Statistical Computing (2021). More information: <a href="https://www.r-project.org" class="uri">https://www.r-project.org</a>.</p>
+<p>A Language and Environment for Statistical Computing. <code>R</code> (version 4.5.2) by The R Foundation for Statistical Computing (2025). More information: <a href="https://www.r-project.org" class="uri">https://www.r-project.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> R
 <span class="term-output">R is /usr/bin/R</span>
 <span class="term-output"></span>
@@ -1137,7 +1158,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="rev" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="rev">rev</h2>
-<p>Reverse lines characterwise. <code>rev</code> (version 2.36.1) by Karel Zak (2021). More information: <a href="https://www.kernel.org/pub/linux/utils/util-linux" class="uri">https://www.kernel.org/pub/linux/utils/util-linux</a>.</p>
+<p>Reverse lines characterwise. <code>rev</code> (version 2.41.3) by Karel Zak (2025). More information: <a href="https://www.kernel.org/pub/linux/utils/util-linux" class="uri">https://www.kernel.org/pub/linux/utils/util-linux</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> rev
 <span class="term-output">rev is /usr/bin/rev</span>
 <span class="term-output"></span>
@@ -1150,7 +1171,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="rm" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="rm">rm</h2>
-<p>Remove files or directories. <code>rm</code> (version 8.30) by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Remove files or directories. <code>rm</code> (version 9.7) by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering (2025). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> rm
 <span class="term-output">rm is /usr/bin/rm</span>
 <span class="term-output"></span>
@@ -1161,7 +1182,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="rush" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="rush">rush</h2>
-<p>R One-Liners from the Shell. <code>rush</code> (version 0.1) by Jeroen Janssens (2021). More information: <a href="https://github.com/jeroenjanssens/rush" class="uri">https://github.com/jeroenjanssens/rush</a>.</p>
+<p>R One-Liners from the Shell. <code>rush</code> (version 0.2.1.9000) by Jeroen Janssens (2026). More information: <a href="https://github.com/jeroenjanssens/rush" class="uri">https://github.com/jeroenjanssens/rush</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> rush
 <span class="term-output">rush is /usr/local/bin/rush</span>
 <span class="term-output"></span>
@@ -1189,21 +1210,24 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sample" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sample">sample</h2>
-<p>Filter lines from standard input according to some probability, with a given delay, and for a certain duration. <code>sample</code> (version 0.2.4) by Jeroen Janssens (2021). More information: <a href="https://github.com/jeroenjanssens/sample" class="uri">https://github.com/jeroenjanssens/sample</a>.</p>
+<p>Filter lines from standard input according to some probability, with a given delay, and for a certain duration. <code>sample</code> (version 0.2.5) by Jeroen Janssens (2021). More information: <a href="https://github.com/jeroenjanssens/sample" class="uri">https://github.com/jeroenjanssens/sample</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> sample
 <span class="term-output">sample is /opt/uv/bin/sample</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sample</span> --help
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 0.01 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">232</span>
-<span class="term-output">371</span>
-<span class="term-output">456</span></code></pre>
+<span class="term-output">335</span>
+<span class="term-output">414</span>
+<span class="term-output">486</span>
+<span class="term-output">649</span>
+<span class="term-output">709</span>
+<span class="term-output">… with 5 more lines</span></code></pre>
 
 </section>
 <section id="scp" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="scp">scp</h2>
-<p>OpenSSH secure file copy. <code>scp</code> (version 1:8.2p1-4ubuntu0.2) by Timo Rinne and Tatu Ylonen (2019). More information: <a href="https://www.openssh.com" class="uri">https://www.openssh.com</a>.</p>
+<p>OpenSSH secure file copy. <code>scp</code> (version 10.2p1) by Timo Rinne and Tatu Ylonen (2025). More information: <a href="https://www.openssh.com" class="uri">https://www.openssh.com</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> scp
 <span class="term-output">scp is /usr/bin/scp</span>
 <span class="term-output"></span>
@@ -1212,7 +1236,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sed" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sed">sed</h2>
-<p>Stream editor for filtering and transforming text. <code>sed</code> (version 4.7) by Jay Fenlason, Tom Lord, Ken Pizzini, and Paolo Bonzini (2018). More information: <a href="https://www.gnu.org/software/sed" class="uri">https://www.gnu.org/software/sed</a>.</p>
+<p>Stream editor for filtering and transforming text. <code>sed</code> (version 4.9) by Jay Fenlason, Tom Lord, Ken Pizzini, and Paolo Bonzini (2022). More information: <a href="https://www.gnu.org/software/sed" class="uri">https://www.gnu.org/software/sed</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> sed
 <span class="term-output">sed is /usr/bin/sed</span>
 <span class="term-output"></span>
@@ -1221,7 +1245,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="seq" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="seq">seq</h2>
-<p>Print a sequence of numbers. <code>seq</code> (version 8.30) by Ulrich Drepper (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Print a sequence of numbers. <code>seq</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> seq
 <span class="term-output">seq is /usr/bin/seq</span>
 <span class="term-output"></span>
@@ -1251,32 +1275,32 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="shuf" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="shuf">shuf</h2>
-<p>Generate random permutations. <code>shuf</code> (version 8.30) by Paul Eggert (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Generate random permutations. <code>shuf</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> shuf
 <span class="term-output">shuf is /usr/bin/shuf</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> shuf
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> {a..z} | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' '</span> <span style="color:var(--term-3)">'\n'</span> | <span style="color:var(--term-2)">shuf</span> | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">s</span>
-<span class="term-output">i</span>
-<span class="term-output">z</span>
-<span class="term-output">v</span>
-<span class="term-output">h</span>
+<span class="term-output">l</span>
+<span class="term-output">q</span>
+<span class="term-output">u</span>
+<span class="term-output">j</span>
+<span class="term-output">a</span>
 <span class="term-output">… with 21 more lines</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">shuf</span> -i 1-100 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">39</span>
-<span class="term-output">1</span>
 <span class="term-output">27</span>
-<span class="term-output">63</span>
-<span class="term-output">10</span>
+<span class="term-output">19</span>
+<span class="term-output">9</span>
+<span class="term-output">100</span>
+<span class="term-output">98</span>
 <span class="term-output">… with 95 more lines</span></code></pre>
 
 </section>
 <section id="skll" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="skll">skll</h2>
-<p>SciKit-Learn Laboratory. <code>skll</code> (version 2.5.0) by Educational Testing Service (2021). The actual tool is <code>run_experiment</code>. I use the alias <code>skll</code> because I find that easier to remember. More information: <a href="https://skll.readthedocs.org" class="uri">https://skll.readthedocs.org</a>.</p>
+<p>SciKit-Learn Laboratory. <code>skll</code> (version 5.1.0) by Educational Testing Service (2024). The actual tool is <code>run_experiment</code>. I use the alias <code>skll</code> because I find that easier to remember. More information: <a href="https://skll.readthedocs.io" class="uri">https://skll.readthedocs.io</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> skll
 <span class="term-output">skll is an alias for run_experiment</span>
 <span class="term-output"></span>
@@ -1285,7 +1309,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sort" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sort">sort</h2>
-<p>Sort lines of text files. <code>sort</code> (version 8.30) by Mike Haertel and Paul Eggert (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Sort lines of text files. <code>sort</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> sort
 <span class="term-output">sort is /usr/bin/sort</span>
 <span class="term-output"></span>
@@ -1300,7 +1324,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="split" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="split">split</h2>
-<p>Split a file into pieces. <code>split</code> (version 8.30) by Torbjorn Granlund and Richard M. Stallman (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Split a file into pieces. <code>split</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> split
 <span class="term-output">split is /usr/bin/split</span>
 <span class="term-output"></span>
@@ -1309,14 +1333,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sponge" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sponge">sponge</h2>
-<p>Soak up standard input and write to a file. <code>sponge</code> (version 0.65) by Colin Watson and Tollef Fog Heen (2021). Useful if you want to read from and write to the same file in a single pipeline. More information: <a href="https://joeyh.name/code/moreutils" class="uri">https://joeyh.name/code/moreutils</a>.</p>
+<p>Soak up standard input and write to a file. <code>sponge</code> (version 0.69) by Colin Watson and Tollef Fog Heen (2024). Useful if you want to read from and write to the same file in a single pipeline. More information: <a href="https://joeyh.name/code/moreutils" class="uri">https://joeyh.name/code/moreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> sponge
 <span class="term-output">sponge is /usr/bin/sponge</span></code></pre>
 
 </section>
 <section id="sql2csv" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sql2csv">sql2csv</h2>
-<p>Execute an SQL query on a database and output the result to a CSV file. <code>sql2csv</code> (version 1.0.5) by Christopher Groskopf (2020). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
+<p>Execute an SQL query on a database and output the result to a CSV file. <code>sql2csv</code> (version 1.1.0) by Christopher Groskopf (2023). More information: <a href="https://csvkit.rtfd.org" class="uri">https://csvkit.rtfd.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> sql2csv
 <span class="term-output">sql2csv is /opt/uv/bin/sql2csv</span>
 <span class="term-output"></span>
@@ -1325,7 +1349,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ssh" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="ssh">ssh</h2>
-<p>OpenSSH remote login client. <code>ssh</code> (version 1:8.2p1-4ubuntu0.2) by Tatu Ylonen, Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo Raadt, Dug Song, and Markus Friedl (2020). More information: <a href="https://www.openssh.com" class="uri">https://www.openssh.com</a>.</p>
+<p>OpenSSH remote login client. <code>ssh</code> (version 10.2p1) by Tatu Ylonen, Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo Raadt, Dug Song, and Markus Friedl (2025). More information: <a href="https://www.openssh.com" class="uri">https://www.openssh.com</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> ssh
 <span class="term-output">ssh is /usr/bin/ssh</span>
 <span class="term-output"></span>
@@ -1334,7 +1358,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="sudo" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="sudo">sudo</h2>
-<p>Execute a command as another user. <code>sudo</code> (version 1.8.31) by Todd C. Miller (2019). More information: <a href="https://www.sudo.ws" class="uri">https://www.sudo.ws</a>.</p>
+<p>Execute a command as another user. <code>sudo</code> (version 1.9.17p2) by Todd C. Miller (2025). More information: <a href="https://www.sudo.ws" class="uri">https://www.sudo.ws</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> sudo
 <span class="term-output">sudo is /usr/bin/sudo</span>
 <span class="term-output"></span>
@@ -1343,7 +1367,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tail" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="tail">tail</h2>
-<p>Output the last part of files. <code>tail</code> (version 8.30) by Paul Rubin, David MacKenzie, Ian Lance Taylor, and Jim Meyering (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Output the last part of files. <code>tail</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> tail
 <span class="term-output">tail is /usr/bin/tail</span>
 <span class="term-output"></span>
@@ -1352,7 +1376,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tapkee" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="tapkee">tapkee</h2>
-<p>An efficient dimension reduction library. <code>tapkee</code> (version 1.2) by Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia (2013). More information: <a href="http://tapkee.lisitsyn.me" class="uri">http://tapkee.lisitsyn.me</a>.</p>
+<p>An efficient dimension reduction library. <code>tapkee</code> (version 1.4.0) by Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia (2026). More information: <a href="https://github.com/lisitsyn/tapkee" class="uri">https://github.com/lisitsyn/tapkee</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> tapkee
 <span class="term-output">tapkee is /usr/local/bin/tapkee</span>
 <span class="term-output"></span>
@@ -1361,7 +1385,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tar" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="tar">tar</h2>
-<p>An archiving utility. <code>tar</code> (version 1.30) by John Gilmore and Jay Fenlason (2014). More information: <a href="https://www.gnu.org/software/tar" class="uri">https://www.gnu.org/software/tar</a>.</p>
+<p>An archiving utility. <code>tar</code> (version 1.35) by John Gilmore and Jay Fenlason (2023). More information: <a href="https://www.gnu.org/software/tar" class="uri">https://www.gnu.org/software/tar</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> tar
 <span class="term-output">tar is /usr/bin/tar</span>
 <span class="term-output"></span>
@@ -1370,7 +1394,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tee" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="tee">tee</h2>
-<p>Read from standard input and write to standard output and files. <code>tee</code> (version 8.30) by Mike Parker, Richard M. Stallman, and David MacKenzie (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Read from standard input and write to standard output and files. <code>tee</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> tee
 <span class="term-output">tee is /usr/bin/tee</span>
 <span class="term-output"></span>
@@ -1379,14 +1403,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="telnet" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="telnet">telnet</h2>
-<p>User interface to the TELNET protocol. <code>telnet</code> (version 0.17) by Mats Erik Andersson, Andreas Henriksson, and Christoph Biedl (1999). More information: <a href="http://www.hcs.harvard.edu/~dholland/computers/netkit.html" class="uri">http://www.hcs.harvard.edu/~dholland/computers/netkit.html</a>.</p>
+<p>User interface to the TELNET protocol. <code>telnet</code> (version 2.7) by the GNU Inetutils developers (2025). More information: <a href="https://www.gnu.org/software/inetutils" class="uri">https://www.gnu.org/software/inetutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> telnet
 <span class="term-output">telnet is /usr/bin/telnet</span></code></pre>
 
 </section>
 <section id="tldr" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="tldr">tldr</h2>
-<p>Collaborative cheatsheets for console commands. <code>tldr</code> (version 3.3.7) by Owen Voke (2021). More information: <a href="https://tldr.sh" class="uri">https://tldr.sh</a>.</p>
+<p>Collaborative cheatsheets for console commands. <code>tldr</code> (version 1.8.1) by Danilo Bargen and Niklas Mohrin (2025). In the Docker image, <code>tldr</code> is tealdeer, a client written in Rust. More information: <a href="https://github.com/tealdeer-rs/tealdeer" class="uri">https://github.com/tealdeer-rs/tealdeer</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> tldr
 <span class="term-output">tldr is /usr/bin/tldr</span>
 <span class="term-output"></span>
@@ -1408,7 +1432,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tr" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="tr">tr</h2>
-<p>Translate or delete characters. <code>tr</code> (version 8.30) by Jim Meyering (2018). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Translate or delete characters. <code>tr</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> tr
 <span class="term-output">tr is /usr/bin/tr</span>
 <span class="term-output"></span>
@@ -1417,7 +1441,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tree" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="tree">tree</h2>
-<p>List contents of directories in a tree-like format. <code>tree</code> (version 1.8.0) by Steve Baker (2018). More information: <a href="https://launchpad.net/ubuntu/+source/tree" class="uri">https://launchpad.net/ubuntu/+source/tree</a>.</p>
+<p>List contents of directories in a tree-like format. <code>tree</code> (version 2.3.1) by Steve Baker (2026). More information: <a href="https://oldmanprogrammer.net/source.php?dir=projects/tree" class="uri">https://oldmanprogrammer.net/source.php?dir=projects/tree</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> tree
 <span class="term-output">tree is /usr/bin/tree</span>
 <span class="term-output"></span>
@@ -1454,12 +1478,12 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ts" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="ts">ts</h2>
-<p>Timestamp input. <code>ts</code> (version 0.65) by Joey Hess (2021). More information: <a href="https://joeyh.name/code/moreutils" class="uri">https://joeyh.name/code/moreutils</a>.</p>
+<p>Timestamp input. <code>ts</code> (version 0.69) by Joey Hess (2024). More information: <a href="https://joeyh.name/code/moreutils" class="uri">https://joeyh.name/code/moreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> ts
 <span class="term-output">ts is /usr/bin/ts</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> seq 5 | <span style="color:var(--term-2)">sample</span> -d 500 | <span style="color:var(--term-2)">ts</span>
-<span class="term-output">Nov 08 21:21:42 seq 5</span></code></pre>
+<span class="term-output">Nov 08 21:50:16 seq 5</span></code></pre>
 
 </section>
 <section id="type" class="level2 unnumbered">
@@ -1473,7 +1497,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="uniq" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="uniq">uniq</h2>
-<p>Report or omit repeated lines. <code>uniq</code> (version 8.30) by Richard M. Stallman and David MacKenzie (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Report or omit repeated lines. <code>uniq</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> uniq
 <span class="term-output">uniq is /usr/bin/uniq</span>
 <span class="term-output"></span>
@@ -1489,7 +1513,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="unrar" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="unrar">unrar</h2>
-<p>Extract files from rar archives. <code>unrar</code> (version 0.0.1) by Ben Asselstine, Christian Scheurer, and Johannes Winkelmann (2014). More information: <a href="http://home.gna.org/unrar" class="uri">http://home.gna.org/unrar</a>.</p>
+<p>Extract files from rar archives. <code>unrar</code> (version 0.3.3) by Ben Asselstine, Christian Scheurer, and Johannes Winkelmann (2025). In the Docker image, <code>unrar</code> is unrar-free. More information: <a href="https://gitlab.com/bgermann/unrar-free" class="uri">https://gitlab.com/bgermann/unrar-free</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> unrar
 <span class="term-output">unrar is /usr/bin/unrar</span>
 <span class="term-output"></span>
@@ -1507,7 +1531,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="vw" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="vw">vw</h2>
-<p>Fast machine learning library for online learning. <code>vw</code> (version 8.10.1) by John Langford (2021). More information: <a href="https://vowpalwabbit.org" class="uri">https://vowpalwabbit.org</a>.</p>
+<p>Fast machine learning library for online learning. <code>vw</code> (version 9.11.9) by John Langford (2026). More information: <a href="https://vowpalwabbit.org" class="uri">https://vowpalwabbit.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> vw
 <span class="term-output">vw is /usr/local/bin/vw</span>
 <span class="term-output"></span>
@@ -1516,7 +1540,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="wc" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="wc">wc</h2>
-<p>Print newline, word, and byte counts for each file. <code>wc</code> (version 8.30) by Paul Rubin and David MacKenzie (2019). More information: <a href="https://www.gnu.org/software/coreutils" class="uri">https://www.gnu.org/software/coreutils</a>.</p>
+<p>Print newline, word, and byte counts for each file. <code>wc</code> (version 0.10.0) by the uutils contributors (2026). More information: <a href="https://github.com/uutils/coreutils" class="uri">https://github.com/uutils/coreutils</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> wc
 <span class="term-output">wc is /usr/bin/wc</span>
 <span class="term-output"></span>
@@ -1559,7 +1583,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="zcat" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="zcat">zcat</h2>
-<p>Decompress and concatenate files to standard output. <code>zcat</code> (version 1.10) by Paul Eggert (2021). More information: <a href="https://www.nongnu.org/zutils/zutils.html" class="uri">https://www.nongnu.org/zutils/zutils.html</a>.</p>
+<p>Decompress and concatenate files to standard output. <code>zcat</code> (version 1.14) by Paul Eggert (2025). More information: <a href="https://www.gnu.org/software/gzip" class="uri">https://www.gnu.org/software/gzip</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> zcat
 <span class="term-output">zcat is /usr/bin/zcat</span>
 <span class="term-output"></span>
@@ -1568,7 +1592,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="zsh" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="zsh">zsh</h2>
-<p>The Z shell. <code>zsh</code> (version 5.8) by Paul Falstad and Peter Stephenson (2020). More information: <a href="https://www.zsh.org" class="uri">https://www.zsh.org</a>.</p>
+<p>The Z shell. <code>zsh</code> (version 5.9) by Paul Falstad and Peter Stephenson (2022). More information: <a href="https://www.zsh.org" class="uri">https://www.zsh.org</a>.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> zsh
 <span class="term-output">zsh is /usr/bin/zsh</span>
 <span class="term-output"></span>

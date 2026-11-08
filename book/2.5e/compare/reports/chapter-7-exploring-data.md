@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 0: `$ cd /data/ch07`
 
 - id: `chapter-7-exploring-data.html:block:0`
-- hash: `89401a48`
+- hash: `156ff059`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -20,10 +20,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:49 tips.csv
 --rw-r--r-- 1 dst dst  83K Dec 14 11:49 venture.csv
 --rw-r--r-- 1 dst dst 4.6K Dec 14 11:49 venture-wide.csv
-+-rw-r--r-- 1 dst dst  125 Nov  8 21:17 datatypes.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  8 21:17 tips.csv
-+-rw-r--r-- 1 dst dst 4.6K Nov  8 21:17 venture-wide.csv
-+-rw-r--r-- 1 dst dst  83K Nov  8 21:17 venture.csv
++-rw-r--r-- 1 dst dst  125 Nov  8 21:48 datatypes.csv
++-rw-r--r-- 1 dst dst 7.8K Nov  8 21:48 tips.csv
++-rw-r--r-- 1 dst dst 4.6K Nov  8 21:48 venture-wide.csv
++-rw-r--r-- 1 dst dst  83K Nov  8 21:48 venture.csv
 ```
 
 ## Code block 20: `> library(tidyverse)                            ➊`
@@ -262,32 +262,33 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 33: `$ R -q -e '?ggplot2::qplot' | trim 14`
 
 - id: `chapter-7-exploring-data.html:block:33`
-- hash: `0b9ff530`
+- hash: `c563d84b`
 - status: **accept**
 - cause: image
-- note: qplot() is deprecated in ggplot2 4; prose to update (book-changes-plan D, ch 7)
+- note: Content pass: rush no longer uses qplot; show the generated ggplot() call
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -7,10 +7,10 @@
- Description:
- 
+@@ -1,16 +1,2 @@
+-$ R -q -e '?ggplot2::qplot' | trim 14
+-> ?ggplot2::qplot
+-qplot                 package:ggplot2                  R Documentation
+-
+-Quick plot
+-
+-Description:
+-
 -     ‘qplot()’ is a shortcut designed to be familiar if you're used to
 -     base ‘plot()’. It's a convenient wrapper for creating a number of
 -     different types of plots using a consistent calling scheme. It's
 -     great for allowing you to produce plots quickly, but I highly
 -     recommend learning ‘ggplot()’ as it makes it easier to create
 -     complex graphics.
-+     ‘qplot()’ is now deprecated in order to encourage the users to
-+     learn ‘ggplot()’ as it makes it easier to create complex graphics.
- 
+-
 -… with 108 more lines
-+Usage:
-+
-+     qplot(
-+       x,
-+… with 104 more lines
++$ rush plot -n --x bill --y tip tips.csv | grep 'ggplot('
++result <- ggplot(df, aes(x = bill, y = tip)) + geom_point()
 ```
 
 ## Code block 34: `$ rush plot --help`
@@ -786,10 +787,63 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
                                      Party size
 ```
 
+## Prose (replace): Writes out the shebang ( #!; see Chapter 4) needed for running an R sc
+
+- id: `chapter-7-exploring-data.html:prose:aca50bd1`
+- hash: `c7999c9a`
+- status: **accept**
+- cause: content
+- note: Content pass: generated scripts run with ir and list their packages
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1,2 @@
+-Writes out the shebang ( #!; see Chapter 4) needed for running an R script from the command line.
++Writes out the shebang ( #!; see Chapter 4) needed for running the script from the command line with ir [^].
++Lists the packages that the script needs, so that ir can prepare them the first time you run it.
+```
+
+## Prose (replace): Runs the specified expression.
+
+- id: `chapter-7-exploring-data.html:prose:cffe4724`
+- hash: `0c561f4b`
+- status: **accept**
+- cause: content
+- note: Content pass: generated scripts assign `result` and write it with rush::write()
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,2 +1,2 @@
+-Runs the specified expression.
+-Prints the result to standard output.
++Runs the specified expression and assigns its result to result.
++Writes the result to standard output.
+```
+
+## Prose (replace): Under the hood, rush plot uses the function qplot from the ggplot2 pac
+
+- id: `chapter-7-exploring-data.html:prose:af94394d`
+- hash: `e609be3d`
+- status: **accept**
+- cause: content
+- note: Content pass: rush plot builds a ggplot2 plot; qplot is deprecated
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,2 +1,2 @@
+-Under the hood, rush plot uses the function qplot from the ggplot2 package. Here’s the first part of its documentation:
+-I agree with this advice; once you’re done reading this book, it’ll be worthwhile to learn ggplot2, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication. For now, while we’re at the command line, let’s take that shortcut.
++Under the hood, rush plot constructs a ggplot2 plot: options such as --x, --y, and --color become aesthetics, and --geom becomes the geometry. With the --dry-run (or -n) option you can see the code that it generates; here I only show the line that creates the plot:
++Once you’re done reading this book, it’ll be worthwhile to learn ggplot2, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication. The code that rush plot -n generates is a good starting point. For now, while we’re at the command line, let’s take the shortcut.
+```
+
 ## 12 old anchor(s) missing
 
 - id: `chapter-7-exploring-data.html:anchors-missing`
-- hash: `6439bc3c`
+- hash: `af4e6f7c`
 - status: **accept**
 - cause: conversion
 - note: Figure anchors are #fig-x instead of #fig:x (Quarto cross-references); section anchors are unchanged
@@ -808,7 +862,7 @@ fig:plot-trend-points-image
 fig:screenshot-display-ansi-and-inline
 fig:screenshot-display-preview-and-browser
 
-(new-only: fig-plot-accident-image, fig-plot-accident-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-bar-image, fig-plot-bar-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-boxplot-image, fig-plot-boxplot-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-demo, fig-plot-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-density-image, fig-plot-density-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-histogram-image, fig-plot-histogram-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-labels-image, fig-plot-labels-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-scatter-image, fig-plot-scatter-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-trend-image, fig-plot-trend-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-trend-points-image, fig-plot-trend-points-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-screenshot-display-ansi-and-inline, fig-screenshot-display-ansi-and-inline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-screenshot-display-preview-and-browser, fig-screenshot-display-preview-and-browser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fn1, fn2, fn3, fn4, fn5, fnref1, fnref2, fnref3, fnref4, fnref5, footnotes, title-block-header)
+(new-only: fig-plot-accident-image, fig-plot-accident-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-bar-image, fig-plot-bar-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-boxplot-image, fig-plot-boxplot-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-demo, fig-plot-demo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-density-image, fig-plot-density-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-histogram-image, fig-plot-histogram-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-labels-image, fig-plot-labels-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-scatter-image, fig-plot-scatter-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-trend-image, fig-plot-trend-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-plot-trend-points-image, fig-plot-trend-points-image-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-screenshot-display-ansi-and-inline, fig-screenshot-display-ansi-and-inline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-screenshot-display-preview-and-browser, fig-screenshot-display-preview-and-browser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fn1, fn2, fn3, fn4, fn5, fn6, fnref1, fnref2, fnref3, fnref4, fnref5, fnref6, footnotes, title-block-header)
 ```
 
 ## External links differ
@@ -826,24 +880,27 @@ fig:screenshot-display-preview-and-browser
 -https://rdrr.io/r/base/factor.html
 ```
 
-## Footnotes differ (5 vs 5)
+## Footnotes differ (5 vs 6)
 
 - id: `chapter-7-exploring-data.html:footnotes`
-- hash: `e0994d15`
+- hash: `01bb1b2d`
 - status: **accept**
 - cause: conversion
-- note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter is full
+- note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -2,3 +2,3 @@
+@@ -1,4 +1,5 @@
+-Mark Nudelman, less – Opposite of more, version 551, 2019, https://www.greenwoodsoftware.com/less.
 -Groskopf, csvstat – Print Descriptive Statistics for Each Column in a CSV File.
 -Janssens, rush – R One-Liners from the Shell.
 -The R Foundation for Statistical Computing, R – a Language and Environment for Statistical Computing.
-+Christopher Groskopf, csvstat – Print Descriptive Statistics for Each Column in a CSV File, version 1.0.5, 2020, https://csvkit.rtfd.org.
-+Jeroen Janssens, rush – R One-Liners from the Shell, version 0.1, 2021, https://github.com/jeroenjanssens/rush.
-+The R Foundation for Statistical Computing, R – a Language and Environment for Statistical Computing, version 4.0.4, 2021, https://www.r-project.org.
++Mark Nudelman, less – Opposite of more, version 668, 2024, https://www.greenwoodsoftware.com/less.
++Christopher Groskopf, csvstat – Print Descriptive Statistics for Each Column in a CSV File, version 1.1.0, 2023, https://csvkit.rtfd.org.
++Jeroen Janssens, rush – R One-Liners from the Shell, version 0.2.1.9000, 2026, https://github.com/jeroenjanssens/rush.
++The R Foundation for Statistical Computing, R – a Language and Environment for Statistical Computing, version 4.5.2, 2025, https://www.r-project.org.
++Tomasz Kalinowski, ir – Run Standalone R Scripts from Embedded Dependency Metadata, version 0.4.1, 2026, https://github.com/r-lib/ir.
 ```
 
 ## Image changed: images/plot-accident.png

@@ -1,0 +1,26 @@
+url	status	final_url	notes
+https://stedolan.github.com/jq	000	https://stedolan.github.com/jq	Connection failed (not a valid GitHub Pages URL); project moved to https://jqlang.org
+https://jqlang.org	200	https://jqlang.org/	Live; new canonical home for jq
+https://curl.haxx.se	200	https://curl.se/	Redirects to https://curl.se (permanent redirect)
+https://curl.se	200	https://curl.se/	Live; current canonical URL for curl
+http://home.gna.org/unrar	000	http://home.gna.org/unrar	Connection failed; gna.org shut down ~2017; URL is dead
+http://www.hcs.harvard.edu/~dholland/computers/netkit.html	000	http://www.hcs.harvard.edu/~dholland/computers/netkit.html	Connection timed out; server unreachable
+https://www.nongnu.org/zutils/zutils.html	000	https://www.nongnu.org/zutils/zutils.html	Connection timed out; nongnu.org unreachable from test machine (same IP as gnu.org: 209.51.188.116)
+https://www.gnu.org/software/gzip	000	https://www.gnu.org/software/gzip	Connection timed out; www.gnu.org unreachable from test machine (IP 209.51.188.116 not responding)
+https://www.gnu.org/software/findutils	000	https://www.gnu.org/software/findutils	Connection timed out; same gnu.org connectivity issue
+https://www.gnu.org/software/sed	000	https://www.gnu.org/software/sed	Connection timed out; same gnu.org connectivity issue
+https://www.gnu.org/software/tar	000	https://www.gnu.org/software/tar	Connection timed out; same gnu.org connectivity issue
+https://www.nongnu.org/man-db	000	https://www.nongnu.org/man-db	Connection timed out; same nongnu.org connectivity issue
+https://tldr.sh	200	https://tldr.sh/	Live
+https://github.com/tealdeer-rs/tealdeer	200	https://github.com/tealdeer-rs/tealdeer	Live; current repo for tealdeer tldr client
+https://github.com/uutils/coreutils	200	https://github.com/uutils/coreutils	Live; Rust coreutils implementation
+https://github.com/antonmedv/fx	200	https://github.com/antonmedv/fx	Live; fx JSON viewer
+https://fx.wtf	200	https://fx.wtf/	Live; alternative homepage for fx
+http://tapkee.lisitsyn.me	200	https://tapkee.lisitsyn.me/	Redirects HTTP→HTTPS; live
+https://github.com/lisitsyn/tapkee	200	https://github.com/lisitsyn/tapkee	Live; tapkee GitHub repo
+https://docs.astral.sh/uv	200	https://docs.astral.sh/uv/	Live; uv documentation
+https://launchpad.net/ubuntu/+source/tree	200	https://launchpad.net/ubuntu/+source/tree	Live; Ubuntu source package for tree
+https://oldmanprogrammer.net/source.php?dir=projects/tree	200	https://oldmanprogrammer.net/source.php?dir=projects/tree	Live; official tree homepage
+https://skll.readthedocs.org	200	https://skll.readthedocs.io/en/latest/	Redirects to https://skll.readthedocs.io/en/latest/
+https://vowpalwabbit.org	200	https://vowpalwabbit.org/	Live; Vowpal Wabbit homepage
+https://www.greenwoodsoftware.com/less	200	https://www.greenwoodsoftware.com/less/	Live; less homepage

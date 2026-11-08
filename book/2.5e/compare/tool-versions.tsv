@@ -1,0 +1,69 @@
+tool	book_version	image_version	how_obtained	release_year	year_source	notes
+aws	2.1.32	2.31.35	docker run ... aws --version	2025	gh api repos/aws/aws-cli/commits?sha=2.31.35 → 2025-11-12	aws-cli v2; commit message "Bump version to 2.31.35"
+bash	5.0.17	5.3.9(1)-release	docker run ... bash --version	2025	https://ftp.gnu.org/gnu/bash/bash-5.3-patches/ (bash53-009 dated 2025-12-10)	5.3 base released 2025-07-30; patch 009 released 2025-12-10
+bat	0.18.0	0.25.0	docker run ... bat --version	2025	gh api repos/sharkdp/bat/releases → v0.25.0 published 2025-01-07	
+bc	1.07.1	1.07.1	docker run ... bc --version	2017	https://ftp.gnu.org/gnu/bc/ (bc-1.07.1.tar.gz dated 2017-04-09)	unchanged from book
+cat	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... cat --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+cut	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... cut --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+head	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... head --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+ls	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... ls --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+sort	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... sort --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+wc	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... wc --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+tr	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... tr --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+uniq	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... uniq --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+tail	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... tail --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+seq	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... seq --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+paste	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... paste --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+nl	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... nl --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+fold	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... fold --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+expand	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... expand --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+shuf	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... shuf --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+tee	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... tee --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+mkdir	8.30 (GNU coreutils)	0.10.0 (uutils coreutils)	docker run ... mkdir --version	2026	gh api repos/uutils/coreutils/releases → 0.10.0 published 2026-08-05	implementation changed: GNU → uutils (Rust)
+cp	8.30 (GNU coreutils)	9.7 (GNU coreutils)	docker run ... cp --version	2025	https://ftp.gnu.org/gnu/coreutils/ (coreutils-9.7.tar.gz dated 2025-04-09)	still GNU (not uutils)
+mv	8.30 (GNU coreutils)	9.7 (GNU coreutils)	docker run ... mv --version	2025	https://ftp.gnu.org/gnu/coreutils/ (coreutils-9.7.tar.gz dated 2025-04-09)	still GNU (not uutils)
+rm	8.30 (GNU coreutils)	9.7 (GNU coreutils)	docker run ... rm --version	2025	https://ftp.gnu.org/gnu/coreutils/ (coreutils-9.7.tar.gz dated 2025-04-09)	still GNU (not uutils)
+column	util-linux 2.36.1	util-linux 2.41.3	docker run ... column --version	2025	gh api repos/util-linux/util-linux/git/tags/{sha} → tagger.date 2025-12-15	
+rev	util-linux 2.36.1	util-linux 2.41.3	docker run ... rev --version	2025	gh api repos/util-linux/util-linux/git/tags/{sha} → tagger.date 2025-12-15	
+csvkit	1.0.5	1.1.0	docker run ... csvcut --version; cat ...csvkit-1.1.0.dist-info/METADATA	2023	https://pypi.org/pypi/csvkit/1.1.0/json → upload_time 2023-01-03	installed via uv tools
+curl	7.68.0	8.18.0	docker run ... curl --version	2026	gh api repos/curl/curl/releases → curl-8_18_0 published 2026-01-07	
+find	4.7.0	4.10.0	docker run ... find --version	2024	https://ftp.gnu.org/gnu/findutils/ (findutils-4.10.0.tar.xz dated 2024-06-01)	
+fx	20.0.2	40.0.1	docker run ... fx --version	2026	gh api repos/antonmedv/fx/releases → 40.0.1 published 2026-10-22	
+git	2.25.1	2.53.0	docker run ... git --version	2026	gh api repos/git/git/git/tags/{sha} → tagger.date 2026-02-02	
+grep	3.4	3.12	docker run ... grep --version	2025	https://ftp.gnu.org/gnu/grep/ (grep-3.12.tar.gz dated 2025-04-10)	
+gron	0.6.1	0.7.1	docker run ... gron --version	2022	gh api repos/tomnomnom/gron/releases → v0.7.1 published 2022-04-13	
+hostname	3.23	3.25build1	docker run ... dpkg-query -W -f='${Version}' hostname	2024	https://changelogs.ubuntu.com/...hostname_3.25build1/changelog → 3.25 uploaded 2024-10-11	upstream release 3.25 (Debian pkg; Ubuntu rebuild for 26.04)
+jq	1.6	1.8.1	docker run ... jq --version	2025	gh api repos/jqlang/jq/releases → jq-1.8.1 published 2025-07-01	project moved from stedolan/jq to jqlang/jq
+json2csv	1.2.1	1.2.1 (built w/go1.27.3)	docker run ... json2csv --version	2019	gh api repos/jehiah/json2csv/releases → v1.2.1 published 2019-12-30	unchanged from book; binary recompiled with newer Go
+less	551	668	docker run ... less --version	2024	https://www.greenwoodsoftware.com/less/news.668.html ("released for general use on 17 Oct 2024")	
+make	4.3	4.4.1	docker run ... make --version	2023	https://ftp.gnu.org/gnu/make/ (make-4.4.1.tar.gz dated 2023-02-26)	
+man	2.9.1	2.13.1	docker run ... man --version	2025	https://gitlab.com/api/v4/projects/man-db%2Fman-db/repository/tags → 2.13.1 committed 2025-05-02	
+mawk	1.3.4	1.3.4 20260129	docker run ... mawk -W version	2026	https://invisible-island.net/datafiles/release/mawk.tar.gz (Last-Modified: Tue, 03 Mar 2026); CHANGES file contains entry "20260129"	mawk uses date-based patch identifiers; 20260129 = 2026-01-29
+nano	5.4	8.7.1	docker run ... nano --version	2026	https://ftp.gnu.org/gnu/nano/ (nano-8.7.1.tar.gz dated 2026-02-04)	
+parallel	20161222	20240222	docker run ... parallel --version	2024	https://ftp.gnu.org/gnu/parallel/ (parallel-20240222.tar.bz2 dated 2024-02-27)	version number IS the release date (YYYYMMDD)
+pip	20.0.2	uv shim (uv 0.13.7)	docker run ... cat /usr/local/bin/pip; uv --version	2026	gh api repos/astral-sh/uv/releases → 0.13.7 published 2026-11-03	pip is a shell script that execs 'uv pip'; no standalone pip installed; uv 0.13.7 is the underlying tool
+pup	0.4.0	0.4.0	docker run ... pup --version	2016	gh api repos/ericchiang/pup/releases → v0.4.0 published 2016-07-23	unchanged from book
+python	3.8.5	3.13.18	docker run ... python3 --version	2026	https://www.python.org/ftp/python/3.13.18/ (Python-3.13.18.tar.xz dated 25-Oct-2026)	
+R	4.0.4	4.5.2	docker run ... R --version	2025	https://cran.r-project.org/src/base/R-4/R-4.5.2.tar.gz (Last-Modified: Fri, 31 Oct 2025)	
+rush	0.1	0.2.1.9000	docker run ... Rscript -e "packageVersion('rush')"	2026	gh api repos/jeroenjanssens/rush/releases → v0.2.1 published 2026-11-05	R package; .9000 suffix denotes development build from after v0.2.1 release
+sample	0.2.4	0.2.5	docker run ... cat .../sample_stream-0.2.5.dist-info/METADATA	2021	https://pypi.org/pypi/sample-stream/0.2.5/json → upload_time 2021-03-02	package name is sample-stream; installed via uv tools
+scp	OpenSSH 8.2p1	OpenSSH 10.2p1	docker run ... ssh -V	2025	https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.2p1.tar.gz (Last-Modified: Fri, 10 Oct 2025)	scp and ssh share the OpenSSH package
+ssh	OpenSSH 8.2p1	OpenSSH 10.2p1	docker run ... ssh -V	2025	https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.2p1.tar.gz (Last-Modified: Fri, 10 Oct 2025)	dpkg: openssh-client 1:10.2p1-2ubuntu3.8
+sed	4.7	4.9	docker run ... sed --version	2022	https://ftp.gnu.org/gnu/sed/ (sed-4.9.tar.gz dated 2022-11-06)	
+skll	2.5.0	5.1.0	docker run ... cat .../skll-5.1.0.dist-info/METADATA	2024	https://pypi.org/pypi/skll/5.1.0/json → upload_time 2024-12-27	installed via uv tools (not in main venv; import fails without sys.path hack)
+sponge	moreutils 0.65	moreutils 0.69	docker run ... dpkg-query -W moreutils	2024	https://changelogs.ubuntu.com/.../moreutils_0.69-1build1/changelog and https://joeyh.name/code/moreutils/news/version_0.69/ (created 2024-02-25)	upstream release 0.69 on 2024-02-25; Ubuntu rebuilt as 0.69-1build1
+ts	moreutils 0.65	moreutils 0.69	docker run ... dpkg-query -W moreutils	2024	https://changelogs.ubuntu.com/.../moreutils_0.69-1build1/changelog and https://joeyh.name/code/moreutils/news/version_0.69/ (created 2024-02-25)	same package as sponge (moreutils)
+sudo	1.8.31	1.9.17p2	docker run ... sudo --version	2025	https://www.sudo.ws/sudo/dist/ (sudo-1.9.17p2.tar.gz dated 26-Jul-2025)	dpkg: sudo 1.9.17p2
+tapkee	1.2	unknown (likely v1.4.0)	docker run ... tapkee --help; file /usr/local/bin/tapkee; grep -a ...binary...	unknown	gh api repos/lisitsyn/tapkee/releases → latest v1.4.0 published 2026-08-29; binary compiled 2026-11-05	Binary does not report version (outputs "Git version unknown"); compiled with GCC 15.2.0 (Ubuntu 26.04); latest tag v1.4.0 released 2026-08-29 before image build date 2026-11-05
+tar	1.30	1.35	docker run ... tar --version	2023	https://ftp.gnu.org/gnu/tar/ (tar-1.35.cpio.gz dated 2023-07-18)	
+telnet	0.17	0.17+2.7-2ubuntu1.1	docker run ... dpkg-query -W telnet	2000	https://metadata.ftp-master.debian.org/...netkit-telnet_0.17-48_changelog → netkit-telnet 0.17-1 packaged 2000-08-19 ("New upstream release")	upstream netkit-0.17 first packaged in Debian on 2000-08-19; "+2.7" is Debian/Ubuntu patch series; Ubuntu rebuild of 0.17+2.7-2ubuntu1
+tldr	3.3.7	tealdeer 1.8.1	docker run ... tldr --version	2025	gh api repos/tealdeer-rs/tealdeer/releases → v1.8.1 published 2025-11-11	tldr client is now tealdeer (Rust reimplementation); old client was dbrgn/tealdeer then moved to tealdeer-rs
+tree	1.8.0	2.3.1	docker run ... tree --version	2026	https://oldmanprogrammer.net/tar/tree/tree-2.3.1.tgz (Last-Modified: Sat, 31 Jan 2026)	
+unrar	0.0.1	0.3.3 (pkg: 1:0.3.3-1build1)	docker run ... dpkg-query -W unrar-free	2025	https://changelogs.ubuntu.com/.../unrar-free_0.3.3-1build1/changelog → 1:0.3.3-1 "New upstream release" uploaded 2025-08-15	command is unrar-free (not unrar); "epoch 1" in pkg version means upstream went 0.0.x→0.3.x
+vw	8.10.1	9.11.9	docker run ... vw --version	2026	gh api repos/VowpalWabbit/vowpal_wabbit/releases → 9.11.9 published 2026-09-27	
+xml2json	0.0.3	0.0.3	docker run ... cat /opt/node/lib/node_modules/xml2json-command/package.json	2016	gh api repos/Inist-CNRS/node-xml2json-command/git/tags/{sha} → tagger.date 2016-02-03	This is the xml2json-command Node.js package; no Python xml2json module installed
+xmlstarlet	1.6.1	1.6.1	docker run ... xmlstarlet --version	2014	https://changelogs.ubuntu.com/.../xmlstarlet_1.6.1-3/changelog → 1.6.1-1 "New upstream release" uploaded 2014-09-14 by Monica Ramirez	unchanged from book
+xsv	0.13.0	0.13.0	docker run ... xsv --version	2018	gh api repos/BurntSushi/xsv/releases → 0.13.0 published 2018-05-12	unchanged from book; project appears unmaintained since 2018
+zcat	gzip 1.10	gzip 1.14	docker run ... zcat --version	2025	https://ftp.gnu.org/gnu/gzip/ (gzip-1.14.tar.gz dated 2025-04-09)	zcat is part of gzip package
+zsh	5.8	5.9	docker run ... zsh --version	2022	https://www.zsh.org/pub/old/ (zsh-5.9.tar.xz dated 14-May-2022)	
+display (ImageMagick)	(not listed)	NOT INSTALLED	docker run ... command -v display; dpkg -l | grep -i imagemagick	N/A	dpkg-query: no packages found matching *imagemagick*	ImageMagick not installed in the image; display command absent

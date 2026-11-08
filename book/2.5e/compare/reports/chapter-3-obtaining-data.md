@@ -270,3 +270,34 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
        "urlToImage": "https://s.yimg.com/os/creatr-uploaded-images/2021-12/bcb0f…
 ```
 
+## Footnotes differ (13 vs 13)
+
+- id: `chapter-3-obtaining-data.html:footnotes`
+- hash: `1cbc023f`
+- status: **accept**
+- cause: content
+- note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,4 +1,4 @@
+-Daniel Stenberg, curl – Transfer a URL, version 7.68.0, 2016, https://curl.haxx.se.
+-Christopher Groskopf, in2csv – Convert Common, but Less Awesome, Tabular Data Formats to CSV, version 1.0.5, 2020, https://csvkit.rtfd.org.
+-Christopher Groskopf, sql2csv – Execute an SQL Query on a Database and Output the Result to a CSV File, version 1.0.5, 2020, https://csvkit.rtfd.org.
+-John Gilmore and Jay Fenlason, tar – an Archiving Utility, version 1.30, 2014, https://www.gnu.org/software/tar.
++Daniel Stenberg, curl – Transfer a URL, version 8.18.0, 2026, https://curl.se.
++Christopher Groskopf, in2csv – Convert Common, but Less Awesome, Tabular Data Formats to CSV, version 1.1.0, 2023, https://csvkit.rtfd.org.
++Christopher Groskopf, sql2csv – Execute an SQL Query on a Database and Output the Result to a CSV File, version 1.1.0, 2023, https://csvkit.rtfd.org.
++John Gilmore and Jay Fenlason, tar – an Archiving Utility, version 1.35, 2023, https://www.gnu.org/software/tar.
+@@ -7 +7 @@
+-Ben Asselstine, Christian Scheurer, and Johannes Winkelmann, unrar – Extract Files from Rar Archives, version 0.0.1, 2014, http://home.gna.org/unrar.
++Ben Asselstine, Christian Scheurer, and Johannes Winkelmann, unrar – Extract Files from Rar Archives, version 0.3.3, 2025, https://gitlab.com/bgermann/unrar-free.
+@@ -10 +10 @@
+-Christopher Groskopf, csvlook – Render a CSV File in the Console as a Markdown-Compatible, Fixed-Width Table, version 1.0.5, 2020, https://csvkit.rtfd.org.
++Christopher Groskopf, csvlook – Render a CSV File in the Console as a Markdown-Compatible, Fixed-Width Table, version 1.1.0, 2023, https://csvkit.rtfd.org.
+@@ -12 +12 @@
+-Mats Erik Andersson, Andreas Henriksson, and Christoph Biedl, telnet – User Interface to the TELNET Protocol, version 0.17, 1999, http://www.hcs.harvard.edu/~dholland/computers/netkit.html.
++GNU Inetutils developers, telnet – User Interface to the TELNET Protocol, version 2.7, 2025, https://www.gnu.org/software/inetutils.
+```
+

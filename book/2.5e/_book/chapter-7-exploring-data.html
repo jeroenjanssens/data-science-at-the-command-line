@@ -315,10 +315,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 104K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  8 21:17 datatypes.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  8 21:17 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  8 21:17 venture-wide.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  8 21:17 venture.csv</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  8 21:48 datatypes.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  8 21:48 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  8 21:48 venture-wide.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  8 21:48 venture.csv</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -843,11 +843,12 @@ Tip
 
 <p>This generated script:</p>
 <ul>
-<li>Writes out the shebang (<em><code>#!</code></em>; see <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a>) needed for running an <code>R</code> script from the command line.</li>
+<li>Writes out the shebang (<em><code>#!</code></em>; see <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a>) needed for running the script from the command line with <code>ir</code><span class="citation" data-cites="ir"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>.</li>
+<li>Lists the packages that the script needs, so that <code>ir</code> can prepare them the first time you run it.</li>
 <li>Imports the <em>tidyverse</em> and <em>glue</em> packages.</li>
 <li>Loads <em>tips.csv</em> as a data frame, cleans the column names, and assigns it to a variable <em>df</em>.</li>
-<li>Runs the specified expression.</li>
-<li>Prints the result to standard output.</li>
+<li>Runs the specified expression and assigns its result to <em>result</em>.</li>
+<li>Writes the result to standard output.</li>
 </ul>
 <p>You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.</p>
 <p>The output of <code>rush</code> doesn’t have to be a in CSV format per se. Here, I compute the mean tip percent, the maximum party size, the unique values of the time column, the correlation between the bill and the tip. Finally, I extract an entire column (but only show the first 10 values).</p>
@@ -945,7 +946,7 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 </figure>
 </div>
 <p>Option 3 is to manually open the image (<em>tips.csv</em> in this example) in an image viewer. <a href="#fig-screenshot-display-preview-and-browser" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> shows, on the left, the file explorer (Finder) and image viewer (Preview) on macOS. When you’re working locally, this option always works. When you’re working inside a Docker container, you can only access the generated image from your OS when you’ve mapped a local directory using the <code>-v</code> option. See <a href="./chapter-2-getting-started.html">Chapter 2</a> for instructions on how to do this. An advantage of this option is that most image viewers automatically update the display when the image has changed, which allows for quick iterations as you fine-tune your visualization.</p>
-<p>Option 4 is to open the image in a browser. The right side of <a href="#fig-screenshot-display-preview-and-browser" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> is a screenshot of Firefox showing <em><a href="http://localhost:8000/tips.png" class="uri">http://localhost:8000/tips.png</a></em>. Any browser will do, but you need two other prerequisites for this option to work. First, you need to have made a port (port 8000 in this example) accessible on the Docker container using the <code>-p</code> option. (Again, see <a href="./chapter-2-getting-started.html">Chapter 2</a> for instructions on how to do this.) Second, you need to start a webserver. For this, the Docker container has a small tool called <code>servewd</code><span class="citation" data-cites="servewd"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>, which serves the current working directory using Python:</p>
+<p>Option 4 is to open the image in a browser. The right side of <a href="#fig-screenshot-display-preview-and-browser" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> is a screenshot of Firefox showing <em><a href="http://localhost:8000/tips.png" class="uri">http://localhost:8000/tips.png</a></em>. Any browser will do, but you need two other prerequisites for this option to work. First, you need to have made a port (port 8000 in this example) accessible on the Docker container using the <code>-p</code> option. (Again, see <a href="./chapter-2-getting-started.html">Chapter 2</a> for instructions on how to do this.) Second, you need to start a webserver. For this, the Docker container has a small tool called <code>servewd</code><span class="citation" data-cites="servewd"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>, which serves the current working directory using Python:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">which</span> servewd<span style="color:var(--term-5)">)</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">/usr/bin/dsutils/servewd</span></span>
@@ -975,25 +976,11 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color size --facets <span style="color:var(--term-3)">'~day'</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> tips.png</code></pre>
 
 <p>While the syntax of <code>ggplot2</code> is relatively concise, especially considering the flexibility it offers, there’s a shortcut to create basic plots quickly. This shortcut is available through the <code>plot</code> subcommand of <code>rush</code>. This allows you to create beautiful basic plots without needing to learn R and the grammar of graphics.</p>
-<p>Under the hood, <code>rush plot</code> uses the function <code>qplot</code> from the <code>ggplot2</code> package. Here’s the first part of its documentation:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">R</span> -q -e <span style="color:var(--term-3)">'?ggplot2::qplot'</span> | <span style="color:var(--term-2)">trim</span> 14
-<span class="term-prompt" data-prompt="> "></span>?ggplot2::qplot
-<span class="term-output">qplot                 package:ggplot2                  R Documentation</span>
-<span class="term-output"></span>
-<span class="term-output">Quick plot</span>
-<span class="term-output"></span>
-<span class="term-output">Description:</span>
-<span class="term-output"></span>
-<span class="term-output">     ‘qplot()’ is now deprecated in order to encourage the users to</span>
-<span class="term-output">     learn ‘ggplot()’ as it makes it easier to create complex graphics.</span>
-<span class="term-output"></span>
-<span class="term-output">Usage:</span>
-<span class="term-output"></span>
-<span class="term-output">     qplot(</span>
-<span class="term-output">       x,</span>
-<span class="term-output">… with 104 more lines</span></code></pre>
+<p>Under the hood, <code>rush plot</code> constructs a <code>ggplot2</code> plot: options such as <code>--x</code>, <code>--y</code>, and <code>--color</code> become aesthetics, and <code>--geom</code> becomes the geometry. With the <code>--dry-run</code> (or <code>-n</code>) option you can see the code that it generates; here I only show the line that creates the plot:</p>
+<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot -n --x bill --y tip <span style="text-decoration:underline">tips.csv</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">'ggplot('</span>
+<span class="term-output">result &lt;- ggplot(df, aes(x = bill, y = tip)) + geom_point()</span></code></pre>
 
-<p>I agree with this advice; once you’re done reading this book, it’ll be worthwhile to learn <code>ggplot2</code>, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication. For now, while we’re at the command line, let’s take that shortcut.</p>
+<p>Once you’re done reading this book, it’ll be worthwhile to learn <code>ggplot2</code>, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication. The code that <code>rush plot -n</code> generates is a good starting point. For now, while we’re at the command line, let’s take the shortcut.</p>
 <p>As <a href="#fig-screenshot-display-ansi-and-inline" class="quarto-xref">Figure&nbsp;<span>7.2</span></a> already showed, <code>rush plot</code> can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and ANSI escape sequences) with the same syntax. When <code>rush</code> detects that its output is piped to another command (such as <code>display</code> or redirected to a file such as <em>tips.png</em> it will produce a graphical visualization; otherwise it will produce a textual visualization.</p>
 <p>Let’s take a moment to read through the plotting and saving options of <code>rush plot</code>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --help
@@ -1443,11 +1430,12 @@ Figure&nbsp;7.12: A violin plot with a title and labels
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Mark Nudelman, <em><span class="nocase">less</span> – Opposite of <span class="nocase">more</span></em>, version 551, 2019, <a href="https://www.greenwoodsoftware.com/less">https://www.greenwoodsoftware.com/less</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Christopher Groskopf, <em><span class="nocase">csvstat</span> – Print Descriptive Statistics for Each Column in a <span>CSV</span> File</em>, version 1.0.5, 2020, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Jeroen Janssens, <em><span class="nocase">rush</span> – <span>R</span> One-Liners from the Shell</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/rush">https://github.com/jeroenjanssens/rush</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>The R Foundation for Statistical Computing, <em><span>R</span> – a Language and Environment for Statistical Computing</em>, version 4.0.4, 2021, <a href="https://www.r-project.org">https://www.r-project.org</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Jeroen Janssens, <em><span class="nocase">servewd</span> – Serve the Current Working Directory Using a Simple <span>HTTP</span> Server</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Mark Nudelman, <em><span class="nocase">less</span> – Opposite of <span class="nocase">more</span></em>, version 668, 2024, <a href="https://www.greenwoodsoftware.com/less">https://www.greenwoodsoftware.com/less</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Christopher Groskopf, <em><span class="nocase">csvstat</span> – Print Descriptive Statistics for Each Column in a <span>CSV</span> File</em>, version 1.1.0, 2023, <a href="https://csvkit.rtfd.org">https://csvkit.rtfd.org</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Jeroen Janssens, <em><span class="nocase">rush</span> – <span>R</span> One-Liners from the Shell</em>, version 0.2.1.9000, 2026, <a href="https://github.com/jeroenjanssens/rush">https://github.com/jeroenjanssens/rush</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The R Foundation for Statistical Computing, <em><span>R</span> – a Language and Environment for Statistical Computing</em>, version 4.5.2, 2025, <a href="https://www.r-project.org">https://www.r-project.org</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Tomasz Kalinowski, <em><span class="nocase">ir</span> – Run Standalone <span>R</span> Scripts from Embedded Dependency Metadata</em>, version 0.4.1, 2026, <a href="https://github.com/r-lib/ir">https://github.com/r-lib/ir</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Jeroen Janssens, <em><span class="nocase">servewd</span> – Serve the Current Working Directory Using a Simple <span>HTTP</span> Server</em>, version 0.1, 2021, <a href="https://github.com/jeroenjanssens/dsutils">https://github.com/jeroenjanssens/dsutils</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

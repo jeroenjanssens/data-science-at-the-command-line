@@ -53,7 +53,6 @@ mkdir -v backup
 cp -v * backup
 rm -i *
 cat /data/ch07/tips.csv | trim 5 25
-which csvlook
 csvlook /data/ch07/tips.csv
 bat /data/ch04/stream.py
 seq 0 2 100 | tee even.txt | trim 5

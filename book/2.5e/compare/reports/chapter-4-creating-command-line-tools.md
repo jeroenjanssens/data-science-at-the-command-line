@@ -416,18 +416,34 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Footnotes differ (14 vs 14)
 
 - id: `chapter-4-creating-command-line-tools.html:footnotes`
-- hash: `9945c89a`
+- hash: `a8152a2c`
 - status: **accept**
 - cause: conversion
-- note: bookdown rendered the book as one document, so citations already cited in an earlier chapter got the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter is full
+- note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -3,2 +3,2 @@
+@@ -2,10 +2,10 @@
+-Jim Meyering, tr – Translate or Delete Characters, version 8.30, 2018, https://www.gnu.org/software/coreutils.
 -Meyering, grep – Print Lines That Match Patterns.
 -Haertel and Eggert, sort – Sort Lines of Text Files.
-+Jim Meyering, grep – Print Lines That Match Patterns, version 3.4, 2019, https://www.gnu.org/software/grep.
-+Mike Haertel and Paul Eggert, sort – Sort Lines of Text Files, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Richard M. Stallman and David MacKenzie, uniq – Report or Omit Repeated Lines, version 8.30, 2019, https://www.gnu.org/software/coreutils.
+-Brian Fox and Chet Ramey, bash – GNU Bourne-Again SHell, version 5.0.17, 2019, https://www.gnu.org/software/bash.
+-David MacKenzie and Jim Meyering, chmod – Change File Mode Bits, version 8.30, 2018, https://www.gnu.org/software/coreutils.
+-Benno Schulenberg et al., nano – Nano’s ANOther editor, inspired by Pico, version 5.4, 2020, https://nano-editor.org.
+-The Python Software Foundation, python – an Interpreted, Interactive, Object-Oriented Programming Language, version 3.8.5, 2021, https://www.python.org.
+-Richard Mlynarik, David MacKenzie, and Assaf Gordon, env – Run a Program in a Modified Environment, version 8.32, 2020, https://www.gnu.org/software/coreutils.
+-The R Foundation for Statistical Computing, R – a Language and Environment for Statistical Computing, version 4.0.4, 2021, https://www.r-project.org.
++uutils contributors, tr – Translate or Delete Characters, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++Jim Meyering, grep – Print Lines That Match Patterns, version 3.12, 2025, https://www.gnu.org/software/grep.
++uutils contributors, sort – Sort Lines of Text Files, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++uutils contributors, uniq – Report or Omit Repeated Lines, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++Brian Fox and Chet Ramey, bash – GNU Bourne-Again SHell, version 5.3.9, 2025, https://www.gnu.org/software/bash.
++uutils contributors, chmod – Change File Mode Bits, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++Benno Schulenberg et al., nano – Nano’s ANOther editor, inspired by Pico, version 8.7.1, 2026, https://nano-editor.org.
++The Python Software Foundation, python – an Interpreted, Interactive, Object-Oriented Programming Language, version 3.13.18, 2026, https://www.python.org.
++uutils contributors, env – Run a Program in a Modified Environment, version 0.10.0, 2026, https://github.com/uutils/coreutils.
++The R Foundation for Statistical Computing, R – a Language and Environment for Statistical Computing, version 4.5.2, 2025, https://www.r-project.org.
 ```
 

@@ -112,7 +112,7 @@ csvlook irismeta.csv
 csvjoin -c species iris.csv irismeta.csv | csvcut -c sepal_length,sepal_width,species,usda_id | sed -n '1p;49,54p' | csvlook
 csvsql --query 'SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id FROM iris i JOIN irismeta m ON (i.species = m.species)' iris.csv irismeta.csv | sed -n '1p;49,54p' | csvlook
 sed -e 's/"gender":/"sex":/g' users.json | jq | trim
-curl -sL 'http://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio' > wiki.html
+curl -sL 'https://web.archive.org/web/20211005234015id_/https://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio' > wiki.html
 < wiki.html trim
 grep wikitable -A 21 wiki.html
 < wiki.html pup 'table.wikitable tbody' | tee table.html | trim

@@ -27,6 +27,7 @@ For each command-line tool, the following information, when available and approp
 
 All command-line tools listed here are included in the Docker image.
 See [Chapter 2](chapter-2-getting-started.qmd) for instructions on how to set it up.
+The versions listed are the ones in the current Docker image; the image used for the printed book is available as `datasciencetoolbox/dsatcl2e:20210628`.
 Please note that citing open source software is not trivial, and that some information may be missing or incorrect.
 
 ```{term}
@@ -56,8 +57,8 @@ alias python=python3
 
 Pattern scanning and text processing language.
 `awk`
-(version 1.3.4)
-by Mike D. Brennan and Thomas E. Dickey (2019).
+(version 1.3.4 20260129)
+by Mike D. Brennan and Thomas E. Dickey (2026).
 More information: https://invisible-island.net/mawk.
 
 ```{term}
@@ -72,8 +73,8 @@ seq 5 | awk '{sum+=$1} END {print sum}'
 
 Unified tool to manage AWS services.
 `aws`
-(version 2.1.32)
-by Amazon Web Services (2021).
+(version 2.31.35)
+by Amazon Web Services (2025).
 More information: https://aws.amazon.com/cli.
 
 ```{term}
@@ -87,8 +88,8 @@ ctrl-c #! literal: false
 
 GNU Bourne-Again SHell.
 `bash`
-(version 5.0.17)
-by Brian Fox and Chet Ramey (2019).
+(version 5.3.9)
+by Brian Fox and Chet Ramey (2025).
 More information: https://www.gnu.org/software/bash.
 
 ```{term}
@@ -102,8 +103,8 @@ ctrl-c #! literal: false
 
 A cat clone with syntax highlighting and Git integration.
 `bat`
-(version 0.18.0)
-by David Peter (2021).
+(version 0.25.0)
+by David Peter (2025).
 More information: https://github.com/sharkdp/bat.
 
 ```{term}
@@ -147,9 +148,9 @@ seq 10 | header -a 'values' | body shuf
 
 Concatenate files and print on the standard output.
 `cat`
-(version 8.30)
-by Torbjorn Granlund and Richard M. Stallman (2018).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: cat
@@ -182,10 +183,10 @@ cd /data/ch01
 
 Change file mode bits.
 `chmod`
-(version 8.30)
-by David MacKenzie and Jim Meyering (2018).
+(version 0.10.0)
+by the uutils contributors (2026).
 I use `chmod` in [Chapter 4](chapter-4-creating-command-line-tools.qmd) to make a tool executable.
-More information: https://www.gnu.org/software/coreutils.
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: chmod
@@ -213,8 +214,8 @@ type cols
 
 Columnate lists.
 `column`
-(version 2.36.1)
-by Karel Zak (2021).
+(version 2.41.3)
+by Karel Zak (2025).
 More information: https://www.kernel.org/pub/linux/utils/util-linux.
 
 ```{term}
@@ -242,8 +243,8 @@ echo 'The command line is awesome!' | cowsay
 
 Copy files and directories.
 `cp`
-(version 8.30)
-by Torbjorn Granlund, David MacKenzie, and Jim Meyering (2018).
+(version 9.7)
+by Torbjorn Granlund, David MacKenzie, and Jim Meyering (2025).
 More information: https://www.gnu.org/software/coreutils.
 
 ```{term}
@@ -272,8 +273,8 @@ type csv2vw
 
 Filter and truncate CSV files.
 `csvcut`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -288,8 +289,8 @@ csvcut -c bill,tip /data/ch05/tips.csv | trim
 
 Search CSV files.
 `csvgrep`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -303,8 +304,8 @@ ctrl-c #! literal: false
 
 Execute a SQL-like join to merge CSV files on a specified column or columns.
 `csvjoin`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -318,8 +319,8 @@ ctrl-c #! literal: false
 
 Render a CSV file in the console as a Markdown-compatible, fixed-width table.
 `csvlook`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -347,8 +348,8 @@ type csvquote
 
 Sort CSV files.
 `csvsort`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -362,8 +363,8 @@ ctrl-c #! literal: false
 
 Execute SQL statements on CSV files.
 `csvsql`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -377,8 +378,8 @@ ctrl-c #! literal: false
 
 Stack up the rows from multiple CSV files.
 `csvstack`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -392,8 +393,8 @@ ctrl-c #! literal: false
 
 Print descriptive statistics for each column in a CSV file.
 `csvstat`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -407,9 +408,9 @@ ctrl-c #! literal: false
 
 Transfer a URL.
 `curl`
-(version 7.68.0)
-by Daniel Stenberg (2016).
-More information: https://curl.haxx.se.
+(version 8.18.0)
+by Daniel Stenberg (2026).
+More information: https://curl.se.
 
 ```{term}
 #| label: curl
@@ -422,9 +423,9 @@ ctrl-c #! literal: false
 
 Remove sections from each line of files.
 `cut`
-(version 8.30)
-by David M. Ihnat, David MacKenzie, and Jim Meyering (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: cut
@@ -435,11 +436,9 @@ ctrl-c #! literal: false
 
 ## display {.unnumbered}
 
-Displays an image or image sequence on any X server.
-`display`
-(version 6.9.10-23)
-by ImageMagick Studio LLC (2019).
-More information: https://imagemagick.org.
+Insert an image into this book.
+`display` is a shell function that I use to insert images into this book while it's being rendered, so it isn't available in the Docker image (see [Chapter 7](chapter-7-exploring-data.qmd)).
+ImageMagick's `display`, which shows an image on an X server, isn't installed either.
 
 ```{term}
 #| label: display
@@ -482,9 +481,9 @@ echo -n Hippopotomonstrosesquippedaliophobia | wc -c
 
 Run a program in a modified environment.
 `env`
-(version 8.30)
-by Richard Mlynarik, David MacKenzie, and Assaf Gordon (2018).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: env
@@ -525,8 +524,8 @@ ctrl-c #! literal: false
 
 Search for files in a directory hierarchy.
 `find`
-(version 4.7.0)
-by Eric B. Decker, James Youngman, and Kevin Dalley (2019).
+(version 4.10.0)
+by Eric B. Decker, James Youngman, and Kevin Dalley (2024).
 More information: https://www.gnu.org/software/findutils.
 
 ```{term}
@@ -541,9 +540,9 @@ find /data -type f -name '*.csv' -size -3
 
 Wrap each input line to fit in specified width.
 `fold`
-(version 8.30)
-by David MacKenzie (2020).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: fold
@@ -571,8 +570,8 @@ for i in {A..C} "It's easy as" {1..3}; do echo $i; done
 
 Interactive JSON viewer.
 `fx`
-(version 20.0.2)
-by Anton Medvedev (2020).
+(version 40.0.1)
+by Anton Medvedev (2026).
 More information: https://github.com/antonmedv/fx.
 
 ```{term}
@@ -587,8 +586,8 @@ echo '[1,2,3]' | fx 'this.map(x => x * 2)'
 
 The stupid content tracker.
 `git`
-(version 2.25.1)
-by Linus Torvalds and Junio C. Hamano (2021).
+(version 2.53.0)
+by Linus Torvalds and Junio C. Hamano (2026).
 More information: https://git-scm.com.
 
 ```{term}
@@ -602,8 +601,8 @@ ctrl-c #! literal: false
 
 Print lines that match patterns.
 `grep`
-(version 3.4)
-by Jim Meyering (2019).
+(version 3.12)
+by Jim Meyering (2025).
 More information: https://www.gnu.org/software/grep.
 
 ```{term}
@@ -618,8 +617,8 @@ seq 100 | grep 3 | wc -l
 
 Make JSON greppable.
 `gron`
-(version 0.6.1)
-by Tom Hudson (2021).
+(version 0.7.1)
+by Tom Hudson (2022).
 More information: https://github.com/TomNomNom/gron.
 
 ```{term}
@@ -633,9 +632,9 @@ ctrl-c #! literal: false
 
 Output the first part of files.
 `head`
-(version 8.30)
-by David MacKenzie and Jim Meyering (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: head
@@ -675,8 +674,8 @@ type history
 
 Show or set the system's host name.
 `hostname`
-(version 3.23)
-by Peter Tobias, Bernd Eckenfels, and Michael Meskes (2021).
+(version 3.25)
+by Peter Tobias, Bernd Eckenfels, and Michael Meskes (2024).
 More information: https://sourceforge.net/projects/net-tools/.
 
 ```{term}
@@ -692,8 +691,8 @@ hostname -i
 
 Convert common, but less awesome, tabular data formats to CSV.
 `in2csv`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -703,13 +702,27 @@ in2csv --help #! enter: false
 ctrl-c #! literal: false
 ```
 
+## ir {.unnumbered}
+
+Run standalone R scripts from embedded dependency metadata.
+`ir`
+(version 0.4.1)
+by Tomasz Kalinowski (2026).
+More information: https://github.com/r-lib/ir.
+
+```{term}
+#| label: ir
+type ir
+ir --help | trim
+```
+
 ## jq {.unnumbered}
 
 Command-line JSON processor.
 `jq`
-(version 1.6)
-by Stephen Dolan (2021).
-More information: https://stedolan.github.com/jq.
+(version 1.8.1)
+by Stephen Dolan (2025).
+More information: https://jqlang.org.
 
 ```{term}
 #| label: jq
@@ -751,8 +764,8 @@ l
 
 opposite of more.
 `less`
-(version 551)
-by Mark Nudelman (2019).
+(version 668)
+by Mark Nudelman (2024).
 More information: https://www.greenwoodsoftware.com/less.
 
 ```{term}
@@ -768,9 +781,9 @@ ctrl-c #! literal: false
 
 List directory contents.
 `ls`
-(version 8.30)
-by Richard M. Stallman and David MacKenzie (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: ls
@@ -784,8 +797,8 @@ ls /data
 
 A Program for Maintaining Computer Programs.
 `make`
-(version 4.3)
-by Stuart I. Feldman (2020).
+(version 4.4.1)
+by Stuart I. Feldman (2023).
 More information: https://www.gnu.org/software/make.
 
 ```{term}
@@ -801,8 +814,8 @@ ctrl-c #! literal: false
 
 An interface to the system reference manuals.
 `man`
-(version 2.9.1)
-by John W. Eaton and Colin Watson (2020).
+(version 2.13.1)
+by John W. Eaton and Colin Watson (2025).
 More information: https://nongnu.org/man-db.
 
 ```{term}
@@ -817,9 +830,9 @@ man excel
 
 Make directories.
 `mkdir`
-(version 8.30)
-by David MacKenzie (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: mkdir
@@ -834,8 +847,8 @@ ctrl-c #! literal: false
 
 Move (rename) files.
 `mv`
-(version 8.30)
-by Mike Parker, David MacKenzie, and Jim Meyering (2020).
+(version 9.7)
+by Mike Parker, David MacKenzie, and Jim Meyering (2025).
 More information: https://www.gnu.org/software/coreutils.
 
 ```{term}
@@ -851,8 +864,8 @@ ctrl-c #! literal: false
 
 Nano's ANOther editor, inspired by Pico.
 `nano`
-(version 5.4)
-by Benno Schulenberg, David Lawrence Ramsey, Jordi Mallach, Chris Allegretta, Robert Siemborski, and Adam Rogoyski (2020).
+(version 8.7.1)
+by Benno Schulenberg, David Lawrence Ramsey, Jordi Mallach, Chris Allegretta, Robert Siemborski, and Adam Rogoyski (2026).
 More information: https://nano-editor.org.
 
 ```{term}
@@ -864,9 +877,9 @@ type nano
 
 Number lines of files.
 `nl`
-(version 8.30)
-by Scott Bartram and David MacKenzie (2020).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: nl
@@ -880,8 +893,8 @@ nl /data/ch05/alice.txt | head
 
 Build and execute shell command lines from standard input in parallel.
 `parallel`
-(version 20161222)
-by Ole Tange (2016).
+(version 20240222)
+by Ole Tange (2024).
 More information: https://www.gnu.org/software/parallel.
 
 ```{term}
@@ -896,9 +909,9 @@ seq 3 | parallel "echo Processing file {}.csv"
 
 Merge lines of files.
 `paste`
-(version 8.30)
-by David M. Ihnat and David MacKenzie (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: paste
@@ -926,9 +939,10 @@ seq 3 | pbc '{1}^2'
 
 A tool for installing and managing Python packages.
 `pip`
-(version 20.0.2)
-by PyPA (2020).
-More information: https://pip.pypa.io.
+(version 0.13.7)
+by Astral (2026).
+In the Docker image, `pip` runs `uv pip`, the pip interface of uv, so the version and author are those of uv.
+More information: https://docs.astral.sh/uv.
 
 ```{term}
 #| label: pip
@@ -959,9 +973,9 @@ ctrl-c #! literal: false
 
 Print name of working directory.
 `pwd`
-(version 8.30)
-by Jim Meyering (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: pwd
@@ -976,8 +990,8 @@ pwd
 
 An interpreted, interactive, object-oriented programming language.
 `python`
-(version 3.8.5)
-by The Python Software Foundation (2021).
+(version 3.13.18)
+by The Python Software Foundation (2026).
 More information: https://www.python.org.
 
 ```{term}
@@ -991,8 +1005,8 @@ ctrl-c #! literal: false
 
 A Language and Environment for Statistical Computing.
 `R`
-(version 4.0.4)
-by The R Foundation for Statistical Computing (2021).
+(version 4.5.2)
+by The R Foundation for Statistical Computing (2025).
 More information: https://www.r-project.org.
 
 ```{term}
@@ -1006,8 +1020,8 @@ ctrl-c #! literal: false
 
 Reverse lines characterwise.
 `rev`
-(version 2.36.1)
-by Karel Zak (2021).
+(version 2.41.3)
+by Karel Zak (2025).
 More information: https://www.kernel.org/pub/linux/utils/util-linux.
 
 ```{term}
@@ -1021,8 +1035,8 @@ echo 'Ça va?' | rev | cut -c 2- | rev
 
 Remove files or directories.
 `rm`
-(version 8.30)
-by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering (2019).
+(version 9.7)
+by Paul Rubin, David MacKenzie, Richard M. Stallman, and Jim Meyering (2025).
 More information: https://www.gnu.org/software/coreutils.
 
 ```{term}
@@ -1038,8 +1052,8 @@ ctrl-c #! literal: false
 
 R One-Liners from the Shell.
 `rush`
-(version 0.1)
-by Jeroen Janssens (2021).
+(version 0.2.1.9000)
+by Jeroen Janssens (2026).
 More information: https://github.com/jeroenjanssens/rush.
 
 ```{term}
@@ -1055,7 +1069,7 @@ rush run --tidyverse 'filter(starwars, species == "Human") %>% select(name)'
 
 Filter lines from standard input according to some probability, with a given delay, and for a certain duration.
 `sample`
-(version 0.2.4)
+(version 0.2.5)
 by Jeroen Janssens (2021).
 More information: https://github.com/jeroenjanssens/sample.
 
@@ -1071,8 +1085,8 @@ seq 1000 | sample -r 0.01 | trim 5
 
 OpenSSH secure file copy.
 `scp`
-(version 1:8.2p1-4ubuntu0.2)
-by Timo Rinne and Tatu Ylonen (2019).
+(version 10.2p1)
+by Timo Rinne and Tatu Ylonen (2025).
 More information: https://www.openssh.com.
 
 ```{term}
@@ -1086,8 +1100,8 @@ ctrl-c #! literal: false
 
 Stream editor for filtering and transforming text.
 `sed`
-(version 4.7)
-by Jay Fenlason, Tom Lord, Ken Pizzini, and Paolo Bonzini (2018).
+(version 4.9)
+by Jay Fenlason, Tom Lord, Ken Pizzini, and Paolo Bonzini (2022).
 More information: https://www.gnu.org/software/sed.
 
 ```{term}
@@ -1101,9 +1115,9 @@ ctrl-c #! literal: false
 
 Print a sequence of numbers.
 `seq`
-(version 8.30)
-by Ulrich Drepper (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: seq
@@ -1135,9 +1149,9 @@ ctrl-c #! literal: false
 
 Generate random permutations.
 `shuf`
-(version 8.30)
-by Paul Eggert (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: shuf
@@ -1152,10 +1166,10 @@ shuf -i 1-100 | trim 5
 
 SciKit-Learn Laboratory.
 `skll`
-(version 2.5.0)
-by Educational Testing Service (2021).
+(version 5.1.0)
+by Educational Testing Service (2024).
 The actual tool is `run_experiment`. I use the alias `skll` because I find that easier to remember.
-More information: https://skll.readthedocs.org.
+More information: https://skll.readthedocs.io.
 
 ```{term}
 #| label: skll
@@ -1168,9 +1182,9 @@ ctrl-c #! literal: false
 
 Sort lines of text files.
 `sort`
-(version 8.30)
-by Mike Haertel and Paul Eggert (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: sort
@@ -1184,9 +1198,9 @@ echo '3\n7\n1\n3' | sort
 
 Split a file into pieces.
 `split`
-(version 8.30)
-by Torbjorn Granlund and Richard M. Stallman (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: split
@@ -1199,8 +1213,8 @@ ctrl-c #! literal: false
 
 Soak up standard input and write to a file.
 `sponge`
-(version 0.65)
-by Colin Watson and Tollef Fog Heen (2021).
+(version 0.69)
+by Colin Watson and Tollef Fog Heen (2024).
 Useful if you want to read from and write to the same file in a single pipeline.
 More information: https://joeyh.name/code/moreutils.
 
@@ -1213,8 +1227,8 @@ type sponge
 
 Execute an SQL query on a database and output the result to a CSV file.
 `sql2csv`
-(version 1.0.5)
-by Christopher Groskopf (2020).
+(version 1.1.0)
+by Christopher Groskopf (2023).
 More information: https://csvkit.rtfd.org.
 
 ```{term}
@@ -1228,8 +1242,8 @@ ctrl-c #! literal: false
 
 OpenSSH remote login client.
 `ssh`
-(version 1:8.2p1-4ubuntu0.2)
-by Tatu Ylonen, Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo Raadt, Dug Song, and Markus Friedl (2020).
+(version 10.2p1)
+by Tatu Ylonen, Aaron Campbell, Bob Beck, Markus Friedl, Niels Provos, Theo Raadt, Dug Song, and Markus Friedl (2025).
 More information: https://www.openssh.com.
 
 ```{term}
@@ -1243,8 +1257,8 @@ ctrl-c #! literal: false
 
 Execute a command as another user.
 `sudo`
-(version 1.8.31)
-by Todd C. Miller (2019).
+(version 1.9.17p2)
+by Todd C. Miller (2025).
 More information: https://www.sudo.ws.
 
 ```{term}
@@ -1258,9 +1272,9 @@ ctrl-c #! literal: false
 
 Output the last part of files.
 `tail`
-(version 8.30)
-by Paul Rubin, David MacKenzie, Ian Lance Taylor, and Jim Meyering (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: tail
@@ -1273,9 +1287,9 @@ ctrl-c #! literal: false
 
 An efficient dimension reduction library.
 `tapkee`
-(version 1.2)
-by Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia (2013).
-More information: http://tapkee.lisitsyn.me.
+(version 1.4.0)
+by Sergey Lisitsyn, Christian Widmer, and Fernando J. Iglesias Garcia (2026).
+More information: https://github.com/lisitsyn/tapkee.
 
 ```{term}
 #| label: tapkee
@@ -1288,8 +1302,8 @@ ctrl-c #! literal: false
 
 An archiving utility.
 `tar`
-(version 1.30)
-by John Gilmore and Jay Fenlason (2014).
+(version 1.35)
+by John Gilmore and Jay Fenlason (2023).
 More information: https://www.gnu.org/software/tar.
 
 ```{term}
@@ -1303,9 +1317,9 @@ ctrl-c #! literal: false
 
 Read from standard input and write to standard output and files.
 `tee`
-(version 8.30)
-by Mike Parker, Richard M. Stallman, and David MacKenzie (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: tee
@@ -1318,9 +1332,9 @@ ctrl-c #! literal: false
 
 User interface to the TELNET protocol.
 `telnet`
-(version 0.17)
-by Mats Erik Andersson, Andreas Henriksson, and Christoph Biedl (1999).
-More information: http://www.hcs.harvard.edu/~dholland/computers/netkit.html.
+(version 2.7)
+by the GNU Inetutils developers (2025).
+More information: https://www.gnu.org/software/inetutils.
 
 ```{term}
 #| label: telnet
@@ -1331,9 +1345,10 @@ type telnet
 
 Collaborative cheatsheets for console commands.
 `tldr`
-(version 3.3.7)
-by Owen Voke (2021).
-More information: https://tldr.sh.
+(version 1.8.1)
+by Danilo Bargen and Niklas Mohrin (2025).
+In the Docker image, `tldr` is tealdeer, a client written in Rust.
+More information: https://github.com/tealdeer-rs/tealdeer.
 
 ```{term}
 #| label: tldr
@@ -1347,9 +1362,9 @@ tldr tar | trim
 
 Translate or delete characters.
 `tr`
-(version 8.30)
-by Jim Meyering (2018).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: tr
@@ -1362,9 +1377,9 @@ ctrl-c #! literal: false
 
 List contents of directories in a tree-like format.
 `tree`
-(version 1.8.0)
-by Steve Baker (2018).
-More information: https://launchpad.net/ubuntu/+source/tree.
+(version 2.3.1)
+by Steve Baker (2026).
+More information: https://oldmanprogrammer.net/source.php?dir=projects/tree.
 
 ```{term}
 #| label: tree
@@ -1391,8 +1406,8 @@ echo {a..z}-{0..9} | fold | trim 5 60
 
 Timestamp input.
 `ts`
-(version 0.65)
-by Joey Hess (2021).
+(version 0.69)
+by Joey Hess (2024).
 More information: https://joeyh.name/code/moreutils.
 
 ```{term}
@@ -1418,9 +1433,9 @@ ctrl-c #! literal: false
 
 Report or omit repeated lines.
 `uniq`
-(version 8.30)
-by Richard M. Stallman and David MacKenzie (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: uniq
@@ -1446,9 +1461,10 @@ type unpack
 
 Extract files from rar archives.
 `unrar`
-(version 0.0.1)
-by Ben Asselstine, Christian Scheurer, and Johannes Winkelmann (2014).
-More information: http://home.gna.org/unrar.
+(version 0.3.3)
+by Ben Asselstine, Christian Scheurer, and Johannes Winkelmann (2025).
+In the Docker image, `unrar` is unrar-free.
+More information: https://gitlab.com/bgermann/unrar-free.
 
 ```{term}
 #| label: unrar
@@ -1476,8 +1492,8 @@ ctrl-c #! literal: false
 
 Fast machine learning library for online learning.
 `vw`
-(version 8.10.1)
-by John Langford (2021).
+(version 9.11.9)
+by John Langford (2026).
 More information: https://vowpalwabbit.org.
 
 ```{term}
@@ -1491,9 +1507,9 @@ ctrl-c #! literal: false
 
 Print newline, word, and byte counts for each file.
 `wc`
-(version 8.30)
-by Paul Rubin and David MacKenzie (2019).
-More information: https://www.gnu.org/software/coreutils.
+(version 0.10.0)
+by the uutils contributors (2026).
+More information: https://github.com/uutils/coreutils.
 
 ```{term}
 #| label: wc
@@ -1564,9 +1580,9 @@ ctrl-c #! literal: false
 
 Decompress and concatenate files to standard output.
 `zcat`
-(version 1.10)
-by Paul Eggert (2021).
-More information: https://www.nongnu.org/zutils/zutils.html.
+(version 1.14)
+by Paul Eggert (2025).
+More information: https://www.gnu.org/software/gzip.
 
 ```{term}
 #| label: zcat
@@ -1579,8 +1595,8 @@ ctrl-c #! literal: false
 
 The Z shell.
 `zsh`
-(version 5.8)
-by Paul Falstad and Peter Stephenson (2020).
+(version 5.9)
+by Paul Falstad and Peter Stephenson (2022).
 More information: https://www.zsh.org.
 
 ```{term}
