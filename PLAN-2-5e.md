@@ -448,6 +448,8 @@ A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both pl
   - (c) `trim`: count zero-width characters as 1 column; wrong in real terminals, so no;
   - (d) book: accept the wrapped line.
 
+**Status (2026-11-08, end of day):** the ch04 BOM line is fixed with option (a): quarto-term 0.7.3 leaves U+FEFF, U+200B, and U+2060 out of what it feeds avt (recordings keep them). Option (b) is reported upstream as a comment on asciinema/avt#27 (with a reproduction for avt 0.18 and 0.20). After the re-render, all 168 entries in `differences.yml` are `accept`; no rendering issue is open. Left: 3a (horizontal y title in rush's terminal plots), 3b/c (legend keys), and the content pass (8).
+
 How 0.7.2 differs from the fixes below:
 - **Issue 7 is wider than HTML.** Quarto processes shortcodes in every raw block a filter creates, so Markdown output was affected too (`{{< meta title >}}` was even expanded), and so was Typst's plain output. 0.7.2 escapes `{` in HTML, writes Typst's plain output as a `#raw()` string when it contains `{{<`, and turns such Markdown output into a code block with `shortcodes="false"`.
 - **Issue 6's test** writes its output with `cat`, which splits characters on every run; a loop of small writes only splits sometimes.

@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.2/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -455,15 +455,15 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 10 | <span style="color:var(--term-2)">header</span> -a <span style="color:var(--term-3)">'values'</span> | <span style="color:var(--term-2)">body</span> shuf
 <span class="term-output">values</span>
 <span class="term-output">2</span>
-<span class="term-output">7</span>
-<span class="term-output">9</span>
-<span class="term-output">1</span>
-<span class="term-output">6</span>
-<span class="term-output">3</span>
-<span class="term-output">4</span>
 <span class="term-output">10</span>
+<span class="term-output">9</span>
+<span class="term-output">5</span>
+<span class="term-output">4</span>
+<span class="term-output">3</span>
 <span class="term-output">8</span>
-<span class="term-output">5</span></code></pre>
+<span class="term-output">6</span>
+<span class="term-output">7</span>
+<span class="term-output">1</span></code></pre>
 
 </section>
 <section id="cat" class="level2 unnumbered">
@@ -884,7 +884,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> hostname
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span>
-<span class="term-output">50740714c04c</span>
+<span class="term-output">bfb99fc6a0ee</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span> -i
 <span class="term-output">172.17.0.2</span></code></pre>
@@ -931,12 +931,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 924K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  8 20:47 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  8 20:47 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  8 20:47 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  8 20:47 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  8 20:47 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  8 20:47 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  8 21:20 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  8 21:20 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  8 21:20 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  8 21:20 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  8 21:20 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  8 21:20 top2000.xlsx</span></code></pre>
 
 </section>
 <section id="less" class="level2 unnumbered">
@@ -1023,7 +1023,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> nl
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">nl</span> <span style="text-decoration:underline">/data/ch05/alice.txt</span> | <span style="color:var(--term-2)">head</span>
-<span class="term-output">     1  ﻿Project Gutenberg's Alice's Adventures in Wonderland, by Lewis Carroll</span>
+<span class="term-output">     1  Project Gutenberg's Alice's Adventures in Wonderland, by Lewis Carroll</span>
 <span class="term-output">     2</span>
 <span class="term-output">     3  This eBook is for the use of anyone anywhere at no cost and with</span>
 <span class="term-output">     4  almost no restrictions whatsoever.  You may copy it, give it away or</span>
@@ -1196,12 +1196,9 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sample</span> --help
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 0.01 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">18</span>
-<span class="term-output">279</span>
-<span class="term-output">405</span>
-<span class="term-output">663</span>
-<span class="term-output">749</span>
-<span class="term-output">… with 3 more lines</span></code></pre>
+<span class="term-output">232</span>
+<span class="term-output">371</span>
+<span class="term-output">456</span></code></pre>
 
 </section>
 <section id="scp" class="level2 unnumbered">
@@ -1261,19 +1258,19 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> shuf
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> {a..z} | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' '</span> <span style="color:var(--term-3)">'\n'</span> | <span style="color:var(--term-2)">shuf</span> | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">o</span>
-<span class="term-output">b</span>
+<span class="term-output">s</span>
+<span class="term-output">i</span>
+<span class="term-output">z</span>
 <span class="term-output">v</span>
-<span class="term-output">k</span>
-<span class="term-output">n</span>
+<span class="term-output">h</span>
 <span class="term-output">… with 21 more lines</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">shuf</span> -i 1-100 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">57</span>
-<span class="term-output">97</span>
-<span class="term-output">64</span>
-<span class="term-output">54</span>
-<span class="term-output">99</span>
+<span class="term-output">39</span>
+<span class="term-output">1</span>
+<span class="term-output">27</span>
+<span class="term-output">63</span>
+<span class="term-output">10</span>
 <span class="term-output">… with 95 more lines</span></code></pre>
 
 </section>
@@ -1462,7 +1459,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">ts is /usr/bin/ts</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> seq 5 | <span style="color:var(--term-2)">sample</span> -d 500 | <span style="color:var(--term-2)">ts</span>
-<span class="term-output">Nov 08 20:48:58 seq 5</span></code></pre>
+<span class="term-output">Nov 08 21:21:42 seq 5</span></code></pre>
 
 </section>
 <section id="type" class="level2 unnumbered">
