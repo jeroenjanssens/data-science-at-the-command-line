@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 0: `$ cd /data/ch03`
 
 - id: `chapter-3-obtaining-data.html:block:0`
-- hash: `e7f693c2`
+- hash: `d7e0df49`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -22,18 +22,18 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
 --rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
 --rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx
-+-rw-r--r-- 1 dst dst 627K Nov  7 09:27 logs.tar.gz
-+-rw-r--r-- 1 dst dst 189K Nov  7 09:27 r-datasets.db
-+-rw-r--r-- 1 dst dst  149 Nov  7 09:27 tmnt-basic.csv
-+-rw-r--r-- 1 dst dst  148 Nov  7 09:27 tmnt-missing-newline.csv
-+-rw-r--r-- 1 dst dst  181 Nov  7 09:27 tmnt-with-header.csv
-+-rw-r--r-- 1 dst dst  91K Nov  7 09:27 top2000.xlsx
++-rw-r--r-- 1 dst dst 627K Nov  8 14:54 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  8 14:54 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  8 14:54 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  8 14:54 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  8 14:54 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  8 14:54 top2000.xlsx
 ```
 
 ## Code block 3: `$ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherl`
 
 - id: `chapter-3-obtaining-data.html:block:3`
-- hash: `1bcdbf72`
+- hash: `bf3f7208`
 - status: **accept**
 - cause: image
 - note: curl 8 progress meter layout
@@ -63,14 +63,14 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
  <script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…
 -100  249k    0  249k    0     0   853k      0 --:--:-- --:--:-- --:--:--  867k
 -… with 1754 more lines
-+100 246.3k 100 246.3k   0      0 153.0M      0                              0
++100 246.3k 100 246.3k   0      0 150.5M      0                              0
 +… with 1729 more lines
 ```
 
 ## Code block 5: `$ curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Frieslan`
 
 - id: `chapter-3-obtaining-data.html:block:5`
-- hash: `5de2f295`
+- hash: `0c827bff`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -88,13 +88,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
 --rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
 --rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx
-+-rw-r--r-- 1 dst dst 430K Nov  7 09:27 List_of_windmills_in_Friesland
-+-rw-r--r-- 1 dst dst 627K Nov  7 09:27 logs.tar.gz
-+-rw-r--r-- 1 dst dst 189K Nov  7 09:27 r-datasets.db
-+-rw-r--r-- 1 dst dst  149 Nov  7 09:27 tmnt-basic.csv
-+-rw-r--r-- 1 dst dst  148 Nov  7 09:27 tmnt-missing-newline.csv
-+-rw-r--r-- 1 dst dst  181 Nov  7 09:27 tmnt-with-header.csv
-+-rw-r--r-- 1 dst dst  91K Nov  7 09:27 top2000.xlsx
++-rw-r--r-- 1 dst dst 430K Nov  8 14:54 List_of_windmills_in_Friesland
++-rw-r--r-- 1 dst dst 627K Nov  8 14:54 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  8 14:54 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  8 14:54 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  8 14:54 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  8 14:54 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  8 14:54 top2000.xlsx
 ```
 
 ## Code block 9: `$ curl -s "https://bit.ly/2XBxvwK"`
@@ -190,48 +190,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 +… with 7571 more lines
 ```
 
-## Code block 18: `$ bat -A tmnt-basic.csv ➊`
-
-- id: `chapter-3-obtaining-data.html:block:18`
-- hash: `45010f0e`
-- status: **fix-quarto-term**
-- cause: quarto-term
-- note: quarto-term decodes each PTY read separately, so a multibyte character split between reads becomes two replacement characters and the line wraps. Intermittent: which bat/csvlook block it hits differs per render
-
-```diff
---- 2e
-+++ 2.5e
-@@ -7,3 +7,4 @@
-    3   │ Michelangelo,Mikey·or·Mike,orange,pair·of·nunchaku␊
-    4   │ Donatello,Donnie·or·Don,purple,staff␊
--───────┴────────────────────────────────────────────────────────────────────────
-+───────┴──────────────────────────────────────────────��────────────────────────
-+─
-```
-
-## Code block 19: `$ bat -A tmnt-missing-newline.csv`
-
-- id: `chapter-3-obtaining-data.html:block:19`
-- hash: `ce41dd01`
-- status: **fix-quarto-term**
-- cause: quarto-term
-- note: quarto-term decodes each PTY read separately, so a multibyte character split between reads becomes two replacement characters and the line wraps. Intermittent: which bat/csvlook block it hits differs per render
-
-```diff
---- 2e
-+++ 2.5e
-@@ -7,3 +7,4 @@
-    3   │ Michelangelo,Mikey·or·Mike,orange,pair·of·nunchaku␊
-    4   │ Donatello,Donnie·or·Don,purple,staff
--───────┴────────────────────────────────────────────────────────────────────────
-+───────┴───────────────────────────────────────────────���──────────────────────
-+──
-```
-
 ## Code block 22: `$ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > t`
 
 - id: `chapter-3-obtaining-data.html:block:22`
-- hash: `99f40783`
+- hash: `75d45ed3`
 - status: **accept**
 - cause: image
 - note: curl 8 progress meter layout
@@ -247,7 +209,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 -100 41744  100 41744    0     0  46024      0 --:--:-- --:--:-- --:--:-- 46228
 +  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
 +                                 Dload  Upload  Total   Spent   Left   Speed
-+100      8 100      8   0      0   6595      0                              0
++100      8 100      8   0      0   9445      0                              0
  
  $ in2csv top2000.xlsx | tee top2000.csv | trim
 ```

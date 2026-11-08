@@ -1,8 +1,9 @@
 local FILTER_DIR = debug.getinfo(1, "S").source:sub(2):match("(.*[/\\])") or "./"
-local VERSION = "0.7.1"
+local VERSION = "0.7.2"
 
 local cell_mod = dofile(FILTER_DIR .. "cell.lua")
 local chrome = dofile(FILTER_DIR .. "chrome.lua")
+local output = dofile(FILTER_DIR .. "output.lua")
 local engine = dofile(FILTER_DIR .. "engine.lua")
 local theme = dofile(FILTER_DIR .. "theme.lua")
 theme.init(FILTER_DIR)
@@ -384,7 +385,7 @@ function Pandoc(doc)
               content = chrome.wrap(content, chrome_cfg)
             end
           end
-          replacements[pos.block_i] = pandoc.RawBlock(raw_format, content)
+          replacements[pos.block_i] = output.block(raw_format, content)
         else
           replacements[pos.block_i] = pandoc.RawBlock(raw_format, "")
         end

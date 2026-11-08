@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 0: `$ cd /data/ch04`
 
 - id: `chapter-4-creating-command-line-tools.html:block:0`
-- hash: `bb019e5f`
+- hash: `84b6cda1`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -24,20 +24,20 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rwxr-xr-x 1 dst dst 128 Dec 14 11:46 top-words-5.sh*
 --rwxr-xr-x 1 dst dst 647 Dec 14 11:46 top-words.py*
 --rwxr-xr-x 1 dst dst 584 Dec 14 11:46 top-words.R*
-+-rwxr-xr-x 1 dst dst 391 Nov  7 09:27 fizzbuzz.R*
-+-rwxr-xr-x 1 dst dst 400 Nov  7 09:27 fizzbuzz.py*
-+-rwxr-xr-x 1 dst dst 147 Nov  7 09:27 stream.R*
-+-rwxr-xr-x 1 dst dst 182 Nov  7 09:27 stream.py*
-+-rwxr-xr-x 1 dst dst 105 Nov  7 09:27 top-words-4.sh*
-+-rwxr-xr-x 1 dst dst 128 Nov  7 09:27 top-words-5.sh*
-+-rwxr-xr-x 1 dst dst 584 Nov  7 09:27 top-words.R*
-+-rwxr-xr-x 1 dst dst 647 Nov  7 09:27 top-words.py*
++-rwxr-xr-x 1 dst dst 391 Nov  8 14:55 fizzbuzz.R*
++-rwxr-xr-x 1 dst dst 400 Nov  8 14:55 fizzbuzz.py*
++-rwxr-xr-x 1 dst dst 147 Nov  8 14:55 stream.R*
++-rwxr-xr-x 1 dst dst 182 Nov  8 14:55 stream.py*
++-rwxr-xr-x 1 dst dst 105 Nov  8 14:55 top-words-4.sh*
++-rwxr-xr-x 1 dst dst 128 Nov  8 14:55 top-words-5.sh*
++-rwxr-xr-x 1 dst dst 584 Nov  8 14:55 top-words.R*
++-rwxr-xr-x 1 dst dst 647 Nov  8 14:55 top-words.py*
 ```
 
 ## Code block 6: `  GNU nano 5.4                     /tmp/zshpu0emE`
 
 - id: `chapter-4-creating-command-line-tools.html:block:6`
-- hash: `e0b6b8c4`
+- hash: `4ea345c3`
 - status: **accept**
 - cause: image
 - note: nano 8.7.1: version, temporary file name, and shortcut labels
@@ -47,7 +47,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 +++ 2.5e
 @@ -1,3 +1,3 @@
 -  GNU nano 5.4                     /tmp/zshpu0emE
-+  GNU nano 8.7.1                    /tmp/zshTAfkQ0
++  GNU nano 8.7.1                    /tmp/zshgdAo3C
  curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
  tr '[:upper:]' '[:lower:]' |
 @@ -13,4 +13,4 @@
@@ -62,7 +62,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 7: `  GNU nano 5.4                     /tmp/zshpu0emE`
 
 - id: `chapter-4-creating-command-line-tools.html:block:7`
-- hash: `ed4fb774`
+- hash: `6d7a06e9`
 - status: **accept**
 - cause: image
 - note: nano 8.7.1: version, temporary file name, and shortcut labels
@@ -72,7 +72,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 +++ 2.5e
 @@ -1,3 +1,3 @@
 -  GNU nano 5.4                     /tmp/zshpu0emE
-+  GNU nano 8.7.1                    /tmp/zshTAfkQ0
++  GNU nano 8.7.1                    /tmp/zshgdAo3C
  curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
  tr '[:upper:]' '[:lower:]' |
 @@ -12,5 +12,5 @@
@@ -89,7 +89,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 8: `  GNU nano 5.4                     /tmp/zshpu0emE`
 
 - id: `chapter-4-creating-command-line-tools.html:block:8`
-- hash: `40c67e4b`
+- hash: `cb9b2447`
 - status: **accept**
 - cause: image
 - note: nano 8.7.1: version, temporary file name, and shortcut labels
@@ -99,7 +99,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 +++ 2.5e
 @@ -1,3 +1,3 @@
 -  GNU nano 5.4                     /tmp/zshpu0emE
-+  GNU nano 8.7.1                    /tmp/zshTAfkQ0
++  GNU nano 8.7.1                    /tmp/zshgdAo3C
  curl -sL "https://www.gutenberg.org/files/11/11-0.txt" |
  tr '[:upper:]' '[:lower:]' |
 ```
@@ -132,7 +132,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 10: `$ pwd`
 
 - id: `chapter-4-creating-command-line-tools.html:block:10`
-- hash: `7ee5caa2`
+- hash: `727bd866`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -153,16 +153,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rwxr-xr-x 1 dst dst  128 Dec 14 11:46 top-words-5.sh*
 --rwxr-xr-x 1 dst dst  647 Dec 14 11:46 top-words.py*
 --rwxr-xr-x 1 dst dst  584 Dec 14 11:46 top-words.R*
-+-rwxr-xr-x 1 dst dst  391 Nov  7 09:27 fizzbuzz.R*
-+-rwxr-xr-x 1 dst dst  400 Nov  7 09:27 fizzbuzz.py*
-+-rw-r--r-- 1 dst dst 7.5K Nov  7 09:27 stopwords
-+-rwxr-xr-x 1 dst dst  147 Nov  7 09:27 stream.R*
-+-rwxr-xr-x 1 dst dst  182 Nov  7 09:27 stream.py*
-+-rw-r--r-- 1 dst dst  173 Nov  7 09:27 top-words-1.sh
-+-rwxr-xr-x 1 dst dst  105 Nov  7 09:27 top-words-4.sh*
-+-rwxr-xr-x 1 dst dst  128 Nov  7 09:27 top-words-5.sh*
-+-rwxr-xr-x 1 dst dst  584 Nov  7 09:27 top-words.R*
-+-rwxr-xr-x 1 dst dst  647 Nov  7 09:27 top-words.py*
++-rwxr-xr-x 1 dst dst  391 Nov  8 14:55 fizzbuzz.R*
++-rwxr-xr-x 1 dst dst  400 Nov  8 14:55 fizzbuzz.py*
++-rw-r--r-- 1 dst dst 7.5K Nov  8 14:55 stopwords
++-rwxr-xr-x 1 dst dst  147 Nov  8 14:55 stream.R*
++-rwxr-xr-x 1 dst dst  182 Nov  8 14:55 stream.py*
++-rw-r--r-- 1 dst dst  173 Nov  8 14:55 top-words-1.sh
++-rwxr-xr-x 1 dst dst  105 Nov  8 14:55 top-words-4.sh*
++-rwxr-xr-x 1 dst dst  128 Nov  8 14:55 top-words-5.sh*
++-rwxr-xr-x 1 dst dst  584 Nov  8 14:55 top-words.R*
++-rwxr-xr-x 1 dst dst  647 Nov  8 14:55 top-words.py*
  
  $ bat top-words-1.sh
 ```
@@ -170,7 +170,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 13: `$ l top-words-{1,2}.sh`
 
 - id: `chapter-4-creating-command-line-tools.html:block:13`
-- hash: `aff75611`
+- hash: `3448063a`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -182,8 +182,8 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
  $ l top-words-{1,2}.sh
 --rw-r--r-- 1 dst dst 173 Dec 14 11:47 top-words-1.sh
 --rwxr--r-- 1 dst dst 173 Dec 14 11:47 top-words-2.sh*
-+-rw-r--r-- 1 dst dst 173 Nov  7 09:27 top-words-1.sh
-+-rwxr--r-- 1 dst dst 173 Nov  7 09:27 top-words-2.sh*
++-rw-r--r-- 1 dst dst 173 Nov  8 14:55 top-words-1.sh
++-rwxr--r-- 1 dst dst 173 Nov  8 14:55 top-words-2.sh*
 ```
 
 ## Code block 17: `  GNU nano 5.4                     top-words-3.sh`
@@ -334,7 +334,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 28: `$ cp -v top-words{-5.sh,}`
 
 - id: `chapter-4-creating-command-line-tools.html:block:28`
-- hash: `ab1f1e82`
+- hash: `7d4c74cb`
 - status: **accept**
 - cause: image
 - note: curl 8 progress meter layout
@@ -357,7 +357,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 -100  170k  100  170k    0     0   115k      0  0:00:01  0:00:01 --:--:--  116k
 +  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
 +                                 Dload  Upload  Total   Spent   Left   Speed
-+100 170.2k 100 170.2k   0      0  3.57M      0                              0
++100 170.2k 100 170.2k   0      0 47.74M      0                              0
      403 alice
       98 gutenberg
 ```
@@ -365,7 +365,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 31: `$ time < alice.txt top-words 5`
 
 - id: `chapter-4-creating-command-line-tools.html:block:31`
-- hash: `414f2ebd`
+- hash: `f2333811`
 - status: **accept**
 - cause: time
 - note: Timings
@@ -377,21 +377,21 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
       76 queen
       71 time
 -top-words 5 < alice.txt  0.38s user 0.04s system 149% cpu 0.278 total
-+top-words 5 < alice.txt  0.03s user 0.02s system 154% cpu 0.030 total
++top-words 5 < alice.txt  0.03s user 0.02s system 155% cpu 0.028 total
  
  $ time < alice.txt top-words.py 5
 @@ -13,5 +13,5 @@
       76 queen
       71 time
 -top-words.py 5 < alice.txt  1.36s user 0.03s system 95% cpu 1.454 total
-+top-words.py 5 < alice.txt  0.16s user 0.01s system 43% cpu 0.401 total
++top-words.py 5 < alice.txt  0.18s user 0.01s system 46% cpu 0.414 total
  
  $ time < alice.txt top-words.R 5
 @@ -21,3 +21,3 @@
       76 queen
       71 time
 -top-words.R 5 < alice.txt  1.48s user 0.14s system 91% cpu 1.774 total
-+top-words.R 5 < alice.txt  0.10s user 0.10s system 43% cpu 0.471 total
++top-words.R 5 < alice.txt  0.12s user 0.05s system 53% cpu 0.322 total
 ```
 
 ## Footnotes differ (14 vs 14)

@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.1/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.7.2/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -454,16 +454,16 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 10 | <span style="color:var(--term-2)">header</span> -a <span style="color:var(--term-3)">'values'</span> | <span style="color:var(--term-2)">body</span> shuf
 <span class="term-output">values</span>
-<span class="term-output">5</span>
-<span class="term-output">9</span>
-<span class="term-output">6</span>
-<span class="term-output">3</span>
-<span class="term-output">1</span>
-<span class="term-output">4</span>
 <span class="term-output">8</span>
-<span class="term-output">2</span>
 <span class="term-output">10</span>
-<span class="term-output">7</span></code></pre>
+<span class="term-output">4</span>
+<span class="term-output">6</span>
+<span class="term-output">1</span>
+<span class="term-output">5</span>
+<span class="term-output">7</span>
+<span class="term-output">3</span>
+<span class="term-output">9</span>
+<span class="term-output">2</span></code></pre>
 
 </section>
 <section id="cat" class="level2 unnumbered">
@@ -698,9 +698,9 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">dseq is /usr/bin/dsutils/dseq</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 3
-<span class="term-output">2026-11-08</span>
 <span class="term-output">2026-11-09</span>
-<span class="term-output">2026-11-10</span></code></pre>
+<span class="term-output">2026-11-10</span>
+<span class="term-output">2026-11-11</span></code></pre>
 
 </section>
 <section id="echo" class="level2 unnumbered">
@@ -884,7 +884,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> hostname
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span>
-<span class="term-output">325abf2a7e5e</span>
+<span class="term-output">215104384d46</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span> -i
 <span class="term-output">172.17.0.2</span></code></pre>
@@ -931,12 +931,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 924K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  7 09:31 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  7 09:31 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  7 09:31 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  7 09:31 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  7 09:31 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  7 09:31 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  8 14:58 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  8 14:58 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  8 14:58 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  8 14:58 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  8 14:58 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  8 14:58 top2000.xlsx</span></code></pre>
 
 </section>
 <section id="less" class="level2 unnumbered">
@@ -1058,11 +1058,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> paste
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">seq</span> 5<span style="color:var(--term-5)">)</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">dseq</span> 5<span style="color:var(--term-5)">)</span>
-<span class="term-output">1,2026-11-08</span>
-<span class="term-output">2,2026-11-09</span>
-<span class="term-output">3,2026-11-10</span>
-<span class="term-output">4,2026-11-11</span>
-<span class="term-output">5,2026-11-12</span>
+<span class="term-output">1,2026-11-09</span>
+<span class="term-output">2,2026-11-10</span>
+<span class="term-output">3,2026-11-11</span>
+<span class="term-output">4,2026-11-12</span>
+<span class="term-output">5,2026-11-13</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">paste</span> -sd+
 <span class="term-output">1+2+3+4+5</span></code></pre>
@@ -1196,12 +1196,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sample</span> --help
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 0.01 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">55</span>
-<span class="term-output">58</span>
-<span class="term-output">322</span>
-<span class="term-output">498</span>
-<span class="term-output">869</span>
-<span class="term-output">… with 2 more lines</span></code></pre>
+<span class="term-output">50</span>
+<span class="term-output">53</span>
+<span class="term-output">57</span>
+<span class="term-output">82</span>
+<span class="term-output">343</span>
+<span class="term-output">… with 7 more lines</span></code></pre>
 
 </section>
 <section id="scp" class="level2 unnumbered">
@@ -1261,19 +1261,19 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> shuf
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> {a..z} | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' '</span> <span style="color:var(--term-3)">'\n'</span> | <span style="color:var(--term-2)">shuf</span> | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">k</span>
-<span class="term-output">m</span>
+<span class="term-output">f</span>
+<span class="term-output">o</span>
 <span class="term-output">r</span>
-<span class="term-output">t</span>
-<span class="term-output">p</span>
+<span class="term-output">u</span>
+<span class="term-output">x</span>
 <span class="term-output">… with 21 more lines</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">shuf</span> -i 1-100 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">79</span>
-<span class="term-output">58</span>
-<span class="term-output">46</span>
-<span class="term-output">23</span>
-<span class="term-output">72</span>
+<span class="term-output">98</span>
+<span class="term-output">18</span>
+<span class="term-output">9</span>
+<span class="term-output">63</span>
+<span class="term-output">28</span>
 <span class="term-output">… with 95 more lines</span></code></pre>
 
 </section>
@@ -1462,7 +1462,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">ts is /usr/bin/ts</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> seq 5 | <span style="color:var(--term-2)">sample</span> -d 500 | <span style="color:var(--term-2)">ts</span>
-<span class="term-output">Nov 07 09:32:13 seq 5</span></code></pre>
+<span class="term-output">Nov 08 15:00:01 seq 5</span></code></pre>
 
 </section>
 <section id="type" class="level2 unnumbered">

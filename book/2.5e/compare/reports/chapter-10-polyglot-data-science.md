@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 0: `$ cd /data/ch10`
 
 - id: `chapter-10-polyglot-data-science.html:block:0`
-- hash: `74d7b92b`
+- hash: `cee2203b`
 - status: **accept**
 - cause: uutils
 - note: Timestamps, ls sort order, no __pycache__ in data
@@ -23,10 +23,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rw-r--r-- 1 dst dst  460 Dec 14 12:03 count.R
 --rw-r--r-- 1 dst dst 1.7K Dec 14 12:03 Untitled1337.ipynb
 +total 176K
-+-rw-r--r-- 1 dst dst 1.7K Nov  7 09:30 Untitled1337.ipynb
-+-rw-r--r-- 1 dst dst 164K Nov  7 09:30 alice.txt
-+-rw-r--r-- 1 dst dst  460 Nov  7 09:30 count.R
-+-rwxr-xr-x 1 dst dst  408 Nov  7 09:30 count.py*
++-rw-r--r-- 1 dst dst 1.7K Nov  8 14:58 Untitled1337.ipynb
++-rw-r--r-- 1 dst dst 164K Nov  8 14:58 alice.txt
++-rw-r--r-- 1 dst dst  460 Nov  8 14:58 count.R
++-rwxr-xr-x 1 dst dst  408 Nov  8 14:58 count.py*
 ```
 
 ## Code block 4: `$ R --quiet`

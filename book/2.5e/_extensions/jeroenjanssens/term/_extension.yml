@@ -1,6 +1,6 @@
 title: Term
 author: Jeroen Janssens
-version: 0.7.1
+version: 0.7.2
 contributes:
   filters:
     - term.lua

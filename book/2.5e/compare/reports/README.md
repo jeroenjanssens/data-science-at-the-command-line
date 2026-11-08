@@ -9,7 +9,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 | [chapter-10-polyglot-data-science.html](chapter-10-polyglot-data-science.md) | 6 | accept: 6 |
 | [chapter-11-conclusion.html](chapter-11-conclusion.md) | 0 | — |
 | [chapter-2-getting-started.html](chapter-2-getting-started.md) | 15 | accept: 15 |
-| [chapter-3-obtaining-data.html](chapter-3-obtaining-data.md) | 12 | accept: 10, fix-quarto-term: 2 |
+| [chapter-3-obtaining-data.html](chapter-3-obtaining-data.md) | 10 | accept: 10 |
 | [chapter-4-creating-command-line-tools.html](chapter-4-creating-command-line-tools.md) | 16 | accept: 16 |
 | [chapter-5-scrubbing-data.html](chapter-5-scrubbing-data.md) | 7 | accept: 7 |
 | [chapter-6-project-management-with-make.html](chapter-6-project-management-with-make.md) | 4 | accept: 4 |

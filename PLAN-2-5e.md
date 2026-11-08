@@ -413,8 +413,8 @@ Summary:
 | 3 | Terminal plots: tiny legend keys, white canvas, vertical y title | rush (+ devoutansi) | Horizontal y title and bigger keys in rush's terminal theme; keep the white canvas | Open |
 | 4 | `geom_smooth()` silently fits straight lines | image | Install `mgcv` | **Fixed** (image #24) |
 | 5 | `trim` cuts multibyte characters | dsutils (image) | Count characters with Perl instead of mawk | Open |
-| 6 | Multibyte characters garbled in terminal output | quarto-term | Keep incomplete UTF-8 sequences between reads | Open (no quarto-term changes for now) |
-| 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` as `&#123;` in HTML output; then drop the book workaround | Open (no quarto-term changes for now) |
+| 6 | Multibyte characters garbled in terminal output | quarto-term | Keep incomplete UTF-8 sequences between reads | **Fixed** (quarto-term 0.7.2) |
+| 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` as `&#123;` in HTML output; then drop the book workaround | **Fixed** (quarto-term 0.7.2; workaround removed) |
 | 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) | Open |
 
 How the code below was checked:
@@ -434,6 +434,15 @@ A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both pl
 **Status (2026-11-07):** published. datasciencetoolbox#24 (rush `5e75a1d`, the forks, and mgcv/duckdb/RSQLite; 175 smoke tests) is merged, and `:latest` (`sha256:4700058904…`) has it. The whole book was re-rendered with it:
 - the bar chart (block 35, Figure 7.4), the terminal box plot (block 48), and Figure 9.2's GAM smoothers are back;
 - every difference is reviewed; only issue 6 remains open (`fix-quarto-term`). It's intermittent: this render hit ch03 blocks 18 and 19, not ch05 block 2.
+
+**Status (2026-11-08):** quarto-term 0.7.2 fixes issues 6 and 7. The book uses it, and `data/.cache/jupyter-console` is the 2e original again. The whole book was re-rendered:
+- the two `fix-quarto-term` entries are gone (no `�` anywhere);
+- ch10's `alice{{2,3}}.txt` line has its coloured `2` again, and the rest of the chapter follows the transcript;
+- the other 40 changed entries are timestamps, timings, and random output; no `fix-*` decisions remain.
+
+How 0.7.2 differs from the fixes below:
+- **Issue 7 is wider than HTML.** Quarto processes shortcodes in every raw block a filter creates, so Markdown output was affected too (`{{< meta title >}}` was even expanded), and so was Typst's plain output. 0.7.2 escapes `{` in HTML, writes Typst's plain output as a `#raw()` string when it contains `{{<`, and turns such Markdown output into a code block with `shortcodes="false"`.
+- **Issue 6's test** writes its output with `cat`, which splits characters on every run; a loop of small writes only splits sometimes.
 
 ### 1. Bar chart fails: `rush plot --x time tips.csv` (fixed)
 
