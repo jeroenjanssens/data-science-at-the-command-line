@@ -325,7 +325,7 @@ Warning
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 4.0K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov  8 14:57 classify.cfg</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov  8 20:46 classify.cfg</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -478,14 +478,14 @@ Figure&nbsp;9.2: Relationship between the alcohol contents of wine and its quali
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">wine-scaled.csv</span>
 <span class="term-output">│ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sugar │ chlorides │…</span>
 <span class="term-output">├───────────────┼──────────────────┼─────────────┼────────────────┼───────────┤…</span>
-<span class="term-output">│        0.142… │           2.189… │     -2.193… │        -0.745… │    …</span>
-<span class="term-output">│        0.451… │           3.282… │     -2.193… │        -0.598… │    …</span>
-<span class="term-output">│        0.451… │           2.553… │     -1.917… │        -0.661… │    …</span>
-<span class="term-output">│        3.074… │          -0.362… │      1.661… │        -0.745… │    …</span>
-<span class="term-output">│        0.142… │           2.189… │     -2.193… │        -0.745… │    …</span>
-<span class="term-output">│        0.142… │           1.946… │     -2.193… │        -0.766… │    …</span>
-<span class="term-output">│        0.528… │           1.581… │     -1.780… │        -0.808… │    …</span>
-<span class="term-output">│        0.065… │           1.885… │     -2.193… │        -0.892… │    …</span>
+<span class="term-output">│        0.142… │           2.189… │     -2.193… │        -0.745… │    0.570… │…</span>
+<span class="term-output">│        0.451… │           3.282… │     -2.193… │        -0.598… │    1.198… │…</span>
+<span class="term-output">│        0.451… │           2.553… │     -1.917… │        -0.661… │    1.027… │…</span>
+<span class="term-output">│        3.074… │          -0.362… │      1.661… │        -0.745… │    0.541… │…</span>
+<span class="term-output">│        0.142… │           2.189… │     -2.193… │        -0.745… │    0.570… │…</span>
+<span class="term-output">│        0.142… │           1.946… │     -2.193… │        -0.766… │    0.541… │…</span>
+<span class="term-output">│        0.528… │           1.581… │     -1.780… │        -0.808… │    0.370… │…</span>
+<span class="term-output">│        0.065… │           1.885… │     -2.193… │        -0.892… │    0.256… │…</span>
 <span class="term-output">… with 6489 more lines</span></code></pre>
 
 <ol type="1">
@@ -666,47 +666,47 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-output">rent</span>
 <span class="term-output">loss     last          counter         weight          label        predict feat</span>
 <span class="term-output">ures</span>
-<span class="term-output">36.00000 36.00000            1            1.0         6.0000         0.0000</span>
+<span class="term-output">25.00000 25.00000            1            1.0         5.0000         0.0000</span>
 <span class="term-output">  78</span>
-<span class="term-output">26.36875 16.73750            2            2.0         5.0000         0.9089</span>
+<span class="term-output">26.58473 28.16947            2            2.0         6.0000         0.6925</span>
 <span class="term-output">  78</span>
-<span class="term-output">26.33121 26.29366            4            4.0         8.0000         2.7863</span>
+<span class="term-output">18.29653 10.00833            4            4.0         7.0000         3.3116</span>
 <span class="term-output">  78</span>
-<span class="term-output">14.25945 2.187690            8            8.0         5.0000         4.4370</span>
+<span class="term-output">10.94139 3.586261            8            8.0         6.0000         5.2994</span>
 <span class="term-output">  78</span>
-<span class="term-output">8.053075 1.846701           16           16.0         6.0000         5.3988</span>
+<span class="term-output">5.746545 0.551693           16           16.0         6.0000         5.6269</span>
 <span class="term-output">  78</span>
-<span class="term-output">4.592783 1.132491           32           32.0         5.0000         5.4773</span>
+<span class="term-output">3.236803 0.727061           32           32.0         6.0000         5.6578</span>
 <span class="term-output">  78</span>
-<span class="term-output">2.699648 0.806514           64           64.0         6.0000         5.8974</span>
+<span class="term-output">2.085011 0.933220           64           64.0         6.0000         5.6293</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.735030 0.770412          128          128.0         6.0000         6.0172</span>
+<span class="term-output">1.610676 1.136341          128          128.0         3.0000         5.7492</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.205671 0.676313          256          256.0         6.0000         5.9917</span>
+<span class="term-output">1.200675 0.790674          256          256.0         5.0000         5.9875</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.991043 0.776414          512          512.0         7.0000         5.9030</span>
+<span class="term-output">1.001630 0.802585          512          512.0         5.0000         6.0328</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.912304 0.833566         1024         1024.0         7.0000         5.8460</span>
+<span class="term-output">0.882789 0.763947         1024         1024.0         6.0000         5.8877</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.817383 0.722461         2048         2048.0         5.0000         6.0205</span>
+<span class="term-output">0.806684 0.730579         2048         2048.0         6.0000         5.7930</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.760264 0.760264         4096         4096.0         7.0000         6.0232</span>
+<span class="term-output">0.735642 0.735642         4096         4096.0         6.0000         6.0954</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.690877 0.621490         8192         8192.0         6.0000         6.0882</span>
+<span class="term-output">0.638423 0.541204         8192         8192.0         7.0000         6.1499</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.664164 0.637452        16384        16384.0         6.0000         5.7553</span>
+<span class="term-output">0.594437 0.550452        16384        16384.0         6.0000         5.8203</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.625118 0.586072        32768        32768.0         6.0000         5.6979</span>
+<span class="term-output">0.560888 0.527339        32768        32768.0         6.0000         6.3963</span>
 <span class="term-output">  78 h</span>
 <span class="term-output"></span>
 <span class="term-output">finished run</span>
 <span class="term-output">number of examples per pass = 3527</span>
 <span class="term-output">passes used = 10</span>
 <span class="term-output">weighted example sum = 35270.000000</span>
-<span class="term-output">weighted label sum = 207590.000000</span>
-<span class="term-output">average loss = 0.585933 h</span>
-<span class="term-output">best constant = 5.885738</span>
-<span class="term-output">total feature number = 2749380</span></code></pre>
+<span class="term-output">weighted label sum = 207510.000000</span>
+<span class="term-output">average loss = 0.526266 h</span>
+<span class="term-output">best constant = 5.883471</span>
+<span class="term-output">total feature number = 2749500</span></code></pre>
 
 <ol type="1">
 <li>The file <em>wine-train.vw</em> is used to train the model.</li>
@@ -731,16 +731,16 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-prompt" data-prompt="> "></span>--quiet <span class="term-callout">➎</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">predictions</span> | <span style="color:var(--term-2)">trim</span>
-<span class="term-output">5.985150</span>
-<span class="term-output">6.351532</span>
-<span class="term-output">5.904746</span>
-<span class="term-output">5.692382</span>
-<span class="term-output">6.260514</span>
-<span class="term-output">5.866639</span>
-<span class="term-output">6.002824</span>
-<span class="term-output">5.827528</span>
-<span class="term-output">6.496091</span>
-<span class="term-output">5.590842</span>
+<span class="term-output">6.194829</span>
+<span class="term-output">5.801942</span>
+<span class="term-output">6.218668</span>
+<span class="term-output">5.718880</span>
+<span class="term-output">5.722202</span>
+<span class="term-output">6.255468</span>
+<span class="term-output">6.321209</span>
+<span class="term-output">6.432611</span>
+<span class="term-output">5.668006</span>
+<span class="term-output">6.320826</span>
 <span class="term-output">… with 970 more lines</span></code></pre>
 
 <ol type="1">
@@ -756,7 +756,7 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cowsay</span> <span class="term-callout">➊</span>
 <span class="term-output"> _______________</span>
-<span class="term-output">&lt; MAE: 0.609382 &gt;</span>
+<span class="term-output">&lt; MAE: 0.573988 &gt;</span>
 <span class="term-output"> ---------------</span>
 <span class="term-output">        \   ^__^</span>
 <span class="term-output">         \  (oo)\_______</span>
@@ -787,7 +787,7 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span>
-<span class="term-output">MAE: 0.651769</span></code></pre>
+<span class="term-output">MAE: 0.623288</span></code></pre>
 
 <ol type="1">
 <li>Train a regression model</li>
@@ -824,14 +824,14 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-balanced.csv | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│    id │ type  │ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sug…</span>
 <span class="term-output">├───────┼───────┼───────────────┼──────────────────┼─────────────┼─────────────…</span>
-<span class="term-output">│     1 │ white │          6.70 │            0.180 │        0.30 │           6.…</span>
-<span class="term-output">│     2 │ red   │          9.30 │            0.390 │        0.40 │           2.…</span>
-<span class="term-output">│     3 │ red   │          7.70 │            0.690 │        0.22 │           1.…</span>
-<span class="term-output">│     4 │ red   │          6.60 │            0.520 │        0.04 │           2.…</span>
-<span class="term-output">│     5 │ red   │          7.40 │            0.350 │        0.33 │           2.…</span>
-<span class="term-output">│     6 │ red   │          9.70 │            0.530 │        0.60 │           2.…</span>
-<span class="term-output">│     7 │ white │          6.10 │            0.280 │        0.25 │          17.…</span>
-<span class="term-output">│     8 │ white │          5.80 │            0.300 │        0.27 │           1.…</span>
+<span class="term-output">│     1 │ red   │           6.9 │            0.630 │        0.01 │           2.…</span>
+<span class="term-output">│     2 │ red   │           8.2 │            0.240 │        0.34 │           5.…</span>
+<span class="term-output">│     3 │ red   │           7.2 │            0.520 │        0.07 │           1.…</span>
+<span class="term-output">│     4 │ red   │           5.4 │            0.740 │        0.00 │           1.…</span>
+<span class="term-output">│     5 │ red   │           6.6 │            0.580 │        0.00 │           2.…</span>
+<span class="term-output">│     6 │ white │           7.7 │            0.390 │        0.49 │           7.…</span>
+<span class="term-output">│     7 │ red   │           7.5 │            0.510 │        0.02 │           1.…</span>
+<span class="term-output">│     8 │ white │           7.2 │            0.190 │        0.27 │          11.…</span>
 <span class="term-output">… with 3190 more lines</span></code></pre>
 
 <ol type="1">
@@ -938,10 +938,10 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"><span style="color:var(--term-3)">tdin ORDER BY accuracy DESC"</span> | <span style="color:var(--term-2)">csvlook</span> -I</span>
 <span class="term-output">│ learner_name           │ accuracy  │</span>
 <span class="term-output">├────────────────────────┼───────────┤</span>
+<span class="term-output">│ LogisticRegression     │ 0.9953125 │</span>
+<span class="term-output">│ KNeighborsClassifier   │ 0.990625  │</span>
 <span class="term-output">│ RandomForestClassifier │ 0.990625  │</span>
-<span class="term-output">│ LogisticRegression     │ 0.9890625 │</span>
-<span class="term-output">│ KNeighborsClassifier   │ 0.9796875 │</span>
-<span class="term-output">│ DecisionTreeClassifier │ 0.975     │</span></code></pre>
+<span class="term-output">│ DecisionTreeClassifier │ 0.978125  │</span></code></pre>
 
 <p>The relevant column here is <em><code>accuracy</code></em>, which indicates the percentage of data points that are classified correctly. From this we see that actually all algorithms are performing really well. The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.</p>
 <p>Each JSON file contains a confusion matrix, giving you additional insight into the performance of each classifier. A confusion matrix is a table where the columns refer to the true labels (red and white) and the rows refer to the predicted labels. Higher numbers on the diagonal mean more correct predictions. With <code>jq</code> I can print the name of each classifier and extract the associated confusion matrix:</p>
@@ -950,9 +950,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [300] |       8 |       0.974 |    0.974 |       0.974 |</span>
+<span class="term-output">|   red | [323] |       6 |       0.976 |    0.982 |       0.979 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     8 |   [324] |       0.976 |    0.976 |       0.976 |</span>
+<span class="term-output">| white |     8 |   [303] |       0.981 |    0.974 |       0.977 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -960,9 +960,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [302] |       6 |       0.977 |    0.981 |       0.979 |</span>
+<span class="term-output">|   red | [325] |       4 |       0.994 |    0.988 |       0.991 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     7 |   [325] |       0.982 |    0.979 |       0.980 |</span>
+<span class="term-output">| white |     2 |   [309] |       0.987 |    0.994 |       0.990 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -970,9 +970,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [304] |       4 |       0.990 |    0.987 |       0.989 |</span>
+<span class="term-output">|   red | [326] |       3 |       1.000 |    0.991 |       0.995 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     3 |   [329] |       0.988 |    0.991 |       0.989 |</span>
+<span class="term-output">| white |     0 |   [311] |       0.990 |    1.000 |       0.995 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -980,9 +980,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [302] |       6 |       1.000 |    0.981 |       0.990 |</span>
+<span class="term-output">|   red | [326] |       3 |       0.991 |    0.991 |       0.991 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     0 |   [332] |       0.982 |    1.000 |       0.991 |</span>
+<span class="term-output">| white |     3 |   [308] |       0.990 |    0.990 |       0.990 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span></code></pre>
 

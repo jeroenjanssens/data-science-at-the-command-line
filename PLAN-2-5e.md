@@ -412,7 +412,7 @@ Summary:
 | 2 | Terminal box plot crashes | miniansi | Skip polygons without edges | **Fixed** (miniansi 0.1.3, image #24) |
 | 3 | Terminal plots: tiny legend keys, white canvas, vertical y title | rush (+ devoutansi) | Horizontal y title and bigger keys in rush's terminal theme; keep the white canvas | Open |
 | 4 | `geom_smooth()` silently fits straight lines | image | Install `mgcv` | **Fixed** (image #24) |
-| 5 | `trim` cuts multibyte characters | dsutils (image) | Count characters with Perl instead of mawk | Open |
+| 5 | `trim` cuts multibyte characters | dsutils (image) | Count characters with Perl instead of mawk | **Fixed** (dsutils 4f49774, image #25) |
 | 6 | Multibyte characters garbled in terminal output | quarto-term | Keep incomplete UTF-8 sequences between reads | **Fixed** (quarto-term 0.7.2) |
 | 7 | `{{<` in output breaks the rest of the page | quarto-term | Escape `{` as `&#123;` in HTML output; then drop the book workaround | **Fixed** (quarto-term 0.7.2; workaround removed) |
 | 8 | Prose and versions no longer match the image | book (+ `tools.yml`) | Separate content pass (book-changes-plan §C–E) | Open |
@@ -439,6 +439,14 @@ A local build (`:dev`) passes all 172 smoke tests, and chapter 7 renders both pl
 - the two `fix-quarto-term` entries are gone (no `�` anywhere);
 - ch10's `alice{{2,3}}.txt` line has its coloured `2` again, and the rest of the chapter follows the transcript;
 - the other 40 changed entries are timestamps, timings, and random output; no `fix-*` decisions remain.
+
+**Status (2026-11-08, later):** issue 5 is fixed: dsutils `4f49774` rewrites `trim` in Perl and measures terminal columns (wide characters 2, zero-width characters 0); datasciencetoolbox #25 is merged. In the re-render:
+- ch09 block 9 (`csvlook` of *wine-scaled.csv*) now fills 80 columns; the awk `trim` had cut it early (accepted);
+- ch04 block 1 (`curl … 11-0.txt | trim`) now wraps: the text starts with a BOM (U+FEFF), which `trim` counts as 0 columns, like `wcwidth` and real terminals, but quarto-term's terminal emulator avt 0.18 counts every non-wide character as 1 column (`Line::char_display_width`). Decision `fix-quarto-term`. Options:
+  - (a) quarto-term: drop U+FEFF before the text reaches avt (it's invisible in every terminal); small, with tests; a patch release;
+  - (b) avt (asciinema/avt, upstream): give zero-width characters no cell; the general fix (also for combining marks and zero-width joiners), but not in our hands;
+  - (c) `trim`: count zero-width characters as 1 column; wrong in real terminals, so no;
+  - (d) book: accept the wrapped line.
 
 How 0.7.2 differs from the fixes below:
 - **Issue 7 is wider than HTML.** Quarto processes shortcodes in every raw block a filter creates, so Markdown output was affected too (`{{< meta title >}}` was even expanded), and so was Typst's plain output. 0.7.2 escapes `{` in HTML, writes Typst's plain output as a `#raw()` string when it contains `{{<`, and turns such Markdown output into a code block with `shortcodes="false"`.

@@ -1,11 +1,11 @@
 # chapter-5-scrubbing-data.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
+Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae316735486f496571ddd1293ad4e1`
 
 ## Code block 0: `$ cd /data/ch05`
 
 - id: `chapter-5-scrubbing-data.html:block:0`
-- hash: `816a62fc`
+- hash: `1c0353f2`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -23,19 +23,19 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rw-r--r-- 1 dst dst  129 Dec 14 11:47 names.csv
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:47 tips.csv
 --rw-r--r-- 1 dst dst 5.1K Dec 14 11:47 users.json
-+-rw-r--r-- 1 dst dst 164K Nov  8 14:55 alice.txt
-+-rw-r--r-- 1 dst dst 4.5K Nov  8 14:55 iris.csv
-+-rw-r--r-- 1 dst dst  179 Nov  8 14:55 irismeta.csv
-+-rw-r--r-- 1 dst dst  160 Nov  8 14:55 names-comma.csv
-+-rw-r--r-- 1 dst dst  129 Nov  8 14:55 names.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  8 14:55 tips.csv
-+-rw-r--r-- 1 dst dst 5.1K Nov  8 14:55 users.json
++-rw-r--r-- 1 dst dst 164K Nov  8 20:44 alice.txt
++-rw-r--r-- 1 dst dst 4.5K Nov  8 20:44 iris.csv
++-rw-r--r-- 1 dst dst  179 Nov  8 20:44 irismeta.csv
++-rw-r--r-- 1 dst dst  160 Nov  8 20:44 names-comma.csv
++-rw-r--r-- 1 dst dst  129 Nov  8 20:44 names.csv
++-rw-r--r-- 1 dst dst 7.8K Nov  8 20:44 tips.csv
++-rw-r--r-- 1 dst dst 5.1K Nov  8 20:44 users.json
 ```
 
 ## Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`
 
 - id: `chapter-5-scrubbing-data.html:block:17`
-- hash: `7d2bddaf`
+- hash: `153fae0c`
 - status: **accept**
 - cause: random
 - note: sample draws other lines
@@ -43,7 +43,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,8 +1,17 @@
+@@ -1,8 +1,7 @@
  $ seq -f "Line %g" 1000 | sample -r 1%
 -Line 45
 -Line 223
@@ -52,28 +52,18 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 -Line 438
 -Line 807
 -Line 813
-+Line 226
-+Line 244
-+Line 336
-+Line 353
-+Line 422
-+Line 482
-+Line 535
-+Line 545
-+Line 603
-+Line 623
-+Line 637
-+Line 737
-+Line 746
-+Line 849
-+Line 890
-+Line 894
++Line 38
++Line 391
++Line 474
++Line 705
++Line 752
++Line 908
 ```
 
 ## Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`
 
 - id: `chapter-5-scrubbing-data.html:block:18`
-- hash: `25db5434`
+- hash: `2626b9dd`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -89,12 +79,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 -Dec 14 11:48:13 Line 250
 -Dec 14 11:48:14 Line 785
 -Dec 14 11:48:15 Line 786
-+Nov 08 14:55:36 Line 319
-+Nov 08 14:55:37 Line 323
-+Nov 08 14:55:38 Line 428
-+Nov 08 14:55:39 Line 437
-+Nov 08 14:55:40 Line 489
-+Nov 08 14:55:41 Line 535
++Nov 08 20:44:32 Line 73
++Nov 08 20:44:33 Line 109
++Nov 08 20:44:34 Line 142
++Nov 08 20:44:35 Line 154
++Nov 08 20:44:36 Line 356
++Nov 08 20:44:37 Line 544
 ```
 
 ## Code block 69: `$ < wiki.html trim`

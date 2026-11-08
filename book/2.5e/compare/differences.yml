@@ -140,7 +140,7 @@
   note: New bio links to Bluesky and Mastodon instead of Twitter; the bio no longer links to Data Science
     Workshops
 - id: chapter-10-polyglot-data-science.html:block:0
-  hash: cee2203b
+  hash: '36810284'
   title: 'Code block 0: `$ cd /data/ch10`'
   cause: uutils
   decision: accept
@@ -177,19 +177,19 @@
   decision: accept
   note: bookdown linked R function names in inline code to rdrr.io; Quarto does not (no R code is run)
 - id: chapter-3-obtaining-data.html:block:0
-  hash: d7e0df49
+  hash: 1088f09f
   title: 'Code block 0: `$ cd /data/ch03`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-3-obtaining-data.html:block:3
-  hash: bf3f7208
+  hash: 903f312e
   title: 'Code block 3: `$ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherl`'
   cause: image
   decision: accept
   note: curl 8 progress meter layout
 - id: chapter-3-obtaining-data.html:block:5
-  hash: 0c827bff
+  hash: ffe6ad79
   title: 'Code block 5: `$ curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Frieslan`'
   cause: time
   decision: accept
@@ -213,7 +213,7 @@
   decision: accept
   note: curl 8 man page
 - id: chapter-3-obtaining-data.html:block:22
-  hash: 75d45ed3
+  hash: 76f101c5
   title: 'Code block 22: `$ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > t`'
   cause: image
   decision: accept
@@ -238,25 +238,25 @@
   note: newsapi response rebuilt from the 2e output (no API key); the long description is cut at a different
     place
 - id: chapter-4-creating-command-line-tools.html:block:0
-  hash: 84b6cda1
+  hash: a2784518
   title: 'Code block 0: `$ cd /data/ch04`'
   cause: uutils
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-4-creating-command-line-tools.html:block:6
-  hash: 4ea345c3
+  hash: 57c578e5
   title: 'Code block 6: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:7
-  hash: 6d7a06e9
+  hash: 821af319
   title: 'Code block 7: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:8
-  hash: cb9b2447
+  hash: 81a7f68b
   title: 'Code block 8: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
@@ -268,13 +268,13 @@
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:10
-  hash: 727bd866
+  hash: 54d6ffd4
   title: 'Code block 10: `$ pwd`'
   cause: uutils
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-4-creating-command-line-tools.html:block:13
-  hash: 3448063a
+  hash: b671facb
   title: 'Code block 13: `$ l top-words-{1,2}.sh`'
   cause: time
   decision: accept
@@ -316,13 +316,13 @@
   decision: accept
   note: PATH of the new image (/opt/venv/bin, /opt/uv/bin; no rush/exec)
 - id: chapter-4-creating-command-line-tools.html:block:28
-  hash: 7d4c74cb
+  hash: 65bed2bb
   title: 'Code block 28: `$ cp -v top-words{-5.sh,}`'
   cause: image
   decision: accept
   note: curl 8 progress meter layout
 - id: chapter-4-creating-command-line-tools.html:block:31
-  hash: f2333811
+  hash: 5ed1eefc
   title: 'Code block 31: `$ time < alice.txt top-words 5`'
   cause: time
   decision: accept
@@ -336,19 +336,19 @@
     the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter
     is full
 - id: chapter-5-scrubbing-data.html:block:0
-  hash: 816a62fc
+  hash: 1c0353f2
   title: 'Code block 0: `$ cd /data/ch05`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-5-scrubbing-data.html:block:17
-  hash: 7d2bddaf
+  hash: 153fae0c
   title: 'Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`'
   cause: random
   decision: accept
   note: sample draws other lines
 - id: chapter-5-scrubbing-data.html:block:18
-  hash: 25db5434
+  hash: 2626b9dd
   title: 'Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`'
   cause: time
   decision: accept
@@ -360,7 +360,7 @@
   decision: accept
   note: Cached 2021 Wikipedia page (October 2021 snapshot), slightly different from the copy 2e fetched
 - id: chapter-5-scrubbing-data.html:anchors-missing
-  hash: 24892e80
+  hash: '24892e80'
   title: 1 old anchor(s) missing
   cause: conversion
   decision: accept
@@ -380,7 +380,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-6-project-management-with-make.html:block:0
-  hash: 5d02d1db
+  hash: a99142dd
   title: 'Code block 0: `$ cd /data/ch06`'
   cause: uutils
   decision: accept
@@ -406,7 +406,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-7-exploring-data.html:block:0
-  hash: 638308a3
+  hash: 4a27ad29
   title: 'Code block 0: `$ cd /data/ch07`'
   cause: uutils
   decision: accept
@@ -587,7 +587,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-8-parallel-pipelines.html:block:0
-  hash: 91a0c310
+  hash: 0a7939c1
   title: 'Code block 0: `$ cd /data/ch08`'
   cause: time
   decision: accept
@@ -617,7 +617,7 @@
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-8-parallel-pipelines.html:block:9
-  hash: 145777b7
+  hash: f1fa3d2f
   title: 'Code block 9: `$ for i in {A..C}; do`'
   cause: random
   decision: accept
@@ -629,7 +629,7 @@
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-8-parallel-pipelines.html:block:11
-  hash: ed358f2a
+  hash: 0f52d3e4
   title: 'Code block 11: `$ parallel --jobs 2 ./slow.sh ::: {A..C}`'
   cause: time
   decision: accept
@@ -661,7 +661,7 @@
   note: 'Fake output is shown now: in 2e the echo chain ended with &&, so it never ran and the next command
     was typed after a continuation prompt'
 - id: chapter-8-parallel-pipelines.html:block:39
-  hash: b676e853
+  hash: 7d894c88
   title: 'Code block 39: `$ l nyc*json.gz`'
   cause: time
   decision: accept
@@ -731,7 +731,7 @@
     the short Chicago form; Quarto renders chapters separately, so the first citation in each chapter
     is full
 - id: chapter-9-modeling-data.html:block:0
-  hash: 7cd143b0
+  hash: 24a53b96
   title: 'Code block 0: `$ cd /data/ch09`'
   cause: time
   decision: accept
@@ -749,31 +749,31 @@
   decision: accept
   note: 'tapkee 1.4 PCA: signs of the components are flipped'
 - id: chapter-9-modeling-data.html:block:18
-  hash: e7bbf22f
+  hash: '04115036'
   title: 'Code block 18: `$ vw \`'
   cause: image
   decision: accept
   note: vw 9 log format (wider columns, wrapped)
 - id: chapter-9-modeling-data.html:block:19
-  hash: 4b40ede1
+  hash: 35b78cfb
   title: 'Code block 19: `$ vw \`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:20
-  hash: c90a5d7d
+  hash: 9830554f
   title: 'Code block 20: `$ paste -d, predictions <(cut -d ''|'' -f 1 wine-test.vw) |`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:22
-  hash: f22b758c
+  hash: d5ac799f
   title: 'Code block 22: `$ vw -d wine-train.vw -f wine2.model --quiet ➊`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:24
-  hash: b36188ea
+  hash: f7b8fd9d
   title: 'Code block 24: `$ NUM_RED="$(< wine-red-clean.csv wc -l)" ➊`'
   cause: random
   decision: accept
@@ -785,13 +785,13 @@
   decision: accept
   note: skll 5 output file names (wine_ instead of wine_features_); prose may need an update
 - id: chapter-9-modeling-data.html:block:29
-  hash: c33948a1
+  hash: 883bd137
   title: 'Code block 29: `$ < output/wine_summary.tsv csvsql --query "SELECT learner_name, accur`'
   cause: random
   decision: accept
   note: Model accuracies (random train/test split, newer scikit-learn)
 - id: chapter-9-modeling-data.html:block:30
-  hash: 253c1b8e
+  hash: b221ac33
   title: 'Code block 30: `$ jq -r ''.[] | "\(.learner_name):\n\(.result_table)\n"'' output/*.json`'
   cause: time
   decision: accept
@@ -835,13 +835,13 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-9-modeling-data.html:image:images/wine-regression.png
-  hash: a9b838a8
+  hash: 85737d5e
   title: 'Image changed: images/wine-regression.png'
   cause: image
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-9-modeling-data.html:image:images/wine-tsne.png
-  hash: e5191443
+  hash: 8e01d15e
   title: 'Image changed: images/wine-tsne.png'
   cause: image
   decision: accept
@@ -853,7 +853,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:6
-  hash: a0fcaa5e
+  hash: ddbfcf3e
   title: 'Code block 6: `$ type body`'
   cause: time
   decision: accept
@@ -919,7 +919,7 @@
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: list-of-command-line-tools.html:block:42
-  hash: bdb03022
+  hash: 92f7c91e
   title: 'Code block 42: `$ type hostname`'
   cause: random
   decision: accept
@@ -937,7 +937,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:46
-  hash: 9b785ba7
+  hash: 52fbcb96
   title: 'Code block 46: `$ type l`'
   cause: time
   decision: accept
@@ -949,7 +949,7 @@
   decision: accept
   note: No csvconf directory in /data anymore
 - id: list-of-command-line-tools.html:block:56
-  hash: 65584270
+  hash: '65584270'
   title: 'Code block 56: `$ type paste`'
   cause: time
   decision: accept
@@ -973,13 +973,13 @@
   decision: accept
   note: rush location; tibble 3 printing; starwars.csv 2021 snapshot capitalizes Lars
 - id: list-of-command-line-tools.html:block:66
-  hash: f5a26fd7
+  hash: 645790c2
   title: 'Code block 66: `$ type sample`'
   cause: random
   decision: accept
   note: Random output (sample, shuf)
 - id: list-of-command-line-tools.html:block:71
-  hash: 49a8480c
+  hash: 2b54d7ad
   title: 'Code block 71: `$ type shuf`'
   cause: random
   decision: accept
@@ -1003,13 +1003,13 @@
   decision: accept
   note: 'tldr is tealdeer: different location and pages'
 - id: list-of-command-line-tools.html:block:86
-  hash: f9f50e3b
+  hash: 005c65cc
   title: 'Code block 86: `$ type tree`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: list-of-command-line-tools.html:block:88
-  hash: cc1ae077
+  hash: 0ecd3381
   title: 'Code block 88: `$ type ts`'
   cause: time
   decision: accept
@@ -1020,3 +1020,18 @@
   cause: image
   decision: accept
   note: Tools live in other places in the new image
+- id: chapter-9-modeling-data.html:block:9
+  hash: acb3981c
+  title: 'Code block 9: `$ rush run --tidyverse --output wine-scaled.csv \`'
+  cause: image
+  decision: accept
+  note: trim measures terminal columns now (dsutils 4f49774); the awk trim counted bytes and cut these
+    box-drawing lines early, hiding the chlorides column
+- id: chapter-4-creating-command-line-tools.html:block:1
+  hash: cccc3e96
+  title: 'Code block 1: `$ curl -sL "https://www.gutenberg.org/files/11/11-0.txt" | trim`'
+  cause: quarto-term
+  decision: fix-quarto-term
+  note: The text starts with a BOM (U+FEFF). trim counts it as 0 columns, like wcwidth and real terminals,
+    but quarto-term's terminal emulator (avt) counts every non-wide character as 1 column, so the 80-column
+    line wraps

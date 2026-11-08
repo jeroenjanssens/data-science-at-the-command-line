@@ -1,6 +1,6 @@
 # list-of-command-line-tools.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
+Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae316735486f496571ddd1293ad4e1`
 
 ## Code block 2: `$ type aws`
 
@@ -24,7 +24,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 6: `$ type body`
 
 - id: `list-of-command-line-tools.html:block:6`
-- hash: `a0fcaa5e`
+- hash: `ddbfcf3e`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -35,21 +35,22 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 @@ -4,12 +4,12 @@
  $ seq 10 | header -a 'values' | body shuf
  values
--3
++2
++7
++9
++1
++6
+ 3
 -7
-+8
++4
  10
 -9
--5
- 4
- 6
++8
+ 5
+-4
+-6
 -8
-+1
-+5
-+7
-+3
-+9
- 2
+-2
 -1
 ```
 
@@ -257,7 +258,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 42: `$ type hostname`
 
 - id: `list-of-command-line-tools.html:block:42`
-- hash: `bdb03022`
+- hash: `92f7c91e`
 - status: **accept**
 - cause: random
 - note: Container hostname
@@ -269,7 +270,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
  
  $ hostname
 -2c3edb64827b
-+215104384d46
++50740714c04c
  
  $ hostname -i
 ```
@@ -315,7 +316,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 46: `$ type l`
 
 - id: `list-of-command-line-tools.html:block:46`
-- hash: `9b785ba7`
+- hash: `52fbcb96`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -332,12 +333,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rw-r--r-- 1 dst dst  148 Dec 14 12:03 tmnt-missing-newline.csv
 --rw-r--r-- 1 dst dst  181 Dec 14 12:03 tmnt-with-header.csv
 --rw-r--r-- 1 dst dst  91K Dec 14 12:03 top2000.xlsx
-+-rw-r--r-- 1 dst dst 627K Nov  8 14:58 logs.tar.gz
-+-rw-r--r-- 1 dst dst 189K Nov  8 14:58 r-datasets.db
-+-rw-r--r-- 1 dst dst  149 Nov  8 14:58 tmnt-basic.csv
-+-rw-r--r-- 1 dst dst  148 Nov  8 14:58 tmnt-missing-newline.csv
-+-rw-r--r-- 1 dst dst  181 Nov  8 14:58 tmnt-with-header.csv
-+-rw-r--r-- 1 dst dst  91K Nov  8 14:58 top2000.xlsx
++-rw-r--r-- 1 dst dst 627K Nov  8 20:47 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  8 20:47 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  8 20:47 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  8 20:47 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  8 20:47 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  8 20:47 top2000.xlsx
 ```
 
 ## Code block 48: `$ type ls`
@@ -471,7 +472,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 66: `$ type sample`
 
 - id: `list-of-command-line-tools.html:block:66`
-- hash: `f5a26fd7`
+- hash: `645790c2`
 - status: **accept**
 - cause: random
 - note: Random output (sample, shuf)
@@ -493,18 +494,18 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 -340
 -434
 -… with 6 more lines
-+50
-+53
-+57
-+82
-+343
-+… with 7 more lines
++18
++279
++405
++663
++749
++… with 3 more lines
 ```
 
 ## Code block 71: `$ type shuf`
 
 - id: `list-of-command-line-tools.html:block:71`
-- hash: `49a8480c`
+- hash: `2b54d7ad`
 - status: **accept**
 - cause: random
 - note: Random output (sample, shuf)
@@ -517,13 +518,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
  $ echo {a..z} | tr ' ' '\n' | shuf | trim 5
 -s
 -a
--k
-+f
 +o
-+r
-+u
- x
++b
++v
+ k
+-x
 -y
++n
  … with 21 more lines
  
  $ shuf -i 1-100 | trim 5
@@ -532,11 +533,11 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 -5
 -92
 -10
-+98
-+18
-+9
-+63
-+28
++57
++97
++64
++54
++99
  … with 95 more lines
 ```
 
@@ -622,7 +623,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 ## Code block 86: `$ type tree`
 
 - id: `list-of-command-line-tools.html:block:86`
-- hash: `f9f50e3b`
+- hash: `005c65cc`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -634,13 +635,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
  │   │   ├── logs.tar.gz
  │   │   ├── r-datasets.db
 -… with 121572 more lines
-+… with 106047 more lines
++… with 105453 more lines
 ```
 
 ## Code block 88: `$ type ts`
 
 - id: `list-of-command-line-tools.html:block:88`
-- hash: `cc1ae077`
+- hash: `0ecd3381`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -652,7 +653,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
  
  $ echo seq 5 | sample -d 500 | ts
 -Dec 14 12:07:20 seq 5
-+Nov 08 15:00:01 seq 5
++Nov 08 20:48:58 seq 5
 ```
 
 ## Code block 99: `$ type xsv`

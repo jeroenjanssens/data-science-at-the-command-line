@@ -1,11 +1,11 @@
 # chapter-6-project-management-with-make.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e7c57af54f8fb06709a2727f0560`
+Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae316735486f496571ddd1293ad4e1`
 
 ## Code block 0: `$ cd /data/ch06`
 
 - id: `chapter-6-project-management-with-make.html:block:0`
-- hash: `5d02d1db`
+- hash: `a99142dd`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -23,13 +23,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:470005890402401f1d3c84f8ebb5afceaf53e
 --rw-r--r-- 1 dst dst 432 Dec 14 11:49 starwars.make
 --rw-r--r-- 1 dst dst 263 Dec 14 11:49 tasks.make
 --rw-r--r-- 1 dst dst  27 Dec 14 11:49 template.make
-+-rw-r--r-- 1 dst dst  37 Nov  8 14:56 Makefile.test
-+-rw-r--r-- 1 dst dst  21 Nov  8 14:56 numbers-write-var.make
-+-rw-r--r-- 1 dst dst  26 Nov  8 14:56 numbers-write.make
-+-rw-r--r-- 1 dst dst  16 Nov  8 14:56 numbers.make
-+-rw-r--r-- 1 dst dst 432 Nov  8 14:56 starwars.make
-+-rw-r--r-- 1 dst dst 263 Nov  8 14:56 tasks.make
-+-rw-r--r-- 1 dst dst  27 Nov  8 14:56 template.make
++-rw-r--r-- 1 dst dst  37 Nov  8 20:44 Makefile.test
++-rw-r--r-- 1 dst dst  21 Nov  8 20:44 numbers-write-var.make
++-rw-r--r-- 1 dst dst  26 Nov  8 20:44 numbers-write.make
++-rw-r--r-- 1 dst dst  16 Nov  8 20:44 numbers.make
++-rw-r--r-- 1 dst dst 432 Nov  8 20:44 starwars.make
++-rw-r--r-- 1 dst dst 263 Nov  8 20:44 tasks.make
++-rw-r--r-- 1 dst dst  27 Nov  8 20:44 template.make
 ```
 
 ## 2 old anchor(s) missing
