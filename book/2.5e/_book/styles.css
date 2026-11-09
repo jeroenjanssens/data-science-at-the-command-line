@@ -24,3 +24,10 @@ figcaption.quarto-float-caption {
 figure:has(img.figure-img[style*="width:90.0%"]) > figcaption { max-width: 90%; }
 figure:has(img.figure-img[style*="width:60.0%"]) > figcaption { max-width: 60%; }
 figure:has(img.figure-img[style*="width:50.0%"]) > figcaption { max-width: 50%; }
+
+/* More space around figures than between paragraphs (1rem): above the image
+   and below the caption */
+div.quarto-float.quarto-figure {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
