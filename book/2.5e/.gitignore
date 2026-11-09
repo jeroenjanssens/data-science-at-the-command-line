@@ -6,3 +6,4 @@
 
 **/*.quarto_ipynb
 __pycache__/
+/_variables.yml
