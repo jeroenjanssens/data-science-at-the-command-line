@@ -58,6 +58,12 @@ format:
     from: markdown+autolink_bare_uris
     include-in-header: favicon.html
     code-copy: true
+    # Light and dark mode, with a toggle; start in the reader's system preference
+    theme:
+      light: default
+      dark: darkly
+    respect-user-color-scheme: true
+    css: styles.css
 
 extensions:
   term:
@@ -77,6 +83,9 @@ extensions:
       rows: 16
       # 80 columns fit the text column without a horizontal scrollbar at 1440px and wider
       font-size: 0.83em
+      # Dark terminal blocks in light mode, light ones in dark mode
+      colorscheme-light: catppuccin-frappe
+      colorscheme-dark: catppuccin-latte
     docker:
       image: datasciencetoolbox/dsatcl2e:latest
       # Pulled before the cache key is computed, so a new image re-runs pages

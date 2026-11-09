@@ -46,10 +46,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-991ac56e13dd9cee11107603d2825d30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
@@ -88,6 +92,49 @@ ul.task-list li input[type="checkbox"] {
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
 <style>
+body.quarto-light {
+  --term-fg: #c6d0f5;
+  --term-bg: #303446;
+  --term-0: #51576d;
+  --term-1: #e78284;
+  --term-2: #a6d189;
+  --term-3: #e5c890;
+  --term-4: #8caaee;
+  --term-5: #f4b8e4;
+  --term-6: #81c8be;
+  --term-7: #b5bfe2;
+  --term-8: #626880;
+  --term-9: #e78284;
+  --term-10: #a6d189;
+  --term-11: #e5c890;
+  --term-12: #8caaee;
+  --term-13: #f4b8e4;
+  --term-14: #81c8be;
+  --term-15: #a5adce;
+}
+
+body.quarto-dark {
+  --term-fg: #4c4f69;
+  --term-bg: #eff1f5;
+  --term-0: #5c5f77;
+  --term-1: #d20f39;
+  --term-2: #40a02b;
+  --term-3: #df8e1d;
+  --term-4: #1e66f5;
+  --term-5: #ea76cb;
+  --term-6: #179299;
+  --term-7: #acb0be;
+  --term-8: #6c6f85;
+  --term-9: #d20f39;
+  --term-10: #40a02b;
+  --term-11: #df8e1d;
+  --term-12: #1e66f5;
+  --term-13: #ea76cb;
+  --term-14: #179299;
+  --term-15: #bcc0cc;
+}
+</style>
+<style>
 @counter-style term-callouts-47c21b52 {
   system: fixed;
   symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
@@ -99,6 +146,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
+<link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="9&nbsp; Modeling Data – Data Science at the Command Line, 2e">
 <meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
 <meta property="og:image" content="images/wine-quality.png">
@@ -109,7 +157,187 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -136,6 +364,7 @@ ul.task-list li input[type="checkbox"] {
       <a href="./">Data Science at the Command Line, 2e</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
     </div>
       </div>
@@ -279,6 +508,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
 
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title"><span id="chapter-9-modeling-data" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modeling Data</span></span></h1>
@@ -335,7 +565,7 @@ Warning
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 4.0K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov  9 18:45 classify.cfg</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov  9 19:00 classify.cfg</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -690,47 +920,47 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-output">rent</span>
 <span class="term-output">loss     last          counter         weight          label        predict feat</span>
 <span class="term-output">ures</span>
-<span class="term-output">36.00000 36.00000            1            1.0         6.0000         0.0000</span>
+<span class="term-output">49.00000 49.00000            1            1.0         7.0000         0.0000</span>
 <span class="term-output">  78</span>
-<span class="term-output">27.32049 18.64098            2            2.0         5.0000         0.6825</span>
+<span class="term-output">43.53563 38.07126            2            2.0         7.0000         0.8298</span>
 <span class="term-output">  78</span>
-<span class="term-output">18.64368 9.966867            4            4.0         7.0000         3.3361</span>
+<span class="term-output">24.68034 5.825049            4            4.0         5.0000         2.9211</span>
 <span class="term-output">  78</span>
-<span class="term-output">11.02208 3.400484            8            8.0         6.0000         5.3535</span>
+<span class="term-output">14.84005 4.999763            8            8.0         6.0000         4.2678</span>
 <span class="term-output">  78</span>
-<span class="term-output">6.230840 1.439597           16           16.0         7.0000         5.4684</span>
+<span class="term-output">8.076589 1.313126           16           16.0         6.0000         5.4573</span>
 <span class="term-output">  78</span>
-<span class="term-output">3.591505 0.952171           32           32.0         8.0000         5.6763</span>
+<span class="term-output">4.366361 0.656133           32           32.0         5.0000         5.5493</span>
 <span class="term-output">  78</span>
-<span class="term-output">2.297118 1.002730           64           64.0         7.0000         6.1455</span>
+<span class="term-output">2.491280 0.616199           64           64.0         7.0000         5.4677</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.489653 0.682187          128          128.0         5.0000         5.8148</span>
+<span class="term-output">1.622991 0.754701          128          128.0         6.0000         5.8842</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.143706 0.797759          256          256.0         7.0000         5.5235</span>
+<span class="term-output">1.317576 1.012160          256          256.0         6.0000         5.8734</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.930339 0.716973          512          512.0         6.0000         5.9245</span>
+<span class="term-output">1.018283 0.718991          512          512.0         5.0000         5.9670</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.872232 0.814124         1024         1024.0         6.0000         6.0398</span>
+<span class="term-output">0.914936 0.811589         1024         1024.0         5.0000         5.9717</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.840070 0.807907         2048         2048.0         6.0000         6.0228</span>
+<span class="term-output">0.832085 0.749234         2048         2048.0         7.0000         5.7516</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.741603 0.741603         4096         4096.0         6.0000         5.7230</span>
+<span class="term-output">0.658276 0.658276         4096         4096.0         7.0000         5.6576</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.699702 0.657801         8192         8192.0         7.0000         6.5498</span>
+<span class="term-output">0.604202 0.550127         8192         8192.0         7.0000         6.2341</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.660146 0.620590        16384        16384.0         7.0000         6.2506</span>
+<span class="term-output">0.569447 0.534692        16384        16384.0         5.0000         5.8441</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.623527 0.586907        32768        32768.0         7.0000         6.1959</span>
+<span class="term-output">0.539908 0.510369        32768        32768.0         6.0000         5.1325</span>
 <span class="term-output">  78 h</span>
 <span class="term-output"></span>
 <span class="term-output">finished run</span>
 <span class="term-output">number of examples per pass = 3527</span>
 <span class="term-output">passes used = 10</span>
 <span class="term-output">weighted example sum = 35270.000000</span>
-<span class="term-output">weighted label sum = 207800.000000</span>
-<span class="term-output">average loss = 0.584793 h</span>
-<span class="term-output">best constant = 5.891693</span>
-<span class="term-output">total feature number = 2749260</span></code></pre>
+<span class="term-output">weighted label sum = 207420.000000</span>
+<span class="term-output">average loss = 0.509540 h</span>
+<span class="term-output">best constant = 5.880919</span>
+<span class="term-output">total feature number = 2749620</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
@@ -757,16 +987,16 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-prompt" data-prompt="> "></span>--quiet <span class="term-callout">➎</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">predictions</span> | <span style="color:var(--term-2)">trim</span>
-<span class="term-output">5.223963</span>
-<span class="term-output">6.290420</span>
-<span class="term-output">6.305194</span>
-<span class="term-output">5.638538</span>
-<span class="term-output">5.837737</span>
-<span class="term-output">6.006775</span>
-<span class="term-output">6.389667</span>
-<span class="term-output">5.674632</span>
-<span class="term-output">5.143237</span>
-<span class="term-output">6.079253</span>
+<span class="term-output">6.210601</span>
+<span class="term-output">5.320969</span>
+<span class="term-output">6.411190</span>
+<span class="term-output">5.973759</span>
+<span class="term-output">5.314037</span>
+<span class="term-output">4.291012</span>
+<span class="term-output">5.827061</span>
+<span class="term-output">5.838736</span>
+<span class="term-output">5.670948</span>
+<span class="term-output">5.832406</span>
 <span class="term-output">… with 970 more lines</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -784,7 +1014,7 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cowsay</span> <span class="term-callout">➊</span>
 <span class="term-output"> _______________</span>
-<span class="term-output">&lt; MAE: 0.575094 &gt;</span>
+<span class="term-output">&lt; MAE: 0.595575 &gt;</span>
 <span class="term-output"> ---------------</span>
 <span class="term-output">        \   ^__^</span>
 <span class="term-output">         \  (oo)\_______</span>
@@ -815,7 +1045,7 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span>
-<span class="term-output">MAE: 0.617164</span></code></pre>
+<span class="term-output">MAE: 0.660777</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
@@ -854,14 +1084,14 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-balanced.csv | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│    id │ type  │ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sug…</span>
 <span class="term-output">├───────┼───────┼───────────────┼──────────────────┼─────────────┼─────────────…</span>
-<span class="term-output">│     1 │ red   │          7.70 │            0.530 │        0.06 │           1.…</span>
-<span class="term-output">│     2 │ white │          6.00 │            0.280 │        0.29 │          19.…</span>
-<span class="term-output">│     3 │ red   │          5.20 │            0.320 │        0.25 │           1.…</span>
-<span class="term-output">│     4 │ red   │          7.10 │            0.630 │        0.06 │           2.…</span>
-<span class="term-output">│     5 │ white │          7.00 │            0.120 │        0.28 │           6.…</span>
-<span class="term-output">│     6 │ white │          6.00 │            0.280 │        0.52 │           6.…</span>
-<span class="term-output">│     7 │ red   │          7.00 │            0.420 │        0.19 │           2.…</span>
-<span class="term-output">│     8 │ red   │          8.00 │            0.380 │        0.44 │           1.…</span>
+<span class="term-output">│     1 │ white │          6.80 │            0.340 │        0.27 │           5.…</span>
+<span class="term-output">│     2 │ red   │         12.40 │            0.420 │        0.49 │           4.…</span>
+<span class="term-output">│     3 │ red   │          7.00 │            0.430 │        0.30 │           2.…</span>
+<span class="term-output">│     4 │ white │          6.70 │            0.330 │        0.49 │           1.…</span>
+<span class="term-output">│     5 │ red   │          9.20 │            0.540 │        0.31 │           2.…</span>
+<span class="term-output">│     6 │ red   │          7.60 │            0.665 │        0.10 │           1.…</span>
+<span class="term-output">│     7 │ red   │          7.70 │            0.580 │        0.01 │           1.…</span>
+<span class="term-output">│     8 │ white │          6.30 │            0.200 │        0.18 │          10.…</span>
 <span class="term-output">… with 3190 more lines</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -970,9 +1200,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"><span style="color:var(--term-3)">tdin ORDER BY accuracy DESC"</span> | <span style="color:var(--term-2)">csvlook</span> -I</span>
 <span class="term-output">│ learner_name           │ accuracy  │</span>
 <span class="term-output">├────────────────────────┼───────────┤</span>
-<span class="term-output">│ LogisticRegression     │ 0.9953125 │</span>
-<span class="term-output">│ RandomForestClassifier │ 0.9953125 │</span>
-<span class="term-output">│ KNeighborsClassifier   │ 0.9875    │</span>
+<span class="term-output">│ RandomForestClassifier │ 0.99375   │</span>
+<span class="term-output">│ KNeighborsClassifier   │ 0.9921875 │</span>
+<span class="term-output">│ LogisticRegression     │ 0.9921875 │</span>
 <span class="term-output">│ DecisionTreeClassifier │ 0.98125   │</span></code></pre>
 
 <p>The relevant column here is <em><code>accuracy</code></em>, which indicates the percentage of data points that are classified correctly. From this we see that actually all algorithms are performing really well. The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.</p>
@@ -982,9 +1212,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [298] |       5 |       0.977 |    0.983 |       0.980 |</span>
+<span class="term-output">|   red | [292] |       7 |       0.983 |    0.977 |       0.980 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     7 |   [330] |       0.985 |    0.979 |       0.982 |</span>
+<span class="term-output">| white |     5 |   [336] |       0.980 |    0.985 |       0.982 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -992,9 +1222,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [301] |       2 |       0.980 |    0.993 |       0.987 |</span>
+<span class="term-output">|   red | [296] |       3 |       0.993 |    0.990 |       0.992 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     6 |   [331] |       0.994 |    0.982 |       0.988 |</span>
+<span class="term-output">| white |     2 |   [339] |       0.991 |    0.994 |       0.993 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -1002,9 +1232,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [302] |       1 |       0.993 |    0.997 |       0.995 |</span>
+<span class="term-output">|   red | [296] |       3 |       0.993 |    0.990 |       0.992 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     2 |   [335] |       0.997 |    0.994 |       0.996 |</span>
+<span class="term-output">| white |     2 |   [339] |       0.991 |    0.994 |       0.993 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -1012,9 +1242,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [302] |       1 |       0.993 |    0.997 |       0.995 |</span>
+<span class="term-output">|   red | [297] |       2 |       0.993 |    0.993 |       0.993 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     2 |   [335] |       0.997 |    0.994 |       0.996 |</span>
+<span class="term-output">| white |     2 |   [339] |       0.994 |    0.994 |       0.994 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span></code></pre>
 
@@ -1056,6 +1286,54 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {

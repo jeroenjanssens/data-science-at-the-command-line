@@ -7,6 +7,12 @@ hide-description: true
 
 Welcome to the website of the second edition of *Data Science at the Command Line* by Jeroen Janssens, published by O'Reilly Media in October 2021. This website is free to use. The contents is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/). You can order a physical copy at [Amazon](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912).
 
+This website is edition 2.5.
+The text is that of the second edition, with small updates where tools or websites have changed since 2021.
+All the code has been run again with the current version of the Docker image, so the output you see here is the output you get when you follow along today.
+The website is now made with [Quarto](https://quarto.org) and [quarto-term](https://quarto-term.jeroenjanssens.com) instead of bookdown.
+The printed book shows the output of the original Docker image, which is still available as `datasciencetoolbox/dsatcl2e:20210628`.
+
 ## Description {.unnumbered}
 
 This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You'll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.

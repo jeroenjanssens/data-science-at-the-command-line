@@ -1,0 +1,4 @@
+/* A border around the cover image on the welcome page, in the theme's border color */
+.quarto-cover-image {
+  border: 1px solid var(--bs-border-color);
+}
