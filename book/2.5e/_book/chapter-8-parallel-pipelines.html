@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-991ac56e13dd9cee11107603d2825d30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -556,10 +556,10 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 20K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  9 19:00 emails.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  9 19:00 movies.txt</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  9 19:00 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 19:00 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  9 19:32 emails.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  9 19:32 movies.txt</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  9 19:32 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 19:32 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -713,19 +713,19 @@ body.quarto-dark {
 <span class="term-output">[3] 173</span>
 <span class="term-output">[4] 174</span>
 <span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 09 19:00:18 Starting job B
-<span class="term-output">Nov 09 19:00:18 Starting job A</span>
-<span class="term-output">Nov 09 19:00:18 Starting job C</span>
-<span class="term-output">Nov 09 19:00:19Nov 09 19:00:19 Job A took 1 seconds</span>
-<span class="term-output"> Job B took 1 seconds</span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 09 19:33:00Nov 09 19:33:00Nov 09 19:33:00 Starting job C
+<span class="term-output"> Starting job B</span>
+<span class="term-output"> Starting job A</span>
+<span class="term-output">Nov 09 19:33:02 Job A took 2 seconds</span>
+<span class="term-output">Nov 09 19:33:02 Job C took 2 seconds</span>
 <span class="term-output"></span>
 <span class="term-output">[2]    done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span>
-<span class="term-output">[3]  - done       ./slow.sh $i</span>
-<span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 09 19:00:20 Job C took 2 seconds
-<span class="term-output"></span>
 <span class="term-output">[4]  + done       ./slow.sh $i</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 09 19:33:04 Job B took 4 seconds
+<span class="term-output"></span>
+<span class="term-output">[3]  + done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -802,12 +802,12 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 </div>
 <p>As you can see it basically acts as a for loop. Here’s another teaser, which replaces the for loop from the previous section.</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --jobs 2 <span style="text-decoration:underline">./slow.sh</span> ::: {A..C}
-<span class="term-output">Nov 09 19:00:26 Starting job B</span>
-<span class="term-output">Nov 09 19:00:29 Job B took 3 seconds</span>
-<span class="term-output">Nov 09 19:00:26 Starting job A</span>
-<span class="term-output">Nov 09 19:00:30 Job A took 4 seconds</span>
-<span class="term-output">Nov 09 19:00:29 Starting job C</span>
-<span class="term-output">Nov 09 19:00:30 Job C took 1 seconds</span></code></pre>
+<span class="term-output">Nov 09 19:33:07 Starting job A</span>
+<span class="term-output">Nov 09 19:33:09 Job A took 2 seconds</span>
+<span class="term-output">Nov 09 19:33:07 Starting job B</span>
+<span class="term-output">Nov 09 19:33:09 Job B took 2 seconds</span>
+<span class="term-output">Nov 09 19:33:09 Starting job C</span>
+<span class="term-output">Nov 09 19:33:12 Job C took 3 seconds</span></code></pre>
 
 <p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
 <p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality. (Perhaps too much.) Luckily you only need to know a handful in order to be effective. The manual page is quite informative in case you need to use a less common option.</p>
@@ -1161,16 +1161,16 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 
 <p>You now have 10 files containing compressed JSON data:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> nyc<span style="color:var(--term-4)">*</span>json.gz
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  9 19:00 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  9 19:33 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
 
 <p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file. Using <code>zcat</code><span class="citation" data-cites="zcat"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, you directly print the contents of a compress file:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">trim</span>

@@ -5,6 +5,10 @@ function M.normalize(val)
   if val == true then
     return { os = "macos", shadow = true }
   end
+  -- A string is the title (as documented: "string value becomes title")
+  if type(val) == "string" then
+    return { os = "macos", title = val, shadow = true }
+  end
   if type(val) == "table" then
     return {
       os     = val.os or "macos",
@@ -14,6 +18,13 @@ function M.normalize(val)
     }
   end
   return nil
+end
+
+-- Escape text for HTML; `{` too, because Quarto reads `{{<` as a shortcode
+local function html_escape(s)
+  return (tostring(s):gsub("[&<>\"{]", {
+    ["&"] = "&amp;", ["<"] = "&lt;", [">"] = "&gt;", ['"'] = "&quot;", ["{"] = "&#123;",
+  }))
 end
 
 function M.wrap(html, cfg)
@@ -26,7 +37,7 @@ function M.wrap(html, cfg)
   local outer_style = (shadow == false) and ' style="box-shadow:none"' or ''
 
   local title_html = title
-    and ('<span class="term-chrome-title">' .. title .. '</span>')
+    and ('<span class="term-chrome-title">' .. html_escape(title) .. '</span>')
     or ''
 
   local bar_inner

@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-991ac56e13dd9cee11107603d2825d30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -554,14 +554,14 @@ Tip
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 32K</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 391 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 400 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 147 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 182 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 105 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 128 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 584 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 647 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span></code></pre>
+<span class="term-output">-rwxr-xr-x 1 dst dst 391 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 400 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 147 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 182 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 105 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 128 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 584 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 647 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -692,7 +692,9 @@ Tip
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">fc</span></code></pre>
 
 <p>Running <code>fc</code> invokes the default text editor, which is stored in the environment variable <em>EDITOR</em>. In the Docker container, this is set to <code>nano</code>, a straightforward text editor. As you can see, this file contains our one-liner:</p>
-<pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshiIsMcQ                              </span>
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">nano</span></div>
+<pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshW2nUn0                              </span>
 curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
 tr '[:upper:]' '[:lower:]' |
 grep -oE "[a-z\']{2,}" |
@@ -708,9 +710,12 @@ head -n 10
                                 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">[ Read 8 lines ]</span>
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^O</span> Write Out <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^F</span> Where Is  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^K</span> Cut       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Execute   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Location
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^X</span> Exit      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^R</span> Read File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^\</span> Replace   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^U</span> Paste     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^J</span> Justify   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^/</span> Go To Line</code></pre>
+</div>
 
 <p>Let’s give this temporary file a proper name by pressing <strong><code>Ctrl-O</code></strong>, removing the temporary filename, and typing <code>top-words-1.sh</code>:</p>
-<pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshiIsMcQ                              </span>
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">nano</span></div>
+<pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshW2nUn0                              </span>
 curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
 tr '[:upper:]' '[:lower:]' |
 grep -oE "[a-z\']{2,}" |
@@ -726,9 +731,12 @@ head -n 10
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Write to File: top-words-1.sh                                                   </span>
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help         <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-D</span> DOS Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-A</span> Append      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-B</span> Backup File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Browse
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-M</span> Mac Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-P</span> Prepend     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^Q</span> Discard buffer</code></pre>
+</div>
 
 <p>Press <strong><code>Enter</code></strong>:</p>
-<pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshiIsMcQ                              </span>
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">nano</span></div>
+<pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshW2nUn0                              </span>
 curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
 tr '[:upper:]' '[:lower:]' |
 grep -oE "[a-z\']{2,}" |
@@ -744,8 +752,11 @@ head -n 10
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Save file under DIFFERENT NAME?                                                 </span>
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> Y</span> Yes
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> N</span> No           <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel</code></pre>
+</div>
 
 <p>Press <strong><code>Y</code></strong> to confirm that you want to save under a different filename:</p>
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">nano</span></div>
 <pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-1.sh                              </span>
 curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
 tr <span style="color:var(--term-3);font-weight:bold">'[:upper:]'</span> <span style="color:var(--term-3);font-weight:bold">'[:lower:]'</span> <span style="color:var(--term-2)">|</span>
@@ -762,6 +773,7 @@ uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="c
                                <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">[ Wrote 8 lines ]</span>
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^O</span> Write Out <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^F</span> Where Is  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^K</span> Cut       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Execute   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Location
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^X</span> Exit      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^R</span> Read File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^\</span> Replace   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^U</span> Paste     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^J</span> Justify   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^/</span> Go To Line</code></pre>
+</div>
 
 <p>Press <strong><code>Ctrl-X</code></strong> to exit <code>nano</code> and go back from whence you came.</p>
 
@@ -772,16 +784,16 @@ uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="c
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 44K</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  391 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  400 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.5K Nov  9 18:58 stopwords</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  147 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  182 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  173 Nov  9 18:58 top-words-1.sh</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  105 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  128 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  584 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  647 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  391 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  400 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.5K Nov  9 19:30 stopwords</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  147 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  182 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  173 Nov  9 19:31 top-words-1.sh</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  105 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  128 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  584 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  647 Nov  9 19:30 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words-1.sh</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
@@ -839,8 +851,8 @@ Tip
 <p>The argument <code>u+x</code> consists of three characters: (1) <code>u</code> indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) <code>+</code> indicates that we want to add a permission; and (3) <code>x</code>, which indicates the permissions to execute.</p>
 <p>Let’s now have a look at the access permissions of both files:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> top-words-{1,2}.sh
-<span class="term-output">-rw-r--r-- 1 dst dst 173 Nov  9 18:58 top-words-1.sh</span>
-<span class="term-output">-rwxr--r-- 1 dst dst 173 Nov  9 18:58 <span style="color:var(--term-2);font-weight:bold">top-words-2.sh</span>*</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 173 Nov  9 19:31 top-words-1.sh</span>
+<span class="term-output">-rwxr--r-- 1 dst dst 173 Nov  9 19:31 <span style="color:var(--term-2);font-weight:bold">top-words-2.sh</span>*</span></code></pre>
 
 <p>The first column shows the access permissions for each file. For <em>top-words-2.sh</em>, this is <em><code>-rwxrw-r--</code></em>. The first character <em><code>-</code></em> (hyphen) indicates the file type. A <em><code>-</code></em> means regular file and a <em><code>d</code></em> means directory. The next three characters, <em><code>rwx</code></em>, indicate the access permissions for the user who owns the file. The <em><code>r</code></em> and <em><code>w</code></em> mean <em>read</em> and <em>write</em>, respectively. (As you can see, <em>top-words-1.sh</em> has a <em><code>-</code></em> instead of an <em><code>x</code></em>, which means that we cannot <em>execute</em> that file.) The next three characters <em><code>rw-</code></em> indicate the access permissions for all members of the group that owns the file. Finally, the last three characters in the column, <em><code>r--</code></em>, indicate access permissions for all other users.</p>
 <p>Now you can execute the file as follows:</p>
@@ -871,6 +883,8 @@ Tip
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">nano</span> <span style="text-decoration:underline">top-words-3.sh</span></code></pre>
 
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">nano</span></div>
 <pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-3.sh                              </span>
 curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
 tr <span style="color:var(--term-3);font-weight:bold">'[:upper:]'</span> <span style="color:var(--term-3);font-weight:bold">'[:lower:]'</span> <span style="color:var(--term-2)">|</span>
@@ -887,8 +901,11 @@ uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="c
                                 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">[ Read 8 lines ]</span>
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^O</span> Write Out <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^F</span> Where Is  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^K</span> Cut       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Execute   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Location
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^X</span> Exit      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^R</span> Read File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^\</span> Replace   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^U</span> Paste     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^J</span> Justify   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^/</span> Go To Line</code></pre>
+</div>
 
 <p>Go ahead and type <em><code>#!/usr/bin/env/bash</code></em> and press <strong><code>Enter</code></strong>. When you’re ready, press <strong><code>Ctrl-X</code></strong> to save and exit.</p>
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">nano</span></div>
 <pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-3.sh *                            </span>
 <span style="color:var(--term-6)">#!/usr/bin/env bash</span>
 curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
@@ -905,8 +922,11 @@ uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="c
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Save modified buffer?                                                           </span>
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> Y</span> Yes
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)"> N</span> No           <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel</code></pre>
+</div>
 
 <p>Press <strong><code>Y</code></strong> to indicate that you want to save the file.</p>
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">nano</span></div>
 <pre class="term-screen" style="font-size:0.83em"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    top-words-3.sh *                            </span>
 <span style="color:var(--term-6)">#!/usr/bin/env bash</span>
 curl -sL <span style="color:var(--term-3);font-weight:bold">"https://www.gutenberg.org/files/11/11-0.txt"</span> <span style="color:var(--term-2)">|</span>
@@ -923,6 +943,7 @@ uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="c
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">Write to File: top-words-3.sh                                                   </span>
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^G</span> Help         <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-D</span> DOS Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-A</span> Append      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-B</span> Backup File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^T</span> Browse
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-M</span> Mac Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-P</span> Prepend     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^Q</span> Discard buffer</code></pre>
+</div>
 
 <p>Let’s confirm what <em>top-words-3.sh</em> looks like:</p>
 
@@ -1120,7 +1141,7 @@ Tip
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">top-words</span> 10
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
-<span class="term-output">100 170.2k 100 170.2k   0      0 52.29M      0                              0</span>
+<span class="term-output">100 170.2k 100 170.2k   0      0 55.76M      0                              0</span>
 <span class="term-output">    403 alice</span>
 <span class="term-output">     98 gutenberg</span>
 <span class="term-output">     88 project</span>
@@ -1213,7 +1234,7 @@ Tip
 <span class="term-output">     88 project</span>
 <span class="term-output">     76 queen</span>
 <span class="term-output">     71 time</span>
-<span class="term-output">top-words 5 &lt; alice.txt  0.04s user 0.02s system 152% cpu 0.035 total</span>
+<span class="term-output">top-words 5 &lt; alice.txt  0.03s user 0.01s system 149% cpu 0.029 total</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">time</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">top-words.py</span> 5
 <span class="term-output">    403 alice</span>
@@ -1221,7 +1242,7 @@ Tip
 <span class="term-output">     88 project</span>
 <span class="term-output">     76 queen</span>
 <span class="term-output">     71 time</span>
-<span class="term-output">top-words.py 5 &lt; alice.txt  0.14s user 0.01s system 42% cpu 0.371 total</span>
+<span class="term-output">top-words.py 5 &lt; alice.txt  0.18s user 0.01s system 36% cpu 0.508 total</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">time</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">top-words.R</span> 5
 <span class="term-output">    403 alice</span>
@@ -1229,7 +1250,7 @@ Tip
 <span class="term-output">     88 project</span>
 <span class="term-output">     76 queen</span>
 <span class="term-output">     71 time</span>
-<span class="term-output">top-words.R 5 &lt; alice.txt  0.12s user 0.04s system 35% cpu 0.441 total</span></code></pre>
+<span class="term-output">top-words.R 5 &lt; alice.txt  0.10s user 0.03s system 40% cpu 0.340 total</span></code></pre>
 
 <p>Wonderful! Sure, the output itself is not very exciting. What’s exciting is that we can accomplish the same task with multiple languages. Let’s look at the differences between the approaches.</p>
 <p>First, what’s immediately obvious is the difference in amount of code. For this specific task, both Python and R require much more code than Bash. This illustrates that, for some tasks, it is better to use the command line. For other tasks, you may better off using a programming language. As you gain more experience on the command line, you will start to recognize when to use which approach. When everything is a command-line tool, you can even split up the task into subtasks, and combine a Bash command-line tool with, say, a Python command-line tool. Whichever approach works best for the task at hand.</p>

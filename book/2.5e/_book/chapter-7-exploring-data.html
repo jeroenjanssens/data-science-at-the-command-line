@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-991ac56e13dd9cee11107603d2825d30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -555,10 +555,10 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 104K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  9 18:59 datatypes.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 18:59 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  9 18:59 venture-wide.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  9 18:59 venture.csv</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  9 19:32 datatypes.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 19:32 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  9 19:32 venture-wide.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  9 19:32 venture.csv</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -615,6 +615,8 @@ body.quarto-dark {
 <p>If you want to inspect the raw data at your own pace, then it’s probably not a good idea to use <code>cat</code>, because then all the data will be printed in one go. I recommend using <code>less</code><span class="citation" data-cites="less"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span>, which allows you to interactively inspect your data in the command line. You can prevent long lines (as with <em>venture.csv</em>) from wrapping by specifying the <code>-S</code> option:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">less</span> -S <span style="text-decoration:underline">venture.csv</span></code></pre>
 
+<div class="term-chrome term-chrome-macos">
+<div class="term-chrome-bar"><span class="term-chrome-dot term-chrome-close"></span><span class="term-chrome-dot term-chrome-minimize"></span><span class="term-chrome-dot term-chrome-maximize"></span><span class="term-chrome-title">less</span></div>
 <pre class="term-screen" style="font-size:0.83em"><code>FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIM<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
 A,P1Y,2015,INV_VEN,PC_GDP,CZ,,0.002,Annual,Annual,Year 2015,No data,"Venture ca<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
 A,P1Y,2007,INV_VEN,PC_GDP,DE,,0.034,Annual,Annual,Year 2007,No data,"Venture ca<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
@@ -631,6 +633,7 @@ A,P1Y,2008,INV_VEN,PC_GDP,DK,,0.074,Annual,Annual,Year 2008,No data,"Venture ca<
 A,P1Y,2009,INV_VEN,PC_GDP,DK,,0.051,Annual,Annual,Year 2009,No data,"Venture ca<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
 A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
 :</code></pre>
+</div>
 
 
 <p>The greater-than signs on the right indicate that you can scroll horizontally. You can scroll up and down by pressing <strong><code>Up</code></strong> and <strong><code>Down</code></strong>. Press <strong><code>Space</code></strong> to scroll down an entire screen. Scrolling horizontally is done by pressing <strong><code>Left</code></strong> and <strong><code>Right</code></strong>. Press <strong><code>g</code></strong> and <strong><code>G</code></strong> to go to start and the end of the file, respectively. Quitting <code>less</code> is done by pressing <strong><code>q</code></strong>. The manual page lists all the available key bindings.</p>

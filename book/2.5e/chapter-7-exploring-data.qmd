@@ -106,6 +106,7 @@ less -S venture.csv #! enter: false
 ```{term}
 #| label: less_enter
 #| fullscreen: true
+#| style.chrome: "less"
 enter right left #! literal: false, hold: 0.1
 ```
 

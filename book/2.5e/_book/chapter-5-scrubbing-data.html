@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-991ac56e13dd9cee11107603d2825d30.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -549,13 +549,13 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 200K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 18:58 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  9 18:58 iris.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  9 18:58 irismeta.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  9 18:58 names-comma.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  9 18:58 names.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 18:58 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 18:58 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 19:31 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  9 19:31 iris.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  9 19:31 irismeta.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  9 19:31 names-comma.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  9 19:31 names.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 19:31 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 19:31 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 <p>Before I dive into the actual transformations, I’d like to demonstrate their ubiquity when working at the command line.</p>
@@ -844,28 +844,30 @@ Note
 <p>When you’re in the process of formulating your data pipeline and you have a lot of data, then debugging your pipeline can be cumbersome. In that case, generating a smaller sample from the data might be useful. This is where <code>sample</code><span class="citation" data-cites="sample"><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></span> comes in handy. The main purpose of <code>sample</code> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
 
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1%
-<span class="term-output">Line 65</span>
-<span class="term-output">Line 83</span>
-<span class="term-output">Line 129</span>
-<span class="term-output">Line 222</span>
-<span class="term-output">Line 237</span>
-<span class="term-output">Line 248</span>
-<span class="term-output">Line 264</span>
-<span class="term-output">Line 374</span>
-<span class="term-output">Line 516</span>
-<span class="term-output">Line 606</span>
-<span class="term-output">Line 712</span>
-<span class="term-output">Line 745</span></code></pre>
+<span class="term-output">Line 27</span>
+<span class="term-output">Line 98</span>
+<span class="term-output">Line 139</span>
+<span class="term-output">Line 168</span>
+<span class="term-output">Line 247</span>
+<span class="term-output">Line 368</span>
+<span class="term-output">Line 371</span>
+<span class="term-output">Line 377</span>
+<span class="term-output">Line 565</span>
+<span class="term-output">Line 569</span>
+<span class="term-output">Line 586</span>
+<span class="term-output">Line 717</span>
+<span class="term-output">Line 736</span>
+<span class="term-output">Line 857</span></code></pre>
 
 <p>Here, every input line has a one percent chance of being printed. This percentage can also be specified as a fraction (namely <code>1/100</code>) or as a probability (namely <code>0.01</code>).</p>
 <p><code>sample</code> has two other purposes, which can be useful when you’re debugging your pipeline. First, it’s possible to add some delay to the output. This comes in handy when the input is a constant stream (for example, the Wikipedia stream we saw in <a href="./chapter-3-obtaining-data.html">Chapter 3</a>), and the data comes in too fast to see what’s going on. Secondly, you can put a timer on <code>sample</code>, so that you don’t have to kill the ongoing process manually. For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1% -d 1000 -s 5 | <span style="color:var(--term-2)">ts</span> <span class="term-callout">➊</span>
-<span class="term-output">Nov 09 18:58:42 Line 135</span>
-<span class="term-output">Nov 09 18:58:43 Line 245</span>
-<span class="term-output">Nov 09 18:58:44 Line 258</span>
-<span class="term-output">Nov 09 18:58:45 Line 282</span>
-<span class="term-output">Nov 09 18:58:46 Line 395</span>
-<span class="term-output">Nov 09 18:58:47 Line 517</span></code></pre>
+<span class="term-output">Nov 09 19:31:24 Line 10</span>
+<span class="term-output">Nov 09 19:31:25 Line 16</span>
+<span class="term-output">Nov 09 19:31:26 Line 57</span>
+<span class="term-output">Nov 09 19:31:27 Line 114</span>
+<span class="term-output">Nov 09 19:31:28 Line 335</span>
+<span class="term-output">Nov 09 19:31:29 Line 574</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">

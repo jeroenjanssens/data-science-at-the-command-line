@@ -171,6 +171,7 @@ As you can see, this file contains our one-liner:
 ```{term}
 #| label: fc_enter
 #| fullscreen: true
+#| style.chrome: "nano"
 enter #! literal: false, hold: 0.2
 ```
 
@@ -179,6 +180,7 @@ Let's give this temporary file a proper name by pressing **`Ctrl-O`**, removing 
 ```{term}
 #| label: fc_save
 #| fullscreen: true
+#| style.chrome: "nano"
 ctrl-o backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace backspace #! literal: false
 top-words-1.sh #! enter: false
 ```
@@ -188,6 +190,7 @@ Press **`Enter`**:
 ```{term}
 #| label: fc_confirm
 #| fullscreen: true
+#| style.chrome: "nano"
 enter #! literal: false
 ```
 
@@ -196,6 +199,7 @@ Press **`Y`** to confirm that you want to save under a different filename:
 ```{term}
 #| label: fc_confirm_yes
 #| fullscreen: true
+#| style.chrome: "nano"
 Y #! literal: false
 ```
 
@@ -308,6 +312,7 @@ nano top-words-3.sh #! enter: false
 ```{term}
 #| label: nano_open
 #| fullscreen: true
+#| style.chrome: "nano"
 enter #! literal: false
 ```
 Go ahead and type *`#!/usr/bin/env/bash`* and press **`Enter`**.
@@ -316,6 +321,7 @@ When you're ready, press **`Ctrl-X`** to save and exit.
 ```{term}
 #| label: nano_edit
 #| fullscreen: true
+#| style.chrome: "nano"
 # ! #! literal: false
 /usr/bin/env bash #! expect-prompt: false
 ctrl-x #! literal: false
@@ -326,6 +332,7 @@ Press **`Y`** to indicate that you want to save the file.
 ```{term}
 #| label: nano_confirm
 #| fullscreen: true
+#| style.chrome: "nano"
 Y #! literal: false
 ```
 
