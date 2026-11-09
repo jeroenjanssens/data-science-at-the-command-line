@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,6 +87,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="7&nbsp; Exploring Data – Data Science at the Command Line, 2e">
@@ -315,10 +325,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 104K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  8 21:48 datatypes.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  8 21:48 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  8 21:48 venture-wide.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  8 21:48 venture.csv</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  9 17:54 datatypes.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 17:54 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  9 17:54 venture-wide.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  9 17:54 venture.csv</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -543,6 +553,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output">2014,PC_GDP,DE,0.021,Year 2014,Percentage of GDP,Germany</span>
 <span class="term-output">… with 531 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The <code>-C</code> option deselects columns given their locations (or names), which is provided with command substitution</li>
 <li>Obtain the number of unique values for each column in <em>venture.csv</em></li>
@@ -552,6 +563,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <li>Put all column locations on one comma-separated line</li>
 <li>Only show the first 10 lines</li>
 </ol>
+</div>
 <p>Having said that, I’m going to keep those columns for now.</p>
 <p>Generally speaking, if the number of unique values is low compared to the total number of rows, then that feature might be treated as a categorical one (such as <em>GEO</em> in the case of <em>venture.csv</em>). If the number is equal to the number of rows, it might be a unique identifier but it might also be a numerical value. There’s only one way to find out: we need to go deeper.</p>
 </section>
@@ -693,9 +705,11 @@ Tip
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">R</span> --quiet <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt=">"></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>I use the <code>--quiet</code> option here to suppress the rather long startup message</li>
 </ol>
+</div>
 <p>And then run the following code:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="> "></span>library(tidyverse) <span class="term-callout">➊</span>
 <span class="term-output">── <span style="font-weight:bold">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span>
@@ -725,6 +739,7 @@ Tip
 <span class="term-prompt" data-prompt="> "></span>q("no") <span class="term-callout">➎</span>
 <span class="term-prompt" data-prompt="$"></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Load any required packages</li>
 <li>Read in the CSV file and assign it to a variable</li>
@@ -732,6 +747,7 @@ Tip
 <li>Save the result to disk</li>
 <li>Exit <code>R</code></li>
 </ol>
+</div>
 <p>Afterwards, you can continue with the saved file <em>percent.csv</em> on the command line.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">percent.csv</span> <span style="color:var(--term-2)">trim</span> 5
 <span class="term-output">bill,tip,sex,smoker,day,time,size,percent</span>

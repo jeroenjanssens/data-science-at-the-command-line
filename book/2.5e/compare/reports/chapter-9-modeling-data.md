@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 0: `$ cd /data/ch09`
 
 - id: `chapter-9-modeling-data.html:block:0`
-- hash: `c7af4a3b`
+- hash: `557e73ab`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -17,7 +17,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
  $ l
  total 4.0K
 --rw-r--r-- 1 dst dst 503 Dec 14 11:57 classify.cfg
-+-rw-r--r-- 1 dst dst 503 Nov  8 21:19 classify.cfg
++-rw-r--r-- 1 dst dst 503 Nov  9 17:56 classify.cfg
 ```
 
 ## Code block 9: `$ rush run --tidyverse --output wine-scaled.csv \`
@@ -130,7 +130,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 18: `$ vw \`
 
 - id: `chapter-9-modeling-data.html:block:18`
-- hash: `37cae394`
+- hash: `326d8e93`
 - status: **accept**
 - cause: image
 - note: vw 9 log format (wider columns, wrapped)
@@ -185,35 +185,35 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 +ures
 +36.00000 36.00000            1            1.0         6.0000         0.0000
 +  78
-+26.30810 16.61621            2            2.0         5.0000         0.9237
++37.07244 38.14488            2            2.0         7.0000         0.8238
 +  78
-+18.42871 10.54931            4            4.0         5.0000         2.8782
++22.01896 6.965489            4            4.0         4.0000         3.1256
 +  78
-+12.09429 5.759870            8            8.0         7.0000         4.3135
++15.32611 8.633264            8            8.0         6.0000         4.7047
 +  78
-+6.765406 1.436522           16           16.0         6.0000         5.5118
++8.314034 1.301953           16           16.0         5.0000         5.5139
 +  78
-+3.844078 0.922749           32           32.0         5.0000         5.8894
++5.034756 1.755477           32           32.0         3.0000         6.1457
 +  78
-+2.425591 1.007104           64           64.0         8.0000         5.6871
++2.839286 0.643816           64           64.0         7.0000         5.8583
 +  78
-+1.628607 0.831624          128          128.0         6.0000         5.5192
++1.669487 0.499689          128          128.0         6.0000         5.8439
 +  78
-+1.126412 0.624216          256          256.0         6.0000         5.9803
++1.192802 0.716117          256          256.0         5.0000         6.1480
 +  78
-+1.039476 0.952540          512          512.0         6.0000         6.1296
++1.016399 0.839996          512          512.0         7.0000         6.0680
 +  78
-+0.859435 0.679394         1024         1024.0         6.0000         5.9695
++0.919651 0.822902         1024         1024.0         6.0000         5.8071
 +  78
-+0.819941 0.780447         2048         2048.0         5.0000         5.8079
++0.844110 0.768569         2048         2048.0         7.0000         5.8403
 +  78
-+0.711028 0.711028         4096         4096.0         6.0000         6.2524
++0.747499 0.747499         4096         4096.0         6.0000         5.7458
 +  78 h
-+0.648373 0.585718         8192         8192.0         5.0000         5.3024
++0.685459 0.623419         8192         8192.0         5.0000         5.2290
 +  78 h
-+0.602672 0.556971        16384        16384.0         5.0000         5.7369
++0.650308 0.615157        16384        16384.0         7.0000         6.1530
 +  78 h
-+0.570859 0.539046        32768        32768.0         5.0000         5.9353
++0.618938 0.587568        32768        32768.0         6.0000         5.5918
 +  78 h
  
  finished run
@@ -223,16 +223,17 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -weighted label sum = 206890.000000
 -average loss = 0.585270 h
 -best constant = 5.865891
-+weighted label sum = 207660.000000
-+average loss = 0.534802 h
-+best constant = 5.887723
- total feature number = 2749380
+-total feature number = 2749380
++weighted label sum = 207800.000000
++average loss = 0.588514 h
++best constant = 5.891693
++total feature number = 2749020
 ```
 
 ## Code block 19: `$ vw \`
 
 - id: `chapter-9-modeling-data.html:block:19`
-- hash: `1c5748da`
+- hash: `a18338aa`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -253,23 +254,23 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -6.452881
 -4.978302
 -5.834136
-+6.457779
-+6.245023
-+5.881400
-+5.637778
-+5.637778
-+6.531656
-+6.436167
-+4.676414
-+6.674654
-+6.057733
++6.523227
++5.648173
++5.320822
++6.504187
++5.627579
++5.561798
++5.861123
++6.462229
++5.461365
++5.670255
  … with 970 more lines
 ```
 
 ## Code block 20: `$ paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |`
 
 - id: `chapter-9-modeling-data.html:block:20`
-- hash: `8f10870e`
+- hash: `77082659`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -281,7 +282,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
  > cowsay ➊
   _______________
 -< MAE: 0.586385 >
-+< MAE: 0.560294 >
++< MAE: 0.571125 >
   ---------------
          \   ^__^
 ```
@@ -289,7 +290,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 22: `$ vw -d wine-train.vw -f wine2.model --quiet ➊`
 
 - id: `chapter-9-modeling-data.html:block:22`
-- hash: `ddce41ff`
+- hash: `73bf6c1e`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -301,13 +302,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
  $ paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) | ➌
  > awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'
 -MAE: 0.61905
-+MAE: 0.602078
++MAE: 0.634726
 ```
 
 ## Code block 24: `$ NUM_RED="$(< wine-red-clean.csv wc -l)" ➊`
 
 - id: `chapter-9-modeling-data.html:block:24`
-- hash: `597514d6`
+- hash: `b9f1049c`
 - status: **accept**
 - cause: random
 - note: Random shuffle
@@ -326,14 +327,14 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -│     6 │ white │          6.40 │            0.150 │        0.29 │           1.…
 -│     7 │ white │          7.80 │            0.210 │        0.34 │          11.…
 -│     8 │ white │          7.00 │            0.130 │        0.37 │          12.…
-+│     1 │ white │          8.50 │            0.230 │        0.28 │          11.…
-+│     2 │ red   │         10.10 │            0.450 │        0.23 │           1.…
-+│     3 │ white │          7.20 │            0.230 │        0.39 │           1.…
-+│     4 │ white │          7.80 │            0.490 │        0.49 │           7.…
-+│     5 │ white │          6.60 │            0.190 │        0.43 │          10.…
-+│     6 │ white │          6.70 │            0.160 │        0.32 │          12.…
-+│     7 │ white │          6.30 │            0.250 │        0.53 │           1.…
-+│     8 │ white │          6.00 │            0.310 │        0.32 │           7.…
++│     1 │ red   │          8.50 │            0.280 │        0.56 │           1.…
++│     2 │ red   │          8.60 │            0.470 │        0.27 │           2.…
++│     3 │ white │          6.60 │            0.400 │        0.32 │           1.…
++│     4 │ white │          6.70 │            0.230 │        0.31 │           2.…
++│     5 │ red   │          7.60 │            0.540 │        0.02 │           1.…
++│     6 │ white │          6.60 │            0.270 │        0.30 │           1.…
++│     7 │ white │          7.20 │            0.260 │        0.40 │           6.…
++│     8 │ red   │         10.40 │            0.330 │        0.63 │           2.…
  … with 3190 more lines
 ```
 
@@ -397,7 +398,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 29: `$ < output/wine_summary.tsv csvsql --query "SELECT learner_name, accur`
 
 - id: `chapter-9-modeling-data.html:block:29`
-- hash: `ff4990e8`
+- hash: `fa04b2d6`
 - status: **accept**
 - cause: random
 - note: Model accuracies (random train/test split, newer scikit-learn)
@@ -410,17 +411,18 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
  ├────────────────────────┼───────────┤
 -│ RandomForestClassifier │ 0.9921875 │
 -│ LogisticRegression     │ 0.990625  │
-+│ LogisticRegression     │ 0.99375   │
-+│ RandomForestClassifier │ 0.99375   │
- │ KNeighborsClassifier   │ 0.9890625 │
+-│ KNeighborsClassifier   │ 0.9890625 │
 -│ DecisionTreeClassifier │ 0.984375  │
-+│ DecisionTreeClassifier │ 0.975     │
++│ RandomForestClassifier │ 0.990625  │
++│ LogisticRegression     │ 0.9875    │
++│ KNeighborsClassifier   │ 0.9859375 │
++│ DecisionTreeClassifier │ 0.96875   │
 ```
 
 ## Code block 30: `$ jq -r '.[] | "\(.learner_name):\n\(.result_table)\n"' output/*.json`
 
 - id: `chapter-9-modeling-data.html:block:30`
-- hash: `448dec7f`
+- hash: `53742d8a`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -432,40 +434,40 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
  |       |   red |   white |   Precision |   Recall |   F-measure |
  +=======+=======+=========+=============+==========+=============+
 -|   red | [313] |       7 |       0.991 |    0.978 |       0.984 |
-+|   red | [312] |       4 |       0.963 |    0.987 |       0.975 |
++|   red | [312] |      12 |       0.975 |    0.963 |       0.969 |
  +-------+-------+---------+-------------+----------+-------------+
 -| white |     3 |   [317] |       0.978 |    0.991 |       0.984 |
-+| white |    12 |   [312] |       0.987 |    0.963 |       0.975 |
++| white |     8 |   [308] |       0.963 |    0.975 |       0.969 |
  +-------+-------+---------+-------------+----------+-------------+
  (row = reference; column = predicted)
 @@ -14,7 +14,7 @@
  |       |   red |   white |   Precision |   Recall |   F-measure |
  +=======+=======+=========+=============+==========+=============+
 -|   red | [314] |       6 |       0.997 |    0.981 |       0.989 |
-+|   red | [313] |       3 |       0.987 |    0.991 |       0.989 |
++|   red | [316] |       8 |       0.997 |    0.975 |       0.986 |
  +-------+-------+---------+-------------+----------+-------------+
 -| white |     1 |   [319] |       0.982 |    0.997 |       0.989 |
-+| white |     4 |   [320] |       0.991 |    0.988 |       0.989 |
++| white |     1 |   [315] |       0.975 |    0.997 |       0.986 |
  +-------+-------+---------+-------------+----------+-------------+
  (row = reference; column = predicted)
 @@ -24,7 +24,7 @@
  |       |   red |   white |   Precision |   Recall |   F-measure |
  +=======+=======+=========+=============+==========+=============+
 -|   red | [315] |       5 |       0.997 |    0.984 |       0.991 |
-+|   red | [315] |       1 |       0.991 |    0.997 |       0.994 |
++|   red | [318] |       6 |       0.994 |    0.981 |       0.988 |
  +-------+-------+---------+-------------+----------+-------------+
 -| white |     1 |   [319] |       0.985 |    0.997 |       0.991 |
-+| white |     3 |   [321] |       0.997 |    0.991 |       0.994 |
++| white |     2 |   [314] |       0.981 |    0.994 |       0.987 |
  +-------+-------+---------+-------------+----------+-------------+
  (row = reference; column = predicted)
 @@ -34,7 +34,7 @@
  |       |   red |   white |   Precision |   Recall |   F-measure |
  +=======+=======+=========+=============+==========+=============+
 -|   red | [315] |       5 |       1.000 |    0.984 |       0.992 |
-+|   red | [314] |       2 |       0.994 |    0.994 |       0.994 |
++|   red | [318] |       6 |       1.000 |    0.981 |       0.991 |
  +-------+-------+---------+-------------+----------+-------------+
 -| white |     0 |   [320] |       0.985 |    1.000 |       0.992 |
-+| white |     2 |   [322] |       0.994 |    0.994 |       0.994 |
++| white |     0 |   [316] |       0.981 |    1.000 |       0.991 |
  +-------+-------+---------+-------------+----------+-------------+
  (row = reference; column = predicted)
 ```
@@ -608,24 +610,24 @@ images/wine-quality.png: 103752 -> 102062 bytes
 ## Image changed: images/wine-regression.png
 
 - id: `chapter-9-modeling-data.html:image:images/wine-regression.png`
-- hash: `b9564a8b`
+- hash: `a86df023`
 - status: **accept**
 - cause: image
 - note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 
 ```diff
-images/wine-regression.png: 91514 -> 187948 bytes
+images/wine-regression.png: 91514 -> 196561 bytes
 ```
 
 ## Image changed: images/wine-tsne.png
 
 - id: `chapter-9-modeling-data.html:image:images/wine-tsne.png`
-- hash: `afe0fe4e`
+- hash: `9a2723d2`
 - status: **accept**
 - cause: image
 - note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 
 ```diff
-images/wine-tsne.png: 97096 -> 383174 bytes
+images/wine-tsne.png: 97096 -> 359128 bytes
 ```
 

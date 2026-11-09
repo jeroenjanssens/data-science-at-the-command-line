@@ -85,7 +85,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,6 +122,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="3&nbsp; Obtaining Data – Data Science at the Command Line, 2e">
@@ -339,12 +349,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 924K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  8 21:16 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  8 21:16 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  8 21:16 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  8 21:16 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  8 21:16 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  8 21:16 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  9 17:53 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  9 17:53 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  9 17:53 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  9 17:53 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  9 17:53 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  9 17:53 top2000.xlsx</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -384,21 +394,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">"noscript":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","user":…</span>
 <span class="term-output">"ext.growthExperiments.SuggestedEditSession"];&lt;/script&gt;</span>
 <span class="term-output">&lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…</span>
-<span class="term-output">100 246.3k 100 246.3k   0      0 158.8M      0                              0</span>
+<span class="term-output">100 246.3k 100 246.3k   0      0 140.5M      0                              0</span>
 <span class="term-output">… with 1729 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Remember, <code>trim</code> is used only to make the output fit nicely in the book.</li>
 </ol>
+</div>
 <p>As you can see, <code>curl</code> downloads the raw HTML returned by Wikipedia’s server; no interpretation is being done and all the contents is immediately printed on standard output. Because of the URL, you’d think that this article would list all the windmills in the Netherlands. However, there are apparently so many windmills left that each province has its own page. Fascinating.</p>
 <p>By default, <code>curl</code> outputs a progress meter that shows the download rate and the expected time of completion. This output isn’t written to standard output, but a separate channel, known as <em>standard error</em>, so this doesn’t interfere when you add another tool to the pipeline. While this information can be useful when downloading very large files, I usually find it distracting, so I specify the <code>-s</code> option to <em>silence</em> this output.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">pup</span> -n <span style="color:var(--term-3)">'table.wikitable tr'</span> <span class="term-callout">➊</span>
 <span class="term-output">234</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>I’ll discuss <code>pup</code><span class="citation" data-cites="pup"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>, a handy tool for scraping websites, in more detail in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a>.</li>
 </ol>
+</div>
 <p>And what do you know, there are apparently 234 windmills in the province of Friesland alone!</p>
 </section>
 <section id="saving" class="level3" data-number="3.3.2">
@@ -408,13 +422,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 1.4M</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 430K Nov  8 21:16 List_of_windmills_in_Friesland</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  8 21:16 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  8 21:16 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  8 21:16 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  8 21:16 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  8 21:16 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  8 21:16 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 430K Nov  9 17:53 List_of_windmills_in_Friesland</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  9 17:53 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  9 17:53 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  9 17:53 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  9 17:53 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  9 17:53 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  9 17:53 top2000.xlsx</span></code></pre>
 
 <p>If you don’t like that filename then you can use the <code>-o</code> option together with a filename or redirect the output to a file yourself:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color:var(--term-3)">&gt;</span> fries
@@ -513,9 +527,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s take <em>tar.gz</em> (pronounced as “gzipped tarball”) as an example. In order to extract an archive named <em>logs.tar.gz</em>, you would use the following incantation:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -xzf <span style="text-decoration:underline">logs.tar.gz</span> <span class="term-callout">➊</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>It’s common to combine these three short options, like I did here, but you can also specify them separately as <code>-x -z -f</code>. In fact, many command-tools allow you to combine options that consist of a single character.</li>
 </ol>
+</div>
 <p>Indeed, <code>tar</code> is notorious for its many command-line arguments. In this case, the three options <code>-x</code>, <code>-z</code>, and <code>-f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm and use file <em>logs.tar.gz</em>.</p>
 
 <p>However, since we’re not yet familiar with this archive, it’s a good idea to first examine its contents. This can be done with the <code>-t</code> option (instead of the <code>-x</code> option):</p>
@@ -566,8 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Especially when you’re just starting out at the command line, you might be tempted to convert your spreadsheet to CSV by opening it in Microsoft Excel or an open source variant such as LibreOffice Calc, and manually exporting it to CSV. While this works as a one-off solution, the disadvantage is that it does not scale well to multiple files and cannot be automated. Furthermore, when you’re working on a server, chances are that you don’t have such an application available. Trust me, you’ll get the hang of it.</p>
 <p>Luckily, there is a command-line tool called <code>in2csv</code>, that converts Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. <!-- TODO: MUST: check and possibly fix reference? --> Yakov Shafranovich defines the CSV format according to the following three points:<span class="citation" data-cites="shafranovich2005common"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span></p>
 <ol type="1">
-<li>Each record is located on a separate line, delimited by a line break (<code>␊</code>). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:</li>
-</ol>
+<li><p>Each record is located on a separate line, delimited by a line break (<code>␊</code>). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-basic.csv</span> <span class="term-callout">➊</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">tmnt-basic.csv</span></span>
@@ -578,10 +593,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">   4   │ Donatello,Donnie<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Don,purple,staff<span style="color:var(--term-5)">␊</span></span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
-<li><p>The <code>-A</code> option makes <code>bat</code> show all non-printable characters like spaces, tabs, and newlines.</p></li>
-<li><p>The last record in the file may or may not have an ending line break. For example:</p></li>
+<li>The <code>-A</code> option makes <code>bat</code> show all non-printable characters like spaces, tabs, and newlines.</li>
 </ol>
+</div></li>
+<li><p>The last record in the file may or may not have an ending line break. For example:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-missing-newline.csv</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">tmnt-missing-newline.csv</span></span>
@@ -591,10 +608,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">   3   │ Michelangelo,Mikey<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Mike,orange,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>nunchaku<span style="color:var(--term-5)">␊</span></span>
 <span class="term-output">   4   │ Donatello,Donnie<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Don,purple,staff</span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
-
-<ol start="3" type="1">
-<li>There may be a header appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file. For example:</li>
-</ol>
+</li>
+<li><p>There may be a header appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file. For example:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-with-header.csv</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">tmnt-with-header.csv</span></span>
@@ -605,7 +620,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">   4   │ Michelangelo,Mikey<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Mike,orange,pair<span style="color:var(--term-6)">·</span>of<span style="color:var(--term-6)">·</span>nunchaku<span style="color:var(--term-5)">␊</span></span>
 <span class="term-output">   5   │ Donatello,Donnie<span style="color:var(--term-6)">·</span>or<span style="color:var(--term-6)">·</span>Don,purple,staff<span style="color:var(--term-5)">␊</span></span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
-
+</li>
+</ol>
 <p>As you can see, CSV by default is not too readable. You can pipe the data to a tool called <code>csvlook</code><span class="citation" data-cites="csvlook"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, which will nicely format it into a table. If the CSV data has no header, like <em>tmnt-missing-newline.csv</em> then you need to add the <code>-H</code> option, otherwise the first line will be interpreted as the header.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">tmnt-with-header.csv</span>
 <span class="term-output">│ name         │ nickname      │ mask_color │ weapon           │</span>
@@ -630,15 +646,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">│ Michelangelo │ Mikey or Mike │ orange │ pair of nunchaku │</span>
 <span class="term-output">│ Donatello    │ Donnie or Don │ purple │ staff            │</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The <code>-H</code> option specifies that the CSV file has no header.</li>
 </ol>
+</div>
 <p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program <a href="https://www.top2000nl.com">Top 2000</a>. To extract its data, you invoke <code>in2csv</code> as follows:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">top2000.xls</span>
 <span class="term-output"><span style="text-decoration:underline">x</span></span>
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
-<span class="term-output">100      8 100      8   0      0   9445      0                              0</span>
+<span class="term-output">100      8 100      8   0      0   8918      0                              0</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> <span style="text-decoration:underline">top2000.xlsx</span> | <span style="color:var(--term-2)">tee</span> top2000.csv | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">BadZipFile: File is not a zip file</span></code></pre>
@@ -648,9 +666,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">││</span>
 <span class="term-output">│  │</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>ARTIEST</code></em>.</li>
 </ol>
+</div>
 <p>By the way, the tools <code>in2csv</code>, <code>csvgrep</code>, and <code>csvlook</code> are part of CSVkit, which is a collection of command-line tools to work with CSV data.</p>
 <p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case. If you were to pipe the data into <code>in2csv</code>, you would have to specify the format explicitly.</p>
 <p>A spreadsheet can contain multiple worksheets. <code>in2csv</code> extracts, by default, the first worksheet. To extract a different worksheet, you need to pass the name of worksheet to the <code>--sheet</code> option. If you’re not sure what’s the worksheet is called, you can use the <code>--names</code> option, which prints the names of all the worksheets. Here we see that <em>top2000.xlsx</em> has only one sheet, named <em>Blad1</em> (which is Dutch for <em>Sheet1</em>).</p>
@@ -734,9 +754,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">  <span style="font-weight:bold">]</span></span>
 <span class="term-output"><span style="font-weight:bold">}</span></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Spoiler alert: this data is not entirely up-to-date.</li>
 </ol>
+</div>
 <p>The data is piped to a command-line tool <code>jq</code> just to display it in a nice way. <code>jq</code> has many more scrubbing and exploring possibilities that I will explore in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a> and <a href="./chapter-7-exploring-data.html">Chapter 7</a>.</p>
 <section id="authentication" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="authentication"><span class="header-section-number">3.7.1</span> Authentication</h3>
@@ -836,10 +858,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output"><span style="color:var(--term-2)">"Jordanian Pro League"</span></span>
 <span class="term-output"><span style="color:var(--term-2)">"List of foreign Serie A players"</span></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>This <code>sed</code> expression only prints lines that start with <em><code>data:</code></em> and prints the part after the semicolon, which happens to be JSON.</li>
 <li>This <code>jq</code> expression prints the <em><code>title</code></em> key of JSON objects that have a certain <em><code>type</code></em> and <em><code>server_name</code></em>.</li>
 </ol>
+</div>
 <p>Speaking of streaming, did you know that you could stream <em>Star Wars: Episode IV – A New Hope</em> for free using <code>telnet</code><span class="citation" data-cites="telnet"><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></span>?</p>
 
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">telnet</span> <span style="text-decoration:underline">towel.blinkenlights.nl</span></code></pre>

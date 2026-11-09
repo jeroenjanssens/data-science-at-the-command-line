@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,6 +87,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="9&nbsp; Modeling Data – Data Science at the Command Line, 2e">
@@ -325,7 +335,7 @@ Warning
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 4.0K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov  8 21:19 classify.cfg</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov  9 17:56 classify.cfg</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -373,10 +383,12 @@ Warning
 <span class="term-output">  4899 wine-white.csv</span>
 <span class="term-output">  6499 total</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>For clarity I use <code>nl</code> to add line numbers.</li>
 <li>To see the entire header, I use <code>fold</code>.</li>
 </ol>
+</div>
 <p>At first sight this data appears to be quite clean. Still, let’s scrub it so that it conforms more with what most command-line tools expect. Specifically, I’ll:</p>
 <ul>
 <li>Convert the header to lowercase.</li>
@@ -393,10 +405,12 @@ Warning
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstack</span> -g red,white -n type wine-{red,white}-clean.csv | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">xsv</span> select 2-,1 <span style="color:var(--term-3)">&gt;</span> wine.csv <span class="term-callout">➋</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The new column <em>type</em> is placed at the beginning by <code>csvstack</code>.</li>
 <li>Some algorithms assume that the label is the last column, so I use <code>xsv</code> to move the column <em>type</em> to the end.</li>
 </ol>
+</div>
 <p>It’s good practice to check whether there are any missing values in this dataset, because most machine learning algorithms can’t handle them:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">wine.csv</span> --nulls
 <span class="term-output">  1. fixed_acidity: False</span>
@@ -488,12 +502,14 @@ Figure&nbsp;9.2: Relationship between the alcohol contents of wine and its quali
 <span class="term-output">│        0.065… │           1.885… │     -2.193… │        -0.892… │    0.256… │…</span>
 <span class="term-output">… with 6489 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>I need to temporary remove the column <em><code>type</code></em> because <code>scale()</code> only works on numerical columns.</li>
 <li>The <code>scale()</code> function accepts a data frame, but returns a matrix.</li>
 <li>The function <code>as_tibble()</code> converts the matrix back to a data frame.</li>
 <li>Finally, I add back the <em><code>type</code></em> column.</li>
 </ol>
+</div>
 <p>Now we apply both dimensionality reduction techniques and visualize the mapping using <code>rush plot</code>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">xsv</span> select <span style="color:var(--term-3)">'!type'</span> <span style="text-decoration:underline">wine-scaled.csv</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -d | <span class="term-callout">➋</span>
@@ -511,11 +527,13 @@ Figure&nbsp;9.2: Relationship between the alcohol contents of wine and its quali
 <span class="term-output">1.18363,-1.81641</span>
 <span class="term-output">… with 6487 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Deselect the column <em><code>type</code></em></li>
 <li>Remove the header</li>
 <li>Apply PCA</li>
 </ol>
+</div>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wine-pca.txt</span> <span style="color:var(--term-2)">header</span> -a pc1,pc2 | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">paste</span> -d, - <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">xsv</span> select type <span style="text-decoration:underline">wine-scaled.csv</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-pca.csv | <span style="color:var(--term-2)">csvlook</span>
@@ -531,10 +549,12 @@ Figure&nbsp;9.2: Relationship between the alcohol contents of wine and its quali
 <span class="term-output">│ -1.104… │ -2.565… │ red   │</span>
 <span class="term-output">… with 6489 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Add back the header with columns <em><code>pc1</code></em> and <em><code>pc2</code></em></li>
 <li>Add back the column <em><code>type</code></em></li>
 </ol>
+</div>
 <p>Now we can create a scatter plot:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x pc1 --y pc2 --color type --shape type <span style="text-decoration:underline">wine-pca.csv</span> <span style="color:var(--term-3)">&gt;</span> wine-pca.pn
 <span class="term-output">g</span>
@@ -559,6 +579,7 @@ Figure&nbsp;9.3: Linear dimensionality reduction with PCA
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">paste</span> -d, - <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">xsv</span> select type <span style="text-decoration:underline">wine-scaled.csv</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➎</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x x --y y --color type --shape type <span style="color:var(--term-3)">&gt;</span> wine-tsne.png <span class="term-callout">➏</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Deselect the column <em><code>type</code></em></li>
 <li>Remove the header</li>
@@ -567,6 +588,7 @@ Figure&nbsp;9.3: Linear dimensionality reduction with PCA
 <li>Add back the column <em><code>type</code></em></li>
 <li>Create a scatter plot</li>
 </ol>
+</div>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">wine-tsne.png</span></code></pre>
 
 <div id="fig-wine-tsne" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -617,9 +639,11 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-output">   979 wine-part-04</span>
 <span class="term-output">  4898 total</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The tool <code>shuf</code><span class="citation" data-cites="shuf"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span> randomizes the dataset to ensure that both the training and the test have similar quality distribution.</li>
 </ol>
+</div>
 <p>Now I can use the first part (so 20%) for the testing set <em>wine-test.vw</em> and combine the four remaining parts (so 80%) into the training set <em>wine-train.vw</em>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mv</span> <span style="text-decoration:underline">wine-part-00</span> wine-test.vw
 <span class="term-output"></span>
@@ -668,46 +692,47 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-output">ures</span>
 <span class="term-output">36.00000 36.00000            1            1.0         6.0000         0.0000</span>
 <span class="term-output">  78</span>
-<span class="term-output">26.30810 16.61621            2            2.0         5.0000         0.9237</span>
+<span class="term-output">37.07244 38.14488            2            2.0         7.0000         0.8238</span>
 <span class="term-output">  78</span>
-<span class="term-output">18.42871 10.54931            4            4.0         5.0000         2.8782</span>
+<span class="term-output">22.01896 6.965489            4            4.0         4.0000         3.1256</span>
 <span class="term-output">  78</span>
-<span class="term-output">12.09429 5.759870            8            8.0         7.0000         4.3135</span>
+<span class="term-output">15.32611 8.633264            8            8.0         6.0000         4.7047</span>
 <span class="term-output">  78</span>
-<span class="term-output">6.765406 1.436522           16           16.0         6.0000         5.5118</span>
+<span class="term-output">8.314034 1.301953           16           16.0         5.0000         5.5139</span>
 <span class="term-output">  78</span>
-<span class="term-output">3.844078 0.922749           32           32.0         5.0000         5.8894</span>
+<span class="term-output">5.034756 1.755477           32           32.0         3.0000         6.1457</span>
 <span class="term-output">  78</span>
-<span class="term-output">2.425591 1.007104           64           64.0         8.0000         5.6871</span>
+<span class="term-output">2.839286 0.643816           64           64.0         7.0000         5.8583</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.628607 0.831624          128          128.0         6.0000         5.5192</span>
+<span class="term-output">1.669487 0.499689          128          128.0         6.0000         5.8439</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.126412 0.624216          256          256.0         6.0000         5.9803</span>
+<span class="term-output">1.192802 0.716117          256          256.0         5.0000         6.1480</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.039476 0.952540          512          512.0         6.0000         6.1296</span>
+<span class="term-output">1.016399 0.839996          512          512.0         7.0000         6.0680</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.859435 0.679394         1024         1024.0         6.0000         5.9695</span>
+<span class="term-output">0.919651 0.822902         1024         1024.0         6.0000         5.8071</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.819941 0.780447         2048         2048.0         5.0000         5.8079</span>
+<span class="term-output">0.844110 0.768569         2048         2048.0         7.0000         5.8403</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.711028 0.711028         4096         4096.0         6.0000         6.2524</span>
+<span class="term-output">0.747499 0.747499         4096         4096.0         6.0000         5.7458</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.648373 0.585718         8192         8192.0         5.0000         5.3024</span>
+<span class="term-output">0.685459 0.623419         8192         8192.0         5.0000         5.2290</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.602672 0.556971        16384        16384.0         5.0000         5.7369</span>
+<span class="term-output">0.650308 0.615157        16384        16384.0         7.0000         6.1530</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.570859 0.539046        32768        32768.0         5.0000         5.9353</span>
+<span class="term-output">0.618938 0.587568        32768        32768.0         6.0000         5.5918</span>
 <span class="term-output">  78 h</span>
 <span class="term-output"></span>
 <span class="term-output">finished run</span>
 <span class="term-output">number of examples per pass = 3527</span>
 <span class="term-output">passes used = 10</span>
 <span class="term-output">weighted example sum = 35270.000000</span>
-<span class="term-output">weighted label sum = 207660.000000</span>
-<span class="term-output">average loss = 0.534802 h</span>
-<span class="term-output">best constant = 5.887723</span>
-<span class="term-output">total feature number = 2749380</span></code></pre>
+<span class="term-output">weighted label sum = 207800.000000</span>
+<span class="term-output">average loss = 0.588514 h</span>
+<span class="term-output">best constant = 5.891693</span>
+<span class="term-output">total feature number = 2749020</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The file <em>wine-train.vw</em> is used to train the model.</li>
 <li>The model, or <em>regressor</em>, will be stored in the file <em>wine.model</em>.</li>
@@ -718,6 +743,7 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <li>Use l2 regularization.</li>
 <li>Use 25 bits to store the features.</li>
 </ol>
+</div>
 <p>Now that I have trained a regression model, let’s use it to make predictions.</p>
 </section>
 <section id="testing-the-model" class="level3" data-number="9.4.3">
@@ -731,18 +757,19 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-prompt" data-prompt="> "></span>--quiet <span class="term-callout">➎</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">predictions</span> | <span style="color:var(--term-2)">trim</span>
-<span class="term-output">6.457779</span>
-<span class="term-output">6.245023</span>
-<span class="term-output">5.881400</span>
-<span class="term-output">5.637778</span>
-<span class="term-output">5.637778</span>
-<span class="term-output">6.531656</span>
-<span class="term-output">6.436167</span>
-<span class="term-output">4.676414</span>
-<span class="term-output">6.674654</span>
-<span class="term-output">6.057733</span>
+<span class="term-output">6.523227</span>
+<span class="term-output">5.648173</span>
+<span class="term-output">5.320822</span>
+<span class="term-output">6.504187</span>
+<span class="term-output">5.627579</span>
+<span class="term-output">5.561798</span>
+<span class="term-output">5.861123</span>
+<span class="term-output">6.462229</span>
+<span class="term-output">5.461365</span>
+<span class="term-output">5.670255</span>
 <span class="term-output">… with 970 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The file <em>wine-test.vw</em> is used to test the model.</li>
 <li>Use the model stored in the file <em>wine.model</em>.</li>
@@ -750,13 +777,14 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <li>The predictions are stored in a file called <em>predictions</em>.</li>
 <li>Don’t output diagnostics and progress updates.</li>
 </ol>
+</div>
 <p>Let’s use <code>paste</code> to combine the predictions in the file <em>predictions</em> with the true, or <em>observed</em>, values that are in the file <em>wine-test.vw</em>. Using <code>awk</code>, I can compare the predicted values with the observed values and compute the mean absolute error (MAE). The MAE tells us how far off <code>vw</code> is on average, when it comes to predicting the quality of a white wine.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> results.csv |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cowsay</span> <span class="term-callout">➊</span>
 <span class="term-output"> _______________</span>
-<span class="term-output">&lt; MAE: 0.560294 &gt;</span>
+<span class="term-output">&lt; MAE: 0.571125 &gt;</span>
 <span class="term-output"> ---------------</span>
 <span class="term-output">        \   ^__^</span>
 <span class="term-output">         \  (oo)\_______</span>
@@ -787,13 +815,15 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span>
-<span class="term-output">MAE: 0.602078</span></code></pre>
+<span class="term-output">MAE: 0.634726</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Train a regression model</li>
 <li>Test the regression model</li>
 <li>Compute mean absolute error</li>
 </ol>
+</div>
 <p>Apparently, with the default values, the MAE is 0.04 higher, meaning that the predictions are slightly worse.</p>
 <p>In this section, I’ve only been able to scratch the surface of what <code>vw</code> can do. There’s reason why it accepts so many options. Besides regression, it also supports, among other things, binary classification, multi-class classification, reinforcement learning, and Latent Dirichlet Allocation. <a href="https://vowpalwabbit.org/">Its website</a> contains many tutorials and articles to learn more.</p>
 </section>
@@ -824,22 +854,24 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-balanced.csv | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│    id │ type  │ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sug…</span>
 <span class="term-output">├───────┼───────┼───────────────┼──────────────────┼─────────────┼─────────────…</span>
-<span class="term-output">│     1 │ white │          8.50 │            0.230 │        0.28 │          11.…</span>
-<span class="term-output">│     2 │ red   │         10.10 │            0.450 │        0.23 │           1.…</span>
-<span class="term-output">│     3 │ white │          7.20 │            0.230 │        0.39 │           1.…</span>
-<span class="term-output">│     4 │ white │          7.80 │            0.490 │        0.49 │           7.…</span>
-<span class="term-output">│     5 │ white │          6.60 │            0.190 │        0.43 │          10.…</span>
-<span class="term-output">│     6 │ white │          6.70 │            0.160 │        0.32 │          12.…</span>
-<span class="term-output">│     7 │ white │          6.30 │            0.250 │        0.53 │           1.…</span>
-<span class="term-output">│     8 │ white │          6.00 │            0.310 │        0.32 │           7.…</span>
+<span class="term-output">│     1 │ red   │          8.50 │            0.280 │        0.56 │           1.…</span>
+<span class="term-output">│     2 │ red   │          8.60 │            0.470 │        0.27 │           2.…</span>
+<span class="term-output">│     3 │ white │          6.60 │            0.400 │        0.32 │           1.…</span>
+<span class="term-output">│     4 │ white │          6.70 │            0.230 │        0.31 │           2.…</span>
+<span class="term-output">│     5 │ red   │          7.60 │            0.540 │        0.02 │           1.…</span>
+<span class="term-output">│     6 │ white │          6.60 │            0.270 │        0.30 │           1.…</span>
+<span class="term-output">│     7 │ white │          7.20 │            0.260 │        0.40 │           6.…</span>
+<span class="term-output">│     8 │ red   │         10.40 │            0.330 │        0.63 │           2.…</span>
 <span class="term-output">… with 3190 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Store the number of red wines in variable <em><code>NUM_RED</code></em>.</li>
 <li>Combine all red wines with a random sample of white wines.</li>
 <li>Add “line numbers” using <code>nl</code> in front of each line.</li>
 <li>Replace the “0” on the first line with “id” so that it’s a proper column name.</li>
 </ol>
+</div>
 <p>Let’s split this balanced dataset into a training set and a test set:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> -p {train,test}
 <span class="term-output"></span>
@@ -938,10 +970,10 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"><span style="color:var(--term-3)">tdin ORDER BY accuracy DESC"</span> | <span style="color:var(--term-2)">csvlook</span> -I</span>
 <span class="term-output">│ learner_name           │ accuracy  │</span>
 <span class="term-output">├────────────────────────┼───────────┤</span>
-<span class="term-output">│ LogisticRegression     │ 0.99375   │</span>
-<span class="term-output">│ RandomForestClassifier │ 0.99375   │</span>
-<span class="term-output">│ KNeighborsClassifier   │ 0.9890625 │</span>
-<span class="term-output">│ DecisionTreeClassifier │ 0.975     │</span></code></pre>
+<span class="term-output">│ RandomForestClassifier │ 0.990625  │</span>
+<span class="term-output">│ LogisticRegression     │ 0.9875    │</span>
+<span class="term-output">│ KNeighborsClassifier   │ 0.9859375 │</span>
+<span class="term-output">│ DecisionTreeClassifier │ 0.96875   │</span></code></pre>
 
 <p>The relevant column here is <em><code>accuracy</code></em>, which indicates the percentage of data points that are classified correctly. From this we see that actually all algorithms are performing really well. The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.</p>
 <p>Each JSON file contains a confusion matrix, giving you additional insight into the performance of each classifier. A confusion matrix is a table where the columns refer to the true labels (red and white) and the rows refer to the predicted labels. Higher numbers on the diagonal mean more correct predictions. With <code>jq</code> I can print the name of each classifier and extract the associated confusion matrix:</p>
@@ -950,9 +982,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [312] |       4 |       0.963 |    0.987 |       0.975 |</span>
+<span class="term-output">|   red | [312] |      12 |       0.975 |    0.963 |       0.969 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |    12 |   [312] |       0.987 |    0.963 |       0.975 |</span>
+<span class="term-output">| white |     8 |   [308] |       0.963 |    0.975 |       0.969 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -960,9 +992,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [313] |       3 |       0.987 |    0.991 |       0.989 |</span>
+<span class="term-output">|   red | [316] |       8 |       0.997 |    0.975 |       0.986 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     4 |   [320] |       0.991 |    0.988 |       0.989 |</span>
+<span class="term-output">| white |     1 |   [315] |       0.975 |    0.997 |       0.986 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -970,9 +1002,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [315] |       1 |       0.991 |    0.997 |       0.994 |</span>
+<span class="term-output">|   red | [318] |       6 |       0.994 |    0.981 |       0.988 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     3 |   [321] |       0.997 |    0.991 |       0.994 |</span>
+<span class="term-output">| white |     2 |   [314] |       0.981 |    0.994 |       0.987 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -980,9 +1012,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [314] |       2 |       0.994 |    0.994 |       0.994 |</span>
+<span class="term-output">|   red | [318] |       6 |       1.000 |    0.981 |       0.991 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     2 |   [322] |       0.994 |    0.994 |       0.994 |</span>
+<span class="term-output">| white |     0 |   [316] |       0.981 |    1.000 |       0.991 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span></code></pre>
 

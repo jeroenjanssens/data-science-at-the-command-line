@@ -1,9 +1,10 @@
 local FILTER_DIR = debug.getinfo(1, "S").source:sub(2):match("(.*[/\\])") or "./"
-local VERSION = "0.7.3"
+local VERSION = "0.8.0"
 
 local cell_mod = dofile(FILTER_DIR .. "cell.lua")
 local chrome = dofile(FILTER_DIR .. "chrome.lua")
 local output = dofile(FILTER_DIR .. "output.lua")
+local callout_list = dofile(FILTER_DIR .. "callout_list.lua")
 local engine = dofile(FILTER_DIR .. "engine.lua")
 local theme = dofile(FILTER_DIR .. "theme.lua")
 theme.init(FILTER_DIR)
@@ -197,6 +198,8 @@ function Pandoc(doc)
       local cell_colorscheme_dark = cell._colorscheme_dark
       local cell_chrome = cell._chrome
       if cell_chrome == nil then cell_chrome = _chrome end
+      local cell_callout_list = cell._callout_list
+      cell._callout_list = nil
       cell._eval = nil
       cell._include = nil
       cell._colorscheme = nil
@@ -219,6 +222,7 @@ function Pandoc(doc)
           colorscheme_light = cell_colorscheme_light,
           colorscheme_dark = cell_colorscheme_dark,
           chrome = cell_chrome,
+          callout_list = cell_callout_list,
         })
       else
         -- Strip #| option lines from the code block
@@ -233,6 +237,7 @@ function Pandoc(doc)
   -- Cell defaults, already applied by build_cell
   config._callout_values = nil
   config._callout_format = nil
+  config._callout_list = nil
 
   if #cells == 0 then
     if next(replacements) then
@@ -334,6 +339,7 @@ function Pandoc(doc)
   end
 
   local cell_theme_css = {}
+  local callout_list_css = {}
 
   for _, pos in ipairs(term_positions) do
     local result = results[pos.cell_i]
@@ -385,7 +391,15 @@ function Pandoc(doc)
               content = chrome.wrap(content, chrome_cfg)
             end
           end
-          replacements[pos.block_i] = output.block(raw_format, content)
+          local block = output.block(raw_format, content)
+          local cell = cells[pos.cell_i]
+          if pos.callout_list and raw_format == "html" and #cell.options.callout > 0 then
+            local symbols = callout_list.symbols(cell.options.callout_values, cell.options.callout_format)
+            callout_list_css[callout_list.class_name(symbols)] = callout_list.css(symbols)
+            replacements[pos.block_i] = pandoc.Blocks({ block, callout_list.marker(symbols) })
+          else
+            replacements[pos.block_i] = block
+          end
         else
           replacements[pos.block_i] = pandoc.RawBlock(raw_format, "")
         end
@@ -394,6 +408,12 @@ function Pandoc(doc)
   end
 
   doc = replace_term_blocks()
+  if next(callout_list_css) then
+    doc = doc:walk({ Blocks = callout_list.wrap })
+    for _, css in pairs(callout_list_css) do
+      cell_theme_css["callout-list:" .. css] = css
+    end
+  end
 
   if os.getenv("QUARTO_TERM_CHECK") then
     local assertions = {}

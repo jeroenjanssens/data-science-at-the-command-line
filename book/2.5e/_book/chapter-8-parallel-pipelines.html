@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,6 +87,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="8&nbsp; Parallel Pipelines – Data Science at the Command Line, 2e">
@@ -316,10 +326,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 20K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  8 21:18 emails.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  8 21:18 movies.txt</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  8 21:18 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  8 21:18 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  9 17:55 emails.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  9 17:55 movies.txt</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  9 17:55 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 17:55 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -350,10 +360,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">324</span>
 <span class="term-output">… with 41 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The Z shell has a feature called brace expansion, which transforms <em><code>{0..100..2}</code></em> into a list separated by spaces: <em><code>0 2 4 … 98 100</code></em>. The variable <em><code>i</code></em> is assigned the value “0” in the first iteration, “1” in the second iteration, and so forth.</li>
 <li>The value of this variable can be used by prefixing it with a dollar sign (<em><code>$</code></em>). The shell will replace <em><code>$i</code></em> with its value before <code>echo</code> is being executed. Note that there can be more than one command between <em><code>do</code></em> and <em><code>done</code></em>.</li>
 </ol>
+</div>
 <p>Although the syntax may appear a bit odd compared to your favorite programming language, it’s worth remembering this because it’s always available in the shell. I’ll introduce a better and more flexible way of repeating commands in a moment.</p>
 </section>
 <section id="looping-over-lines" class="level3" data-number="8.2.2">
@@ -386,11 +398,13 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">Sending invitation to benjamin.robinson@example.com.</span>
 <span class="term-output">Sending invitation to paulo.muller@example.com.</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>In this case you need to use a while loop because the Z shell does not know beforehand how many lines the input consists of.</li>
 <li>Although the curly braces around the <em>line</em> variable are not necessary in this case (since variable names cannot contain periods), it’s still good practice.</li>
 <li>This redirection can also be placed before <code>while</code>.</li>
 </ol>
+</div>
 <p>You can also provide input to a while loop interactively by specifying the special file standard input <em>/dev/stdin</em>. Press <strong><code>Ctrl-D</code></strong> when you are done.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">while</span> <span style="color:var(--term-2)">read</span> line; <span style="color:var(--term-3)">do</span> <span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"You typed: </span><span style="color:var(--term-6)">${line}</span><span style="color:var(--term-3)">."</span>; <span style="color:var(--term-3)">done</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">/dev/stdin</span>
 <span class="term-output">one</span>
@@ -453,11 +467,13 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">   5   │ <span style="color:var(--term-6)">echo</span> <span style="color:var(--term-2)">"Job $1 took ${duration} seconds"</span> <span style="color:var(--term-5)">|</span> ts</span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li><code>ts</code><span class="citation" data-cites="ts"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> adds a timestamp.</li>
 <li>The magic variable <em><code>RANDOM</code></em> calls an internal Bash function that returns a pseudorandom integer between 0 and 32767. Taking the remainder of the division of that integer by 5 and adding 1 ensures that <em>duration</em> is between 1 and 5.</li>
 <li><code>sleep</code> pauses execution for a given number of seconds.</li>
 </ol>
+</div>
 <p>This process probably doesn’t take up all the available resources. And it so happens that you need to run this command a lot of times. For example, you need to download a whole sequence of files.</p>
 <p>A naive way to parallelize is to run the commands in the background. Let’s run <code>slow.sh</code> three times:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> i in {A..C}; <span style="color:var(--term-3)">do</span>
@@ -467,25 +483,26 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">[3] 173</span>
 <span class="term-output">[4] 174</span>
 <span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 08 21:18:54Nov 08 21:18:54 Starting job C
-<span class="term-output"> Starting job B</span>
-<span class="term-output">Nov 08 21:18:54 Starting job A</span>
-<span class="term-output">Nov 08 21:18:57 Job B took 3 seconds</span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 09 17:55:50Nov 09 17:55:50Nov 09 17:55:50 Starting job B
+<span class="term-output"> Starting job A</span>
+<span class="term-output"> Starting job C</span>
+<span class="term-output">Nov 09 17:55:52Nov 09 17:55:52 Job A took 2 seconds</span>
+<span class="term-output"> Job B took 2 seconds</span>
+<span class="term-output">Nov 09 17:55:52 Job C took 2 seconds</span>
 <span class="term-output"></span>
 <span class="term-output">[3]  - done       ./slow.sh $i</span>
-<span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 08 21:18:58Nov 08 21:18:58 Job C took 4 seconds
-<span class="term-output"> Job A took 4 seconds</span>
-<span class="term-output"></span>
-<span class="term-output">[2]  - done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span>
 <span class="term-output">[4]  + done       ./slow.sh $i</span>
+<span class="term-prompt" data-prompt="$"></span>
+<span class="term-output">[2]  + done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The ampersand (<code>&amp;</code>) sends the command to the background, allowing the for loop to continue immediately with the next iteration.</li>
 <li>This line shows the job number given by the Z shell and the process ID, which can be used for more fine-grained job control. This topic, while powerful, is beyond the scope of this book.</li>
 </ol>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -554,12 +571,12 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 </div>
 <p>As you can see it basically acts as a for loop. Here’s another teaser, which replaces the for loop from the previous section.</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --jobs 2 <span style="text-decoration:underline">./slow.sh</span> ::: {A..C}
-<span class="term-output">Nov 08 21:19:02 Starting job B</span>
-<span class="term-output">Nov 08 21:19:04 Job B took 2 seconds</span>
-<span class="term-output">Nov 08 21:19:02 Starting job A</span>
-<span class="term-output">Nov 08 21:19:06 Job A took 4 seconds</span>
-<span class="term-output">Nov 08 21:19:04 Starting job C</span>
-<span class="term-output">Nov 08 21:19:07 Job C took 3 seconds</span></code></pre>
+<span class="term-output">Nov 09 17:55:58 Starting job A</span>
+<span class="term-output">Nov 09 17:56:00 Job A took 2 seconds</span>
+<span class="term-output">Nov 09 17:55:58 Starting job B</span>
+<span class="term-output">Nov 09 17:56:00 Job B took 2 seconds</span>
+<span class="term-output">Nov 09 17:56:00 Starting job C</span>
+<span class="term-output">Nov 09 17:56:04 Job C took 4 seconds</span></code></pre>
 
 <p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
 <p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality. (Perhaps too much.) Luckily you only need to know a handful in order to be effective. The manual page is quite informative in case you need to use a less common option.</p>
@@ -601,9 +618,11 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> 3 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Because the output is the same as before, I redirect it to <em>/dev/null</em> to suppress it.</li>
 </ol>
+</div>
 <p>Although this often works, I advise you to be explicit about where the input item should be inserted in the command by using placeholders. In this case, because you want to use the entire input line (a number) at once, you only need one placeholder. You specify the placeholder, in other words, where to put the input item, with a pair of curly braces (<code>{}</code>):</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3 | <span style="color:var(--term-2)">parallel</span> cowsay {} <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
 
@@ -629,9 +648,11 @@ Note
 <span class="term-output">5) "/data/ch03/logs.tar.gz" has basename "logs.tar.gz"</span>
 <span class="term-output">6) "/data/ch03/top2000.xlsx" has basename "top2000.xlsx"</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Characters such as parentheses (<code>)</code>) and quotes (<code>"</code>) have a special meaning in the shell. To use them literally you put a backslash <code>\</code> in front of them. This is called <em>escaping</em>.</li>
 </ol>
+</div>
 <p>If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">input.csv</span> <span style="color:var(--term-2)">parallel</span> --colsep , <span style="color:var(--term-3)">"mv {2} {1}"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
 
@@ -909,16 +930,16 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 
 <p>You now have 10 files containing compressed JSON data:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> nyc<span style="color:var(--term-4)">*</span>json.gz
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  8 21:19 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
 
 <p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file. Using <code>zcat</code><span class="citation" data-cites="zcat"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, you directly print the contents of a compress file:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">trim</span>
@@ -968,6 +989,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">│ bronx         │   169 │</span>
 <span class="term-output">│ staten_island │    28 │</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Expand all compressed files using <code>zcat</code>.</li>
 <li>For each call, extract the name of the borough using <code>jq</code>.</li>
@@ -976,6 +998,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <li>Reverse the two columns and delimit them by comma delimited using <code>awk</code>.</li>
 <li>Add a header using <code>header</code>.</li>
 </ol>
+</div>
 <p>Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally. You can use <code>parallel</code> to distribute the local files among the remote machines, let them do the processing, and retrieve the results:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="color:var(--term-4)">*</span>.json.gz | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">parallel</span> -v --basefile jq \ <span class="term-callout">➋</span>
@@ -984,6 +1007,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">"zcat {} | ./jq -r '.borough' | tr '[A-Z] ' '[a-z]_' | sort | uniq -c | awk '{</span>
 <span class="term-output"><span style="color:var(--term-3)">print </span><span style="color:var(--term-6)">\$</span><span style="color:var(--term-3)">2</span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)">,</span><span style="color:var(--term-6)">\"\$</span><span style="color:var(--term-3)">1}' &gt; {.}.csv"</span> <span class="term-callout">➎</span></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Print the list of files and pipe it into <code>parallel</code></li>
 <li>Transmit the <code>jq</code> binary to each remote machine. Luckily, <code>jq</code> has no dependencies. This file will be removed from the remote machines afterwards because I specified the <code>--trc</code> option (which implies the <code>--cleanup</code> option). Note that the pipeline uses <code>./jq</code> instead of just <code>jq</code>. That’s because the pipeline needs to use the version which was uploaded and not the version that may or may not be on the search path.</li>
@@ -991,6 +1015,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <li>Specify a list of hostnames. Remember, if you want to try this out locally, you can specify <code>--sshlogin :</code> instead of <code>--slf hostnames</code></li>
 <li>Note the escaping in the <code>awk</code> expression. Quoting can sometimes be tricky. Here, the dollar signs and the double quotes are escaped. If quoting ever gets too confusing, remember that you put the pipeline into a separate command-line tool just as I did with <code>add</code></li>
 </ol>
+</div>
 
 <p>If you, during this process, run <code>ls</code> on one of the remote machines, you would see that <code>parallel</code> indeed transfers (and cleans up) the binary <code>jq</code>, the JSON files, and CSV files:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ssh</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">head</span> -n 1 hostnames<span style="color:var(--term-5)">)</span> ls

@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,6 +87,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="4&nbsp; Creating Command-line Tools – Data Science at the Command Line, 2e">
@@ -314,14 +324,14 @@ Tip
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 32K</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 391 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 400 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 147 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 182 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 105 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 128 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 584 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst 647 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span></code></pre>
+<span class="term-output">-rwxr-xr-x 1 dst dst 391 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 400 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 147 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 182 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 105 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 128 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 584 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst 647 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -360,6 +370,7 @@ Tip
 <span class="term-output">    435 in</span>
 <span class="term-output">    403 alice</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Downloading an ebook using <code>curl</code>.</li>
 <li>Converting the entire text to lowercase using <code>tr</code><span class="citation" data-cites="tr"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>.</li>
@@ -369,6 +380,7 @@ Tip
 <li>Sort this list of unique words by their count in descending order using <code>sort</code>.</li>
 <li>Keep only the top 10 lines (i.e., words) using <code>head</code>.</li>
 </ol>
+</div>
 <p>Those words indeed appear the most often in the text. Because those words (apart from the word “alice”) appear very frequently in many English texts, they carry very little meaning. In fact, these are known as <em>stopwords</em>. If we get rid of those, we keep the most frequent words that are related to this text.</p>
 <p>Here’s a list of stopwords I’ve found:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">"https://raw.githubusercontent.com/stopwords-iso/stopwords-en/master/</span>
@@ -416,9 +428,11 @@ Tip
 <span class="term-output">     56 hatter</span>
 <span class="term-output">     55 gryphon</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Obtain the patterns from a file (<em>stopwords</em> in our case), one per line, with <code>-f</code>. Interpret those patterns as fixed strings with <code>-F</code>. Select only those lines containing matches that form whole words with <code>-w</code>. Select non-matching lines with <code>-v</code>.</li>
 </ol>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -448,7 +462,7 @@ Tip
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">fc</span></code></pre>
 
 <p>Running <code>fc</code> invokes the default text editor, which is stored in the environment variable <em>EDITOR</em>. In the Docker container, this is set to <code>nano</code>, a straightforward text editor. As you can see, this file contains our one-liner:</p>
-<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshTLEblA                              </span>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshr7ON3Q                              </span>
 curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
 tr '[:upper:]' '[:lower:]' |
 grep -oE "[a-z\']{2,}" |
@@ -466,7 +480,7 @@ head -n 10
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^X</span> Exit      <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^R</span> Read File <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^\</span> Replace   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^U</span> Paste     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^J</span> Justify   <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^/</span> Go To Line</code></pre>
 
 <p>Let’s give this temporary file a proper name by pressing <strong><code>Ctrl-O</code></strong>, removing the temporary filename, and typing <code>top-words-1.sh</code>:</p>
-<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshTLEblA                              </span>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshr7ON3Q                              </span>
 curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
 tr '[:upper:]' '[:lower:]' |
 grep -oE "[a-z\']{2,}" |
@@ -484,7 +498,7 @@ head -n 10
 <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^C</span> Cancel       <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-M</span> Mac Format  <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">M-P</span> Prepend     <span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">^Q</span> Discard buffer</code></pre>
 
 <p>Press <strong><code>Enter</code></strong>:</p>
-<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshTLEblA                              </span>
+<pre class="term-screen"><code><span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">  GNU nano 8.7.1                    /tmp/zshr7ON3Q                              </span>
 curl -sL "<span style="color:var(--term-12)">https://www.gutenberg.org/files/11/11-0.txt"</span> |
 tr '[:upper:]' '[:lower:]' |
 grep -oE "[a-z\']{2,}" |
@@ -528,16 +542,16 @@ uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="c
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 44K</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  391 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  400 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.5K Nov  8 21:16 stopwords</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  147 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  182 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  173 Nov  8 21:16 top-words-1.sh</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  105 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  128 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  584 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  647 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  391 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  400 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">fizzbuzz.py</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.5K Nov  9 17:53 stopwords</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  147 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">stream.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  182 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">stream.py</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  173 Nov  9 17:53 top-words-1.sh</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  105 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words-4.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  128 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words-5.sh</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  584 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words.R</span>*</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  647 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words.py</span>*</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">top-words-1.sh</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
@@ -595,8 +609,8 @@ Tip
 <p>The argument <code>u+x</code> consists of three characters: (1) <code>u</code> indicates that we want to change the permissions for the user who owns the file, which is you, because you created the file; (2) <code>+</code> indicates that we want to add a permission; and (3) <code>x</code>, which indicates the permissions to execute.</p>
 <p>Let’s now have a look at the access permissions of both files:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> top-words-{1,2}.sh
-<span class="term-output">-rw-r--r-- 1 dst dst 173 Nov  8 21:16 top-words-1.sh</span>
-<span class="term-output">-rwxr--r-- 1 dst dst 173 Nov  8 21:16 <span style="color:var(--term-2);font-weight:bold">top-words-2.sh</span>*</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 173 Nov  9 17:53 top-words-1.sh</span>
+<span class="term-output">-rwxr--r-- 1 dst dst 173 Nov  9 17:53 <span style="color:var(--term-2);font-weight:bold">top-words-2.sh</span>*</span></code></pre>
 
 <p>The first column shows the access permissions for each file. For <em>top-words-2.sh</em>, this is <em><code>-rwxrw-r--</code></em>. The first character <em><code>-</code></em> (hyphen) indicates the file type. A <em><code>-</code></em> means regular file and a <em><code>d</code></em> means directory. The next three characters, <em><code>rwx</code></em>, indicate the access permissions for the user who owns the file. The <em><code>r</code></em> and <em><code>w</code></em> mean <em>read</em> and <em>write</em>, respectively. (As you can see, <em>top-words-1.sh</em> has a <em><code>-</code></em> instead of an <em><code>x</code></em>, which means that we cannot <em>execute</em> that file.) The next three characters <em><code>rw-</code></em> indicate the access permissions for all members of the group that owns the file. Finally, the last three characters in the column, <em><code>r--</code></em>, indicate access permissions for all other users.</p>
 <p>Now you can execute the file as follows:</p>
@@ -876,7 +890,7 @@ Tip
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">top-words</span> 10
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
-<span class="term-output">100 170.2k 100 170.2k   0      0 80.89M      0                              0</span>
+<span class="term-output">100 170.2k 100 170.2k   0      0 57.64M      0                              0</span>
 <span class="term-output">    403 alice</span>
 <span class="term-output">     98 gutenberg</span>
 <span class="term-output">     88 project</span>
@@ -969,7 +983,7 @@ Tip
 <span class="term-output">     88 project</span>
 <span class="term-output">     76 queen</span>
 <span class="term-output">     71 time</span>
-<span class="term-output">top-words 5 &lt; alice.txt  0.04s user 0.02s system 147% cpu 0.038 total</span>
+<span class="term-output">top-words 5 &lt; alice.txt  0.03s user 0.02s system 146% cpu 0.031 total</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">time</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">top-words.py</span> 5
 <span class="term-output">    403 alice</span>
@@ -977,7 +991,7 @@ Tip
 <span class="term-output">     88 project</span>
 <span class="term-output">     76 queen</span>
 <span class="term-output">     71 time</span>
-<span class="term-output">top-words.py 5 &lt; alice.txt  0.20s user 0.02s system 46% cpu 0.455 total</span>
+<span class="term-output">top-words.py 5 &lt; alice.txt  0.17s user 0.01s system 44% cpu 0.406 total</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">time</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">top-words.R</span> 5
 <span class="term-output">    403 alice</span>
@@ -985,7 +999,7 @@ Tip
 <span class="term-output">     88 project</span>
 <span class="term-output">     76 queen</span>
 <span class="term-output">     71 time</span>
-<span class="term-output">top-words.R 5 &lt; alice.txt  0.10s user 0.04s system 47% cpu 0.277 total</span></code></pre>
+<span class="term-output">top-words.R 5 &lt; alice.txt  0.16s user 0.11s system 48% cpu 0.555 total</span></code></pre>
 
 <p>Wonderful! Sure, the output itself is not very exciting. What’s exciting is that we can accomplish the same task with multiple languages. Let’s look at the differences between the approaches.</p>
 <p>First, what’s immediately obvious is the difference in amount of code. For this specific task, both Python and R require much more code than Bash. This illustrates that, for some tasks, it is better to use the command line. For other tasks, you may better off using a programming language. As you gain more experience on the command line, you will start to recognize when to use which approach. When everything is a command-line tool, you can even split up the task into subtasks, and combine a Bash command-line tool with, say, a Python command-line tool. Whichever approach works best for the task at hand.</p>

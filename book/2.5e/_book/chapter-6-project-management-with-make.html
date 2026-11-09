@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,6 +87,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="6&nbsp; Project Management with Make – Data Science at the Command Line, 2e">
@@ -322,13 +332,13 @@ Note
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 28K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  37 Nov  8 21:17 Makefile.test</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  21 Nov  8 21:17 numbers-write-var.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  26 Nov  8 21:17 numbers-write.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  16 Nov  8 21:17 numbers.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 432 Nov  8 21:17 starwars.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 263 Nov  8 21:17 tasks.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  27 Nov  8 21:17 template.make</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  37 Nov  9 17:54 Makefile.test</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  21 Nov  9 17:54 numbers-write-var.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  26 Nov  9 17:54 numbers-write.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  16 Nov  9 17:54 numbers.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 432 Nov  9 17:54 starwars.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 263 Nov  9 17:54 tasks.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  27 Nov  9 17:54 template.make</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -367,10 +377,12 @@ Note
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">spaces.make</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>I need to add the <code>-f</code> option (short for the <code>--makefile</code> option) because the configuration file isn’t called <em>Makefile</em>, which is the default.</li>
 <li>One of the more helpful error messages you’ll find at the command line!</li>
 </ol>
+</div>
 <p>From now on, I’ll rename the appropriate file to <em>Makefile</em> because that matches real-world use more closely. So, if I just run <code>make</code>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers.make</span> Makefile
 <span class="term-output"></span>
@@ -427,9 +439,11 @@ Note
 <span class="term-output">       │ datasciencetoolbox/dsatcl2e:latest <span class="term-callout">➊</span></span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Note the extra dollar sign in front of <em><code>$(pwd)</code></em>. This is needed because <code>make</code> uses a single dollar sign to refer to various special variables, which I’ll explain later.</li>
 </ol>
+</div>
 <p>The above is taken from a <em>Makefile</em> I use while working on this book. You could say that I’m using <code>make</code> as a glorified task runner. Although this wasn’t the primary purpose of <code>make</code>, it still provides a lot of value because I don’t need to remember or look up what incantation I used. Instead, I type <code>make publish</code> and the latest version of the book is published. It’s perfectly fine to put long-running commands in a <em>Makefile</em>.</p>
 <p>And <code>make</code> can do much more for us!</p>
 </section>
@@ -538,12 +552,14 @@ Note
 <span class="term-output">Jango Fett,183</span>
 <span class="term-output">Cliegg Lars,183</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Only keep lines that contain the pattern <em><code>Human</code></em>.</li>
 <li>Extract the first two columns.</li>
 <li>Sort the lines by the second column in reverse numeric order.</li>
 <li>By default, <code>head</code> prints the first 10 lines. You can override this with the <code>-n</code> option.</li>
 </ol>
+</div>
 <p>The second task creates a box plot showing the distribution of heights per species (see <a href="#fig-starwars-image" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>):</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
 <span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>

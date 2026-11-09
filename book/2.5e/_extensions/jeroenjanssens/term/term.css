@@ -77,7 +77,6 @@ pre.term-source code span {
 
 .term-callout {
   color: var(--term-8);
-  font-style: italic;
 }
 
 .term-truncated {

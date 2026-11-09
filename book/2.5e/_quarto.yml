@@ -67,6 +67,8 @@ extensions:
     spacing: true
     callout-values: "➊➋➌➍➎➏➐➑➒"
     callout-format: "{}"
+    # The numbered list after a cell gets the same markers (➊, ➋, ...)
+    callout-list: true
     # Scripts mounted at /.book (hidden, so `tree /` doesn't show it) and sourced by init are part of the cache key
     cache-depends:
       - container

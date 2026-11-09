@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,6 +87,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="5&nbsp; Scrubbing Data – Data Science at the Command Line, 2e">
@@ -309,13 +319,13 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 200K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  8 21:47 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  8 21:47 iris.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  8 21:47 irismeta.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  8 21:47 names-comma.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  8 21:47 names.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  8 21:47 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  8 21:47 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 17:54 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  9 17:54 iris.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  9 17:54 irismeta.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  9 17:54 names-comma.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  9 17:54 names.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 17:54 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 17:54 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 <p>Before I dive into the actual transformations, I’d like to demonstrate their ubiquity when working at the command line.</p>
@@ -340,9 +350,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">buzz</span>
 <span class="term-output">… with 90 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The custom tool <code>fizzbuzz.py</code> comes from <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a>.</li>
 </ol>
+</div>
 <p>Then you use <code>grep</code> to keep the lines that match the pattern <em>fizz</em> or <em>buzz</em> and count how often each word appears using <code>sort</code> and <code>uniq</code><span class="citation" data-cites="uniq"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> -E <span style="color:var(--term-3)">"fizz|buzz"</span> <span style="text-decoration:underline">fb.seq</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> | <span style="color:var(--term-2)">uniq</span> -c | <span style="color:var(--term-2)">sort</span> -nr <span style="color:var(--term-3)">&gt;</span> fb.cnt <span class="term-callout">➋</span>
@@ -356,10 +368,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">   3   │ <span style="color:var(--term-6)">······</span>6<span style="color:var(--term-6)">·</span>fizzbuzz<span style="color:var(--term-5)">␊</span></span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>This regular expression also matches <em>fizzbuzz</em>.</li>
 <li>Using <code>sort</code> and <code>uniq</code> this way is a common way to count lines and sort them in descending order. It’s the <code>-c</code> option that adds the counts.</li>
 </ol>
+</div>
 <p>Note that <code>sort</code> is used twice: first because <code>uniq</code> assumes its input data to be sorted and second to sort the counts numerically. In a way, this is an intermediate transformation, albeit a subtle one.</p>
 <p>The next step would be to visualize the counts using <code>rush</code><span class="citation" data-cites="rush"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>. However, since <code>rush</code> expects the input data to be in CSV format, this requires a less subtle transformation first. <code>awk</code> can add a header, flip the two fields, and insert commas in a single incantation:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">fb.cnt</span> <span style="color:var(--term-2)">awk</span> <span style="color:var(--term-3)">'BEGIN { print "value,count" } { print $2","$1 }'</span> <span style="color:var(--term-3)">&gt;</span> fb.csv
@@ -447,9 +461,11 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 <span class="term-output">Line 2</span>
 <span class="term-output">Line 3</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>In <code>awk</code>, <em>NR</em> refers to the total number of input records seen so far.</li>
 </ol>
+</div>
 <p>Similarly, you can print the last 3 lines using <code>tail</code><span class="citation" data-cites="tail"><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></span>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">tail</span> -n 3
 <span class="term-output">Line 8</span>
@@ -572,9 +588,11 @@ Note
 <span class="term-output">CHAPTER XI. Who Stole the Tarts?</span>
 <span class="term-output">CHAPTER XII. Alice's Evidence</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The <code>-i</code> options specifies that the matching should be case-insensitive.</li>
 </ol>
+</div>
 <p>You can also specify a regular expression. For example, if you only wanted to print the headings that start with <em>The</em>:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -E <span style="color:var(--term-3)">'^CHAPTER (.*)\. The'</span>
 <span class="term-output">CHAPTER II. The Pool of Tears</span>
@@ -596,31 +614,31 @@ Note
 <p>When you’re in the process of formulating your data pipeline and you have a lot of data, then debugging your pipeline can be cumbersome. In that case, generating a smaller sample from the data might be useful. This is where <code>sample</code><span class="citation" data-cites="sample"><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></span> comes in handy. The main purpose of <code>sample</code> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
 
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1%
-<span class="term-output">Line 154</span>
-<span class="term-output">Line 223</span>
-<span class="term-output">Line 394</span>
-<span class="term-output">Line 400</span>
-<span class="term-output">Line 520</span>
-<span class="term-output">Line 681</span>
-<span class="term-output">Line 710</span>
-<span class="term-output">Line 722</span>
-<span class="term-output">Line 840</span>
-<span class="term-output">Line 909</span>
-<span class="term-output">Line 921</span></code></pre>
+<span class="term-output">Line 24</span>
+<span class="term-output">Line 93</span>
+<span class="term-output">Line 330</span>
+<span class="term-output">Line 653</span>
+<span class="term-output">Line 654</span>
+<span class="term-output">Line 804</span>
+<span class="term-output">Line 846</span>
+<span class="term-output">Line 888</span>
+<span class="term-output">Line 912</span></code></pre>
 
 <p>Here, every input line has a one percent chance of being printed. This percentage can also be specified as a fraction (namely <code>1/100</code>) or as a probability (namely <code>0.01</code>).</p>
 <p><code>sample</code> has two other purposes, which can be useful when you’re debugging your pipeline. First, it’s possible to add some delay to the output. This comes in handy when the input is a constant stream (for example, the Wikipedia stream we saw in <a href="./chapter-3-obtaining-data.html">Chapter 3</a>), and the data comes in too fast to see what’s going on. Secondly, you can put a timer on <code>sample</code>, so that you don’t have to kill the ongoing process manually. For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1% -d 1000 -s 5 | <span style="color:var(--term-2)">ts</span> <span class="term-callout">➊</span>
-<span class="term-output">Nov 08 21:47:41 Line 12</span>
-<span class="term-output">Nov 08 21:47:42 Line 101</span>
-<span class="term-output">Nov 08 21:47:43 Line 225</span>
-<span class="term-output">Nov 08 21:47:44 Line 292</span>
-<span class="term-output">Nov 08 21:47:45 Line 381</span>
-<span class="term-output">Nov 08 21:47:46 Line 392</span></code></pre>
+<span class="term-output">Nov 09 17:54:11 Line 211</span>
+<span class="term-output">Nov 09 17:54:12 Line 372</span>
+<span class="term-output">Nov 09 17:54:13 Line 504</span>
+<span class="term-output">Nov 09 17:54:14 Line 720</span>
+<span class="term-output">Nov 09 17:54:15 Line 742</span>
+<span class="term-output">Nov 09 17:54:16 Line 783</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The tool <code>ts</code><span class="citation" data-cites="ts"><a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></span> adds a timestamp in front of each line.</li>
 </ol>
+</div>
 <p>In order to prevent unnecessary computation, try to put <code>sample</code> as early as possible in your pipeline. In fact, this argument holds for any command-line tool that reduces data, like <code>head</code> and <code>tail</code>. Once you’re confident your pipeline works, you take it out of the pipeline.</p>
 </section>
 </section>
@@ -695,9 +713,11 @@ Note
 <span class="term-output">apple</span>
 <span class="term-output">… with 25 more lines</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Here I use <code>tr</code> to make the text lowercase. We’ll have a closer look at <code>tr</code> in the next section.</li>
 </ol>
+</div>
 <p>The two <code>grep</code> commands might have been combined into one, but in this case I decided it would be easier to reuse and adapt the previous pipeline. There’s no shame in being pragmatic in order to get the job done!</p>
 </section>
 <section id="replacing-and-deleting-values" class="level3" data-number="5.3.3">
@@ -751,11 +771,13 @@ Note
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'s/\s+//'</span> <span class="term-callout">➌</span>
 <span class="term-output">bye world!</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Replace <em>hello</em> with <em>bye</em>.</li>
 <li>Replace any whitespace with one space. The flag <code>g</code> stands for global, meaning that the same substitution can be applied more than once on the same line.</li>
 <li>This only removes leading spaces because I didn’t specify the flag <code>g</code> here.</li>
 </ol>
+</div>
 <p>Again, just as with the <code>grep</code> example earlier, these three <code>sed</code> commands can be combined into one:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">' hello     world!'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'s/hello/bye/;s/\s+/ /g;s/\s+//'</span>

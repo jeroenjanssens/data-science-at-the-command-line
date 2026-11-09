@@ -305,27 +305,27 @@ Yakov Shafranovich defines the CSV format according to the following three point
 
 1.  Each record is located on a separate line, delimited by a line break (`␊`). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:
 
-```{term}
-#| label: csv_1
-#| callout: ['bat \-A tmnt\-basic\.csv\s*$']
-bat -A tmnt-basic.csv
-```
+    ```{term}
+    #| label: csv_1
+    #| callout: ['bat \-A tmnt\-basic\.csv\s*$']
+    bat -A tmnt-basic.csv
+    ```
 
-1. The `-A` option makes `bat` show all non-printable characters like spaces, tabs, and newlines.
+    1. The `-A` option makes `bat` show all non-printable characters like spaces, tabs, and newlines.
 
 2.  The last record in the file may or may not have an ending line break. For example:
 
-```{term}
-#| label: csv_2
-bat -A tmnt-missing-newline.csv
-```
+    ```{term}
+    #| label: csv_2
+    bat -A tmnt-missing-newline.csv
+    ```
 
 3.  There may be a header appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file. For example:
 
-```{term}
-#| label: csv_3
-bat -A tmnt-with-header.csv
-```
+    ```{term}
+    #| label: csv_3
+    bat -A tmnt-with-header.csv
+    ```
 
 As you can see, CSV by default is not too readable.
 You can pipe the data to a tool called `csvlook` [@csvlook], which will nicely format it into a table.

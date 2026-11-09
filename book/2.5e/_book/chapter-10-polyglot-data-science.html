@@ -50,7 +50,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.7.3/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.0/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -87,6 +87,16 @@ ul.task-list li input[type="checkbox"] {
 <meta name="application-name" content="Data Science at the Command Line">
 <meta name="msapplication-TileColor" content="#b91d47">
 <meta name="theme-color" content="#ffffff">
+<style>
+@counter-style term-callouts-47c21b52 {
+  system: fixed;
+  symbols: "➊" "➋" "➌" "➍" "➎" "➏" "➐" "➑" "➒";
+  suffix: " ";
+}
+.term-callout-list.term-callouts-47c21b52 > ol {
+  list-style-type: term-callouts-47c21b52;
+}
+</style>
 
 
 <meta property="og:title" content="10&nbsp; Polyglot Data Science – Data Science at the Command Line, 2e">
@@ -293,10 +303,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 176K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  8 21:20 Untitled1337.ipynb</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  8 21:20 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  8 21:20 count.R</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  8 21:20 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  9 17:57 Untitled1337.ipynb</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 17:57 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  9 17:57 count.R</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  9 17:57 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -389,6 +399,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">Shutting down kernel</span>
 <span class="term-output"></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>You can run arbitrary shell commands and pipelines such as <code>date</code> or <code>pip</code> to install a Python package.</li>
 <li>Compare this line of Pyton code to count the number of lines in <em>alice.txt</em> with the invocation of <code>wc</code> below it.</li>
@@ -398,6 +409,7 @@ ul.task-list li input[type="checkbox"] {
 <li>If you want to use literal curly braces, type them twice.</li>
 <li>Using a Python variable as standard input can be done, but gets quite tricky as you can see.</li>
 </ol>
+</div>
 <p>Jupyter Notebook is, in essence, a browser-based version of Jupyter Console. It supports the same ways to leverage the command line, including the exclamation mark and bash magic. The biggest difference is that a notebook cannot only contain code, but also marked-up text, equations, and data visualizations. It’s very popular among data scientists for this reason. Jupyter Notebook is a separate project and environment, but I’d like to use JupyterLab to work with notebooks, because it offers a more complete IDE.</p>
 <p>Figure <a href="#fig-jupyterlab" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> is a screenshot of JupyterLab, showing the file explorer (left), a code editor (middle), a notebook (right), and a terminal (bottom). The latter three all show ways to leverage the command line. The code is something I get back to in the next section. This particular notebook is quite similar to the console session I just discussed. The terminal offers a complete shell for you to run command line tools. Be aware that there’s no interactivity possible between this terminal, the code, and the notebook. So this terminal is not really different from having a separate terminal application open, but it’s still helpful when you’re working inside a Docker container or on a remote server.</p>
 <div id="fig-jupyterlab" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -453,6 +465,7 @@ Warning
 <span class="term-output">  20   │     <span style="color:var(--term-6)">print</span>(<span style="color:var(--term-6)">len</span>(grep.stdout.strip().split(<span style="color:var(--term-2)">"</span><span style="color:var(--term-6)">\n</span><span style="color:var(--term-2)">"</span>))) <span class="term-callout">➎</span></span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The recommended way to leverage the command line is to use the <code>run()</code> function of the <code>subprocess</code> module.</li>
 <li>Open the file <em>filename</em></li>
@@ -460,6 +473,7 @@ Warning
 <li>Run the command-line tool <code>grep</code>, where <em>words</em> is passed as standard input.</li>
 <li>The standard output is available as one long string. Here, I split it on each newline character to count the number of occurrences of <em>pattern</em>.</li>
 </ol>
+</div>
 <p>This command-line tools is used as follows:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">./count.py</span> <span style="text-decoration:underline">alice.txt</span> alice
 <span class="term-output">403</span></code></pre>
@@ -489,12 +503,14 @@ Warning
 <span class="term-prompt" data-prompt="> "></span>length(alice) <span class="term-callout">➍</span>
 <span class="term-output">[1] 403</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Read in the file <em>alice.txt</em></li>
 <li>Split the text into words</li>
 <li>Invoke the command-line tool <code>grep</code> to only keep the lines that match the string <em>alice</em>. The character vector <em>words</em> is passed as standard input.</li>
 <li>Count the number of elements in the character vector <em>alice</em></li>
 </ol>
+</div>
 <p>A disadvantage of <code>system2()</code> is that it first writes the character vector to a file before passing it as standard input to the command-line tool. This can be problematic when dealing with a lot of data and a lot of invocations.</p>
 <p>It’s better to use a named pipe, because then no data will be written to disk, which is much more efficient. This can be done with <code>pipe()</code> and <code>fifo()</code> functions. Thanks to Jim Hester for suggesting this. The code below demonstrates this:</p>
 <pre class="term-output"><code><span class="term-prompt" data-prompt="> "></span>out_con &lt;- fifo("out", "w+") <span class="term-callout">➊</span>
@@ -504,6 +520,7 @@ Warning
 <span class="term-output">[1] "bar"</span>
 <span class="term-prompt" data-prompt="> "></span>close(out_con); close(in_con); unlink("out") <span class="term-callout">➎</span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>The function <code>fifo()</code> creates a special first-in-first-out file called <em>out</em>. This is just a reference to a pipe connection (like stdin and stdout are). No data is actually written to disk.</li>
 <li>The tool <code>grep</code> will only keep lines that contain a <em>b</em> and write them the named pipe <em>out</em> .</li>
@@ -511,6 +528,7 @@ Warning
 <li>Read the standard output produces by <code>grep</code> as a character vector.</li>
 <li>Clean up the connections and delete the special file.</li>
 </ol>
+</div>
 <!-- check out the processx package https://processx.r-lib.org/. experimental at the time of writing. but seems very promising to working with connections in a more robust manner. -->
 <!-- # all four options are executed in a shell.  -->
 <!-- # no stdin and no stdout: system -->
@@ -645,6 +663,7 @@ Figure&nbsp;10.3: RStudio IDE with terminal tab open
 <span class="term-output">lice").pipe("wc -l").map(x =&gt; x.toInt).reduce(_ + _)</span>
 <span class="term-output"><span style="color:var(--term-4);font-weight:bold">res5</span>: <span style="color:var(--term-2);font-weight:bold">Int</span> = 403 <span class="term-callout">➐</span></span></code></pre>
 
+<div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
 <li>Read <em>alice.txt</em> such that each line is an element.</li>
 <li>Split each element on spaces. In other words, each line is split into words.</li>
@@ -654,6 +673,7 @@ Figure&nbsp;10.3: RStudio IDE with terminal tab open
 <li>Sum all counts to get a final count. Note that elements first need to be converted from strings to integers.</li>
 <li>The above steps combined into a single command.</li>
 </ol>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

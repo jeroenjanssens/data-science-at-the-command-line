@@ -303,6 +303,9 @@ function M.extract_config(meta)
   end
   local cf_val = term_meta["callout-format"] or term_meta["callout_format"]
   if cf_val ~= nil then config._callout_format = meta_str(cf_val) end
+  local cl_val = term_meta["callout-list"]
+  if cl_val == nil then cl_val = term_meta["callout_list"] end
+  if cl_val ~= nil then config._callout_list = meta_bool(cl_val) end
 
   local FORMAT_KEYS = { html = true, pdf = true, revealjs = true, epub = true, markdown = true, latex = true, typst = true }
 

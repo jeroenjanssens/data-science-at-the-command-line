@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 0: `$ cd /data/ch03`
 
 - id: `chapter-3-obtaining-data.html:block:0`
-- hash: `657d538e`
+- hash: `741b5450`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -22,18 +22,18 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
 --rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
 --rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx
-+-rw-r--r-- 1 dst dst 627K Nov  8 21:16 logs.tar.gz
-+-rw-r--r-- 1 dst dst 189K Nov  8 21:16 r-datasets.db
-+-rw-r--r-- 1 dst dst  149 Nov  8 21:16 tmnt-basic.csv
-+-rw-r--r-- 1 dst dst  148 Nov  8 21:16 tmnt-missing-newline.csv
-+-rw-r--r-- 1 dst dst  181 Nov  8 21:16 tmnt-with-header.csv
-+-rw-r--r-- 1 dst dst  91K Nov  8 21:16 top2000.xlsx
++-rw-r--r-- 1 dst dst 627K Nov  9 17:53 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  9 17:53 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  9 17:53 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  9 17:53 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  9 17:53 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  9 17:53 top2000.xlsx
 ```
 
 ## Code block 3: `$ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherl`
 
 - id: `chapter-3-obtaining-data.html:block:3`
-- hash: `1bcd6b2c`
+- hash: `655714ea`
 - status: **accept**
 - cause: image
 - note: curl 8 progress meter layout
@@ -63,14 +63,14 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
  <script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…
 -100  249k    0  249k    0     0   853k      0 --:--:-- --:--:-- --:--:--  867k
 -… with 1754 more lines
-+100 246.3k 100 246.3k   0      0 158.8M      0                              0
++100 246.3k 100 246.3k   0      0 140.5M      0                              0
 +… with 1729 more lines
 ```
 
 ## Code block 5: `$ curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Frieslan`
 
 - id: `chapter-3-obtaining-data.html:block:5`
-- hash: `eaf34d69`
+- hash: `466d484d`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -88,13 +88,13 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst  148 Dec 14 11:46 tmnt-missing-newline.csv
 --rw-r--r-- 1 dst dst  181 Dec 14 11:46 tmnt-with-header.csv
 --rw-r--r-- 1 dst dst  91K Dec 14 11:46 top2000.xlsx
-+-rw-r--r-- 1 dst dst 430K Nov  8 21:16 List_of_windmills_in_Friesland
-+-rw-r--r-- 1 dst dst 627K Nov  8 21:16 logs.tar.gz
-+-rw-r--r-- 1 dst dst 189K Nov  8 21:16 r-datasets.db
-+-rw-r--r-- 1 dst dst  149 Nov  8 21:16 tmnt-basic.csv
-+-rw-r--r-- 1 dst dst  148 Nov  8 21:16 tmnt-missing-newline.csv
-+-rw-r--r-- 1 dst dst  181 Nov  8 21:16 tmnt-with-header.csv
-+-rw-r--r-- 1 dst dst  91K Nov  8 21:16 top2000.xlsx
++-rw-r--r-- 1 dst dst 430K Nov  9 17:53 List_of_windmills_in_Friesland
++-rw-r--r-- 1 dst dst 627K Nov  9 17:53 logs.tar.gz
++-rw-r--r-- 1 dst dst 189K Nov  9 17:53 r-datasets.db
++-rw-r--r-- 1 dst dst  149 Nov  9 17:53 tmnt-basic.csv
++-rw-r--r-- 1 dst dst  148 Nov  9 17:53 tmnt-missing-newline.csv
++-rw-r--r-- 1 dst dst  181 Nov  9 17:53 tmnt-with-header.csv
++-rw-r--r-- 1 dst dst  91K Nov  9 17:53 top2000.xlsx
 ```
 
 ## Code block 9: `$ curl -s "https://bit.ly/2XBxvwK"`
@@ -193,7 +193,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 22: `$ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > t`
 
 - id: `chapter-3-obtaining-data.html:block:22`
-- hash: `75d45ed3`
+- hash: `945b95ba`
 - status: **accept**
 - cause: image
 - note: curl 8 progress meter layout
@@ -209,7 +209,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -100 41744  100 41744    0     0  46024      0 --:--:-- --:--:-- --:--:-- 46228
 +  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
 +                                 Dload  Upload  Total   Spent   Left   Speed
-+100      8 100      8   0      0   9445      0                              0
++100      8 100      8   0      0   8918      0                              0
  
  $ in2csv top2000.xlsx | tee top2000.csv | trim
 ```

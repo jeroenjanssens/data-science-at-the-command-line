@@ -217,6 +217,11 @@ function M.build_cell(block, cell_id, config)
   options.callout_format = config._callout_format
   if cell_opts["callout-values"] ~= nil then options.callout_values = cell_opts["callout-values"] end
   if cell_opts["callout-format"] ~= nil then options.callout_format = cell_opts["callout-format"] end
+  -- Lua only: style the numbered list after the cell like its callouts
+  local callout_list = config._callout_list
+  local cl_opt = cell_opts["callout-list"]
+  if cl_opt == nil then cl_opt = cell_opts["callout_list"] end
+  if cl_opt ~= nil then callout_list = cl_opt == true end
   if cell_opts["remove"] ~= nil then options.remove = as_list(cell_opts["remove"]) end
   if cell_opts["truncate"] ~= nil then options.truncate = as_list(cell_opts["truncate"]) end
   if cell_opts["highlight"] ~= nil then options.highlight = cell_opts["highlight"] end
@@ -288,6 +293,7 @@ function M.build_cell(block, cell_id, config)
     _colorscheme_light = cell_colorscheme_light,
     _colorscheme_dark = cell_colorscheme_dark,
     _chrome = cell_chrome,
+    _callout_list = callout_list == true,
   }
 end
 
