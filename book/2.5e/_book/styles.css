@@ -2,3 +2,11 @@
 .quarto-cover-image {
   border: 1px solid var(--bs-border-color);
 }
+
+/* Switch the table of contents in the right margin between light and dark
+   mode instantly, like the rest of the page (Bootstrap's .nav-link and
+   Quarto's TOC fade colors and borders) */
+#quarto-margin-sidebar,
+#quarto-margin-sidebar * {
+  transition: none;
+}
