@@ -12,3 +12,15 @@
 #quarto-margin-sidebar * {
   transition: none;
 }
+
+/* Figure captions: centered, and no wider than the image above them. The
+   image's width is a percentage of the column (the width attribute of the
+   image in the .qmd), so give the caption the same maximum width */
+figcaption.quarto-float-caption {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+figure:has(img.figure-img[style*="width:90.0%"]) > figcaption { max-width: 90%; }
+figure:has(img.figure-img[style*="width:60.0%"]) > figcaption { max-width: 60%; }
+figure:has(img.figure-img[style*="width:50.0%"]) > figcaption { max-width: 50%; }
