@@ -58,7 +58,9 @@ def norm(text: str) -> str:
     text = html.unescape(text).replace("\u00a0", " ")
     text = re.sub(r"\s+", " ", text).strip()
     # get_text(" ") inserts spaces between inline elements; undo before punctuation
-    return re.sub(r" ([.,;:!?)\]\u201d\u2019])", r"\1", text)
+    text = re.sub(r" ([.,;:!?)\]\u201d\u2019])", r"\1", text)
+    # The welcome page says when the site was rendered; that changes every day
+    return re.sub(r"last updated on [A-Z][a-z]+ \d{1,2}, \d{4}", "last updated on DATE", text)
 
 
 def short_hash(text: str) -> str:

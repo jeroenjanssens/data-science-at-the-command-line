@@ -20,11 +20,11 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 
 ## Prose (replace): Want to learn from Jeroen in person? Through his company, Data Science
 
-- id: `index.html:prose:d372aded`
-- hash: `937f5d59`
+- id: `index.html:prose:e30a535c`
+- hash: `346d5d1a`
 - status: **accept**
 - cause: content
-- note: Decision 5 and content pass: remove the course announcement and the Data Science Workshops paragraph; new paragraph that explains edition 2.5
+- note: Decision 5 and content pass: remove the course announcement and the Data Science Workshops paragraph; new paragraph that explains edition 2.5, with the date of the last update (compare.py replaces the date with DATE)
 
 ```diff
 --- 2e
@@ -32,7 +32,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 @@ -1,2 +1 @@
 -Want to learn from Jeroen in person? Through his company, Data Science Workshops, Jeroen provides in-company training about data science at the command line and related topics such as Python, R, and machine learning. Visit Data Science Workshops for more information.
 -Jeroen is currently working on a new course Embrace the Command Line. If you haven’t fully embraced the command line yet, then this course might be for you. The beta cohort is expected to start in Q1 2021. You can learn more about this course and tell Jeroen what you think here.
-+This website is edition 2.5. The text is that of the second edition, with small updates where tools or websites have changed since 2021. All the code has been run again with the current version of the Docker image, so the output you see here is the output you get when you follow along today. The website is now made with Quarto and quarto-term instead of bookdown. The printed book shows the output of the original Docker image, which is still available as datasciencetoolbox/dsatcl2e:20210628.
++This website is edition 2.5 and was last updated on DATE. The text is that of the second edition, with small updates where tools or websites have changed since 2021. All the code has been run again with the current version of the Docker image, so the output you see here is the output you get when you follow along today. The website is now made with Quarto and quarto-term instead of bookdown. The printed book shows the output of the original Docker image, which is still available as datasciencetoolbox/dsatcl2e:20210628.
 ```
 
 ## Prose (replace): Jeroen Janssens is an independent data science consultant and instruct

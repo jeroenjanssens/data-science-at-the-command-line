@@ -1600,16 +1600,17 @@
   cause: content
   decision: accept
   note: 'Content pass: note about the updated Docker image and the :20210628 tag'
-- id: index.html:prose:d372aded
-  hash: 937f5d59
-  title: 'Prose (replace): Want to learn from Jeroen in person? Through his company, Data Science'
-  cause: content
-  decision: accept
-  note: 'Decision 5 and content pass: remove the course announcement and the Data Science Workshops paragraph;
-    new paragraph that explains edition 2.5'
 - id: index.html:prose:d81a8dfa
   hash: ec2ab285
   title: 'Prose (replace): Jeroen Janssens is an independent data science consultant and instruct'
   cause: intended
   decision: accept
   note: Current bio and profiles from https://jeroenjanssens.com/about/, plus a link to jeroenjanssens.com
+- id: index.html:prose:e30a535c
+  hash: 346d5d1a
+  title: 'Prose (replace): Want to learn from Jeroen in person? Through his company, Data Science'
+  cause: content
+  decision: accept
+  note: 'Decision 5 and content pass: remove the course announcement and the Data Science Workshops paragraph;
+    new paragraph that explains edition 2.5, with the date of the last update (compare.py replaces the
+    date with DATE)'
