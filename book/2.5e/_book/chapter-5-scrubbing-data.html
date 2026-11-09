@@ -315,17 +315,17 @@ ul.task-list li input[type="checkbox"] {
 <li>Combine multiple files</li>
 </ul>
 <p>This chapter starts with the following files:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch05</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch05</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 200K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 17:54 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  9 17:54 iris.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  9 17:54 irismeta.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  9 17:54 names-comma.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  9 17:54 names.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 17:54 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 17:54 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 18:42 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.5K Nov  9 18:42 iris.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  179 Nov  9 18:42 irismeta.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  160 Nov  9 18:42 names-comma.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  129 Nov  9 18:42 names.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 18:42 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 18:42 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 <p>Before I dive into the actual transformations, I’d like to demonstrate their ubiquity when working at the command line.</p>
@@ -335,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In <a href="./chapter-1-introduction.html">Chapter 1</a> I mentioned that, in practice, the steps of the OSEMN model will rarely be followed linearly. In this vein, although scrubbing is the second step of the OSEMN model, I want you to know that it’s not <em>just</em> the obtained data that needs scrubbing. The transformations that you’ll learn in this chapter can be useful at any part of your pipeline and at any step of the OSEMN model. Generally, if one command line tool generates output that can be used immediately by the next tool, you can chain the two tools together by using the pipe operator (<code>|</code>). Otherwise, a transformation needs to be applied to the data first by inserting an intermediate tool into the pipeline.</p>
 <p>Let me walk you through an example to make this more concrete. Imagine that you have obtained the first 100 items of a <em>fizzbuzz</em> sequence (cf.&nbsp;<a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a>) and that you’d like to visualize how often the words <em>fizz</em>, <em>buzz</em>, and <em>fizzbuzz</em> appear using a bar chart. Don’t worry if this example uses tools that you might not be familiar with yet, they’ll all be covered in more detail later.</p>
 <p>First you obtain the data by generating the sequence and write it to <em>fb.seq</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 100 |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 100 |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">/data/ch04/fizzbuzz.py</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> fb.seq | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">1</span>
@@ -356,7 +356,7 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </div>
 <p>Then you use <code>grep</code> to keep the lines that match the pattern <em>fizz</em> or <em>buzz</em> and count how often each word appears using <code>sort</code> and <code>uniq</code><span class="citation" data-cites="uniq"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> -E <span style="color:var(--term-3)">"fizz|buzz"</span> <span style="text-decoration:underline">fb.seq</span> | <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> -E <span style="color:var(--term-3)">"fizz|buzz"</span> <span style="text-decoration:underline">fb.seq</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> | <span style="color:var(--term-2)">uniq</span> -c | <span style="color:var(--term-2)">sort</span> -nr <span style="color:var(--term-3)">&gt;</span> fb.cnt <span class="term-callout">➋</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">fb.cnt</span>
@@ -376,7 +376,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Note that <code>sort</code> is used twice: first because <code>uniq</code> assumes its input data to be sorted and second to sort the counts numerically. In a way, this is an intermediate transformation, albeit a subtle one.</p>
 <p>The next step would be to visualize the counts using <code>rush</code><span class="citation" data-cites="rush"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>. However, since <code>rush</code> expects the input data to be in CSV format, this requires a less subtle transformation first. <code>awk</code> can add a header, flip the two fields, and insert commas in a single incantation:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">fb.cnt</span> <span style="color:var(--term-2)">awk</span> <span style="color:var(--term-3)">'BEGIN { print "value,count" } { print $2","$1 }'</span> <span style="color:var(--term-3)">&gt;</span> fb.csv
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">fb.cnt</span> <span style="color:var(--term-2)">awk</span> <span style="color:var(--term-3)">'BEGIN { print "value,count" } { print $2","$1 }'</span> <span style="color:var(--term-3)">&gt;</span> fb.csv
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">fb.csv</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
@@ -396,7 +396,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">│ fizzbuzz │     6 │</span></code></pre>
 
 <p>Now you’re ready to use <code>rush</code> to create a bar chart. See <a href="#fig-fb-image" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> for the result. (I’ll cover this syntax of <code>rush</code> in detail in <a href="./chapter-7-exploring-data.html">Chapter 7</a>.)</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot -x value -y count --geom col --height 2 <span style="text-decoration:underline">fb.csv</span> <span style="color:var(--term-3)">&gt;</span> fb.png
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot -x value -y count --geom col --height 2 <span style="text-decoration:underline">fb.csv</span> <span style="color:var(--term-3)">&gt;</span> fb.png
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">fb.png</span></code></pre>
 
@@ -433,7 +433,7 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 <section id="based-on-location" class="level4" data-number="5.3.1.1">
 <h4 data-number="5.3.1.1" class="anchored" data-anchor-id="based-on-location"><span class="header-section-number">5.3.1.1</span> Based on Location</h4>
 <p>The most straightforward way to filter lines is based on their location. This may be useful when you want to inspect, say, the top 10 lines of a file, or when you extract a specific row from the output of another command-line tool. To illustrate how to filter based on location, let’s create a dummy file that contains 10 lines:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 10 | <span style="color:var(--term-2)">tee</span> lines
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 10 | <span style="color:var(--term-2)">tee</span> lines
 <span class="term-output">Line 1</span>
 <span class="term-output">Line 2</span>
 <span class="term-output">Line 3</span>
@@ -446,7 +446,7 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 <span class="term-output">Line 10</span></code></pre>
 
 <p>You can print the first 3 lines using either <code>head</code><span class="citation" data-cites="head"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, <code>sed</code><span class="citation" data-cites="sed"><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></span>, or <code>awk</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">head</span> -n 3
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">head</span> -n 3
 <span class="term-output">Line 1</span>
 <span class="term-output">Line 2</span>
 <span class="term-output">Line 3</span>
@@ -467,13 +467,13 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 </ol>
 </div>
 <p>Similarly, you can print the last 3 lines using <code>tail</code><span class="citation" data-cites="tail"><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></span>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">tail</span> -n 3
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">tail</span> -n 3
 <span class="term-output">Line 8</span>
 <span class="term-output">Line 9</span>
 <span class="term-output">Line 10</span></code></pre>
 
 <p>You can also you use <code>sed</code> and <code>awk</code> for this, but <code>tail</code> is much faster. Removing the first 3 lines goes as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">tail</span> -n +4
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">tail</span> -n +4
 <span class="term-output">Line 4</span>
 <span class="term-output">Line 5</span>
 <span class="term-output">Line 6</span>
@@ -501,7 +501,7 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 <span class="term-output">Line 10</span></code></pre>
 
 <p>Notice that with <code>tail</code> you have to specify the number of lines plus one. Think of it as the line from which you want to start printing. Removing the last 3 lines can be done with <code>head</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">head</span> -n -3
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">head</span> -n -3
 <span class="term-output">Line 1</span>
 <span class="term-output">Line 2</span>
 <span class="term-output">Line 3</span>
@@ -511,7 +511,7 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 <span class="term-output">Line 7</span></code></pre>
 
 <p>You can print specific lines using a either <code>sed</code>, <code>awk</code>, or a combination of <code>head</code> and <code>tail</code>. Here I print lines 4, 5, and 6:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'4,6p'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'4,6p'</span>
 <span class="term-output">Line 4</span>
 <span class="term-output">Line 5</span>
 <span class="term-output">Line 6</span>
@@ -527,7 +527,7 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 <span class="term-output">Line 6</span></code></pre>
 
 <p>You can print odd lines with <code>sed</code> by specifying a start and a step, or with <code>awk</code> by using the modulo operator:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'1~2p'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'1~2p'</span>
 <span class="term-output">Line 1</span>
 <span class="term-output">Line 3</span>
 <span class="term-output">Line 5</span>
@@ -542,7 +542,7 @@ Figure&nbsp;5.1: Counting fizz, buzz, and fizzbuzz
 <span class="term-output">Line 9</span></code></pre>
 
 <p>Printing even lines works in a similar manner:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'0~2p'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">lines</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'0~2p'</span>
 <span class="term-output">Line 2</span>
 <span class="term-output">Line 4</span>
 <span class="term-output">Line 6</span>
@@ -574,7 +574,7 @@ Note
 <section id="based-on-a-pattern" class="level4" data-number="5.3.1.2">
 <h4 data-number="5.3.1.2" class="anchored" data-anchor-id="based-on-a-pattern"><span class="header-section-number">5.3.1.2</span> Based on a Pattern</h4>
 <p>Sometimes you want to keep or discard lines based on their contents. With <code>grep</code>, the canonical command-line tool for filtering lines, you can print every line that matches a certain pattern or regular expression. For example, to extract all the chapter headings from <em>Alice’s Adventures in Wonderland</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -i chapter <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -i chapter <span class="term-callout">➊</span>
 <span class="term-output">CHAPTER I. Down the Rabbit-Hole</span>
 <span class="term-output">CHAPTER II. The Pool of Tears</span>
 <span class="term-output">CHAPTER III. A Caucus-Race and a Long Tale</span>
@@ -594,7 +594,7 @@ Note
 </ol>
 </div>
 <p>You can also specify a regular expression. For example, if you only wanted to print the headings that start with <em>The</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -E <span style="color:var(--term-3)">'^CHAPTER (.*)\. The'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -E <span style="color:var(--term-3)">'^CHAPTER (.*)\. The'</span>
 <span class="term-output">CHAPTER II. The Pool of Tears</span>
 <span class="term-output">CHAPTER IV. The Rabbit Sends in a Little Bill</span>
 <span class="term-output">CHAPTER VIII. The Queen's Croquet-Ground</span>
@@ -602,10 +602,10 @@ Note
 <span class="term-output">CHAPTER X. The Lobster Quadrille</span></code></pre>
 
 <p>Note that you have to specify the <code>-E</code> option in order to enable regular expressions. Otherwise, <code>grep</code> interprets the pattern as a literal string which most likely results in no matches at all:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">'^CHAPTER (.*)\. The'</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">'^CHAPTER (.*)\. The'</span></code></pre>
 
 <p>With the <code>-v</code> option you invert the matches, so that <code>grep</code> prints the lines which <em>don’t</em> match the pattern. The regular expression below matches lines that contain white space, only. So with the inverse, and using <code>wc -l</code>, you can count the number of non-empty lines:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -Ev <span style="color:var(--term-3)">'^\s$'</span> | <span style="color:var(--term-2)">wc</span> -l
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -Ev <span style="color:var(--term-3)">'^\s$'</span> | <span style="color:var(--term-2)">wc</span> -l
 <span class="term-output">2790</span></code></pre>
 
 </section>
@@ -613,26 +613,26 @@ Note
 <h4 data-number="5.3.1.3" class="anchored" data-anchor-id="based-on-randomness"><span class="header-section-number">5.3.1.3</span> Based on Randomness</h4>
 <p>When you’re in the process of formulating your data pipeline and you have a lot of data, then debugging your pipeline can be cumbersome. In that case, generating a smaller sample from the data might be useful. This is where <code>sample</code><span class="citation" data-cites="sample"><a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></span> comes in handy. The main purpose of <code>sample</code> is to get a subset of the data by outputting only a certain percentage of the input on a line-by-line basis.</p>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1%
-<span class="term-output">Line 24</span>
-<span class="term-output">Line 93</span>
-<span class="term-output">Line 330</span>
-<span class="term-output">Line 653</span>
-<span class="term-output">Line 654</span>
-<span class="term-output">Line 804</span>
-<span class="term-output">Line 846</span>
-<span class="term-output">Line 888</span>
-<span class="term-output">Line 912</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1%
+<span class="term-output">Line 30</span>
+<span class="term-output">Line 121</span>
+<span class="term-output">Line 237</span>
+<span class="term-output">Line 302</span>
+<span class="term-output">Line 425</span>
+<span class="term-output">Line 499</span>
+<span class="term-output">Line 501</span>
+<span class="term-output">Line 685</span>
+<span class="term-output">Line 854</span></code></pre>
 
 <p>Here, every input line has a one percent chance of being printed. This percentage can also be specified as a fraction (namely <code>1/100</code>) or as a probability (namely <code>0.01</code>).</p>
 <p><code>sample</code> has two other purposes, which can be useful when you’re debugging your pipeline. First, it’s possible to add some delay to the output. This comes in handy when the input is a constant stream (for example, the Wikipedia stream we saw in <a href="./chapter-3-obtaining-data.html">Chapter 3</a>), and the data comes in too fast to see what’s going on. Secondly, you can put a timer on <code>sample</code>, so that you don’t have to kill the ongoing process manually. For example, to add a 1 second delay between each line being printed and to only run for 5 seconds, you would type:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1% -d 1000 -s 5 | <span style="color:var(--term-2)">ts</span> <span class="term-callout">➊</span>
-<span class="term-output">Nov 09 17:54:11 Line 211</span>
-<span class="term-output">Nov 09 17:54:12 Line 372</span>
-<span class="term-output">Nov 09 17:54:13 Line 504</span>
-<span class="term-output">Nov 09 17:54:14 Line 720</span>
-<span class="term-output">Nov 09 17:54:15 Line 742</span>
-<span class="term-output">Nov 09 17:54:16 Line 783</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> -f <span style="color:var(--term-3)">"Line %g"</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 1% -d 1000 -s 5 | <span style="color:var(--term-2)">ts</span> <span class="term-callout">➊</span>
+<span class="term-output">Nov 09 18:43:08 Line 19</span>
+<span class="term-output">Nov 09 18:43:09 Line 305</span>
+<span class="term-output">Nov 09 18:43:10 Line 414</span>
+<span class="term-output">Nov 09 18:43:11 Line 553</span>
+<span class="term-output">Nov 09 18:43:12 Line 681</span>
+<span class="term-output">Nov 09 18:43:13 Line 684</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
@@ -645,7 +645,7 @@ Note
 <section id="extracting-values" class="level3" data-number="5.3.2">
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="extracting-values"><span class="header-section-number">5.3.2</span> Extracting Values</h3>
 <p>To extract the actual chapter headings from our example earlier, you can take a simple approach by piping the output of <code>grep</code> to <code>cut</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> -i chapter <span style="text-decoration:underline">alice.txt</span> | <span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">' '</span> -f 3-
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> -i chapter <span style="text-decoration:underline">alice.txt</span> | <span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">' '</span> -f 3-
 <span class="term-output">Down the Rabbit-Hole</span>
 <span class="term-output">The Pool of Tears</span>
 <span class="term-output">A Caucus-Race and a Long Tale</span>
@@ -660,7 +660,7 @@ Note
 <span class="term-output">Alice's Evidence</span></code></pre>
 
 <p>Here, each line that’s passed to <code>cut</code> is being split on spaces into fields, and then the third field to the last field is being printed. The total number of fields can be different per input line. With <code>sed</code> you can accomplish the same task in a much more complex manner:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sed</span> -rn <span style="color:var(--term-3)">'s/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p'</span> <span style="text-decoration:underline">alice.txt</span> | <span style="color:var(--term-2)">trim</span> 3
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sed</span> -rn <span style="color:var(--term-3)">'s/^CHAPTER ([IVXLCDM]{1,})\. (.*)$/\2/p'</span> <span style="text-decoration:underline">alice.txt</span> | <span style="color:var(--term-2)">trim</span> 3
 <span class="term-output">Down the Rabbit-Hole</span>
 <span class="term-output">The Pool of Tears</span>
 <span class="term-output">A Caucus-Race and a Long Tale</span>
@@ -668,7 +668,7 @@ Note
 
 <p>(Since the output is the same it’s trimmed to three lines.) This approach uses a regular expression and a back reference. Here, <code>sed</code> also takes over the work done by <code>grep</code>. I only recommend using such a complicated approach when a simpler one would not work. For example, if <em>chapter</em> was ever part of the text itself and not just used to indicate the start of a new chapter. Of course there are many levels of complexity which would have worked around this, but this is to illustrate an extremely strict approach. In practice, the challenge is to come up with a pipeline that strikes a good balance between complexity and flexibility.</p>
 <p>It’s worth noting that <code>cut</code> can also split on characters positions. This is useful for when you want to extract (or remove) the same set of characters per input line:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> -i chapter <span style="text-decoration:underline">alice.txt</span> | <span style="color:var(--term-2)">cut</span> -c 9-
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> -i chapter <span style="text-decoration:underline">alice.txt</span> | <span style="color:var(--term-2)">cut</span> -c 9-
 <span class="term-output">I. Down the Rabbit-Hole</span>
 <span class="term-output">II. The Pool of Tears</span>
 <span class="term-output">III. A Caucus-Race and a Long Tale</span>
@@ -683,7 +683,7 @@ Note
 <span class="term-output">XII. Alice's Evidence</span></code></pre>
 
 <p><code>grep</code> has a great feature that outputs every match onto a separate line using the <code>-o</code> option:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -oE <span style="color:var(--term-3)">'\w{2,}'</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">grep</span> -oE <span style="color:var(--term-3)">'\w{2,}'</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">Project</span>
 <span class="term-output">Gutenberg</span>
 <span class="term-output">Alice</span>
@@ -697,7 +697,7 @@ Note
 <span class="term-output">… with 28615 more lines</span></code></pre>
 
 <p>But what if you wanted to create a dataset of all the words that start with an <em>a</em> and end with an <em>e</em>? Well, of course there’s a pipeline for that too:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[:upper:]'</span> <span style="color:var(--term-3)">'[:lower:]'</span> | <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">alice.txt</span> <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[:upper:]'</span> <span style="color:var(--term-3)">'[:lower:]'</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> -oE <span style="color:var(--term-3)">'\w{2,}'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> -E <span style="color:var(--term-3)">'^a.*e$'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> | <span style="color:var(--term-2)">uniq</span> | <span style="color:var(--term-2)">sort</span> -nr | <span style="color:var(--term-2)">trim</span>
@@ -723,29 +723,29 @@ Note
 <section id="replacing-and-deleting-values" class="level3" data-number="5.3.3">
 <h3 data-number="5.3.3" class="anchored" data-anchor-id="replacing-and-deleting-values"><span class="header-section-number">5.3.3</span> Replacing and Deleting Values</h3>
 <p>You can use the command-line tool <code>tr</code><span class="citation" data-cites="tr"><a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a></span>, which stands for <em>translate</em>, to replace or delete individual characters. For example, spaces can be replaced by underscores as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' '</span> <span style="color:var(--term-3)">'_'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' '</span> <span style="color:var(--term-3)">'_'</span>
 <span class="term-output">hello_world!</span></code></pre>
 
 <p>If more than one character needs to be replaced, then you can combine that:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' !'</span> <span style="color:var(--term-3)">'_?'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' !'</span> <span style="color:var(--term-3)">'_?'</span>
 <span class="term-output">hello_world?</span></code></pre>
 
 <p><code>tr</code> can also be used to delete individual characters by specifying the argument <code>-d</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> -d <span style="color:var(--term-3)">' !'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> -d <span style="color:var(--term-3)">' !'</span>
 <span class="term-output">helloworld</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> -d -c <span style="color:var(--term-3)">'[a-z]'</span>
 <span class="term-output">helloworld<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff);font-weight:bold">%</span></span></code></pre>
 
 <p>In this case, these two commands accomplish the same thing. The second command, however, uses two additional features: It specifies a <em>range</em> of characters (all lowercase letters) using the square brackets and the dash (<code>[-]</code>), and the <code>-c</code> option indicates that complement of that should be used. In other words, this command only keeps lowercase letters. You can even use <code>tr</code> to convert text to uppercase:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[a-z]'</span> <span style="color:var(--term-3)">'[A-Z]'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[a-z]'</span> <span style="color:var(--term-3)">'[A-Z]'</span>
 <span class="term-output">HELLO WORLD!</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[:lower:]'</span> <span style="color:var(--term-3)">'[:upper:]'</span>
 <span class="term-output">HELLO WORLD!</span></code></pre>
 
 <p>However, if you need to translate non-ASCII characters, then <code>tr</code> may not work because it operates on single-byte characters only. In those cases you should use <code>sed</code> instead:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[a-z]'</span> <span style="color:var(--term-3)">'[A-Z]'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hello world!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[a-z]'</span> <span style="color:var(--term-3)">'[A-Z]'</span>
 <span class="term-output">HELLO WORLD!</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'hallo wêreld!'</span> | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[a-z]'</span> <span style="color:var(--term-3)">'[A-Z]'</span>
@@ -765,7 +765,7 @@ Note
 
 <!-- #TODO: SHOULD: Give a proper intro about sed -->
 <p>If you need to operate on more than individual characters, then you may find <code>sed</code> useful. You’ve already seen an example of <code>sed</code> with extracting the chapter headings from <em>alice.txt</em>. Extracting, deleting, and replacing is actually all the same operation in <code>sed</code>. You just specify different regular expressions. For example, to change a word, remove repeated spaces, and remove leading spaces:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">' hello     world!'</span> |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">' hello     world!'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'s/hello/bye/'</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'s/\s+/ /g'</span> | <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'s/\s+//'</span> <span class="term-callout">➌</span>
@@ -779,7 +779,7 @@ Note
 </ol>
 </div>
 <p>Again, just as with the <code>grep</code> example earlier, these three <code>sed</code> commands can be combined into one:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">' hello     world!'</span> |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">' hello     world!'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'s/hello/bye/;s/\s+/ /g;s/\s+//'</span>
 <span class="term-output">bye world!</span></code></pre>
 
@@ -814,7 +814,7 @@ Note
 <p>The command-line tools that I’ve used to scrub plain text, such as <code>tr</code> and <code>grep</code>, cannot always be applied to CSV. The reason is that these command-line tools have no notion of headers, bodies, and columns. What if you want to filter lines using <code>grep</code> but always include the header in the output? Or what if you only want to uppercase the values of a specific column using <code>tr</code> and leave the other columns untouched?</p>
 <p>There are multi-step workarounds for this, but they are very cumbersome. I have something better. In order to leverage ordinary command-line tools for CSV, I’d like to introduce you to three command-line tools, aptly named: <code>body</code><span class="citation" data-cites="body"><a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></span>, <code>header</code><span class="citation" data-cites="header"><a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></span>, and <code>cols</code><span class="citation" data-cites="cols"><a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></span>.</p>
 <p>Let’s start with the first command-line tool, <code>body</code>. With <code>body</code> you can apply any command-line tool to the body of a CSV file, that is, everything excluding the header. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> -e <span style="color:var(--term-3)">"value\n7\n2\n5\n3"</span> | <span style="color:var(--term-2)">body</span> sort -n
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> -e <span style="color:var(--term-3)">"value\n7\n2\n5\n3"</span> | <span style="color:var(--term-2)">body</span> sort -n
 <span class="term-output">value</span>
 <span class="term-output">2</span>
 <span class="term-output">3</span>
@@ -828,7 +828,7 @@ Note
 <li>Execute all the command-line arguments passed to <code>body</code> on the remaining data in standard in.</li>
 </ul>
 <p>Here’s another example. Imagine that you want to count the lines of the following CSV file:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count
 <span class="term-output">count</span>
 <span class="term-output">1</span>
 <span class="term-output">2</span>
@@ -837,21 +837,21 @@ Note
 <span class="term-output">5</span></code></pre>
 
 <p>With <code>wc -l</code>, you can count the number of all lines:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count | <span style="color:var(--term-2)">wc</span> -l
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count | <span style="color:var(--term-2)">wc</span> -l
 <span class="term-output">6</span></code></pre>
 
 <p>If you only want to consider the lines in the body (so everything except the header), you add <code>body</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count | <span style="color:var(--term-2)">body</span> wc -l
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count | <span style="color:var(--term-2)">body</span> wc -l
 <span class="term-output">count</span>
 <span class="term-output">5</span></code></pre>
 
 <p>Note that the header is not used and is also printed again in the output.</p>
 <p>The second command-line tool, <code>header</code> allows you to manipulate the header of a CSV file. If no arguments are provided, the header of the CSV file is printed:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">header</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">header</span>
 <span class="term-output">bill,tip,sex,smoker,day,time,size</span></code></pre>
 
 <p>This is the same as <code>head -n 1</code>. If the header spans more than one row, which is not recommended, you can specify <code>-n 2</code>. You can also add a header to a CSV file:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a count
 <span class="term-output">count</span>
 <span class="term-output">1</span>
 <span class="term-output">2</span>
@@ -860,7 +860,7 @@ Note
 <span class="term-output">5</span></code></pre>
 
 <p>This is equivalent to <code>echo "count" | cat - &lt;(seq 5)</code>. Deleting a header is done with the <code>-d</code> option:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">header</span> -d | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">header</span> -d | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">5.1,3.5,1.4,0.2,Iris-setosa</span>
 <span class="term-output">4.9,3.0,1.4,0.2,Iris-setosa</span>
 <span class="term-output">4.7,3.2,1.3,0.2,Iris-setosa</span>
@@ -874,12 +874,12 @@ Note
 <span class="term-output">… with 140 more lines</span></code></pre>
 
 <p>This is similar to <code>tail -n +2</code>, but it’s a bit easier to remember. Replacing a header, which is basically first deleting a header and then adding one if you look at the above source code, is accomplished by specifying the <code>-r</code> option. Here, we combine it with <code>body</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a line | <span style="color:var(--term-2)">body</span> wc -l | <span style="color:var(--term-2)">header</span> -r count
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a line | <span style="color:var(--term-2)">body</span> wc -l | <span style="color:var(--term-2)">header</span> -r count
 <span class="term-output">count</span>
 <span class="term-output">5</span></code></pre>
 
 <p>And last but not least, you can apply a command to just the header, similar to what the <code>body</code> command-line tool does to the body. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a line | <span style="color:var(--term-2)">header</span> -e <span style="color:var(--term-3)">"tr '[a-z]' '[A-Z]'"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a line | <span style="color:var(--term-2)">header</span> -e <span style="color:var(--term-3)">"tr '[a-z]' '[A-Z]'"</span>
 <span class="term-output">LINE</span>
 <span class="term-output">1</span>
 <span class="term-output">2</span>
@@ -888,7 +888,7 @@ Note
 <span class="term-output">5</span></code></pre>
 
 <p>The third command-line tool is called <code>cols</code>, which allows you to apply a certain command to only a subset of the columns. For example, if you wanted to uppercase the values in the day column in the tips data set (without affecting the other columns and the header), you would use <code>cols</code> in combination with <code>body</code>, as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">cols</span> -c day body <span style="color:var(--term-3)">"tr '[a-z]' '[A-Z]'"</span> | <span style="color:var(--term-2)">head</span> -n 5 | <span style="color:var(--term-2)">csvlook</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">cols</span> -c day body <span style="color:var(--term-3)">"tr '[a-z]' '[A-Z]'"</span> | <span style="color:var(--term-2)">head</span> -n 5 | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│        day │  bill │  tip │ sex    │ smoker │ time   │ size │</span>
 <span class="term-output">├────────────┼───────┼──────┼────────┼────────┼────────┼──────┤</span>
 <span class="term-output">│ 0001-01-07 │ 16.99 │ 1.01 │ Female │  False │ Dinner │    2 │</span>
@@ -916,7 +916,7 @@ Note
 </div>
 </div>
 <p>In the scrubbing tasks below, I’ll include several solutions that involve <code>csvsql</code>. A basic command is this:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a val | <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT SUM(val) AS sum FROM stdin"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">header</span> -a val | <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT SUM(val) AS sum FROM stdin"</span>
 <span class="term-output">sum</span>
 <span class="term-output">15.0</span></code></pre>
 
@@ -926,7 +926,7 @@ Note
 <h3 data-number="5.4.3" class="anchored" data-anchor-id="extracting-and-reordering-columns"><span class="header-section-number">5.4.3</span> Extracting and Reordering Columns</h3>
 <!-- #TODO: MUST: Replace csvcut with xsv select -->
 <p>Columns can be extracted and reordered using the command-line tool: <code>csvcut</code><span class="citation" data-cites="csvcut"><a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></span>. For example, to keep only the columns in the Iris data set that contain numerical values <em>and</em> reorder the middle two columns:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">csvcut</span> -c sepal_length,petal_length,sepal_width,petal_width | <span style="color:var(--term-2)">csvlo</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">csvcut</span> -c sepal_length,petal_length,sepal_width,petal_width | <span style="color:var(--term-2)">csvlo</span>
 <span class="term-output"><span style="color:var(--term-2)">ok</span></span>
 <span class="term-output">│ sepal_length │ petal_length │ sepal_width │ petal_width │</span>
 <span class="term-output">├──────────────┼──────────────┼─────────────┼─────────────┤</span>
@@ -941,7 +941,7 @@ Note
 <span class="term-output">… with 142 more lines</span></code></pre>
 
 <p>Alternatively, you can also specify the columns you want to leave out with the <code>-C</code> option, which stands for <em>complement</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">csvcut</span> -C species | <span style="color:var(--term-2)">csvlook</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">csvcut</span> -C species | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│ sepal_length │ sepal_width │ petal_length │ petal_width │</span>
 <span class="term-output">├──────────────┼─────────────┼──────────────┼─────────────┤</span>
 <span class="term-output">│          5.1 │         3.5 │          1.4 │         0.2 │</span>
@@ -955,18 +955,18 @@ Note
 <span class="term-output">… with 142 more lines</span></code></pre>
 
 <p>Here, the included columns are kept in the same order. Instead of the column names, you can also specify the indices of the columns, which start at 1. This allows you to, for example, select only the odd columns (should you ever need it!):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9'</span> |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvcut</span> -c <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">seq</span> 1 2 9 | <span style="color:var(--term-2)">paste</span> -sd,<span style="color:var(--term-5)">)</span>
 <span class="term-output">a,c,e,g,i</span>
 <span class="term-output">1,3,5,7,9</span></code></pre>
 
 <p>If you’re certain that there are no comma’s in any of the values, then you can also use <code>cut</code> to extract columns. Be aware that <code>cut</code> does not reorder columns, as is demonstrated with the following command:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9'</span> | <span style="color:var(--term-2)">cut</span> -d, -f 5,1,3
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'a,b,c,d,e,f,g,h,i\n1,2,3,4,5,6,7,8,9'</span> | <span style="color:var(--term-2)">cut</span> -d, -f 5,1,3
 <span class="term-output">a,c,e</span>
 <span class="term-output">1,3,5</span></code></pre>
 
 <p>As you can see, it does not matter in which order you specify the columns with the <code>-f</code> option; with <code>cut</code> they will always appear in the original order. For completeness, let’s also take a look at the SQL approach for extracting and reordering the numerical columns of the Iris data set:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT sepal_length, petal_length, "</span>\
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">iris.csv</span> <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT sepal_length, petal_length, "</span>\
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">"sepal_width, petal_width FROM stdi</span>n<span style="color:var(--term-2)">" | </span>head <span style="color:var(--term-2)">-n 5 | </span>csvlook
 <span class="term-output">│ sepal_length │ petal_length │ sepal_width │ petal_width │</span>
 <span class="term-output">├──────────────┼──────────────┼─────────────┼─────────────┤</span>
@@ -980,7 +980,7 @@ Note
 <h3 data-number="5.4.4" class="anchored" data-anchor-id="filtering-rows"><span class="header-section-number">5.4.4</span> Filtering Rows</h3>
 <p>The difference between filtering rows in a CSV file as opposed to filtering lines in a plain text file is that you may want to base this filtering on values in a certain column, only. Filtering on location is essentially the same, but you have to take into account that the first line of a CSV file is usually the header. Remember that you can always use the <code>body</code> command-line tool if you want to keep the header:</p>
 <!-- #TODO: #MUST use xsv slice and xsv search -->
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'3,5p'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'3,5p'</span>
 <span class="term-output">3</span>
 <span class="term-output">4</span>
 <span class="term-output">5</span>
@@ -992,7 +992,7 @@ Note
 <span class="term-output">5</span></code></pre>
 
 <p>When it comes down to filtering on a certain pattern within a certain column, you can use either <code>csvgrep</code><span class="citation" data-cites="csvgrep"><a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></span>, <code>awk</code>, or, of course, <code>csvsql</code>. For example, to exclude all the bills of which the party size was smaller than 5:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvgrep</span> -c size -i -r <span style="color:var(--term-3)">"[1-4]"</span> <span style="text-decoration:underline">tips.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvgrep</span> -c size -i -r <span style="color:var(--term-3)">"[1-4]"</span> <span style="text-decoration:underline">tips.csv</span>
 <span class="term-output">bill,tip,sex,smoker,day,time,size</span>
 <span class="term-output">29.8,4.2,Female,No,Thur,Lunch,6</span>
 <span class="term-output">34.3,6.7,Male,No,Thur,Lunch,6</span>
@@ -1005,7 +1005,7 @@ Note
 <span class="term-output">28.15,3.0,Male,Yes,Sat,Dinner,5</span></code></pre>
 
 <p>Both <code>awk</code> and <code>csvsql</code> can also do numerical comparisons. For example, to get all the bills above 40 USD on a Saturday or a Sunday:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'NR==1 || ($1 &gt; 40.0) &amp;&amp; ($5 ~ /^S/)'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'NR==1 || ($1 &gt; 40.0) &amp;&amp; ($5 ~ /^S/)'</span>
 <span class="term-output">bill,tip,sex,smoker,day,time,size</span>
 <span class="term-output">48.27,6.73,Male,No,Sat,Dinner,4</span>
 <span class="term-output">44.3,2.5,Female,Yes,Sat,Dinner,3</span>
@@ -1016,7 +1016,7 @@ Note
 <span class="term-output">48.33,9.0,Male,No,Sat,Dinner,4</span></code></pre>
 
 <p>The <code>csvsql</code> solution is more verbose but it’s also more robust as it uses the names of the columns instead of their indexes:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT * FROM tips WHERE bill &gt; 40 AND day LIKE 'S%'"</span> <span style="text-decoration:underline">tips.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT * FROM tips WHERE bill &gt; 40 AND day LIKE 'S%'"</span> <span style="text-decoration:underline">tips.csv</span>
 <span class="term-output"></span>
 <span class="term-output">bill,tip,sex,smoker,day,time,size</span>
 <span class="term-output">48.27,6.73,Male,0,Sat,Dinner,4.0</span>
@@ -1034,7 +1034,7 @@ Note
 <p>Merging columns is useful for when the values of interest are spread over multiple columns. This may happen with dates (where year, month, and day could be separate columns) or names (where the first name and last name are separate columns). Let’s consider the second situation.</p>
 <!-- #TODO: Must use composers.csv -->
 <p>The input CSV is a list of composers. Imagine that your task is to combine the first name and the last name into a full name. I’ll present four different approaches for this task: <code>sed</code>, <code>awk</code>, <code>cols</code> + <code>tr</code>, and <code>csvsql</code>. Let’s have a look at the input CSV:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> -I <span style="text-decoration:underline">names.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> -I <span style="text-decoration:underline">names.csv</span>
 <span class="term-output">│ id │ last_name │ first_name │ born │</span>
 <span class="term-output">├────┼───────────┼────────────┼──────┤</span>
 <span class="term-output">│ 1  │ Williams  │ John       │ 1932 │</span>
@@ -1044,7 +1044,7 @@ Note
 <span class="term-output">│ 5  │ Zimmer    │ Hans       │ 1957 │</span></code></pre>
 
 <p>The first approach, <code>sed</code>, uses two statements. The first is to replace the header and the second is a regular expression with back references applied to the second row onwards:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/\1,\3 </span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/\1,\3 </span>
 <span class="term-output"><span style="color:var(--term-3)">\2,\4/g'</span> |</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvlook</span> -I
 <span class="term-output">│ id │ full_name     │ born │</span>
@@ -1056,7 +1056,7 @@ Note
 <span class="term-output">│ 5  │ Hans Zimmer   │ 1957 │</span></code></pre>
 
 <p>The <code>awk</code> approach looks as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'BEGIN{OFS=","; print "id,full_name,born"} {if(NR &gt; 1) {pr</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'BEGIN{OFS=","; print "id,full_name,born"} {if(NR &gt; 1) {pr</span>
 <span class="term-output"><span style="color:var(--term-3)">int $1,$3" "$2,$4}}'</span> |</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvlook</span> -I
 <span class="term-output">│ id │ full_name     │ born │</span>
@@ -1068,7 +1068,7 @@ Note
 <span class="term-output">│ 5  │ Hans Zimmer   │ 1957 │</span></code></pre>
 
 <p>The <code>cols</code> approach in combination with <code>tr</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-1);font-weight:bold">|</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-1);font-weight:bold">|</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cols</span> -c first_name,last_name tr \",\" \" \" |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -r full_name,id,born |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvcut</span> -c id,full_name,born |
@@ -1082,7 +1082,7 @@ Note
 <span class="term-output">│ 5  │ Hans Zimmer   │ 1957 │</span></code></pre>
 
 <p>Please note that <code>csvsql</code> employ SQLite as the database to execute the query and that <code>||</code> stands for concatenation:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT id, first_name || ' ' || last_name "</span>\
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names.csv</span> <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT id, first_name || ' ' || last_name "</span>\
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">"AS full_name, born FROM stdi</span>n<span style="color:var(--term-2)">" | csv</span>look -I
 <span class="term-output">│ id  │ full_name     │ born   │</span>
 <span class="term-output">├─────┼───────────────┼────────┤</span>
@@ -1100,7 +1100,7 @@ Note
 <!-- bat -A composers.csv -->
 <!-- //# cat composers.csv | csvquote | tr -d $'\x1f'   # comma (unit separator in unicode) -->
 <!-- //# cat composers.csv | csvquote | tr $'\x1e' ' '  # new line (record separator in unicode) -->
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">names-comma.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">names-comma.csv</span>
 <span class="term-output">id,last_name,first_name,born</span>
 <span class="term-output">1,Williams,John,1932</span>
 <span class="term-output">2,Elfman,Danny,1953</span>
@@ -1110,23 +1110,23 @@ Note
 <span class="term-output">6,"Beethoven, van",Ludwig,1770</span></code></pre>
 
 <p>Well, it appears that the first three approaches fail; all in different ways. Only <code>csvsql</code> is able to combine first_name and full_name:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">sed</span> -re <span style="color:var(--term-3)">'1s/.*/id,full_name,born/g;2,$s/(.*),(.*),(.*),(.*)/</span>
 <span class="term-output"><span style="color:var(--term-3)">\1,\3 \2,\4/g'</span> | <span style="color:var(--term-2)">tail</span> -n 1</span>
 <span class="term-output">6,"Beethoven,Ludwig  van",1770</span></code></pre>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'BEGIN{OFS=","; print "id,full_name,born"} {if(NR &gt; </span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'BEGIN{OFS=","; print "id,full_name,born"} {if(NR &gt; </span>
 <span class="term-output"><span style="color:var(--term-3)">1) {print $1,$3" "$2,$4}}'</span> | <span style="color:var(--term-2)">tail</span> -n 1</span>
 <span class="term-output">6, van" "Beethoven,Ludwig</span></code></pre>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-1);font-weight:bold">|</span> <span style="color:var(--term-2)">cols</span> -c first_name,last_name tr \",\" \" \" |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-1);font-weight:bold">|</span> <span style="color:var(--term-2)">cols</span> -c first_name,last_name tr \",\" \" \" |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -r full_name,id,born | <span style="color:var(--term-2)">csvcut</span> -c id,full_name,born | <span style="color:var(--term-2)">tail</span> -n 1
 <span class="term-output">6,"Ludwig ""Beethoven  van""",1770</span></code></pre>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT id, first_name || ' ' || last_name AS</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">"SELECT id, first_name || ' ' || last_name AS</span>
 <span class="term-output"><span style="color:var(--term-3)"> full_name, born FROM stdin"</span> | <span style="color:var(--term-2)">tail</span> -n 1</span>
 <span class="term-output">6.0,"Ludwig Beethoven, van",1770.0</span></code></pre>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">rush</span> run -t <span style="color:var(--term-3)">'unite(df, full_name, first_name, last_name, sep</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">names-comma.csv</span> <span style="color:var(--term-2)">rush</span> run -t <span style="color:var(--term-3)">'unite(df, full_name, first_name, last_name, sep</span>
 <span class="term-output"><span style="color:var(--term-3)"> = " ")'</span> - | <span style="color:var(--term-2)">tail</span> -n 1</span>
 <span class="term-output">6,"Ludwig Beethoven, van",1770</span></code></pre>
 
@@ -1176,7 +1176,7 @@ Note
 <section id="concatenate-horizontally" class="level4" data-number="5.4.6.1">
 <h4 data-number="5.4.6.1" class="anchored" data-anchor-id="concatenate-horizontally"><span class="header-section-number">5.4.6.1</span> Concatenate Horizontally</h4>
 <p>Let’s say you have three CSV files that want to put side by side. We use <code>tee</code><span class="citation" data-cites="tee"><a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></span> to save the result of <code>csvcut</code> in the middle of the pipeline:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">csvcut</span> -c bill,tip | <span style="color:var(--term-2)">tee</span> bills.csv | <span style="color:var(--term-2)">head</span> -n 3 | <span style="color:var(--term-2)">csvlook</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">csvcut</span> -c bill,tip | <span style="color:var(--term-2)">tee</span> bills.csv | <span style="color:var(--term-2)">head</span> -n 3 | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│  bill │  tip │</span>
 <span class="term-output">├───────┼──────┤</span>
 <span class="term-output">│ 16.99 │ 1.01 │</span>
@@ -1197,7 +1197,7 @@ Note
 <span class="term-output">│ Male   │  False │    3 │</span></code></pre>
 
 <p>Assuming that the rows line up, you can <code>paste</code><span class="citation" data-cites="paste"><a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></span> the files together:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, {bills,customers,datetime}.csv | <span style="color:var(--term-2)">head</span> -n 3 | <span style="color:var(--term-2)">csvlook</span> -I
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, {bills,customers,datetime}.csv | <span style="color:var(--term-2)">head</span> -n 3 | <span style="color:var(--term-2)">csvlook</span> -I
 <span class="term-output">│ bill  │ tip  │ sex    │ smoker │ size │ day │ time   │</span>
 <span class="term-output">├───────┼──────┼────────┼────────┼──────┼─────┼────────┤</span>
 <span class="term-output">│ 16.99 │ 1.01 │ Female │ No     │ 2    │ Sun │ Dinner │</span>
@@ -1208,7 +1208,7 @@ Note
 <section id="joining" class="level4" data-number="5.4.6.2">
 <h4 data-number="5.4.6.2" class="anchored" data-anchor-id="joining"><span class="header-section-number">5.4.6.2</span> Joining</h4>
 <p>Sometimes data cannot be combined by vertical or horizontal concatenation. In some cases, especially in relational databases, the data is spread over multiple tables (or files) in order to minimize redundancy. Imagine you wanted to extend the Iris data set with more information about the three types of Iris flowers, namely the USDA identifier. It so happens that I have a separate CSV file with these identifiers:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">irismeta.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">irismeta.csv</span>
 <span class="term-output">│ species         │ wikipedia_url                                │ usda_id │</span>
 <span class="term-output">├─────────────────┼──────────────────────────────────────────────┼─────────┤</span>
 <span class="term-output">│ Iris-versicolor │ http://en.wikipedia.org/wiki/Iris_versicolor │ IRVE2   │</span>
@@ -1216,7 +1216,7 @@ Note
 <span class="term-output">│ Iris-setosa     │                                              │ IRSE    │</span></code></pre>
 
 <p>What this data set and the Iris data set have in common is the <em>species</em> column. You can use <code>csvjoin</code><span class="citation" data-cites="csvjoin"><a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a></span> to join the two data sets:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvjoin</span> -c species <span style="text-decoration:underline">iris.csv</span> <span style="text-decoration:underline">irismeta.csv</span> | <span style="color:var(--term-2)">csvcut</span> -c sepal_length,sepal_width,
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvjoin</span> -c species <span style="text-decoration:underline">iris.csv</span> <span style="text-decoration:underline">irismeta.csv</span> | <span style="color:var(--term-2)">csvcut</span> -c sepal_length,sepal_width,
 <span class="term-output">species,usda_id | <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'1p;49,54p'</span> | <span style="color:var(--term-2)">csvlook</span></span>
 <span class="term-output">│ sepal_length │ sepal_width │ species         │ usda_id │</span>
 <span class="term-output">├──────────────┼─────────────┼─────────────────┼─────────┤</span>
@@ -1228,7 +1228,7 @@ Note
 <span class="term-output">│          6.9 │         3.1 │ Iris-versicolor │ IRVE2   │</span></code></pre>
 
 <p>Of course you can also use the SQL approach using <code>csvsql</code>, which is, as per usual, a bit longer (but potentially much more flexible):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">'SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id FRO</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">'SELECT i.sepal_length, i.sepal_width, i.species, m.usda_id FRO</span>
 <span class="term-output"><span style="color:var(--term-3)">M iris i JOIN irismeta m ON (i.species = m.species)'</span> <span style="text-decoration:underline">iris.csv</span> <span style="text-decoration:underline">irismeta.csv</span> | <span style="color:var(--term-2)">sed</span></span>
 <span class="term-output"> -n <span style="color:var(--term-3)">'1p;49,54p'</span> | <span style="color:var(--term-2)">csvlook</span></span>
 <span class="term-output">│ sepal_length │ sepal_width │ species         │ usda_id │</span>
@@ -1252,7 +1252,7 @@ Note
 <p>First, oftentimes, the data needs to be in tabular form, just like a database table or a spreadsheet, because many visualization and machine learning algorithms depend on it. CSV is inherently in tabular form, but JSON and HTML/XML data can have a deeply nested structure.</p>
 <p>Second, many command-line tools, especially the classic ones such as <code>cut</code> and <code>grep</code>, operate on plain text. This is because text is regarded as a universal interface between command-line tools. Moreover, the other formats are younger. Each of these formats can be treated as plain text, allowing us to apply such command-line tools to the other formats as well.</p>
 <p>Sometimes you can get away with applying the classic tools to structured data. For example, by treating the JSON data below as plain text, you can change the attribute <em>gender</em> to <em>sex</em> using <code>sed</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sed</span> -e <span style="color:var(--term-3)">'s/"gender":/"sex":/g'</span> <span style="text-decoration:underline">users.json</span> | <span style="color:var(--term-2)">jq</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sed</span> -e <span style="color:var(--term-3)">'s/"gender":/"sex":/g'</span> <span style="text-decoration:underline">users.json</span> | <span style="color:var(--term-2)">jq</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">{</span>
 <span class="term-output">  "results": [</span>
 <span class="term-output">    {</span>
@@ -1270,11 +1270,11 @@ Note
 <p>Wikpedia holds a wealth of information. Much of this information is ordered in tables, which can be regarded as data sets. For example, <a href="https://web.archive.org/web/20211005234015/https://en.wikipedia.org/wiki/List_of_countries_and_territories_by_border/area_ratio">this page</a> contains a list of countries and territories together with their border length, their area, and the ratio between the two. The page was deleted from Wikipedia in January 2025, so I use a copy from October 2021 that the Internet Archive keeps.</p>
 <p>Let’s imagine that you’re interested in analyzing this data. In this section, I’ll walk you through all the necessary steps and their corresponding commands. I won’t go into every little detail, so it could be that you won’t understand everything right away. Don’t worry, I’re confident that you’ll get the gist of it. Remember that the purpose of this section is to demonstrate the command line. All tools and concepts used in this section (and more) will be explained in the subsequent chapters.</p>
 <p>The data set that you’re interested in, is embedded in HTML. Your goal is to end up with a representation of this data set that you can work with. The very first step is to download the HTML using <code>curl</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://web.archive.org/web/20211005234015id_/https://en.wikipedia.o</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://web.archive.org/web/20211005234015id_/https://en.wikipedia.o</span>
 <span class="term-output"><span style="color:var(--term-3)">rg/wiki/List_of_countries_and_territories_by_border/area_ratio'</span> <span style="color:var(--term-3)">&gt;</span> wiki.html</span></code></pre>
 
 <p>The <code>id_</code> after the date makes the Internet Archive return the page as it was, without its own navigation bar. The HTML is saved to a file named <em>wiki.html</em>. Let’s see how the first 10 lines look like:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wiki.html</span> <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wiki.html</span> <span style="color:var(--term-2)">trim</span>
 <span class="term-output">&lt;!DOCTYPE html&gt;</span>
 <span class="term-output">&lt;html class="client-nojs" lang="en" dir="ltr"&gt;</span>
 <span class="term-output">&lt;head&gt;</span>
@@ -1288,7 +1288,7 @@ Note
 <span class="term-output">… with 3071 more lines</span></code></pre>
 
 <p>That seems to be in order. Image that you’ve been able to determine that the root HTML element that we’re interested in is a <em>&lt;table&gt;</em> with the class <em>wikitable</em>. This allows you to look at the part that you’re interest in using <code>grep</code> (the <code>-A</code> option specifies the number of lines you want to print after the matching line):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> wikitable -A 21 <span style="text-decoration:underline">wiki.html</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">grep</span> wikitable -A 21 <span style="text-decoration:underline">wiki.html</span>
 <span class="term-output">&lt;table class="wikitable sortable"&gt;</span>
 <span class="term-output">&lt;tbody&gt;&lt;tr&gt;</span>
 <span class="term-output">&lt;th&gt;Rank&lt;/th&gt;</span>
@@ -1313,7 +1313,7 @@ Note
 <span class="term-output">&lt;/td&gt;</span></code></pre>
 
 <p>You now actually see the countries and their values. The next step is to extract the necessary elements from the HTML file. For this you can use <code>pup</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wiki.html</span> <span style="color:var(--term-2)">pup</span> <span style="color:var(--term-3)">'table.wikitable tbody'</span> | <span style="color:var(--term-2)">tee</span> table.html | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wiki.html</span> <span style="color:var(--term-2)">pup</span> <span style="color:var(--term-3)">'table.wikitable tbody'</span> | <span style="color:var(--term-2)">tee</span> table.html | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">&lt;tbody&gt;</span>
 <span class="term-output"> &lt;tr&gt;</span>
 <span class="term-output">  &lt;th&gt;</span>
@@ -1327,7 +1327,7 @@ Note
 <span class="term-output">… with 4199 more lines</span></code></pre>
 
 <p>The expression passed to <code>pup</code> is a CSS-selector. The syntax is usually used to style web pages, but you can also use it to select certain elements from HTML. In this case, you want to select the <em>tbody</em> of the <em>table</em> which has the <em>wikitable</em> class. Up next is <code>xml2json</code>, which converts XML (and HTML) to JSON.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">table.html</span> <span style="color:var(--term-2)">xml2json</span> <span style="color:var(--term-3)">&gt;</span> table.json
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">table.html</span> <span style="color:var(--term-2)">xml2json</span> <span style="color:var(--term-3)">&gt;</span> table.json
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">jq</span> <span style="text-decoration:underline">.</span> <span style="text-decoration:underline">table.json</span> | <span style="color:var(--term-2)">trim</span> 20
 <span class="term-output">{</span>
@@ -1353,11 +1353,11 @@ Note
 <span class="term-output">… with 4691 more lines</span></code></pre>
 
 <p>The reason I convert the HTML to JSON is because there is a very powerful tool called <code>jq</code> that operates on JSON data. The following command extracts certain parts of the JSON data and reshapes it into a form that we can work with:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">table.json</span> <span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.tbody.tr[1:][] | [.td[]["$t"]] | @csv'</span> | <span style="color:var(--term-2)">header</span> -a rank,c
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">table.json</span> <span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.tbody.tr[1:][] | [.td[]["$t"]] | @csv'</span> | <span style="color:var(--term-2)">header</span> -a rank,c
 <span class="term-output">ountry,border,surface,ratio <span style="color:var(--term-3)">&gt;</span> countries.csv</span></code></pre>
 
 <p>The data is now in a form that you can work with. Those were quite a few steps to get from a Wikipedia page to a CSV data set. However, when you combine all of the above commands into one, you will see that it’s actually really concise and expressive.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> --max-column-width 28 <span style="text-decoration:underline">countries.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> --max-column-width 28 <span style="text-decoration:underline">countries.csv</span>
 <span class="term-output">│ rank │ country                      │    border │       surface │  ratio │</span>
 <span class="term-output">├──────┼──────────────────────────────┼───────────┼───────────────┼────────┤</span>
 <span class="term-output">│    1 │ Vatican City                 │      3.20 │          0.44 │ 7.273… │</span>

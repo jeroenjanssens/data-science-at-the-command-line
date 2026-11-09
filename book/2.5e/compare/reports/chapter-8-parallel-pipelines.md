@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 0: `$ cd /data/ch08`
 
 - id: `chapter-8-parallel-pipelines.html:block:0`
-- hash: `cb767be8`
+- hash: `0d768399`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -20,10 +20,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst   61 Dec 14 11:54 movies.txt
 --rwxr-xr-x 1 dst dst  125 Dec 14 11:54 slow.sh*
 --rw-r--r-- 1 dst dst 5.1K Dec 14 11:54 users.json
-+-rw-r--r-- 1 dst dst  126 Nov  9 17:55 emails.txt
-+-rw-r--r-- 1 dst dst   61 Nov  9 17:55 movies.txt
-+-rwxr-xr-x 1 dst dst  125 Nov  9 17:55 slow.sh*
-+-rw-r--r-- 1 dst dst 5.1K Nov  9 17:55 users.json
++-rw-r--r-- 1 dst dst  126 Nov  9 18:44 emails.txt
++-rw-r--r-- 1 dst dst   61 Nov  9 18:44 movies.txt
++-rwxr-xr-x 1 dst dst  125 Nov  9 18:44 slow.sh*
++-rw-r--r-- 1 dst dst 5.1K Nov  9 18:44 users.json
 ```
 
 ## Code block 2: `$ for i in {0..100..2}  ➊`
@@ -116,7 +116,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 9: `$ for i in {A..C}; do`
 
 - id: `chapter-8-parallel-pipelines.html:block:9`
-- hash: `f95b7b86`
+- hash: `665d9055`
 - status: **accept**
 - cause: random
 - note: Background jobs: PIDs, timestamps, random durations, and order
@@ -124,7 +124,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ```diff
 --- 2e
 +++ 2.5e
-@@ -2,19 +2,19 @@
+@@ -2,19 +2,21 @@
  > ./slow.sh $i & ➊
  > done
 -[2] 386 ➋
@@ -139,21 +139,26 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -Dec 14 11:54:18 Starting job C
 -Dec 14 11:54:20Dec 14 11:54:20 Job B took 2 seconds
 - Job C took 2 seconds
-+$ Nov 09 17:55:50Nov 09 17:55:50Nov 09 17:55:50 Starting job B
-+ Starting job A
-+ Starting job C
-+Nov 09 17:55:52Nov 09 17:55:52 Job A took 2 seconds
-+ Job B took 2 seconds
-+Nov 09 17:55:52 Job C took 2 seconds
++$ Nov 09 18:44:46 Starting job A
++Nov 09 18:44:46 Starting job C
++Nov 09 18:44:46 Starting job B
++Nov 09 18:44:47 Job B took 1 seconds
  
  [3]  - done       ./slow.sh $i
++
++$ Nov 09 18:44:50 Job A took 4 seconds
++
++[2]  - done       ./slow.sh $i
++
++$ Nov 09 18:44:51 Job C took 5 seconds
++
++[4]  + done       ./slow.sh $i
  $
- [4]  + done       ./slow.sh $i
+-[4]  + done       ./slow.sh $i
 -$ Dec 14 11:54:23 Job A took 5 seconds
 -
-+$
- [2]  + done       ./slow.sh $i
- $
+-[2]  + done       ./slow.sh $i
+-$
 ```
 
 ## Code block 10: `$ seq 0 2 100 | parallel "echo {}^2 | bc" | trim`
@@ -187,7 +192,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 11: `$ parallel --jobs 2 ./slow.sh ::: {A..C}`
 
 - id: `chapter-8-parallel-pipelines.html:block:11`
-- hash: `21674336`
+- hash: `0ff7457a`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -203,12 +208,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -Dec 14 11:54:33 Job A took 5 seconds
 -Dec 14 11:54:32 Starting job C
 -Dec 14 11:54:37 Job C took 5 seconds
-+Nov 09 17:55:58 Starting job A
-+Nov 09 17:56:00 Job A took 2 seconds
-+Nov 09 17:55:58 Starting job B
-+Nov 09 17:56:00 Job B took 2 seconds
-+Nov 09 17:56:00 Starting job C
-+Nov 09 17:56:04 Job C took 4 seconds
++Nov 09 18:44:54 Starting job B
++Nov 09 18:44:55 Job B took 1 seconds
++Nov 09 18:44:55 Starting job C
++Nov 09 18:44:56 Job C took 1 seconds
++Nov 09 18:44:54 Starting job A
++Nov 09 18:44:57 Job A took 3 seconds
 ```
 
 ## Code block 15: `$ find /data/ch03 -type f | parallel echo '{#}\) \"{}\" has basename \`
@@ -305,7 +310,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 39: `$ l nyc*json.gz`
 
 - id: `chapter-8-parallel-pipelines.html:block:39`
-- hash: `ac761a8f`
+- hash: `0027d369`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -325,16 +330,16 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst 16K Dec 14 11:55 nyc-7.json.gz
 --rw-r--r-- 1 dst dst 16K Dec 14 11:56 nyc-8.json.gz
 --rw-r--r-- 1 dst dst 15K Dec 14 11:56 nyc-9.json.gz
-+-rw-r--r-- 1 dst dst 16K Nov  9 17:56 nyc-1.json.gz
-+-rw-r--r-- 1 dst dst 17K Nov  9 17:56 nyc-10.json.gz
-+-rw-r--r-- 1 dst dst 15K Nov  9 17:56 nyc-2.json.gz
-+-rw-r--r-- 1 dst dst 16K Nov  9 17:56 nyc-3.json.gz
-+-rw-r--r-- 1 dst dst 17K Nov  9 17:56 nyc-4.json.gz
-+-rw-r--r-- 1 dst dst 14K Nov  9 17:56 nyc-5.json.gz
-+-rw-r--r-- 1 dst dst 16K Nov  9 17:56 nyc-6.json.gz
-+-rw-r--r-- 1 dst dst 15K Nov  9 17:56 nyc-7.json.gz
-+-rw-r--r-- 1 dst dst 17K Nov  9 17:56 nyc-8.json.gz
-+-rw-r--r-- 1 dst dst 18K Nov  9 17:56 nyc-9.json.gz
++-rw-r--r-- 1 dst dst 16K Nov  9 18:45 nyc-1.json.gz
++-rw-r--r-- 1 dst dst 17K Nov  9 18:45 nyc-10.json.gz
++-rw-r--r-- 1 dst dst 15K Nov  9 18:45 nyc-2.json.gz
++-rw-r--r-- 1 dst dst 16K Nov  9 18:45 nyc-3.json.gz
++-rw-r--r-- 1 dst dst 17K Nov  9 18:45 nyc-4.json.gz
++-rw-r--r-- 1 dst dst 14K Nov  9 18:45 nyc-5.json.gz
++-rw-r--r-- 1 dst dst 16K Nov  9 18:45 nyc-6.json.gz
++-rw-r--r-- 1 dst dst 15K Nov  9 18:45 nyc-7.json.gz
++-rw-r--r-- 1 dst dst 17K Nov  9 18:45 nyc-8.json.gz
++-rw-r--r-- 1 dst dst 18K Nov  9 18:45 nyc-9.json.gz
 ```
 
 ## Code block 40: `$ zcat nyc-1.json.gz | trim`

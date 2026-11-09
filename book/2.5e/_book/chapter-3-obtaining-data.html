@@ -345,16 +345,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Call web APIs</li>
 </ul>
 <p>This chapter starts with the following files:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch03</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch03</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 924K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  9 17:53 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  9 17:53 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  9 17:53 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  9 17:53 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  9 17:53 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  9 17:53 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  9 18:42 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  9 18:42 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  9 18:42 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  9 18:42 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  9 18:42 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  9 18:42 top2000.xlsx</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -367,7 +367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="fu">cd</span> <span class="op">%</span>UserProfile<span class="op">%</span>\Downloads</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="fu">copy</span> logs<span class="op">.</span><span class="fu">csv</span> MyDataScienceToolbox\</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If you are running Linux or macOS, open a terminal and execute the following command on your operating system (and not inside the Docker container):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> ~/Downloads/logs.csv ~/my-data-science-toolbox</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> ~/Downloads/logs.csv ~/my-data-science-toolbox</code></pre>
 
 
 <p>You can also drag-and-drop the file into the right directory using a graphical file manager such as Windows Explorer or macOS Finder.</p>
@@ -379,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="3.3.1" class="anchored" data-anchor-id="introducing-curl"><span class="header-section-number">3.3.1</span> Introducing <code>curl</code></h3>
 <p>When you browse to a URL, which stands for <em>uniform resource locator</em>, your browser interprets the data it downloads. For example, the browser renders HTML files, plays video files automatically, and shows PDF files. However, when you use <code>curl</code> to access a URL, it downloads the data and, by default, prints it to standard output. <code>curl</code> doesn’t do any interpretation, but luckily other command-line tools can be used to process the data further.</p>
 <p>The easiest invocation of <code>curl</code> is to specify a URL as a command-line argument. Let’s, try downloading an article from Wikipedia:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands"</span> |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherlands"</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">trim</span> <span class="term-callout">➊</span>
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
@@ -394,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">"noscript":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","user":…</span>
 <span class="term-output">"ext.growthExperiments.SuggestedEditSession"];&lt;/script&gt;</span>
 <span class="term-output">&lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…</span>
-<span class="term-output">100 246.3k 100 246.3k   0      0 140.5M      0                              0</span>
+<span class="term-output">100 246.3k 100 246.3k   0      0 106.2M      0                              0</span>
 <span class="term-output">… with 1729 more lines</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -404,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>As you can see, <code>curl</code> downloads the raw HTML returned by Wikipedia’s server; no interpretation is being done and all the contents is immediately printed on standard output. Because of the URL, you’d think that this article would list all the windmills in the Netherlands. However, there are apparently so many windmills left that each province has its own page. Fascinating.</p>
 <p>By default, <code>curl</code> outputs a progress meter that shows the download rate and the expected time of completion. This output isn’t written to standard output, but a separate channel, known as <em>standard error</em>, so this doesn’t interfere when you add another tool to the pipeline. While this information can be useful when downloading very large files, I usually find it distracting, so I specify the <code>-s</code> option to <em>silence</em> this output.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">pup</span> -n <span style="color:var(--term-3)">'table.wikitable tr'</span> <span class="term-callout">➊</span>
 <span class="term-output">234</span></code></pre>
 
@@ -418,27 +418,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="saving" class="level3" data-number="3.3.2">
 <h3 data-number="3.3.2" class="anchored" data-anchor-id="saving"><span class="header-section-number">3.3.2</span> Saving</h3>
 <p>You can let <code>curl</code> save the output to a file by adding the <code>-O</code> option. The filename will be based on the last part of the URL.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> -O
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> -O
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 1.4M</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 430K Nov  9 17:53 List_of_windmills_in_Friesland</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  9 17:53 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  9 17:53 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  9 17:53 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  9 17:53 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  9 17:53 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  9 17:53 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 430K Nov  9 18:42 List_of_windmills_in_Friesland</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  9 18:42 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  9 18:42 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  9 18:42 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  9 18:42 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  9 18:42 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  9 18:42 top2000.xlsx</span></code></pre>
 
 <p>If you don’t like that filename then you can use the <code>-o</code> option together with a filename or redirect the output to a file yourself:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color:var(--term-3)">&gt;</span> fries
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color:var(--term-3)">&gt;</span> fries
 <span class="term-output">land.html</span></code></pre>
 
 </section>
 <section id="other-protocols" class="level3" data-number="3.3.3">
 <h3 data-number="3.3.3" class="anchored" data-anchor-id="other-protocols"><span class="header-section-number">3.3.3</span> Other Protocols</h3>
 <p>In total, <code>curl</code> supports <a href="https://ec.haxx.se/protocols/protocols-curl">more than 20 protocols</a>. To download from an FTP server, which stands for File Transfer Protocol, you use <code>curl</code> the same way. Here I download the file <em>welcome.msg</em> from <em>ftp.gnu.org</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"ftp://ftp.gnu.org/welcome.msg"</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"ftp://ftp.gnu.org/welcome.msg"</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">NOTICE (Updated October 15 2021):</span>
 <span class="term-output"></span>
 <span class="term-output">If you maintain scripts used to access ftp.gnu.org over FTP,</span>
@@ -453,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>If the specified URL is a directory, <code>curl</code> will list the contents of that directory. When the URL is password protected, you can specify a username and a password as follows with the <code>-u</code> option.</p>
 <p>Or how about the DICT protocol, which allows you to access various dictionaries and lookup definitions. Here’s the definition of “windmill” according to the Collaborative International Dictionary of English:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"dict://dict.org/d:windmill"</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"dict://dict.org/d:windmill"</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">220 dict.dict.org dictd 1.12.1/rf on Linux 4.19.0-10-amd64 &lt;auth.mime&gt; &lt;8291886…</span>
 <span class="term-output">250 ok</span>
 <span class="term-output">150 1 definitions retrieved</span>
@@ -471,16 +471,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="following-redirects" class="level3" data-number="3.3.4">
 <h3 data-number="3.3.4" class="anchored" data-anchor-id="following-redirects"><span class="header-section-number">3.3.4</span> Following Redirects</h3>
 <p>When you access a shortened URL, such as the ones that start with <em><a href="http://bit.ly/" class="uri">http://bit.ly/</a></em> or <em><a href="http://t.co/" class="uri">http://t.co/</a></em>, your browser automatically redirects you to the correct location. With <code>curl</code>, however, you need to specify the <code>-L</code> or <code>--location</code> option in order to be redirected. If you don’t, you can get something like:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://bit.ly/2XBxvwK"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://bit.ly/2XBxvwK"</span>
 <span class="term-output">&lt;html&gt;</span>
 <span class="term-output">&lt;body&gt;&lt;a href="https://youtu.be/dQw4w9WgXcQ"&gt;moved here&lt;/a&gt;&lt;/body&gt;</span>
 <span class="term-output">&lt;/html&gt;<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff);font-weight:bold">%</span></span></code></pre>
 
 <p>Sometimes you get nothing back, just like when we follow the URL mentioned above:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://youtu.be/dQw4w9WgXcQ"</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://youtu.be/dQw4w9WgXcQ"</span></code></pre>
 
 <p>By specifying the <code>-I</code> or <code>--head</code> option, <code>curl</code> fetches only the HTTP header of the response, which allows you to inspect the status code and other information returned by the server.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sI <span style="color:var(--term-3)">"https://youtu.be/dQw4w9WgXcQ"</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sI <span style="color:var(--term-3)">"https://youtu.be/dQw4w9WgXcQ"</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">HTTP/1.1 303</span>
 <span class="term-output">content-type: application/binary</span>
 <span class="term-output">x-content-type-options: nosniff</span>
@@ -495,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>The first line shows the protocol followed by the HTTP status code, which is 303 in this case. You can also see the location this URL redirects to. Inspecting the header and getting the status code is a useful debugging tool in case <code>curl</code> does not give you the expected result. Other common HTTP status codes include 404 (not found) and 403 (forbidden). Wikipedia has a page that lists <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">all HTTP status codes</a>.</p>
 <p>In summary, <code>curl</code> is a useful command-line tool for downloading data from the Internet. Its three most common options are <code>-s</code> to silence the progress meter, <code>-u</code> to specify a username and password, and <code>-L</code> to automatically follow redirects. See its man page for more information (and to make your head spin):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> curl | <span style="color:var(--term-2)">trim</span> 20
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> curl | <span style="color:var(--term-2)">trim</span> 20
 <span class="term-output">curl(1)                           curl Manual                          curl(1)</span>
 <span class="term-output"></span>
 <span class="term-output">NAME</span>
@@ -525,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If the original dataset is very large or it’s a collection of many files, the file may be a compressed archive. Datasets which contain many repeated values (such as the words in a text file or the keys in a JSON file) are especially well suited for compression.</p>
 <p>Common file extensions of compressed archives are: <em>.tar.gz</em>, <em>.zip</em>, and <em>.rar</em>. To decompress these, you would use the command-line tools <code>tar</code>, <code>unzip</code><span class="citation" data-cites="unzip"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>, and <code>unrar</code><span class="citation" data-cites="unrar"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, respectively. (There are a few more, though less common, file extensions for which you would need yet other tools.)</p>
 <p>Let’s take <em>tar.gz</em> (pronounced as “gzipped tarball”) as an example. In order to extract an archive named <em>logs.tar.gz</em>, you would use the following incantation:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -xzf <span style="text-decoration:underline">logs.tar.gz</span> <span class="term-callout">➊</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -xzf <span style="text-decoration:underline">logs.tar.gz</span> <span class="term-callout">➊</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
@@ -535,7 +535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Indeed, <code>tar</code> is notorious for its many command-line arguments. In this case, the three options <code>-x</code>, <code>-z</code>, and <code>-f</code> specify that <code>tar</code> should <em>extract</em> files from an archive, use <em>gzip</em> as the decompression algorithm and use file <em>logs.tar.gz</em>.</p>
 
 <p>However, since we’re not yet familiar with this archive, it’s a good idea to first examine its contents. This can be done with the <code>-t</code> option (instead of the <code>-x</code> option):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -tzf <span style="text-decoration:underline">logs.tar.gz</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -tzf <span style="text-decoration:underline">logs.tar.gz</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">E1FOSPSAYDNUZI.2020-09-01-00.0dd00628</span>
 <span class="term-output">E1FOSPSAYDNUZI.2020-09-01-00.b717c457</span>
 <span class="term-output">E1FOSPSAYDNUZI.2020-09-01-01.05f904a4</span>
@@ -549,12 +549,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">… with 2427 more lines</span></code></pre>
 
 <p>Is seems that this archive contains a lot of files, and they are not inside a directory. In order to keep the current directory clean, it’s a good idea to first create a new directory using <code>mkdir</code> and extract those files there using the <code>-C</code> option.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> logs
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> logs
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tar</span> -xzf <span style="text-decoration:underline">logs.tar.gz</span> -C <span style="text-decoration:underline">logs</span></code></pre>
 
 <p>Let’s verify the number of files and some of their contents:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="text-decoration:underline">logs</span> | <span style="color:var(--term-2)">wc</span> -l
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="text-decoration:underline">logs</span> | <span style="color:var(--term-2)">wc</span> -l
 <span class="term-output">2437</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> logs/<span style="color:var(--term-4)">*</span> | <span style="color:var(--term-2)">trim</span>
@@ -572,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Excellent. Now, I understand that you’d like to scrub and explore these log files, but that’s for later in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a> and <a href="./chapter-7-exploring-data.html">Chapter 7</a>.</p>
 <p>In time, you’ll get used to these options, but I’d like to show you an alternative option, which might be convenient. Rather than remembering the different command-line tools and their options, there’s a handy script called <code>unpack</code><span class="citation" data-cites="unpack"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span>, which will decompress many different formats. <code>unpack</code> looks at the extension of the file that you want to decompress, and calls the appropriate command-line tool. Now, in order to decompress this same file, you would run:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">unpack</span> <span style="text-decoration:underline">logs.tar.gz</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">unpack</span> <span style="text-decoration:underline">logs.tar.gz</span></code></pre>
 
 
 </section>
@@ -583,7 +583,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Luckily, there is a command-line tool called <code>in2csv</code>, that converts Microsoft Excel spreadsheets to CSV files. CSV stands for comma-separated values. Working with CSV can be tricky because it lacks a formal specification. <!-- TODO: MUST: check and possibly fix reference? --> Yakov Shafranovich defines the CSV format according to the following three points:<span class="citation" data-cites="shafranovich2005common"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span></p>
 <ol type="1">
 <li><p>Each record is located on a separate line, delimited by a line break (<code>␊</code>). Take, for example, the following CSV file with crucial information about the Teenage Mutant Ninja Turtles:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-basic.csv</span> <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-basic.csv</span> <span class="term-callout">➊</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">tmnt-basic.csv</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -599,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </div></li>
 <li><p>The last record in the file may or may not have an ending line break. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-missing-newline.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-missing-newline.csv</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">tmnt-missing-newline.csv</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -610,7 +610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 </li>
 <li><p>There may be a header appearing as the first line of the file with the same format as normal record lines. This header will contain names corresponding to the fields in the file and should contain the same number of fields as the records in the rest of the file. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-with-header.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">tmnt-with-header.csv</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">tmnt-with-header.csv</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -623,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 </ol>
 <p>As you can see, CSV by default is not too readable. You can pipe the data to a tool called <code>csvlook</code><span class="citation" data-cites="csvlook"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, which will nicely format it into a table. If the CSV data has no header, like <em>tmnt-missing-newline.csv</em> then you need to add the <code>-H</code> option, otherwise the first line will be interpreted as the header.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">tmnt-with-header.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">tmnt-with-header.csv</span>
 <span class="term-output">│ name         │ nickname      │ mask_color │ weapon           │</span>
 <span class="term-output">├──────────────┼───────────────┼────────────┼──────────────────┤</span>
 <span class="term-output">│ Leonardo     │ Leo           │ blue       │ two ninjakens    │</span>
@@ -652,17 +652,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </div>
 <p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program <a href="https://www.top2000nl.com">Top 2000</a>. To extract its data, you invoke <code>in2csv</code> as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">top2000.xls</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">top2000.xls</span>
 <span class="term-output"><span style="text-decoration:underline">x</span></span>
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
-<span class="term-output">100      8 100      8   0      0   8918      0                              0</span>
+<span class="term-output">100      8 100      8   0      0   6344      0                              0</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> <span style="text-decoration:underline">top2000.xlsx</span> | <span style="color:var(--term-2)">tee</span> top2000.csv | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">BadZipFile: File is not a zip file</span></code></pre>
 
 <p>Who is Danny Vera? The most popular song is supposed to be <em>Bohemian Rhapsody</em>, of course. Well, at least Queen appears plenty of times in the Top 2000 so I can’t really complain:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvgrep</span> <span style="text-decoration:underline">top2000.csv</span> --columns ARTIEST --regex <span style="color:var(--term-3)">'^Queen$'</span> | <span style="color:var(--term-2)">csvlook</span> -I <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvgrep</span> <span style="text-decoration:underline">top2000.csv</span> --columns ARTIEST --regex <span style="color:var(--term-3)">'^Queen$'</span> | <span style="color:var(--term-2)">csvlook</span> -I <span class="term-callout">➊</span>
 <span class="term-output">││</span>
 <span class="term-output">│  │</span></code></pre>
 
@@ -674,7 +674,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>By the way, the tools <code>in2csv</code>, <code>csvgrep</code>, and <code>csvlook</code> are part of CSVkit, which is a collection of command-line tools to work with CSV data.</p>
 <p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case. If you were to pipe the data into <code>in2csv</code>, you would have to specify the format explicitly.</p>
 <p>A spreadsheet can contain multiple worksheets. <code>in2csv</code> extracts, by default, the first worksheet. To extract a different worksheet, you need to pass the name of worksheet to the <code>--sheet</code> option. If you’re not sure what’s the worksheet is called, you can use the <code>--names</code> option, which prints the names of all the worksheets. Here we see that <em>top2000.xlsx</em> has only one sheet, named <em>Blad1</em> (which is Dutch for <em>Sheet1</em>).</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> --names <span style="text-decoration:underline">top2000.xlsx</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> --names <span style="text-decoration:underline">top2000.xlsx</span>
 <span class="term-output">BadZipFile: File is not a zip file</span></code></pre>
 
 </section>
@@ -685,7 +685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Fortunately, there is a command-line tool called <code>sql2csv</code>, which is part of the CSVkit suite. It works with many different databases through a common interface, including MySQL, Oracle, PostgreSQL, SQLite, Microsoft SQL Server, and Sybase. The output of <code>sql2csv</code> is, as its name suggests, in CSV format.</p>
 <p>We can obtain data from relational databases by executing a <em><code>SELECT</code></em> query on them. (<code>sql2csv</code> also support <em><code>INSERT</code></em>, <em><code>UPDATE</code></em>, and <em><code>DELETE</code></em> queries, but that’s not the purpose of this chapter.)</p>
 <p><code>sql2csv</code> needs two arguments: <code>--db</code>, which specifies the database URL, of which the typical form is: <code>dialect+driver://username:password@host:port/database</code> and <code>--query</code>, which contains the <em><code>SELECT</code></em> query. For example, given an SQLite database that contains the standard datasets from R<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> , I can select all the rows from the table <em>mtcars</em> and sort them by the <em>mpg</em> column as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sql2csv</span> --db <span style="color:var(--term-3)">'sqlite:///r-datasets.db'</span> \
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sql2csv</span> --db <span style="color:var(--term-3)">'sqlite:///r-datasets.db'</span> \
 <span class="term-prompt" data-prompt="> "></span>--query <span style="color:var(--term-3)">'SELECT row_names AS car, mpg FROM mtcars ORDER BY mpg'</span> | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│ car                 │  mpg │</span>
 <span class="term-output">├─────────────────────┼──────┤</span>
@@ -705,7 +705,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3.7" class="anchored" data-anchor-id="calling-web-apis"><span class="header-section-number">3.7</span> Calling Web APIs</h2>
 <p>In the previous section I explained how to download files from the Internet. Another way data can come from the Internet is through a web API, which stands for <em>Application Programming Interface</em>. The number of APIs that are being offered is growing at an increasing rate, which means a lot of interesting data for us data scientists.</p>
 <p>Web APIs are not meant to be presented in a nice layout, such as websites. Instead, most web APIs return data in a structured format, such as JSON or XML. Having data in a structured form has the advantage that the data can be easily processed by other tools, such as <code>jq</code>. For example, the API of Ice and Fire, which contains a lot of information about George R.R. Martin’s fictional world, in which the Game of Thrones book and TV shows take place, returns data in the following JSON structure:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://anapioficeandfire.com/api/characters/583"</span> | <span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://anapioficeandfire.com/api/characters/583"</span> | <span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.'</span>
 <span class="term-output"><span style="font-weight:bold">{</span></span>
 <span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"url"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"https://anapioficeandfire.com/api/characters/583"</span><span style="font-weight:bold">,</span></span>
 <span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"name"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"Jon Snow"</span><span style="font-weight:bold">,</span></span>
@@ -763,7 +763,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="authentication" class="level3" data-number="3.7.1">
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="authentication"><span class="header-section-number">3.7.1</span> Authentication</h3>
 <p>Some web APIs require you to authenticate (that is, to prove your identity) before you can consume their output. There are several ways to do this. Some web APIs use API keys while others use the OAuth protocol. News API, an independent source of headlines and news articles, is a great example. Let’s see what happens when you try to access this API without an API key:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"http://newsapi.org/v2/everything?q=linux"</span> | <span style="color:var(--term-2)">jq</span> <span style="text-decoration:underline">.</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"http://newsapi.org/v2/everything?q=linux"</span> | <span style="color:var(--term-2)">jq</span> <span style="text-decoration:underline">.</span>
 <span class="term-output"><span style="font-weight:bold">{</span></span>
 <span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"status"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"error"</span><span style="font-weight:bold">,</span></span>
 <span class="term-output">  <span style="color:var(--term-4);font-weight:bold">"code"</span><span style="font-weight:bold">:</span> <span style="color:var(--term-2)">"apiKeyMissing"</span><span style="font-weight:bold">,</span></span>
@@ -772,7 +772,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output"><span style="font-weight:bold">}</span></span></code></pre>
 
 <p>Well, that was to be expected. The part after the question mark, by the way, is where we pass any query parameters. That’s also the place where you need to specify an API key. I’d like to keep my own API key a secret, so I insert it below by reading the file <em>/data/.secret/newsapi.org_apikey</em> using command substitution.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"http://newsapi.org/v2/everything?q=linux&amp;apiKey=</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">/data/.secret/new</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"http://newsapi.org/v2/everything?q=linux&amp;apiKey=</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">/data/.secret/new</span>
 <span class="term-output"><span style="text-decoration:underline">sapi.org_apikey</span><span style="color:var(--term-5)">)</span><span style="color:var(--term-3)">"</span> |</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.'</span> | <span style="color:var(--term-2)">trim</span> 30
 <span class="term-output">{</span>
@@ -814,12 +814,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Some web APIs return data in a streaming manner. This means that once you connect to it, the data will continue to pour in, until the connection is closed. A well-known example is the Twitter “firehose,” which constantly streams all the tweets being sent around the world. Luckily, most command-line tools also operate in a streaming matter.</p>
 
 <p>Let’s take a 10 second sample of one of Wikimedia’s streaming APIs, for example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://stream.wikimedia.org/v2/stream/recentchange"</span> |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://stream.wikimedia.org/v2/stream/recentchange"</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sample</span> -s 10 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span></code></pre>
 
 
 <p>This particular API returns all changes that have been made to Wikipedia and other properties of Wikimedia. The command-line tool <code>sample</code> is used to close the connection after 10 seconds. The connection can also be closed manually by pressing <strong><code>Ctrl-C</code></strong> to send an interrupt. The output is saved to a file <em>wikimedia-stream-sample</em>. Let’s take a peek using <code>trim</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span> <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span> <span style="color:var(--term-2)">trim</span>
 <span class="term-output">:ok</span>
 <span class="term-output"></span>
 <span class="term-output">event: message</span>
@@ -833,7 +833,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="term-output">… with 1078 more lines</span></code></pre>
 
 <p>With a little bit of <code>sed</code> and <code>jq</code> I can scrub this data to get a glimpse of the changes happening on the English version of Wikipedia:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'s/^data: //p'</span> | <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">wikimedia-stream-sample</span> <span style="color:var(--term-2)">sed</span> -n <span style="color:var(--term-3)">'s/^data: //p'</span> | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'select(.type == "edit" and .server_name == "en.wikipedia.org") | .title'</span> <span class="term-callout">➋</span>
 <span class="term-output"><span style="color:var(--term-2)">"Odion Ighalo"</span></span>
 <span class="term-output"><span style="color:var(--term-2)">"Hold Up (song)"</span></span>
@@ -866,11 +866,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Speaking of streaming, did you know that you could stream <em>Star Wars: Episode IV – A New Hope</em> for free using <code>telnet</code><span class="citation" data-cites="telnet"><a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></span>?</p>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">telnet</span> <span style="text-decoration:underline">towel.blinkenlights.nl</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">telnet</span> <span style="text-decoration:underline">towel.blinkenlights.nl</span></code></pre>
 
 <p>And after some time, we see that Han Solo did shoot first!</p>
 
-<pre class="term-output"><code><span class="term-output"></span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-output"></span>
 <span class="term-output"></span>
 <span class="term-output">                       -===                    `"',</span>
 <span class="term-output">       I'll bet you   ""o o                    O O|)</span>

@@ -328,17 +328,17 @@ Note
 <li>Thinking about your workflow in terms of input and output dependencies.</li>
 <li>Running tasks and building targets.</li>
 </ul>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch06</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch06</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 28K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  37 Nov  9 17:54 Makefile.test</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  21 Nov  9 17:54 numbers-write-var.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  26 Nov  9 17:54 numbers-write.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  16 Nov  9 17:54 numbers.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 432 Nov  9 17:54 starwars.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 263 Nov  9 17:54 tasks.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  27 Nov  9 17:54 template.make</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  37 Nov  9 18:43 Makefile.test</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  21 Nov  9 18:43 numbers-write-var.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  26 Nov  9 18:43 numbers-write.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  16 Nov  9 18:43 numbers.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 432 Nov  9 18:43 starwars.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 263 Nov  9 18:43 tasks.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  27 Nov  9 18:43 template.make</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -351,7 +351,7 @@ Note
 <section id="running-tasks" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="running-tasks"><span class="header-section-number">6.3</span> Running Tasks</h2>
 <p>By default, <code>make</code> searches for a configuration file called <em>Makefile</em> in the current directory. It can also be named <em>makefile</em> (lower case), but I recommend calling your file <em>Makefile</em> because it’s more common and that way it appears at the top of a directory listing. Normally you would only have one configuration file per project. Because this chapter discusses many different ones, I haven given each of them a different filename with the <em>.make</em> extension. Let’s start with the following <em>Makefile</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">numbers.make</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">numbers.make</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">numbers.make</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -361,7 +361,7 @@ Note
 
 <p>This <em>Makefile</em> contains one <em>target</em> called <em><code>numbers</code></em>. A <em>target</em> is like a task. It’s usually the name of a file you’d like to create but it can also be more generic than that. The line below, <em><code>seq 7</code></em>, is known as a <em>rule</em>. Think of a rule as a recipe; one or more commands that specify how the target should be built.</p>
 <p>The whitespace in front of the rule is a single tab character. <code>make</code> is picky when it comes to whitespace. Beware that some editors insert spaces when you press the <strong><code>TAB</code></strong> key, known as a soft tab, which will cause <code>make</code> to produce an error. The following code illustrates this by expanding the tab to eight spaces:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">numbers.make</span> <span style="color:var(--term-2)">expand</span> <span style="color:var(--term-3)">&gt;</span> spaces.make
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">numbers.make</span> <span style="color:var(--term-2)">expand</span> <span style="color:var(--term-3)">&gt;</span> spaces.make
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">spaces.make</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
@@ -384,7 +384,7 @@ Note
 </ol>
 </div>
 <p>From now on, I’ll rename the appropriate file to <em>Makefile</em> because that matches real-world use more closely. So, if I just run <code>make</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers.make</span> Makefile
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers.make</span> Makefile
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span>
 <span class="term-output">seq 7</span>
@@ -397,7 +397,7 @@ Note
 <span class="term-output">7</span></code></pre>
 
 <p>Then we see that <code>make</code> first prints the rule itself (<em><code>seq 7</code></em>), and then the output generated by the rule. This process is known as <em>building</em> a target. If you don’t specify the name of a target, then <code>make</code> will build the first target specified in the <em>Makefile</em>. In practice though, you’ll most often be specifying the target you’d want to build:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> numbers
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> numbers
 <span class="term-output">seq 7</span>
 <span class="term-output">1</span>
 <span class="term-output">2</span>
@@ -422,7 +422,7 @@ Note
 </div>
 <p>In this case, we’re not actually building anything, as in, we’re not creating any new files. <code>make</code> will happily <em>build</em> our target <code>numbers</code> again, because it’s not finding a file called <em>numbers</em>. In the next section I’ll go into this.</p>
 <p>Sometimes it’s useful to have a target that builds regardless of whether a file with the same name exists. Think of tasks that you need to perform as part of a project. It’s good practice to declare those targets as phony by using a special target called <code>.PHONY</code> at the top of your <em>Makefile</em>, followed by the names of the phony targets. Here’s an example <em>Makefile</em> that illustrates to use of phony targets:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">tasks.make</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">tasks.make</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">tasks.make</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -450,7 +450,7 @@ Note
 <section id="building-for-real" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="building-for-real"><span class="header-section-number">6.4</span> Building, For Real</h2>
 <p>Let’s modify our <em>Makefile</em> such the output of the rule is written to a file <em>numbers</em>.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers-write.make</span> <span style="text-decoration:underline">Makefile</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers-write.make</span> <span style="text-decoration:underline">Makefile</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">Makefile</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
@@ -477,13 +477,13 @@ Note
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>Now we can say that <code>make</code> is actually building something. What’s more, if we run it again, we see that <code>make</code> reports that target <em><code>numbers</code></em> is up-to-date.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> <span style="text-decoration:underline">numbers</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> <span style="text-decoration:underline">numbers</span>
 <span class="term-output">make: 'numbers' is up to date.</span></code></pre>
 
 <p>There’s no need to rebuild the target <em><code>numbers</code></em> because the file <em>numbers</em> already exists. That’s great because <code>make</code> is saving us time by not repeating work.</p>
 <p>In <code>make</code>, it’s all about files. But keep in mind that <code>make</code> only cares about the <em>name</em> of the target. It does not check whether a file of the same name actually gets created by the rule. If we were to write to a file called <em>nummers</em>, which is Dutch for “numbers,” and the target was still called <em><code>numbers</code></em>, then <code>make</code> would always build this target. Vice versa, if the file <em>numbers</em> was created by some other process, whether automated or manual, then <code>make</code> would still consider that target up-to-date.</p>
 <p>We can avoid some repetition by using the automatic variable <code>$@</code>, which gets expanded to the name of the target:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers-write-var.make</span> <span style="text-decoration:underline">Makefile</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">numbers-write-var.make</span> <span style="text-decoration:underline">Makefile</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">Makefile</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
@@ -494,7 +494,7 @@ Note
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>Let’s verify that this works by removing the file <em>numbers</em> and calling <code>make</code> again:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">numbers</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">numbers</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span> numbers
 <span class="term-output">seq 7 &gt; numbers</span>
@@ -518,7 +518,7 @@ Note
 <h2 data-number="6.5" class="anchored" data-anchor-id="adding-dependencies"><span class="header-section-number">6.5</span> Adding Dependencies</h2>
 <p>So far, we’ve looked at targets that exist in isolation. In a typical data science workflow, many steps depend on other steps. In order to properly talk about dependencies in a <em>Makefile</em>, let’s consider two tasks that work with a dataset about Star Wars characters.</p>
 <p>Here’s an excerpt of that dataset:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
 <span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">xsv</span> select name,height,mass,homeworld,species |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvlook</span>
@@ -535,7 +535,7 @@ Note
 <span class="term-output">… with 79 more lines</span></code></pre>
 
 <p>The first task computes the ten tallest humans:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
 <span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> Human | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cut</span> -d, -f 1,2 | <span class="term-callout">➋</span>
@@ -561,7 +561,7 @@ Note
 </ol>
 </div>
 <p>The second task creates a box plot showing the distribution of heights per species (see <a href="#fig-starwars-image" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
 <span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x height --y species --geom boxplot <span style="color:var(--term-3)">&gt;</span> heights.png
 <span class="term-output"></span>
@@ -578,7 +578,7 @@ Figure&nbsp;6.1: Distribution of heights per species in Star Wars
 </figure>
 </div>
 <p>Let’s put these two tasks into a <em>Makefile</em>. Instead of doing this incrementally, I’d first like to show what a complete <em>Makefile</em> looks like and then explain all the syntax step by step.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">starwars.make</span> <span style="text-decoration:underline">Makefile</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> <span style="text-decoration:underline">starwars.make</span> <span style="text-decoration:underline">Makefile</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">Makefile</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
@@ -639,7 +639,7 @@ Figure&nbsp;6.2: Dependencies between targets
 <li>The target <em><code>heights.png</code></em>, like target <em><code>top10</code></em> depends <em><code>data/starwars.csv</code></em> and makes use of both automatic variables we’ve seen in this chapter. See the <a href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">online documentation</a> if you’d like to learn about other automatic variables.</li>
 </ol>
 <p>Last but not least, let’s verify that this <em>Makefile</em> works:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">make</span>
 <span class="term-output">mkdir data</span>
 <span class="term-output">curl -sL "https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/star</span>
 <span class="term-output">wars.csv" &gt; data/starwars.csv</span>

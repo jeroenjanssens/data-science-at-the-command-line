@@ -75,6 +75,8 @@ extensions:
     style:
       cols: 80
       rows: 16
+      # 80 columns fit the text column without a horizontal scrollbar at 1440px and wider
+      font-size: 0.83em
     docker:
       image: datasciencetoolbox/dsatcl2e:latest
       # Pulled before the cache key is computed, so a new image re-runs pages

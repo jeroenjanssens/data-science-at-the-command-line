@@ -325,7 +325,7 @@ Tip
 </div>
 </div>
 <p>To install the Docker image, you first need to download and install Docker itself from <a href="https://www.docker.com/products/docker">the Docker website</a>. Once Docker is installed, you invoke the following command on your terminal or command prompt to download the Docker image (don’t type the dollar sign):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> pull datasciencetoolbox/dsatcl2e</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> pull datasciencetoolbox/dsatcl2e</code></pre>
 
 
 <div class="callout callout-style-default callout-note callout-titled">
@@ -342,11 +342,11 @@ Note
 </div>
 </div>
 <p>You can run the Docker image as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> run --rm -it datasciencetoolbox/dsatcl2e</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> run --rm -it datasciencetoolbox/dsatcl2e</code></pre>
 
 
 <p>You’re now inside an isolated environment—known as a <em>Docker container</em>—with all the necessary command-line tools installed. If the following command produces an enthusiastic cow, then you know everything is working correctly:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> <span style="color:var(--term-3)">"Let's moove</span><span style="color:var(--term-6)">\!</span><span style="color:var(--term-3)">"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> <span style="color:var(--term-3)">"Let's moove</span><span style="color:var(--term-6)">\!</span><span style="color:var(--term-3)">"</span>
 <span class="term-output"> ______________</span>
 <span class="term-output">&lt; Let's moove! &gt;</span>
 <span class="term-output"> --------------</span>
@@ -357,7 +357,7 @@ Note
 <span class="term-output">                ||     ||</span></code></pre>
 
 <p>If you want to get data in and out of the container, you can add a volume, which means that a local directory gets mapped to a directory inside the container. I recommend that you first create a new directory, navigate to this new directory, and then run the following when you’re on macOS or Linux:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> run --rm -it -v <span style="color:var(--term-3)">"</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">pwd</span><span style="color:var(--term-5)">)</span><span style="color:var(--term-3)">"</span>:/data datasciencetoolbox/dsatcl2e</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">docker</span> run --rm -it -v <span style="color:var(--term-3)">"</span><span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">pwd</span><span style="color:var(--term-5)">)</span><span style="color:var(--term-3)">"</span>:/data datasciencetoolbox/dsatcl2e</code></pre>
 
 
 <p>Or the following when you’re on Windows and using the Command Prompt (also known as <code>cmd</code>):</p>
@@ -407,7 +407,7 @@ Note
 <dt>Terminal</dt>
 <dd>
 <p>The terminal, which is the second layer, is the application where we type our commands in. If you see the following text mentioned in the book:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3
 <span class="term-output">1</span>
 <span class="term-output">2</span>
 <span class="term-output">3</span></code></pre>
@@ -427,12 +427,12 @@ Note
 <section id="executing-a-command-line-tool" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="executing-a-command-line-tool"><span class="header-section-number">2.3.2</span> Executing a Command-line Tool</h3>
 <p>Now that you have a basic understanding of the environment, it is high time that you try out some commands. Type the following in your terminal (without the dollar sign) and press <strong><code>Enter</code></strong>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pwd</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pwd</span>
 <span class="term-output">/home/dst</span></code></pre>
 
 <p>You just executed a command that contained a single command-line tool. The tool <code>pwd</code><span class="citation" data-cites="pwd"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> outputs the name of the directory where you currently are. By default, when you login, this is your home directory.</p>
 <p>The command-line tool <code>cd</code>, which is a Z shell builtin, allows you to navigate to a different directory:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch02</span> <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch02</span> <span class="term-callout">➊</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pwd</span> <span class="term-callout">➋</span>
 <span class="term-output">/data/ch02</span>
@@ -454,7 +454,7 @@ Note
 </ol>
 </div>
 <p>The part after <code>cd</code> specifies to which directory you want to navigate to. Values that come after the command are called <em>command-line arguments</em> or <em>options</em>. Two dots refer to the parent directory. One dot, by the way, refers to the current directory. While <code>cd .</code> wouldn’t have any effect, you’ll still see one dot being used in other places. Let’s try a different command:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">head</span> -n 3 <span style="text-decoration:underline">movies.txt</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">head</span> -n 3 <span style="text-decoration:underline">movies.txt</span>
 <span class="term-output">Matrix</span>
 <span class="term-output">Star Wars</span>
 <span class="term-output">Home Alone</span></code></pre>
@@ -495,7 +495,7 @@ Figure&nbsp;2.1: I use the term command-line tool as an umbrella term
 <dt>Interpreted Script</dt>
 <dd>
 <p>An interpreted script is a text file that is executed by a binary executable. Examples include: Python, R, and Bash scripts. One great advantage of an interpreted script is that you can read and change it. The script below is interpreted by Python not because of the file extension <em>.py</em>, but because the first line of the script defines the binary that should execute it.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">fac.py</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">fac.py</span>
 <span class="term-output">───────┬──────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">fac.py</span></span>
 <span class="term-output">───────┼──────────────────────────────────────────────────────────────</span>
@@ -514,7 +514,7 @@ Figure&nbsp;2.1: I use the term command-line tool as an umbrella term
 <span class="term-output">───────┴──────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>This script computes the factorial of the integer that we pass as a parameter. It can be invoked from the command line as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">./fac.py</span> 5
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">./fac.py</span> 5
 <span class="term-output">120</span></code></pre>
 
 <p>In <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a>, I’ll discuss in great detail how to create reusable command-line tools using interpreted scripts.</p>
@@ -522,7 +522,7 @@ Figure&nbsp;2.1: I use the term command-line tool as an umbrella term
 <dt>Shell Function</dt>
 <dd>
 <p>A shell function is a function that is, in our case, executed by <code>zsh</code>. They provide similar functionality to a script, but they are usually (but not necessarily) smaller than scripts. They also tend to be more personal. The following command defines a function called <code>fac</code>, which, just like the interpreted Python script above, computes the factorial of the integer we pass as a parameter. It does by generating a list of numbers using <code>seq</code>, putting those numbers on one line with <code>*</code> as the delimiter using <code>paste</code><span class="citation" data-cites="paste"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, and passing this equation into <code>bc</code><span class="citation" data-cites="bc"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span>, which evaluates it and outputs the result.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-1);font-weight:bold">fac</span><span style="color:var(--term-3)">()</span> <span style="color:var(--term-3)">{</span> <span style="color:var(--term-3)">(</span><span style="color:var(--term-2)">echo</span> 1; <span style="color:var(--term-2)">seq</span> $1<span style="color:var(--term-3)">)</span> | <span style="color:var(--term-2)">paste</span> -s -d\* - | <span style="color:var(--term-2)">bc</span>; <span style="color:var(--term-3)">}</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-1);font-weight:bold">fac</span><span style="color:var(--term-3)">()</span> <span style="color:var(--term-3)">{</span> <span style="color:var(--term-3)">(</span><span style="color:var(--term-2)">echo</span> 1; <span style="color:var(--term-2)">seq</span> $1<span style="color:var(--term-3)">)</span> | <span style="color:var(--term-2)">paste</span> -s -d\* - | <span style="color:var(--term-2)">bc</span>; <span style="color:var(--term-3)">}</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">fac</span> 5
 <span class="term-output">120</span></code></pre>
@@ -532,24 +532,24 @@ Figure&nbsp;2.1: I use the term command-line tool as an umbrella term
 <dt>Alias</dt>
 <dd>
 <p>Aliases are like macros. If you often find yourself executing a certain command with the same parameters (or a part of it), you can define an alias for it to save time. Aliases are also very useful when you continue to misspell a certain command (Chris Wiggins maintains a <a href="https://github.com/chrishwiggins/mise/blob/master/sh/aliases-public.sh">useful list of aliases</a>). The following command defines such an alias:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> l=<span style="color:var(--term-3)">'ls --color -lhF --group-directories-first'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> l=<span style="color:var(--term-3)">'ls --color -lhF --group-directories-first'</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> les=less</code></pre>
 
 <p>Now, if you type the following on the command line, the shell will replace each alias it finds with its value:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 36K</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">ch02</span></code></pre>
 
@@ -557,7 +557,7 @@ Figure&nbsp;2.1: I use the term command-line tool as an umbrella term
 </dd>
 </dl>
 <p>In this book I’ll focus mostly on the last three types of command-line tools: interpreted scripts, shell functions, and aliases. This is because these can easily be changed. The purpose of a command-line tool is to make your life on the easier, and to make you a more productive and more efficient data scientist. You can find out the type of a command-line tool with <code>type</code> (which is itself a shell builtin):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> -a pwd
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">type</span> -a pwd
 <span class="term-output">pwd is a shell builtin</span>
 <span class="term-output">pwd is /usr/bin/pwd</span>
 <span class="term-output">pwd is /bin/pwd</span>
@@ -601,7 +601,7 @@ Figure&nbsp;2.3: The output from a tool can be piped to another tool
 </figure>
 </div>
 <p>We can <em>pipe</em> the output of <code>curl</code> to <code>grep</code> to filter lines on a pattern. Imagine that we want to see the chapters listed in the table of contents: We can combine <code>curl</code> and <code>grep</code> as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span>
 <span class="term-output"> CHAPTER I.     Down the Rabbit-Hole</span>
 <span class="term-output"> CHAPTER II.    The Pool of Tears</span>
 <span class="term-output"> CHAPTER III.   A Caucus-Race and a Long Tale</span>
@@ -616,7 +616,7 @@ Figure&nbsp;2.3: The output from a tool can be piped to another tool
 <span class="term-output"> CHAPTER XII.   Alice’s Evidence</span></code></pre>
 
 <p>And if we wanted to know <em>how many</em> chapters the book has, we can use <code>wc</code>, which is very good at counting things:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">wc</span> -l <span class="term-callout">➊</span>
 <span class="term-output">12</span></code></pre>
@@ -631,11 +631,11 @@ Figure&nbsp;2.3: The output from a tool can be piped to another tool
 <section id="redirecting-input-and-output" class="level3" data-number="2.3.5">
 <h3 data-number="2.3.5" class="anchored" data-anchor-id="redirecting-input-and-output"><span class="header-section-number">2.3.5</span> Redirecting Input and Output</h3>
 <p>Besides piping the output from one tool to another tool, you can also save it to a file. The file will be saved it in the current directory, unless a full path is given. This is called <em>output redirection</em>, and works as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span> <span style="color:var(--term-3)">&gt;</span> chapter
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.gutenberg.org/files/11/11-0.txt"</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">" CHAPTER"</span> <span style="color:var(--term-3)">&gt;</span> chapter
 <span class="term-output">s.txt</span>
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
-<span class="term-output">100 170.2k 100 170.2k   0      0  3.23M      0                              0</span>
+<span class="term-output">100 170.2k 100 170.2k   0      0 159.3M      0                              0</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">chapters.txt</span>
 <span class="term-output"> CHAPTER I.     Down the Rabbit-Hole</span>
@@ -663,13 +663,13 @@ Figure&nbsp;2.4: The output from a tool can be redirected to a file
 </figure>
 </div>
 <p>You can also append the output to a file with <code>&gt;&gt;</code>, meaning the output is added after the original contents:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> -n <span style="color:var(--term-3)">"Hello"</span> <span style="color:var(--term-3)">&gt;</span> greeting.txt
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> -n <span style="color:var(--term-3)">"Hello"</span> <span style="color:var(--term-3)">&gt;</span> greeting.txt
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">" World"</span> <span style="color:var(--term-3)">&gt;&gt;</span> <span style="text-decoration:underline">greeting.txt</span></code></pre>
 
 <p>The tool <code>echo</code> outputs the value you specify. The <code>-n</code> option, which stands for <em>newline</em>, specifies that <code>echo</code> should not output a trailing newline.</p>
 <p>Saving the output to a file is useful if you need to store intermediate results, for example to continue with your analysis at a later stage. To use the contents of the file <em>greeting.txt</em> again, we can use <code>cat</code>, which reads a file prints it.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">greeting.txt</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">greeting.txt</span>
 <span class="term-output">Hello World</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">greeting.txt</span> | <span style="color:var(--term-2)">wc</span> -w <span class="term-callout">➊</span>
@@ -681,7 +681,7 @@ Figure&nbsp;2.4: The output from a tool can be redirected to a file
 </ol>
 </div>
 <p>The same result can be achieved by using the smaller-than-sign (<code>&lt;</code>):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">greeting.txt</span> <span style="color:var(--term-2)">wc</span> -w
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">greeting.txt</span> <span style="color:var(--term-2)">wc</span> -w
 <span class="term-output">2</span></code></pre>
 
 <p>This way, you are directly passing the file to the standard input of <code>wc</code> without running an additional process <a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>. <a href="#fig-diagram-essential-stdin-cat" class="quarto-xref">Figure&nbsp;<span>2.5</span></a> illustrates how these two ways work. Again, the final output is the same.</p>
@@ -696,14 +696,14 @@ Figure&nbsp;2.5: Two ways to use the contents of a file as input
 </figure>
 </div>
 <p>Like many command-line tools, <code>wc</code> allows one or more filenames to be specified as arguments. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -w <span style="text-decoration:underline">greeting.txt</span> <span style="text-decoration:underline">movies.txt</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -w <span style="text-decoration:underline">greeting.txt</span> <span style="text-decoration:underline">movies.txt</span>
 <span class="term-output"> 2 greeting.txt</span>
 <span class="term-output">11 movies.txt</span>
 <span class="term-output">13 total</span></code></pre>
 
 <p>Note that in this case, <code>wc</code> also outputs the name of the files.</p>
 <p>You can suppress the output of any tool by redirecting it to a special file called <em>/dev/null</em>. I often do this to suppress error messages (see <a href="#fig-diagram-essential-redirect-devnull" class="quarto-xref">Figure&nbsp;<span>2.6</span></a> for an illustration). The following causes <code>cat</code> to produce an error message because it cannot find the file <em>404.txt</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">movies.txt</span> 404.txt
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">movies.txt</span> 404.txt
 <span class="term-output">Matrix</span>
 <span class="term-output">Star Wars</span>
 <span class="term-output">Home Alone</span>
@@ -712,7 +712,7 @@ Figure&nbsp;2.5: Two ways to use the contents of a file as input
 <span class="term-output">cat: 404.txt: No such file or directory</span></code></pre>
 
 <p>You can redirect standard error to <em>/dev/null</em> as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">movies.txt</span> 404.txt <span style="color:var(--term-3)">2&gt;</span> <span style="text-decoration:underline">/dev/null</span> <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">movies.txt</span> 404.txt <span style="color:var(--term-3)">2&gt;</span> <span style="text-decoration:underline">/dev/null</span> <span class="term-callout">➊</span>
 <span class="term-output">Matrix</span>
 <span class="term-output">Star Wars</span>
 <span class="term-output">Home Alone</span>
@@ -746,7 +746,7 @@ Figure&nbsp;2.7: Unless you use <code>sponge</code>, you cannot read from and wr
 </figure>
 </div>
 <p>For example, imagine you have used <code>dseq</code><span class="citation" data-cites="dseq"><a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></span> to generate a file <em>dates.txt</em> and now you’d like to add line numbers using <code>nl</code><span class="citation" data-cites="nl"><a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a></span>. If you run the following, the file <em>dates.txt</em> will end up empty.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 5 <span style="color:var(--term-3)">&gt;</span> dates.txt
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 5 <span style="color:var(--term-3)">&gt;</span> dates.txt
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">dates.txt</span> <span style="color:var(--term-2)">nl</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">dates.txt</span>
 <span class="term-output"></span>
@@ -756,7 +756,7 @@ Figure&nbsp;2.7: Unless you use <code>sponge</code>, you cannot read from and wr
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>Instead, you can use one of the workarounds I just described:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 5 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">dates.txt</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 5 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">dates.txt</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">dates.txt</span> <span style="color:var(--term-2)">nl</span> <span style="color:var(--term-3)">&gt;</span> dates-nl.txt
 <span class="term-output"></span>
@@ -791,7 +791,7 @@ Figure&nbsp;2.7: Unless you use <code>sponge</code>, you cannot read from and wr
 <h3 data-number="2.3.6" class="anchored" data-anchor-id="working-with-files-and-directories"><span class="header-section-number">2.3.6</span> Working With Files and Directories</h3>
 <p>As data scientists, we work with a lot of data. This data is often stored in files. It is important to know how to work with files (and the directories they live in) on the command line. Every action that you can do using a GUI, you can do with command-line tools (and much more). In this section I introduce the most important ones to list, create, move, copy, rename, and delete files and directories.</p>
 <p>Listing the contents of a directory can be done with <code>ls</code>. If you don’t specify a directory, it lists the contents of the current directory. I prefer <code>ls</code> to have a long listing format and the directories grouped before files. Instead of typing the corresponding options each time, I use the alias <code>l</code>.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="text-decoration:underline">/data/ch10</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="text-decoration:underline">/data/ch10</span>
 <span class="term-output">Untitled1337.ipynb  alice.txt  count.R  count.py</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">alias</span> l
@@ -799,10 +799,10 @@ Figure&nbsp;2.7: Unless you use <code>sponge</code>, you cannot read from and wr
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> <span style="text-decoration:underline">/data/ch10</span>
 <span class="term-output">total 176K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  9 17:52 Untitled1337.ipynb</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 17:52 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  9 17:52 count.R</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  9 17:52 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  9 18:41 Untitled1337.ipynb</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 18:41 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  9 18:41 count.R</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  9 18:41 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
 
 <p>You have already seen how we can create new files by redirecting the output with either <code>&gt;</code> or <code>&gt;&gt;</code>. If you need to move a file to a different directory you can use <code>mv</code><span class="citation" data-cites="mv"><a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a></span>:</p>
 <pre class="text"><code>$ mv hello.txt /data/ch02</code></pre>
@@ -816,22 +816,22 @@ $ mv hello.txt bye.txt</code></pre>
 <p>If you want to copy a file, use <code>cp</code><span class="citation" data-cites="cp"><a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a></span>. This is useful for creating backups:</p>
 <pre class="text"><code>$ cp server.log server.log.bak</code></pre>
 <p>You can create directories using <code>mkdir</code><span class="citation" data-cites="mkdir"><a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></span>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> logs
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 40K</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:53 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:52 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
-<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 17:53 <span style="color:var(--term-4);font-weight:bold">logs</span>/</span></code></pre>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:42 <span style="color:var(--term-4);font-weight:bold">ch02</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch03</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch04</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch05</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch06</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch07</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch08</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch09</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:41 <span style="color:var(--term-4);font-weight:bold">ch10</span>/</span>
+<span class="term-output">drwxr-xr-x 2 dst dst 4.0K Nov  9 18:42 <span style="color:var(--term-4);font-weight:bold">logs</span>/</span></code></pre>
 
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -847,7 +847,7 @@ Tip
 </div>
 </div>
 <p>All of the above command-line tools accept the <code>-v</code> option, which stands for verbose, so that they output what’s going on. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> -v backup
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">mkdir</span> -v backup
 <span class="term-output">mkdir: created directory 'backup'</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> -v <span style="color:var(--term-4)">*</span> <span style="text-decoration:underline">backup</span>
@@ -864,7 +864,7 @@ Tip
 <span class="term-output">cp: -r not specified; omitting directory 'logs'</span></code></pre>
 
 <p>All tools but <code>mkdir</code> also accept the <code>-i</code> option, which stands for interactive, and causes the tools to ask you for confirmation. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> -i <span style="color:var(--term-4)">*</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> -i <span style="color:var(--term-4)">*</span>
 <span class="term-output">zsh: sure you want to delete all 11 files in /data [yn]? n</span></code></pre>
 
 </section>
@@ -873,7 +873,7 @@ Tip
 <p>Sometimes a tools or sequence of tools produces too much output to include in the book. Instead of manually altering such output, I prefer to be transparent by piping it through a helper tool. You don’t necessarily have to do this, especially if you’re interested in the complete output.</p>
 <p>Here are the tools that I use for making output manageable:</p>
 <p>If often use <code>trim</code> to limit the output to a given height and width. By default, output is trimmed to 10 lines and the width of the terminal. Pass a negative number to disable trimming the height and or width. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span> | <span style="color:var(--term-2)">trim</span> 5 25
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span> | <span style="color:var(--term-2)">trim</span> 5 25
 <span class="term-output">bill,tip,sex,smoker,day,…</span>
 <span class="term-output">16.99,1.01,Female,No,Sun…</span>
 <span class="term-output">10.34,1.66,Male,No,Sun,D…</span>
@@ -888,7 +888,7 @@ Tip
     sed '2s/- | -/──┼──/g;2s/| -/├──/g;2s/- |/──┤/;s/|/│/g;2s/-/─/g'
 }</code></pre>
 <p><code>command</code> makes sure that the original <code>csvlook</code> is run, not the function itself. To get the same behavior on your own machine, add this function to your <em>~/.zshrc</em>. Here’s the result:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span>
 <span class="term-output">│  bill │   tip │ sex    │ smoker │ day  │ time   │ size │</span>
 <span class="term-output">├───────┼───────┼────────┼────────┼──────┼────────┼──────┤</span>
 <span class="term-output">│ 16.99 │  1.01 │ Female │  False │ Sun  │ Dinner │    2 │</span>
@@ -902,7 +902,7 @@ Tip
 <span class="term-output">… with 236 more lines</span></code></pre>
 
 <p>I use <code>bat</code> to show the contents of a file where line numbers and syntax highlighting matters. For example source code:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">/data/ch04/stream.py</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">/data/ch04/stream.py</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">/data/ch04/stream.py</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -918,7 +918,7 @@ Tip
 
 <p>Sometimes I add the <code>-A</code> option when I want to explicitly point out the spaces, tabs, and newlines in a file.</p>
 <p>Sometimes it’s useful to write intermediate output to a file. This allows you to inspect any step in your pipeline once it has completed. You can insert the tool <code>tee</code> as often as you like in your pipeline. I often use it to inspect a portion of the final output, while writing the complete output to file (see <a href="#fig-diagram-essential-tee" class="quarto-xref">Figure&nbsp;<span>2.8</span></a>. Here, the complete output is written to <em>even.txt</em> and the first 5 lines are printed using <code>trim</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 2 100 | <span style="color:var(--term-2)">tee</span> even.txt | <span style="color:var(--term-2)">trim</span> 5
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 2 100 | <span style="color:var(--term-2)">tee</span> even.txt | <span style="color:var(--term-2)">trim</span> 5
 <span class="term-output">0</span>
 <span class="term-output">2</span>
 <span class="term-output">4</span>
@@ -942,7 +942,7 @@ Figure&nbsp;2.8: With <code>tee</code>, you can write intermediate output to a f
 <h3 data-number="2.3.8" class="anchored" data-anchor-id="help"><span class="header-section-number">2.3.8</span> Help!</h3>
 <p>As you’re finding your way around the command-line, it may happen that you need help. Even the most seasoned users need help at some point. It is impossible to remember all the different command-line tools and their possible arguments. Fortunately, the command line offers severals ways to get help.</p>
 <p>The most important command to get help is perhaps <code>man</code><span class="citation" data-cites="man"><a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></span>, which is short for <em>manual</em>. It contains information for most command-line tools. In case I forgot the options to the tool <code>tar</code>, which happens all the time, I just access its manual page using:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> tar | <span style="color:var(--term-2)">trim</span> 20
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> tar | <span style="color:var(--term-2)">trim</span> 20
 <span class="term-output">TAR(1)                          GNU TAR Manual                          TAR(1)</span>
 <span class="term-output"></span>
 <span class="term-output">NAME</span>
@@ -966,11 +966,11 @@ Figure&nbsp;2.8: With <code>tee</code>, you can write intermediate output to a f
 <span class="term-output">… with 1144 more lines</span></code></pre>
 
 <p>Not every command-line tool has a manual page. Take <code>cd</code> for example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> cd
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> cd
 <span class="term-output">No manual entry for cd</span></code></pre>
 
 <p>For shell builtins like <code>cd</code> you can consult the <em>zshbuiltins</em> manual page:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> zshbuiltins | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> zshbuiltins | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">ZSHBUILTINS(1)              General Commands Manual             ZSHBUILTINS(1)</span>
 <span class="term-output"></span>
 <span class="term-output">NAME</span>
@@ -985,7 +985,7 @@ Figure&nbsp;2.8: With <code>tee</code>, you can write intermediate output to a f
 
 <p>You can search by pressing <strong><code>/</code></strong> and exit by pressing <strong><code>q</code></strong>. Try to find the appropriate section for <code>cd</code>.</p>
 <p>Newer command-line tools often lack a manual page as well. In that case, your best bet is to invoke the tool with the <code>--help</code> (or <code>-h</code>) option. For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">jq</span> --help | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">jq</span> --help | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">jq - commandline JSON processor [version 1.8.1]</span>
 <span class="term-output"></span>
 <span class="term-output">Usage:  jq [options] &lt;jq filter&gt; [file...]</span>
@@ -1001,7 +1001,7 @@ Figure&nbsp;2.8: With <code>tee</code>, you can write intermediate output to a f
 <p>Specifying the <code>--help</code> option also works for command-line tools such as <code>cat</code>. However, the corresponding man page often provides more information. If, after trying these three approaches, you are still stuck, then it is perfectly acceptable to consult the Internet. In the appendix, there’s a list of all command-line tools used in this book. Besides how each command-line tool can be installed, it also shows how you can get help.</p>
 <p>Manual pages can be quite verbose and difficult to read. The tool <code>tldr</code><span class="citation" data-cites="tldr"><a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></span> is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional manual pages. Here’s an example showing the tldr page for <code>tar</code>:</p>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tldr</span> tar | <span style="color:var(--term-2)">trim</span> 20
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tldr</span> tar | <span style="color:var(--term-2)">trim</span> 20
 <span class="term-output"></span>
 <span class="term-output">  Archiving utility.</span>
 <span class="term-output">  Often combined with a compression method, such as `gzip` or `bzip2`.</span>

@@ -299,14 +299,14 @@ ul.task-list li input[type="checkbox"] {
 <li>Transform data using shell commands in Apache Spark</li>
 </ul>
 <p>This chapter starts with the following files:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch10</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch10</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 176K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  9 17:57 Untitled1337.ipynb</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 17:57 alice.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  9 17:57 count.R</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  9 17:57 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 1.7K Nov  9 18:46 Untitled1337.ipynb</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 164K Nov  9 18:46 alice.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  460 Nov  9 18:46 count.R</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  408 Nov  9 18:46 <span style="color:var(--term-2);font-weight:bold">count.py</span>*</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -314,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="10.2" class="anchored" data-anchor-id="jupyter"><span class="header-section-number">10.2</span> Jupyter</h2>
 <p>Project Jupyter is an open-source project, born out of the IPython Project in 2014 as it evolved to support interactive data science and scientific computing across all programming languages. Jupyter supports over 40 programming languages, including Python, R, Julia, and Scala. In this section I’ll focus on Python.</p>
 <p>The project includes JupyterLab, Jupyter Notebook, and Jupyter Console. I’ll start with Jupyter Console, as it is the most basic one to work with Python in an interactive way. Here’s a Jupyter Console session illustrating a couple of ways to leverage the command line.</p>
-<pre class="term-output"><code><span class="term-output"></span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">jupyter</span> console
 <span class="term-output">Jupyter console 6.4.0</span>
 <span class="term-output"></span>
@@ -439,7 +439,7 @@ Warning
 <section id="python" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="python"><span class="header-section-number">10.3</span> Python</h2>
 <p>The <code>subprocess</code> module allows you to run command-line tools from Python and connect to their standard input and output. This module is recommended over the older <code>os.system()</code> function. It’s not run in a shell by default, but it’s possible to change that with the <code>shell</code> argument to <code>run()</code> function.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">count.py</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">count.py</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">count.py</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -475,7 +475,7 @@ Warning
 </ol>
 </div>
 <p>This command-line tools is used as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">./count.py</span> <span style="text-decoration:underline">alice.txt</span> alice
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">./count.py</span> <span style="text-decoration:underline">alice.txt</span> alice
 <span class="term-output">403</span></code></pre>
 
 <p>Notice that the first argument of the <code>run</code> call on line 15 is a list of strings, where the first item is the name of the command-line tool, and the remaining items are arguments. This is different from passing a single string. This is also means that you don’t have any other shell syntax available that would allow for things such as redirection and piping.</p>
@@ -484,7 +484,7 @@ Warning
 <h2 data-number="10.4" class="anchored" data-anchor-id="r"><span class="header-section-number">10.4</span> R</h2>
 <p>In R, there are several ways to leverage the command line.</p>
 <p>In the example below, I start an R session and count the number of occurrences of the string <em>alice</em> in the book <em>Alice’s Adventures in Wonderland</em> using the <code>system2()</code> function.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">R</span> --quiet
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">R</span> --quiet
 <span class="term-prompt" data-prompt="> "></span>lines &lt;- readLines("alice.txt") <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span>head(lines)
 <span class="term-output">[1] "Project Gutenberg's Alice's Adventures in Wonderland, by Lewis Carroll"</span>
@@ -513,7 +513,7 @@ Warning
 </div>
 <p>A disadvantage of <code>system2()</code> is that it first writes the character vector to a file before passing it as standard input to the command-line tool. This can be problematic when dealing with a lot of data and a lot of invocations.</p>
 <p>It’s better to use a named pipe, because then no data will be written to disk, which is much more efficient. This can be done with <code>pipe()</code> and <code>fifo()</code> functions. Thanks to Jim Hester for suggesting this. The code below demonstrates this:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="> "></span>out_con &lt;- fifo("out", "w+") <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="> "></span>out_con &lt;- fifo("out", "w+") <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span>in_con &lt;- pipe("grep b &gt; out") <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span>writeLines(c("foo", "bar"), in_con) <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span>readLines(out_con) <span class="term-callout">➍</span>
@@ -546,7 +546,7 @@ Warning
 <!-- pbcopy pbpaste -->
 <!-- when formatting emailadresses -->
 <p>Because this requires quite a bit of boilerplate code (creating connections, writing, reading, cleaning up), I have written a helper function <code>sh()</code>. Using the pipe operator (<code>%&gt;%</code>) from the <code>magrittr</code> package I chain together multiple shell commands.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="> "></span>library(magrittr)
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="> "></span>library(magrittr)
 <span class="term-prompt" data-prompt=">"></span>
 <span class="term-prompt" data-prompt="> "></span>sh &lt;- function(.data, command) {
 <span class="term-output">+   temp_file &lt;- tempfile()</span>
@@ -614,7 +614,7 @@ Figure&nbsp;10.3: RStudio IDE with terminal tab open
 <p>Apache Spark is a cluster-computing framework. It’s the 800-pound gorilla you turn to when it’s impossible to fit your data in memory. Spark itself is written in Scala, but you can also interact with it from Python using <a href="https://spark.apache.org/docs/latest/api/python/index.html">PySpark</a> and from R using <a href="https://spark.apache.org/docs/latest/sparkr.html">SparkR</a> or <a href="https://spark.rstudio.com/">sparklyr</a>.</p>
 <p>Data processing and machine learning pipelines are defined through a series of transformations and one final action. One such transformation is the <code>pipe()</code> transformation, which allows you to run the entire dataset through a shell command such as a Bash or Perl script. The items in the dataset are written to standard input and the standard output is returned as an RDD of strings.</p>
 <p>In the session below, I start a Spark shell and again count the number of occurrences of <em>alice</em> in the book <em>Alice’s Adventures in Wonderland</em>.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">spark-shell</span> --master local[6]
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">spark-shell</span> --master local[6]
 <span class="term-output">Spark context Web UI available at http://3d1bec8f2543:4040</span>
 <span class="term-output">Spark context available as 'sc' (master = local[6], app id = local-16193763).</span>
 <span class="term-output">Spark session available as 'spark'.</span>

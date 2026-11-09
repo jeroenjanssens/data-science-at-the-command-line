@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 0: `$ cd /data/ch07`
 
 - id: `chapter-7-exploring-data.html:block:0`
-- hash: `6b6778e3`
+- hash: `c95e2435`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -20,10 +20,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:49 tips.csv
 --rw-r--r-- 1 dst dst  83K Dec 14 11:49 venture.csv
 --rw-r--r-- 1 dst dst 4.6K Dec 14 11:49 venture-wide.csv
-+-rw-r--r-- 1 dst dst  125 Nov  9 17:54 datatypes.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  9 17:54 tips.csv
-+-rw-r--r-- 1 dst dst 4.6K Nov  9 17:54 venture-wide.csv
-+-rw-r--r-- 1 dst dst  83K Nov  9 17:54 venture.csv
++-rw-r--r-- 1 dst dst  125 Nov  9 18:43 datatypes.csv
++-rw-r--r-- 1 dst dst 7.8K Nov  9 18:43 tips.csv
++-rw-r--r-- 1 dst dst 4.6K Nov  9 18:43 venture-wide.csv
++-rw-r--r-- 1 dst dst  83K Nov  9 18:43 venture.csv
 ```
 
 ## Code block 20: `> library(tidyverse)                            ➊`

@@ -5,7 +5,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 0: `$ cd /data/ch05`
 
 - id: `chapter-5-scrubbing-data.html:block:0`
-- hash: `90a1ec3a`
+- hash: `3e68d4a3`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -23,19 +23,19 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst  129 Dec 14 11:47 names.csv
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:47 tips.csv
 --rw-r--r-- 1 dst dst 5.1K Dec 14 11:47 users.json
-+-rw-r--r-- 1 dst dst 164K Nov  9 17:54 alice.txt
-+-rw-r--r-- 1 dst dst 4.5K Nov  9 17:54 iris.csv
-+-rw-r--r-- 1 dst dst  179 Nov  9 17:54 irismeta.csv
-+-rw-r--r-- 1 dst dst  160 Nov  9 17:54 names-comma.csv
-+-rw-r--r-- 1 dst dst  129 Nov  9 17:54 names.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  9 17:54 tips.csv
-+-rw-r--r-- 1 dst dst 5.1K Nov  9 17:54 users.json
++-rw-r--r-- 1 dst dst 164K Nov  9 18:42 alice.txt
++-rw-r--r-- 1 dst dst 4.5K Nov  9 18:42 iris.csv
++-rw-r--r-- 1 dst dst  179 Nov  9 18:42 irismeta.csv
++-rw-r--r-- 1 dst dst  160 Nov  9 18:42 names-comma.csv
++-rw-r--r-- 1 dst dst  129 Nov  9 18:42 names.csv
++-rw-r--r-- 1 dst dst 7.8K Nov  9 18:42 tips.csv
++-rw-r--r-- 1 dst dst 5.1K Nov  9 18:42 users.json
 ```
 
 ## Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`
 
 - id: `chapter-5-scrubbing-data.html:block:17`
-- hash: `4b6e540d`
+- hash: `95e40bdf`
 - status: **accept**
 - cause: random
 - note: sample draws other lines
@@ -52,21 +52,21 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -Line 438
 -Line 807
 -Line 813
-+Line 24
-+Line 93
-+Line 330
-+Line 653
-+Line 654
-+Line 804
-+Line 846
-+Line 888
-+Line 912
++Line 30
++Line 121
++Line 237
++Line 302
++Line 425
++Line 499
++Line 501
++Line 685
++Line 854
 ```
 
 ## Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`
 
 - id: `chapter-5-scrubbing-data.html:block:18`
-- hash: `1265db44`
+- hash: `c2b98044`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -82,12 +82,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -Dec 14 11:48:13 Line 250
 -Dec 14 11:48:14 Line 785
 -Dec 14 11:48:15 Line 786
-+Nov 09 17:54:11 Line 211
-+Nov 09 17:54:12 Line 372
-+Nov 09 17:54:13 Line 504
-+Nov 09 17:54:14 Line 720
-+Nov 09 17:54:15 Line 742
-+Nov 09 17:54:16 Line 783
++Nov 09 18:43:08 Line 19
++Nov 09 18:43:09 Line 305
++Nov 09 18:43:10 Line 414
++Nov 09 18:43:11 Line 553
++Nov 09 18:43:12 Line 681
++Nov 09 18:43:13 Line 684
 ```
 
 ## Code block 68: `$ curl -sL 'http://en.wikipedia.org/wiki/List_of_countries_and_territo`

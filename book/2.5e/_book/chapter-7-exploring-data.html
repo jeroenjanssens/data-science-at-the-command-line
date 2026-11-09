@@ -321,14 +321,14 @@ ul.task-list li input[type="checkbox"] {
 <li>Create data visualizations inside and outside the command line</li>
 </ul>
 <p>This chapter starts with the following files:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch07</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch07</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 104K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  9 17:54 datatypes.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 17:54 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  9 17:54 venture-wide.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  9 17:54 venture.csv</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov  9 18:43 datatypes.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov  9 18:43 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov  9 18:43 venture-wide.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov  9 18:43 venture.csv</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -345,7 +345,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="header-or-not-here-i-come" class="level3" data-number="7.2.1">
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="header-or-not-here-i-come"><span class="header-section-number">7.2.1</span> Header Or Not, Here I Come</h3>
 <p>You can check whether your file has a header by printing the first few lines using <code>head</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">head</span> -n 5 <span style="text-decoration:underline">venture.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">head</span> -n 5 <span style="text-decoration:underline">venture.csv</span>
 <span class="term-output">FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIME</span>
 <span class="term-output">_FORMAT_DESC,TIME_PERIOD_DESC,OBS_STATUS_DESC,EXPEND_DESC,UNIT_DESC,GEO_DESC</span>
 <span class="term-output">A,P1Y,2015,INV_VEN,PC_GDP,CZ,,0.002,Annual,Annual,Year 2015,No data,"Venture cap</span>
@@ -358,7 +358,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">ital investment (seed, start-up and later stage) ",Percentage of GDP,Germany</span></code></pre>
 
 <p>If the lines wrap around, add line numbers using <code>nl</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">head</span> -n 3 <span style="text-decoration:underline">venture.csv</span> | <span style="color:var(--term-2)">nl</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">head</span> -n 3 <span style="text-decoration:underline">venture.csv</span> | <span style="color:var(--term-2)">nl</span>
 <span class="term-output">     1  FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_D</span>
 <span class="term-output">ESC,TIME_FORMAT_DESC,TIME_PERIOD_DESC,OBS_STATUS_DESC,EXPEND_DESC,UNIT_DESC,GEO_</span>
 <span class="term-output">DESC</span>
@@ -370,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">many</span></code></pre>
 
 <p>Alternatively, you can use <code>trim</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">venture.csv</span> <span style="color:var(--term-2)">trim</span> 5
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">venture.csv</span> <span style="color:var(--term-2)">trim</span> 5
 <span class="term-output">FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIM…</span>
 <span class="term-output">A,P1Y,2015,INV_VEN,PC_GDP,CZ,,0.002,Annual,Annual,Year 2015,No data,"Venture ca…</span>
 <span class="term-output">A,P1Y,2007,INV_VEN,PC_GDP,DE,,0.034,Annual,Annual,Year 2007,No data,"Venture ca…</span>
@@ -383,9 +383,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="inspect-all-the-data" class="level3" data-number="7.2.2">
 <h3 data-number="7.2.2" class="anchored" data-anchor-id="inspect-all-the-data"><span class="header-section-number">7.2.2</span> Inspect All The Data</h3>
 <p>If you want to inspect the raw data at your own pace, then it’s probably not a good idea to use <code>cat</code>, because then all the data will be printed in one go. I recommend using <code>less</code><span class="citation" data-cites="less"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></span>, which allows you to interactively inspect your data in the command line. You can prevent long lines (as with <em>venture.csv</em>) from wrapping by specifying the <code>-S</code> option:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">less</span> -S <span style="text-decoration:underline">venture.csv</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">less</span> -S <span style="text-decoration:underline">venture.csv</span></code></pre>
 
-<pre class="term-screen"><code>FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIM<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
+<pre class="term-screen" style="font-size:0.83em"><code>FREQ,TIME_FORMAT,TIME_PERIOD,EXPEND,UNIT,GEO,OBS_STATUS,OBS_VALUE,FREQ_DESC,TIM<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
 A,P1Y,2015,INV_VEN,PC_GDP,CZ,,0.002,Annual,Annual,Year 2015,No data,"Venture ca<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
 A,P1Y,2007,INV_VEN,PC_GDP,DE,,0.034,Annual,Annual,Year 2007,No data,"Venture ca<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
 A,P1Y,2008,INV_VEN,PC_GDP,DE,,0.039,Annual,Annual,Year 2008,No data,"Venture ca<span style="color:var(--term-bg, #000);background:var(--term-fg, #fff)">&gt;</span>
@@ -409,7 +409,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <section id="feature-names-and-data-types" class="level3" data-number="7.2.3">
 <h3 data-number="7.2.3" class="anchored" data-anchor-id="feature-names-and-data-types"><span class="header-section-number">7.2.3</span> Feature Names and Data Types</h3>
 <p>The column (or feature) names may indicate the meaning of the feature. You can use the following <code>head</code> and <code>tr</code> combo for this:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">venture.csv</span> <span style="color:var(--term-2)">head</span> -n 1 | <span style="color:var(--term-2)">tr</span> , <span style="color:var(--term-3)">'\n'</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">venture.csv</span> <span style="color:var(--term-2)">head</span> -n 1 | <span style="color:var(--term-2)">tr</span> , <span style="color:var(--term-3)">'\n'</span>
 <span class="term-output">FREQ</span>
 <span class="term-output">TIME_FORMAT</span>
 <span class="term-output">TIME_PERIOD</span>
@@ -427,7 +427,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output">GEO_DESC</span></code></pre>
 
 <p>This basic command assumes that the file is delimited by commas. A more robust approach is to use <code>csvcut</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvcut</span> -n <span style="text-decoration:underline">venture.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvcut</span> -n <span style="text-decoration:underline">venture.csv</span>
 <span class="term-output">  1: FREQ</span>
 <span class="term-output">  2: TIME_FORMAT</span>
 <span class="term-output">  3: TIME_PERIOD</span>
@@ -445,7 +445,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output"> 15: GEO_DESC</span></code></pre>
 
 <p>You can go a step further than just printing the column names. Besides the names of the columns, it would be very useful to know what type of values each column contains, such as a string of characters, a numerical value, or a date. Assume that you have the following toy dataset:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">datatypes.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> -A <span style="text-decoration:underline">datatypes.csv</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">datatypes.csv</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -456,7 +456,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>Which <code>csvlook</code> interprets as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">datatypes.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvlook</span> <span style="text-decoration:underline">datatypes.csv</span>
 <span class="term-output">│  a │      b │     c │ d        │                   e │          f │</span>
 <span class="term-output">├────┼────────┼───────┼──────────┼─────────────────────┼────────────┤</span>
 <span class="term-output">│  1 │ 0.000… │ False │ "Yes!"   │ 2011-11-11 11:00:00 │ 2012-09-08 │</span>
@@ -464,7 +464,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output">│ 66 │        │ False │ 2198     │                     │            │</span></code></pre>
 
 <p>I have already used <code>csvsql</code> in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a> to execute SQL queries directly on CSV data. When no command-line arguments are passed, it generates the necessary SQL statement that would be needed if you were to insert this data into an actual database. You can use the output also to inspect what the inferred column types are. If a column has the <em>NOT NULL</em> string printed after the data type, then that column contains no missing values.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> <span style="text-decoration:underline">datatypes.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> <span style="text-decoration:underline">datatypes.csv</span>
 <span class="term-output">CREATE TABLE datatypes (</span>
 <span class="term-output">        a DECIMAL NOT NULL,</span>
 <span class="term-output">        b DECIMAL,</span>
@@ -475,7 +475,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output">);</span></code></pre>
 
 <p>This output is especially useful when you use other tools within the <code>csvkit</code> suite, such as <code>csvgrep</code>, <code>csvsort</code> and <code>csvsql</code>. For <em>venture.csv</em>, the columns are inferred as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> <span style="text-decoration:underline">venture.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvsql</span> <span style="text-decoration:underline">venture.csv</span>
 <span class="term-output">CREATE TABLE venture (</span>
 <span class="term-output">        "FREQ" VARCHAR NOT NULL,</span>
 <span class="term-output">        "TIME_FORMAT" VARCHAR NOT NULL,</span>
@@ -500,14 +500,14 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <p>Knowing the data type of each feature is not enough. It’s also essential to know what each feature represents. Having knowledge about the domain is very useful here, but we may also get some context by looking at the data itself.</p>
 <p>Both a string and an integer could be a unique identifier or could represent a category. In the latter case, this could be used to assign a color to your visualization. But if an integer denotes, say, a postal code, then it doesn’t make sense to compute the average.</p>
 <p>To determine whether a feature should be treated as a unique identifier or categorical variable, you could count the number of unique values for a specific column:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -l <span style="text-decoration:underline">tips.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">wc</span> -l <span style="text-decoration:underline">tips.csv</span>
 <span class="term-output">245 tips.csv</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-2)">csvcut</span> -c day | <span style="color:var(--term-2)">header</span> -d | <span style="color:var(--term-2)">sort</span> | <span style="color:var(--term-2)">uniq</span> | <span style="color:var(--term-2)">wc</span> -l
 <span class="term-output">4</span></code></pre>
 
 <p>You can use <code>csvstat</code><span class="citation" data-cites="csvstat"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>, which is part of <code>csvkit</code>, to get the number of unique values for each column:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">tips.csv</span> --unique
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">tips.csv</span> --unique
 <span class="term-output">  1. bill: 229</span>
 <span class="term-output">  2. tip: 123</span>
 <span class="term-output">  3. sex: 2</span>
@@ -534,7 +534,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output"> 15. GEO_DESC: 20</span></code></pre>
 
 <p>If there’s only one unique value (such as with <em>OBS_STATUS</em>), then there’s a chance that you can discard that column because it doesn’t provide any value. If you wanted to automatically discard all such columns, then you could use the following pipeline:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">venture.csv</span> <span style="color:var(--term-2)">csvcut</span> -C <span style="color:var(--term-5)">$(</span> <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">venture.csv</span> <span style="color:var(--term-2)">csvcut</span> -C <span style="color:var(--term-5)">$(</span> <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt=">   "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> --unique | <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt=">   "></span><span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">': 1$'</span> | <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt=">   "></span><span style="color:var(--term-2)">cut</span> -d. -f 1 | <span class="term-callout">➍</span>
@@ -580,7 +580,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <li>Various descriptive statistics (minimum, maximum, sum, mean, standard deviation, and median) for those features for which it is appropriate</li>
 </ul>
 <p>Invoke <code>csvstat</code> as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> | <span style="color:var(--term-2)">trim</span> 32
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> | <span style="color:var(--term-2)">trim</span> 32
 <span class="term-output">  1. "FREQ"</span>
 <span class="term-output"></span>
 <span class="term-output">        Type of data:          Text</span>
@@ -629,7 +629,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <li><code>--len</code> (maximum value length)</li>
 </ul>
 <p>For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> --freq | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> --freq | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">  1. FREQ: { "A": 540 }</span>
 <span class="term-output">  2. TIME_FORMAT: { "P1Y": 540 }</span>
 <span class="term-output">  3. TIME_PERIOD: { "2015": 60, "2007": 60, "2008": 60, "2009": 60, "2010": 60 }</span>
@@ -643,7 +643,7 @@ A,P1Y,2010,INV_VEN,PC_GDP,DK,,0.059,Annual,Annual,Year 2010,No data,"Venture ca<
 <span class="term-output">… with 5 more lines</span></code></pre>
 
 <p>You can select a subset of features with the <code>-c</code> option, which accepts both integers and column names:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> -c 3,GEO
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> -c 3,GEO
 <span class="term-output">  3. "TIME_PERIOD"</span>
 <span class="term-output"></span>
 <span class="term-output">        Type of data:          Number</span>
@@ -689,7 +689,7 @@ Tip
 </div>
 </div>
 <p>As a nice extra, <code>csvstat</code> outputs, at the very end, the number of data points (rows). Newlines and commas inside values are handled correctly. To only see that last line, you can use <code>tail</code>. Alternatively, you can use <code>xsv</code>, which only returns the actual number of rows.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> | <span style="color:var(--term-2)">tail</span> -n 1
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvstat</span> <span style="text-decoration:underline">venture.csv</span> | <span style="color:var(--term-2)">tail</span> -n 1
 <span class="term-output">Row count: 540</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">xsv</span> count <span style="text-decoration:underline">venture.csv</span>
@@ -702,7 +702,7 @@ Tip
 <p>In this section I’d like to introduce you to a command-line tool called <code>rush</code><span class="citation" data-cites="rush"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span>, which enables you to leverage the statistical programming environment <code>R</code><span class="citation" data-cites="R"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span> directly from the command line. Before I explain what <code>rush</code> does and why it exists, lets talk a bit about <code>R</code> itself.</p>
 <p><code>R</code> is a very powerful statistical software package to do data science. It’s an interpreted programming language, has an extensive collection of packages, and offers its own REPL, which allows you, similar to the command line, to play with your data. Note that, once you start R, you’re in an interactive session that is separated from the Unix command line.</p>
 <p>Imagine that you have a CSV file called <em>tips.csv</em>, and you would like compute the tip percentage, and save the result. To accomplish this in <code>R</code> you would first run, <code>R</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">R</span> --quiet <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">R</span> --quiet <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt=">"></span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -711,7 +711,7 @@ Tip
 </ol>
 </div>
 <p>And then run the following code:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="> "></span>library(tidyverse) <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="> "></span>library(tidyverse) <span class="term-callout">➊</span>
 <span class="term-output">── <span style="font-weight:bold">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span>
 <span class="term-output"><span style="color:var(--term-2)">✔</span> <span style="color:var(--term-4)">dplyr    </span> 1.2.1     <span style="color:var(--term-2)">✔</span> <span style="color:var(--term-4)">readr    </span> 2.2.0</span>
 <span class="term-output"><span style="color:var(--term-2)">✔</span> <span style="color:var(--term-4)">forcats  </span> 1.0.1     <span style="color:var(--term-2)">✔</span> <span style="color:var(--term-4)">stringr  </span> 1.6.0</span>
@@ -749,7 +749,7 @@ Tip
 </ol>
 </div>
 <p>Afterwards, you can continue with the saved file <em>percent.csv</em> on the command line.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">percent.csv</span> <span style="color:var(--term-2)">trim</span> 5
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">percent.csv</span> <span style="color:var(--term-2)">trim</span> 5
 <span class="term-output">bill,tip,sex,smoker,day,time,size,percent</span>
 <span class="term-output">16.99,1.01,Female,No,Sun,Dinner,2,5.9446733372572105</span>
 <span class="term-output">10.34,1.66,Male,No,Sun,Dinner,3,16.054158607350097</span>
@@ -759,7 +759,7 @@ Tip
 
 <p>Note that only the third line is associated with what you want to accomplish specifically. The other lines are necessary boilerplate. Typing in this boilerplate in order to accomplish something simple is cumbersome and breaks your workflow. Sometimes, you only want to do one or two things at a time to your data. Wouldn’t it be great if you could harness the power of <code>R</code> and to use it from the command line?</p>
 <p>This is where <code>rush</code> comes in. Let’s perform the same task as before, but now using <code>rush</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">percent.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rm</span> <span style="text-decoration:underline">percent.csv</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run -t <span style="color:var(--term-3)">'mutate(df, percent = tip / bill * 100)'</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> percent.csv
 <span class="term-output"></span>
@@ -772,7 +772,7 @@ Tip
 <span class="term-output">… with 240 more lines</span></code></pre>
 
 <p>These small one-liners are possible because <code>rush</code> takes care of all the boilerplate. In this case I’m using the <code>run</code> subcommand. There’s also the <code>plot</code> subcommand, which I’ll use in the next section to produce data visualizations quickly. If you’re passing in any input data, then by default, <code>rush</code> assumes that it’s in CSV format with a header and a comma as the delimiter. Moreover, the column names are sanitized so that they are easier to work with. You can override these defaults using the <code>--no-header</code> (or <code>-H</code>), <code>--delimiter</code> (or <code>-d</code>), and <code>--no-clean-names</code> (or <code>-C</code>) options, respectively. The help gives a good overview of the available options for the <code>run</code> subcommand:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run --help
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run --help
 <span class="term-output">rush: Run an R expression</span>
 <span class="term-output"></span>
 <span class="term-output">Usage:</span>
@@ -832,7 +832,7 @@ Tip
 <span class="term-output">      --version                 Show version.</span></code></pre>
 
 <p>Under the hood, <code>rush</code> generates an <code>R</code> script and subsequently executes it. You can view this generated script by specifying the <code>--dry-run</code> (or <code>-n</code>) option:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run -n --tidyverse <span style="color:var(--term-3)">'mutate(df, percent = tip / bill * 100)'</span> <span style="text-decoration:underline">tips.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run -n --tidyverse <span style="color:var(--term-3)">'mutate(df, percent = tip / bill * 100)'</span> <span style="text-decoration:underline">tips.csv</span>
 <span class="term-output">#!/usr/bin/env -S ir run</span>
 <span class="term-output">#| packages:</span>
 <span class="term-output">#|   - github::jeroenjanssens/rush@5e75a1d59384efea243a316dacf3092b36169f26</span>
@@ -868,7 +868,7 @@ Tip
 </ul>
 <p>You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.</p>
 <p>The output of <code>rush</code> doesn’t have to be a in CSV format per se. Here, I compute the mean tip percent, the maximum party size, the unique values of the time column, the correlation between the bill and the tip. Finally, I extract an entire column (but only show the first 10 values).</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">percent.csv</span> <span style="color:var(--term-2)">rush</span> run <span style="color:var(--term-3)">'mean(df$percent)'</span> -
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">percent.csv</span> <span style="color:var(--term-2)">rush</span> run <span style="color:var(--term-3)">'mean(df$percent)'</span> -
 <span class="term-output">16.0802581722505</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">percent.csv</span> <span style="color:var(--term-2)">rush</span> run <span style="color:var(--term-3)">'max(df$size)'</span> -
@@ -927,7 +927,7 @@ Figure&nbsp;7.2: Displaying an image in the terminal via ASCII characters and AN
 </figure>
 </div>
 <p>Option 1 is to display the image inside the terminal as shown at the top of <a href="#fig-screenshot-display-ansi-and-inline" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>. This output is generated by <code>rush</code> when the standard output is not redirected to a file. It’s based on ASCII characters and ANSI escape sequences, so it’s available in every terminal. Depending on how you’re reading this book, the output you get when you run this code might or might not match the screenshot in <a href="#fig-screenshot-display-ansi-and-inline" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color size --facets <span style="color:var(--term-3)">'~day'</span> <span style="text-decoration:underline">tips.csv</span>              
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color size --facets <span style="color:var(--term-3)">'~day'</span> <span style="text-decoration:underline">tips.csv</span>              
 <span class="term-output"><span style="color:#080808;background:#ffffff">                      </span><span style="color:#1c1c1c;background:#ffffff">Fri</span><span style="color:#080808;background:#ffffff">                               </span><span style="color:#1c1c1c;background:#ffffff">Sat</span><span style="color:#080808;background:#ffffff">                     </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">10.0</span><span style="color:#080808;background:#ffffff">                                                                  </span><span style="color:#080808;background:#5f87af"> </span><span style="color:#080808;background:#ffffff"> </span><span style="color:#080808;background:#5f87af"> </span><span style="color:#080808;background:#ffffff">     </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">   </span><span style="color:#4e4e4e;background:#ffffff">7.5</span><span style="color:#080808;background:#ffffff">                                                            </span><span style="color:#080808;background:#5f87af"> </span><span style="color:#080808;background:#ffffff">             </span></span>
@@ -948,7 +948,7 @@ Figure&nbsp;7.2: Displaying an image in the terminal via ASCII characters and AN
 
 <p>If you only see ASCII characters, that means the medium on which you’re reading this book doesn’t support the ANSI escape sequences responsible for the colors. Fortunately, if you run the above command yourself, it will look just like the screenshot.</p>
 <p>Option 2, as seen at the bottom of <a href="#fig-screenshot-display-ansi-and-inline" class="quarto-xref">Figure&nbsp;<span>7.2</span></a>, also displays images inside the terminal. This is the iTerm2 terminal, which is only available for macOS and uses the <a href="https://iterm2.com/documentation-images.html">Inline Images Protocol</a> through a small script (which I have named <code>display</code>). This script is not included with the Docker image, but you can easily install it:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://iterm2.com/utilities/imgcat"</span> <span style="color:var(--term-3)">&gt;</span> display &amp;&amp; <span style="color:var(--term-2)">chmod</span> u+x display</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://iterm2.com/utilities/imgcat"</span> <span style="color:var(--term-3)">&gt;</span> display &amp;&amp; <span style="color:var(--term-2)">chmod</span> u+x display</code></pre>
 
 <p>If you’re not using iTerm2 on macOS, there might be other options available to display images inline. Please consult your favorite search engine.</p>
 <div id="fig-screenshot-display-preview-and-browser" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -963,7 +963,7 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 </div>
 <p>Option 3 is to manually open the image (<em>tips.csv</em> in this example) in an image viewer. <a href="#fig-screenshot-display-preview-and-browser" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> shows, on the left, the file explorer (Finder) and image viewer (Preview) on macOS. When you’re working locally, this option always works. When you’re working inside a Docker container, you can only access the generated image from your OS when you’ve mapped a local directory using the <code>-v</code> option. See <a href="./chapter-2-getting-started.html">Chapter 2</a> for instructions on how to do this. An advantage of this option is that most image viewers automatically update the display when the image has changed, which allows for quick iterations as you fine-tune your visualization.</p>
 <p>Option 4 is to open the image in a browser. The right side of <a href="#fig-screenshot-display-preview-and-browser" class="quarto-xref">Figure&nbsp;<span>7.3</span></a> is a screenshot of Firefox showing <em><a href="http://localhost:8000/tips.png" class="uri">http://localhost:8000/tips.png</a></em>. Any browser will do, but you need two other prerequisites for this option to work. First, you need to have made a port (port 8000 in this example) accessible on the Docker container using the <code>-p</code> option. (Again, see <a href="./chapter-2-getting-started.html">Chapter 2</a> for instructions on how to do this.) Second, you need to start a webserver. For this, the Docker container has a small tool called <code>servewd</code><span class="citation" data-cites="servewd"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>, which serves the current working directory using Python:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">which</span> servewd<span style="color:var(--term-5)">)</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">which</span> servewd<span style="color:var(--term-5)">)</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">/usr/bin/dsutils/servewd</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -973,10 +973,10 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>You only need to run <code>servewd</code> once from a directory (for example, <em>/data/</em>) and it will happily run in the background. Once you’ve plotted something, you can visit <em>localhost:8000</em> in your browser and access the contents of that directory and all of its subdirectories. The default port is 8000, but you can change this by specifying it as an argument to <code>servewd</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">servewd</span> 9999</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">servewd</span> 9999</code></pre>
 
 <p>Just make sure that this port is accessible. Because <code>servewd</code> runs in the background, you need to stop it as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pkill</span> -f http.server</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">pkill</span> -f http.server</code></pre>
 
 <p>Option 4 can also work on a remote machine.</p>
 <p>Now that we’ve covered four options to display images, let’s move on to actually creating some.</p>
@@ -985,21 +985,21 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 <h3 data-number="7.4.2" class="anchored" data-anchor-id="plotting-in-a-rush"><span class="header-section-number">7.4.2</span> Plotting in a Rush</h3>
 <p>When it comes to creating data visualizations, there’s a plethora of options. Personally, I’m a staunch proponent of <code>ggplot2</code>, which is a visualization package for R. The underlying grammar of graphics is accompanied by a consistent API that allows you to quickly and iteratively create different types of beautiful data visualizations while rarely having to consult the documentation. A welcoming set of properties when exploring data.</p>
 <p>We’re not really in a rush, but we also don’t want to fiddle too much about any single visualization. Moreover, we’d like to stay at the command line as much as possible. Luckily, we still have <code>rush</code>, which allows us to <code>ggplot2</code> from the command line. The data visualization from <a href="#fig-plot-demo" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> could have been created as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run --library ggplot2 <span style="color:var(--term-3)">'ggplot(df, aes(x = bill, y = tip, color = size)) +</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run --library ggplot2 <span style="color:var(--term-3)">'ggplot(df, aes(x = bill, y = tip, color = size)) +</span>
 <span class="term-output"><span style="color:var(--term-3)"> geom_point() + facet_wrap(~day)'</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> tips.png</span></code></pre>
 
 <p>However, as you may have noticed, I have used a very different command to create <em>tips.png</em>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color size --facets <span style="color:var(--term-3)">'~day'</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> tips.png</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color size --facets <span style="color:var(--term-3)">'~day'</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> tips.png</code></pre>
 
 <p>While the syntax of <code>ggplot2</code> is relatively concise, especially considering the flexibility it offers, there’s a shortcut to create basic plots quickly. This shortcut is available through the <code>plot</code> subcommand of <code>rush</code>. This allows you to create beautiful basic plots without needing to learn R and the grammar of graphics.</p>
 <p>Under the hood, <code>rush plot</code> constructs a <code>ggplot2</code> plot: options such as <code>--x</code>, <code>--y</code>, and <code>--color</code> become aesthetics, and <code>--geom</code> becomes the geometry. With the <code>--dry-run</code> (or <code>-n</code>) option you can see the code that it generates; here I only show the line that creates the plot:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot -n --x bill --y tip <span style="text-decoration:underline">tips.csv</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">'ggplot('</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot -n --x bill --y tip <span style="text-decoration:underline">tips.csv</span> | <span style="color:var(--term-2)">grep</span> <span style="color:var(--term-3)">'ggplot('</span>
 <span class="term-output">result &lt;- ggplot(df, aes(x = bill, y = tip)) + geom_point()</span></code></pre>
 
 <p>Once you’re done reading this book, it’ll be worthwhile to learn <code>ggplot2</code>, especially if you want to upgrade any exploratory data visualizations into ones that are suitable for communication. The code that <code>rush plot -n</code> generates is a good starting point. For now, while we’re at the command line, let’s take the shortcut.</p>
 <p>As <a href="#fig-screenshot-display-ansi-and-inline" class="quarto-xref">Figure&nbsp;<span>7.2</span></a> already showed, <code>rush plot</code> can create both graphical visualizations (consisting of pixels) and textual visualizations (consisting of ASCII characters and ANSI escape sequences) with the same syntax. When <code>rush</code> detects that its output is piped to another command (such as <code>display</code> or redirected to a file such as <em>tips.png</em> it will produce a graphical visualization; otherwise it will produce a textual visualization.</p>
 <p>Let’s take a moment to read through the plotting and saving options of <code>rush plot</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --help
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --help
 <span class="term-output">rush: Quick plot</span>
 <span class="term-output"></span>
 <span class="term-output">Usage:</span>
@@ -1081,7 +1081,7 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 <section id="creating-bar-charts" class="level3" data-number="7.4.3">
 <h3 data-number="7.4.3" class="anchored" data-anchor-id="creating-bar-charts"><span class="header-section-number">7.4.3</span> Creating Bar Charts</h3>
 <p>Bar charts are especially useful for displaying the value counts of a categorical feature. Here’s a textual visualization of the <em>time</em> feature in the tips dataset:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x time <span style="text-decoration:underline">tips.csv</span>                                                   
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x time <span style="text-decoration:underline">tips.csv</span>                                                   
 <span class="term-output"><span style="color:#080808;background:#ffffff">         </span><span style="color:#080808;background:#585858">                                </span><span style="color:#080808;background:#ffffff">                                       </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">         </span><span style="color:#080808;background:#585858">                                </span><span style="color:#080808;background:#ffffff">                                       </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">150</span><span style="color:#080808;background:#ffffff">    </span><span style="color:#080808;background:#585858">                                </span><span style="color:#080808;background:#ffffff">                                       </span></span>
@@ -1101,7 +1101,7 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                        time                                    </span></span></code></pre>
 
 <p><a href="#fig-plot-bar-image" class="quarto-xref">Figure&nbsp;<span>7.4</span></a> shows the graphical visualization, which is created by <code>rush plot</code> when the output is redirected to a file.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x time <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-bar.png
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x time <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-bar.png
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">plot-bar.png</span></code></pre>
 
@@ -1120,7 +1120,7 @@ Figure&nbsp;7.4: A bar chart
 <section id="creating-histograms" class="level3" data-number="7.4.4">
 <h3 data-number="7.4.4" class="anchored" data-anchor-id="creating-histograms"><span class="header-section-number">7.4.4</span> Creating Histograms</h3>
 <p>The counts of a continuous variable can be visualized with a histogram. Here, I have used the <em>time</em> feature to set the fill color. As a result, <code>rush plot</code> conveniently creates a stacked histogram.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --fill time <span style="text-decoration:underline">tips.csv</span>                                        
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --fill time <span style="text-decoration:underline">tips.csv</span>                                        
 <span class="term-output"><span style="color:#080808;background:#ffffff">             </span><span style="color:#080808;background:#ff8787">   </span><span style="color:#080808;background:#ffffff">                                                                </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">             </span><span style="color:#080808;background:#ff8787">   </span><span style="color:#080808;background:#ffffff">                                                                </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">40</span><span style="color:#080808;background:#ffffff">         </span><span style="color:#080808;background:#ff8787">   </span><span style="color:#080808;background:#ffffff">                                                                </span></span>
@@ -1153,7 +1153,7 @@ Tip
 <p>Allow me to demonstrate two syntax shortcuts that you may find useful. The two exclamation marks (<code>!!</code>) get replaced with the previous command. The exclamation mark and dollar sign (<code>!$</code>) get replaced by the last part of the previous command, which is the filename <em>plot-histogram.png</em>. As you can see, the updated commands are first printed by the Z shell so you know exactly what it executes. These two shortcuts can save a lot of typing, but they’re not easy to remember.</p>
 </div>
 </div>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-4)">!!</span> <span style="color:var(--term-3)">&gt;</span> plot-histogram.png
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-4)">!!</span> <span style="color:var(--term-3)">&gt;</span> plot-histogram.png
 <span class="term-output">rush plot --x tip --fill time tips.csv &gt; plot-histogram.png</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="color:var(--term-4)">!$</span>
@@ -1174,7 +1174,7 @@ Figure&nbsp;7.5: A histogram
 <section id="creating-density-plots" class="level3" data-number="7.4.5">
 <h3 data-number="7.4.5" class="anchored" data-anchor-id="creating-density-plots"><span class="header-section-number">7.4.5</span> Creating Density Plots</h3>
 <p>A density plot is useful for visualizing the distribution of a continuous variable. <code>rush plot</code> uses heuristics to determine the appropriate geometry, but you can override this with the <code>geom</code> option:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --fill time --geom density <span style="text-decoration:underline">tips.csv</span>                         
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --fill time --geom density <span style="text-decoration:underline">tips.csv</span>                         
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">0.5</span><span style="color:#080808;background:#ffffff">        </span><span style="color:#080808;background:#080808">   </span><span style="color:#080808;background:#ffffff">                                                                </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">            </span><span style="color:#080808;background:#080808">  </span><span style="color:#080808;background:#00d7d7"> </span><span style="color:#080808;background:#080808">  </span><span style="color:#080808;background:#ffffff">                                                               </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">0.4</span><span style="color:#080808;background:#ffffff">       </span><span style="color:#080808;background:#080808"> </span><span style="color:#080808;background:#00d7d7">   </span><span style="color:#080808;background:#080808">  </span><span style="color:#080808;background:#ffffff">                                                              </span></span>
@@ -1194,7 +1194,7 @@ Figure&nbsp;7.5: A histogram
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                     tip                                        </span></span></code></pre>
 
 <p>In this case, the textual representation really shows its limitations when compared to the visual representation in <a href="#fig-plot-density-image" class="quarto-xref">Figure&nbsp;<span>7.6</span></a>.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --fill time --geom density <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-density.png
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --fill time --geom density <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-density.png
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">plot-density.png</span></code></pre>
 
@@ -1212,7 +1212,7 @@ Figure&nbsp;7.6: A density plot
 <section id="happy-little-accidents" class="level3" data-number="7.4.6">
 <h3 data-number="7.4.6" class="anchored" data-anchor-id="happy-little-accidents"><span class="header-section-number">7.4.6</span> Happy Little Accidents</h3>
 <p>You’ve already seen three types of visualizations. In <code>ggplot2</code>, these correspond to the functions <code>geom_bar</code>, <code>geom_histogram</code>, and <code>geom_density</code>. <em>geom</em> is short for geometry and dictates what is actually being plotted. This <a href="https://ggplot2.tidyverse.org/">cheat sheet for <code>ggplot2</code></a> provides a good overview of the available geometry types. Which geometry types you can use depend on the columns (and their types) you specify. Not every combination makes sense. Take this line plot for example.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --y bill --color size --size day --geom path <span style="text-decoration:underline">tips.csv</span>       
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --y bill --color size --size day --geom path <span style="text-decoration:underline">tips.csv</span>       
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">50</span><span style="color:#080808;background:#ffffff">                                           </span><span style="color:#080808;background:#5f5f87"> </span><span style="color:#080808;background:#5f87af"> </span><span style="color:#080808;background:#ffffff">               </span><span style="color:#080808;background:#5f87af"> </span><span style="color:#080808;background:#ffffff">   </span><span style="color:#080808;background:#5f87af">    </span><span style="color:#080808;background:#ffffff">        </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                         </span><span style="color:#080808;background:#5f87af"> </span><span style="color:#080808;background:#ffffff">        </span><span style="color:#080808;background:#87afff">  </span><span style="color:#080808;background:#ffffff">        </span><span style="color:#080808;background:#5f5f87"> </span><span style="color:#080808;background:#5f87af">   </span><span style="color:#080808;background:#ffffff">            </span><span style="color:#080808;background:#5f87af">        </span><span style="color:#080808;background:#ffffff">            </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                 </span><span style="color:#080808;background:#5f87af"> </span><span style="color:#080808;background:#ffffff">        </span><span style="color:#080808;background:#5f87af">   </span><span style="color:#080808;background:#ffffff">    </span><span style="color:#080808;background:#87afff"> </span><span style="color:#080808;background:#5f87af">  </span><span style="color:#080808;background:#5fafd7"> </span><span style="color:#080808;background:#ffffff">    </span><span style="color:#080808;background:#5f5f87"> </span><span style="color:#080808;background:#5f87af">   </span><span style="color:#080808;background:#ffffff">          </span><span style="color:#080808;background:#5f87af">        </span><span style="color:#080808;background:#ffffff">                 </span></span>
@@ -1232,7 +1232,7 @@ Figure&nbsp;7.6: A density plot
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                      tip                                       </span></span></code></pre>
 
 <p>This happy little accident becomes clearer in the visual representation in <a href="#fig-plot-accident-image" class="quarto-xref">Figure&nbsp;<span>7.7</span></a>.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --y bill --color size --size day --geom path <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x tip --y bill --color size --size day --geom path <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot
 <span class="term-output">-accident.png</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">plot-accident.png</span></code></pre>
@@ -1252,7 +1252,7 @@ Figure&nbsp;7.7: A happy little accident
 <section id="creating-scatter-plots" class="level3" data-number="7.4.7">
 <h3 data-number="7.4.7" class="anchored" data-anchor-id="creating-scatter-plots"><span class="header-section-number">7.4.7</span> Creating Scatter Plots</h3>
 <p>A scatter plot, where the geometry is a point, happens to be the default when specifying two continuous features:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time <span style="text-decoration:underline">tips.csv</span>                              
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time <span style="text-decoration:underline">tips.csv</span>                              
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">10.0</span><span style="color:#080808;background:#ffffff">                                                                </span><span style="color:#080808;background:#ff8787"> </span><span style="color:#080808;background:#ffffff">         </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                                                   </span><span style="color:#080808;background:#ff8787"> </span><span style="color:#080808;background:#ffffff">            </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                                                                </span></span>
@@ -1272,7 +1272,7 @@ Figure&nbsp;7.7: A happy little accident
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                     bill                                       </span></span></code></pre>
 
 <p>Note that the color of each point is specified with the <code>--color</code> option (and not with the <code>--fill</code> option). See <a href="#fig-plot-scatter-image" class="quarto-xref">Figure&nbsp;<span>7.8</span></a> for the visual representation.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-scatter.png
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-scatter.png
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">plot-scatter.png</span></code></pre>
 
@@ -1291,7 +1291,7 @@ Figure&nbsp;7.8: A scatter plot
 <section id="creating-trend-lines" class="level3" data-number="7.4.8">
 <h3 data-number="7.4.8" class="anchored" data-anchor-id="creating-trend-lines"><span class="header-section-number">7.4.8</span> Creating Trend Lines</h3>
 <p>If you override the default geometry with <em><code>smooth</code></em>, you can visualize trend lines. These are useful for seeing the bigger picture.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time --geom smooth <span style="text-decoration:underline">tips.csv</span>                
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time --geom smooth <span style="text-decoration:underline">tips.csv</span>                
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                                                     </span><span style="color:#080808;background:#949494">  </span><span style="color:#080808;background:#ffffff">         </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                                                   </span><span style="color:#080808;background:#949494">    </span><span style="color:#080808;background:#ffffff">         </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">7.5</span><span style="color:#080808;background:#ffffff">                                                            </span><span style="color:#080808;background:#949494">   </span><span style="color:#080808;background:#ff8787">   </span><span style="color:#080808;background:#ffffff">         </span></span>
@@ -1311,7 +1311,7 @@ Figure&nbsp;7.8: A scatter plot
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                     bill                                       </span></span></code></pre>
 
 <p><code>rush plot</code> cannot handle transparency, so a visual representation (see <a href="#fig-plot-trend-image" class="quarto-xref">Figure&nbsp;<span>7.9</span></a> is much better in this case.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time --geom smooth <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-trend.pn
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x bill --y tip --color time --geom smooth <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-trend.pn
 <span class="term-output">g</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">plot-trend.png</span></code></pre>
@@ -1327,7 +1327,7 @@ Figure&nbsp;7.9: Trend lines
 </figure>
 </div>
 <p>If you like to visualize the original points along with the trend lines, you need to resort to writing <code>ggplot2</code> code with <code>rush run</code> (see <a href="#fig-plot-trend-points-image" class="quarto-xref">Figure&nbsp;<span>7.10</span></a>).</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run --library ggplot2 <span style="color:var(--term-3)">'ggplot(df, aes(x = bill, y = tip, color = time)) +</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run --library ggplot2 <span style="color:var(--term-3)">'ggplot(df, aes(x = bill, y = tip, color = time)) +</span>
 <span class="term-output"><span style="color:var(--term-3)"> geom_point() + geom_smooth()'</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-trend-points.png</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">plot-trend-points.png</span></code></pre>
@@ -1346,7 +1346,7 @@ Figure&nbsp;7.10: Trend lines and original points combined
 <section id="creating-box-plots" class="level3" data-number="7.4.9">
 <h3 data-number="7.4.9" class="anchored" data-anchor-id="creating-box-plots"><span class="header-section-number">7.4.9</span> Creating Box Plots</h3>
 <p>A box plot visualizes, for one or more features, a five-number summary: the minimum, the maximum, the sample median, and the first and third quartiles. In this case we need to convert the <em>size</em> feature to a categorical one using the <code>factor()</code> function, otherwise all values of the <em>bill</em> feature will be lumped together.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom boxplot <span style="text-decoration:underline">tips.csv</span>                 
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom boxplot <span style="text-decoration:underline">tips.csv</span>                 
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">50</span><span style="color:#080808;background:#ffffff">                               </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">                                            </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                   </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">           </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">                        </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">       </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                   </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">           </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">                        </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">       </span></span>
@@ -1366,7 +1366,7 @@ Figure&nbsp;7.10: Trend lines and original points combined
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                   factor(size)                                 </span></span></code></pre>
 
 <p>While the textual representation is not too bad, the visual one is much clearer (see <a href="#fig-plot-boxplot-image" class="quarto-xref">Figure&nbsp;<span>7.11</span></a>).</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom boxplot <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-boxplot.p
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom boxplot <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> plot-boxplot.p
 <span class="term-output">ng</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">plot-boxplot.png</span></code></pre>
@@ -1386,7 +1386,7 @@ Figure&nbsp;7.11: A box plot
 <section id="adding-labels" class="level3" data-number="7.4.10">
 <h3 data-number="7.4.10" class="anchored" data-anchor-id="adding-labels"><span class="header-section-number">7.4.10</span> Adding Labels</h3>
 <p>The default labels are based on column names (or specification). In the previous image, the label <em><code>factor(size)</code></em> should be improved. Using the <code>--xlab</code> and <code>--ylab</code> options you can override the labels of the x and y axes. A title can be added with the <code>--title</code> option. Here’s a violin plot (which is a mashup of a box plot and a density plot) demonstrating this (see also <a href="#fig-plot-labels-image" class="quarto-xref">Figure&nbsp;<span>7.12</span></a>.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom violin --title <span style="color:var(--term-3)">'Distribution of b</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom violin --title <span style="color:var(--term-3)">'Distribution of b</span>
 <span class="term-output"><span style="color:var(--term-3)">ill amount per party size'</span> --xlab <span style="color:var(--term-3)">'Party size'</span> --ylab <span style="color:var(--term-3)">'Bill (USD)'</span> <span style="text-decoration:underline">tips.csv</span>     </span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">   Distribution of bill amount per party size                                   </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">  </span><span style="color:#4e4e4e;background:#ffffff">50</span><span style="color:#080808;background:#ffffff">                               </span><span style="color:#080808;background:#3a3a3a"> </span><span style="color:#080808;background:#ffffff">                                            </span></span>
@@ -1406,7 +1406,7 @@ Figure&nbsp;7.11: A box plot
 <span class="term-output"><span style="color:#080808;background:#ffffff">          </span><span style="color:#4e4e4e;background:#ffffff">1</span><span style="color:#080808;background:#ffffff">            </span><span style="color:#4e4e4e;background:#ffffff">2</span><span style="color:#080808;background:#ffffff">           </span><span style="color:#4e4e4e;background:#ffffff">3</span><span style="color:#080808;background:#ffffff">           </span><span style="color:#4e4e4e;background:#ffffff">4</span><span style="color:#080808;background:#ffffff">           </span><span style="color:#4e4e4e;background:#ffffff">5</span><span style="color:#080808;background:#ffffff">           </span><span style="color:#4e4e4e;background:#ffffff">6</span><span style="color:#080808;background:#ffffff">        </span></span>
 <span class="term-output"><span style="color:#080808;background:#ffffff">                                    Party size                                  </span></span></code></pre>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom violin --title <span style="color:var(--term-3)">'Distribution of b</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> plot --x <span style="color:var(--term-3)">'factor(size)'</span> --y bill --geom violin --title <span style="color:var(--term-3)">'Distribution of b</span>
 <span class="term-output"><span style="color:var(--term-3)">ill amount per party size'</span> --xlab <span style="color:var(--term-3)">'Party size'</span> --ylab <span style="color:var(--term-3)">'Bill (USD)'</span> <span style="text-decoration:underline">tips.csv</span> <span style="color:var(--term-3)">&gt;</span> pl</span>
 <span class="term-output">ot-labels.png</span>
 <span class="term-output"></span>

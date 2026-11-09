@@ -322,14 +322,14 @@ ul.task-list li input[type="checkbox"] {
 <li>Distributing pipelines to multiple machines</li>
 </ul>
 <p>This chapter starts with the following files:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch08</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cd</span> <span style="text-decoration:underline">/data/ch08</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 20K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  9 17:55 emails.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  9 17:55 movies.txt</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  9 17:55 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 17:55 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov  9 18:44 emails.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov  9 18:44 movies.txt</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov  9 18:44 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov  9 18:44 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -340,11 +340,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="looping-over-numbers" class="level3" data-number="8.2.1">
 <h3 data-number="8.2.1" class="anchored" data-anchor-id="looping-over-numbers"><span class="header-section-number">8.2.1</span> Looping Over Numbers</h3>
 <p>Imagine that you need to compute the square of every even integer between 0 and 100. There’s a tool called <code>bc</code><span class="citation" data-cites="bc"><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></span>, which is a <em>basic calculator</em> where you can pipe an equation to. The command to compute the square of 4 looks as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"4^2"</span> | <span style="color:var(--term-2)">bc</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"4^2"</span> | <span style="color:var(--term-2)">bc</span>
 <span class="term-output">16</span></code></pre>
 
 <p>For a one-off calculation, this will do. However, as mentioned in the introduction, you would need to be crazy to press <strong><code>Up</code></strong>, change the number, and press <strong><code>Enter</code></strong> 50 times! In this case it’s better to let the shell do the hard work for you by using a for loop:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> i in {0..100..2} <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> i in {0..100..2} <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">do</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"</span><span style="color:var(--term-6)">$i</span><span style="color:var(--term-3)">^2"</span> | <span style="color:var(--term-2)">bc</span> <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span> | <span style="color:var(--term-2)">trim</span>
@@ -372,7 +372,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="8.2.2" class="anchored" data-anchor-id="looping-over-lines"><span class="header-section-number">8.2.2</span> Looping Over Lines</h3>
 <p>The second type of items you can loop over are lines. These lines can come from either a file or from standard input. This is a very generic approach because the lines can contain anything, including: numbers, dates, and email addresses.</p>
 <p>Imagine that you’d want to send an email to all your contacts. Let’s first generate some fake users using the free <a href="https://randomuser.me">Random User Generator API</a>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://randomuser.me/api/1.2/?results=5&amp;seed=dsatcl2e"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">users.json</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://randomuser.me/api/1.2/?results=5&amp;seed=dsatcl2e"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">users.json</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">users.json</span> <span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.results[].email'</span> <span style="color:var(--term-3)">&gt;</span> emails
 <span class="term-output"></span>
@@ -388,7 +388,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>You can loop over the lines from <em>emails</em> with a while loop:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">while</span> <span style="color:var(--term-2)">read</span> line <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">while</span> <span style="color:var(--term-2)">read</span> line <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">do</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"Sending invitation to </span><span style="color:var(--term-6)">${line}</span><span style="color:var(--term-3)">."</span> <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">emails</span> <span class="term-callout">➌</span>
@@ -406,7 +406,7 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </div>
 <p>You can also provide input to a while loop interactively by specifying the special file standard input <em>/dev/stdin</em>. Press <strong><code>Ctrl-D</code></strong> when you are done.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">while</span> <span style="color:var(--term-2)">read</span> line; <span style="color:var(--term-3)">do</span> <span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"You typed: </span><span style="color:var(--term-6)">${line}</span><span style="color:var(--term-3)">."</span>; <span style="color:var(--term-3)">done</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">/dev/stdin</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">while</span> <span style="color:var(--term-2)">read</span> line; <span style="color:var(--term-3)">do</span> <span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"You typed: </span><span style="color:var(--term-6)">${line}</span><span style="color:var(--term-3)">."</span>; <span style="color:var(--term-3)">done</span> <span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">/dev/stdin</span>
 <span class="term-output">one</span>
 <span class="term-output">You typed: one.</span>
 <span class="term-output">two</span>
@@ -420,7 +420,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="8.2.3" class="anchored" data-anchor-id="looping-over-files"><span class="header-section-number">8.2.3</span> Looping Over Files</h3>
 <p>In this section I discuss the third type of item that we often need to loop over: files.</p>
 <p>To handle special characters, use <em>globbing</em> (i.e., pathname expansion) instead of <code>ls</code><span class="citation" data-cites="ls"><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></span>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> chapter in /data/<span style="color:var(--term-4)">*</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> chapter in /data/<span style="color:var(--term-4)">*</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">do</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">"Processing Chapter </span><span style="color:var(--term-6)">${chapter}</span><span style="color:var(--term-3)">."</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span>
@@ -442,7 +442,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Handles special characters such as spaces and newlines</li>
 </ul>
 <p>For example, the following <code>find</code> invocation lists all files located under the directory <em>/data</em> that have <em>csv</em> as extension and are smaller than 2 kilobyte:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">find</span> <span style="text-decoration:underline">/data</span> -type f -name <span style="color:var(--term-3)">'*.csv'</span> -size -2k
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">find</span> <span style="text-decoration:underline">/data</span> -type f -name <span style="color:var(--term-3)">'*.csv'</span> -size -2k
 <span class="term-output">/data/ch03/tmnt-missing-newline.csv</span>
 <span class="term-output">/data/ch03/tmnt-with-header.csv</span>
 <span class="term-output">/data/ch03/tmnt-basic.csv</span>
@@ -456,7 +456,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="parallel-processing" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="parallel-processing"><span class="header-section-number">8.3</span> Parallel Processing</h2>
 <p>Let’s say that you have a very long running tool, such as the one shown here:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">slow.sh</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">slow.sh</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">slow.sh</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -476,25 +476,27 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>This process probably doesn’t take up all the available resources. And it so happens that you need to run this command a lot of times. For example, you need to download a whole sequence of files.</p>
 <p>A naive way to parallelize is to run the commands in the background. Let’s run <code>slow.sh</code> three times:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> i in {A..C}; <span style="color:var(--term-3)">do</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">for</span> i in {A..C}; <span style="color:var(--term-3)">do</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">./slow.sh</span> $i &amp; <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-3)">done</span>
 <span class="term-output">[2] 172 <span class="term-callout">➋</span></span>
 <span class="term-output">[3] 173</span>
 <span class="term-output">[4] 174</span>
 <span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 09 17:55:50Nov 09 17:55:50Nov 09 17:55:50 Starting job B
-<span class="term-output"> Starting job A</span>
-<span class="term-output"> Starting job C</span>
-<span class="term-output">Nov 09 17:55:52Nov 09 17:55:52 Job A took 2 seconds</span>
-<span class="term-output"> Job B took 2 seconds</span>
-<span class="term-output">Nov 09 17:55:52 Job C took 2 seconds</span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 09 18:44:46 Starting job A
+<span class="term-output">Nov 09 18:44:46 Starting job C</span>
+<span class="term-output">Nov 09 18:44:46 Starting job B</span>
+<span class="term-output">Nov 09 18:44:47 Job B took 1 seconds</span>
 <span class="term-output"></span>
 <span class="term-output">[3]  - done       ./slow.sh $i</span>
-<span class="term-prompt" data-prompt="$"></span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 09 18:44:50 Job A took 4 seconds
+<span class="term-output"></span>
+<span class="term-output">[2]  - done       ./slow.sh $i</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 09 18:44:51 Job C took 5 seconds
+<span class="term-output"></span>
 <span class="term-output">[4]  + done       ./slow.sh $i</span>
-<span class="term-prompt" data-prompt="$"></span>
-<span class="term-output">[2]  + done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -545,7 +547,7 @@ Warning
 </div>
 </div>
 <p>Before I go into the details of <code>parallel</code>, here’s a little teaser to show you how easy it is to replace the for-loop from earlier:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 2 100 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo {}^2 | bc"</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 2 100 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo {}^2 | bc"</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">0</span>
 <span class="term-output">4</span>
 <span class="term-output">16</span>
@@ -570,13 +572,13 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 </figure>
 </div>
 <p>As you can see it basically acts as a for loop. Here’s another teaser, which replaces the for loop from the previous section.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --jobs 2 <span style="text-decoration:underline">./slow.sh</span> ::: {A..C}
-<span class="term-output">Nov 09 17:55:58 Starting job A</span>
-<span class="term-output">Nov 09 17:56:00 Job A took 2 seconds</span>
-<span class="term-output">Nov 09 17:55:58 Starting job B</span>
-<span class="term-output">Nov 09 17:56:00 Job B took 2 seconds</span>
-<span class="term-output">Nov 09 17:56:00 Starting job C</span>
-<span class="term-output">Nov 09 17:56:04 Job C took 4 seconds</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --jobs 2 <span style="text-decoration:underline">./slow.sh</span> ::: {A..C}
+<span class="term-output">Nov 09 18:44:54 Starting job B</span>
+<span class="term-output">Nov 09 18:44:55 Job B took 1 seconds</span>
+<span class="term-output">Nov 09 18:44:55 Starting job C</span>
+<span class="term-output">Nov 09 18:44:56 Job C took 1 seconds</span>
+<span class="term-output">Nov 09 18:44:54 Starting job A</span>
+<span class="term-output">Nov 09 18:44:57 Job A took 3 seconds</span></code></pre>
 
 <p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
 <p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality. (Perhaps too much.) Luckily you only need to know a handful in order to be effective. The manual page is quite informative in case you need to use a less common option.</p>
@@ -584,7 +586,7 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 <section id="specifying-input" class="level3" data-number="8.3.2">
 <h3 data-number="8.3.2" class="anchored" data-anchor-id="specifying-input"><span class="header-section-number">8.3.2</span> Specifying Input</h3>
 <p>The most important argument to <code>parallel</code>, is the command or pipeline that you’d like to run for every input. The question is: where should the input item be inserted in the command line? If you don’t specify anything, then the input item will be appended to the end of the pipeline.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3 | <span style="color:var(--term-2)">parallel</span> cowsay
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3 | <span style="color:var(--term-2)">parallel</span> cowsay
 <span class="term-output"></span>
 <span class="term-output"> ___</span>
 <span class="term-output">&lt; 1 &gt;</span>
@@ -612,7 +614,7 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 <span class="term-output">                ||     ||</span></code></pre>
 
 <p>The above is the same as running:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> 1 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span> <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> 1 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span> <span class="term-callout">➊</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cowsay</span> 2 <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span>
 <span class="term-output"></span>
@@ -624,7 +626,7 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 </ol>
 </div>
 <p>Although this often works, I advise you to be explicit about where the input item should be inserted in the command by using placeholders. In this case, because you want to use the entire input line (a number) at once, you only need one placeholder. You specify the placeholder, in other words, where to put the input item, with a pair of curly braces (<code>{}</code>):</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3 | <span style="color:var(--term-2)">parallel</span> cowsay {} <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 3 | <span style="color:var(--term-2)">parallel</span> cowsay {} <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
 
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -640,7 +642,7 @@ Note
 </div>
 </div>
 <p>When the input items are filenames, there are a couple of modifiers you can use only parts of the filename. For example, with <code>{/}</code>, only the basename of the filename will be used:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">find</span> <span style="text-decoration:underline">/data/ch03</span> -type f | <span style="color:var(--term-2)">parallel</span> echo <span style="color:var(--term-3)">'{#}\) \"{}\" has basename \"{/}\"'</span> <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">find</span> <span style="text-decoration:underline">/data/ch03</span> -type f | <span style="color:var(--term-2)">parallel</span> echo <span style="color:var(--term-3)">'{#}\) \"{}\" has basename \"{/}\"'</span> <span class="term-callout">➊</span>
 <span class="term-output">1) "/data/ch03/tmnt-missing-newline.csv" has basename "tmnt-missing-newline.csv"</span>
 <span class="term-output">2) "/data/ch03/r-datasets.db" has basename "r-datasets.db"</span>
 <span class="term-output">3) "/data/ch03/tmnt-with-header.csv" has basename "tmnt-with-header.csv"</span>
@@ -654,10 +656,10 @@ Note
 </ol>
 </div>
 <p>If the input line has multiple parts separated by a delimiter you can add numbers to the placeholders.For example:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">input.csv</span> <span style="color:var(--term-2)">parallel</span> --colsep , <span style="color:var(--term-3)">"mv {2} {1}"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">input.csv</span> <span style="color:var(--term-2)">parallel</span> --colsep , <span style="color:var(--term-3)">"mv {2} {1}"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">/dev/null</span></code></pre>
 
 <p>Here, you can apply the same placeholder modifiers. It is also possible to reuse the same input item. If the input to <code>parallel</code> is a CSV file with a header, then you can use the column names as placeholders:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">input.csv</span> <span style="color:var(--term-2)">parallel</span> -C, --header : <span style="color:var(--term-3)">"invite {name} {email}"</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">input.csv</span> <span style="color:var(--term-2)">parallel</span> -C, --header : <span style="color:var(--term-3)">"invite {name} {email}"</span></code></pre>
 
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -677,14 +679,14 @@ Tip
 <h3 data-number="8.3.3" class="anchored" data-anchor-id="controlling-the-number-of-concurrent-jobs"><span class="header-section-number">8.3.3</span> Controlling the Number of Concurrent Jobs</h3>
 <p>By default, parallel runs one job per CPU core. You can control the number of jobs that will be run concurrently with the <code>--jobs</code> or <code>-j</code> option. Specifying a number means that many jobs will be run concurrently. If you put a plus sign in front of the number then <code>parallel</code> will run <em>N</em> jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run <em>N-M</em> jobs. Where <em>N</em> is the number of CPU cores. You can also specify a percentage, where the default is 100% of the number of CPU cores. The optimal number of jobs to run concurrently depends on the actual commands you are running.</p>
 <!-- #TODO: Figure out where to type concurrently instead of parallel. And make sure all occurences of parallel are surrounded by backticks -->
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> -j0 <span style="color:var(--term-3)">"echo Hi {}"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> -j0 <span style="color:var(--term-3)">"echo Hi {}"</span>
 <span class="term-output">Hi 1</span>
 <span class="term-output">Hi 2</span>
 <span class="term-output">Hi 3</span>
 <span class="term-output">Hi 4</span>
 <span class="term-output">Hi 5</span></code></pre>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> -j200% <span style="color:var(--term-3)">"echo Hi {}"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> -j200% <span style="color:var(--term-3)">"echo Hi {}"</span>
 <span class="term-output">Hi 1</span>
 <span class="term-output">Hi 2</span>
 <span class="term-output">Hi 3</span>
@@ -696,14 +698,14 @@ Tip
 <section id="logging-and-output" class="level3" data-number="8.3.4">
 <h3 data-number="8.3.4" class="anchored" data-anchor-id="logging-and-output"><span class="header-section-number">8.3.4</span> Logging and Output</h3>
 <p>To save the output of each command, you might be tempted to the following:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo </span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)">Hi {}</span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)"> &gt; hi-{}.txt"</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo </span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)">Hi {}</span><span style="color:var(--term-6)">\"</span><span style="color:var(--term-3)"> &gt; hi-{}.txt"</span></code></pre>
 
 <p>This will save the output into individual files. Or, if you want to save everything into one big file you could do the following:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo Hi {}"</span> <span style="color:var(--term-3)">&gt;&gt;</span> one-big-file.txt</code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> <span style="color:var(--term-3)">"echo Hi {}"</span> <span style="color:var(--term-3)">&gt;&gt;</span> one-big-file.txt</code></pre>
 
 <p>However, <code>parallel</code> offers the <code>--results</code> option, which stores the output in separate files. For each job, <code>parallel</code> creates three files: <em>seq</em>, which holds the job number, <em>stdout</em> which contains the output produced by the job, and <em>stderr</em> which contains any errors produced by the job. These three files are placed in subdirectories based on the input values.</p>
 <p><code>parallel</code> still prints all the output, which is redundant in this case. You can redirect both the standard input and standard output to <em>/dev/null</em> as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 10 | <span style="color:var(--term-2)">parallel</span> --results outdir <span style="color:var(--term-3)">"curl 'https://anapioficeandfire.com/api/ch</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 10 | <span style="color:var(--term-2)">parallel</span> --results outdir <span style="color:var(--term-3)">"curl 'https://anapioficeandfire.com/api/ch</span>
 <span class="term-output"><span style="color:var(--term-3)">aracters/{}' | jq -r '.aliases[0]'"</span> <span style="color:var(--term-3)">2&gt;</span><span style="text-decoration:underline">/dev/null</span> <span style="color:var(--term-3)">1&gt;&amp;</span>2</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">tree</span> <span style="text-decoration:underline">outdir</span> | <span style="color:var(--term-2)">trim</span>
@@ -732,7 +734,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 </div>
 <p>When you’re running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input. The output of jobs is therefore also mixed up. To keep the same order, specify the <code>--keep-order</code> option or <code>-k</code> option.</p>
 <p>Sometimes it’s useful to record which input generated which output. <code>parallel</code> allows you to <em>tag</em> the output with the <code>--tag</code> option, which prepends each line with the input item.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> --tag <span style="color:var(--term-3)">"echo 'sqrt({})' | bc -l"</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> --tag <span style="color:var(--term-3)">"echo 'sqrt({})' | bc -l"</span>
 <span class="term-output">1       1</span>
 <span class="term-output">2       1.41421356237309504880</span>
 <span class="term-output">3       1.73205080756887729352</span>
@@ -751,7 +753,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <section id="creating-parallel-tools" class="level3" data-number="8.3.5">
 <h3 data-number="8.3.5" class="anchored" data-anchor-id="creating-parallel-tools"><span class="header-section-number">8.3.5</span> Creating Parallel Tools</h3>
 <p>The <code>bc</code> tool, which I used in the beginning of the chapter, is not parallel by itself. However, you can parallelize it using <code>parallel</code>. The Docker image contains a tool called <code>pbc</code><span class="citation" data-cites="pbc"><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></span>. Its code is shown here:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">which</span> pbc<span style="color:var(--term-5)">)</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">which</span> pbc<span style="color:var(--term-5)">)</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">/usr/bin/dsutils/pbc</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -770,7 +772,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>This tool allows us to simplify the code used in the beginning of the chapter too. And it can process comma-separated values simultaneously:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 100 | <span style="color:var(--term-2)">pbc</span> <span style="color:var(--term-3)">'{1}^2'</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 100 | <span style="color:var(--term-2)">pbc</span> <span style="color:var(--term-3)">'{1}^2'</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">1</span>
 <span class="term-output">4</span>
 <span class="term-output">9</span>
@@ -810,7 +812,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <p>In this section we’re creating a file named <em>hostnames</em> that will contain one hostname of a remote machine per line. I’m using Amazon Web Services (AWS) as an example. I assume that you have an AWS account and that you know how to launch instances. If you’re using a different cloud computing service (such as Google Cloud Platform or Microsoft Azure), or if you have your own servers, please make sure that you create a <em>hostnames</em> file yourself before continuing to the next section.</p>
 <p>You can obtain a list of running AWS EC2 instances using <code>aws</code><span class="citation" data-cites="aws"><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></span>, the command-line interface to the AWS API. With <code>aws</code>, you can almost do everything you can do with the online AWS Management Console.</p>
 <p>The command <code>aws ec2 describe-instances</code> returns a lot of information about all your EC2 instances in JSON format (see <a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ec2/describe-instances.html">the online documentation</a> for more information). You can extract the relevant fields using <code>jq</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">aws</span> ec2 describe-instances | <span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.Reservations[].Instances[] | {public_dns: .P</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">aws</span> ec2 describe-instances | <span style="color:var(--term-2)">jq</span> <span style="color:var(--term-3)">'.Reservations[].Instances[] | {public_dns: .P</span>
 <span class="term-output"><span style="color:var(--term-3)">ublicDnsName, state: .State.Name}'</span></span>
 <span class="term-output">{</span>
 <span class="term-output">  "state": "running",</span>
@@ -822,7 +824,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">}</span></code></pre>
 
 <p>The possible states of an EC2 instance are: <em><code>pending</code></em>, <em><code>running</code></em>, <em><code>shutting-down</code></em>, <em><code>terminated</code></em>, <em><code>stopping</code></em>, and <em><code>stopped</code></em>. Because you can only distribute your pipeline to running instances, you filter out the non-running instances as follows:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">aws</span> ec2 describe-instances | <span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.Reservations[].Instances[] | select(.Stat</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">aws</span> ec2 describe-instances | <span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.Reservations[].Instances[] | select(.Stat</span>
 <span class="term-output"><span style="color:var(--term-3)">e.Name=="running") | .PublicDnsName'</span> | <span style="color:var(--term-2)">tee</span> hostnames</span>
 <span class="term-output">ec2-54-88-122-140.compute-1.amazonaws.com</span>
 <span class="term-output">ec2-54-88-89-208.compute-1.amazonaws.com</span></code></pre>
@@ -830,7 +832,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <p>(Without the <code>-r</code> or <code>--raw-output</code> option, the hostnames would have been surrounded by double quotes.) The output is saved to <em>hostnames</em>, so that I can pass this to <code>parallel</code> later.</p>
 <p>As mentioned, <code>parallel</code> employs <code>ssh</code><span class="citation" data-cites="ssh"><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></span> to connect to the remote machines. If you want to connect to your EC2 instances without typing the credentials every time, you can add something like the following text to the file <em>~/.ssh/config</em>.</p>
 
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">~/.ssh/config</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">~/.ssh/config</span>
 <span class="term-output">───────┬────────────────────────────────────────────────────────────────────────</span>
 <span class="term-output">       │ File: <span style="font-weight:bold">/home/dst/.ssh/config</span></span>
 <span class="term-output">───────┼────────────────────────────────────────────────────────────────────────</span>
@@ -844,16 +846,16 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <section id="running-commands-on-remote-machines" class="level3" data-number="8.4.2">
 <h3 data-number="8.4.2" class="anchored" data-anchor-id="running-commands-on-remote-machines"><span class="header-section-number">8.4.2</span> Running Commands on Remote Machines</h3>
 <p>The first flavor of distributed processing is to run ordinary commands on remote machines. Let’s first double check that <code>parallel</code> is working by running the tool <code>hostname</code><span class="citation" data-cites="hostname"><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></span> on each EC2 instance:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --sshloginfile hostnames hostname
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --sshloginfile hostnames hostname
 <span class="term-output">ip-172-31-23-204</span>
 <span class="term-output">ip-172-31-23-205</span></code></pre>
 
 <p>Here, the <code>--sshloginfile</code> or <code>--slf</code> option is used to refer to the file <em>hostnames</em>. The <code>--nonall</code> option instructs <code>parallel</code> to execute the same command on every remote machine in the <em>hostnames</em> file without using any parameters. Remember, if you don’t have any remote machines to utilize, you can replace <code>--slf hostnames</code> with <code>--sshlogin :</code> so that the command is run on your local machine:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --sshlogin : hostname
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --sshlogin : hostname
 <span class="term-output">data-science-toolbox</span></code></pre>
 
 <p>Running the same command on every remote machine once only requires one core per machine. If you wanted to distribute the list of arguments passed in to <code>parallel</code> then it could potentially use more than one core. If the number of cores are not specified explicitly, <code>parallel</code> will try to determine this.</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 2 | <span style="color:var(--term-2)">parallel</span> --slf hostnames echo <span style="color:var(--term-3)">2&gt;&amp;</span>1
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 2 | <span style="color:var(--term-2)">parallel</span> --slf hostnames echo <span style="color:var(--term-3)">2&gt;&amp;</span>1
 <span class="term-output">bash: parallel: command not found</span>
 <span class="term-output">parallel: Warning: Could not figure out number of cpus on ec2-54-88-122-140.comp</span>
 <span class="term-output">ute-1.amazonaws.com (). Using 1.</span>
@@ -867,13 +869,13 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <li>Specify the number of cores to use per machine by putting, for example, <em>2/</em> if you want two cores, in front of each hostname in the <em>hostnames</em> file</li>
 <li>Install <code>parallel</code> using a package manager. For example, if the remote machines all run Ubuntu:</li>
 </ul>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --slf hostnames <span style="color:var(--term-3)">"sudo apt-get install -y parallel"</span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --nonall --slf hostnames <span style="color:var(--term-3)">"sudo apt-get install -y parallel"</span></code></pre>
 
 </section>
 <section id="distributing-local-data-among-remote-machines" class="level3" data-number="8.4.3">
 <h3 data-number="8.4.3" class="anchored" data-anchor-id="distributing-local-data-among-remote-machines"><span class="header-section-number">8.4.3</span> Distributing Local Data among Remote Machines</h3>
 <p>The second flavor of distributed processing is to distribute local data directly among remote machines. Imagine that you have one very large dataset that you want to process using multiple remote machines. For simplicity, let’s sum all integers from 1 to 1000. First, let’s double check that your input is actually being distributed by printing the hostname of the remote machine and the length of the input it received using <code>wc</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">parallel</span> -N100 --pipe --slf hostnames <span style="color:var(--term-3)">"(hostname; wc -l) | paste -s</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">parallel</span> -N100 --pipe --slf hostnames <span style="color:var(--term-3)">"(hostname; wc -l) | paste -s</span>
 <span class="term-output"><span style="color:var(--term-3)">d:"</span></span>
 <span class="term-output">ip-172-31-23-204:100</span>
 <span class="term-output">ip-172-31-23-205:100</span>
@@ -887,16 +889,16 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">ip-172-31-23-204:100</span></code></pre>
 
 <p>Excellent. You can see that your 1000 numbers get distributed evenly in subsets of 100 (as specified by <code>-N100</code>). Now, you’re ready to sum all those numbers:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">parallel</span> -N100 --pipe --slf hostnames <span style="color:var(--term-3)">"paste -sd+ | bc"</span> | <span style="color:var(--term-2)">paste</span> -sd
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">parallel</span> -N100 --pipe --slf hostnames <span style="color:var(--term-3)">"paste -sd+ | bc"</span> | <span style="color:var(--term-2)">paste</span> -sd
 <span class="term-output"></span>
 <span class="term-output">500500</span></code></pre>
 
 <p>Here, you immediately also sum the ten sums you get back from the remote machines. Let’s check that the answer is correct by doing the same calculation without <code>parallel</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">paste</span> -sd+ | <span style="color:var(--term-2)">bc</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">paste</span> -sd+ | <span style="color:var(--term-2)">bc</span>
 <span class="term-output">500500</span></code></pre>
 
 <p>Good, that works. If you have a larger pipeline that you want to execute on the remote machines, you can also put it in a separate script and upload it with <code>parallel</code>. I’ll demonstrate this by creating a very simple command-line tool called <code>add</code>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'#!/usr/bin/env bash'</span> <span style="color:var(--term-3)">&gt;</span> add
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'#!/usr/bin/env bash'</span> <span style="color:var(--term-3)">&gt;</span> add
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> <span style="color:var(--term-3)">'paste -sd+ | bc'</span> <span style="color:var(--term-3)">&gt;&gt;</span> <span style="text-decoration:underline">add</span>
 <span class="term-output"></span>
@@ -915,7 +917,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 
 <p>Using the <code>--basefile</code> option, <code>parallel</code> first uploads the file <em>add</em> to all remote machines before running the jobs:</p>
 <!-- #TODO: Explain --pipe -->
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">parallel</span> -N100 --basefile <span style="text-decoration:underline">add</span> --pipe --slf hostnames <span style="color:var(--term-3)">'./add'</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">./add</span>
 <span class="term-output">500500</span></code></pre>
@@ -925,24 +927,24 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <section id="processing-files-on-remote-machines" class="level3" data-number="8.4.4">
 <h3 data-number="8.4.4" class="anchored" data-anchor-id="processing-files-on-remote-machines"><span class="header-section-number">8.4.4</span> Processing Files on Remote Machines</h3>
 <p>The third flavor of distributed processing is to send files to remote machines, process them, and retrieve the results. Imagine that you want to count for each borough of New York City, how often they receive service calls on 311. You don’t have that data on your local machine yet, so let’s first obtain it from the free <a href="https://data.cityofnewyork.us/">NYC Open Data API</a>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 100 900 | <span style="color:var(--term-2)">parallel</span>  <span style="color:var(--term-3)">"curl -sL 'http://data.cityofnewyork.us/resource/erm</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 0 100 900 | <span style="color:var(--term-2)">parallel</span>  <span style="color:var(--term-3)">"curl -sL 'http://data.cityofnewyork.us/resource/erm</span>
 <span class="term-output"><span style="color:var(--term-3)">2-nwe9.json?</span><span style="color:var(--term-6)">\$</span><span style="color:var(--term-3)">limit=100&amp;</span><span style="color:var(--term-6)">\$</span><span style="color:var(--term-3)">offset={}' | jq -c '.[]' | gzip &gt; nyc-{#}.json.gz"</span></span></code></pre>
 
 <p>You now have 10 files containing compressed JSON data:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> nyc<span style="color:var(--term-4)">*</span>json.gz
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  9 17:56 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> nyc<span style="color:var(--term-4)">*</span>json.gz
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov  9 18:45 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
 
 <p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file. Using <code>zcat</code><span class="citation" data-cites="zcat"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, you directly print the contents of a compress file:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">trim</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">trim</span>
 <span class="term-output">{"unique_key":"70999722","created_date":"2026-11-04T02:05:23.000","agency":"NYP…</span>
 <span class="term-output">{"unique_key":"70996337","created_date":"2026-11-04T02:04:46.000","agency":"NYP…</span>
 <span class="term-output">{"unique_key":"70992486","created_date":"2026-11-04T02:04:27.000","agency":"DOT…</span>
@@ -956,7 +958,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">… with 90 more lines</span></code></pre>
 
 <p>Let’s see what one line of JSON looks like using:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">head</span> -n 1
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">head</span> -n 1
 <span class="term-output">{"unique_key":"70999722","created_date":"2026-11-04T02:05:23.000","agency":"NYPD</span>
 <span class="term-output">","agency_name":"New York City Police Department","complaint_type":"Noise - Resi</span>
 <span class="term-output">dential","descriptor":"Banging/Pounding","location_type":"Residential Building/H</span>
@@ -974,7 +976,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">nih":"12",":@computed_region_92fq_4b7q":"19"}</span></code></pre>
 
 <p>If you were to get the total number of service calls per borough on your local machine, you would run the following command:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> nyc<span style="color:var(--term-4)">*</span>json.gz | <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> nyc<span style="color:var(--term-4)">*</span>json.gz | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">jq</span> -r <span style="color:var(--term-3)">'.borough'</span> | <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">'[A-Z] '</span> <span style="color:var(--term-3)">'[a-z]_'</span> | <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">sort</span> | <span style="color:var(--term-2)">uniq</span> -c | <span style="color:var(--term-2)">sort</span> -nr | <span class="term-callout">➍</span>
@@ -1000,7 +1002,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 </ol>
 </div>
 <p>Imagine, for a moment, that your own machine is so slow that you simply cannot perform this pipeline locally. You can use <code>parallel</code> to distribute the local files among the remote machines, let them do the processing, and retrieve the results:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="color:var(--term-4)">*</span>.json.gz | <span class="term-callout">➊</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ls</span> <span style="color:var(--term-4)">*</span>.json.gz | <span class="term-callout">➊</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">parallel</span> -v --basefile jq \ <span class="term-callout">➋</span>
 <span class="term-prompt" data-prompt="> "></span>--trc {.}.csv \ <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span>--slf hostnames \ <span class="term-callout">➍</span>
@@ -1018,13 +1020,13 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 </div>
 
 <p>If you, during this process, run <code>ls</code> on one of the remote machines, you would see that <code>parallel</code> indeed transfers (and cleans up) the binary <code>jq</code>, the JSON files, and CSV files:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ssh</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">head</span> -n 1 hostnames<span style="color:var(--term-5)">)</span> ls
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">ssh</span> <span style="color:var(--term-5)">$(</span><span style="color:var(--term-2)">head</span> -n 1 hostnames<span style="color:var(--term-5)">)</span> ls
 <span class="term-output">nyc-1.json.csv</span>
 <span class="term-output">nyc-1.json.gz</span>
 <span class="term-output">jq</span></code></pre>
 
 <p>Each CSV file looks something like this:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">nyc-1.json.csv</span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">nyc-1.json.csv</span>
 <span class="term-output">bronx,3</span>
 <span class="term-output">brooklyn,5</span>
 <span class="term-output">manhattan,24</span>
@@ -1032,7 +1034,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">staten_island,2</span></code></pre>
 
 <p>You can sum the counts in each CSV file using <code>rush</code><span class="citation" data-cites="rush"><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></span> and the tidyverse:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> nyc<span style="color:var(--term-4)">*</span>csv | <span style="color:var(--term-2)">header</span> -a borough,count |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> nyc<span style="color:var(--term-4)">*</span>csv | <span style="color:var(--term-2)">header</span> -a borough,count |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> run -t <span style="color:var(--term-3)">'group_by(df, borough) %&gt;% summarize(count = sum(count))'</span> - |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvsort</span> -rc count | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│ borough       │ count │</span>
@@ -1044,7 +1046,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 <span class="term-output">│ staten_island │    28 │</span></code></pre>
 
 <p>Or, if you prefer to use SQL to aggregate results, you can use <code>csvsql</code> as discussed in <a href="./chapter-5-scrubbing-data.html">Chapter 5</a>:</p>
-<pre class="term-output"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> nyc<span style="color:var(--term-4)">*</span>csv | <span style="color:var(--term-2)">header</span> -a borough,count |
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> nyc<span style="color:var(--term-4)">*</span>csv | <span style="color:var(--term-2)">header</span> -a borough,count |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvsql</span> --query <span style="color:var(--term-3)">'SELECT borough, SUM(count) AS count FROM stdin GROUP BY boroug</span>
 <span class="term-output"><span style="color:var(--term-3)">h ORDER BY count DESC'</span> |</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">csvlook</span>
