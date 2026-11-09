@@ -5,7 +5,7 @@ hide-description: true
 
 # Welcome {#welcome .unnumbered}
 
-Welcome to the website of the second edition of *Data Science at the Command Line* by Jeroen Janssens, published by O'Reilly Media in October 2021. This website is free to use. The contents is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/). You can order a physical copy at [Amazon](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912).
+Welcome to the website of the second edition of *Data Science at the Command Line* by [Jeroen Janssens](https://jeroenjanssens.com), published by O'Reilly Media in October 2021. This website is free to use. The contents is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/). You can order a physical copy at [Amazon](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912).
 
 This website is edition 2.5.
 The text is that of the second edition, with small updates where tools or websites have changed since 2021.
@@ -84,7 +84,7 @@ He’s passionate about open source and sharing knowledge.
 He’s the author of *Python Polars: The Definitive Guide* (O’Reilly, 2025) and *Data Science at the Command Line* (O’Reilly, 2021).
 Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University.
 He lives with his wife and two kids in Rotterdam, the Netherlands.
-You can find Jeroen on [Bluesky](https://bsky.app/profile/jeroenjanssens.com), [Mastodon](https://fosstodon.org/@jeroenjanssens), [LinkedIn](https://www.linkedin.com/in/jeroenjanssens), and [GitHub](https://github.com/jeroenjanssens).
+You can find Jeroen at [jeroenjanssens.com](https://jeroenjanssens.com) and on [Bluesky](https://bsky.app/profile/jeroenjanssens.com), [Mastodon](https://fosstodon.org/@jeroenjanssens), [LinkedIn](https://www.linkedin.com/in/jeroenjanssens), and [GitHub](https://github.com/jeroenjanssens).
 
 ## Colophon {.unnumbered}
 

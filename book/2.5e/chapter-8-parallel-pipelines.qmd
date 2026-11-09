@@ -241,7 +241,7 @@ seq 0 2 100 | parallel "echo {}^2 | bc" | trim
 This is `parallel` in its simplest form: the items to loop over are passed via standard input and there aren't any arguments other than the command that `parallel` needs to run.
 See @fig-diagram-parallel-output for an illustration of how `parallel` concurrently distributes input among processes and collects their outputs.
 
-![GNU Parallel concurrently distributes input among processes and collects their outputs](images/dscl_0802.png){#fig-diagram-parallel-output fig-align="center"}
+![GNU Parallel concurrently distributes input among processes and collects their outputs](images/dscl_0802.png){#fig-diagram-parallel-output fig-align="center" width="90%"}
 
 As you can see it basically acts as a for loop.
 Here's another teaser, which replaces the for loop from the previous section.
@@ -381,7 +381,7 @@ tree outdir | trim
 
 See @fig-diagram-parallel-results for a pictorial overview of how the `--results` option works.
 
-![GNU Parallel stores output in separate files with the `--results` option](images/dscl_0803.png){#fig-diagram-parallel-results fig-align="center"}
+![GNU Parallel stores output in separate files with the `--results` option](images/dscl_0803.png){#fig-diagram-parallel-results fig-align="center" width="90%"}
 
 When you're running multiple jobs in parallel, the order in which the jobs are run may not correspond to the order of the input.
 The output of jobs is therefore also mixed up.

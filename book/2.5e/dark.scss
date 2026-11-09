@@ -1,0 +1,14 @@
+/*-- scss:defaults --*/
+// darkly uses Lato and larger headings than the light theme (Quarto's
+// default). Use the light theme's typography (Quarto's defaults in
+// _bootstrap-customize.scss and Bootstrap's font stack), so that switching
+// between light and dark mode only changes colors, not where lines break.
+$font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$h1-font-size: 2rem;
+$h2-font-size: 1.65rem;
+$h3-font-size: 1.45rem;
+$h4-font-size: 1.25rem;
+$h5-font-size: 1.1rem;
+$navbar-padding-y: 0.5rem;
+// Don't load Lato
+$web-font-path: false;

@@ -93,7 +93,7 @@ The terminal offers a complete shell for you to run command line tools.
 Be aware that there's no interactivity possible between this terminal, the code, and the notebook.
 So this terminal is not really different from having a separate terminal application open, but it's still helpful when you're working inside a Docker container or on a remote server.
 
-![JupyterLab with the file explorer, a code editor, a notebook, and a terminal](images/screenshot_jupyterlab.png){#fig-jupyterlab fig-align="center"}
+![JupyterLab with the file explorer, a code editor, a notebook, and a terminal](images/screenshot_jupyterlab.png){#fig-jupyterlab fig-align="center" width="90%"}
 
 ::: {.callout-warning}
 This notebook in the screenshot also contains a cell using so-called `%%bash` magic, which allows you to write multi-line Bash scripts.
@@ -230,12 +230,12 @@ q("no") #! expect-prompt: false
 The RStudio IDE is arguably the most popular environment for working with R.
 When you open RStudio, you will first see the console tab:
 
-![RStudio IDE with console tab open](images/screenshot_rstudio_console.png){#fig-rstudio-console fig-align="center"}
+![RStudio IDE with console tab open](images/screenshot_rstudio_console.png){#fig-rstudio-console fig-align="center" width="90%"}
 
 The terminal tab is right next to the console tab.
 If offers a complete shell:
 
-![RStudio IDE with terminal tab open](images/screenshot_rstudio_terminal.png){#fig-rstudio-terminal fig-align="center"}
+![RStudio IDE with terminal tab open](images/screenshot_rstudio_terminal.png){#fig-rstudio-terminal fig-align="center" width="90%"}
 
 Note that, just as with JupyterLab, this terminal is not connected to the console or any R scripts.
 

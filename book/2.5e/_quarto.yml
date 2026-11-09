@@ -7,7 +7,9 @@ project:
 book:
   title: "Data Science at the Command Line, 2e"
   subtitle: "Obtain, Scrub, Explore, and Model Data with Unix Power Tools"
-  author: "Jeroen Janssens"
+  author:
+    name: "Jeroen Janssens"
+    url: https://jeroenjanssens.com
   # The second edition was published by O'Reilly in October 2021 (the day isn't shown)
   date: 2021-10-01
   date-format: "MMMM YYYY"
@@ -61,7 +63,7 @@ format:
     # Light and dark mode, with a toggle; start in the reader's system preference
     theme:
       light: default
-      dark: darkly
+      dark: [darkly, dark.scss]
     respect-user-color-scheme: true
     css: styles.css
 

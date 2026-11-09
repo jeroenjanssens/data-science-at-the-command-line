@@ -37,42 +37,46 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 
 ## Prose (replace): Jeroen Janssens is an independent data science consultant and instruct
 
-- id: `index.html:prose:fed28160`
-- hash: `e30d34ea`
+- id: `index.html:prose:d81a8dfa`
+- hash: `ec2ab285`
 - status: **accept**
 - cause: intended
-- note: Current bio and profiles from https://jeroenjanssens.com/about/
+- note: Current bio and profiles from https://jeroenjanssens.com/about/, plus a link to jeroenjanssens.com
 
 ```diff
 --- 2e
 +++ 2.5e
 @@ -1 +1 @@
 -Jeroen Janssens is an independent data science consultant and instructor. He enjoys visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. Jeroen manages Data Science Workshops, a training and coaching firm that organizes open enrollment workshops, in-company courses, inspiration sessions, hackathons, and meetups. Previously, he was an assistant professor at Jheronimus Academy of Data Science and a data scientist at Elsevier in Amsterdam and various startups in New York City. Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He lives with his wife and two kids in Rotterdam, the Netherlands. You can find Jeroen on Twitter, GitHub, and LinkedIn.
-+Jeroen Janssens, PhD, is Head of Developer Relations at Posit, PBC. His expertise lies in visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. He’s passionate about open source and sharing knowledge. He’s the author of Python Polars: The Definitive Guide (O’Reilly, 2025) and Data Science at the Command Line (O’Reilly, 2021). Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He lives with his wife and two kids in Rotterdam, the Netherlands. You can find Jeroen on Bluesky, Mastodon, LinkedIn, and GitHub.
++Jeroen Janssens, PhD, is Head of Developer Relations at Posit, PBC. His expertise lies in visualizing data, implementing machine learning models, and building solutions using Python, R, JavaScript, and Bash. He’s passionate about open source and sharing knowledge. He’s the author of Python Polars: The Definitive Guide (O’Reilly, 2025) and Data Science at the Command Line (O’Reilly, 2021). Jeroen holds a PhD in machine learning from Tilburg University and an MSc in artificial intelligence from Maastricht University. He lives with his wife and two kids in Rotterdam, the Netherlands. You can find Jeroen at jeroenjanssens.com and on Bluesky, Mastodon, LinkedIn, and GitHub.
 ```
 
 ## External links differ
 
 - id: `index.html:external-links`
-- hash: `d6338e94`
+- hash: `c3dd0142`
 - status: **accept**
 - cause: intended
-- note: Content pass: Data Science Workshops paragraph removed; current bio and profiles; links to Quarto and quarto-term in the edition 2.5 paragraph
+- note: Content pass: Data Science Workshops paragraph removed; current bio and profiles; links to jeroenjanssens.com, Quarto, and quarto-term
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -3 +3,2 @@
+@@ -0,0 +1,2 @@
++https://jeroenjanssens.com
++https://jeroenjanssens.com
+@@ -3 +5,2 @@
 -https://datascienceworkshops.com
 +https://quarto.org
 +https://quarto-term.jeroenjanssens.com
-@@ -7,2 +8,3 @@
+@@ -7,2 +10,4 @@
 -https://datascienceworkshops.com
 -https://twitter.com/jeroenhjanssens
++https://jeroenjanssens.com
 +https://bsky.app/profile/jeroenjanssens.com
 +https://fosstodon.org/@jeroenjanssens
 +https://www.linkedin.com/in/jeroenjanssens
-@@ -10 +11,0 @@
+@@ -10 +14,0 @@
 -https://www.linkedin.com/in/jeroenjanssens/
 ```
 

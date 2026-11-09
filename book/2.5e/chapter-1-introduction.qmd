@@ -137,9 +137,9 @@ Before I discuss *why* you should use the command line for data science, let's t
 @fig-mac-terminal and @fig-ubuntu-terminal show a screenshot of the command line as it appears by default on macOS and Ubuntu, respectively.
 Ubuntu is a particular distribution of GNU/Linux, and it's the one I’ll be using in this book.
 
-![Command line on macOS](images/screenshot_terminal_mac_dst.png){#fig-mac-terminal fig-align="center"}
+![Command line on macOS](images/screenshot_terminal_mac_dst.png){#fig-mac-terminal fig-align="center" width="90%"}
 
-![Command line on Ubuntu](images/screenshot_terminal_ubuntu_dst.png){#fig-ubuntu-terminal fig-align="center"}
+![Command line on Ubuntu](images/screenshot_terminal_ubuntu_dst.png){#fig-ubuntu-terminal fig-align="center" width="90%"}
 
 The window shown in the two screenshots is called the *terminal*.
 This is the program that enables you to interact with the shell.

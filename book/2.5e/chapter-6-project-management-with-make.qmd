@@ -277,7 +277,7 @@ With the special target *`.PHONY`* we can indicate which targets are not represe
 There are five targets: *`all`*, *`data`*, *`data/starwars.csv`*, *`top10`*, and *`heights.png`*.
 @fig-starwars-image provides an overview of these targets and the dependencies between them.
 
-![Dependencies between targets](images/dscl_0602.png){#fig-dependencies fig-align="center"}
+![Dependencies between targets](images/dscl_0602.png){#fig-dependencies fig-align="center" width="90%"}
 
 Let's discuss each target in turn:
 

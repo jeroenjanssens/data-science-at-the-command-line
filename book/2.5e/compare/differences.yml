@@ -120,19 +120,13 @@
   cause: conversion
   decision: accept
   note: Quarto title block shows title and subtitle (bs4_book showed them as hand-written divs)
-- id: index.html:prose:fed28160
-  hash: e30d34ea
-  title: 'Prose (replace): Jeroen Janssens is an independent data science consultant and instruct'
-  cause: intended
-  decision: accept
-  note: Current bio and profiles from https://jeroenjanssens.com/about/
 - id: index.html:external-links
-  hash: 'd6338e94'
+  hash: 'c3dd0142'
   title: External links differ
   cause: intended
   decision: accept
-  note: 'Content pass: Data Science Workshops paragraph removed; current bio and profiles; links to Quarto
-    and quarto-term in the edition 2.5 paragraph'
+  note: 'Content pass: Data Science Workshops paragraph removed; current bio and profiles; links to jeroenjanssens.com,
+    Quarto, and quarto-term'
 - id: chapter-10-polyglot-data-science.html:block:0
   hash: '61993f27'
   title: 'Code block 0: `$ cd /data/ch10`'
@@ -1613,3 +1607,9 @@
   decision: accept
   note: 'Decision 5 and content pass: remove the course announcement and the Data Science Workshops paragraph;
     new paragraph that explains edition 2.5'
+- id: index.html:prose:d81a8dfa
+  hash: ec2ab285
+  title: 'Prose (replace): Jeroen Janssens is an independent data science consultant and instruct'
+  cause: intended
+  decision: accept
+  note: Current bio and profiles from https://jeroenjanssens.com/about/, plus a link to jeroenjanssens.com
