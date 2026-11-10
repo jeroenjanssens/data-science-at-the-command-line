@@ -1,6 +1,6 @@
 # Comparison summary
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae316735486f496571ddd1293ad4e1`
+Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732f796409580c0b012149d74a782e`
 
 | Page | Differences | Status |
 |---|---:|---|
@@ -14,8 +14,8 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 | [chapter-5-scrubbing-data.html](chapter-5-scrubbing-data.md) | 11 | accept: 11 |
 | [chapter-6-project-management-with-make.html](chapter-6-project-management-with-make.md) | 4 | accept: 4 |
 | [chapter-7-exploring-data.html](chapter-7-exploring-data.md) | 31 | accept: 31 |
-| [chapter-8-parallel-pipelines.html](chapter-8-parallel-pipelines.md) | 23 | accept: 23 |
-| [chapter-9-modeling-data.html](chapter-9-modeling-data.md) | 22 | accept: 22 |
+| [chapter-8-parallel-pipelines.html](chapter-8-parallel-pipelines.md) | 24 | accept: 24 |
+| [chapter-9-modeling-data.html](chapter-9-modeling-data.md) | 23 | accept: 23 |
 | [foreword.html](foreword.md) | 0 | — |
 | [index.html](index.md) | 4 | accept: 4 |
 | [list-of-command-line-tools.html](list-of-command-line-tools.md) | 107 | accept: 107 |

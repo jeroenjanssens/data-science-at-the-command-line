@@ -139,7 +139,7 @@ An alternative, less subtle approach is to remove any data points that have at l
 Just out of curiosity, let’s see what the distribution of quality looks like for both red and white wines.
 
 ```{term}
-rush run -t 'ggplot(df, aes(x = quality, fill = type)) + geom_density(adjust = 3, alpha = 0.5)' wine.csv > wine-quality.png
+rush plot --x quality --fill type --geom density --geom-args 'adjust = 3, alpha = 0.5' wine.csv > wine-quality.png
 display wine-quality.png
 ```
 ![Comparing the quality of red and white wines using a density plot](images/wine-quality.png){#fig-plot-wine-quality fig-align="center" width="90%"}

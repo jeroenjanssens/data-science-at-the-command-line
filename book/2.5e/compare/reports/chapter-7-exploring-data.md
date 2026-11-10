@@ -1,11 +1,11 @@
 # chapter-7-exploring-data.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae316735486f496571ddd1293ad4e1`
+Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732f796409580c0b012149d74a782e`
 
 ## Code block 0: `$ cd /data/ch07`
 
 - id: `chapter-7-exploring-data.html:block:0`
-- hash: `2702e80a`
+- hash: `97392b6e`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -20,10 +20,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:49 tips.csv
 --rw-r--r-- 1 dst dst  83K Dec 14 11:49 venture.csv
 --rw-r--r-- 1 dst dst 4.6K Dec 14 11:49 venture-wide.csv
-+-rw-r--r-- 1 dst dst  125 Nov  9 19:32 datatypes.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  9 19:32 tips.csv
-+-rw-r--r-- 1 dst dst 4.6K Nov  9 19:32 venture-wide.csv
-+-rw-r--r-- 1 dst dst  83K Nov  9 19:32 venture.csv
++-rw-r--r-- 1 dst dst  125 Nov 10 11:49 datatypes.csv
++-rw-r--r-- 1 dst dst 7.8K Nov 10 11:49 tips.csv
++-rw-r--r-- 1 dst dst 4.6K Nov 10 11:49 venture-wide.csv
++-rw-r--r-- 1 dst dst  83K Nov 10 11:49 venture.csv
 ```
 
 ## Code block 20: `> library(tidyverse)                            ➊`
@@ -177,7 +177,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 24: `$ rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tip`
 
 - id: `chapter-7-exploring-data.html:block:24`
-- hash: `4de42e3e`
+- hash: `7c23d35a`
 - status: **accept**
 - cause: image
 - note: rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan D, ch 7)
@@ -190,7 +190,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -#!/usr/bin/env Rscript
 +#!/usr/bin/env -S ir run
 +#| packages:
-+#|   - github::jeroenjanssens/rush@5e75a1d59384efea243a316dacf3092b36169f26
++#|   - github::jeroenjanssens/rush@5b7976dd7efe55208334ec1e475f61be3c15460d
 +#|   - rlang
 +#|   - cli
 +#|   - tibble
@@ -294,7 +294,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ## Code block 34: `$ rush plot --help`
 
 - id: `chapter-7-exploring-data.html:block:34`
-- hash: `1f136cdf`
+- hash: `864b1f9f`
 - status: **accept**
 - cause: image
 - note: rush 0.2.1 help text
@@ -302,7 +302,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ```diff
 --- 2e
 +++ 2.5e
-@@ -3,48 +3,74 @@
+@@ -3,48 +3,75 @@
  
  Usage:
 -  rush plot [options] [--] [<file>|-]
@@ -365,6 +365,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 +      --facets <formula>        Facet specification.
 +  -f, --fill <name>             Fill column.
 +  -g, --geom <geom>             Geometry [default: auto].
++      --geom-args <args>        Arguments for the geometry.
 +      --group <name>            Group column.
 +      --log <x|y|xy>            Variables to log transform.
 +      --margins                 Display marginal facets.

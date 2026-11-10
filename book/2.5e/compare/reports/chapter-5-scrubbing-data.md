@@ -1,11 +1,11 @@
 # chapter-5-scrubbing-data.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae316735486f496571ddd1293ad4e1`
+Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732f796409580c0b012149d74a782e`
 
 ## Code block 0: `$ cd /data/ch05`
 
 - id: `chapter-5-scrubbing-data.html:block:0`
-- hash: `c21c1f9b`
+- hash: `78fde68d`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -23,19 +23,19 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 --rw-r--r-- 1 dst dst  129 Dec 14 11:47 names.csv
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:47 tips.csv
 --rw-r--r-- 1 dst dst 5.1K Dec 14 11:47 users.json
-+-rw-r--r-- 1 dst dst 164K Nov  9 19:31 alice.txt
-+-rw-r--r-- 1 dst dst 4.5K Nov  9 19:31 iris.csv
-+-rw-r--r-- 1 dst dst  179 Nov  9 19:31 irismeta.csv
-+-rw-r--r-- 1 dst dst  160 Nov  9 19:31 names-comma.csv
-+-rw-r--r-- 1 dst dst  129 Nov  9 19:31 names.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov  9 19:31 tips.csv
-+-rw-r--r-- 1 dst dst 5.1K Nov  9 19:31 users.json
++-rw-r--r-- 1 dst dst 164K Nov 10 11:48 alice.txt
++-rw-r--r-- 1 dst dst 4.5K Nov 10 11:48 iris.csv
++-rw-r--r-- 1 dst dst  179 Nov 10 11:48 irismeta.csv
++-rw-r--r-- 1 dst dst  160 Nov 10 11:48 names-comma.csv
++-rw-r--r-- 1 dst dst  129 Nov 10 11:48 names.csv
++-rw-r--r-- 1 dst dst 7.8K Nov 10 11:48 tips.csv
++-rw-r--r-- 1 dst dst 5.1K Nov 10 11:48 users.json
 ```
 
 ## Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`
 
 - id: `chapter-5-scrubbing-data.html:block:17`
-- hash: `e6ca56cc`
+- hash: `e31506e6`
 - status: **accept**
 - cause: random
 - note: sample draws other lines
@@ -43,7 +43,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,8 +1,15 @@
+@@ -1,8 +1,10 @@
  $ seq -f "Line %g" 1000 | sample -r 1%
 -Line 45
 -Line 223
@@ -52,26 +52,21 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -Line 438
 -Line 807
 -Line 813
-+Line 27
-+Line 98
-+Line 139
-+Line 168
-+Line 247
-+Line 368
-+Line 371
-+Line 377
-+Line 565
-+Line 569
-+Line 586
-+Line 717
-+Line 736
-+Line 857
++Line 91
++Line 158
++Line 341
++Line 463
++Line 612
++Line 771
++Line 789
++Line 880
++Line 921
 ```
 
 ## Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`
 
 - id: `chapter-5-scrubbing-data.html:block:18`
-- hash: `4a90e472`
+- hash: `40338691`
 - status: **accept**
 - cause: time
 - note: Timestamps, dates, sizes, or durations of this render
@@ -87,12 +82,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:9cd9b96f9e1b3a286a103fef60b0c6129cae3
 -Dec 14 11:48:13 Line 250
 -Dec 14 11:48:14 Line 785
 -Dec 14 11:48:15 Line 786
-+Nov 09 19:31:24 Line 10
-+Nov 09 19:31:25 Line 16
-+Nov 09 19:31:26 Line 57
-+Nov 09 19:31:27 Line 114
-+Nov 09 19:31:28 Line 335
-+Nov 09 19:31:29 Line 574
++Nov 10 11:48:19 Line 26
++Nov 10 11:48:20 Line 403
++Nov 10 11:48:21 Line 609
++Nov 10 11:48:22 Line 809
++Nov 10 11:48:23 Line 858
++Nov 10 11:48:24 Line 953
 ```
 
 ## Code block 68: `$ curl -sL 'http://en.wikipedia.org/wiki/List_of_countries_and_territo`

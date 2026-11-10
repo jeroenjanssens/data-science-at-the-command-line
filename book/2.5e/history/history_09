@@ -12,7 +12,7 @@ done
 csvstack -g red,white -n type wine-{red,white}-clean.csv |\
 xsv select 2-,1 > wine.csv
 csvstat wine.csv --nulls
-rush run -t 'ggplot(df, aes(x = quality, fill = type)) + geom_density(adjust = 3, alpha = 0.5)' wine.csv > wine-quality.png
+rush plot --x quality --fill type --geom density --geom-args 'adjust = 3, alpha = 0.5' wine.csv > wine-quality.png
 display wine-quality.png
 rush plot --x alcohol --y quality --color type --geom smooth wine.csv > wine-alcohol-vs-quality.png
 display wine-alcohol-vs-quality.png

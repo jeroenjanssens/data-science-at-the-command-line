@@ -128,7 +128,7 @@
   note: 'Content pass: Data Science Workshops paragraph removed; current bio and profiles; links to jeroenjanssens.com,
     Quarto, and quarto-term'
 - id: chapter-10-polyglot-data-science.html:block:0
-  hash: '61993f27'
+  hash: '0e7df2d9'
   title: 'Code block 0: `$ cd /data/ch10`'
   cause: uutils
   decision: accept
@@ -165,19 +165,19 @@
   decision: accept
   note: bookdown linked R function names in inline code to rdrr.io; Quarto does not (no R code is run)
 - id: chapter-3-obtaining-data.html:block:0
-  hash: '4f4c3ed3'
+  hash: '6a9f3664'
   title: 'Code block 0: `$ cd /data/ch03`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-3-obtaining-data.html:block:3
-  hash: '7defc98f'
+  hash: '98b50c5a'
   title: 'Code block 3: `$ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherl`'
   cause: image
   decision: accept
   note: curl 8 progress meter layout
 - id: chapter-3-obtaining-data.html:block:5
-  hash: '25d416bb'
+  hash: '8fb50b2e'
   title: 'Code block 5: `$ curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Frieslan`'
   cause: time
   decision: accept
@@ -201,7 +201,7 @@
   decision: accept
   note: curl 8 man page
 - id: chapter-3-obtaining-data.html:block:22
-  hash: 'e83ac73a'
+  hash: '3ae07141'
   title: 'Code block 22: `$ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > t`'
   cause: image
   decision: accept
@@ -226,25 +226,25 @@
   note: newsapi response rebuilt from the 2e output (no API key); the long description is cut at a different
     place
 - id: chapter-4-creating-command-line-tools.html:block:0
-  hash: '761c9626'
+  hash: '33ff1154'
   title: 'Code block 0: `$ cd /data/ch04`'
   cause: uutils
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-4-creating-command-line-tools.html:block:6
-  hash: '4a430cac'
+  hash: 'eaa6bf51'
   title: 'Code block 6: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:7
-  hash: '8dedde68'
+  hash: 'e8521dac'
   title: 'Code block 7: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:8
-  hash: '6390bf14'
+  hash: '4edee0c1'
   title: 'Code block 8: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
@@ -256,13 +256,13 @@
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:10
-  hash: '02b014ae'
+  hash: 'd2a6ab7a'
   title: 'Code block 10: `$ pwd`'
   cause: uutils
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-4-creating-command-line-tools.html:block:13
-  hash: '187cfa6f'
+  hash: '2fe8e8f4'
   title: 'Code block 13: `$ l top-words-{1,2}.sh`'
   cause: time
   decision: accept
@@ -304,13 +304,13 @@
   decision: accept
   note: PATH of the new image (/opt/venv/bin, /opt/uv/bin; no rush/exec)
 - id: chapter-4-creating-command-line-tools.html:block:28
-  hash: '7ecc1e32'
+  hash: '8a41e0e9'
   title: 'Code block 28: `$ cp -v top-words{-5.sh,}`'
   cause: image
   decision: accept
   note: curl 8 progress meter layout
 - id: chapter-4-creating-command-line-tools.html:block:31
-  hash: '9fc6115f'
+  hash: 'e915209d'
   title: 'Code block 31: `$ time < alice.txt top-words 5`'
   cause: time
   decision: accept
@@ -322,19 +322,19 @@
   decision: accept
   note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 - id: chapter-5-scrubbing-data.html:block:0
-  hash: 'c21c1f9b'
+  hash: '78fde68d'
   title: 'Code block 0: `$ cd /data/ch05`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-5-scrubbing-data.html:block:17
-  hash: 'e6ca56cc'
+  hash: 'e31506e6'
   title: 'Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`'
   cause: random
   decision: accept
   note: sample draws other lines
 - id: chapter-5-scrubbing-data.html:block:18
-  hash: '4a90e472'
+  hash: '40338691'
   title: 'Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`'
   cause: time
   decision: accept
@@ -364,7 +364,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-6-project-management-with-make.html:block:0
-  hash: 'fefbd993'
+  hash: '4b080493'
   title: 'Code block 0: `$ cd /data/ch06`'
   cause: uutils
   decision: accept
@@ -388,7 +388,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-7-exploring-data.html:block:0
-  hash: '2702e80a'
+  hash: '97392b6e'
   title: 'Code block 0: `$ cd /data/ch07`'
   cause: uutils
   decision: accept
@@ -407,7 +407,7 @@
   note: 'rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan
     D, ch 7)'
 - id: chapter-7-exploring-data.html:block:24
-  hash: 4de42e3e
+  hash: '7c23d35a'
   title: 'Code block 24: `$ rush run -n --tidyverse ''mutate(df, percent = tip / bill * 100)'' tip`'
   cause: image
   decision: accept
@@ -427,7 +427,7 @@
   decision: accept
   note: 'Content pass: rush no longer uses qplot; show the generated ggplot() call'
 - id: chapter-7-exploring-data.html:block:34
-  hash: 1f136cdf
+  hash: '864b1f9f'
   title: 'Code block 34: `$ rush plot --help`'
   cause: image
   decision: accept
@@ -567,7 +567,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-8-parallel-pipelines.html:block:0
-  hash: '490ed68f'
+  hash: 'bb9d638c'
   title: 'Code block 0: `$ cd /data/ch08`'
   cause: time
   decision: accept
@@ -597,7 +597,7 @@
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-8-parallel-pipelines.html:block:9
-  hash: '49ef9cfe'
+  hash: '1b90a455'
   title: 'Code block 9: `$ for i in {A..C}; do`'
   cause: random
   decision: accept
@@ -609,7 +609,7 @@
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-8-parallel-pipelines.html:block:11
-  hash: 'b8d4f8fb'
+  hash: 'af269344'
   title: 'Code block 11: `$ parallel --jobs 2 ./slow.sh ::: {A..C}`'
   cause: time
   decision: accept
@@ -641,7 +641,7 @@
   note: 'Fake output is shown now: in 2e the echo chain ended with &&, so it never ran and the next command
     was typed after a continuation prompt'
 - id: chapter-8-parallel-pipelines.html:block:39
-  hash: '92287962'
+  hash: '7576834b'
   title: 'Code block 39: `$ l nyc*json.gz`'
   cause: time
   decision: accept
@@ -709,7 +709,7 @@
   decision: accept
   note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 - id: chapter-9-modeling-data.html:block:0
-  hash: 'ebb62d67'
+  hash: '261c4a9b'
   title: 'Code block 0: `$ cd /data/ch09`'
   cause: time
   decision: accept
@@ -727,31 +727,31 @@
   decision: accept
   note: 'tapkee 1.4 PCA: signs of the components are flipped'
 - id: chapter-9-modeling-data.html:block:18
-  hash: 'b9f94820'
+  hash: '06fc3430'
   title: 'Code block 18: `$ vw \`'
   cause: image
   decision: accept
   note: vw 9 log format (wider columns, wrapped)
 - id: chapter-9-modeling-data.html:block:19
-  hash: '8c1d4780'
+  hash: '3f2b9765'
   title: 'Code block 19: `$ vw \`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:20
-  hash: '68803c16'
+  hash: '36671013'
   title: 'Code block 20: `$ paste -d, predictions <(cut -d ''|'' -f 1 wine-test.vw) |`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:22
-  hash: '0243222b'
+  hash: 'ac3363e2'
   title: 'Code block 22: `$ vw -d wine-train.vw -f wine2.model --quiet ➊`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:24
-  hash: '2e5f661f'
+  hash: '1cc465bd'
   title: 'Code block 24: `$ NUM_RED="$(< wine-red-clean.csv wc -l)" ➊`'
   cause: random
   decision: accept
@@ -763,13 +763,13 @@
   decision: accept
   note: skll 5 output file names (wine_ instead of wine_features_); prose may need an update
 - id: chapter-9-modeling-data.html:block:29
-  hash: 'bead6708'
+  hash: 'e102f2f3'
   title: 'Code block 29: `$ < output/wine_summary.tsv csvsql --query "SELECT learner_name, accur`'
   cause: random
   decision: accept
   note: Model accuracies (random train/test split, newer scikit-learn)
 - id: chapter-9-modeling-data.html:block:30
-  hash: '2d49973e'
+  hash: '35a0f745'
   title: 'Code block 30: `$ jq -r ''.[] | "\(.learner_name):\n\(.result_table)\n"'' output/*.json`'
   cause: time
   decision: accept
@@ -813,13 +813,13 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-9-modeling-data.html:image:images/wine-regression.png
-  hash: 'e4e3667c'
+  hash: '4262a5f8'
   title: 'Image changed: images/wine-regression.png'
   cause: image
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-9-modeling-data.html:image:images/wine-tsne.png
-  hash: 'f7d6305a'
+  hash: '3926b2d3'
   title: 'Image changed: images/wine-tsne.png'
   cause: image
   decision: accept
@@ -831,7 +831,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:6
-  hash: '43460550'
+  hash: '4a723434'
   title: 'Code block 6: `$ type body`'
   cause: time
   decision: accept
@@ -885,7 +885,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:27
-  hash: 'e357cc29'
+  hash: '93fd5626'
   title: 'Code block 27: `$ type dseq`'
   cause: time
   decision: accept
@@ -897,7 +897,7 @@
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: list-of-command-line-tools.html:block:42
-  hash: 'f3a31bd8'
+  hash: '74ea0a25'
   title: 'Code block 42: `$ type hostname`'
   cause: random
   decision: accept
@@ -915,7 +915,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:46
-  hash: '89535995'
+  hash: 'e30f856e'
   title: 'Code block 46: `$ type l`'
   cause: time
   decision: accept
@@ -927,7 +927,7 @@
   decision: accept
   note: No csvconf directory in /data anymore
 - id: list-of-command-line-tools.html:block:56
-  hash: '66d2a216'
+  hash: 'f0aaa2d6'
   title: 'Code block 56: `$ type paste`'
   cause: time
   decision: accept
@@ -951,13 +951,13 @@
   decision: accept
   note: rush location; tibble 3 printing; starwars.csv 2021 snapshot capitalizes Lars
 - id: list-of-command-line-tools.html:block:66
-  hash: '3f5d8ac7'
+  hash: '556cc91f'
   title: 'Code block 66: `$ type sample`'
   cause: random
   decision: accept
   note: Random output (sample, shuf)
 - id: list-of-command-line-tools.html:block:71
-  hash: '586c4c37'
+  hash: '048da6e4'
   title: 'Code block 71: `$ type shuf`'
   cause: random
   decision: accept
@@ -987,7 +987,7 @@
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: list-of-command-line-tools.html:block:88
-  hash: '3bf8e145'
+  hash: '40f4a0b0'
   title: 'Code block 88: `$ type ts`'
   cause: time
   decision: accept
@@ -1614,3 +1614,15 @@
   note: 'Decision 5 and content pass: remove the course announcement and the Data Science Workshops paragraph;
     new paragraph that explains edition 2.5, with the date of the last update (compare.py replaces the
     date with DATE)'
+- id: chapter-8-parallel-pipelines.html:block:18
+  hash: any
+  title: 'Code block 18: `$ seq 5 | parallel -j0 "echo Hi {}"`'
+  cause: random
+  decision: accept
+  note: parallel -j0 runs the jobs at the same time, so the order of the output varies between renders
+- id: chapter-9-modeling-data.html:block:7
+  hash: 33aa65cb
+  title: 'Code block 7: `$ rush run -t ''ggplot(df, aes(x = quality, fill = type)) + geom_densit`'
+  cause: content
+  decision: accept
+  note: rush plot with --geom-args (rush 5b7976d) instead of rush run with ggplot2 code; the PNG is byte-identical

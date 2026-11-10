@@ -685,16 +685,16 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 10 | <span style="color:var(--term-2)">header</span> -a <span style="color:var(--term-3)">'values'</span> | <span style="color:var(--term-2)">body</span> shuf
 <span class="term-output">values</span>
-<span class="term-output">4</span>
-<span class="term-output">10</span>
 <span class="term-output">6</span>
-<span class="term-output">8</span>
-<span class="term-output">5</span>
+<span class="term-output">9</span>
 <span class="term-output">7</span>
+<span class="term-output">8</span>
 <span class="term-output">1</span>
-<span class="term-output">3</span>
+<span class="term-output">5</span>
 <span class="term-output">2</span>
-<span class="term-output">9</span></code></pre>
+<span class="term-output">3</span>
+<span class="term-output">4</span>
+<span class="term-output">10</span></code></pre>
 
 </section>
 <section id="cat" class="level2 unnumbered">
@@ -929,9 +929,9 @@ body.quarto-dark {
 <span class="term-output">dseq is /usr/bin/dsutils/dseq</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">dseq</span> 3
-<span class="term-output">2026-11-10</span>
 <span class="term-output">2026-11-11</span>
-<span class="term-output">2026-11-12</span></code></pre>
+<span class="term-output">2026-11-12</span>
+<span class="term-output">2026-11-13</span></code></pre>
 
 </section>
 <section id="echo" class="level2 unnumbered">
@@ -1115,7 +1115,7 @@ body.quarto-dark {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> hostname
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span>
-<span class="term-output">8f119ec640fc</span>
+<span class="term-output">411a835d7b4a</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">hostname</span> -i
 <span class="term-output">172.17.0.2</span></code></pre>
@@ -1182,12 +1182,12 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 924K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov  9 19:34 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov  9 19:34 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov  9 19:34 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov  9 19:34 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov  9 19:34 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov  9 19:34 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov 10 11:51 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov 10 11:51 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov 10 11:51 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov 10 11:51 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov 10 11:51 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov 10 11:51 top2000.xlsx</span></code></pre>
 
 </section>
 <section id="less" class="level2 unnumbered">
@@ -1309,11 +1309,11 @@ body.quarto-dark {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> paste
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">seq</span> 5<span style="color:var(--term-5)">)</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">dseq</span> 5<span style="color:var(--term-5)">)</span>
-<span class="term-output">1,2026-11-10</span>
-<span class="term-output">2,2026-11-11</span>
-<span class="term-output">3,2026-11-12</span>
-<span class="term-output">4,2026-11-13</span>
-<span class="term-output">5,2026-11-14</span>
+<span class="term-output">1,2026-11-11</span>
+<span class="term-output">2,2026-11-12</span>
+<span class="term-output">3,2026-11-13</span>
+<span class="term-output">4,2026-11-14</span>
+<span class="term-output">5,2026-11-15</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">paste</span> -sd+
 <span class="term-output">1+2+3+4+5</span></code></pre>
@@ -1447,12 +1447,12 @@ body.quarto-dark {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">sample</span> --help
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 1000 | <span style="color:var(--term-2)">sample</span> -r 0.01 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">15</span>
-<span class="term-output">32</span>
-<span class="term-output">41</span>
-<span class="term-output">62</span>
-<span class="term-output">264</span>
-<span class="term-output">… with 12 more lines</span></code></pre>
+<span class="term-output">39</span>
+<span class="term-output">339</span>
+<span class="term-output">582</span>
+<span class="term-output">612</span>
+<span class="term-output">633</span>
+<span class="term-output">… with 2 more lines</span></code></pre>
 
 </section>
 <section id="scp" class="level2 unnumbered">
@@ -1512,19 +1512,19 @@ body.quarto-dark {
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">man</span> shuf
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> {a..z} | <span style="color:var(--term-2)">tr</span> <span style="color:var(--term-3)">' '</span> <span style="color:var(--term-3)">'\n'</span> | <span style="color:var(--term-2)">shuf</span> | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">k</span>
-<span class="term-output">h</span>
+<span class="term-output">x</span>
+<span class="term-output">c</span>
 <span class="term-output">q</span>
-<span class="term-output">t</span>
-<span class="term-output">d</span>
+<span class="term-output">p</span>
+<span class="term-output">e</span>
 <span class="term-output">… with 21 more lines</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">shuf</span> -i 1-100 | <span style="color:var(--term-2)">trim</span> 5
-<span class="term-output">8</span>
-<span class="term-output">36</span>
-<span class="term-output">7</span>
-<span class="term-output">43</span>
-<span class="term-output">32</span>
+<span class="term-output">57</span>
+<span class="term-output">88</span>
+<span class="term-output">4</span>
+<span class="term-output">29</span>
+<span class="term-output">10</span>
 <span class="term-output">… with 95 more lines</span></code></pre>
 
 </section>
@@ -1713,7 +1713,7 @@ body.quarto-dark {
 <span class="term-output">ts is /usr/bin/ts</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">echo</span> seq 5 | <span style="color:var(--term-2)">sample</span> -d 500 | <span style="color:var(--term-2)">ts</span>
-<span class="term-output">Nov 09 19:35:46 seq 5</span></code></pre>
+<span class="term-output">Nov 10 11:52:48 seq 5</span></code></pre>
 
 </section>
 <section id="type" class="level2 unnumbered">
@@ -2376,7 +2376,7 @@ body.quarto-dark {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 9, 2026.</p>
+<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 10, 2026.</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/list-of-command-line-tools.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/list-of-command-line-tools.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
