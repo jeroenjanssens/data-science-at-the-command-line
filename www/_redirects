@@ -1,0 +1,20 @@
+# datascienceatthecommandline.com: the book moved to https://dsatcl.jeroenjanssens.com
+# (deployed to the Netlify site of the old domain with `make publish-redirects`)
+
+# The data from Chapter 2, and files that pages linked to
+/2e/data.zip  https://dsatcl.jeroenjanssens.com/data.zip  301!
+/resources/*  https://dsatcl.jeroenjanssens.com/resources/:splat  301!
+
+# Chapters of the first edition that were renamed in the second
+/1e/chapter-4-creating-reusable-command-line-tools.html  https://dsatcl.jeroenjanssens.com/chapter-4-creating-command-line-tools  301!
+/1e/chapter-6-managing-your-data-workflow.html  https://dsatcl.jeroenjanssens.com/chapter-6-project-management-with-make  301!
+/1e/chapter-10-conclusion.html  https://dsatcl.jeroenjanssens.com/chapter-11-conclusion  301!
+/chapter-4-creating-reusable-command-line-tools.html  https://dsatcl.jeroenjanssens.com/chapter-4-creating-command-line-tools  301!
+/chapter-6-managing-your-data-workflow.html  https://dsatcl.jeroenjanssens.com/chapter-6-project-management-with-make  301!
+/chapter-10-conclusion.html  https://dsatcl.jeroenjanssens.com/chapter-11-conclusion  301!
+
+# Everything else keeps its name: the other first-edition chapters, the
+# second edition (/2e/), and the old pages at the top level
+/1e/*  https://dsatcl.jeroenjanssens.com/:splat  301!
+/2e/*  https://dsatcl.jeroenjanssens.com/:splat  301!
+/*  https://dsatcl.jeroenjanssens.com/:splat  301!

@@ -1,6 +1,7 @@
 # Plan: publish 2.5e at dsatcl.jeroenjanssens.com
 
-Status: **plan only — nothing implemented yet** (2026-11-09).
+Status: **being carried out** (2026-11-26). `master` is renamed to `main`, and
+`2-5e` is merged into `main`.
 
 Goal: the Quarto edition (`book/2.5e/_book`) replaces the 2e website. It's
 served by **GitHub Pages** at **https://dsatcl.jeroenjanssens.com**, set up
@@ -43,10 +44,10 @@ jeroenjanssens.com/dsatcl/*         datascienceatthecommandline.com/*
 
 ## 3. Steps
 
-### Phase 1: this repo (on `2-5e`, then merge into `master`)
+### Phase 1: this repo (on `2-5e`, then merge into `main`)
 
 1. **`site-url`.** In `book/2.5e/_quarto.yml`, under `book:`: `site-url: https://dsatcl.jeroenjanssens.com`
-   (canonical links, Open Graph URLs, sitemap). `repo-branch: master` stays.
+   (canonical links, Open Graph URLs, sitemap), and `repo-branch: main`.
 2. **Slides.** Copy `jj-com/misc/dsatcl/resources/50-reasons.pdf` to
    `book/2.5e/resources/50-reasons.pdf`, list it under `project: resources:`, and
    link it relatively from chapter 1 (`resources/50-reasons.pdf`).
@@ -57,7 +58,7 @@ jeroenjanssens.com/dsatcl/*         datascienceatthecommandline.com/*
      `book/2.5e/images/` (or the repo) instead of `datascienceatthecommandline.com/static/…`
 4. **Publish workflow** `.github/workflows/publish-book.yml` (modelled on
    quarto-term's `publish-docs.yml`):
-   - on push to `master` touching `book/2.5e/_book/**`, `book/2.5e/data/ch*/**`,
+   - on push to `main` touching `book/2.5e/_book/**`, `book/2.5e/data/ch*/**`,
      or the workflow; plus `workflow_dispatch`;
    - no rendering in CI (it needs Docker and ~6 minutes; `_book` is tracked):
      copy `book/2.5e/_book` to `site/`, then
@@ -66,7 +67,7 @@ jeroenjanssens.com/dsatcl/*         datascienceatthecommandline.com/*
    - `permissions: pages: write, id-token: write`; `concurrency: pages`.
    `data.zip` is built in CI, so it isn't tracked and doesn't churn `_book`.
 5. **Render, compare, commit** (`make render compare` in `book/2.5e`), then
-   **merge `2-5e` into `master` and push**. Nothing is public yet: Pages isn't
+   **rename `master` to `main`, merge `2-5e` into `main`, and push**. Nothing is public yet: Pages isn't
    enabled.
 
 ### Phase 2: GitHub Pages and the subdomain
@@ -154,7 +155,7 @@ jeroenjanssens.com/dsatcl/*         datascienceatthecommandline.com/*
 
 ## 5. Needs you
 
-- Merging `2-5e` into `master` (step 5) makes the new book the default branch.
+- Merging `2-5e` into `main` (step 5) makes the new book the default branch.
 - `! npx netlify-cli login` for step 11, or deploy the `_redirects` folder in
   the Netlify UI yourself.
 - Optional: Search Console (step 14).

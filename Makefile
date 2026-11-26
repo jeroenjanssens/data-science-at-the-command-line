@@ -1,4 +1,4 @@
-.PHONY: clean 1e 2e redirects live publish-draft publish-production sync-atlas asciidoc hugo lab appendix
+.PHONY: clean 1e 2e publish-redirects sync-atlas asciidoc hugo lab appendix
 .SUFFIXES:
 
 .ONESHELL:
@@ -12,14 +12,6 @@ clean:
 	cd book/2e &&\
 	rm -f book.md &&\
 	Rscript --vanilla -e 'bookdown::render_book("index.Rmd", encoding = "UTF-8", clean = FALSE)'
-
-copy-2e:
-	cd book/2e/output &&\
-	rm -f *.md &&\
-	cp -vr * ../../../www/src/2e/ &&\
-    cd ../data &&\
-    zip data */* &&\
-    mv -v data.zip ../../../www/src/2e/
 
 book/2e/%.utf8.md: book/2e/%.Rmd
 	cd book/2e && Rscript --vanilla -e 'bookdown::render_book("$*.Rmd", encoding = "UTF-8", preview = TRUE, clean = FALSE, new_session = TRUE)'
@@ -57,14 +49,7 @@ lab:
 appendix:
 	cd book/2e/bin && ./appendix.py > ../tools.Rmd
 
-build-www:
-	cd www && npm run build
-
-live:
-	cd www && npm run start
-
-publish-draft: build-www
-	netlify deploy --dir www/_site
-
-publish-production: build-www
-	netlify deploy --prod --dir www/_site
+# The old domain, datascienceatthecommandline.com, only redirects to
+# https://dsatcl.jeroenjanssens.com (see www/_redirects)
+publish-redirects:
+	npx netlify-cli deploy --prod --dir www
