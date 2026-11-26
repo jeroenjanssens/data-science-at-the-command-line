@@ -534,6 +534,54 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:ac2e2f4327e2873ff504d7e72cc8f1fa8abb9
 +│ staten_island │    28 │
 ```
 
+## Prose (replace): The Z shell has a feature called brace expansion, which transforms {0.
+
+- id: `chapter-8-parallel-pipelines.html:prose:744d984f`
+- hash: `6c67ec89`
+- status: **accept**
+- cause: content
+- note: {0..100..2} gives 2 in the second iteration, issue #121
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-The Z shell has a feature called brace expansion, which transforms {0..100..2} into a list separated by spaces: 0 2 4 … 98 100. The variable i is assigned the value “0” in the first iteration, “1” in the second iteration, and so forth.
++The Z shell has a feature called brace expansion, which transforms {0..100..2} into a list separated by spaces: 0 2 4 … 98 100. The variable i is assigned the value “0” in the first iteration, “2” in the second iteration, and so forth.
+```
+
+## Prose (replace): When the input items are filenames, there are a couple of modifiers yo
+
+- id: `chapter-8-parallel-pipelines.html:prose:1517aaa7`
+- hash: `f7694ef7`
+- status: **accept**
+- cause: content
+- note: Wording, issue #121
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-When the input items are filenames, there are a couple of modifiers you can use only parts of the filename. For example, with {/}, only the basename of the filename will be used:
++When the input items are filenames, there are a couple of modifiers you can use to get only parts of the filename. For example, with {/}, only the basename of the filename will be used:
+```
+
+## Prose (replace): By default, parallel runs one job per CPU core. You can control the nu
+
+- id: `chapter-8-parallel-pipelines.html:prose:6f32c5c9`
+- hash: `3b825ad3`
+- status: **accept**
+- cause: content
+- note: Clearer -j+M and -j-M, issue #121
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-By default, parallel runs one job per CPU core. You can control the number of jobs that will be run concurrently with the --jobs or -j option. Specifying a number means that many jobs will be run concurrently. If you put a plus sign in front of the number then parallel will run N jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run N-M jobs. Where N is the number of CPU cores. You can also specify a percentage, where the default is 100% of the number of CPU cores. The optimal number of jobs to run concurrently depends on the actual commands you are running.
++By default, parallel runs one job per CPU core. You can control the number of jobs that will be run concurrently with the --jobs or -j option. Specifying a number means that many jobs will be run concurrently. If you put a plus sign in front of the number M (for example, -j+2), then parallel will run N+M jobs, where N is the number of CPU cores. If you put a minus sign in front of it (for example, -j-2), then parallel will run N-M jobs. You can also specify a percentage, where the default is 100% of the number of CPU cores. The optimal number of jobs to run concurrently depends on the actual commands you are running.
+```
+
 ## 3 old anchor(s) missing
 
 - id: `chapter-8-parallel-pipelines.html:anchors-missing`

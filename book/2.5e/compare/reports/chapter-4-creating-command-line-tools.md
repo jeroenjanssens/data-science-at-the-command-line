@@ -413,6 +413,22 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:ac2e2f4327e2873ff504d7e72cc8f1fa8abb9
 +top-words.R 5 < alice.txt  0.14s user 0.06s system 4% cpu 4.281 total
 ```
 
+## Prose (replace): We know have a valid command-line tool that we can execute from the co
+
+- id: `chapter-4-creating-command-line-tools.html:prose:259aee0e`
+- hash: `33a1022d`
+- status: **accept**
+- cause: content
+- note: Typo: know -> now, PR #114
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-We know have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is curl, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.
++We now have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is curl, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.
+```
+
 ## Footnotes differ (14 vs 14)
 
 - id: `chapter-4-creating-command-line-tools.html:footnotes`

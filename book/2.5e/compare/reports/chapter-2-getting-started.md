@@ -515,6 +515,54 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:ac2e2f4327e2873ff504d7e72cc8f1fa8abb9
 +The Docker image works on Intel/AMD and ARM computers, including Macs with Apple Silicon. It has been updated since the book was published, so some output may look slightly different from the printed book. If you want the exact environment that was used for the printed book, use datasciencetoolbox/dsatcl2e:20210628 instead of datasciencetoolbox/dsatcl2e in the commands in this chapter.
 ```
 
+## Prose (replace): The terminal, which is the second layer, is the application where we t
+
+- id: `chapter-2-getting-started.html:prose:4ef383de`
+- hash: `f10060c5`
+- status: **accept**
+- cause: content
+- note: Explain the continuation prompt (>), issue #133
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-The terminal, which is the second layer, is the application where we type our commands in. If you see the following text mentioned in the book: then you would type seq 3 into your terminal and press Enter. (The command-line tool seq [^], as you can see, generates a sequence of numbers.) You do not type the dollar sign. It’s just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below seq 3 is the output of the command.
++The terminal, which is the second layer, is the application where we type our commands in. If you see the following text mentioned in the book: then you would type seq 3 into your terminal and press Enter. (The command-line tool seq [^], as you can see, generates a sequence of numbers.) You do not type the dollar sign. It’s just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. When a command continues on the next line, that line starts with a greater-than sign ( >) instead, which you don’t type either. The text below seq 3 is the output of the command.
+```
+
+## Prose (replace): then you would type seq 3 into your terminal and press Enter. (The com
+
+- id: `chapter-2-getting-started.html:prose:37bab5db`
+- hash: `2b824af3`
+- status: **accept**
+- cause: content
+- note: Explain the continuation prompt (>), issue #133
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-then you would type seq 3 into your terminal and press Enter. (The command-line tool seq [^], as you can see, generates a sequence of numbers.) You do not type the dollar sign. It’s just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below seq 3 is the output of the command.
++then you would type seq 3 into your terminal and press Enter. (The command-line tool seq [^], as you can see, generates a sequence of numbers.) You do not type the dollar sign. It’s just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. When a command continues on the next line, that line starts with a greater-than sign ( >) instead, which you don’t type either. The text below seq 3 is the output of the command.
+```
+
+## Prose (replace): If often use trim to limit the output to a given height and width. By 
+
+- id: `chapter-2-getting-started.html:prose:665c54f8`
+- hash: `78b14a5e`
+- status: **accept**
+- cause: content
+- note: Typo: If often -> I often, issue #121
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +1 @@
+-If often use trim to limit the output to a given height and width. By default, output is trimmed to 10 lines and the width of the terminal. Pass a negative number to disable trimming the height and or width. For example:
++I often use trim to limit the output to a given height and width. By default, output is trimmed to 10 lines and the width of the terminal. Pass a negative number to disable trimming the height and or width. For example:
+```
+
 ## Prose (replace): If the output is a comma-separated values, I often pipe it through csv
 
 - id: `chapter-2-getting-started.html:prose:25395da1`

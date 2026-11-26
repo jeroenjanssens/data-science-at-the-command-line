@@ -644,7 +644,7 @@ Note
 <span class="term-output">2</span>
 <span class="term-output">3</span></code></pre>
 
-<p>then you would type <code>seq 3</code> into your terminal and press <strong><code>Enter</code></strong>. (The command-line tool <code>seq</code><span class="citation" data-cites="seq"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span>, as you can see, generates a sequence of numbers.) You do not type the dollar sign. It’s just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. The text below <code>seq 3</code> is the output of the command.</p>
+<p>then you would type <code>seq 3</code> into your terminal and press <strong><code>Enter</code></strong>. (The command-line tool <code>seq</code><span class="citation" data-cites="seq"><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></span>, as you can see, generates a sequence of numbers.) You do not type the dollar sign. It’s just there to tell you that this a command you can type in the terminal. This dollar sign is known as the prompt. When a command continues on the next line, that line starts with a greater-than sign (<code>&gt;</code>) instead, which you don’t type either. The text below <code>seq 3</code> is the output of the command.</p>
 </dd>
 <dt>Shell</dt>
 <dd>
@@ -1104,7 +1104,7 @@ Tip
 <h3 data-number="2.3.7" class="anchored" data-anchor-id="managing-output"><span class="header-section-number">2.3.7</span> Managing Output</h3>
 <p>Sometimes a tools or sequence of tools produces too much output to include in the book. Instead of manually altering such output, I prefer to be transparent by piping it through a helper tool. You don’t necessarily have to do this, especially if you’re interested in the complete output.</p>
 <p>Here are the tools that I use for making output manageable:</p>
-<p>If often use <code>trim</code> to limit the output to a given height and width. By default, output is trimmed to 10 lines and the width of the terminal. Pass a negative number to disable trimming the height and or width. For example:</p>
+<p>I often use <code>trim</code> to limit the output to a given height and width. By default, output is trimmed to 10 lines and the width of the terminal. Pass a negative number to disable trimming the height and or width. For example:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cat</span> <span style="text-decoration:underline">/data/ch07/tips.csv</span> | <span style="color:var(--term-2)">trim</span> 5 25
 <span class="term-output">bill,tip,sex,smoker,day,…</span>
 <span class="term-output">16.99,1.01,Female,No,Sun…</span>

@@ -207,17 +207,17 @@
   decision: accept
   note: curl 8 progress meter layout
 - id: chapter-3-obtaining-data.html:block:23
-  hash: cfb31730
+  hash: '993a2962'
   title: 'Code block 23: `$ csvgrep top2000.csv --columns ARTIEST --regex ''^Queen$'' | csvlook -I`'
   cause: image
   decision: accept
-  note: 'csvkit 1.1.0 on an empty file: an empty table instead of StopIteration; no ResourceWarning'
+  note: 'The 2021 Top 2000 has lowercase column names; 2e failed here (StopIteration) because the 2020 URL was gone'
 - id: chapter-3-obtaining-data.html:block:24
-  hash: 3f8d1215
+  hash: '6615db8f'
   title: 'Code block 24: `$ in2csv --names top2000.xlsx`'
   cause: image
   decision: accept
-  note: 'csvkit 1.1.0 on an empty file: an empty table instead of StopIteration; no ResourceWarning'
+  note: '2e failed here (BadZipFile) because the 2020 URL was gone; the 2021 file has one sheet, Blad1'
 - id: chapter-3-obtaining-data.html:block:28
   hash: 89edfe60
   title: 'Code block 28: `$ curl -s "http://newsapi.org/v2/everything?q=linux&apiKey=$(< /data/.`'
@@ -1678,3 +1678,51 @@
   cause: image
   decision: accept
   note: 'rush 0.3 only reads standard input with an explicit -'
+- id: chapter-2-getting-started.html:prose:4ef383de
+  hash: 'f10060c5'
+  title: 'Prose (replace): The terminal, which is the second layer, is the application where we t'
+  cause: content
+  decision: accept
+  note: 'Explain the continuation prompt (>), issue #133'
+- id: chapter-2-getting-started.html:prose:37bab5db
+  hash: '2b824af3'
+  title: 'Prose (replace): then you would type seq 3 into your terminal and press Enter. (The com'
+  cause: content
+  decision: accept
+  note: 'Explain the continuation prompt (>), issue #133'
+- id: chapter-2-getting-started.html:prose:665c54f8
+  hash: '78b14a5e'
+  title: 'Prose (replace): If often use trim to limit the output to a given height and width. By '
+  cause: content
+  decision: accept
+  note: 'Typo: If often -> I often, issue #121'
+- id: chapter-3-obtaining-data.html:prose:222a4e5c
+  hash: 'e8d0aadd'
+  title: 'Prose (replace): Who is Danny Vera? The most popular song is supposed to be Bohemian Rh'
+  cause: content
+  decision: accept
+  note: 'The 2021 Top 2000 (the 2020 URL is gone, issues #123 and #148, URL from PR #126): Bohemian Rhapsody is number one again'
+- id: chapter-4-creating-command-line-tools.html:prose:259aee0e
+  hash: '33a1022d'
+  title: 'Prose (replace): We know have a valid command-line tool that we can execute from the co'
+  cause: content
+  decision: accept
+  note: 'Typo: know -> now, PR #114'
+- id: chapter-8-parallel-pipelines.html:prose:744d984f
+  hash: '6c67ec89'
+  title: 'Prose (replace): The Z shell has a feature called brace expansion, which transforms {0.'
+  cause: content
+  decision: accept
+  note: '{0..100..2} gives 2 in the second iteration, issue #121'
+- id: chapter-8-parallel-pipelines.html:prose:1517aaa7
+  hash: 'f7694ef7'
+  title: 'Prose (replace): When the input items are filenames, there are a couple of modifiers yo'
+  cause: content
+  decision: accept
+  note: 'Wording, issue #121'
+- id: chapter-8-parallel-pipelines.html:prose:6f32c5c9
+  hash: '3b825ad3'
+  title: 'Prose (replace): By default, parallel runs one job per CPU core. You can control the nu'
+  cause: content
+  decision: accept
+  note: 'Clearer -j+M and -j-M, issue #121'

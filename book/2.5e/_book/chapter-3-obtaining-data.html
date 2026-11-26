@@ -579,12 +579,12 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 924K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov 26 11:52 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov 26 11:52 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov 26 11:52 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov 26 11:52 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov 26 11:52 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov 26 11:52 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov 26 15:37 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov 26 15:37 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov 26 15:37 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov 26 15:37 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov 26 15:37 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov 26 15:37 top2000.xlsx</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -624,7 +624,7 @@ body.quarto-dark {
 <span class="term-output">"noscript":"ready","user.styles":"ready","ext.globalCssJs.user":"ready","user":…</span>
 <span class="term-output">"ext.growthExperiments.SuggestedEditSession"];&lt;/script&gt;</span>
 <span class="term-output">&lt;script&gt;(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.options@…</span>
-<span class="term-output">100 246.3k 100 246.3k   0      0 108.9M      0                              0</span>
+<span class="term-output">100 246.3k 100 246.3k   0      0 130.6M      0                              0</span>
 <span class="term-output">… with 1729 more lines</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -652,13 +652,13 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 1.4M</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 430K Nov 26 11:52 List_of_windmills_in_Friesland</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov 26 11:52 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov 26 11:52 r-datasets.db</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov 26 11:52 tmnt-basic.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov 26 11:52 tmnt-missing-newline.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov 26 11:52 tmnt-with-header.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov 26 11:52 top2000.xlsx</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 430K Nov 26 15:37 List_of_windmills_in_Friesland</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 627K Nov 26 15:37 <span style="color:var(--term-1);font-weight:bold">logs.tar.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 189K Nov 26 15:37 r-datasets.db</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  149 Nov 26 15:37 tmnt-basic.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  148 Nov 26 15:37 tmnt-missing-newline.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  181 Nov 26 15:37 tmnt-with-header.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  91K Nov 26 15:37 top2000.xlsx</span></code></pre>
 
 <p>If you don’t like that filename then you can use the <code>-o</code> option together with a filename or redirect the output to a file yourself:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -s <span style="color:var(--term-3)">"https://en.wikipedia.org/wiki/List_of_windmills_in_Friesland"</span> <span style="color:var(--term-3)">&gt;</span> fries
@@ -882,30 +882,49 @@ body.quarto-dark {
 </ol>
 </div>
 <p>Let’s demonstrate <code>in2csv</code> using a spreadsheet that contains the 2000 most popular songs according to an annual Dutch marathon radio program <a href="https://www.top2000nl.com">Top 2000</a>. To extract its data, you invoke <code>in2csv</code> as follows:</p>
-<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">top2000.xls</span>
-<span class="term-output"><span style="text-decoration:underline">x</span></span>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> <span style="color:var(--term-3)">"https://cms-assets.nporadio.nl/npoRadio2/TOP-2000-2021.xlsx"</span> <span style="color:var(--term-3)">&gt;</span> <span style="text-decoration:underline">top2000.x</span>
+<span class="term-output"><span style="text-decoration:underline">lsx</span></span>
 <span class="term-output">  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current</span>
 <span class="term-output">                                 Dload  Upload  Total   Spent   Left   Speed</span>
-<span class="term-output">100      8 100      8   0      0   9852      0                              0</span>
+<span class="term-output">100 108.6k 100 108.6k   0      0 80.53M      0                              0</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> <span style="text-decoration:underline">top2000.xlsx</span> | <span style="color:var(--term-2)">tee</span> top2000.csv | <span style="color:var(--term-2)">trim</span>
-<span class="term-output">BadZipFile: File is not a zip file</span></code></pre>
+<span class="term-output">positie,titel,artiest,jaar</span>
+<span class="term-output">,,,</span>
+<span class="term-output">1,Bohemian Rhapsody,Queen,1975</span>
+<span class="term-output">2,Roller Coaster,Danny Vera,2019</span>
+<span class="term-output">3,A Whiter Shade Of Pale,Procol Harum,1967</span>
+<span class="term-output">4,Hotel California,Eagles,1977</span>
+<span class="term-output">5,Piano Man,Billy Joel,1974</span>
+<span class="term-output">6,Radar Love,Golden Earring,1973</span>
+<span class="term-output">7,Stairway To Heaven,Led Zeppelin,1971</span>
+<span class="term-output">8,Nothing Else Matters,Metallica,1992</span>
+<span class="term-output">… with 1992 more lines</span></code></pre>
 
-<p>Who is Danny Vera? The most popular song is supposed to be <em>Bohemian Rhapsody</em>, of course. Well, at least Queen appears plenty of times in the Top 2000 so I can’t really complain:</p>
-<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvgrep</span> <span style="text-decoration:underline">top2000.csv</span> --columns ARTIEST --regex <span style="color:var(--term-3)">'^Queen$'</span> | <span style="color:var(--term-2)">csvlook</span> -I <span class="term-callout">➊</span>
-<span class="term-output">││</span>
-<span class="term-output">│  │</span></code></pre>
+<p>Who is Danny Vera? He’s at number two, right behind <em>Bohemian Rhapsody</em>, which is the most popular song, of course. And Queen appears plenty of times in the Top 2000, so I can’t complain:</p>
+<pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">csvgrep</span> <span style="text-decoration:underline">top2000.csv</span> --columns artiest --regex <span style="color:var(--term-3)">'^Queen$'</span> | <span style="color:var(--term-2)">csvlook</span> -I <span class="term-callout">➊</span>
+<span class="term-output">│ positie │ titel                           │ artiest │ jaar │</span>
+<span class="term-output">├─────────┼─────────────────────────────────┼─────────┼──────┤</span>
+<span class="term-output">│ 1       │ Bohemian Rhapsody               │ Queen   │ 1975 │</span>
+<span class="term-output">│ 12      │ Love Of My Life                 │ Queen   │ 1975 │</span>
+<span class="term-output">│ 42      │ Innuendo                        │ Queen   │ 1991 │</span>
+<span class="term-output">│ 57      │ Don't Stop Me Now               │ Queen   │ 1979 │</span>
+<span class="term-output">│ 81      │ Somebody To Love                │ Queen   │ 1976 │</span>
+<span class="term-output">│ 89      │ Who Wants To Live Forever       │ Queen   │ 1986 │</span>
+<span class="term-output">│ 105     │ The Show Must Go On             │ Queen   │ 1991 │</span>
+<span class="term-output">│ 169     │ Killer Queen                    │ Queen   │ 1974 │</span>
+<span class="term-output">… with 25 more lines</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
-<li>The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>ARTIEST</code></em>.</li>
+<li>The value after the <code>--regex</code> options is a regular expression (or <em>regex</em>). It’s a special syntax for defining patterns. Here, I only want to match artists that exactly match “Queen,” so I use the caret (<code>^</code>) and dollar sign (<code>$</code>) to match the start and end of the values in the column <em><code>artiest</code></em>.</li>
 </ol>
 </div>
 <p>By the way, the tools <code>in2csv</code>, <code>csvgrep</code>, and <code>csvlook</code> are part of CSVkit, which is a collection of command-line tools to work with CSV data.</p>
 <p>The format of the file is automatically determined by the extension, <em>.xlsx</em> in this case. If you were to pipe the data into <code>in2csv</code>, you would have to specify the format explicitly.</p>
 <p>A spreadsheet can contain multiple worksheets. <code>in2csv</code> extracts, by default, the first worksheet. To extract a different worksheet, you need to pass the name of worksheet to the <code>--sheet</code> option. If you’re not sure what’s the worksheet is called, you can use the <code>--names</code> option, which prints the names of all the worksheets. Here we see that <em>top2000.xlsx</em> has only one sheet, named <em>Blad1</em> (which is Dutch for <em>Sheet1</em>).</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">in2csv</span> --names <span style="text-decoration:underline">top2000.xlsx</span>
-<span class="term-output">BadZipFile: File is not a zip file</span></code></pre>
+<span class="term-output">Blad1</span></code></pre>
 
 </section>
 <section id="querying-relational-databases" class="level2" data-number="3.6">

@@ -967,7 +967,7 @@ uniq<span style="color:var(--term-5);font-weight:bold"> -c</span> <span style="c
 </section>
 <section id="step-4-remove-fixed-input" class="level3" data-number="4.2.4">
 <h3 data-number="4.2.4" class="anchored" data-anchor-id="step-4-remove-fixed-input"><span class="header-section-number">4.2.4</span> Step 4: Remove Fixed Input</h3>
-<p>We know have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is <code>curl</code>, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.</p>
+<p>We now have a valid command-line tool that we can execute from the command line. But we can do better than this. We can make our command-line tool more reusable. The first command in our file is <code>curl</code>, which downloads the text from which we wish to obtain the top 10 most-used words. So, the data and operations are combined into one.</p>
 <p>What if we wanted to obtain the top 10 most-used words from another e-book, or any other text for that matter? The input data is fixed within the tools itself. It would be better to separate the data from the command-line tool.</p>
 <p>If we assume that the user of the command-line tool will provide the text, the tool will become generally applicable. So, the solution is to remove the <code>curl</code> command from the script. Here is the updated script named <em>top-words-4.sh</em>:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">cp</span> -v top-words-{3,4}.sh
