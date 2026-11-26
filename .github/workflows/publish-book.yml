@@ -1,0 +1,50 @@
+name: Publish book
+
+# Publishes the rendered book (book/2.5e/_book, which is tracked in git) to
+# GitHub Pages at https://dsatcl.jeroenjanssens.com. Rendering needs Docker and
+# runs locally (`make render` in book/2.5e), so this workflow doesn't render.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "book/2.5e/_book/**"
+      - "book/2.5e/data/ch*/**"
+      - ".github/workflows/publish-book.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble the site
+        run: |
+          cp -r book/2.5e/_book site
+          # The chapter data that readers download (see Chapter 2), without
+          # the hidden cache that the rendering uses
+          (cd book/2.5e/data && zip -qrX ../../../site/data.zip ch*)
+          unzip -l site/data.zip | tail -1
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
