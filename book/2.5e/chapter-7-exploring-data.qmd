@@ -380,14 +380,15 @@ rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tips.csv
 
 This generated script:
 
-- Writes out the shebang (*`#!`*; see [Chapter 4](chapter-4-creating-command-line-tools.qmd)) needed for running the script from the command line with `ir` [@ir].
-- Lists the packages that the script needs, so that `ir` can prepare them the first time you run it.
+- Writes out the shebang (*`#!`*; see [Chapter 4](chapter-4-creating-command-line-tools.qmd)) needed for running the script from the command line with `Rscript`.
 - Imports the *tidyverse* and *glue* packages.
 - Loads *tips.csv* as a data frame, cleans the column names, and assigns it to a variable *df*.
 - Runs the specified expression and assigns its result to *result*.
 - Writes the result to standard output.
 
 You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.
+In the Docker image, all the packages that the script needs are already installed.
+Outside the Docker image, `rush` uses `ir` [@ir] instead of `Rscript` and lists the packages that the script needs, so that `ir` can install them the first time you run the script.
 
 The output of `rush` doesn’t have to be a in CSV format per se. Here, I compute the mean tip percent, the maximum party size, the unique values of the time column, the correlation between the bill and the tip. Finally, I extract an entire column (but only show the first 10 values).
 
