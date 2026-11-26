@@ -387,7 +387,6 @@ Using `awk`, I can compare the predicted values with the observed values and com
 The MAE tells us how far off `vw` is on average, when it comes to predicting the quality of a white wine.
 
 ```{term}
-#| callout: ['cowsay']
 paste -d, predictions <(cut -d '|' -f 1 wine-test.vw) |
 tee results.csv |
 awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}' |
