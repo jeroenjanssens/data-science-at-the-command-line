@@ -257,7 +257,7 @@ header -d |
 tapkee --method t-sne |
 header -a x,y |
 paste -d, - <(xsv select type wine-scaled.csv) |
-rush plot --x x --y y --color type --shape type > wine-tsne.png
+rush plot --x x --y y --color type --shape type - > wine-tsne.png
 ```
 
 1. Deselect the column *`type`*
@@ -398,7 +398,7 @@ Let's visualize the relationship between the observed values and the predicted v
 
 ```{term}
 < results.csv header -a "predicted,observed" |
-rush plot --x observed --y predicted --geom jitter > wine-regression.png
+rush plot --x observed --y predicted --geom jitter - > wine-regression.png
 display wine-regression.png
 ```
 ![Regression with Vowpal Wabbit](images/wine-regression.png){#fig-wine-regression fig-align="center" width="90%"}

@@ -249,7 +249,7 @@ The second task creates a box plot showing the distribution of heights per speci
 
 ```{term}
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |
-rush plot --x height --y species --geom boxplot > heights.png
+rush plot --x height --y species --geom boxplot - > heights.png
 display heights.png
 ```
 ![Distribution of heights per species in Star Wars](images/heights.png){#fig-starwars-image fig-align="center" width="90%"}

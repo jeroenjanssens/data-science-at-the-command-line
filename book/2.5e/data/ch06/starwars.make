@@ -21,4 +21,4 @@ top10: data/starwars.csv
 	head
 
 heights.png: data/starwars.csv
-	< $< rush plot --x height --y species --geom boxplot > $@
+	< $< rush plot --x height --y species --geom boxplot - > $@
