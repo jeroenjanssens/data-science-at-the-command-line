@@ -36,7 +36,7 @@ header -d |\
 tapkee --method t-sne |\
 header -a x,y |\
 paste -d, - <(xsv select type wine-scaled.csv) |\
-rush plot --x x --y y --color type --shape type > wine-tsne.png
+rush plot --x x --y y --color type --shape type - > wine-tsne.png
 display wine-tsne.png
 csv2vw wine-white-clean.csv --label quality | trim
 csv2vw wine-white-clean.csv --label quality |\
@@ -68,7 +68,7 @@ tee results.csv |\
 awk -F, '{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}' |\
 cowsay
 < results.csv header -a "predicted,observed" |\
-rush plot --x observed --y predicted --geom jitter > wine-regression.png
+rush plot --x observed --y predicted --geom jitter - > wine-regression.png
 display wine-regression.png
 vw -d wine-train.vw -f wine2.model --quiet
 vw -data wine-test.vw -i wine2.model -t -p predictions --quiet

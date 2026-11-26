@@ -1,11 +1,11 @@
 # chapter-7-exploring-data.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732f796409580c0b012149d74a782e`
+Image: `datasciencetoolbox/dsatcl2e@sha256:ac2e2f4327e2873ff504d7e72cc8f1fa8abb9701698a123b2539ad3157ce9302`
 
 ## Code block 0: `$ cd /data/ch07`
 
 - id: `chapter-7-exploring-data.html:block:0`
-- hash: `97392b6e`
+- hash: `5d5d5e9f`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -20,10 +20,10 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 --rw-r--r-- 1 dst dst 7.8K Dec 14 11:49 tips.csv
 --rw-r--r-- 1 dst dst  83K Dec 14 11:49 venture.csv
 --rw-r--r-- 1 dst dst 4.6K Dec 14 11:49 venture-wide.csv
-+-rw-r--r-- 1 dst dst  125 Nov 10 11:49 datatypes.csv
-+-rw-r--r-- 1 dst dst 7.8K Nov 10 11:49 tips.csv
-+-rw-r--r-- 1 dst dst 4.6K Nov 10 11:49 venture-wide.csv
-+-rw-r--r-- 1 dst dst  83K Nov 10 11:49 venture.csv
++-rw-r--r-- 1 dst dst  125 Nov 26 11:56 datatypes.csv
++-rw-r--r-- 1 dst dst 7.8K Nov 26 11:56 tips.csv
++-rw-r--r-- 1 dst dst 4.6K Nov 26 11:56 venture-wide.csv
++-rw-r--r-- 1 dst dst  83K Nov 26 11:56 venture.csv
 ```
 
 ## Code block 20: `> library(tidyverse)                            ➊`
@@ -90,15 +90,15 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 ## Code block 23: `$ rush run --help`
 
 - id: `chapter-7-exploring-data.html:block:23`
-- hash: `3dd91960`
+- hash: `606faa25`
 - status: **accept**
 - cause: image
-- note: rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan D, ch 7)
+- note: rush 0.3 help text
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -3,27 +3,56 @@
+@@ -3,27 +3,55 @@
  
  Usage:
 -  rush run [options] <expression> [--] [<file>...]
@@ -125,7 +125,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 +  -d, --delimiter <str>         Delimiter (input and output) [default: ,].
 +      --input-delimiter <str>   Input delimiter (overrides -d).
 +  -F, --input-format <format>   Input format [default: auto].
-+      --input-sheet <name|int>  Excel sheet to read.
++      --input-sheet <name|int>  Sheet to read, or * for all.
 +      --names <a,b,c>           Column names (implies no input header).
 +  -C, --no-clean-names          No clean names.
 +  -H, --no-header               No header (input and output).
@@ -151,8 +151,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 +  -D, --output-delimiter <str>  Output delimiter (overrides -d).
 +  -O, --output-format <format>  Output format [default: auto].
 +      --output-indent <int>     Indentation level (JSON, YAML) [default: 2].
-+      --output-record <str>     Record element name (XML, TOML) [default: record
-+].
++      --output-record <str>     Record name (XML, TOML) [default: record].
 +      --output-root <str>       Root element name (XML) [default: root].
 +      --output-sheet <str>      Excel sheet name to write.
 +      --units <str>             Plot size units [default: in].
@@ -177,27 +176,17 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 ## Code block 24: `$ rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tip`
 
 - id: `chapter-7-exploring-data.html:block:24`
-- hash: `7c23d35a`
+- hash: `ba19ca7d`
 - status: **accept**
 - cause: image
-- note: rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan D, ch 7)
+- note: rush 0.3: generated script (rush::read() and rush::write(); Rscript shebang in the image, where RUSH_NO_IR=1)
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,7 +1,24 @@
+@@ -1,7 +1,15 @@
  $ rush run -n --tidyverse 'mutate(df, percent = tip / bill * 100)' tips.csv
--#!/usr/bin/env Rscript
-+#!/usr/bin/env -S ir run
-+#| packages:
-+#|   - github::jeroenjanssens/rush@5b7976dd7efe55208334ec1e475f61be3c15460d
-+#|   - rlang
-+#|   - cli
-+#|   - tibble
-+#|   - readr
-+#|   - tidyverse
-+#|   - glue
-+#|   - janitor
+ #!/usr/bin/env Rscript
 +
 +rush::init(
 +  dpi = 300L
@@ -294,30 +283,33 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 ## Code block 34: `$ rush plot --help`
 
 - id: `chapter-7-exploring-data.html:block:34`
-- hash: `864b1f9f`
+- hash: `23482297`
 - status: **accept**
 - cause: image
-- note: rush 0.2.1 help text
+- note: rush 0.3 help text
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -3,48 +3,75 @@
+@@ -3,48 +3,77 @@
  
  Usage:
 -  rush plot [options] [--] [<file>|-]
 +  rush plot [options] [--] [<file>...]
 +
 +Arguments:
-+  <file>                   Data file(s) to read before plotting. The reader is
-+                           chosen by extension: '.parquet'/'.pq' via
-+                           nanoparquet, '.duckdb'/'.ddb' via DuckDB, everything
-+                           else as delimited text. A single file is read into a
-+                           data frame named 'df'; use '-' or omit to read
-+                           delimited text from standard input. Multiple files
-+                           are each read into a named element of a list 'dfs';
-+                           combine them into 'df' yourself with the --pre
-+                           option, e.g. 'df <- dplyr::bind_rows(dfs)'.
++  <file>                   Data file(s) to plot. The reader is chosen by
++                           extension (or overridden with -F). The first input
++                           is read into a data frame named 'df', and all inputs
++                           into a named list 'dfs', keyed by file stem; combine
++                           multiple files into 'df' with the --pre option, e.g.
++                           'df <- dplyr::bind_rows(dfs)'. Use '-' to read
++                           from standard input.
++
++Note: Without --output, the plot is drawn as ANSI art on a terminal and
++written as PNG to standard output otherwise. Use -O ansi, -O ascii, or a
++graphics device such as -O svg to choose, or -o with a file extension
++(.png, .svg, .pdf, ...) to save it.
  
  Reading options:
 -  -d, --delimiter <str>    Delimiter [default: ,].
@@ -326,7 +318,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 +  -d, --delimiter <str>         Delimiter (input and output) [default: ,].
 +      --input-delimiter <str>   Input delimiter (overrides -d).
 +  -F, --input-format <format>   Input format [default: auto].
-+      --input-sheet <name|int>  Excel sheet to read.
++      --input-sheet <name|int>  Sheet to read, or * for all.
 +      --names <a,b,c>           Column names (implies no input header).
 +  -C, --no-clean-names          No clean names.
 +  -H, --no-header               No header (input and output).
@@ -393,8 +385,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 +  -D, --output-delimiter <str>  Output delimiter (overrides -d).
 +  -O, --output-format <format>  Output format [default: auto].
 +      --output-indent <int>     Indentation level (JSON, YAML) [default: 2].
-+      --output-record <str>     Record element name (XML, TOML) [default: record
-+].
++      --output-record <str>     Record name (XML, TOML) [default: record].
 +      --output-root <str>       Root element name (XML) [default: root].
 +      --output-sheet <str>      Excel sheet name to write.
 +      --units <str>             Plot size units [default: in].
@@ -790,37 +781,38 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 
 ## Prose (replace): Writes out the shebang ( #!; see Chapter 4) needed for running an R sc
 
-- id: `chapter-7-exploring-data.html:prose:aca50bd1`
-- hash: `c7999c9a`
+- id: `chapter-7-exploring-data.html:prose:f712b73b`
+- hash: `0bea50a5`
 - status: **accept**
 - cause: content
-- note: Content pass: generated scripts run with ir and list their packages
+- note: rush 0.3 in the image (RUSH_NO_IR=1) writes an Rscript shebang without the ir frontmatter
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1 +1,2 @@
+@@ -1 +1 @@
 -Writes out the shebang ( #!; see Chapter 4) needed for running an R script from the command line.
-+Writes out the shebang ( #!; see Chapter 4) needed for running the script from the command line with ir [^].
-+Lists the packages that the script needs, so that ir can prepare them the first time you run it.
++Writes out the shebang ( #!; see Chapter 4) needed for running the script from the command line with Rscript.
 ```
 
 ## Prose (replace): Runs the specified expression.
 
-- id: `chapter-7-exploring-data.html:prose:cffe4724`
-- hash: `0c561f4b`
+- id: `chapter-7-exploring-data.html:prose:751054d2`
+- hash: `aa9ea4ba`
 - status: **accept**
 - cause: content
-- note: Content pass: generated scripts assign `result` and write it with rush::write()
+- note: Generated scripts assign `result` and write it with rush::write(); outside the image rush uses ir
 
 ```diff
 --- 2e
 +++ 2.5e
-@@ -1,2 +1,2 @@
+@@ -1,3 +1,3 @@
 -Runs the specified expression.
 -Prints the result to standard output.
+-You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.
 +Runs the specified expression and assigns its result to result.
 +Writes the result to standard output.
++You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang. In the Docker image, all the packages that the script needs are already installed. Outside the Docker image, rush uses ir [^] instead of Rscript and lists the packages that the script needs, so that ir can install them the first time you run the script.
 ```
 
 ## Prose (replace): Under the hood, rush plot uses the function qplot from the ggplot2 pac

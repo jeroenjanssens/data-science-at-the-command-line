@@ -1,11 +1,11 @@
 # chapter-6-project-management-with-make.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732f796409580c0b012149d74a782e`
+Image: `datasciencetoolbox/dsatcl2e@sha256:ac2e2f4327e2873ff504d7e72cc8f1fa8abb9701698a123b2539ad3157ce9302`
 
 ## Code block 0: `$ cd /data/ch06`
 
 - id: `chapter-6-project-management-with-make.html:block:0`
-- hash: `4b080493`
+- hash: `2d2e8a07`
 - status: **accept**
 - cause: uutils
 - note: Timestamps and ls sort order (uutils sorts by byte value)
@@ -23,13 +23,72 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 --rw-r--r-- 1 dst dst 432 Dec 14 11:49 starwars.make
 --rw-r--r-- 1 dst dst 263 Dec 14 11:49 tasks.make
 --rw-r--r-- 1 dst dst  27 Dec 14 11:49 template.make
-+-rw-r--r-- 1 dst dst  37 Nov 10 11:48 Makefile.test
-+-rw-r--r-- 1 dst dst  21 Nov 10 11:48 numbers-write-var.make
-+-rw-r--r-- 1 dst dst  26 Nov 10 11:48 numbers-write.make
-+-rw-r--r-- 1 dst dst  16 Nov 10 11:48 numbers.make
-+-rw-r--r-- 1 dst dst 432 Nov 10 11:48 starwars.make
-+-rw-r--r-- 1 dst dst 263 Nov 10 11:48 tasks.make
-+-rw-r--r-- 1 dst dst  27 Nov 10 11:48 template.make
++-rw-r--r-- 1 dst dst  37 Nov 26 12:05 Makefile.test
++-rw-r--r-- 1 dst dst  21 Nov 26 12:05 numbers-write-var.make
++-rw-r--r-- 1 dst dst  26 Nov 26 12:05 numbers-write.make
++-rw-r--r-- 1 dst dst  16 Nov 26 12:05 numbers.make
++-rw-r--r-- 1 dst dst 434 Nov 26 12:05 starwars.make
++-rw-r--r-- 1 dst dst 263 Nov 26 12:05 tasks.make
++-rw-r--r-- 1 dst dst  27 Nov 26 12:05 template.make
+```
+
+## Code block 12: `$ curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/d`
+
+- id: `chapter-6-project-management-with-make.html:block:12`
+- hash: `c71c3279`
+- status: **accept**
+- cause: image
+- note: rush 0.3 only reads standard input with an explicit -
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1,5 +1,5 @@
+ $ curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st
+ arwars.csv' |
+-> rush plot --x height --y species --geom boxplot > heights.png
++> rush plot --x height --y species --geom boxplot - > heights.png
+ 
+ $ display heights.png
+```
+
+## Code block 13: `$ cp starwars.make Makefile`
+
+- id: `chapter-6-project-management-with-make.html:block:13`
+- hash: `513895ed`
+- status: **accept**
+- cause: image
+- note: rush 0.3 only reads standard input with an explicit -, also in starwars.make
+
+```diff
+--- 2e
++++ 2.5e
+@@ -29,4 +29,4 @@
+   22   │
+   23   │ heights.png: data/starwars.csv
+-  24   │         < $< rush plot --x height --y species --geom boxplot > $@
++  24   │         < $< rush plot --x height --y species --geom boxplot - > $@
+ ───────┴────────────────────────────────────────────────────────────────────────
+```
+
+## Code block 14: `$ make`
+
+- id: `chapter-6-project-management-with-make.html:block:14`
+- hash: `35f28955`
+- status: **accept**
+- cause: image
+- note: rush 0.3 only reads standard input with an explicit -, also in starwars.make
+
+```diff
+--- 2e
++++ 2.5e
+@@ -17,4 +17,4 @@
+ Jango Fett,183
+ Cliegg Lars,183
+-< data/starwars.csv rush plot --x height --y species --geom boxplot > heights.pn
+-g
++< data/starwars.csv rush plot --x height --y species --geom boxplot - > heights.
++png
 ```
 
 ## 2 old anchor(s) missing

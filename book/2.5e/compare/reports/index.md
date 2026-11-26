@@ -1,6 +1,6 @@
 # index.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732f796409580c0b012149d74a782e`
+Image: `datasciencetoolbox/dsatcl2e@sha256:ac2e2f4327e2873ff504d7e72cc8f1fa8abb9701698a123b2539ad3157ce9302`
 
 ## Prose (insert): Data Science at the Command Line, 2e
 
@@ -54,7 +54,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 ## External links differ
 
 - id: `index.html:external-links`
-- hash: `c3dd0142`
+- hash: `24e3e3c9`
 - status: **accept**
 - cause: intended
 - note: Content pass: Data Science Workshops paragraph removed; current bio and profiles; links to jeroenjanssens.com, Quarto, and quarto-term
@@ -65,10 +65,12 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
 @@ -0,0 +1,2 @@
 +https://jeroenjanssens.com
 +https://jeroenjanssens.com
-@@ -3 +5,2 @@
+@@ -3,2 +5,3 @@
 -https://datascienceworkshops.com
+-https://twitter.com/intent/tweet?url=https%3A%2F%2Fdatascienceatthecommandline.com&via=jeroenhjanssens&text=Data%20Science%20at%20the%20Command%20Line%2C%20second%20edition
 +https://quarto.org
 +https://quarto-term.jeroenjanssens.com
++https://twitter.com/intent/tweet?url=https%3A%2F%2Fdsatcl.jeroenjanssens.com&via=jeroenhjanssens&text=Data%20Science%20at%20the%20Command%20Line%2C%20second%20edition
 @@ -7,2 +10,4 @@
 -https://datascienceworkshops.com
 -https://twitter.com/jeroenhjanssens

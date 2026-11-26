@@ -121,14 +121,14 @@
   decision: accept
   note: Quarto title block shows title and subtitle (bs4_book showed them as hand-written divs)
 - id: index.html:external-links
-  hash: 'c3dd0142'
+  hash: '24e3e3c9'
   title: External links differ
   cause: intended
   decision: accept
   note: 'Content pass: Data Science Workshops paragraph removed; current bio and profiles; links to jeroenjanssens.com,
     Quarto, and quarto-term'
 - id: chapter-10-polyglot-data-science.html:block:0
-  hash: '0e7df2d9'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch10`'
   cause: uutils
   decision: accept
@@ -165,19 +165,19 @@
   decision: accept
   note: bookdown linked R function names in inline code to rdrr.io; Quarto does not (no R code is run)
 - id: chapter-3-obtaining-data.html:block:0
-  hash: '6a9f3664'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch03`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-3-obtaining-data.html:block:3
-  hash: '98b50c5a'
+  hash: any
   title: 'Code block 3: `$ curl "https://en.wikipedia.org/wiki/List_of_windmills_in_the_Netherl`'
   cause: image
   decision: accept
   note: curl 8 progress meter layout
 - id: chapter-3-obtaining-data.html:block:5
-  hash: '8fb50b2e'
+  hash: any
   title: 'Code block 5: `$ curl -s "https://en.wikipedia.org/wiki/List_of_windmills_in_Frieslan`'
   cause: time
   decision: accept
@@ -201,7 +201,7 @@
   decision: accept
   note: curl 8 man page
 - id: chapter-3-obtaining-data.html:block:22
-  hash: '3ae07141'
+  hash: any
   title: 'Code block 22: `$ curl "https://www.nporadio2.nl/data/download/TOP-2000-2020.xlsx" > t`'
   cause: image
   decision: accept
@@ -226,25 +226,25 @@
   note: newsapi response rebuilt from the 2e output (no API key); the long description is cut at a different
     place
 - id: chapter-4-creating-command-line-tools.html:block:0
-  hash: '33ff1154'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch04`'
   cause: uutils
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-4-creating-command-line-tools.html:block:6
-  hash: 'eaa6bf51'
+  hash: 'c8596489'
   title: 'Code block 6: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:7
-  hash: 'e8521dac'
+  hash: 'd01f63e6'
   title: 'Code block 7: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:8
-  hash: '4edee0c1'
+  hash: 'b680447c'
   title: 'Code block 8: `  GNU nano 5.4                     /tmp/zshpu0emE`'
   cause: image
   decision: accept
@@ -256,13 +256,13 @@
   decision: accept
   note: 'nano 8.7.1: version, temporary file name, and shortcut labels'
 - id: chapter-4-creating-command-line-tools.html:block:10
-  hash: 'd2a6ab7a'
+  hash: any
   title: 'Code block 10: `$ pwd`'
   cause: uutils
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-4-creating-command-line-tools.html:block:13
-  hash: '2fe8e8f4'
+  hash: any
   title: 'Code block 13: `$ l top-words-{1,2}.sh`'
   cause: time
   decision: accept
@@ -304,13 +304,13 @@
   decision: accept
   note: PATH of the new image (/opt/venv/bin, /opt/uv/bin; no rush/exec)
 - id: chapter-4-creating-command-line-tools.html:block:28
-  hash: '8a41e0e9'
+  hash: any
   title: 'Code block 28: `$ cp -v top-words{-5.sh,}`'
   cause: image
   decision: accept
   note: curl 8 progress meter layout
 - id: chapter-4-creating-command-line-tools.html:block:31
-  hash: 'e915209d'
+  hash: any
   title: 'Code block 31: `$ time < alice.txt top-words 5`'
   cause: time
   decision: accept
@@ -322,19 +322,19 @@
   decision: accept
   note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 - id: chapter-5-scrubbing-data.html:block:0
-  hash: '78fde68d'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch05`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-5-scrubbing-data.html:block:17
-  hash: 'e31506e6'
+  hash: any
   title: 'Code block 17: `$ seq -f "Line %g" 1000 | sample -r 1%`'
   cause: random
   decision: accept
   note: sample draws other lines
 - id: chapter-5-scrubbing-data.html:block:18
-  hash: '40338691'
+  hash: any
   title: 'Code block 18: `$ seq -f "Line %g" 1000 | sample -r 1% -d 1000 -s 5 | ts ➊`'
   cause: time
   decision: accept
@@ -364,7 +364,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-6-project-management-with-make.html:block:0
-  hash: '4b080493'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch06`'
   cause: uutils
   decision: accept
@@ -388,7 +388,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-7-exploring-data.html:block:0
-  hash: '97392b6e'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch07`'
   cause: uutils
   decision: accept
@@ -400,19 +400,17 @@
   decision: accept
   note: tidyverse 2 startup message; callout marker right after the code (2e aligned the comments)
 - id: chapter-7-exploring-data.html:block:23
-  hash: 3dd91960
+  hash: '606faa25'
   title: 'Code block 23: `$ rush run --help`'
   cause: image
   decision: accept
-  note: 'rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan
-    D, ch 7)'
+  note: 'rush 0.3 help text'
 - id: chapter-7-exploring-data.html:block:24
-  hash: '7c23d35a'
+  hash: 'ba19ca7d'
   title: 'Code block 24: `$ rush run -n --tidyverse ''mutate(df, percent = tip / bill * 100)'' tip`'
   cause: image
   decision: accept
-  note: 'rush 0.2.1: new help text and generated script (ir shebang); prose to update (book-changes-plan
-    D, ch 7)'
+  note: 'rush 0.3: generated script (rush::read() and rush::write(); Rscript shebang in the image, where RUSH_NO_IR=1)'
 - id: chapter-7-exploring-data.html:block:26
   hash: f3bfca45
   title: 'Code block 26: `$ rush plot --x bill --y tip --color size --facets ''~day'' tips.csv`'
@@ -427,11 +425,11 @@
   decision: accept
   note: 'Content pass: rush no longer uses qplot; show the generated ggplot() call'
 - id: chapter-7-exploring-data.html:block:34
-  hash: '864b1f9f'
+  hash: '23482297'
   title: 'Code block 34: `$ rush plot --help`'
   cause: image
   decision: accept
-  note: rush 0.2.1 help text
+  note: 'rush 0.3 help text'
 - id: chapter-7-exploring-data.html:block:35
   hash: 263c2a9f
   title: 'Code block 35: `$ rush plot --x time tips.csv`'
@@ -567,7 +565,7 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-8-parallel-pipelines.html:block:0
-  hash: 'bb9d638c'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch08`'
   cause: time
   decision: accept
@@ -597,7 +595,7 @@
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: chapter-8-parallel-pipelines.html:block:9
-  hash: '1b90a455'
+  hash: any
   title: 'Code block 9: `$ for i in {A..C}; do`'
   cause: random
   decision: accept
@@ -609,7 +607,7 @@
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-8-parallel-pipelines.html:block:11
-  hash: 'af269344'
+  hash: any
   title: 'Code block 11: `$ parallel --jobs 2 ./slow.sh ::: {A..C}`'
   cause: time
   decision: accept
@@ -641,7 +639,7 @@
   note: 'Fake output is shown now: in 2e the echo chain ended with &&, so it never ran and the next command
     was typed after a continuation prompt'
 - id: chapter-8-parallel-pipelines.html:block:39
-  hash: '7576834b'
+  hash: any
   title: 'Code block 39: `$ l nyc*json.gz`'
   cause: time
   decision: accept
@@ -709,7 +707,7 @@
   decision: accept
   note: Citations show the versions and years of the tools in the current image (content pass, tools.bib)
 - id: chapter-9-modeling-data.html:block:0
-  hash: '261c4a9b'
+  hash: any
   title: 'Code block 0: `$ cd /data/ch09`'
   cause: time
   decision: accept
@@ -727,31 +725,31 @@
   decision: accept
   note: 'tapkee 1.4 PCA: signs of the components are flipped'
 - id: chapter-9-modeling-data.html:block:18
-  hash: '06fc3430'
+  hash: '905a63ee'
   title: 'Code block 18: `$ vw \`'
   cause: image
   decision: accept
   note: vw 9 log format (wider columns, wrapped)
 - id: chapter-9-modeling-data.html:block:19
-  hash: '3f2b9765'
+  hash: any
   title: 'Code block 19: `$ vw \`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:20
-  hash: '36671013'
+  hash: any
   title: 'Code block 20: `$ paste -d, predictions <(cut -d ''|'' -f 1 wine-test.vw) |`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:22
-  hash: 'ac3363e2'
+  hash: any
   title: 'Code block 22: `$ vw -d wine-train.vw -f wine2.model --quiet ➊`'
   cause: time
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: chapter-9-modeling-data.html:block:24
-  hash: '1cc465bd'
+  hash: any
   title: 'Code block 24: `$ NUM_RED="$(< wine-red-clean.csv wc -l)" ➊`'
   cause: random
   decision: accept
@@ -763,13 +761,13 @@
   decision: accept
   note: skll 5 output file names (wine_ instead of wine_features_); prose may need an update
 - id: chapter-9-modeling-data.html:block:29
-  hash: 'e102f2f3'
+  hash: any
   title: 'Code block 29: `$ < output/wine_summary.tsv csvsql --query "SELECT learner_name, accur`'
   cause: random
   decision: accept
   note: Model accuracies (random train/test split, newer scikit-learn)
 - id: chapter-9-modeling-data.html:block:30
-  hash: '35a0f745'
+  hash: any
   title: 'Code block 30: `$ jq -r ''.[] | "\(.learner_name):\n\(.result_table)\n"'' output/*.json`'
   cause: time
   decision: accept
@@ -813,13 +811,13 @@
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-9-modeling-data.html:image:images/wine-regression.png
-  hash: '4262a5f8'
+  hash: '6368a39a'
   title: 'Image changed: images/wine-regression.png'
   cause: image
   decision: accept
   note: Regenerated with the new image (R 4.5, ggplot2 4, tapkee 1.4); reviewed in compare/reports/images.html
 - id: chapter-9-modeling-data.html:image:images/wine-tsne.png
-  hash: '3926b2d3'
+  hash: any
   title: 'Image changed: images/wine-tsne.png'
   cause: image
   decision: accept
@@ -831,7 +829,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:6
-  hash: '4a723434'
+  hash: any
   title: 'Code block 6: `$ type body`'
   cause: time
   decision: accept
@@ -885,7 +883,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:27
-  hash: '93fd5626'
+  hash: any
   title: 'Code block 27: `$ type dseq`'
   cause: time
   decision: accept
@@ -897,7 +895,7 @@
   decision: accept
   note: Timestamps and ls sort order (uutils sorts by byte value)
 - id: list-of-command-line-tools.html:block:42
-  hash: '74ea0a25'
+  hash: any
   title: 'Code block 42: `$ type hostname`'
   cause: random
   decision: accept
@@ -915,7 +913,7 @@
   decision: accept
   note: Tools live in other places in the new image
 - id: list-of-command-line-tools.html:block:46
-  hash: 'e30f856e'
+  hash: any
   title: 'Code block 46: `$ type l`'
   cause: time
   decision: accept
@@ -927,7 +925,7 @@
   decision: accept
   note: No csvconf directory in /data anymore
 - id: list-of-command-line-tools.html:block:56
-  hash: 'f0aaa2d6'
+  hash: any
   title: 'Code block 56: `$ type paste`'
   cause: time
   decision: accept
@@ -951,13 +949,13 @@
   decision: accept
   note: rush location; tibble 3 printing; starwars.csv 2021 snapshot capitalizes Lars
 - id: list-of-command-line-tools.html:block:66
-  hash: '556cc91f'
+  hash: any
   title: 'Code block 66: `$ type sample`'
   cause: random
   decision: accept
   note: Random output (sample, shuf)
 - id: list-of-command-line-tools.html:block:71
-  hash: '048da6e4'
+  hash: any
   title: 'Code block 71: `$ type shuf`'
   cause: random
   decision: accept
@@ -987,7 +985,7 @@
   decision: accept
   note: Timestamps, dates, sizes, or durations of this render
 - id: list-of-command-line-tools.html:block:88
-  hash: '40f4a0b0'
+  hash: any
   title: 'Code block 88: `$ type ts`'
   cause: time
   decision: accept
@@ -1059,7 +1057,7 @@
   decision: accept
   note: 'Content pass: show the csvlook function as a copyable code block (datasciencetoolbox#20)'
 - id: chapter-2-getting-started.html:external-links
-  hash: 9985b1eb
+  hash: '7efb8bd5'
   title: External links differ
   cause: content
   decision: accept
@@ -1101,18 +1099,6 @@
   cause: content
   decision: accept
   note: 'Content pass: link to the Internet Archive copy'
-- id: chapter-7-exploring-data.html:prose:aca50bd1
-  hash: c7999c9a
-  title: 'Prose (replace): Writes out the shebang ( #!; see Chapter 4) needed for running an R sc'
-  cause: content
-  decision: accept
-  note: 'Content pass: generated scripts run with ir and list their packages'
-- id: chapter-7-exploring-data.html:prose:cffe4724
-  hash: 0c561f4b
-  title: 'Prose (replace): Runs the specified expression.'
-  cause: content
-  decision: accept
-  note: 'Content pass: generated scripts assign `result` and write it with rush::write()'
 - id: chapter-7-exploring-data.html:prose:af94394d
   hash: e609be3d
   title: 'Prose (replace): Under the hood, rush plot uses the function qplot from the ggplot2 pac'
@@ -1626,3 +1612,69 @@
   cause: content
   decision: accept
   note: rush plot with --geom-args (rush 5b7976d) instead of rush run with ggplot2 code; the PNG is byte-identical
+- id: chapter-1-introduction.html:external-links
+  hash: 'ca93d7aa'
+  title: 'External links differ'
+  cause: content
+  decision: accept
+  note: 'The slides link to resources/50-reasons.pdf on the book''s own site; the old URL was a 404'
+- id: chapter-11-conclusion.html:prose:d306111c
+  hash: '40b1b7b8'
+  title: 'Prose (replace): Book website: https://datascienceatthecommandline.com/'
+  cause: content
+  decision: accept
+  note: 'The book website is now https://dsatcl.jeroenjanssens.com/'
+- id: chapter-11-conclusion.html:external-links
+  hash: '97dec6a6'
+  title: 'External links differ'
+  cause: content
+  decision: accept
+  note: 'The book website is now https://dsatcl.jeroenjanssens.com/'
+- id: chapter-2-getting-started.html:prose:8fc3eaf4
+  hash: '09556917'
+  title: 'Prose (replace): Download the ZIP file from https://www.datascienceatthecommandline.com'
+  cause: content
+  decision: accept
+  note: 'data.zip is now served from https://dsatcl.jeroenjanssens.com/data.zip'
+- id: chapter-6-project-management-with-make.html:block:12
+  hash: 'c71c3279'
+  title: 'Code block 12: `$ curl -sL ''https://raw.githubusercontent.com/tidyverse/dplyr/master/d`'
+  cause: image
+  decision: accept
+  note: 'rush 0.3 only reads standard input with an explicit -'
+- id: chapter-6-project-management-with-make.html:block:13
+  hash: '513895ed'
+  title: 'Code block 13: `$ cp starwars.make Makefile`'
+  cause: image
+  decision: accept
+  note: 'rush 0.3 only reads standard input with an explicit -, also in starwars.make'
+- id: chapter-6-project-management-with-make.html:block:14
+  hash: '35f28955'
+  title: 'Code block 14: `$ make`'
+  cause: image
+  decision: accept
+  note: 'rush 0.3 only reads standard input with an explicit -, also in starwars.make'
+- id: chapter-7-exploring-data.html:prose:f712b73b
+  hash: '0bea50a5'
+  title: 'Prose (replace): Writes out the shebang ( #!; see Chapter 4) needed for running an R sc'
+  cause: content
+  decision: accept
+  note: 'rush 0.3 in the image (RUSH_NO_IR=1) writes an Rscript shebang without the ir frontmatter'
+- id: chapter-7-exploring-data.html:prose:751054d2
+  hash: 'aa9ea4ba'
+  title: 'Prose (replace): Runs the specified expression.'
+  cause: content
+  decision: accept
+  note: 'Generated scripts assign `result` and write it with rush::write(); outside the image rush uses ir'
+- id: chapter-9-modeling-data.html:block:13
+  hash: '52f70756'
+  title: 'Code block 13: `$ xsv select ''!type'' wine-scaled.csv | ➊`'
+  cause: image
+  decision: accept
+  note: 'rush 0.3 only reads standard input with an explicit -'
+- id: chapter-9-modeling-data.html:block:21
+  hash: '7b585776'
+  title: 'Code block 21: `$ < results.csv header -a "predicted,observed" |`'
+  cause: image
+  decision: accept
+  note: 'rush 0.3 only reads standard input with an explicit -'

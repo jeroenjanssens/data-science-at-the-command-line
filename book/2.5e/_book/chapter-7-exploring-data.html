@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-d96b37388c6ce42d10ab3442bfd2e021.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.2/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -149,11 +149,13 @@ body.quarto-dark {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="7&nbsp; Exploring Data – Data Science at the Command Line, 2e">
 <meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta property="og:image" content="images/screenshot_display_preview_and_browser.png">
+<meta property="og:image" content="https://dsatcl.jeroenjanssens.com/images/screenshot_display_preview_and_browser.png">
 <meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta property="og:image:height" content="1542">
+<meta property="og:image:width" content="2454">
 <meta name="twitter:title" content="7&nbsp; Exploring Data – Data Science at the Command Line, 2e">
 <meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta name="twitter:image" content="images/screenshot_display_preview_and_browser.png">
+<meta name="twitter:image" content="https://dsatcl.jeroenjanssens.com/images/screenshot_display_preview_and_browser.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -363,7 +365,7 @@ body.quarto-dark {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science at the Command Line, 2e</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/main/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
     </div>
@@ -511,7 +513,7 @@ body.quarto-dark {
   <li><a href="#summary-6" id="toc-summary-6" class="nav-link" data-scroll-target="#summary-6"><span class="header-section-number">7.5</span> Summary</a></li>
   <li><a href="#for-further-exploration-6" id="toc-for-further-exploration-6" class="nav-link" data-scroll-target="#for-further-exploration-6"><span class="header-section-number">7.6</span> For Further Exploration</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -555,10 +557,10 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 104K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov 10 11:49 datatypes.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov 10 11:49 tips.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov 10 11:49 venture-wide.csv</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov 10 11:49 venture.csv</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  125 Nov 26 11:56 datatypes.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 7.8K Nov 26 11:56 tips.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 4.6K Nov 26 11:56 venture-wide.csv</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  83K Nov 26 11:56 venture.csv</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -1029,7 +1031,7 @@ Tip
 <span class="term-output">  -d, --delimiter &lt;str&gt;         Delimiter (input and output) [default: ,].</span>
 <span class="term-output">      --input-delimiter &lt;str&gt;   Input delimiter (overrides -d).</span>
 <span class="term-output">  -F, --input-format &lt;format&gt;   Input format [default: auto].</span>
-<span class="term-output">      --input-sheet &lt;name|int&gt;  Excel sheet to read.</span>
+<span class="term-output">      --input-sheet &lt;name|int&gt;  Sheet to read, or * for all.</span>
 <span class="term-output">      --names &lt;a,b,c&gt;           Column names (implies no input header).</span>
 <span class="term-output">  -C, --no-clean-names          No clean names.</span>
 <span class="term-output">  -H, --no-header               No header (input and output).</span>
@@ -1048,8 +1050,7 @@ Tip
 <span class="term-output">  -D, --output-delimiter &lt;str&gt;  Output delimiter (overrides -d).</span>
 <span class="term-output">  -O, --output-format &lt;format&gt;  Output format [default: auto].</span>
 <span class="term-output">      --output-indent &lt;int&gt;     Indentation level (JSON, YAML) [default: 2].</span>
-<span class="term-output">      --output-record &lt;str&gt;     Record element name (XML, TOML) [default: record</span>
-<span class="term-output">].</span>
+<span class="term-output">      --output-record &lt;str&gt;     Record name (XML, TOML) [default: record].</span>
 <span class="term-output">      --output-root &lt;str&gt;       Root element name (XML) [default: root].</span>
 <span class="term-output">      --output-sheet &lt;str&gt;      Excel sheet name to write.</span>
 <span class="term-output">      --units &lt;str&gt;             Plot size units [default: in].</span>
@@ -1066,16 +1067,7 @@ Tip
 
 <p>Under the hood, <code>rush</code> generates an <code>R</code> script and subsequently executes it. You can view this generated script by specifying the <code>--dry-run</code> (or <code>-n</code>) option:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">rush</span> run -n --tidyverse <span style="color:var(--term-3)">'mutate(df, percent = tip / bill * 100)'</span> <span style="text-decoration:underline">tips.csv</span>
-<span class="term-output">#!/usr/bin/env -S ir run</span>
-<span class="term-output">#| packages:</span>
-<span class="term-output">#|   - github::jeroenjanssens/rush@5b7976dd7efe55208334ec1e475f61be3c15460d</span>
-<span class="term-output">#|   - rlang</span>
-<span class="term-output">#|   - cli</span>
-<span class="term-output">#|   - tibble</span>
-<span class="term-output">#|   - readr</span>
-<span class="term-output">#|   - tidyverse</span>
-<span class="term-output">#|   - glue</span>
-<span class="term-output">#|   - janitor</span>
+<span class="term-output">#!/usr/bin/env Rscript</span>
 <span class="term-output"></span>
 <span class="term-output">rush::init(</span>
 <span class="term-output">  dpi = 300L</span>
@@ -1092,14 +1084,13 @@ Tip
 
 <p>This generated script:</p>
 <ul>
-<li>Writes out the shebang (<em><code>#!</code></em>; see <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a>) needed for running the script from the command line with <code>ir</code><span class="citation" data-cites="ir"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span>.</li>
-<li>Lists the packages that the script needs, so that <code>ir</code> can prepare them the first time you run it.</li>
+<li>Writes out the shebang (<em><code>#!</code></em>; see <a href="./chapter-4-creating-command-line-tools.html">Chapter 4</a>) needed for running the script from the command line with <code>Rscript</code>.</li>
 <li>Imports the <em>tidyverse</em> and <em>glue</em> packages.</li>
 <li>Loads <em>tips.csv</em> as a data frame, cleans the column names, and assigns it to a variable <em>df</em>.</li>
 <li>Runs the specified expression and assigns its result to <em>result</em>.</li>
 <li>Writes the result to standard output.</li>
 </ul>
-<p>You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang.</p>
+<p>You could redirect this generated script to a file and easily turn it into a new command-line tool because of the shebang. In the Docker image, all the packages that the script needs are already installed. Outside the Docker image, <code>rush</code> uses <code>ir</code><span class="citation" data-cites="ir"><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></span> instead of <code>Rscript</code> and lists the packages that the script needs, so that <code>ir</code> can install them the first time you run the script.</p>
 <p>The output of <code>rush</code> doesn’t have to be a in CSV format per se. Here, I compute the mean tip percent, the maximum party size, the unique values of the time column, the correlation between the bill and the tip. Finally, I extract an entire column (but only show the first 10 values).</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">percent.csv</span> <span style="color:var(--term-2)">rush</span> run <span style="color:var(--term-3)">'mean(df$percent)'</span> -
 <span class="term-output">16.0802581722505</span>
@@ -1239,21 +1230,24 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 <span class="term-output">  rush plot [options] [--] [&lt;file&gt;...]</span>
 <span class="term-output"></span>
 <span class="term-output">Arguments:</span>
-<span class="term-output">  &lt;file&gt;                   Data file(s) to read before plotting. The reader is</span>
-<span class="term-output">                           chosen by extension: '.parquet'/'.pq' via</span>
-<span class="term-output">                           nanoparquet, '.duckdb'/'.ddb' via DuckDB, everything</span>
-<span class="term-output">                           else as delimited text. A single file is read into a</span>
-<span class="term-output">                           data frame named 'df'; use '-' or omit to read</span>
-<span class="term-output">                           delimited text from standard input. Multiple files</span>
-<span class="term-output">                           are each read into a named element of a list 'dfs';</span>
-<span class="term-output">                           combine them into 'df' yourself with the --pre</span>
-<span class="term-output">                           option, e.g. 'df &lt;- dplyr::bind_rows(dfs)'.</span>
+<span class="term-output">  &lt;file&gt;                   Data file(s) to plot. The reader is chosen by</span>
+<span class="term-output">                           extension (or overridden with -F). The first input</span>
+<span class="term-output">                           is read into a data frame named 'df', and all inputs</span>
+<span class="term-output">                           into a named list 'dfs', keyed by file stem; combine</span>
+<span class="term-output">                           multiple files into 'df' with the --pre option, e.g.</span>
+<span class="term-output">                           'df &lt;- dplyr::bind_rows(dfs)'. Use '-' to read</span>
+<span class="term-output">                           from standard input.</span>
+<span class="term-output"></span>
+<span class="term-output">Note: Without --output, the plot is drawn as ANSI art on a terminal and</span>
+<span class="term-output">written as PNG to standard output otherwise. Use -O ansi, -O ascii, or a</span>
+<span class="term-output">graphics device such as -O svg to choose, or -o with a file extension</span>
+<span class="term-output">(.png, .svg, .pdf, ...) to save it.</span>
 <span class="term-output"></span>
 <span class="term-output">Reading options:</span>
 <span class="term-output">  -d, --delimiter &lt;str&gt;         Delimiter (input and output) [default: ,].</span>
 <span class="term-output">      --input-delimiter &lt;str&gt;   Input delimiter (overrides -d).</span>
 <span class="term-output">  -F, --input-format &lt;format&gt;   Input format [default: auto].</span>
-<span class="term-output">      --input-sheet &lt;name|int&gt;  Excel sheet to read.</span>
+<span class="term-output">      --input-sheet &lt;name|int&gt;  Sheet to read, or * for all.</span>
 <span class="term-output">      --names &lt;a,b,c&gt;           Column names (implies no input header).</span>
 <span class="term-output">  -C, --no-clean-names          No clean names.</span>
 <span class="term-output">  -H, --no-header               No header (input and output).</span>
@@ -1294,8 +1288,7 @@ Figure&nbsp;7.3: Displaying an image externally via a file explorer and an image
 <span class="term-output">  -D, --output-delimiter &lt;str&gt;  Output delimiter (overrides -d).</span>
 <span class="term-output">  -O, --output-format &lt;format&gt;  Output format [default: auto].</span>
 <span class="term-output">      --output-indent &lt;int&gt;     Indentation level (JSON, YAML) [default: 2].</span>
-<span class="term-output">      --output-record &lt;str&gt;     Record element name (XML, TOML) [default: record</span>
-<span class="term-output">].</span>
+<span class="term-output">      --output-record &lt;str&gt;     Record name (XML, TOML) [default: record].</span>
 <span class="term-output">      --output-root &lt;str&gt;       Root element name (XML) [default: root].</span>
 <span class="term-output">      --output-sheet &lt;str&gt;      Excel sheet name to write.</span>
 <span class="term-output">      --units &lt;str&gt;             Plot size units [default: in].</span>
@@ -1811,7 +1804,7 @@ Figure&nbsp;7.12: A violin plot with a title and labels
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/dsatcl\.jeroenjanssens\.com");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -2233,8 +2226,8 @@ Figure&nbsp;7.12: A violin plot with a title and labels
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 10, 2026.</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 26, 2026.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-7-exploring-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

@@ -1,11 +1,11 @@
 # chapter-1-introduction.html
 
-Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732f796409580c0b012149d74a782e`
+Image: `datasciencetoolbox/dsatcl2e@sha256:ac2e2f4327e2873ff504d7e72cc8f1fa8abb9701698a123b2539ad3157ce9302`
 
 ## Code block 0: `$ whoami`
 
 - id: `chapter-1-introduction.html:block:0`
-- hash: `4df5cb97`
+- hash: `39d93541`
 - status: **accept**
 - cause: time
 - note: date prints the render date; container runs in UTC (decision 8). keep-last-prompt: 2e had an extra empty line before the final prompt
@@ -17,7 +17,7 @@ Image: `datasciencetoolbox/dsatcl2e@sha256:dedbd1bfc3ea3db11abe3db1a3c972d85b732
  
  $ date
 -Tue Dec 14 11:43:30 AM CET 2021
-+Tue Nov 10 11:47:06 AM UTC 2026
++Thu Nov 26 11:50:12 AM UTC 2026
  
  $ echo 'The command line is awesome!' | cowsay -f tux
 @@ -19,4 +19,3 @@
@@ -41,6 +41,21 @@ fig:mac-terminal
 fig:ubuntu-terminal
 
 (new-only: fig-diagram-osemn, fig-diagram-osemn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-mac-terminal, fig-mac-terminal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fig-ubuntu-terminal, fig-ubuntu-terminal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca, fn1, fn2, fn3, fn4, fn5, fn6, fn7, fn8, fn9, fnref1, fnref2, fnref3, fnref4, fnref5, fnref6, fnref7, fnref8, fnref9, footnotes, title-block-header)
+```
+
+## External links differ
+
+- id: `chapter-1-introduction.html:external-links`
+- hash: `ca93d7aa`
+- status: **accept**
+- cause: content
+- note: The slides link to resources/50-reasons.pdf on the book's own site; the old URL was a 404
+
+```diff
+--- 2e
++++ 2.5e
+@@ -1 +0,0 @@
+-https://datascienceatthecommandline.com/resources/50-reasons.pdf
 ```
 
 ## Footnotes differ (9 vs 9)

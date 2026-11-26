@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-d96b37388c6ce42d10ab3442bfd2e021.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.2/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -149,11 +149,13 @@ body.quarto-dark {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="8&nbsp; Parallel Pipelines – Data Science at the Command Line, 2e">
 <meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta property="og:image" content="images/dscl_0801.png">
+<meta property="og:image" content="https://dsatcl.jeroenjanssens.com/images/dscl_0801.png">
 <meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta property="og:image:height" content="1217">
+<meta property="og:image:width" content="904">
 <meta name="twitter:title" content="8&nbsp; Parallel Pipelines – Data Science at the Command Line, 2e">
 <meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta name="twitter:image" content="images/dscl_0801.png">
+<meta name="twitter:image" content="https://dsatcl.jeroenjanssens.com/images/dscl_0801.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -363,7 +365,7 @@ body.quarto-dark {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science at the Command Line, 2e</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/main/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
     </div>
@@ -506,7 +508,7 @@ body.quarto-dark {
   <li><a href="#summary-7" id="toc-summary-7" class="nav-link" data-scroll-target="#summary-7"><span class="header-section-number">8.5</span> Summary</a></li>
   <li><a href="#for-further-exploration-7" id="toc-for-further-exploration-7" class="nav-link" data-scroll-target="#for-further-exploration-7"><span class="header-section-number">8.6</span> For Further Exploration</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -556,10 +558,10 @@ body.quarto-dark {
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 20K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov 10 11:49 emails.txt</span>
-<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov 10 11:49 movies.txt</span>
-<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov 10 11:49 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov 10 11:49 users.json</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  126 Nov 26 11:57 emails.txt</span>
+<span class="term-output">-rw-r--r-- 1 dst dst   61 Nov 26 11:57 movies.txt</span>
+<span class="term-output">-rwxr-xr-x 1 dst dst  125 Nov 26 11:57 <span style="color:var(--term-2);font-weight:bold">slow.sh</span>*</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 5.1K Nov 26 11:57 users.json</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -713,20 +715,20 @@ body.quarto-dark {
 <span class="term-output">[3] 173</span>
 <span class="term-output">[4] 174</span>
 <span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 10 11:50:00 Starting job B
-<span class="term-output">Nov 10 11:50:00Nov 10 11:50:00 Starting job C</span>
-<span class="term-output"> Starting job A</span>
-<span class="term-output">Nov 10 11:50:01 Job B took 1 seconds</span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 26 11:57:54Nov 26 11:57:54 Starting job A
+<span class="term-output"> Starting job B</span>
+<span class="term-output">Nov 26 11:57:54 Starting job C</span>
+<span class="term-output">Nov 26 11:57:55 Job B took 1 seconds</span>
 <span class="term-output"></span>
 <span class="term-output">[3]  - done       ./slow.sh $i</span>
 <span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 10 11:50:02 Job C took 2 seconds
+<span class="term-prompt" data-prompt="$ "></span>Nov 26 11:57:56 Job A took 2 seconds
+<span class="term-output"></span>
+<span class="term-output">[2]  - done       ./slow.sh $i</span>
+<span class="term-output"></span>
+<span class="term-prompt" data-prompt="$ "></span>Nov 26 11:57:59 Job C took 5 seconds
 <span class="term-output"></span>
 <span class="term-output">[4]  + done       ./slow.sh $i</span>
-<span class="term-output"></span>
-<span class="term-prompt" data-prompt="$ "></span>Nov 10 11:50:05 Job A took 5 seconds
-<span class="term-output"></span>
-<span class="term-output">[2]  + done       ./slow.sh $i</span>
 <span class="term-prompt" data-prompt="$"></span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -803,12 +805,12 @@ Figure&nbsp;8.2: GNU Parallel concurrently distributes input among processes and
 </div>
 <p>As you can see it basically acts as a for loop. Here’s another teaser, which replaces the for loop from the previous section.</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">parallel</span> --jobs 2 <span style="text-decoration:underline">./slow.sh</span> ::: {A..C}
-<span class="term-output">Nov 10 11:50:07 Starting job A</span>
-<span class="term-output">Nov 10 11:50:08 Job A took 1 seconds</span>
-<span class="term-output">Nov 10 11:50:07 Starting job B</span>
-<span class="term-output">Nov 10 11:50:09 Job B took 2 seconds</span>
-<span class="term-output">Nov 10 11:50:08 Starting job C</span>
-<span class="term-output">Nov 10 11:50:09 Job C took 1 seconds</span></code></pre>
+<span class="term-output">Nov 26 11:58:02 Starting job A</span>
+<span class="term-output">Nov 26 11:58:06 Job A took 4 seconds</span>
+<span class="term-output">Nov 26 11:58:02 Starting job B</span>
+<span class="term-output">Nov 26 11:58:07 Job B took 5 seconds</span>
+<span class="term-output">Nov 26 11:58:06 Starting job C</span>
+<span class="term-output">Nov 26 11:58:08 Job C took 2 seconds</span></code></pre>
 
 <p>Here, using the <code>--jobs</code> option, I specify that <code>parallel</code> can run at most two jobs concurrently. The arguments to <code>slow.sh</code> are specified as an argument instead of via standard input.</p>
 <p>With a whopping 159 different options, <code>parallel</code> offers a lot of functionality. (Perhaps too much.) Luckily you only need to know a handful in order to be effective. The manual page is quite informative in case you need to use a less common option.</p>
@@ -910,8 +912,8 @@ Tip
 <p>By default, parallel runs one job per CPU core. You can control the number of jobs that will be run concurrently with the <code>--jobs</code> or <code>-j</code> option. Specifying a number means that many jobs will be run concurrently. If you put a plus sign in front of the number then <code>parallel</code> will run <em>N</em> jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run <em>N-M</em> jobs. Where <em>N</em> is the number of CPU cores. You can also specify a percentage, where the default is 100% of the number of CPU cores. The optimal number of jobs to run concurrently depends on the actual commands you are running.</p>
 <!-- #TODO: Figure out where to type concurrently instead of parallel. And make sure all occurences of parallel are surrounded by backticks -->
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">seq</span> 5 | <span style="color:var(--term-2)">parallel</span> -j0 <span style="color:var(--term-3)">"echo Hi {}"</span>
-<span class="term-output">Hi 2</span>
 <span class="term-output">Hi 1</span>
+<span class="term-output">Hi 2</span>
 <span class="term-output">Hi 3</span>
 <span class="term-output">Hi 4</span>
 <span class="term-output">Hi 5</span></code></pre>
@@ -1162,16 +1164,16 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
 
 <p>You now have 10 files containing compressed JSON data:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span> nyc<span style="color:var(--term-4)">*</span>json.gz
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
-<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov 10 11:50 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-1.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-10.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-2.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-3.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-4.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 14K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-5.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 16K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-6.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 15K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-7.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 17K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-8.json.gz</span></span>
+<span class="term-output">-rw-r--r-- 1 dst dst 18K Nov 26 11:58 <span style="color:var(--term-1);font-weight:bold">nyc-9.json.gz</span></span></code></pre>
 
 <p>Note that <code>jq -c '.[]'</code> is used to flatten the array of JSON objects so that there’s one object per line, with a total of 100 lines per file. Using <code>zcat</code><span class="citation" data-cites="zcat"><a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></span>, you directly print the contents of a compress file:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">zcat</span> <span style="text-decoration:underline">nyc-1.json.gz</span> | <span style="color:var(--term-2)">trim</span>
@@ -1441,7 +1443,7 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/dsatcl\.jeroenjanssens\.com");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1863,8 +1865,8 @@ Figure&nbsp;8.3: GNU Parallel stores output in separate files with the <code>--r
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 10, 2026.</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 26, 2026.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-8-parallel-pipelines.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

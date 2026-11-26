@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-d96b37388c6ce42d10ab3442bfd2e021.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.2/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -149,11 +149,13 @@ body.quarto-dark {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="6&nbsp; Project Management with Make – Data Science at the Command Line, 2e">
 <meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta property="og:image" content="images/heights.png">
+<meta property="og:image" content="https://dsatcl.jeroenjanssens.com/images/heights.png">
 <meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:width" content="1800">
 <meta name="twitter:title" content="6&nbsp; Project Management with Make – Data Science at the Command Line, 2e">
 <meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta name="twitter:image" content="images/heights.png">
+<meta name="twitter:image" content="https://dsatcl.jeroenjanssens.com/images/heights.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -363,7 +365,7 @@ body.quarto-dark {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science at the Command Line, 2e</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/main/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
     </div>
@@ -489,7 +491,7 @@ body.quarto-dark {
   <li><a href="#summary-5" id="toc-summary-5" class="nav-link" data-scroll-target="#summary-5"><span class="header-section-number">6.6</span> Summary</a></li>
   <li><a href="#for-further-exploration-5" id="toc-for-further-exploration-5" class="nav-link" data-scroll-target="#for-further-exploration-5"><span class="header-section-number">6.7</span> For Further Exploration</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -562,13 +564,13 @@ Note
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 28K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  37 Nov 10 11:48 Makefile.test</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  21 Nov 10 11:48 numbers-write-var.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  26 Nov 10 11:48 numbers-write.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  16 Nov 10 11:48 numbers.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 432 Nov 10 11:48 starwars.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 263 Nov 10 11:48 tasks.make</span>
-<span class="term-output">-rw-r--r-- 1 dst dst  27 Nov 10 11:48 template.make</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst  37 Nov 26 12:05 Makefile.test</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  21 Nov 26 12:05 numbers-write-var.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  26 Nov 26 12:05 numbers-write.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  16 Nov 26 12:05 numbers.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 434 Nov 26 12:05 starwars.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst 263 Nov 26 12:05 tasks.make</span>
+<span class="term-output">-rw-r--r-- 1 dst dst  27 Nov 26 12:05 template.make</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -793,7 +795,7 @@ Note
 <p>The second task creates a box plot showing the distribution of heights per species (see <a href="#fig-starwars-image" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>):</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">curl</span> -sL <span style="color:var(--term-3)">'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/st</span>
 <span class="term-output"><span style="color:var(--term-3)">arwars.csv'</span> |</span>
-<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x height --y species --geom boxplot <span style="color:var(--term-3)">&gt;</span> heights.png
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x height --y species --geom boxplot - <span style="color:var(--term-3)">&gt;</span> heights.png
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">heights.png</span></code></pre>
 
@@ -838,7 +840,7 @@ Figure&nbsp;6.1: Distribution of heights per species in Star Wars
 <span class="term-output">  21   │         head</span>
 <span class="term-output">  22   │</span>
 <span class="term-output">  23   │ <span style="color:var(--term-4)">heights.png</span><span style="color:var(--term-5)">:</span> <span style="color:var(--term-2)">data/starwars.csv</span></span>
-<span class="term-output">  24   │         <span style="color:var(--term-5)">&lt;</span> $&lt; rush plot<span style="color:var(--term-6)"> --x</span> height<span style="color:var(--term-6)"> --y</span> species<span style="color:var(--term-6)"> --geom</span> boxplot <span style="color:var(--term-5)">&gt;</span> $@</span>
+<span class="term-output">  24   │         <span style="color:var(--term-5)">&lt;</span> $&lt; rush plot<span style="color:var(--term-6)"> --x</span> height<span style="color:var(--term-6)"> --y</span> species<span style="color:var(--term-6)"> --geom</span> boxplot - <span style="color:var(--term-5)">&gt;</span> $@</span>
 <span class="term-output">───────┴────────────────────────────────────────────────────────────────────────</span></code></pre>
 
 <p>Let’s go through this <em>Makefile</em> step by step. The first three lines are there to change some default settings related to <code>make</code> itself:</p>
@@ -887,8 +889,8 @@ Figure&nbsp;6.2: Dependencies between targets
 <span class="term-output">Gregar Typho,185</span>
 <span class="term-output">Jango Fett,183</span>
 <span class="term-output">Cliegg Lars,183</span>
-<span class="term-output">&lt; data/starwars.csv rush plot --x height --y species --geom boxplot &gt; heights.pn</span>
-<span class="term-output">g</span></code></pre>
+<span class="term-output">&lt; data/starwars.csv rush plot --x height --y species --geom boxplot - &gt; heights.</span>
+<span class="term-output">png</span></code></pre>
 
 <p>No surprises here. Because we didn’t specify any target, the <em><code>all</code></em> target will be built, which, in turn, causes both the <em><code>top10</code></em> and <em><code>heights.png</code></em> targets to be built. The output of the former is printed to standard output and the latter creates a file <em>heights.png</em>. The <em>data</em> directory is created only once, just like the CSV file is only downloaded once.</p>
 <p>There’s nothing more fun than just playing with your data and forgetting everything else. But you have to trust me when I say that it’s worthwhile to keep a record of what you have done using a <em>Makefile</em>. Not only will it make your life easier (pun intended), but you will also start thinking about your data workflow in terms of steps. Just as with your own command-line toolbox, which you expand over time, the same holds for <code>make</code> workflows. The more steps you have defined, the easier it gets to keep doing it, because very often you can reuse certain steps. I hope that you will get used to <code>make</code>, and that it will make your life easier.</p>
@@ -1039,7 +1041,7 @@ Figure&nbsp;6.2: Dependencies between targets
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/dsatcl\.jeroenjanssens\.com");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1461,8 +1463,8 @@ Figure&nbsp;6.2: Dependencies between targets
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 10, 2026.</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 26, 2026.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-6-project-management-with-make.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

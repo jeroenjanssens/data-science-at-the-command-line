@@ -54,7 +54,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-d96b37388c6ce42d10ab3442bfd2e021.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-c8c551e6f3193d712569b0b3e87f3232.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/quarto-term-0.8.1/term.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/quarto-term-0.8.2/term.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -149,11 +149,13 @@ body.quarto-dark {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="9&nbsp; Modeling Data – Data Science at the Command Line, 2e">
 <meta property="og:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta property="og:image" content="images/wine-quality.png">
+<meta property="og:image" content="https://dsatcl.jeroenjanssens.com/images/wine-quality.png">
 <meta property="og:site_name" content="Data Science at the Command Line, 2e">
+<meta property="og:image:height" content="1200">
+<meta property="og:image:width" content="1800">
 <meta name="twitter:title" content="9&nbsp; Modeling Data – Data Science at the Command Line, 2e">
 <meta name="twitter:description" content="This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You’ll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux.">
-<meta name="twitter:image" content="images/wine-quality.png">
+<meta name="twitter:image" content="https://dsatcl.jeroenjanssens.com/images/wine-quality.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -363,7 +365,7 @@ body.quarto-dark {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Data Science at the Command Line, 2e</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/master/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/tree/main/book/2.5e/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
     </div>
@@ -503,7 +505,7 @@ body.quarto-dark {
   <li><a href="#summary-8" id="toc-summary-8" class="nav-link" data-scroll-target="#summary-8"><span class="header-section-number">9.6</span> Summary</a></li>
   <li><a href="#for-further-exploration-8" id="toc-for-further-exploration-8" class="nav-link" data-scroll-target="#for-further-exploration-8"><span class="header-section-number">9.7</span> For Further Exploration</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -565,7 +567,7 @@ Warning
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">l</span>
 <span class="term-output">total 4.0K</span>
-<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov 10 11:50 classify.cfg</span></code></pre>
+<span class="term-output">-rw-r--r-- 1 dst dst 503 Nov 26 12:06 classify.cfg</span></code></pre>
 
 <p>The instructions to get these files are in <a href="./chapter-2-getting-started.html">Chapter 2</a>. Any other files are either downloaded or generated using command-line tools.</p>
 </section>
@@ -807,7 +809,7 @@ Figure&nbsp;9.3: Linear dimensionality reduction with PCA
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tapkee</span> --method t-sne | <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">header</span> -a x,y | <span class="term-callout">➍</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">paste</span> -d, - <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">xsv</span> select type <span style="text-decoration:underline">wine-scaled.csv</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➎</span>
-<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x x --y y --color type --shape type <span style="color:var(--term-3)">&gt;</span> wine-tsne.png <span class="term-callout">➏</span></code></pre>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x x --y y --color type --shape type - <span style="color:var(--term-3)">&gt;</span> wine-tsne.png <span class="term-callout">➏</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
@@ -922,45 +924,45 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-output">ures</span>
 <span class="term-output">36.00000 36.00000            1            1.0         6.0000         0.0000</span>
 <span class="term-output">  78</span>
-<span class="term-output">26.63314 17.26629            2            2.0         5.0000         0.8447</span>
+<span class="term-output">31.44315 26.88631            2            2.0         6.0000         0.8148</span>
 <span class="term-output">  78</span>
-<span class="term-output">19.70820 12.78326            4            4.0         6.0000         2.7379</span>
+<span class="term-output">22.91761 14.39207            4            4.0         7.0000         3.1586</span>
 <span class="term-output">  78</span>
-<span class="term-output">13.49373 7.279274            8            8.0         8.0000         4.9235</span>
+<span class="term-output">14.39489 5.872176            8            8.0         7.0000         4.8596</span>
 <span class="term-output">  78</span>
-<span class="term-output">7.033225 0.572711           16           16.0         6.0000         5.4475</span>
+<span class="term-output">7.489171 0.583446           16           16.0         6.0000         5.7365</span>
 <span class="term-output">  78</span>
-<span class="term-output">4.031611 1.029998           32           32.0         5.0000         5.4389</span>
+<span class="term-output">3.884140 0.279109           32           32.0         6.0000         5.6270</span>
 <span class="term-output">  78</span>
-<span class="term-output">2.412554 0.793496           64           64.0         7.0000         5.8034</span>
+<span class="term-output">2.385070 0.885999           64           64.0         6.0000         5.7390</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.650367 0.888180          128          128.0         4.0000         5.7854</span>
+<span class="term-output">1.650075 0.915080          128          128.0         5.0000         6.1961</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.224600 0.798833          256          256.0         6.0000         5.9404</span>
+<span class="term-output">1.306002 0.961929          256          256.0         6.0000         5.9729</span>
 <span class="term-output">  78</span>
-<span class="term-output">1.018123 0.811647          512          512.0         4.0000         5.7441</span>
+<span class="term-output">1.004915 0.703827          512          512.0         6.0000         5.9098</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.909415 0.800706         1024         1024.0         5.0000         5.9122</span>
+<span class="term-output">0.871719 0.738523         1024         1024.0         7.0000         5.8732</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.859200 0.808986         2048         2048.0         6.0000         6.2828</span>
+<span class="term-output">0.827763 0.783806         2048         2048.0         5.0000         5.6517</span>
 <span class="term-output">  78</span>
-<span class="term-output">0.679572 0.679572         4096         4096.0         5.0000         5.9216</span>
+<span class="term-output">0.738829 0.738829         4096         4096.0         5.0000         5.7941</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.614816 0.550060         8192         8192.0         7.0000         6.1802</span>
+<span class="term-output">0.677383 0.615936         8192         8192.0         8.0000         6.3025</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.570148 0.525480        16384        16384.0         4.0000         5.9510</span>
+<span class="term-output">0.613424 0.549465        16384        16384.0         6.0000         5.6169</span>
 <span class="term-output">  78 h</span>
-<span class="term-output">0.540460 0.510772        32768        32768.0         5.0000         6.1212</span>
+<span class="term-output">0.570297 0.527170        32768        32768.0         6.0000         6.4087</span>
 <span class="term-output">  78 h</span>
 <span class="term-output"></span>
 <span class="term-output">finished run</span>
 <span class="term-output">number of examples per pass = 3527</span>
 <span class="term-output">passes used = 10</span>
 <span class="term-output">weighted example sum = 35270.000000</span>
-<span class="term-output">weighted label sum = 207170.000000</span>
-<span class="term-output">average loss = 0.503386 h</span>
-<span class="term-output">best constant = 5.873830</span>
-<span class="term-output">total feature number = 2749620</span></code></pre>
+<span class="term-output">weighted label sum = 207180.000000</span>
+<span class="term-output">average loss = 0.519087 h</span>
+<span class="term-output">best constant = 5.874114</span>
+<span class="term-output">total feature number = 2749140</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
@@ -987,16 +989,16 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <span class="term-prompt" data-prompt="> "></span>--quiet <span class="term-callout">➎</span>
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">bat</span> <span style="text-decoration:underline">predictions</span> | <span style="color:var(--term-2)">trim</span>
-<span class="term-output">5.265318</span>
-<span class="term-output">5.387872</span>
-<span class="term-output">5.487614</span>
-<span class="term-output">5.374556</span>
-<span class="term-output">6.261392</span>
-<span class="term-output">5.413928</span>
-<span class="term-output">5.279875</span>
-<span class="term-output">5.211679</span>
-<span class="term-output">6.243527</span>
-<span class="term-output">6.466093</span>
+<span class="term-output">5.860320</span>
+<span class="term-output">5.804998</span>
+<span class="term-output">6.464737</span>
+<span class="term-output">6.239792</span>
+<span class="term-output">5.745499</span>
+<span class="term-output">5.545188</span>
+<span class="term-output">6.277202</span>
+<span class="term-output">6.576332</span>
+<span class="term-output">5.459355</span>
+<span class="term-output">5.562388</span>
 <span class="term-output">… with 970 more lines</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -1012,9 +1014,9 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> results.csv |
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span> |
-<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cowsay</span> <span class="term-callout">➊</span>
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">cowsay</span>
 <span class="term-output"> _______________</span>
-<span class="term-output">&lt; MAE: 0.585368 &gt;</span>
+<span class="term-output">&lt; MAE: 0.568813 &gt;</span>
 <span class="term-output"> ---------------</span>
 <span class="term-output">        \   ^__^</span>
 <span class="term-output">         \  (oo)\_______</span>
@@ -1024,7 +1026,7 @@ Figure&nbsp;9.4: Non-linear dimensionality reduction with t-SNE
 
 <p>So, the predictions are on average about 0.6 points off. Let’s visualize the relationship between the observed values and the predicted values using <code>rush plot</code>:</p>
 <pre class="term-output" style="font-size:0.83em"><code><span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-3)">&lt;</span> <span style="text-decoration:underline">results.csv</span> <span style="color:var(--term-2)">header</span> -a <span style="color:var(--term-3)">"predicted,observed"</span> |
-<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x observed --y predicted --geom jitter <span style="color:var(--term-3)">&gt;</span> wine-regression.png
+<span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">rush</span> plot --x observed --y predicted --geom jitter - <span style="color:var(--term-3)">&gt;</span> wine-regression.png
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">display</span> <span style="text-decoration:underline">wine-regression.png</span></code></pre>
 
@@ -1045,7 +1047,7 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"></span>
 <span class="term-prompt" data-prompt="$ "></span><span style="color:var(--term-2)">paste</span> -d, <span style="text-decoration:underline">predictions</span> <span style="color:var(--term-5)">&lt;(</span><span style="color:var(--term-2)">cut</span> -d <span style="color:var(--term-3)">'|'</span> -f 1 <span style="text-decoration:underline">wine-test.vw</span><span style="color:var(--term-5)">)</span> | <span class="term-callout">➌</span>
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">awk</span> -F, <span style="color:var(--term-3)">'{E+=sqrt(($1-$2)^2)} END {print "MAE: " E/NR}'</span>
-<span class="term-output">MAE: 0.631249</span></code></pre>
+<span class="term-output">MAE: 0.610473</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
 <ol type="1">
@@ -1084,14 +1086,14 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-prompt" data-prompt="> "></span><span style="color:var(--term-2)">tee</span> wine-balanced.csv | <span style="color:var(--term-2)">csvlook</span>
 <span class="term-output">│    id │ type  │ fixed_acidity │ volatile_acidity │ citric_acid │ residual_sug…</span>
 <span class="term-output">├───────┼───────┼───────────────┼──────────────────┼─────────────┼─────────────…</span>
-<span class="term-output">│     1 │ white │          6.40 │            0.250 │        0.30 │           5.…</span>
-<span class="term-output">│     2 │ red   │         10.20 │            0.360 │        0.64 │           2.…</span>
-<span class="term-output">│     3 │ white │          6.30 │            0.270 │        0.18 │           7.…</span>
-<span class="term-output">│     4 │ red   │          6.00 │            0.500 │        0.04 │           2.…</span>
-<span class="term-output">│     5 │ red   │          9.90 │            0.540 │        0.45 │           2.…</span>
-<span class="term-output">│     6 │ red   │          8.90 │            0.400 │        0.32 │           5.…</span>
-<span class="term-output">│     7 │ red   │          5.70 │            0.600 │        0.00 │           1.…</span>
-<span class="term-output">│     8 │ white │          7.20 │            0.290 │        0.20 │           7.…</span>
+<span class="term-output">│     1 │ white │          6.10 │            0.310 │        0.26 │           2.…</span>
+<span class="term-output">│     2 │ white │          6.70 │            0.180 │        0.28 │          10.…</span>
+<span class="term-output">│     3 │ red   │          9.20 │            0.755 │        0.18 │           2.…</span>
+<span class="term-output">│     4 │ white │          6.60 │            0.905 │        0.19 │           0.…</span>
+<span class="term-output">│     5 │ white │          7.80 │            0.280 │        0.34 │           1.…</span>
+<span class="term-output">│     6 │ red   │          8.30 │            0.530 │        0.00 │           1.…</span>
+<span class="term-output">│     7 │ white │          7.20 │            0.190 │        0.31 │           6.…</span>
+<span class="term-output">│     8 │ red   │          7.40 │            0.590 │        0.08 │           4.…</span>
 <span class="term-output">… with 3190 more lines</span></code></pre>
 
 <div class="term-callout-list term-callouts-47c21b52">
@@ -1200,10 +1202,10 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output"><span style="color:var(--term-3)">tdin ORDER BY accuracy DESC"</span> | <span style="color:var(--term-2)">csvlook</span> -I</span>
 <span class="term-output">│ learner_name           │ accuracy  │</span>
 <span class="term-output">├────────────────────────┼───────────┤</span>
+<span class="term-output">│ LogisticRegression     │ 0.99375   │</span>
 <span class="term-output">│ RandomForestClassifier │ 0.9921875 │</span>
-<span class="term-output">│ KNeighborsClassifier   │ 0.9875    │</span>
-<span class="term-output">│ LogisticRegression     │ 0.9875    │</span>
-<span class="term-output">│ DecisionTreeClassifier │ 0.9765625 │</span></code></pre>
+<span class="term-output">│ KNeighborsClassifier   │ 0.9890625 │</span>
+<span class="term-output">│ DecisionTreeClassifier │ 0.9734375 │</span></code></pre>
 
 <p>The relevant column here is <em><code>accuracy</code></em>, which indicates the percentage of data points that are classified correctly. From this we see that actually all algorithms are performing really well. The RandomForestClassifier comes out as best performing algorithm, closely followed by KNeighborsClassifier.</p>
 <p>Each JSON file contains a confusion matrix, giving you additional insight into the performance of each classifier. A confusion matrix is a table where the columns refer to the true labels (red and white) and the rows refer to the predicted labels. Higher numbers on the diagonal mean more correct predictions. With <code>jq</code> I can print the name of each classifier and extract the associated confusion matrix:</p>
@@ -1212,9 +1214,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [325] |       9 |       0.982 |    0.973 |       0.977 |</span>
+<span class="term-output">|   red | [323] |       8 |       0.973 |    0.976 |       0.974 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     6 |   [300] |       0.971 |    0.980 |       0.976 |</span>
+<span class="term-output">| white |     9 |   [300] |       0.974 |    0.971 |       0.972 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -1222,9 +1224,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [330] |       4 |       0.988 |    0.988 |       0.988 |</span>
+<span class="term-output">|   red | [325] |       6 |       0.997 |    0.982 |       0.989 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     4 |   [302] |       0.987 |    0.987 |       0.987 |</span>
+<span class="term-output">| white |     1 |   [308] |       0.981 |    0.997 |       0.989 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -1232,9 +1234,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [330] |       4 |       0.988 |    0.988 |       0.988 |</span>
+<span class="term-output">|   red | [328] |       3 |       0.997 |    0.991 |       0.994 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     4 |   [302] |       0.987 |    0.987 |       0.987 |</span>
+<span class="term-output">| white |     1 |   [308] |       0.990 |    0.997 |       0.994 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span>
 <span class="term-output"></span>
@@ -1242,9 +1244,9 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">|       |   red |   white |   Precision |   Recall |   F-measure |</span>
 <span class="term-output">+=======+=======+=========+=============+==========+=============+</span>
-<span class="term-output">|   red | [331] |       3 |       0.994 |    0.991 |       0.993 |</span>
+<span class="term-output">|   red | [328] |       3 |       0.994 |    0.991 |       0.992 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
-<span class="term-output">| white |     2 |   [304] |       0.990 |    0.993 |       0.992 |</span>
+<span class="term-output">| white |     2 |   [307] |       0.990 |    0.994 |       0.992 |</span>
 <span class="term-output">+-------+-------+---------+-------------+----------+-------------+</span>
 <span class="term-output">(row = reference; column = predicted)</span></code></pre>
 
@@ -1405,7 +1407,7 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/dsatcl\.jeroenjanssens\.com");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1827,8 +1829,8 @@ Figure&nbsp;9.5: Regression with Vowpal Wabbit
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 10, 2026.</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/master/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
+<p>Rendered with <a href="https://quarto.org">Quarto</a> and <a href="https://quarto-term.jeroenjanssens.com">quarto-term</a>. Last updated on November 26, 2026.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/edit/main/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/jeroenjanssens/data-science-at-the-command-line/blob/main/book/2.5e/chapter-9-modeling-data.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

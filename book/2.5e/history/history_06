@@ -28,7 +28,7 @@ cut -d, -f 1,2 |\
 sort -t, -k2 -nr |\
 head
 curl -sL 'https://raw.githubusercontent.com/tidyverse/dplyr/master/data-raw/starwars.csv' |\
-rush plot --x height --y species --geom boxplot > heights.png
+rush plot --x height --y species --geom boxplot - > heights.png
 display heights.png
 cp starwars.make Makefile
 bat Makefile
