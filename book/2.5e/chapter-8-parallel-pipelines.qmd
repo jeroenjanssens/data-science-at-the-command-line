@@ -91,7 +91,7 @@ echo "$i^2" | bc
 done | trim
 ```
 
-1. The Z shell has a feature called brace expansion, which transforms *`{0..100..2}`* into a list separated by spaces: *`0 2 4 … 98 100`*. The variable *`i`* is assigned the value "0" in the first iteration, "1" in the second iteration, and so forth.
+1. The Z shell has a feature called brace expansion, which transforms *`{0..100..2}`* into a list separated by spaces: *`0 2 4 … 98 100`*. The variable *`i`* is assigned the value "0" in the first iteration, "2" in the second iteration, and so forth.
 3. The value of this variable can be used by prefixing it with a dollar sign (*`$`*). The shell will replace *`$i`* with its value before `echo` is being executed. Note that there can be more than one command between *`do`* and *`done`*.
 
 Although the syntax may appear a bit odd compared to your favorite programming language, it's worth remembering this because it's always available in the shell.
@@ -297,7 +297,7 @@ The other ways involve syntax that's not seen anywhere else.
 Having said that, they do enable additional functionality, such as iterating over all possible combinations of multiple lists, so be sure to read `parallel`s manual page if you like to know more.
 :::
 
-When the input items are filenames, there are a couple of modifiers you can use only parts of the filename.
+When the input items are filenames, there are a couple of modifiers you can use to get only parts of the filename.
 For example, with `{/}`, only the basename of the filename will be used:
 
 ```{term}
@@ -335,8 +335,8 @@ Instead of actually executing the command, `parallel` will print out all the com
 By default, parallel runs one job per CPU core.
 You can control the number of jobs that will be run concurrently with the `--jobs` or `-j` option.
 Specifying a number means that many jobs will be run concurrently.
-If you put a plus sign in front of the number then `parallel` will run *N* jobs plus the number of CPU cores. If you put a minus sign in front of the number then parallel will run *N-M* jobs.
-Where *N* is the number of CPU cores.
+If you put a plus sign in front of the number *M* (for example, `-j+2`), then `parallel` will run *N+M* jobs, where *N* is the number of CPU cores.
+If you put a minus sign in front of it (for example, `-j-2`), then `parallel` will run *N-M* jobs.
 You can also specify a percentage, where the default is 100% of the number of CPU cores.
 The optimal number of jobs to run concurrently depends on the actual commands you are running.
 

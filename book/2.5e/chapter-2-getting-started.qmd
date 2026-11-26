@@ -169,6 +169,7 @@ Terminal
 (The command-line tool `seq` [@seq], as you can see, generates a sequence of numbers.) You do not type the dollar sign.
 It's just there to tell you that this a command you can type in the terminal.
 This dollar sign is known as the prompt.
+When a command continues on the next line, that line starts with a greater-than sign (`>`) instead, which you don't type either.
 The text below `seq 3` is the output of the command.
 
 Shell
@@ -583,7 +584,7 @@ You don't necessarily have to do this, especially if you're interested in the co
 
 Here are the tools that I use for making output manageable:
 
-If often use `trim` to limit the output to a given height and width.
+I often use `trim` to limit the output to a given height and width.
 By default, output is trimmed to 10 lines and the width of the terminal.
 Pass a negative number to disable trimming the height and or width.
 For example:
