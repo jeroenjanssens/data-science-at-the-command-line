@@ -25,7 +25,7 @@ By the end of this chapter, you’ll have everything you need in order to contin
 
 The datasets that I use in this book can be downloaded as follows:
 
-1. Download the ZIP file from https://www.datascienceatthecommandline.com/2e/data.zip.
+1. Download the ZIP file from https://dsatcl.jeroenjanssens.com/data.zip.
 2. Create a new directory. You can give this directory any name you want, but I recommend you stick to lowercase letters, numbers, and maybe a hyphen or underscore so that it's easier to work with at the command line. For example: *dsatcl2e-data*. Remember where this directory is.
 3. Move the ZIP file to that new directory and unpack it.
 4. This directory now contains one subdirectory per chapter.

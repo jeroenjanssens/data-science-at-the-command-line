@@ -269,7 +269,7 @@ In the next chapter I'm going to show you how to get started by installing the d
 ## For Further Exploration
 
 - The book *UNIX: A History and a Memoir* by Brian W. Kernighan tells the story of Unix, explaining what it is, how it was developed, and why it matters.
-- In 2018 I gave a presentation titled *50 Reasons to Learn the Shell for Doing Data Science* at Strata London. You can [read the slides](https://datascienceatthecommandline.com/resources/50-reasons.pdf) if you need even more convincing.
+- In 2018 I gave a presentation titled *50 Reasons to Learn the Shell for Doing Data Science* at Strata London. You can [read the slides](resources/50-reasons.pdf) if you need even more convincing.
 - The short but sweet book *Thinking with Data* by Max Shron focuses on the *why* instead of the *how* and provides a framework for defining your data science project that will help you ask the right questions and solve the right problems.
 
 [^1]: The development of the UNIX operating system started back in 1969. It featured a command line since the beginning. The important concept of pipes, which I will discuss in [Section 2.3](chapter-2-getting-started.qmd#essential-concepts), was added in 1973.

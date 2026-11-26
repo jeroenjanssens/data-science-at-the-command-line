@@ -1,6 +1,9 @@
 project:
   type: book
   output-dir: _book
+  # Files that pages link to, copied to _book
+  resources:
+    - resources/50-reasons.pdf
   # Writes _variables.yml with today's date for the page footer
   pre-render: bin/last-updated.sh
 
@@ -18,7 +21,8 @@ book:
   description: "This thoroughly revised guide demonstrates how the flexibility of the command line can help you become a more efficient and productive data scientist. You'll learn how to combine small yet powerful command-line tools to quickly obtain, scrub, explore, and model your data. To get you started, author Jeroen Janssens provides a Docker image packed with over 100 Unix power tools—useful whether you work with Windows, macOS, or Linux."
   repo-url: https://github.com/jeroenjanssens/data-science-at-the-command-line
   repo-subdir: book/2.5e
-  repo-branch: master
+  site-url: https://dsatcl.jeroenjanssens.com
+  repo-branch: main
   repo-actions: [edit, source]
   page-footer:
     center: "Rendered with [Quarto](https://quarto.org) and [quarto-term](https://quarto-term.jeroenjanssens.com). Last updated on {{< var last-updated >}}."

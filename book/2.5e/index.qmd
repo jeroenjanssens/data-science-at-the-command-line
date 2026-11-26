@@ -30,7 +30,7 @@ You'll quickly discover why the command line is an agile, scalable, and extensib
 
 ::: {.callout-note}
 If you find this book helpful, consider spreading the word! You could, for instance,
-share it on [Twitter](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdatascienceatthecommandline.com&via=jeroenhjanssens&text=Data%20Science%20at%20the%20Command%20Line%2C%20second%20edition),
+share it on [Twitter](https://twitter.com/intent/tweet?url=https%3A%2F%2Fdsatcl.jeroenjanssens.com&via=jeroenhjanssens&text=Data%20Science%20at%20the%20Command%20Line%2C%20second%20edition),
 write a review on [Amazon](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912), or
 star the [Github repository](https://github.com/jeroenjanssens/data-science-at-the-command-line). Much appreciated!
 :::

@@ -135,7 +135,7 @@ There are a couple of ways to get in touch:
 
 - Email: <jeroen@jeroenjanssens.com>
 - Twitter: [\@jeroenhjanssens](https://twitter.com/jeroenhjanssens/)
-- Book website: <https://datascienceatthecommandline.com/>
+- Book website: <https://dsatcl.jeroenjanssens.com/>
 - Book GitHub repository: <https://github.com/jeroenjanssens/data-science-at-the-command-line>
 
 Thank you.
