@@ -1,8 +1,0 @@
-HTTP/2 307 
-server: nginx
-date: Thu, 05 Nov 2026 21:51:24 GMT
-cache-control: private, no-cache, no-store, max-age=0, must-revalidate
-location: /top2000
-x-cache-status: MISS
-strict-transport-security: max-age=31536000;preload
-
